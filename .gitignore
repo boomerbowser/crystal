@@ -8,3 +8,9 @@ __pycache__/
 
 # Build artifact: regenerate with design-system/tools/package.py
 design-system/crystal-design-system.zip
+
+# Agent guidance kept locally, not distributed
+AGENTS.md
+CLAUDE.md
+CODEX.md
+.claude/

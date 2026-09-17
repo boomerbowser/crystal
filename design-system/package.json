@@ -13,7 +13,8 @@
     "motion": "13.4.0"
   },
   "devDependencies": {
-    "esbuild": "0.28.2"
+    "esbuild": "0.28.2",
+    "lucide-static": "^1.47.0"
   },
   "private": true
 }
