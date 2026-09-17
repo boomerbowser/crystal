@@ -4,7 +4,7 @@
   "description": "Crystal design system, motion runtime, interactive component studies and specifications.",
   "scripts": {
     "build:motion": "node tools/build-motion.cjs",
-    "test": "node tools/build-tokens.cjs && node tools/validate-tokens.cjs && node tools/validate-motion.cjs",
+    "test": "node tools/build-tokens.cjs && node tests/core-contracts.cjs && node tools/validate-tokens.cjs && node tools/validate-motion.cjs",
     "build:tokens": "node tools/build-tokens.cjs"
   },
   "keywords": [],
