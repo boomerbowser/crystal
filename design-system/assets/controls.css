@@ -91,7 +91,13 @@ input[type=file]::file-selector-button{min-height:44px;padding:10px 16px;border:
 @media(max-width:600px){.cr-dock{padding:7px}.cr-dock button{padding:10px 9px;font-size:11px;min-height:44px}.suite-tabs{padding:7px}.suite-tabs button{padding:8px 5px}}
 [data-effects=opaque] :is(.cr-dock,.segmented,.suite-tabs){background:var(--cr-surface);backdrop-filter:none;}
 @media(prefers-reduced-transparency:reduce){:is(.cr-dock,.segmented,.suite-tabs){background:var(--cr-surface);backdrop-filter:none}}
-@media(forced-colors:active){:is(.cr-dock,.segmented,.suite-tabs){background:Canvas;border:1px solid ButtonText;box-shadow:none;backdrop-filter:none}:is(.cr-dock,.segmented,.suite-tabs)::before{display:none}:is(.cr-dock,.segmented,.suite-tabs) button:is([aria-pressed=true],[aria-selected=true]){background:Highlight!important;color:HighlightText!important}}
+/* Selection is a ring, not a fill. Chromium paints an opaque Canvas-coloured
+   backplate behind text in forced colours; a Highlight fill puts HighlightText
+   on that backplate, and where the palette makes those two the same colour the
+   label disappears. CanvasText on Canvas is legible against the backplate by
+   construction, so the Highlight ring carries the state instead. This matches
+   what .cr-dock already does in crystal.css. */
+@media(forced-colors:active){:is(.cr-dock,.segmented,.suite-tabs){background:Canvas;border:1px solid ButtonText;box-shadow:none;backdrop-filter:none}:is(.cr-dock,.segmented,.suite-tabs)::before{display:none}:is(.cr-dock,.segmented,.suite-tabs) button:is([aria-pressed=true],[aria-selected=true]){background:Canvas!important;color:CanvasText!important;outline:2px solid Highlight;outline-offset:-3px}}
 /* Specimen swatches retain their actual colors; they are not reading wells. */
 button.swatch{min-height:32px;height:32px;}
 button.swatch::before{background:var(--swatch);filter:none;inset:5px;}

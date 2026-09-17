@@ -6,6 +6,8 @@ The working reference for this upgrade. Every item in [the proposal](crystal-2.0
 
 Last updated 2026-09-17.
 
+Branch `crystal-2.0`, ahead of `main` and **not merged**. Merging, publishing to the registry and cutting a release are release decisions and are deliberately left to Meridian.
+
 ## Decisions taken
 
 | Question | Decision | Taken by |
@@ -63,9 +65,9 @@ Material specifications may only improve, never regress. The default position is
 
 | Proposal item | Task | Status |
 | --- | --- | --- |
-| Visual regression harness | 14 | in progress — `compare-captures.py` exists and gated task 4; the frame set and capture script remain |
+| Visual regression harness | 14 | **partial** — `compare-captures.py` is done and has gated four tasks; the frame set is now data in `validation/frames.json` with a documented re-blessing procedure. The driver that walks that file automatically is **not written**: every frame so far was driven manually through a real browser. That is the remaining work. |
 | Right-to-left as a first-class axis | 15 | done — primitives use logical properties; mirroring verified and captured |
-| Forced-colour and reduced-transparency evidence | 16 | done for reduced transparency, which caught a real defect; forced-colours capture still to do |
+| Forced-colour and reduced-transparency evidence | 16 | done — both axes captured, and each caught a real defect. Reduced transparency: white-on-white selected controls. Forced colours: the selected segment's label erased by Chromium's text backplate. |
 | Keep the existing contrast and integrity checks | — | done — unchanged at 1716 checks, 0 failures |
 
 ### F. Governance
@@ -89,6 +91,8 @@ Material specifications may only improve, never regress. The default position is
 ## Notes carried forward
 
 - Adding the reduced-transparency axis immediately caught a defect that four full-effects frames had missed: selected controls rendered white-on-white at 1:1 contrast. A visual gate is only as good as the states it covers.
+
+- The forced-colours axis then caught a second defect the same way, and a subtler one: the selected segment used `background: Highlight; color: HighlightText`, which is the conventional pairing and passes any contrast calculation you run on it. It still rendered an unreadable black block, because Chromium paints an opaque `Canvas` text backplate above the element's own background, and in the dark palette `HighlightText` and `Canvas` are both black. No arithmetic check could have found this; only looking at the pixels did. Both defects argue the same thing — the value of a visual gate is in the axes it covers, which is why the frame set is now data.
 
 - The regression capture from gate G2 is kept deliberately as evidence: it is the clearest illustration that unlayered CSS beats every layer, which is the behaviour products rely on and the behaviour a page's own scaffolding must opt out of.
 - The DOM-mutation blocker is cleared. `controls.js` now only reads state and sets attributes on elements that already exist, so a framework binding can replace it wholesale against the same headless core.
