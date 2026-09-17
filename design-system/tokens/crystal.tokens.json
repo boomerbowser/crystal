@@ -1,0 +1,1608 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "Crystal design tokens, W3C DTCG format. Three tiers: primitive holds raw values, semantic names roles and aliases primitives, component binds semantics to control surfaces. Derived values (elevation-scaled shadows, rgba composites, scaled motion) are computed by the resolver, not stored here.",
+  "$meta": {
+    "system": "Crystal",
+    "version": "1.0.0",
+    "basis": "Gather crystal-03-balanced; independent reusable extension",
+    "generatedFrom": "tokens/crystal.json"
+  },
+  "primitive": {
+    "palette": {
+      "prism": {
+        "$name": "Prism",
+        "$description": "Electric violet, orchid light. The shared signature.",
+        "seed": {
+          "$type": "color",
+          "$value": "#7338EF"
+        },
+        "companion": {
+          "$type": "color",
+          "$value": "#EF48C6"
+        },
+        "glow": {
+          "$type": "color",
+          "$value": "#52BDF3"
+        },
+        "light": {
+          "canvas": {
+            "$type": "color",
+            "$value": "#f9f6fe",
+            "$description": "Foundation behind every surface"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Opaque reading surface"
+          },
+          "surfaceAlt": {
+            "$type": "color",
+            "$value": "#f2edfe",
+            "$description": "Secondary reading surface"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#171130",
+            "$description": "Body ink"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#402e76",
+            "$description": "Supporting ink"
+          },
+          "primary": {
+            "$type": "color",
+            "$value": "#7338EF",
+            "$description": "Action colour"
+          },
+          "onPrimary": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Ink on the action colour"
+          },
+          "primarySoft": {
+            "$type": "color",
+            "$value": "#e6dbfc",
+            "$description": "Selected or authored container"
+          },
+          "onPrimarySoft": {
+            "$type": "color",
+            "$value": "#2b195a",
+            "$description": "Ink on the soft container"
+          },
+          "outline": {
+            "$type": "color",
+            "$value": "#624a9f",
+            "$description": "Functional boundary"
+          },
+          "decorative": {
+            "$type": "color",
+            "$value": "#7338EF",
+            "$description": "Atmosphere and decorative light"
+          },
+          "companion": {
+            "$type": "color",
+            "$value": "#EF48C6",
+            "$description": "Paired atmosphere colour"
+          },
+          "glow": {
+            "$type": "color",
+            "$value": "#52BDF3",
+            "$description": "Highlight light"
+          }
+        },
+        "dark": {
+          "canvas": {
+            "$type": "color",
+            "$value": "#120d26",
+            "$description": "Foundation behind every surface"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#1d1730",
+            "$description": "Opaque reading surface"
+          },
+          "surfaceAlt": {
+            "$type": "color",
+            "$value": "#332756",
+            "$description": "Secondary reading surface"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#f7f3fe",
+            "$description": "Body ink"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#dbcbfb",
+            "$description": "Supporting ink"
+          },
+          "primary": {
+            "$type": "color",
+            "$value": "#c8b1f9",
+            "$description": "Action colour"
+          },
+          "onPrimary": {
+            "$type": "color",
+            "$value": "#16102e",
+            "$description": "Ink on the action colour"
+          },
+          "primarySoft": {
+            "$type": "color",
+            "$value": "#331e65",
+            "$description": "Selected or authored container"
+          },
+          "onPrimarySoft": {
+            "$type": "color",
+            "$value": "#ebe3fd",
+            "$description": "Ink on the soft container"
+          },
+          "outline": {
+            "$type": "color",
+            "$value": "#bfa3f8",
+            "$description": "Functional boundary"
+          },
+          "decorative": {
+            "$type": "color",
+            "$value": "#7e48f0",
+            "$description": "Atmosphere and decorative light"
+          },
+          "companion": {
+            "$type": "color",
+            "$value": "#EF48C6",
+            "$description": "Paired atmosphere colour"
+          },
+          "glow": {
+            "$type": "color",
+            "$value": "#52BDF3",
+            "$description": "Highlight light"
+          }
+        }
+      },
+      "fuchsia": {
+        "$name": "Fuchsia",
+        "$description": "Confident magenta for creative products.",
+        "seed": {
+          "$type": "color",
+          "$value": "#C01993"
+        },
+        "companion": {
+          "$type": "color",
+          "$value": "#7C4DFF"
+        },
+        "glow": {
+          "$type": "color",
+          "$value": "#FF96DA"
+        },
+        "light": {
+          "canvas": {
+            "$type": "color",
+            "$value": "#fcf5fa",
+            "$description": "Foundation behind every surface"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Opaque reading surface"
+          },
+          "surfaceAlt": {
+            "$type": "color",
+            "$value": "#f9eaf5",
+            "$description": "Secondary reading surface"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#210d25",
+            "$description": "Body ink"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#5b2356",
+            "$description": "Supporting ink"
+          },
+          "primary": {
+            "$type": "color",
+            "$value": "#C01993",
+            "$description": "Action colour"
+          },
+          "onPrimary": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Ink on the action colour"
+          },
+          "primarySoft": {
+            "$type": "color",
+            "$value": "#f4d6ec",
+            "$description": "Selected or authored container"
+          },
+          "onPrimarySoft": {
+            "$type": "color",
+            "$value": "#440f3d",
+            "$description": "Ink on the soft container"
+          },
+          "outline": {
+            "$type": "color",
+            "$value": "#813e7a",
+            "$description": "Functional boundary"
+          },
+          "decorative": {
+            "$type": "color",
+            "$value": "#C01993",
+            "$description": "Atmosphere and decorative light"
+          },
+          "companion": {
+            "$type": "color",
+            "$value": "#7C4DFF",
+            "$description": "Paired atmosphere colour"
+          },
+          "glow": {
+            "$type": "color",
+            "$value": "#FF96DA",
+            "$description": "Highlight light"
+          }
+        },
+        "dark": {
+          "canvas": {
+            "$type": "color",
+            "$value": "#190a1e",
+            "$description": "Foundation behind every surface"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#241427",
+            "$description": "Opaque reading surface"
+          },
+          "surfaceAlt": {
+            "$type": "color",
+            "$value": "#422144",
+            "$description": "Secondary reading surface"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#fbf1f9",
+            "$description": "Body ink"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#efc3e3",
+            "$description": "Supporting ink"
+          },
+          "primary": {
+            "$type": "color",
+            "$value": "#e6a5d5",
+            "$description": "Action colour"
+          },
+          "onPrimary": {
+            "$type": "color",
+            "$value": "#1f0d23",
+            "$description": "Ink on the action colour"
+          },
+          "primarySoft": {
+            "$type": "color",
+            "$value": "#4e1344",
+            "$description": "Selected or authored container"
+          },
+          "onPrimarySoft": {
+            "$type": "color",
+            "$value": "#f6dff0",
+            "$description": "Ink on the soft container"
+          },
+          "outline": {
+            "$type": "color",
+            "$value": "#e295cd",
+            "$description": "Functional boundary"
+          },
+          "decorative": {
+            "$type": "color",
+            "$value": "#c52b9c",
+            "$description": "Atmosphere and decorative light"
+          },
+          "companion": {
+            "$type": "color",
+            "$value": "#7C4DFF",
+            "$description": "Paired atmosphere colour"
+          },
+          "glow": {
+            "$type": "color",
+            "$value": "#FF96DA",
+            "$description": "Highlight light"
+          }
+        }
+      },
+      "cobalt": {
+        "$name": "Cobalt",
+        "$description": "Clear blue with a violet undertone.",
+        "seed": {
+          "$type": "color",
+          "$value": "#2758E8"
+        },
+        "companion": {
+          "$type": "color",
+          "$value": "#6D47F2"
+        },
+        "glow": {
+          "$type": "color",
+          "$value": "#48C6F0"
+        },
+        "light": {
+          "canvas": {
+            "$type": "color",
+            "$value": "#f5f7fe",
+            "$description": "Foundation behind every surface"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Opaque reading surface"
+          },
+          "surfaceAlt": {
+            "$type": "color",
+            "$value": "#ecf0fd",
+            "$description": "Secondary reading surface"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#0d1530",
+            "$description": "Body ink"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#263974",
+            "$description": "Supporting ink"
+          },
+          "primary": {
+            "$type": "color",
+            "$value": "#2758E8",
+            "$description": "Action colour"
+          },
+          "onPrimary": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Ink on the action colour"
+          },
+          "primarySoft": {
+            "$type": "color",
+            "$value": "#d8e1fb",
+            "$description": "Selected or authored container"
+          },
+          "onPrimarySoft": {
+            "$type": "color",
+            "$value": "#132458",
+            "$description": "Ink on the soft container"
+          },
+          "outline": {
+            "$type": "color",
+            "$value": "#44579c",
+            "$description": "Functional boundary"
+          },
+          "decorative": {
+            "$type": "color",
+            "$value": "#2758E8",
+            "$description": "Atmosphere and decorative light"
+          },
+          "companion": {
+            "$type": "color",
+            "$value": "#6D47F2",
+            "$description": "Paired atmosphere colour"
+          },
+          "glow": {
+            "$type": "color",
+            "$value": "#48C6F0",
+            "$description": "Highlight light"
+          }
+        },
+        "dark": {
+          "canvas": {
+            "$type": "color",
+            "$value": "#0b1025",
+            "$description": "Foundation behind every surface"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#151a30",
+            "$description": "Opaque reading surface"
+          },
+          "surfaceAlt": {
+            "$type": "color",
+            "$value": "#252d55",
+            "$description": "Secondary reading surface"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#f2f5fe",
+            "$description": "Body ink"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#c7d4f9",
+            "$description": "Supporting ink"
+          },
+          "primary": {
+            "$type": "color",
+            "$value": "#abbef6",
+            "$description": "Action colour"
+          },
+          "onPrimary": {
+            "$type": "color",
+            "$value": "#0d142d",
+            "$description": "Ink on the action colour"
+          },
+          "primarySoft": {
+            "$type": "color",
+            "$value": "#182962",
+            "$description": "Selected or authored container"
+          },
+          "onPrimarySoft": {
+            "$type": "color",
+            "$value": "#e1e8fc",
+            "$description": "Ink on the soft container"
+          },
+          "outline": {
+            "$type": "color",
+            "$value": "#9cb2f4",
+            "$description": "Functional boundary"
+          },
+          "decorative": {
+            "$type": "color",
+            "$value": "#3865ea",
+            "$description": "Atmosphere and decorative light"
+          },
+          "companion": {
+            "$type": "color",
+            "$value": "#6D47F2",
+            "$description": "Paired atmosphere colour"
+          },
+          "glow": {
+            "$type": "color",
+            "$value": "#48C6F0",
+            "$description": "Highlight light"
+          }
+        }
+      },
+      "ion": {
+        "$name": "Ion",
+        "$description": "Vivid cyan and indigo for focused tools.",
+        "seed": {
+          "$type": "color",
+          "$value": "#007E97"
+        },
+        "companion": {
+          "$type": "color",
+          "$value": "#3D45E5"
+        },
+        "glow": {
+          "$type": "color",
+          "$value": "#36DCD1"
+        },
+        "light": {
+          "canvas": {
+            "$type": "color",
+            "$value": "#f4f9fa",
+            "$description": "Foundation behind every surface"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Opaque reading surface"
+          },
+          "surfaceAlt": {
+            "$type": "color",
+            "$value": "#e8f3f6",
+            "$description": "Secondary reading surface"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#081a25",
+            "$description": "Body ink"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#184757",
+            "$description": "Supporting ink"
+          },
+          "primary": {
+            "$type": "color",
+            "$value": "#007E97",
+            "$description": "Action colour"
+          },
+          "onPrimary": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Ink on the action colour"
+          },
+          "primarySoft": {
+            "$type": "color",
+            "$value": "#d1e8ec",
+            "$description": "Selected or authored container"
+          },
+          "onPrimarySoft": {
+            "$type": "color",
+            "$value": "#06303e",
+            "$description": "Ink on the soft container"
+          },
+          "outline": {
+            "$type": "color",
+            "$value": "#34667c",
+            "$description": "Functional boundary"
+          },
+          "decorative": {
+            "$type": "color",
+            "$value": "#007E97",
+            "$description": "Atmosphere and decorative light"
+          },
+          "companion": {
+            "$type": "color",
+            "$value": "#3D45E5",
+            "$description": "Paired atmosphere colour"
+          },
+          "glow": {
+            "$type": "color",
+            "$value": "#36DCD1",
+            "$description": "Highlight light"
+          }
+        },
+        "dark": {
+          "canvas": {
+            "$type": "color",
+            "$value": "#07141e",
+            "$description": "Foundation behind every surface"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#111e27",
+            "$description": "Opaque reading surface"
+          },
+          "surfaceAlt": {
+            "$type": "color",
+            "$value": "#1d3445",
+            "$description": "Secondary reading surface"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#f0f7f9",
+            "$description": "Body ink"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#bddde4",
+            "$description": "Supporting ink"
+          },
+          "primary": {
+            "$type": "color",
+            "$value": "#9ccdd6",
+            "$description": "Action colour"
+          },
+          "onPrimary": {
+            "$type": "color",
+            "$value": "#081924",
+            "$description": "Ink on the action colour"
+          },
+          "primarySoft": {
+            "$type": "color",
+            "$value": "#0a3646",
+            "$description": "Selected or authored container"
+          },
+          "onPrimarySoft": {
+            "$type": "color",
+            "$value": "#dbedf0",
+            "$description": "Ink on the soft container"
+          },
+          "outline": {
+            "$type": "color",
+            "$value": "#8ac4cf",
+            "$description": "Functional boundary"
+          },
+          "decorative": {
+            "$type": "color",
+            "$value": "#14889f",
+            "$description": "Atmosphere and decorative light"
+          },
+          "companion": {
+            "$type": "color",
+            "$value": "#3D45E5",
+            "$description": "Paired atmosphere colour"
+          },
+          "glow": {
+            "$type": "color",
+            "$value": "#36DCD1",
+            "$description": "Highlight light"
+          }
+        }
+      },
+      "amethyst": {
+        "$name": "Amethyst",
+        "$description": "Rich purple with a warm luminous edge.",
+        "seed": {
+          "$type": "color",
+          "$value": "#8430C6"
+        },
+        "companion": {
+          "$type": "color",
+          "$value": "#CE49B2"
+        },
+        "glow": {
+          "$type": "color",
+          "$value": "#9198FF"
+        },
+        "light": {
+          "canvas": {
+            "$type": "color",
+            "$value": "#f9f6fc",
+            "$description": "Foundation behind every surface"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Opaque reading surface"
+          },
+          "surfaceAlt": {
+            "$type": "color",
+            "$value": "#f4ecfa",
+            "$description": "Secondary reading surface"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#19102b",
+            "$description": "Body ink"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#462b68",
+            "$description": "Supporting ink"
+          },
+          "primary": {
+            "$type": "color",
+            "$value": "#8430C6",
+            "$description": "Action colour"
+          },
+          "onPrimary": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Ink on the action colour"
+          },
+          "primarySoft": {
+            "$type": "color",
+            "$value": "#e9daf5",
+            "$description": "Selected or authored container"
+          },
+          "onPrimarySoft": {
+            "$type": "color",
+            "$value": "#30174d",
+            "$description": "Ink on the soft container"
+          },
+          "outline": {
+            "$type": "color",
+            "$value": "#69478f",
+            "$description": "Functional boundary"
+          },
+          "decorative": {
+            "$type": "color",
+            "$value": "#8430C6",
+            "$description": "Atmosphere and decorative light"
+          },
+          "companion": {
+            "$type": "color",
+            "$value": "#CE49B2",
+            "$description": "Paired atmosphere colour"
+          },
+          "glow": {
+            "$type": "color",
+            "$value": "#9198FF",
+            "$description": "Highlight light"
+          }
+        },
+        "dark": {
+          "canvas": {
+            "$type": "color",
+            "$value": "#130d22",
+            "$description": "Foundation behind every surface"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#1e162c",
+            "$description": "Opaque reading surface"
+          },
+          "surfaceAlt": {
+            "$type": "color",
+            "$value": "#36254e",
+            "$description": "Secondary reading surface"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#f8f3fc",
+            "$description": "Body ink"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#dfc9f0",
+            "$description": "Supporting ink"
+          },
+          "primary": {
+            "$type": "color",
+            "$value": "#cfaee9",
+            "$description": "Action colour"
+          },
+          "onPrimary": {
+            "$type": "color",
+            "$value": "#180f29",
+            "$description": "Ink on the action colour"
+          },
+          "primarySoft": {
+            "$type": "color",
+            "$value": "#391b56",
+            "$description": "Selected or authored container"
+          },
+          "onPrimarySoft": {
+            "$type": "color",
+            "$value": "#eee2f7",
+            "$description": "Ink on the soft container"
+          },
+          "outline": {
+            "$type": "color",
+            "$value": "#c6a0e5",
+            "$description": "Functional boundary"
+          },
+          "decorative": {
+            "$type": "color",
+            "$value": "#8e41cb",
+            "$description": "Atmosphere and decorative light"
+          },
+          "companion": {
+            "$type": "color",
+            "$value": "#CE49B2",
+            "$description": "Paired atmosphere colour"
+          },
+          "glow": {
+            "$type": "color",
+            "$value": "#9198FF",
+            "$description": "Highlight light"
+          }
+        }
+      },
+      "harbor": {
+        "$name": "Harbor",
+        "$description": "Gather’s original palette, mapped to shared roles.",
+        "seed": {
+          "$type": "color",
+          "$value": "#4669B2"
+        },
+        "companion": {
+          "$type": "color",
+          "$value": "#8970B5"
+        },
+        "glow": {
+          "$type": "color",
+          "$value": "#72C4DF"
+        },
+        "light": {
+          "canvas": {
+            "$type": "color",
+            "$value": "#faf8fe",
+            "$description": "Foundation behind every surface"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#ffffff",
+            "$description": "Opaque reading surface"
+          },
+          "surfaceAlt": {
+            "$type": "color",
+            "$value": "#e7e7f1",
+            "$description": "Secondary reading surface"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#30323a",
+            "$description": "Body ink"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#5c5f68",
+            "$description": "Supporting ink"
+          },
+          "primary": {
+            "$type": "color",
+            "$value": "#4b5e8b",
+            "$description": "Action colour"
+          },
+          "onPrimary": {
+            "$type": "color",
+            "$value": "#f9f8ff",
+            "$description": "Ink on the action colour"
+          },
+          "primarySoft": {
+            "$type": "color",
+            "$value": "#b8cbff",
+            "$description": "Selected or authored container"
+          },
+          "onPrimarySoft": {
+            "$type": "color",
+            "$value": "#2f436e",
+            "$description": "Ink on the soft container"
+          },
+          "outline": {
+            "$type": "color",
+            "$value": "#787a84",
+            "$description": "Functional boundary"
+          },
+          "decorative": {
+            "$type": "color",
+            "$value": "#4669B2",
+            "$description": "Atmosphere and decorative light"
+          },
+          "companion": {
+            "$type": "color",
+            "$value": "#8970B5",
+            "$description": "Paired atmosphere colour"
+          },
+          "glow": {
+            "$type": "color",
+            "$value": "#72C4DF",
+            "$description": "Highlight light"
+          }
+        },
+        "dark": {
+          "canvas": {
+            "$type": "color",
+            "$value": "#0d0e12",
+            "$description": "Foundation behind every surface"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#111318",
+            "$description": "Opaque reading surface"
+          },
+          "surfaceAlt": {
+            "$type": "color",
+            "$value": "#1d1f26",
+            "$description": "Secondary reading surface"
+          },
+          "text": {
+            "$type": "color",
+            "$value": "#e4e5f0",
+            "$description": "Body ink"
+          },
+          "muted": {
+            "$type": "color",
+            "$value": "#a9aab5",
+            "$description": "Supporting ink"
+          },
+          "primary": {
+            "$type": "color",
+            "$value": "#b8c6ee",
+            "$description": "Action colour"
+          },
+          "onPrimary": {
+            "$type": "color",
+            "$value": "#314060",
+            "$description": "Ink on the action colour"
+          },
+          "primarySoft": {
+            "$type": "color",
+            "$value": "#445274",
+            "$description": "Selected or authored container"
+          },
+          "onPrimarySoft": {
+            "$type": "color",
+            "$value": "#dae3ff",
+            "$description": "Ink on the soft container"
+          },
+          "outline": {
+            "$type": "color",
+            "$value": "#73757f",
+            "$description": "Functional boundary"
+          },
+          "decorative": {
+            "$type": "color",
+            "$value": "#4669B2",
+            "$description": "Atmosphere and decorative light"
+          },
+          "companion": {
+            "$type": "color",
+            "$value": "#8970B5",
+            "$description": "Paired atmosphere colour"
+          },
+          "glow": {
+            "$type": "color",
+            "$value": "#72C4DF",
+            "$description": "Highlight light"
+          },
+          "contentOwnSurface": {
+            "$type": "color",
+            "$value": "#283c60"
+          }
+        }
+      }
+    },
+    "material": {
+      "acrylicBlur": {
+        "$type": "dimension",
+        "$value": "40px"
+      },
+      "acrylicSaturation": {
+        "$type": "number",
+        "$value": 125
+      },
+      "glassBlur": {
+        "$type": "dimension",
+        "$value": "20px"
+      },
+      "glassSaturation": {
+        "$type": "number",
+        "$value": 165
+      },
+      "glassOpacity": {
+        "$type": "number",
+        "$value": 0.2
+      },
+      "grainOpacity": {
+        "$type": "number",
+        "$value": 0.045
+      },
+      "labelVeil": {
+        "$type": "number",
+        "$value": 0.55
+      },
+      "labelVeilDark": {
+        "$type": "number",
+        "$value": 0.6
+      },
+      "contentOpacity": {
+        "$type": "number",
+        "$value": 0.8
+      },
+      "contentFeather": {
+        "$type": "dimension",
+        "$value": "1.95px"
+      },
+      "stoneFeather": {
+        "$type": "dimension",
+        "$value": "1.95px"
+      },
+      "mirageColor": {
+        "$type": "color",
+        "$value": "#111525"
+      },
+      "mirageOpacity": {
+        "$type": "number",
+        "$value": 0.38
+      },
+      "mirageBlur": {
+        "$type": "dimension",
+        "$value": "28px"
+      },
+      "mirageSaturation": {
+        "$type": "number",
+        "$value": 165
+      },
+      "mirageBrightness": {
+        "$type": "number",
+        "$value": 88
+      },
+      "mirageFallbackOpacity": {
+        "$type": "number",
+        "$value": 0.64
+      },
+      "plasticInactive": {
+        "light": {
+          "$type": "color",
+          "$value": "#f1f1f3"
+        },
+        "dark": {
+          "$type": "color",
+          "$value": "#202126"
+        }
+      }
+    },
+    "duration": {
+      "press": {
+        "$type": "duration",
+        "$value": "120ms"
+      },
+      "state": {
+        "$type": "duration",
+        "$value": "213.33ms"
+      },
+      "spatial": {
+        "$type": "duration",
+        "$value": "293.33ms"
+      },
+      "exit": {
+        "$type": "duration",
+        "$value": "160ms"
+      },
+      "material": {
+        "$type": "duration",
+        "$value": "1000ms"
+      },
+      "liquid": {
+        "$type": "duration",
+        "$value": "1400ms"
+      },
+      "flow": {
+        "$type": "duration",
+        "$value": "1200ms"
+      },
+      "departure": {
+        "$type": "duration",
+        "$value": "650ms"
+      },
+      "maxDuration": {
+        "$type": "duration",
+        "$value": "5000ms"
+      }
+    },
+    "distance": {
+      "panel": {
+        "$type": "dimension",
+        "$value": "24px"
+      },
+      "floating": {
+        "$type": "dimension",
+        "$value": "30px"
+      },
+      "content": {
+        "$type": "dimension",
+        "$value": "0px"
+      },
+      "exit": {
+        "$type": "dimension",
+        "$value": "20px"
+      },
+      "depth": {
+        "$type": "dimension",
+        "$value": "50px"
+      },
+      "feather": {
+        "$type": "dimension",
+        "$value": "6px"
+      },
+      "maxTravel": {
+        "$type": "dimension",
+        "$value": "50px"
+      },
+      "$travelPolicy": {
+        "ordinaryRange": [
+          5,
+          30
+        ],
+        "compactGuideline": 50,
+        "extended": "Documented large compositions and measured layout may exceed 50px.",
+        "stationaryMaterials": [
+          "haze",
+          "stone"
+        ]
+      }
+    },
+    "easing": {
+      "enter": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0.22, 0.65, 0.22, 1)"
+      },
+      "settle": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0.2, 0, 0.2, 1)"
+      },
+      "exit": {
+        "$type": "cubicBezier",
+        "$value": "cubic-bezier(0.4, 0, 0.6, 1)"
+      }
+    }
+  },
+  "semantic": {
+    "material": {
+      "frost": {
+        "diffusion": {
+          "$type": "dimension",
+          "$value": "{primitive.material.acrylicBlur}",
+          "$description": "Frost backdrop diffusion"
+        },
+        "saturation": {
+          "$type": "number",
+          "$value": "{primitive.material.acrylicSaturation}",
+          "$description": "Frost backdrop saturation, percent"
+        },
+        "grain": {
+          "$type": "number",
+          "$value": "{primitive.material.grainOpacity}",
+          "$description": "Frost grain opacity"
+        }
+      },
+      "resin": {
+        "diffusion": {
+          "$type": "dimension",
+          "$value": "{primitive.material.glassBlur}",
+          "$description": "Resin backdrop diffusion"
+        },
+        "saturation": {
+          "$type": "number",
+          "$value": "{primitive.material.glassSaturation}",
+          "$description": "Resin backdrop saturation, percent"
+        },
+        "fill": {
+          "$type": "number",
+          "$value": "{primitive.material.glassOpacity}",
+          "$description": "Resin fill opacity, fixed by the material contract"
+        }
+      },
+      "stone": {
+        "fill": {
+          "light": {
+            "$type": "number",
+            "$value": "{primitive.material.labelVeil}",
+            "$description": "Stone label backing, light mode"
+          },
+          "dark": {
+            "$type": "number",
+            "$value": "{primitive.material.labelVeilDark}",
+            "$description": "Stone label backing, dark mode"
+          }
+        },
+        "feather": {
+          "$type": "dimension",
+          "$value": "{primitive.material.stoneFeather}",
+          "$description": "Stone feathered perimeter"
+        }
+      },
+      "haze": {
+        "fill": {
+          "$type": "number",
+          "$value": "{primitive.material.contentOpacity}",
+          "$description": "Haze content fill opacity"
+        },
+        "feather": {
+          "$type": "dimension",
+          "$value": "{primitive.material.contentFeather}",
+          "$description": "Haze feathered perimeter"
+        }
+      },
+      "mirage": {
+        "colour": {
+          "$type": "color",
+          "$value": "{primitive.material.mirageColor}",
+          "$description": "Mirage scrim colour"
+        },
+        "opacity": {
+          "$type": "number",
+          "$value": "{primitive.material.mirageOpacity}",
+          "$description": "Mirage scrim opacity"
+        },
+        "diffusion": {
+          "$type": "dimension",
+          "$value": "{primitive.material.mirageBlur}",
+          "$description": "Mirage chromatic diffusion"
+        },
+        "saturation": {
+          "$type": "number",
+          "$value": "{primitive.material.mirageSaturation}",
+          "$description": "Mirage saturation, percent"
+        },
+        "brightness": {
+          "$type": "number",
+          "$value": "{primitive.material.mirageBrightness}",
+          "$description": "Mirage brightness, percent"
+        },
+        "fallback": {
+          "$type": "number",
+          "$value": "{primitive.material.mirageFallbackOpacity}",
+          "$description": "Mirage opacity without backdrop filtering"
+        }
+      },
+      "plastic": {
+        "inactive": {
+          "light": {
+            "$type": "color",
+            "$value": "{primitive.material.plasticInactive.light}",
+            "$description": "Plastic neutral fallback, inactive window"
+          },
+          "dark": {
+            "$type": "color",
+            "$value": "{primitive.material.plasticInactive.dark}",
+            "$description": "Plastic neutral fallback, inactive window"
+          }
+        }
+      }
+    },
+    "feedback": {
+      "light": {
+        "success": {
+          "ink": {
+            "$type": "color",
+            "$value": "#175D38"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#E5F4EA"
+          },
+          "symbol": {
+            "$type": "string",
+            "$value": "✓",
+            "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
+          },
+          "label": {
+            "$type": "string",
+            "$value": "Ready"
+          }
+        },
+        "attention": {
+          "ink": {
+            "$type": "color",
+            "$value": "#714B00"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#FFF0CD"
+          },
+          "symbol": {
+            "$type": "string",
+            "$value": "△",
+            "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
+          },
+          "label": {
+            "$type": "string",
+            "$value": "Review needed"
+          }
+        },
+        "danger": {
+          "ink": {
+            "$type": "color",
+            "$value": "#941D36"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#FFE8EC"
+          },
+          "symbol": {
+            "$type": "string",
+            "$value": "!",
+            "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
+          },
+          "label": {
+            "$type": "string",
+            "$value": "Action blocked"
+          }
+        },
+        "info": {
+          "ink": {
+            "$type": "color",
+            "$value": "#334155"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#E8EDF4"
+          },
+          "symbol": {
+            "$type": "string",
+            "$value": "i",
+            "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
+          },
+          "label": {
+            "$type": "string",
+            "$value": "Information"
+          }
+        }
+      },
+      "dark": {
+        "success": {
+          "ink": {
+            "$type": "color",
+            "$value": "#9BE2B3"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#173525"
+          },
+          "symbol": {
+            "$type": "string",
+            "$value": "✓",
+            "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
+          },
+          "label": {
+            "$type": "string",
+            "$value": "Ready"
+          }
+        },
+        "attention": {
+          "ink": {
+            "$type": "color",
+            "$value": "#FFDA8A"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#3D2D0E"
+          },
+          "symbol": {
+            "$type": "string",
+            "$value": "△",
+            "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
+          },
+          "label": {
+            "$type": "string",
+            "$value": "Review needed"
+          }
+        },
+        "danger": {
+          "ink": {
+            "$type": "color",
+            "$value": "#FFB2C0"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#481C29"
+          },
+          "symbol": {
+            "$type": "string",
+            "$value": "!",
+            "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
+          },
+          "label": {
+            "$type": "string",
+            "$value": "Action blocked"
+          }
+        },
+        "info": {
+          "ink": {
+            "$type": "color",
+            "$value": "#D2DCEC"
+          },
+          "surface": {
+            "$type": "color",
+            "$value": "#263244"
+          },
+          "symbol": {
+            "$type": "string",
+            "$value": "i",
+            "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
+          },
+          "label": {
+            "$type": "string",
+            "$value": "Information"
+          }
+        }
+      }
+    },
+    "motion": {
+      "duration": {
+        "press": {
+          "$type": "duration",
+          "$value": "{primitive.duration.press}"
+        },
+        "state": {
+          "$type": "duration",
+          "$value": "{primitive.duration.state}"
+        },
+        "spatial": {
+          "$type": "duration",
+          "$value": "{primitive.duration.spatial}"
+        },
+        "exit": {
+          "$type": "duration",
+          "$value": "{primitive.duration.exit}"
+        },
+        "material": {
+          "$type": "duration",
+          "$value": "{primitive.duration.material}"
+        },
+        "liquid": {
+          "$type": "duration",
+          "$value": "{primitive.duration.liquid}"
+        },
+        "flow": {
+          "$type": "duration",
+          "$value": "{primitive.duration.flow}"
+        },
+        "departure": {
+          "$type": "duration",
+          "$value": "{primitive.duration.departure}"
+        },
+        "ceiling": {
+          "$type": "duration",
+          "$value": "{primitive.duration.maxDuration}",
+          "$description": "Hard ceiling for any single animation, including replay-rate adjustment"
+        }
+      },
+      "easing": {
+        "enter": {
+          "$type": "cubicBezier",
+          "$value": "{primitive.easing.enter}"
+        },
+        "settle": {
+          "$type": "cubicBezier",
+          "$value": "{primitive.easing.settle}"
+        },
+        "exit": {
+          "$type": "cubicBezier",
+          "$value": "{primitive.easing.exit}"
+        }
+      },
+      "travel": {
+        "panel": {
+          "$type": "dimension",
+          "$value": "{primitive.distance.panel}"
+        },
+        "floating": {
+          "$type": "dimension",
+          "$value": "{primitive.distance.floating}"
+        },
+        "content": {
+          "$type": "dimension",
+          "$value": "{primitive.distance.content}"
+        },
+        "exit": {
+          "$type": "dimension",
+          "$value": "{primitive.distance.exit}"
+        },
+        "depth": {
+          "$type": "dimension",
+          "$value": "{primitive.distance.depth}"
+        },
+        "feather": {
+          "$type": "dimension",
+          "$value": "{primitive.distance.feather}"
+        },
+        "max": {
+          "$type": "dimension",
+          "$value": "{primitive.distance.maxTravel}"
+        }
+      }
+    },
+    "typography": {
+      "family": {
+        "$type": "fontFamily",
+        "$value": "Manrope"
+      },
+      "readingSize": {
+        "$type": "dimension",
+        "$value": "16px"
+      },
+      "readingLeading": {
+        "$type": "dimension",
+        "$value": "24px"
+      }
+    },
+    "shape": {
+      "contentRadius": {
+        "$type": "dimension",
+        "$value": "28px",
+        "$description": "Default content radius; adjustable 14-28px"
+      }
+    },
+    "range": {
+      "atmosphere": {
+        "$type": "number",
+        "$value": 90,
+        "$description": "Default 90; valid range 15-90",
+        "$extensions": {
+          "digital.meridian.crystal": {
+            "minimum": 15,
+            "maximum": 90
+          }
+        }
+      },
+      "translucency": {
+        "$type": "number",
+        "$value": 35,
+        "$description": "Default 35; valid range 35-85",
+        "$extensions": {
+          "digital.meridian.crystal": {
+            "minimum": 35,
+            "maximum": 85
+          }
+        }
+      },
+      "elevation": {
+        "$type": "number",
+        "$value": 125,
+        "$description": "Default 125; valid range 60-150",
+        "$extensions": {
+          "digital.meridian.crystal": {
+            "minimum": 60,
+            "maximum": 150
+          }
+        }
+      },
+      "radius": {
+        "$type": "number",
+        "$value": 28,
+        "$description": "Default 28; valid range 14-28",
+        "$extensions": {
+          "digital.meridian.crystal": {
+            "minimum": 14,
+            "maximum": 28
+          }
+        }
+      },
+      "motionSpeed": {
+        "$type": "number",
+        "$value": 1,
+        "$description": "Default 1; valid range 0.25-2",
+        "$extensions": {
+          "digital.meridian.crystal": {
+            "minimum": 0.25,
+            "maximum": 2
+          }
+        }
+      }
+    },
+    "default": {
+      "palette": {
+        "$type": "string",
+        "$value": "prism"
+      },
+      "mode": {
+        "$type": "string",
+        "$value": "light"
+      },
+      "density": {
+        "$type": "string",
+        "$value": "comfortable"
+      },
+      "font": {
+        "$type": "string",
+        "$value": "manrope"
+      },
+      "reduced": {
+        "$type": "boolean",
+        "$value": false
+      },
+      "reduceMotion": {
+        "$type": "boolean",
+        "$value": false
+      }
+    }
+  },
+  "component": {
+    "action": {
+      "radius": {
+        "$type": "dimension",
+        "$value": "999px",
+        "$description": "Action controls are pill-shaped, independent of the content radius"
+      },
+      "minTarget": {
+        "$type": "dimension",
+        "$value": "44px",
+        "$description": "Minimum interactive target"
+      }
+    },
+    "card": {
+      "radius": {
+        "$type": "dimension",
+        "$value": "{semantic.shape.contentRadius}",
+        "$description": "Card-shaped buttons keep the content radius so artwork is not clipped"
+      }
+    },
+    "focus": {
+      "coreWidth": {
+        "$type": "dimension",
+        "$value": "2px",
+        "$description": "Crisp focus core, never blurred"
+      },
+      "coreOffset": {
+        "$type": "dimension",
+        "$value": "3px"
+      }
+    },
+    "selection": {
+      "railWidth": {
+        "$type": "dimension",
+        "$value": "3px",
+        "$description": "Selection is a leading rail plus label weight, never a check mark"
+      },
+      "railHeight": {
+        "$type": "dimension",
+        "$value": "15px"
+      }
+    },
+    "indicator": {
+      "size": {
+        "$type": "dimension",
+        "$value": "20px",
+        "$description": "Circular state badge"
+      },
+      "fieldSize": {
+        "$type": "dimension",
+        "$value": "24px"
+      }
+    }
+  }
+}

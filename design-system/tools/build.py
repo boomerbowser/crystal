@@ -3,6 +3,7 @@ from pathlib import Path
 import json, html, subprocess
 import markdown
 ROOT=Path(__file__).resolve().parents[1]
+subprocess.run(['node','tools/build-tokens.cjs'],cwd=ROOT,check=True)
 data=json.loads((ROOT/'tokens/crystal.json').read_text())
 (ROOT/'assets/tokens.js').write_text('window.CRYSTAL_TOKENS = '+json.dumps(data,separators=(',',':'))+';\n')
 subprocess.run(['node','-e',"const f=require('fs'),v=require('vm');const c={window:{}};v.createContext(c);for(const p of ['assets/tokens.js','assets/crystal.js'])v.runInContext(f.readFileSync(p,'utf8'),c);f.writeFileSync('assets/crystal-theme.css',c.window.Crystal.exportCSS());"],cwd=ROOT,check=True)

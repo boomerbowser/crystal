@@ -213,7 +213,7 @@
     },
     "harbor": {
       "name": "Harbor",
-      "description": "Gather\u2019s original palette, mapped to shared roles.",
+      "description": "Gather’s original palette, mapped to shared roles.",
       "seed": "#4669B2",
       "companion": "#8970B5",
       "glow": "#72C4DF",
@@ -257,13 +257,13 @@
       "success": {
         "ink": "#175D38",
         "surface": "#E5F4EA",
-        "symbol": "\u2713",
+        "symbol": "✓",
         "label": "Ready"
       },
       "attention": {
         "ink": "#714B00",
         "surface": "#FFF0CD",
-        "symbol": "\u25b3",
+        "symbol": "△",
         "label": "Review needed"
       },
       "danger": {
@@ -283,13 +283,13 @@
       "success": {
         "ink": "#9BE2B3",
         "surface": "#173525",
-        "symbol": "\u2713",
+        "symbol": "✓",
         "label": "Ready"
       },
       "attention": {
         "ink": "#FFDA8A",
         "surface": "#3D2D0E",
-        "symbol": "\u25b3",
+        "symbol": "△",
         "label": "Review needed"
       },
       "danger": {
@@ -308,16 +308,12 @@
   },
   "material": {
     "acrylicBlur": 40,
-    "glassBlur": 20,
     "acrylicSaturation": 125,
+    "glassBlur": 20,
     "glassSaturation": 165,
+    "glassOpacity": 0.2,
     "grainOpacity": 0.045,
     "labelVeil": 0.55,
-    "micaInactive": {
-      "light": "#f1f1f3",
-      "dark": "#202126"
-    },
-    "glassOpacity": 0.2,
     "labelVeilDark": 0.6,
     "contentOpacity": 0.8,
     "contentFeather": 1.95,
@@ -327,13 +323,17 @@
     "mirageBlur": 28,
     "mirageSaturation": 165,
     "mirageBrightness": 88,
-    "mirageFallbackOpacity": 0.64
+    "mirageFallbackOpacity": 0.64,
+    "micaInactive": {
+      "light": "#f1f1f3",
+      "dark": "#202126"
+    }
   },
   "motion": {
-    "press": 120.0,
+    "press": 120,
     "state": 213.33,
     "spatial": 293.33,
-    "exit": 160.0,
+    "exit": 160,
     "easing": {
       "enter": "cubic-bezier(0.22, 0.65, 0.22, 1)",
       "settle": "cubic-bezier(0.2, 0, 0.2, 1)",
@@ -371,7 +371,7 @@
     "readingLeading": 24,
     "family": "Manrope"
   },
-  "schemaNote": "Crystal token schema v1, not a claim of DTCG format conformance.",
+  "schemaNote": "Generated from tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.",
   "materials": {
     "plastic": {
       "name": "Plastic",
