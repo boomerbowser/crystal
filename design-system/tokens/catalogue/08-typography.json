@@ -1,0 +1,68 @@
+{
+  "id": "typography",
+  "name": "Typography",
+  "description": "Reading. Reading text stays 16px/24px on every platform, and text scaling always takes precedence over layout.",
+  "components": [
+    {
+      "id": "title",
+      "name": "Title",
+      "anatomy": "A heading at one of six levels, with tightened tracking at display sizes.",
+      "states": ["default"],
+      "material": "None",
+      "geometry": "1.2 line height; -0.04em tracking; sizes on a modular scale",
+      "semantics": "The visual level must not be chosen independently of the document outline; use a level, style separately",
+      "crystal": "Scale, tracking and leading",
+      "product": "The outline and the content",
+      "parity": ["mantine:Title", "mui:Typography", "antd:Typography.Title"]
+    },
+    {
+      "id": "text",
+      "name": "Text",
+      "anatomy": "Body copy with size, weight, colour role and truncation options.",
+      "states": ["default", "muted", "truncated", "clamped"],
+      "material": "None",
+      "geometry": "16px/24px reading rhythm; 78ch maximum measure",
+      "semantics": "Truncated text keeps its full value in the accessibility tree and in a title where useful",
+      "crystal": "Rhythm, measure, colour roles",
+      "product": "The content and truncation policy",
+      "parity": ["mantine:Text", "mui:Typography", "antd:Typography.Text"]
+    },
+    {
+      "id": "blockquote",
+      "name": "Blockquote",
+      "anatomy": "Quoted content with a leading rule and optional attribution.",
+      "states": ["default", "attributed"],
+      "material": "Haze panel when set apart",
+      "geometry": "Content radius; 3px leading rule",
+      "semantics": "Real blockquote with cite where the source is known",
+      "crystal": "Rule, panel and attribution treatment",
+      "product": "The quote and its source",
+      "parity": ["mantine:Blockquote", "mui:—", "antd:—"]
+    },
+    {
+      "id": "mark",
+      "name": "Mark",
+      "anatomy": "Inline highlighted text, typically a search match.",
+      "states": ["default"],
+      "material": "Primary-soft fill with its tested ink pair",
+      "geometry": "4px radius; does not disturb the line box",
+      "semantics": "Real mark element; highlighting is never the only indication of a match",
+      "crystal": "Fill pair and geometry",
+      "product": "What is highlighted",
+      "motion": ["highlight"],
+      "parity": ["mantine:Mark", "mui:—", "antd:—"]
+    },
+    {
+      "id": "prose",
+      "name": "Prose",
+      "anatomy": "Long-form content with consistent rhythm across headings, lists, tables, code and media.",
+      "states": ["default"],
+      "material": "Inherits; embedded surfaces follow their own components",
+      "geometry": "78ch measure; 1.8 line height; 4px-rhythm vertical spacing",
+      "semantics": "Anchor navigation must preserve focus when sections change",
+      "crystal": "The complete reading rhythm and embedded-element treatment",
+      "product": "Content, rendering and virtualisation",
+      "parity": ["mui:—", "mantine:TypographyStylesProvider", "antd:Typography"]
+    }
+  ]
+}

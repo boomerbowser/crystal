@@ -1,0 +1,97 @@
+{
+  "id": "actions",
+  "name": "Actions",
+  "description": "Controls that do something. All action geometry is a pill, independent of the content radius.",
+  "components": [
+    {
+      "id": "button",
+      "name": "Button",
+      "anatomy": "Resin shell, 8px-inset Haze reading fill, directional optical sheen, label and optional leading icon.",
+      "states": ["default", "hover", "pressed", "focus", "disabled", "loading"],
+      "material": "Resin shell with Haze fill; primary, secondary, quiet and danger variants",
+      "geometry": "Pill (999px); 48px height; 15px/24px padding; 44px minimum target",
+      "semantics": "Native button. A disabled button must not be the only explanation of unavailability.",
+      "crystal": "Material, pill geometry, optical pressure, focus ring, variant hierarchy",
+      "product": "The action itself, progress reporting and error recovery",
+      "motion": ["press", "hover"],
+      "parity": ["mantine:Button", "mui:Button", "antd:Button"]
+    },
+    {
+      "id": "icon-button",
+      "name": "Icon button",
+      "anatomy": "Square-ratio Resin shell containing a single 24px icon.",
+      "states": ["default", "hover", "pressed", "focus", "disabled", "toggled"],
+      "material": "Resin shell with Haze fill",
+      "geometry": "Pill or circle; 44px minimum target regardless of icon size",
+      "semantics": "Requires an accessible name; the icon itself is aria-hidden. Toggles use aria-pressed.",
+      "crystal": "Material, geometry, target floor, focus ring",
+      "product": "The action and the accessible name",
+      "motion": ["press", "icon-turn"],
+      "parity": ["mantine:ActionIcon", "mui:IconButton", "antd:Button"]
+    },
+    {
+      "id": "button-group",
+      "name": "Button group",
+      "anatomy": "Adjacent actions sharing one Resin plane with internal hairlines.",
+      "states": ["default", "hover", "focus", "disabled"],
+      "material": "One shared Resin plane, not one plane per button",
+      "geometry": "Pill outer geometry; interior corners square against neighbours",
+      "semantics": "group role with an accessible name when the buttons are related",
+      "crystal": "The shared plane and interior separation",
+      "product": "Which actions are grouped",
+      "parity": ["mantine:Button.Group", "mui:ButtonGroup", "antd:Space.Compact"]
+    },
+    {
+      "id": "split-button",
+      "name": "Split button",
+      "anatomy": "A default action and an adjacent disclosure that opens related actions.",
+      "states": ["default", "hover", "focus", "open", "disabled"],
+      "material": "Shared Resin plane with a hairline between the two targets",
+      "geometry": "Pill outer geometry; both halves meet the 44px floor independently",
+      "semantics": "Two buttons; the disclosure carries aria-expanded and aria-haspopup=\"menu\"",
+      "crystal": "Shared plane, separation, menu material",
+      "product": "The default action, the menu contents and menu keyboard behaviour",
+      "motion": ["menu-in", "menu-out"],
+      "parity": ["antd:Dropdown.Button", "mui:ButtonGroup", "mantine:Menu"]
+    },
+    {
+      "id": "floating-action",
+      "name": "Floating action",
+      "anatomy": "A persistent circular Resin action floating above content.",
+      "states": ["default", "hover", "pressed", "focus", "extended"],
+      "material": "Resin with the clearest floating shadow",
+      "geometry": "Circle, or pill when extended with a label",
+      "semantics": "Requires an accessible name; must not cover the final content or the focused element",
+      "crystal": "Material, elevation, extend behaviour, safe-area offset",
+      "product": "The action and when it is present",
+      "motion": ["press", "resin-confluence"],
+      "parity": ["mui:Fab", "mantine:—", "antd:FloatButton"]
+    },
+    {
+      "id": "copy-button",
+      "name": "Copy button",
+      "anatomy": "An action that copies a value and confirms in place.",
+      "states": ["idle", "copied", "hover", "focus", "error"],
+      "material": "Resin shell; the confirmation is a transient label change",
+      "geometry": "Pill; 44px minimum",
+      "semantics": "The confirmation must reach assistive technology through a live region, not colour alone",
+      "crystal": "Material, the confirmation transition and its timing",
+      "product": "The clipboard call and its failure handling",
+      "motion": ["copy-confirm"],
+      "parity": ["mantine:CopyButton", "mui:—", "antd:Typography.Paragraph copyable"],
+      "note": "The confirmation may show a check mark: it reports a completed action, which is information display."
+    },
+    {
+      "id": "close-button",
+      "name": "Close button",
+      "anatomy": "A compact icon action that dismisses its container.",
+      "states": ["default", "hover", "focus", "pressed"],
+      "material": "Resin shell, quiet variant",
+      "geometry": "Pill or circle; 44px minimum target",
+      "semantics": "Accessible name naming what closes, not just \"Close\"; Escape must do the same thing",
+      "crystal": "Material, geometry, placement within overlays",
+      "product": "What dismissal does and whether it is destructive",
+      "parity": ["mantine:CloseButton", "mui:IconButton", "antd:—"]
+    }
+  ]
+}

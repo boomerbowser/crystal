@@ -1,0 +1,168 @@
+{
+  "id": "utility",
+  "name": "Utility and behaviour",
+  "description": "Components with little or no appearance whose behaviour is nonetheless part of the contract. A library that omits these forces every product to reinvent them inconsistently.",
+  "components": [
+    {
+      "id": "visually-hidden",
+      "name": "Visually hidden",
+      "anatomy": "Content available to assistive technology and hidden from sight.",
+      "states": [
+        "hidden",
+        "focusable"
+      ],
+      "material": "None",
+      "geometry": "None",
+      "semantics": "Must not use display:none. Focusable variants become visible when focused, as the skip link does.",
+      "crystal": "The clipping recipe and the focusable variant",
+      "product": "What needs a text alternative",
+      "parity": [
+        "mantine:VisuallyHidden",
+        "mui:visuallyHidden",
+        "antd:\u2014"
+      ]
+    },
+    {
+      "id": "skip-link",
+      "name": "Skip link",
+      "anatomy": "A visually hidden link that appears on focus and jumps to the main region.",
+      "states": [
+        "hidden",
+        "focused"
+      ],
+      "material": "Surface fill when visible",
+      "geometry": "Pill; appears at the top-left inset",
+      "semantics": "First focusable element in the document; its target must be focusable",
+      "crystal": "Appearance on focus and placement",
+      "product": "The target region",
+      "parity": [
+        "\u2014"
+      ]
+    },
+    {
+      "id": "focus-trap",
+      "name": "Focus trap",
+      "anatomy": "A region that contains keyboard focus while active.",
+      "states": [
+        "inactive",
+        "active"
+      ],
+      "material": "None",
+      "geometry": "None",
+      "semantics": "Restores focus to the trigger on release; never traps without a visible, keyboard-reachable exit",
+      "crystal": "The contract only",
+      "product": "The implementation. Use a maintained primitive rather than rebuilding it.",
+      "parity": [
+        "mantine:FocusTrap",
+        "mui:FocusTrap",
+        "antd:\u2014"
+      ]
+    },
+    {
+      "id": "transition",
+      "name": "Transition",
+      "anatomy": "Entry and exit choreography bound to Crystal's timings and easings.",
+      "states": [
+        "entering",
+        "entered",
+        "exiting",
+        "exited"
+      ],
+      "material": "None",
+      "geometry": "Travel from the motion scale: 5-30px ordinary, up to 50px expressive",
+      "semantics": "Reduced motion removes spatial change and keeps state feedback; transitions are interruptible and never delay a semantic change",
+      "crystal": "Timings, easings, travel limits, the 5s ceiling, reduced-motion behaviour",
+      "product": "Which elements transition and when",
+      "parity": [
+        "mantine:Transition",
+        "mui:Fade/Grow/Slide",
+        "antd:\u2014"
+      ]
+    },
+    {
+      "id": "direction-provider",
+      "name": "Direction provider",
+      "anatomy": "The scope declaring text direction for its subtree.",
+      "states": [
+        "ltr",
+        "rtl"
+      ],
+      "material": "None",
+      "geometry": "Mirrors directional geometry: bubble corners, selection rails, range tracks, drawer edges",
+      "semantics": "Sets a real dir attribute; logical properties do the rest",
+      "crystal": "Which properties are directional and must mirror",
+      "product": "Locale detection and content direction",
+      "parity": [
+        "mantine:DirectionProvider",
+        "mui:\u2014",
+        "antd:ConfigProvider"
+      ]
+    },
+    {
+      "id": "theme-provider",
+      "name": "Theme provider",
+      "anatomy": "The scope supplying resolved Crystal tokens to its subtree.",
+      "states": [
+        "light",
+        "dark",
+        "system"
+      ],
+      "material": "Supplies every material's resolved values",
+      "geometry": "Supplies the content radius and spacing scale",
+      "semantics": "Sets color-scheme so native controls and scrollbars match; respects the system preference when set to system",
+      "crystal": "Token resolution, mode switching, preference persistence, reduced-effect handling",
+      "product": "Which palette, and where preferences are stored",
+      "parity": [
+        "mantine:MantineProvider",
+        "mui:ThemeProvider",
+        "antd:ConfigProvider"
+      ]
+    },
+    {
+      "id": "reduced-effects",
+      "name": "Reduced effects",
+      "anatomy": "The scope that replaces translucency and diffusion with solid equivalents.",
+      "states": [
+        "full",
+        "reduced",
+        "forced-colors"
+      ],
+      "material": "Solid surfaces replacing every translucent fill; hierarchy preserved by tone and contour",
+      "geometry": "Unchanged. Shapes, silhouettes and spacing never change with effects.",
+      "semantics": "Honours prefers-reduced-transparency and forced-colors, and an explicit product preference",
+      "crystal": "Every material's fallback and the guarantee that hierarchy survives",
+      "product": "Exposing the preference and respecting the system setting",
+      "parity": [
+        "\u2014"
+      ],
+      "note": "A compliant fallback never excuses an inaccessible default. Both presentations must pass."
+    },
+    {
+      "id": "resizable",
+      "name": "Resizable region",
+      "anatomy": "A region whose size the person controls, with a visible grab handle.",
+      "states": [
+        "idle",
+        "hover",
+        "dragging",
+        "at-min",
+        "at-max",
+        "disabled"
+      ],
+      "material": "Resin handle on the region's own surface",
+      "geometry": "Handle meets 44px even when the visible grip is narrower",
+      "semantics": "role=separator with aria-valuenow and arrow-key resizing. Pointer dragging is never the only route.",
+      "crystal": "Handle treatment, bound states and the settle after a size change",
+      "product": "Bounds, persistence and what resizes",
+      "motion": [
+        "resize-settle"
+      ],
+      "parity": [
+        "mantine:\u2014",
+        "mui:\u2014",
+        "antd:Splitter"
+      ],
+      "note": "Layout settles after a measured size change; focus and hover states never animate."
+    }
+  ]
+}

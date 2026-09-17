@@ -165,19 +165,28 @@ span.cr-field-shell:has([aria-invalid=true])>.cr-indicator::after{content:'!';fo
    rather than a grid of hard rules. Cells carry a single hairline separator and
    the header keeps the tested primary-soft ink pair. Text stays crisp: only the
    shell's fill layer is feathered. */
-.cr-table{position:relative;isolation:isolate;display:block;overflow:auto;max-width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--cr-rim);border-radius:var(--cr-radius);background:var(--cr-resin-fill);box-shadow:var(--cr-shadow-content);backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));-webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));}
-.cr-table::before{content:'';position:absolute;inset:6px;z-index:-1;pointer-events:none;border-radius:inherit;background:var(--cr-haze-fill);filter:blur(var(--cr-haze-feather));}
+.cr-table-scroll{position:relative;isolation:isolate;overflow:auto;max-width:100%;border:1px solid var(--cr-rim);border-radius:var(--cr-radius);background:var(--cr-resin-fill);box-shadow:var(--cr-shadow-content);backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));-webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));}
+.cr-table-scroll::before{content:'';position:absolute;inset:6px;z-index:-1;pointer-events:none;border-radius:inherit;background:var(--cr-haze-fill);filter:blur(var(--cr-haze-feather));}
+/* The scroll container owns the shell; the table stays a table so the header
+   band spans the full width and column widths still resolve. */
+.cr-table{width:100%;border-collapse:separate;border-spacing:0;background:transparent;box-shadow:none;border:0;}
 .cr-table :is(th,td){border:0;border-bottom:1px solid var(--cr-edge);padding:14px 18px;text-align:start;vertical-align:top;background:transparent;}
 .cr-table thead th{position:sticky;top:0;z-index:1;background:var(--cr-primary-soft);color:var(--cr-on-primary-soft);font-weight:800;border-bottom:0;}
 .cr-table thead th:first-child{border-start-start-radius:calc(var(--cr-radius) - 8px);}
 .cr-table thead th:last-child{border-start-end-radius:calc(var(--cr-radius) - 8px);}
 .cr-table tbody tr:last-child :is(th,td){border-bottom:0;}
+/* Headerless property tables: the first row takes the rounded top edge the
+   header band would otherwise provide, and the label column reads as a label. */
+.cr-table-properties tbody tr:first-child :is(th,td){padding-top:18px;}
+.cr-table-properties th[scope=row]{width:11.5rem;font-weight:800;color:var(--cr-text);}
+.cr-table-properties td{color:var(--cr-muted);}
+@media(max-width:600px){.cr-table-properties th[scope=row]{width:auto}.cr-table-properties tr{display:grid}.cr-table-properties :is(th,td){border-bottom:0}.cr-table-properties td{padding-top:0;padding-bottom:14px;border-bottom:1px solid var(--cr-edge)}}
 .cr-table tbody tr:hover :is(th,td){background:var(--cr-label-fill);}
 .cr-table caption{caption-side:top;text-align:start;padding:14px 18px 6px;font-size:13px;color:var(--cr-muted);}
-[data-effects=opaque] .cr-table{background:var(--cr-surface);backdrop-filter:none;-webkit-backdrop-filter:none;}
-[data-effects=opaque] .cr-table::before{display:none;}
-@media(prefers-reduced-transparency:reduce){.cr-table{background:var(--cr-surface);backdrop-filter:none;-webkit-backdrop-filter:none}.cr-table::before{display:none}}
-@media(forced-colors:active){.cr-table{background:Canvas;border:1px solid CanvasText;box-shadow:none;backdrop-filter:none}.cr-table::before{display:none}.cr-table :is(th,td){border-bottom:1px solid CanvasText}.cr-table thead th{background:Canvas;color:CanvasText;border-bottom:1px solid CanvasText}}
+[data-effects=opaque] .cr-table-scroll{background:var(--cr-surface);backdrop-filter:none;-webkit-backdrop-filter:none;}
+[data-effects=opaque] .cr-table-scroll::before{display:none;}
+@media(prefers-reduced-transparency:reduce){.cr-table-scroll{background:var(--cr-surface);backdrop-filter:none;-webkit-backdrop-filter:none}.cr-table-scroll::before{display:none}}
+@media(forced-colors:active){.cr-table-scroll{background:Canvas;border:1px solid CanvasText;box-shadow:none;backdrop-filter:none}.cr-table-scroll::before{display:none}.cr-table :is(th,td){border-bottom:1px solid CanvasText}.cr-table thead th{background:Canvas;color:CanvasText;border-bottom:1px solid CanvasText}}
 @media(max-width:600px){.cr-table :is(th,td){padding:11px 13px}}
 
 }

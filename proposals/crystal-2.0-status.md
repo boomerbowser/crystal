@@ -45,9 +45,10 @@ Material specifications may only improve, never regress. The default position is
 
 | Proposal item | Task | Status |
 | --- | --- | --- |
-| Component catalogue at full parity (~110-120) | 10 | in progress |
-| Close the eleven orphaned motion families | 10 | in progress |
+| Component catalogue at full parity (~110-120) | 10 | done — 119 components across 9 categories |
+| Close the eleven orphaned motion families | 10 | done — zero orphans; material choreography exempted by category |
 | Table given a Crystal surface | — | done — found in review, not in the original proposal |
+| Headless core: state and preferences | 5, 6 | done — 18 contract tests |
 | Icon set expanded to ~1000 | 8 | not started — gate G4 |
 | Icon integrity check and gallery | 9 | not started |
 
@@ -56,7 +57,7 @@ Material specifications may only improve, never regress. The default position is
 | Proposal item | Task | Status |
 | --- | --- | --- |
 | Written parity contract | 11 | not started |
-| Machine-readable parity manifest | 10, 11 | in progress — generated from the catalogue |
+| Machine-readable parity manifest | 10, 11 | done — generated from the catalogue, 119 entries x 4 platforms |
 
 ### E. Verification
 

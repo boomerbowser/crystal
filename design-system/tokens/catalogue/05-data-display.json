@@ -1,0 +1,501 @@
+{
+  "id": "data-display",
+  "name": "Data display",
+  "description": "Presenting content. These are reading surfaces: Haze fills carry them, text stays crisp, and no fill is ever feathered across a glyph.",
+  "components": [
+    {
+      "id": "card",
+      "name": "Card",
+      "anatomy": "A Haze content surface with optional media, header, body and action row.",
+      "states": [
+        "default",
+        "interactive",
+        "hover",
+        "focus",
+        "selected",
+        "disabled"
+      ],
+      "material": "Haze, 80% fill with a 1.95px feathered perimeter",
+      "geometry": "Content radius; at least 12px between content and the feathered edge",
+      "semantics": "An article when it is content, a button when the whole card acts. Never both.",
+      "crystal": "Fill, feather, elevation, interactive treatment",
+      "product": "Content and what an interactive card does",
+      "parity": [
+        "mantine:Card",
+        "mui:Card",
+        "antd:Card"
+      ],
+      "note": "A card-shaped button keeps the content radius rather than the action pill, so its artwork is not clipped."
+    },
+    {
+      "id": "table",
+      "name": "Table",
+      "anatomy": "A Resin-rimmed shell over Haze, a sticky header band, hairline row separators and a scrolling body.",
+      "states": [
+        "default",
+        "hover-row",
+        "selected-row",
+        "empty",
+        "loading"
+      ],
+      "material": "Resin shell, Haze fill, primary-soft header",
+      "geometry": "Content radius shell; header corners inset 8px; 14px/18px cells",
+      "semantics": "Real table semantics with header associations; sort controls are buttons carrying aria-sort",
+      "crystal": "Shell, header band, separators, sticky behaviour, reduced-effect fallbacks",
+      "product": "Data, sorting, pagination and selection behaviour",
+      "parity": [
+        "mantine:Table",
+        "mui:Table",
+        "antd:Table"
+      ]
+    },
+    {
+      "id": "data-table",
+      "name": "Data table",
+      "anatomy": "Table anatomy with sorting, filtering, selection, column sizing and pagination.",
+      "states": [
+        "default",
+        "sorted",
+        "filtered",
+        "selected",
+        "empty",
+        "loading",
+        "error"
+      ],
+      "material": "Shared with Table; selection uses the leading rail, not a check badge on the row",
+      "geometry": "Shared with Table",
+      "semantics": "aria-sort on sorted headers; row selection through real checkboxes with names",
+      "crystal": "All Table treatment plus sort, filter and selection appearance",
+      "product": "The data layer, virtualisation, and the sorting and filtering implementation",
+      "parity": [
+        "mui:DataGrid",
+        "antd:Table",
+        "mantine:DataTable"
+      ]
+    },
+    {
+      "id": "list",
+      "name": "List",
+      "anatomy": "Ordered or unordered rows with optional leading media and trailing actions.",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "selected",
+        "empty"
+      ],
+      "material": "Haze rows on the surrounding surface",
+      "geometry": "Content radius on rows; separators are hairlines",
+      "semantics": "Real list semantics; interactive rows are buttons or links, not clickable divs",
+      "crystal": "Row treatment, separators, selection rail",
+      "product": "Content, virtualisation and row actions",
+      "motion": [
+        "list-in",
+        "list-out",
+        "reorder"
+      ],
+      "parity": [
+        "mantine:List",
+        "mui:List",
+        "antd:List"
+      ]
+    },
+    {
+      "id": "description-list",
+      "name": "Description list",
+      "anatomy": "Term and value pairs in a two-column or stacked arrangement.",
+      "states": [
+        "default",
+        "empty"
+      ],
+      "material": "Haze panel when grouped",
+      "geometry": "Content radius; term column aligned to the 4px rhythm",
+      "semantics": "Real definition-list semantics so term and value stay associated",
+      "crystal": "Pair rhythm and panel treatment",
+      "product": "The data",
+      "parity": [
+        "antd:Descriptions",
+        "mui:\u2014",
+        "mantine:\u2014"
+      ]
+    },
+    {
+      "id": "avatar",
+      "name": "Avatar",
+      "anatomy": "A circular image, initials or icon, with an optional status indicator.",
+      "states": [
+        "image",
+        "initials",
+        "icon",
+        "loading",
+        "error"
+      ],
+      "material": "Surface-alt fill behind initials; 2px surface ring for separation",
+      "geometry": "Always circular; sizes on the 4px rhythm",
+      "semantics": "Decorative avatars are aria-hidden; identifying avatars carry the person's name",
+      "crystal": "Shape, ring, fallback treatment",
+      "product": "Real identity, image loading and the fallback source",
+      "parity": [
+        "mantine:Avatar",
+        "mui:Avatar",
+        "antd:Avatar"
+      ]
+    },
+    {
+      "id": "avatar-group",
+      "name": "Avatar group",
+      "anatomy": "Overlapping avatars with an overflow count.",
+      "states": [
+        "default",
+        "overflowing"
+      ],
+      "material": "Shared with Avatar",
+      "geometry": "-7px overlap; overflow chip matches avatar size",
+      "semantics": "The group has one accessible name; the overflow count is announced, not implied",
+      "crystal": "Overlap, stacking order, overflow treatment",
+      "product": "Who is shown and the overflow threshold",
+      "parity": [
+        "mantine:Avatar.Group",
+        "mui:AvatarGroup",
+        "antd:Avatar.Group"
+      ]
+    },
+    {
+      "id": "badge",
+      "name": "Badge",
+      "anatomy": "A small count or label attached to a host element.",
+      "states": [
+        "count",
+        "dot",
+        "zero",
+        "overflow",
+        "hidden"
+      ],
+      "material": "Resin shell with Haze fill; status badges use their semantic ink pair",
+      "geometry": "Pill or circle; never smaller than legible",
+      "semantics": "The count reaches assistive technology through the host's accessible name or a live region",
+      "crystal": "Shell, placement, overflow formatting",
+      "product": "The count and when it is meaningful",
+      "parity": [
+        "mantine:Indicator",
+        "mui:Badge",
+        "antd:Badge"
+      ]
+    },
+    {
+      "id": "status-badge",
+      "name": "Status badge",
+      "anatomy": "A semantic symbol in a circular well, followed by a visible word.",
+      "states": [
+        "success",
+        "attention",
+        "danger",
+        "info",
+        "neutral"
+      ],
+      "material": "Tested semantic ink and surface pair behind the symbol; never a coloured perimeter stroke",
+      "geometry": "Pill; 24px symbol well; 36px minimum height",
+      "semantics": "The word carries the meaning. Symbol and colour are reinforcement, never the only signal.",
+      "crystal": "Symbol vocabulary, tested colour pairs, geometry",
+      "product": "Which status applies and the wording",
+      "motion": [
+        "success",
+        "attention"
+      ],
+      "parity": [
+        "mantine:Badge",
+        "mui:Chip",
+        "antd:Tag"
+      ],
+      "note": "Success uses a check mark. That is information display \u2014 the legitimate use of the glyph."
+    },
+    {
+      "id": "indicator",
+      "name": "Indicator",
+      "anatomy": "A small circular Resin mark attached to a control, carrying state.",
+      "states": [
+        "selection",
+        "current",
+        "busy",
+        "field-idle",
+        "field-focused",
+        "required",
+        "invalid"
+      ],
+      "material": "Resin shell with a 3px-inset Haze fill and a 1px feather on that fill",
+      "geometry": "20px, or 24px on fields; never a click target",
+      "semantics": "aria-hidden. The real control supplies the state; the mark only shows it.",
+      "crystal": "The complete mark vocabulary and its precedence",
+      "product": "Nothing; this is entirely system-owned",
+      "parity": [
+        "mantine:Indicator",
+        "mui:Badge",
+        "antd:Badge"
+      ],
+      "note": "Selection resolves to a leading rail, not a badge. A check mark is not in this vocabulary."
+    },
+    {
+      "id": "image",
+      "name": "Image",
+      "anatomy": "Media with a reserved ratio, a loading placeholder and a failure fallback.",
+      "states": [
+        "loading",
+        "loaded",
+        "error"
+      ],
+      "material": "Haze placeholder while loading",
+      "geometry": "Content radius when clipped; never distorts aspect",
+      "semantics": "Meaningful images carry alt text; decorative images carry empty alt",
+      "crystal": "Placeholder, fallback and radius treatment",
+      "product": "Sources, sizing and alt text",
+      "motion": [
+        "media-in"
+      ],
+      "parity": [
+        "mantine:Image",
+        "mui:\u2014",
+        "antd:Image"
+      ]
+    },
+    {
+      "id": "timeline",
+      "name": "Timeline",
+      "anatomy": "Ordered events on a connector with per-event markers.",
+      "states": [
+        "complete",
+        "current",
+        "upcoming",
+        "error"
+      ],
+      "material": "Resin markers on a Haze connector",
+      "geometry": "Circular markers; 2px connector",
+      "semantics": "Ordered list; the current item carries aria-current",
+      "crystal": "Marker and connector treatment, state appearance",
+      "product": "Events and their ordering",
+      "parity": [
+        "mantine:Timeline",
+        "mui:Timeline",
+        "antd:Timeline"
+      ]
+    },
+    {
+      "id": "accordion",
+      "name": "Accordion",
+      "anatomy": "Disclosure rows with a header control, a rotating chevron and a content region.",
+      "states": [
+        "collapsed",
+        "expanded",
+        "hover",
+        "focus",
+        "disabled"
+      ],
+      "material": "Haze rows; expanded content shares the row surface",
+      "geometry": "Content radius; header meets 44px",
+      "semantics": "Header is a button with aria-expanded and aria-controls; content is not hidden from search when collapsed unless intended",
+      "crystal": "Row treatment, chevron rotation, expansion appearance",
+      "product": "Single or multiple expansion policy and content",
+      "motion": [
+        "accordion-in",
+        "accordion-out"
+      ],
+      "parity": [
+        "mantine:Accordion",
+        "mui:Accordion",
+        "antd:Collapse"
+      ]
+    },
+    {
+      "id": "collapse",
+      "name": "Collapse",
+      "anatomy": "A height transition revealing or hiding a region.",
+      "states": [
+        "collapsed",
+        "expanded",
+        "transitioning"
+      ],
+      "material": "Inherits",
+      "geometry": "Inherits",
+      "semantics": "The trigger carries aria-expanded; hidden content is genuinely hidden from assistive technology",
+      "crystal": "Transition timing and reduced-motion behaviour",
+      "product": "Trigger and content",
+      "motion": [
+        "accordion-in",
+        "accordion-out"
+      ],
+      "parity": [
+        "mantine:Collapse",
+        "mui:Collapse",
+        "antd:\u2014"
+      ]
+    },
+    {
+      "id": "spoiler",
+      "name": "Spoiler",
+      "anatomy": "Content truncated to a height with a reveal control and an edge fade.",
+      "states": [
+        "collapsed",
+        "expanded"
+      ],
+      "material": "Edge fade drawn from the surrounding material",
+      "geometry": "Fade depth 24px",
+      "semantics": "The control carries aria-expanded; truncated text remains in the accessibility tree",
+      "crystal": "Fade and control treatment",
+      "product": "Threshold and content",
+      "parity": [
+        "mantine:Spoiler",
+        "mui:\u2014",
+        "antd:Typography ellipsis"
+      ]
+    },
+    {
+      "id": "carousel",
+      "name": "Carousel",
+      "anatomy": "A scrolling track of slides with previous and next controls and position indicators.",
+      "states": [
+        "at-start",
+        "scrolling",
+        "at-end",
+        "single-slide"
+      ],
+      "material": "Resin controls floating over Haze slides",
+      "geometry": "Content radius slides; pill controls meeting 44px",
+      "semantics": "role=group with an accessible name; indicators are buttons; never autoplay without a pause control",
+      "crystal": "Slide and control treatment, indicator appearance",
+      "product": "Slides, scroll behaviour and autoplay policy",
+      "motion": [
+        "carousel-next",
+        "carousel-previous"
+      ],
+      "parity": [
+        "mantine:Carousel",
+        "mui:\u2014",
+        "antd:Carousel"
+      ]
+    },
+    {
+      "id": "statistic",
+      "name": "Statistic",
+      "anatomy": "A large value with a label and an optional trend indicator.",
+      "states": [
+        "default",
+        "positive",
+        "negative",
+        "loading"
+      ],
+      "material": "Haze panel when grouped into a row",
+      "geometry": "Content radius; tabular figures",
+      "semantics": "Trend direction is stated in text, not by colour or arrow alone",
+      "crystal": "Value typography, trend treatment",
+      "product": "The value, formatting and what the trend compares",
+      "parity": [
+        "antd:Statistic",
+        "mantine:\u2014",
+        "mui:\u2014"
+      ]
+    },
+    {
+      "id": "code",
+      "name": "Code",
+      "anatomy": "Inline or block monospace content with an optional copy action.",
+      "states": [
+        "inline",
+        "block",
+        "with-copy"
+      ],
+      "material": "Canvas fill with an edge rim; never feathered, as code must stay exact",
+      "geometry": "14px radius inline, content radius for blocks",
+      "semantics": "Real code and pre elements; blocks are focusable when scrollable",
+      "crystal": "Surface, rhythm and copy-action placement",
+      "product": "Highlighting and content",
+      "parity": [
+        "mantine:Code",
+        "mui:\u2014",
+        "antd:Typography.Text code"
+      ]
+    },
+    {
+      "id": "kbd",
+      "name": "Keyboard key",
+      "anatomy": "A small raised key cap representing a physical key.",
+      "states": [
+        "default"
+      ],
+      "material": "Resin cap with a defined lower rim",
+      "geometry": "8px radius; compact but legible",
+      "semantics": "Real kbd element; key names are spelled, not drawn as symbols alone",
+      "crystal": "Cap treatment",
+      "product": "The key names",
+      "parity": [
+        "mantine:Kbd",
+        "mui:\u2014",
+        "antd:\u2014"
+      ]
+    },
+    {
+      "id": "theme-icon",
+      "name": "Theme icon",
+      "anatomy": "An icon in a filled container, used as a visual anchor rather than an action.",
+      "states": [
+        "default"
+      ],
+      "material": "Primary-soft or surface-alt fill",
+      "geometry": "Content radius or circle; 24px icon",
+      "semantics": "Decorative and aria-hidden unless it is the only carrier of meaning",
+      "crystal": "Container fill and icon sizing",
+      "product": "Which icon and what it anchors",
+      "parity": [
+        "mantine:ThemeIcon",
+        "mui:Avatar",
+        "antd:\u2014"
+      ]
+    },
+    {
+      "id": "authored-bubble",
+      "name": "Authored bubble",
+      "anatomy": "A reading surface with one intentionally tightened corner indicating authorship or direction.",
+      "states": [
+        "incoming",
+        "own",
+        "grouped",
+        "pending",
+        "failed"
+      ],
+      "material": "Haze; own messages use the primary-container pair",
+      "geometry": "6/22/22/22px incoming, 22/6/22/22px own, mirrored for right-to-left",
+      "semantics": "Author and time are text, not implied by side alone",
+      "crystal": "Silhouette, corner asymmetry, own and incoming pairs, mirroring",
+      "product": "Delivery, grouping rules and failure recovery",
+      "motion": [
+        "message-in",
+        "reaction"
+      ],
+      "parity": [
+        "\u2014"
+      ],
+      "note": "This silhouette is part of Crystal's identity and carries through from the approved baseline."
+    },
+    {
+      "id": "caption",
+      "name": "Caption",
+      "anatomy": "Descriptive text accompanying media, placed below or over the media surface.",
+      "states": [
+        "hidden",
+        "visible",
+        "overlaid"
+      ],
+      "material": "Stone label backing when overlaid on media, so contrast does not depend on the image",
+      "geometry": "Content radius when overlaid; 12px inset from the media edge",
+      "semantics": "Real figure and figcaption. A caption never replaces alt text; the two say different things.",
+      "crystal": "Backing material, placement and protected contrast",
+      "product": "The caption text",
+      "motion": [
+        "caption-in"
+      ],
+      "parity": [
+        "mui:\u2014",
+        "mantine:\u2014",
+        "antd:Image"
+      ]
+    }
+  ]
+}

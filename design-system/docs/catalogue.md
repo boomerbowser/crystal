@@ -1,0 +1,1801 @@
+# Component catalogue
+
+Crystal specifies **119 components** across 9 categories. Parity is measured against the most fully-featured libraries in use — Mantine, Ant Design and MUI — rather than a shorter list Crystal finds convenient.
+
+Crystal specifies appearance: anatomy, states, material, geometry and the semantics a correct implementation must expose. It does not ship focus management, menu keyboard behaviour, date arithmetic or a rich-text engine. Products bring their own accessible primitives and dress them in Crystal. Every entry states this split explicitly, so what the system owes you and what you owe the system are never in doubt.
+
+This chapter is generated from `tokens/catalogue/`. The same source generates the parity manifest in `libraries/parity.json`, so a component cannot appear in one and not the other.
+
+## Coverage
+
+| Category | Components |
+| --- | --- |
+| [Layout and structure](#layout-and-structure) | 11 |
+| [Navigation](#navigation) | 12 |
+| [Actions](#actions) | 7 |
+| [Inputs and forms](#inputs-and-forms) | 34 |
+| [Data display](#data-display) | 22 |
+| [Feedback and status](#feedback-and-status) | 11 |
+| [Overlays](#overlays) | 9 |
+| [Typography](#typography) | 5 |
+| [Utility and behaviour](#utility-and-behaviour) | 8 |
+| **Total** | **119** |
+
+## Layout and structure
+
+Surfaces and arrangement. These carry Crystal's material hierarchy; everything else sits inside them.
+
+### App shell
+
+Plastic foundation, optional Frost sidebar and header, a content region, and a floating Resin destination group.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>expanded, collapsed, narrow</td></tr>
+<tr><th scope="row">Material</th><td>Plastic foundation; Frost supporting panels; Resin destination plane</td></tr>
+<tr><th scope="row">Geometry</th><td>Panel radius = content radius + 6px</td></tr>
+<tr><th scope="row">Semantics</th><td>Landmark roles: banner, navigation, main, contentinfo. One main per view.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Material assignment per region, elevation ordering, safe-area handling</td></tr>
+<tr><th scope="row">Product owns</th><td>Routing, which regions exist, persistence of the collapsed state</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:AppShell · antd:Layout · mui:Box+Drawer</td></tr>
+</tbody></table></div>
+
+### Container
+
+Max-width reading column with responsive gutters.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default</td></tr>
+<tr><th scope="row">Material</th><td>None; inherits the surface beneath</td></tr>
+<tr><th scope="row">Geometry</th><td>Gutters follow the 4px rhythm: 18/26/44px by viewport</td></tr>
+<tr><th scope="row">Semantics</th><td>Presentational only; must not introduce a landmark</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Width ceiling and gutter scale</td></tr>
+<tr><th scope="row">Product owns</th><td>Which content is constrained</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Container · mui:Container · antd:Layout.Content</td></tr>
+</tbody></table></div>
+
+### Grid
+
+Column grid with a consistent gutter and responsive column counts.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>Gutters from the 4px rhythm; 12-column reference</td></tr>
+<tr><th scope="row">Semantics</th><td>Presentational; reading order must match visual order</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Gutter scale and breakpoint behaviour</td></tr>
+<tr><th scope="row">Product owns</th><td>Column spans per breakpoint</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Grid · mui:Grid · antd:Row+Col</td></tr>
+</tbody></table></div>
+
+### Simple grid
+
+Equal-width auto-flowing cells.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>Shared gutter with Grid</td></tr>
+<tr><th scope="row">Semantics</th><td>Presentational</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Minimum cell width and gutter</td></tr>
+<tr><th scope="row">Product owns</th><td>Cell count and content</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:SimpleGrid · mui:Grid · antd:Row</td></tr>
+</tbody></table></div>
+
+### Stack
+
+Vertical arrangement with one spacing value between children.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>Spacing from the 4px rhythm</td></tr>
+<tr><th scope="row">Semantics</th><td>Presentational</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Spacing scale</td></tr>
+<tr><th scope="row">Product owns</th><td>Which spacing step</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Stack · mui:Stack · antd:Space</td></tr>
+</tbody></table></div>
+
+### Group
+
+Horizontal arrangement with wrapping and alignment control.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, wrapped</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>Spacing from the 4px rhythm</td></tr>
+<tr><th scope="row">Semantics</th><td>Presentational</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Spacing scale and wrap behaviour</td></tr>
+<tr><th scope="row">Product owns</th><td>Alignment and content</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Group · mui:Stack · antd:Space</td></tr>
+</tbody></table></div>
+
+### Divider
+
+A hairline rule, optionally with a centred or leading label.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>plain, labelled, vertical</td></tr>
+<tr><th scope="row">Material</th><td>Edge colour token; never a heavy rule</td></tr>
+<tr><th scope="row">Geometry</th><td>1px, full-bleed within its container</td></tr>
+<tr><th scope="row">Semantics</th><td>role=separator with an accessible name when labelled; decorative dividers are aria-hidden</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Rule colour and label treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Placement and label text</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Divider · mui:Divider · antd:Divider</td></tr>
+</tbody></table></div>
+
+### Aspect ratio
+
+A box that reserves a fixed ratio before its content loads.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default</td></tr>
+<tr><th scope="row">Material</th><td>Inherits; commonly wraps Image or a media surface</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius when clipping media</td></tr>
+<tr><th scope="row">Semantics</th><td>Presentational</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Reserving space so loading media does not shift layout</td></tr>
+<tr><th scope="row">Product owns</th><td>The ratio and the media</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:AspectRatio · mui:Box · antd:—</td></tr>
+</tbody></table></div>
+
+### Scroll area
+
+A bounded scrolling region with a Crystal scrollbar and edge fades.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>at-start, scrolling, at-end</td></tr>
+<tr><th scope="row">Material</th><td>Inherits; edge fade uses the surrounding material</td></tr>
+<tr><th scope="row">Geometry</th><td>Inherits container radius; fade depth 24px</td></tr>
+<tr><th scope="row">Semantics</th><td>Keyboard scrollable; must be focusable when it is the only way to reach content</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Scrollbar appearance, edge fade, reduced-motion behaviour</td></tr>
+<tr><th scope="row">Product owns</th><td>What scrolls and how far</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:ScrollArea · mui:Box · antd:—</td></tr>
+</tbody></table></div>
+
+### Center
+
+Centres a single child on both axes.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>None</td></tr>
+<tr><th scope="row">Semantics</th><td>Presentational</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Nothing beyond layout</td></tr>
+<tr><th scope="row">Product owns</th><td>Content</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Center · mui:Box · antd:Flex</td></tr>
+</tbody></table></div>
+
+### Space
+
+An explicit gap from the spacing scale.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>4px rhythm</td></tr>
+<tr><th scope="row">Semantics</th><td>Presentational; never used to convey grouping to assistive technology</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Spacing scale</td></tr>
+<tr><th scope="row">Product owns</th><td>Which step</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Space · mui:Box · antd:Space</td></tr>
+</tbody></table></div>
+
+## Navigation
+
+Moving between destinations. Current location is a dot; selection within a set is a leading rail. Neither is ever a check mark.
+
+### Anchor
+
+Inline text link with an offset underline.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover, focus, visited, external</td></tr>
+<tr><th scope="row">Material</th><td>None; inherits reading surface</td></tr>
+<tr><th scope="row">Geometry</th><td>Underline offset 4px</td></tr>
+<tr><th scope="row">Semantics</th><td>Native anchor with an href. A link that acts is a button, not a link.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Colour, underline offset, focus ring</td></tr>
+<tr><th scope="row">Product owns</th><td>Destination and external-link disclosure</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Anchor · mui:Link · antd:Typography.Link</td></tr>
+</tbody></table></div>
+
+### Nav link
+
+Pill-shaped destination with optional icon, label and current-location dot.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover, focus, current, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell with Haze fill</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill; minimum 44px target</td></tr>
+<tr><th scope="row">Semantics</th><td>aria-current="page" for the active destination, never aria-selected</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Material, pill geometry, current-location dot, focus ring</td></tr>
+<tr><th scope="row">Product owns</th><td>Routing and which destination is current</td></tr>
+<tr><th scope="row">Motion</th><td><code>page-in</code>, <code>page-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:NavLink · mui:ListItemButton · antd:Menu.Item</td></tr>
+</tbody></table></div>
+
+### Navigation rail
+
+A vertical Frost panel of nav links, collapsible to icons.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>expanded, collapsed, narrow</td></tr>
+<tr><th scope="row">Material</th><td>Frost panel, Resin active destination</td></tr>
+<tr><th scope="row">Geometry</th><td>Panel radius = content radius + 6px</td></tr>
+<tr><th scope="row">Semantics</th><td>nav landmark with an accessible name; collapsed items keep accessible names</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Panel material, collapse geometry, active treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Destination list, routing, collapse persistence</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:NavLink · mui:Drawer · antd:Menu</td></tr>
+</tbody></table></div>
+
+### Destination dock
+
+One floating Resin plane holding labelled destinations on a shared Stone label group.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, selected, hover, focus</td></tr>
+<tr><th scope="row">Material</th><td>Resin plane, Stone label backing, primary fill on the selected destination</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill; 52px minimum destination height</td></tr>
+<tr><th scope="row">Semantics</th><td>nav landmark; aria-pressed or aria-current on the destination</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>The single shared plane, selection rail and label weight, elevation</td></tr>
+<tr><th scope="row">Product owns</th><td>Destinations and routing</td></tr>
+<tr><th scope="row">Motion</th><td><code>selection</code>, <code>page-in</code></td></tr>
+<tr><th scope="row">Parity</th><td>mui:BottomNavigation · antd:Menu · mantine:SegmentedControl</td></tr>
+</tbody></table></div>
+
+> One plane, not three separate glass objects. This is an approved-baseline requirement.
+
+### Breadcrumbs
+
+Ordered trail of anchors with a separator, collapsing in the middle when space is short.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, collapsed, current</td></tr>
+<tr><th scope="row">Material</th><td>None; sits on the reading surface</td></tr>
+<tr><th scope="row">Geometry</th><td>Separator from the icon set; 44px targets on touch</td></tr>
+<tr><th scope="row">Semantics</th><td>nav landmark with an ordered list; aria-current="page" on the final crumb</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Separator, collapse behaviour, current treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>The trail and its destinations</td></tr>
+<tr><th scope="row">Motion</th><td><code>breadcrumb</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Breadcrumbs · mui:Breadcrumbs · antd:Breadcrumb</td></tr>
+</tbody></table></div>
+
+### Tabs
+
+A Resin tab strip with a selected tab and an associated panel.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover, focus, selected, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin strip, primary fill on the selected tab</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill tabs inside a pill strip; 44px minimum</td></tr>
+<tr><th scope="row">Semantics</th><td>role=tablist/tab/tabpanel with arrow-key, Home and End navigation and aria-selected</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Strip material, selection rail and label weight, focus ring</td></tr>
+<tr><th scope="row">Product owns</th><td>The roving tabindex implementation and panel content</td></tr>
+<tr><th scope="row">Motion</th><td><code>tab-in</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Tabs · mui:Tabs · antd:Tabs</td></tr>
+</tbody></table></div>
+
+### Pagination
+
+Page controls with previous and next, numbered pills and an ellipsis for elided ranges.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, current, disabled, hover, focus</td></tr>
+<tr><th scope="row">Material</th><td>Resin shells with Haze fill</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill; 44px minimum target</td></tr>
+<tr><th scope="row">Semantics</th><td>nav landmark with an accessible name; aria-current="page" on the active page</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Pill geometry, current treatment, elision rules</td></tr>
+<tr><th scope="row">Product owns</th><td>Page count, routing and the data fetch</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Pagination · mui:Pagination · antd:Pagination</td></tr>
+</tbody></table></div>
+
+### Stepper
+
+Ordered steps with a connector, each showing its own completion state.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>upcoming, current, complete, error, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin step markers on a Haze track</td></tr>
+<tr><th scope="row">Geometry</th><td>Circular markers; connector 2px</td></tr>
+<tr><th scope="row">Semantics</th><td>Ordered list; the current step carries aria-current="step"; state is announced in text, not by colour</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Marker geometry, connector, state treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Step validation and whether steps are navigable</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Stepper · mui:Stepper · antd:Steps</td></tr>
+</tbody></table></div>
+
+> A completed step may use a check mark: that is information display about validation, not a selection cue.
+
+### Burger
+
+An icon-only control that discloses navigation on narrow viewports.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>closed, open, hover, focus</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill or circle; 44px minimum</td></tr>
+<tr><th scope="row">Semantics</th><td>button with aria-expanded and aria-controls, and a real accessible name</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Material, geometry, the open/closed icon transition</td></tr>
+<tr><th scope="row">Product owns</th><td>What it discloses</td></tr>
+<tr><th scope="row">Motion</th><td><code>icon-turn</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Burger · mui:IconButton · antd:Button</td></tr>
+</tbody></table></div>
+
+### Command palette
+
+A Mirage-backed overlay with a search field, grouped results and keyboard hints.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>closed, open, searching, empty, loading</td></tr>
+<tr><th scope="row">Material</th><td>Mirage scrim, Haze decision surface, Resin field shell</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; results list inset 8px</td></tr>
+<tr><th scope="row">Semantics</th><td>Modal dialog with a combobox; aria-activedescendant for the highlighted result</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Overlay material, result row treatment, keyboard hint styling</td></tr>
+<tr><th scope="row">Product owns</th><td>The command registry, search, modality, focus containment and focus return</td></tr>
+<tr><th scope="row">Motion</th><td><code>menu-in</code>, <code>menu-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Spotlight · mui:— · antd:—</td></tr>
+</tbody></table></div>
+
+### Tree view
+
+Nested disclosure rows with indentation guides and expand controls.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>collapsed, expanded, selected, focus, disabled, loading</td></tr>
+<tr><th scope="row">Material</th><td>Haze rows on the surrounding surface</td></tr>
+<tr><th scope="row">Geometry</th><td>Indent step 20px; guides use the edge token</td></tr>
+<tr><th scope="row">Semantics</th><td>role=tree/treeitem/group with aria-expanded, aria-level and full arrow-key navigation</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Row treatment, indentation guides, selection rail</td></tr>
+<tr><th scope="row">Product owns</th><td>The keyboard navigation implementation, data and lazy loading</td></tr>
+<tr><th scope="row">Motion</th><td><code>accordion-in</code>, <code>accordion-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Tree · mui:TreeView · antd:Tree</td></tr>
+</tbody></table></div>
+
+### Affix
+
+An element that pins to the viewport past a scroll threshold.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>inline, pinned</td></tr>
+<tr><th scope="row">Material</th><td>Resin once pinned, to separate it from the content it floats over</td></tr>
+<tr><th scope="row">Geometry</th><td>Inherits the pinned element's geometry</td></tr>
+<tr><th scope="row">Semantics</th><td>Must not cover the focused element or the final content</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>The material change on pin and the elevation it takes</td></tr>
+<tr><th scope="row">Product owns</th><td>Threshold and what is pinned</td></tr>
+<tr><th scope="row">Parity</th><td>antd:Affix · mantine:Affix · mui:—</td></tr>
+</tbody></table></div>
+
+## Actions
+
+Controls that do something. All action geometry is a pill, independent of the content radius.
+
+### Button
+
+Resin shell, 8px-inset Haze reading fill, directional optical sheen, label and optional leading icon.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover, pressed, focus, disabled, loading</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell with Haze fill; primary, secondary, quiet and danger variants</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill (999px); 48px height; 15px/24px padding; 44px minimum target</td></tr>
+<tr><th scope="row">Semantics</th><td>Native button. A disabled button must not be the only explanation of unavailability.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Material, pill geometry, optical pressure, focus ring, variant hierarchy</td></tr>
+<tr><th scope="row">Product owns</th><td>The action itself, progress reporting and error recovery</td></tr>
+<tr><th scope="row">Motion</th><td><code>press</code>, <code>hover</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Button · mui:Button · antd:Button</td></tr>
+</tbody></table></div>
+
+### Icon button
+
+Square-ratio Resin shell containing a single 24px icon.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover, pressed, focus, disabled, toggled</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell with Haze fill</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill or circle; 44px minimum target regardless of icon size</td></tr>
+<tr><th scope="row">Semantics</th><td>Requires an accessible name; the icon itself is aria-hidden. Toggles use aria-pressed.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Material, geometry, target floor, focus ring</td></tr>
+<tr><th scope="row">Product owns</th><td>The action and the accessible name</td></tr>
+<tr><th scope="row">Motion</th><td><code>press</code>, <code>icon-turn</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:ActionIcon · mui:IconButton · antd:Button</td></tr>
+</tbody></table></div>
+
+### Button group
+
+Adjacent actions sharing one Resin plane with internal hairlines.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover, focus, disabled</td></tr>
+<tr><th scope="row">Material</th><td>One shared Resin plane, not one plane per button</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill outer geometry; interior corners square against neighbours</td></tr>
+<tr><th scope="row">Semantics</th><td>group role with an accessible name when the buttons are related</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>The shared plane and interior separation</td></tr>
+<tr><th scope="row">Product owns</th><td>Which actions are grouped</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Button.Group · mui:ButtonGroup · antd:Space.Compact</td></tr>
+</tbody></table></div>
+
+### Split button
+
+A default action and an adjacent disclosure that opens related actions.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover, focus, open, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Shared Resin plane with a hairline between the two targets</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill outer geometry; both halves meet the 44px floor independently</td></tr>
+<tr><th scope="row">Semantics</th><td>Two buttons; the disclosure carries aria-expanded and aria-haspopup="menu"</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shared plane, separation, menu material</td></tr>
+<tr><th scope="row">Product owns</th><td>The default action, the menu contents and menu keyboard behaviour</td></tr>
+<tr><th scope="row">Motion</th><td><code>menu-in</code>, <code>menu-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>antd:Dropdown.Button · mui:ButtonGroup · mantine:Menu</td></tr>
+</tbody></table></div>
+
+### Floating action
+
+A persistent circular Resin action floating above content.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover, pressed, focus, extended</td></tr>
+<tr><th scope="row">Material</th><td>Resin with the clearest floating shadow</td></tr>
+<tr><th scope="row">Geometry</th><td>Circle, or pill when extended with a label</td></tr>
+<tr><th scope="row">Semantics</th><td>Requires an accessible name; must not cover the final content or the focused element</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Material, elevation, extend behaviour, safe-area offset</td></tr>
+<tr><th scope="row">Product owns</th><td>The action and when it is present</td></tr>
+<tr><th scope="row">Motion</th><td><code>press</code>, <code>resin-confluence</code></td></tr>
+<tr><th scope="row">Parity</th><td>mui:Fab · mantine:— · antd:FloatButton</td></tr>
+</tbody></table></div>
+
+### Copy button
+
+An action that copies a value and confirms in place.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, copied, hover, focus, error</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell; the confirmation is a transient label change</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill; 44px minimum</td></tr>
+<tr><th scope="row">Semantics</th><td>The confirmation must reach assistive technology through a live region, not colour alone</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Material, the confirmation transition and its timing</td></tr>
+<tr><th scope="row">Product owns</th><td>The clipboard call and its failure handling</td></tr>
+<tr><th scope="row">Motion</th><td><code>copy-confirm</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:CopyButton · mui:— · antd:Typography.Paragraph copyable</td></tr>
+</tbody></table></div>
+
+> The confirmation may show a check mark: it reports a completed action, which is information display.
+
+### Close button
+
+A compact icon action that dismisses its container.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover, focus, pressed</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell, quiet variant</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill or circle; 44px minimum target</td></tr>
+<tr><th scope="row">Semantics</th><td>Accessible name naming what closes, not just "Close"; Escape must do the same thing</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Material, geometry, placement within overlays</td></tr>
+<tr><th scope="row">Product owns</th><td>What dismissal does and whether it is destructive</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:CloseButton · mui:IconButton · antd:—</td></tr>
+</tbody></table></div>
+
+## Inputs and forms
+
+Data entry. Every field keeps a visible label, a circular Resin/Haze state badge, and a focus ring that is never replaced by the badge.
+
+### Text input
+
+Visible label, Resin field shell with an inset Haze well, the native control, a circular state badge, and helper or error text.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, hover, focus, filled, invalid, disabled, read-only</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell, Haze well; the native field keeps its functional boundary</td></tr>
+<tr><th scope="row">Geometry</th><td>Field well radius = content radius − 7px; shell 20px; 44px minimum height</td></tr>
+<tr><th scope="row">Semantics</th><td>Native input with a programmatically associated label, aria-invalid and aria-describedby for errors</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shell material, badge vocabulary (hollow circle idle, filled focused, asterisk required, exclamation invalid), focus ring</td></tr>
+<tr><th scope="row">Product owns</th><td>Validation rules, error copy and submission</td></tr>
+<tr><th scope="row">Motion</th><td><code>field-focus</code>, <code>field-invalid</code>, <code>field-valid</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:TextInput · mui:TextField · antd:Input</td></tr>
+</tbody></table></div>
+
+### Textarea
+
+Text input anatomy with a multi-line well and an optional resize affordance.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, hover, focus, filled, invalid, disabled, read-only</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell, Haze well</td></tr>
+<tr><th scope="row">Geometry</th><td>Well radius = content radius − 7px; minimum three visible lines</td></tr>
+<tr><th scope="row">Semantics</th><td>Native textarea with an associated label; autosize must not trap the caret</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shell material, badge placement at the well's top edge, focus ring</td></tr>
+<tr><th scope="row">Product owns</th><td>Autosize policy, character limits and validation</td></tr>
+<tr><th scope="row">Motion</th><td><code>field-focus</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Textarea · mui:TextField · antd:Input.TextArea</td></tr>
+</tbody></table></div>
+
+### Number input
+
+Text input anatomy with increment and decrement controls.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, focus, invalid, disabled, at-min, at-max</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell; steppers share the plane rather than floating separately</td></tr>
+<tr><th scope="row">Geometry</th><td>Stepper targets meet 44px even when visually compact</td></tr>
+<tr><th scope="row">Semantics</th><td>Native number input or a text input with inputmode and role=spinbutton; arrow keys must step</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shell, stepper treatment, at-bound states</td></tr>
+<tr><th scope="row">Product owns</th><td>Step size, precision, clamping and locale formatting</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:NumberInput · mui:TextField · antd:InputNumber</td></tr>
+</tbody></table></div>
+
+### Password input
+
+Text input anatomy with a reveal toggle and optional strength meter.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, focus, revealed, invalid, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell; the toggle shares the shell</td></tr>
+<tr><th scope="row">Geometry</th><td>Toggle meets the 44px floor</td></tr>
+<tr><th scope="row">Semantics</th><td>The reveal toggle is a button with aria-pressed and a real accessible name; never a decorative icon</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shell, toggle placement, strength meter treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Strength policy and what it reveals</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:PasswordInput · mui:TextField · antd:Input.Password</td></tr>
+</tbody></table></div>
+
+### Search input
+
+Text input anatomy with a leading search icon and a clear control.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, focus, filled, loading, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell, Haze well</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill well is permitted here, as search reads as an action surface</td></tr>
+<tr><th scope="row">Semantics</th><td>role=searchbox or type=search inside a search landmark; the clear control is a named button</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shell, icon placement, clear affordance, loading treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Debounce, the query and result rendering</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:TextInput · mui:TextField · antd:Input.Search</td></tr>
+</tbody></table></div>
+
+### Select
+
+Labelled Resin shell containing a native select, with the platform disclosure preserved.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, focus, open, filled, invalid, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell, Haze well</td></tr>
+<tr><th scope="row">Geometry</th><td>Well radius = content radius − 7px</td></tr>
+<tr><th scope="row">Semantics</th><td>Native select wherever the option set allows it; the badge never covers the platform arrow</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shell material, badge placement clear of the disclosure, focus ring</td></tr>
+<tr><th scope="row">Product owns</th><td>Options, grouping and change handling</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:NativeSelect · mui:Select · antd:Select</td></tr>
+</tbody></table></div>
+
+### Combobox
+
+A text field with a filtered popover list, keyboard highlight and optional creation.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, focus, open, filtering, empty, loading, invalid, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin field shell, Resin popover with Haze rows</td></tr>
+<tr><th scope="row">Geometry</th><td>Popover content radius; rows inset 8px</td></tr>
+<tr><th scope="row">Semantics</th><td>role=combobox with aria-expanded, aria-controls and aria-activedescendant; the list is never focus-stealing</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Field and popover material, row treatment, selection rail, empty and loading appearance</td></tr>
+<tr><th scope="row">Product owns</th><td>The accessible combobox implementation, filtering and async loading</td></tr>
+<tr><th scope="row">Motion</th><td><code>popover-in</code>, <code>popover-out</code>, <code>list-in</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Autocomplete · mui:Autocomplete · antd:AutoComplete</td></tr>
+</tbody></table></div>
+
+### Multi select
+
+Combobox anatomy whose value is a set of removable chips inside the field shell.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, focus, open, filled, at-limit, invalid, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell, Haze chips</td></tr>
+<tr><th scope="row">Geometry</th><td>Chips are pills; the shell grows in whole line steps</td></tr>
+<tr><th scope="row">Semantics</th><td>Each chip's remove control is a named button; removal must be reachable by keyboard</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Chip geometry within the shell, overflow treatment, growth behaviour</td></tr>
+<tr><th scope="row">Product owns</th><td>Selection limits, the option set and the accessible implementation</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:MultiSelect · mui:Autocomplete multiple · antd:Select mode=multiple</td></tr>
+</tbody></table></div>
+
+### Checkbox
+
+A luminous Resin box with a contained contrast-bearing mark, plus its label.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>unchecked, checked, indeterminate, focus, disabled, invalid</td></tr>
+<tr><th scope="row">Material</th><td>Resin box, primary fill when checked</td></tr>
+<tr><th scope="row">Geometry</th><td>26px box, 9px radius; the whole label is a target meeting 44px</td></tr>
+<tr><th scope="row">Semantics</th><td>Native checkbox; indeterminate set through the property, not a class</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Box material, the contained mark, focus ring</td></tr>
+<tr><th scope="row">Product owns</th><td>Grouping semantics and validation</td></tr>
+<tr><th scope="row">Motion</th><td><code>check</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Checkbox · mui:Checkbox · antd:Checkbox</td></tr>
+</tbody></table></div>
+
+> The checked mark is a check glyph. That is the control's own semantics — a validated, entered value — not a selection badge placed over a focused item.
+
+### Checkbox group
+
+A labelled fieldset of related checkboxes with shared helper or error text.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, invalid, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Inherits the surrounding surface</td></tr>
+<tr><th scope="row">Geometry</th><td>Spacing from the 4px rhythm</td></tr>
+<tr><th scope="row">Semantics</th><td>fieldset and legend, or role=group with an accessible name; errors describe the group</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Grouping rhythm and error association treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Validation across the group</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Checkbox.Group · mui:FormGroup · antd:Checkbox.Group</td></tr>
+</tbody></table></div>
+
+### Radio
+
+A circular Resin control with a contained centre mark, plus its label.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>unselected, selected, focus, disabled, invalid</td></tr>
+<tr><th scope="row">Material</th><td>Resin circle, primary centre when selected</td></tr>
+<tr><th scope="row">Geometry</th><td>26px circle; label target meets 44px</td></tr>
+<tr><th scope="row">Semantics</th><td>Native radio in a named group; arrow keys move within the group</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Circle material, contained centre mark, focus ring</td></tr>
+<tr><th scope="row">Product owns</th><td>Group naming and validation</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Radio · mui:Radio · antd:Radio</td></tr>
+</tbody></table></div>
+
+### Radio group
+
+A labelled fieldset of mutually exclusive options.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, invalid, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Inherits</td></tr>
+<tr><th scope="row">Geometry</th><td>4px rhythm</td></tr>
+<tr><th scope="row">Semantics</th><td>fieldset and legend, or role=radiogroup with an accessible name</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Grouping rhythm and error association</td></tr>
+<tr><th scope="row">Product owns</th><td>Validation and default selection</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Radio.Group · mui:RadioGroup · antd:Radio.Group</td></tr>
+</tbody></table></div>
+
+### Switch
+
+A Resin track with a contrast-bearing thumb that moves between two ends.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>off, on, focus, disabled, loading</td></tr>
+<tr><th scope="row">Material</th><td>Resin track, primary-soft track when on, opaque thumb</td></tr>
+<tr><th scope="row">Geometry</th><td>44x28px track, circular thumb; 44px target</td></tr>
+<tr><th scope="row">Semantics</th><td>Native checkbox with role=switch, or a button with aria-checked; state must not rely on position alone</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Track and thumb material, travel, focus ring on the track</td></tr>
+<tr><th scope="row">Product owns</th><td>What toggling does and whether it is immediate or deferred</td></tr>
+<tr><th scope="row">Motion</th><td><code>switch-on</code>, <code>switch-off</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Switch · mui:Switch · antd:Switch</td></tr>
+</tbody></table></div>
+
+### Slider
+
+A value-driven track with a marked glass thumb, optional ticks and a visible value.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover, focus, dragging, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Primary fill to the value, primary-soft beyond; Resin thumb</td></tr>
+<tr><th scope="row">Geometry</th><td>8px track, 26px thumb; the thumb is the target and meets 44px in practice through padding</td></tr>
+<tr><th scope="row">Semantics</th><td>Native range or role=slider with aria-valuenow, valuemin, valuemax and valuetext</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Track fill, thumb material, tick treatment, RTL mirroring</td></tr>
+<tr><th scope="row">Product owns</th><td>Step, bounds and what the value drives</td></tr>
+<tr><th scope="row">Motion</th><td><code>slider-step</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Slider · mui:Slider · antd:Slider</td></tr>
+</tbody></table></div>
+
+### Range slider
+
+Slider anatomy with two thumbs bounding a filled span.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, focus, dragging, disabled, collapsed</td></tr>
+<tr><th scope="row">Material</th><td>Primary fill between the thumbs</td></tr>
+<tr><th scope="row">Geometry</th><td>Shared with Slider; thumbs must remain separable when they meet</td></tr>
+<tr><th scope="row">Semantics</th><td>Two sliders with distinct accessible names; each announces its own bound</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Span fill, thumb collision behaviour</td></tr>
+<tr><th scope="row">Product owns</th><td>Minimum span and what the range drives</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:RangeSlider · mui:Slider range · antd:Slider range</td></tr>
+</tbody></table></div>
+
+### Segmented control
+
+A pill strip of mutually exclusive options sharing one Resin plane.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover, focus, selected, disabled</td></tr>
+<tr><th scope="row">Material</th><td>One Resin plane; primary fill on the selected segment</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill strip and pill segments; 44px minimum</td></tr>
+<tr><th scope="row">Semantics</th><td>Radio group semantics, or aria-pressed on buttons; never aria-selected outside a tablist</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shared plane, selection rail and label weight, focus ring</td></tr>
+<tr><th scope="row">Product owns</th><td>Options and change handling</td></tr>
+<tr><th scope="row">Motion</th><td><code>selection</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:SegmentedControl · mui:ToggleButtonGroup · antd:Segmented</td></tr>
+</tbody></table></div>
+
+### Rating
+
+An ordered set of symbols expressing a score, with optional fractional fill.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>empty, partial, filled, hover, focus, read-only</td></tr>
+<tr><th scope="row">Material</th><td>Primary fill on the active symbols</td></tr>
+<tr><th scope="row">Geometry</th><td>24px symbols on the icon grid; 44px targets when interactive</td></tr>
+<tr><th scope="row">Semantics</th><td>Radio group when interactive; plain text with a visible value when read-only. Never symbol-only.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Symbol treatment and fractional fill</td></tr>
+<tr><th scope="row">Product owns</th><td>Scale, precision and what the score means</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Rating · mui:Rating · antd:Rate</td></tr>
+</tbody></table></div>
+
+### PIN input
+
+A row of single-character Resin wells that advance automatically.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>empty, partial, complete, focus, invalid, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin shells with Haze wells</td></tr>
+<tr><th scope="row">Geometry</th><td>Square-ish wells at the field radius; 44px minimum</td></tr>
+<tr><th scope="row">Semantics</th><td>One labelled group; paste must fill the whole value; backspace must move back</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Well geometry, advance and focus treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Length, masking and verification</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:PinInput · mui:— · antd:Input.OTP</td></tr>
+</tbody></table></div>
+
+### Tags input
+
+A field shell whose value is a set of removable chips created as you type.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>empty, filled, focus, at-limit, duplicate, invalid</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell, Haze chips</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill chips; shell grows in whole line steps</td></tr>
+<tr><th scope="row">Semantics</th><td>Each chip has a named remove control; additions and removals are announced</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Chip geometry, duplicate and limit treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Delimiters, validation and limits</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:TagsInput · mui:Autocomplete freeSolo · antd:Select tags</td></tr>
+</tbody></table></div>
+
+### Chip
+
+A compact pill representing a value, filter or selection, optionally removable.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, selected, hover, focus, disabled, removable</td></tr>
+<tr><th scope="row">Material</th><td>Haze fill on a Resin rim; primary fill when selected</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill; 32px compact height with a 44px target</td></tr>
+<tr><th scope="row">Semantics</th><td>Selectable chips use aria-pressed; the remove control is a separate named button</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Pill geometry, selected treatment, remove affordance</td></tr>
+<tr><th scope="row">Product owns</th><td>What the chip filters or represents</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Chip · mui:Chip · antd:Tag</td></tr>
+</tbody></table></div>
+
+### Colour input
+
+A field shell with a colour swatch, a text value and an optional picker surface.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, focus, open, invalid, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell; the swatch is specimen content, not a reading well</td></tr>
+<tr><th scope="row">Geometry</th><td>Circular swatch; picker at content radius</td></tr>
+<tr><th scope="row">Semantics</th><td>A text value must always be editable; colour alone is never the only representation</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Swatch treatment, picker surface material</td></tr>
+<tr><th scope="row">Product owns</th><td>Colour space, format and the picker implementation</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:ColorInput · mui:— · antd:ColorPicker</td></tr>
+</tbody></table></div>
+
+### Date input
+
+A field shell with segmented or free-text date entry and a calendar disclosure.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, focus, filled, invalid, disabled, open</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell, Haze well</td></tr>
+<tr><th scope="row">Geometry</th><td>Field radius; calendar at content radius</td></tr>
+<tr><th scope="row">Semantics</th><td>Typing must always be possible; the calendar is an enhancement, never the only route</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shell, disclosure placement, calendar surface</td></tr>
+<tr><th scope="row">Product owns</th><td>Locale, parsing, validation and the calendar implementation</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:DateInput · mui:DatePicker · antd:DatePicker</td></tr>
+</tbody></table></div>
+
+### Date picker
+
+A calendar surface with month navigation, a day grid and today and selected treatments.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, selected, today, in-range, disabled, out-of-month</td></tr>
+<tr><th scope="row">Material</th><td>Resin surface, Haze day cells, primary fill on the selection</td></tr>
+<tr><th scope="row">Geometry</th><td>Circular day cells; 44px targets</td></tr>
+<tr><th scope="row">Semantics</th><td>role=grid with full arrow-key navigation; the selected date is announced in words</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Surface, cell geometry, selection and range treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Date arithmetic, locale, disabled ranges and the grid keyboard implementation</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:DatePicker · mui:DateCalendar · antd:DatePicker</td></tr>
+</tbody></table></div>
+
+### Date range picker
+
+Date picker anatomy with a start, an end and a filled span between them.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>empty, start-selected, complete, hover-preview, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Primary-soft span fill between endpoints</td></tr>
+<tr><th scope="row">Geometry</th><td>Span fill joins cells without breaking the 44px target</td></tr>
+<tr><th scope="row">Semantics</th><td>Start and end are separately named and separately announced</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Span treatment and preview appearance</td></tr>
+<tr><th scope="row">Product owns</th><td>Range rules, minimum and maximum spans</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:DatePicker type=range · mui:DateRangePicker · antd:RangePicker</td></tr>
+</tbody></table></div>
+
+### Time input
+
+A field shell with hour, minute and optional period segments.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, focus, filled, invalid, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell, Haze well</td></tr>
+<tr><th scope="row">Geometry</th><td>Field radius; segment targets meet 44px</td></tr>
+<tr><th scope="row">Semantics</th><td>Segments are individually focusable and individually announced</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shell and segment treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Locale, 12- or 24-hour policy and validation</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:TimeInput · mui:TimePicker · antd:TimePicker</td></tr>
+</tbody></table></div>
+
+### File input
+
+A named file action with selected-file rows and per-file removal.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>empty, selected, uploading, error, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin action, Haze file rows</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill action; rows at content radius</td></tr>
+<tr><th scope="row">Semantics</th><td>Native file input with a real label; progress and errors reach a live region</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Action and row treatment, progress appearance</td></tr>
+<tr><th scope="row">Product owns</th><td>Upload, accepted types, size limits and retry</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:FileInput · mui:— · antd:Upload</td></tr>
+</tbody></table></div>
+
+> Crystal supplies appearance only. A file input that does not actually upload must not be presented as working.
+
+### Dropzone
+
+A bounded region accepting dragged files, with idle, hovering and rejecting states.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, accepting, rejecting, uploading, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Haze surface with a dashed edge at rest, primary-soft while accepting</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; minimum 120px height</td></tr>
+<tr><th scope="row">Semantics</th><td>Must have a keyboard-reachable file action; drag and drop is never the only route</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Surface, edge treatment and state appearance</td></tr>
+<tr><th scope="row">Product owns</th><td>Drop handling, validation and upload</td></tr>
+<tr><th scope="row">Motion</th><td><code>drag-pickup</code>, <code>drag-settle</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Dropzone · mui:— · antd:Upload.Dragger</td></tr>
+</tbody></table></div>
+
+### Form field
+
+The wrapper binding a label, control, helper text and error message together.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, required, invalid, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Inherits</td></tr>
+<tr><th scope="row">Geometry</th><td>Label to control 7px; control to helper 6px</td></tr>
+<tr><th scope="row">Semantics</th><td>Programmatic association through label, aria-describedby and aria-invalid. Errors are text, never colour alone.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Rhythm, label and helper treatment, error appearance</td></tr>
+<tr><th scope="row">Product owns</th><td>Validation timing, error copy and submission</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Input.Wrapper · mui:FormControl · antd:Form.Item</td></tr>
+</tbody></table></div>
+
+### Fieldset
+
+A named group of related fields with an optional description.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, disabled, invalid</td></tr>
+<tr><th scope="row">Material</th><td>Optional Haze panel for visually grouped sections</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius when a surface is used</td></tr>
+<tr><th scope="row">Semantics</th><td>Native fieldset and legend; disabling the set disables its controls</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Grouping rhythm and optional panel treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Which fields group and cross-field validation</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Fieldset · mui:FormControl · antd:Form</td></tr>
+</tbody></table></div>
+
+### Transfer
+
+Two lists with controls that move items between them.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, selected, empty, filtering, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Haze list panels, Resin move actions</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius panels; pill actions</td></tr>
+<tr><th scope="row">Semantics</th><td>Each list is separately named; moves are announced; keyboard must move items without drag</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Panel and action treatment, selection rail in the lists</td></tr>
+<tr><th scope="row">Product owns</th><td>The data, move rules and filtering</td></tr>
+<tr><th scope="row">Motion</th><td><code>list-in</code>, <code>list-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>antd:Transfer · mui:— · mantine:TransferList</td></tr>
+</tbody></table></div>
+
+### Cascader
+
+Progressive columns narrowing a hierarchical selection.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, open, partial, complete, loading, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin popover, Haze columns</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; columns separated by a hairline</td></tr>
+<tr><th scope="row">Semantics</th><td>Each column is a listbox; the composed value is announced as a path</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Popover and column treatment, selection rail</td></tr>
+<tr><th scope="row">Product owns</th><td>The hierarchy, lazy loading and the keyboard implementation</td></tr>
+<tr><th scope="row">Parity</th><td>antd:Cascader · mui:— · mantine:—</td></tr>
+</tbody></table></div>
+
+### Mentions
+
+A text surface that offers a filtered list after a trigger character.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, triggered, filtering, empty, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin popover with Haze rows over the field</td></tr>
+<tr><th scope="row">Geometry</th><td>Popover at content radius, anchored to the caret</td></tr>
+<tr><th scope="row">Semantics</th><td>Combobox semantics attached to the text surface; the inserted value is announced</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Popover, row and inserted-token treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Trigger characters, the data source and insertion</td></tr>
+<tr><th scope="row">Parity</th><td>antd:Mentions · mui:— · mantine:—</td></tr>
+</tbody></table></div>
+
+### Rich text surface
+
+A toolbar of formatting actions above an editable content surface.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, focus, selection-active, disabled, read-only</td></tr>
+<tr><th scope="row">Material</th><td>Resin toolbar, Haze editing surface</td></tr>
+<tr><th scope="row">Geometry</th><td>Toolbar is a pill group; surface at content radius</td></tr>
+<tr><th scope="row">Semantics</th><td>Toolbar actions use aria-pressed for active formatting; the editor exposes its own semantics</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Toolbar and surface appearance, active-format treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>The entire editing engine, serialisation and paste handling</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:RichTextEditor · mui:— · antd:—</td></tr>
+</tbody></table></div>
+
+> Crystal specifies the surface only. Do not rebuild a rich-text engine to obtain this appearance.
+
+### Helper text
+
+Guidance beneath a field, replaced by an error message when the field is invalid.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>hidden, visible, error</td></tr>
+<tr><th scope="row">Material</th><td>None; sits on the surrounding surface</td></tr>
+<tr><th scope="row">Geometry</th><td>6px below the control; never overlaps the field shell</td></tr>
+<tr><th scope="row">Semantics</th><td>Associated through aria-describedby. When an error replaces the hint, the error must also be associated and announced.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Rhythm, colour role, and the transition between hint and error</td></tr>
+<tr><th scope="row">Product owns</th><td>The copy and when guidance becomes an error</td></tr>
+<tr><th scope="row">Motion</th><td><code>hint-in</code>, <code>hint-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Input.Description · mui:FormHelperText · antd:Form.Item extra</td></tr>
+</tbody></table></div>
+
+> Guidance is removed only after the field is complete, and never while the field is focused.
+
+## Data display
+
+Presenting content. These are reading surfaces: Haze fills carry them, text stays crisp, and no fill is ever feathered across a glyph.
+
+### Card
+
+A Haze content surface with optional media, header, body and action row.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, interactive, hover, focus, selected, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Haze, 80% fill with a 1.95px feathered perimeter</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; at least 12px between content and the feathered edge</td></tr>
+<tr><th scope="row">Semantics</th><td>An article when it is content, a button when the whole card acts. Never both.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Fill, feather, elevation, interactive treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Content and what an interactive card does</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Card · mui:Card · antd:Card</td></tr>
+</tbody></table></div>
+
+> A card-shaped button keeps the content radius rather than the action pill, so its artwork is not clipped.
+
+### Table
+
+A Resin-rimmed shell over Haze, a sticky header band, hairline row separators and a scrolling body.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover-row, selected-row, empty, loading</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell, Haze fill, primary-soft header</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius shell; header corners inset 8px; 14px/18px cells</td></tr>
+<tr><th scope="row">Semantics</th><td>Real table semantics with header associations; sort controls are buttons carrying aria-sort</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shell, header band, separators, sticky behaviour, reduced-effect fallbacks</td></tr>
+<tr><th scope="row">Product owns</th><td>Data, sorting, pagination and selection behaviour</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Table · mui:Table · antd:Table</td></tr>
+</tbody></table></div>
+
+### Data table
+
+Table anatomy with sorting, filtering, selection, column sizing and pagination.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, sorted, filtered, selected, empty, loading, error</td></tr>
+<tr><th scope="row">Material</th><td>Shared with Table; selection uses the leading rail, not a check badge on the row</td></tr>
+<tr><th scope="row">Geometry</th><td>Shared with Table</td></tr>
+<tr><th scope="row">Semantics</th><td>aria-sort on sorted headers; row selection through real checkboxes with names</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>All Table treatment plus sort, filter and selection appearance</td></tr>
+<tr><th scope="row">Product owns</th><td>The data layer, virtualisation, and the sorting and filtering implementation</td></tr>
+<tr><th scope="row">Parity</th><td>mui:DataGrid · antd:Table · mantine:DataTable</td></tr>
+</tbody></table></div>
+
+### List
+
+Ordered or unordered rows with optional leading media and trailing actions.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, hover, focus, selected, empty</td></tr>
+<tr><th scope="row">Material</th><td>Haze rows on the surrounding surface</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius on rows; separators are hairlines</td></tr>
+<tr><th scope="row">Semantics</th><td>Real list semantics; interactive rows are buttons or links, not clickable divs</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Row treatment, separators, selection rail</td></tr>
+<tr><th scope="row">Product owns</th><td>Content, virtualisation and row actions</td></tr>
+<tr><th scope="row">Motion</th><td><code>list-in</code>, <code>list-out</code>, <code>reorder</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:List · mui:List · antd:List</td></tr>
+</tbody></table></div>
+
+### Description list
+
+Term and value pairs in a two-column or stacked arrangement.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, empty</td></tr>
+<tr><th scope="row">Material</th><td>Haze panel when grouped</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; term column aligned to the 4px rhythm</td></tr>
+<tr><th scope="row">Semantics</th><td>Real definition-list semantics so term and value stay associated</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Pair rhythm and panel treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>The data</td></tr>
+<tr><th scope="row">Parity</th><td>antd:Descriptions · mui:— · mantine:—</td></tr>
+</tbody></table></div>
+
+### Avatar
+
+A circular image, initials or icon, with an optional status indicator.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>image, initials, icon, loading, error</td></tr>
+<tr><th scope="row">Material</th><td>Surface-alt fill behind initials; 2px surface ring for separation</td></tr>
+<tr><th scope="row">Geometry</th><td>Always circular; sizes on the 4px rhythm</td></tr>
+<tr><th scope="row">Semantics</th><td>Decorative avatars are aria-hidden; identifying avatars carry the person's name</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shape, ring, fallback treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Real identity, image loading and the fallback source</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Avatar · mui:Avatar · antd:Avatar</td></tr>
+</tbody></table></div>
+
+### Avatar group
+
+Overlapping avatars with an overflow count.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, overflowing</td></tr>
+<tr><th scope="row">Material</th><td>Shared with Avatar</td></tr>
+<tr><th scope="row">Geometry</th><td>-7px overlap; overflow chip matches avatar size</td></tr>
+<tr><th scope="row">Semantics</th><td>The group has one accessible name; the overflow count is announced, not implied</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Overlap, stacking order, overflow treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Who is shown and the overflow threshold</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Avatar.Group · mui:AvatarGroup · antd:Avatar.Group</td></tr>
+</tbody></table></div>
+
+### Badge
+
+A small count or label attached to a host element.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>count, dot, zero, overflow, hidden</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell with Haze fill; status badges use their semantic ink pair</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill or circle; never smaller than legible</td></tr>
+<tr><th scope="row">Semantics</th><td>The count reaches assistive technology through the host's accessible name or a live region</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shell, placement, overflow formatting</td></tr>
+<tr><th scope="row">Product owns</th><td>The count and when it is meaningful</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Indicator · mui:Badge · antd:Badge</td></tr>
+</tbody></table></div>
+
+### Status badge
+
+A semantic symbol in a circular well, followed by a visible word.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>success, attention, danger, info, neutral</td></tr>
+<tr><th scope="row">Material</th><td>Tested semantic ink and surface pair behind the symbol; never a coloured perimeter stroke</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill; 24px symbol well; 36px minimum height</td></tr>
+<tr><th scope="row">Semantics</th><td>The word carries the meaning. Symbol and colour are reinforcement, never the only signal.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Symbol vocabulary, tested colour pairs, geometry</td></tr>
+<tr><th scope="row">Product owns</th><td>Which status applies and the wording</td></tr>
+<tr><th scope="row">Motion</th><td><code>success</code>, <code>attention</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Badge · mui:Chip · antd:Tag</td></tr>
+</tbody></table></div>
+
+> Success uses a check mark. That is information display — the legitimate use of the glyph.
+
+### Indicator
+
+A small circular Resin mark attached to a control, carrying state.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>selection, current, busy, field-idle, field-focused, required, invalid</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell with a 3px-inset Haze fill and a 1px feather on that fill</td></tr>
+<tr><th scope="row">Geometry</th><td>20px, or 24px on fields; never a click target</td></tr>
+<tr><th scope="row">Semantics</th><td>aria-hidden. The real control supplies the state; the mark only shows it.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>The complete mark vocabulary and its precedence</td></tr>
+<tr><th scope="row">Product owns</th><td>Nothing; this is entirely system-owned</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Indicator · mui:Badge · antd:Badge</td></tr>
+</tbody></table></div>
+
+> Selection resolves to a leading rail, not a badge. A check mark is not in this vocabulary.
+
+### Image
+
+Media with a reserved ratio, a loading placeholder and a failure fallback.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>loading, loaded, error</td></tr>
+<tr><th scope="row">Material</th><td>Haze placeholder while loading</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius when clipped; never distorts aspect</td></tr>
+<tr><th scope="row">Semantics</th><td>Meaningful images carry alt text; decorative images carry empty alt</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Placeholder, fallback and radius treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Sources, sizing and alt text</td></tr>
+<tr><th scope="row">Motion</th><td><code>media-in</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Image · mui:— · antd:Image</td></tr>
+</tbody></table></div>
+
+### Timeline
+
+Ordered events on a connector with per-event markers.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>complete, current, upcoming, error</td></tr>
+<tr><th scope="row">Material</th><td>Resin markers on a Haze connector</td></tr>
+<tr><th scope="row">Geometry</th><td>Circular markers; 2px connector</td></tr>
+<tr><th scope="row">Semantics</th><td>Ordered list; the current item carries aria-current</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Marker and connector treatment, state appearance</td></tr>
+<tr><th scope="row">Product owns</th><td>Events and their ordering</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Timeline · mui:Timeline · antd:Timeline</td></tr>
+</tbody></table></div>
+
+### Accordion
+
+Disclosure rows with a header control, a rotating chevron and a content region.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>collapsed, expanded, hover, focus, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Haze rows; expanded content shares the row surface</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; header meets 44px</td></tr>
+<tr><th scope="row">Semantics</th><td>Header is a button with aria-expanded and aria-controls; content is not hidden from search when collapsed unless intended</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Row treatment, chevron rotation, expansion appearance</td></tr>
+<tr><th scope="row">Product owns</th><td>Single or multiple expansion policy and content</td></tr>
+<tr><th scope="row">Motion</th><td><code>accordion-in</code>, <code>accordion-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Accordion · mui:Accordion · antd:Collapse</td></tr>
+</tbody></table></div>
+
+### Collapse
+
+A height transition revealing or hiding a region.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>collapsed, expanded, transitioning</td></tr>
+<tr><th scope="row">Material</th><td>Inherits</td></tr>
+<tr><th scope="row">Geometry</th><td>Inherits</td></tr>
+<tr><th scope="row">Semantics</th><td>The trigger carries aria-expanded; hidden content is genuinely hidden from assistive technology</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Transition timing and reduced-motion behaviour</td></tr>
+<tr><th scope="row">Product owns</th><td>Trigger and content</td></tr>
+<tr><th scope="row">Motion</th><td><code>accordion-in</code>, <code>accordion-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Collapse · mui:Collapse · antd:—</td></tr>
+</tbody></table></div>
+
+### Spoiler
+
+Content truncated to a height with a reveal control and an edge fade.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>collapsed, expanded</td></tr>
+<tr><th scope="row">Material</th><td>Edge fade drawn from the surrounding material</td></tr>
+<tr><th scope="row">Geometry</th><td>Fade depth 24px</td></tr>
+<tr><th scope="row">Semantics</th><td>The control carries aria-expanded; truncated text remains in the accessibility tree</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Fade and control treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Threshold and content</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Spoiler · mui:— · antd:Typography ellipsis</td></tr>
+</tbody></table></div>
+
+### Carousel
+
+A scrolling track of slides with previous and next controls and position indicators.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>at-start, scrolling, at-end, single-slide</td></tr>
+<tr><th scope="row">Material</th><td>Resin controls floating over Haze slides</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius slides; pill controls meeting 44px</td></tr>
+<tr><th scope="row">Semantics</th><td>role=group with an accessible name; indicators are buttons; never autoplay without a pause control</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Slide and control treatment, indicator appearance</td></tr>
+<tr><th scope="row">Product owns</th><td>Slides, scroll behaviour and autoplay policy</td></tr>
+<tr><th scope="row">Motion</th><td><code>carousel-next</code>, <code>carousel-previous</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Carousel · mui:— · antd:Carousel</td></tr>
+</tbody></table></div>
+
+### Statistic
+
+A large value with a label and an optional trend indicator.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, positive, negative, loading</td></tr>
+<tr><th scope="row">Material</th><td>Haze panel when grouped into a row</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; tabular figures</td></tr>
+<tr><th scope="row">Semantics</th><td>Trend direction is stated in text, not by colour or arrow alone</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Value typography, trend treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>The value, formatting and what the trend compares</td></tr>
+<tr><th scope="row">Parity</th><td>antd:Statistic · mantine:— · mui:—</td></tr>
+</tbody></table></div>
+
+### Code
+
+Inline or block monospace content with an optional copy action.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>inline, block, with-copy</td></tr>
+<tr><th scope="row">Material</th><td>Canvas fill with an edge rim; never feathered, as code must stay exact</td></tr>
+<tr><th scope="row">Geometry</th><td>14px radius inline, content radius for blocks</td></tr>
+<tr><th scope="row">Semantics</th><td>Real code and pre elements; blocks are focusable when scrollable</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Surface, rhythm and copy-action placement</td></tr>
+<tr><th scope="row">Product owns</th><td>Highlighting and content</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Code · mui:— · antd:Typography.Text code</td></tr>
+</tbody></table></div>
+
+### Keyboard key
+
+A small raised key cap representing a physical key.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default</td></tr>
+<tr><th scope="row">Material</th><td>Resin cap with a defined lower rim</td></tr>
+<tr><th scope="row">Geometry</th><td>8px radius; compact but legible</td></tr>
+<tr><th scope="row">Semantics</th><td>Real kbd element; key names are spelled, not drawn as symbols alone</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Cap treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>The key names</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Kbd · mui:— · antd:—</td></tr>
+</tbody></table></div>
+
+### Theme icon
+
+An icon in a filled container, used as a visual anchor rather than an action.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default</td></tr>
+<tr><th scope="row">Material</th><td>Primary-soft or surface-alt fill</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius or circle; 24px icon</td></tr>
+<tr><th scope="row">Semantics</th><td>Decorative and aria-hidden unless it is the only carrier of meaning</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Container fill and icon sizing</td></tr>
+<tr><th scope="row">Product owns</th><td>Which icon and what it anchors</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:ThemeIcon · mui:Avatar · antd:—</td></tr>
+</tbody></table></div>
+
+### Authored bubble
+
+A reading surface with one intentionally tightened corner indicating authorship or direction.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>incoming, own, grouped, pending, failed</td></tr>
+<tr><th scope="row">Material</th><td>Haze; own messages use the primary-container pair</td></tr>
+<tr><th scope="row">Geometry</th><td>6/22/22/22px incoming, 22/6/22/22px own, mirrored for right-to-left</td></tr>
+<tr><th scope="row">Semantics</th><td>Author and time are text, not implied by side alone</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Silhouette, corner asymmetry, own and incoming pairs, mirroring</td></tr>
+<tr><th scope="row">Product owns</th><td>Delivery, grouping rules and failure recovery</td></tr>
+<tr><th scope="row">Motion</th><td><code>message-in</code>, <code>reaction</code></td></tr>
+<tr><th scope="row">Parity</th><td>—</td></tr>
+</tbody></table></div>
+
+> This silhouette is part of Crystal's identity and carries through from the approved baseline.
+
+### Caption
+
+Descriptive text accompanying media, placed below or over the media surface.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>hidden, visible, overlaid</td></tr>
+<tr><th scope="row">Material</th><td>Stone label backing when overlaid on media, so contrast does not depend on the image</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius when overlaid; 12px inset from the media edge</td></tr>
+<tr><th scope="row">Semantics</th><td>Real figure and figcaption. A caption never replaces alt text; the two say different things.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Backing material, placement and protected contrast</td></tr>
+<tr><th scope="row">Product owns</th><td>The caption text</td></tr>
+<tr><th scope="row">Motion</th><td><code>caption-in</code></td></tr>
+<tr><th scope="row">Parity</th><td>mui:— · mantine:— · antd:Image</td></tr>
+</tbody></table></div>
+
+## Feedback and status
+
+Telling people what happened and what is happening. Every state here is carried by words first; symbol and colour reinforce.
+
+### Alert
+
+An inline banner with a semantic symbol, a title, body text and optional actions.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>success, attention, danger, info, dismissible</td></tr>
+<tr><th scope="row">Material</th><td>Haze surface with the semantic ink pair on the symbol well</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; 12px minimum from content to the feathered edge</td></tr>
+<tr><th scope="row">Semantics</th><td>role=alert only for genuinely urgent, interrupting content; otherwise a plain region</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Surface, symbol well, semantic pairs, action placement</td></tr>
+<tr><th scope="row">Product owns</th><td>The message, severity and any recovery action</td></tr>
+<tr><th scope="row">Motion</th><td><code>attention</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Alert · mui:Alert · antd:Alert</td></tr>
+</tbody></table></div>
+
+### Toast
+
+A transient floating Resin notification with a message and an optional single action.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>entering, visible, leaving, persistent, stacked</td></tr>
+<tr><th scope="row">Material</th><td>Resin with Haze reading fill and the clearest floating shadow</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; stacked with a 12px offset</td></tr>
+<tr><th scope="row">Semantics</th><td>Polite live region; an urgent toast is assertive. Auto-dismiss must never remove the only route to an action.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Surface, stacking, entry and exit motion</td></tr>
+<tr><th scope="row">Product owns</th><td>Message, duration policy, queueing and the action</td></tr>
+<tr><th scope="row">Motion</th><td><code>toast-in</code>, <code>toast-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Notifications · mui:Snackbar · antd:message</td></tr>
+</tbody></table></div>
+
+### Notification
+
+A persistent, dismissible message with a title, body, timestamp and actions.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>unread, read, dismissed</td></tr>
+<tr><th scope="row">Material</th><td>Resin surface with Haze reading fill</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius</td></tr>
+<tr><th scope="row">Semantics</th><td>Announced politely; the dismiss control is named for what it dismisses</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Surface, unread treatment, action row</td></tr>
+<tr><th scope="row">Product owns</th><td>Delivery, read state and persistence</td></tr>
+<tr><th scope="row">Motion</th><td><code>toast-in</code>, <code>toast-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>antd:notification · mantine:Notification · mui:Alert</td></tr>
+</tbody></table></div>
+
+### Progress
+
+A determinate or indeterminate track showing work in flight.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>determinate, indeterminate, complete, error, paused</td></tr>
+<tr><th scope="row">Material</th><td>Primary fill on a primary-soft track</td></tr>
+<tr><th scope="row">Geometry</th><td>8px track at pill radius, matching the slider track</td></tr>
+<tr><th scope="row">Semantics</th><td>role=progressbar with aria-valuenow when determinate; indeterminate omits the value rather than faking one</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Track, fill, indeterminate motion and reduced-motion fallback</td></tr>
+<tr><th scope="row">Product owns</th><td>Real progress. Never simulate progress for work that is not measurable.</td></tr>
+<tr><th scope="row">Motion</th><td><code>progress-change</code>, <code>busy</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Progress · mui:LinearProgress · antd:Progress</td></tr>
+</tbody></table></div>
+
+### Ring progress
+
+A circular track with a filled arc and an optional centre label.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>determinate, indeterminate, complete, error</td></tr>
+<tr><th scope="row">Material</th><td>Primary arc on a primary-soft ring</td></tr>
+<tr><th scope="row">Geometry</th><td>Stroke matches the icon stroke weight family; label is tabular</td></tr>
+<tr><th scope="row">Semantics</th><td>Shared with Progress; the centre label is not the only representation</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Ring, arc, label treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Real progress</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:RingProgress · mui:CircularProgress · antd:Progress type=circle</td></tr>
+</tbody></table></div>
+
+### Loader
+
+A compact indeterminate activity mark.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>visible, hidden</td></tr>
+<tr><th scope="row">Material</th><td>Primary on the surrounding material</td></tr>
+<tr><th scope="row">Geometry</th><td>Sizes on the 4px rhythm</td></tr>
+<tr><th scope="row">Semantics</th><td>Accompanied by text saying what is loading; reduced motion replaces spin with a static, still-legible state</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Mark, motion and reduced-motion fallback</td></tr>
+<tr><th scope="row">Product owns</th><td>When it appears and what it describes</td></tr>
+<tr><th scope="row">Motion</th><td><code>busy</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Loader · mui:CircularProgress · antd:Spin</td></tr>
+</tbody></table></div>
+
+### Skeleton
+
+Placeholder shapes matching the layout of content that is loading.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>loading, resolving</td></tr>
+<tr><th scope="row">Material</th><td>Haze fill with a slow luminance sweep</td></tr>
+<tr><th scope="row">Geometry</th><td>Matches the real content's radius and rhythm exactly</td></tr>
+<tr><th scope="row">Semantics</th><td>aria-hidden with a live region announcing loading; must not be read as content</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Fill, sweep, reduced-motion fallback, resolve transition</td></tr>
+<tr><th scope="row">Product owns</th><td>Which shapes match which content</td></tr>
+<tr><th scope="row">Motion</th><td><code>skeleton-resolve</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Skeleton · mui:Skeleton · antd:Skeleton</td></tr>
+</tbody></table></div>
+
+> A skeleton must match the real layout. A skeleton that does not resolve into the shape it promised is a worse experience than a spinner.
+
+### Loading overlay
+
+A scrim over a region with a centred activity mark, blocking interaction.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>hidden, visible</td></tr>
+<tr><th scope="row">Material</th><td>Mirage at region scope</td></tr>
+<tr><th scope="row">Geometry</th><td>Inherits the region's radius</td></tr>
+<tr><th scope="row">Semantics</th><td>Blocked content is inert; focus does not enter it; the reason is announced</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Scrim, mark placement, inert treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>When the region blocks and for how long</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:LoadingOverlay · mui:Backdrop · antd:Spin</td></tr>
+</tbody></table></div>
+
+### Empty state
+
+An explanation of why a region is empty, with the action that would fill it.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>empty, no-results, error, unauthorised</td></tr>
+<tr><th scope="row">Material</th><td>Haze panel</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; centred within its region</td></tr>
+<tr><th scope="row">Semantics</th><td>Real text; never an illustration alone. No-results and truly-empty are different states and read differently.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Panel, rhythm and action placement</td></tr>
+<tr><th scope="row">Product owns</th><td>The copy and the action</td></tr>
+<tr><th scope="row">Motion</th><td><code>empty-in</code></td></tr>
+<tr><th scope="row">Parity</th><td>antd:Empty · mui:— · mantine:—</td></tr>
+</tbody></table></div>
+
+### Result
+
+A full-region outcome with a status symbol, title, explanation and next actions.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>success, error, warning, info, not-found, unauthorised</td></tr>
+<tr><th scope="row">Material</th><td>Haze panel with the semantic ink pair on the symbol</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius</td></tr>
+<tr><th scope="row">Semantics</th><td>The outcome is stated in the heading; symbol and colour reinforce it</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Panel, symbol treatment, action row</td></tr>
+<tr><th scope="row">Product owns</th><td>The outcome, explanation and recovery routes</td></tr>
+<tr><th scope="row">Parity</th><td>antd:Result · mui:— · mantine:—</td></tr>
+</tbody></table></div>
+
+### Inline confirm
+
+A small popover asking for confirmation next to the control that triggered it.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>closed, open, pending</td></tr>
+<tr><th scope="row">Material</th><td>Resin popover with Haze reading fill</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; anchored to the trigger</td></tr>
+<tr><th scope="row">Semantics</th><td>Focus moves into the popover, returns to the trigger on dismiss, and Escape cancels</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Popover surface and action row</td></tr>
+<tr><th scope="row">Product owns</th><td>The consequence, its wording and whether a full dialog is warranted instead</td></tr>
+<tr><th scope="row">Motion</th><td><code>popover-in</code>, <code>popover-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>antd:Popconfirm · mui:— · mantine:—</td></tr>
+</tbody></table></div>
+
+> Consequential and irreversible actions belong in a dialog, not an inline confirm.
+
+## Overlays
+
+Surfaces that sit above the scene. Crystal supplies the material and the separation; the product supplies real modality, focus containment and focus return.
+
+### Dialog
+
+A Mirage scrim, a Haze decision surface, a title, body and named actions.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>closed, opening, open, closing</td></tr>
+<tr><th scope="row">Material</th><td>Mirage scrim; 80% feathered Haze surface above it</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; 12px minimum from content to the feathered edge</td></tr>
+<tr><th scope="row">Semantics</th><td>Real modal semantics with a named dialog, focus containment, Escape, and focus return to the trigger</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Scrim, surface, entrance and exit motion, elevation</td></tr>
+<tr><th scope="row">Product owns</th><td>Modality, focus management, the decision itself and its consequences</td></tr>
+<tr><th scope="row">Motion</th><td><code>mirage</code>, <code>mirage-out</code>, <code>dismiss</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Modal · mui:Dialog · antd:Modal</td></tr>
+</tbody></table></div>
+
+### Drawer
+
+An edge-anchored panel over a Mirage scrim, with a label and a close control.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>closed, open, dragging</td></tr>
+<tr><th scope="row">Material</th><td>Mirage scrim, Frost or Resin panel by depth</td></tr>
+<tr><th scope="row">Geometry</th><td>Panel radius on the inner edges only</td></tr>
+<tr><th scope="row">Semantics</th><td>Dialog semantics when modal; a complementary region when not. Modality must be real, not implied.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Panel material, edge geometry, entrance direction</td></tr>
+<tr><th scope="row">Product owns</th><td>Modality, focus management and content</td></tr>
+<tr><th scope="row">Motion</th><td><code>drawer-in</code>, <code>drawer-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Drawer · mui:Drawer · antd:Drawer</td></tr>
+</tbody></table></div>
+
+### Menu
+
+A Resin popover of actions, with optional groups, separators and checkable items.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>closed, open, highlighted, disabled-item, checked-item</td></tr>
+<tr><th scope="row">Material</th><td>Resin surface with Haze rows</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; rows reserve leading room for the selection rail on every row</td></tr>
+<tr><th scope="row">Semantics</th><td>role=menu with full keyboard navigation, type-ahead and Escape; checkable items use aria-checked</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Surface, row treatment, rail placement, separators</td></tr>
+<tr><th scope="row">Product owns</th><td>The menu implementation, actions and dismissal</td></tr>
+<tr><th scope="row">Motion</th><td><code>menu-in</code>, <code>menu-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Menu · mui:Menu · antd:Dropdown</td></tr>
+</tbody></table></div>
+
+### Context menu
+
+Menu anatomy opened at a pointer position or from a keyboard context key.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>closed, open</td></tr>
+<tr><th scope="row">Material</th><td>Shared with Menu</td></tr>
+<tr><th scope="row">Geometry</th><td>Repositions to stay within the viewport</td></tr>
+<tr><th scope="row">Semantics</th><td>Must be reachable by keyboard, not pointer-only; never the sole route to an action</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Surface and positioning behaviour</td></tr>
+<tr><th scope="row">Product owns</th><td>The actions and the keyboard route</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Menu · mui:Menu · antd:Dropdown</td></tr>
+</tbody></table></div>
+
+### Popover
+
+An anchored Resin surface holding arbitrary content, with optional arrow.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>closed, open, repositioned</td></tr>
+<tr><th scope="row">Material</th><td>Resin with Haze reading fill</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; flips and shifts to stay in view</td></tr>
+<tr><th scope="row">Semantics</th><td>The trigger carries aria-expanded and aria-controls; focus moves in for interactive content</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Surface, arrow, positioning behaviour</td></tr>
+<tr><th scope="row">Product owns</th><td>Content, dismissal and focus policy</td></tr>
+<tr><th scope="row">Motion</th><td><code>popover-in</code>, <code>popover-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Popover · mui:Popover · antd:Popover</td></tr>
+</tbody></table></div>
+
+### Hover card
+
+A popover that opens on hover or focus after a delay, showing preview content.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>closed, opening, open, closing</td></tr>
+<tr><th scope="row">Material</th><td>Shared with Popover</td></tr>
+<tr><th scope="row">Geometry</th><td>Shared with Popover</td></tr>
+<tr><th scope="row">Semantics</th><td>Must also open on keyboard focus; never contains the only route to an action</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Surface, open and close delays</td></tr>
+<tr><th scope="row">Product owns</th><td>Preview content and delay tuning</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:HoverCard · mui:— · antd:Popover</td></tr>
+</tbody></table></div>
+
+### Tooltip
+
+Short supplemental text on a small Resin surface, anchored to its trigger.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>hidden, visible</td></tr>
+<tr><th scope="row">Material</th><td>Resin with Stone label backing</td></tr>
+<tr><th scope="row">Geometry</th><td>18px radius; compact padding</td></tr>
+<tr><th scope="row">Semantics</th><td>Never the sole accessible name. Opens on focus as well as hover, dismisses on Escape, and stays while hovered.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Surface, delay, placement</td></tr>
+<tr><th scope="row">Product owns</th><td>Content and whether a tooltip is the right disclosure at all</td></tr>
+<tr><th scope="row">Motion</th><td><code>tooltip-in</code>, <code>tooltip-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Tooltip · mui:Tooltip · antd:Tooltip</td></tr>
+</tbody></table></div>
+
+### Scrim
+
+The Mirage layer separating an overlay from the scene beneath it.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>hidden, visible</td></tr>
+<tr><th scope="row">Material</th><td>Mirage: chromatic diffusion of the real scene beneath</td></tr>
+<tr><th scope="row">Geometry</th><td>Full viewport, or region-scoped for a local overlay</td></tr>
+<tr><th scope="row">Semantics</th><td>Content beneath is inert; the scrim is not a focus target; clicking it dismisses only when dismissal is safe</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>The complete Mirage recipe and its reduced-transparency fallback</td></tr>
+<tr><th scope="row">Product owns</th><td>Inertness, dismissal policy and stack order</td></tr>
+<tr><th scope="row">Motion</th><td><code>mirage</code>, <code>mirage-out</code></td></tr>
+<tr><th scope="row">Parity</th><td>mui:Backdrop · mantine:Overlay · antd:—</td></tr>
+</tbody></table></div>
+
+### Portal
+
+A mechanism for rendering an overlay outside its layout parent.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>mounted, unmounted</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>None</td></tr>
+<tr><th scope="row">Semantics</th><td>Portalled content must preserve the logical focus and reading order of its trigger</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Stacking contract and layer placement</td></tr>
+<tr><th scope="row">Product owns</th><td>The portal implementation</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Portal · mui:Portal · antd:—</td></tr>
+</tbody></table></div>
+
+## Typography
+
+Reading. Reading text stays 16px/24px on every platform, and text scaling always takes precedence over layout.
+
+### Title
+
+A heading at one of six levels, with tightened tracking at display sizes.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>1.2 line height; -0.04em tracking; sizes on a modular scale</td></tr>
+<tr><th scope="row">Semantics</th><td>The visual level must not be chosen independently of the document outline; use a level, style separately</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Scale, tracking and leading</td></tr>
+<tr><th scope="row">Product owns</th><td>The outline and the content</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Title · mui:Typography · antd:Typography.Title</td></tr>
+</tbody></table></div>
+
+### Text
+
+Body copy with size, weight, colour role and truncation options.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, muted, truncated, clamped</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>16px/24px reading rhythm; 78ch maximum measure</td></tr>
+<tr><th scope="row">Semantics</th><td>Truncated text keeps its full value in the accessibility tree and in a title where useful</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Rhythm, measure, colour roles</td></tr>
+<tr><th scope="row">Product owns</th><td>The content and truncation policy</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Text · mui:Typography · antd:Typography.Text</td></tr>
+</tbody></table></div>
+
+### Blockquote
+
+Quoted content with a leading rule and optional attribution.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default, attributed</td></tr>
+<tr><th scope="row">Material</th><td>Haze panel when set apart</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; 3px leading rule</td></tr>
+<tr><th scope="row">Semantics</th><td>Real blockquote with cite where the source is known</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Rule, panel and attribution treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>The quote and its source</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Blockquote · mui:— · antd:—</td></tr>
+</tbody></table></div>
+
+### Mark
+
+Inline highlighted text, typically a search match.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default</td></tr>
+<tr><th scope="row">Material</th><td>Primary-soft fill with its tested ink pair</td></tr>
+<tr><th scope="row">Geometry</th><td>4px radius; does not disturb the line box</td></tr>
+<tr><th scope="row">Semantics</th><td>Real mark element; highlighting is never the only indication of a match</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Fill pair and geometry</td></tr>
+<tr><th scope="row">Product owns</th><td>What is highlighted</td></tr>
+<tr><th scope="row">Motion</th><td><code>highlight</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Mark · mui:— · antd:—</td></tr>
+</tbody></table></div>
+
+### Prose
+
+Long-form content with consistent rhythm across headings, lists, tables, code and media.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>default</td></tr>
+<tr><th scope="row">Material</th><td>Inherits; embedded surfaces follow their own components</td></tr>
+<tr><th scope="row">Geometry</th><td>78ch measure; 1.8 line height; 4px-rhythm vertical spacing</td></tr>
+<tr><th scope="row">Semantics</th><td>Anchor navigation must preserve focus when sections change</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>The complete reading rhythm and embedded-element treatment</td></tr>
+<tr><th scope="row">Product owns</th><td>Content, rendering and virtualisation</td></tr>
+<tr><th scope="row">Parity</th><td>mui:— · mantine:TypographyStylesProvider · antd:Typography</td></tr>
+</tbody></table></div>
+
+## Utility and behaviour
+
+Components with little or no appearance whose behaviour is nonetheless part of the contract. A library that omits these forces every product to reinvent them inconsistently.
+
+### Visually hidden
+
+Content available to assistive technology and hidden from sight.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>hidden, focusable</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>None</td></tr>
+<tr><th scope="row">Semantics</th><td>Must not use display:none. Focusable variants become visible when focused, as the skip link does.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>The clipping recipe and the focusable variant</td></tr>
+<tr><th scope="row">Product owns</th><td>What needs a text alternative</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:VisuallyHidden · mui:visuallyHidden · antd:—</td></tr>
+</tbody></table></div>
+
+### Skip link
+
+A visually hidden link that appears on focus and jumps to the main region.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>hidden, focused</td></tr>
+<tr><th scope="row">Material</th><td>Surface fill when visible</td></tr>
+<tr><th scope="row">Geometry</th><td>Pill; appears at the top-left inset</td></tr>
+<tr><th scope="row">Semantics</th><td>First focusable element in the document; its target must be focusable</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Appearance on focus and placement</td></tr>
+<tr><th scope="row">Product owns</th><td>The target region</td></tr>
+<tr><th scope="row">Parity</th><td>—</td></tr>
+</tbody></table></div>
+
+### Focus trap
+
+A region that contains keyboard focus while active.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>inactive, active</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>None</td></tr>
+<tr><th scope="row">Semantics</th><td>Restores focus to the trigger on release; never traps without a visible, keyboard-reachable exit</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>The contract only</td></tr>
+<tr><th scope="row">Product owns</th><td>The implementation. Use a maintained primitive rather than rebuilding it.</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:FocusTrap · mui:FocusTrap · antd:—</td></tr>
+</tbody></table></div>
+
+### Transition
+
+Entry and exit choreography bound to Crystal's timings and easings.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>entering, entered, exiting, exited</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>Travel from the motion scale: 5-30px ordinary, up to 50px expressive</td></tr>
+<tr><th scope="row">Semantics</th><td>Reduced motion removes spatial change and keeps state feedback; transitions are interruptible and never delay a semantic change</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Timings, easings, travel limits, the 5s ceiling, reduced-motion behaviour</td></tr>
+<tr><th scope="row">Product owns</th><td>Which elements transition and when</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:Transition · mui:Fade/Grow/Slide · antd:—</td></tr>
+</tbody></table></div>
+
+### Direction provider
+
+The scope declaring text direction for its subtree.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>ltr, rtl</td></tr>
+<tr><th scope="row">Material</th><td>None</td></tr>
+<tr><th scope="row">Geometry</th><td>Mirrors directional geometry: bubble corners, selection rails, range tracks, drawer edges</td></tr>
+<tr><th scope="row">Semantics</th><td>Sets a real dir attribute; logical properties do the rest</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Which properties are directional and must mirror</td></tr>
+<tr><th scope="row">Product owns</th><td>Locale detection and content direction</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:DirectionProvider · mui:— · antd:ConfigProvider</td></tr>
+</tbody></table></div>
+
+### Theme provider
+
+The scope supplying resolved Crystal tokens to its subtree.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>light, dark, system</td></tr>
+<tr><th scope="row">Material</th><td>Supplies every material's resolved values</td></tr>
+<tr><th scope="row">Geometry</th><td>Supplies the content radius and spacing scale</td></tr>
+<tr><th scope="row">Semantics</th><td>Sets color-scheme so native controls and scrollbars match; respects the system preference when set to system</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Token resolution, mode switching, preference persistence, reduced-effect handling</td></tr>
+<tr><th scope="row">Product owns</th><td>Which palette, and where preferences are stored</td></tr>
+<tr><th scope="row">Parity</th><td>mantine:MantineProvider · mui:ThemeProvider · antd:ConfigProvider</td></tr>
+</tbody></table></div>
+
+### Reduced effects
+
+The scope that replaces translucency and diffusion with solid equivalents.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>full, reduced, forced-colors</td></tr>
+<tr><th scope="row">Material</th><td>Solid surfaces replacing every translucent fill; hierarchy preserved by tone and contour</td></tr>
+<tr><th scope="row">Geometry</th><td>Unchanged. Shapes, silhouettes and spacing never change with effects.</td></tr>
+<tr><th scope="row">Semantics</th><td>Honours prefers-reduced-transparency and forced-colors, and an explicit product preference</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Every material's fallback and the guarantee that hierarchy survives</td></tr>
+<tr><th scope="row">Product owns</th><td>Exposing the preference and respecting the system setting</td></tr>
+<tr><th scope="row">Parity</th><td>—</td></tr>
+</tbody></table></div>
+
+> A compliant fallback never excuses an inaccessible default. Both presentations must pass.
+
+### Resizable region
+
+A region whose size the person controls, with a visible grab handle.
+
+<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
+<tr><th scope="row">States</th><td>idle, hover, dragging, at-min, at-max, disabled</td></tr>
+<tr><th scope="row">Material</th><td>Resin handle on the region's own surface</td></tr>
+<tr><th scope="row">Geometry</th><td>Handle meets 44px even when the visible grip is narrower</td></tr>
+<tr><th scope="row">Semantics</th><td>role=separator with aria-valuenow and arrow-key resizing. Pointer dragging is never the only route.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Handle treatment, bound states and the settle after a size change</td></tr>
+<tr><th scope="row">Product owns</th><td>Bounds, persistence and what resizes</td></tr>
+<tr><th scope="row">Motion</th><td><code>resize-settle</code></td></tr>
+<tr><th scope="row">Parity</th><td>mantine:— · mui:— · antd:Splitter</td></tr>
+</tbody></table></div>
+
+> Layout settles after a measured size change; focus and hover states never animate.
+

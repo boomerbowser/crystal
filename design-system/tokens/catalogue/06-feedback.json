@@ -1,0 +1,265 @@
+{
+  "id": "feedback",
+  "name": "Feedback and status",
+  "description": "Telling people what happened and what is happening. Every state here is carried by words first; symbol and colour reinforce.",
+  "components": [
+    {
+      "id": "alert",
+      "name": "Alert",
+      "anatomy": "An inline banner with a semantic symbol, a title, body text and optional actions.",
+      "states": [
+        "success",
+        "attention",
+        "danger",
+        "info",
+        "dismissible"
+      ],
+      "material": "Haze surface with the semantic ink pair on the symbol well",
+      "geometry": "Content radius; 12px minimum from content to the feathered edge",
+      "semantics": "role=alert only for genuinely urgent, interrupting content; otherwise a plain region",
+      "crystal": "Surface, symbol well, semantic pairs, action placement",
+      "product": "The message, severity and any recovery action",
+      "motion": [
+        "attention"
+      ],
+      "parity": [
+        "mantine:Alert",
+        "mui:Alert",
+        "antd:Alert"
+      ]
+    },
+    {
+      "id": "toast",
+      "name": "Toast",
+      "anatomy": "A transient floating Resin notification with a message and an optional single action.",
+      "states": [
+        "entering",
+        "visible",
+        "leaving",
+        "persistent",
+        "stacked"
+      ],
+      "material": "Resin with Haze reading fill and the clearest floating shadow",
+      "geometry": "Content radius; stacked with a 12px offset",
+      "semantics": "Polite live region; an urgent toast is assertive. Auto-dismiss must never remove the only route to an action.",
+      "crystal": "Surface, stacking, entry and exit motion",
+      "product": "Message, duration policy, queueing and the action",
+      "motion": [
+        "toast-in",
+        "toast-out"
+      ],
+      "parity": [
+        "mantine:Notifications",
+        "mui:Snackbar",
+        "antd:message"
+      ]
+    },
+    {
+      "id": "notification",
+      "name": "Notification",
+      "anatomy": "A persistent, dismissible message with a title, body, timestamp and actions.",
+      "states": [
+        "unread",
+        "read",
+        "dismissed"
+      ],
+      "material": "Resin surface with Haze reading fill",
+      "geometry": "Content radius",
+      "semantics": "Announced politely; the dismiss control is named for what it dismisses",
+      "crystal": "Surface, unread treatment, action row",
+      "product": "Delivery, read state and persistence",
+      "motion": [
+        "toast-in",
+        "toast-out"
+      ],
+      "parity": [
+        "antd:notification",
+        "mantine:Notification",
+        "mui:Alert"
+      ]
+    },
+    {
+      "id": "progress",
+      "name": "Progress",
+      "anatomy": "A determinate or indeterminate track showing work in flight.",
+      "states": [
+        "determinate",
+        "indeterminate",
+        "complete",
+        "error",
+        "paused"
+      ],
+      "material": "Primary fill on a primary-soft track",
+      "geometry": "8px track at pill radius, matching the slider track",
+      "semantics": "role=progressbar with aria-valuenow when determinate; indeterminate omits the value rather than faking one",
+      "crystal": "Track, fill, indeterminate motion and reduced-motion fallback",
+      "product": "Real progress. Never simulate progress for work that is not measurable.",
+      "motion": [
+        "progress-change",
+        "busy"
+      ],
+      "parity": [
+        "mantine:Progress",
+        "mui:LinearProgress",
+        "antd:Progress"
+      ]
+    },
+    {
+      "id": "ring-progress",
+      "name": "Ring progress",
+      "anatomy": "A circular track with a filled arc and an optional centre label.",
+      "states": [
+        "determinate",
+        "indeterminate",
+        "complete",
+        "error"
+      ],
+      "material": "Primary arc on a primary-soft ring",
+      "geometry": "Stroke matches the icon stroke weight family; label is tabular",
+      "semantics": "Shared with Progress; the centre label is not the only representation",
+      "crystal": "Ring, arc, label treatment",
+      "product": "Real progress",
+      "parity": [
+        "mantine:RingProgress",
+        "mui:CircularProgress",
+        "antd:Progress type=circle"
+      ]
+    },
+    {
+      "id": "loader",
+      "name": "Loader",
+      "anatomy": "A compact indeterminate activity mark.",
+      "states": [
+        "visible",
+        "hidden"
+      ],
+      "material": "Primary on the surrounding material",
+      "geometry": "Sizes on the 4px rhythm",
+      "semantics": "Accompanied by text saying what is loading; reduced motion replaces spin with a static, still-legible state",
+      "crystal": "Mark, motion and reduced-motion fallback",
+      "product": "When it appears and what it describes",
+      "motion": [
+        "busy"
+      ],
+      "parity": [
+        "mantine:Loader",
+        "mui:CircularProgress",
+        "antd:Spin"
+      ]
+    },
+    {
+      "id": "skeleton",
+      "name": "Skeleton",
+      "anatomy": "Placeholder shapes matching the layout of content that is loading.",
+      "states": [
+        "loading",
+        "resolving"
+      ],
+      "material": "Haze fill with a slow luminance sweep",
+      "geometry": "Matches the real content's radius and rhythm exactly",
+      "semantics": "aria-hidden with a live region announcing loading; must not be read as content",
+      "crystal": "Fill, sweep, reduced-motion fallback, resolve transition",
+      "product": "Which shapes match which content",
+      "motion": [
+        "skeleton-resolve"
+      ],
+      "parity": [
+        "mantine:Skeleton",
+        "mui:Skeleton",
+        "antd:Skeleton"
+      ],
+      "note": "A skeleton must match the real layout. A skeleton that does not resolve into the shape it promised is a worse experience than a spinner."
+    },
+    {
+      "id": "loading-overlay",
+      "name": "Loading overlay",
+      "anatomy": "A scrim over a region with a centred activity mark, blocking interaction.",
+      "states": [
+        "hidden",
+        "visible"
+      ],
+      "material": "Mirage at region scope",
+      "geometry": "Inherits the region's radius",
+      "semantics": "Blocked content is inert; focus does not enter it; the reason is announced",
+      "crystal": "Scrim, mark placement, inert treatment",
+      "product": "When the region blocks and for how long",
+      "parity": [
+        "mantine:LoadingOverlay",
+        "mui:Backdrop",
+        "antd:Spin"
+      ]
+    },
+    {
+      "id": "empty-state",
+      "name": "Empty state",
+      "anatomy": "An explanation of why a region is empty, with the action that would fill it.",
+      "states": [
+        "empty",
+        "no-results",
+        "error",
+        "unauthorised"
+      ],
+      "material": "Haze panel",
+      "geometry": "Content radius; centred within its region",
+      "semantics": "Real text; never an illustration alone. No-results and truly-empty are different states and read differently.",
+      "crystal": "Panel, rhythm and action placement",
+      "product": "The copy and the action",
+      "motion": [
+        "empty-in"
+      ],
+      "parity": [
+        "antd:Empty",
+        "mui:\u2014",
+        "mantine:\u2014"
+      ]
+    },
+    {
+      "id": "result",
+      "name": "Result",
+      "anatomy": "A full-region outcome with a status symbol, title, explanation and next actions.",
+      "states": [
+        "success",
+        "error",
+        "warning",
+        "info",
+        "not-found",
+        "unauthorised"
+      ],
+      "material": "Haze panel with the semantic ink pair on the symbol",
+      "geometry": "Content radius",
+      "semantics": "The outcome is stated in the heading; symbol and colour reinforce it",
+      "crystal": "Panel, symbol treatment, action row",
+      "product": "The outcome, explanation and recovery routes",
+      "parity": [
+        "antd:Result",
+        "mui:\u2014",
+        "mantine:\u2014"
+      ]
+    },
+    {
+      "id": "popconfirm",
+      "name": "Inline confirm",
+      "anatomy": "A small popover asking for confirmation next to the control that triggered it.",
+      "states": [
+        "closed",
+        "open",
+        "pending"
+      ],
+      "material": "Resin popover with Haze reading fill",
+      "geometry": "Content radius; anchored to the trigger",
+      "semantics": "Focus moves into the popover, returns to the trigger on dismiss, and Escape cancels",
+      "crystal": "Popover surface and action row",
+      "product": "The consequence, its wording and whether a full dialog is warranted instead",
+      "motion": [
+        "popover-in",
+        "popover-out"
+      ],
+      "parity": [
+        "antd:Popconfirm",
+        "mui:\u2014",
+        "mantine:\u2014"
+      ],
+      "note": "Consequential and irreversible actions belong in a dialog, not an inline confirm."
+    }
+  ]
+}
