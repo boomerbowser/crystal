@@ -2,7 +2,10 @@
   "$description": "The visual regression frame set. Each entry is one deterministic rendering of the preview. A frame exists because some axis of it has broken before, or because a contract says it must not break; the 'why' field records which. Captures live in validation/captures/<date>-<topic>/ and are compared with tools/compare-captures.py.",
   "$status": "Frame set and comparison tool are complete. The capture driver that walks this file automatically is NOT yet written; frames so far were driven manually through a real browser. See proposals/crystal-2.0-status.md, task 14.",
   "defaults": {
-    "viewport": { "width": 1280, "height": 900 },
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
     "palette": "prism",
     "mode": "light",
     "density": "comfortable",
@@ -12,11 +15,27 @@
     "settleMs": 900
   },
   "axes": {
-    "mode": ["light", "dark"],
-    "effects": ["full", "opaque", "reduced-transparency"],
-    "direction": ["ltr", "rtl"],
-    "forcedColors": ["none", "active"],
-    "density": ["compact", "comfortable"]
+    "mode": [
+      "light",
+      "dark"
+    ],
+    "effects": [
+      "full",
+      "opaque",
+      "reduced-transparency"
+    ],
+    "direction": [
+      "ltr",
+      "rtl"
+    ],
+    "forcedColors": [
+      "none",
+      "active"
+    ],
+    "density": [
+      "compact",
+      "comfortable"
+    ]
   },
   "frames": [
     {
@@ -86,14 +105,17 @@
     },
     {
       "id": "icons",
-      "page": "icons.html",
-      "why": "Icon grid rendering and the 24px/1.8px stroke contract."
+      "page": "docs/icons.html",
+      "why": "Icon grid rendering and the 24px/1.8px stroke contract. The path was wrong until 2026-09-17 and this frame silently guarded a 404 page; the capture driver now refuses a non-OK response."
     },
     {
       "id": "playground-narrow",
       "page": "index.html",
       "anchor": "#playground",
-      "viewport": { "width": 390, "height": 844 },
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
       "why": "Narrow layout must not overflow horizontally and must keep 44px targets."
     }
   ],

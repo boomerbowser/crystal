@@ -133,6 +133,46 @@ node tools/validate-tokens.cjs
 
 Node is used for the same resolver/exporter consumed by the browser; no Node package installation is required. Python requirements support Markdown rendering and HTML link checks. Browser checks are recorded separately as actual UI observations. Rebuilding never reads or writes the Gather project. Keep dependencies and temporary environments out of distributable ZIPs.
 
+## Deploying the preview
+
+The preview is static. Every page, stylesheet, script, icon and shader in this directory is
+committed, so a host only has to serve the directory — there is no build step at deploy time,
+and adding one would only introduce a way for the published site to disagree with the
+validated one.
+
+`vercel.json` at the repository root serves `design-system/` as the site root with no build
+and no install. The constraints worth knowing before changing it:
+
+**Every path is relative and must stay that way.** Nothing references an absolute `/path`, so
+the site works at a domain root, under a subpath, or from a preview URL without alteration.
+An absolute path added anywhere would break the last two.
+
+**Scripts that fetch must resolve against their own URL, not the page's.** `motion-shaders.js`
+derives its base from `document.currentScript.src`. A page-relative `assets/…` only works for
+pages at the site root; from `/docs/materials.html` it resolves to `/docs/assets/…`. Because
+the shader runtime fails quietly by design, that broke the optical layer on ten documentation
+pages with no visible symptom until it was measured.
+
+**Caching assumes filenames are not content-hashed, because they are not.** Assets carry
+`max-age=0, must-revalidate` for browsers and a long `s-maxage` for the edge, which Vercel
+purges on each deployment: the edge serves cached bytes, browsers always revalidate, and a
+redeploy is picked up immediately. Fonts are the exception and are cached immutably for a
+year. Do not mark the stylesheets or scripts `immutable` unless their names gain hashes;
+clients would hold a stale Crystal for a year.
+
+**Shader sources are served as text.** `.frag` and `.glsl` are given an explicit
+`text/plain` content type, which matters because `X-Content-Type-Options: nosniff` is set.
+
+**`cleanUrls` is deliberately off.** Every internal link is written with its `.html`
+extension and `tools/validate.py` checks that link graph. Enabling clean URLs would redirect
+each of those and publish a site whose routes differ from the validated ones.
+
+`.vercelignore` keeps the build and test machinery out of the upload. Only two directories
+are excluded, `tools/` and `src/`, and both were verified to be referenced by no page. The
+link graph resolves with zero errors against the exact tree that gets uploaded; `tests/`,
+`reference/`, `tokens/`, `artifacts/` and the Markdown sources are all linked and are all
+published.
+
 ### User animation speed
 
 `Crystal.normalize({ motionSpeed: 1 })` accepts a factor from 0.25 to 2. Resolved durations divide by that factor and cap each animation at 5000ms; reduced motion produces zero durations. CSS and JSON exports retain this preference. The playground and Motion page share it, including real dialog/backdrop timing. Products should target 0–2 seconds by default and expose reduced motion independently of speed.

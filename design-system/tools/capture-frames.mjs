@@ -108,7 +108,15 @@ for (const frame of frames) {
 
   const url = `${BASE}/${frame.page}${frame.anchor || ''}`;
   try {
-    await page.goto(url, { waitUntil: 'load' });
+    const response = await page.goto(url, { waitUntil: 'load' });
+    /* A 404 still fires 'load', so without this a mistyped path is captured as a
+       baseline and the gate then guards an error page forever. That is not
+       hypothetical: the icons frame pointed at icons.html instead of
+       docs/icons.html and its committed baseline was a screenshot of the
+       server's 404. A capture harness must never bless a page it did not get. */
+    if (!response || !response.ok()) {
+      throw new Error(`HTTP ${response ? response.status() : 'no response'} for ${url}`);
+    }
     await page.evaluate(() => document.fonts.ready);
     if (frame.anchor) {
       /* Re-apply the anchor: the hash is consumed before styles settle. */

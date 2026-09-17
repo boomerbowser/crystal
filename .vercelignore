@@ -1,0 +1,22 @@
+# Everything outside the preview site. outputDirectory already limits what is
+# served; this keeps it out of the upload as well.
+proposals/
+libraries/
+.claude/
+.playwright-mcp/
+.remember/
+
+# Build and test machinery. Verified as referenced by no page: the only link
+# into a non-asset directory is design-system/tests/motion-contracts.html, which
+# is kept.
+design-system/tools/
+design-system/src/
+design-system/package.json
+design-system/package-lock.json
+
+# Never publishable.
+**/node_modules/
+**/.venv/
+**/__pycache__/
+**/*.pyc
+design-system/crystal-design-system.zip

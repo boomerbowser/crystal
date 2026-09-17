@@ -12,8 +12,17 @@
 (function (root) {
   'use strict';
 
-  const MANIFEST_URL = 'assets/shaders/manifest.json';
-  const SHADER_DIR = 'assets/shaders/';
+  /* Resolve from this script's own URL, not the page's.
+     A page-relative 'assets/shaders/...' only works for pages at the site root:
+     from /docs/materials.html it resolves to /docs/assets/shaders/... and 404s.
+     Because the runtime fails quietly by design, that broke the optical layer on
+     ten documentation pages without any visible symptom. Deriving the base from
+     the script location works at any depth and under any origin or subpath,
+     which is also what a static host serving this directory requires. */
+  const SCRIPT_SRC = (document.currentScript && document.currentScript.src) || '';
+  const ASSET_BASE = SCRIPT_SRC ? new URL('.', SCRIPT_SRC).href : 'assets/';
+  const MANIFEST_URL = new URL('shaders/manifest.json', ASSET_BASE).href;
+  const SHADER_DIR = new URL('shaders/', ASSET_BASE).href;
 
   const VERTEX = `#version 300 es
 in vec2 a_position;

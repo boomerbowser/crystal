@@ -37,6 +37,23 @@ These apply to everything, not to one task.
 | R10 | Research Neumorphism to inform how Haze should look and feel — shadows, feathering, light source — especially filling a Resin frame | done — Haze inside Resin now reads as recessed by inverting the light pair; the palette half of neumorphism is deliberately refused. **Outstanding:** no preview composition exercises it, so it is not yet covered by the visual gate. |
 | R11 | **Resin-on-Resin is prohibited.** A layer above a Resin element, such as a label, must be a Haze content fill. Do not adjust Resin to compensate: that would disturb the material spec. | done — 0 violations across 13 pages, enforced by `tools/audit-materials.mjs` |
 | R12 | Keep a running document of these requests | done — this file |
+| R13 | Make the launch specification work flawlessly if the preview is deployed to Vercel from the GitHub repo | done — `vercel.json` + `.vercelignore`, verified against a simulated deploy tree |
+
+## Defects found while doing R13
+
+Two, both pre-existing and both invisible until measured.
+
+**A committed baseline was a screenshot of a 404.** `frames.json` pointed the `icons` frame
+at `icons.html`; the page is `docs/icons.html`. A 404 still fires `load`, so the capture
+driver blessed the error page and the visual gate had been guarding it ever since. The driver
+now refuses any non-OK response — proven with a deliberate bad path — and the frame has been
+recaptured.
+
+**The shader runtime was silently broken on ten pages.** `motion-shaders.js` fetched its
+manifest with a page-relative path, which only resolves for pages at the site root; from
+`/docs/...` it 404'd. The runtime fails quietly by design, so nothing looked wrong. It now
+resolves against its own script URL, which is also what makes the site portable to a preview
+URL or a subpath.
 
 ## Notes on the open items
 
