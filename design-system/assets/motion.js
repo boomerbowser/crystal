@@ -9,6 +9,14 @@
   function stopAll(){for(const element of active.keys())stop(element);}
   function direction(element,requested){const value=directions.includes(requested)?requested:directions[flowIndex++%4];element.dataset.flowDirection=value;element.dataset.flowSoft=String(typeof CSS!=='undefined'&&typeof CSS.registerProperty==='function');return value;}
   const recipes=Object.fromEntries((root.CRYSTAL_MOTION_RECIPES||[]).map(recipe=>[recipe.id,recipe]));
+  /* A fluid is incompressible: a deformation that loses area reads as rubber
+     being crushed, not liquid moving. Both axes are divided by the square root
+     of the area, which conserves volume while preserving the deformation's
+     aspect ratio exactly, so only the physical error is removed. The recipes in
+     motion-recipes.json are corrected the same way and the contract is enforced
+     by tools/validate-motion.cjs. */
+  function squash(sx,sy){const k=Math.sqrt(sx*sy);return `scale(${(sx/k).toFixed(4)},${(sy/k).toFixed(4)})`;}
+
   function duration(base,rate=1){const css=getComputedStyle(document.documentElement);const speed=Number(css.getPropertyValue('--cr-motion-speed'))||1;return Math.min(5000,Math.max(0,base)/(Math.max(.25,Math.min(2,speed))*Math.max(.25,Math.min(2,rate))));}
   function opticalLayers(element,recipe,options,animations){
     if(document.documentElement.dataset.effects==='opaque'||matchMedia('(prefers-reduced-transparency: reduce)').matches||matchMedia('(forced-colors: active)').matches)return;
@@ -20,7 +28,7 @@
       add([{transform:'translate(0,0)',borderRadius:corner},{transform:'translate(-4px,2px)',borderRadius:'35% 65% 42% 58% / 52% 42% 58% 48%',offset:.3},{transform:'translate(3px,-1px)',borderRadius:'58% 42% 62% 38% / 44% 58% 42% 56%',offset:.68},{transform:'translate(0,0)',borderRadius:corner}],'::before');
     }else if(['pressure','tension','coalesce','meniscus'].includes(signature)){
       const amplitude=signature==='coalesce'?1.045:1.02;
-      add([{transform:'scale(1)',borderRadius:corner},{transform:`scale(${amplitude},.94)`,borderRadius:'40% 60% 52% 48% / 55% 43% 57% 45%',offset:.3},{transform:'scale(.985,1.025)',borderRadius:'56% 44% 46% 54% / 42% 58% 42% 58%',offset:.66},{transform:'scale(1)',borderRadius:corner}],'::before');
+      add([{transform:'scale(1)',borderRadius:corner},{transform:squash(amplitude,.94),borderRadius:'40% 60% 52% 48% / 55% 43% 57% 45%',offset:.3},{transform:squash(.985,1.025),borderRadius:'56% 44% 46% 54% / 42% 58% 42% 58%',offset:.66},{transform:'scale(1)',borderRadius:corner}],'::before');
     }
     if(['pressure','tension','coalesce','meniscus','caustic','torsion','iris'].includes(signature)){
       add([{backgroundPosition:'130% 0',opacity:.35},{backgroundPosition:'40% 0',opacity:1,offset:.48},{backgroundPosition:'-45% 0',opacity:.55}],'::after');
@@ -71,7 +79,7 @@
     const frames={
       plastic:[{transform:`translateY(${travel}px)`,opacity:0},{transform:'translateY(0)',opacity:1}],
       frost:[{transform:'perspective(700px) translateZ(0)',opacity:.5},{transform:`perspective(700px) translateZ(${depth}px)`,opacity:1,offset:.66},{transform:'perspective(700px) translateZ(0)',opacity:1}],
-      resin:[{transform:`translateY(${travel}px) scale(.90,1.10) skewX(-3deg)`,opacity:0},{transform:'translateY(-6px) scale(1.045,.965) skewX(1.5deg)',opacity:1,offset:.58},{transform:'translateY(2px) scale(.99,1.015) skewX(-.4deg)',opacity:1,offset:.82},{transform:'translateY(0) scale(1,1) skewX(0deg)',opacity:1}],
+      resin:[{transform:`translateY(${travel}px) ${squash(.90,1.10)} skewX(-3deg)`,opacity:0},{transform:`translateY(-6px) ${squash(1.045,.965)} skewX(1.5deg)`,opacity:1,offset:.58},{transform:`translateY(2px) ${squash(.99,1.015)} skewX(-.4deg)`,opacity:1,offset:.82},{transform:'translateY(0) scale(1,1) skewX(0deg)',opacity:1}],
       dismiss:anchored?[{opacity:1},{opacity:0}]:[{transform:'translateY(0)',opacity:1},{transform:`translateY(${travel}px)`,opacity:0}]
     };
     if(name==='mirage'||name==='mirage-out'){

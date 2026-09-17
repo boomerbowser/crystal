@@ -74,8 +74,8 @@ Material specifications may only improve, never regress. The default position is
 
 | Proposal item | Task | Status |
 | --- | --- | --- |
-| Spring physics as the portable primitive | 17 | not started |
-| Incompressible deformation (17 keyframes across 7 recipes) | 18 | not started |
+| Spring physics as the portable primitive | 17 | **done** — all 54 recipes carry a fitted spring; worst drift from the authored duration is 0.31%. Gate G5 passed. |
+| Incompressible deformation (17 keyframes across 7 recipes) | 18 | **done** — 17 corrections across 9 recipes, worst area error 35.1%, every aspect ratio preserved exactly. |
 | Shader layer with a portable uniform contract | 19 | not started |
 | Motion and shader parity across platforms | 20 | not started |
 

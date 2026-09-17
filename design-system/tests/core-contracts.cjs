@@ -130,6 +130,69 @@ check('a missing or invalid speed falls back to 1x', () => {
   assert.equal(preferences.resolveDuration(120, 'fast', false), 120);
 });
 
+/* ------------------------------------------------------------- springs */
+
+const spring = require('../assets/core/spring.js');
+
+check('a critically damped spring does not overshoot', () => {
+  const critical = { stiffness: 180, damping: 2 * Math.sqrt(180), mass: 1 };
+  assert.equal(spring.peakOvershoot(critical), 0);
+  assert.equal(spring.overshoots(critical), false);
+  assert.equal(spring.dampingRatio(critical).toFixed(6), '1.000000');
+});
+
+check('an underdamped spring overshoots, which is what reads as momentum', () => {
+  const loose = { stiffness: 180, damping: 12, mass: 1 };
+  assert.ok(spring.overshoots(loose));
+  assert.ok(spring.peakOvershoot(loose) > 0.1);
+});
+
+check('critical damping is not NaN', () => {
+  // The underdamped solution divides by omega*sqrt(1-zeta^2), which is zero
+  // here. A single-formula implementation returns NaN at exactly the value a
+  // designer is most likely to choose.
+  const critical = { stiffness: 180, damping: 2 * Math.sqrt(180), mass: 1 };
+  for (const t of [0, 0.05, 0.2, 1]) {
+    assert.ok(Number.isFinite(spring.sampleSpring(critical, t)), `NaN at t=${t}`);
+  }
+});
+
+check('a spring starts at rest and arrives at its target', () => {
+  const s = { stiffness: 180, damping: 22, mass: 1 };
+  assert.equal(spring.sampleSpring(s, 0), 0);
+  assert.ok(Math.abs(1 - spring.sampleSpring(s, 5)) < 0.001);
+});
+
+check('a softer spring takes longer to settle', () => {
+  const stiff = spring.settleTime({ stiffness: 400, damping: 30, mass: 1 });
+  const soft = spring.settleTime({ stiffness: 60, damping: 14, mass: 1 });
+  assert.ok(soft > stiff, `${soft} should exceed ${stiff}`);
+});
+
+check('a heavier mass takes longer to settle', () => {
+  const light = spring.settleTime({ stiffness: 180, damping: 22, mass: 1 });
+  const heavy = spring.settleTime({ stiffness: 180, damping: 22, mass: 3 });
+  assert.ok(heavy > light, `${heavy} should exceed ${light}`);
+});
+
+check('settle time is bounded by the motion ceiling', () => {
+  // A barely-moving spring must still terminate.
+  assert.ok(spring.settleTime({ stiffness: 0.01, damping: 0.001, mass: 50 }) <= spring.MAX_SETTLE_MS);
+});
+
+check('an invalid spring falls back rather than producing NaN', () => {
+  for (const bad of [undefined, {}, { stiffness: 0 }, { stiffness: -5, mass: 0 }, { mass: 'heavy' }]) {
+    assert.ok(Number.isFinite(spring.settleTime(bad)), `NaN for ${JSON.stringify(bad)}`);
+  }
+});
+
+check('the platform mapping round-trips the damping ratio', () => {
+  const s = { stiffness: 180, damping: 22, mass: 1 };
+  const platform = spring.toPlatform(s);
+  assert.equal(platform.compose.dampingRatio, platform.swiftUI.dampingFraction);
+  assert.ok(Math.abs(platform.compose.dampingRatio - spring.dampingRatio(s)) < 1e-4);
+});
+
 /* -------------------------------------------------------------- report */
 
 const failures = results.filter((r) => r.status === 'fail');

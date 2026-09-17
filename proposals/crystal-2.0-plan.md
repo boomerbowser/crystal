@@ -246,7 +246,7 @@ Parity is measured against the most fully-featured libraries in use — Mantine,
 **Files:** `tokens/motion-recipes.json`, `tools/validate-motion.cjs`, `assets/motion.js`
 
 - [ ] **Step 1** — Write the failing validator: every `scale(sx, sy)` in a recipe keyframe must satisfy `|sx·sy − 1| ≤ 0.005`. Expect 17 failures across 7 recipes.
-- [ ] **Step 2** — Correct each one by keeping the dominant axis and deriving the other as its reciprocal, so the intended amplitude is preserved and only the compressibility error is removed.
+- [ ] **Step 2** — Correct each one by dividing **both** axes by the square root of the area. This was changed during implementation: keeping the dominant axis and deriving the other also conserves volume, but it changes the deformation's aspect ratio, which alters the designed look rather than only the physics. Normalising by the square root conserves volume *and* preserves aspect ratio exactly, so the correction removes the compressibility error and nothing else. The tool asserts no aspect ratio moved.
 - [ ] **Step 3** — Apply the same rule to the inline deformations in `assets/motion.js` (the Resin preset and the `::before` morphs).
 - [ ] **Step 4** — Re-bless the affected baselines, recording in the capture README that the change is a deliberate material improvement with the before and after areas stated.
 
