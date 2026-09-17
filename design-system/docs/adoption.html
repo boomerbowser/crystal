@@ -139,6 +139,19 @@ document.documentElement.style.colorScheme = 'dark';
 <h2 id="product-customization-boundaries">Product customization boundaries</h2>
 <p>Products may choose a palette, layout, iconography, density and supported material intensity. They should retain semantic state meanings, reading/focus requirements, material hierarchy and recognizable geometry. A materially different behavior or palette needs its own acceptance evidence; a new theme cannot silently change danger/success semantics.</p>
 <p>Adopt one version per product, maintain a changelog for actual changes, and review a shared visual gallery before promoting a breaking token/behavior change. Deprecate renamed tokens before removal. Treat changes to accessibility, status meanings, token contracts and exported file formats as compatibility decisions.</p>
+<h2 id="versioning-and-the-public-contract">Versioning and the public contract</h2>
+<p>Crystal follows semantic versioning against a stated public contract. These are the things a version number promises:</p>
+<ul>
+<li>Token names in the DTCG source and the generated <code>--cr-*</code> custom properties</li>
+<li>Material primitive class names and the cascade layer names</li>
+<li>Component contracts in the catalogue: anatomy, states, semantics and the split between what Crystal supplies and what the product owns</li>
+<li>The headless core's function signatures and return values</li>
+<li>Exported file formats for CSS, JSON, TypeScript, Swift and Kotlin</li>
+<li>Icon identifiers in the manifest</li>
+</ul>
+<p>Anything else — internal selectors, generated file ordering, the preview site — may change in a patch release.</p>
+<p><strong>Deprecate before removing.</strong> A deprecated name keeps working for at least one minor version, and the version that will remove it is named at the moment it is deprecated. Removal happens only in a major release. The legacy material vocabulary — <code>--cr-acrylic-*</code>, <code>--cr-glass-*</code>, <code>--cr-mica-*</code> and the <code>.cr-acrylic</code> and <code>.cr-glass</code> classes — is deprecated in 2.0.0 and will be removed in 3.0.0; they currently ship as aliases of the Frost, Resin and Plastic tokens.</p>
+<p>Crystal publishes privately to GitHub Packages under the <code>@meridian</code> scope. Products pin a version, which is what makes one-version-per-product and a CI parity check enforceable. The packaged ZIP remains available as a release asset for consumers that do not use a package manager.</p>
 <h2 id="rebuild-and-validate">Rebuild and validate</h2>
 <p>Use an isolated environment for documentation tools, then run from the package root:</p>
 <pre><code class="language-sh">python3 -m venv .venv

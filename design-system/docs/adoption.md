@@ -100,6 +100,23 @@ Products may choose a palette, layout, iconography, density and supported materi
 
 Adopt one version per product, maintain a changelog for actual changes, and review a shared visual gallery before promoting a breaking token/behavior change. Deprecate renamed tokens before removal. Treat changes to accessibility, status meanings, token contracts and exported file formats as compatibility decisions.
 
+## Versioning and the public contract
+
+Crystal follows semantic versioning against a stated public contract. These are the things a version number promises:
+
+- Token names in the DTCG source and the generated `--cr-*` custom properties
+- Material primitive class names and the cascade layer names
+- Component contracts in the catalogue: anatomy, states, semantics and the split between what Crystal supplies and what the product owns
+- The headless core's function signatures and return values
+- Exported file formats for CSS, JSON, TypeScript, Swift and Kotlin
+- Icon identifiers in the manifest
+
+Anything else — internal selectors, generated file ordering, the preview site — may change in a patch release.
+
+**Deprecate before removing.** A deprecated name keeps working for at least one minor version, and the version that will remove it is named at the moment it is deprecated. Removal happens only in a major release. The legacy material vocabulary — `--cr-acrylic-*`, `--cr-glass-*`, `--cr-mica-*` and the `.cr-acrylic` and `.cr-glass` classes — is deprecated in 2.0.0 and will be removed in 3.0.0; they currently ship as aliases of the Frost, Resin and Plastic tokens.
+
+Crystal publishes privately to GitHub Packages under the `@meridian` scope. Products pin a version, which is what makes one-version-per-product and a CI parity check enforceable. The packaged ZIP remains available as a release asset for consumers that do not use a package manager.
+
 ## Rebuild and validate
 
 Use an isolated environment for documentation tools, then run from the package root:

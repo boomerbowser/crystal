@@ -172,6 +172,27 @@ function migrate() {
   set(out.semantic, 'typography.readingSize', leaf('dimension', dim(flat.typography.readingSize)));
   set(out.semantic, 'typography.readingLeading', leaf('dimension', dim(flat.typography.readingLeading)));
 
+  /* The material vocabulary was renamed Mica -> Plastic, Acrylic -> Frost and
+     Glass -> Resin. Both names still ship so existing adopters keep working;
+     the removal version is named here, at the moment of deprecation. */
+  out.$deprecated = {
+    removedIn: '3.0.0',
+    reason: 'Superseded by the named material vocabulary. Two names for one concept is a documentation and tooling problem that multiplies across platform libraries.',
+    tokens: {
+      '--cr-acrylic-fill': '--cr-frost-fill',
+      '--cr-acrylic-blur': '--cr-frost-blur',
+      '--cr-acrylic-saturation': '--cr-frost-saturation',
+      '--cr-glass-fill': '--cr-resin-fill',
+      '--cr-glass-blur': '--cr-resin-blur',
+      '--cr-glass-saturation': '--cr-resin-saturation',
+      '--cr-mica-inactive': '--cr-plastic-inactive',
+      '--cr-content-fill': '--cr-haze-fill',
+      '--cr-content-feather': '--cr-haze-feather',
+      '--cr-label-fill': '--cr-stone-fill',
+    },
+    classes: { '.cr-acrylic': '.cr-frost', '.cr-glass': '.cr-resin' },
+  };
+
   /* component: bindings that libraries implement against */
   set(out.component, 'action.radius', leaf('dimension', '999px',
     'Action controls are pill-shaped, independent of the content radius'));

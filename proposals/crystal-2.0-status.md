@@ -29,7 +29,7 @@ Material specifications may only improve, never regress. The default position is
 | W3C DTCG format as the authoring source | 1 | done |
 | Generated CSS from the token source | 2 | done — gate G1 passed, theme CSS byte-identical |
 | TypeScript, Swift, Kotlin exports | 3 | done — 94 tokens, collision-guarded |
-| Retire the duplicate material vocabulary | 13 | not started |
+| Retire the duplicate material vocabulary | 13 | done — deprecated with removal named for 3.0.0; both vocabularies still ship |
 
 ### B. Distribution and specificity
 
@@ -56,7 +56,7 @@ Material specifications may only improve, never regress. The default position is
 
 | Proposal item | Task | Status |
 | --- | --- | --- |
-| Written parity contract | 11 | not started |
+| Written parity contract | 11 | done — libraries/CONTRACT.md |
 | Machine-readable parity manifest | 10, 11 | done — generated from the catalogue, 119 entries x 4 platforms |
 
 ### E. Verification
@@ -72,9 +72,9 @@ Material specifications may only improve, never regress. The default position is
 
 | Proposal item | Task | Status |
 | --- | --- | --- |
-| Semantic versioning against a stated public contract | 12 | not started |
-| Changelog | 12 | not started |
-| Deprecate before removal | 12, 13 | not started |
+| Semantic versioning against a stated public contract | 12 | done — public contract enumerated in the adoption chapter |
+| Changelog | 12 | done — CHANGELOG.md, Keep a Changelog format |
+| Deprecate before removal | 12, 13 | done — rule documented; the removal version is named at deprecation |
 | ZIP as a release asset | — | done — published as the v1.0.1 asset |
 
 ## Gates

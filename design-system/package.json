@@ -1,12 +1,13 @@
 {
-  "name": "crystal-design-system",
-  "version": "1.0.0",
-  "description": "Crystal design system, motion runtime, interactive component studies and specifications.",
+  "name": "@meridian/crystal",
+  "version": "2.0.0-alpha.1",
+  "description": "Crystal design system: tokens, material primitives, headless core, icons and specifications.",
   "scripts": {
     "build:motion": "node tools/build-motion.cjs",
     "test": "node tools/build-tokens.cjs && node tools/build-catalogue.cjs && node tests/core-contracts.cjs && node tools/validate-tokens.cjs && node tools/validate-motion.cjs",
     "build:tokens": "node tools/build-tokens.cjs",
-    "build:catalogue": "node tools/build-catalogue.cjs"
+    "build:catalogue": "node tools/build-catalogue.cjs",
+    "build": "node tools/build-tokens.cjs && node tools/build-catalogue.cjs && node tools/build-icons.cjs"
   },
   "keywords": [],
   "type": "commonjs",
@@ -18,5 +19,31 @@
     "esbuild": "0.28.2",
     "lucide-static": "^1.47.0"
   },
-  "private": true
+  "private": true,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boomerbowser/crystal.git",
+    "directory": "design-system"
+  },
+  "files": [
+    "assets/",
+    "tokens/",
+    "exports/",
+    "docs/",
+    "reference/licenses/",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./exports/crystal-tokens.ts",
+    "./tokens": "./tokens/crystal.tokens.json",
+    "./css": "./assets/crystal.css",
+    "./theme": "./assets/crystal-theme.css",
+    "./controls": "./assets/controls.css",
+    "./core": "./assets/core/state.js",
+    "./icons": "./assets/icons/manifest.json"
+  }
 }

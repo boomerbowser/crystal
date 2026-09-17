@@ -1604,5 +1604,25 @@
         "$value": "24px"
       }
     }
+  },
+  "$deprecated": {
+    "removedIn": "3.0.0",
+    "reason": "Superseded by the named material vocabulary. Two names for one concept is a documentation and tooling problem that multiplies across platform libraries.",
+    "tokens": {
+      "--cr-acrylic-fill": "--cr-frost-fill",
+      "--cr-acrylic-blur": "--cr-frost-blur",
+      "--cr-acrylic-saturation": "--cr-frost-saturation",
+      "--cr-glass-fill": "--cr-resin-fill",
+      "--cr-glass-blur": "--cr-resin-blur",
+      "--cr-glass-saturation": "--cr-resin-saturation",
+      "--cr-mica-inactive": "--cr-plastic-inactive",
+      "--cr-content-fill": "--cr-haze-fill",
+      "--cr-content-feather": "--cr-haze-feather",
+      "--cr-label-fill": "--cr-stone-fill"
+    },
+    "classes": {
+      ".cr-acrylic": ".cr-frost",
+      ".cr-glass": ".cr-resin"
+    }
   }
 }
