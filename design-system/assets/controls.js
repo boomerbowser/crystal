@@ -1,23 +1,71 @@
-/* Preserve native fields and labels; add only a Resin material shell. */
-(function(){
- const selector='select,textarea,input:not([type]),input[type=text],input[type=search],input[type=email],input[type=password],input[type=number],input[type=url]';
- function badge(parent,kind){const existing=parent.querySelector(':scope > .cr-indicator');if(existing){existing.dataset.kind=kind;return;}const indicator=document.createElement('span');indicator.className='cr-indicator';indicator.dataset.kind=kind;indicator.setAttribute('aria-hidden','true');parent.append(indicator);}
- function enhance(scope){
-  for(const link of scope.querySelectorAll('nav a'))link.classList.add('cr-control');
-  for(const field of scope.querySelectorAll(selector)){if(!field.parentElement.classList.contains('cr-field-shell')){const shell=document.createElement('span');shell.className='cr-field-shell';field.before(shell);shell.append(field);}badge(field.parentElement,'field');}
-  /* Selection, current location and activity are distinct marks. A check is never
-     one of them: it belongs to validation and information display only. */
-  for(const control of scope.querySelectorAll('button[aria-pressed],button[aria-selected],button[aria-checked],a[aria-current],button[aria-busy],[role=tab]')){
-   const kind=control.getAttribute('aria-busy')==='true'?'busy':(control.hasAttribute('aria-current')?'current':'selection');
-   badge(control,kind);
+/* Crystal controls: state synchronisation only.
+ *
+ * This script creates no elements and observes no mutations. Field shells and
+ * indicators are authored in markup, or emitted by whichever renderer owns the
+ * control. All this does is read state and set attributes on elements that
+ * already exist.
+ *
+ * That distinction is the whole point. A script that rewrites other people's
+ * DOM cannot coexist with React, SwiftUI or Compose, which own their own trees;
+ * one that only reads state and sets attributes can be replaced wholesale by a
+ * framework binding to the same headless core.
+ */
+(function () {
+  'use strict';
+
+  const core = (globalThis.CrystalCore || {});
+  const state = core.state;
+
+  /* Without the core there is nothing to derive from. Fail quietly rather than
+     half-applying: the CSS already handles the common cases on its own. */
+  if (!state) return;
+
+  const flagsOf = (el) => ({
+    pressed: el.getAttribute('aria-pressed') === 'true',
+    selected: el.getAttribute('aria-selected') === 'true',
+    checked: el.getAttribute('aria-checked') === 'true',
+    current: el.getAttribute('aria-current'),
+    busy: el.getAttribute('aria-busy') === 'true',
+  });
+
+  /* Most state changes are handled by CSS alone, because the selectors key off
+     the aria attributes directly. This exists for the case CSS cannot express:
+     a control whose indicator kind changes, such as one that becomes busy while
+     it is also selected. */
+  function syncIndicators(root) {
+    for (const mark of root.querySelectorAll('.cr-indicator[data-kind]')) {
+      const kind = mark.dataset.kind;
+      if (kind === 'field') continue;
+      const host = mark.parentElement;
+      if (!host) continue;
+      const resolved = state.resolveIndicator(flagsOf(host));
+      if (resolved && resolved !== kind) mark.dataset.kind = resolved;
+    }
   }
- }
- function updateRange(field){const min=Number(field.min||0),max=Number(field.max||100);const progress=max>min?Math.max(0,Math.min(100,(Number(field.value)-min)/(max-min)*100)):0;field.style.setProperty('--cr-range-progress',progress+'%');}
- function syncRanges(){document.querySelectorAll('input[type=range]').forEach(updateRange);}
- document.addEventListener('input',event=>{if(event.target.matches('input[type=range]'))updateRange(event.target);});
- document.addEventListener('change',syncRanges);
- document.addEventListener('reset',()=>requestAnimationFrame(syncRanges));
- enhance(document);syncRanges();
- const observer=new MutationObserver(records=>{if(records.some(r=>r.type==='attributes'||r.addedNodes.length)){enhance(document);syncRanges();}});observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['aria-pressed','aria-selected','aria-checked','aria-current','aria-busy']});
- window.addEventListener('pagehide',()=>observer.disconnect(),{once:true});
+
+  function syncRange(field) {
+    field.style.setProperty('--cr-range-progress', state.rangeProgress({
+      value: field.value, min: field.min || 0, max: field.max || 100,
+    }) + '%');
+  }
+
+  function syncAllRanges(root) {
+    for (const field of root.querySelectorAll('input[type=range]')) syncRange(field);
+  }
+
+  document.addEventListener('input', (event) => {
+    if (event.target.matches('input[type=range]')) syncRange(event.target);
+  });
+  document.addEventListener('change', () => {
+    syncAllRanges(document);
+    syncIndicators(document);
+  });
+  document.addEventListener('click', () => {
+    /* After the handler that changed the state has run. */
+    requestAnimationFrame(() => syncIndicators(document));
+  });
+  document.addEventListener('reset', () => requestAnimationFrame(() => syncAllRanges(document)));
+
+  syncAllRanges(document);
+  syncIndicators(document);
 })();

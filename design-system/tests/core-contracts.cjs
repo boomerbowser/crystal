@@ -4,8 +4,8 @@
  * design system promises has changed — check the specification before the code.
  */
 const assert = require('node:assert/strict');
-const state = require('../src/core/state.js');
-const preferences = require('../src/core/preferences.js');
+const state = require('../assets/core/state.js');
+const preferences = require('../assets/core/preferences.js');
 
 const results = [];
 function check(name, fn) {

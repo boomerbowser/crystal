@@ -39,7 +39,7 @@ Material specifications may only improve, never regress. The default position is
 | Remove the `:root body` specificity prefix | 4 | done — 144 removed |
 | Headless core: state derivation | 5 | done — 18 contract tests |
 | Headless core: preferences and motion | 6 | done |
-| Declarative controls, no DOM mutation | 7 | not started — gate G3 |
+| Declarative controls, no DOM mutation | 7 | done — gate G3 passed; zero elements created, zero observers |
 
 ### C. Component parity
 
@@ -83,11 +83,11 @@ Material specifications may only improve, never regress. The default position is
 | --- | --- | --- |
 | G1 | Generated theme CSS byte-identical | passed |
 | G2 | Preview renders identically under cascade layers | passed — caught and fixed one real regression |
-| G3 | Preview runs on the headless core with zero DOM mutation | not reached |
+| G3 | Preview runs on the headless core with zero DOM mutation | passed |
 | G4 | Icon set vendored, licensed, normalised, existing symbols intact | passed |
 
 ## Notes carried forward
 
 - The regression capture from gate G2 is kept deliberately as evidence: it is the clearest illustration that unlayered CSS beats every layer, which is the behaviour products rely on and the behaviour a page's own scaffolding must opt out of.
-- `controls.js` mutating the DOM remains the blocking item for any framework library. Nothing downstream of gate G3 should be considered settled until it passes.
+- The DOM-mutation blocker is cleared. `controls.js` now only reads state and sets attributes on elements that already exist, so a framework binding can replace it wholesale against the same headless core.
 - The v1.0.1 release is the last 1.x artifact. 2.0 breaks the legacy vocabulary and the specificity contract.
