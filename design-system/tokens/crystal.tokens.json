@@ -3,7 +3,7 @@
   "$description": "Crystal design tokens, W3C DTCG format. Three tiers: primitive holds raw values, semantic names roles and aliases primitives, component binds semantics to control surfaces. Derived values (elevation-scaled shadows, rgba composites, scaled motion) are computed by the resolver, not stored here.",
   "$meta": {
     "system": "Crystal",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "basis": "Gather crystal-03-balanced; independent reusable extension",
     "generatedFrom": "tokens/crystal.json"
   },
@@ -761,7 +761,7 @@
       },
       "harbor": {
         "$name": "Harbor",
-        "$description": "Gather’s original palette, mapped to shared roles.",
+        "$description": "Gather\u2019s original palette, mapped to shared roles.",
         "seed": {
           "$type": "color",
           "$value": "#4669B2"
@@ -1216,7 +1216,7 @@
           },
           "symbol": {
             "$type": "string",
-            "$value": "✓",
+            "$value": "\u2713",
             "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
           },
           "label": {
@@ -1235,7 +1235,7 @@
           },
           "symbol": {
             "$type": "string",
-            "$value": "△",
+            "$value": "\u25b3",
             "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
           },
           "label": {
@@ -1294,7 +1294,7 @@
           },
           "symbol": {
             "$type": "string",
-            "$value": "✓",
+            "$value": "\u2713",
             "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
           },
           "label": {
@@ -1313,7 +1313,7 @@
           },
           "symbol": {
             "$type": "string",
-            "$value": "△",
+            "$value": "\u25b3",
             "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
           },
           "label": {

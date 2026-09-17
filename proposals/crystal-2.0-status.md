@@ -79,6 +79,14 @@ Material specifications may only improve, never regress. The default position is
 | Shader layer with a portable uniform contract | 19 | not started |
 | Motion and shader parity across platforms | 20 | not started |
 
+### H. Material law (added after review, 2026-09-17)
+
+| Proposal item | Task | Status |
+| --- | --- | --- |
+| Resin may never contain Resin; upper layers are Haze content fills | — | **done** — indicator converted from Resin to Haze, structural rule added, 0 violations across 13 pages |
+| Automated material-stacking audit | — | **done** — `tools/audit-materials.mjs`, classifies by blur recipe so the intended Plastic → Frost → Resin hierarchy is not falsely reported |
+| Haze informed by neumorphic shadow, feather and light-source practice | — | in progress |
+
 ### F. Governance
 
 | Proposal item | Task | Status |

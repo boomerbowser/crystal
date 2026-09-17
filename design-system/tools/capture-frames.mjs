@@ -30,6 +30,12 @@ const arg = (name, fallback) => {
 const BASE = arg('base', 'http://127.0.0.1:4321');
 const OUT = resolve(ROOT, arg('out', 'validation/captures/latest'));
 const ONLY = arg('only', null);
+/* Gate G6: prove the optical shader layer is an enhancement by capturing the
+   whole frame set with WebGL2 made unavailable. The result must match the
+   committed baselines exactly, which is only meaningful if it runs through this
+   same capture path — a bespoke script would differ from the baselines for
+   reasons that have nothing to do with shaders. */
+const NO_WEBGL = process.argv.includes('--no-webgl');
 
 const set = JSON.parse(readFileSync(resolve(ROOT, 'validation/frames.json'), 'utf8'));
 const frames = set.frames
@@ -79,6 +85,16 @@ for (const frame of frames) {
     [STORAGE_KEY, preferencesFor(frame), frame.direction],
   );
 
+  if (NO_WEBGL) {
+    await context.addInitScript(() => {
+      const original = HTMLCanvasElement.prototype.getContext;
+      HTMLCanvasElement.prototype.getContext = function (type, ...rest) {
+        if (String(type).startsWith('webgl')) return null;
+        return original.call(this, type, ...rest);
+      };
+    });
+  }
+
   const page = await context.newPage();
 
   /* prefers-reduced-transparency has no emulateMedia option, so ask the
@@ -117,6 +133,7 @@ await browser.close();
 
 console.log(JSON.stringify({
   base: BASE,
+  webgl2: NO_WEBGL ? 'blocked' : 'available',
   out: OUT.replace(`${ROOT}/`, ''),
   captured: captured.length,
   frames: captured,

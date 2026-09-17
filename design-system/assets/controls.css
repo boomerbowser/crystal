@@ -128,8 +128,44 @@ span.cr-field-shell:focus-within,
 :is(.cr-dock,.segmented,.suite-tabs) button:focus-visible{outline:2px solid var(--cr-focus-core);outline-offset:3px;box-shadow:inset 0 2px 1px var(--cr-rim),var(--cr-focus-ring);}
 span.cr-field-shell :is(input,select,textarea):focus-visible{outline:0;box-shadow:none;}
 /* Each indicator is a small Resin shell with its own Haze reading fill. */
-.cr-indicator{position:absolute;isolation:isolate;display:grid;place-items:center;inset-block-start:-4px;inset-inline-end:-3px;width:20px;height:20px;min-width:20px;border-radius:50%;border:1px solid var(--cr-rim);background:var(--cr-resin-fill);backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));box-shadow:inset 0 1px 1px var(--cr-rim),0 2px 4px var(--cr-control-edge),0 4px 8px #080b2426;color:var(--cr-text);font:800 12px/1 var(--cr-font);z-index:2;pointer-events:none;text-decoration:none;text-shadow:none;}
-.cr-indicator::before{content:'';position:absolute;inset:3px;z-index:-1;border-radius:50%;background:var(--cr-haze-fill);filter:blur(1px);}
+/* Resin never contains Resin.
+   A control dropped into a Resin surface — a button in a menu, a popover or a
+   toast — would otherwise bring its own 20px backdrop blur and read through the
+   surface's blur, which is the stacking that makes translucent interfaces
+   illegible. Any such control becomes a Haze content fill instead: an 80% fill
+   with a 1.95px feather, crisp text. This is a structural rule rather than four
+   patched instances, so the law holds for markup nobody has written yet.
+   Deliberately not solved by softening Resin, which would disturb a material
+   specification. Verified by tools/audit-materials.mjs. */
+:is(.cr-resin,.cr-glass,.cr-resin-haze) :is(button,a.cr-button,.cr-button,.cr-control){
+  backdrop-filter:none;-webkit-backdrop-filter:none;
+  /* backdrop-filter silently creates a stacking context, and these controls
+     paint their fill on a ::before at z-index -1 which was relying on it. Drop
+     the filter alone and that pseudo-element escapes to the nearest ancestor
+     context and paints behind the button's own background instead of above it —
+     which erased the selected dock label completely. Isolation restores the
+     containment without restoring the second blur. */
+  isolation:isolate;
+}
+/* Only the backdrop filter is removed, and deliberately no background is
+   imposed. These controls already carry their fill on a ::before that paints
+   beneath the element's own background box, so assigning a Haze fill here
+   covered it: the selected dock item went to white-on-white and its label
+   disappeared entirely. Removing the second blur is the whole of the fix; the
+   Haze fill these controls need is already theirs. */
+
+/* An indicator is a Haze content fill, never Resin.
+   Indicators sit on controls, and controls are frequently Resin, so giving the
+   indicator its own Resin recipe stacked translucency on translucency: a 20px
+   backdrop blur reading through another 20px backdrop blur. That is the exact
+   failure translucent interfaces are criticised for, and the fix is always to
+   change the upper layer rather than to weaken Resin, which would disturb a
+   material specification. Haze exists for precisely this job — a readable 80%
+   fill with a 1.95px feather on the background layer only, leaving the glyph
+   crisp. Enforced by tools/audit-materials.cjs. */
+.cr-indicator{position:absolute;isolation:isolate;display:grid;place-items:center;inset-block-start:-4px;inset-inline-end:-3px;width:20px;height:20px;min-width:20px;border-radius:50%;border:1px solid var(--cr-rim);background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 2px 4px var(--cr-control-edge),0 4px 8px #080b2426;color:var(--cr-text);font:800 12px/1 var(--cr-font);z-index:2;pointer-events:none;text-decoration:none;text-shadow:none;}
+/* The feathered background layer of the Haze fill. The glyph above it stays crisp. */
+.cr-indicator::before{content:'';position:absolute;inset:1px;z-index:-1;border-radius:50%;background:var(--cr-haze-fill);filter:blur(var(--cr-haze-feather));}
 /* A check mark means validated or informational, never "this one is selected".
    Selection is a leading rail plus label weight; location is a dot; activity an ellipsis. */
 .cr-indicator:is([data-kind=selection],[data-kind=current],[data-kind=busy]){display:none;}

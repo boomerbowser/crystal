@@ -9,7 +9,8 @@
     "build:catalogue": "node tools/build-catalogue.cjs",
     "build": "node tools/build-tokens.cjs && node tools/build-catalogue.cjs && node tools/build-icons.cjs",
     "capture:frames": "node tools/capture-frames.mjs",
-    "verify:visual": "node tools/verify-frames.mjs"
+    "verify:visual": "node tools/verify-frames.mjs",
+    "audit:materials": "node tools/audit-materials.mjs"
   },
   "keywords": [],
   "type": "commonjs",

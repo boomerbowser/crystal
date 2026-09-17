@@ -1,6 +1,6 @@
 # Crystal: a shared visual language
 
-Crystal 1.0 is an independent, reusable extension of Gather’s approved `crystal-03-balanced` design. It retains the material hierarchy and recognizable silhouettes while allowing stronger product color identities. Gather’s original proposal and application are not modified by this system.
+Crystal 2.0 is an independent, reusable extension of Gather’s approved `crystal-03-balanced` design. It retains the material hierarchy and recognizable silhouettes while allowing stronger product color identities. Gather’s original proposal and application are not modified by this system.
 
 ## Governing hierarchy
 

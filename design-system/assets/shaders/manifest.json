@@ -1,0 +1,127 @@
+{
+  "$description": "Crystal's optical shader layer. The uniform contract below is the portable artefact; the GLSL files are one implementation of it. A platform library honours the contract, not the source: GLSL, Metal Shading Language and AGSL are close enough that the port is mechanical, but a platform is free to reach the specified appearance its own way.",
+  "version": "2.0.0",
+  "principle": "A shader is an enhancement of an already-correct surface, never a requirement for it. Every material renders completely without one. Nothing here may alter a resting appearance: the shaders paint only while motion is in flight, and gate G6 proves the preview is pixel-identical when WebGL2 is unavailable.",
+  "compositing": {
+    "element": "A transparent canvas positioned over the surface, never in the content flow.",
+    "blend": "mix-blend-mode as declared per shader; the canvas carries no opaque pixels.",
+    "note": "A web shader cannot sample the page behind it, so refraction is rendered as the lighting response to a computed surface normal rather than by displacing a backdrop. The eye reads normals and specular as refraction, and the technique degrades to nothing rather than to something wrong."
+  },
+  "uniforms": {
+    "u_time": {
+      "type": "float",
+      "unit": "seconds",
+      "description": "Seconds since the effect began, already divided by the user motion-speed factor."
+    },
+    "u_resolution": {
+      "type": "vec2",
+      "unit": "device pixels",
+      "description": "Canvas size, for aspect-correct sampling."
+    },
+    "u_progress": {
+      "type": "float",
+      "range": [
+        0,
+        1
+      ],
+      "description": "Spring displacement from the headless core, not a linear ramp. This is what ties the optical layer to the same physics as the geometry."
+    },
+    "u_pressure": {
+      "type": "float",
+      "range": [
+        0,
+        1
+      ],
+      "description": "Interaction intensity. 0 at rest; 1 at full press or drag."
+    },
+    "u_contact": {
+      "type": "vec2",
+      "range": [
+        0,
+        1
+      ],
+      "description": "Normalised contact point, the origin of a disturbance. Defaults to the centre."
+    },
+    "u_tint": {
+      "type": "vec3",
+      "description": "Resolved material tint in linear sRGB, taken from the palette so shaders never introduce colour of their own."
+    },
+    "u_intensity": {
+      "type": "float",
+      "range": [
+        0,
+        1
+      ],
+      "description": "Global attenuation. Products lower it; reduced transparency drives it to 0."
+    }
+  },
+  "shaders": [
+    {
+      "id": "resin-refraction",
+      "file": "resin-refraction.frag",
+      "material": "resin",
+      "signatures": [
+        "refraction",
+        "meniscus",
+        "tension"
+      ],
+      "blend": "hard-light",
+      "claim": "Resin bends and disperses light at its rim. A signed-distance field gives the lens profile; the lighting response is a specular band that tracks the direction of travel, a defined bright edge, and chromatic separation where the lens is steepest. The interior stays clear so content remains readable through the material.",
+      "degradesTo": "The existing CSS travelling-light sweep.",
+      "blendNote": "hard-light, and the choice is forced rather than aesthetic. On a white surface both screen and overlay are mathematically no-ops: overlay resolves to 1 - 2(1-b)(1-s), which is 1 for every source colour when the backdrop is white, so the layer was being discarded by the compositor while painting correctly. hard-light swaps the operands, letting the shader's own luminance decide: below mid-grey it multiplies and darkens, above it screens and brightens. That matches what a curved transparent surface does \u2014 it darkens at steep angles and highlights where it catches the key light \u2014 and it reads on light and dark backdrops alike. The shader's output is centred on 0.5 for exactly this reason."
+    },
+    {
+      "id": "resin-caustics",
+      "file": "resin-caustics.frag",
+      "material": "resin",
+      "signatures": [
+        "caustic"
+      ],
+      "blend": "screen",
+      "claim": "Light focused by a curved surface concentrates into bright curves. The curvature here is at the rim, so the caustics fall as sparse arcs along the boundary. Read from the same height field as the refraction shader, so the two agree by construction rather than by tuning.",
+      "degradesTo": "A static highlight at the resting opacity.",
+      "blendNote": "Screen is kept: a caustic is added light, and adding light to an already-white surface is correctly invisible. Caustics are specified for Resin over a coloured backdrop, which is where they occur."
+    },
+    {
+      "id": "frost-displacement",
+      "file": "frost-displacement.frag",
+      "material": "frost",
+      "signatures": [
+        "feather"
+      ],
+      "blend": "hard-light",
+      "claim": "Frost diffuses light through a grained solid. Modulates the existing diffusion rather than replacing it; the 40px blur and grain remain the material, and this adds only slow local variation.",
+      "degradesTo": "The existing backdrop-filter blur and grain, unchanged.",
+      "blendNote": "hard-light for the same reason as resin-refraction; the output is centred on 0.5 so the mean brightness of the surface is unchanged."
+    },
+    {
+      "id": "mirage-flow",
+      "file": "mirage-flow.frag",
+      "material": "mirage",
+      "signatures": [
+        "iris"
+      ],
+      "blend": "screen",
+      "claim": "Mirage washes across a scene as a curved front. A flow field advects the front so its edge is organic rather than a geometric ellipse.",
+      "degradesTo": "The existing clip-path ellipse reveal."
+    }
+  ],
+  "requirements": {
+    "attach": "WebGL2 available, prefers-reduced-motion not set, prefers-reduced-transparency not set, element intersecting the viewport, and the document visible.",
+    "detach": "Immediately on any of those becoming false, on animation end, and on page hide. A shader never runs against a hidden or static surface.",
+    "budget": "One canvas per animating surface, released on detach. Shaders do not run at rest, so a still page costs nothing."
+  },
+  "platformMapping": {
+    "web": "GLSL ES 3.00 fragment shaders on WebGL2, as authored here.",
+    "apple": "Metal Shading Language. Port mechanically; uniforms become a single constant buffer in the declared order.",
+    "android": "AGSL via RuntimeShader. Uniforms map one to one; AGSL is GLSL-derived and the bodies transfer with signature changes only.",
+    "note": "A platform that cannot meet the contract must degrade as declared per shader rather than approximate it differently, because a divergent approximation is worse for parity than an honest absence."
+  },
+  "opticalModel": {
+    "basis": "Edge lensing, not surface waves.",
+    "rationale": "Refraction is concentrated in a band just inside the boundary and falls off steeply, leaving the centre of a surface optically clear. This follows how contemporary glass interfaces behave: the interior is shrunk and the edges stretched outward, which is a displacement concentrated at the rim rather than a wave crossing the surface. A defined, light-catching edge is what separates glass from frosted plastic.",
+    "rejected": "An earlier implementation radiated concentric ripples from the contact point. That is what water does when something is dropped into it, and it read as a pond rather than as a solid transparent material. Meridian rejected it on sight and they were right: glass does not oscillate, it bends light where it curves.",
+    "specular": "The highlight tracks the direction of travel rather than sitting still. On a handset the reference for this is the gyroscope; on the web it is the motion's own direction, taken from the contact point. A highlight that does not move with the object reads as a painted-on gradient.",
+    "morphing": "Shape-shifting between states is geometry, not optics, and is carried by the spring recipes: the coalesce and meniscus signatures describe surfaces merging and separating. The optical layer lights whatever shape the geometry produces."
+  }
+}

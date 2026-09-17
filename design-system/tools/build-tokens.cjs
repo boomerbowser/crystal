@@ -396,7 +396,17 @@ if (process.argv.includes('--migrate')) {
     }
     return v;
   };
-  const strip = (o) => { const c = structuredClone(o); delete c.schemaNote; return canonical(c); };
+  /* Metadata, not material. The guard exists to prove that no token *value*
+     changed while the file was restructured; a version string is supposed to
+     change and would otherwise make every release look like a regression. The
+     exemption is deliberately narrow — two named metadata keys, nothing that
+     participates in a colour, size or duration. */
+  const strip = (o) => {
+    const c = structuredClone(o);
+    delete c.schemaNote;
+    delete c.version;
+    return canonical(c);
+  };
   const diffs = [];
   (function compare(a, b, trail) {
     if (JSON.stringify(a) === JSON.stringify(b)) return;

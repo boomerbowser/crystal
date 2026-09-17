@@ -38,3 +38,69 @@ Crystal's verification covers the design-system package: token contrast, static 
 Each library ships its own accessibility and visual-regression evidence, covering every component across the six palettes, both modes, both densities, full and reduced effects, and both text directions. Native clients require real device review; an HTML specimen is not evidence about a native renderer.
 
 Record intentional platform compromises with actual device captures and review them. Never resolve a rendering or performance problem by silently substituting flat styling: reduce costly effects on supporting surfaces first, keeping palette, silhouette, contour, readable text and depth hierarchy.
+
+## 6. Honour the motion physics, not the keyframes.
+
+Crystal's motion is specified as a damped harmonic oscillator. Every recipe in
+`design-system/tokens/motion-recipes.json` carries a `spring` block with
+`stiffness`, `damping` and `mass`, plus a `platform` block that pre-computes the
+parameterisation each platform actually exposes. Use it; do not re-derive it,
+because two libraries deriving the same spring slightly differently is exactly
+the drift this contract exists to prevent.
+
+| Platform | API | Source of values |
+|---|---|---|
+| Web | Motion / GSAP spring, or `linear()` sampled from the core | `spring.stiffness`, `spring.damping`, `spring.mass` |
+| Apple | `.spring(response:dampingFraction:)` | `spring.platform.swiftUI` |
+| Android | `spring(dampingRatio:stiffness:)` | `spring.platform.compose` |
+
+Three rules travel with it.
+
+**Duration remains the authority.** Each spring is fitted to a reviewed
+duration, and `tools/validate-motion.cjs` asserts the derived settling time
+still matches within 15%. If you change one, change both.
+
+**Damping expresses the material claim.** It is chosen by `signature`, not per
+component: `inertia` overshoots about 12% because momentum is what it asserts,
+and `feather` overshoots 0.1% because a soft edge that bounces is wrong. A
+library that flattens every spring to one house curve has discarded the
+signature system.
+
+**Deformations conserve volume.** Every `scale(sx, sy)` satisfies `sx·sy = 1`.
+This is not a stylistic preference: a shape that loses area while deforming
+reads as rubber being crushed rather than liquid moving, which is precisely the
+defect corrected in 2.0 across seventeen keyframes. If your platform expresses
+deformation differently, preserve the invariant, not the syntax.
+
+## 7. Treat the optical layer as an enhancement.
+
+`design-system/assets/shaders/manifest.json` is the portable artefact; the GLSL
+files are one implementation of it. Honour the **uniform contract**, not the
+source.
+
+| Platform | Shading language | Notes |
+|---|---|---|
+| Web | GLSL ES 3.00 on WebGL2 | As authored |
+| Apple | Metal Shading Language | Uniforms become one constant buffer, declared order preserved |
+| Android | AGSL via `RuntimeShader` | GLSL-derived; bodies transfer with signature changes only |
+
+Non-negotiable properties:
+
+- **Never required.** Every material must render completely with no shader at
+  all. Each entry declares a `degradesTo`; a platform that cannot meet the
+  contract degrades as declared rather than approximating it differently, since
+  a divergent approximation damages parity more than an honest absence.
+- **Never at rest.** Shaders paint only while a motion is in flight. Gate G6
+  proves the web preview is pixel-identical across all twelve reference frames
+  with WebGL2 unavailable.
+- **Never above content.** The optical layer belongs between a material's
+  background and its content. On the web this is a negative `z-index` inside an
+  isolated stacking context; the principle is that verified text contrast is
+  never traded for an effect, and it is verified by comparing the label's own
+  pixels with the layer on and off.
+- **Never a new colour.** Shaders take their tint from the resolved palette. An
+  optical layer may redistribute light; it may not introduce colour the token
+  set did not sanction.
+- **Off when the user has asked for less.** Reduced motion, reduced transparency
+  and forced colours each disable the layer outright.
+

@@ -1,4 +1,4 @@
-// Crystal 1.0.0 design tokens.
+// Crystal 2.0.0 design tokens.
 // Generated from tokens/crystal.tokens.json. Do not edit by hand.
 
 export const crystalTokens = {
