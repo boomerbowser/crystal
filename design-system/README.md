@@ -34,4 +34,4 @@ The source Gather proposal and application remain unchanged. Company branding is
 
 Run `python3 tools/serve.py` from this folder and visit `http://127.0.0.1:4321/`. Direct file opening is not browser-verified. The preview has no backend and makes no required external asset requests. External reference links open their named documentation sites.
 
-See [adoption](docs/adoption.html), [verification](validation/report.html), and [asset notices](reference/ASSET-NOTICES.md). The ZIP packages the complete usable directory without local dependency environments. No framework installation is needed to view it.
+See [adoption](docs/adoption.html), [verification](validation/report.html), and [asset notices](reference/ASSET-NOTICES.md). The packaged ZIP is published as a release asset rather than kept in the repository; it contains the complete usable directory without local dependency environments. Rebuild it locally with `python3 tools/package.py`. No framework installation is needed to view it.
