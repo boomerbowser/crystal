@@ -128,6 +128,26 @@ span.cr-field-shell:focus-within,
 :is(.cr-dock,.segmented,.suite-tabs) button:focus-visible{outline:2px solid var(--cr-focus-core);outline-offset:3px;box-shadow:inset 0 2px 1px var(--cr-rim),var(--cr-focus-ring);}
 span.cr-field-shell :is(input,select,textarea):focus-visible{outline:0;box-shadow:none;}
 /* Each indicator is a small Resin shell with its own Haze reading fill. */
+/* Haze filling a Resin frame is recessed, not floating.
+   A Haze fill inside a Resin frame is a content well: it sits *in* the frame,
+   and an outward drop shadow says the opposite. Soft-UI practice expresses
+   recession by inverting the light pair rather than by adding contrast — with
+   the source directly overhead, as Crystal's is throughout, an inset shadow
+   falls along the top edge where the frame occludes the light and a highlight
+   returns along the bottom where it bounces back off the far wall.
+
+   Crystal takes the light discipline from that tradition and explicitly not its
+   palette: neumorphism fills an element with its own background colour, so all
+   definition comes from shadow, which is exactly why it fails contrast checks
+   and why almost nobody ships it. Haze keeps its 80% fill and its verified text
+   contrast; only the shadow pair changes, and only inside a Resin frame.
+
+   Scoped rather than applied to every Haze surface, because a standalone Haze
+   card genuinely is raised and its existing recipe is correct. */
+:is(.cr-resin,.cr-glass,.cr-resin-haze) :is(.cr-haze,.cr-surface,.cr-well,.cr-content-fill){
+  box-shadow:inset 0 1px 2px rgba(39,24,68,.15),inset 0 -1px 0 var(--cr-rim);
+}
+
 /* Resin never contains Resin.
    A control dropped into a Resin surface — a button in a menu, a popover or a
    toast — would otherwise bring its own 20px backdrop blur and read through the
