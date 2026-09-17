@@ -1,0 +1,121 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Adoption and governance · Crystal</title><link rel="icon" href="../assets/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/crystal-theme.css"><link rel="stylesheet" href="../assets/crystal.css"><link rel="stylesheet" href="../assets/site.css"><link rel="stylesheet" href="../assets/motion.css"><script src="../assets/tokens.js" defer></script><script src="../assets/crystal.js" defer></script><script src="../assets/docs.js" defer></script><style>.doc-layout{display:grid;grid-template-columns:170px minmax(0,1fr);gap:48px;padding:42px 0}.doc-nav{display:flex;flex-direction:column;gap:7px;align-self:start;position:sticky;top:24px}.doc-nav a{padding:9px 12px;border-radius:10px;text-decoration:none;font-size:14px}.doc-nav a[aria-current]{background:var(--cr-primary-soft);color:var(--cr-on-primary-soft);font-weight:800}.doc-body{max-width:920px;min-width:0}.doc-body h1{font-size:38px}.doc-body h2{font-size:25px;margin-top:36px}.doc-body p,.doc-body li{font-size:15px;line-height:1.8;max-width:78ch}.doc-body table{display:block;overflow:auto;border-collapse:collapse;font-size:13px;margin:22px 0;max-width:100%}.doc-body td,.doc-body th{border:1px solid var(--cr-edge);padding:12px;text-align:left;min-width:130px}.doc-body th{background:var(--cr-primary-soft);color:var(--cr-on-primary-soft)}.doc-body td{background:var(--cr-surface)}@media(max-width:700px){.doc-layout{display:block;padding-top:24px}.doc-nav{position:static;flex-direction:row;overflow:auto;margin-bottom:30px;gap:5px}.doc-nav a{white-space:nowrap}.doc-body h1{font-size:30px}}</style><link rel="stylesheet" href="../assets/controls.css?v=pill-focus-2"><script src="../assets/controls.js?v=pill-focus-2" defer></script></head><body><a class="skip" href="#main">Skip to specification</a><div class="shell"><header class="site-header"><a class="wordmark" href="../index.html" aria-label="Crystal design system"><span class="mark" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#crystal"/></svg></span>crystal <small>Design system</small></a><nav class="site-nav" aria-label="Main"><a href="../index.html#playground">Playground</a><a href="../index.html#foundations">Foundations</a><a href="../index.html#components">Components</a><a href="../motion.html">Motion</a><a href="../docs/principles.html" aria-current="true">Specification</a><a href="../validation/report.html">Verification</a></nav></header><div class="doc-layout"><nav class="doc-nav" aria-label="Specifications"><a href="principles.html">Foundations</a><a href="colors.html">Color</a><a href="materials.html">Materials</a><a href="components.html">Components</a><a href="motion.html">Motion</a><a href="motion-components.html">Component motion</a><a href="accessibility.html">Accessibility</a><a href="adoption.html" aria-current="page">Adoption</a></nav><main id="main" class="doc-body"><h1 id="adoption-and-governance">Adoption and governance</h1>
+<h2 id="deliverable-layout">Deliverable layout</h2>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index.html</code></td>
+<td>Interactive system playground and reference entry</td>
+</tr>
+<tr>
+<td><code>motion.html</code>, <code>assets/motion-preview.js</code></td>
+<td>Dedicated motion playground with shared appearance preferences and adjustable replay</td>
+</tr>
+<tr>
+<td><code>assets/crystal.css</code></td>
+<td>Framework-independent CSS material/component primitives</td>
+</tr>
+<tr>
+<td><code>assets/crystal-theme.css</code></td>
+<td>Generated default Prism tokens, both modes</td>
+</tr>
+<tr>
+<td><code>assets/motion.css</code>, <code>assets/motion.js</code></td>
+<td>Motion primitives and shared Motion/GSAP browser adapter</td>
+</tr>
+<tr>
+<td><code>assets/crystal.js</code></td>
+<td>Pure token resolver, contrast calculation and CSS/JSON export</td>
+</tr>
+<tr>
+<td><code>assets/tokens.js</code></td>
+<td>Generated browser copy of canonical JSON</td>
+</tr>
+<tr>
+<td><code>assets/site.css</code>, <code>assets/site.js</code></td>
+<td>Reference-site layout and local demonstration behavior</td>
+</tr>
+<tr>
+<td><code>tokens/crystal.json</code></td>
+<td>Canonical editable palette, material and default configuration</td>
+</tr>
+<tr>
+<td><code>docs/*.md</code></td>
+<td>Editable specifications; adjacent HTML is generated</td>
+</tr>
+<tr>
+<td><code>reference/</code></td>
+<td>Immutable Gather source copies and SHA-256 provenance</td>
+</tr>
+<tr>
+<td><code>tools/</code></td>
+<td>Rebuild, validation and packaging commands</td>
+</tr>
+<tr>
+<td><code>validation/</code></td>
+<td>Executed-check evidence and explicit limits</td>
+</tr>
+</tbody>
+</table>
+<p>The site uses relative local assets without fetching fonts or services. Review it through a loopback HTTP server; that path has been browser-tested. Direct file opening has not been browser-verified. Do not introduce an application/backend dependency to serve the documentation.</p>
+<h2 id="static-css-adoption">Static CSS adoption</h2>
+<p>Copy <code>assets/crystal.css</code>, <code>assets/controls.css</code>, <code>assets/fonts/</code>, <code>assets/grain.svg</code>, and the theme CSS into the product. Preserve the primitive stylesheet’s relative asset paths. Load theme CSS before primitive CSS. The reference-site CSS/JS are not needed by a product.</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;crystal-theme.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;assets/crystal.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;assets/controls.css&quot;&gt;
+&lt;section class=&quot;cr-plastic&quot;&gt;
+  &lt;section class=&quot;cr-frost&quot;&gt;
+    &lt;article class=&quot;cr-haze&quot;&gt;Readable product content&lt;/article&gt;
+  &lt;/section&gt;
+  &lt;nav class=&quot;cr-resin&quot; aria-label=&quot;Product navigation&quot;&gt;
+    &lt;!-- Place the product’s real navigation controls here. --&gt;
+  &lt;/nav&gt;
+&lt;/section&gt;
+</code></pre>
+<p>Set <code>data-crystal-mode="dark"</code> or <code>"light"</code> on the root HTML element to select a mode. An export made with Auto selected also follows the OS preference unless explicitly overridden. Export CSS from the playground to capture the selected palette and material settings in both modes.</p>
+<p>The product adapter supplies layout, padding and placement (at least 12px of inset for content on feathered fills): the snippet shows material assignment, not a complete application. Set <code>data-window-active="false"</code> on a foundation to select its neutral opaque inactive state; remove the attribute or set it to <code>"true"</code> to restore contextual tint. Wire this to supported host activation events where available. The browser study uses a manual switch and does not infer desktop activation or capture wallpaper.</p>
+<p>The primitive stylesheet includes element-level typography, focus and box-sizing rules intended for a Crystal product root. Review them when introducing Crystal into an existing application; scope these rules in your adapter if the page contains unrelated embedded products. <code>--cr-</code> variables are namespaced, but generic element selectors are not a CSS isolation boundary.</p>
+<h2 id="runtime-adoption">Runtime adoption</h2>
+<p>Load <code>assets/tokens.js</code> before <code>assets/crystal.js</code>. The runtime exposes <code>window.Crystal</code>; it does not automatically choose preferences, render UI or write storage. The reference site's <code>site.js</code> handles those concerns only for this playground.</p>
+<pre><code class="language-js">const config = Crystal.normalize({ palette: 'fuchsia', mode: 'dark' });
+const tokens = Crystal.resolve(config, 'dark');
+for (const [name, value] of Object.entries(tokens)) {
+  document.documentElement.style.setProperty(name, value);
+}
+document.documentElement.dataset.crystalMode = 'dark';
+document.documentElement.dataset.effects = config.reduced ? 'opaque' : 'full';
+document.documentElement.style.colorScheme = 'dark';
+</code></pre>
+<p><code>Crystal.normalize</code> validates known keys and clamps numeric settings. <code>resolve(config, mode)</code> returns resolved CSS variables for an explicit light/dark mode. <code>exportCSS(config)</code> returns complete CSS for both modes. <code>exportJSON(config)</code> returns configuration plus resolved modes. <code>audit(config, mode)</code> reports the documented solid contrast pairs. JSON is a custom v1 schema; it is not a packaged native-theme adapter.</p>
+<p>A product owns preference sync, account boundaries, device exceptions, migration, consent and secure persistence. Do not copy the playground’s global localStorage preference model into a multi-account product without designing those boundaries.</p>
+<h2 id="native-products">Native products</h2>
+<p>Share color roles, typography relationships, radii, elevation hierarchy, status vocabulary and adaptation rules. Build real platform components and use supported native material APIs where appropriate. CSS shadows/blur values are visual references, not guaranteed equivalent compositor parameters. Verify real native accessibility, text scaling, keyboard/IME, input capture and performance on each target. No native adapter is included in this package.</p>
+<h2 id="named-material-api-and-compatibility">Named material API and compatibility</h2>
+<p>Use <code>.cr-plastic</code>, <code>.cr-frost</code>, <code>.cr-resin</code>, <code>.cr-haze</code>, <code>.cr-stone</code> and <code>.cr-mirage</code> for new integrations. The canonical JSON’s <code>materials</code> catalog records all six names, roles, inspirations and primitives. Named CSS variables include <code>--cr-plastic-inactive</code>, <code>--cr-frost-fill</code>, <code>--cr-resin-fill</code>, <code>--cr-haze-fill</code>, <code>--cr-stone-fill</code>, and <code>--cr-mirage-fill</code>, with matching blur/feather variables where applicable.</p>
+<p>The prior <code>.cr-foundation</code>, <code>.cr-acrylic</code>, <code>.cr-glass</code> and <code>.cr-surface</code> selectors remain compatibility aliases. Existing <code>--cr-acrylic-*</code>, <code>--cr-glass-*</code>, <code>--cr-content-*</code> and <code>--cr-label-fill</code> variables remain in exports alongside their named equivalents. These legacy identifiers do not define extra materials. Original reference copies retain their historical names and provenance.</p>
+<p>Font licensing notices are retained in <code>reference/ASSET-NOTICES.md</code> and the font’s license file; they are not a Sources documentation page.</p>
+<h2 id="product-customization-boundaries">Product customization boundaries</h2>
+<p>Products may choose a palette, layout, iconography, density and supported material intensity. They should retain semantic state meanings, reading/focus requirements, material hierarchy and recognizable geometry. A materially different behavior or palette needs its own acceptance evidence; a new theme cannot silently change danger/success semantics.</p>
+<p>Adopt one version per product, maintain a changelog for actual changes, and review a shared visual gallery before promoting a breaking token/behavior change. Deprecate renamed tokens before removal. Treat changes to accessibility, status meanings, token contracts and exported file formats as compatibility decisions.</p>
+<h2 id="rebuild-and-validate">Rebuild and validate</h2>
+<p>Use an isolated environment for documentation tools, then run from the package root:</p>
+<pre><code class="language-sh">python3 -m venv .venv
+.venv/bin/pip install -r tools/requirements.txt
+.venv/bin/python tools/build.py
+node tools/validate-tokens.cjs
+.venv/bin/python tools/validate.py
+.venv/bin/python tools/report.py
+.venv/bin/python tools/package.py
+</code></pre>
+<p>Node is used for the same resolver/exporter consumed by the browser; no Node package installation is required. Python requirements support Markdown rendering and HTML link checks. Browser checks are recorded separately as actual UI observations. Rebuilding never reads or writes the Gather project. Keep dependencies and temporary environments out of distributable ZIPs.</p>
+<h3 id="user-animation-speed">User animation speed</h3>
+<p><code>Crystal.normalize({ motionSpeed: 1 })</code> accepts a factor from 0.25 to 2. Resolved durations divide by that factor and cap each animation at 5000ms; reduced motion produces zero durations. CSS and JSON exports retain this preference. The playground and Motion page share it, including real dialog/backdrop timing. Products should target 0–2 seconds by default and expose reduced motion independently of speed.</p>
+<h3 id="motion-engine-dependencies">Motion engine dependencies</h3>
+<p>The motion runtime now requires the locally bundled engines and recipe catalog. Load <code>assets/vendor/crystal-engines.js</code>, <code>assets/motion-catalog.js</code>, then <code>assets/motion.js</code>. <code>npm ci</code> reproduces the pinned Motion 13.4.0 and GSAP 3.15.0 dependencies; <code>npm run build:motion</code> rebuilds the bundle with esbuild. Preserve the vendor legal-comment file and <code>reference/licenses/</code> when distributing it. The token resolver and static material CSS do not require these libraries. See <a href="motion-components.html">component motion</a> for integration and cancellation contracts.</p>
+<h3 id="interaction-surfaces-and-revised-motion">Interaction surfaces and revised motion</h3>
+<p>Include <code>assets/controls.css</code> after base/layout styles. Use <code>assets/controls.js</code> for the preview's native field shells, or render equivalent shells in your component framework. Compact information surfaces and ephemeral menus use <code>.cr-resin-haze</code>. Do not transplant the legacy solid button rules without this material layer. The 54-recipe catalog declares material signatures and justified extended travel; the old 50px token describes compact motion only.</p></main></div><footer class="site-footer"><p>Crystal 1.0 · Editable specification</p><a href="adoption.md">Markdown source</a></footer></div></body></html>

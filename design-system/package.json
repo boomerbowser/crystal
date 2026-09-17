@@ -1,0 +1,19 @@
+{
+  "name": "crystal-design-system",
+  "version": "1.0.0",
+  "description": "Crystal design system, motion runtime, interactive component studies and specifications.",
+  "scripts": {
+    "build:motion": "node tools/build-motion.cjs",
+    "test": "node tools/validate-tokens.cjs && node tools/validate-motion.cjs"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "dependencies": {
+    "gsap": "3.15.0",
+    "motion": "13.4.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  },
+  "private": true
+}

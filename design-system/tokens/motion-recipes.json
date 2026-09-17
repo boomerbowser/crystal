@@ -1,0 +1,1233 @@
+{
+  "version": 2,
+  "scope": "Framework-independent animation recipes; component semantics remain caller-owned.",
+  "recipes": [
+    {
+      "id": "press",
+      "category": "Controls",
+      "label": "Press and release",
+      "duration": 320,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "scale(1,1)",
+          "offset": 0.0
+        },
+        {
+          "transform": "scale(1.035,.93)",
+          "offset": 0.3333333333333333
+        },
+        {
+          "transform": "scale(.985,1.025)",
+          "offset": 0.6666666666666666
+        },
+        {
+          "transform": "scale(1,1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Buttons, icon buttons and segmented controls. Disabled controls never animate.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "pressure"
+    },
+    {
+      "id": "hover",
+      "category": "Controls",
+      "label": "Light follows the surface",
+      "duration": 700,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 1
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "Fine-pointer affordance only; keyboard focus is immediate.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "caustic"
+    },
+    {
+      "id": "selection",
+      "category": "Controls",
+      "label": "Selection settle",
+      "duration": 420,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "scale(.98,1.015)",
+          "offset": 0.0
+        },
+        {
+          "transform": "scale(1.025,.985)",
+          "offset": 0.5
+        },
+        {
+          "transform": "scale(1,1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Selected chips, radios, toggles and navigation; set selected semantics first.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "meniscus"
+    },
+    {
+      "id": "switch-on",
+      "category": "Controls",
+      "label": "Switch on",
+      "duration": 460,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "translateX(-16px) scale(.75,1.15)",
+          "offset": 0.0
+        },
+        {
+          "transform": "translateX(2.0px) scale(1.2,.85)",
+          "offset": 0.5
+        },
+        {
+          "transform": "translateX(0) scale(1,1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Animate the thumb after its checked state is applied.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "coalesce"
+    },
+    {
+      "id": "switch-off",
+      "category": "Controls",
+      "label": "Switch off",
+      "duration": 460,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "translateX(16px) scale(.75,1.15)",
+          "offset": 0.0
+        },
+        {
+          "transform": "translateX(-2.0px) scale(1.2,.85)",
+          "offset": 0.5
+        },
+        {
+          "transform": "translateX(0) scale(1,1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Animate the thumb after its unchecked state is applied.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "coalesce"
+    },
+    {
+      "id": "check",
+      "category": "Controls",
+      "label": "Checkmark confirmation",
+      "duration": 340,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "clipPath": "circle(0% at 50% 65%)"
+        },
+        {
+          "clipPath": "circle(80% at 50% 50%)"
+        }
+      ],
+      "use": "Checkbox and radio indicators; retain a visible non-color state.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "iris"
+    },
+    {
+      "id": "slider-step",
+      "category": "Controls",
+      "label": "Value response",
+      "duration": 400,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 1
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "Range outputs, steppers and scrubber labels; value updates immediately.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "stone",
+      "signature": "feather"
+    },
+    {
+      "id": "icon-turn",
+      "category": "Controls",
+      "label": "Disclosure icon",
+      "duration": 440,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "rotate(-16deg) scale(.92)",
+          "offset": 0.0
+        },
+        {
+          "transform": "rotate(8deg) scale(1.08)",
+          "offset": 0.5
+        },
+        {
+          "transform": "rotate(0) scale(1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Disclosure chevrons; parent expanded state is authoritative.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "torsion"
+    },
+    {
+      "id": "copy-confirm",
+      "category": "Controls",
+      "label": "Copy confirmation",
+      "duration": 540,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "scale(.92,1.04)",
+          "offset": 0.0
+        },
+        {
+          "transform": "scale(1.04,.96)",
+          "offset": 0.5
+        },
+        {
+          "transform": "scale(1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Only after clipboard write succeeds; retain textual confirmation.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "coalesce"
+    },
+    {
+      "id": "field-focus",
+      "category": "Forms",
+      "label": "Field focus response",
+      "duration": 600,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 1
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "Supplementary focus response; never animate or delay the actual focus ring.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "caustic"
+    },
+    {
+      "id": "field-invalid",
+      "category": "Forms",
+      "label": "Invalid field",
+      "duration": 480,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "transform": "skewX(0)",
+          "offset": 0.0
+        },
+        {
+          "transform": "skewX(-1.4deg)",
+          "offset": 0.25
+        },
+        {
+          "transform": "skewX(1deg)",
+          "offset": 0.5
+        },
+        {
+          "transform": "skewX(-.4deg)",
+          "offset": 0.75
+        },
+        {
+          "transform": "skewX(0)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Single low-amplitude cue with persistent error text; never repeated shaking.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "tension"
+    },
+    {
+      "id": "field-valid",
+      "category": "Forms",
+      "label": "Valid field",
+      "duration": 550,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 1
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "After real local validation; never imply a remote operation succeeded.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "meniscus"
+    },
+    {
+      "id": "hint-in",
+      "category": "Forms",
+      "label": "Help text reveal",
+      "duration": 500,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 0
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "Inline help, character guidance and validation details.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "coalesce"
+    },
+    {
+      "id": "hint-out",
+      "category": "Forms",
+      "label": "Help text departure",
+      "duration": 500,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 1
+        },
+        {
+          "opacity": 0
+        }
+      ],
+      "use": "Hide the help only after completion; do not remove focused content.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "meniscus"
+    },
+    {
+      "id": "tab-in",
+      "category": "Navigation",
+      "label": "Tab content arrival",
+      "duration": 650,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "perspective(900px) rotateX(-5deg) translateZ(-18px)",
+          "offset": 0.0
+        },
+        {
+          "transform": "perspective(900px) rotateX(1deg) translateZ(8px)",
+          "offset": 0.5
+        },
+        {
+          "transform": "perspective(900px) rotateX(0) translateZ(0)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Selected tab panels; apply aria-selected and hidden state synchronously.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "frost",
+      "signature": "refraction"
+    },
+    {
+      "id": "page-in",
+      "category": "Navigation",
+      "label": "View arrival",
+      "duration": 1050,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "perspective(1100px) translateY(90px) rotateX(5deg) scale(.96)",
+          "offset": 0.0
+        },
+        {
+          "transform": "perspective(1100px) translateY(-4px) rotateX(-.4deg) scale(1.005)",
+          "offset": 0.5
+        },
+        {
+          "transform": "perspective(1100px) translateY(0) rotateX(0) scale(1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "New local view after routing is committed; preserve focus and history.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "plastic",
+      "signature": "inertia",
+      "travelException": "Whole-view spatial continuity needs a 90px settling path."
+    },
+    {
+      "id": "page-out",
+      "category": "Navigation",
+      "label": "View departure",
+      "duration": 760,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "scale(1)",
+          "opacity": 1
+        },
+        {
+          "transform": "perspective(900px) translateY(-75px) rotateX(-5deg) scale(.94)",
+          "opacity": 0
+        }
+      ],
+      "use": "Departing view only; never postpone route authorization or loading.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "plastic",
+      "signature": "inertia",
+      "travelException": "Departing view clears the incoming view across 75px."
+    },
+    {
+      "id": "breadcrumb",
+      "category": "Navigation",
+      "label": "Location update",
+      "duration": 500,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 1
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "New breadcrumb item; current-page semantics stay explicit.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "coalesce"
+    },
+    {
+      "id": "drawer-in",
+      "category": "Overlays",
+      "label": "Drawer arrival",
+      "duration": 1000,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "transform": "perspective(1200px) translateX(105%) rotateY(-12deg)",
+          "offset": 0.0
+        },
+        {
+          "transform": "perspective(1200px) translateX(-8px) rotateY(1deg)",
+          "offset": 0.5
+        },
+        {
+          "transform": "perspective(1200px) translateX(0) rotateY(0)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Side sheets and inspector panels; establish modality first.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "frost",
+      "signature": "refraction",
+      "travelException": "A sheet must cross its own width from outside the viewport."
+    },
+    {
+      "id": "drawer-out",
+      "category": "Overlays",
+      "label": "Drawer departure",
+      "duration": 650,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "transform": "perspective(1200px) translateX(0) rotateY(0)"
+        },
+        {
+          "transform": "perspective(1200px) translateX(105%) rotateY(-8deg)"
+        }
+      ],
+      "use": "Keep modal focus contained until dismissal completes.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "frost",
+      "signature": "refraction",
+      "travelException": "The sheet returns beyond its full-width viewport boundary."
+    },
+    {
+      "id": "menu-in",
+      "category": "Overlays",
+      "label": "Menu reveal",
+      "duration": 620,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "scale(.96,1.04)",
+          "opacity": 0
+        },
+        {
+          "transform": "scale(1.02,.98)",
+          "opacity": 1
+        },
+        {
+          "transform": "scale(1,1)",
+          "opacity": 1
+        }
+      ],
+      "use": "Dropdowns, selects and command menus; keyboard behavior belongs to the component.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "coalesce"
+    },
+    {
+      "id": "menu-out",
+      "category": "Overlays",
+      "label": "Menu dismissal",
+      "duration": 380,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "scale(1,1)",
+          "opacity": 1
+        },
+        {
+          "transform": "scale(1.02,.98)",
+          "opacity": 1
+        },
+        {
+          "transform": "scale(.96,1.04)",
+          "opacity": 0
+        }
+      ],
+      "use": "Close menus and restore trigger focus when appropriate.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "meniscus"
+    },
+    {
+      "id": "tooltip-in",
+      "category": "Overlays",
+      "label": "Tooltip arrival",
+      "duration": 420,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "clipPath": "inset(35% 45% round 24px)",
+          "opacity": 0
+        },
+        {
+          "clipPath": "inset(0% 0% round 12px)",
+          "opacity": 1
+        }
+      ],
+      "use": "Noninteractive descriptions on focus or hover; Escape dismisses.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "meniscus"
+    },
+    {
+      "id": "tooltip-out",
+      "category": "Overlays",
+      "label": "Tooltip departure",
+      "duration": 420,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "clipPath": "inset(0% 0% round 12px)",
+          "opacity": 1
+        },
+        {
+          "clipPath": "inset(35% 45% round 24px)",
+          "opacity": 0
+        }
+      ],
+      "use": "Pointer and focus must both leave before hiding.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "meniscus"
+    },
+    {
+      "id": "popover-in",
+      "category": "Overlays",
+      "label": "Popover arrival",
+      "duration": 620,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "scale(.96,1.04)",
+          "opacity": 0
+        },
+        {
+          "transform": "scale(1.02,.98)",
+          "opacity": 1
+        },
+        {
+          "transform": "scale(1,1)",
+          "opacity": 1
+        }
+      ],
+      "use": "Nonmodal details with outside-click, Escape and focus handling.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "coalesce"
+    },
+    {
+      "id": "popover-out",
+      "category": "Overlays",
+      "label": "Popover departure",
+      "duration": 380,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "scale(1,1)",
+          "opacity": 1
+        },
+        {
+          "transform": "scale(1.02,.98)",
+          "opacity": 1
+        },
+        {
+          "transform": "scale(.96,1.04)",
+          "opacity": 0
+        }
+      ],
+      "use": "Dismiss nonmodal details without trapping focus.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "meniscus"
+    },
+    {
+      "id": "accordion-in",
+      "category": "Content",
+      "label": "Disclosure reveal",
+      "duration": 650,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "clipPath": "inset(0 0 100% 0 round 24px)",
+          "opacity": 0
+        },
+        {
+          "clipPath": "inset(0 0 0% 0 round 0px)",
+          "opacity": 1
+        }
+      ],
+      "use": "Animate visible content after expanding; no scripted height measurement needed.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "haze",
+      "signature": "feather"
+    },
+    {
+      "id": "accordion-out",
+      "category": "Content",
+      "label": "Disclosure close",
+      "duration": 650,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "clipPath": "inset(0 0 0% 0 round 0px)",
+          "opacity": 1
+        },
+        {
+          "clipPath": "inset(0 0 100% 0 round 24px)",
+          "opacity": 0
+        }
+      ],
+      "use": "Hide content after completion; return focus first if a child has focus.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "haze",
+      "signature": "feather"
+    },
+    {
+      "id": "list-in",
+      "category": "Content",
+      "label": "Item insertion",
+      "duration": 650,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 0,
+          "clipPath": "inset(8% 4% round 36px)"
+        },
+        {
+          "opacity": 1,
+          "clipPath": "inset(0% 0% round 0px)"
+        }
+      ],
+      "use": "Real added messages, table rows, cards and collection items.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "haze",
+      "signature": "feather"
+    },
+    {
+      "id": "list-out",
+      "category": "Content",
+      "label": "Item removal",
+      "duration": 440,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 1,
+          "clipPath": "inset(0% 0% round 0px)"
+        },
+        {
+          "opacity": 0,
+          "clipPath": "inset(8% 4% round 36px)"
+        }
+      ],
+      "use": "Remove after completion; announce the actual change and keep focus valid.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "haze",
+      "signature": "feather"
+    },
+    {
+      "id": "reorder",
+      "category": "Content",
+      "label": "Reorder settle",
+      "duration": 500,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "transform": "rotate(-1.4deg)",
+          "offset": 0.0
+        },
+        {
+          "transform": "rotate(.7deg)",
+          "offset": 0.5
+        },
+        {
+          "transform": "rotate(0)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Supplement DOM reordering; use layout() for measured bounded displacement.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "plastic",
+      "signature": "inertia"
+    },
+    {
+      "id": "highlight",
+      "category": "Content",
+      "label": "Updated content",
+      "duration": 500,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 1
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "A brief update cue paired with actual content or announcement.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "haze",
+      "signature": "feather"
+    },
+    {
+      "id": "message-in",
+      "category": "Content",
+      "label": "Message arrival",
+      "duration": 650,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 0,
+          "clipPath": "inset(8% 4% round 36px)"
+        },
+        {
+          "opacity": 1,
+          "clipPath": "inset(0% 0% round 0px)"
+        }
+      ],
+      "use": "Only on a new message; do not replay on virtualized history or steal scroll.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "haze",
+      "signature": "feather"
+    },
+    {
+      "id": "reaction",
+      "category": "Content",
+      "label": "Reaction response",
+      "duration": 680,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "scale(.88,1.05) rotate(-4deg)",
+          "offset": 0.0
+        },
+        {
+          "transform": "scale(1.14,.91) rotate(3deg)",
+          "offset": 0.3333333333333333
+        },
+        {
+          "transform": "scale(.97,1.04) rotate(-1deg)",
+          "offset": 0.6666666666666666
+        },
+        {
+          "transform": "scale(1) rotate(0)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Toggle the real reaction state and count before the response.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "coalesce"
+    },
+    {
+      "id": "toast-in",
+      "category": "Feedback",
+      "label": "Notification arrival",
+      "duration": 650,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 0,
+          "clipPath": "inset(8% 4% round 36px)"
+        },
+        {
+          "opacity": 1,
+          "clipPath": "inset(0% 0% round 0px)"
+        }
+      ],
+      "use": "Live status text with a persistent dismiss button.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "coalesce"
+    },
+    {
+      "id": "toast-out",
+      "category": "Feedback",
+      "label": "Notification departure",
+      "duration": 440,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 1,
+          "clipPath": "inset(0% 0% round 0px)"
+        },
+        {
+          "opacity": 0,
+          "clipPath": "inset(8% 4% round 36px)"
+        }
+      ],
+      "use": "No timer required; manual dismissal preserves reading time.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "meniscus"
+    },
+    {
+      "id": "success",
+      "category": "Feedback",
+      "label": "Success acknowledgement",
+      "duration": 600,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "opacity": 0.8
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "Use after a successful operation with text and a recognizable mark.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "stone",
+      "signature": "feather"
+    },
+    {
+      "id": "attention",
+      "category": "Feedback",
+      "label": "Attention cue",
+      "duration": 500,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 1
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "Single finite cue for important text; never flash or loop.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "stone",
+      "signature": "feather"
+    },
+    {
+      "id": "progress-change",
+      "category": "Feedback",
+      "label": "Progress settle",
+      "duration": 500,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 1
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "Actual progress is set first; this animation does not fabricate completion.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "stone",
+      "signature": "feather"
+    },
+    {
+      "id": "busy",
+      "category": "Feedback",
+      "label": "Finite busy cue",
+      "duration": 680,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "opacity": 1
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "One cycle for an actual pending operation; keep a static busy label if it lasts longer.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "stone",
+      "signature": "feather"
+    },
+    {
+      "id": "skeleton-resolve",
+      "category": "Feedback",
+      "label": "Loading content resolve",
+      "duration": 650,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 0,
+          "clipPath": "inset(8% 4% round 36px)"
+        },
+        {
+          "opacity": 1,
+          "clipPath": "inset(0% 0% round 0px)"
+        }
+      ],
+      "use": "Replace a skeleton only when real data arrives; no endless shimmer.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "haze",
+      "signature": "feather"
+    },
+    {
+      "id": "empty-in",
+      "category": "Feedback",
+      "label": "Empty-state reveal",
+      "duration": 500,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 0
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "Shown only when the collection is actually empty.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "coalesce"
+    },
+    {
+      "id": "media-in",
+      "category": "Media",
+      "label": "Media arrival",
+      "duration": 900,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "perspective(900px) rotateY(-8deg) scale(.96)",
+          "offset": 0.0
+        },
+        {
+          "transform": "perspective(900px) rotateY(1deg) scale(1.01)",
+          "offset": 0.5
+        },
+        {
+          "transform": "perspective(900px) rotateY(0) scale(1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "After an image decodes or media becomes ready; reserve layout space.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "frost",
+      "signature": "refraction"
+    },
+    {
+      "id": "caption-in",
+      "category": "Media",
+      "label": "Caption reveal",
+      "duration": 500,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "opacity": 0
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "Optional descriptive caption; text remains accessible in reduced motion.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "coalesce"
+    },
+    {
+      "id": "carousel-next",
+      "category": "Media",
+      "label": "Next item",
+      "duration": 920,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "transform": "perspective(900px) rotateY(22deg) translateX(80px) scale(.92)",
+          "offset": 0.0
+        },
+        {
+          "transform": "perspective(900px) rotateY(-2deg) translateX(-6px) scale(1.01)",
+          "offset": 0.5
+        },
+        {
+          "transform": "perspective(900px) rotateY(0) translateX(0) scale(1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Explicit next/previous navigation; never autoplay.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "frost",
+      "signature": "refraction",
+      "travelException": "A gallery changes spatial position with an 80px perspective turn."
+    },
+    {
+      "id": "carousel-previous",
+      "category": "Media",
+      "label": "Previous item",
+      "duration": 920,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "transform": "perspective(900px) rotateY(-22deg) translateX(-80px) scale(.92)",
+          "offset": 0.0
+        },
+        {
+          "transform": "perspective(900px) rotateY(2deg) translateX(6px) scale(1.01)",
+          "offset": 0.5
+        },
+        {
+          "transform": "perspective(900px) rotateY(0) translateX(0) scale(1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Maintain item count and keyboard navigation.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "frost",
+      "signature": "refraction",
+      "travelException": "A gallery changes spatial position with an 80px perspective turn."
+    },
+    {
+      "id": "drag-pickup",
+      "category": "Manipulation",
+      "label": "Lift to move",
+      "duration": 500,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "scale(1)",
+          "offset": 0.0
+        },
+        {
+          "transform": "rotate(-2deg) scale(1.04)",
+          "offset": 0.5
+        },
+        {
+          "transform": "rotate(0) scale(1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Visual lift for a selected movable item; keyboard alternative required.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "tension"
+    },
+    {
+      "id": "drag-settle",
+      "category": "Manipulation",
+      "label": "Drop settle",
+      "duration": 640,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "transform": "scale(1.04,.97)",
+          "offset": 0.0
+        },
+        {
+          "transform": "scale(.97,1.025)",
+          "offset": 0.5
+        },
+        {
+          "transform": "scale(1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "After a valid local move, with undo where data changes.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "resin",
+      "signature": "coalesce"
+    },
+    {
+      "id": "resize-settle",
+      "category": "Manipulation",
+      "label": "Resize settle",
+      "duration": 600,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "scale(.975,1.01)",
+          "offset": 0.0
+        },
+        {
+          "transform": "scale(1.007,.995)",
+          "offset": 0.5
+        },
+        {
+          "transform": "scale(1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "After measured layout size changes; never animate focus or hide handles.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "frost",
+      "signature": "refraction"
+    },
+    {
+      "id": "resin-confluence",
+      "label": "Resin confluence",
+      "category": "Material compositions",
+      "material": "resin",
+      "signature": "coalesce",
+      "duration": 1600,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "transform": "scale(.55,1.18) skewX(-9deg)",
+          "offset": 0.0
+        },
+        {
+          "transform": "scale(1.16,.86) skewX(4deg)",
+          "offset": 0.3333333333333333
+        },
+        {
+          "transform": "scale(.97,1.04) skewX(-1deg)",
+          "offset": 0.6666666666666666
+        },
+        {
+          "transform": "scale(1) skewX(0)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Explicit material choreography for a large specimen; replay is a visual study, not an application action.",
+      "reduced": "Keep the resting material visible; omit choreography."
+    },
+    {
+      "id": "frost-unfold",
+      "label": "Frost unfolds into depth",
+      "category": "Material compositions",
+      "material": "frost",
+      "signature": "refraction",
+      "duration": 1900,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "transform": "perspective(1200px) rotateY(-65deg) translateZ(-90px) scale(.82)",
+          "offset": 0.0
+        },
+        {
+          "transform": "perspective(1200px) rotateY(8deg) translateZ(110px) scale(1.02)",
+          "offset": 0.5
+        },
+        {
+          "transform": "perspective(1200px) rotateY(0) translateZ(0) scale(1)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Explicit material choreography for a large specimen; replay is a visual study, not an application action.",
+      "reduced": "Keep the resting material visible; omit choreography.",
+      "travelException": "Large panel unfolding uses up to 110px depth; never use on a small control."
+    },
+    {
+      "id": "plastic-settle",
+      "label": "Plastic settles into place",
+      "category": "Material compositions",
+      "material": "plastic",
+      "signature": "inertia",
+      "duration": 1700,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "transform": "perspective(1200px) translateY(120px) rotateX(9deg)",
+          "offset": 0.0
+        },
+        {
+          "transform": "perspective(1200px) translateY(-8px) rotateX(-1deg)",
+          "offset": 0.5
+        },
+        {
+          "transform": "perspective(1200px) translateY(0) rotateX(0)",
+          "offset": 1.0
+        }
+      ],
+      "use": "Explicit material choreography for a large specimen; replay is a visual study, not an application action.",
+      "reduced": "Keep the resting material visible; omit choreography.",
+      "travelException": "Window-scale composition uses 120px upward travel."
+    },
+    {
+      "id": "haze-tide",
+      "label": "Haze perimeter tide",
+      "category": "Material compositions",
+      "material": "haze",
+      "signature": "feather",
+      "duration": 1800,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "opacity": 1
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "Explicit material choreography for a large specimen; replay is a visual study, not an application action.",
+      "reduced": "Keep the resting material visible; omit choreography."
+    },
+    {
+      "id": "stone-contour",
+      "label": "Stone contour ripple",
+      "category": "Material compositions",
+      "material": "stone",
+      "signature": "feather",
+      "duration": 1300,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "opacity": 1
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "use": "Explicit material choreography for a large specimen; replay is a visual study, not an application action.",
+      "reduced": "Keep the resting material visible; omit choreography."
+    }
+  ],
+  "travelPolicy": "5\u201330px ordinary, 50px guidance; justified large transitions may exceed it. Haze and Stone paint moves locally while text stays fixed."
+}

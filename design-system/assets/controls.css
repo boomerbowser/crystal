@@ -1,0 +1,158 @@
+/* Resin is the interaction plane. Haze is a separate, inset reading fill.
+   Context light stays beneath Haze: nested white wells must not erase Resin. */
+:root{--cr-control-light:color-mix(in srgb,var(--cr-glow) 12.6%,transparent);--cr-control-color:color-mix(in srgb,var(--cr-decorative) 8.4%,transparent);--cr-control-edge:color-mix(in srgb,var(--cr-outline) 18%,transparent);}
+:root[data-crystal-mode=dark]{--cr-control-light:color-mix(in srgb,var(--cr-glow) 9.8%,transparent);--cr-control-color:color-mix(in srgb,var(--cr-decorative) 7%,transparent);}
+:root body :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status){position:relative;isolation:isolate;background:var(--cr-resin-fill);color:var(--cr-text);border:1px solid var(--cr-rim);box-shadow:inset 0 2px 1px var(--cr-rim),inset 0 -1px 1px var(--cr-rim),0 5px 9px #080b2412,0 16px 30px #080b2420;backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));-webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));filter:none;}
+:root body :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::before{content:'';position:absolute;inset:8px;z-index:-1;pointer-events:none;border-radius:inherit;background:var(--cr-haze-fill);filter:blur(var(--cr-haze-feather));box-shadow:none;}
+:root body :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after{content:'';position:absolute;inset:0;z-index:-2;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent 20%,#ffffff30 43%,#ffffff0a 55%,transparent 72%),radial-gradient(ellipse at 12% 0%,var(--cr-control-light),transparent 75%),linear-gradient(135deg,var(--cr-control-color),transparent 60%,var(--cr-control-light));background-size:220% 100%,100% 100%,100% 100%;background-position:100% 0;box-shadow:inset 0 2px 1px var(--cr-rim),inset 0 -1px 1px var(--cr-rim);}
+/* Feather only the chromatic paint, beneath Haze. The parent retains the crisp optical rim. */
+:root body :is(button:not(.swatch),a.cr-button,.cr-control)::after{inset:2px;filter:blur(2px);box-shadow:none;}
+:root body :is(button,a.cr-button){min-height:48px;}
+:root body :is(button,a.cr-button):hover{background:var(--cr-resin-fill);filter:none;}
+:root body :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true]){color:var(--cr-on-primary);}
+:root body :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true])::before{background:var(--cr-primary);filter:none;}
+:root body :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true]){text-decoration:none;}
+:root body .cr-button.danger{color:var(--cr-text);border-color:var(--cr-rim);}
+:root body .cr-button.danger::before{background:var(--cr-haze-fill);}
+/* Circular badges carry state; native semantics remain authoritative. */
+:root body .cr-field-shell{display:inline-flex;align-items:center;min-width:0;border-radius:20px;padding:8px;vertical-align:middle;}
+:root body .cr-field-shell:has(.cr-input){width:100%;}
+:root body .cr-field-shell :is(input,select,textarea){position:relative;background:transparent;border:0;box-shadow:none;border-radius:12px;min-width:0;color:var(--cr-text);min-height:44px;max-width:100%;}
+:root body select option{background:var(--cr-surface);color:var(--cr-text);}
+:root body .cr-field-shell:focus-within{outline:3px solid var(--cr-primary);outline-offset:4px;}
+:root body .cr-field-shell :focus-visible{outline:0;}
+/* Compact controls have a luminous shell and a contained contrast-bearing mark.
+   The mark identifies the control without a dark wire around the outer material. */
+:root body input:is([type=checkbox],[type=radio]){appearance:none;width:26px;height:26px;flex:none;vertical-align:middle;border:1px solid var(--cr-rim);border-radius:9px;background:linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);backdrop-filter:blur(20px);box-shadow:inset 0 2px 2px var(--cr-rim),0 2px 3px var(--cr-control-edge),0 5px 10px #080b2426;display:inline-grid;place-items:center;}
+:root body input[type=radio]{border-radius:50%;}
+:root body input:is([type=checkbox],[type=radio])::after{content:'';box-sizing:border-box;width:14px;height:14px;border:2px solid var(--cr-primary);border-radius:4px;background:var(--cr-surface);}
+:root body input[type=radio]::after{border-radius:50%;}
+:root body input[type=checkbox]:checked::after{content:'✓';font-size:14px;font-weight:800;background:var(--cr-primary);color:var(--cr-on-primary);border:0;line-height:18px;width:18px;height:18px;text-align:center;}
+:root body input[type=radio]:checked::after{background:var(--cr-primary);box-shadow:inset 0 0 0 3px var(--cr-surface);}
+:root body .suite-switch input{position:absolute;opacity:0;width:44px;height:28px;}
+:root body .switch-track{border:1px solid var(--cr-rim);background:linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);box-shadow:inset 0 2px 1px var(--cr-rim),0 4px 10px #080b2426;backdrop-filter:blur(20px);}
+:root body .switch-thumb{background:var(--cr-surface);border:0;box-shadow:inset 0 0 0 2px var(--cr-primary),inset 0 2px 1px var(--cr-rim),0 3px 5px #080b2433;}
+:root body .suite-switch input:checked+.switch-track{background:linear-gradient(90deg,var(--cr-primary-soft),var(--cr-control-light)),var(--cr-resin-fill);}
+:root body input[type=range]{appearance:none;background:transparent;min-height:32px;--cr-range-progress:50%;}
+:root body input[type=range]::-webkit-slider-runnable-track{height:8px;border:0;border-radius:99px;background:linear-gradient(to right,var(--cr-primary) 0 var(--cr-range-progress),var(--cr-primary-soft) var(--cr-range-progress) 100%);box-shadow:0 -1px 0 var(--cr-rim),0 2px 4px var(--cr-control-edge);}
+:root body input[type=range]::-webkit-slider-thumb{appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;border:2px solid var(--cr-rim);background:radial-gradient(circle,var(--cr-primary) 0 3px,var(--cr-surface) 3.5px 7px,transparent 8px),linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);box-shadow:inset 0 2px 1px var(--cr-rim),0 2px 4px var(--cr-control-edge),0 5px 10px #080b2433;}
+:root body input[type=range]::-moz-range-track{height:8px;border:0;border-radius:99px;background:var(--cr-primary-soft);box-shadow:0 -1px 0 var(--cr-rim),0 2px 4px var(--cr-control-edge);}
+:root body input[type=range]::-moz-range-progress{height:8px;border-radius:99px;background:var(--cr-primary);}
+:root body input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;border:2px solid var(--cr-rim);background:radial-gradient(circle,var(--cr-primary) 0 3px,var(--cr-surface) 3.5px 7px,transparent 8px),linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);box-shadow:inset 0 2px 1px var(--cr-rim),0 2px 4px var(--cr-control-edge),0 5px 10px #080b2433;}
+:root[dir=rtl] body input[type=range]::-webkit-slider-runnable-track{background:linear-gradient(to left,var(--cr-primary) 0 var(--cr-range-progress),var(--cr-primary-soft) var(--cr-range-progress) 100%);}
+:root body .swatch::before{inset:8px;background:transparent;filter:none;}
+:root body .palette-card::before{display:none;}
+:root body .swatch{color:var(--cr-text);text-shadow:0 0 2px var(--cr-surface);}
+[data-effects=opaque] body :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status){background:var(--cr-surface);backdrop-filter:none;-webkit-backdrop-filter:none;}
+[data-effects=opaque] body :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after{display:none;}
+@media(prefers-reduced-transparency:reduce){:root body :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status){background:var(--cr-surface);backdrop-filter:none;-webkit-backdrop-filter:none}:root body :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after{display:none}}
+@media(forced-colors:active){:root body :is(button,a.cr-button,.cr-control,.cr-field-shell,input){background:Canvas!important;color:CanvasText!important;border:1px solid ButtonText;box-shadow:none;backdrop-filter:none}:root body :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::before,:root body :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after{display:none}:root body input:is([type=checkbox],[type=radio]){appearance:auto}:root body input:is([type=checkbox],[type=radio])::after{display:none}}
+
+:root body .cr-resin-haze{border-radius:18px;padding:16px;line-height:1.5;}
+:root body .cr-status{--cr-outline:var(--status-ink);padding:10px 14px;min-height:36px;}
+:root body .cr-tag{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border-radius:99px;font-size:13px;font-weight:700;}
+
+:root body nav a.cr-control{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:99px;min-height:44px;text-decoration:none;}
+:root body nav a.cr-control[aria-current]{text-decoration:none;}
+:root body input[type=file]::file-selector-button{min-height:44px;padding:10px 16px;border:1px solid var(--cr-rim);border-radius:99px;color:var(--cr-text);background:linear-gradient(var(--cr-haze-fill),var(--cr-haze-fill)) padding-box,var(--cr-resin-fill);box-shadow:inset 1px 1px 2px #fffc,0 4px 8px #0002;margin-right:8px;cursor:pointer;}
+/* Palette colors are specimen content inside the Resin control, not its shell. */
+:root body .swatch::before{inset:5px;background:var(--swatch);border-radius:inherit;filter:none;}
+
+:root body .palette-card::before{display:block;}
+
+/* Broad Resin frame, soft inset fill, and one shared plane for grouped actions. */
+:root body .cr-button{padding:15px 24px;}
+:root body .export-controls .cr-button{padding-inline:14px;}
+:root body .cr-field-shell{box-shadow:inset 0 2px 1px var(--cr-rim),0 3px 5px var(--cr-control-edge),0 12px 24px #080b241c;}
+:root body :is(.cr-tag,.cr-resin-haze){padding:17px 24px;}
+:root body .cr-tag{min-height:48px;}
+:root body :is(.cr-dock,.segmented,.suite-tabs){position:relative;isolation:isolate;background:var(--cr-resin-fill);border:1px solid var(--cr-rim);border-radius:999px;padding:9px;gap:4px;box-shadow:inset 0 2px 1px var(--cr-rim),0 5px 9px #080b2412,0 16px 30px #080b2420;backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));}
+:root body :is(.cr-dock,.segmented,.suite-tabs)::before{content:'';position:absolute;inset:8px;border-radius:inherit;z-index:-1;background:var(--cr-haze-fill);filter:blur(var(--cr-haze-feather));pointer-events:none;}
+:root body .cr-dock-inner{background:transparent;padding:0;isolation:auto;}
+:root body .cr-dock-inner::before{display:none;}
+:root body :is(.cr-dock,.segmented,.suite-tabs) button{border:0;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:999px;color:var(--cr-text);}
+:root body :is(.cr-dock,.segmented,.suite-tabs) button::before,:root body :is(.cr-dock,.segmented,.suite-tabs) button::after{display:none;}
+:root body :is(.cr-dock,.segmented,.suite-tabs) button:is([aria-pressed=true],[aria-selected=true]){background:var(--cr-primary);color:var(--cr-on-primary);box-shadow:0 3px 7px #080b2426;}
+:root body .cr-dock button{min-height:52px;padding:13px 18px;}
+:root body .segmented button{min-height:44px;padding-inline:16px;}
+:root body .suite-tabs{gap:2px;}
+:root body .suite-tabs button{min-height:44px;padding:8px 16px;}
+:root body :is(.cr-dock,.segmented,.suite-tabs) button:focus-visible{outline:3px solid var(--cr-primary);outline-offset:3px;}
+:root body .suite-menu button{border:0;box-shadow:none;}
+:root body .suite-menu button::before,:root body .suite-menu button::after{display:none;}
+:root body .suite-menu button[aria-checked=true]{background:var(--cr-primary);color:var(--cr-on-primary);}
+:root body .swatch{min-height:28px;}
+:root body .swatch[aria-pressed=true],:root body .palette-card[aria-pressed=true]{color:var(--cr-text);}
+:root body .palette-card[aria-pressed=true]::before{background:var(--cr-haze-fill);}
+@media(max-width:600px){:root body .cr-dock{padding:7px}:root body .cr-dock button{padding:10px 9px;font-size:11px;min-height:44px}:root body .suite-tabs{padding:7px}:root body .suite-tabs button{padding:8px 5px}}
+[data-effects=opaque] body :is(.cr-dock,.segmented,.suite-tabs){background:var(--cr-surface);backdrop-filter:none;}
+@media(prefers-reduced-transparency:reduce){:root body :is(.cr-dock,.segmented,.suite-tabs){background:var(--cr-surface);backdrop-filter:none}}
+@media(forced-colors:active){:root body :is(.cr-dock,.segmented,.suite-tabs){background:Canvas;border:1px solid ButtonText;box-shadow:none;backdrop-filter:none}:root body :is(.cr-dock,.segmented,.suite-tabs)::before{display:none}:root body :is(.cr-dock,.segmented,.suite-tabs) button:is([aria-pressed=true],[aria-selected=true]){background:Highlight!important;color:HighlightText!important}}
+/* Specimen swatches retain their actual colors; they are not reading wells. */
+:root body button.swatch{min-height:32px;height:32px;}
+:root body button.swatch::before{background:var(--swatch);filter:none;inset:5px;}
+:root body button.palette-card[aria-pressed=true]{color:var(--cr-text);}
+:root body button.palette-card[aria-pressed=true]::before{background:var(--cr-haze-fill);}
+/* Native fields retain their material paint; badges identify entry and requirements. */
+:root body span.cr-field-shell{border-color:var(--cr-rim);}
+:root body span.cr-field-shell::after{background-image:radial-gradient(ellipse at 12% 0%,var(--cr-control-light),transparent 75%),linear-gradient(135deg,var(--cr-control-color),transparent 60%,var(--cr-control-light));background-size:100% 100%,100% 100%;background-position:0 0,0 0;background-repeat:no-repeat;}
+:root body span.cr-field-shell:has([aria-invalid=true])::after{background-image:radial-gradient(ellipse at 12% 0%,var(--cr-control-light),transparent 75%),linear-gradient(135deg,var(--cr-control-color),transparent 60%,var(--cr-control-light));}
+:root body span.cr-status{border-color:var(--cr-rim);border-radius:18px;padding:12px 18px;}
+:root body span.cr-status>span{display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:50%;background:var(--status-surface);color:var(--status-ink);font-weight:800;}
+/* Content boundaries are gentle; functional contrast belongs to the controls. */
+:root body :is(.suite-list li,.cr-dialog,.recipe-specimen.cr-resin,.recipe-specimen.cr-frost){border-color:var(--cr-rim);}
+:root body .suite-list li{background:var(--cr-haze-fill);box-shadow:0 3px 8px var(--cr-control-edge);}
+[data-effects=opaque] body span.cr-field-shell::after{display:none;}
+@media(prefers-reduced-transparency:reduce){:root body span.cr-field-shell::after{display:none;}}
+@media(forced-colors:active){:root body span.cr-field-shell{border:1px solid ButtonText}:root body span.cr-field-shell::after{display:none}:root body .switch-track{border:1px solid ButtonText;background:Canvas}:root body .switch-thumb{background:ButtonText}:root body input[type=range]{appearance:auto}:root body input[type=range]::-webkit-slider-runnable-track{background:CanvasText}:root body input[type=range]::-webkit-slider-thumb{background:ButtonText;border-color:Canvas}:root body span.cr-status>span{background:Canvas;color:CanvasText}}
+
+
+/* An immediate, contrast-bearing core sits inside a lightly feathered halo.
+   Focus changes the elevation shadow's hue without blurring any foreground. */
+:root{--cr-focus-core:var(--cr-primary);--cr-focus-feather-1:color-mix(in srgb,var(--cr-primary) 46%,transparent);--cr-focus-feather-2:color-mix(in srgb,var(--cr-primary) 30%,transparent);--cr-focus-feather-3:color-mix(in srgb,var(--cr-primary) 17%,transparent);--cr-focus-feather-4:color-mix(in srgb,var(--cr-primary) 8%,transparent);--cr-focus-shadow:color-mix(in srgb,var(--cr-decorative) 27%,transparent);--cr-focus-ring:0 0 6px 2px var(--cr-focus-feather-1),0 0 16px 6px var(--cr-focus-feather-2),0 0 30px 12px var(--cr-focus-feather-3),0 0 54px 22px var(--cr-focus-feather-4),0 8px 18px var(--cr-focus-feather-2),0 22px 40px var(--cr-focus-shadow);}
+/* Dark mode needs more light in the feather to read against a deep canvas. */
+:root[data-crystal-mode=dark]{--cr-focus-feather-1:color-mix(in srgb,var(--cr-primary) 56%,transparent);--cr-focus-feather-2:color-mix(in srgb,var(--cr-primary) 38%,transparent);--cr-focus-feather-3:color-mix(in srgb,var(--cr-primary) 22%,transparent);--cr-focus-feather-4:color-mix(in srgb,var(--cr-primary) 11%,transparent);}
+:root body :is(button,a,input,select,textarea,summary,[tabindex]):focus-visible,
+:root body span.cr-field-shell:focus-within,
+:root body .suite-switch input:focus-visible+.switch-track,
+:root body :is(.cr-dock,.segmented,.suite-tabs) button:focus-visible{outline:2px solid var(--cr-focus-core);outline-offset:3px;box-shadow:inset 0 2px 1px var(--cr-rim),var(--cr-focus-ring);}
+:root body span.cr-field-shell :is(input,select,textarea):focus-visible{outline:0;box-shadow:none;}
+/* Each indicator is a small Resin shell with its own Haze reading fill. */
+:root body .cr-indicator{position:absolute;isolation:isolate;display:grid;place-items:center;inset-block-start:-4px;inset-inline-end:-3px;width:20px;height:20px;min-width:20px;border-radius:50%;border:1px solid var(--cr-rim);background:var(--cr-resin-fill);backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));box-shadow:inset 0 1px 1px var(--cr-rim),0 2px 4px var(--cr-control-edge),0 4px 8px #080b2426;color:var(--cr-text);font:800 12px/1 var(--cr-font);z-index:2;pointer-events:none;text-decoration:none;text-shadow:none;}
+:root body .cr-indicator::before{content:'';position:absolute;inset:3px;z-index:-1;border-radius:50%;background:var(--cr-haze-fill);filter:blur(1px);}
+/* A check mark means validated or informational, never "this one is selected".
+   Selection is a leading rail plus label weight; location is a dot; activity an ellipsis. */
+:root body .cr-indicator:is([data-kind=selection],[data-kind=current],[data-kind=busy]){display:none;}
+:root body [aria-current]:not([aria-current=false])>.cr-indicator[data-kind=current]{display:grid;}
+:root body [aria-busy=true]>.cr-indicator[data-kind=busy]{display:grid;}
+:root body .cr-indicator[data-kind=current]::after{content:'●';font-size:9px;}
+:root body .cr-indicator[data-kind=busy]::after{content:'…';font-size:14px;}
+/* The rail is absolutely positioned inside existing padding, so selecting an item
+   never reflows its group. currentColor resolves to the tested on-primary ink. */
+:root body :is([aria-pressed=true],[aria-selected=true],[aria-checked=true])>.cr-indicator[data-kind=selection]{display:block;inset-block-start:50%;inset-inline-end:auto;inset-inline-start:7px;transform:translateY(-50%);width:3px;height:15px;min-width:3px;border:0;border-radius:99px;background:currentColor;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;}
+:root body .cr-indicator[data-kind=selection]::before,:root body .cr-indicator[data-kind=selection]::after{content:none;display:none;}
+:root body :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true],[role=tab][aria-selected=true]){font-weight:800;}
+/* Round specimen swatches cannot carry a rail; they take a ring gap instead. */
+:root body button.swatch>.cr-indicator[data-kind=selection]{display:none;}
+:root body button.swatch[aria-pressed=true]{box-shadow:inset 0 0 0 3px var(--cr-surface),0 0 0 2px var(--cr-primary);}
+/* Card-shaped selections anchor the rail to the label row, not the artwork. */
+:root body .palette-card[aria-pressed=true]>.cr-indicator[data-kind=selection]{inset-block-start:auto;inset-block-end:14px;inset-inline-start:10px;transform:none;height:13px;background:var(--cr-primary);}
+:root body span.cr-field-shell{padding-inline-end:40px;}
+:root body span.cr-field-shell>.cr-indicator{inset-block-start:50%;inset-inline-end:10px;transform:translateY(-50%);width:24px;height:24px;}
+:root body span.cr-field-shell>.cr-indicator::after{content:'○';font-size:15px;}
+:root body span.cr-field-shell:focus-within>.cr-indicator::after{content:'●';font-size:9px;}
+:root body span.cr-field-shell:has(:is([required],[aria-required=true]))>.cr-indicator::after{content:'*';font-size:19px;}
+:root body span.cr-field-shell:has([aria-invalid=true])>.cr-indicator::after{content:'!';font-size:15px;}
+:root body :is(button[aria-pressed],button[aria-selected],button[aria-checked],a.cr-control[aria-current]){text-decoration:none;}
+
+:root body .palette-card[aria-pressed=true] strong::after{content:none;}
+:root body #suite-chip[aria-pressed=true]::after{content:'';}
+:root body .suite-menu button[aria-checked=true]::after{content:none;}
+[data-effects=opaque] body .cr-indicator{background:var(--cr-surface);backdrop-filter:none;}
+[data-effects=opaque] body .cr-indicator::before{filter:none;}
+@media(prefers-reduced-transparency:reduce){:root body .cr-indicator{background:var(--cr-surface);backdrop-filter:none}:root body .cr-indicator::before{filter:none}}
+@media(forced-colors:active){:root body .cr-indicator{background:Canvas;color:CanvasText;border:1px solid ButtonText;box-shadow:none;backdrop-filter:none}:root body .cr-indicator::before{display:none}:root body :is(button,a,input,select,textarea,summary,[tabindex]):focus-visible,:root body span.cr-field-shell:focus-within,:root body .suite-switch input:focus-visible+.switch-track,:root body :is(.cr-dock,.segmented,.suite-tabs) button:focus-visible{outline:2px solid Highlight;box-shadow:none}}
+
+/* Pill padding is generous by default; narrow viewports keep the shape but stop
+   short labels from wrapping inside the capsule. */
+@media(max-width:600px){:root body .tiny-button{padding:8px 14px;white-space:nowrap}:root body .cr-tag{padding:10px 15px;min-height:40px;white-space:nowrap}}

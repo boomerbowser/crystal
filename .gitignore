@@ -1,0 +1,10 @@
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+.playwright-mcp/
+.remember/
+.DS_Store
+
+# Build artifact: regenerate with design-system/tools/package.py
+design-system/crystal-design-system.zip
