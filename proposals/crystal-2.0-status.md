@@ -64,8 +64,8 @@ Material specifications may only improve, never regress. The default position is
 | Proposal item | Task | Status |
 | --- | --- | --- |
 | Visual regression harness | 14 | in progress — `compare-captures.py` exists and gated task 4; the frame set and capture script remain |
-| Right-to-left as a first-class axis | 15 | not started |
-| Forced-colour and reduced-transparency evidence | 16 | not started |
+| Right-to-left as a first-class axis | 15 | done — primitives use logical properties; mirroring verified and captured |
+| Forced-colour and reduced-transparency evidence | 16 | done for reduced transparency, which caught a real defect; forced-colours capture still to do |
 | Keep the existing contrast and integrity checks | — | done — unchanged at 1716 checks, 0 failures |
 
 ### F. Governance
@@ -87,6 +87,8 @@ Material specifications may only improve, never regress. The default position is
 | G4 | Icon set vendored, licensed, normalised, existing symbols intact | passed |
 
 ## Notes carried forward
+
+- Adding the reduced-transparency axis immediately caught a defect that four full-effects frames had missed: selected controls rendered white-on-white at 1:1 contrast. A visual gate is only as good as the states it covers.
 
 - The regression capture from gate G2 is kept deliberately as evidence: it is the clearest illustration that unlayered CSS beats every layer, which is the behaviour products rely on and the behaviour a page's own scaffolding must opt out of.
 - The DOM-mutation blocker is cleared. `controls.js` now only reads state and sets attributes on elements that already exist, so a framework binding can replace it wholesale against the same headless core.
