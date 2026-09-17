@@ -160,4 +160,24 @@ span.cr-field-shell:has([aria-invalid=true])>.cr-indicator::after{content:'!';fo
 /* Pill padding is generous by default; narrow viewports keep the shape but stop
    short labels from wrapping inside the capsule. */
 @media(max-width:600px){.tiny-button{padding:8px 14px;white-space:nowrap}.cr-tag{padding:10px 15px;min-height:40px;white-space:nowrap}}
+
+/* Tables are reading content, so they sit on Haze inside a Resin-rimmed shell
+   rather than a grid of hard rules. Cells carry a single hairline separator and
+   the header keeps the tested primary-soft ink pair. Text stays crisp: only the
+   shell's fill layer is feathered. */
+.cr-table{position:relative;isolation:isolate;display:block;overflow:auto;max-width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--cr-rim);border-radius:var(--cr-radius);background:var(--cr-resin-fill);box-shadow:var(--cr-shadow-content);backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));-webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));}
+.cr-table::before{content:'';position:absolute;inset:6px;z-index:-1;pointer-events:none;border-radius:inherit;background:var(--cr-haze-fill);filter:blur(var(--cr-haze-feather));}
+.cr-table :is(th,td){border:0;border-bottom:1px solid var(--cr-edge);padding:14px 18px;text-align:start;vertical-align:top;background:transparent;}
+.cr-table thead th{position:sticky;top:0;z-index:1;background:var(--cr-primary-soft);color:var(--cr-on-primary-soft);font-weight:800;border-bottom:0;}
+.cr-table thead th:first-child{border-start-start-radius:calc(var(--cr-radius) - 8px);}
+.cr-table thead th:last-child{border-start-end-radius:calc(var(--cr-radius) - 8px);}
+.cr-table tbody tr:last-child :is(th,td){border-bottom:0;}
+.cr-table tbody tr:hover :is(th,td){background:var(--cr-label-fill);}
+.cr-table caption{caption-side:top;text-align:start;padding:14px 18px 6px;font-size:13px;color:var(--cr-muted);}
+[data-effects=opaque] .cr-table{background:var(--cr-surface);backdrop-filter:none;-webkit-backdrop-filter:none;}
+[data-effects=opaque] .cr-table::before{display:none;}
+@media(prefers-reduced-transparency:reduce){.cr-table{background:var(--cr-surface);backdrop-filter:none;-webkit-backdrop-filter:none}.cr-table::before{display:none}}
+@media(forced-colors:active){.cr-table{background:Canvas;border:1px solid CanvasText;box-shadow:none;backdrop-filter:none}.cr-table::before{display:none}.cr-table :is(th,td){border-bottom:1px solid CanvasText}.cr-table thead th{background:Canvas;color:CanvasText;border-bottom:1px solid CanvasText}}
+@media(max-width:600px){.cr-table :is(th,td){padding:11px 13px}}
+
 }
