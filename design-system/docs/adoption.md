@@ -42,7 +42,26 @@ Set `data-crystal-mode="dark"` or `"light"` on the root HTML element to select a
 
 The product adapter supplies layout, padding and placement (at least 12px of inset for content on feathered fills): the snippet shows material assignment, not a complete application. Set `data-window-active="false"` on a foundation to select its neutral opaque inactive state; remove the attribute or set it to `"true"` to restore contextual tint. Wire this to supported host activation events where available. The browser study uses a manual switch and does not infer desktop activation or capture wallpaper.
 
-The primitive stylesheet includes element-level typography, focus and box-sizing rules intended for a Crystal product root. Review them when introducing Crystal into an existing application; scope these rules in your adapter if the page contains unrelated embedded products. `--cr-` variables are namespaced, but generic element selectors are not a CSS isolation boundary.
+The primitive stylesheet includes element-level typography, focus and box-sizing rules intended for a Crystal product root.
+
+## Cascade layers
+
+Crystal's stylesheets are organised into cascade layers, declared once at the top of the primitive stylesheet in precedence order:
+
+```css
+@layer crystal.reset, crystal.base, crystal.component, crystal.override;
+```
+
+| Layer | Holds | Who writes it |
+| --- | --- | --- |
+| `crystal.reset` | Element-level defaults for a Crystal product root | Crystal |
+| `crystal.base` | The consuming page's own layout and typography, which Crystal's components win over | You |
+| `crystal.component` | Crystal's controls and material surfaces | Crystal |
+| `crystal.override` | Deliberate overrides that beat Crystal's components | You |
+
+**An ordinary unlayered rule in your own stylesheet beats every layer.** Overriding Crystal no longer requires out-specifying it: `.cr-button { border-radius: 4px }` is enough. Use `crystal.override` when you want an override that still loses to your own unlayered rules, and `crystal.base` for page styles Crystal's components should win over.
+
+If your page has inline `<style>` blocks that Crystal's components are expected to win over, declare them into `crystal.base`. Unlayered styles take precedence over all layers, which is usually what you want for product code and occasionally surprising for a page's own scaffolding. Review them when introducing Crystal into an existing application; scope these rules in your adapter if the page contains unrelated embedded products. `--cr-` variables are namespaced, but generic element selectors are not a CSS isolation boundary.
 
 ## Runtime adoption
 

@@ -1,3 +1,4 @@
+@layer crystal.base {
 @property --cr-flow-reach{syntax:'<percentage>';inherits:false;initial-value:100%}
 @keyframes cr-soft-flow-in{from{opacity:0;--cr-flow-reach:0%}to{opacity:1;--cr-flow-reach:100%}}
 @keyframes cr-soft-flow-out{from{opacity:1;--cr-flow-reach:100%}to{opacity:0;--cr-flow-reach:0%}}
@@ -35,3 +36,4 @@ html[data-motion=reduce] .cr-dialog::backdrop{animation:none!important}
 .cr-dialog[data-flow-soft=true][data-closing]::backdrop{mask-image:radial-gradient(ellipse 150% 150% at var(--flow-exit-x) var(--flow-exit-y),#000 calc(var(--cr-flow-reach) - 14%),transparent var(--cr-flow-reach));animation-name:cr-soft-flow-out}
 html[data-motion=reduce] .cr-dialog::backdrop{mask-image:none;animation:none!important}
 @media(prefers-reduced-motion:reduce){.cr-dialog::backdrop{mask-image:none;animation:none!important}}
+}

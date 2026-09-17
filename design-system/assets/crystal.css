@@ -1,3 +1,13 @@
+/* Crystal cascade layers, declared once and in precedence order.
+   reset     — element-level defaults Crystal sets on a product root
+   base      — the consuming page's own layout and typography
+   component — Crystal's controls and material surfaces, which win over base
+   override  — reserved for the consuming product
+   Unlayered CSS beats every layer, so a product needs no specificity contest
+   to override Crystal: an ordinary rule in its own stylesheet is enough. */
+@layer crystal.reset, crystal.base, crystal.component, crystal.override;
+
+@layer crystal.reset {
 @font-face{font-family:Manrope;src:url('fonts/manrope.woff2') format('woff2');font-weight:200 800;font-display:swap}
 /* Crystal 1.0: framework-independent primitives. Theme variables are supplied by
    crystal-theme.css or by a configuration exported from the playground. */
@@ -77,4 +87,5 @@
 /* Mirage draws its chroma from the actual backdrop, never an invented overlay gradient. */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fallback-fill)}
+}
 }
