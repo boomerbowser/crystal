@@ -147,15 +147,25 @@ A gate is a point where the work stops if verification fails, because everything
 - [ ] **Step 3:** Add a searchable gallery to the components chapter, reading `manifest.json`.
 - [ ] **Step 4:** Verify in the browser, both modes. Commit.
 
-### Task 10: Wave 1 component contracts
+### Task 10: The component catalogue
+
+Parity is measured against the most fully-featured libraries in use — Mantine, Ant Design and MUI — not against a shorter list Crystal finds convenient. That is roughly 110-120 components.
 
 **Files:**
-- Modify: `design-system/docs/components.md`
+- Create: `design-system/tokens/catalogue/*.json` (one file per category)
+- Create: `design-system/tools/build-catalogue.cjs`
+- Create: `design-system/docs/catalogue.md` (generated)
+- Create: `libraries/parity.json` (generated)
 
-- [ ] **Step 1:** Add contracts for the eleven components that already have motion recipes but no anatomy: accordion, breadcrumb, carousel, skeleton, chip, drag affordance, reorderable list, caption, hint, copy-confirm, reaction.
-- [ ] **Step 2:** Each row states anatomy and states, the programmatic source, and explicitly what the product owns — per the decision that Crystal specifies appearance and products bring their own accessible primitives.
-- [ ] **Step 3:** Re-run the motion/spec cross-check; the eleven orphaned families must drop to zero.
-- [ ] **Step 4:** Rebuild docs, validate, commit.
+**Interfaces:**
+- Produces: a catalogue entry per component with `id`, `name`, `anatomy`, `states`, `material`, `geometry`, `semantics`, `crystal` (what the system supplies), `product` (what the product owns), optional `motion` recipe ids, and `parity` references naming the equivalent in other libraries.
+
+- [ ] **Step 1:** Author the catalogue as data, one JSON file per category, so every contract has the same shape and none can be half-written.
+- [ ] **Step 2:** Each entry states what Crystal supplies and what the product owns, following the decision that Crystal specifies appearance and products bring their own accessible primitives.
+- [ ] **Step 3:** Write the generator, emitting the specification chapter and the parity manifest from the same source.
+- [ ] **Step 4:** Assert every motion recipe family maps to a catalogue entry. The eleven orphaned families must drop to zero.
+- [ ] **Step 5:** Assert every catalogue entry carries a non-empty `crystal` and `product` statement, so no contract can be a placeholder.
+- [ ] **Step 6:** Add the chapter to the specification navigation. Rebuild, validate, commit.
 
 ### Task 11: Parity manifest and platform contract
 
@@ -177,3 +187,43 @@ A gate is a point where the work stops if verification fails, because everything
 - [ ] **Step 2:** Add `publishConfig` targeting GitHub Packages, private, and a `files` allowlist. Do not publish — that is a release step for the team to trigger.
 - [ ] **Step 3:** Document the versioning contract in the adoption chapter: what is public API, and the deprecate-then-remove rule.
 - [ ] **Step 4:** Rebuild, validate, commit.
+
+### Task 13: Deprecate the legacy material vocabulary
+
+**Files:**
+- Modify: `design-system/tools/build-tokens.cjs`, `design-system/assets/crystal.css`, `design-system/docs/adoption.md`
+
+- [ ] **Step 1:** Emit `--cr-acrylic-*`, `--cr-glass-*` and `--cr-mica-*` as generated aliases of the Frost, Resin and Plastic tokens, marked deprecated in the token source.
+- [ ] **Step 2:** Keep `.cr-acrylic` and `.cr-glass` as class aliases, documented as deprecated.
+- [ ] **Step 3:** Record the removal version in the adoption chapter and the changelog. Deprecate before removal; never remove in the same version that deprecates.
+- [ ] **Step 4:** Rebuild, confirm the theme CSS still contains both vocabularies, validate, commit.
+
+### Task 14: Visual regression harness
+
+**Files:**
+- Modify: `design-system/tools/compare-captures.py`
+- Create: `design-system/tools/capture-frames.mjs`, `design-system/validation/frames.json`
+
+- [ ] **Step 1:** Define the frame set as data: page, scroll anchor, palette, mode, density, effects and viewport.
+- [ ] **Step 2:** Write a capture script that drives a real browser over the frame set and writes PNGs.
+- [ ] **Step 3:** Compare against committed baselines with `compare-captures.py`; exit non-zero on any difference.
+- [ ] **Step 4:** Commit the baselines and document how to re-bless them deliberately.
+
+### Task 15: Right-to-left as a verified axis
+
+**Files:**
+- Modify: `design-system/assets/*.css`, `design-system/tools/validate.py`, `design-system/docs/accessibility.md`
+
+- [ ] **Step 1:** Audit every physical direction property and replace with logical properties where the meaning is directional.
+- [ ] **Step 2:** Confirm the directional bubble corner, the selection rail, field badges and the range track all mirror.
+- [ ] **Step 3:** Capture RTL frames in both modes and add them to the evidence.
+- [ ] **Step 4:** Add an RTL row to the verification report. Commit.
+
+### Task 16: Reduced-effect and forced-colour evidence
+
+**Files:**
+- Modify: `design-system/tools/report.py`, `design-system/validation/captures/`
+
+- [ ] **Step 1:** Capture reduced transparency, reduced motion and forced colours for the playground and one specification page.
+- [ ] **Step 2:** Add them to the report's evidence list, described as captures of the adaptations rather than as a conformance claim.
+- [ ] **Step 3:** Commit.
