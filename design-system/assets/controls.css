@@ -19,7 +19,7 @@
 :root body .cr-field-shell:has(.cr-input){width:100%;}
 :root body .cr-field-shell :is(input,select,textarea){position:relative;background:transparent;border:0;box-shadow:none;border-radius:12px;min-width:0;color:var(--cr-text);min-height:44px;max-width:100%;}
 :root body select option{background:var(--cr-surface);color:var(--cr-text);}
-:root body .cr-field-shell:focus-within{outline:3px solid var(--cr-primary);outline-offset:4px;}
+:root body .cr-field-shell:focus-within{outline:2px solid var(--cr-focus-core);outline-offset:3px;}
 :root body .cr-field-shell :focus-visible{outline:0;}
 /* Compact controls have a luminous shell and a contained contrast-bearing mark.
    The mark identifies the control without a dark wire around the outer material. */
@@ -77,10 +77,13 @@
 :root body .segmented button{min-height:44px;padding-inline:16px;}
 :root body .suite-tabs{gap:2px;}
 :root body .suite-tabs button{min-height:44px;padding:8px 16px;}
-:root body :is(.cr-dock,.segmented,.suite-tabs) button:focus-visible{outline:3px solid var(--cr-primary);outline-offset:3px;}
+
 :root body .suite-menu button{border:0;box-shadow:none;}
 :root body .suite-menu button::before,:root body .suite-menu button::after{display:none;}
 :root body .suite-menu button[aria-checked=true]{background:var(--cr-primary);color:var(--cr-on-primary);}
+/* Menu rows are left-aligned, so they reserve room for the selection rail on
+   every row — selected or not — rather than shifting the label when chosen. */
+:root body :is(.suite-menu,[role=menu]) button{padding-inline-start:24px;}
 :root body .swatch{min-height:28px;}
 :root body .swatch[aria-pressed=true],:root body .palette-card[aria-pressed=true]{color:var(--cr-text);}
 :root body .palette-card[aria-pressed=true]::before{background:var(--cr-haze-fill);}

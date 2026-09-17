@@ -4,7 +4,7 @@ Open [the interactive playground](index.html). This independent package extends 
 
 ## Visual acceptance baseline
 
-The [approved Crystal material studies](reference/approved-crystal/README.md) are the visual standard for all future work. Unexplained divergence is a defect. See [project guidelines](AGENTS.md).
+The [approved Crystal material studies](reference/approved-crystal/README.md) are the visual standard for all future work. Unexplained divergence is a defect. See the project guidelines in `AGENTS.md` at the repository root.
 
 ## Defining hierarchy
 
