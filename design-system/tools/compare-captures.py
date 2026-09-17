@@ -5,10 +5,26 @@ can become visually indistinguishable while every token and contrast check still
 passes. This decodes PNGs directly so the comparison needs no image library.
 
     python3 tools/compare-captures.py BEFORE.png AFTER.png [--tolerance N]
+                                     [--max-differing N]
 
 Exits non-zero when the images differ beyond the tolerance, so it can gate a
-build. --tolerance is the permitted per-channel delta, for captures where
-antialiasing differs harmlessly between runs; it defaults to 0.
+build. Both ceilings default to zero, which means exact equality: that is the
+right setting when proving that a change altered nothing, and it is how the
+gates in this project are run.
+
+The ceilings are deliberately separate rather than a single "percentage
+changed" figure, which would let a real change hide inside an allowance.
+
+  --tolerance      per-channel delta below which two pixels count as the same
+                   colour. Above 2 this stops describing rasterisation noise.
+  --max-differing  how many pixels may exceed --tolerance.
+  --visible-delta  the delta at which a difference is considered visible to a
+                   person. A single pixel beyond it fails the comparison no
+                   matter what --max-differing says.
+
+That last rule is what keeps the allowance honest: --max-differing forgives a
+scatter of near-invisible rasterisation dither, but it can never forgive a
+pixel that actually changed colour, however few of them there are.
 """
 import argparse
 import struct
@@ -71,14 +87,16 @@ def decode(path):
     return width, height, channels, bytes(out)
 
 
-def compare(before, after, tolerance=0):
+def compare(before, after, tolerance=0, visible_delta=24):
+    """Return (pixels over the tolerance, worst delta, pixels visibly changed)."""
     bw, bh, bc, ba = decode(before)
     aw, ah, ac, aa = decode(after)
     if (bw, bh) != (aw, ah):
-        return None, f"dimensions differ: {bw}x{bh} vs {aw}x{ah}"
+        return None, f"dimensions differ: {bw}x{bh} vs {aw}x{ah}", None
 
     differing = 0
     worst = 0
+    visible = 0
     step = min(bc, ac)
     for i in range(0, len(ba), bc):
         j = i // bc * ac
@@ -86,7 +104,9 @@ def compare(before, after, tolerance=0):
         if delta > tolerance:
             differing += 1
             worst = max(worst, delta)
-    return differing, worst
+            if delta > visible_delta:
+                visible += 1
+    return differing, worst, visible
 
 
 def main():
@@ -94,10 +114,18 @@ def main():
     parser.add_argument("before")
     parser.add_argument("after")
     parser.add_argument("--tolerance", type=int, default=0,
-                        help="permitted per-channel delta (default 0)")
+                        help="per-channel delta below which two pixels count as "
+                             "the same colour (default 0, meaning exact)")
+    parser.add_argument("--max-differing", type=int, default=0,
+                        help="how many pixels may exceed --tolerance before the "
+                             "comparison fails (default 0)")
+    parser.add_argument("--visible-delta", type=int, default=24,
+                        help="delta at which a change counts as visible; one such "
+                             "pixel fails regardless of --max-differing (default 24)")
     args = parser.parse_args()
 
-    differing, worst = compare(args.before, args.after, args.tolerance)
+    differing, worst, visible = compare(args.before, args.after,
+                                        args.tolerance, args.visible_delta)
     if differing is None:
         print(f"FAIL  {worst}")
         return 1
@@ -106,9 +134,25 @@ def main():
     if differing == 0:
         print(f"PASS  {name}: identical")
         return 0
+
     total = decode(args.before)[0] * decode(args.before)[1]
-    print(f"FAIL  {name}: {differing} of {total} pixels differ "
-          f"({differing / total * 100:.4f}%), worst channel delta {worst}")
+    summary = (f"{differing} of {total} pixels differ "
+               f"({differing / total * 100:.4f}%), worst channel delta {worst}")
+
+    if visible:
+        # Never forgiven by the allowance: something actually changed colour.
+        print(f"FAIL  {name}: {summary}; {visible} pixel(s) changed visibly "
+              f"(delta over {args.visible_delta})")
+        return 1
+
+    if differing <= args.max_differing:
+        # Within the declared noise allowance. Say so explicitly rather than
+        # printing "identical", because the images are not identical.
+        print(f"PASS  {name}: {summary}; within the allowance of "
+              f"{args.max_differing} pixels above a delta of {args.tolerance}")
+        return 0
+
+    print(f"FAIL  {name}: {summary}")
     return 1
 
 

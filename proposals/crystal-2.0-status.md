@@ -65,7 +65,7 @@ Material specifications may only improve, never regress. The default position is
 
 | Proposal item | Task | Status |
 | --- | --- | --- |
-| Visual regression harness | 14 | **partial** — `compare-captures.py` is done and has gated four tasks; the frame set is now data in `validation/frames.json` with a documented re-blessing procedure. The driver that walks that file automatically is **not written**: every frame so far was driven manually through a real browser. That is the remaining work. |
+| Visual regression harness | 14 | **done** — frame set as data (12 frames), `tools/capture-frames.mjs` drives a real browser over it, `tools/verify-frames.mjs` gates against 12 committed baselines, and the re-blessing procedure is documented. Proven deterministic: two independent runs compared identical on all 12. |
 | Right-to-left as a first-class axis | 15 | done — primitives use logical properties; mirroring verified and captured |
 | Forced-colour and reduced-transparency evidence | 16 | done — both axes captured, and each caught a real defect. Reduced transparency: white-on-white selected controls. Forced colours: the selected segment's label erased by Chromium's text backplate. |
 | Keep the existing contrast and integrity checks | — | done — unchanged at 1716 checks, 0 failures |
@@ -91,6 +91,8 @@ Material specifications may only improve, never regress. The default position is
 ## Notes carried forward
 
 - Adding the reduced-transparency axis immediately caught a defect that four full-effects frames had missed: selected controls rendered white-on-white at 1:1 contrast. A visual gate is only as good as the states it covers.
+
+- The harness needed a noise allowance and it was worth being careful about one. Captures are not bit-identical between runs: GPU rasterisation dithers gradients by a channel step or two, moving about a hundred pixels of one frame. The allowance forgives up to 400 pixels past a delta of 2, but `compare-captures.py` fails on **any** pixel past a delta of 24 regardless of the allowance, and `tests/visual-gate-contracts.py` proves it — one black pixel on a grey field still fails with the allowance set to a million. A percentage-changed threshold, the usual shortcut, would not have that property.
 
 - The forced-colours axis then caught a second defect the same way, and a subtler one: the selected segment used `background: Highlight; color: HighlightText`, which is the conventional pairing and passes any contrast calculation you run on it. It still rendered an unreadable black block, because Chromium paints an opaque `Canvas` text backplate above the element's own background, and in the dark palette `HighlightText` and `Canvas` are both black. No arithmetic check could have found this; only looking at the pixels did. Both defects argue the same thing — the value of a visual gate is in the axes it covers, which is why the frame set is now data.
 
