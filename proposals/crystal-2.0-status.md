@@ -70,6 +70,15 @@ Material specifications may only improve, never regress. The default position is
 | Forced-colour and reduced-transparency evidence | 16 | done — both axes captured, and each caught a real defect. Reduced transparency: white-on-white selected controls. Forced colours: the selected segment's label erased by Chromium's text backplate. |
 | Keep the existing contrast and integrity checks | — | done — unchanged at 1716 checks, 0 failures |
 
+### G. Motion (added after review, 2026-09-17)
+
+| Proposal item | Task | Status |
+| --- | --- | --- |
+| Spring physics as the portable primitive | 17 | not started |
+| Incompressible deformation (17 keyframes across 7 recipes) | 18 | not started |
+| Shader layer with a portable uniform contract | 19 | not started |
+| Motion and shader parity across platforms | 20 | not started |
+
 ### F. Governance
 
 | Proposal item | Task | Status |

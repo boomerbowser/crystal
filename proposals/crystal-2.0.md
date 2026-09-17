@@ -120,6 +120,78 @@ Adopt semantic versioning against a stated public contract (token names, class n
 
 ---
 
+## G. Motion: from timed curves to simulated material
+
+Added after the first 2.0 review, on Meridian's observation that the animations "feel as
+though they come from the early days of web animation", and that Resin in particular should
+"look and feel like the movements of a fluid".
+
+The criticism is correct, but the cause is not where it first appears. Crystal's motion is
+not naive — it already morphs border radius organically, travels light across a surface and
+holds Haze and Stone still while their feathered paint moves. Three specific things are
+missing, and each is measurable.
+
+### G1. Nothing has physics
+
+Every one of the 54 recipes is a fixed duration plus a cubic-bézier. That is the 2015 web
+idiom, and it has a behavioural consequence rather than merely an aesthetic one: a timed
+curve is not interruptible. Press a control while it is still settling and the animation
+restarts from a new zero rather than continuing from its current position and velocity.
+Real materials carry momentum; timed curves cannot represent it at all.
+
+Springs are also the only formulation that ports. `cubic-bezier` is a web primitive. A
+spring expressed as stiffness, damping and mass maps directly onto SwiftUI's
+`.spring(response:dampingFraction:)`, Compose's `spring(dampingRatio:stiffness:)` and every
+serious animation runtime. Since Crystal's purpose is parity across platform libraries,
+the portable formulation is the correct one.
+
+**Change:** add `spring: { stiffness, damping, mass }` to every recipe. Keep `duration` and
+`keyframes` unchanged, deriving `duration` from the spring's settling time and asserting the
+two agree. Existing consumers keep working; new ones get physics.
+
+### G2. Resin is compressible, and fluids are not
+
+This is why Resin reads as rubber. A fluid conserves volume: squeeze it on one axis and it
+must expand on the other, exactly enough. Seventeen keyframes across seven recipes break
+that rule — the press loses 3.74% of its area at peak, and the switch loses **13.75%**.
+
+A shape that loses area while deforming does not read as liquid. It reads as a rubber ball
+being crushed, because that is the physical behaviour being described. No amount of easing
+work fixes it; the geometry is wrong.
+
+**Change:** make every deformation area-preserving, so `scale(sx, sy)` satisfies `sx·sy = 1`
+within tolerance. This is a material improvement and is enforced by a validator, not by
+review. Amplitudes are preserved where they already conserve volume; where they do not, the
+dominant axis is kept and the other is derived.
+
+### G3. The optical layer is faked in CSS
+
+Resin's travelling light is a `background-position` sweep. Frost's diffusion is
+`backdrop-filter: blur()`. Both are competent approximations, and both stop short of what
+the material claims: refraction bends what is behind it, caustics concentrate light into
+moving bright curves, and a meniscus has surface tension at its edge. None of these can be
+expressed as a CSS gradient sweep.
+
+Meridian's component libraries will target platforms that all now expose programmable
+shading — WebGL2 and WebGPU on the web, Metal on Apple platforms, AGSL on Android. All three
+shading languages are GLSL-derived, so one authored fragment shader with a declared uniform
+contract ports mechanically.
+
+**Change:** add an optional `shader` layer to the material signatures that have optical
+claims — Resin refraction and caustics, Frost displacement, Mirage flow. Author them as GLSL
+with a declared uniform contract, and specify the degradation path explicitly: WebGL2 where
+available, the existing CSS approximation where not, and static paint under reduced motion.
+The shader is an enhancement of an already-correct surface, never a requirement for it.
+
+### What this must not do
+
+The standing constraint applies with full force. A material specification may be improved,
+never regressed. Springs must reproduce the existing keyframe positions when their physics
+is disabled; volume correction may change a deformation only in the direction of physical
+accuracy; and no shader may alter the resting appearance of any surface, because the resting
+recipes are the approved visual baseline. Gate G5 exists to prove the first of these
+mechanically.
+
 ## What does not change
 
 The identity. Plastic → Frost → Resin and the six named materials; the recommended defaults (atmosphere 90%, Frost tint 35%, elevation 125%, radius 28px, Resin 20%, Haze 80% at 1.95px); the six palettes with independent status colours; Manrope at 16/24 reading rhythm; the motion timings and the 5s ceiling; and the four approved baseline studies as the acceptance standard.

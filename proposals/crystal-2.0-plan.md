@@ -28,6 +28,8 @@ A gate is a point where the work stops if verification fails, because everything
 | G2 after Task 4 | Preview renders identically under cascade layers; six reference frames match |
 | G3 after Task 7 | Preview runs on the headless core with zero DOM mutation |
 | G4 after Task 9 | Icon set vendored, licensed, normalised, and every existing symbol still resolves |
+| G5 after Task 17 | With spring physics disabled, every recipe reproduces its existing keyframes exactly; the twelve committed baselines still match |
+| G6 after Task 19 | With WebGL2 unavailable, the preview renders exactly the committed baselines: a shader is an enhancement, never a requirement |
 
 ---
 
@@ -227,3 +229,40 @@ Parity is measured against the most fully-featured libraries in use — Mantine,
 - [ ] **Step 1:** Capture reduced transparency, reduced motion and forced colours for the playground and one specification page.
 - [ ] **Step 2:** Add them to the report's evidence list, described as captures of the adaptations rather than as a conformance claim.
 - [ ] **Step 3:** Commit.
+
+### Task 17: Spring physics for every recipe
+
+**Files:** `tokens/motion-recipes.json`, `assets/core/spring.js` (create),
+`tools/validate-motion.cjs`, `tests/core-contracts.cjs`
+
+- [ ] **Step 1** — Write `assets/core/spring.js` as pure derivation, no DOM: `settleTime({stiffness, damping, mass})` returning milliseconds to rest within 0.1%, and `sampleSpring(spec, t)` returning normalised displacement. Same UMD pattern as `state.js`.
+- [ ] **Step 2** — Write the failing contract tests: a critically damped spring must not overshoot; an underdamped one must; settle time must rise as stiffness falls; reduced motion must resolve to zero regardless of spring.
+- [ ] **Step 3** — Add `spring: {stiffness, damping, mass}` to all 54 recipes, chosen so the derived settle time matches the authored `duration` within 15%. Do not change `duration` or `keyframes`.
+- [ ] **Step 4** — Extend `validate-motion.cjs` to assert every recipe has a spring and that derived settle time and authored duration agree within tolerance. Document that the authored bound (2000ms) and the runtime ceiling (5000ms, after the user speed factor) are different limits.
+- [ ] **Step 5** — **GATE G5.** With springs disabled, every recipe renders exactly its existing keyframes. Prove with `npm run verify:visual` against committed baselines.
+
+### Task 18: Make deformation incompressible
+
+**Files:** `tokens/motion-recipes.json`, `tools/validate-motion.cjs`, `assets/motion.js`
+
+- [ ] **Step 1** — Write the failing validator: every `scale(sx, sy)` in a recipe keyframe must satisfy `|sx·sy − 1| ≤ 0.005`. Expect 17 failures across 7 recipes.
+- [ ] **Step 2** — Correct each one by keeping the dominant axis and deriving the other as its reciprocal, so the intended amplitude is preserved and only the compressibility error is removed.
+- [ ] **Step 3** — Apply the same rule to the inline deformations in `assets/motion.js` (the Resin preset and the `::before` morphs).
+- [ ] **Step 4** — Re-bless the affected baselines, recording in the capture README that the change is a deliberate material improvement with the before and after areas stated.
+
+### Task 19: The shader layer
+
+**Files:** `assets/shaders/*.frag` (create), `assets/shaders/manifest.json` (create), `assets/motion-shaders.js` (create), `docs/motion.md`
+
+- [ ] **Step 1** — Author the uniform contract first, as `assets/shaders/manifest.json`: every shader declares the uniforms it consumes (`u_time`, `u_resolution`, `u_pressure`, `u_contact`, `u_tint`), its material, and its degradation path. The contract is the portable artefact; the GLSL is one implementation of it.
+- [ ] **Step 2** — Write the fragment shaders: Resin refraction, Resin caustics, Frost displacement, Mirage flow.
+- [ ] **Step 3** — Write `motion-shaders.js`: attach to a surface only when WebGL2 is available, `prefers-reduced-motion` is not set, and the element is visible. Never required for correctness — the CSS approximation remains the floor.
+- [ ] **Step 4** — Prove degradation: with WebGL2 unavailable the page must render exactly the committed baselines. This is the gate that keeps the shader an enhancement.
+
+### Task 20: Motion parity across platforms
+
+**Files:** `libraries/CONTRACT.md`, `libraries/parity.json`, `tools/build-catalogue.cjs`
+
+- [ ] **Step 1** — Extend the contract with a motion section: springs are the portable primitive, with the mapping to SwiftUI, Compose and Motion stated explicitly.
+- [ ] **Step 2** — State the shader mapping — GLSL to Metal Shading Language and AGSL — and that the uniform contract, not the GLSL, is what a platform must honour.
+- [ ] **Step 3** — Emit motion and shader parity into `parity.json` from the same source, so it cannot drift from the recipes.
