@@ -26,6 +26,31 @@ for p in pages:
         for attr in ('aria-labelledby','aria-describedby'):
             for ident in el.get(attr,'').split():
                 if ident not in ids:errors.append(f'{p.name}: missing ARIA target {ident}')
+# Every sprite symbol a page references must exist, and every icon the manifest
+# names must be present. A missing symbol renders as nothing at all, which no
+# link check catches because the file itself resolves.
+sprite=(ROOT/'assets/icons.svg').read_text()
+sprite_ids=set(re.findall(r'<symbol[^>]*id="([^"]+)"',sprite))
+used=set()
+for p_ in pages:
+    for m in re.finditer(r'href="([^"]*icons\.svg)#([^"]+)"',p_.read_text()):
+        used.add(m.group(2))
+        if m.group(2) not in sprite_ids:
+            errors.append(f'{p_.relative_to(ROOT)}: sprite has no symbol #{m.group(2)}')
+manifest_path=ROOT/'assets/icons/manifest.json'
+icons_checked=0
+if manifest_path.exists():
+    manifest=json.loads(manifest_path.read_text())
+    for icon in manifest['icons']:
+        if icon['source']=='crystal':
+            if icon['id'] not in sprite_ids:
+                errors.append(f"manifest: original symbol {icon['id']} missing from the sprite")
+        elif not (ROOT/'assets/icons'/f"{icon['id']}.svg").exists():
+            errors.append(f"manifest: {icon['id']}.svg missing from assets/icons")
+        icons_checked+=1
+    if manifest['total']!=len(manifest['icons']):
+        errors.append('manifest: total does not match the icon list')
+
 for css in (ROOT/'assets').glob('*.css'):
     if re.search(r'(?im)^\s*<(?:!doctype|html\b)',css.read_text()):errors.append(f'{css.name}: HTML in stylesheet')
     for raw in re.findall(r'url\([\'"]?([^\)\'\"]+)',css.read_text()):
@@ -34,7 +59,7 @@ for css in (ROOT/'assets').glob('*.css'):
 manifest=json.loads((ROOT/'reference/provenance.json').read_text())
 for item in manifest['files']:
     if hashlib.sha256((ROOT/item['copy']).read_bytes()).hexdigest()!=item['sha256']:errors.append('Changed source copy: '+item['copy'])
-report={'scope':'Static artifact integrity; not product or complete WCAG validation','htmlPages':len(pages),'localLinksAndAssets':links,'preservedSourceCopies':len(manifest['files']),'errors':errors}
+report={'scope':'Static artifact integrity; not product or complete WCAG validation','htmlPages':len(pages),'localLinksAndAssets':links,'iconsChecked':icons_checked,'preservedSourceCopies':len(manifest['files']),'errors':errors}
 (ROOT/'validation/artifact-checks.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))
 raise SystemExit(bool(errors))

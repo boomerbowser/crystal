@@ -1,0 +1,6089 @@
+{
+  "$description": "Crystal icon set. Every icon is a 24px view box with 1.8px strokes, round caps and joins, and currentColor, so it inherits tested foreground colours. Stroke width, caps and joins are supplied by the stylesheet and are deliberately absent from the files.",
+  "grid": {
+    "viewBox": "0 0 24 24",
+    "strokeWidth": 1.8,
+    "linecap": "round",
+    "linejoin": "round"
+  },
+  "total": 1011,
+  "sources": {
+    "crystal": {
+      "count": 13,
+      "license": "Original work"
+    },
+    "lucide": {
+      "count": 998,
+      "license": "ISC",
+      "notice": "reference/licenses/lucide-LICENSE.txt"
+    }
+  },
+  "icons": [
+    {
+      "id": "a-arrow-down",
+      "name": "A Arrow Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "a-arrow-up",
+      "name": "A Arrow Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "accessibility",
+      "name": "Accessibility",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "activity-square",
+      "name": "Activity Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "air-vent",
+      "name": "Air Vent",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "alarm-check",
+      "name": "Alarm Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "alarm-clock-check",
+      "name": "Alarm Clock Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "alarm-clock-off",
+      "name": "Alarm Clock Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "alarm-minus",
+      "name": "Alarm Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "alarm-smoke",
+      "name": "Alarm Smoke",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "alert",
+      "name": "Alert",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "alert-circle",
+      "name": "Alert Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "alert-triangle",
+      "name": "Alert Triangle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-center-horizontal",
+      "name": "Align Center Horizontal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-end-horizontal",
+      "name": "Align End Horizontal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-horizontal-distribute-center",
+      "name": "Align Horizontal Distribute Center",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-horizontal-distribute-end",
+      "name": "Align Horizontal Distribute End",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-horizontal-justify-center",
+      "name": "Align Horizontal Justify Center",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-horizontal-justify-start",
+      "name": "Align Horizontal Justify Start",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-horizontal-space-between",
+      "name": "Align Horizontal Space Between",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-left",
+      "name": "Align Left",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-start-horizontal",
+      "name": "Align Start Horizontal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-vertical-distribute-center",
+      "name": "Align Vertical Distribute Center",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-vertical-distribute-start",
+      "name": "Align Vertical Distribute Start",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-vertical-justify-end",
+      "name": "Align Vertical Justify End",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "align-vertical-space-around",
+      "name": "Align Vertical Space Around",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ambulance",
+      "name": "Ambulance",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ampersands",
+      "name": "Ampersands",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "anchor",
+      "name": "Anchor",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "angry",
+      "name": "Angry",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "annoyed",
+      "name": "Annoyed",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "anvil",
+      "name": "Anvil",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "app-window",
+      "name": "App Window",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "archive",
+      "name": "Archive",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "archive-x",
+      "name": "Archive X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "armchair",
+      "name": "Armchair",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-big-down-dash",
+      "name": "Arrow Big Down Dash",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-big-left-dash",
+      "name": "Arrow Big Left Dash",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-big-right-dash",
+      "name": "Arrow Big Right Dash",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-big-up-dash",
+      "name": "Arrow Big Up Dash",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-down-01",
+      "name": "Arrow Down 01",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-down-a-z",
+      "name": "Arrow Down A Z",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-down-circle",
+      "name": "Arrow Down Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-down-left",
+      "name": "Arrow Down Left",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-down-left-from-square",
+      "name": "Arrow Down Left From Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-down-left-square",
+      "name": "Arrow Down Left Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-down-right",
+      "name": "Arrow Down Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-down-right-from-square",
+      "name": "Arrow Down Right From Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-down-square",
+      "name": "Arrow Down Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-down-to-line",
+      "name": "Arrow Down To Line",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-down-wide-narrow",
+      "name": "Arrow Down Wide Narrow",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-down-za",
+      "name": "Arrow Down Za",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-left-circle",
+      "name": "Arrow Left Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-left-right",
+      "name": "Arrow Left Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-left-to-line",
+      "name": "Arrow Left To Line",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-right-circle",
+      "name": "Arrow Right Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-right-left",
+      "name": "Arrow Right Left",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-right-to-line",
+      "name": "Arrow Right To Line",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-up-01",
+      "name": "Arrow Up 01",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-up-10",
+      "name": "Arrow Up 10",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-up-az",
+      "name": "Arrow Up Az",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-up-down",
+      "name": "Arrow Up Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-up-from-line",
+      "name": "Arrow Up From Line",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-up-left-from-circle",
+      "name": "Arrow Up Left From Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-up-left-square",
+      "name": "Arrow Up Left Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-up-right",
+      "name": "Arrow Up Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-up-right-from-square",
+      "name": "Arrow Up Right From Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-up-square",
+      "name": "Arrow Up Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-up-wide-narrow",
+      "name": "Arrow Up Wide Narrow",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "arrow-up-za",
+      "name": "Arrow Up Za",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "asterisk",
+      "name": "Asterisk",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "astroid",
+      "name": "Astroid",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "atom",
+      "name": "Atom",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "attention",
+      "name": "Attention",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "audio-lines-off",
+      "name": "Audio Lines Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "audio-lines-x",
+      "name": "Audio Lines X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "award",
+      "name": "Award",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "axis-3-d",
+      "name": "Axis 3 D",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "baby",
+      "name": "Baby",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "badge",
+      "name": "Badge",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "badge-cent",
+      "name": "Badge Cent",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "badge-dollar-sign",
+      "name": "Badge Dollar Sign",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "badge-help",
+      "name": "Badge Help",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "badge-info",
+      "name": "Badge Info",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "badge-minus",
+      "name": "Badge Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "badge-plus",
+      "name": "Badge Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "badge-question-mark",
+      "name": "Badge Question Mark",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "badge-swiss-franc",
+      "name": "Badge Swiss Franc",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "badge-x",
+      "name": "Badge X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "baggage-claim",
+      "name": "Baggage Claim",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ban",
+      "name": "Ban",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bandage",
+      "name": "Bandage",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "banknote-arrow-down",
+      "name": "Banknote Arrow Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "banknote-check",
+      "name": "Banknote Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bar-chart",
+      "name": "Bar Chart",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bar-chart-horizontal",
+      "name": "Bar Chart Horizontal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "barcode",
+      "name": "Barcode",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "baseline",
+      "name": "Baseline",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "battery",
+      "name": "Battery",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "battery-full",
+      "name": "Battery Full",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "battery-medium",
+      "name": "Battery Medium",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "battery-warning",
+      "name": "Battery Warning",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bean",
+      "name": "Bean",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bed",
+      "name": "Bed",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bed-double",
+      "name": "Bed Double",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "beef",
+      "name": "Beef",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "beer",
+      "name": "Beer",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bell",
+      "name": "Bell",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bell-dot",
+      "name": "Bell Dot",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bell-minus",
+      "name": "Bell Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bell-plus",
+      "name": "Bell Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "between-horizonal-end",
+      "name": "Between Horizonal End",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "between-horizontal-end",
+      "name": "Between Horizontal End",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "between-vertical-end",
+      "name": "Between Vertical End",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "biceps-flexed",
+      "name": "Biceps Flexed",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "binary",
+      "name": "Binary",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "biohazard",
+      "name": "Biohazard",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "birdhouse",
+      "name": "Birdhouse",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "blend",
+      "name": "Blend",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "blinds",
+      "name": "Blinds",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bluetooth",
+      "name": "Bluetooth",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bluetooth-off",
+      "name": "Bluetooth Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bold",
+      "name": "Bold",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bomb",
+      "name": "Bomb",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bone-fracture",
+      "name": "Bone Fracture",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-a",
+      "name": "Book A",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-audio",
+      "name": "Book Audio",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-check",
+      "name": "Book Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-down",
+      "name": "Book Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-heart",
+      "name": "Book Heart",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-key",
+      "name": "Book Key",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-marked",
+      "name": "Book Marked",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-open",
+      "name": "Book Open",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-open-check",
+      "name": "Book Open Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-plus",
+      "name": "Book Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-template",
+      "name": "Book Template",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-type",
+      "name": "Book Type",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "book-user",
+      "name": "Book User",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bookmark",
+      "name": "Bookmark",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bookmark-minus",
+      "name": "Bookmark Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bookmark-plus",
+      "name": "Bookmark Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "boom-box",
+      "name": "Boom Box",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bot-message-square",
+      "name": "Bot Message Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bottle-wine",
+      "name": "Bottle Wine",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "box",
+      "name": "Box",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "boxes",
+      "name": "Boxes",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "brackets",
+      "name": "Brackets",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "brain",
+      "name": "Brain",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "brain-cog",
+      "name": "Brain Cog",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "brick-wall-fire",
+      "name": "Brick Wall Fire",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bridge",
+      "name": "Bridge",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "briefcase-business",
+      "name": "Briefcase Business",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "briefcase-medical",
+      "name": "Briefcase Medical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "broccoli",
+      "name": "Broccoli",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "broom-sparkles",
+      "name": "Broom Sparkles",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "brush-cleaning",
+      "name": "Brush Cleaning",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bug",
+      "name": "Bug",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bug-play",
+      "name": "Bug Play",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "building-complex",
+      "name": "Building Complex",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "bus",
+      "name": "Bus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cable",
+      "name": "Cable",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cake",
+      "name": "Cake",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cake-slice",
+      "name": "Cake Slice",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "calendar",
+      "name": "Calendar",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "calendar-arrow-up",
+      "name": "Calendar Arrow Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "calendar-chevrons-right",
+      "name": "Calendar Chevrons Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "calendar-cog",
+      "name": "Calendar Cog",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "calendar-fold",
+      "name": "Calendar Fold",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "calendar-minus",
+      "name": "Calendar Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "calendar-plus",
+      "name": "Calendar Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "calendar-search",
+      "name": "Calendar Search",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "calendar-x",
+      "name": "Calendar X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "camera",
+      "name": "Camera",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "can",
+      "name": "Can",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "candlestick-chart",
+      "name": "Candlestick Chart",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "candy-cane",
+      "name": "Candy Cane",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "candy-off",
+      "name": "Candy Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cannabis-off",
+      "name": "Cannabis Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "captions-off",
+      "name": "Captions Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "car-battery",
+      "name": "Car Battery",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "car-taxi-front",
+      "name": "Car Taxi Front",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "card-sim",
+      "name": "Card Sim",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "carton",
+      "name": "Carton",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "case-lower",
+      "name": "Case Lower",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "case-upper",
+      "name": "Case Upper",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cast",
+      "name": "Cast",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cat",
+      "name": "Cat",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cctv-off",
+      "name": "Cctv Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chart-bar",
+      "name": "Chart Bar",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chart-bar-decreasing",
+      "name": "Chart Bar Decreasing",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chart-bar-stacked",
+      "name": "Chart Bar Stacked",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chart-candlestick",
+      "name": "Chart Candlestick",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chart-column-big",
+      "name": "Chart Column Big",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chart-column-increasing",
+      "name": "Chart Column Increasing",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chart-gantt",
+      "name": "Chart Gantt",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chart-network",
+      "name": "Chart Network",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chart-no-axes-column-decreasing",
+      "name": "Chart No Axes Column Decreasing",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chart-no-axes-combined",
+      "name": "Chart No Axes Combined",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chart-pie",
+      "name": "Chart Pie",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chart-spline",
+      "name": "Chart Spline",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "check",
+      "name": "Check",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "check-check",
+      "name": "Check Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "check-line",
+      "name": "Check Line",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chef-hat",
+      "name": "Chef Hat",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chess-bishop",
+      "name": "Chess Bishop",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chess-knight",
+      "name": "Chess Knight",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chess-pawn",
+      "name": "Chess Pawn",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chess-rook",
+      "name": "Chess Rook",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chevron",
+      "name": "Chevron",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "chevron-down-circle",
+      "name": "Chevron Down Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chevron-first",
+      "name": "Chevron First",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chevron-left",
+      "name": "Chevron Left",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chevron-left-square",
+      "name": "Chevron Left Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chevron-right-circle",
+      "name": "Chevron Right Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chevron-up",
+      "name": "Chevron Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chevron-up-square",
+      "name": "Chevron Up Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chevrons-down-up",
+      "name": "Chevrons Down Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chevrons-left-right",
+      "name": "Chevrons Left Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chevrons-right",
+      "name": "Chevrons Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "chevrons-up",
+      "name": "Chevrons Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "church",
+      "name": "Church",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cigarette-off",
+      "name": "Cigarette Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle",
+      "name": "Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-check",
+      "name": "Circle Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-dashed-check",
+      "name": "Circle Dashed Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-dollar-sign",
+      "name": "Circle Dollar Sign",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-ellipsis",
+      "name": "Circle Ellipsis",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-euro",
+      "name": "Circle Euro",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-fading-plus",
+      "name": "Circle Fading Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-help",
+      "name": "Circle Help",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-off",
+      "name": "Circle Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-parking-off",
+      "name": "Circle Parking Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-percent",
+      "name": "Circle Percent",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-play",
+      "name": "Circle Play",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-pound-sterling",
+      "name": "Circle Pound Sterling",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-question-mark",
+      "name": "Circle Question Mark",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-slash",
+      "name": "Circle Slash",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-small",
+      "name": "Circle Small",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-stop",
+      "name": "Circle Stop",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circle-user-round",
+      "name": "Circle User Round",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "circuit-board",
+      "name": "Circuit Board",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clapperboard",
+      "name": "Clapperboard",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clef-bass",
+      "name": "Clef Bass",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clipboard",
+      "name": "Clipboard",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clipboard-clock",
+      "name": "Clipboard Clock",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clipboard-edit",
+      "name": "Clipboard Edit",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clipboard-minus",
+      "name": "Clipboard Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clipboard-pen",
+      "name": "Clipboard Pen",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clipboard-plus",
+      "name": "Clipboard Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clipboard-type",
+      "name": "Clipboard Type",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clock",
+      "name": "Clock",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clock-10",
+      "name": "Clock 10",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clock-12",
+      "name": "Clock 12",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clock-arrow-down",
+      "name": "Clock Arrow Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clock-arrow-right",
+      "name": "Clock Arrow Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clock-check",
+      "name": "Clock Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clock-plus",
+      "name": "Clock Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cloud-backup",
+      "name": "Cloud Backup",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cloud-cog",
+      "name": "Cloud Cog",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cloud-drizzle",
+      "name": "Cloud Drizzle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cloud-hail",
+      "name": "Cloud Hail",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cloud-moon",
+      "name": "Cloud Moon",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cloud-off",
+      "name": "Cloud Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cloud-rain-wind",
+      "name": "Cloud Rain Wind",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cloud-snow",
+      "name": "Cloud Snow",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cloud-sun-rain",
+      "name": "Cloud Sun Rain",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cloud-upload",
+      "name": "Cloud Upload",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "clover",
+      "name": "Clover",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "code",
+      "name": "Code",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "code-xml",
+      "name": "Code Xml",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cog",
+      "name": "Cog",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "columns",
+      "name": "Columns",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "columns-settings",
+      "name": "Columns Settings",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "command",
+      "name": "Command",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "component",
+      "name": "Component",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "concierge-bell",
+      "name": "Concierge Bell",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "construction",
+      "name": "Construction",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "contact-round",
+      "name": "Contact Round",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "contrast",
+      "name": "Contrast",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "conversation",
+      "name": "Conversation",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "cookie",
+      "name": "Cookie",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "copy",
+      "name": "Copy",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "copy-minus",
+      "name": "Copy Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "copy-slash",
+      "name": "Copy Slash",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "copyleft",
+      "name": "Copyleft",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "corner-down-left",
+      "name": "Corner Down Left",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "corner-left-down",
+      "name": "Corner Left Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "corner-right-down",
+      "name": "Corner Right Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "corner-up-left",
+      "name": "Corner Up Left",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cpu",
+      "name": "Cpu",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "credit-card",
+      "name": "Credit Card",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "credit-card-minus",
+      "name": "Credit Card Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "credit-card-reader",
+      "name": "Credit Card Reader",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "croissant",
+      "name": "Croissant",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "crop",
+      "name": "Crop",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "crosshair",
+      "name": "Crosshair",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "crystal",
+      "name": "Crystal",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "cuboid",
+      "name": "Cuboid",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "cupcake",
+      "name": "Cupcake",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "currency",
+      "name": "Currency",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "dam",
+      "name": "Dam",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "database-arrow-down",
+      "name": "Database Arrow Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "database-backup",
+      "name": "Database Backup",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "database-minus",
+      "name": "Database Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "database-search",
+      "name": "Database Search",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "database-zap",
+      "name": "Database Zap",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "decimals-arrow-right",
+      "name": "Decimals Arrow Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "dessert",
+      "name": "Dessert",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "diamond",
+      "name": "Diamond",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "diamond-percent",
+      "name": "Diamond Percent",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "diamond-plus",
+      "name": "Diamond Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "diff",
+      "name": "Diff",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "directions",
+      "name": "Directions",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "disc-album",
+      "name": "Disc Album",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "divide-circle",
+      "name": "Divide Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "dna",
+      "name": "Dna",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "dock",
+      "name": "Dock",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "document",
+      "name": "Document",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "dollar-sign",
+      "name": "Dollar Sign",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "donut",
+      "name": "Donut",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "door-closed-locked",
+      "name": "Door Closed Locked",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "door-open",
+      "name": "Door Open",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "dot",
+      "name": "Dot",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "download",
+      "name": "Download",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "drafting-compass",
+      "name": "Drafting Compass",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "drill",
+      "name": "Drill",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "drone",
+      "name": "Drone",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "droplet-off",
+      "name": "Droplet Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "drum",
+      "name": "Drum",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "dumbbell",
+      "name": "Dumbbell",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ear-off",
+      "name": "Ear Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "earth-lock",
+      "name": "Earth Lock",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "edit",
+      "name": "Edit",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "egg-fried",
+      "name": "Egg Fried",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "eject",
+      "name": "Eject",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ellipsis",
+      "name": "Ellipsis",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "engine",
+      "name": "Engine",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "equal-approximately",
+      "name": "Equal Approximately",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "equal-not",
+      "name": "Equal Not",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "eraser",
+      "name": "Eraser",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "euro",
+      "name": "Euro",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ev-charger",
+      "name": "Ev Charger",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "external-link",
+      "name": "External Link",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "eye-closed",
+      "name": "Eye Closed",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "face-angry",
+      "name": "Face Angry",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "face-grinning",
+      "name": "Face Grinning",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "face-slightly-frowning",
+      "name": "Face Slightly Frowning",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "face-slightly-smiling-plus",
+      "name": "Face Slightly Smiling Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "fan",
+      "name": "Fan",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "faucet",
+      "name": "Faucet",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "fence",
+      "name": "Fence",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file",
+      "name": "File",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-audio",
+      "name": "File Audio",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-axis-3d",
+      "name": "File Axis 3d",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-bar-chart",
+      "name": "File Bar Chart",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-box",
+      "name": "File Box",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-braces-corner",
+      "name": "File Braces Corner",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-chart-column-increasing",
+      "name": "File Chart Column Increasing",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-chart-pie",
+      "name": "File Chart Pie",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-check-corner",
+      "name": "File Check Corner",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-code",
+      "name": "File Code",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-cog",
+      "name": "File Cog",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-digit",
+      "name": "File Digit",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-edit",
+      "name": "File Edit",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-headphone",
+      "name": "File Headphone",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-image",
+      "name": "File Image",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-json",
+      "name": "File Json",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-line-chart",
+      "name": "File Line Chart",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-minus",
+      "name": "File Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-music",
+      "name": "File Music",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-output",
+      "name": "File Output",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-pen-line",
+      "name": "File Pen Line",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-play",
+      "name": "File Play",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-plus-corner",
+      "name": "File Plus Corner",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-question-mark",
+      "name": "File Question Mark",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-search",
+      "name": "File Search",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-signal",
+      "name": "File Signal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-sliders",
+      "name": "File Sliders",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-stack",
+      "name": "File Stack",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-terminal",
+      "name": "File Terminal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-type",
+      "name": "File Type",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-up",
+      "name": "File Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-video",
+      "name": "File Video",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-volume",
+      "name": "File Volume",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-warning",
+      "name": "File Warning",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "file-x-corner",
+      "name": "File X Corner",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "film",
+      "name": "Film",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "filter-x",
+      "name": "Filter X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "fingerprint-pattern",
+      "name": "Fingerprint Pattern",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "fish",
+      "name": "Fish",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "fish-symbol",
+      "name": "Fish Symbol",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "fishing-rod",
+      "name": "Fishing Rod",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "flag-off",
+      "name": "Flag Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "flag-triangle-right",
+      "name": "Flag Triangle Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "flame-kindling",
+      "name": "Flame Kindling",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "flashlight-off",
+      "name": "Flashlight Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "flask-conical-off",
+      "name": "Flask Conical Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "flip-horizontal",
+      "name": "Flip Horizontal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "flower",
+      "name": "Flower",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "focus",
+      "name": "Focus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "fold-vertical",
+      "name": "Fold Vertical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-archive",
+      "name": "Folder Archive",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-check",
+      "name": "Folder Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-closed",
+      "name": "Folder Closed",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-cog",
+      "name": "Folder Cog",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-down",
+      "name": "Folder Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-git",
+      "name": "Folder Git",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-input",
+      "name": "Folder Input",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-key",
+      "name": "Folder Key",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-minus",
+      "name": "Folder Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-open-dot",
+      "name": "Folder Open Dot",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-pen",
+      "name": "Folder Pen",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-root",
+      "name": "Folder Root",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-search",
+      "name": "Folder Search",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-sync",
+      "name": "Folder Sync",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folder-up",
+      "name": "Folder Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "folders",
+      "name": "Folders",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "fork-knife",
+      "name": "Fork Knife",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "forklift",
+      "name": "Forklift",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "form-input",
+      "name": "Form Input",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "frame",
+      "name": "Frame",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "fuel",
+      "name": "Fuel",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "function-square",
+      "name": "Function Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "funnel-plus",
+      "name": "Funnel Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "galaxy",
+      "name": "Galaxy",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "gallery-horizontal-end",
+      "name": "Gallery Horizontal End",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "gallery-vertical",
+      "name": "Gallery Vertical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "gamepad",
+      "name": "Gamepad",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "gamepad-directional",
+      "name": "Gamepad Directional",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "gantt-chart-square",
+      "name": "Gantt Chart Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "gap-vertical",
+      "name": "Gap Vertical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "gauge-circle",
+      "name": "Gauge Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "gem",
+      "name": "Gem",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "germ",
+      "name": "Germ",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ghost",
+      "name": "Ghost",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "git-branch",
+      "name": "Git Branch",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "git-branch-plus",
+      "name": "Git Branch Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "git-commit-horizontal",
+      "name": "Git Commit Horizontal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "git-compare",
+      "name": "Git Compare",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "git-fork",
+      "name": "Git Fork",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "git-merge",
+      "name": "Git Merge",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "git-pull-request",
+      "name": "Git Pull Request",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "git-pull-request-arrow",
+      "name": "Git Pull Request Arrow",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "git-pull-request-create",
+      "name": "Git Pull Request Create",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "git-pull-request-draft",
+      "name": "Git Pull Request Draft",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "glasses",
+      "name": "Glasses",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "globe-check",
+      "name": "Globe Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "globe-lock",
+      "name": "Globe Lock",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "globe-x",
+      "name": "Globe X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "gpu",
+      "name": "Gpu",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "graduation-cap",
+      "name": "Graduation Cap",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "grid",
+      "name": "Grid",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "grid-2-x-2-plus",
+      "name": "Grid 2 X 2 Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "grid-2x2",
+      "name": "Grid 2x2",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "grid-2x2-plus",
+      "name": "Grid 2x2 Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "grid-3x2",
+      "name": "Grid 3x2",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "grip",
+      "name": "Grip",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "grip-horizontal",
+      "name": "Grip Horizontal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "group",
+      "name": "Group",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ham",
+      "name": "Ham",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "hammer",
+      "name": "Hammer",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "hand-coins",
+      "name": "Hand Coins",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "hand-grab",
+      "name": "Hand Grab",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "hand-helping",
+      "name": "Hand Helping",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "hand-platter",
+      "name": "Hand Platter",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "handshake",
+      "name": "Handshake",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "hard-drive-download",
+      "name": "Hard Drive Download",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "hard-hat",
+      "name": "Hard Hat",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "hat-glasses",
+      "name": "Hat Glasses",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "hd",
+      "name": "Hd",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "heading",
+      "name": "Heading",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "headphone-off",
+      "name": "Headphone Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "headset",
+      "name": "Headset",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "heart-crack",
+      "name": "Heart Crack",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "heart-minus",
+      "name": "Heart Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "heart-plus",
+      "name": "Heart Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "heart-x",
+      "name": "Heart X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "helicopter",
+      "name": "Helicopter",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "helping-hand",
+      "name": "Helping Hand",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "highlighter",
+      "name": "Highlighter",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "home",
+      "name": "Home",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "hop-off",
+      "name": "Hop Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "hotel",
+      "name": "Hotel",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "hourglass-cog",
+      "name": "Hourglass Cog",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "house-heart",
+      "name": "House Heart",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "house-plus",
+      "name": "House Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "house-wifi",
+      "name": "House Wifi",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ice-cream",
+      "name": "Ice Cream",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ice-cream-cone",
+      "name": "Ice Cream Cone",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "id-card-lanyard",
+      "name": "Id Card Lanyard",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "image-down",
+      "name": "Image Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "image-off",
+      "name": "Image Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "image-plus",
+      "name": "Image Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "image-upscale",
+      "name": "Image Upscale",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "import",
+      "name": "Import",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "indent",
+      "name": "Indent",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "indent-increase",
+      "name": "Indent Increase",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "infinity",
+      "name": "Infinity",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "info",
+      "name": "Info",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "inspect",
+      "name": "Inspect",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "italic",
+      "name": "Italic",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "iteration-ccw",
+      "name": "Iteration Ccw",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "iv-bag",
+      "name": "Iv Bag",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "joystick",
+      "name": "Joystick",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "kanban-square",
+      "name": "Kanban Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "key",
+      "name": "Key",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "key-square",
+      "name": "Key Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "keyboard-music",
+      "name": "Keyboard Music",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "lambda",
+      "name": "Lambda",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "lamp-ceiling",
+      "name": "Lamp Ceiling",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "lamp-floor",
+      "name": "Lamp Floor",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "lamp-wall-up",
+      "name": "Lamp Wall Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "landmark",
+      "name": "Landmark",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "laptop",
+      "name": "Laptop",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "laptop-minimal-check",
+      "name": "Laptop Minimal Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "lasso-select",
+      "name": "Lasso Select",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "laugh",
+      "name": "Laugh",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "layer-arrow-up",
+      "name": "Layer Arrow Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "layers",
+      "name": "Layers",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "layers-arrow-down",
+      "name": "Layers Arrow Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "layers-minus",
+      "name": "Layers Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "layout",
+      "name": "Layout",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "layout-arrow-right",
+      "name": "Layout Arrow Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "layout-freeform",
+      "name": "Layout Freeform",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "layout-list",
+      "name": "Layout List",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "layout-panel-top",
+      "name": "Layout Panel Top",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "leaf",
+      "name": "Leaf",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "lectern",
+      "name": "Lectern",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "lens-convex",
+      "name": "Lens Convex",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "library",
+      "name": "Library",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "library-square",
+      "name": "Library Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "life-buoy",
+      "name": "Life Buoy",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "lightbulb",
+      "name": "Lightbulb",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "lighthouse",
+      "name": "Lighthouse",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "line-dot-right-horizontal",
+      "name": "Line Dot Right Horizontal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "line-style",
+      "name": "Line Style",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "link-2-off",
+      "name": "Link 2 Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-check",
+      "name": "List Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-chevrons-down-up",
+      "name": "List Chevrons Down Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-clock",
+      "name": "List Clock",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-end",
+      "name": "List End",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-filter-plus",
+      "name": "List Filter Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-indent-increase",
+      "name": "List Indent Increase",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-music",
+      "name": "List Music",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-plus",
+      "name": "List Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-sort-ascending",
+      "name": "List Sort Ascending",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-sort-descending",
+      "name": "List Sort Descending",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-todo",
+      "name": "List Todo",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-video",
+      "name": "List Video",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "loader",
+      "name": "Loader",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "loader-pinwheel",
+      "name": "Loader Pinwheel",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "locate-fixed",
+      "name": "Locate Fixed",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "location-edit",
+      "name": "Location Edit",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "lock-keyhole",
+      "name": "Lock Keyhole",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "lock-open",
+      "name": "Lock Open",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "log-out",
+      "name": "Log Out",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "lollipop",
+      "name": "Lollipop",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "m-square",
+      "name": "M Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mail",
+      "name": "Mail",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mail-check",
+      "name": "Mail Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mail-clock",
+      "name": "Mail Clock",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mail-open",
+      "name": "Mail Open",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mail-plus",
+      "name": "Mail Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mail-question-mark",
+      "name": "Mail Question Mark",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mail-warning",
+      "name": "Mail Warning",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mailbox",
+      "name": "Mailbox",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "map",
+      "name": "Map",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "map-pin",
+      "name": "Map Pin",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "map-pin-check-inside",
+      "name": "Map Pin Check Inside",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "map-pin-minus",
+      "name": "Map Pin Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "map-pin-off",
+      "name": "Map Pin Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "map-pin-plus",
+      "name": "Map Pin Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "map-pin-search",
+      "name": "Map Pin Search",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "map-pin-x-inside",
+      "name": "Map Pin X Inside",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "map-plus",
+      "name": "Map Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mars",
+      "name": "Mars",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "martini",
+      "name": "Martini",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "medal",
+      "name": "Medal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "megaphone-off",
+      "name": "Megaphone Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "memory-stick",
+      "name": "Memory Stick",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "menu-square",
+      "name": "Menu Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-circle",
+      "name": "Message Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-circle-code",
+      "name": "Message Circle Code",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-circle-heart",
+      "name": "Message Circle Heart",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-circle-off",
+      "name": "Message Circle Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-circle-question",
+      "name": "Message Circle Question",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-circle-reply",
+      "name": "Message Circle Reply",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-circle-x",
+      "name": "Message Circle X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-square-check",
+      "name": "Message Square Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-square-code",
+      "name": "Message Square Code",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-square-dot",
+      "name": "Message Square Dot",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-square-lock",
+      "name": "Message Square Lock",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-square-off",
+      "name": "Message Square Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-square-quote",
+      "name": "Message Square Quote",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-square-share",
+      "name": "Message Square Share",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "message-square-warning",
+      "name": "Message Square Warning",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "messages-circle",
+      "name": "Messages Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "metronome",
+      "name": "Metronome",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mic-audio-lines",
+      "name": "Mic Audio Lines",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mic-signal",
+      "name": "Mic Signal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "microchip",
+      "name": "Microchip",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "microwave",
+      "name": "Microwave",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "milestone",
+      "name": "Milestone",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "milk-off",
+      "name": "Milk Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "minimize",
+      "name": "Minimize",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "minus-circle",
+      "name": "Minus Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mirror-rectangular",
+      "name": "Mirror Rectangular",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "monitor",
+      "name": "Monitor",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "monitor-cloud",
+      "name": "Monitor Cloud",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "monitor-dot",
+      "name": "Monitor Dot",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "monitor-off",
+      "name": "Monitor Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "monitor-pc",
+      "name": "Monitor Pc",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "monitor-smartphone",
+      "name": "Monitor Smartphone",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "monitor-stop",
+      "name": "Monitor Stop",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "monitor-x",
+      "name": "Monitor X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "moon-star",
+      "name": "Moon Star",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mop-sparkles",
+      "name": "Mop Sparkles",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "more-vertical",
+      "name": "More Vertical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mosque",
+      "name": "Mosque",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mountain",
+      "name": "Mountain",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mouse",
+      "name": "Mouse",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mouse-off",
+      "name": "Mouse Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mouse-pointer-2-off",
+      "name": "Mouse Pointer 2 Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mouse-pointer-click",
+      "name": "Mouse Pointer Click",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "mouth",
+      "name": "Mouth",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "move",
+      "name": "Move",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "move-3d",
+      "name": "Move 3d",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "move-down",
+      "name": "Move Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "move-down-right",
+      "name": "Move Down Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "move-left",
+      "name": "Move Left",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "move-up",
+      "name": "Move Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "move-up-right",
+      "name": "Move Up Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "music",
+      "name": "Music",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "navigation",
+      "name": "Navigation",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "navigation-off",
+      "name": "Navigation Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "network",
+      "name": "Network",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "non-binary",
+      "name": "Non Binary",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "notebook-dot",
+      "name": "Notebook Dot",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "notebook-tabs",
+      "name": "Notebook Tabs",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "notepad-text",
+      "name": "Notepad Text",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "nut-off",
+      "name": "Nut Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "octagon-alert",
+      "name": "Octagon Alert",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "octagon-pause",
+      "name": "Octagon Pause",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "omega",
+      "name": "Omega",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "orbit",
+      "name": "Orbit",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "outdent",
+      "name": "Outdent",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "package-check",
+      "name": "Package Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "package-minus",
+      "name": "Package Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "package-plus",
+      "name": "Package Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "package-x",
+      "name": "Package X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "paint-roller",
+      "name": "Paint Roller",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "paintbrush-vertical",
+      "name": "Paintbrush Vertical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "palmtree",
+      "name": "Palmtree",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "panel-bottom",
+      "name": "Panel Bottom",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "panel-bottom-inactive",
+      "name": "Panel Bottom Inactive",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "panel-left",
+      "name": "Panel Left",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "panel-left-inactive",
+      "name": "Panel Left Inactive",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "panel-right",
+      "name": "Panel Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "panel-right-inactive",
+      "name": "Panel Right Inactive",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "panel-top",
+      "name": "Panel Top",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "panel-top-inactive",
+      "name": "Panel Top Inactive",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "panels-left-bottom",
+      "name": "Panels Left Bottom",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "panels-left-right",
+      "name": "Panels Left Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "panels-top-bottom",
+      "name": "Panels Top Bottom",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "paper-bag",
+      "name": "Paper Bag",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "parasol",
+      "name": "Parasol",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "park",
+      "name": "Park",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "parking-circle-off",
+      "name": "Parking Circle Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "parking-square",
+      "name": "Parking Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "party-popper",
+      "name": "Party Popper",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pause-circle",
+      "name": "Pause Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "paw-print",
+      "name": "Paw Print",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pen",
+      "name": "Pen",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pen-line",
+      "name": "Pen Line",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pen-square",
+      "name": "Pen Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pencil",
+      "name": "Pencil",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pencil-line",
+      "name": "Pencil Line",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pencil-ruler",
+      "name": "Pencil Ruler",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pentagon",
+      "name": "Pentagon",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "percent-circle",
+      "name": "Percent Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "percent-square",
+      "name": "Percent Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "phi",
+      "name": "Phi",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "phone",
+      "name": "Phone",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "phone-forwarded",
+      "name": "Phone Forwarded",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "phone-missed",
+      "name": "Phone Missed",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "phone-outgoing",
+      "name": "Phone Outgoing",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pi-square",
+      "name": "Pi Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pickaxe",
+      "name": "Pickaxe",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pie-chart",
+      "name": "Pie Chart",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pilcrow",
+      "name": "Pilcrow",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pilcrow-right",
+      "name": "Pilcrow Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pilcrow-square",
+      "name": "Pilcrow Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pill-bottle",
+      "name": "Pill Bottle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pin-off",
+      "name": "Pin Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pizza",
+      "name": "Pizza",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "plane-landing",
+      "name": "Plane Landing",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "plant-pot",
+      "name": "Plant Pot",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "play-circle",
+      "name": "Play Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "play-square",
+      "name": "Play Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "playing-cards",
+      "name": "Playing Cards",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "plug",
+      "name": "Plug",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "plus",
+      "name": "Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "plus-square",
+      "name": "Plus Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "podcast",
+      "name": "Podcast",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pointer",
+      "name": "Pointer",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "pointer-off",
+      "name": "Pointer Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "popsicle",
+      "name": "Popsicle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "power",
+      "name": "Power",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "power-off",
+      "name": "Power Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "presentation",
+      "name": "Presentation",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "printer-check",
+      "name": "Printer Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "projector",
+      "name": "Projector",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "puzzle",
+      "name": "Puzzle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "qr-code",
+      "name": "Qr Code",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "rabbit",
+      "name": "Rabbit",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "radiation",
+      "name": "Radiation",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "radio",
+      "name": "Radio",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "radio-receiver",
+      "name": "Radio Receiver",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "radius",
+      "name": "Radius",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "rat",
+      "name": "Rat",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ratio",
+      "name": "Ratio",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "receipt-cent",
+      "name": "Receipt Cent",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "receipt-indian-rupee",
+      "name": "Receipt Indian Rupee",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "receipt-pound-sterling",
+      "name": "Receipt Pound Sterling",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "receipt-swiss-franc",
+      "name": "Receipt Swiss Franc",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "receipt-turkish-lira",
+      "name": "Receipt Turkish Lira",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "rectangle-ellipsis",
+      "name": "Rectangle Ellipsis",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "rectangle-horizontal",
+      "name": "Rectangle Horizontal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "recycle",
+      "name": "Recycle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "redo-dot",
+      "name": "Redo Dot",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "refresh-ccw-dot",
+      "name": "Refresh Ccw Dot",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "refresh-cw-off",
+      "name": "Refresh Cw Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "regex",
+      "name": "Regex",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "repeat",
+      "name": "Repeat",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "repeat-off",
+      "name": "Repeat Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "replace-all",
+      "name": "Replace All",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "reply-all",
+      "name": "Reply All",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ribbon",
+      "name": "Ribbon",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "robot-arm",
+      "name": "Robot Arm",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "rocket",
+      "name": "Rocket",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "roller-coaster",
+      "name": "Roller Coaster",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "rotate-3-d",
+      "name": "Rotate 3 D",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "rotate-ccw",
+      "name": "Rotate Ccw",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "rotate-ccw-key",
+      "name": "Rotate Ccw Key",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "rotate-cw",
+      "name": "Rotate Cw",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "rotate-cw-fading-clock",
+      "name": "Rotate Cw Fading Clock",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "route",
+      "name": "Route",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "router",
+      "name": "Router",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ruler",
+      "name": "Ruler",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ruler-dimension-line",
+      "name": "Ruler Dimension Line",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sailboat",
+      "name": "Sailboat",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sandwich",
+      "name": "Sandwich",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "satellite-dish",
+      "name": "Satellite Dish",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "save",
+      "name": "Save",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "save-check",
+      "name": "Save Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "save-pen",
+      "name": "Save Pen",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "scale",
+      "name": "Scale",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "scale-3d",
+      "name": "Scale 3d",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "scan",
+      "name": "Scan",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "scan-box",
+      "name": "Scan Box",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "scan-face",
+      "name": "Scan Face",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "scan-line",
+      "name": "Scan Line",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "scan-search",
+      "name": "Scan Search",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "scan-square",
+      "name": "Scan Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "scatter-chart",
+      "name": "Scatter Chart",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "scissors",
+      "name": "Scissors",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "scissors-square-dashed-bottom",
+      "name": "Scissors Square Dashed Bottom",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "screen-share",
+      "name": "Screen Share",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "scroll",
+      "name": "Scroll",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "search",
+      "name": "Search",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "search-check",
+      "name": "Search Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "search-slash",
+      "name": "Search Slash",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "section",
+      "name": "Section",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "send-horizonal",
+      "name": "Send Horizonal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "send-to-back",
+      "name": "Send To Back",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "separator-vertical",
+      "name": "Separator Vertical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "server-cog",
+      "name": "Server Cog",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "server-off",
+      "name": "Server Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "server-plus",
+      "name": "Server Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shapes",
+      "name": "Shapes",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sheet",
+      "name": "Sheet",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shelving-unit",
+      "name": "Shelving Unit",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shield-alert",
+      "name": "Shield Alert",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shield-check",
+      "name": "Shield Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shield-cog",
+      "name": "Shield Cog",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shield-ellipsis",
+      "name": "Shield Ellipsis",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shield-keyhole",
+      "name": "Shield Keyhole",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shield-minus",
+      "name": "Shield Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shield-plus",
+      "name": "Shield Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shield-question-mark",
+      "name": "Shield Question Mark",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shield-x",
+      "name": "Shield X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ship-cargo",
+      "name": "Ship Cargo",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ship-wheel",
+      "name": "Ship Wheel",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shopping-bag",
+      "name": "Shopping Bag",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shopping-cart",
+      "name": "Shopping Cart",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shopping-cart-plus",
+      "name": "Shopping Cart Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shower-head",
+      "name": "Shower Head",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shrimp",
+      "name": "Shrimp",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shrink",
+      "name": "Shrink",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "shuffle",
+      "name": "Shuffle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sidebar-close",
+      "name": "Sidebar Close",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sigma",
+      "name": "Sigma",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "signal",
+      "name": "Signal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "signal-low",
+      "name": "Signal Low",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "signal-zero",
+      "name": "Signal Zero",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "signpost",
+      "name": "Signpost",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "siren",
+      "name": "Siren",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "skip-back",
+      "name": "Skip Back",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "skull",
+      "name": "Skull",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "slash-square",
+      "name": "Slash Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sliders",
+      "name": "Sliders",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sliders-vertical",
+      "name": "Sliders Vertical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "smartphone-charging",
+      "name": "Smartphone Charging",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "smile",
+      "name": "Smile",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "snail",
+      "name": "Snail",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "soap-dispenser-droplet",
+      "name": "Soap Dispenser Droplet",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "solar-panel",
+      "name": "Solar Panel",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sort-desc",
+      "name": "Sort Desc",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "space",
+      "name": "Space",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sparkle",
+      "name": "Sparkle",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "speaker",
+      "name": "Speaker",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "speech",
+      "name": "Speech",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "spline",
+      "name": "Spline",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "split",
+      "name": "Split",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "split-square-vertical",
+      "name": "Split Square Vertical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sport-shoe",
+      "name": "Sport Shoe",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "spray-can",
+      "name": "Spray Can",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square",
+      "name": "Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-asterisk",
+      "name": "Square Asterisk",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-bottom-dashed-scissors",
+      "name": "Square Bottom Dashed Scissors",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-centerline-dashed-vertical",
+      "name": "Square Centerline Dashed Vertical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-check",
+      "name": "Square Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-code",
+      "name": "Square Code",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-dashed-bottom-code",
+      "name": "Square Dashed Bottom Code",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-dashed-mouse-pointer",
+      "name": "Square Dashed Mouse Pointer",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-dashed-text",
+      "name": "Square Dashed Text",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-dashed-top-solid",
+      "name": "Square Dashed Top Solid",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-dashed-x-corner",
+      "name": "Square Dashed X Corner",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-divide",
+      "name": "Square Divide",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-equal",
+      "name": "Square Equal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-function",
+      "name": "Square Function",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-kanban",
+      "name": "Square Kanban",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-m",
+      "name": "Square M",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-minus",
+      "name": "Square Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-off",
+      "name": "Square Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-parking-off",
+      "name": "Square Parking Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-pen",
+      "name": "Square Pen",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-pi",
+      "name": "Square Pi",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-play",
+      "name": "Square Play",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-power",
+      "name": "Square Power",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-radical",
+      "name": "Square Radical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-scissors",
+      "name": "Square Scissors",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-slash",
+      "name": "Square Slash",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-split-vertical",
+      "name": "Square Split Vertical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-stack",
+      "name": "Square Stack",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-stop",
+      "name": "Square Stop",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-text",
+      "name": "Square Text",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "square-user-round",
+      "name": "Square User Round",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "squares-exclude",
+      "name": "Squares Exclude",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "squares-subtract",
+      "name": "Squares Subtract",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "squircle",
+      "name": "Squircle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "stamp",
+      "name": "Stamp",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "star-check",
+      "name": "Star Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "star-minus",
+      "name": "Star Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "star-plus",
+      "name": "Star Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "star-x",
+      "name": "Star X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "step-back",
+      "name": "Step Back",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "stethoscope",
+      "name": "Stethoscope",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sticky-note",
+      "name": "Sticky Note",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sticky-note-minus",
+      "name": "Sticky Note Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sticky-note-plus",
+      "name": "Sticky Note Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sticky-notes",
+      "name": "Sticky Notes",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "stop-circle",
+      "name": "Stop Circle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "stretch-horizontal",
+      "name": "Stretch Horizontal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "strikethrough",
+      "name": "Strikethrough",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "subtitles",
+      "name": "Subtitles",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sun",
+      "name": "Sun",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sun-medium",
+      "name": "Sun Medium",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sun-snow",
+      "name": "Sun Snow",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sunrise",
+      "name": "Sunrise",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "superscript",
+      "name": "Superscript",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "swiss-franc",
+      "name": "Swiss Franc",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "sword",
+      "name": "Sword",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "syringe",
+      "name": "Syringe",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "table-cells-merge",
+      "name": "Table Cells Merge",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "table-columns-split",
+      "name": "Table Columns Split",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "table-of-contents",
+      "name": "Table Of Contents",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "table-rows-split",
+      "name": "Table Rows Split",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tablet-smartphone",
+      "name": "Tablet Smartphone",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tag",
+      "name": "Tag",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tag-x",
+      "name": "Tag X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tangent",
+      "name": "Tangent",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "telescope",
+      "name": "Telescope",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tent-tree",
+      "name": "Tent Tree",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "terminal",
+      "name": "Terminal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "test-tube",
+      "name": "Test Tube",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "test-tubes",
+      "name": "Test Tubes",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "text-align-center",
+      "name": "Text Align Center",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "text-align-justify",
+      "name": "Text Align Justify",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "text-cursor",
+      "name": "Text Cursor",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "text-initial",
+      "name": "Text Initial",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "text-search",
+      "name": "Text Search",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "text-selection",
+      "name": "Text Selection",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "theater",
+      "name": "Theater",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "thermometer-snowflake",
+      "name": "Thermometer Snowflake",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "thumbs-down",
+      "name": "Thumbs Down",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tic-tac-toe",
+      "name": "Tic Tac Toe",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ticket-check",
+      "name": "Ticket Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ticket-minus",
+      "name": "Ticket Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ticket-plus",
+      "name": "Ticket Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "ticket-x",
+      "name": "Ticket X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tickets-plane",
+      "name": "Tickets Plane",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "timer",
+      "name": "Timer",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "timer-reset",
+      "name": "Timer Reset",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "toggle-right",
+      "name": "Toggle Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tool-case",
+      "name": "Tool Case",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "toothbrush",
+      "name": "Toothbrush",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tornado",
+      "name": "Tornado",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "touchpad",
+      "name": "Touchpad",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "towel-rack",
+      "name": "Towel Rack",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "toy-brick",
+      "name": "Toy Brick",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "traffic-cone",
+      "name": "Traffic Cone",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "train",
+      "name": "Train",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "train-front",
+      "name": "Train Front",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "train-track",
+      "name": "Train Track",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "transgender",
+      "name": "Transgender",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "trash-off",
+      "name": "Trash Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tree-palm",
+      "name": "Tree Palm",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "trees",
+      "name": "Trees",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "trending-up",
+      "name": "Trending Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "triangle",
+      "name": "Triangle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "triangle-right",
+      "name": "Triangle Right",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "triangles-centerline-dashed-vertical",
+      "name": "Triangles Centerline Dashed Vertical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "truck",
+      "name": "Truck",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tube-lotion",
+      "name": "Tube Lotion",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "turntable",
+      "name": "Turntable",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tv",
+      "name": "Tv",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "tv-minimal",
+      "name": "Tv Minimal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "type",
+      "name": "Type",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "umbrella",
+      "name": "Umbrella",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "underline",
+      "name": "Underline",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "undo-dot",
+      "name": "Undo Dot",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "unfold-vertical",
+      "name": "Unfold Vertical",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "university",
+      "name": "University",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "unlock",
+      "name": "Unlock",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "unplug",
+      "name": "Unplug",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "upload-cloud",
+      "name": "Upload Cloud",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "usb-c-port",
+      "name": "Usb C Port",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-check",
+      "name": "User Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-cog",
+      "name": "User Cog",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-key",
+      "name": "User Key",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-minus",
+      "name": "User Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-pen",
+      "name": "User Pen",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-round",
+      "name": "User Round",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-round-check",
+      "name": "User Round Check",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-round-group",
+      "name": "User Round Group",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-round-minus",
+      "name": "User Round Minus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-round-plus",
+      "name": "User Round Plus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-round-x",
+      "name": "User Round X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-shield",
+      "name": "User Shield",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "user-star",
+      "name": "User Star",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "users",
+      "name": "Users",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "utensils",
+      "name": "Utensils",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "utility-pole",
+      "name": "Utility Pole",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "variable",
+      "name": "Variable",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "vector-polygon",
+      "name": "Vector Polygon",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "vector-square",
+      "name": "Vector Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "venetian-mask",
+      "name": "Venetian Mask",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "venus-and-mars",
+      "name": "Venus And Mars",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "vibrate",
+      "name": "Vibrate",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "video",
+      "name": "Video",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "videotape",
+      "name": "Videotape",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "virus",
+      "name": "Virus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "voicemail",
+      "name": "Voicemail",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "volume",
+      "name": "Volume",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "volume-x",
+      "name": "Volume X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "wallet",
+      "name": "Wallet",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "wallet-minimal",
+      "name": "Wallet Minimal",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "wand",
+      "name": "Wand",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "warehouse",
+      "name": "Warehouse",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "watch",
+      "name": "Watch",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "waves",
+      "name": "Waves",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "waves-arrow-up",
+      "name": "Waves Arrow Up",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "waves-ladder",
+      "name": "Waves Ladder",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "waypoints",
+      "name": "Waypoints",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "webcam-off",
+      "name": "Webcam Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "weight",
+      "name": "Weight",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "wheat",
+      "name": "Wheat",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "whistle",
+      "name": "Whistle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "wifi",
+      "name": "Wifi",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "wifi-high",
+      "name": "Wifi High",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "wifi-off",
+      "name": "Wifi Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "wifi-sync",
+      "name": "Wifi Sync",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "wind",
+      "name": "Wind",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "wine",
+      "name": "Wine",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "wine-off",
+      "name": "Wine Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "workspace",
+      "name": "Workspace",
+      "source": "crystal",
+      "license": "original"
+    },
+    {
+      "id": "worm",
+      "name": "Worm",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "wrench",
+      "name": "Wrench",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "x",
+      "name": "X",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "x-line-top",
+      "name": "X Line Top",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "x-square",
+      "name": "X Square",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "zap-off",
+      "name": "Zap Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "zodiac-aries",
+      "name": "Zodiac Aries",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "zodiac-capricorn",
+      "name": "Zodiac Capricorn",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "zodiac-leo",
+      "name": "Zodiac Leo",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "zodiac-ophiuchus",
+      "name": "Zodiac Ophiuchus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "zodiac-sagittarius",
+      "name": "Zodiac Sagittarius",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "zodiac-taurus",
+      "name": "Zodiac Taurus",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "zoom-in",
+      "name": "Zoom In",
+      "source": "lucide",
+      "license": "ISC"
+    }
+  ]
+}

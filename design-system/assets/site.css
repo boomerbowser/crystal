@@ -60,4 +60,14 @@
 .page-nav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:16px 0 0}.page-nav>span{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--cr-muted)}.page-nav a{font-size:13px;font-weight:700;text-decoration:none}@media(max-width:600px){.page-nav{padding-top:12px;gap:8px}.page-nav a{font-size:12px}}
 /* Grouped exports stay on one line at the narrow inspector width. */
 .export-controls .cr-button{padding-inline:14px}
+
+/* Icon gallery */
+.icon-controls{margin:22px 0 10px}
+.icon-search{display:block;font-size:13px;font-weight:750}
+.icon-search input{margin-top:8px;width:100%;max-width:360px}
+.icon-grid{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+.icon-cell{display:flex;flex-direction:column;align-items:center;gap:9px;padding:16px 8px;border:1px solid var(--cr-edge);border-radius:16px;background:var(--cr-surface);min-width:0}
+.icon-cell svg{width:24px;height:24px;color:var(--cr-text)}
+.icon-cell code{font-size:10px;color:var(--cr-muted);text-align:center;overflow-wrap:anywhere;line-height:1.4}
+@media(max-width:600px){.icon-grid{grid-template-columns:repeat(auto-fill,minmax(88px,1fr))}}
 }

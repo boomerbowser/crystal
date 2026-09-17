@@ -49,8 +49,8 @@ Material specifications may only improve, never regress. The default position is
 | Close the eleven orphaned motion families | 10 | done — zero orphans; material choreography exempted by category |
 | Table given a Crystal surface | — | done — found in review, not in the original proposal |
 | Headless core: state and preferences | 5, 6 | done — 18 contract tests |
-| Icon set expanded to ~1000 | 8 | not started — gate G4 |
-| Icon integrity check and gallery | 9 | not started |
+| Icon set expanded to ~1000 | 8 | done — 1011 icons (998 Lucide ISC + 13 Crystal originals) |
+| Icon integrity check and gallery | 9 | done — searchable gallery; integrity check proven to fire on a broken reference |
 
 ### D. Platform contract
 
@@ -84,7 +84,7 @@ Material specifications may only improve, never regress. The default position is
 | G1 | Generated theme CSS byte-identical | passed |
 | G2 | Preview renders identically under cascade layers | passed — caught and fixed one real regression |
 | G3 | Preview runs on the headless core with zero DOM mutation | not reached |
-| G4 | Icon set vendored, licensed, normalised, existing symbols intact | not reached |
+| G4 | Icon set vendored, licensed, normalised, existing symbols intact | passed |
 
 ## Notes carried forward
 
