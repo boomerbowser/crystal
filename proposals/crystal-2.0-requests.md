@@ -236,3 +236,56 @@ only `stone-contour`, an explicit replay study. `CrystalMotion.ambientAll()` now
 both as surfaces come into view, and `stone-settle` is a new recipe (60 total). Haze
 breathes outward and Stone draws inward, so a label backing and the fill around it never
 pulse in unison.
+
+## R20 — the animations are choppy (2026-09-18)
+
+Meridian: "we need the animations to be smoother and take full advantage of React. In
+the preview site, although beautiful, they're extremely choppy."
+
+**Measured, with a caveat that matters.** Headless Chromium has no real display or
+compositor, so these absolute numbers are not what a person on real hardware sees. The
+*ordering* reproduced across repeated fresh-browser runs and is the useful part. Idle
+page, no interaction, percentage of frames arriving later than 24ms:
+
+| condition | median | late frames |
+| --- | --- | --- |
+| ambient on, as shipped | 30fps | 63.5% |
+| canvases with `mix-blend-mode: normal` | 30fps | 56% |
+| canvases `display:none`, still drawing | 60fps | 43% |
+| ambient stopped, canvases removed | 60fps | 29% |
+
+Two findings.
+
+**The signature is judder, not a low frame rate.** The first measurement said "30fps
+median" and that was contaminated by browser warm-up across reused contexts. With a fresh
+browser and a settling period, the median is 60fps and *46% of frames are late* — an
+irregular alternation of fast and slow frames, which feels considerably worse than a
+steady 30. Median frame rate was the wrong metric and nearly sent this to the wrong cause.
+
+**The cost is compositing, not drawing.** Hiding the canvases while leaving them drawing
+restores 60fps; removing blend mode helps a little; stopping the draw entirely accounts
+for the rest. Several full-size canvas layers, blended, stacked over `backdrop-filter`
+surfaces, are expensive to composite every frame regardless of how cheap the GL is.
+
+**Two speculative fixes were tried and reverted**, because both were measured and neither
+worked: a 24fps wall-clock budget changed nothing, and an every-second-frame cadence made
+it *worse* (53% late), most likely because a draw pattern that does not divide the
+refresh rate is itself a source of irregularity. Nothing was shipped on a hunch.
+
+Also noted while looking: the optical layers animate `boxShadow` (18), `borderRadius`
+(19), `backgroundPosition` (9) and `backgroundImage` (6). None of those can be
+composited — each forces a repaint every frame — and they contradict the keyframe
+vocabulary the motion chapter claims. That is a second, independent cause and it is the
+one that matters most for the React library, which must not inherit it.
+
+**Not yet fixed.** The direction is: express every animated effect in `transform` and
+`opacity` only, with shadow and rim changes done as opacity cross-fades between
+pre-rendered layers rather than as animated `box-shadow`; and reconsider whether ambient
+Resin and Frost should hold a live canvas per surface at all, versus a single shared
+canvas or a CSS-only rest state. That is a material-specification question, not a
+performance tweak, so it is recorded here rather than guessed at.
+
+Baseline note: even with ambient fully off, 29% of idle frames are late in this
+environment, so part of what is being measured is the harness. Confirmation on real
+hardware is wanted before committing to a fix — the quickest check is whether the preview
+feels smooth with `data-ambient="off"` set on `<html>`.
