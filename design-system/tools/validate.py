@@ -56,6 +56,22 @@ for css in (ROOT/'assets').glob('*.css'):
     for raw in re.findall(r'url\([\'"]?([^\)\'\"]+)',css.read_text()):
         if raw.startswith('data:'):continue
         if not (css.parent/raw).exists():errors.append(f'{css.name}: missing {raw}')
+# Every top-level stylesheet and script must be loaded by at least one page. An asset
+# that nothing references is either dead code or — the case this exists to catch — a
+# reference dropped from a page's asset list. That failure is silent: the page still
+# renders, still returns 200 and still logs nothing; it just stops working. The motion
+# studies page lost its suite CSS, its preview player and its suite chrome exactly this
+# way, and nothing in the build noticed.
+referenced=set()
+for p_ in pages:
+    for el in BeautifulSoup(p_.read_text(),'html.parser').select('[href],[src]'):
+        for attr in ('href','src'):
+            raw=el.get(attr)
+            if not raw:continue
+            name=urlsplit(raw).path.rsplit('/',1)[-1]
+            if name:referenced.add(name)
+for asset in sorted(list(ROOT.glob('assets/*.js'))+list(ROOT.glob('assets/*.css'))):
+    if asset.name not in referenced:errors.append(f'assets/{asset.name}: referenced by no page')
 manifest=json.loads((ROOT/'reference/provenance.json').read_text())
 for item in manifest['files']:
     if hashlib.sha256((ROOT/item['copy']).read_bytes()).hexdigest()!=item['sha256']:errors.append('Changed source copy: '+item['copy'])
