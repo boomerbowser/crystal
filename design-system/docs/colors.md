@@ -54,3 +54,50 @@ Contrast calculations use sRGB relative luminance. Normal text pairs target at l
 Add a complete entry under `palettes` in the canonical JSON, including both modes. Use brand seeds for identity, then define readable semantic pairs, independent functional states and tested gradients. Run the token validation and inspect full tasks, not just swatches. Do not modify the immutable source copies in `reference/` to disguise a new palette as Gather-approved.
 
 The controls deliberately offer curated presets rather than an unrestricted color picker; arbitrary colors would need new paired-token generation and composite validation. The design still supports new company palettes through explicit token authoring.
+
+## Status
+
+**Status colours are independent of brand palettes and are never redefined by them.**
+
+The four statuses are `success`, `attention`, `danger` and `info`, set with a
+`data-status` attribute. Each carries an icon as well as a colour.
+
+Crystal ships six product palettes. Every one of them changes the primary, the companion,
+the decorative and the glow. None of them changes what success, warning, error or
+information look like.
+
+The reason is that a status colour is a *shared vocabulary*, not a brand expression. If
+error is red in one Meridian product and magenta in another because magenta suited the
+palette, then red stops meaning error and the user has to re-learn a safety signal per
+product. Brand identity is expressed in the primary; safety is not available for
+expression.
+
+<div class="feedback-grid">
+<span class="cr-status" data-status="success"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#check"/></svg></span>Ready</span>
+<span class="cr-status" data-status="attention"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#attention"/></svg></span>Needs review</span>
+<span class="cr-status" data-status="danger"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#alert"/></svg></span>Failed</span>
+<span class="cr-status" data-status="info"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#info"/></svg></span>Scheduled</span>
+</div>
+
+These render identically under all six palettes. Switch palettes in the
+[Playground](../playground.html) and watch them not move.
+
+Status colours still respond to **mode** — a red that is legible on a light canvas is not
+the same red that is legible on a dark one — but the pair is derived from the status
+token, not from the active palette.
+
+Status is never the only signal. Each status carries an icon and a text message; see
+[colour is never the only signal](accessibility.html#colour-is-never-the-only-signal).
+
+### What may and may not be re-pointed
+
+| Token | Re-pointable by a product palette? |
+| --- | --- |
+| `semantic.material.primary` and its companions | Yes — this is what a palette is |
+| `primitive.palette.*` seeds | Yes, by adding a palette |
+| `semantic.feedback.*` | **No** |
+| `component.focus.*` | No — focus follows the primary automatically |
+
+A product that needs a status colour changed does not have a theming problem; it has a
+semantics problem, and the answer is a new semantic token, not a redefinition of an
+existing one.

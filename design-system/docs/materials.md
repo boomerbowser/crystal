@@ -145,3 +145,105 @@ A small Resin control over a Haze reading well can lose the color and depth visi
 Use a luminous outer contour and soft paired shadows instead of a dark hairline around every control. Text fields have a circular Resin/Haze field-state badge within the Resin surround; keyboard focus still adds a full, clearly visible ring. Checkboxes and radios use contained selection marks, switches retain a contrast-bearing thumb, and sliders use a value-driven track and marked glass thumb. Keep labels and native semantics. Status badges use their semantic symbol and words, with the tested semantic ink/surface pair behind the symbol, rather than a colored perimeter stroke. Selection, errors and focus must remain distinguishable without color.
 
 When adapting controls to different sizes, preserve enough exposed Resin to show the rim and enough protected Haze to keep text crisp. Do not blur the element or its foreground. Opaque, reduced-transparency and forced-color modes remain functional alternatives. Validate actual composed controls in both modes and at narrow widths; a beautiful isolated material swatch does not establish component fidelity.
+
+## Resin never contains Resin
+
+**A Resin surface may not contain another Resin surface.** When something has to sit on
+top of a Resin element — a label, a badge, a nested control, a content area — that upper
+layer becomes a **Haze content fill**. This is a hard rule, and it is the one adopters
+break most often.
+
+### Why
+
+Resin is a backdrop filter: it samples what is behind it, blurs at 20px and saturates to
+165%. Nest a second Resin surface inside the first and the inner one samples *the already
+blurred output of the outer one*. The result is a blur of a blur — contrast collapses,
+edge definition disappears, and any text on the inner surface is sitting on a field of
+mush that changes as the page scrolls behind it.
+
+This is the specific, repeatedly documented failure of translucent interface materials
+generally: stacked translucency reads as beautiful in a static mock and as illegible in
+use. Crystal's answer is not to soften Resin — that would regress the material — but to
+change what the upper layer is made of.
+
+### The fix is always the upper layer
+
+| Situation | Wrong | Right |
+| --- | --- | --- |
+| A label on a Resin dock | Give the label its own Resin chip | Give it a Haze content fill, or Stone if the backdrop is unknown |
+| A control inside a Resin bar | `.cr-resin` on the control | Plastic control, no backdrop filter |
+| A content area in a Resin panel | Nested `.cr-resin` | `.cr-haze` recessed into the frame |
+
+Never weaken the outer Resin to make a nested one legible. Resin's parameters are fixed
+at 20px blur, 165% saturation and a 20% fill; changing them to accommodate a composition
+that should not exist trades a real material for a local convenience.
+
+### How it is enforced
+
+The rule is enforced in CSS, so a mistake is corrected rather than merely reported:
+
+```css
+/* Any control inside a Resin surface loses its own backdrop filter and gets its
+   own stacking context, so it composites against the frame instead of resampling it. */
+:is(.cr-resin,.cr-glass,.cr-resin-haze) :is(button,a.cr-button,.cr-button,.cr-control){
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+  isolation:isolate;
+}
+```
+
+It is also checked. `npm run audit:materials` loads every page in the site, reads the
+*computed* backdrop filter of every element, classifies each surface by its blur radius
+against the live `--cr-resin-blur` and `--cr-frost-blur` tokens, and fails on any Resin
+nested inside Resin. Classifying by radius rather than by "has a backdrop filter" matters:
+Resin inside **Frost** is the intended hierarchy and must not be flagged.
+
+There is deliberately no live counter-example on this page. A rendered Resin-on-Resin
+specimen would make the specification violate the rule it specifies, and the audit —
+which reads these pages like any other — would fail the build. The failure is described;
+only the correct composition is real.
+
+### The correct composition, live
+
+Haze is the readable fill *inside* a translucent frame. It is recessed rather than
+raised, because a fill that floats above its own frame reads as a separate object rather
+than as the frame's content:
+
+<div class="cr-resin" style="padding:18px;max-width:420px" markdown="1">
+<div class="cr-haze" style="padding:14px 16px;border-radius:14px" markdown="1">
+This paragraph sits on a Haze content fill inside a Resin frame. The fill is 80% opaque
+with a 1.95px feather, and it is recessed into the frame with an inset shadow.
+</div>
+</div>
+
+The recess is a single pair of inset shadows — a dark inner top edge and a light inner
+bottom edge — which is how neumorphic surfaces express recession under a consistent
+light source. Crystal's light source is above, so the shadow is at the top and the
+highlight at the bottom. Inverting that pair is what makes a surface read as raised:
+
+```css
+:is(.cr-resin,.cr-glass,.cr-resin-haze) :is(.cr-haze,.cr-surface,.cr-well,.cr-content-fill){
+  box-shadow:inset 0 1px 2px rgba(39,24,68,.15),  /* light source is above */
+             inset 0 -1px 0 var(--cr-rim);
+}
+```
+
+Crystal takes the recession model from neumorphism and rejects its palette. Neumorphism's
+characteristic failure is that it tints the surface, the highlight and the shadow from one
+near-identical hue, so nothing has enough contrast to be found or read. Here the geometry
+is neumorphic and the contrast is not: the fill is 80% opaque, and the text on it is
+checked against the same ratios as text anywhere else.
+
+### Feathering never touches content
+
+Haze's 1.95px feather applies to an isolated paint layer only. Text, icons, hit areas and
+focus rings stay crisp. A feathered glyph is a blurry glyph, and no amount of material
+intent makes that legible — the feather exists to soften the *edge of the fill* against
+the frame behind it, nothing more.
+
+## See it working
+
+The [Playground](../playground.html#foundations) renders the full hierarchy live, with
+atmosphere, Frost tint, elevation and content radius adjustable. The
+[supporting materials section](../playground.html#supporting-materials) shows Haze, Stone
+and Mirage in the compositions each is intended for.

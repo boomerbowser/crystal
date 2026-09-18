@@ -17,18 +17,24 @@
  *   node tools/audit-materials.mjs
  */
 import { chromium } from 'playwright';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const BASE = process.argv.includes('--base')
   ? process.argv[process.argv.indexOf('--base') + 1]
   : 'http://127.0.0.1:4321';
 
+// Discovered, not listed. A hand-maintained list silently stops covering pages as
+// the site grows — `playground.html`, the richest composition here, went unaudited
+// for exactly that reason.
+const ROOT = path.resolve(fileURLToPath(import.meta.url), '../..');
 const PAGES = [
-  'index.html', 'motion.html', 'validation/report.html',
-  'docs/principles.html', 'docs/materials.html', 'docs/colors.html',
-  'docs/components.html', 'docs/catalogue.html', 'docs/motion.html',
-  'docs/motion-components.html', 'docs/accessibility.html', 'docs/adoption.html',
-  'docs/icons.html',
-];
+  ...fs.readdirSync(ROOT).filter(f => f.endsWith('.html')),
+  ...['docs', 'validation'].flatMap(dir =>
+    fs.readdirSync(path.join(ROOT, dir))
+      .filter(f => f.endsWith('.html')).map(f => `${dir}/${f}`)),
+].sort();
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });

@@ -14,9 +14,21 @@
 | `assets/site.css`, `assets/site.js` | Reference-site layout and local demonstration behavior |
 | `tokens/crystal.json` | Canonical editable palette, material and default configuration |
 | `docs/*.md` | Editable specifications; adjacent HTML is generated |
+| `docs/tokens.md`, `docs/catalogue.md` | **Generated** from the token sources — do not edit |
+| `src/overview.md` | The site's index page, editable |
+| `src/pages/*.html` | Editable body fragments for the Playground and motion studies |
+| `tools/shell.py` | The only copy of the page header, side menu and footer |
 | `reference/` | Immutable Gather source copies and SHA-256 provenance |
 | `tools/` | Rebuild, validation and packaging commands |
 | `validation/` | Executed-check evidence and explicit limits |
+
+**Every HTML file in the site is generated.** `index.html`, `playground.html`,
+`motion.html`, the ten specification pages and the verification report are all written
+by `tools/build.py` and `tools/report.py` through `tools/shell.py`. Edit the markdown,
+the fragments under `src/pages/`, or the shell — never the HTML, which the next build
+overwrites. Sections between `<!-- generated:NAME -->` markers inside a markdown file
+are written by `tools/build-reference.cjs` and are overwritten too; the prose around
+them is not.
 
 The site uses relative local assets without fetching fonts or services. Review it through a loopback HTTP server; that path has been browser-tested. Direct file opening has not been browser-verified. Do not introduce an application/backend dependency to serve the documentation.
 

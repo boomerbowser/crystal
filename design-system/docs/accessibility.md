@@ -37,3 +37,126 @@ Use automated scans as one part of review. Screen-reader journeys, focus recover
 ## What this delivery verifies
 
 See the [verification report](../validation/report.html) for checks actually run, environments and limits. Proposed product tests above do not count as executed checks. The package includes no backend, no native material implementation and no production service stubs.
+
+## Forced colours
+
+Windows High Contrast — `forced-colors: active` in CSS — replaces the page's palette with
+a small set of system colours the user has chosen: `Canvas`, `CanvasText`, `Highlight`,
+`HighlightText`, `ButtonFace`, `ButtonText`, `LinkText`. Crystal honours that choice
+rather than opting out of it.
+
+### Selection is a ring, never a fill
+
+This is the rule, and it comes from a real defect found in this system.
+
+Chromium paints an opaque **text backplate** behind text runs in forced-colors mode: a
+rectangle of `Canvas` drawn *above* the element's own background, so that text is
+guaranteed to sit on the user's background colour. A selected control styled as a filled
+row therefore renders as: your fill, then an opaque `Canvas` rectangle over it, then the
+label. In the dark high-contrast palette `HighlightText` and `Canvas` are both black — so
+the label disappears into the backplate and the control becomes a solid black block.
+
+The fix is to stop filling and start ringing:
+
+```css
+@media (forced-colors: active){
+  .menu-item[aria-current]{
+    background:Canvas;                  /* agree with the backplate rather than fight it */
+    color:CanvasText;
+    outline:2px solid Highlight;        /* selection lives outside the text run */
+    outline-offset:-3px;                /* inside the pill's own edge */
+  }
+}
+```
+
+An outline is not covered by the backplate, because the backplate only spans the text. The
+negative offset draws the ring just inside the control's boundary so it reads as "this one"
+rather than as a focus ring.
+
+**`forced-color-adjust: none` is not the fix.** It works, and it does so by discarding the
+palette the user deliberately chose — which is the entire point of the mode. It is
+reserved for content whose meaning *is* its colour, such as a palette swatch.
+
+Verified in both the light and dark high-contrast palettes. The captures and the defect
+this rule came from are in
+`validation/captures/2026-09-17-forced-colours/`.
+
+## Reduced motion
+
+`prefers-reduced-motion: reduce` is honoured by every one of the 54 motion recipes. Each
+recipe declares its own `reduced` behaviour rather than being globally switched off,
+because "no animation" and "no *movement*" are different requirements.
+
+The contract is: **the semantic state change still happens, immediately; the decorative
+travel does not.** A menu that opens still opens. A button that has been pressed still
+shows it has been pressed. What is removed is the travel, the overshoot and the shader
+layer. Reduced motion resolves to zero displacement regardless of the recipe's spring —
+this is asserted by `tools/validate-motion.cjs`, not left to each implementation.
+
+## Reduced transparency
+
+`prefers-reduced-transparency: reduce` sets `data-effects="opaque"`, which replaces every
+backdrop filter with a solid surface and a stronger border:
+
+```css
+[data-effects=opaque] :is(.cr-frost,.cr-acrylic),
+[data-effects=opaque] :is(.cr-resin,.cr-glass){
+  backdrop-filter:none;
+  background:var(--cr-surface);
+  border-color:var(--cr-outline);
+}
+```
+
+The border strengthens deliberately. Translucency was carrying some of the edge
+definition; removing it without compensating leaves surfaces that are technically opaque
+and visually unbounded. Contrast is re-checked in this mode — a regression here was found
+and fixed during verification, recorded in
+`validation/captures/2026-09-17-rtl-and-reduced-effects/`.
+
+## Target size
+
+Every interactive control has a minimum target of **44 × 44 px**, including controls that
+look smaller than that. A 24px icon button carries 44px of hit area; a menu entry is 44px
+tall even where the label is 19px. This is a floor, not a target — it is not reduced on
+dense layouts, because "dense" is a visual decision and the hand does not get more precise.
+
+## Direction
+
+Right-to-left is a verified axis, not an aspiration. Layout uses logical properties
+throughout — `inset-inline-start`, `padding-inline-start`, `margin-inline-end` — so mirroring
+is a direction change rather than a stylesheet. The selection rail, the menu indentation
+and the focus offset all follow.
+
+Physical properties are correct only where the meaning is physical: a light source is
+above in both directions, so the Haze recess keeps `inset 0 1px` rather than becoming a
+logical offset.
+
+## Colour is never the only signal
+
+Every state that is communicated with colour is also communicated another way:
+
+| State | Colour | Second signal |
+| --- | --- | --- |
+| Selected | Primary rail | Position (leading rail) and label weight |
+| Focused | Primary ring | A 2px outline at 3px offset |
+| Error | Status red | Icon and message text |
+| Validated | Status green | A check mark |
+| Current page | Primary | `aria-current="page"` and weight |
+
+Status colours are independent of the six brand palettes, so none of these signals changes
+meaning when a product re-themes. See [Color](colors.html#status).
+
+## Contrast
+
+1,716 contrast cases are computed across all six palettes in both modes, including bounded
+composites: Resin and Haze control labels are checked with the optical sheen beneath the
+protective fill, against 80%/79% content composites and RGB-corner backdrops with the
+fixed 20% Resin fill.
+
+Normal text is held to 4.5:1. Essential non-text — focus rings, control boundaries, the
+selection rail — uses its separate 3:1 threshold, which is the correct standard for those
+elements rather than a relaxation for them.
+
+The current run reports zero failures. What that does and does not establish is stated
+plainly in the [verification report](../validation/report.html): it is evidence about this
+reference package, not a claim of complete WCAG conformance for a product built with it.

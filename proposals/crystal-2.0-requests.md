@@ -38,6 +38,7 @@ These apply to everything, not to one task.
 | R11 | **Resin-on-Resin is prohibited.** A layer above a Resin element, such as a label, must be a Haze content fill. Do not adjust Resin to compensate: that would disturb the material spec. | done — 0 violations across 13 pages, enforced by `tools/audit-materials.mjs` |
 | R12 | Keep a running document of these requests | done — this file |
 | R13 | Make the launch specification work flawlessly if the preview is deployed to Vercel from the GitHub repo | done — `vercel.json` + `.vercelignore`, verified against a simulated deploy tree |
+| R14 | Docs home as the index page; navigation becomes a side menu of Crystal buttons; Playground reformatted to match the docs and linked into them; docs expanded to cover every relevant detail with explanations and examples | in progress — Section H, tasks 21-24 |
 
 ## Defects found while doing R13
 

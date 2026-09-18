@@ -114,3 +114,117 @@ A `.cr-indicator` is a 20px circular Resin surface with a 3px-inset 80% Haze fil
 | Work in progress | Ellipsis | Real `aria-busy`; no fabricated activity |
 
 A check mark is reserved for validation and information display — the status badges in `.cr-status` and a checkbox's own `:checked` indicator. It never marks a selected, pressed or focused control. Selection instead uses a 3px leading rail in the control's own foreground ink plus a heavier label weight; the rail is absolutely positioned inside existing padding, so selecting an item never reflows its group. Round specimen swatches, which cannot carry a rail, use an inset ring gap. Floating check text and the short field rail are replaced by these marks. Ordinary prose links retain their link styling. Badges are `aria-hidden`: the real control supplies its accessible name, required/invalid/selected/busy state and error association. The visual symbol never gets appended to the control's text content. Native checkbox/radio indicators and functional labels remain intact. Small controls retain full-sized hit targets. Badges have solid, unblurred alternatives under reduced transparency and forced colors.
+
+## Geometry
+
+Crystal has exactly two control shapes, and which one applies is determined by what the
+control *is*, not by how it looks best in a particular layout.
+
+**Action controls are pill-shaped.** Buttons, icon buttons, segmented controls, chips,
+menu entries, tabs — anything whose job is "do this" or "go here" — use a fully rounded
+radius. A pill is unambiguous at any size: it never reads as a card, a field or a
+container.
+
+**Card-shaped buttons keep the content radius.** A control that is really a tappable
+*object* — a project tile, a palette swatch card, a library item — keeps `--cr-radius`
+(28px by default). These are the exception and they are recognisable: the user is choosing
+a thing, not triggering an action.
+
+There is no third option. A button with an 8px or 12px radius is neither shape and is a
+defect, not a variant.
+
+<div class="sample-row" markdown="1">
+<button class="cr-button" type="button">Pill action</button>
+<button class="cr-control" type="button">Pill control</button>
+</div>
+
+The pill radius is a token, not a literal: `component.action.radius` resolves through
+`semantic.shape.pill`. A component that writes `border-radius:999px` directly works and
+silently opts itself out of every future change to the shape language. See
+[Tokens](tokens.html).
+
+## Focus
+
+Focus is a **crisp 2px primary core at 3px offset, inside a four-layer feathered halo**.
+Six layers in total, and each one is doing a job:
+
+| Layer | Role |
+| --- | --- |
+| `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | The crisp core. This is what proves focus at a glance and what survives forced colours. |
+| `inset 0 2px 1px var(--cr-rim)` | Keeps the control's own top edge readable inside the ring. |
+| 4 × feathered primary glows at 6/2, 16/6, 30/12 and 54/22 | The halo. Increasing blur at decreasing opacity, so the ring dissolves outward rather than ending on a hard edge. |
+
+The core is never feathered. The offset is never zero — a ring drawn *on* the border is
+hard to distinguish from a hover state, and on a pill it reads as a thicker stroke rather
+than as focus.
+
+Tab to the entries in the side menu on this page to see the complete recipe on a real
+control.
+
+Focus is applied through `:focus-visible`, never `:focus`, so pointer users do not get a
+ring they did not ask for. Any rule that resets `box-shadow` on a control must exclude the
+focused state, or it silently reduces the recipe to a bare outline:
+
+```css
+/* Correct: the resting state only. */
+.menu-item:not(:focus-visible){ box-shadow:none }
+```
+
+## Selection
+
+**A check mark means validated or informational. It never means "selected".** This is
+Crystal's most frequently violated rule, because a check is the reflexive choice for
+selection in most systems.
+
+Selection is expressed with **a leading rail plus label weight**:
+
+- a 3px rail at the inline start of the row, in the primary colour
+- the label at weight 800 instead of 650
+- `aria-current="page"` for navigation, or `aria-selected` / `aria-pressed` as the control
+  demands
+
+The side menu on this page is the reference implementation. The rail animates its height
+rather than its opacity, so the transition reads as the rail extending to meet the item.
+
+Why not a check: a check mark is a *statement about a value* — this field validated, this
+item is complete, this option is confirmed. If it also means "this is the current tab",
+then a list containing both validated items and a current item becomes unreadable, and a
+screen reader's "checked" state stops corresponding to anything the user can act on.
+
+Selection colour is never the only signal. A rail is positional, a weight change is
+typographic, and both survive the palette being changed, the mode being dark, and colour
+vision differences. This is WCAG 1.4.1 applied as a design rule rather than as a
+post-hoc check.
+
+### Selection in forced colours
+
+A filled selected row is a defect in forced-colors mode — see
+[forced colours](accessibility.html#forced-colours) for the reason and the correct
+recipe. In short: selection becomes a `Highlight` ring, never a fill.
+
+## Indicators
+
+An indicator — the moving pill behind a selected segment, the dock's active marker — is
+**Haze, not Resin**. It sits above a surface that is frequently already translucent, and a
+Resin indicator would be the nested-Resin failure by another name.
+
+```css
+.cr-indicator{
+  background:transparent;          /* the indicator paints through ::before */
+  backdrop-filter:none;
+}
+.cr-indicator::before{
+  inset:1px;
+  background:var(--cr-haze-fill);
+  filter:blur(var(--cr-haze-feather));
+}
+```
+
+The feather is on the `::before` layer alone, so the label above it stays crisp.
+
+## See it working
+
+The [Playground](../playground.html#components) renders these controls live, and the side
+menu on this page is the reference implementation of the selection pattern. Change the
+palette in the Playground to confirm that focus follows the primary and that status
+colours do not move.

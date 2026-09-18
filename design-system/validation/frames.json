@@ -40,47 +40,47 @@
   "frames": [
     {
       "id": "playground-light",
-      "page": "index.html",
+      "page": "playground.html",
       "anchor": "#playground",
       "why": "The primary composition. Guards the material hierarchy, pill geometry and focus ring."
     },
     {
       "id": "playground-dark",
-      "page": "index.html",
+      "page": "playground.html",
       "anchor": "#playground",
       "mode": "dark",
       "why": "Dark mode resolves a different Stone fill; regressions here do not show in light."
     },
     {
       "id": "components-light",
-      "page": "index.html",
+      "page": "playground.html",
       "anchor": "#components",
       "why": "Control surfaces: dock, segmented, tabs, fields, table."
     },
     {
       "id": "playground-reduced-transparency",
-      "page": "index.html",
+      "page": "playground.html",
       "anchor": "#playground",
       "effects": "reduced-transparency",
       "why": "Caught a real defect: selected controls rendered white-on-white at 1:1 after a specificity change. Four full-effects frames missed it."
     },
     {
       "id": "playground-opaque",
-      "page": "index.html",
+      "page": "playground.html",
       "anchor": "#playground",
       "effects": "opaque",
       "why": "The [data-effects=opaque] path carries its own selector weight and can drift from the media-query path."
     },
     {
       "id": "forced-colours-light",
-      "page": "index.html",
+      "page": "playground.html",
       "anchor": "#playground",
       "forcedColors": "active",
       "why": "Forced colours discards box-shadow, so the focus ring must survive as an outline."
     },
     {
       "id": "forced-colours-dark",
-      "page": "index.html",
+      "page": "playground.html",
       "anchor": "#playground",
       "mode": "dark",
       "forcedColors": "active",
@@ -88,7 +88,7 @@
     },
     {
       "id": "playground-rtl",
-      "page": "index.html",
+      "page": "playground.html",
       "anchor": "#playground",
       "direction": "rtl",
       "why": "Logical properties must mirror: bubble corners, selection rail edge, no horizontal overflow."
@@ -110,13 +110,44 @@
     },
     {
       "id": "playground-narrow",
-      "page": "index.html",
+      "page": "playground.html",
       "anchor": "#playground",
       "viewport": {
         "width": 390,
         "height": 844
       },
       "why": "Narrow layout must not overflow horizontally and must keep 44px targets."
+    },
+    {
+      "id": "overview-light",
+      "page": "index.html",
+      "why": "The documentation home, which is now the index page. Guards the side menu, the Frost panel behind it, and the live material specimens on the overview."
+    },
+    {
+      "id": "overview-dark",
+      "page": "index.html",
+      "mode": "dark",
+      "why": "Frost and the menu rail resolve differently in dark; the overview specimens are the only place the three materials appear side by side."
+    },
+    {
+      "id": "docs-menu-light",
+      "page": "docs/materials.html",
+      "why": "A specification page with a current menu entry. Guards the selection rail and that menu entries stay Plastic rather than inheriting the Resin of .cr-control."
+    },
+    {
+      "id": "docs-menu-forced-colours",
+      "page": "docs/materials.html",
+      "forcedColors": "active",
+      "why": "Selection must be a Highlight ring, not a fill. A filled current entry is erased by Chromium's text backplate, which is the defect this rule exists to prevent."
+    },
+    {
+      "id": "docs-menu-narrow",
+      "page": "docs/materials.html",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "why": "Below 860px the menu collapses behind its toggle. Guards that the toggle is present, reaches 44px, and that the page does not overflow."
     }
   ],
   "reblessing": {

@@ -71,3 +71,68 @@
 .icon-cell code{font-size:10px;color:var(--cr-muted);text-align:center;overflow-wrap:anywhere;line-height:1.4}
 @media(max-width:600px){.icon-grid{grid-template-columns:repeat(auto-fill,minmax(88px,1fr))}}
 }
+
+/* The site shell: a persistent side menu of Crystal controls.
+   Frost holds the menu; the pills inside it are Plastic. Resin never appears here —
+   a navigation surface that blurs its own children is the legibility failure the
+   material hierarchy exists to prevent. */
+@layer crystal.base {
+  .site-layout{display:grid;grid-template-columns:236px minmax(0,1fr);gap:46px;align-items:start;padding:36px 0}
+  .site-menu{position:sticky;top:22px;align-self:start;display:flex;flex-direction:column;gap:18px;padding:16px 13px;max-height:calc(100vh - 46px);overflow-y:auto;overscroll-behavior:contain}
+  .menu-heading{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--cr-muted);margin:0 0 7px;padding-inline-start:14px}
+  .menu-group{display:flex;flex-direction:column;gap:2px}
+  .menu-rail{position:absolute;inset-inline-start:6px;top:50%;translate:0 -50%;width:3px;height:0;border-radius:2px;background:var(--cr-primary);transition:height var(--cr-state)}
+  .menu-toggle{display:none;font-size:13px;font-weight:750}
+  .site-main{min-width:0}
+  .doc-body{max-width:920px;min-width:0}
+  .doc-body h1{font-size:38px}
+  .doc-body h2{font-size:25px;margin-top:38px}
+  .doc-body h3{font-size:18px;margin-top:26px}
+  .doc-body p,.doc-body li{font-size:15px;line-height:1.8;max-width:78ch}
+  .doc-body table{font-size:13px;margin:22px 0}
+  .doc-body :is(td,th){min-width:130px}
+  @media(max-width:1000px){.site-layout{grid-template-columns:200px minmax(0,1fr);gap:30px}}
+  @media(max-width:860px){
+    .site-layout{display:block;padding-top:20px}
+    .site-menu{display:none;position:static;margin-bottom:26px;max-height:none}
+    .site-layout[data-menu-open] .site-menu{display:flex}
+    .menu-toggle{display:inline-flex}
+    .doc-body h1{font-size:30px}
+  }
+}
+
+/* These override `.cr-control`, which crystal.css declares in the crystal.component
+   layer. A base-layer rule can never win that, whatever its specificity — which is the
+   point of layers, and the reason this block is separate rather than merely later. */
+@layer crystal.override {
+  /* Menu entries are Plastic, not Resin. `.cr-control` is Resin by default: correct for
+     a floating action, wrong for navigation. Resin is reserved for surfaces that float
+     above everything, and a sidebar entry is furniture. Thirteen floating capsules would
+     also be exactly the legibility noise the hierarchy exists to prevent. The pill
+     geometry is kept; only the material changes. */
+  .menu-item{position:relative;justify-content:flex-start;text-align:start;font-size:14px;font-weight:650;color:var(--cr-muted);padding-inline-start:20px;line-height:1.35;min-height:44px;background:transparent;border:1px solid transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+  /* Resting state only. Focus is a 2px primary core inside a four-layer feathered
+     halo, and that halo IS a box-shadow — blanket `box-shadow:none` would silently
+     regress the focus recipe to a bare outline. */
+  .menu-item:not(:focus-visible){box-shadow:none}
+  /* `.cr-control` paints an 80% white protective fill under its label so text stays
+     legible on Resin. A Plastic entry has nothing to protect against, so the fill is
+     just a blob — remove it. Focus is a box-shadow recipe and is unaffected. */
+  /* ::before is the Haze protective fill (80% white, 1.95px feather); ::after is
+     Resin's optical sheen. Both exist to make a label readable on a glassy control.
+     A Plastic entry has neither problem, so both are decoration without a material
+     justification here. */
+  .menu-item::before,.menu-item::after{content:none}
+  .menu-item:hover{background:var(--cr-surface-alt);color:var(--cr-text)}
+  /* Selection is a rail and a weight, never a check mark. */
+  .menu-item[aria-current]{color:var(--cr-text);font-weight:800;background:var(--cr-surface-alt)}
+  .menu-item[aria-current] .menu-rail{height:19px}
+  /* Forced colours: the current entry is a ring, never a fill. Chromium paints an opaque
+     Canvas backplate behind text runs, above the element's own background, so a filled
+     row loses its label entirely. */
+  @media (forced-colors: active){
+    .menu-item[aria-current]{background:Canvas;color:CanvasText;outline:2px solid Highlight;outline-offset:-3px}
+    .menu-rail{background:Highlight}
+    .site-menu{border-color:CanvasText}
+  }
+}

@@ -86,3 +86,310 @@ Both engines are now installed, bundled locally and used by the runtime. [Motion
 See the [component motion suite](motion-components.html) for all 54 recipes, engine assignments, API contracts, live component behavior, test instructions and future component-library/Storybook coverage. [License notices](../reference/ASSET-NOTICES.md) accompany the local bundle.
 
 The compact CSS timing tokens remain available for small state changes. The material-driven Resin press recipe uses 320ms for a complete compression/recovery sequence; hover light uses 700ms. These visual clocks never delay the actual action. The executable catalog lists the current duration of every recipe.
+
+## Springs are the portable primitive
+
+Every recipe carries a spring — `{stiffness, damping, mass}` — fitted so that its derived
+settle time matches the authored duration within 15%. The authored duration remains the
+authority; the spring is what makes the recipe portable, because a duration and a cubic
+bezier do not survive being moved to SwiftUI or Compose, and a spring does.
+
+`assets/core/spring.js` derives everything else from those three numbers, with no DOM and
+no dependencies: damping ratio, sampled displacement, settle time, whether the recipe
+overshoots and by how much. The generated table below is computed from it at build time,
+which is why the numbers there cannot go stale.
+
+### The three regimes
+
+The damping ratio **ζ = c / (2√(km))** decides which closed form applies, and they are
+genuinely different equations rather than one equation with a parameter:
+
+| ζ | Regime | Behaviour |
+| --- | --- | --- |
+| ζ < 1 | Underdamped | Overshoots and oscillates back. Damped frequency ωd = ω√(1−ζ²). |
+| ζ = 1 | Critically damped | The fastest approach with no overshoot. ωd is exactly zero, so the oscillatory form degenerates and a separate solution is required. |
+| ζ > 1 | Overdamped | Approaches without ever crossing the target, more slowly than critical. |
+
+Implementations that interpolate through ζ = 1 with the underdamped formula divide by a
+damped frequency of zero. `sampleSpring` branches on the regime explicitly.
+
+### Damping is chosen by signature, not by taste
+
+Whether a movement overshoots is a claim about what the material *is*:
+
+- **`inertia`** and **`coalesce`** overshoot, most of all — momentum is their entire claim.
+  Mass that stops dead was never moving.
+- **`feather`** and **`caustic`** do not overshoot. A soft edge that bounces is wrong: the
+  signature is diffusion, and diffusion has no momentum to carry.
+- Everything between is scaled accordingly.
+
+The generated table shows measured peak overshoot per recipe. `feather` comes out at 0.1%
+and `inertia` at 12.6% — the fitting produces the policy rather than being asserted
+alongside it.
+
+## Deformation is incompressible
+
+Any `scale(sx, sy)` in a recipe must satisfy **sx · sy = 1** within 0.005. A surface that
+squashes without spreading is a surface losing volume, and it reads as cheap because
+nothing physical behaves that way.
+
+Corrections divide **both** axes by the square root of the area. Keeping the dominant axis
+and deriving the other also conserves volume, but it changes the deformation's aspect
+ratio — which alters the designed look rather than only the physics. Normalising by √area
+conserves volume *and* preserves aspect ratio exactly, so the correction removes the
+compressibility error and nothing else. `tools/validate-motion.cjs` asserts both.
+
+## Why Resin is not animated with ripples
+
+An early model animated Resin as a surface wave — a ripple spreading from the contact
+point. It was rejected, and the reasoning is recorded here because the rejected model is
+the one people reach for first.
+
+A ripple is a *surface* phenomenon: it says the material has a skin, that the skin was
+disturbed, and that the disturbance is travelling across it. That is water in a dish. Resin
+is not a skin; it is a solid, transparent body with optical depth. Its response to contact
+is not a wave — it is a change in how it bends light.
+
+What contemporary glass interfaces actually do, and what Crystal now does:
+
+- **Edge lensing.** Refraction concentrates in a band just inside the boundary and falls
+  off steeply, leaving the centre optically clear. The interior is shrunk and the edges
+  stretched outward.
+- **Specular tracking.** The highlight band moves with the interaction rather than
+  spreading from it. Contact changes where the light is, not what the surface shape is.
+- **Morphing.** The boundary itself changes shape. The lens follows the boundary, because
+  the lens *is* the boundary.
+
+The practical difference: a ripple animates the middle of a surface, where the user is
+reading. Edge lensing animates the rim, where nothing is. The optical model is stated in
+`assets/shaders/manifest.json` under `opticalModel`, including the rejected approach, so
+that a platform port inherits the reasoning and not just the result.
+
+## The shader layer is an enhancement, never a requirement
+
+WebGL2 shaders are attached only when WebGL2 is available, `prefers-reduced-motion` is not
+set, and the surface is visible. The CSS approximation is the floor, and it is what the
+committed visual baselines are captured against — with WebGL2 unavailable, every page must
+render exactly those baselines. That is the gate that keeps the shader optional rather
+than load-bearing.
+
+Two implementation notes that cost real time to find:
+
+**Blend mode.** `screen` and `overlay` are both no-ops on a white backdrop — `overlay`
+resolves to `1 − 2(1−b)(1−s)`, which is 1 whenever b = 1. Only `hard-light` produces
+visible output on both white and dark backdrops.
+
+**Stacking.** The shader canvas sits at `z-index:-1` inside an `isolation:isolate`
+container, so it paints behind the content rather than over it. Verified by proving label
+glyphs are pixel-identical with the shader on and off.
+
+
+## Recipe reference
+
+<!-- generated:recipes -->
+
+All 54 recipes, generated from `tokens/motion-recipes.json`. **Damping ratio** and
+**overshoot** are derived from each recipe's spring by `assets/core/spring.js`, not
+authored — so a spring that was retuned cannot leave a stale number behind in this table.
+
+A damping ratio below 1 overshoots and settles back; exactly 1 is the fastest approach
+with no overshoot; above 1 crawls in without ever passing the target. Which one is
+correct is a material question, not a taste question — see the signature policy below.
+
+#### Controls
+
+| Recipe | Duration | Signature | Material | Damping ζ | Overshoot | Use | Reduced motion |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `press` — Press and release | 320ms | pressure | resin | 0.660 | 6.3% | Buttons, icon buttons and segmented controls. Disabled controls never animate. | Apply the semantic state immediately; omit decorative movement. |
+| `hover` — Light follows the surface | 700ms | caustic | resin | 0.900 | 0.2% | Fine-pointer affordance only; keyboard focus is immediate. | Apply the semantic state immediately; omit decorative movement. |
+| `selection` — Selection settle | 420ms | meniscus | resin | 0.700 | 4.6% | Selected chips, radios, toggles and navigation; set selected semantics first. | Apply the semantic state immediately; omit decorative movement. |
+| `switch-on` — Switch on | 460ms | coalesce | resin | 0.620 | 8.4% | Animate the thumb after its checked state is applied. | Apply the semantic state immediately; omit decorative movement. |
+| `switch-off` — Switch off | 460ms | coalesce | resin | 0.620 | 8.4% | Animate the thumb after its unchecked state is applied. | Apply the semantic state immediately; omit decorative movement. |
+| `check` — Checkmark confirmation | 340ms | iris | resin | 0.800 | 1.5% | Checkbox and radio indicators; retain a visible non-color state. | Apply the semantic state immediately; omit decorative movement. |
+| `slider-step` — Value response | 400ms | feather | stone | 0.920 | none | Range outputs, steppers and scrubber labels; value updates immediately. | Apply the semantic state immediately; omit decorative movement. |
+| `icon-turn` — Disclosure icon | 440ms | torsion | resin | 0.660 | 6.3% | Disclosure chevrons; parent expanded state is authoritative. | Apply the semantic state immediately; omit decorative movement. |
+| `copy-confirm` — Copy confirmation | 540ms | coalesce | resin | 0.620 | 8.4% | Only after clipboard write succeeds; retain textual confirmation. | Apply the semantic state immediately; omit decorative movement. |
+
+#### Forms
+
+| Recipe | Duration | Signature | Material | Damping ζ | Overshoot | Use | Reduced motion |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `field-focus` — Field focus response | 600ms | caustic | resin | 0.900 | 0.2% | Supplementary focus response; never animate or delay the actual focus ring. | Apply the semantic state immediately; omit decorative movement. |
+| `field-invalid` — Invalid field | 480ms | tension | resin | 0.700 | 4.6% | Single low-amplitude cue with persistent error text; never repeated shaking. | Apply the semantic state immediately; omit decorative movement. |
+| `field-valid` — Valid field | 550ms | meniscus | resin | 0.700 | 4.6% | After real local validation; never imply a remote operation succeeded. | Apply the semantic state immediately; omit decorative movement. |
+| `hint-in` — Help text reveal | 500ms | coalesce | resin | 0.620 | 8.4% | Inline help, character guidance and validation details. | Apply the semantic state immediately; omit decorative movement. |
+| `hint-out` — Help text departure | 500ms | meniscus | resin | 0.700 | 4.6% | Hide the help only after completion; do not remove focused content. | Apply the semantic state immediately; omit decorative movement. |
+
+#### Navigation
+
+| Recipe | Duration | Signature | Material | Damping ζ | Overshoot | Use | Reduced motion |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `tab-in` — Tab content arrival | 650ms | refraction | frost | 0.850 | 0.6% | Selected tab panels; apply aria-selected and hidden state synchronously. | Apply the semantic state immediately; omit decorative movement. |
+| `page-in` — View arrival | 1050ms | inertia | plastic | 0.550 | 12.6% | New local view after routing is committed; preserve focus and history. | Apply the semantic state immediately; omit decorative movement. |
+| `page-out` — View departure | 760ms | inertia | plastic | 0.550 | 12.6% | Departing view only; never postpone route authorization or loading. | Apply the semantic state immediately; omit decorative movement. |
+| `breadcrumb` — Location update | 500ms | coalesce | resin | 0.620 | 8.4% | New breadcrumb item; current-page semantics stay explicit. | Apply the semantic state immediately; omit decorative movement. |
+
+#### Overlays
+
+| Recipe | Duration | Signature | Material | Damping ζ | Overshoot | Use | Reduced motion |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `drawer-in` — Drawer arrival | 1000ms | refraction | frost | 0.850 | 0.6% | Side sheets and inspector panels; establish modality first. | Apply the semantic state immediately; omit decorative movement. |
+| `drawer-out` — Drawer departure | 650ms | refraction | frost | 0.850 | 0.6% | Keep modal focus contained until dismissal completes. | Apply the semantic state immediately; omit decorative movement. |
+| `menu-in` — Menu reveal | 620ms | coalesce | resin | 0.620 | 8.4% | Dropdowns, selects and command menus; keyboard behavior belongs to the component. | Apply the semantic state immediately; omit decorative movement. |
+| `menu-out` — Menu dismissal | 380ms | meniscus | resin | 0.700 | 4.6% | Close menus and restore trigger focus when appropriate. | Apply the semantic state immediately; omit decorative movement. |
+| `tooltip-in` — Tooltip arrival | 420ms | meniscus | resin | 0.700 | 4.6% | Noninteractive descriptions on focus or hover; Escape dismisses. | Apply the semantic state immediately; omit decorative movement. |
+| `tooltip-out` — Tooltip departure | 420ms | meniscus | resin | 0.700 | 4.6% | Pointer and focus must both leave before hiding. | Apply the semantic state immediately; omit decorative movement. |
+| `popover-in` — Popover arrival | 620ms | coalesce | resin | 0.620 | 8.4% | Nonmodal details with outside-click, Escape and focus handling. | Apply the semantic state immediately; omit decorative movement. |
+| `popover-out` — Popover departure | 380ms | meniscus | resin | 0.700 | 4.6% | Dismiss nonmodal details without trapping focus. | Apply the semantic state immediately; omit decorative movement. |
+
+#### Content
+
+| Recipe | Duration | Signature | Material | Damping ζ | Overshoot | Use | Reduced motion |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `accordion-in` — Disclosure reveal | 650ms | feather | haze | 0.920 | none | Animate visible content after expanding; no scripted height measurement needed. | Apply the semantic state immediately; omit decorative movement. |
+| `accordion-out` — Disclosure close | 650ms | feather | haze | 0.920 | none | Hide content after completion; return focus first if a child has focus. | Apply the semantic state immediately; omit decorative movement. |
+| `list-in` — Item insertion | 650ms | feather | haze | 0.920 | none | Real added messages, table rows, cards and collection items. | Apply the semantic state immediately; omit decorative movement. |
+| `list-out` — Item removal | 440ms | feather | haze | 0.920 | none | Remove after completion; announce the actual change and keep focus valid. | Apply the semantic state immediately; omit decorative movement. |
+| `reorder` — Reorder settle | 500ms | inertia | plastic | 0.550 | 12.6% | Supplement DOM reordering; use layout() for measured bounded displacement. | Apply the semantic state immediately; omit decorative movement. |
+| `highlight` — Updated content | 500ms | feather | haze | 0.920 | none | A brief update cue paired with actual content or announcement. | Apply the semantic state immediately; omit decorative movement. |
+| `message-in` — Message arrival | 650ms | feather | haze | 0.920 | none | Only on a new message; do not replay on virtualized history or steal scroll. | Apply the semantic state immediately; omit decorative movement. |
+| `reaction` — Reaction response | 680ms | coalesce | resin | 0.620 | 8.4% | Toggle the real reaction state and count before the response. | Apply the semantic state immediately; omit decorative movement. |
+
+#### Feedback
+
+| Recipe | Duration | Signature | Material | Damping ζ | Overshoot | Use | Reduced motion |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `toast-in` — Notification arrival | 650ms | coalesce | resin | 0.620 | 8.4% | Live status text with a persistent dismiss button. | Apply the semantic state immediately; omit decorative movement. |
+| `toast-out` — Notification departure | 440ms | meniscus | resin | 0.700 | 4.6% | No timer required; manual dismissal preserves reading time. | Apply the semantic state immediately; omit decorative movement. |
+| `success` — Success acknowledgement | 600ms | feather | stone | 0.920 | none | Use after a successful operation with text and a recognizable mark. | Apply the semantic state immediately; omit decorative movement. |
+| `attention` — Attention cue | 500ms | feather | stone | 0.920 | none | Single finite cue for important text; never flash or loop. | Apply the semantic state immediately; omit decorative movement. |
+| `progress-change` — Progress settle | 500ms | feather | stone | 0.920 | none | Actual progress is set first; this animation does not fabricate completion. | Apply the semantic state immediately; omit decorative movement. |
+| `busy` — Finite busy cue | 680ms | feather | stone | 0.920 | none | One cycle for an actual pending operation; keep a static busy label if it lasts longer. | Apply the semantic state immediately; omit decorative movement. |
+| `skeleton-resolve` — Loading content resolve | 650ms | feather | haze | 0.920 | none | Replace a skeleton only when real data arrives; no endless shimmer. | Apply the semantic state immediately; omit decorative movement. |
+| `empty-in` — Empty-state reveal | 500ms | coalesce | resin | 0.620 | 8.4% | Shown only when the collection is actually empty. | Apply the semantic state immediately; omit decorative movement. |
+
+#### Media
+
+| Recipe | Duration | Signature | Material | Damping ζ | Overshoot | Use | Reduced motion |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `media-in` — Media arrival | 900ms | refraction | frost | 0.850 | 0.6% | After an image decodes or media becomes ready; reserve layout space. | Apply the semantic state immediately; omit decorative movement. |
+| `caption-in` — Caption reveal | 500ms | coalesce | resin | 0.620 | 8.4% | Optional descriptive caption; text remains accessible in reduced motion. | Apply the semantic state immediately; omit decorative movement. |
+| `carousel-next` — Next item | 920ms | refraction | frost | 0.850 | 0.6% | Explicit next/previous navigation; never autoplay. | Apply the semantic state immediately; omit decorative movement. |
+| `carousel-previous` — Previous item | 920ms | refraction | frost | 0.850 | 0.6% | Maintain item count and keyboard navigation. | Apply the semantic state immediately; omit decorative movement. |
+
+#### Manipulation
+
+| Recipe | Duration | Signature | Material | Damping ζ | Overshoot | Use | Reduced motion |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `drag-pickup` — Lift to move | 500ms | tension | resin | 0.700 | 4.6% | Visual lift for a selected movable item; keyboard alternative required. | Apply the semantic state immediately; omit decorative movement. |
+| `drag-settle` — Drop settle | 640ms | coalesce | resin | 0.620 | 8.4% | After a valid local move, with undo where data changes. | Apply the semantic state immediately; omit decorative movement. |
+| `resize-settle` — Resize settle | 600ms | refraction | frost | 0.850 | 0.6% | After measured layout size changes; never animate focus or hide handles. | Apply the semantic state immediately; omit decorative movement. |
+
+#### Material compositions
+
+| Recipe | Duration | Signature | Material | Damping ζ | Overshoot | Use | Reduced motion |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `resin-confluence` — Resin confluence | 1600ms | coalesce | resin | 0.620 | 8.4% | Explicit material choreography for a large specimen; replay is a visual study, not an application action. | Keep the resting material visible; omit choreography. |
+| `frost-unfold` — Frost unfolds into depth | 1900ms | refraction | frost | 0.850 | 0.6% | Explicit material choreography for a large specimen; replay is a visual study, not an application action. | Keep the resting material visible; omit choreography. |
+| `plastic-settle` — Plastic settles into place | 1700ms | inertia | plastic | 0.550 | 12.6% | Explicit material choreography for a large specimen; replay is a visual study, not an application action. | Keep the resting material visible; omit choreography. |
+| `haze-tide` — Haze perimeter tide | 1800ms | feather | haze | 0.920 | none | Explicit material choreography for a large specimen; replay is a visual study, not an application action. | Keep the resting material visible; omit choreography. |
+| `stone-contour` — Stone contour ripple | 1300ms | feather | stone | 0.920 | none | Explicit material choreography for a large specimen; replay is a visual study, not an application action. | Keep the resting material visible; omit choreography. |
+
+**Spring policy.** Every recipe carries a spring fitted to its authored duration, which remains the authority. Damping ratio is chosen by signature: inertia and coalesce overshoot because momentum is their material claim, feather and caustic do not because a soft edge that bounces is wrong. Disabling springs must reproduce the keyframes exactly.
+
+**Travel policy.** 5–30px ordinary, 50px guidance; justified large transitions may exceed it. Haze and Stone paint moves locally while text stays fixed.
+
+**Incompressibility.** Deformations conserve volume: every scale(sx, sy) satisfies sx*sy = 1 within 0.005. Corrected by dividing both axes by the square root of the area, which preserves each deformation's aspect ratio exactly and removes only the compressibility error. Enforced by tools/validate-motion.cjs.
+
+<!-- /generated:recipes -->
+
+## The shader contract
+
+<!-- generated:shaders -->
+
+Generated from `assets/shaders/manifest.json` (version 2.0.0).
+
+**The contract is the uniform set, not the GLSL.** A platform that honours these
+uniforms has implemented Crystal's shader layer correctly, whether it does so in
+GLSL, Metal or AGSL. The `.frag` files in this repository are one implementation.
+
+### Uniforms
+
+| Uniform | Type | Meaning |
+| --- | --- | --- |
+| `u_time` | float | Seconds since the effect began, already divided by the user motion-speed factor. |
+| `u_resolution` | vec2 | Canvas size, for aspect-correct sampling. |
+| `u_progress` | float | Spring displacement from the headless core, not a linear ramp. This is what ties the optical layer to the same physics as the geometry. |
+| `u_pressure` | float | Interaction intensity. 0 at rest; 1 at full press or drag. |
+| `u_contact` | vec2 | Normalised contact point, the origin of a disturbance. Defaults to the centre. |
+| `u_tint` | vec3 | Resolved material tint in linear sRGB, taken from the palette so shaders never introduce colour of their own. |
+| `u_intensity` | float | Global attenuation. Products lower it; reduced transparency drives it to 0. |
+
+### Shaders
+
+#### `resin-refraction`
+
+- **Material** — resin
+- **Signatures** — refraction, meniscus, tension
+- **Blend mode** — `hard-light`
+- **Degrades to** — The existing CSS travelling-light sweep.
+
+Resin bends and disperses light at its rim. A signed-distance field gives the lens profile; the lighting response is a specular band that tracks the direction of travel, a defined bright edge, and chromatic separation where the lens is steepest. The interior stays clear so content remains readable through the material.
+
+#### `resin-caustics`
+
+- **Material** — resin
+- **Signatures** — caustic
+- **Blend mode** — `screen`
+- **Degrades to** — A static highlight at the resting opacity.
+
+Light focused by a curved surface concentrates into bright curves. The curvature here is at the rim, so the caustics fall as sparse arcs along the boundary. Read from the same height field as the refraction shader, so the two agree by construction rather than by tuning.
+
+#### `frost-displacement`
+
+- **Material** — frost
+- **Signatures** — feather
+- **Blend mode** — `hard-light`
+- **Degrades to** — The existing backdrop-filter blur and grain, unchanged.
+
+Frost diffuses light through a grained solid. Modulates the existing diffusion rather than replacing it; the 40px blur and grain remain the material, and this adds only slow local variation.
+
+#### `mirage-flow`
+
+- **Material** — mirage
+- **Signatures** — iris
+- **Blend mode** — `screen`
+- **Degrades to** — The existing clip-path ellipse reveal.
+
+Mirage washes across a scene as a curved front. A flow field advects the front so its edge is organic rather than a geometric ellipse.
+
+### Compositing
+
+**element** — A transparent canvas positioned over the surface, never in the content flow.
+
+**blend** — mix-blend-mode as declared per shader; the canvas carries no opaque pixels.
+
+**note** — A web shader cannot sample the page behind it, so refraction is rendered as the lighting response to a computed surface normal rather than by displacing a backdrop. The eye reads normals and specular as refraction, and the technique degrades to nothing rather than to something wrong.
+
+### The optical model
+
+**basis** — Edge lensing, not surface waves.
+
+**rationale** — Refraction is concentrated in a band just inside the boundary and falls off steeply, leaving the centre of a surface optically clear. This follows how contemporary glass interfaces behave: the interior is shrunk and the edges stretched outward, which is a displacement concentrated at the rim rather than a wave crossing the surface. A defined, light-catching edge is what separates glass from frosted plastic.
+
+**rejected** — An earlier implementation radiated concentric ripples from the contact point. That is what water does when something is dropped into it, and it read as a pond rather than as a solid transparent material. Meridian rejected it on sight and they were right: glass does not oscillate, it bends light where it curves.
+
+**specular** — The highlight tracks the direction of travel rather than sitting still. On a handset the reference for this is the gyroscope; on the web it is the motion's own direction, taken from the contact point. A highlight that does not move with the object reads as a painted-on gradient.
+
+**morphing** — Shape-shifting between states is geometry, not optics, and is carried by the spring recipes: the coalesce and meniscus signatures describe surfaces merging and separating. The optical layer lights whatever shape the geometry produces.
+
+### Platform mapping
+
+| Platform | Shading language |
+| --- | --- |
+| web | GLSL ES 3.00 fragment shaders on WebGL2, as authored here. |
+| apple | Metal Shading Language. Port mechanically; uniforms become a single constant buffer in the declared order. |
+| android | AGSL via RuntimeShader. Uniforms map one to one; AGSL is GLSL-derived and the bodies transfer with signature changes only. |
+| note | A platform that cannot meet the contract must degrade as declared per shader rather than approximate it differently, because a divergent approximation is worse for parity than an honest absence. |
+
+<!-- /generated:shaders -->
