@@ -14,6 +14,15 @@ design-system/src/
 design-system/package.json
 design-system/package-lock.json
 
+# Verification evidence that no served page links to. The report links to the
+# capture READMEs, which are kept; the reference baselines and the approved image
+# sets are for reviewing this repository, not for publishing. Roughly 10MB of a
+# 23MB upload, and none of it is reachable from the site.
+design-system/validation/baselines/
+design-system/reference/material-examples/
+design-system/reference/approved-crystal/
+design-system/reference/approved-controls/
+
 # Never publishable.
 **/node_modules/
 **/.venv/

@@ -13,7 +13,8 @@
     "verify:floor": "node tools/verify-frames.mjs --no-webgl",
     "audit:materials": "node tools/audit-materials.mjs",
     "verify:interactions": "node tools/verify-interactions.mjs",
-    "validate:docs": "node tools/validate-docs.cjs"
+    "validate:docs": "node tools/validate-docs.cjs",
+    "verify:deploy": "node tools/verify-deploy.mjs ."
   },
   "keywords": [],
   "type": "commonjs",
