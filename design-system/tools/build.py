@@ -81,7 +81,7 @@ title, content = render_markdown(ROOT / 'src/overview.md')
     # index.html#playground anchor can only be forwarded in the page.
     head_extra='<script>if(location.hash&&/^#(playground|workbench|palettes|foundations|content-blending|supporting-materials|components|accessibility|motion|adoption|specification)$/.test(location.hash))'
                'location.replace("playground.html"+location.hash);</script>',
-    footer_note='Crystal 2.0 · Derived from Gather’s approved Crystal balance-03.',
+    footer_note='Crystal 2.0 · Meridian Digital, Inc.',
     footer_link=('validation/report.html', 'Verification')))
 built.append('index.html')
 
@@ -91,7 +91,7 @@ for name, title in [('playground', 'Playground'), ('motion', 'Motion studies')]:
         title=title, path=f'{name}.html', content=fragment(f'{name}.html'),
         styles=PAGE_ASSETS[name]['styles'], scripts=PAGE_ASSETS[name]['scripts'],
         main_class='site-main', tail=fragment(f'{name}.tail.html'),
-        footer_note='Crystal 2.0 · Derived from Gather’s approved Crystal balance-03.',
+        footer_note='Crystal 2.0 · Meridian Digital, Inc.',
         footer_link=('validation/report.html', 'Verification')))
     built.append(f'{name}.html')
 
