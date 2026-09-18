@@ -107,7 +107,7 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
      draft read `--cr-accent`, which no palette defines — every palette therefore
      refracted the hardcoded fallback, and the shaders were prism-purple regardless
      of the scheme. The fallback is kept only for a surface queried before the
-     theme resolves, and is the default palette's own companion. */
+     theme resolves, and is the default palette's own companion linearised. */
   /* Palette tokens are authored as hex, so a bare digit scan reads "#EF48C6" as
      the two numbers 48 and 6 and silently falls through to the default every
      time. Both notations are parsed explicitly instead. */
@@ -130,7 +130,7 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
     const parts = parseColour(value);
     /* sRGB to linear, because the shader mixes light rather than pixels. */
     if (parts) return parts.map((c) => Math.pow(c / 255, 2.2));
-    return [0.45, 0.22, 0.94];
+    return [0.867, 0.062, 0.573];
   }
 
   function detach(element) {
@@ -337,6 +337,11 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
       contact: (t) => [0.5 + 0.4 * Math.cos(t * 0.22), 0.5 + 0.4 * Math.sin(t * 0.22)],
       intensity: 16,
     },
+    /* Frost has no lens, so its progress scales grain displacement rather than a
+       deformation, and 1 is not the same mistake here that it was for Resin. 0.85
+       is still measurably the better rest value: identical travel (7) and identical
+       rim max (26), with rim mean 1.51 against 2.00 and interior 0.80 against 1.13.
+       Quieter at rest for nothing given up. */
     'frost-displacement': { progress: 0.85, intensity: 2.2 },
   };
   const AMBIENT_FOR = [['.cr-resin,.cr-glass', 'resin-refraction'], ['.cr-frost,.cr-acrylic', 'frost-displacement']];

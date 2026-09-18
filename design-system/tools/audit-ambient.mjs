@@ -45,40 +45,64 @@ const ORIGIN = process.env.CRYSTAL_ORIGIN || 'http://localhost:4321';
 /* Specimens are addressed by selector rather than by page region, because the
    material studies live below the fold of every reference frame. */
 const SURFACES = [
-  { label: 'Resin control plane', page: 'playground.html', selector: '.material-sample.cr-resin' },
-  { label: 'Resin floating dock', page: 'playground.html', selector: '.study-floating.cr-resin' },
-  { label: 'Frost study pane', page: 'playground.html', selector: '.study-pane.cr-frost' },
+  { label: 'Resin control plane', page: 'playground.html', selector: '.material-sample.cr-resin', tier: 'shader' },
+  { label: 'Resin floating dock', page: 'playground.html', selector: '.study-floating.cr-resin', tier: 'shader' },
+  { label: 'Resin stage dock', page: 'playground.html', selector: '.stage .cr-dock', tier: 'shader' },
+  { label: 'Frost study pane', page: 'playground.html', selector: '.study-pane.cr-frost', tier: 'shader' },
+  /* The animation tier, which is the floor every platform must reach, and which
+     was until recently declared but never started. Its largest specimen is here
+     on purpose: haze-settle is a 1.8% scale, so its travel grows with the box. */
+  { label: 'Haze content fill', page: 'playground.html', selector: '.component-box.cr-haze' },
+  { label: 'Stone label backing', page: 'playground.html', selector: '.protected.cr-stone' },
 ];
 
 /* Chosen to sit an order of magnitude away from both observed failures rather
    than snugly around the current numbers, so ordinary drift does not trip them
    and a material regression cannot slip through. */
-const LIMITS = { interiorMean: 2.0, rimMean: 8.0, rimMaxFloor: 6 };
+const LIMITS = { interiorMean: 2.0, rimMean: 8.0, rimMaxFloor: 6, travelFloor: 4 };
 
-/* A fixed instant on the ambient clock. Any value works; it only has to be the
-   same one on both sides of the comparison. */
-const CLOCK = '6.5';
+/* Two fixed instants on the ambient clock, not one.
+ *
+ * A single instant makes the measurement phase-dependent, and for a looping
+ * recipe that can be the one phase where nothing is happening: stone-settle runs
+ * 1600ms alternating, so a 3200ms cycle puts t=6.5s just 100ms in, sitting at
+ * identity. Measured there the recipe looked invisible at every amplitude,
+ * including amplitudes that were plainly wrong. Presence is therefore the better
+ * of two well-separated phases, and the motion between them is reported too —
+ * for the animation tier that is the more direct question, since what has to
+ * move is an edge. */
+const CLOCKS = ['6.5', '7.3'];
 
-function prepare(mode) {
+function prepare(mode, clock, surface) {
   /* The attribute must be re-applied on DOMContentLoaded. An init script runs
      against the initial empty document, whose documentElement is then replaced
      by the parsed one, so setting it once succeeds and silently does nothing —
      the same fault that once left the right-to-left reference frames identical
      to their left-to-right twins. */
-  return [mode, CLOCK];
+  return [mode, clock, surface.tier === 'shader', surface.selector];
 }
 
-async function capture(browser, surface, mode) {
+async function capture(browser, surface, mode, clock) {
   const context = await browser.newContext({ viewport: { width: 1280, height: 1000 }, deviceScaleFactor: 1 });
-  await context.addInitScript(([m, clock]) => {
+  await context.addInitScript(([m, clock, isolate, selector]) => {
     const apply = () => {
       if (!document.documentElement) return;
       if (m === 'still') document.documentElement.dataset.ambient = 'off';
       else document.documentElement.dataset.ambientClock = clock;
     };
     apply();
-    document.addEventListener('DOMContentLoaded', apply);
-  }, prepare(mode));
+    document.addEventListener('DOMContentLoaded', () => {
+      apply();
+      /* Measure one tier at a time. A Resin panel usually has a Haze or Stone fill
+         sitting on it, and that fill now breathes too — differencing the panel against
+         a still capture would then attribute the label's movement to the panel's
+         shader, which is how this surface's interior reading flapped between 0.02 and
+         2.37 across runs. `data-cr-motion="manual"` is the existing opt-out that
+         ambientAll honours, so marking the subtree isolates the optical layer. Init
+         scripts run before page scripts, so this listener precedes ambientAll's. */
+      if (isolate) for (const el of document.querySelectorAll(selector)) el.dataset.crMotion = 'manual';
+    });
+  }, prepare(mode, clock, surface));
   const page = await context.newPage();
   await page.goto(`${ORIGIN}/${surface.page}`);
   const element = await page.waitForSelector(surface.selector, { timeout: 10000 });
@@ -133,26 +157,37 @@ const decoder = await (await browser.newContext()).newPage();
 const failures = [];
 
 for (const surface of SURFACES) {
-  let result;
+  let phases, travel;
   try {
     const still = await capture(browser, surface, 'still');
-    const rest = await capture(browser, surface, 'rest');
-    result = await difference(decoder, still, rest);
+    const rests = [];
+    for (const clock of CLOCKS) rests.push(await capture(browser, surface, 'rest', clock));
+    phases = [];
+    for (const rest of rests) phases.push(await difference(decoder, still, rest));
+    travel = await difference(decoder, rests[0], rests[1]);
   } catch (error) {
     failures.push(`${surface.label}: could not be captured — ${error.message}`);
     continue;
   }
-  if (result.error) { failures.push(`${surface.label}: ${result.error}`); continue; }
+  const broken = phases.find((p) => p.error) || (travel.error ? travel : null);
+  if (broken) { failures.push(`${surface.label}: ${broken.error}`); continue; }
 
   const problems = [];
-  if (result.interiorMean > LIMITS.interiorMean)
-    problems.push(`interior is being painted (mean ${result.interiorMean} > ${LIMITS.interiorMean})`);
-  if (result.rimMean > LIMITS.rimMean)
-    problems.push(`rim amplitude is not a rest state (mean ${result.rimMean} > ${LIMITS.rimMean})`);
-  if (result.rimMax < LIMITS.rimMaxFloor)
-    problems.push(`rest state is invisible (max ${result.rimMax} < ${LIMITS.rimMaxFloor})`);
+  const worstInterior = Math.max(...phases.map((p) => p.interiorMean));
+  const worstRimMean = Math.max(...phases.map((p) => p.rimMean));
+  /* Presence is the BEST phase: one of them may legitimately sit at rest. */
+  const bestRimMax = Math.max(...phases.map((p) => p.rimMax));
 
-  const line = `rim max ${result.rimMax}, rim mean ${result.rimMean}, interior mean ${result.interiorMean}`;
+  if (worstInterior > LIMITS.interiorMean)
+    problems.push(`interior is being painted (mean ${worstInterior} > ${LIMITS.interiorMean})`);
+  if (worstRimMean > LIMITS.rimMean)
+    problems.push(`rim amplitude is not a rest state (mean ${worstRimMean} > ${LIMITS.rimMean})`);
+  if (bestRimMax < LIMITS.rimMaxFloor)
+    problems.push(`rest state is invisible (max ${bestRimMax} < ${LIMITS.rimMaxFloor})`);
+  if (travel.rimMax < LIMITS.travelFloor)
+    problems.push(`rest state does not move between phases (max ${travel.rimMax} < ${LIMITS.travelFloor})`);
+
+  const line = `rim max ${bestRimMax}, rim mean ${worstRimMean}, interior mean ${worstInterior}, travel ${travel.rimMax}`;
   if (problems.length) failures.push(`${surface.label}: ${problems.join('; ')} — ${line}`);
   else console.log(`  ok  ${surface.label} — ${line}`);
 }

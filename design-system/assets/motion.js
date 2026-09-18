@@ -153,10 +153,33 @@
        would move the text with it, and feathering never touches content. */
     const options={duration:recipe.duration,easing:'ease-in-out',iterations:Infinity,
       direction:'alternate',fill:'none'};
-    if(recipe.layer)options.pseudoElement=recipe.layer;
+    if(recipe.layer){
+      /* Refuse a layer that cannot paint. A pseudo-element with no content box accepts an
+         animation, reports it through getAnimations, and renders absolutely nothing — an
+         effect that exists in every API and in no pixel. `.cr-dock-inner` is exactly that:
+         it carries .cr-stone but controls.css hides its paint layer, because the dock
+         frame's own Haze fill already does that job. Checking costs one computed style at
+         attach time and turns an invisible no-op into a legible refusal. */
+      const layer=getComputedStyle(element,recipe.layer);
+      if(layer.content==='none'||layer.display==='none'){
+        element.dataset.crAmbientState='no-layer';return null;
+      }
+      options.pseudoElement=recipe.layer;
+    }
     const effect=element.animate(recipe.keyframes,options);
     element.dataset.crAmbient=name;element.dataset.crAmbientState='running';
     effect.playbackRate=ambientRate;
+    /* The same capture hook the optical layer honours, so a reference frame freezes the
+       WHOLE rest state rather than only the half of it that runs on WebGL. Without this
+       these animations were photographed at whatever phase the capture happened to land
+       on, and passed only because a sub-pixel shrink falls under the comparison
+       tolerance — a frame that is stable by luck is not a gate. `alternate` means one
+       there-and-back cycle is twice the duration. */
+    const frozen=Number(document.documentElement.dataset.ambientClock);
+    if(Number.isFinite(frozen)){
+      effect.currentTime=(frozen*1000)%(recipe.duration*2);
+      effect.pause();element.dataset.crAmbientState='pinned';
+    }
     ambients.set(element,effect);
     return effect;
   }
@@ -183,6 +206,8 @@
   let ambientRate=REST_RATE, decay;
   const applyRate=rate=>{
     ambientRate=rate;
+    /* A pinned clock outranks energy: nothing a capture does to the page may unfreeze it. */
+    if(Number.isFinite(Number(document.documentElement.dataset.ambientClock)))return;
     for(const effect of ambients.values()){
       /* Zero means paused rather than stopped: the surface holds its position and
          resumes from it, which is what returning to a half-open state should look like. */
@@ -221,8 +246,17 @@
 
      Unlike the WebGL tier there is no cap here. These are Web Animations on an existing
      paint layer, cheap enough to be everywhere, which is why the CSS tier is the floor
-     the specification guarantees on every platform. */
-  const AMBIENT_SURFACES=[['.cr-haze,.cr-surface','haze-settle'],['.cr-stone,.cr-dock-inner','stone-settle']];
+     the specification guarantees on every platform.
+
+     A dock, a segmented control and a tab strip are Resin frames whose inner fill is
+     Haze — `.cr-dock::before` is a Haze fill inset 8px — so they breathe with Haze, not
+     with Stone. `.cr-dock-inner` is the opposite case: it carries the `.cr-stone` class
+     but `controls.css` hides its paint layer, because the frame's own Haze fill already
+     does that job. Animating it would move nothing. */
+  const AMBIENT_SURFACES=[
+    ['.cr-haze,.cr-surface,.cr-dock,.segmented,.suite-tabs','haze-settle'],
+    ['.cr-stone:not(.cr-dock-inner)','stone-settle'],
+  ];
   function ambientAll(scope=document){
     if(reduced()||document.documentElement.dataset.ambient==='off')return()=>{};
     if(typeof IntersectionObserver!=='function')return()=>{};
@@ -230,7 +264,10 @@
       for(const record of entries){
         const name=AMBIENT_SURFACES.find(([selector])=>record.target.matches(selector))?.[1];
         if(!name)continue;
-        if(record.isIntersecting)ambient(record.target,name);
+        /* Re-checked here rather than only at observe() time. The opt-out can be applied
+           after the observer is installed but before the callback runs, and filtering
+           only at registration let a surface be marked manual and animated anyway. */
+        if(record.isIntersecting&&!record.target.closest('[data-cr-motion=manual]'))ambient(record.target,name);
         else stopAmbient(record.target);
       }
     },{rootMargin:'64px'});
