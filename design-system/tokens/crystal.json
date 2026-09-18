@@ -386,7 +386,8 @@
       "gutterCompact": 18,
       "gutterBase": 26,
       "gutterWide": 44,
-      "minCellWidth": 240
+      "minCellWidth": 240,
+      "sidebarWidth": 280
     }
   },
   "spacing": {

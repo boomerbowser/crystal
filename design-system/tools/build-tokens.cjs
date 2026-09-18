@@ -258,6 +258,8 @@ function migrate() {
      text; below it the two collide. */
   set(out.component, 'layout.minCellWidth', leaf('dimension', '240px',
     'Narrowest an auto-flowing grid cell becomes before the grid drops a column'));
+  set(out.component, 'layout.sidebarWidth', leaf('dimension', '280px',
+    'Default width of a shell\'s supporting panel: a two-word label plus an icon at comfortable density'));
   set(out.component, 'card.radius', leaf('dimension', '{semantic.shape.contentRadius}',
     'Card-shaped buttons keep the content radius so artwork is not clipped'));
   set(out.component, 'focus.coreWidth', leaf('dimension', '2px', 'Crisp focus core, never blurred'));

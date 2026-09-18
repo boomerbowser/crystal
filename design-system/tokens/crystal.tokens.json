@@ -1697,6 +1697,11 @@
         "$type": "dimension",
         "$value": "240px",
         "$description": "Narrowest an auto-flowing grid cell becomes before the grid drops a column"
+      },
+      "sidebarWidth": {
+        "$type": "dimension",
+        "$value": "280px",
+        "$description": "Default width of a shell's supporting panel: a two-word label plus an icon at comfortable density"
       }
     },
     "card": {

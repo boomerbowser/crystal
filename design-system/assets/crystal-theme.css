@@ -53,6 +53,7 @@
   --cr-layout-gutter-base: 26px;
   --cr-layout-gutter-wide: 44px;
   --cr-layout-min-cell-width: 240px;
+  --cr-layout-sidebar-width: 280px;
   --cr-scrollbar-frost-thumb: rgba(23, 17, 48, 0.55);
   --cr-scrollbar-resin-thumb: rgba(115, 56, 239, 0.8);
   --cr-scrollbar-track: rgba(98, 74, 159, 0.12);
@@ -165,6 +166,7 @@
   --cr-layout-gutter-base: 26px;
   --cr-layout-gutter-wide: 44px;
   --cr-layout-min-cell-width: 240px;
+  --cr-layout-sidebar-width: 280px;
   --cr-scrollbar-frost-thumb: rgba(23, 17, 48, 0.55);
   --cr-scrollbar-resin-thumb: rgba(115, 56, 239, 0.8);
   --cr-scrollbar-track: rgba(98, 74, 159, 0.12);
@@ -277,6 +279,7 @@
   --cr-layout-gutter-base: 26px;
   --cr-layout-gutter-wide: 44px;
   --cr-layout-min-cell-width: 240px;
+  --cr-layout-sidebar-width: 280px;
   --cr-scrollbar-frost-thumb: rgba(247, 243, 254, 0.55);
   --cr-scrollbar-resin-thumb: rgba(200, 177, 249, 0.8);
   --cr-scrollbar-track: rgba(191, 163, 248, 0.12);

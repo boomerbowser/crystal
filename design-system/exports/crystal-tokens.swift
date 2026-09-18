@@ -114,6 +114,7 @@ public enum CrystalToken {
     public static let layoutGutterBase = "26px"
     public static let layoutGutterWide = "44px"
     public static let layoutMinCellWidth = "240px"
+    public static let layoutSidebarWidth = "280px"
     public static let cardRadius = "28px"
     public static let focusCoreWidth = "2px"
     public static let focusCoreOffset = "3px"
