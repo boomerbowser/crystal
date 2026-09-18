@@ -28,7 +28,7 @@
 in vec2 a_position;
 void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
 
-  const state = { manifest: null, common: null, sources: new Map(), active: new Map() };
+  const state = { manifest: null, common: null, sources: new Map(), active: new Map(), energy: 0.6 };
 
   const prefers = (query) => {
     try { return matchMedia(query).matches; } catch { return false; }
@@ -198,12 +198,20 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
 
     const tint = tintOf(element);
     const started = performance.now();
-    const record = { canvas, gl, frame: 0, previousPosition, previousIsolation, element };
+    const record = { canvas, gl, frame: 0, previousPosition, previousIsolation, element,
+      /* Ambient surfaces keep their own clock. Interaction advances it faster rather than
+         brightening the surface, which is what "faster on press" physically means: the
+         light moves quicker, it does not become more light. */
+      clock: 0, last: started, ambient: !!options.ambient };
     state.active.set(element, record);
 
     const draw = (now) => {
       if (!permitted()) { detach(element); return; }
-      const seconds = (now - started) / 1000;
+      if (record.ambient && root.document.documentElement.dataset.ambient === 'off') { detach(element); return; }
+      const rate = record.ambient ? state.energy : 1;
+      record.clock += ((now - record.last) / 1000) * rate;
+      record.last = now;
+      const seconds = record.ambient ? record.clock : (now - started) / 1000;
       const progress = typeof options.progress === 'function'
         ? options.progress(seconds) : (options.progress ?? 1);
 
@@ -230,8 +238,83 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
 
   document.addEventListener('visibilitychange', () => { if (document.hidden) detachAll(); });
 
+  /* Ambient energy. Rest, hover, press — the surface is always moving, and interaction
+     adds to it rather than stopping it. Text entry is the one exception, because a field
+     being typed into is where motion genuinely competes with the task. */
+  let settle;
+  const energise = (rate) => {
+    state.energy = rate;
+    clearTimeout(settle);
+    settle = setTimeout(() => { state.energy = 0.6; }, 900);
+  };
+  root.addEventListener('pointerover', (event) => {
+    if (event.target instanceof Element
+      && event.target.closest('button,a,[role=button],.cr-control')) energise(1);
+  }, { passive: true });
+  root.addEventListener('pointerdown', () => energise(2.4), { passive: true });
+  root.addEventListener('focusin', (event) => {
+    const field = event.target;
+    const typing = field instanceof Element && field.matches(
+      'input:not([type=range],[type=checkbox],[type=radio],[type=button],[type=submit],[type=reset]),textarea,[contenteditable=true]');
+    state.energy = typing ? 0 : 0.6;
+  }, { passive: true });
+
+  /* A page has many material surfaces and a browser has few WebGL contexts — Chromium
+     starts discarding them around sixteen. Ambient shaders are therefore capped well
+     below that and given only to surfaces actually on screen; everything else keeps the
+     CSS floor, which is complete on its own. Haze, Stone and Plastic never take a
+     context at all: their motion is CSS, which is cheap enough to be everywhere. */
+  const MAX_AMBIENT = 6;
+  const AMBIENT_FOR = [['.cr-resin,.cr-glass', 'resin-refraction'], ['.cr-frost,.cr-acrylic', 'frost-displacement']];
+  const ambientHandles = new Map();
+
+  function ambient(element, shaderId) {
+    if (ambientHandles.has(element) || ambientHandles.size >= MAX_AMBIENT) return null;
+    /* 2.2 is where the shader's own alpha ceiling takes over — past it nothing changes,
+       which is the material's low-amplitude rule holding rather than a number chosen by
+       eye. Below it the effect measures a worst-channel delta of 3 against a still
+       surface, which is present in a contract and absent to a person. */
+    const pending = attach(element, shaderId, { ambient: true, progress: 1, intensity: 2.2 });
+    ambientHandles.set(element, pending);
+    return pending;
+  }
+  function stopAmbient(element) {
+    const pending = ambientHandles.get(element);
+    ambientHandles.delete(element);
+    Promise.resolve(pending).then((handle) => handle && handle.detach()).catch(() => {});
+  }
+
+  /* Give every Resin and Frost surface on the page its rest state, as they come into
+     view. This is what the preview calls; a product opts surfaces in itself. */
+  function ambientAll(scope = document) {
+    if (!supported || !permitted()) return () => {};
+    const observer = new IntersectionObserver((entries) => {
+      for (const record of entries) {
+        const shaderId = AMBIENT_FOR.find(([selector]) => record.target.matches(selector))?.[1];
+        if (!shaderId) continue;
+        if (record.isIntersecting) ambient(record.target, shaderId);
+        else stopAmbient(record.target);
+      }
+    }, { rootMargin: '64px' });
+    for (const [selector] of AMBIENT_FOR)
+      for (const element of scope.querySelectorAll(selector)) observer.observe(element);
+    return () => { observer.disconnect(); for (const el of [...ambientHandles.keys()]) stopAmbient(el); };
+  }
+
   root.CrystalShaders = Object.freeze({
-    attach, detach, detachAll, supported,
-    permitted, manifestUrl: MANIFEST_URL,
+    attach, detach, detachAll, supported, ambient, stopAmbient, ambientAll,
+    permitted, manifestUrl: MANIFEST_URL, maxAmbient: MAX_AMBIENT,
   });
+
+  /* Ambient is the rest state of Resin and Frost, so it starts on its own. It is not a
+     decision a page has to remember to make — a material that only comes alive when
+     asked is not a material with a rest state. `data-ambient="off"` on the document
+     turns it off everywhere, which is what reference captures set, and a product can
+     stop any single surface with `stopAmbient`. */
+  function startAmbient() {
+    if (document.documentElement.dataset.ambient === 'off') return;
+    ambientAll();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startAmbient);
+  else startAmbient();
 })(window);

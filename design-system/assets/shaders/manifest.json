@@ -68,7 +68,8 @@
       "blend": "hard-light",
       "claim": "Resin bends and disperses light at its rim. A signed-distance field gives the lens profile; the lighting response is a specular band that tracks the direction of travel, a defined bright edge, and chromatic separation where the lens is steepest. The interior stays clear so content remains readable through the material.",
       "degradesTo": "The existing CSS travelling-light sweep.",
-      "blendNote": "hard-light, and the choice is forced rather than aesthetic. On a white surface both screen and overlay are mathematically no-ops: overlay resolves to 1 - 2(1-b)(1-s), which is 1 for every source colour when the backdrop is white, so the layer was being discarded by the compositor while painting correctly. hard-light swaps the operands, letting the shader's own luminance decide: below mid-grey it multiplies and darkens, above it screens and brightens. That matches what a curved transparent surface does \u2014 it darkens at steep angles and highlights where it catches the key light \u2014 and it reads on light and dark backdrops alike. The shader's output is centred on 0.5 for exactly this reason."
+      "blendNote": "hard-light, and the choice is forced rather than aesthetic. On a white surface both screen and overlay are mathematically no-ops: overlay resolves to 1 - 2(1-b)(1-s), which is 1 for every source colour when the backdrop is white, so the layer was being discarded by the compositor while painting correctly. hard-light swaps the operands, letting the shader's own luminance decide: below mid-grey it multiplies and darkens, above it screens and brightens. That matches what a curved transparent surface does — it darkens at steep angles and highlights where it catches the key light — and it reads on light and dark backdrops alike. The shader's output is centred on 0.5 for exactly this reason.",
+      "ambient": true
     },
     {
       "id": "resin-caustics",
@@ -80,19 +81,22 @@
       "blend": "screen",
       "claim": "Light focused by a curved surface concentrates into bright curves. The curvature here is at the rim, so the caustics fall as sparse arcs along the boundary. Read from the same height field as the refraction shader, so the two agree by construction rather than by tuning.",
       "degradesTo": "A static highlight at the resting opacity.",
-      "blendNote": "Screen is kept: a caustic is added light, and adding light to an already-white surface is correctly invisible. Caustics are specified for Resin over a coloured backdrop, which is where they occur."
+      "blendNote": "Screen is kept: a caustic is added light, and adding light to an already-white surface is correctly invisible. Caustics are specified for Resin over a coloured backdrop, which is where they occur.",
+      "ambient": false
     },
     {
       "id": "frost-displacement",
       "file": "frost-displacement.frag",
       "material": "frost",
       "signatures": [
-        "feather"
+        "feather",
+        "refraction"
       ],
       "blend": "hard-light",
-      "claim": "Frost diffuses light through a grained solid. Modulates the existing diffusion rather than replacing it; the 40px blur and grain remain the material, and this adds only slow local variation.",
+      "claim": "Frost refracts colour, not shape. At 40px of diffusion nothing sharp survives the material, so the three channels sample the same field at slightly separated points and resolve into a slow warm-to-cool wander across the surface rather than a visible fringe. Resin, at 20px, keeps detail and disperses sharply at its rim instead: the diffusion radius decides which behaviour is correct, not taste. Turning Resin down does not produce Frost, it produces weak Resin.",
       "degradesTo": "The existing backdrop-filter blur and grain, unchanged.",
-      "blendNote": "hard-light for the same reason as resin-refraction; the output is centred on 0.5 so the mean brightness of the surface is unchanged."
+      "blendNote": "hard-light for the same reason as resin-refraction; the output is centred on 0.5 so the mean brightness of the surface is unchanged.",
+      "ambient": true
     },
     {
       "id": "mirage-flow",
@@ -103,7 +107,8 @@
       ],
       "blend": "screen",
       "claim": "Mirage washes across a scene as a curved front. A flow field advects the front so its edge is organic rather than a geometric ellipse.",
-      "degradesTo": "The existing clip-path ellipse reveal."
+      "degradesTo": "The existing clip-path ellipse reveal.",
+      "ambient": false
     }
   ],
   "requirements": {
@@ -123,5 +128,6 @@
     "rejected": "An earlier implementation radiated concentric ripples from the contact point. That is what water does when something is dropped into it, and it read as a pond rather than as a solid transparent material. Meridian rejected it on sight and they were right: glass does not oscillate, it bends light where it curves.",
     "specular": "The highlight tracks the direction of travel rather than sitting still. On a handset the reference for this is the gyroscope; on the web it is the motion's own direction, taken from the contact point. A highlight that does not move with the object reads as a painted-on gradient.",
     "morphing": "Shape-shifting between states is geometry, not optics, and is carried by the spring recipes: the coalesce and meniscus signatures describe surfaces merging and separating. The optical layer lights whatever shape the geometry produces."
-  }
+  },
+  "ambientTier": "Resin and Frost declare an ambient rest state and run it by default where WebGL2, motion preference and transparency preference allow. Ambient is capped at six live contexts and given only to surfaces on screen, because a page has many material surfaces and a browser has few contexts. Haze, Stone and Plastic never take a context: their rest motion is CSS. Interaction advances the shader clock rather than brightening the surface — rest 0.6, hover 1, press 2.4, decaying back — which is what faster light physically means. Text entry pauses it, and nothing else does."
 }

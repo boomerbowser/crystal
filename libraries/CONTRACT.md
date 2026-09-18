@@ -119,10 +119,18 @@ and a recipe that loops is the only kind a platform may run continuously.
 A platform is not required to implement this tier at all. A platform that does must honour
 all four properties:
 
-- **Opt-in per surface.** Nothing ambient starts because a component was rendered. The
-  host opts a surface in explicitly and can stop it. On the web this is
-  `CrystalMotion.ambient(element, recipe)` and `CrystalMotion.stopAmbient(element)`; a
-  platform provides the equivalent pair under its own names.
+- **On by default for Resin and Frost; stoppable everywhere.** Ambient is a material's
+  rest state, not a decision a page has to remember to make — a material that only comes
+  alive when asked does not have a rest state. Resin and Frost start their own; Haze,
+  Stone and Plastic carry theirs in CSS. A host can stop any single surface, and one
+  document-level switch disables every ambient effect at once. On the web those are
+  `CrystalMotion.stopAmbient(element)` / `CrystalShaders.stopAmbient(element)` and
+  `data-ambient="off"`; a platform provides the equivalents under its own names.
+- **Bounded by what the platform can hold.** A page has many material surfaces and a
+  browser has few live GPU contexts — Chromium starts discarding them around sixteen. The
+  web implementation caps ambient shaders at six and gives them only to surfaces on
+  screen. A platform sets its own ceiling and says what it is; an ambient tier that
+  exhausts the device is worse than none.
 - **Rim and fill only, never a surface being read.** Motion in the middle of a surface
   competes with the text on it; motion at its boundary does not. This is the same argument
   that makes Resin lens at its edge rather than ripple through its centre. Text never

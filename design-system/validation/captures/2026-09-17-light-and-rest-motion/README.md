@@ -105,3 +105,55 @@ scroll offset.
 
 **Gate G8 passed at 18 of 18** with WebGL2 unavailable and ambient off, which is the check
 that keeps ambient an enhancement rather than a requirement.
+
+---
+
+# The shader tier (task 26)
+
+## Frost refracts colour, not shape
+
+Frost's shader varied diffusion but was effectively monochrome. It now samples the same
+field at three slightly separated points, one per channel, which resolves into a slow
+warm-to-cool wander across the surface.
+
+That separation is wide on purpose. A narrow offset produces a visible fringe, which is
+Resin's behaviour; a wide one produces a gradient of colour temperature, which is what
+40px of diffusion actually does to light. **The diffusion radius decides which is correct,
+not taste** — turning Resin's dispersion down does not produce Frost, it produces weak
+Resin.
+
+No uniform was added. Per-channel sampling of an existing field gives dispersion for free,
+and every new uniform is a contract change for three platforms.
+
+## Interaction advances the clock
+
+Ambient surfaces keep their own clock, and interaction advances it faster — rest 0.6,
+hover 1, press 2.4, decaying after 900ms. That is what "faster light" physically means:
+the light moves quicker, there is not more of it. Raising brightness instead would have
+been the easy translation and the wrong one.
+
+## Bounded, because a browser has few contexts
+
+Chromium starts discarding WebGL contexts around sixteen and a Crystal page has dozens of
+material surfaces. Ambient shaders are capped at six, given only to surfaces intersecting
+the viewport, and released on `visibilitychange`. Haze, Stone and Plastic never take a
+context at all — their rest motion is CSS, which is cheap enough to be everywhere.
+
+## Calibrated against a person, not a contract
+
+The first ambient Frost measured a worst-channel delta of **3** against a still surface.
+It attached, it ran, it passed every check, and it could not be seen — the same failure as
+the eleven hollow recipes and as `hover` at 1.2%. Raising the intensity moves it to **11**,
+where the shader's own alpha ceiling takes over: past that point nothing changes, so the
+figure is the material's low-amplitude rule holding rather than a number chosen by eye.
+
+## Two gates, still green
+
+`verify:visual` is 18 of 18 with ambient shaders live, because captures disable ambient.
+**Gate G8** — WebGL2 unavailable *and* ambient off — is 18 of 18, which is what keeps the
+whole tier an enhancement rather than a requirement.
+
+A bug in the probe, worth recording so it is not rediscovered: the first compile check
+reported all four shaders refused. The cause was an 800px viewport, where the Frost side
+menu collapses to `display:none` and `attach` correctly refuses a zero-size element. The
+runtime was right and the test was wrong.

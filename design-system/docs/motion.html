@@ -248,11 +248,19 @@ glyphs are pixel-identical with the shader on and off.</p>
 <p>Ambient motion is what a surface does at rest — the specular band drifting along a Resin
 rim, a Haze fill breathing around its 80% value. It is the tenth category and the newest,
 and it is governed by three rules that are not negotiable.</p>
-<p><strong>It is a capability tier, not a default.</strong> A platform declares support and a surface opts
-in. Nothing ambient runs because a component was rendered. Where a platform cannot honour
-it, ambient degrades to a static surface with no other change — exactly the shape the
-shader layer already uses, and for the same reason: an enhancement that is load-bearing is
-not an enhancement.</p>
+<p><strong>It is a rest state, not a decision.</strong> Resin and Frost start their own ambient motion;
+Haze, Stone and Plastic carry theirs in CSS. A material that only comes alive when asked
+does not have a rest state. What <em>is</em> a decision is stopping it: any single surface can be
+stopped, and <code>data-ambient="off"</code> on the document disables every ambient effect at once —
+which is what reference captures set, because a moving surface cannot be photographed
+deterministically.</p>
+<p><strong>It is still never load-bearing.</strong> Where a platform cannot honour it, ambient degrades to
+a static surface with no other change, exactly as the shader layer does. Gate G8 proves it:
+with WebGL2 unavailable <em>and</em> ambient disabled, every page renders precisely its committed
+baseline.</p>
+<p><strong>It is bounded by what the device can hold.</strong> A page has many material surfaces and a
+browser has few live GPU contexts. Ambient shaders are capped at six and given only to
+surfaces on screen; everything else keeps the CSS floor, which is complete on its own.</p>
 <p><strong>It runs on the rim and the fill, never on a surface the user is reading.</strong> This is the
 edge-lensing argument again. Motion in the middle of a surface competes with the text on
 it; motion at the boundary does not. Text never moves, and an ambient recipe that would
@@ -262,11 +270,17 @@ move text is wrong regardless of how subtle it is.</p>
 that anything moving for more than five seconds can be paused or stopped, and an ambient
 loop by definition never stops on its own. A surface with ambient motion removed must be
 identical to one that never had it.</p>
-<p>On the web the tier is <code>CrystalMotion.ambient(element, recipe)</code> and
-<code>CrystalMotion.stopAmbient(element)</code>. Nothing starts on its own: a surface is opted in
-explicitly. Reduced motion refuses outright and marks the surface static, a recipe that
-does not declare <code>loop</code> is refused, and any interaction pauses every loop until the page
-is quiet again.</p>
+<p>On the web the tier is <code>CrystalMotion.ambient(element, recipe)</code> /
+<code>CrystalMotion.stopAmbient(element)</code> for the CSS recipes and <code>CrystalShaders.ambientAll()</code> /
+<code>CrystalShaders.stopAmbient(element)</code> for the shader ones. Reduced motion refuses outright
+and marks the surface static, and a recipe that does not declare <code>loop</code> is refused.</p>
+<p><strong>Interaction adds energy; it does not stop the surface.</strong> Rest is 0.6, hover 1, press 2.4,
+decaying back after 900ms — and for a shader that rate advances its clock rather than
+brightening it, because faster light means the light moves quicker, not that there is more
+of it. A material that goes still the moment it is touched reads as broken rather than as
+calm.</p>
+<p>The single exception is text entry. A field being typed into is the one place where motion
+genuinely competes with the task, so ambient pauses on focus there and nowhere else.</p>
 <p>The high tier belongs in the shader layer, where <code>u_time</code> is already a declared uniform.
 The CSS keyframes below are the floor, not the ceiling. The platform obligations are in
 <code>libraries/CONTRACT.md</code> §8.</p>
@@ -1172,11 +1186,11 @@ GLSL, Metal or AGSL. The <code>.frag</code> files in this repository are one imp
 <h4 id="frost-displacement"><code>frost-displacement</code></h4>
 <ul>
 <li><strong>Material</strong> — frost</li>
-<li><strong>Signatures</strong> — feather</li>
+<li><strong>Signatures</strong> — feather, refraction</li>
 <li><strong>Blend mode</strong> — <code>hard-light</code></li>
 <li><strong>Degrades to</strong> — The existing backdrop-filter blur and grain, unchanged.</li>
 </ul>
-<p>Frost diffuses light through a grained solid. Modulates the existing diffusion rather than replacing it; the 40px blur and grain remain the material, and this adds only slow local variation.</p>
+<p>Frost refracts colour, not shape. At 40px of diffusion nothing sharp survives the material, so the three channels sample the same field at slightly separated points and resolve into a slow warm-to-cool wander across the surface rather than a visible fringe. Resin, at 20px, keeps detail and disperses sharply at its rim instead: the diffusion radius decides which behaviour is correct, not taste. Turning Resin down does not produce Frost, it produces weak Resin.</p>
 <h4 id="mirage-flow"><code>mirage-flow</code></h4>
 <ul>
 <li><strong>Material</strong> — mirage</li>

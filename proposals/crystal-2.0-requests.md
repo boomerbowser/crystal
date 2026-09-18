@@ -140,7 +140,7 @@ restated the optical rules it implies. Section I, tasks 25-27, gate G8.
 
 | # | Requested | Status |
 | --- | --- | --- |
-| R17a | Resin and Frost refract light *and colour* in their animations, in different amounts and ways | specified; Resin sharp and rim-concentrated, Frost broad and chromatic. Shader tier is task 26, still open |
+| R17a | Resin and Frost refract light *and colour* in their animations, in different amounts and ways | done — Frost samples per channel for a broad warm-to-cool wander; Resin keeps its sharp rim dispersion. Both run at rest, capped at six contexts |
 | R17b | Plastic carries the base glow of its primary plus the active scheme's tint | done — `--cr-atmosphere-glow`, drifting over 38s |
 | R17c | Refraction affects the shadow the surface casts | done — the palette companion mixes into the shadow ink, colour only, alpha preserved |
 | R17d | Haze and Stone have edges that move on their own, outward and inward rather than around the perimeter | done — boundary travel on the isolated paint layer |

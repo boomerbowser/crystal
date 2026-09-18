@@ -190,11 +190,21 @@ Ambient motion is what a surface does at rest — the specular band drifting alo
 rim, a Haze fill breathing around its 80% value. It is the tenth category and the newest,
 and it is governed by three rules that are not negotiable.
 
-**It is a capability tier, not a default.** A platform declares support and a surface opts
-in. Nothing ambient runs because a component was rendered. Where a platform cannot honour
-it, ambient degrades to a static surface with no other change — exactly the shape the
-shader layer already uses, and for the same reason: an enhancement that is load-bearing is
-not an enhancement.
+**It is a rest state, not a decision.** Resin and Frost start their own ambient motion;
+Haze, Stone and Plastic carry theirs in CSS. A material that only comes alive when asked
+does not have a rest state. What *is* a decision is stopping it: any single surface can be
+stopped, and `data-ambient="off"` on the document disables every ambient effect at once —
+which is what reference captures set, because a moving surface cannot be photographed
+deterministically.
+
+**It is still never load-bearing.** Where a platform cannot honour it, ambient degrades to
+a static surface with no other change, exactly as the shader layer does. Gate G8 proves it:
+with WebGL2 unavailable *and* ambient disabled, every page renders precisely its committed
+baseline.
+
+**It is bounded by what the device can hold.** A page has many material surfaces and a
+browser has few live GPU contexts. Ambient shaders are capped at six and given only to
+surfaces on screen; everything else keeps the CSS floor, which is complete on its own.
 
 **It runs on the rim and the fill, never on a surface the user is reading.** This is the
 edge-lensing argument again. Motion in the middle of a surface competes with the text on
@@ -207,11 +217,19 @@ that anything moving for more than five seconds can be paused or stopped, and an
 loop by definition never stops on its own. A surface with ambient motion removed must be
 identical to one that never had it.
 
-On the web the tier is `CrystalMotion.ambient(element, recipe)` and
-`CrystalMotion.stopAmbient(element)`. Nothing starts on its own: a surface is opted in
-explicitly. Reduced motion refuses outright and marks the surface static, a recipe that
-does not declare `loop` is refused, and any interaction pauses every loop until the page
-is quiet again.
+On the web the tier is `CrystalMotion.ambient(element, recipe)` /
+`CrystalMotion.stopAmbient(element)` for the CSS recipes and `CrystalShaders.ambientAll()` /
+`CrystalShaders.stopAmbient(element)` for the shader ones. Reduced motion refuses outright
+and marks the surface static, and a recipe that does not declare `loop` is refused.
+
+**Interaction adds energy; it does not stop the surface.** Rest is 0.6, hover 1, press 2.4,
+decaying back after 900ms — and for a shader that rate advances its clock rather than
+brightening it, because faster light means the light moves quicker, not that there is more
+of it. A material that goes still the moment it is touched reads as broken rather than as
+calm.
+
+The single exception is text entry. A field being typed into is the one place where motion
+genuinely competes with the task, so ambient pauses on focus there and nowhere else.
 
 The high tier belongs in the shader layer, where `u_time` is already a declared uniform.
 The CSS keyframes below are the floor, not the ceiling. The platform obligations are in
@@ -420,11 +438,11 @@ Light focused by a curved surface concentrates into bright curves. The curvature
 #### `frost-displacement`
 
 - **Material** — frost
-- **Signatures** — feather
+- **Signatures** — feather, refraction
 - **Blend mode** — `hard-light`
 - **Degrades to** — The existing backdrop-filter blur and grain, unchanged.
 
-Frost diffuses light through a grained solid. Modulates the existing diffusion rather than replacing it; the 40px blur and grain remain the material, and this adds only slow local variation.
+Frost refracts colour, not shape. At 40px of diffusion nothing sharp survives the material, so the three channels sample the same field at slightly separated points and resolve into a slow warm-to-cool wander across the surface rather than a visible fringe. Resin, at 20px, keeps detail and disperses sharply at its rim instead: the diffusion radius decides which behaviour is correct, not taste. Turning Resin down does not produce Frost, it produces weak Resin.
 
 #### `mirage-flow`
 
