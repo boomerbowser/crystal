@@ -177,6 +177,22 @@ if (stats.orphans.length) {
 fs.writeFileSync(CHAPTER, chapter(categories, stats));
 fs.mkdirSync(path.dirname(MANIFEST), { recursive: true });
 fs.writeFileSync(MANIFEST, JSON.stringify(manifest(categories, stats), null, 2) + '\n');
+/* The full specification in one file. parity.json carries per-platform status;
+   this carries what each component actually IS — anatomy, states, material,
+   geometry, semantics, the Crystal/product split and the parity claim. A library
+   needs the second to build a component and to document it, and reading fourteen
+   files across a package boundary is not something a consumer should have to do. */
+fs.writeFileSync(
+  path.join(ROOT, 'tokens/catalogue.json'),
+  JSON.stringify({
+    $description: 'Crystal component catalogue, combined. Generated from tokens/catalogue/.',
+    generated: new Date().toISOString().slice(0, 10),
+    categories: categories.map((category) => ({
+      id: category.id, name: category.name, description: category.description,
+      components: category.components,
+    })),
+  }, null, 2) + '\n',
+);
 
 console.log(JSON.stringify({
   components: stats.count,

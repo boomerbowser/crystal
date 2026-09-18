@@ -72,6 +72,7 @@
     "./core/presets": {
       "types": "./assets/core/presets.d.ts",
       "default": "./assets/core/presets.js"
-    }
+    },
+    "./catalogue": "./tokens/catalogue.json"
   }
 }
