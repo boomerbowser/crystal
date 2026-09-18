@@ -75,28 +75,25 @@
     if(reduced()||typeof element.animate!=='function'){element.dataset.crMotionState='instant';return Promise.resolve({status:'instant'});}
     const tokens=getComputedStyle(document.documentElement),read=(key,fallback)=>{const value=parseFloat(tokens.getPropertyValue('--cr-'+key));return Number.isFinite(value)?value:fallback;};
     const limit=Math.min(50,Math.max(0,read('motion-max-travel',50)));
-    const travel=Math.min(limit,Math.max(0,read('travel-'+(name==='resin'?'floating':name==='dismiss'?'exit':'panel'),24)));
+    /* The travel role, the keyframes and the easing role all come from the shared
+       preset module, so the web runtime and every platform library compute the
+       same movement from the same tokens instead of each carrying a copy. */
+    const presets=(root.CrystalCore&&root.CrystalCore.presets)||null;
+    const travel=Math.min(limit,Math.max(0,read('travel-'+(presets?presets.travelRole(name):'panel'),24)));
     const depth=Math.min(limit,Math.max(0,read('travel-depth',50))),feather=Math.min(6,Math.max(0,read('travel-feather',6)));
     const anchored=name==='haze'||name==='stone'||(name==='dismiss'&&element.matches('.cr-dialog,.cr-haze,.cr-surface,.cr-stone'));
     const rate=Number.isFinite(options.rate)?Math.max(.25,Math.min(2,options.rate)):1;
     const duration=Math.min(read('motion-max-duration',5000),read(durationNames[name],1000)/rate);
-    const easing=tokens.getPropertyValue('--cr-ease-'+(name==='dismiss'||name==='mirage-out'?'exit':'enter')).trim()||'ease-in-out';
+    const easingRole=presets&&presets.EXITING.has(name)?'exit':(name==='dismiss'||name==='mirage-out'?'exit':'enter');
+    const easing=tokens.getPropertyValue('--cr-ease-'+easingRole).trim()||'ease-in-out';
     const opts={duration,easing,fill:'none'},animations=[];
     const add=(frames,pseudoElement)=>{element.dataset.crMotionEngine=pseudoElement?'Motion + GSAP':'Motion';animations.push(CrystalEngines.frames(element,frames,{...opts,...(pseudoElement?{pseudoElement}:{} )}));};
-    const frames={
-      plastic:[{transform:`translateY(${travel}px)`,opacity:0},{transform:'translateY(0)',opacity:1}],
-      frost:[{transform:'perspective(700px) translateZ(0)',opacity:.5},{transform:`perspective(700px) translateZ(${depth}px)`,opacity:1,offset:.66},{transform:'perspective(700px) translateZ(0)',opacity:1}],
-      resin:[{transform:`translateY(${travel}px) ${squash(.90,1.10)} skewX(-3deg)`,opacity:0},{transform:`translateY(-6px) ${squash(1.045,.965)} skewX(1.5deg)`,opacity:1,offset:.58},{transform:`translateY(2px) ${squash(.99,1.015)} skewX(-.4deg)`,opacity:1,offset:.82},{transform:'translateY(0) scale(1,1) skewX(0deg)',opacity:1}],
-      dismiss:anchored?[{opacity:1},{opacity:0}]:[{transform:'translateY(0)',opacity:1},{transform:`translateY(${travel}px)`,opacity:0}]
-    };
-    if(name==='mirage'||name==='mirage-out'){
-      const from=direction(element,options.direction),origins={left:'0% 65%',right:'100% 35%',top:'65% 0%',bottom:'35% 100%'};
-      const start={opacity:0,clipPath:`ellipse(0% 35% at ${origins[from]})`},end={opacity:1,clipPath:`ellipse(150% 150% at ${origins[from]})`};
-      if(element.dataset.flowSoft==='true'){
-        const softStart={opacity:0,'--cr-flow-reach':'0%'},softEnd={opacity:1,'--cr-flow-reach':'100%'};
-        add(name==='mirage'?[softStart,softEnd]:[softEnd,softStart]);
-      }else add(name==='mirage'?[start,{opacity:.8,clipPath:`ellipse(70% 95% at ${origins[from]})`,offset:.58},end]:[end,start]);
-    }else if(frames[name])add(frames[name]);
+    const built=presets?presets.presetKeyframes(name,{
+      travel,depth,anchored,
+      from:(name==='mirage'||name==='mirage-out')?direction(element,options.direction):undefined,
+      softFlow:element.dataset.flowSoft==='true',
+    }):{keyframes:[]};
+    if(built.keyframes.length)add(built.keyframes);
     // Paint-only layers carry the rippling perimeter and changing light, behind crisp labels.
     const decorate=document.documentElement.dataset.effects!=='opaque'&&!matchMedia('(prefers-reduced-transparency: reduce)').matches&&!matchMedia('(forced-colors: active)').matches;
     if(decorate){

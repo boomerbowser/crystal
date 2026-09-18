@@ -68,6 +68,10 @@
     "./motion-recipes": "./tokens/motion-recipes.json",
     "./engines": "./src/engines.js",
     "./shaders/": "./assets/shaders/",
-    "./flat": "./tokens/crystal.json"
+    "./flat": "./tokens/crystal.json",
+    "./core/presets": {
+      "types": "./assets/core/presets.d.ts",
+      "default": "./assets/core/presets.js"
+    }
   }
 }

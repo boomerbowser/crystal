@@ -27,7 +27,8 @@ subprocess.run(['node', '-e', "const f=require('fs'),v=require('vm');const c={wi
 # fails on any asset under `assets/` that no page references, which is what catches a
 # dropped entry here.
 INTERACTIVE = ['assets/vendor/crystal-engines.js?v=modal-cleanup-1', 'assets/motion-catalog.js',
-               'assets/motion.js', 'assets/motion-interactions.js']
+               # The shared preset module must load before motion.js, which reads it.
+               'assets/core/presets.js', 'assets/motion.js', 'assets/motion-interactions.js']
 PAGE_ASSETS = {
     'playground': {'styles': ['assets/motion.css'],
                    'scripts': INTERACTIVE + ['assets/site.js']},

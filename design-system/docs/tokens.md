@@ -394,7 +394,7 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.
 
-9 tokens.
+13 tokens.
 
 ### Component · action
 
@@ -402,6 +402,10 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | --- | --- | --- | --- |
 | `component.action.radius` | dimension | `999px` | Action controls are pill-shaped, independent of the content radius |
 | `component.action.minTarget` | dimension | `44px` | Minimum interactive target |
+| `component.action.paddingBlock` | dimension | `15px` | Action control block padding |
+| `component.action.paddingInline` | dimension | `24px` | Action control inline padding |
+| `component.action.gap` | dimension | `9px` | Gap between an action's icon and its label |
+| `component.action.disabledOpacity` | number | `0.55` | Opacity of a disabled control |
 
 ### Component · card
 

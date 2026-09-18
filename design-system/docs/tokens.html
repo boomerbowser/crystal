@@ -1965,7 +1965,7 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 </table></div>
 <h2 id="component-tokens">Component tokens</h2>
 <p>Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.</p>
-<p>9 tokens.</p>
+<p>13 tokens.</p>
 <h3 id="component-action">Component · action</h3>
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
@@ -1988,6 +1988,30 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 <td>dimension</td>
 <td><code>44px</code></td>
 <td>Minimum interactive target</td>
+</tr>
+<tr>
+<td><code>component.action.paddingBlock</code></td>
+<td>dimension</td>
+<td><code>15px</code></td>
+<td>Action control block padding</td>
+</tr>
+<tr>
+<td><code>component.action.paddingInline</code></td>
+<td>dimension</td>
+<td><code>24px</code></td>
+<td>Action control inline padding</td>
+</tr>
+<tr>
+<td><code>component.action.gap</code></td>
+<td>dimension</td>
+<td><code>9px</code></td>
+<td>Gap between an action's icon and its label</td>
+</tr>
+<tr>
+<td><code>component.action.disabledOpacity</code></td>
+<td>number</td>
+<td><code>0.55</code></td>
+<td>Opacity of a disabled control</td>
 </tr>
 </tbody>
 </table></div>
