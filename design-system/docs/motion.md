@@ -190,12 +190,21 @@ Ambient motion is what a surface does at rest — the specular band drifting alo
 rim, a Haze fill breathing around its 80% value. It is the tenth category and the newest,
 and it is governed by three rules that are not negotiable.
 
-**It is a rest state, not a decision.** Resin and Frost start their own ambient motion;
-Haze, Stone and Plastic carry theirs in CSS. A material that only comes alive when asked
+**It is a rest state, not a decision.** Every ambient material starts its own motion as it
+comes into view. Resin and Frost do it on the optical layer, through `CrystalShaders`; Haze
+and Stone do it on the Web Animations tier, through `CrystalMotion.ambientAll()`, because
+their rest state is their feathered edge travelling rather than light moving over them.
+Plastic alone is pure CSS, a keyframed glow on the foundation itself. A material that only comes alive when asked
 does not have a rest state. What *is* a decision is stopping it: any single surface can be
-stopped, and `data-ambient="off"` on the document disables every ambient effect at once —
-which is what reference captures set, because a moving surface cannot be photographed
-deterministically.
+stopped, and `data-ambient="off"` on the document disables every ambient effect at once.
+
+Most reference captures set that switch, because a moving surface cannot be photographed
+deterministically. Doing it on *every* frame turned out to be a hole rather than a
+convenience: it meant no reference frame had ever contained an ambient surface, and a
+Resin rest state pinned at full press deformation shipped with every frame identical. A
+frame may instead pin `data-ambient-clock` to a number of seconds, which freezes the
+optical layer at that instant and makes its appearance as reviewable as anything else.
+That attribute is a capture hook and nothing else; products have no reason to set it.
 
 **It is still never load-bearing.** Where a platform cannot honour it, ambient degrades to
 a static surface with no other change, exactly as the shader layer does. Gate G8 proves it:

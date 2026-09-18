@@ -178,3 +178,61 @@ non-colour signal on top of a sufficient one, and it was costing label alignment
 there.
 
 Status: done — both rails removed, tokens deprecated in place, six chapters updated.
+
+## R19 — the Resin rest state is embossing every control (2026-09-17)
+
+Meridian: "Idk if its just a temporary bug, but we're seeing what appears to be another
+resin-on-resin issue where the neumorphic effects that apply exclusively to Haze and Stone
+are applied directly to Resin instead, making highly unpleasant embossing and indenting
+effects. It also seems to be causing a fill leak in some places. Please fix this to the
+best of your ability and include it in your current update, then ensure this does not
+happen again."
+
+**The diagnosis is not the one in the report, and both named causes were ruled out by
+measurement before anything was changed.** The Haze-in-Resin recess rule matches exactly
+one element on the entire site. Removing `.cr-stone` from the specimen left the emboss
+completely untouched. Blocking `motion-shaders.js` removed it entirely.
+
+It was R17's own work. The ambient shader shipped in `021e0a0` attached with
+`progress: 1` — the peak of a press, not a rest state — so `edgeLens` painted a
+full-strength lens band a fifth of the panel deep, with its own dark inner shade,
+permanently, on every Resin surface; anything laid over it showed the band through, which
+is the "fill leak". `intensity: 2.2` had been calibrated against Frost's alpha ceiling and
+drove Resin's `hard-light` layer straight to its 0.72 clamp. Underneath it, panel geometry
+was measured in 0..1 uv, so on a 216x113 control the band was twice as deep along the top
+edge as along the side and its contour could not follow the element it was lighting.
+
+**Meridian's instinct was right even though the attribution was not.** What they were
+looking at genuinely is a recess treatment — an inset dark edge with a returning highlight
+— appearing on a material that should never carry one. It simply came from the optical
+layer rather than from the recess rule.
+
+**Why it shipped.** Three gates were green: `verify:visual` sets `data-ambient=off` on
+every frame, so no reference frame had ever contained an ambient surface; the material
+specimens sit below the fold of every 1280x900 frame; and `validate-motion` checks that
+recipes move, which a shader is not. The earlier claim in this log that gate G8 ran "with
+ambient live" was wrong — the capture path has always forced it off.
+
+**No material specification changed.** The press response at `progress: 1` is identical:
+the new thickness term resolves to the original 0.20 there, and the geometry correction
+only makes radius and band depth mean the same thing on both axes.
+
+**"Ensure this does not happen again"** is answered twice, because one answer would have
+been a number nobody looks at and the other a picture nobody measures:
+
+- `npm run audit:ambient` differences each ambient surface against a still capture of
+  itself and bounds interior mean, rim mean, and a **floor** under rim max — the opposite
+  failure is just as real, and a first attempt at this fix measured 2 and was invisible.
+  Every bound has been shown to fail on demand.
+- Reference frames may now pin `data-ambient-clock` and clip to a specimen. Two do.
+  Reintroducing the regression changes 4474 pixels in `materials-at-rest`, where
+  previously all eighteen frames stayed identical.
+
+Status: done — see `validation/captures/2026-09-17-resin-rest-regression/`.
+
+**It also closes R17d, which was still open in fact if not on paper.** `haze-settle` was
+an ambient recipe that nothing ever started, and Stone had no ambient recipe at all —
+only `stone-contour`, an explicit replay study. `CrystalMotion.ambientAll()` now starts
+both as surfaces come into view, and `stone-settle` is a new recipe (60 total). Haze
+breathes outward and Stone draws inward, so a label backing and the fill around it never
+pulse in unison.

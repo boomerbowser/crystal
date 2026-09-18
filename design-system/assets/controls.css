@@ -82,7 +82,7 @@ input[type=file]::file-selector-button{min-height:44px;padding:10px 16px;border:
 .suite-menu button{border:0;box-shadow:none;}
 .suite-menu button::before,.suite-menu button::after{display:none;}
 .suite-menu button[aria-checked=true]{background:var(--cr-primary);color:var(--cr-on-primary);}
-/* Menu rows are left-aligned, so they reserve room for the selection rail on
+/* Menu rows are left-aligned, so the label starts at the same place on
    every row — selected or not — rather than shifting the label when chosen. */
 :is(.suite-menu,[role=menu]) button{padding-inline-start:24px;}
 .swatch{min-height:28px;}
@@ -191,14 +191,12 @@ span.cr-field-shell :is(input,select,textarea):focus-visible{outline:0;box-shado
 /* The feathered background layer of the Haze fill. The glyph above it stays crisp. */
 .cr-indicator::before{content:'';position:absolute;inset:1px;z-index:-1;border-radius:50%;background:var(--cr-haze-fill);filter:blur(var(--cr-haze-feather));}
 /* A check mark means validated or informational, never "this one is selected".
-   Selection is a leading rail plus label weight; location is a dot; activity an ellipsis. */
+   Selection is carried by label weight; location is a dot; activity an ellipsis. */
 .cr-indicator:is([data-kind=selection],[data-kind=current],[data-kind=busy]){display:none;}
 [aria-current]:not([aria-current=false])>.cr-indicator[data-kind=current]{display:grid;}
 [aria-busy=true]>.cr-indicator[data-kind=busy]{display:grid;}
 .cr-indicator[data-kind=current]::after{content:'●';font-size:9px;}
 .cr-indicator[data-kind=busy]::after{content:'…';font-size:14px;}
-/* The rail is absolutely positioned inside existing padding, so selecting an item
-   never reflows its group. currentColor resolves to the tested on-primary ink. */
 /* The selection rail was removed at Meridian's direction: it is not in line with
    Crystal and it offsets the label it sits beside. Selection is carried by label
    weight, which is typographic rather than chromatic and so still satisfies the

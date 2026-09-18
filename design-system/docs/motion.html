@@ -248,12 +248,20 @@ glyphs are pixel-identical with the shader on and off.</p>
 <p>Ambient motion is what a surface does at rest — the specular band drifting along a Resin
 rim, a Haze fill breathing around its 80% value. It is the tenth category and the newest,
 and it is governed by three rules that are not negotiable.</p>
-<p><strong>It is a rest state, not a decision.</strong> Resin and Frost start their own ambient motion;
-Haze, Stone and Plastic carry theirs in CSS. A material that only comes alive when asked
+<p><strong>It is a rest state, not a decision.</strong> Every ambient material starts its own motion as it
+comes into view. Resin and Frost do it on the optical layer, through <code>CrystalShaders</code>; Haze
+and Stone do it on the Web Animations tier, through <code>CrystalMotion.ambientAll()</code>, because
+their rest state is their feathered edge travelling rather than light moving over them.
+Plastic alone is pure CSS, a keyframed glow on the foundation itself. A material that only comes alive when asked
 does not have a rest state. What <em>is</em> a decision is stopping it: any single surface can be
-stopped, and <code>data-ambient="off"</code> on the document disables every ambient effect at once —
-which is what reference captures set, because a moving surface cannot be photographed
-deterministically.</p>
+stopped, and <code>data-ambient="off"</code> on the document disables every ambient effect at once.</p>
+<p>Most reference captures set that switch, because a moving surface cannot be photographed
+deterministically. Doing it on <em>every</em> frame turned out to be a hole rather than a
+convenience: it meant no reference frame had ever contained an ambient surface, and a
+Resin rest state pinned at full press deformation shipped with every frame identical. A
+frame may instead pin <code>data-ambient-clock</code> to a number of seconds, which freezes the
+optical layer at that instant and makes its appearance as reviewable as anything else.
+That attribute is a capture hook and nothing else; products have no reason to set it.</p>
 <p><strong>It is still never load-bearing.</strong> Where a platform cannot honour it, ambient degrades to
 a static surface with no other change, exactly as the shader layer does. Gate G8 proves it:
 with WebGL2 unavailable <em>and</em> ambient disabled, every page renders precisely its committed

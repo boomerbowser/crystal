@@ -382,47 +382,92 @@ excepted:
 **Files:** `assets/crystal.js`, `assets/controls.css`, `tokens/motion-recipes.json`,
 `tools/capture-frames.mjs`, `validation/frames.json`
 
-- [ ] **Step 1** — Rewrite `haze-settle`, `haze-tide` and `stone-contour`. They were
+- [x] **Step 1** — Rewrite `haze-settle`, `haze-tide` and `stone-contour`. They were
   authored as opacity oscillations, and opacity pulsing is not an edge that moves. They
   become radial breathing of the boundary — `clipPath: inset(N round R)` on the isolated
   paint layer with N travelling outward and inward. The recess shadow pair stays fixed,
   because the light source does not move, and the text above never moves at all.
-- [ ] **Step 2** — Plastic emits rather than refracts, because it is opaque. A soft radial
+- [x] **Step 2** — Plastic emits rather than refracts, because it is opaque. A soft radial
   bloom of `--cr-glow` over the existing atmosphere gradient, drifting slowly.
-- [ ] **Step 3** — Tint the shadow. Coloured glass casts a coloured shadow, so the palette's
+- [x] **Step 3** — Tint the shadow. Coloured glass casts a coloured shadow, so the palette's
   companion mixes into `--cr-shadow-*` in `crystal.js`. The generated theme CSS stops being
   byte-identical; that is deliberate and is recorded.
-- [ ] **Step 4** — Seed `ambient: false` in `preferencesFor()` so every frame captures a
+- [x] **Step 4** — Seed `ambient: false` in `preferencesFor()` so every frame captures a
   still surface, and say so in each frame's `why`.
-- [ ] **Step 5** — Re-bless all eighteen frames with one README and one reason.
+- [x] **Step 5** — Re-bless all eighteen frames with one README and one reason.
 
 ### Task 26: The shader tier
 
 **Files:** `assets/motion-shaders.js`, `assets/shaders/*.frag`, `assets/shaders/manifest.json`
 
-- [ ] **Step 1** — Ambient loop: Resin and Frost attach at rest, only while intersecting the
+- [x] **Step 1** — Ambient loop: Resin and Frost attach at rest, only while intersecting the
   viewport, released on `visibilitychange`, and hard-capped well under Chromium's ~16 live
   WebGL contexts. Haze, Stone and Plastic stay CSS, which is cheap enough to be everywhere.
-- [ ] **Step 2** — Frost refracts differently from Resin, and physics decides how. At 40px
+- [x] **Step 2** — Frost refracts differently from Resin, and physics decides how. At 40px
   nothing sharp survives, so Frost's refraction is a slow, broad colour-temperature wander
   at low amplitude. Resin at 20px keeps detail, so its dispersion stays sharp and
   rim-concentrated. Light through frosted glass shows colour, not shape.
-- [ ] **Step 3** — Interaction adds energy instead of silencing it. `hush()` was written to
+- [x] **Step 3** — Interaction adds energy instead of silencing it. `hush()` was written to
   pause ambient on any interaction; the reference rises from 0.6 at rest to 1 on hover and
   2.4 on press. Hover and press raise `u_intensity` and let it decay. Pausing is kept only
   for text entry, because a surface being read is the one place motion must not compete.
-- [ ] **Step 4** — No new uniform. `u_intensity` carries ambient energy; every uniform added
+- [x] **Step 4** — No new uniform. `u_intensity` carries ambient energy; every uniform added
   is a contract change for three platforms.
 
 ### Task 27: Say it in the specification
 
 **Files:** `docs/materials.md`, `libraries/CONTRACT.md`, `docs/motion.md`
 
-- [ ] **Step 1** — `materials.md` gains a **Light** section stating each material's optical
+- [x] **Step 1** — `materials.md` gains a **Light** section stating each material's optical
   behaviour as a rule: what refracts, what emits, what breathes, and what that does to the
   shadow.
-- [ ] **Step 2** — Rewrite CONTRACT §7 and extend §8. "Never at rest" becomes "during a
+- [x] **Step 2** — Rewrite CONTRACT §7 and extend §8. "Never at rest" becomes "during a
   motion or during ambient", with reference capture stated as the reason frames stay stable.
-- [ ] **Step 3** — **GATE G8.** With WebGL2 unavailable *and* ambient disabled, every page
+- [x] **Step 3** — **GATE G8.** With WebGL2 unavailable *and* ambient disabled, every page
   renders exactly the committed baselines. The CSS floor remains the floor: ambient is an
   enhancement on top of it, never a requirement.
+
+---
+
+## Section J — The rest state, corrected
+
+Section I specified ambient motion and shipped it unlooked-at. See R19. The work here is
+the correction and, more importantly, the two gates that make the class of fault visible.
+
+### Task 28: A rest state that is actually at rest
+
+- [x] **Step 1** — Ambient options per shader instead of one shared set. `progress: 1` is
+  the peak of a press; Resin's rest progress is a shallow oscillation and its contact point
+  is resolved per frame so the specular band travels around the rim.
+- [x] **Step 2** — Panel geometry in units of the short side. In 0..1 uv a "corner radius"
+  and a band "thickness" mean different distances on each axis, so the lens contour cannot
+  follow a non-square element. `panelSpace()` in `_common.glsl`, set once per frame.
+- [x] **Step 3** — Depth and width are one quantity: a shallow lens is a narrow one. At
+  `progress: 1` the term resolves to the original 0.20, so the press response is unchanged.
+- [x] **Step 4** — Parse the palette tint properly. `--cr-companion` is authored as hex and
+  was being read by a bare digit scan; before that the code read `--cr-accent`, which no
+  palette defines. It is the token `exportCSS` mixes the shadow tint from, so light and the
+  shadow it casts agree.
+
+### Task 29: Gates that can see ambient
+
+- [x] **Step 1** — `tools/audit-ambient.mjs`: difference each ambient surface against a
+  still capture of itself. Bound interior mean and rim mean, and put a **floor** under rim
+  max — the invisible failure is as real as the embossing one.
+- [x] **Step 2** — Prove each bound fails on demand by reintroducing the fault it describes.
+- [x] **Step 3** — Frames may pin `data-ambient-clock` and clip to a specimen, because the
+  material studies sit below the fold of every viewport frame. Two frames added.
+- [x] **Step 4** — Prove the frames catch it: reintroducing the regression changes 4474
+  pixels in `materials-at-rest` where all eighteen previous frames stayed identical.
+
+### Task 30: Haze and Stone actually move
+
+- [x] **Step 1** — `haze-settle` was an ambient recipe nothing started; Stone had none at
+  all, only the `stone-contour` replay study. Add `stone-settle` (60 recipes).
+- [x] **Step 2** — `CrystalMotion.ambientAll()` starts both as surfaces intersect. Haze
+  breathes outward, Stone draws inward, so neighbouring fills never pulse in unison.
+- [x] **Step 3** — One ambient rate table. The shader tier kept a second copy that had
+  already drifted — zero on text focus, no blur handler — so leaving a field froze every
+  shader until the next click. `motion.js` owns it and broadcasts it.
+- [x] **Step 4** — Correct `docs/motion.md` and `CONTRACT.md` §8: Haze and Stone run on the
+  animation tier, Plastic alone is CSS.

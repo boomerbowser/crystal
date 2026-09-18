@@ -7,10 +7,11 @@
  * point is that a pixel cannot change without somebody saying why.
  *
  *   node tools/verify-frames.mjs
- *   node tools/verify-frames.mjs --bless      (replace the baselines)
+ *   node tools/verify-frames.mjs --bless       (replace the baselines)
+ *   node tools/verify-frames.mjs --no-webgl    (gate G8: prove the CSS floor)
  */
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readdirSync, copyFileSync, existsSync } from 'node:fs';
+import { mkdtempSync, readdirSync, copyFileSync, existsSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -19,11 +20,32 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
 const BASELINES = join(ROOT, 'validation/baselines');
 const BLESS = process.argv.includes('--bless');
+/* Gate G8: with WebGL2 unavailable, every page must still render exactly the
+   committed baselines — the optical layer is an enhancement on top of a complete
+   CSS floor, never a requirement.
+   This used to be run by passing a capture directory to this script, which it
+   has never accepted: the flag was ignored, the frames were recaptured with
+   WebGL available, and the gate reported a pass that asserted nothing. */
+const NO_WEBGL = process.argv.includes('--no-webgl');
+if (BLESS && NO_WEBGL) {
+  console.error('Refusing to bless baselines captured without WebGL2.');
+  process.exit(2);
+}
+
+/* Frames that deliberately photograph the optical layer cannot be compared with
+   that layer switched off — they are the enhancement being disabled. They are
+   named and skipped rather than quietly passing. */
+const frameSet = JSON.parse(readFileSync(join(ROOT, 'validation/frames.json'), 'utf8'));
+const ambientFrames = new Set(
+  frameSet.frames.filter((f) => f.ambient === 'rest').map((f) => `${f.id}.png`),
+);
 
 const work = mkdtempSync(join(tmpdir(), 'crystal-frames-'));
-execFileSync('node', [join(HERE, 'capture-frames.mjs'), '--out', work], { stdio: 'inherit' });
+execFileSync('node', [join(HERE, 'capture-frames.mjs'), '--out', work, ...(NO_WEBGL ? ['--no-webgl'] : [])], { stdio: 'inherit' });
 
-const shots = readdirSync(work).filter((f) => f.endsWith('.png')).sort();
+const all = readdirSync(work).filter((f) => f.endsWith('.png')).sort();
+const skipped = NO_WEBGL ? all.filter((f) => ambientFrames.has(f)) : [];
+const shots = all.filter((f) => !skipped.includes(f));
 const differing = [];
 const missing = [];
 
@@ -50,11 +72,13 @@ if (BLESS) {
 }
 
 console.log(JSON.stringify({
-  suite: 'visual regression',
+  suite: NO_WEBGL ? 'visual regression (WebGL2 blocked)' : 'visual regression',
+  webgl2: NO_WEBGL ? 'blocked' : 'available',
   frames: shots.length,
   identical: shots.length - differing.length - missing.length,
   differing,
   missingBaseline: missing,
+  ...(skipped.length ? { skipped, why: 'these frames photograph the optical layer, which this run disables' } : {}),
 }, null, 2));
 
 if (differing.length || missing.length) {

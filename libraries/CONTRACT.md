@@ -121,8 +121,9 @@ all four properties:
 
 - **On by default for Resin and Frost; stoppable everywhere.** Ambient is a material's
   rest state, not a decision a page has to remember to make — a material that only comes
-  alive when asked does not have a rest state. Resin and Frost start their own; Haze,
-  Stone and Plastic carry theirs in CSS. A host can stop any single surface, and one
+  alive when asked does not have a rest state. Resin and Frost carry theirs on the optical
+  layer, Haze and Stone on the animation tier, and Plastic in CSS; all four start
+  themselves as a surface comes into view. A host can stop any single surface, and one
   document-level switch disables every ambient effect at once. On the web those are
   `CrystalMotion.stopAmbient(element)` / `CrystalShaders.stopAmbient(element)` and
   `data-ambient="off"`; a platform provides the equivalents under its own names.

@@ -93,7 +93,7 @@
       "page": "playground.html",
       "anchor": "#playground",
       "direction": "rtl",
-      "why": "Logical properties must mirror: bubble corners, selection rail edge, no horizontal overflow."
+      "why": "Logical properties must mirror: bubble corners, menu padding, no horizontal overflow."
     },
     {
       "id": "motion",
@@ -129,12 +129,12 @@
       "id": "overview-dark",
       "page": "index.html",
       "mode": "dark",
-      "why": "Frost and the menu rail resolve differently in dark; the overview specimens are the only place the three materials appear side by side."
+      "why": "Frost and the menu resolve differently in dark; the overview specimens are the only place the three materials appear side by side."
     },
     {
       "id": "docs-menu-light",
       "page": "docs/materials.html",
-      "why": "A specification page with a current menu entry. Guards the selection rail and that menu entries stay Plastic rather than inheriting the Resin of .cr-control."
+      "why": "A specification page with a current menu entry. Guards that selection reads by label weight alone and that menu entries stay Plastic rather than inheriting the Resin of .cr-control."
     },
     {
       "id": "docs-menu-forced-colours",
@@ -155,7 +155,7 @@
       "id": "haze-in-resin",
       "page": "docs/materials.html",
       "anchor": "#the-correct-composition-live",
-      "why": "The only composition on the site that exercises Haze inside a Resin frame. The rule forbidding Resin inside Resin is audited in the DOM, but the recess that makes the Haze fill read as the frame's content — an inset dark top edge and light bottom edge, under a light source above — is purely visual and was gated by nothing."
+      "why": "The only composition on the site that exercises Haze inside a Resin frame. The rule forbidding Resin inside Resin is audited in the DOM, but the recess that makes the Haze fill read as the frame's content \u2014 an inset dark top edge and light bottom edge, under a light source above \u2014 is purely visual and was gated by nothing."
     },
     {
       "id": "materials-at-rest",
