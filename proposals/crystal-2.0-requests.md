@@ -74,7 +74,7 @@ sparse. Eleven symptoms; they resolve into four causes.
 | R15b | Elements spaced too closely | `motion-suite.css` dropped | done — `959dc7d` |
 | R15c | Elements not covered by their backgrounds | `motion-suite.css` dropped | done — `959dc7d` |
 | R15d | Menus will not open | `motion-suite.js` dropped | done — `959dc7d` |
-| R15e | Menus that open are not Frost | `motion-suite.css` dropped | done — `959dc7d` |
+| R15e | Menus that open are not Frost | Two causes: `motion-suite.css` dropped, and the overlays were genuinely Resin | done — assets restored in `959dc7d`; menu, popover, tooltip and toast moved to Frost, and the audit now checks overlay assignment as well as nesting |
 | R15f | Focus ring too thick by half | Halo spread in `--cr-focus-ring` | done — spread halved, blur and the 2px core unchanged |
 | R15g | Slider animation choppy | `slider-step` is a hollow recipe | done — real keyframes, and a recipe no longer restarts itself mid-flight |
 | R15h | Checkboxes have no check/uncheck animation | `check` exists but is wired to nothing | done — wired to `checked`, and `check-off` added |

@@ -94,3 +94,31 @@ physics.
 - `npm run audit:materials` — 15 pages, 0 violations
 - `npm run verify:visual` — 18 of 18 identical; no frame moved, because none of this
   changes a resting appearance
+
+## The overlays were Resin, and the specification says Frost
+
+Meridian noted that the menus which did open "don't seem to be using Frost as they should".
+That was correct, and it is a conformance defect rather than a preference. The material
+assignment table in `docs/materials.md` is explicit:
+
+- **Frost** — "Intermediate task frames, **transient panels and overlays**, with Haze
+  reading/input surrounds"
+- **Resin** — "**One** clustered navigation or control plane"
+
+The suite's menu, popover, tooltip and toast all carried `cr-resin-haze`, rendering at
+20px / 165% — Resin. A menu is not a clustered navigation plane and a tooltip is not a
+control plane; both are transient overlays, so both are Frost. They now render at
+40px / 125%.
+
+This nested legally, which is why the existing audit never saw it: the rule it enforced
+was that Resin may not contain Resin, and none of these did. Legal nesting and correct
+assignment are different questions, and only the first was being asked.
+
+`tools/audit-materials.mjs` now asks the second as well: anything matching `[role=menu]`,
+`[role=tooltip]`, `[role=listbox]`, `[popover]` or the menu/popover/tooltip/toast classes
+must not classify as Resin. Proven by reverting one overlay and watching the audit report
+`overlay-material` against `suite-pop.cr-resin-haze` with its 20px filter.
+
+Contrast is unchanged by the move — 1,716 cases, 0 failures, minimum 3.7157, identical to
+before. Frost is the more opaque of the two recipes at 45% fill against Resin's fixed 20%,
+so a label on it is better protected, not worse.

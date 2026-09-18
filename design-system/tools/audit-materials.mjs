@@ -81,13 +81,34 @@ for (const path of PAGES) {
       return Math.abs(b.radius - RESIN_BLUR) < TOLERANCE;
     };
 
+    /* The material assignment table is explicit about which material an overlay is:
+       Frost covers "intermediate task frames, transient panels and overlays"; Resin is
+       "one clustered navigation or control plane". A menu, popover, tooltip or toast is
+       a transient overlay, so Resin on one is a misassignment even though it nests
+       legally. The suite's menu, popover, tooltip and toast were all Resin. */
+    const TRANSIENT = '[role=menu],[role=tooltip],[role=listbox],[popover],' +
+      '.cr-menu,.cr-popover,.cr-tooltip,.cr-toast,[class*=suite-menu],[class*=suite-pop],' +
+      '[class*=suite-toast]';
+
     const out = [];
+    for (const el of document.querySelectorAll(TRANSIENT)) {
+      if (!isResin(el)) continue;
+      out.push({
+        rule: 'overlay-material',
+        inner: describe(el),
+        outer: '(transient overlay)',
+        innerFilter: (blurOf(el) || {}).filter?.slice(0, 40),
+        text: (el.textContent || '').trim().slice(0, 24),
+      });
+    }
+
     for (const el of document.querySelectorAll('*')) {
       if (!isResin(el)) continue;
       let parent = el.parentElement;
       while (parent) {
         if (isResin(parent)) {
           out.push({
+            rule: 'resin-in-resin',
             inner: describe(el),
             outer: describe(parent),
             innerFilter: (blurOf(el) || {}).filter?.slice(0, 40),
@@ -109,7 +130,8 @@ await browser.close();
 
 console.log(JSON.stringify({
   audit: 'material stacking',
-  rule: 'Resin may not contain Resin; an upper layer over Resin is a Haze content fill',
+  rules: ['Resin may not contain Resin; an upper layer over Resin is a Haze content fill',
+          'Transient overlays — menus, popovers, tooltips, toasts — are Frost, not Resin'],
   pagesChecked: PAGES.length - unreachable.length,
   unreachable,
   violations,
