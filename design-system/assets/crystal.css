@@ -97,7 +97,8 @@
  *   - `scrollbar-gutter: stable` keeps content from shifting in the inline
  *     direction when a vertical scrollbar appears, which is what makes a growing
  *     list jitter. It is not applied to horizontal-only scrollers, where it
- *     reserves space against a scrollbar that never arrives.
+ *     reserves space against a scrollbar that never arrives — add `.cr-scroll-x`
+ *     to say a scroller is horizontal-only, since CSS cannot work that out.
  *   - `touch-action: pan-x pan-y` keeps a browser's own gesture handling rather
  *     than replacing it, so momentum and rubber-banding still feel native.
  *
@@ -125,6 +126,14 @@
    gutter on one side alone would sit it off-centre. */
 .cr-scroll,.cr-scroll-frost,.cr-scroll-resin{scrollbar-gutter:stable}
 .cr-dialog{scrollbar-gutter:stable both-edges}
+/* A horizontal-only scroller says so, because the stylesheet cannot tell. Setting
+   `overflow-x: auto` alone makes `overflow-y` compute to `auto` as well, so the
+   browser reserves the inline gutter for a vertical scrollbar that can never
+   appear — 12px lost on every such surface, protecting against no shift. This is
+   the declaration `.cr-table-scroll` gets by being excluded from the rule above,
+   made available to anything that reaches for one of the three classes directly.
+   It comes after them, so it wins on order alone without raising specificity. */
+.cr-scroll-x{overflow-x:auto;overflow-y:hidden;scrollbar-gutter:auto}
 
 /* A dialog is a reading surface, so it takes the Frost scrollbar; the table
    scroller is a Resin plane and takes the Resin one. */

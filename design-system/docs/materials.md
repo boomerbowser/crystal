@@ -199,7 +199,15 @@ A scrollbar belongs to the material it scrolls, not to the operating system. The
 - `scrollbar-gutter: stable` keeps content from shifting when a vertical scrollbar appears. It is not applied to horizontal-only scrollers, where the gutter would reserve space against a scrollbar that never arrives. A dialog takes `stable both-edges` so centred content stays centred.
 - `touch-action: pan-x pan-y` leaves the browser's own gesture handling in place, so momentum and rubber-banding still feel native.
 
-A horizontal scroller is the one case that needs care. Setting `overflow-x: auto` makes `overflow-y` compute to `auto` as well, so a gutter is reserved for a vertical scrollbar that can never appear — 12px lost at the inline edge. Pair a horizontal scroller with `overflow-y: hidden`, which is what the React scroll area does on its horizontal axis. `.cr-table-scroll` avoids the same cost from the other side: it is excluded from the gutter rule, because it never scrolls vertically.
+A horizontal scroller is the one case that needs care. Setting `overflow-x: auto` makes `overflow-y` compute to `auto` as well, so a gutter is reserved for a vertical scrollbar that can never appear — 12px lost at the inline edge.
+
+**Add `.cr-scroll-x` to say a scroller is horizontal-only.** CSS cannot work it out, so it has to be declared:
+
+```html
+<div class="cr-scroll-resin cr-scroll-x">…</div>
+```
+
+It clips the block axis and releases the gutter, which is the same treatment `.cr-table-scroll` gets by being excluded from the gutter rule. `verify-scroll` fails any container that scrolls across but not down while still holding a gutter, so forgetting it is caught rather than merely costly.
 
 Both thumbs clear 3:1 against every Crystal surface in all six palettes and both modes; the token gate asserts it. Under reduced transparency and forced colors the thumb goes solid and takes the system or outline colour.
 

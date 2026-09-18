@@ -79,6 +79,9 @@ for (const [label, contextOptions] of [
           scrollbarGutter: cs.scrollbarGutter,
           scrollbarColor: cs.scrollbarColor,
           scrolls: [scrollsX && 'x', scrollsY && 'y'].filter(Boolean).join('+'),
+          /* Not "is it wide", but "can it ever scroll down": a gutter reserved
+             on a surface whose block axis is clipped is space nothing will use. */
+          canScrollY: !/(hidden|clip)/.test(cs.overflowY),
         });
       }
       return out;
@@ -92,6 +95,21 @@ for (const [label, contextOptions] of [
       }
       if (container.scrolls.includes('y') && container.scrollbarGutter === 'auto') {
         failures.push(`${where}: no stable scrollbar gutter, so content shifts when the scrollbar appears`);
+      }
+      /* The other half of the same contract, and the one that had no gate: a
+         gutter reserved against a scrollbar that can never appear. A container
+         that scrolls across and not down is a horizontal scroller, and the 12px
+         it holds on the inline edge prevents no shift — `overflow-x: auto` alone
+         makes `overflow-y` compute to `auto`, which is how the gutter gets there
+         without anybody asking for it. `.cr-scroll-x` is how a horizontal-only
+         scroller says what CSS cannot work out.
+
+         Deliberately not "does not scroll down *yet*": a short list that may grow
+         is exactly what the gutter is for, and such a list does not scroll across
+         either, so it cannot reach this branch. */
+      const horizontalOnly = container.scrolls === 'x';
+      if ((horizontalOnly || !container.canScrollY) && container.scrollbarGutter !== 'auto') {
+        failures.push(`${where}: reserves a gutter it cannot use (scrollbar-gutter: ${container.scrollbarGutter} on a horizontal scroller) — add .cr-scroll-x`);
       }
       if (!CRYSTAL_SCROLLBAR.test(container.scrollbarColor)) {
         failures.push(`${where}: uses the operating system's scrollbar (scrollbar-color: ${container.scrollbarColor})`);

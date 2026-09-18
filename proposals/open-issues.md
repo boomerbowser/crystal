@@ -44,6 +44,20 @@ A product that reaches for the class directly gets neither.
 `design-system/assets/crystal.css`. Either document the pairing as a requirement
 or split the class in two.
 
+**Closed.** `.cr-scroll-x` — a modifier that clips the block axis and releases the
+gutter, which is the treatment `.cr-table-scroll` already gets by exclusion, made
+available to anything reaching for one of the three classes directly.
+
+The part that matters is the gate. `verify-scroll` now fails any container that
+scrolls across but not down while still holding a gutter, so forgetting the
+modifier is caught rather than silently costing 12px. Proved by planting the
+defect — `scrollbar-gutter: stable` on `.cr-table-scroll` — and watching seven
+containers across two viewports fail.
+
+The condition is deliberately "scrolls across and not down", not "does not scroll
+down yet": a short list that may grow is exactly what the gutter is for, and such
+a list does not scroll across, so it cannot reach the branch.
+
 ## D-3 · The preview's own layout is not on its own tokens
 
 Crystal now has a spacing scale, breakpoints, a shell width and a reading column —
