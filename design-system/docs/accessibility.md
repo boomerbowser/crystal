@@ -150,16 +150,16 @@ meaning when a product re-themes. See [Color](colors.html#status).
 
 <!-- generated:contrast -->
 
-**1,716 contrast cases** are computed across all six palettes in both
+**1,788 contrast cases** are computed across all six palettes in both
 modes, including bounded composites: Resin and Haze control labels are checked with the
 optical sheen beneath the protective fill, against content composites and RGB-corner
 backdrops with the fixed Resin fill.
 
 | Measure | Result |
 |---|---|
-| Cases computed | 1,716 |
+| Cases computed | 1,788 |
 | Failures | 0 |
-| Lowest result of any kind | 3.72:1 |
+| Lowest result of any kind | 3.07:1 |
 | Lowest normal-text result | 4.67:1 |
 | Checks run | 2026-09-18 |
 

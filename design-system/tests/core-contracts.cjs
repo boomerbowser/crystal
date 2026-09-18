@@ -193,6 +193,39 @@ check('the platform mapping round-trips the damping ratio', () => {
   assert.ok(Math.abs(platform.compose.dampingRatio - spring.dampingRatio(s)) < 1e-4);
 });
 
+/* ------------------------------------------------- scrollbar mechanisms */
+
+/* Crystal draws its two scrollbars through two mechanisms, and exactly one of
+   them may reach any given browser. Chromium 121 and later ignore every
+   `::-webkit-scrollbar` pseudo-element on a container whose `scrollbar-width` or
+   `scrollbar-color` is not `auto` — which is every container Crystal styles. A
+   webkit rule written outside the `@supports not (scrollbar-color:auto)` guard
+   is therefore dead in the browser most people use and live in the one they do
+   not, which is one specification rendering two ways.
+
+   This is a source check because it cannot be a runtime one: a branch that did
+   not apply leaves nothing in the computed style to look at. */
+check('every webkit scrollbar rule sits behind the legacy guard', () => {
+  const source = require('node:fs').readFileSync(require('node:path').join(__dirname, '../assets/crystal.css'), 'utf8');
+  /* Comments name the pseudo-element in order to explain it. Blanked rather than
+     deleted so the offsets below still point at the real line. */
+  const css = source.replace(/\/\*[\s\S]*?\*\//g, (comment) => comment.replace(/[^\n]/g, ' '));
+  const guard = css.indexOf('@supports not (scrollbar-color:auto){');
+  assert.ok(guard !== -1, 'the legacy guard is missing entirely');
+
+  /* Where the guarded block ends: the first line that closes it at column zero. */
+  const end = css.indexOf('\n}\n', guard);
+  assert.ok(end > guard, 'the legacy guard is not closed');
+
+  const stray = [];
+  for (const match of css.matchAll(/::-webkit-scrollbar/g)) {
+    if (match.index < guard || match.index > end) {
+      stray.push(css.slice(css.lastIndexOf('\n', match.index) + 1, css.indexOf('\n', match.index)).trim());
+    }
+  }
+  assert.deepEqual(stray, [], 'webkit scrollbar rules outside the guard');
+});
+
 /* -------------------------------------------------------------- report */
 
 const failures = results.filter((r) => r.status === 'fail');

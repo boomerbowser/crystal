@@ -147,6 +147,25 @@ Support claims must be verified on actual target browsers/devices. A native impl
 
 Keep backdrop filters confined to a few bounded surfaces, avoid continuous blur animations, and avoid putting a scrolling text layer under numerous overlapping filters. A low-power mode can select the opaque recipe without changing geometry. Measure actual scroll/compositor behavior before setting device-specific budgets.
 
+## Scrolling
+
+A scrollbar belongs to the material it scrolls, not to the operating system. There are two, and which one a surface takes follows the hierarchy rather than taste.
+
+| Class | Material | Thumb | Use it on |
+|---|---|---|---|
+| `.cr-scroll-frost` | Frost | palette ink at 55% | Panels, side navigation, long reading surfaces, and dialogs. Frost is the intermediate surface, so its scrollbar belongs to the panel the way the panel's own text does. |
+| `.cr-scroll-resin` | Resin | palette primary at 80% | Floating control planes, menus, popovers, and compact or horizontal scrollers such as `.cr-table-scroll`. Resin is the control plane, so a scrollbar there is tinted like a control. |
+
+`.cr-scroll` carries the behaviour both build on and is worth applying to any scroll container on its own:
+
+- `overscroll-behavior: contain` stops scroll chaining, so a swipe that reaches the end of a scroller does not carry on into the page underneath. This is invisible with a mouse and immediately obvious on a phone.
+- `scrollbar-gutter: stable` keeps content from shifting when a vertical scrollbar appears. It is not applied to horizontal-only scrollers, where the gutter would reserve space against a scrollbar that never arrives. A dialog takes `stable both-edges` so centred content stays centred.
+- `touch-action: pan-x pan-y` leaves the browser's own gesture handling in place, so momentum and rubber-banding still feel native.
+
+Both thumbs clear 3:1 against every Crystal surface in all six palettes and both modes; the token gate asserts it. Under reduced transparency and forced colors the thumb goes solid and takes the system or outline colour.
+
+What a native scrollbar cannot carry is the material itself — `backdrop-filter` has no effect on one, and the standard properties expose only two colours and a coarse width. A surface that needs the material in full uses the **scroll area** component, which draws its thumb as a real element.
+
 ## Acceptance
 
 Inspect light/dark, every palette, strongest atmosphere, both Frost tint extremes, reduced effects, narrow layouts, long labels, text zoom, keyboard focus and relevant backdrop extremes. The material comparison board intentionally places all samples over the same saturated motif so differences remain visible. Compare silhouettes and depth relationships, not only pixel similarity.

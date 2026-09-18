@@ -60,6 +60,22 @@
       '--cr-content-muted':s.palette==='harbor'?p.text:p.muted,
       '--cr-content-own-text':s.palette==='harbor'?p.text:p.onPrimarySoft,
       '--cr-stone-feather':s.reduced?'0px':data.material.stoneFeather+'px',
+      /* Scrollbars.
+         The thumb is ink, not material. Painting it in the material's own
+         surface colour is the mistake that made it invisible: a white thumb at
+         62% over a white Frost panel is a white panel. So the Frost thumb is the
+         palette's ink — it belongs to the panel the way the panel's own text
+         does — and the Resin thumb is the palette's primary, because Resin is
+         the floating control plane and a scrollbar there is a control. Both
+         clear 3:1 against surface, surfaceAlt and canvas in every palette and
+         both modes, which validate-tokens asserts.
+         The track stays a faint channel so the panel shows through. */
+      '--cr-scrollbar-width':data.component.scrollbar.width+'px',
+      '--cr-scrollbar-thumb-min':data.component.scrollbar.thumbMinLength+'px',
+      '--cr-scrollbar-inset':data.component.scrollbar.inset+'px',
+      '--cr-scrollbar-frost-thumb':s.reduced?p.text:rgba(p.text,0.55),
+      '--cr-scrollbar-resin-thumb':s.reduced?p.primary:rgba(p.primary,0.80),
+      '--cr-scrollbar-track':s.reduced?p.surfaceAlt:rgba(p.outline,0.12),
       '--cr-mirage-fill':rgba(data.material.mirageColor,s.reduced?data.material.mirageFallbackOpacity:data.material.mirageOpacity),
       '--cr-mirage-blur':s.reduced?'0px':data.material.mirageBlur+'px',
       '--cr-mirage-saturation':(s.reduced?100:data.material.mirageSaturation)+'%',

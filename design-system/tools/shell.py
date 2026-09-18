@@ -75,7 +75,7 @@ def menu(path):
         groups.append(f'<h2 class="menu-heading" id="menu-{ident}">{html.escape(heading)}</h2>'
                       f'<div class="menu-group" role="group" aria-labelledby="menu-{ident}">'
                       + ''.join(items) + '</div>')
-    return ('<nav class="site-menu cr-frost" id="site-menu" aria-label="Sections">'
+    return ('<nav class="site-menu cr-frost cr-scroll-frost" id="site-menu" aria-label="Sections">'
             + ''.join(groups) + '</nav>')
 
 

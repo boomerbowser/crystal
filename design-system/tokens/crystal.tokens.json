@@ -1584,6 +1584,23 @@
         "$description": "Opacity of a disabled control"
       }
     },
+    "scrollbar": {
+      "width": {
+        "$type": "dimension",
+        "$value": "10px",
+        "$description": "Scrollbar track width"
+      },
+      "thumbMinLength": {
+        "$type": "dimension",
+        "$value": "32px",
+        "$description": "Shortest a thumb may become, so a very long surface stays draggable"
+      },
+      "inset": {
+        "$type": "dimension",
+        "$value": "2px",
+        "$description": "Gap between the thumb and the track edge"
+      }
+    },
     "card": {
       "radius": {
         "$type": "dimension",

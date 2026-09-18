@@ -392,3 +392,60 @@ motion tier, which is the useful result: nothing about how Crystal looks at rest
 depended on it.
 
 Crystal React inherits none of this. Its plan no longer carries an ambient binding.
+
+## R23 — scrolling, and two Crystal scrollbars (2026-09-18)
+
+Meridian: "We've deployed the design system website with Vercel, and it works like
+a charm! One problem though that a team member noticed trying to access the
+deployed website on their phone: Crystal both in the design system and in Crystal
+React needs comprehensive scrolling support with two custom scrollbars (one in
+Frost, one in Resin)."
+
+Four faults, one reported and three found while fixing it.
+
+1. **Scroll chaining.** Every horizontally scrollable table carried
+   `overscroll-behavior: auto`, so a swipe reaching the end of a table scrolled the
+   page underneath. It reads as the table refusing to move, and it is invisible on
+   a desktop with a mouse, which is how it survived to a phone.
+2. **The operating system's scrollbars.** `scrollbar-color` was `auto` everywhere,
+   so on a phone the only scrollbar was an overlay that is not there until you are
+   already scrolling. Nothing said a surface could be scrolled.
+3. **A gutter reserved against a scrollbar that never arrives.** My first fix put
+   `scrollbar-gutter: stable` on every scroll container. It reserves space on the
+   inline edge only, so on the horizontal-only tables it cost 12px each and
+   prevented no shift. Now on block-direction scrollers, with `both-edges` on
+   dialogs so centred content stays centred.
+4. **A thumb painted in the material's own colour.** I read "the scrollbar belongs
+   to the material" literally and set the thumb to the material's surface colour:
+   white at 62% over a white Frost panel, contrast ratio 1.00. The bug that was
+   reported, rebuilt with better intentions.
+
+**The two scrollbars.** The thumb is ink, not material. `.cr-scroll-frost` takes
+the palette's ink at 55%, because Frost is the intermediate surface and its
+scrollbar belongs to the panel the way the panel's text does. `.cr-scroll-resin`
+takes the palette's primary at 80%, because Resin is the floating control plane and
+a scrollbar there is a control. A dialog takes the Frost one — a dialog is Haze
+over Mirage, not Resin. Both clear 3:1 against surface, surfaceAlt and canvas in
+all six palettes and both modes; 72 new checks in `validate-tokens` assert it, and
+the old value fails them at 1.00.
+
+**One mechanism per engine.** Chromium 121 and later ignore `::-webkit-scrollbar`
+on any container whose `scrollbar-width` or `scrollbar-color` is non-`auto`, which
+is every container Crystal styles. The webkit rules were therefore dead in the
+browser most people use and live in the one they do not — one specification
+rendering two ways. They now sit behind `@supports not (scrollbar-color: auto)`,
+and a source check in `core-contracts` fails if one is ever written outside it. It
+has to be a source check: a branch that did not apply leaves nothing in the
+computed style to look at.
+
+**Two things the gates cannot see, stated rather than implied.** Playwright's
+mobile emulation puts Chromium into overlay-scrollbar mode, so the phone leg of
+`verify-scroll` proves behaviour and not appearance. And headless Chromium paints
+no scrollbar at all, so no reference frame contains one — the appearance was
+checked in a real browser, and what guards it from here is the contrast gate,
+which covers twelve palette-and-mode combinations rather than the two the frames
+photograph.
+
+`tools/verify-scroll.mjs` checks four things on every scroll container across seven
+pages on a phone viewport and a desktop one. 37 containers pass; reverting the fix
+produces 58 failures.

@@ -78,7 +78,7 @@
    material hierarchy exists to prevent. */
 @layer crystal.base {
   .site-layout{display:grid;grid-template-columns:236px minmax(0,1fr);gap:46px;align-items:start;padding:36px 0}
-  .site-menu{position:sticky;top:22px;align-self:start;display:flex;flex-direction:column;gap:18px;padding:16px 13px;max-height:calc(100vh - 46px);overflow-y:auto;overscroll-behavior:contain}
+  .site-menu{position:sticky;top:22px;align-self:start;display:flex;flex-direction:column;gap:18px;padding:16px 13px;max-height:calc(100vh - 46px);overflow-y:auto}
   .menu-heading{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--cr-muted);margin:0 0 7px;padding-inline-start:14px}
   .menu-group{display:flex;flex-direction:column;gap:2px}
   /* Pill geometry explicitly: controls.css scopes it to `nav a.cr-control`, so a

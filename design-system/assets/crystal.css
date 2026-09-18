@@ -75,6 +75,121 @@
 }
 
 
+/* Scrolling.
+ *
+ * A scrollbar in Crystal belongs to the material it scrolls, not to the
+ * operating system. There are two, and which one a surface gets follows the
+ * hierarchy rather than taste:
+ *
+ *   .cr-scroll-frost   panels and long reading surfaces. Frost is the
+ *                      intermediate layer, so a scrollbar on a panel reads as
+ *                      part of the panel.
+ *   .cr-scroll-resin   floating control planes, menus, popovers and compact
+ *                      scrollers. Resin is the control plane, and a scrollbar
+ *                      there is a control sitting above content.
+ *
+ * `.cr-scroll` is the shared behaviour both build on, and is worth applying to
+ * any scroll container on its own:
+ *
+ *   - `overscroll-behavior: contain` stops scroll chaining. On a phone, swiping
+ *     a table that has reached its end otherwise scrolls the page underneath,
+ *     which reads as the table refusing to move.
+ *   - `scrollbar-gutter: stable` keeps content from shifting in the inline
+ *     direction when a vertical scrollbar appears, which is what makes a growing
+ *     list jitter. It is not applied to horizontal-only scrollers, where it
+ *     reserves space against a scrollbar that never arrives.
+ *   - `touch-action: pan-x pan-y` keeps a browser's own gesture handling rather
+ *     than replacing it, so momentum and rubber-banding still feel native.
+ *
+ * What this cannot do is give a scrollbar the actual material. `backdrop-filter`
+ * has no effect on a scrollbar, and the standard properties expose only two
+ * colours and a coarse width, so what these deliver is the right Frost or Resin
+ * colour rather than real diffusion. CONTRACT §2 already says a CSS
+ * approximation is not a native optical specification; a surface that needs the
+ * true material uses the scroll-area component, which draws its own thumb as a
+ * real element and can carry the material in full. */
+.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog{
+  overscroll-behavior:contain;
+  touch-action:pan-x pan-y;
+  scrollbar-width:thin;
+}
+/* The gutter belongs to vertical scrolling only. `scrollbar-gutter` reserves
+   space on the inline edge, where a vertical scrollbar appears; it does nothing
+   for a horizontal one. `.cr-table-scroll` scrolls horizontally and is therefore
+   excluded — reserving a gutter there costs every table 12px and prevents no
+   shift. A dialog takes `both-edges` because its content is centred, and a
+   gutter on one side alone would sit it off-centre. */
+.cr-scroll,.cr-scroll-frost,.cr-scroll-resin{scrollbar-gutter:stable}
+.cr-dialog{scrollbar-gutter:stable both-edges}
+
+/* A dialog is a reading surface, so it takes the Frost scrollbar; the table
+   scroller is a Resin plane and takes the Resin one. */
+.cr-scroll-frost,.cr-dialog{scrollbar-color:var(--cr-scrollbar-frost-thumb) var(--cr-scrollbar-track)}
+.cr-scroll-resin,.cr-table-scroll{scrollbar-color:var(--cr-scrollbar-resin-thumb) var(--cr-scrollbar-track)}
+
+/* Reduced transparency and forced colours: keep the shape, drop the translucency. */
+[data-effects=opaque] :is(.cr-scroll-frost,.cr-scroll-resin){
+  scrollbar-color:var(--cr-outline) var(--cr-surface-alt);
+}
+@media(prefers-reduced-transparency:reduce){
+  :is(.cr-scroll-frost,.cr-scroll-resin){scrollbar-color:var(--cr-outline) var(--cr-surface-alt)}
+}
+@media(forced-colors:active){
+  :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog){scrollbar-color:CanvasText Canvas}
+}
+
+/* The older path, for engines that predate the standard properties — Safari
+ * before 18.2, Chromium before 121. It is deliberately exclusive with the block
+ * above rather than additional to it.
+ *
+ * Chromium 121 and later ignore every `::-webkit-scrollbar` pseudo-element on a
+ * container whose `scrollbar-width` or `scrollbar-color` is anything but `auto`,
+ * and they are set above on exactly these selectors. Left unguarded, these rules
+ * are dead in the browser most people use and live in the one they don't, which
+ * is two renderings of one specification — the drift CONTRACT §1 forbids. The
+ * guard makes each engine take exactly one mechanism.
+ *
+ * What the older path can express and the standard properties cannot is
+ * geometry: `--cr-scrollbar-width`, `--cr-scrollbar-inset` and
+ * `--cr-scrollbar-thumb-min` reach only this branch, because `scrollbar-width`
+ * takes `auto | thin | none` and nothing finer. Those three tokens are the older
+ * path's statement of the same intent, not a second specification. */
+@supports not (scrollbar-color:auto){
+  :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog)::-webkit-scrollbar{
+    width:var(--cr-scrollbar-width);height:var(--cr-scrollbar-width);
+  }
+  :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog)::-webkit-scrollbar-track{
+    background:var(--cr-scrollbar-track);border-radius:var(--cr-scrollbar-width);
+  }
+  :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog)::-webkit-scrollbar-thumb{
+    border-radius:var(--cr-scrollbar-width);
+    /* The inset is a transparent border with a clipped background, which is the
+       only way to inset a scrollbar thumb: padding does not apply to it. */
+    border:var(--cr-scrollbar-inset) solid transparent;
+    background-clip:padding-box;
+    min-height:var(--cr-scrollbar-thumb-min);min-width:var(--cr-scrollbar-thumb-min);
+  }
+  :is(.cr-scroll-frost,.cr-dialog)::-webkit-scrollbar-thumb{background-color:var(--cr-scrollbar-frost-thumb)}
+  :is(.cr-scroll-resin,.cr-table-scroll)::-webkit-scrollbar-thumb{background-color:var(--cr-scrollbar-resin-thumb)}
+  :is(.cr-scroll-frost,.cr-scroll-resin)::-webkit-scrollbar-thumb:hover{
+    /* The rim is the same contour the materials use, so a hovered thumb gains
+       definition the way every other Crystal surface does. */
+    box-shadow:inset 0 0 0 1px var(--cr-rim);
+  }
+  :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)::-webkit-scrollbar-corner{background:transparent}
+  [data-effects=opaque] :is(.cr-scroll-frost,.cr-scroll-resin)::-webkit-scrollbar-thumb{
+    background-color:var(--cr-outline);
+  }
+  @media(prefers-reduced-transparency:reduce){
+    :is(.cr-scroll-frost,.cr-scroll-resin)::-webkit-scrollbar-thumb{background-color:var(--cr-outline)}
+  }
+  @media(forced-colors:active){
+    :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog)::-webkit-scrollbar-thumb{
+      background-color:CanvasText;border-color:Canvas;
+    }
+  }
+}
+
 /* Stone shares Haze's feather, with its own unchanged label opacity. */
 .cr-stone,.cr-dock-inner{position:relative;isolation:isolate;background:transparent;color:var(--cr-text)}
 .cr-stone::before,.cr-dock-inner::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:var(--cr-stone-fill);filter:blur(var(--cr-stone-feather))}

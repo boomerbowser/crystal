@@ -204,6 +204,16 @@ function migrate() {
   set(out.component, 'action.paddingInline', leaf('dimension', '24px', 'Action control inline padding'));
   set(out.component, 'action.gap', leaf('dimension', '9px', 'Gap between an action\'s icon and its label'));
   set(out.component, 'action.disabledOpacity', leaf('number', 0.55, 'Opacity of a disabled control'));
+
+  /* Scrollbars are a Crystal surface, not browser furniture. Two of them: a Frost
+     scrollbar for panels and long reading surfaces, and a Resin one for floating
+     control planes and compact scrollers, so a scrollbar belongs to the material
+     it scrolls rather than to the operating system. */
+  const sb = (flat.component && flat.component.scrollbar) || { width: 10, thumbMinLength: 32, inset: 2 };
+  set(out.component, 'scrollbar.width', leaf('dimension', dim(sb.width), 'Scrollbar track width'));
+  set(out.component, 'scrollbar.thumbMinLength', leaf('dimension', dim(sb.thumbMinLength),
+    'Shortest a thumb may become, so a very long surface stays draggable'));
+  set(out.component, 'scrollbar.inset', leaf('dimension', dim(sb.inset), 'Gap between the thumb and the track edge'));
   set(out.component, 'card.radius', leaf('dimension', '{semantic.shape.contentRadius}',
     'Card-shaped buttons keep the content radius so artwork is not clipped'));
   set(out.component, 'focus.coreWidth', leaf('dimension', '2px', 'Crisp focus core, never blurred'));
@@ -326,6 +336,18 @@ function buildFlat(tokens) {
     readingSize: unpx(tokens.semantic.typography.readingSize.$value),
     readingLeading: unpx(tokens.semantic.typography.readingLeading.$value),
     family: tokens.semantic.typography.family.$value,
+  };
+  /* Component-level values the runtime resolver needs. Until now the flat file
+     carried only primitives and semantics, so anything set on out.component was
+     invisible to assets/crystal.js — which meant a component token could be
+     defined and unreachable, and the only way to use it was to write the number
+     again somewhere else. */
+  flat.component = {
+    scrollbar: {
+      width: unpx(tokens.component.scrollbar.width.$value),
+      thumbMinLength: unpx(tokens.component.scrollbar.thumbMinLength.$value),
+      inset: unpx(tokens.component.scrollbar.inset.$value),
+    },
   };
   flat.schemaNote = 'Generated from tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.';
   flat.materials = MATERIALS;

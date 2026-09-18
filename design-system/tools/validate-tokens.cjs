@@ -6,6 +6,14 @@ const C=ctx.window.Crystal,D=ctx.window.CRYSTAL_TOKENS;
 const fromHex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
 const toHex=a=>'#'+a.map(x=>Math.round(x).toString(16).padStart(2,'0')).join('');
 const over=(fg,bg,alpha)=>toHex(fromHex(fg).map((v,i)=>v*alpha+fromHex(bg)[i]*(1-alpha)));
+/* An `rgba(r, g, b, a)` string composited onto an opaque hex background, so a
+   translucent token can be measured as what the eye actually receives. */
+const flatten=(value,background)=>{
+  const parts=/^rgba?\(([^)]+)\)$/.exec(value.trim());
+  if(!parts)return value;
+  const [r,g,b,a=1]=parts[1].split(',').map(Number);
+  return toHex([r,g,b].map((v,i)=>v*a+fromHex(background)[i]*(1-a)));
+};
 const results=[],failures=[];function check(label,a,b,min,details){const ratio=C.contrast(a,b);const result={label,ratio:Number(ratio.toFixed(4)),minimum:min,...details};results.push(result);if(ratio+1e-9<min)failures.push(result);}
 for(const palette of Object.keys(D.palettes))for(const mode of ['light','dark']){
  const p=D.palettes[palette].modes[mode],config={palette,mode};
@@ -13,6 +21,18 @@ for(const palette of Object.keys(D.palettes))for(const mode of ['light','dark'])
  assert.equal(C.resolve(config,mode)['--cr-mica-inactive'],D.material.micaInactive[mode]);
  for(const pair of C.audit(config,mode))check(pair.label,pair.foreground,pair.background,pair.minimum,{palette,mode,kind:'solid'});
  for(const background of [p.surface,p.primarySoft])check('Compact control marker',p.primary,background,3,{palette,mode,kind:'control-marker'});
+ /* A scrollbar thumb is a control, and it has to be seen against the surface it
+    scrolls. The first version painted it in the material's own surface colour,
+    which is the one colour guaranteed to match the panel behind it — on a light
+    Frost panel the thumb was white on white. 3:1 is the non-text bar, checked
+    against every background a Crystal panel can be. */
+ for(const [label,token] of [['Frost scrollbar thumb','--cr-scrollbar-frost-thumb'],
+                             ['Resin scrollbar thumb','--cr-scrollbar-resin-thumb']]){
+  const value=C.resolve(config,mode)[token];
+  for(const background of [p.surface,p.surfaceAlt,p.canvas]){
+   check(label,flatten(value,background),background,3,{palette,mode,token,background,kind:'scrollbar'});
+  }
+ }
  for(const backdrop of ['#000000','#ffffff','#ff0000','#00ff00','#0000ff','#ffff00','#00ffff','#ff00ff']){
   // A 79% lower bound allows a small feather tail inside the padded reading area.
   for(const alpha of [.79,D.material.contentOpacity]){

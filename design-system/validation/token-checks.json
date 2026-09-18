@@ -1,8 +1,8 @@
 {
-  "date": "2026-09-18T15:21:26.874Z",
+  "date": "2026-09-18T16:24:56.228Z",
   "scope": "Token pairs, bounded composite models, normalization and exported theme behavior. Not a WCAG certification.",
-  "checks": 1716,
-  "minimum": 3.7157,
+  "checks": 1788,
+  "minimum": 3.0673,
   "failures": [],
   "results": [
     {
@@ -108,6 +108,66 @@
       "palette": "prism",
       "mode": "light",
       "kind": "control-marker"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 4.0618,
+      "minimum": 3,
+      "palette": "prism",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#ffffff",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 3.8894,
+      "minimum": 3,
+      "palette": "prism",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#f2edfe",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 3.9734,
+      "minimum": 3,
+      "palette": "prism",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#f9f6fe",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 4.099,
+      "minimum": 3,
+      "palette": "prism",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#ffffff",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.7175,
+      "minimum": 3,
+      "palette": "prism",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#f2edfe",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.9022,
+      "minimum": 3,
+      "palette": "prism",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#f9f6fe",
+      "kind": "scrollbar"
     },
     {
       "label": "Content body over RGB corner",
@@ -1578,6 +1638,66 @@
       "kind": "control-marker"
     },
     {
+      "label": "Frost scrollbar thumb",
+      "ratio": 5.5704,
+      "minimum": 3,
+      "palette": "prism",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#1d1730",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 4.8192,
+      "minimum": 3,
+      "palette": "prism",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#332756",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 5.7807,
+      "minimum": 3,
+      "palette": "prism",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#120d26",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 6.2865,
+      "minimum": 3,
+      "palette": "prism",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#1d1730",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 5.1105,
+      "minimum": 3,
+      "palette": "prism",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#332756",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 6.7209,
+      "minimum": 3,
+      "palette": "prism",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#120d26",
+      "kind": "scrollbar"
+    },
+    {
       "label": "Content body over RGB corner",
       "ratio": 16.6874,
       "minimum": 4.5,
@@ -3044,6 +3164,66 @@
       "palette": "fuchsia",
       "mode": "light",
       "kind": "control-marker"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 4.0928,
+      "minimum": 3,
+      "palette": "fuchsia",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#ffffff",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 3.9428,
+      "minimum": 3,
+      "palette": "fuchsia",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#f9eaf5",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 4.0253,
+      "minimum": 3,
+      "palette": "fuchsia",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#fcf5fa",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 4.142,
+      "minimum": 3,
+      "palette": "fuchsia",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#ffffff",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.6969,
+      "minimum": 3,
+      "palette": "fuchsia",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#f9eaf5",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.9285,
+      "minimum": 3,
+      "palette": "fuchsia",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#fcf5fa",
+      "kind": "scrollbar"
     },
     {
       "label": "Content body over RGB corner",
@@ -4514,6 +4694,66 @@
       "kind": "control-marker"
     },
     {
+      "label": "Frost scrollbar thumb",
+      "ratio": 5.5768,
+      "minimum": 3,
+      "palette": "fuchsia",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#241427",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 4.8307,
+      "minimum": 3,
+      "palette": "fuchsia",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#422144",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 5.706,
+      "minimum": 3,
+      "palette": "fuchsia",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#190a1e",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 6.1275,
+      "minimum": 3,
+      "palette": "fuchsia",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#241427",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 5.0626,
+      "minimum": 3,
+      "palette": "fuchsia",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#422144",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 6.5254,
+      "minimum": 3,
+      "palette": "fuchsia",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#190a1e",
+      "kind": "scrollbar"
+    },
+    {
       "label": "Content body over RGB corner",
       "ratio": 16.6643,
       "minimum": 4.5,
@@ -5980,6 +6220,66 @@
       "palette": "cobalt",
       "mode": "light",
       "kind": "control-marker"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 4.0412,
+      "minimum": 3,
+      "palette": "cobalt",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#ffffff",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 3.8698,
+      "minimum": 3,
+      "palette": "cobalt",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#ecf0fd",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 3.944,
+      "minimum": 3,
+      "palette": "cobalt",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#f5f7fe",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.9499,
+      "minimum": 3,
+      "palette": "cobalt",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#ffffff",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.5987,
+      "minimum": 3,
+      "palette": "cobalt",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#ecf0fd",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.7447,
+      "minimum": 3,
+      "palette": "cobalt",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#f5f7fe",
+      "kind": "scrollbar"
     },
     {
       "label": "Content body over RGB corner",
@@ -7450,6 +7750,66 @@
       "kind": "control-marker"
     },
     {
+      "label": "Frost scrollbar thumb",
+      "ratio": 5.5584,
+      "minimum": 3,
+      "palette": "cobalt",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#151a30",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 4.8122,
+      "minimum": 3,
+      "palette": "cobalt",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#252d55",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 5.7664,
+      "minimum": 3,
+      "palette": "cobalt",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#0b1025",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 6.4194,
+      "minimum": 3,
+      "palette": "cobalt",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#151a30",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 5.2075,
+      "minimum": 3,
+      "palette": "cobalt",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#252d55",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 6.868,
+      "minimum": 3,
+      "palette": "cobalt",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#0b1025",
+      "kind": "scrollbar"
+    },
+    {
       "label": "Content body over RGB corner",
       "ratio": 16.623,
       "minimum": 4.5,
@@ -8916,6 +9276,66 @@
       "palette": "ion",
       "mode": "light",
       "kind": "control-marker"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 3.9815,
+      "minimum": 3,
+      "palette": "ion",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#ffffff",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 3.8227,
+      "minimum": 3,
+      "palette": "ion",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#e8f3f6",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 3.9252,
+      "minimum": 3,
+      "palette": "ion",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#f4f9fa",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.372,
+      "minimum": 3,
+      "palette": "ion",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#ffffff",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.0993,
+      "minimum": 3,
+      "palette": "ion",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#e8f3f6",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.2183,
+      "minimum": 3,
+      "palette": "ion",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#f4f9fa",
+      "kind": "scrollbar"
     },
     {
       "label": "Content body over RGB corner",
@@ -10386,6 +10806,66 @@
       "kind": "control-marker"
     },
     {
+      "label": "Frost scrollbar thumb",
+      "ratio": 5.5595,
+      "minimum": 3,
+      "palette": "ion",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#111e27",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 4.7433,
+      "minimum": 3,
+      "palette": "ion",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#1d3445",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 5.7816,
+      "minimum": 3,
+      "palette": "ion",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#07141e",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 6.7149,
+      "minimum": 3,
+      "palette": "ion",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#111e27",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 5.3518,
+      "minimum": 3,
+      "palette": "ion",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#1d3445",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 7.2023,
+      "minimum": 3,
+      "palette": "ion",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#07141e",
+      "kind": "scrollbar"
+    },
+    {
       "label": "Content body over RGB corner",
       "ratio": 16.5965,
       "minimum": 4.5,
@@ -11852,6 +12332,66 @@
       "palette": "amethyst",
       "mode": "light",
       "kind": "control-marker"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 4.0513,
+      "minimum": 3,
+      "palette": "amethyst",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#ffffff",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 3.9069,
+      "minimum": 3,
+      "palette": "amethyst",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#f4ecfa",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 4.0138,
+      "minimum": 3,
+      "palette": "amethyst",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#f9f6fc",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 4.3903,
+      "minimum": 3,
+      "palette": "amethyst",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#ffffff",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.9483,
+      "minimum": 3,
+      "palette": "amethyst",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#f4ecfa",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 4.1645,
+      "minimum": 3,
+      "palette": "amethyst",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#f9f6fc",
+      "kind": "scrollbar"
     },
     {
       "label": "Content body over RGB corner",
@@ -13322,6 +13862,66 @@
       "kind": "control-marker"
     },
     {
+      "label": "Frost scrollbar thumb",
+      "ratio": 5.6202,
+      "minimum": 3,
+      "palette": "amethyst",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#1e162c",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 4.8901,
+      "minimum": 3,
+      "palette": "amethyst",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#36254e",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 5.794,
+      "minimum": 3,
+      "palette": "amethyst",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#130d22",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 6.2432,
+      "minimum": 3,
+      "palette": "amethyst",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#1e162c",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 5.1403,
+      "minimum": 3,
+      "palette": "amethyst",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#36254e",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 6.61,
+      "minimum": 3,
+      "palette": "amethyst",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#130d22",
+      "kind": "scrollbar"
+    },
+    {
       "label": "Content body over RGB corner",
       "ratio": 16.8087,
       "minimum": 4.5,
@@ -14790,6 +15390,66 @@
       "kind": "control-marker"
     },
     {
+      "label": "Frost scrollbar thumb",
+      "ratio": 3.2695,
+      "minimum": 3,
+      "palette": "harbor",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#ffffff",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 3.0673,
+      "minimum": 3,
+      "palette": "harbor",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#e7e7f1",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 3.2103,
+      "minimum": 3,
+      "palette": "harbor",
+      "mode": "light",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#faf8fe",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 4.0525,
+      "minimum": 3,
+      "palette": "harbor",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#ffffff",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.5266,
+      "minimum": 3,
+      "palette": "harbor",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#e7e7f1",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 3.8926,
+      "minimum": 3,
+      "palette": "harbor",
+      "mode": "light",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#faf8fe",
+      "kind": "scrollbar"
+    },
+    {
       "label": "Content body over RGB corner",
       "ratio": 7.7185,
       "minimum": 4.5,
@@ -16256,6 +16916,66 @@
       "palette": "harbor",
       "mode": "dark",
       "kind": "control-marker"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 5.1846,
+      "minimum": 3,
+      "palette": "harbor",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#111318",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 4.9097,
+      "minimum": 3,
+      "palette": "harbor",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#1d1f26",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Frost scrollbar thumb",
+      "ratio": 5.1846,
+      "minimum": 3,
+      "palette": "harbor",
+      "mode": "dark",
+      "token": "--cr-scrollbar-frost-thumb",
+      "background": "#0d0e12",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 7.3193,
+      "minimum": 3,
+      "palette": "harbor",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#111318",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 6.701,
+      "minimum": 3,
+      "palette": "harbor",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#1d1f26",
+      "kind": "scrollbar"
+    },
+    {
+      "label": "Resin scrollbar thumb",
+      "ratio": 7.5081,
+      "minimum": 3,
+      "palette": "harbor",
+      "mode": "dark",
+      "token": "--cr-scrollbar-resin-thumb",
+      "background": "#0d0e12",
+      "kind": "scrollbar"
     },
     {
       "label": "Content body over RGB corner",

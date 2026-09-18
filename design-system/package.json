@@ -14,7 +14,8 @@
     "audit:materials": "node tools/audit-materials.mjs",
     "verify:interactions": "node tools/verify-interactions.mjs",
     "validate:docs": "node tools/validate-docs.cjs",
-    "verify:deploy": "node tools/verify-deploy.mjs ."
+    "verify:deploy": "node tools/verify-deploy.mjs .",
+    "verify:scroll": "node tools/verify-scroll.mjs"
   },
   "keywords": [],
   "type": "commonjs",

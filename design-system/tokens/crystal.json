@@ -371,6 +371,13 @@
     "readingLeading": 24,
     "family": "Manrope"
   },
+  "component": {
+    "scrollbar": {
+      "width": 10,
+      "thumbMinLength": 32,
+      "inset": 2
+    }
+  },
   "schemaNote": "Generated from tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.",
   "materials": {
     "plastic": {
