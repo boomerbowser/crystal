@@ -226,6 +226,23 @@ check('every webkit scrollbar rule sits behind the legacy guard', () => {
   assert.deepEqual(stray, [], 'webkit scrollbar rules outside the guard');
 });
 
+/* Crystal's focus is a crisp core inside a feathered halo, and it has to reach
+   anything that can take focus — not only the native controls. A scroll area that
+   holds nothing focusable becomes a tab stop so its content is reachable by
+   keyboard, and before this it received the browser's default ring instead of
+   Crystal's, on the one component whose whole reason for being focusable is
+   accessibility. */
+check('the focus halo reaches anything focusable, not only native controls', () => {
+  const css = require('node:fs').readFileSync(require('node:path').join(__dirname, '../assets/crystal.css'), 'utf8');
+  for (const rule of css.match(/[^{}]*:focus-visible[^{}]*\{[^}]*\}/g) ?? []) {
+    if (!/outline:\s*2px solid var\(--cr-primary\)/.test(rule)) continue;
+    assert.match(rule, /\[tabindex\]:focus-visible/,
+      'the focus rule does not reach [tabindex]');
+    return;
+  }
+  assert.fail('no focus rule found to check');
+});
+
 /* -------------------------------------------------------------- report */
 
 const failures = results.filter((r) => r.status === 'fail');

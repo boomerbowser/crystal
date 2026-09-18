@@ -51,6 +51,18 @@ for (const [label, contextOptions] of [
     await tab.goto(`${ORIGIN}/${page}`, { waitUntil: 'load' });
     await tab.waitForTimeout(700);
 
+    /* A closed dialog has no layout, so a contract checked only on what is on
+       screen never sees one — and a dialog is a scroll container with a material
+       of its own. `show` rather than `showModal` because only one dialog may be
+       modal at a time and the page may have several; what is being measured is
+       the container, not the modality. */
+    await tab.evaluate(() => {
+      for (const dialog of document.querySelectorAll('dialog')) {
+        if (!dialog.open) dialog.show();
+      }
+    });
+    await tab.waitForTimeout(200);
+
     const found = await tab.evaluate(() => {
       const out = [];
       for (const el of document.querySelectorAll('*')) {

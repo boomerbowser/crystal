@@ -90,13 +90,11 @@ Non-negotiable properties:
   all. Each entry declares a `degradesTo`; a platform that cannot meet the
   contract degrades as declared rather than approximating it differently, since
   a divergent approximation damages parity more than an honest absence.
-- **During a motion, or during ambient.** Shaders paint while a motion is in flight
-  and while a surface is in its ambient rest state (§8). They never paint on a surface
-  that is doing neither. This rule read "never at rest" until Crystal 2.0; ambient
-  motion made the rest state a state a material actually has, so the rule was rewritten
-  rather than excepted. Reference frames capture ambient disabled — a moving surface
-  cannot be photographed deterministically — and gate G8 proves that with both the
-  shader layer and ambient unavailable, every page renders exactly its baseline.
+- **During a motion, and never at rest.** Shaders paint while a motion a person
+  started is in flight, and on no surface that is doing nothing. This rule was briefly
+  rewritten to admit an ambient rest state; ambient was then withdrawn (§8), so it
+  reads as it originally did. A reference frame photographs a surface at rest, which is
+  only deterministic because nothing paints there.
 - **Never above content.** The optical layer belongs between a material's
   background and its content. On the web this is a negative `z-index` inside an
   isolated stacking context; the principle is that verified text contrast is
@@ -134,3 +132,66 @@ Two findings from that work are worth carrying forward, because they will apply 
 
 Motion that a person starts is unaffected. So is §7: the optical layer still runs for the
 duration of an interaction.
+
+
+---
+
+## 9. Scrolling is part of the system, not the browser's business.
+
+A team member opened the deployed preview on a phone and reported that the tables would
+not scroll. They did scroll; the swipe chained into the page underneath, and nothing on
+screen said the table was scrollable, because a phone's scrollbar is an overlay that is
+not there until you are already scrolling. Both halves of that are Crystal's to own.
+
+**Every scroll container owes four things:**
+
+- `overscroll-behavior: contain`, so a swipe that reaches the end stays in the thing
+  being swiped. This is invisible with a mouse, which is how it reaches a phone.
+- A stable gutter **where it scrolls vertically**, so content does not jump when the
+  scrollbar appears. `scrollbar-gutter` reserves the inline edge only; on a
+  horizontal-only scroller it reserves space against a scrollbar that never arrives.
+  A centred surface such as a dialog takes `stable both-edges`.
+- A Crystal scrollbar rather than the operating system's.
+- Something actually there to scroll. A container styled as scrollable with nothing to
+  scroll is a container whose overflow is a mistake.
+
+**There are two scrollbars, and which one a surface takes follows the hierarchy.** Frost
+— the palette's ink — for panels, side navigation, reading surfaces and dialogs, because
+Frost is the intermediate surface and its scrollbar belongs to the panel the way the
+panel's own text does. Resin — the palette's primary — for control planes, menus,
+popovers and compact or horizontal scrollers, because Resin is the floating control plane
+and a scrollbar there is a control. A dialog takes the Frost one: a dialog is Haze over
+Mirage, not Resin.
+
+**The thumb is ink, never the material's own surface colour.** Crystal's first attempt
+read "the scrollbar belongs to the material" literally and painted the thumb in the
+material's surface: white at 62% over a white Frost panel, contrast ratio 1.00. Both
+thumbs clear **3:1** against every Crystal surface in all six palettes and both modes.
+
+**One mechanism per engine.** Where a platform offers both a standard scrollbar API and
+an older vendor one, a library implements exactly one of them per engine. On the web,
+Chromium 121 and later ignore every `::-webkit-scrollbar` pseudo-element on a container
+whose `scrollbar-width` or `scrollbar-color` is non-`auto`, so writing both leaves the
+vendor rules dead in the browser most people use and live in the one they do not — which
+is §1's drift by another route.
+
+**The edge fade says there is more.** A scroll area fades its content where there is
+content beyond the edge, at `--cr-scroll-fade`, on the scrolling axis. It is a mask
+rather than a painted overlay: what an overlay would have to paint is the surrounding
+material, and a colour approximating a translucent material over an unknown backdrop is
+wrong at every edge except the one it was sampled at. The same value is the container's
+scroll padding, so a focus ring can never come to rest underneath the fade — Crystal does
+not blur focus, and fading one is the same defect by another route. A mask fades the
+element's own fill and border too, so it belongs on the element that scrolls; a material
+surface that also scrolls puts its material on a wrapper.
+
+**A scrollable region that holds nothing focusable must be a tab stop**, or its content
+is unreachable by keyboard. One that already holds something focusable must not be: an
+unnecessary tab stop is its own annoyance. A named one is a region; an unnamed one is
+not, because a landmark without a name is noise in a screen reader's landmark list.
+
+**Two limits worth stating rather than discovering.** Mobile emulation in a headless
+browser uses overlay scrollbars, where a gutter is a no-op and no thumb is painted, so an
+emulated phone verifies behaviour and not appearance. And headless Chromium paints no
+scrollbar at all, so a reference frame cannot photograph one — what guards the appearance
+is the contrast gate, across every palette and mode, not a screenshot of two of them.
