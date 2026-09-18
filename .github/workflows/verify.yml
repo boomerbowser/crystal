@@ -11,6 +11,10 @@ on:
   push:
     branches: [main, 'crystal-*']
   pull_request:
+  # Re-runnable without an empty commit. A workflow that can only be triggered by
+  # a push cannot be used to check whether a secret was set correctly, which is
+  # the first thing anybody wants to check.
+  workflow_dispatch:
 
 # A superseded run has nothing to tell anyone.
 concurrency:
