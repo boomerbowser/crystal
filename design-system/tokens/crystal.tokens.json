@@ -1692,6 +1692,11 @@
         "$type": "dimension",
         "$value": "44px",
         "$description": "Shell gutter at the lg breakpoint and above"
+      },
+      "minCellWidth": {
+        "$type": "dimension",
+        "$value": "240px",
+        "$description": "Narrowest an auto-flowing grid cell becomes before the grid drops a column"
       }
     },
     "card": {

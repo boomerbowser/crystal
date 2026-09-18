@@ -415,7 +415,7 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.
 
-22 tokens.
+23 tokens.
 
 ### Component · action
 
@@ -451,6 +451,7 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | `component.layout.gutterCompact` | dimension | `18px` | Shell gutter below the sm breakpoint |
 | `component.layout.gutterBase` | dimension | `26px` | Shell gutter between the sm and lg breakpoints |
 | `component.layout.gutterWide` | dimension | `44px` | Shell gutter at the lg breakpoint and above |
+| `component.layout.minCellWidth` | dimension | `240px` | Narrowest an auto-flowing grid cell becomes before the grid drops a column |
 
 ### Component · card
 

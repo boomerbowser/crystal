@@ -385,7 +385,8 @@
       "readingMax": 920,
       "gutterCompact": 18,
       "gutterBase": 26,
-      "gutterWide": 44
+      "gutterWide": 44,
+      "minCellWidth": 240
     }
   },
   "spacing": {

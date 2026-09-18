@@ -113,6 +113,7 @@ object CrystalToken {
     const val layoutGutterCompact = "18px"
     const val layoutGutterBase = "26px"
     const val layoutGutterWide = "44px"
+    const val layoutMinCellWidth = "240px"
     const val cardRadius = "28px"
     const val focusCoreWidth = "2px"
     const val focusCoreOffset = "3px"

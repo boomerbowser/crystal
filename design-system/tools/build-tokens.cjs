@@ -252,6 +252,12 @@ function migrate() {
   set(out.component, 'layout.gutterCompact', leaf('dimension', '18px', 'Shell gutter below the sm breakpoint'));
   set(out.component, 'layout.gutterBase', leaf('dimension', '26px', 'Shell gutter between the sm and lg breakpoints'));
   set(out.component, 'layout.gutterWide', leaf('dimension', '44px', 'Shell gutter at the lg breakpoint and above'));
+  /* The catalogue makes "minimum cell width" Crystal's obligation for the
+     auto-flowing grid, so it is a token rather than a number each library picks.
+     240px is a card that still holds a short heading and a line of supporting
+     text; below it the two collide. */
+  set(out.component, 'layout.minCellWidth', leaf('dimension', '240px',
+    'Narrowest an auto-flowing grid cell becomes before the grid drops a column'));
   set(out.component, 'card.radius', leaf('dimension', '{semantic.shape.contentRadius}',
     'Card-shaped buttons keep the content radius so artwork is not clipped'));
   set(out.component, 'focus.coreWidth', leaf('dimension', '2px', 'Crisp focus core, never blurred'));

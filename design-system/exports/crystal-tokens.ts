@@ -113,6 +113,7 @@ export const crystalTokens = {
   "layout.gutterCompact": "18px",
   "layout.gutterBase": "26px",
   "layout.gutterWide": "44px",
+  "layout.minCellWidth": "240px",
   "card.radius": "28px",
   "focus.coreWidth": "2px",
   "focus.coreOffset": "3px",
