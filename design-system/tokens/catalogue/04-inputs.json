@@ -1004,6 +1004,163 @@
       "parity": [
         "mantine:JsonInput"
       ]
+    },
+    {
+      "id": "color-area",
+      "name": "Colour area",
+      "anatomy": "A two-dimensional field for saturation and brightness.",
+      "states": [
+        "at-rest",
+        "dragging",
+        "focus-visible",
+        "disabled"
+      ],
+      "material": "Resin thumb over the gradient field",
+      "geometry": "Thumb reaches 44px including its hit area.",
+      "semantics": "Two linked sliders; each axis announces its own value and responds to arrow keys.",
+      "crystal": "Thumb material, focus ring, contrast of the thumb against any underlying colour",
+      "product": "Colour space and value",
+      "parity": [
+        "react-aria:ColorArea"
+      ]
+    },
+    {
+      "id": "color-slider",
+      "name": "Colour slider",
+      "anatomy": "One channel of a colour, as a track.",
+      "states": [
+        "at-rest",
+        "dragging",
+        "focus-visible",
+        "disabled"
+      ],
+      "material": "Resin thumb on a gradient track",
+      "geometry": "Matches the slider contract.",
+      "semantics": "role=\"slider\" with the channel named and the value in that channel's units.",
+      "crystal": "Thumb and track material, focus ring",
+      "product": "Which channel, and the colour space",
+      "parity": [
+        "react-aria:ColorSlider"
+      ]
+    },
+    {
+      "id": "color-wheel",
+      "name": "Colour wheel",
+      "anatomy": "Hue as a ring.",
+      "states": [
+        "at-rest",
+        "dragging",
+        "focus-visible",
+        "disabled"
+      ],
+      "material": "Resin thumb on the hue ring",
+      "geometry": "Ring thickness is a declared proportion of the radius.",
+      "semantics": "role=\"slider\" in degrees, wrapping at 360.",
+      "crystal": "Thumb material, ring geometry, focus ring",
+      "product": "Colour space",
+      "parity": [
+        "react-aria:ColorWheel"
+      ]
+    },
+    {
+      "id": "color-swatch",
+      "name": "Colour swatch",
+      "anatomy": "One colour, shown as a surface.",
+      "states": [
+        "at-rest",
+        "selected",
+        "focus-visible"
+      ],
+      "material": "Haze chequerboard beneath a transparent colour",
+      "geometry": "Content radius; selection is a ring, never a check mark.",
+      "semantics": "Carries the colour name as text, because colour cannot be the only carrier.",
+      "crystal": "Transparency treatment, selection ring, contrast",
+      "product": "The colour and its name",
+      "parity": [
+        "react-aria:ColorSwatch"
+      ]
+    },
+    {
+      "id": "color-swatch-picker",
+      "name": "Colour swatch picker",
+      "anatomy": "A set of swatches, one selectable.",
+      "states": [
+        "at-rest",
+        "selected",
+        "focus-visible"
+      ],
+      "material": "Inherits from its swatches",
+      "geometry": "Grid gap follows the spacing scale.",
+      "semantics": "A listbox of swatches; arrow keys move, and the selected one is announced by name.",
+      "crystal": "Selection rendering, focus order",
+      "product": "The palette offered",
+      "parity": [
+        "react-aria:ColorSwatchPicker"
+      ]
+    },
+    {
+      "id": "token-field",
+      "name": "Token field",
+      "anatomy": "A text field whose committed values become removable tokens.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "invalid",
+        "disabled"
+      ],
+      "material": "Haze field fill; tokens are Haze chips",
+      "geometry": "Field keeps the content radius; tokens are pills.",
+      "semantics": "Each token is removable by keyboard and announces its removal; the field keeps its own value.",
+      "crystal": "Token material, add and remove motion, focus return after removal",
+      "product": "What may be tokenised, and duplicate policy",
+      "parity": [
+        "react-aria:TokenField",
+        "mantine:PillsInput"
+      ]
+    },
+    {
+      "id": "upload",
+      "name": "Upload",
+      "anatomy": "A file input with progress, retry and per-file status.",
+      "states": [
+        "idle",
+        "selecting",
+        "uploading",
+        "succeeded",
+        "failed",
+        "focus-visible"
+      ],
+      "material": "Resin control with Haze file rows",
+      "geometry": "Rows keep the content radius; the trigger is a pill.",
+      "semantics": "Progress is announced politely; a failure is announced assertively and is retryable by keyboard.",
+      "crystal": "Materials, progress rendering, status colour from the status tokens, retry affordance",
+      "product": "Transport, chunking, retry policy, accepted types",
+      "parity": [
+        "primereact:fileupload",
+        "antd:Upload"
+      ]
+    },
+    {
+      "id": "upload-zone",
+      "name": "Upload zone",
+      "anatomy": "A drop target that accepts files by drag, paste or browse.",
+      "states": [
+        "idle",
+        "drag-over",
+        "uploading",
+        "rejected",
+        "focus-visible"
+      ],
+      "material": "Haze fill with a dashed rim",
+      "geometry": "Content radius; the whole zone is a 44px-plus target.",
+      "semantics": "Dragging is never the only route: the zone is also a button, and paste works. Rejections say why.",
+      "crystal": "Drag-over material change, rejection surface, motion on drop",
+      "product": "Accepted types, size limits, transport",
+      "parity": [
+        "react-aria:DropZone",
+        "primereact:fileupload",
+        "antd:Upload.Dragger"
+      ]
     }
   ]
 }

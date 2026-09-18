@@ -1,0 +1,271 @@
+{
+  "id": "screens",
+  "name": "Screens",
+  "description": "Whole views and the chrome around them, for interactive applications rather than documents. A screen owns landmarks, focus movement between views, and the states a view can be in before it has content — loading, empty, error, offline, not found, unauthorised — which products otherwise improvise separately and inconsistently.",
+  "components": [
+    {
+      "id": "screen",
+      "name": "Screen",
+      "anatomy": "A full view with its own header, content region and chrome.",
+      "states": [
+        "at-rest",
+        "loading",
+        "error"
+      ],
+      "material": "Plastic foundation with Frost chrome",
+      "geometry": "Full-bleed; safe areas respected.",
+      "semantics": "One main per view; the heading is the view name.",
+      "crystal": "Region materials, elevation ordering, safe-area handling",
+      "product": "Routing and what the regions hold",
+      "parity": [
+        "antd:Layout",
+        "mui:Container"
+      ]
+    },
+    {
+      "id": "page-header",
+      "name": "Page header",
+      "anatomy": "Title, description, breadcrumbs and page actions.",
+      "states": [
+        "at-rest",
+        "condensed"
+      ],
+      "material": "Frost band or inherits",
+      "geometry": "Actions are pills.",
+      "semantics": "Contains the h1; breadcrumbs are a navigation landmark.",
+      "crystal": "Material, condense behaviour on scroll",
+      "product": "Actions and copy",
+      "parity": [
+        "antd:PageHeader",
+        "mantine:Group"
+      ]
+    },
+    {
+      "id": "view-stack",
+      "name": "View stack",
+      "anatomy": "Pushed views with a back affordance.",
+      "states": [
+        "at-rest",
+        "pushing",
+        "popping"
+      ],
+      "material": "Inherits per view",
+      "geometry": "Views enter and leave along the reading direction.",
+      "semantics": "Focus moves to the new view and returns on pop; the back control is a real button.",
+      "crystal": "Enter and exit recipes, focus management",
+      "product": "The stack and routing",
+      "parity": [
+        "react-aria:RouterProvider"
+      ]
+    },
+    {
+      "id": "master-detail",
+      "name": "Master detail",
+      "anatomy": "A list beside the detail of its selection.",
+      "states": [
+        "at-rest",
+        "empty-selection",
+        "narrow"
+      ],
+      "material": "Frost list pane; Haze detail surface",
+      "geometry": "Collapses to a stack below the layout breakpoint.",
+      "semantics": "Selection moves focus to the detail only when the layout has collapsed.",
+      "crystal": "Pane materials, the collapse transition",
+      "product": "The data and routing",
+      "parity": [
+        "antd:Layout"
+      ]
+    },
+    {
+      "id": "split-view",
+      "name": "Split view",
+      "anatomy": "Two resizable regions.",
+      "states": [
+        "at-rest",
+        "resizing",
+        "collapsed",
+        "focus-visible"
+      ],
+      "material": "Inherits per pane",
+      "geometry": "The divider is a 44px target.",
+      "semantics": "The divider is a separator with a value, resizable by keyboard.",
+      "crystal": "Divider material, focus ring",
+      "product": "Panes and persistence",
+      "parity": [
+        "primereact:splitter",
+        "antd:Splitter"
+      ]
+    },
+    {
+      "id": "command-bar",
+      "name": "Command bar",
+      "anatomy": "A context-sensitive row of actions for the current view.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "overflowing"
+      ],
+      "material": "Resin plane",
+      "geometry": "Pill; overflow to a menu.",
+      "semantics": "role=\"toolbar\" with one tab stop.",
+      "crystal": "Material, overflow behaviour, press recipes",
+      "product": "Which commands apply",
+      "parity": [
+        "mui:Toolbar"
+      ]
+    },
+    {
+      "id": "status-bar",
+      "name": "Status bar",
+      "anatomy": "Persistent status at the edge of a view.",
+      "states": [
+        "at-rest",
+        "busy",
+        "error"
+      ],
+      "material": "Stone backing",
+      "geometry": "Full-bleed; text stays crisp.",
+      "semantics": "role=\"status\"; errors escalate to assertive.",
+      "crystal": "Material, status tokens",
+      "product": "What is reported",
+      "parity": [
+        "antd:Layout.Footer"
+      ]
+    },
+    {
+      "id": "workspace",
+      "name": "Workspace",
+      "anatomy": "A persistent multi-pane working area.",
+      "states": [
+        "at-rest",
+        "focus-mode"
+      ],
+      "material": "Plastic foundation with Frost panels",
+      "geometry": "Panels keep panel radius.",
+      "semantics": "Each pane is a labelled region; focus order follows the visual order.",
+      "crystal": "Panel materials, pane transitions",
+      "product": "The panes and their layout",
+      "parity": [
+        "antd:Layout"
+      ]
+    },
+    {
+      "id": "focus-mode",
+      "name": "Focus mode",
+      "anatomy": "Hides chrome to leave one task visible.",
+      "states": [
+        "off",
+        "on",
+        "transitioning"
+      ],
+      "material": "Inherits",
+      "geometry": "Chrome leaves along its own edge.",
+      "semantics": "Entering and leaving are announced; nothing becomes unreachable, only hidden.",
+      "crystal": "The enter and exit recipes",
+      "product": "What counts as chrome",
+      "parity": [
+        "mantine:AppShell"
+      ]
+    },
+    {
+      "id": "empty-screen",
+      "name": "Empty screen",
+      "anatomy": "A whole view with nothing in it yet.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Says what would be here and offers the action that creates it.",
+      "crystal": "Material, illustration treatment",
+      "product": "The copy and the action",
+      "parity": [
+        "antd:Empty",
+        "mantine:Center"
+      ]
+    },
+    {
+      "id": "error-screen",
+      "name": "Error screen",
+      "anatomy": "A view that failed, with a way forward.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "role=\"alert\"; states what failed and what to try, never only a code.",
+      "crystal": "Material, status tokens",
+      "product": "The error taxonomy",
+      "parity": [
+        "antd:Result"
+      ]
+    },
+    {
+      "id": "loading-screen",
+      "name": "Loading screen",
+      "anatomy": "A whole view still arriving.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Skeletons on the surrounding material",
+      "geometry": "Skeletons match the shape of what is coming.",
+      "semantics": "aria-busy on the region; the wait is announced once, not repeatedly.",
+      "crystal": "Skeleton material and the reduced-motion contract",
+      "product": "What is loading",
+      "parity": [
+        "antd:Skeleton",
+        "mantine:Skeleton"
+      ]
+    },
+    {
+      "id": "offline-screen",
+      "name": "Offline screen",
+      "anatomy": "Connectivity lost, with what still works.",
+      "states": [
+        "at-rest",
+        "reconnecting"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Announced politely; retry is a real button.",
+      "crystal": "Material, status tokens",
+      "product": "What is available offline",
+      "parity": [
+        "antd:Result"
+      ]
+    },
+    {
+      "id": "not-found-screen",
+      "name": "Not found screen",
+      "anatomy": "The requested thing does not exist.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "States what was not found and offers a route onward.",
+      "crystal": "Material",
+      "product": "The copy and the routes",
+      "parity": [
+        "antd:Result"
+      ]
+    },
+    {
+      "id": "permission-screen",
+      "name": "Permission screen",
+      "anatomy": "Access is denied or must be granted.",
+      "states": [
+        "denied",
+        "requesting"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Says which permission and why; the request is a real button.",
+      "crystal": "Material, status tokens",
+      "product": "The permission model",
+      "parity": [
+        "antd:Result"
+      ]
+    }
+  ]
+}

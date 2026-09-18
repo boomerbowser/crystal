@@ -1,0 +1,107 @@
+{
+  "id": "media",
+  "name": "Media",
+  "description": "Video, audio and galleries. Crystal named none of these before, and they are the clearest case of the parity requirement being about capability rather than nomenclature: a design system without a transport control leaves every product to invent one, and each invention re-solves captions, scrubbing and keyboard transport differently.",
+  "components": [
+    {
+      "id": "video-player",
+      "name": "Video player",
+      "anatomy": "A video surface with Crystal transport controls.",
+      "states": [
+        "idle",
+        "playing",
+        "paused",
+        "buffering",
+        "ended",
+        "focus-visible"
+      ],
+      "material": "Resin control bar over the video; Haze fills behind readable labels",
+      "geometry": "Control bar is a pill; every control reaches 44px.",
+      "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus.",
+      "crystal": "Control-bar material, transport geometry, the motion of showing and hiding controls",
+      "product": "Sources, captions, DRM, analytics",
+      "parity": [
+        "primereact:galleria",
+        "mui:CardMedia"
+      ]
+    },
+    {
+      "id": "audio-player",
+      "name": "Audio player",
+      "anatomy": "An audio transport with scrubbing and volume.",
+      "states": [
+        "idle",
+        "playing",
+        "paused",
+        "buffering",
+        "ended",
+        "focus-visible"
+      ],
+      "material": "Resin plane with Haze readable regions",
+      "geometry": "Pill; the scrubber is a slider with a 44px thumb.",
+      "semantics": "A real audio element. The scrubber is a slider announcing time, not a progress bar.",
+      "crystal": "Material, scrubber geometry, time formatting",
+      "product": "Sources, playlists, streaming",
+      "parity": [
+        "mantine:Audio"
+      ]
+    },
+    {
+      "id": "media-controls",
+      "name": "Media controls",
+      "anatomy": "The shared transport used by both players.",
+      "states": [
+        "idle",
+        "playing",
+        "paused",
+        "buffering",
+        "focus-visible"
+      ],
+      "material": "Resin plane",
+      "geometry": "Pill; 44px targets throughout.",
+      "semantics": "Each control is a button with a name; play and pause are one toggle with a pressed state.",
+      "crystal": "Materials, the press recipe on every control",
+      "product": "Which controls appear",
+      "parity": [
+        "mui:CardActions"
+      ]
+    },
+    {
+      "id": "gallery",
+      "name": "Gallery",
+      "anatomy": "A set of media with a full-screen viewer.",
+      "states": [
+        "at-rest",
+        "open",
+        "focus-visible"
+      ],
+      "material": "Thumbnails are Haze; the viewer sits on a Mirage scrim",
+      "geometry": "Thumbnails keep the content radius; the viewer is full-bleed within the scrim.",
+      "semantics": "The viewer is a dialog: focus is contained, Escape closes, and arrows move between items with position announced.",
+      "crystal": "Scrim material, thumbnail material, the transition between thumbnail and viewer",
+      "product": "The media set and its captions",
+      "parity": [
+        "primereact:galleria",
+        "mui:ImageList"
+      ]
+    },
+    {
+      "id": "lightbox",
+      "name": "Lightbox",
+      "anatomy": "A single media item enlarged over a scrim.",
+      "states": [
+        "hidden",
+        "open",
+        "focus-visible"
+      ],
+      "material": "Mirage scrim; the item sits above it",
+      "geometry": "The item keeps its own aspect; the scrim is full-bleed.",
+      "semantics": "A dialog. Zoom and pan are keyboard reachable, and closing returns focus to the thumbnail.",
+      "crystal": "Scrim material, the open and close motion",
+      "product": "The item and its caption",
+      "parity": [
+        "primereact:image"
+      ]
+    }
+  ]
+}

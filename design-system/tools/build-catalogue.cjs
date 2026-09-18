@@ -149,7 +149,12 @@ function manifest(categories, stats) {
         id: c.id,
         name: c.name,
         category: category.id,
-        status: Object.fromEntries(PLATFORMS.map((p) => [p, 'not-started'])),
+        /* A component the catalogue has refused carries that refusal through to
+           the manifest. Regenerating it as not-started would quietly turn a
+           decision back into a to-do, and the reason would be the first thing
+           lost. */
+        status: Object.fromEntries(PLATFORMS.map((p) => [p, c.status === 'not-applicable' ? 'not-applicable' : 'not-started'])),
+        ...(c.why ? { why: c.why } : {}),
       }))),
   };
 }

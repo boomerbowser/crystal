@@ -226,6 +226,22 @@
       "parity": [
         "mantine:FloatingWindow"
       ]
+    },
+    {
+      "id": "overlay-arrow",
+      "name": "Overlay arrow",
+      "anatomy": "The pointer that ties a popover or tooltip to its trigger.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Inherits its overlay",
+      "geometry": "Follows the overlay radius; flips with placement.",
+      "semantics": "Decorative: hidden from assistive technology.",
+      "crystal": "That it matches the overlay material exactly, including under reduced effects",
+      "product": "Placement",
+      "parity": [
+        "react-aria:OverlayArrow"
+      ]
     }
   ]
 }

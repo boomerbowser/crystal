@@ -264,6 +264,195 @@
       "parity": [
         "mui-x-charts:ChartsTooltip"
       ]
+    },
+    {
+      "id": "calendar-heatmap",
+      "name": "Calendar heatmap",
+      "anatomy": "Daily values across weeks and months.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Square cells with a hairline gap; week and month labels outside.",
+      "semantics": "Every cell states its date and value; intensity is paired with a number.",
+      "crystal": "Scale construction and the contrast floor at every step",
+      "product": "Data and bucketing",
+      "parity": [
+        "mui-x-charts:Heatmap"
+      ]
+    },
+    {
+      "id": "treemap",
+      "name": "Treemap",
+      "anatomy": "Nested proportions as nested rectangles.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Hairline separation; labels drop out rather than overflow.",
+      "semantics": "Navigable as a tree, with each node stating its share.",
+      "crystal": "Nesting depth rendering, label policy",
+      "product": "Hierarchy and values",
+      "parity": [
+        "recharts:Treemap"
+      ]
+    },
+    {
+      "id": "sankey",
+      "name": "Sankey",
+      "anatomy": "Flow between stages, with width as volume.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Link opacity keeps crossings readable.",
+      "semantics": "Each link states its endpoints and volume as text.",
+      "crystal": "Link material and opacity so overlaps stay legible",
+      "product": "Nodes and flows",
+      "parity": [
+        "recharts:Sankey"
+      ]
+    },
+    {
+      "id": "candlestick-chart",
+      "name": "Candlestick chart",
+      "anatomy": "Open, high, low and close per period.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Wick and body share one x centre; body has no radius.",
+      "semantics": "Each period is reachable and states all four values.",
+      "crystal": "Rise and fall colour from the status tokens, never red and green alone",
+      "product": "Data and period",
+      "parity": [
+        "mui-x-charts:BarChart"
+      ]
+    },
+    {
+      "id": "waterfall-chart",
+      "name": "Waterfall chart",
+      "anatomy": "Cumulative effect of sequential changes.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Connectors align with bar edges.",
+      "semantics": "Each step states its delta and the running total.",
+      "crystal": "Increase, decrease and total colour from the status tokens",
+      "product": "Steps and values",
+      "parity": [
+        "mui-x-charts:BarChart"
+      ]
+    },
+    {
+      "id": "bullet-chart",
+      "name": "Bullet chart",
+      "anatomy": "A measure against a target and qualitative ranges.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Haze range bands",
+      "geometry": "Single row; the target is a crisp marker, not a bar.",
+      "semantics": "role=\"meter\" with the target stated in text.",
+      "crystal": "Band materials, marker crispness",
+      "product": "Ranges and targets",
+      "parity": [
+        "mui-x-charts:Gauge"
+      ]
+    },
+    {
+      "id": "box-plot",
+      "name": "Box plot",
+      "anatomy": "Distribution summary: quartiles, median and outliers.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Whisker caps align with the box width.",
+      "semantics": "Each summary statistic is reachable as text; outliers are counted, not only drawn.",
+      "crystal": "Box and whisker geometry",
+      "product": "Data and outlier rule",
+      "parity": [
+        "recharts:Scatter"
+      ]
+    },
+    {
+      "id": "histogram",
+      "name": "Histogram",
+      "anatomy": "Frequency across bins.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Bins meet without gaps; the value end keeps a small radius.",
+      "semantics": "Bin bounds and counts are text.",
+      "crystal": "Bin geometry, series colour",
+      "product": "Bin width and range",
+      "parity": [
+        "mui-x-charts:BarChart"
+      ]
+    },
+    {
+      "id": "geo-map",
+      "name": "Geographic map",
+      "anatomy": "Values by region on a projected map.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Region borders are hairlines in the rim colour.",
+      "semantics": "Regions are reachable by keyboard and state their name and value; a table equivalent is required.",
+      "crystal": "Scale construction, border treatment, contrast floor",
+      "product": "Projection, topology, and the data join",
+      "parity": [
+        "recharts:Customized"
+      ]
+    },
+    {
+      "id": "network-graph",
+      "name": "Network graph",
+      "anatomy": "Nodes and the edges between them.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Haze node fills",
+      "geometry": "Node size is a scale; edges are hairlines.",
+      "semantics": "Nodes are reachable by keyboard; each states its degree and neighbours.",
+      "crystal": "Node material, edge treatment, focus ring on a node",
+      "product": "Layout algorithm and data",
+      "parity": [
+        "primereact:organizationchart"
+      ]
     }
   ]
 }

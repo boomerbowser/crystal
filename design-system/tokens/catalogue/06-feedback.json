@@ -313,6 +313,26 @@
       "parity": [
         "primereact:metergroup"
       ]
+    },
+    {
+      "id": "banner",
+      "name": "Banner",
+      "anatomy": "A full-width message pinned to the top of a region.",
+      "states": [
+        "hidden",
+        "shown",
+        "dismissed",
+        "focus-visible"
+      ],
+      "material": "Haze fill with a status accent",
+      "geometry": "Full-bleed within its region; the dismiss control is a 44px pill.",
+      "semantics": "role=\"status\" for information, role=\"alert\" for urgency. Dismissal returns focus sensibly.",
+      "crystal": "Material, status colour from the status tokens, entry and exit motion",
+      "product": "Copy, urgency, and whether it persists",
+      "parity": [
+        "antd:Alert.Banner",
+        "mantine:Notification"
+      ]
     }
   ]
 }

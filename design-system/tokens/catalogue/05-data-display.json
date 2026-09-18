@@ -661,6 +661,120 @@
       "parity": [
         "primereact:overlaybadge"
       ]
+    },
+    {
+      "id": "navigation-tree",
+      "name": "Navigation tree",
+      "anatomy": "A tree whose items are navigation destinations rather than data.",
+      "states": [
+        "at-rest",
+        "expanded",
+        "current",
+        "focus-visible"
+      ],
+      "material": "Haze rows",
+      "geometry": "Indentation per level; rows reach 44px.",
+      "semantics": "A tree with aria-current on the active destination; expansion is announced.",
+      "crystal": "Row material, expansion motion, current marking by label weight",
+      "product": "The destination set and routing",
+      "parity": [
+        "react-aria:NavigationTree"
+      ]
+    },
+    {
+      "id": "resizable-table",
+      "name": "Resizable table",
+      "anatomy": "A table whose columns can be resized by pointer and keyboard.",
+      "states": [
+        "at-rest",
+        "resizing",
+        "focus-visible"
+      ],
+      "material": "Inherits the table surface",
+      "geometry": "The resizer is a 44px target that does not shift the column it borders.",
+      "semantics": "The resizer is a slider: arrow keys resize, and the new width is announced.",
+      "crystal": "Resizer affordance, focus ring, live layout while dragging",
+      "product": "Which columns resize, and persistence",
+      "parity": [
+        "react-aria:ResizableTableContainer",
+        "mui-x-data-grid:GridColumnResizer"
+      ]
+    },
+    {
+      "id": "stat-card",
+      "name": "Stat card",
+      "anatomy": "A single figure with its label, trend and period.",
+      "states": [
+        "at-rest",
+        "loading",
+        "empty"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "The figure and its trend are one readable sentence, not a number beside an arrow.",
+      "crystal": "Material, figure typography, trend colour from the status tokens",
+      "product": "The data and its period",
+      "parity": [
+        "mantine:Card",
+        "antd:Statistic"
+      ]
+    },
+    {
+      "id": "kpi-tile",
+      "name": "KPI tile",
+      "anatomy": "A stat card with a target and progress toward it.",
+      "states": [
+        "at-rest",
+        "on-target",
+        "off-target",
+        "loading"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Target attainment is stated in words as well as shown.",
+      "crystal": "Material, progress rendering, status colour",
+      "product": "Targets and thresholds",
+      "parity": [
+        "antd:Statistic",
+        "primereact:card"
+      ]
+    },
+    {
+      "id": "trend-indicator",
+      "name": "Trend indicator",
+      "anatomy": "Direction and magnitude of a change.",
+      "states": [
+        "up",
+        "down",
+        "flat"
+      ],
+      "material": "Inherits",
+      "geometry": "Sits inline with the figure it qualifies.",
+      "semantics": "Direction is carried by a word and a symbol, never by colour alone.",
+      "crystal": "Status colour, symbol pairing",
+      "product": "What counts as a meaningful change",
+      "parity": [
+        "antd:Statistic",
+        "mantine:Text"
+      ]
+    },
+    {
+      "id": "delta-badge",
+      "name": "Delta badge",
+      "anatomy": "A compact signed change.",
+      "states": [
+        "positive",
+        "negative",
+        "neutral"
+      ],
+      "material": "Haze fill",
+      "geometry": "Pill.",
+      "semantics": "The sign is a character, not a colour.",
+      "crystal": "Status tokens, pill geometry",
+      "product": "Formatting and precision",
+      "parity": [
+        "antd:Tag"
+      ]
     }
   ]
 }

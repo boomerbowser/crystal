@@ -341,6 +341,45 @@
       "parity": [
         "mantine:TableOfContents"
       ]
+    },
+    {
+      "id": "menubar",
+      "name": "Menubar",
+      "anatomy": "A horizontal bar of menu triggers, each opening its own menu.",
+      "states": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "material": "Bar inherits; menus are Frost",
+      "geometry": "Triggers are pills; menus keep panel radius.",
+      "semantics": "Menubar semantics: arrows move between triggers, Home and End jump, typeahead selects.",
+      "crystal": "Materials, open and close motion, focus handling",
+      "product": "Menu structure and actions",
+      "parity": [
+        "react-aria:Menu",
+        "primereact:menubar",
+        "antd:Menu"
+      ]
+    },
+    {
+      "id": "submenu",
+      "name": "Submenu",
+      "anatomy": "A menu opened from an item inside another menu.",
+      "states": [
+        "closed",
+        "open",
+        "focus-visible"
+      ],
+      "material": "Frost panel",
+      "geometry": "Offset from its parent item; flips at the viewport edge.",
+      "semantics": "The parent item carries aria-haspopup and aria-expanded; the submenu is reachable by arrow key and closes with Escape without closing its parent.",
+      "crystal": "Panel material, stagger, edge flipping",
+      "product": "Nesting depth and content",
+      "parity": [
+        "react-aria:SubmenuTrigger",
+        "primereact:tieredmenu"
+      ]
     }
   ]
 }

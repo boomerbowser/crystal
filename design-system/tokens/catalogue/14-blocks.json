@@ -1,0 +1,395 @@
+{
+  "id": "blocks",
+  "name": "Blocks",
+  "description": "Composed arrangements that solve a recognisable product problem: a dashboard shell, a checkout, a player, a storefront. Kept as their own tier rather than mixed into the components, because a component is a primitive with one job and a contract, while a block is opinionated by design — and a design system that cannot tell the two apart ships opinions as if they were primitives. Benchmarked against Tailwind UI, Mantine UI, Ant Design Pro, MUI Templates and PrimeBlocks.",
+  "components": [
+    {
+      "id": "dashboard-shell",
+      "name": "Dashboard shell",
+      "anatomy": "Header, navigation rail, content grid and status bar.",
+      "states": [
+        "at-rest",
+        "collapsed",
+        "narrow"
+      ],
+      "material": "Plastic foundation, Frost chrome, Resin actions",
+      "geometry": "Panel radius throughout; safe areas respected.",
+      "semantics": "Landmarks in place: banner, navigation, main, contentinfo. One main.",
+      "crystal": "Region materials and elevation ordering",
+      "product": "Navigation model and routing",
+      "parity": [
+        "antd-pro:ProLayout",
+        "mui-templates:Dashboard"
+      ]
+    },
+    {
+      "id": "metrics-row",
+      "name": "Metrics row",
+      "anatomy": "A row of KPI tiles that reflows by container width.",
+      "states": [
+        "at-rest",
+        "loading",
+        "empty"
+      ],
+      "material": "Inherits from its tiles",
+      "geometry": "Gap from the scale.",
+      "semantics": "A labelled list of figures.",
+      "crystal": "Reflow behaviour",
+      "product": "Which metrics",
+      "parity": [
+        "antd-pro:StatisticCard"
+      ]
+    },
+    {
+      "id": "analytics-panel",
+      "name": "Analytics panel",
+      "anatomy": "A chart with its controls, legend and range picker.",
+      "states": [
+        "at-rest",
+        "loading",
+        "empty",
+        "error"
+      ],
+      "material": "Haze panel on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "The chart carries a table equivalent; controls are real controls.",
+      "crystal": "Panel material, control geometry",
+      "product": "The data and the ranges",
+      "parity": [
+        "antd-pro:ChartCard",
+        "mui-templates:Analytics"
+      ]
+    },
+    {
+      "id": "data-table-block",
+      "name": "Data table block",
+      "anatomy": "A table with toolbar, filters, bulk actions and pagination.",
+      "states": [
+        "at-rest",
+        "loading",
+        "empty",
+        "selecting",
+        "error"
+      ],
+      "material": "Table surface with Frost overlays",
+      "geometry": "Toolbar controls are pills; the table keeps its own surface.",
+      "semantics": "Selection count is announced; bulk actions describe what they will affect.",
+      "crystal": "Surfaces, selection treatment, the motion of entering bulk mode",
+      "product": "Data, filters, and what the actions do",
+      "parity": [
+        "antd-pro:ProTable",
+        "mui-x-data-grid:DataGrid"
+      ]
+    },
+    {
+      "id": "crud-form-block",
+      "name": "CRUD form block",
+      "anatomy": "A create or edit form with sections, validation and submit.",
+      "states": [
+        "at-rest",
+        "validating",
+        "submitting",
+        "saved",
+        "error"
+      ],
+      "material": "Haze sections in a Frost panel",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Errors summarise at the top and link to their fields; submission state is announced.",
+      "crystal": "Section materials, field recipes, the submit transition",
+      "product": "The schema and the mutation",
+      "parity": [
+        "antd-pro:ProForm"
+      ]
+    },
+    {
+      "id": "settings-block",
+      "name": "Settings block",
+      "anatomy": "Grouped preferences with immediate or deferred save.",
+      "states": [
+        "at-rest",
+        "dirty",
+        "saving",
+        "saved"
+      ],
+      "material": "Haze groups",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Each group is a labelled region; unsaved changes are announced before navigation.",
+      "crystal": "Group material, the save transition",
+      "product": "Which settings, and when they apply",
+      "parity": [
+        "antd-pro:ProForm"
+      ]
+    },
+    {
+      "id": "auth-block",
+      "name": "Auth block",
+      "anatomy": "Sign in, register, reset and verification.",
+      "states": [
+        "at-rest",
+        "submitting",
+        "error",
+        "locked"
+      ],
+      "material": "Haze card on the Plastic foundation",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Real form semantics with autocomplete tokens; failures never reveal which factor was wrong.",
+      "crystal": "Card material, field recipes",
+      "product": "The auth provider and its policy",
+      "parity": [
+        "mui-templates:SignIn",
+        "mantine-ui:Authentication"
+      ]
+    },
+    {
+      "id": "profile-block",
+      "name": "Profile block",
+      "anatomy": "Identity, avatar, contact details and account actions.",
+      "states": [
+        "at-rest",
+        "editing",
+        "saving"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Destructive actions confirm and say what they remove.",
+      "crystal": "Material, avatar geometry",
+      "product": "The profile model",
+      "parity": [
+        "antd-pro:ProDescriptions"
+      ]
+    },
+    {
+      "id": "activity-feed",
+      "name": "Activity feed",
+      "anatomy": "Chronological events with actors and actions.",
+      "states": [
+        "at-rest",
+        "loading",
+        "empty",
+        "live"
+      ],
+      "material": "Haze rows",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Live updates are announced politely and never steal focus.",
+      "crystal": "Row material, the insert motion",
+      "product": "The event model",
+      "parity": [
+        "antd:Timeline",
+        "mantine:Timeline"
+      ]
+    },
+    {
+      "id": "notification-centre",
+      "name": "Notification centre",
+      "anatomy": "Grouped notifications with read state and actions.",
+      "states": [
+        "at-rest",
+        "unread",
+        "empty",
+        "focus-visible"
+      ],
+      "material": "Frost panel with Haze rows",
+      "geometry": "Panel radius; rows reach 44px.",
+      "semantics": "Unread count is announced; marking read is undoable.",
+      "crystal": "Panel and row materials, the read transition",
+      "product": "The notification model",
+      "parity": [
+        "antd:Notification"
+      ]
+    },
+    {
+      "id": "player-shell",
+      "name": "Player shell",
+      "anatomy": "A media surface with transport, queue and metadata.",
+      "states": [
+        "idle",
+        "playing",
+        "paused",
+        "buffering",
+        "full-screen"
+      ],
+      "material": "Resin transport over the media; Haze metadata",
+      "geometry": "Transport is a pill; controls reach 44px.",
+      "semantics": "Real media elements; captions and their state announced; transport reachable by keyboard.",
+      "crystal": "Transport material, the show and hide motion",
+      "product": "Sources, queue, DRM",
+      "parity": [
+        "primereact:galleria"
+      ]
+    },
+    {
+      "id": "playlist-block",
+      "name": "Playlist block",
+      "anatomy": "An ordered, reorderable queue with now-playing state.",
+      "states": [
+        "at-rest",
+        "playing",
+        "dragging",
+        "focus-visible"
+      ],
+      "material": "Haze rows",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Reorder works by keyboard; the now-playing row is aria-current.",
+      "crystal": "Row material, the drag lift and settle",
+      "product": "The queue model",
+      "parity": [
+        "react-aria:GridList"
+      ]
+    },
+    {
+      "id": "storefront-block",
+      "name": "Storefront block",
+      "anatomy": "Product grid with filters, sort and pagination.",
+      "states": [
+        "at-rest",
+        "loading",
+        "empty",
+        "filtering"
+      ],
+      "material": "Inherits from its cards and panels",
+      "geometry": "Grid gap from the scale; reflows by container width.",
+      "semantics": "Result count is announced on filter change; the grid is a labelled list.",
+      "crystal": "Card and panel materials, the filter transition",
+      "product": "Catalogue and facets",
+      "parity": [
+        "primeblocks:ecommerce"
+      ]
+    },
+    {
+      "id": "product-detail-block",
+      "name": "Product detail block",
+      "anatomy": "Gallery, variants, price, stock and purchase action.",
+      "states": [
+        "at-rest",
+        "unavailable",
+        "adding"
+      ],
+      "material": "Inherits from its parts",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Variant changes update price and stock together, and say so.",
+      "crystal": "Composition of materials, the add-to-cart transition",
+      "product": "The product model",
+      "parity": [
+        "primeblocks:ecommerce"
+      ]
+    },
+    {
+      "id": "checkout-block",
+      "name": "Checkout block",
+      "anatomy": "Steps, address, shipping, payment and the order summary.",
+      "states": [
+        "at-rest",
+        "validating",
+        "submitting",
+        "error"
+      ],
+      "material": "Haze sections in a Frost panel",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Each step is a labelled region; errors summarise and link; raw card data never touches this component.",
+      "crystal": "Section materials, step transitions",
+      "product": "Providers, tax, and the order model",
+      "parity": [
+        "primeblocks:ecommerce",
+        "mui-templates:Checkout"
+      ]
+    },
+    {
+      "id": "cart-drawer",
+      "name": "Cart drawer",
+      "anatomy": "The basket as a drawer, with items, totals and checkout.",
+      "states": [
+        "closed",
+        "open",
+        "updating",
+        "empty"
+      ],
+      "material": "Frost drawer with Haze rows",
+      "geometry": "Drawer keeps panel radius on its inner edge.",
+      "semantics": "Opening moves focus in and returns it on close; total changes are announced.",
+      "crystal": "Drawer material, the enter and exit recipes",
+      "product": "The cart model",
+      "parity": [
+        "antd:Drawer"
+      ]
+    },
+    {
+      "id": "pricing-block",
+      "name": "Pricing block",
+      "anatomy": "Plan comparison with features and a call to action.",
+      "states": [
+        "at-rest",
+        "recommended",
+        "focus-visible"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "The recommended plan is stated in words, not only styled.",
+      "crystal": "Card materials, emphasis treatment",
+      "product": "Plans and their features",
+      "parity": [
+        "mantine-ui:Pricing"
+      ]
+    },
+    {
+      "id": "onboarding-block",
+      "name": "Onboarding block",
+      "anatomy": "A guided first-run sequence with progress.",
+      "states": [
+        "at-rest",
+        "active",
+        "complete",
+        "skipped"
+      ],
+      "material": "Frost panel over a Mirage scrim",
+      "geometry": "Panel radius; the highlight follows the target radius.",
+      "semantics": "Escapable at every step; progress announced; focus moves with the step.",
+      "crystal": "Panel and scrim materials, step motion, focus management",
+      "product": "The steps and their copy",
+      "parity": [
+        "antd:Tour"
+      ]
+    },
+    {
+      "id": "search-block",
+      "name": "Search block",
+      "anatomy": "Search with suggestions, recent queries and results.",
+      "states": [
+        "at-rest",
+        "open",
+        "loading",
+        "empty",
+        "focus-visible"
+      ],
+      "material": "Frost overlay with Haze rows",
+      "geometry": "Overlay keeps panel radius; rows reach 44px.",
+      "semantics": "A combobox: results are announced by count, and arrow keys move without losing the typed value.",
+      "crystal": "Overlay material, the open motion, row treatment",
+      "product": "The search backend and ranking",
+      "parity": [
+        "mantine:Spotlight",
+        "primereact:autocomplete"
+      ]
+    },
+    {
+      "id": "editor-block",
+      "name": "Editor block",
+      "anatomy": "A rich text surface with toolbar, and save state.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "dirty",
+        "saving",
+        "saved"
+      ],
+      "material": "Haze surface in a Frost frame",
+      "geometry": "Toolbar controls are pills; the surface keeps the content radius.",
+      "semantics": "The toolbar is a real toolbar with one tab stop; formatting state is announced.",
+      "crystal": "Surface and toolbar materials, the save transition",
+      "product": "The editor engine and its schema",
+      "parity": [
+        "primereact:editor",
+        "mantine:RichTextEditor"
+      ]
+    }
+  ]
+}

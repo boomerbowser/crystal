@@ -131,6 +131,175 @@
       "parity": [
         "mantine:NumberFormatter"
       ]
+    },
+    {
+      "id": "display",
+      "name": "Display",
+      "anatomy": "The largest type step, for a single statement per view.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Inherits",
+      "geometry": "Tightest tracking of the scale; one line where possible.",
+      "semantics": "Exactly one per view, and it is the h1 unless the page says otherwise.",
+      "crystal": "The step, tracking and leading",
+      "product": "The words",
+      "parity": [
+        "mantine:Title",
+        "mui:Typography"
+      ]
+    },
+    {
+      "id": "heading",
+      "name": "Heading",
+      "anatomy": "Section headings, levels two to six.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Inherits",
+      "geometry": "Step per level; leading tightens as size grows.",
+      "semantics": "The level is the document structure, never chosen for size — size comes from the step.",
+      "crystal": "The scale and its tracking",
+      "product": "Level and wording",
+      "parity": [
+        "mantine:Title",
+        "antd:Typography.Title"
+      ]
+    },
+    {
+      "id": "lead",
+      "name": "Lead",
+      "anatomy": "The standfirst paragraph beneath a title.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Inherits",
+      "geometry": "One step above body; measure capped for reading.",
+      "semantics": "A paragraph, not a heading.",
+      "crystal": "Step and measure",
+      "product": "The words",
+      "parity": [
+        "mantine:Text"
+      ]
+    },
+    {
+      "id": "prose-list",
+      "name": "Prose list",
+      "anatomy": "Ordered and unordered lists inside running text, with Crystal markers.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Inherits",
+      "geometry": "Marker inset follows the spacing scale; hanging indent preserved.",
+      "semantics": "Real ul and ol so the count and nesting are announced.",
+      "crystal": "Marker treatment, spacing, nesting rhythm",
+      "product": "Content and ordering",
+      "parity": [
+        "mantine:List",
+        "antd:Typography"
+      ]
+    },
+    {
+      "id": "code-block",
+      "name": "Code block",
+      "anatomy": "A multi-line code sample with optional highlighting.",
+      "states": [
+        "at-rest",
+        "copied",
+        "focus-visible"
+      ],
+      "material": "Haze fill with a crisp monospace face",
+      "geometry": "Content radius; the copy control is a pill.",
+      "semantics": "Focusable and scrollable by keyboard; the language is announced; the copy button says what it copied.",
+      "crystal": "Fill material, the monospace pairing, copy feedback motion",
+      "product": "Which highlighter, and the languages",
+      "parity": [
+        "mantine:CodeHighlight",
+        "primereact:editor"
+      ]
+    },
+    {
+      "id": "truncate",
+      "name": "Truncate",
+      "anatomy": "Clamps text to a line count with an accessible full value.",
+      "states": [
+        "clamped",
+        "expanded"
+      ],
+      "material": "Inherits",
+      "geometry": "Clamp by line count, never by pixel height.",
+      "semantics": "The full text remains available to assistive technology; expansion is a real control.",
+      "crystal": "The fade, if any, and the expand motion",
+      "product": "Line count and expansion policy",
+      "parity": [
+        "mantine:Spoiler",
+        "antd:Typography.Paragraph"
+      ]
+    },
+    {
+      "id": "cite",
+      "name": "Cite",
+      "anatomy": "An attribution attached to a quotation.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Inherits",
+      "geometry": "Sits beneath the quote at one step down.",
+      "semantics": "Uses cite, and is associated with its blockquote.",
+      "crystal": "Step and colour",
+      "product": "The attribution",
+      "parity": [
+        "mantine:Blockquote"
+      ]
+    },
+    {
+      "id": "abbreviation",
+      "name": "Abbreviation",
+      "anatomy": "An abbreviation with its expansion available.",
+      "states": [
+        "at-rest",
+        "focus-visible"
+      ],
+      "material": "Inherits",
+      "geometry": "No visual weight change; underline on hover only.",
+      "semantics": "Uses abbr with a title, and is focusable so the expansion is reachable without a pointer.",
+      "crystal": "The underline treatment",
+      "product": "The expansion text",
+      "parity": [
+        "antd:Typography.Text"
+      ]
+    },
+    {
+      "id": "text-balance",
+      "name": "Balanced text",
+      "anatomy": "Headings wrapped so lines are even rather than ragged.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Inherits",
+      "geometry": "Balances wrapping without changing the step.",
+      "semantics": "Purely visual: the text content is unchanged.",
+      "crystal": "Where balancing applies, and its fallback",
+      "product": "The words",
+      "parity": [
+        "mantine:Title"
+      ]
+    },
+    {
+      "id": "gradient-text",
+      "name": "Gradient text",
+      "anatomy": "Text filled with a palette gradient.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Palette gradient clipped to the glyphs",
+      "geometry": "No change to step or tracking.",
+      "semantics": "Contrast is checked against the surface at both gradient ends, and a solid fallback applies where the clip is unsupported.",
+      "crystal": "The gradient, and the contrast floor at every point",
+      "product": "Which text warrants it",
+      "parity": [
+        "mantine:Text"
+      ]
     }
   ]
 }

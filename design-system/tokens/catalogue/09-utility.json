@@ -301,6 +301,167 @@
       ],
       "status": "not-applicable",
       "why": "Crystal specifies edge treatment as the Resin optical rim. A second, unrelated mechanism for a moving border would contradict the material spec, and the ambient tier that would have owned it is deferred."
+    },
+    {
+      "id": "pressable",
+      "name": "Pressable",
+      "anatomy": "Makes any element respond to press across pointer, keyboard and touch.",
+      "states": [
+        "at-rest",
+        "pressed",
+        "focus-visible",
+        "disabled"
+      ],
+      "material": "None of its own",
+      "geometry": "Enforces the 44px minimum target on whatever it wraps.",
+      "semantics": "Gives its child button semantics unless told otherwise; never swallows keyboard activation.",
+      "crystal": "That the press recipe plays and the focus ring appears",
+      "product": "What the press does",
+      "parity": [
+        "react-aria:Pressable"
+      ]
+    },
+    {
+      "id": "focusable",
+      "name": "Focusable",
+      "anatomy": "Makes any element focusable with Crystal's focus ring.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "disabled"
+      ],
+      "material": "None of its own",
+      "geometry": "Focus ring at the documented offset.",
+      "semantics": "Adds a tab stop without inventing a role.",
+      "crystal": "The focus recipe",
+      "product": "Why the element is focusable",
+      "parity": [
+        "react-aria:Focusable"
+      ]
+    },
+    {
+      "id": "drag-handle",
+      "name": "Drag handle",
+      "anatomy": "Click-and-drag reordering and transfer, by pointer and by keyboard.",
+      "states": [
+        "at-rest",
+        "dragging",
+        "drop-target",
+        "focus-visible"
+      ],
+      "material": "Resin while lifted; Haze drop indicator",
+      "geometry": "Handle is a 44px target; the lifted item keeps its own radius.",
+      "semantics": "Keyboard drag is required, not optional: Enter lifts, arrows move, Enter drops, Escape cancels. Every state is announced.",
+      "crystal": "Lift elevation, drop-indicator material, the motion of the lift and the settle",
+      "product": "What may be dragged where, and what a drop means",
+      "parity": [
+        "react-aria:useDragAndDrop",
+        "mui-x-tree-view:TreeItemDragAndDropOverlay"
+      ]
+    },
+    {
+      "id": "drop-indicator",
+      "name": "Drop indicator",
+      "anatomy": "Shows where a dragged item will land.",
+      "states": [
+        "hidden",
+        "shown",
+        "invalid-target"
+      ],
+      "material": "Haze line or fill",
+      "geometry": "Follows the gap between items rather than covering one.",
+      "semantics": "Announced as the drag moves, so a keyboard drag is followable without sight.",
+      "crystal": "Indicator material and motion",
+      "product": "Valid targets",
+      "parity": [
+        "react-aria:DropIndicator"
+      ]
+    },
+    {
+      "id": "virtualizer",
+      "name": "Virtualizer",
+      "anatomy": "Renders only what is near the viewport, for lists, grids and tables.",
+      "states": [
+        "at-rest",
+        "scrolling",
+        "loading"
+      ],
+      "material": "None of its own",
+      "geometry": "Preserves scroll position and item size across recycling.",
+      "semantics": "Keeps aria-setsize and aria-posinset correct, and never drops focus when a focused row recycles.",
+      "crystal": "Scroll surface, focus retention",
+      "product": "Row sizing strategy and data",
+      "parity": [
+        "react-aria:Virtualizer",
+        "primereact:virtualscroller"
+      ]
+    },
+    {
+      "id": "shared-element-transition",
+      "name": "Shared element transition",
+      "anatomy": "Carries one element between two views so it reads as the same object.",
+      "states": [
+        "idle",
+        "transitioning"
+      ],
+      "material": "Inherits",
+      "geometry": "The element keeps its own geometry through the transition.",
+      "semantics": "Removed entirely under reduced motion; never the only way a view change is signalled.",
+      "crystal": "Which recipes apply, and the reduced-motion contract",
+      "product": "Which elements are shared",
+      "parity": [
+        "react-aria:SharedElementTransition"
+      ]
+    },
+    {
+      "id": "toolbar",
+      "name": "Toolbar",
+      "anatomy": "A grouped set of controls with one tab stop.",
+      "states": [
+        "at-rest",
+        "focus-visible"
+      ],
+      "material": "Resin plane or inherits",
+      "geometry": "Controls are pills; the group reaches 44px.",
+      "semantics": "role=\"toolbar\": one tab stop, arrows move within, orientation declared.",
+      "crystal": "Material, grouping geometry, focus ring",
+      "product": "Which controls, and their order",
+      "parity": [
+        "react-aria:Toolbar",
+        "mui:Toolbar"
+      ]
+    },
+    {
+      "id": "router-provider",
+      "name": "Router provider",
+      "anatomy": "Hands the library the host application's navigation function.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "None",
+      "geometry": "None.",
+      "semantics": "Every link and navigable item routes through the host router rather than reloading the page.",
+      "crystal": "That navigation is consistent across every component that links",
+      "product": "Which router, and how it navigates",
+      "parity": [
+        "react-aria:RouterProvider"
+      ]
+    },
+    {
+      "id": "ssr-provider",
+      "name": "SSR provider",
+      "anatomy": "Keeps generated ids stable across server and client.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "None",
+      "geometry": "None.",
+      "semantics": "Prevents hydration mismatches in ids that label and describe controls.",
+      "crystal": "That labelling survives hydration",
+      "product": "Where it is mounted",
+      "parity": [
+        "react-aria:SSRProvider"
+      ]
     }
   ]
 }

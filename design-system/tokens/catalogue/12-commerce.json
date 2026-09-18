@@ -1,0 +1,450 @@
+{
+  "id": "commerce",
+  "name": "Commerce",
+  "description": "Functional e-commerce components. Crystal named none before, which left every store to reinvent a quantity stepper, a variant selector and a cart summary — and to re-solve availability, currency formatting and checkout validation each time. Payment is deliberately bounded: these components never handle raw card data, and defer to the host provider's own element.",
+  "components": [
+    {
+      "id": "price",
+      "name": "Price",
+      "anatomy": "A monetary amount with its currency and locale.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Inherits",
+      "geometry": "Tabular figures so a column of prices aligns.",
+      "semantics": "The formatted value is the text content; currency is stated, not implied by a symbol alone.",
+      "crystal": "Figure style and step",
+      "product": "Currency, locale, precision, tax display",
+      "parity": [
+        "antd:Statistic"
+      ]
+    },
+    {
+      "id": "price-range",
+      "name": "Price range",
+      "anatomy": "A from-to price, or a from price.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Inherits",
+      "geometry": "Matches price.",
+      "semantics": "Reads as a sentence rather than two numbers with a dash.",
+      "crystal": "Typography",
+      "product": "Range rules",
+      "parity": [
+        "antd:Statistic"
+      ]
+    },
+    {
+      "id": "discount-badge",
+      "name": "Discount badge",
+      "anatomy": "A reduction, as an amount or a percentage.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Haze fill with a status accent",
+      "geometry": "Pill.",
+      "semantics": "States what is reduced from what; a percentage alone is not a claim.",
+      "crystal": "Status tokens, pill geometry",
+      "product": "Discount rules and rounding",
+      "parity": [
+        "antd:Tag"
+      ]
+    },
+    {
+      "id": "quantity-stepper",
+      "name": "Quantity stepper",
+      "anatomy": "A bounded integer with decrement and increment.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "at-min",
+        "at-max",
+        "disabled"
+      ],
+      "material": "Resin shell with a Haze well",
+      "geometry": "Pill; both controls reach 44px.",
+      "semantics": "A spin button: the value is typable, and the bounds are announced when reached.",
+      "crystal": "Materials, press recipe on each control",
+      "product": "Bounds, step, stock rules",
+      "parity": [
+        "react-aria:NumberField",
+        "primereact:inputnumber"
+      ]
+    },
+    {
+      "id": "variant-selector",
+      "name": "Variant selector",
+      "anatomy": "Choice among product variants, with availability.",
+      "states": [
+        "at-rest",
+        "selected",
+        "unavailable",
+        "focus-visible"
+      ],
+      "material": "Haze option fills",
+      "geometry": "Options are pills; swatch variants are circles.",
+      "semantics": "Unavailable options stay perceivable and say why; selection is label weight, never a check mark.",
+      "crystal": "Option material, selection weight, unavailable treatment",
+      "product": "Variant axes and stock",
+      "parity": [
+        "mantine:SegmentedControl"
+      ]
+    },
+    {
+      "id": "stock-indicator",
+      "name": "Stock indicator",
+      "anatomy": "Availability, with urgency where it applies.",
+      "states": [
+        "in-stock",
+        "low",
+        "out-of-stock",
+        "backorder"
+      ],
+      "material": "Inherits",
+      "geometry": "Inline with the price or the action.",
+      "semantics": "Words carry the state; status colour reinforces it.",
+      "crystal": "Status tokens",
+      "product": "Thresholds and wording",
+      "parity": [
+        "antd:Tag"
+      ]
+    },
+    {
+      "id": "product-card",
+      "name": "Product card",
+      "anatomy": "One product: media, name, price, rating and a primary action.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "unavailable"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "The whole card is not a link; the name is, and the action is a button. One tab stop each.",
+      "crystal": "Material, media aspect, action geometry, hover recipe",
+      "product": "Which attributes appear",
+      "parity": [
+        "primereact:card",
+        "mantine:Card"
+      ]
+    },
+    {
+      "id": "product-gallery",
+      "name": "Product gallery",
+      "anatomy": "Product media with thumbnails and zoom.",
+      "states": [
+        "at-rest",
+        "zoomed",
+        "focus-visible"
+      ],
+      "material": "Haze thumbnails; Mirage scrim when enlarged",
+      "geometry": "Thumbnails keep the content radius; the viewer is full-bleed within the scrim.",
+      "semantics": "Arrow keys move between items with position announced; zoom is keyboard reachable.",
+      "crystal": "Scrim and thumbnail materials, the transition into the viewer",
+      "product": "The media set",
+      "parity": [
+        "primereact:galleria"
+      ]
+    },
+    {
+      "id": "cart-item",
+      "name": "Cart item",
+      "anatomy": "One line of a basket: product, quantity, price, remove.",
+      "states": [
+        "at-rest",
+        "updating",
+        "removed",
+        "focus-visible"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Removal is announced and undoable; quantity changes announce the new subtotal.",
+      "crystal": "Material, the update and remove motion",
+      "product": "Pricing and stock rules",
+      "parity": [
+        "antd:List.Item"
+      ]
+    },
+    {
+      "id": "cart-summary",
+      "name": "Cart summary",
+      "anatomy": "Subtotal, discounts, shipping, tax and total.",
+      "states": [
+        "at-rest",
+        "updating",
+        "empty"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "A description list, so each line is a labelled pair; the total is marked as such.",
+      "crystal": "Material, figure alignment, the motion of a changing total",
+      "product": "What the lines are and how they are computed",
+      "parity": [
+        "antd:Descriptions"
+      ]
+    },
+    {
+      "id": "coupon-input",
+      "name": "Coupon input",
+      "anatomy": "A code field with apply, validation and applied state.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "applying",
+        "applied",
+        "invalid"
+      ],
+      "material": "Haze well in a Resin shell",
+      "geometry": "Field and action share one pill row.",
+      "semantics": "Success and failure are announced; an applied code is removable.",
+      "crystal": "Materials, field-valid and field-invalid recipes",
+      "product": "Validation and stacking rules",
+      "parity": [
+        "antd:Input.Search"
+      ]
+    },
+    {
+      "id": "checkout-steps",
+      "name": "Checkout steps",
+      "anatomy": "Progress through a purchase.",
+      "states": [
+        "at-rest",
+        "current",
+        "complete",
+        "error",
+        "focus-visible"
+      ],
+      "material": "Haze step fills",
+      "geometry": "Steps are pills; connectors are hairlines.",
+      "semantics": "The current step is aria-current; completion is stated in words, and a check mark here means validated rather than selected.",
+      "crystal": "Step materials, connector treatment, the advance motion",
+      "product": "The steps and their validation",
+      "parity": [
+        "antd:Steps",
+        "mui:Stepper"
+      ]
+    },
+    {
+      "id": "payment-method",
+      "name": "Payment method",
+      "anatomy": "Choice among stored or new payment methods.",
+      "states": [
+        "at-rest",
+        "selected",
+        "invalid",
+        "focus-visible"
+      ],
+      "material": "Haze option fills",
+      "geometry": "Options keep the content radius; the selected one carries label weight.",
+      "semantics": "A radio group. Card fields are never reimplemented — the host supplies its provider element.",
+      "crystal": "Option material, selection, focus ring",
+      "product": "The provider, tokenisation, and PCI scope — this component never handles raw card data",
+      "parity": [
+        "antd:Radio.Group"
+      ]
+    },
+    {
+      "id": "address-form",
+      "name": "Address form",
+      "anatomy": "A locale-aware address, with the right fields per country.",
+      "states": [
+        "at-rest",
+        "validating",
+        "invalid",
+        "submitting"
+      ],
+      "material": "Haze wells in Resin shells",
+      "geometry": "Fields follow the input geometry.",
+      "semantics": "Field order, labels and required-ness change by country; postcode validation is per-locale, not one regular expression.",
+      "crystal": "Materials, validation recipes",
+      "product": "Countries supported and their field rules",
+      "parity": [
+        "antd:Form"
+      ]
+    },
+    {
+      "id": "order-summary",
+      "name": "Order summary",
+      "anatomy": "A completed or pending order, with items and totals.",
+      "states": [
+        "at-rest",
+        "pending",
+        "shipped",
+        "cancelled"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "Status is a word; the status colour reinforces it.",
+      "crystal": "Material, status tokens",
+      "product": "Order model and statuses",
+      "parity": [
+        "antd:Descriptions"
+      ]
+    },
+    {
+      "id": "shipping-selector",
+      "name": "Shipping selector",
+      "anatomy": "Delivery options with price and estimate.",
+      "states": [
+        "at-rest",
+        "selected",
+        "unavailable",
+        "focus-visible"
+      ],
+      "material": "Haze option fills",
+      "geometry": "Options keep the content radius.",
+      "semantics": "A radio group; each option states price and estimate together.",
+      "crystal": "Option material, selection weight",
+      "product": "Rates and estimates",
+      "parity": [
+        "antd:Radio.Group"
+      ]
+    },
+    {
+      "id": "delivery-estimate",
+      "name": "Delivery estimate",
+      "anatomy": "When something will arrive.",
+      "states": [
+        "at-rest",
+        "loading",
+        "unavailable"
+      ],
+      "material": "Inherits",
+      "geometry": "Inline.",
+      "semantics": "An absolute date, not only a relative phrase.",
+      "crystal": "Typography and colour",
+      "product": "Estimation and locale",
+      "parity": [
+        "antd:Typography"
+      ]
+    },
+    {
+      "id": "wishlist-button",
+      "name": "Wishlist button",
+      "anatomy": "Adds or removes an item from a saved list.",
+      "states": [
+        "at-rest",
+        "saved",
+        "pressed",
+        "focus-visible"
+      ],
+      "material": "Resin pill or icon button",
+      "geometry": "Pill; 44px target.",
+      "semantics": "A toggle with a pressed state and a name that says what it will do.",
+      "crystal": "Press recipe, the state-change recipe",
+      "product": "Persistence",
+      "parity": [
+        "mantine:ActionIcon"
+      ]
+    },
+    {
+      "id": "review",
+      "name": "Review",
+      "anatomy": "One review: rating, title, body, author and date.",
+      "states": [
+        "at-rest",
+        "expanded"
+      ],
+      "material": "Haze content fill on the surrounding material",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "The rating is text as well as stars.",
+      "crystal": "Material, rating rendering, expansion motion",
+      "product": "Moderation and sorting",
+      "parity": [
+        "primereact:rating"
+      ]
+    },
+    {
+      "id": "rating-summary",
+      "name": "Rating summary",
+      "anatomy": "Average rating with a distribution.",
+      "states": [
+        "at-rest",
+        "empty"
+      ],
+      "material": "Haze distribution bars",
+      "geometry": "Content radius; spacing from the scale.",
+      "semantics": "The average and the count are both stated; bars are labelled.",
+      "crystal": "Bar material, figure typography",
+      "product": "How the average is computed",
+      "parity": [
+        "primereact:rating"
+      ]
+    },
+    {
+      "id": "filter-panel",
+      "name": "Filter panel",
+      "anatomy": "Faceted filters with counts and clear-all.",
+      "states": [
+        "at-rest",
+        "applied",
+        "loading",
+        "focus-visible"
+      ],
+      "material": "Frost panel with Haze groups",
+      "geometry": "Panel radius; controls are pills.",
+      "semantics": "Applied filters are announced and individually removable; counts update politely.",
+      "crystal": "Panel and group materials, the apply and clear motion",
+      "product": "The facets and their counts",
+      "parity": [
+        "antd:Collapse",
+        "primereact:accordion"
+      ]
+    },
+    {
+      "id": "sort-select",
+      "name": "Sort select",
+      "anatomy": "Ordering for a product list.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "open"
+      ],
+      "material": "Haze well in a Resin shell",
+      "geometry": "Pill.",
+      "semantics": "A select whose current ordering is announced on change.",
+      "crystal": "Materials, open motion",
+      "product": "The orderings offered",
+      "parity": [
+        "antd:Select"
+      ]
+    },
+    {
+      "id": "compare-table",
+      "name": "Compare table",
+      "anatomy": "Products side by side by attribute.",
+      "states": [
+        "at-rest",
+        "focus-visible"
+      ],
+      "material": "Inherits the table surface",
+      "geometry": "Sticky first column and header; differences are marked, not only coloured.",
+      "semantics": "A real table with row and column headers; differences are stated in text.",
+      "crystal": "Table surface, sticky treatment, difference marking",
+      "product": "Which attributes compare",
+      "parity": [
+        "antd:Table"
+      ]
+    },
+    {
+      "id": "recently-viewed",
+      "name": "Recently viewed",
+      "anatomy": "A horizontal strip of previously seen products.",
+      "states": [
+        "at-rest",
+        "empty",
+        "focus-visible"
+      ],
+      "material": "Inherits from its cards",
+      "geometry": "Scrolls within its own container; never the page.",
+      "semantics": "A labelled list; the strip is keyboard scrollable.",
+      "crystal": "Scroll surface, edge fade from the surrounding material",
+      "product": "Retention and privacy policy",
+      "parity": [
+        "primereact:carousel"
+      ]
+    }
+  ]
+}
