@@ -108,3 +108,27 @@ wiring instruction and was never acted on.
 - Ambient motion is a **capability tier, not a default**: declared, opt-in, and degrading
   to static. It never runs on a surface the user is reading, and it is the first thing
   `prefers-reduced-motion` removes.
+
+## R16 — generate what is hand-maintained (2026-09-17)
+
+Meridian asked whether any other parts of the documentation were hand-maintained but would
+be better generated. Seven were.
+
+| Was hand-maintained | Now generated from |
+| --- | --- |
+| `motion-components.md` executable recipe catalog (54 rows) | `tokens/motion-recipes.json` |
+| `materials.md` recommended defaults | `semantic.range.*` and `semantic.default.*` |
+| `materials.md` material recipe values (new) | resolved values in `tokens/crystal.json` |
+| `colors.md` product palettes | `primitive.palette.*` |
+| `components.md` focus layer table | `--cr-focus-ring` in `assets/controls.css` |
+| `accessibility.md` contrast figures | `validation/token-checks.json` |
+| `icons.md` counts, sources and grid | `assets/icons/manifest.json` |
+
+Two were provably drifting already: the recipe catalogue had fallen five recipes behind,
+and the focus table had been hand-corrected the same day when the halo spread changed.
+
+**Deliberately not generated:** prose that quotes a value in context. Generating those
+inline would wreck the writing. `tools/validate-docs.cjs` protects them from the other
+direction instead — every material recipe value, both engine versions, the recipe and
+category counts and the contrast total must appear in the chapter that documents them,
+so a token that moves without its prose fails `npm test`.

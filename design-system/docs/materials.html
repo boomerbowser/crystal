@@ -4,32 +4,76 @@
 <p>The approved Crystal material studies define the intended appearance, not merely inspiration. Every implementation must preserve their distinct opacity and diffusion, transmitted color, optical contours, elevation, soft reading-fill edges and crisp text. If a component or material departs from those qualities without an approved reason, treat it as a defect. Check actual UI screenshots as well as tokens. Dark mode and alternate palettes must preserve the same relationships; documented accessibility fallbacks remain required.</p>
 <h2 id="recommended-defaults">Recommended defaults</h2>
 <p>Use these settings as Crystal’s recommended starting point across products:</p>
+<!-- generated:defaults -->
+
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
 <tr>
 <th>Setting</th>
 <th>Recommended default</th>
+<th>Valid range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Color atmosphere</td>
 <td>90%</td>
+<td>15% – 90%</td>
 </tr>
 <tr>
 <td>Frost base tint</td>
 <td>35%</td>
+<td>35% – 85%</td>
 </tr>
 <tr>
 <td>Elevation</td>
 <td>125%</td>
+<td>60% – 150%</td>
 </tr>
 <tr>
 <td>Corner radius</td>
 <td>28px</td>
+<td>14px – 28px</td>
+</tr>
+<tr>
+<td>Motion speed</td>
+<td>1×</td>
+<td>0.25× – 2×</td>
+</tr>
+<tr>
+<td>Palette</td>
+<td><code>prism</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Mode</td>
+<td><code>light</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Density</td>
+<td><code>comfortable</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Font</td>
+<td><code>manrope</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Reduced</td>
+<td><code>false</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Reduce motion</td>
+<td><code>false</code></td>
+<td>—</td>
 </tr>
 </tbody>
 </table></div>
+<!-- /generated:defaults -->
+
 <p>The canonical tokens, generated theme and playground’s <strong>Reset</strong> action use these values. Saved user preferences remain customizable. Frost’s existing recipe adds 10 percentage points to its base tint, so the recommended 35% base produces a 45% surface fill. Resin remains fixed at 20% fill opacity; opaque accessibility fallbacks take precedence.</p>
 <h2 id="material-family-and-inspiration">Material family and inspiration</h2>
 <p>Crystal has <strong>six first-class materials: Plastic, Frost, Resin, Haze, Stone, and Mirage</strong>. Each has its own named recipe and reusable primitive. Plastic → Frost → Resin is the main spatial stack; Haze and Stone are readable fills within components, while Mirage separates a modal from the rest of the interface.</p>
@@ -120,6 +164,55 @@
 <p>Resin renders at a fixed 20% fill opacity in both modes, independent of the Frost base tint control. Frost retains its existing recipe (45% fill from the recommended 35% base). Text, rims and shadows retain their opacity. Label protection is 55% in light mode and 60% in dark mode, with the dark backing strengthened to preserve contrast over bright backdrops at this lower glass opacity. Opaque accessibility fallbacks remain fully opaque. This deliberately differs from the original Gather recipes preserved in <code>reference/gather-crystal-recipes.json</code>.</p>
 <p>The persistent Frost task frame is an intentional Crystal hybrid, not a claim of strict Microsoft placement conformance. One frame can contain several softened content wells; avoid nesting independently blurred panes. All three live scenes show that same stack.</p>
 <p>Do not apply opacity to an entire pane containing text. Do not stack backdrop blur on adjacent cards or every message; the content recipe feathers only its own background paint. Do not sample the desktop, capture other windows or duplicate private content into canvases to create a refraction effect. This implementation provides CSS blur, tint, texture, highlights and shadows; it does not implement native optical lensing.</p>
+<h2 id="material-recipe-values">Material recipe values</h2>
+<p>The numbers every material resolves to, generated from <code>tokens/crystal.json</code>. This table
+is the authority; where the prose above describes a technique, these are the values that
+technique uses.</p>
+<!-- generated:material-recipes -->
+
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Material</th>
+<th>Diffusion</th>
+<th>Fill</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Plastic</strong></td>
+<td>Opaque. No backdrop filter at all.</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Frost</strong></td>
+<td>40px blur, 125% saturation</td>
+<td>grain 0.045</td>
+</tr>
+<tr>
+<td><strong>Resin</strong></td>
+<td>20px blur, 165% saturation</td>
+<td>fixed 20% fill, both modes</td>
+</tr>
+<tr>
+<td><strong>Haze</strong></td>
+<td>80% content fill</td>
+<td>1.95px feather</td>
+</tr>
+<tr>
+<td><strong>Stone</strong></td>
+<td>55% light / 60% dark</td>
+<td>1.95px feather</td>
+</tr>
+<tr>
+<td><strong>Mirage</strong></td>
+<td>28px blur, 165% saturation, 88% brightness</td>
+<td>#111525 at 38%; 64% without backdrop filtering</td>
+</tr>
+</tbody>
+</table></div>
+<!-- /generated:material-recipes -->
+
 <h2 id="haze-integrated-reading-surfaces">Haze: integrated reading surfaces</h2>
 <p>Haze is Crystal’s named content material, previously called Solid. Its normal recipe now uses <strong>80% fill opacity</strong> and a <strong>1.95px edge feather</strong>, so the underlying Frost or Resin contributes color rather than ending abruptly at a sheet of blank fill. Plastic → Frost → Resin remains the governing hierarchy; a reading fill within a Resin component is part of that component.</p>
 <p>The <code>.cr-haze</code>, <code>.cr-well</code>, <code>.cr-bubble</code>, <code>.cr-content-fill</code> and <code>.cr-dialog</code> primitives paint the fill on an isolated, non-interactive <code>::before</code> layer. Only that paint layer receives <code>filter: blur(1.95px)</code>; text, icons, selection, hit areas and focus outlines stay sharp and fully opaque. The broad interior remains at 80%, while the narrow perimeter feathers into its surroundings. Keep at least <strong>12px of padding</strong> between readable content and the feathered edge, including around rounded corners. Do not clip the feather with an ancestor’s overflow unless deliberately necessary for media.</p>

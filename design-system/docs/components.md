@@ -104,14 +104,23 @@ Focus uses an immediate 2px primary-color core at a 3px offset, surrounded by a 
 
 A `.cr-indicator` is a 20px circular Resin surface with a 3px-inset 80% Haze fill and a 1px feather on that fill. Field badges are 24px. Their foreground remains crisp and uses the tested body ink. They sit beside the content, never over text or a native select arrow. These are informational, non-interactive marks, not small click targets.
 
-| State | Badge symbol | Programmatic source |
-| --- | --- | --- |
-| Selected or toggled | Leading rail, plus label weight | `aria-selected`, `aria-pressed` or `aria-checked` |
-| Current location | Filled circle | `aria-current`, excluding `false` |
-| Required field | Asterisk | Native `required` or `aria-required` |
-| Invalid field | Exclamation | `aria-invalid`, with the existing visible error message |
-| Editable field, idle / focused | Hollow / filled circle | Native field focus |
-| Work in progress | Ellipsis | Real `aria-busy`; no fabricated activity |
+<!-- generated:focus-recipe -->
+
+| Layer | Blur | Spread | Role |
+|---|---|---|---|
+| `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | — | — | The crisp core. Never feathered, and the only part that survives forced colours. |
+| `--cr-focus-feather-1` | 6px | 1px | Feathered halo; increasing blur at decreasing opacity |
+| `--cr-focus-feather-2` | 16px | 3px | Feathered halo; increasing blur at decreasing opacity |
+| `--cr-focus-feather-3` | 30px | 6px | Feathered halo; increasing blur at decreasing opacity |
+| `--cr-focus-feather-4` | 54px | 11px | Feathered halo; increasing blur at decreasing opacity |
+| `--cr-focus-feather-2` | 18px | 0 | Directional elevation |
+| `--cr-focus-shadow` | 40px | 0 | Elevation beneath the control |
+<!-- /generated:focus-recipe -->
+
+Each halo layer is read from `--cr-focus-ring` in `assets/controls.css`, so this table
+cannot disagree with what ships. The core is never feathered and the offset is never
+zero: a ring drawn *on* the border is hard to tell from a hover state, and on a pill it
+reads as a thicker stroke rather than as focus.
 
 A check mark is reserved for validation and information display — the status badges in `.cr-status` and a checkbox's own `:checked` indicator. It never marks a selected, pressed or focused control. Selection instead uses a 3px leading rail in the control's own foreground ink plus a heavier label weight; the rail is absolutely positioned inside existing padding, so selecting an item never reflows its group. Round specimen swatches, which cannot carry a rail, use an inset ring gap. Floating check text and the short field rail are replaced by these marks. Ordinary prose links retain their link styling. Badges are `aria-hidden`: the real control supplies its accessible name, required/invalid/selected/busy state and error association. The visual symbol never gets appended to the control's text content. Native checkbox/radio indicators and functional labels remain intact. Small controls retain full-sized hit targets. Badges have solid, unblurred alternatives under reduced transparency and forced colors.
 

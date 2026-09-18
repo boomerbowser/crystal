@@ -148,15 +148,26 @@ meaning when a product re-themes. See [Color](colors.html#status).
 
 ## Contrast
 
-1,716 contrast cases are computed across all six palettes in both modes, including bounded
-composites: Resin and Haze control labels are checked with the optical sheen beneath the
-protective fill, against 80%/79% content composites and RGB-corner backdrops with the
-fixed 20% Resin fill.
+<!-- generated:contrast -->
+
+**1,716 contrast cases** are computed across all six palettes in both
+modes, including bounded composites: Resin and Haze control labels are checked with the
+optical sheen beneath the protective fill, against content composites and RGB-corner
+backdrops with the fixed Resin fill.
+
+| Measure | Result |
+|---|---|
+| Cases computed | 1,716 |
+| Failures | 0 |
+| Lowest result of any kind | 3.72:1 |
+| Lowest normal-text result | 4.67:1 |
+| Checks run | 2026-09-18 |
 
 Normal text is held to 4.5:1. Essential non-text — focus rings, control boundaries, the
 selection rail — uses its separate 3:1 threshold, which is the correct standard for those
 elements rather than a relaxation for them.
+<!-- /generated:contrast -->
 
-The current run reports zero failures. What that does and does not establish is stated
-plainly in the [verification report](../validation/report.html): it is evidence about this
-reference package, not a claim of complete WCAG conformance for a product built with it.
+What that does and does not establish is stated plainly in the
+[verification report](../validation/report.html): it is evidence about this reference
+package, not a claim of complete WCAG conformance for a product built with it.

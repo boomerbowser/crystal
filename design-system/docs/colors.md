@@ -10,14 +10,17 @@ Prism, Fuchsia and Amethyst emphasize violet/magenta away from conventional traf
 
 ## Product palettes
 
-| Identity | Seed | Character |
-|---|---|---|
-| Prism | `#7338EF` | Electric violet with orchid and cool light; shared default |
-| Fuchsia | `#C01993` | Saturated magenta for expressive creative products |
-| Cobalt | `#2758E8` | Clear, confident blue with a violet undertone |
-| Ion | `#007E97` | Vivid cyan supported by indigo and luminous teal |
-| Amethyst | `#8430C6` | Rich purple with warmer luminous accents |
-| Harbor | `#4669B2` | Gather’s original semantic palette mapped to shared roles |
+<!-- generated:palettes -->
+
+| Identity | Seed | Companion | Glow |
+|---|---|---|---|
+| Prism | `#7338EF` | `#EF48C6` | `#52BDF3` |
+| Fuchsia | `#C01993` | `#7C4DFF` | `#FF96DA` |
+| Cobalt | `#2758E8` | `#6D47F2` | `#48C6F0` |
+| Ion | `#007E97` | `#3D45E5` | `#36DCD1` |
+| Amethyst | `#8430C6` | `#CE49B2` | `#9198FF` |
+| Harbor | `#4669B2` | `#8970B5` | `#72C4DF` |
+<!-- /generated:palettes -->
 
 The seed is not automatically a text color. The canonical [token JSON](../tokens/crystal.json) defines paired light/dark values. The bold palette entries are authored sRGB mixtures; they do not use or claim conformity to Material’s tonal generator. Harbor retains mapped source values from Gather’s original generated palette.
 

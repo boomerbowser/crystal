@@ -10,12 +10,22 @@ The approved Crystal material studies define the intended appearance, not merely
 
 Use these settings as Crystal’s recommended starting point across products:
 
-| Setting | Recommended default |
-|---|---|
-| Color atmosphere | 90% |
-| Frost base tint | 35% |
-| Elevation | 125% |
-| Corner radius | 28px |
+<!-- generated:defaults -->
+
+| Setting | Recommended default | Valid range |
+|---|---|---|
+| Color atmosphere | 90% | 15% – 90% |
+| Frost base tint | 35% | 35% – 85% |
+| Elevation | 125% | 60% – 150% |
+| Corner radius | 28px | 14px – 28px |
+| Motion speed | 1× | 0.25× – 2× |
+| Palette | `prism` | — |
+| Mode | `light` | — |
+| Density | `comfortable` | — |
+| Font | `manrope` | — |
+| Reduced | `false` | — |
+| Reduce motion | `false` | — |
+<!-- /generated:defaults -->
 
 The canonical tokens, generated theme and playground’s **Reset** action use these values. Saved user preferences remain customizable. Frost’s existing recipe adds 10 percentage points to its base tint, so the recommended 35% base produces a 45% surface fill. Resin remains fixed at 20% fill opacity; opaque accessibility fallbacks take precedence.
 
@@ -50,6 +60,24 @@ Resin renders at a fixed 20% fill opacity in both modes, independent of the Fros
 The persistent Frost task frame is an intentional Crystal hybrid, not a claim of strict Microsoft placement conformance. One frame can contain several softened content wells; avoid nesting independently blurred panes. All three live scenes show that same stack.
 
 Do not apply opacity to an entire pane containing text. Do not stack backdrop blur on adjacent cards or every message; the content recipe feathers only its own background paint. Do not sample the desktop, capture other windows or duplicate private content into canvases to create a refraction effect. This implementation provides CSS blur, tint, texture, highlights and shadows; it does not implement native optical lensing.
+
+## Material recipe values
+
+The numbers every material resolves to, generated from `tokens/crystal.json`. This table
+is the authority; where the prose above describes a technique, these are the values that
+technique uses.
+
+<!-- generated:material-recipes -->
+
+| Material | Diffusion | Fill |
+|---|---|---|
+| **Plastic** | Opaque. No backdrop filter at all. | — |
+| **Frost** | 40px blur, 125% saturation | grain 0.045 |
+| **Resin** | 20px blur, 165% saturation | fixed 20% fill, both modes |
+| **Haze** | 80% content fill | 1.95px feather |
+| **Stone** | 55% light / 60% dark | 1.95px feather |
+| **Mirage** | 28px blur, 165% saturation, 88% brightness | #111525 at 38%; 64% without backdrop filtering |
+<!-- /generated:material-recipes -->
 
 ## Haze: integrated reading surfaces
 

@@ -1,6 +1,6 @@
 # Icons
 
-Crystal's icon set is **1011 symbols** on one grid: a 24px view box, 1.8px strokes, round caps and joins, and `currentColor` so every icon inherits a tested foreground colour.
+Crystal's icon set is one grid: a 24px view box, 1.8px strokes, round caps and joins, and `currentColor` so every icon inherits a tested foreground colour.
 
 Icon files carry no stroke width, cap, join or colour of their own. Those come from the stylesheet, so the contract lives in one place and cannot drift across a thousand files. An icon that carries its own stroke is a defect, not a variant.
 
@@ -25,3 +25,18 @@ Icons beside text are decorative and hidden from assistive technology. An icon-o
 </div>
 
 <script src="../assets/icons.js" defer></script>
+
+## The sets
+
+<!-- generated:icon-counts -->
+
+| Source | Count | Licence |
+|---|---|---|
+| crystal | 13 | Original work |
+| lucide | 998 | ISC ([notice](../reference/licenses/lucide-LICENSE.txt)) |
+| **Total** | **1011** | |
+
+One grid: `0 0 24 24` view box, 1.8px strokes, round caps and round joins, and `currentColor` so every icon inherits a tested foreground colour.
+
+This site's own interface uses 13 of them, inlined as a sprite in `assets/icons.svg`; the full set is one file per icon under `assets/icons/`.
+<!-- /generated:icon-counts -->

@@ -4,47 +4,58 @@
 <p>WCAG does not reserve particular hues for errors, success, warnings, or information. Its use-of-color requirement addresses conveying meaning through color alone. Crystal instead treats separation as a system architecture choice: brand tokens may vary by product, while functional status tokens remain stable and have visible text and symbols. <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html">W3C: Use of Color</a>.</p>
 <p>Prism, Fuchsia and Amethyst emphasize violet/magenta away from conventional traffic-light statuses. Cobalt and Ion provide blue/cyan alternatives. They are brand identities, not success or information indicators. The information status uses an independent neutral slate pair to avoid inheriting a product’s primary brand color.</p>
 <h2 id="product-palettes">Product palettes</h2>
+<!-- generated:palettes -->
+
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
 <tr>
 <th>Identity</th>
 <th>Seed</th>
-<th>Character</th>
+<th>Companion</th>
+<th>Glow</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Prism</td>
 <td><code>#7338EF</code></td>
-<td>Electric violet with orchid and cool light; shared default</td>
+<td><code>#EF48C6</code></td>
+<td><code>#52BDF3</code></td>
 </tr>
 <tr>
 <td>Fuchsia</td>
 <td><code>#C01993</code></td>
-<td>Saturated magenta for expressive creative products</td>
+<td><code>#7C4DFF</code></td>
+<td><code>#FF96DA</code></td>
 </tr>
 <tr>
 <td>Cobalt</td>
 <td><code>#2758E8</code></td>
-<td>Clear, confident blue with a violet undertone</td>
+<td><code>#6D47F2</code></td>
+<td><code>#48C6F0</code></td>
 </tr>
 <tr>
 <td>Ion</td>
 <td><code>#007E97</code></td>
-<td>Vivid cyan supported by indigo and luminous teal</td>
+<td><code>#3D45E5</code></td>
+<td><code>#36DCD1</code></td>
 </tr>
 <tr>
 <td>Amethyst</td>
 <td><code>#8430C6</code></td>
-<td>Rich purple with warmer luminous accents</td>
+<td><code>#CE49B2</code></td>
+<td><code>#9198FF</code></td>
 </tr>
 <tr>
 <td>Harbor</td>
 <td><code>#4669B2</code></td>
-<td>Gather’s original semantic palette mapped to shared roles</td>
+<td><code>#8970B5</code></td>
+<td><code>#72C4DF</code></td>
 </tr>
 </tbody>
 </table></div>
+<!-- /generated:palettes -->
+
 <p>The seed is not automatically a text color. The canonical <a href="../tokens/crystal.json">token JSON</a> defines paired light/dark values. The bold palette entries are authored sRGB mixtures; they do not use or claim conformity to Material’s tonal generator. Harbor retains mapped source values from Gather’s original generated palette.</p>
 <h2 id="token-layers">Token layers</h2>
 <div class="cr-table-scroll"><table class="cr-table">

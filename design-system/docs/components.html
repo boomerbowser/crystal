@@ -177,47 +177,68 @@
 <h2 id="focus-light-and-circular-state-badges">Focus light and circular state badges</h2>
 <p>Focus uses an immediate 2px primary-color core at a 3px offset, surrounded by a broadly feathered halo. The halo is four graded layers of the primary color — 46% at 6px blur / 2px spread, 30% at 16px / 6px, 17% at 30px / 12px and 8% at 54px / 22px — so the light falls off smoothly instead of ending on a hard edge. Dark mode raises those alphas to 56/38/22/11% to carry the same falloff against a deep canvas. Its elevation shadow stays chromatic: the 30% layer supplies the close glow and decorative color at 27% supplies the broad shadow. The single token <code>--cr-focus-ring</code> composes the halo so every focusable surface shares one recipe. The core remains defined for visibility; text and icons are never blurred. Keyboard focus applies to all interactive elements. Text entry lights its Resin shell through <code>:focus-within</code>. Motion must neither delay nor remove the focus cue. Forced colors substitute a system Highlight outline and remove decorative shadows.</p>
 <p>A <code>.cr-indicator</code> is a 20px circular Resin surface with a 3px-inset 80% Haze fill and a 1px feather on that fill. Field badges are 24px. Their foreground remains crisp and uses the tested body ink. They sit beside the content, never over text or a native select arrow. These are informational, non-interactive marks, not small click targets.</p>
+<!-- generated:focus-recipe -->
+
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
 <tr>
-<th>State</th>
-<th>Badge symbol</th>
-<th>Programmatic source</th>
+<th>Layer</th>
+<th>Blur</th>
+<th>Spread</th>
+<th>Role</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Selected or toggled</td>
-<td>Leading rail, plus label weight</td>
-<td><code>aria-selected</code>, <code>aria-pressed</code> or <code>aria-checked</code></td>
+<td><code>outline: 2px solid var(--cr-focus-core)</code> at <code>outline-offset: 3px</code></td>
+<td>—</td>
+<td>—</td>
+<td>The crisp core. Never feathered, and the only part that survives forced colours.</td>
 </tr>
 <tr>
-<td>Current location</td>
-<td>Filled circle</td>
-<td><code>aria-current</code>, excluding <code>false</code></td>
+<td><code>--cr-focus-feather-1</code></td>
+<td>6px</td>
+<td>1px</td>
+<td>Feathered halo; increasing blur at decreasing opacity</td>
 </tr>
 <tr>
-<td>Required field</td>
-<td>Asterisk</td>
-<td>Native <code>required</code> or <code>aria-required</code></td>
+<td><code>--cr-focus-feather-2</code></td>
+<td>16px</td>
+<td>3px</td>
+<td>Feathered halo; increasing blur at decreasing opacity</td>
 </tr>
 <tr>
-<td>Invalid field</td>
-<td>Exclamation</td>
-<td><code>aria-invalid</code>, with the existing visible error message</td>
+<td><code>--cr-focus-feather-3</code></td>
+<td>30px</td>
+<td>6px</td>
+<td>Feathered halo; increasing blur at decreasing opacity</td>
 </tr>
 <tr>
-<td>Editable field, idle / focused</td>
-<td>Hollow / filled circle</td>
-<td>Native field focus</td>
+<td><code>--cr-focus-feather-4</code></td>
+<td>54px</td>
+<td>11px</td>
+<td>Feathered halo; increasing blur at decreasing opacity</td>
 </tr>
 <tr>
-<td>Work in progress</td>
-<td>Ellipsis</td>
-<td>Real <code>aria-busy</code>; no fabricated activity</td>
+<td><code>--cr-focus-feather-2</code></td>
+<td>18px</td>
+<td>0</td>
+<td>Directional elevation</td>
+</tr>
+<tr>
+<td><code>--cr-focus-shadow</code></td>
+<td>40px</td>
+<td>0</td>
+<td>Elevation beneath the control</td>
 </tr>
 </tbody>
 </table></div>
+<!-- /generated:focus-recipe -->
+
+<p>Each halo layer is read from <code>--cr-focus-ring</code> in <code>assets/controls.css</code>, so this table
+cannot disagree with what ships. The core is never feathered and the offset is never
+zero: a ring drawn <em>on</em> the border is hard to tell from a hover state, and on a pill it
+reads as a thicker stroke rather than as focus.</p>
 <p>A check mark is reserved for validation and information display — the status badges in <code>.cr-status</code> and a checkbox's own <code>:checked</code> indicator. It never marks a selected, pressed or focused control. Selection instead uses a 3px leading rail in the control's own foreground ink plus a heavier label weight; the rail is absolutely positioned inside existing padding, so selecting an item never reflows its group. Round specimen swatches, which cannot carry a rail, use an inset ring gap. Floating check text and the short field rail are replaced by these marks. Ordinary prose links retain their link styling. Badges are <code>aria-hidden</code>: the real control supplies its accessible name, required/invalid/selected/busy state and error association. The visual symbol never gets appended to the control's text content. Native checkbox/radio indicators and functional labels remain intact. Small controls retain full-sized hit targets. Badges have solid, unblurred alternatives under reduced transparency and forced colors.</p>
 <h2 id="geometry">Geometry</h2>
 <p>Crystal has exactly two control shapes, and which one applies is determined by what the

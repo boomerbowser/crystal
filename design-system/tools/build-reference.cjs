@@ -193,6 +193,131 @@ function componentRecipeTable() {
   return lines.join('\n');
 }
 
+
+/* ---------- values that live in the token file ---------- */
+
+/* These tables were hand-maintained copies of numbers that already exist in
+   `tokens/crystal.json`. A material recipe transcribed into prose is a material recipe
+   that will disagree with the build sooner or later, and the material specification is
+   the one thing in Crystal that may never drift. */
+
+function defaultsTable() {
+  const tokens = read('tokens/crystal.tokens.json');
+  const ranges = tokens.semantic.range;
+  const label = {
+    atmosphere: 'Color atmosphere', translucency: 'Frost base tint', elevation: 'Elevation',
+    radius: 'Corner radius', motionSpeed: 'Motion speed',
+  };
+  const unit = { radius: 'px', motionSpeed: '\u00d7' };
+  const lines = ['| Setting | Recommended default | Valid range |', '|---|---|---|'];
+  for (const [key, token] of Object.entries(ranges)) {
+    if (key.startsWith('$')) continue;
+    const range = /range ([\d.]+)-([\d.]+)/.exec(token.$description || '');
+    const u = unit[key] ?? '%';
+    lines.push(`| ${label[key] || key} | ${token.$value}${u} | ${range ? `${range[1]}${u} – ${range[2]}${u}` : '—'} |`);
+  }
+  const d = tokens.semantic.default;
+  for (const [key, token] of Object.entries(d)) {
+    if (key.startsWith('$')) continue;
+    const words = key.replace(/([A-Z])/g, ' $1').toLowerCase();
+    lines.push(`| ${words[0].toUpperCase() + words.slice(1)} | \`${token.$value}\` | — |`);
+  }
+  return lines.join('\n');
+}
+
+function materialRecipeTable() {
+  const r = read('tokens/crystal.json').material;
+  const pct = v => `${Math.round(v * 100)}%`;
+  const rows = [
+    ['Plastic', 'Opaque. No backdrop filter at all.', '—'],
+    ['Frost', `${r.acrylicBlur}px blur, ${r.acrylicSaturation}% saturation`, `grain ${r.grainOpacity}`],
+    ['Resin', `${r.glassBlur}px blur, ${r.glassSaturation}% saturation`, `fixed ${pct(r.glassOpacity)} fill, both modes`],
+    ['Haze', `${pct(r.contentOpacity)} content fill`, `${r.contentFeather}px feather`],
+    ['Stone', `${pct(r.labelVeil)} light / ${pct(r.labelVeilDark)} dark`, `${r.stoneFeather || r.contentFeather}px feather`],
+    ['Mirage', `${r.mirageBlur}px blur, ${r.mirageSaturation}% saturation, ${r.mirageBrightness}% brightness`,
+      `${r.mirageColor} at ${pct(r.mirageOpacity)}; ${pct(r.mirageFallbackOpacity)} without backdrop filtering`],
+  ];
+  return ['| Material | Diffusion | Fill |', '|---|---|---|']
+    .concat(rows.map(([a, b, c]) => `| **${a}** | ${b} | ${c} |`)).join('\n');
+}
+
+function paletteTable() {
+  const tokens = read('tokens/crystal.tokens.json');
+  const lines = ['| Identity | Seed | Companion | Glow |', '|---|---|---|---|'];
+  for (const [name, p] of Object.entries(tokens.primitive.palette)) {
+    if (name.startsWith('$')) continue;
+    const v = k => (p[k] && p[k].$value) ? `\`${p[k].$value}\`` : '—';
+    lines.push(`| ${name[0].toUpperCase() + name.slice(1)} | ${v('seed')} | ${v('companion')} | ${v('glow')} |`);
+  }
+  return lines.join('\n');
+}
+
+/* The focus recipe is composed in `assets/controls.css`, not in the token file, so it is
+   read from there. It was hand-transcribed into the components chapter and had to be
+   hand-corrected when the halo spread changed — which is the drift this prevents. */
+function focusRecipeTable() {
+  const css = fs.readFileSync(path.join(ROOT, 'assets/controls.css'), 'utf8');
+  const ring = /--cr-focus-ring:([^;]+);/.exec(css);
+  if (!ring) throw new Error('assets/controls.css: no --cr-focus-ring to read');
+  const layers = ring[1].split(/,(?![^(]*\))/).map(s => s.trim());
+  const lines = ['| Layer | Blur | Spread | Role |', '|---|---|---|---|',
+    '| `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | — | — | The crisp core. Never feathered, and the only part that survives forced colours. |'];
+  for (const layer of layers) {
+    const m = /^(-?[\d.]+\w*)\s+(-?[\d.]+\w*)\s+([\d.]+\w*)(?:\s+([\d.]+\w*))?\s+var\(([^)]+)\)/.exec(layer);
+    if (!m) continue;
+    const [, , y, blur, spread, name] = m;
+    const role = /shadow/.test(name) ? 'Elevation beneath the control'
+      : y !== '0' ? 'Directional elevation'
+      : 'Feathered halo; increasing blur at decreasing opacity';
+    lines.push(`| \`${name}\` | ${blur} | ${spread || '0'} | ${role} |`);
+  }
+  return lines.join('\n');
+}
+
+function contrastFigures() {
+  const checks = read('validation/token-checks.json');
+  const text = checks.results.filter(r => r.minimum === 4.5).map(r => r.ratio);
+  return [
+    `**${checks.checks.toLocaleString()} contrast cases** are computed across all six palettes in both`,
+    'modes, including bounded composites: Resin and Haze control labels are checked with the',
+    'optical sheen beneath the protective fill, against content composites and RGB-corner',
+    'backdrops with the fixed Resin fill.',
+    '',
+    '| Measure | Result |',
+    '|---|---|',
+    `| Cases computed | ${checks.checks.toLocaleString()} |`,
+    `| Failures | ${checks.failures.length} |`,
+    `| Lowest result of any kind | ${checks.minimum.toFixed(2)}:1 |`,
+    `| Lowest normal-text result | ${Math.min(...text).toFixed(2)}:1 |`,
+    `| Checks run | ${String(checks.date).slice(0, 10)} |`,
+    '',
+    'Normal text is held to 4.5:1. Essential non-text — focus rings, control boundaries, the',
+    'selection rail — uses its separate 3:1 threshold, which is the correct standard for those',
+    'elements rather than a relaxation for them.',
+  ].join('\n');
+}
+
+function iconFigures() {
+  const sprite = fs.readFileSync(path.join(ROOT, 'assets/icons.svg'), 'utf8');
+  const ui = (sprite.match(/<symbol /g) || []).length;
+  const manifest = read('assets/icons/manifest.json');
+  const g = manifest.grid || {};
+  const lines = ['| Source | Count | Licence |', '|---|---|---|'];
+  for (const [name, s] of Object.entries(manifest.sources || {})) {
+    const notice = s.notice ? ` ([notice](../${s.notice}))` : '';
+    lines.push(`| ${name} | ${s.count} | ${esc(s.license || '—')}${notice} |`);
+  }
+  lines.push(`| **Total** | **${manifest.total}** | |`);
+  lines.push('');
+  lines.push(`One grid: \`${g.viewBox}\` view box, ${g.strokeWidth}px strokes, ` +
+    `${g.linecap} caps and ${g.linejoin} joins, and \`currentColor\` so every icon inherits a ` +
+    'tested foreground colour.');
+  lines.push('');
+  lines.push(`This site's own interface uses ${ui} of them, inlined as a sprite in ` +
+    '`assets/icons.svg`; the full set is one file per icon under `assets/icons/`.');
+  return lines.join('\n');
+}
+
 /* ---------- writing ---------- */
 
 function replaceSection(file, name, body) {
@@ -218,5 +343,11 @@ const changed = [
   /* This was a hand-maintained 54-row copy of the recipe file. It had already fallen
      behind by five recipes, which is what a duplicated table always does. */
   replaceSection('docs/motion-components.md', 'component-recipes', componentRecipeTable()),
+  replaceSection('docs/materials.md', 'defaults', defaultsTable()),
+  replaceSection('docs/materials.md', 'material-recipes', materialRecipeTable()),
+  replaceSection('docs/colors.md', 'palettes', paletteTable()),
+  replaceSection('docs/components.md', 'focus-recipe', focusRecipeTable()),
+  replaceSection('docs/accessibility.md', 'contrast', contrastFigures()),
+  replaceSection('docs/icons.md', 'icon-counts', iconFigures()),
 ];
 console.log(`Generated docs/tokens.md and ${changed.length} reference sections.`);
