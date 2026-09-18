@@ -155,7 +155,12 @@
  * `scroll-padding` is the part that keeps this accessible: browsers scroll a
  * newly focused element into view respecting scroll padding, so a focus ring can
  * never come to rest underneath the fade. Crystal does not blur focus, and a
- * fade over one would be the same defect by another route. */
+ * fade over one would be the same defect by another route.
+ *
+ * A mask fades the whole element, its own fill and border included. So the fade
+ * belongs on the element that scrolls, and a material surface that also scrolls
+ * puts its material on a wrapper — otherwise the panel dissolves along with the
+ * content it is holding. */
 :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll]{
   --cr-scroll-fade-start:0px;--cr-scroll-fade-end:0px;
   scroll-padding:var(--cr-scroll-fade);

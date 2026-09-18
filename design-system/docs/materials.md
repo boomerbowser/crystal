@@ -172,6 +172,8 @@ The fade is a **mask**, not a painted overlay. What an overlay would have to pai
 
 Set `data-cr-scroll` to `start`, `end` or `both` — which edges have content beyond them — together with `data-cr-scroll-axis` of `x` or `y`. `start` means the container is *at* its start, so only the far edge fades. Without the attribute nothing fades, so a container with no runtime driving it is unmasked rather than permanently faded at both ends. Start and end are logical: the horizontal gradient turns around in right-to-left.
 
+A mask fades the whole element — its own fill and border included — so the fade belongs on the element that scrolls. A material surface that also scrolls puts its material on a wrapper, or the panel dissolves along with the content it is holding.
+
 The same token is the container's `scroll-padding`, which is what keeps this accessible. Browsers scroll a newly focused element into view respecting scroll padding, so a focus ring can never come to rest underneath the fade — Crystal does not blur focus, and fading one would be the same defect by another route. Forced colors removes the fade entirely.
 
 What a native scrollbar cannot carry is the material itself — `backdrop-filter` has no effect on one, and the standard properties expose only two colours and a coarse width. A surface that needs the material in full uses the **scroll area** component, which draws its thumb as a real element.
