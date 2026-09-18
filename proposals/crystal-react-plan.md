@@ -21,7 +21,7 @@ Every task inherits these. They are the contract, not preferences.
 - **Focus** is a crisp 2px core at 3px offset inside a four-layer feathered halo. **Selection is label weight** — never a rail, never a check mark.
 - **Action controls are pills.** Card-shaped buttons keep the content radius.
 - **Motion** honours the spring physics in `motion-recipes.json`, not the keyframes (CONTRACT §6). Hard ceiling 5000ms. Reduced motion removes spatial change and keeps state feedback.
-- **Ambient motion is on by default** and low amplitude: it never paints the interior of a surface being read, and it is stoppable per surface and document-wide.
+- **No ambient motion.** Crystal 2.0 ships none — it was built, measured and withdrawn (R22) — and Crystal React must not invent any. Materials are at rest when nothing is happening to them.
 - **Status colours** are independent of brand palettes.
 - Every component ships: types, SCSS, a story, a test, an axe check, and a `parity.json` status change. A component is not done until `parity.json` says so.
 
@@ -108,10 +108,10 @@ Nothing downstream is trustworthy until this is proven, so it ends with a gate t
 ### Task 7: Motion
 
 - [ ] **Step 1** — `useMotion(ref, recipe, options)` calling Crystal's engine, cancelling on unmount, honouring `{ once }`.
-- [ ] **Step 2** — `useAmbient(ref, recipe)` for the Web Animations tier, and `useOpticalAmbient(ref)` for the shader tier, both refusing under reduced motion and both stoppable.
+- [ ] **Step 2** — No ambient hooks. The tier is deferred upstream; when it returns it arrives as a Crystal specification first, not as a React invention.
 - [ ] **Step 3** — Bind to state, not to events — the React equivalent of `motion-interactions.js`: `checked`, `aria-expanded`, `aria-invalid`, `open`, committed range values.
 - [ ] **Step 4** — One rate table, read from context, matching the rest/hover/press behaviour the web preview already ships.
-- [ ] **Step 5** — `data-ambient-clock` honoured, so a Storybook story or a visual test can freeze the rest state.
+- [ ] **Step 5** — A deterministic clock hook for visual tests, so any future rest state can be photographed rather than guessed at. The upstream lesson: a gate that cannot pin an animation is a gate that never sees it.
 
 ### Task 8: Testing, stories, and machine readability
 
@@ -123,10 +123,10 @@ Nothing downstream is trustworthy until this is proven, so it ends with a gate t
 ### Task 9: **GATE C.** One component per tier, proven.
 
 - [ ] **Step 1** — `Button`: pill geometry, press recipe, Resin material, focus halo.
-- [ ] **Step 2** — `Card`: Haze fill, `haze-settle` ambient actually running on a mounted component.
-- [ ] **Step 3** — `Dialog`: Resin surface, Mirage scrim, shader ambient attached and detached with the dialog.
+- [ ] **Step 2** — `Card`: Haze fill, feathered edge, crisp text.
+- [ ] **Step 3** — `Dialog`: Resin surface, Mirage scrim, optical layer attached for the entry motion and detached after it.
 - [ ] **Step 4** — `TextInput`: `field-focus`, `field-invalid`, Haze fill inside a Resin shell.
-- [ ] **Step 5** — Port `audit-ambient.mjs` to the library and prove the rest state is within contract on a mounted React tree. **If ambient does not fire on a mounted Card, nothing downstream is trustworthy and the foundation is not done.**
+- [ ] **Step 5** — Prove the optical layer attaches for an interaction and fully detaches afterwards on a mounted React tree, leaving no canvas and no stray stacking context. **A layer that outlives its motion is how the preview got a ghost box.**
 
 ---
 
