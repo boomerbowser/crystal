@@ -416,6 +416,24 @@
       "size": 20,
       "action": 24
     },
+    "choice": {
+      "boxSize": 26,
+      "boxRadius": 9
+    },
+    "switch": {
+      "trackWidth": 44,
+      "trackHeight": 28
+    },
+    "slider": {
+      "trackHeight": 8,
+      "thumbSize": 26
+    },
+    "chip": {
+      "height": 32
+    },
+    "field": {
+      "wellInset": 7
+    },
     "layout": {
       "containerMax": 1536,
       "readingMax": 920,

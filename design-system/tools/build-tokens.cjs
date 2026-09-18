@@ -299,6 +299,23 @@ function migrate() {
      library could read. */
   set(out.component, 'icon.size', leaf('dimension', '20px', 'An icon in running content or beside a label'));
   set(out.component, 'icon.action', leaf('dimension', '24px', 'The single icon inside an icon button'));
+  /* The choice and range controls. Every one of these figures was already in the
+     catalogue as prose — "26px box, 9px radius", "44x28px track", "8px track,
+     26px thumb" — which is a specification no platform library can read. A value
+     stated in a sentence and implemented from memory is the drift CONTRACT §1
+     describes, and it is worse than an untokenised value because it looks
+     specified. */
+  set(out.component, 'choice.boxSize', leaf('dimension', '26px', 'A checkbox box or a radio circle'));
+  set(out.component, 'choice.boxRadius', leaf('dimension', '9px', 'The checkbox box corner; a radio is a circle'));
+  set(out.component, 'switch.trackWidth', leaf('dimension', '44px', 'Switch track width'));
+  set(out.component, 'switch.trackHeight', leaf('dimension', '28px', 'Switch track height'));
+  set(out.component, 'slider.trackHeight', leaf('dimension', '8px', 'Slider track thickness'));
+  set(out.component, 'slider.thumbSize', leaf('dimension', '26px', 'Slider thumb, padded to the target floor'));
+  set(out.component, 'chip.height', leaf('dimension', '32px', 'A compact chip, inside a 44px target'));
+  /* The well inside a field shell is tighter than the shell around it, so the two
+     radii nest rather than sitting concentric. */
+  set(out.component, 'field.wellInset', leaf('dimension', '7px',
+    'How much tighter a well\'s radius is than the shell containing it'));
   set(out.component, 'card.radius', leaf('dimension', '{semantic.shape.contentRadius}',
     'Card-shaped buttons keep the content radius so artwork is not clipped'));
   set(out.component, 'focus.coreWidth', leaf('dimension', '2px', 'Crisp focus core, never blurred'));
@@ -440,6 +457,20 @@ function buildFlat(tokens) {
       size: unpx(tokens.component.icon.size.$value),
       action: unpx(tokens.component.icon.action.$value),
     },
+    choice: {
+      boxSize: unpx(tokens.component.choice.boxSize.$value),
+      boxRadius: unpx(tokens.component.choice.boxRadius.$value),
+    },
+    switch: {
+      trackWidth: unpx(tokens.component.switch.trackWidth.$value),
+      trackHeight: unpx(tokens.component.switch.trackHeight.$value),
+    },
+    slider: {
+      trackHeight: unpx(tokens.component.slider.trackHeight.$value),
+      thumbSize: unpx(tokens.component.slider.thumbSize.$value),
+    },
+    chip: { height: unpx(tokens.component.chip.height.$value) },
+    field: { wellInset: unpx(tokens.component.field.wellInset.$value) },
     layout: Object.fromEntries(Object.entries(tokens.component.layout)
       .map(([key, leafValue]) => [key, unpx(leafValue.$value)])),
   };

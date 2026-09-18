@@ -433,7 +433,7 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.
 
-26 tokens.
+34 tokens.
 
 ### Component · action
 
@@ -478,6 +478,39 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | --- | --- | --- | --- |
 | `component.icon.size` | dimension | `20px` | An icon in running content or beside a label |
 | `component.icon.action` | dimension | `24px` | The single icon inside an icon button |
+
+### Component · choice
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.choice.boxSize` | dimension | `26px` | A checkbox box or a radio circle |
+| `component.choice.boxRadius` | dimension | `9px` | The checkbox box corner; a radio is a circle |
+
+### Component · switch
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.switch.trackWidth` | dimension | `44px` | Switch track width |
+| `component.switch.trackHeight` | dimension | `28px` | Switch track height |
+
+### Component · slider
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.slider.trackHeight` | dimension | `8px` | Slider track thickness |
+| `component.slider.thumbSize` | dimension | `26px` | Slider thumb, padded to the target floor |
+
+### Component · chip
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.chip.height` | dimension | `32px` | A compact chip, inside a 44px target |
+
+### Component · field
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.field.wellInset` | dimension | `7px` | How much tighter a well's radius is than the shell containing it |
 
 ### Component · card
 

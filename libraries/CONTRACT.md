@@ -134,6 +134,28 @@ Motion that a person starts is unaffected. So is §7: the optical layer still ru
 duration of an interaction.
 
 
+
+### What not to load
+
+`@crystal/core/css` and `@crystal/core/theme` are for everyone: the reset, the
+materials, the scroll contract, and the resolved token values.
+
+**`@crystal/core/controls` is the preview site's own control layer and a library
+must not load it.** It styles bare elements — `:is(button, a.cr-button)` gives
+every button in the document a Resin background, a feathered `::before` and a
+48px minimum height — which is exactly right for a page that writes
+`<button class="cr-control">` and exactly wrong underneath a library that ships
+its own controls. Loading both is two implementations of every control fighting,
+which is §1's drift with a stylesheet instead of a value.
+
+Crystal React loaded it in its Storybook for one release. A 32px chip rendered
+50px tall, and every story was validated against styles a consumer of that
+package would never have had — which is the worse half: the components were
+fine, the evidence was not.
+
+A library that wants the resolved values in CSS takes `@crystal/core/resolver`
+and publishes them onto its own scope, which is what the provider does.
+
 ---
 
 ## 9. Scrolling is part of the system, not the browser's business.

@@ -1,3 +1,12 @@
+/* Crystal's control primitives, for this preview site.
+ *
+ * NOT for a platform library. These rules style bare elements — `:is(button,
+ * a.cr-button)` gives every button in the document a Resin background, a
+ * feathered ::before and a 48px minimum height. That is right for a page that
+ * writes `<button class="cr-control">` and wrong underneath a library that ships
+ * its own controls, where it becomes a second implementation of every control.
+ * CONTRACT.md §1 says which stylesheets a library may load; this is not one.
+ */
 /* Resin is the interaction plane. Haze is a separate, inset reading fill.
    Context light stays beneath Haze: nested white wells must not erase Resin. */
 @layer crystal.component {

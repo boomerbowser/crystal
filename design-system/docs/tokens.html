@@ -2165,7 +2165,7 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 </table></div>
 <h2 id="component-tokens">Component tokens</h2>
 <p>Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.</p>
-<p>26 tokens.</p>
+<p>34 tokens.</p>
 <h3 id="component-action">Component · action</h3>
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
@@ -2342,6 +2342,119 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 <td>dimension</td>
 <td><code>24px</code></td>
 <td>The single icon inside an icon button</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="component-choice">Component · choice</h3>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Token</th>
+<th>Type</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>component.choice.boxSize</code></td>
+<td>dimension</td>
+<td><code>26px</code></td>
+<td>A checkbox box or a radio circle</td>
+</tr>
+<tr>
+<td><code>component.choice.boxRadius</code></td>
+<td>dimension</td>
+<td><code>9px</code></td>
+<td>The checkbox box corner; a radio is a circle</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="component-switch">Component · switch</h3>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Token</th>
+<th>Type</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>component.switch.trackWidth</code></td>
+<td>dimension</td>
+<td><code>44px</code></td>
+<td>Switch track width</td>
+</tr>
+<tr>
+<td><code>component.switch.trackHeight</code></td>
+<td>dimension</td>
+<td><code>28px</code></td>
+<td>Switch track height</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="component-slider">Component · slider</h3>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Token</th>
+<th>Type</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>component.slider.trackHeight</code></td>
+<td>dimension</td>
+<td><code>8px</code></td>
+<td>Slider track thickness</td>
+</tr>
+<tr>
+<td><code>component.slider.thumbSize</code></td>
+<td>dimension</td>
+<td><code>26px</code></td>
+<td>Slider thumb, padded to the target floor</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="component-chip">Component · chip</h3>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Token</th>
+<th>Type</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>component.chip.height</code></td>
+<td>dimension</td>
+<td><code>32px</code></td>
+<td>A compact chip, inside a 44px target</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="component-field">Component · field</h3>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Token</th>
+<th>Type</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>component.field.wellInset</code></td>
+<td>dimension</td>
+<td><code>7px</code></td>
+<td>How much tighter a well's radius is than the shell containing it</td>
 </tr>
 </tbody>
 </table></div>

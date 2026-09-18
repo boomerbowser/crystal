@@ -1820,6 +1820,56 @@
         "$description": "The single icon inside an icon button"
       }
     },
+    "choice": {
+      "boxSize": {
+        "$type": "dimension",
+        "$value": "26px",
+        "$description": "A checkbox box or a radio circle"
+      },
+      "boxRadius": {
+        "$type": "dimension",
+        "$value": "9px",
+        "$description": "The checkbox box corner; a radio is a circle"
+      }
+    },
+    "switch": {
+      "trackWidth": {
+        "$type": "dimension",
+        "$value": "44px",
+        "$description": "Switch track width"
+      },
+      "trackHeight": {
+        "$type": "dimension",
+        "$value": "28px",
+        "$description": "Switch track height"
+      }
+    },
+    "slider": {
+      "trackHeight": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "Slider track thickness"
+      },
+      "thumbSize": {
+        "$type": "dimension",
+        "$value": "26px",
+        "$description": "Slider thumb, padded to the target floor"
+      }
+    },
+    "chip": {
+      "height": {
+        "$type": "dimension",
+        "$value": "32px",
+        "$description": "A compact chip, inside a 44px target"
+      }
+    },
+    "field": {
+      "wellInset": {
+        "$type": "dimension",
+        "$value": "7px",
+        "$description": "How much tighter a well's radius is than the shell containing it"
+      }
+    },
     "card": {
       "radius": {
         "$type": "dimension",
