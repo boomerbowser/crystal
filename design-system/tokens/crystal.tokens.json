@@ -1562,6 +1562,26 @@
         "$type": "dimension",
         "$value": "44px",
         "$description": "Minimum interactive target"
+      },
+      "paddingBlock": {
+        "$type": "dimension",
+        "$value": "15px",
+        "$description": "Action control block padding"
+      },
+      "paddingInline": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$description": "Action control inline padding"
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "9px",
+        "$description": "Gap between an action's icon and its label"
+      },
+      "disabledOpacity": {
+        "$type": "number",
+        "$value": 0.55,
+        "$description": "Opacity of a disabled control"
       }
     },
     "card": {

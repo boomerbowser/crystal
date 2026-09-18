@@ -197,6 +197,13 @@ function migrate() {
   set(out.component, 'action.radius', leaf('dimension', '999px',
     'Action controls are pill-shaped, independent of the content radius'));
   set(out.component, 'action.minTarget', leaf('dimension', '44px', 'Minimum interactive target'));
+  /* The geometry of an action control, stated once. These were literals inside
+     controls.css and inside every library that reimplemented a button; a value
+     used by every action in the system is a token by definition. */
+  set(out.component, 'action.paddingBlock', leaf('dimension', '15px', 'Action control block padding'));
+  set(out.component, 'action.paddingInline', leaf('dimension', '24px', 'Action control inline padding'));
+  set(out.component, 'action.gap', leaf('dimension', '9px', 'Gap between an action\'s icon and its label'));
+  set(out.component, 'action.disabledOpacity', leaf('number', 0.55, 'Opacity of a disabled control'));
   set(out.component, 'card.radius', leaf('dimension', '{semantic.shape.contentRadius}',
     'Card-shaped buttons keep the content radius so artwork is not clipped'));
   set(out.component, 'focus.coreWidth', leaf('dimension', '2px', 'Crisp focus core, never blurred'));
