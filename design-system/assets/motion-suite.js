@@ -3,13 +3,13 @@
 'use strict';
 const $=selector=>document.querySelector(selector),$$=selector=>[...document.querySelectorAll(selector)],M=CrystalMotion;
 const status=text=>{$('#suite-live-status').textContent=text;};
-const play=(element,name)=>M.play(element,name).catch(error=>{status('Animation failed: '+error.message);throw error;});
+const play=(element,name,options)=>M.play(element,name,options).catch(error=>{status('Animation failed: '+error.message);throw error;});
 $('#suite-action').addEventListener('click',()=>{play($('#suite-action'),'press');status('Button activated.');});
 $('#suite-chip').addEventListener('click',event=>{const button=event.currentTarget,on=button.getAttribute('aria-pressed')!=='true';button.setAttribute('aria-pressed',String(on));play(button,'selection');status(on?'Specimen pinned locally.':'Specimen unpinned.');});
 $('#suite-switch').addEventListener('change',event=>{const on=event.target.checked;$('#suite-detail').hidden=!on;play($('.switch-thumb'),on?'switch-on':'switch-off');});
-$('#suite-check').addEventListener('change',event=>{$('#suite-check-label').textContent=event.target.checked?'Reviewed ✓':'Mark reviewed';play($('#suite-check-label'),'check');});
+$('#suite-check').addEventListener('change',event=>{$('#suite-check-label').textContent=event.target.checked?'Reviewed ✓':'Mark reviewed';play($('#suite-check-label'),event.target.checked?'check':'check-off');});
 $$('[name=suite-size]').forEach(input=>input.addEventListener('change',()=>{$('#suite-size-sample').style.fontWeight=input.value==='large'?'800':'400';play(input.parentElement,'selection');}));
-$('#suite-range').addEventListener('input',event=>{$('#suite-range-value').value=event.target.value+'px';$('#suite-size-sample').style.fontSize=event.target.value+'px';play($('#suite-range-value'),'slider-step');});
+$('#suite-range').addEventListener('input',event=>{$('#suite-range-value').value=event.target.value+'px';$('#suite-size-sample').style.fontSize=event.target.value+'px';play($('#suite-range-value'),'slider-step',{once:true});});
 $('#suite-name').addEventListener('focus',()=>play($('#suite-name'),'field-focus'));
 $('#suite-form').addEventListener('submit',event=>{
  event.preventDefault();const input=$('#suite-name'),name=input.value.trim(),error=$('#suite-name-error');

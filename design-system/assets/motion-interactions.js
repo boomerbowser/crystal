@@ -18,18 +18,14 @@
     delegated listener would then fire the same recipe a second time. */
  const managed=element=>!!element.closest?.(MANUAL);
 
- /* Restarting an animation that is already running is what makes a continuous control
-    feel choppy: every event stops the previous run partway and begins again. The guard
-    is per recipe, not per element — a checkbox that is mid `field-focus` must still be
-    allowed to play `check`, because those express different things. Blocking the whole
-    element swallows the state change that the user actually made. */
- const alreadyRunning=(element,name)=>element.dataset.crMotionName===name
-   &&typeof element.getAnimations==='function'
-   &&element.getAnimations().some(animation=>animation.playState==='running');
-
+ /* `once` is the runtime's own guard: a repeat of the same recipe on the same element
+    while it is still running is coalesced rather than restarted. It lives in
+    CrystalMotion so that a page driving its own components gets the same behaviour —
+    there is no second copy of this rule. A *different* recipe still interrupts, because
+    a checkbox mid `field-focus` must still be allowed to play `check`. */
  const play=(element,name)=>{
-  if(!element||managed(element)||alreadyRunning(element,name))return;
-  root.CrystalMotion?.play(element,name);
+  if(!element||managed(element))return;
+  root.CrystalMotion?.play(element,name,{once:true});
  };
 
  /* A range's value updates immediately; what settles is the readout. Prefer the linked

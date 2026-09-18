@@ -207,8 +207,15 @@ that anything moving for more than five seconds can be paused or stopped, and an
 loop by definition never stops on its own. A surface with ambient motion removed must be
 identical to one that never had it.
 
+On the web the tier is `CrystalMotion.ambient(element, recipe)` and
+`CrystalMotion.stopAmbient(element)`. Nothing starts on its own: a surface is opted in
+explicitly. Reduced motion refuses outright and marks the surface static, a recipe that
+does not declare `loop` is refused, and any interaction pauses every loop until the page
+is quiet again.
+
 The high tier belongs in the shader layer, where `u_time` is already a declared uniform.
-The CSS keyframes below are the floor, not the ceiling.
+The CSS keyframes below are the floor, not the ceiling. The platform obligations are in
+`libraries/CONTRACT.md` §8.
 
 ## What triggers a recipe
 

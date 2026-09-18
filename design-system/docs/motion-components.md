@@ -2,7 +2,7 @@
 
 [Open the live component studies](../motion.html#component-motion) · [Search all recipes](../motion.html#recipe-library) · [Run browser contracts](../tests/motion-contracts.html)
 
-Crystal ships 54 executable component recipes in nine families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
+Crystal ships 59 executable component recipes in ten families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
 
 ## Engine responsibilities
 
@@ -65,62 +65,70 @@ Mappings intentionally share recipes. Each new product component should select a
 
 Base times below are at 1×; the preview resolves the saved speed at playback. Every row has an executable recipe and a replay in the library.
 
+<!-- generated:component-recipes -->
+
 | ID | Material / behavior | Engine | Base duration | Intended use |
 |---|---|---|---|---|
-| `press` | resin / pressure | Motion | 320ms | Buttons, icon buttons and segmented controls. Disabled controls never animate.  |
-| `hover` | resin / caustic | Motion | 700ms | Fine-pointer affordance only; keyboard focus is immediate.  |
-| `selection` | resin / meniscus | Motion | 420ms | Selected chips, radios, toggles and navigation; set selected semantics first.  |
-| `switch-on` | resin / coalesce | Motion | 460ms | Animate the thumb after its checked state is applied.  |
-| `switch-off` | resin / coalesce | Motion | 460ms | Animate the thumb after its unchecked state is applied.  |
-| `check` | resin / iris | Motion | 340ms | Checkbox and radio indicators; retain a visible non-color state.  |
-| `slider-step` | stone / feather | Motion | 400ms | Range outputs, steppers and scrubber labels; value updates immediately.  |
-| `icon-turn` | resin / torsion | Motion | 440ms | Disclosure chevrons; parent expanded state is authoritative.  |
-| `copy-confirm` | resin / coalesce | Motion | 540ms | Only after clipboard write succeeds; retain textual confirmation.  |
-| `field-focus` | resin / caustic | Motion | 600ms | Supplementary focus response; never animate or delay the actual focus ring.  |
-| `field-invalid` | resin / tension | GSAP | 480ms | Single low-amplitude cue with persistent error text; never repeated shaking.  |
-| `field-valid` | resin / meniscus | Motion | 550ms | After real local validation; never imply a remote operation succeeded.  |
-| `hint-in` | resin / coalesce | Motion | 500ms | Inline help, character guidance and validation details.  |
-| `hint-out` | resin / meniscus | Motion | 500ms | Hide the help only after completion; do not remove focused content.  |
-| `tab-in` | frost / refraction | Motion | 650ms | Selected tab panels; apply aria-selected and hidden state synchronously.  |
-| `page-in` | plastic / inertia | Motion | 1050ms | New local view after routing is committed; preserve focus and history. Extended: Whole-view spatial continuity needs a 90px settling path. |
-| `page-out` | plastic / inertia | Motion | 760ms | Departing view only; never postpone route authorization or loading. Extended: Departing view clears the incoming view across 75px. |
-| `breadcrumb` | resin / coalesce | Motion | 500ms | New breadcrumb item; current-page semantics stay explicit.  |
-| `drawer-in` | frost / refraction | GSAP | 1000ms | Side sheets and inspector panels; establish modality first. Extended: A sheet must cross its own width from outside the viewport. |
-| `drawer-out` | frost / refraction | GSAP | 650ms | Keep modal focus contained until dismissal completes. Extended: The sheet returns beyond its full-width viewport boundary. |
-| `menu-in` | resin / coalesce | Motion | 620ms | Dropdowns, selects and command menus; keyboard behavior belongs to the component.  |
-| `menu-out` | resin / meniscus | Motion | 380ms | Close menus and restore trigger focus when appropriate.  |
-| `tooltip-in` | resin / meniscus | Motion | 420ms | Noninteractive descriptions on focus or hover; Escape dismisses.  |
-| `tooltip-out` | resin / meniscus | Motion | 420ms | Pointer and focus must both leave before hiding.  |
-| `popover-in` | resin / coalesce | Motion | 620ms | Nonmodal details with outside-click, Escape and focus handling.  |
-| `popover-out` | resin / meniscus | Motion | 380ms | Dismiss nonmodal details without trapping focus.  |
-| `accordion-in` | haze / feather | Motion | 650ms | Animate visible content after expanding; no scripted height measurement needed.  |
-| `accordion-out` | haze / feather | Motion | 650ms | Hide content after completion; return focus first if a child has focus.  |
-| `list-in` | haze / feather | Motion | 650ms | Real added messages, table rows, cards and collection items.  |
-| `list-out` | haze / feather | Motion | 440ms | Remove after completion; announce the actual change and keep focus valid.  |
-| `reorder` | plastic / inertia | GSAP | 500ms | Supplement DOM reordering; use layout() for measured bounded displacement.  |
-| `highlight` | haze / feather | Motion | 500ms | A brief update cue paired with actual content or announcement.  |
-| `message-in` | haze / feather | Motion | 650ms | Only on a new message; do not replay on virtualized history or steal scroll.  |
-| `reaction` | resin / coalesce | Motion | 680ms | Toggle the real reaction state and count before the response.  |
-| `toast-in` | resin / coalesce | Motion | 650ms | Live status text with a persistent dismiss button.  |
-| `toast-out` | resin / meniscus | Motion | 440ms | No timer required; manual dismissal preserves reading time.  |
-| `success` | stone / feather | GSAP | 600ms | Use after a successful operation with text and a recognizable mark.  |
-| `attention` | stone / feather | Motion | 500ms | Single finite cue for important text; never flash or loop.  |
-| `progress-change` | stone / feather | Motion | 500ms | Actual progress is set first; this animation does not fabricate completion.  |
-| `busy` | stone / feather | GSAP | 680ms | One cycle for an actual pending operation; keep a static busy label if it lasts longer.  |
-| `skeleton-resolve` | haze / feather | Motion | 650ms | Replace a skeleton only when real data arrives; no endless shimmer.  |
-| `empty-in` | resin / coalesce | Motion | 500ms | Shown only when the collection is actually empty.  |
-| `media-in` | frost / refraction | Motion | 900ms | After an image decodes or media becomes ready; reserve layout space.  |
-| `caption-in` | resin / coalesce | Motion | 500ms | Optional descriptive caption; text remains accessible in reduced motion.  |
-| `carousel-next` | frost / refraction | GSAP | 920ms | Explicit next/previous navigation; never autoplay. Extended: A gallery changes spatial position with an 80px perspective turn. |
-| `carousel-previous` | frost / refraction | GSAP | 920ms | Maintain item count and keyboard navigation. Extended: A gallery changes spatial position with an 80px perspective turn. |
-| `drag-pickup` | resin / tension | Motion | 500ms | Visual lift for a selected movable item; keyboard alternative required.  |
-| `drag-settle` | resin / coalesce | GSAP | 640ms | After a valid local move, with undo where data changes.  |
-| `resize-settle` | frost / refraction | Motion | 600ms | After measured layout size changes; never animate focus or hide handles.  |
-| `resin-confluence` | resin / coalesce | GSAP | 1600ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action.  |
-| `frost-unfold` | frost / refraction | GSAP | 1900ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. Extended: Large panel unfolding uses up to 110px depth; never use on a small control. |
-| `plastic-settle` | plastic / inertia | GSAP | 1700ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. Extended: Window-scale composition uses 120px upward travel. |
-| `haze-tide` | haze / feather | GSAP | 1800ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action.  |
-| `stone-contour` | stone / feather | GSAP | 1300ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action.  |
+| `press` | resin / pressure | Motion | 320ms | Buttons, icon buttons and segmented controls. Disabled controls never animate. |
+| `hover` | resin / caustic | Motion | 700ms | Fine-pointer affordance only; keyboard focus is immediate. |
+| `selection` | resin / meniscus | Motion | 420ms | Selected chips, radios, toggles and navigation; set selected semantics first. |
+| `switch-on` | resin / coalesce | Motion | 460ms | Animate the thumb after its checked state is applied. |
+| `switch-off` | resin / coalesce | Motion | 460ms | Animate the thumb after its unchecked state is applied. |
+| `check` | resin / iris | Motion | 340ms | Checkbox and radio indicators; retain a visible non-color state. |
+| `slider-step` | stone / feather | Motion | 400ms | Range outputs, steppers and scrubber labels; value updates immediately. |
+| `icon-turn` | resin / torsion | Motion | 440ms | Disclosure chevrons; parent expanded state is authoritative. |
+| `copy-confirm` | resin / coalesce | Motion | 540ms | Only after clipboard write succeeds; retain textual confirmation. |
+| `field-focus` | resin / caustic | Motion | 600ms | Supplementary focus response; never animate or delay the actual focus ring. |
+| `field-invalid` | resin / tension | GSAP | 480ms | Single low-amplitude cue with persistent error text; never repeated shaking. |
+| `field-valid` | resin / meniscus | Motion | 550ms | After real local validation; never imply a remote operation succeeded. |
+| `hint-in` | resin / coalesce | Motion | 500ms | Inline help, character guidance and validation details. |
+| `hint-out` | resin / meniscus | Motion | 500ms | Hide the help only after completion; do not remove focused content. |
+| `tab-in` | frost / refraction | Motion | 650ms | Selected tab panels; apply aria-selected and hidden state synchronously. |
+| `page-in` | plastic / inertia | Motion | 1050ms | New local view after routing is committed; preserve focus and history. |
+| `page-out` | plastic / inertia | Motion | 760ms | Departing view only; never postpone route authorization or loading. |
+| `breadcrumb` | resin / coalesce | Motion | 500ms | New breadcrumb item; current-page semantics stay explicit. |
+| `drawer-in` | frost / refraction | GSAP | 1000ms | Side sheets and inspector panels; establish modality first. |
+| `drawer-out` | frost / refraction | GSAP | 650ms | Keep modal focus contained until dismissal completes. |
+| `menu-in` | resin / coalesce | Motion | 620ms | Dropdowns, selects and command menus; keyboard behavior belongs to the component. |
+| `menu-out` | resin / meniscus | Motion | 380ms | Close menus and restore trigger focus when appropriate. |
+| `tooltip-in` | resin / meniscus | Motion | 420ms | Noninteractive descriptions on focus or hover; Escape dismisses. |
+| `tooltip-out` | resin / meniscus | Motion | 420ms | Pointer and focus must both leave before hiding. |
+| `popover-in` | resin / coalesce | Motion | 620ms | Nonmodal details with outside-click, Escape and focus handling. |
+| `popover-out` | resin / meniscus | Motion | 380ms | Dismiss nonmodal details without trapping focus. |
+| `accordion-in` | haze / feather | Motion | 650ms | Animate visible content after expanding; no scripted height measurement needed. |
+| `accordion-out` | haze / feather | Motion | 650ms | Hide content after completion; return focus first if a child has focus. |
+| `list-in` | haze / feather | Motion | 650ms | Real added messages, table rows, cards and collection items. |
+| `list-out` | haze / feather | Motion | 440ms | Remove after completion; announce the actual change and keep focus valid. |
+| `reorder` | plastic / inertia | GSAP | 500ms | Supplement DOM reordering; use layout() for measured bounded displacement. |
+| `highlight` | haze / feather | Motion | 500ms | A brief update cue paired with actual content or announcement. |
+| `message-in` | haze / feather | Motion | 650ms | Only on a new message; do not replay on virtualized history or steal scroll. |
+| `reaction` | resin / coalesce | Motion | 680ms | Toggle the real reaction state and count before the response. |
+| `toast-in` | resin / coalesce | Motion | 650ms | Live status text with a persistent dismiss button. |
+| `toast-out` | resin / meniscus | Motion | 440ms | No timer required; manual dismissal preserves reading time. |
+| `success` | stone / feather | GSAP | 600ms | Use after a successful operation with text and a recognizable mark. |
+| `attention` | stone / feather | Motion | 500ms | Single finite cue for important text; never flash or loop. |
+| `progress-change` | stone / feather | Motion | 500ms | Actual progress is set first; this animation does not fabricate completion. |
+| `busy` | stone / feather | GSAP | 680ms | One cycle for an actual pending operation; keep a static busy label if it lasts longer. |
+| `skeleton-resolve` | haze / feather | Motion | 650ms | Replace a skeleton only when real data arrives; no endless shimmer. |
+| `empty-in` | resin / coalesce | Motion | 500ms | Shown only when the collection is actually empty. |
+| `media-in` | frost / refraction | Motion | 900ms | After an image decodes or media becomes ready; reserve layout space. |
+| `caption-in` | resin / coalesce | Motion | 500ms | Optional descriptive caption; text remains accessible in reduced motion. |
+| `carousel-next` | frost / refraction | GSAP | 920ms | Explicit next/previous navigation; never autoplay. |
+| `carousel-previous` | frost / refraction | GSAP | 920ms | Maintain item count and keyboard navigation. |
+| `drag-pickup` | resin / tension | Motion | 500ms | Visual lift for a selected movable item; keyboard alternative required. |
+| `drag-settle` | resin / coalesce | GSAP | 640ms | After a valid local move, with undo where data changes. |
+| `resize-settle` | frost / refraction | Motion | 600ms | After measured layout size changes; never animate focus or hide handles. |
+| `resin-confluence` | resin / coalesce | GSAP | 1600ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. |
+| `frost-unfold` | frost / refraction | GSAP | 1900ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. |
+| `plastic-settle` | plastic / inertia | GSAP | 1700ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. |
+| `haze-tide` | haze / feather | GSAP | 1800ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. |
+| `stone-contour` | stone / feather | GSAP | 1300ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. |
+| `check-off` | plastic / iris | Motion | 300ms | Checkbox and radio indicators returning to unchecked. Paired with `check`; the iris closes toward the same point it opened from. |
+| `resin-breathe` | resin / refraction | GSAP | 2000ms | The specular band on a Resin surface at rest. Applies to the rim layer only; the content above it never moves. |
+| `frost-drift` | frost / feather | GSAP | 2000ms | Slow drift of the Frost grain and tint on a panel that persists while content moves behind it. |
+| `haze-settle` | haze / feather | GSAP | 1900ms | A barely perceptible oscillation of a Haze content fill around its 80% value. Never drops far enough to affect the contrast of text on it. |
+| `mirage-current` | mirage / refraction | GSAP | 2000ms | Slow current in the modal scrim while a dialog is open. Stops when the dialog closes. |
+<!-- /generated:component-recipes -->
 
 ## Runtime API
 

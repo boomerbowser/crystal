@@ -180,6 +180,19 @@ function shaderSection() {
   return lines.join('\n');
 }
 
+
+/* ---------- the component recipe catalog ---------- */
+
+function componentRecipeTable() {
+  const motion = read('tokens/motion-recipes.json');
+  const lines = ['| ID | Material / behavior | Engine | Base duration | Intended use |',
+                 '|---|---|---|---|---|'];
+  for (const r of motion.recipes) {
+    lines.push(`| \`${r.id}\` | ${r.material} / ${r.signature} | ${r.engine} | ${r.duration}ms | ${esc(r.use || '—')} |`);
+  }
+  return lines.join('\n');
+}
+
 /* ---------- writing ---------- */
 
 function replaceSection(file, name, body) {
@@ -202,5 +215,8 @@ fs.writeFileSync(path.join(ROOT, 'docs/tokens.md'), tokensPage() + '\n');
 const changed = [
   replaceSection('docs/motion.md', 'recipes', recipeSection()),
   replaceSection('docs/motion.md', 'shaders', shaderSection()),
+  /* This was a hand-maintained 54-row copy of the recipe file. It had already fallen
+     behind by five recipes, which is what a duplicated table always does. */
+  replaceSection('docs/motion-components.md', 'component-recipes', componentRecipeTable()),
 ];
 console.log(`Generated docs/tokens.md and ${changed.length} reference sections.`);

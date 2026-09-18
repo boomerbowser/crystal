@@ -262,8 +262,14 @@ move text is wrong regardless of how subtle it is.</p>
 that anything moving for more than five seconds can be paused or stopped, and an ambient
 loop by definition never stops on its own. A surface with ambient motion removed must be
 identical to one that never had it.</p>
+<p>On the web the tier is <code>CrystalMotion.ambient(element, recipe)</code> and
+<code>CrystalMotion.stopAmbient(element)</code>. Nothing starts on its own: a surface is opted in
+explicitly. Reduced motion refuses outright and marks the surface static, a recipe that
+does not declare <code>loop</code> is refused, and any interaction pauses every loop until the page
+is quiet again.</p>
 <p>The high tier belongs in the shader layer, where <code>u_time</code> is already a declared uniform.
-The CSS keyframes below are the floor, not the ceiling.</p>
+The CSS keyframes below are the floor, not the ceiling. The platform obligations are in
+<code>libraries/CONTRACT.md</code> §8.</p>
 <h2 id="what-triggers-a-recipe">What triggers a recipe</h2>
 <p>A recipe that nothing triggers is a specification, not a behaviour. Crystal binds motion
 to <strong>state, not to clicks</strong>:</p>

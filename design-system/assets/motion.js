@@ -41,6 +41,13 @@
   }
   function runComponent(element,name,frames,base,engine,options={}){
     if(!(element instanceof Element))throw new TypeError('CrystalMotion requires an element');
+    /* `once` coalesces repeats of the SAME recipe on the same element. A continuous
+       control fires its event many times a second, and restarting a 400ms animation on
+       every one of them stops it partway and begins again — which is what makes a slider
+       feel choppy. A different recipe still interrupts, because that is a different thing
+       being expressed. Deliberate replays (the catalogue) simply omit the option. */
+    if(options.once&&element.dataset.crMotionName===name&&element.dataset.crMotionState==='running')
+      return Promise.resolve({status:'coalesced'});
     stop(element);element.dataset.crMotionName=name;element.dataset.crMotionEngine=engine;
     const recipe=recipes[name]||{};
     element.dataset.crMotionSignature=recipe.signature||'measured-layout';
@@ -121,5 +128,47 @@
   }
   media.addEventListener('change',()=>{if(reduced())stopAll();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAll();});
-  root.CrystalMotion=Object.freeze({play,layout,duration,recipes:Object.freeze(recipes),stop,stopAll,reduced,direction,presets:Object.freeze([...Object.keys(durationNames),...Object.keys(recipes)])});
+  /* Ambient motion: what a surface does at rest.
+   *
+   * A capability, not a default — nothing here starts on its own. A host opts a surface
+   * in, and the surface keeps cycling until it is stopped. This uses the native effect
+   * directly rather than the engine adapter, because an ambient loop needs no clock,
+   * no spring and no completion promise; it needs to repeat and to stop cleanly.
+   *
+   * Three rules from the specification are enforced here rather than left to callers:
+   * reduced motion refuses outright, a surface that is not ambient-capable is refused,
+   * and interaction pauses the loop — WCAG 2.2.2 requires that anything moving beyond
+   * five seconds can be stopped, and an ambient loop never stops on its own. */
+  const ambients=new Map();
+  function ambient(element,name){
+    if(!(element instanceof Element))throw new TypeError('CrystalMotion.ambient requires an element');
+    const recipe=recipes[name];
+    if(!recipe)throw new RangeError('Unknown Crystal motion: '+name);
+    if(!recipe.loop)throw new RangeError(name+' is not an ambient recipe; ambient motion must declare loop');
+    stopAmbient(element);
+    if(reduced()||typeof element.animate!=='function'){element.dataset.crAmbientState='static';return null;}
+    const effect=element.animate(recipe.keyframes,
+      {duration:recipe.duration,easing:'ease-in-out',iterations:Infinity,direction:'alternate',fill:'none'});
+    element.dataset.crAmbient=name;element.dataset.crAmbientState='running';
+    ambients.set(element,effect);
+    return effect;
+  }
+  function stopAmbient(element){
+    const effect=ambients.get(element);
+    if(effect){effect.cancel();ambients.delete(element);}
+    if(element instanceof Element){delete element.dataset.crAmbient;element.dataset.crAmbientState='stopped';}
+  }
+  /* Ambient yields to the user. Any interaction pauses every loop; they resume once the
+     page is quiet again, so ambient never competes with something being read or used. */
+  let quiet;
+  const hush=()=>{
+    for(const effect of ambients.values())effect.pause();
+    clearTimeout(quiet);
+    quiet=setTimeout(()=>{for(const effect of ambients.values())effect.play();},1200);
+  };
+  for(const type of ['pointerdown','keydown','focusin','wheel'])
+    root.addEventListener(type,hush,{passive:true});
+  media.addEventListener('change',()=>{if(reduced())for(const element of [...ambients.keys()])stopAmbient(element);});
+
+  root.CrystalMotion=Object.freeze({play,ambient,stopAmbient,layout,duration,recipes:Object.freeze(recipes),stop,stopAll,reduced,direction,presets:Object.freeze([...Object.keys(durationNames),...Object.keys(recipes)])});
 })(window);

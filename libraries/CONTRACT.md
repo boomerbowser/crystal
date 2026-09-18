@@ -104,3 +104,38 @@ Non-negotiable properties:
 - **Off when the user has asked for less.** Reduced motion, reduced transparency
   and forced colours each disable the layer outright.
 
+
+## 8. Ambient motion is a capability tier, not a baseline.
+
+Ambient motion is what a surface does at rest — the specular band drifting along a Resin
+rim, a Haze fill breathing around its 80% value. The `Ambient` category in
+`design-system/tokens/motion-recipes.json` carries the recipes; each declares `loop: true`,
+and a recipe that loops is the only kind a platform may run continuously.
+
+A platform is not required to implement this tier at all. A platform that does must honour
+all four properties:
+
+- **Opt-in per surface.** Nothing ambient starts because a component was rendered. The
+  host opts a surface in explicitly and can stop it. On the web this is
+  `CrystalMotion.ambient(element, recipe)` and `CrystalMotion.stopAmbient(element)`; a
+  platform provides the equivalent pair under its own names.
+- **Rim and fill only, never a surface being read.** Motion in the middle of a surface
+  competes with the text on it; motion at its boundary does not. This is the same argument
+  that makes Resin lens at its edge rather than ripple through its centre. Text never
+  moves, and an ambient recipe that would move text is wrong however subtle it is.
+- **The first thing reduced motion removes.** Every ambient recipe declares
+  `reduced: "None."` — not a shorter version, not a gentler one. WCAG 2.2.2 requires that
+  anything moving for more than five seconds can be paused or stopped, and an ambient loop
+  never stops on its own. A surface with ambient removed must be identical to one that
+  never had it.
+- **Yields to the user.** Interaction pauses every ambient loop; they resume once the page
+  is quiet. A loop that keeps running under the pointer is competing with the task.
+
+This does not relax §7. A shader still paints only while a motion is in flight — an
+ambient loop *is* a motion, so the optical layer may drive it — and because ambient is off
+until a surface opts in, a reference frame captured with ambient disabled is unchanged.
+Gate G6 continues to hold for exactly that reason, not by exception.
+
+Where a platform cannot honour the tier, ambient degrades to a static surface with no other
+change. As with the shader layer, an honest absence preserves parity better than a
+divergent approximation.
