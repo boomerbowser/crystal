@@ -49,17 +49,26 @@ jobs:
       # build writes `libraries/parity.json`, a sibling of `design-system/`, and
       # drift there would otherwise be invisible.
       #
+      # `:(top)` on **both** halves, because this step runs in `design-system/`
+      # and a bare exclude is read relative to the working directory. The first
+      # version wrote `:/` for the include and `:!design-system/…` for the
+      # exclude, which resolved to `design-system/design-system/…` and therefore
+      # excluded nothing. It passed locally — because at that moment there was no
+      # diff for it to exclude. CI caught it on the first run, which is the whole
+      # reason for having it.
+      #
       # `validation/token-checks.json` is the exception, and only for its `date`:
       # it records when the evidence was produced, so it differs on every run by
       # design. Its numbers are held to the same rule as everything else — the
       # second command fails if anything but the timestamp moved.
       - name: Generated files match their source
         run: |
-          git diff --exit-code -- :/ ':!design-system/validation/token-checks.json' || {
+          git diff --exit-code -- ':(top)' \
+            ':(exclude,top)design-system/validation/token-checks.json' || {
             echo "::error::A build changed a committed file. Run the build and commit the result."
             exit 1
           }
-          drift=$(git diff -U0 -- :/design-system/validation/token-checks.json \
+          drift=$(git diff -U0 -- ':(top)design-system/validation/token-checks.json' \
             | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | grep -v '"date"' || true)
           if [ -n "$drift" ]; then
             echo "::error::The token evidence changed beyond its timestamp:"
