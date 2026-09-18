@@ -121,6 +121,11 @@ assumption — but neither is closed.
 `design-system/tools/verify-scroll.mjs`. Closing either needs a real device or a
 browser that paints classic scrollbars headlessly.
 
+**Documented, not closable here.** Both are stated in `verify-scroll.mjs` and in
+the capture README, where a reader meets them. Closing either needs hardware this
+repository does not have: a real device, or a headless browser that paints
+classic scrollbars. Left open deliberately rather than marked done.
+
 ## D-4b · `crystal.css` writes both `backdrop-filter` forms too
 
 Crystal's own stylesheet pairs `backdrop-filter` with `-webkit-backdrop-filter` on
@@ -136,6 +141,14 @@ at all, in every story, until it was found.
 the moment this stylesheet is put through any build — a bundler, a minifier, a
 CDN that optimises CSS — it acquires the same defect silently, and because a
 platform library reading it as an example will copy the pattern.
+
+**Closed as a rule rather than an edit.** Stripping `-webkit-backdrop-filter`
+from this stylesheet would lose Safari, because nothing here runs autoprefixer to
+put it back — the preview ships the CSS it is written in. The pair is correct
+*here* and wrong in anything that builds, so what was needed was the distinction,
+written where a library author looks: `libraries/CONTRACT.md`, "Write
+`backdrop-filter` once", with the reproduction and an explicit note not to read
+`crystal.css` as an example of it.
 
 ## D-6 · Neither repository had continuous integration
 
@@ -167,6 +180,11 @@ instead and says why in its source.
 Worth knowing before `animate-on-scroll` or a virtualiser is reviewed the same way.
 
 ---
+
+**Documented, not closable here.** The trade is written where somebody meeting it
+would look — in `AppBar`'s own source, beside the passive scroll listener that
+replaced the observer. It is a limitation of the preview browser, not a defect in
+Crystal, and there is nothing here to repair.
 
 ## Decisions for Meridian
 

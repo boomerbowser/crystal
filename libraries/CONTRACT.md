@@ -135,6 +135,35 @@ duration of an interaction.
 
 
 
+### Write `backdrop-filter` once
+
+Write the unprefixed property and let the build add the alias. Never write
+`-webkit-backdrop-filter` by hand beside it.
+
+The pair does not survive a normal CSS pipeline. Autoprefixer emits the alias,
+and a minifier that sees two declarations it believes are equivalent keeps one —
+the prefixed one, because it comes first. Chromium does not implement the WebKit
+alias, so the material loses its diffusion and nothing reports an error: no
+warning, no failed build, no missing file. Frost and Resin simply render as flat
+translucent fills.
+
+Crystal React shipped like that from its first component until slice G. Every
+screenshot taken in between shows a Crystal without its materials. Reproduced
+through the real pipeline rather than inferred:
+
+```
+/* written as a pair */        -> -webkit-backdrop-filter: blur(40px) saturate(125%)
+/* written unprefixed only */  -> -webkit-backdrop-filter: …; backdrop-filter: …
+```
+
+Autoprefixer alone does not do this; running it over the same declaration keeps
+both. It is autoprefixer *followed by* a minifier that is fatal.
+
+Crystal's own `assets/crystal.css` writes the pair, and correctly: the preview
+ships hand-written CSS that nothing minifies, and dropping the alias there would
+lose Safari. Do not read it as an example. A stylesheet that goes through a build
+is a different problem from one that does not.
+
 ### What not to load
 
 `@crystal/core/css` and `@crystal/core/theme` are for everyone: the reset, the
