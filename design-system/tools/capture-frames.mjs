@@ -79,8 +79,18 @@ for (const frame of frames) {
   await context.addInitScript(
     ([key, prefs, direction]) => {
       try { localStorage.setItem(key, JSON.stringify(prefs)); } catch { /* private mode */ }
-      /* Set before first paint so no frame renders in the wrong direction. */
-      document.documentElement.setAttribute('dir', direction);
+      /* Set before first paint so no frame renders in the wrong direction.
+       *
+       * This has to be re-applied on DOMContentLoaded. An init script runs against the
+       * initial empty document, whose documentElement is then REPLACED by the parsed
+       * one — so setting the attribute once succeeds, silently does nothing, and leaves
+       * an RTL frame that is byte-identical to its LTR twin. That is exactly what had
+       * happened: the direction axis guarded nothing until this was fixed. */
+      const applyDirection = () => {
+        if (document.documentElement) document.documentElement.setAttribute('dir', direction);
+      };
+      applyDirection();
+      document.addEventListener('DOMContentLoaded', applyDirection);
     },
     [STORAGE_KEY, preferencesFor(frame), frame.direction],
   );

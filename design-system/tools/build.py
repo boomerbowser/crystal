@@ -65,7 +65,7 @@ title, content = render_markdown(ROOT / 'src/overview.md')
     styles=['assets/motion.css'], scripts=['assets/docs.js'],
     # Fragments never reach the server, so an inbound link to the old
     # index.html#playground anchor can only be forwarded in the page.
-    head_extra='<script>if(location.hash&&/^#(playground|foundations|components|materials|palettes|code)$/.test(location.hash))'
+    head_extra='<script>if(location.hash&&/^#(playground|workbench|palettes|foundations|content-blending|supporting-materials|components|accessibility|motion|adoption|specification)$/.test(location.hash))'
                'location.replace("playground.html"+location.hash);</script>',
     footer_note='Crystal 2.0 · Derived from Gather’s approved Crystal balance-03.',
     footer_link=('validation/report.html', 'Verification')))

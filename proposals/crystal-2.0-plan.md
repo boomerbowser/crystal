@@ -282,43 +282,43 @@ site contains. The fix is not to restyle four copies. It is to leave one.
 **Files:** `tools/shell.py` (create), `tools/build.py`, `tools/report.py`,
 `src/pages/*.html` (create), `index.html`, `playground.html`, `motion.html`
 
-- [ ] **Step 1** — Write `tools/shell.py` as the only place the header, navigation and footer
+- [x] **Step 1** — Write `tools/shell.py` as the only place the header, navigation and footer
   exist. It is depth-aware: pages at the site root get `prefix=''`, pages in `docs/` get `'../'`.
-- [ ] **Step 2** — Move the body of the current `index.html` into `src/pages/playground.html`
+- [x] **Step 2** — Move the body of the current `index.html` into `src/pages/playground.html`
   and the body of `motion.html` into `src/pages/motion.html`. These fragments are the hand-
   authored content; everything around them becomes generated.
-- [ ] **Step 3** — Generate `playground.html` and `motion.html` from those fragments.
-- [ ] **Step 4** — Have `report.py` import the same shell rather than carry its own copy.
-- [ ] **Step 5** — Prove it: `grep -rl 'site-nav' *.html docs/ validation/ tests/` returns nothing.
+- [x] **Step 3** — Generate `playground.html` and `motion.html` from those fragments.
+- [x] **Step 4** — Have `report.py` import the same shell rather than carry its own copy.
+- [x] **Step 5** — Prove it: `grep -rl 'site-nav' *.html docs/ validation/ tests/` returns nothing.
   A shell that still has a second copy has not been unified.
 
 ### Task 22: The side menu, built from Crystal's own controls
 
 **Files:** `tools/shell.py`, `assets/site.css`
 
-- [ ] **Step 1** — Collapse the top navigation into the sidebar. The sidebar is the whole
+- [x] **Step 1** — Collapse the top navigation into the sidebar. The sidebar is the whole
   site index: Overview, Playground, the ten specification pages, Motion studies, Verification.
-- [ ] **Step 2** — Build the entries as Crystal pill controls, not bare links. Action controls
+- [x] **Step 2** — Build the entries as Crystal pill controls, not bare links. Action controls
   are pill-shaped; the current `doc-nav a` uses a 10px radius, which violates that rule.
-- [ ] **Step 3** — The current page is marked with `aria-current="page"`, and marked visually
+- [x] **Step 3** — The current page is marked with `aria-current="page"`, and marked visually
   with a rail and weight, never a check mark.
-- [ ] **Step 4** — Forced colours: the current entry is a `Highlight` ring, never a fill.
+- [x] **Step 4** — Forced colours: the current entry is a `Highlight` ring, never a fill.
   A filled `--cr-primary-soft` row is the same defect already fixed on the segmented control —
   Chromium's text backplate paints `Canvas` over the label and the text disappears.
-- [ ] **Step 5** — The sidebar is Frost holding Plastic pills. Resin never appears here, and
+- [x] **Step 5** — The sidebar is Frost holding Plastic pills. Resin never appears here, and
   `npm run audit:materials` must report zero violations rather than the rule being asserted.
 
 ### Task 23: The documentation home becomes the index
 
 **Files:** `docs/overview.md` (create), `tools/build.py`, `index.html`, `vercel.json`
 
-- [ ] **Step 1** — Write `docs/overview.md`: what Crystal is, the material hierarchy at a
+- [x] **Step 1** — Write `docs/overview.md`: what Crystal is, the material hierarchy at a
   glance, and a card per specification section. Not a redirect — a real first page.
-- [ ] **Step 2** — Generate it to `index.html` at the site root.
-- [ ] **Step 3** — Preserve inbound `index.html#playground` links with a hash forward. Fragments
+- [x] **Step 2** — Generate it to `index.html` at the site root.
+- [x] **Step 3** — Preserve inbound `index.html#playground` links with a hash forward. Fragments
   never reach the server, so this cannot be a `vercel.json` redirect; it has to be two lines of
   script in the page.
-- [ ] **Step 4** — Cross-link both directions: every Playground section links to its
+- [x] **Step 4** — Cross-link both directions: every Playground section links to its
   specification, every specification section links back to the Playground that demonstrates it.
   `validate.py` already checks that every anchor exists, so a broken cross-link fails the build.
 
@@ -326,16 +326,16 @@ site contains. The fix is not to restyle four copies. It is to leave one.
 
 **Files:** `docs/*.md`, `tools/build-reference.cjs` (create)
 
-- [ ] **Step 1** — Generate what is derivable, so it cannot drift: the token reference from
+- [x] **Step 1** — Generate what is derivable, so it cannot drift: the token reference from
   `tokens/crystal.tokens.json`, the motion recipe reference from `tokens/motion-recipes.json`
   with derived damping ratios and measured overshoot, and the shader contract from
   `assets/shaders/manifest.json`.
-- [ ] **Step 2** — Write the explanations that currently exist only in CSS comments and capture
+- [x] **Step 2** — Write the explanations that currently exist only in CSS comments and capture
   READMEs. Named gaps: Resin-never-inside-Resin and why; the Haze recess; the forced-colours
   text backplate; why not ripples; the six-layer focus recipe; the selection rail.
-- [ ] **Step 3** — Every rule gets a live specimen in the page, not a screenshot. The docs pages
+- [x] **Step 3** — Every rule gets a live specimen in the page, not a screenshot. The docs pages
   already load `crystal.css` and `controls.css`, so a specimen is real and is audited by
   `audit-materials.mjs` like any other composition.
-- [ ] **Step 4** — **GATE G7.** `validate.py` reports zero errors across the moved tree, every
+- [x] **Step 4** — **GATE G7.** `validate.py` reports zero errors across the moved tree, every
   affected baseline is re-blessed with a README stating what moved and why, and the material
   audit is clean including the new specimens.

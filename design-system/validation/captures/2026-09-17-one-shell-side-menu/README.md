@@ -89,3 +89,39 @@ pages checked, zero violations.
 - `tools/validate.py` — 16 pages, 631 local links and assets, 1,011 icons, 0 errors
 - `npm run audit:materials` — 15 pages, 0 violations
 - `npm run verify:visual` — 17 frames against re-blessed baselines
+
+## Three more defects, found by reading the baselines
+
+The first pass blessed seventeen baselines and looked at two of them. Reading the rest
+found three real faults — which is the entire argument for the rule that a blessed frame
+must be looked at. A frame guards whatever it captured, defect included.
+
+**The overview's link cards were split into separate grid cells.** `<a>` is an inline
+element to Python-Markdown's block parser, so the `<strong>` and `<p>` inside each
+`.doc-link` were hoisted out and became siblings. The three-column grid rendered nine
+cells: three links, three orphaned paragraphs and three empty. Each card is now a single
+line of raw HTML. Visible immediately in `overview-dark`, invisible in every automated
+check — `validate.py` saw well-formed HTML with working links, which it was.
+
+**The right-to-left axis had never been applied.** `playground-rtl.png` was byte-identical
+to `playground-light.png`, and had been since the frame was created — verified against
+`HEAD~1`, so this predates these changes. `tools/capture-frames.mjs` set
+`document.documentElement.setAttribute('dir', …)` in an init script, which runs against the
+*initial empty document*; the parsed document then replaces that element and the attribute
+goes with it. The call succeeded, did nothing, and raised nothing. It is now re-applied on
+`DOMContentLoaded`, and the RTL capture differs from its LTR twin for the first time.
+
+This matters beyond the gate: `docs/accessibility.md` states that right-to-left is a
+verified axis. Until this fix that sentence was not true.
+
+**The menu toggle had no pill geometry.** `controls.css` scopes the control geometry to
+`nav a.cr-control`, so a `<button class="cr-control">` in the header matched the Resin
+background rule but not the geometry rule, and fell back to the user agent's 1px/6px
+padding — a squashed box with the label pinned to its top edge. Action controls are
+pill-shaped whatever element implements them, so `.menu-toggle` now carries the geometry
+explicitly rather than inheriting it by accident.
+
+Also added: a `haze-in-resin` frame anchored at the live specimen in `docs/materials.md`.
+The request log had recorded that no composition exercised Haze inside a Resin frame, so
+the rule was audited in the DOM but the recess that expresses it was gated by nothing.
+Eighteen frames now.

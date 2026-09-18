@@ -82,7 +82,10 @@
   .menu-heading{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--cr-muted);margin:0 0 7px;padding-inline-start:14px}
   .menu-group{display:flex;flex-direction:column;gap:2px}
   .menu-rail{position:absolute;inset-inline-start:6px;top:50%;translate:0 -50%;width:3px;height:0;border-radius:2px;background:var(--cr-primary);transition:height var(--cr-state)}
-  .menu-toggle{display:none;font-size:13px;font-weight:750}
+  /* Pill geometry explicitly: controls.css scopes it to `nav a.cr-control`, so a
+     <button> in the header inherits none of it and falls back to the user agent's
+     1px/6px padding. Action controls are pill-shaped whatever element they are. */
+  .menu-toggle{display:none;align-items:center;justify-content:center;gap:8px;padding:10px 16px;min-height:44px;border-radius:99px;font-size:13px;font-weight:750}
   .site-main{min-width:0}
   .doc-body{max-width:920px;min-width:0}
   .doc-body h1{font-size:38px}

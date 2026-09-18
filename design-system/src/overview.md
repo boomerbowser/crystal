@@ -9,23 +9,10 @@ This site is both the specification and a working copy of the system. Every spec
 these pages is live: the same CSS that ships is the CSS drawing the examples, so a rule
 that has stopped being true shows it here first.
 
-<div class="docs-grid" markdown="1">
-
-<a class="doc-link" href="playground.html">
-<strong>Open the Playground</strong>
-<p>Change palette, atmosphere, elevation and material depth on a real interface, then export the configuration.</p>
-</a>
-
-<a class="doc-link" href="docs/principles.html">
-<strong>Read the foundations</strong>
-<p>What the system is for, and the decisions that everything else follows from.</p>
-</a>
-
-<a class="doc-link" href="docs/adoption.html">
-<strong>Adopt it</strong>
-<p>Install, build, theme, and the parity bar a platform library has to clear.</p>
-</a>
-
+<div class="docs-grid">
+<a class="doc-link" href="playground.html"><strong>Open the Playground</strong><p>Change palette, atmosphere, elevation and material depth on a real interface, then export the configuration.</p></a>
+<a class="doc-link" href="docs/principles.html"><strong>Read the foundations</strong><p>What the system is for, and the decisions that everything else follows from.</p></a>
+<a class="doc-link" href="docs/adoption.html"><strong>Adopt it</strong><p>Install, build, theme, and the parity bar a platform library has to clear.</p></a>
 </div>
 
 ## The material hierarchy
