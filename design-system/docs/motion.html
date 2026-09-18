@@ -341,7 +341,7 @@ including that reduced motion still applies the state instantly.</p>
 <h2 id="recipe-reference">Recipe reference</h2>
 <!-- generated:recipes -->
 
-<p>All 59 recipes in 10 categories, generated from <code>tokens/motion-recipes.json</code>. <strong>Damping ratio</strong> and
+<p>All 60 recipes in 10 categories, generated from <code>tokens/motion-recipes.json</code>. <strong>Damping ratio</strong> and
 <strong>overshoot</strong> are derived from each recipe's spring by <code>assets/core/spring.js</code>, not
 authored — so a spring that was retuned cannot leave a stale number behind in this table.</p>
 <p>A damping ratio below 1 overshoots and settles back; exactly 1 is the fastest approach
@@ -1094,6 +1094,16 @@ correct is a material question, not a taste question — see the signature polic
 <td>none</td>
 <td>A barely perceptible oscillation of a Haze content fill around its 80% value. Never drops far enough to affect the contrast of text on it.</td>
 <td>None. The fill holds at 80%.</td>
+</tr>
+<tr>
+<td><code>stone-settle</code> — Stone at rest</td>
+<td>1600ms</td>
+<td>feather</td>
+<td>stone</td>
+<td>0.920</td>
+<td>none</td>
+<td>The feathered edge of a Stone label backing, drawing inward and returning. Stone draws in where Haze breathes out, so a label backing and the content fill around it never pulse together. The label above it does not move.</td>
+<td>None. The backing holds at its resting opacity.</td>
 </tr>
 <tr>
 <td><code>mirage-current</code> — Mirage at rest</td>

@@ -12,7 +12,9 @@
     "effects": "full",
     "direction": "ltr",
     "forcedColors": "none",
-    "settleMs": 900
+    "settleMs": 900,
+    "ambient": "off",
+    "ambientClock": 6.5
   },
   "axes": {
     "mode": [
@@ -153,7 +155,21 @@
       "id": "haze-in-resin",
       "page": "docs/materials.html",
       "anchor": "#the-correct-composition-live",
-      "why": "The only composition on the site that exercises Haze inside a Resin frame. The rule forbidding Resin inside Resin is audited in the DOM, but the recess that makes the Haze fill read as the frame's content \u2014 an inset dark top edge and light bottom edge, under a light source above \u2014 is purely visual and was gated by nothing."
+      "why": "The only composition on the site that exercises Haze inside a Resin frame. The rule forbidding Resin inside Resin is audited in the DOM, but the recess that makes the Haze fill read as the frame's content — an inset dark top edge and light bottom edge, under a light source above — is purely visual and was gated by nothing."
+    },
+    {
+      "id": "materials-at-rest",
+      "page": "playground.html",
+      "clip": ".materials",
+      "ambient": "rest",
+      "why": "The three material samples with ambient motion running at a pinned clock. Every other frame photographs the materials still, and these specimens sit below the fold of all of them, so the rest state was guarded by nothing: a Resin lens pinned at full press deformation shipped as a hard emboss around every control with all eighteen frames identical."
+    },
+    {
+      "id": "resin-dock-at-rest",
+      "page": "playground.html",
+      "clip": ".study-pane",
+      "ambient": "rest",
+      "why": "Resin and Frost at rest in one composition, with a Stone label inside the Resin frame. Guards that an optical rest layer stays at the rim and never reaches the surface a label is read on."
     }
   ],
   "reblessing": {

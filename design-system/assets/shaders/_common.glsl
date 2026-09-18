@@ -33,8 +33,27 @@ float fbm(vec2 p){
    derives from this one function, which is why refraction and caustics agree:
    they are two readings of one surface rather than two effects tuned to
    resemble each other. */
-float roundedBoxSDF(vec2 uv, vec2 halfSize, float radius){
-  vec2 d = abs(uv - 0.5) - halfSize + radius;
+/* Panel geometry is measured in units of the SHORT side.
+ *
+ * Working directly in 0..1 uv makes every distance anisotropic: on a 216x113
+ * control a "corner radius" of 0.17 is 37px across and 19px down, and a lens
+ * band of one thickness is twice as deep along the top edge as along the side.
+ * The result is a contour that visibly fails to follow the element it is
+ * lighting — a rounded rectangle of the wrong shape, drawn just inside the
+ * real one. Correcting the space costs one multiply and makes radius and
+ * thickness mean the same thing in both axes.
+ *
+ * Set once per frame, at the top of main, before any helper is called. */
+vec2 g_aspect = vec2(1.0);
+void panelSpace(vec2 resolution){
+  g_aspect = resolution / max(min(resolution.x, resolution.y), 1.0);
+}
+
+/* Signed distance to the panel's rounded rectangle, negative inside.
+   `radius` is in short-side units, so it is a real corner radius. */
+float roundedPanelSDF(vec2 uv, float radius){
+  vec2 halfSize = 0.5 * g_aspect;
+  vec2 d = abs((uv - 0.5) * g_aspect) - halfSize + radius;
   return length(max(d, 0.0)) + min(max(d.x, d.y), 0.0) - radius;
 }
 
@@ -65,8 +84,10 @@ float edgeLens(float sdf, float thickness){
    simulate heavier material the same way. */
 float surface(vec2 uv, vec2 contact, float time, float progress, float pressure){
   float radius = 0.17;
-  float sdf = roundedBoxSDF(uv, vec2(0.5) - vec2(radius), radius);
-  float thickness = 0.20 + pressure * 0.10;
+  float sdf = roundedPanelSDF(uv, radius);
+  /* Depth and width are one quantity: a shallow lens is also a narrow one. At
+     full displacement this is the original 0.20. */
+  float thickness = 0.10 + 0.10 * progress + pressure * 0.10;
   float lens = edgeLens(sdf, thickness);
 
   /* A slow, small variation along the rim so the material feels alive without
@@ -105,8 +126,5 @@ vec3 surfaceNormal(vec2 uv, vec2 contact, float time, float progress, float pres
 /* Soft rounded-rectangle mask so a shader never paints past the material's own
    corner radius. Signed distance, so the falloff is uniform along the edge. */
 float panelMask(vec2 uv, float radius, float softness){
-  vec2 halfSize = vec2(0.5) - vec2(radius);
-  vec2 d = abs(uv - 0.5) - halfSize;
-  float sdf = length(max(d, 0.0)) + min(max(d.x, d.y), 0.0) - radius;
-  return 1.0 - smoothstep(-softness, softness, sdf);
+  return 1.0 - smoothstep(-softness, softness, roundedPanelSDF(uv, radius));
 }

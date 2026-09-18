@@ -34,6 +34,7 @@ float diffusionAt(vec2 uv){
 
 void main(){
   vec2 uv = gl_FragCoord.xy / u_resolution;
+  panelSpace(u_resolution);
 
   /* The separation drifts so the wander is never static, and stays wide — a
      broad offset gives a slow gradient of colour temperature; a narrow one

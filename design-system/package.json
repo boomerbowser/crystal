@@ -11,6 +11,7 @@
     "capture:frames": "node tools/capture-frames.mjs",
     "verify:visual": "node tools/verify-frames.mjs",
     "audit:materials": "node tools/audit-materials.mjs",
+    "audit:ambient": "node tools/audit-ambient.mjs",
     "verify:interactions": "node tools/verify-interactions.mjs",
     "validate:docs": "node tools/validate-docs.cjs"
   },

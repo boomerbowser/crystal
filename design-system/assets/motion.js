@@ -156,7 +156,7 @@
     if(recipe.layer)options.pseudoElement=recipe.layer;
     const effect=element.animate(recipe.keyframes,options);
     element.dataset.crAmbient=name;element.dataset.crAmbientState='running';
-    effect.playbackRate=REST_RATE;
+    effect.playbackRate=ambientRate;
     ambients.set(element,effect);
     return effect;
   }
@@ -174,12 +174,27 @@
      motion genuinely competes with the task, so ambient pauses there and nowhere else.
      WCAG 2.2.2 is satisfied by reduced motion and stopAmbient, not by stopping on every
      click. */
+  /* This is the ONE rate table for ambient motion. The WebGL tier used to carry its own
+     copy, which had already drifted: it dropped to zero on text focus and never restored
+     on blur, so escaping a field left every shader frozen until the next click. The rate
+     is broadcast instead, and assets/motion-shaders.js listens. A page that loads the
+     shader tier without this file keeps the resting rate and simply never speeds up. */
   const REST_RATE=0.6, HOVER_RATE=1, PRESS_RATE=2.4;
-  let decay;
+  let ambientRate=REST_RATE, decay;
+  const applyRate=rate=>{
+    ambientRate=rate;
+    for(const effect of ambients.values()){
+      /* Zero means paused rather than stopped: the surface holds its position and
+         resumes from it, which is what returning to a half-open state should look like. */
+      if(rate===0)effect.pause();
+      else{effect.play();effect.playbackRate=rate;}
+    }
+    root.dispatchEvent(new CustomEvent('crystal:ambient-rate',{detail:{rate}}));
+  };
   const energise=rate=>{
-    for(const effect of ambients.values())effect.playbackRate=rate;
+    applyRate(rate);
     clearTimeout(decay);
-    decay=setTimeout(()=>{for(const effect of ambients.values())effect.playbackRate=REST_RATE;},900);
+    decay=setTimeout(()=>applyRate(REST_RATE),900);
   };
   root.addEventListener('pointerover',event=>{
     if(event.target instanceof Element&&event.target.closest('button,a,[role=button],.cr-control'))
@@ -190,11 +205,42 @@
     const field=event.target;
     const typing=field instanceof Element&&field.matches(
       'input:not([type=range],[type=checkbox],[type=radio],[type=button],[type=submit],[type=reset]),textarea,[contenteditable=true]');
-    for(const effect of ambients.values())
-      if(typing)effect.pause();else effect.play();
+    /* Text entry is not a decaying burst; it holds until the field is left. */
+    clearTimeout(decay);
+    applyRate(typing?0:REST_RATE);
   },{passive:true});
-  root.addEventListener('focusout',()=>{for(const effect of ambients.values())effect.play();},{passive:true});
+  root.addEventListener('focusout',()=>{clearTimeout(decay);applyRate(REST_RATE);},{passive:true});
   media.addEventListener('change',()=>{if(reduced())for(const element of [...ambients.keys()])stopAmbient(element);});
 
-  root.CrystalMotion=Object.freeze({play,ambient,stopAmbient,layout,duration,recipes:Object.freeze(recipes),stop,stopAll,reduced,direction,presets:Object.freeze([...Object.keys(durationNames),...Object.keys(recipes)])});
+  /* Give every Haze and Stone surface its rest state as it comes into view.
+     Haze and Stone are the two materials that ARE their feathered edge, so their rest
+     motion is that edge travelling outward and back — never a colour or opacity change,
+     which is the same edge merely getting fainter. They are opposed on purpose: Haze
+     breathes outward, Stone draws inward, so a label backing and the content fill around
+     it are never pulsing in unison.
+
+     Unlike the WebGL tier there is no cap here. These are Web Animations on an existing
+     paint layer, cheap enough to be everywhere, which is why the CSS tier is the floor
+     the specification guarantees on every platform. */
+  const AMBIENT_SURFACES=[['.cr-haze,.cr-surface','haze-settle'],['.cr-stone,.cr-dock-inner','stone-settle']];
+  function ambientAll(scope=document){
+    if(reduced()||document.documentElement.dataset.ambient==='off')return()=>{};
+    if(typeof IntersectionObserver!=='function')return()=>{};
+    const observer=new IntersectionObserver(entries=>{
+      for(const record of entries){
+        const name=AMBIENT_SURFACES.find(([selector])=>record.target.matches(selector))?.[1];
+        if(!name)continue;
+        if(record.isIntersecting)ambient(record.target,name);
+        else stopAmbient(record.target);
+      }
+    },{rootMargin:'64px'});
+    for(const [selector] of AMBIENT_SURFACES)
+      for(const element of scope.querySelectorAll(selector))
+        if(!element.closest('[data-cr-motion=manual]'))observer.observe(element);
+    return()=>observer.disconnect();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>ambientAll());
+  else ambientAll();
+
+  root.CrystalMotion=Object.freeze({play,ambient,stopAmbient,ambientAll,ambientRate:()=>ambientRate,layout,duration,recipes:Object.freeze(recipes),stop,stopAll,reduced,direction,presets:Object.freeze([...Object.keys(durationNames),...Object.keys(recipes)])});
 })(window);

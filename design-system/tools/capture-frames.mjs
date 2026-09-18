@@ -77,7 +77,7 @@ for (const frame of frames) {
   });
 
   await context.addInitScript(
-    ([key, prefs, direction]) => {
+    ([key, prefs, direction, ambient, clock]) => {
       try { localStorage.setItem(key, JSON.stringify(prefs)); } catch { /* private mode */ }
       /* Set before first paint so no frame renders in the wrong direction.
        *
@@ -90,15 +90,20 @@ for (const frame of frames) {
         if (!document.documentElement) return;
         document.documentElement.setAttribute('dir', direction);
         /* Ambient motion is a material's declared rest state, so by default these
-           surfaces are moving. A moving surface cannot be captured deterministically,
-           so every reference frame photographs the material still. This is a property
-           of the camera, not an exemption from the rule. */
-        document.documentElement.setAttribute('data-ambient', 'off');
+           surfaces are moving, and a moving surface cannot be captured
+           deterministically. Most frames therefore photograph the material still.
+           That was once true of ALL of them, which meant no reference frame had
+           ever contained an ambient surface — and a Resin rest shader pinned at
+           full press deformation reached the preview with every gate green.
+           A frame may now instead pin the ambient clock, which freezes the effect
+           at a chosen instant and makes it as reviewable as anything else. */
+        if (ambient === 'rest') document.documentElement.setAttribute('data-ambient-clock', clock);
+        else document.documentElement.setAttribute('data-ambient', 'off');
       };
       applyDirection();
       document.addEventListener('DOMContentLoaded', applyDirection);
     },
-    [STORAGE_KEY, preferencesFor(frame), frame.direction],
+    [STORAGE_KEY, preferencesFor(frame), frame.direction, frame.ambient, String(frame.ambientClock)],
   );
 
   if (NO_WEBGL) {
@@ -144,7 +149,17 @@ for (const frame of frames) {
     await page.waitForTimeout(frame.settleMs);
 
     const file = `${OUT}/${frame.id}.png`;
-    await page.screenshot({ path: file });
+    /* A frame may photograph one specimen instead of the viewport. The material
+       studies sit far below the fold of every 1280x900 frame, so nothing that
+       happens to them has ever been visible to this gate. */
+    if (frame.clip) {
+      const element = await page.waitForSelector(frame.clip, { timeout: 10000 });
+      await element.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(frame.settleMs);
+      await element.screenshot({ path: file });
+    } else {
+      await page.screenshot({ path: file });
+    }
     captured.push(frame.id);
   } catch (error) {
     failures.push({ id: frame.id, url, error: error.message.split('\n')[0] });

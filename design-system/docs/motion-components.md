@@ -2,7 +2,7 @@
 
 [Open the live component studies](../motion.html#component-motion) · [Search all recipes](../motion.html#recipe-library) · [Run browser contracts](../tests/motion-contracts.html)
 
-Crystal ships 59 executable component recipes in ten families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
+Crystal ships 60 executable component recipes in ten families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
 
 ## Engine responsibilities
 
@@ -127,6 +127,7 @@ Base times below are at 1×; the preview resolves the saved speed at playback. E
 | `resin-breathe` | resin / refraction | GSAP | 2000ms | The specular band on a Resin surface at rest. Applies to the rim layer only; the content above it never moves. |
 | `frost-drift` | frost / feather | GSAP | 2000ms | Slow drift of the Frost grain and tint on a panel that persists while content moves behind it. |
 | `haze-settle` | haze / feather | GSAP | 1900ms | A barely perceptible oscillation of a Haze content fill around its 80% value. Never drops far enough to affect the contrast of text on it. |
+| `stone-settle` | stone / feather | GSAP | 1600ms | The feathered edge of a Stone label backing, drawing inward and returning. Stone draws in where Haze breathes out, so a label backing and the content fill around it never pulse together. The label above it does not move. |
 | `mirage-current` | mirage / refraction | GSAP | 2000ms | Slow current in the modal scrim while a dialog is open. Stops when the dialog closes. |
 <!-- /generated:component-recipes -->
 

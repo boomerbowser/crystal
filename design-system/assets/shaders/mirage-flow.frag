@@ -16,6 +16,7 @@ out vec4 fragColor;
 
 void main(){
   vec2 uv = gl_FragCoord.xy / u_resolution;
+  panelSpace(u_resolution);
 
   /* Distort the sampling position before measuring distance: the front is
      still a expanding boundary, but its edge is shaped by the flow rather

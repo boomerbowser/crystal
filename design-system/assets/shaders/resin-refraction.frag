@@ -32,10 +32,16 @@ out vec4 fragColor;
 
 void main(){
   vec2 uv = gl_FragCoord.xy / u_resolution;
+  panelSpace(u_resolution);
 
   float radius = 0.17;
-  float sdf = roundedBoxSDF(uv, vec2(0.5) - vec2(radius), radius);
-  float thickness = 0.20 + u_pressure * 0.10;
+  float sdf = roundedPanelSDF(uv, radius);
+  /* The lens gets both shallower and NARROWER as progress falls. A thick band at
+     low strength is a vignette, not a rim: it dims a fifth of the panel, which is
+     the part of the surface content is read on. Depth and width are one physical
+     quantity here, so they move together. At full displacement this resolves to
+     the original 0.20, leaving the press response untouched. */
+  float thickness = 0.10 + 0.10 * u_progress + u_pressure * 0.10;
   float rim = edgeLens(sdf, thickness) * u_progress;
 
   vec3 normal = surfaceNormal(uv, u_contact, u_time, u_progress, u_pressure);

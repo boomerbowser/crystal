@@ -268,7 +268,7 @@ including that reduced motion still applies the state instantly.
 
 <!-- generated:recipes -->
 
-All 59 recipes in 10 categories, generated from `tokens/motion-recipes.json`. **Damping ratio** and
+All 60 recipes in 10 categories, generated from `tokens/motion-recipes.json`. **Damping ratio** and
 **overshoot** are derived from each recipe's spring by `assets/core/spring.js`, not
 authored — so a spring that was retuned cannot leave a stale number behind in this table.
 
@@ -383,6 +383,7 @@ correct is a material question, not a taste question — see the signature polic
 | `resin-breathe` — Resin at rest | 2000ms | refraction | resin | 0.850 | 0.6% | The specular band on a Resin surface at rest. Applies to the rim layer only; the content above it never moves. | None. The surface is static. |
 | `frost-drift` — Frost at rest | 2000ms | feather | frost | 0.920 | none | Slow drift of the Frost grain and tint on a panel that persists while content moves behind it. | None. The surface is static. |
 | `haze-settle` — Haze at rest | 1900ms | feather | haze | 0.920 | none | A barely perceptible oscillation of a Haze content fill around its 80% value. Never drops far enough to affect the contrast of text on it. | None. The fill holds at 80%. |
+| `stone-settle` — Stone at rest | 1600ms | feather | stone | 0.920 | none | The feathered edge of a Stone label backing, drawing inward and returning. Stone draws in where Haze breathes out, so a label backing and the content fill around it never pulse together. The label above it does not move. | None. The backing holds at its resting opacity. |
 | `mirage-current` — Mirage at rest | 2000ms | refraction | mirage | 0.850 | 0.6% | Slow current in the modal scrim while a dialog is open. Stops when the dialog closes. | None. The scrim is a flat fill. |
 
 **Spring policy.** Every recipe carries a spring fitted to its authored duration, which remains the authority. Damping ratio is chosen by signature: inertia and coalesce overshoot because momentum is their material claim, feather and caustic do not because a soft edge that bounces is wrong. Disabling springs must reproduce the keyframes exactly.

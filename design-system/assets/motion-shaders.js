@@ -101,12 +101,36 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
   /* Read the material tint from the resolved palette rather than choosing a
      colour here, so a shader can never introduce colour the token set did not
      sanction. */
+  /* `--cr-companion` is the same token the shadow tint is mixed from in
+     CrystalMotion.exportCSS. Refracted light and the shadow it casts have to agree
+     about what colour the light is, so they read one token, not two. An earlier
+     draft read `--cr-accent`, which no palette defines — every palette therefore
+     refracted the hardcoded fallback, and the shaders were prism-purple regardless
+     of the scheme. The fallback is kept only for a surface queried before the
+     theme resolves, and is the default palette's own companion. */
+  /* Palette tokens are authored as hex, so a bare digit scan reads "#EF48C6" as
+     the two numbers 48 and 6 and silently falls through to the default every
+     time. Both notations are parsed explicitly instead. */
+  function parseColour(value) {
+    const text = (value || '').trim();
+    const hex = /^#([0-9a-f]{3,8})$/i.exec(text);
+    if (hex) {
+      const digits = hex[1].length < 6
+        ? hex[1].slice(0, 3).split('').map((c) => c + c).join('')
+        : hex[1].slice(0, 6);
+      return [0, 2, 4].map((i) => parseInt(digits.slice(i, i + 2), 16));
+    }
+    const parts = (text.match(/[\d.]+/g) || []).slice(0, 3).map(Number);
+    return parts.length === 3 && parts.every(Number.isFinite) ? parts : null;
+  }
+
   function tintOf(element) {
-    const value = getComputedStyle(element).getPropertyValue('--cr-accent')
-      || getComputedStyle(document.documentElement).getPropertyValue('--cr-accent');
-    const parts = (value.match(/[\d.]+/g) || []).slice(0, 3).map(Number);
-    if (parts.length === 3) return parts.map((c) => Math.pow(c / 255, 2.2));
-    return [0.45, 0.22, 0.94].map((c) => c);
+    const value = getComputedStyle(element).getPropertyValue('--cr-companion')
+      || getComputedStyle(document.documentElement).getPropertyValue('--cr-companion');
+    const parts = parseColour(value);
+    /* sRGB to linear, because the shader mixes light rather than pixels. */
+    if (parts) return parts.map((c) => Math.pow(c / 255, 2.2));
+    return [0.45, 0.22, 0.94];
   }
 
   function detach(element) {
@@ -211,9 +235,26 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
       const rate = record.ambient ? state.energy : 1;
       record.clock += ((now - record.last) / 1000) * rate;
       record.last = now;
-      const seconds = record.ambient ? record.clock : (now - started) / 1000;
+      /* A surface that moves at rest cannot be photographed by a comparison gate, and
+         the previous answer — capture every frame with ambient switched off — meant the
+         rest state was never in a reference frame at all. That is how a Resin lens
+         pinned at full press deformation reached the preview unseen. Pinning the clock
+         instead freezes the effect at a chosen instant, so ambient appearance becomes
+         as reviewable as anything else. It is a capture hook, not a product feature:
+         reading it costs one attribute lookup per frame and it is documented as such. */
+      const frozen = Number(root.document.documentElement.dataset.ambientClock);
+      const seconds = Number.isFinite(frozen) && record.ambient
+        ? frozen
+        : (record.ambient ? record.clock : (now - started) / 1000);
       const progress = typeof options.progress === 'function'
         ? options.progress(seconds) : (options.progress ?? 1);
+      /* The contact point is where the light gathers. During a motion it is fixed —
+         the place the movement came from. At rest it is the one thing that moves:
+         the shader reads only its direction from centre, so walking it around a
+         circle sweeps the specular band along the rim without changing anything
+         else. Light travelling over a still surface is the whole rest effect. */
+      const contact = typeof options.contact === 'function'
+        ? options.contact(seconds) : options.contact;
 
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.clearColor(0, 0, 0, 0);
@@ -222,7 +263,7 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
       gl.uniform2f(locations.resolution, canvas.width, canvas.height);
       gl.uniform1f(locations.progress, Math.max(0, Math.min(1, progress)));
       gl.uniform1f(locations.pressure, options.pressure ?? 0);
-      gl.uniform2f(locations.contact, options.contact?.[0] ?? 0.5, options.contact?.[1] ?? 0.5);
+      gl.uniform2f(locations.contact, contact?.[0] ?? 0.5, contact?.[1] ?? 0.5);
       gl.uniform3f(locations.tint, tint[0], tint[1], tint[2]);
       gl.uniform1f(locations.intensity, options.intensity ?? 1);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
@@ -240,24 +281,18 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
 
   /* Ambient energy. Rest, hover, press — the surface is always moving, and interaction
      adds to it rather than stopping it. Text entry is the one exception, because a field
-     being typed into is where motion genuinely competes with the task. */
-  let settle;
-  const energise = (rate) => {
-    state.energy = rate;
-    clearTimeout(settle);
-    settle = setTimeout(() => { state.energy = 0.6; }, 900);
-  };
-  root.addEventListener('pointerover', (event) => {
-    if (event.target instanceof Element
-      && event.target.closest('button,a,[role=button],.cr-control')) energise(1);
-  }, { passive: true });
-  root.addEventListener('pointerdown', () => energise(2.4), { passive: true });
-  root.addEventListener('focusin', (event) => {
-    const field = event.target;
-    const typing = field instanceof Element && field.matches(
-      'input:not([type=range],[type=checkbox],[type=radio],[type=button],[type=submit],[type=reset]),textarea,[contenteditable=true]');
-    state.energy = typing ? 0 : 0.6;
-  }, { passive: true });
+     being typed into is where motion genuinely competes with the task.
+
+     The rate itself belongs to assets/motion.js, which owns the one table and broadcasts
+     it. This tier used to keep a second copy of the same numbers, and the copies had
+     already drifted apart: this one dropped to zero on text focus and had no blur
+     handler at all, so leaving a field by any route left every shader frozen until the
+     next click. Listening costs nothing and cannot drift. Loaded without that file, the
+     shaders simply stay at the resting rate. */
+  root.addEventListener('crystal:ambient-rate', (event) => {
+    const rate = Number(event.detail?.rate);
+    if (Number.isFinite(rate)) state.energy = rate;
+  });
 
   /* A page has many material surfaces and a browser has few WebGL contexts — Chromium
      starts discarding them around sixteen. Ambient shaders are therefore capped well
@@ -265,16 +300,53 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
      CSS floor, which is complete on its own. Haze, Stone and Plastic never take a
      context at all: their motion is CSS, which is cheap enough to be everywhere. */
   const MAX_AMBIENT = 6;
+
+  /* What "at rest" means, per material. This is the part an earlier draft got wrong:
+     it handed both shaders `progress: 1`, which is not a rest state but the peak of a
+     press. For Resin that pinned the lens at full deformation forever — a hard-edged
+     band a fifth of the panel deep, with its own dark inner shade, permanently
+     embossed around every Resin surface and showing through anything laid over it.
+     `progress` is a displacement, so at rest it must be small, and it must move.
+
+     Resin refracts: a shallow lens that breathes slightly while the specular band
+     travels around the rim. Frost diffuses: no lens at all, so its progress only
+     scales the grain's displacement and its light does not travel. The two materials
+     are deliberately given different rest behaviour, because the difference between
+     them is the point of the hierarchy.
+
+     Calibrated by measurement, not by eye, against a still capture of the same
+     surface (tools/audit-ambient.mjs keeps these numbers honest):
+
+       worst-channel delta        rim mean   rim max   interior mean
+       as shipped in 021e0a0         48.73        81            9.35
+       Resin at rest, now             1.90        34            0.02
+       Frost at rest, now             1.51        26            0.80
+
+     The shipped figures are the two faults compounded: a pinned progress, and a
+     panel geometry measured in 0..1 uv, which on a wide control stretched the
+     lens band until it reached the middle of the surface. With the geometry
+     corrected in _common.glsl the interior stays clean even at progress 1, so it
+     is the rim mean that now catches a lens pinned open — all three bounds are
+     load-bearing and each of them has been shown to fail on demand.
+
+     `intensity` is high because it scales alpha alone: the lens stays shallow and
+     narrow, and only the light travelling over it gets brighter. */
+  const REST = {
+    'resin-refraction': {
+      progress: (t) => 0.15 + 0.05 * Math.sin(t * 0.55),
+      contact: (t) => [0.5 + 0.4 * Math.cos(t * 0.22), 0.5 + 0.4 * Math.sin(t * 0.22)],
+      intensity: 16,
+    },
+    'frost-displacement': { progress: 0.85, intensity: 2.2 },
+  };
   const AMBIENT_FOR = [['.cr-resin,.cr-glass', 'resin-refraction'], ['.cr-frost,.cr-acrylic', 'frost-displacement']];
   const ambientHandles = new Map();
 
   function ambient(element, shaderId) {
     if (ambientHandles.has(element) || ambientHandles.size >= MAX_AMBIENT) return null;
-    /* 2.2 is where the shader's own alpha ceiling takes over — past it nothing changes,
-       which is the material's low-amplitude rule holding rather than a number chosen by
-       eye. Below it the effect measures a worst-channel delta of 3 against a still
-       surface, which is present in a contract and absent to a person. */
-    const pending = attach(element, shaderId, { ambient: true, progress: 1, intensity: 2.2 });
+    const rest = REST[shaderId];
+    if (!rest) return null;
+    const pending = attach(element, shaderId, { ...rest, ambient: true });
     ambientHandles.set(element, pending);
     return pending;
   }

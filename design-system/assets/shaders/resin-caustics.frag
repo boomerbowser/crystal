@@ -20,6 +20,7 @@ out vec4 fragColor;
 
 void main(){
   vec2 uv = gl_FragCoord.xy / u_resolution;
+  panelSpace(u_resolution);
   float e = 0.0032;
 
   /* Divergence of the height field: negative where the surface focuses light,
