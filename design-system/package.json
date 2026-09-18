@@ -1,5 +1,5 @@
 {
-  "name": "@meridian/crystal",
+  "name": "@crystal/core",
   "version": "2.0.0-alpha.1",
   "description": "Crystal design system: tokens, material primitives, headless core, icons and specifications.",
   "scripts": {

@@ -7,133 +7,261 @@
       "id": "app-shell",
       "name": "App shell",
       "anatomy": "Plastic foundation, optional Frost sidebar and header, a content region, and a floating Resin destination group.",
-      "states": ["expanded", "collapsed", "narrow"],
+      "states": [
+        "expanded",
+        "collapsed",
+        "narrow"
+      ],
       "material": "Plastic foundation; Frost supporting panels; Resin destination plane",
       "geometry": "Panel radius = content radius + 6px",
       "semantics": "Landmark roles: banner, navigation, main, contentinfo. One main per view.",
       "crystal": "Material assignment per region, elevation ordering, safe-area handling",
       "product": "Routing, which regions exist, persistence of the collapsed state",
-      "parity": ["mantine:AppShell", "antd:Layout", "mui:Box+Drawer"]
+      "parity": [
+        "mantine:AppShell",
+        "antd:Layout",
+        "mui:Box+Drawer"
+      ]
     },
     {
       "id": "container",
       "name": "Container",
       "anatomy": "Max-width reading column with responsive gutters.",
-      "states": ["default"],
+      "states": [
+        "default"
+      ],
       "material": "None; inherits the surface beneath",
       "geometry": "Gutters follow the 4px rhythm: 18/26/44px by viewport",
       "semantics": "Presentational only; must not introduce a landmark",
       "crystal": "Width ceiling and gutter scale",
       "product": "Which content is constrained",
-      "parity": ["mantine:Container", "mui:Container", "antd:Layout.Content"]
+      "parity": [
+        "mantine:Container",
+        "mui:Container",
+        "antd:Layout.Content"
+      ]
     },
     {
       "id": "grid",
       "name": "Grid",
       "anatomy": "Column grid with a consistent gutter and responsive column counts.",
-      "states": ["default"],
+      "states": [
+        "default"
+      ],
       "material": "None",
       "geometry": "Gutters from the 4px rhythm; 12-column reference",
       "semantics": "Presentational; reading order must match visual order",
       "crystal": "Gutter scale and breakpoint behaviour",
       "product": "Column spans per breakpoint",
-      "parity": ["mantine:Grid", "mui:Grid", "antd:Row+Col"]
+      "parity": [
+        "mantine:Grid",
+        "mui:Grid",
+        "antd:Row+Col"
+      ]
     },
     {
       "id": "simple-grid",
       "name": "Simple grid",
       "anatomy": "Equal-width auto-flowing cells.",
-      "states": ["default"],
+      "states": [
+        "default"
+      ],
       "material": "None",
       "geometry": "Shared gutter with Grid",
       "semantics": "Presentational",
       "crystal": "Minimum cell width and gutter",
       "product": "Cell count and content",
-      "parity": ["mantine:SimpleGrid", "mui:Grid", "antd:Row"]
+      "parity": [
+        "mantine:SimpleGrid",
+        "mui:Grid",
+        "antd:Row"
+      ]
     },
     {
       "id": "stack",
       "name": "Stack",
       "anatomy": "Vertical arrangement with one spacing value between children.",
-      "states": ["default"],
+      "states": [
+        "default"
+      ],
       "material": "None",
       "geometry": "Spacing from the 4px rhythm",
       "semantics": "Presentational",
       "crystal": "Spacing scale",
       "product": "Which spacing step",
-      "parity": ["mantine:Stack", "mui:Stack", "antd:Space"]
+      "parity": [
+        "mantine:Stack",
+        "mui:Stack",
+        "antd:Space"
+      ]
     },
     {
       "id": "group",
       "name": "Group",
       "anatomy": "Horizontal arrangement with wrapping and alignment control.",
-      "states": ["default", "wrapped"],
+      "states": [
+        "default",
+        "wrapped"
+      ],
       "material": "None",
       "geometry": "Spacing from the 4px rhythm",
       "semantics": "Presentational",
       "crystal": "Spacing scale and wrap behaviour",
       "product": "Alignment and content",
-      "parity": ["mantine:Group", "mui:Stack", "antd:Space"]
+      "parity": [
+        "mantine:Group",
+        "mui:Stack",
+        "antd:Space"
+      ]
     },
     {
       "id": "divider",
       "name": "Divider",
       "anatomy": "A hairline rule, optionally with a centred or leading label.",
-      "states": ["plain", "labelled", "vertical"],
+      "states": [
+        "plain",
+        "labelled",
+        "vertical"
+      ],
       "material": "Edge colour token; never a heavy rule",
       "geometry": "1px, full-bleed within its container",
       "semantics": "role=separator with an accessible name when labelled; decorative dividers are aria-hidden",
       "crystal": "Rule colour and label treatment",
       "product": "Placement and label text",
-      "parity": ["mantine:Divider", "mui:Divider", "antd:Divider"]
+      "parity": [
+        "mantine:Divider",
+        "mui:Divider",
+        "antd:Divider"
+      ]
     },
     {
       "id": "aspect-ratio",
       "name": "Aspect ratio",
       "anatomy": "A box that reserves a fixed ratio before its content loads.",
-      "states": ["default"],
+      "states": [
+        "default"
+      ],
       "material": "Inherits; commonly wraps Image or a media surface",
       "geometry": "Content radius when clipping media",
       "semantics": "Presentational",
       "crystal": "Reserving space so loading media does not shift layout",
       "product": "The ratio and the media",
-      "parity": ["mantine:AspectRatio", "mui:Box", "antd:—"]
+      "parity": [
+        "mantine:AspectRatio",
+        "mui:Box",
+        "antd:—"
+      ]
     },
     {
       "id": "scroll-area",
       "name": "Scroll area",
       "anatomy": "A bounded scrolling region with a Crystal scrollbar and edge fades.",
-      "states": ["at-start", "scrolling", "at-end"],
+      "states": [
+        "at-start",
+        "scrolling",
+        "at-end"
+      ],
       "material": "Inherits; edge fade uses the surrounding material",
       "geometry": "Inherits container radius; fade depth 24px",
       "semantics": "Keyboard scrollable; must be focusable when it is the only way to reach content",
       "crystal": "Scrollbar appearance, edge fade, reduced-motion behaviour",
       "product": "What scrolls and how far",
-      "parity": ["mantine:ScrollArea", "mui:Box", "antd:—"]
+      "parity": [
+        "mantine:ScrollArea",
+        "mui:Box",
+        "antd:—"
+      ]
     },
     {
       "id": "center",
       "name": "Center",
       "anatomy": "Centres a single child on both axes.",
-      "states": ["default"],
+      "states": [
+        "default"
+      ],
       "material": "None",
       "geometry": "None",
       "semantics": "Presentational",
       "crystal": "Nothing beyond layout",
       "product": "Content",
-      "parity": ["mantine:Center", "mui:Box", "antd:Flex"]
+      "parity": [
+        "mantine:Center",
+        "mui:Box",
+        "antd:Flex"
+      ]
     },
     {
       "id": "space",
       "name": "Space",
       "anatomy": "An explicit gap from the spacing scale.",
-      "states": ["default"],
+      "states": [
+        "default"
+      ],
       "material": "None",
       "geometry": "4px rhythm",
       "semantics": "Presentational; never used to convey grouping to assistive technology",
       "crystal": "Spacing scale",
       "product": "Which step",
-      "parity": ["mantine:Space", "mui:Box", "antd:Space"]
+      "parity": [
+        "mantine:Space",
+        "mui:Box",
+        "antd:Space"
+      ]
+    },
+    {
+      "id": "app-bar",
+      "name": "App bar",
+      "anatomy": "A Frost band across the top of a view, holding a title, navigation affordances and actions.",
+      "states": [
+        "at-rest",
+        "scrolled",
+        "condensed"
+      ],
+      "material": "Frost band over the Plastic foundation",
+      "geometry": "Full-bleed; no radius on the outer edges; actions are pills.",
+      "semantics": "role=\"banner\" unless nested; the title is the page heading or labels one.",
+      "crystal": "Material, elevation on scroll, action geometry",
+      "product": "Which actions appear, scroll behaviour, routing",
+      "parity": [
+        "mui:AppBar",
+        "antd:Layout.Header"
+      ]
+    },
+    {
+      "id": "masonry",
+      "name": "Masonry",
+      "anatomy": "A column layout that packs items of unequal height without stretching them.",
+      "states": [
+        "at-rest",
+        "reflowing"
+      ],
+      "material": "None of its own; children carry material",
+      "geometry": "Gap follows the spacing scale; columns respond to container width.",
+      "semantics": "A list when the items are a set; otherwise presentational.",
+      "crystal": "Spacing, breakpoint behaviour, reduced-motion reflow",
+      "product": "Item content and ordering",
+      "parity": [
+        "antd:Masonry",
+        "mui:Masonry"
+      ]
+    },
+    {
+      "id": "overflow-list",
+      "name": "Overflow list",
+      "anatomy": "A single row that measures itself and moves what does not fit into a menu.",
+      "states": [
+        "all-visible",
+        "overflowing",
+        "menu-open"
+      ],
+      "material": "Children keep theirs; the overflow menu is Frost",
+      "geometry": "Overflow trigger is a pill and reaches 44px.",
+      "semantics": "The overflow trigger names how many items it holds; hidden items stay reachable.",
+      "crystal": "Measurement, the trigger, the menu material",
+      "product": "Item content, priority order",
+      "parity": [
+        "mantine:OverflowList"
+      ]
     }
   ]
 }

@@ -115,8 +115,8 @@
       "product": "The data",
       "parity": [
         "antd:Descriptions",
-        "mui:\u2014",
-        "mantine:\u2014"
+        "mui:—",
+        "mantine:—"
       ]
     },
     {
@@ -207,7 +207,7 @@
         "mui:Chip",
         "antd:Tag"
       ],
-      "note": "Success uses a check mark. That is information display \u2014 the legitimate use of the glyph."
+      "note": "Success uses a check mark. That is information display — the legitimate use of the glyph."
     },
     {
       "id": "indicator",
@@ -253,7 +253,7 @@
       ],
       "parity": [
         "mantine:Image",
-        "mui:\u2014",
+        "mui:—",
         "antd:Image"
       ]
     },
@@ -325,7 +325,7 @@
       "parity": [
         "mantine:Collapse",
         "mui:Collapse",
-        "antd:\u2014"
+        "antd:—"
       ]
     },
     {
@@ -343,7 +343,7 @@
       "product": "Threshold and content",
       "parity": [
         "mantine:Spoiler",
-        "mui:\u2014",
+        "mui:—",
         "antd:Typography ellipsis"
       ]
     },
@@ -368,7 +368,7 @@
       ],
       "parity": [
         "mantine:Carousel",
-        "mui:\u2014",
+        "mui:—",
         "antd:Carousel"
       ]
     },
@@ -389,8 +389,8 @@
       "product": "The value, formatting and what the trend compares",
       "parity": [
         "antd:Statistic",
-        "mantine:\u2014",
-        "mui:\u2014"
+        "mantine:—",
+        "mui:—"
       ]
     },
     {
@@ -409,7 +409,7 @@
       "product": "Highlighting and content",
       "parity": [
         "mantine:Code",
-        "mui:\u2014",
+        "mui:—",
         "antd:Typography.Text code"
       ]
     },
@@ -427,8 +427,8 @@
       "product": "The key names",
       "parity": [
         "mantine:Kbd",
-        "mui:\u2014",
-        "antd:\u2014"
+        "mui:—",
+        "antd:—"
       ]
     },
     {
@@ -446,7 +446,7 @@
       "parity": [
         "mantine:ThemeIcon",
         "mui:Avatar",
-        "antd:\u2014"
+        "antd:—"
       ]
     },
     {
@@ -470,7 +470,7 @@
         "reaction"
       ],
       "parity": [
-        "\u2014"
+        "—"
       ],
       "note": "This silhouette is part of Crystal's identity and carries through from the approved baseline."
     },
@@ -492,9 +492,174 @@
         "caption-in"
       ],
       "parity": [
-        "mui:\u2014",
-        "mantine:\u2014",
+        "mui:—",
+        "mantine:—",
         "antd:Image"
+      ]
+    },
+    {
+      "id": "calendar",
+      "name": "Calendar",
+      "anatomy": "A month grid, usable on its own rather than only inside a picker.",
+      "states": [
+        "at-rest",
+        "selected",
+        "in-range",
+        "today",
+        "focus-visible",
+        "disabled"
+      ],
+      "material": "Frost panel with Haze day cells",
+      "geometry": "Cells reach 44px; the panel keeps panel radius.",
+      "semantics": "A grid with row and column headers; today is marked as current, selection as selected.",
+      "crystal": "Cell materials, range rendering, selection by weight",
+      "product": "Locale, events, min and max",
+      "parity": [
+        "mui-x-date-pickers:DateCalendar",
+        "primereact:datepicker"
+      ]
+    },
+    {
+      "id": "data-view",
+      "name": "Data view",
+      "anatomy": "A collection rendered as a list or grid, with sorting and paging.",
+      "states": [
+        "at-rest",
+        "loading",
+        "empty",
+        "focus-visible"
+      ],
+      "material": "Haze item fills on the surrounding material",
+      "geometry": "Item radius is the content radius; layout switches at a declared breakpoint.",
+      "semantics": "A list; the layout switch is a control with a pressed state, not a hidden toggle.",
+      "crystal": "Item material, layout motion, empty and loading surfaces",
+      "product": "Data, sorting, paging",
+      "parity": [
+        "primereact:dataview"
+      ]
+    },
+    {
+      "id": "virtual-scroller",
+      "name": "Virtual scroller",
+      "anatomy": "A long list that renders only what is near the viewport.",
+      "states": [
+        "at-rest",
+        "scrolling",
+        "loading"
+      ],
+      "material": "None of its own",
+      "geometry": "Scroll container follows the scroll-area contract.",
+      "semantics": "Rows keep their position in the set via aria-setsize and aria-posinset.",
+      "crystal": "Scroll surface, focus retention across recycling",
+      "product": "Row height strategy, data source",
+      "parity": [
+        "primereact:virtualscroller"
+      ]
+    },
+    {
+      "id": "image-list",
+      "name": "Image list",
+      "anatomy": "A grid of images with optional captions.",
+      "states": [
+        "at-rest",
+        "focus-visible"
+      ],
+      "material": "Haze caption bars over the image",
+      "geometry": "Uniform gap; caption bars keep the content radius at the bottom corners.",
+      "semantics": "A list; each image needs an accessible name or is marked decorative.",
+      "crystal": "Caption material, focus ring, aspect handling",
+      "product": "Images, captions, columns",
+      "parity": [
+        "mui:ImageList",
+        "primereact:gallery"
+      ]
+    },
+    {
+      "id": "organization-chart",
+      "name": "Organization chart",
+      "anatomy": "A hierarchy drawn as connected nodes.",
+      "states": [
+        "at-rest",
+        "selected",
+        "collapsed",
+        "focus-visible"
+      ],
+      "material": "Haze nodes on the surrounding material",
+      "geometry": "Nodes keep the content radius; connectors use the rim colour.",
+      "semantics": "A tree; collapse state is announced, and the chart is navigable by keyboard.",
+      "crystal": "Node material, connector colour, selection by weight",
+      "product": "Hierarchy data and layout direction",
+      "parity": [
+        "primereact:organizationchart"
+      ]
+    },
+    {
+      "id": "rolling-number",
+      "name": "Rolling number",
+      "anatomy": "A number that animates digit by digit when it changes.",
+      "states": [
+        "at-rest",
+        "changing"
+      ],
+      "material": "Inherits",
+      "geometry": "Tabular figures so the width does not jump.",
+      "semantics": "The value is announced once it settles, not on every frame.",
+      "crystal": "Digit motion, reduced-motion fallback to an instant change",
+      "product": "Value, formatting, locale",
+      "parity": [
+        "mantine:RollingNumber"
+      ]
+    },
+    {
+      "id": "image-compare",
+      "name": "Image compare",
+      "anatomy": "Two images under a draggable divider.",
+      "states": [
+        "at-rest",
+        "dragging",
+        "focus-visible"
+      ],
+      "material": "Resin handle over the images",
+      "geometry": "Handle is a pill and reaches 44px.",
+      "semantics": "The divider is a slider with a percentage value and keyboard steps.",
+      "crystal": "Handle material, focus ring, drag motion",
+      "product": "The two images and their labels",
+      "parity": [
+        "primereact:imagecompare"
+      ]
+    },
+    {
+      "id": "marquee",
+      "name": "Marquee",
+      "anatomy": "Content that scrolls continuously along one axis.",
+      "states": [
+        "playing",
+        "paused"
+      ],
+      "material": "Inherits",
+      "geometry": "Edges fade using the surrounding material, not a hard cut.",
+      "semantics": "Pausable on hover and focus; removed entirely under reduced motion.",
+      "crystal": "Edge treatment, motion, the reduced-motion contract",
+      "product": "Content and speed",
+      "parity": [
+        "mantine:Marquee"
+      ]
+    },
+    {
+      "id": "overlay-badge",
+      "name": "Overlay badge",
+      "anatomy": "A badge positioned over the corner of another element.",
+      "states": [
+        "at-rest",
+        "hidden"
+      ],
+      "material": "Haze fill with a crisp glyph",
+      "geometry": "Offset from the corner; never clipped by its host.",
+      "semantics": "Labels its host rather than standing alone; decorative badges are hidden from assistive technology.",
+      "crystal": "Material, offset, glyph crispness",
+      "product": "Count or status shown",
+      "parity": [
+        "primereact:overlaybadge"
       ]
     }
   ]

@@ -209,8 +209,8 @@
       ],
       "parity": [
         "antd:Empty",
-        "mui:\u2014",
-        "mantine:\u2014"
+        "mui:—",
+        "mantine:—"
       ]
     },
     {
@@ -232,8 +232,8 @@
       "product": "The outcome, explanation and recovery routes",
       "parity": [
         "antd:Result",
-        "mui:\u2014",
-        "mantine:\u2014"
+        "mui:—",
+        "mantine:—"
       ]
     },
     {
@@ -256,10 +256,63 @@
       ],
       "parity": [
         "antd:Popconfirm",
-        "mui:\u2014",
-        "mantine:\u2014"
+        "mui:—",
+        "mantine:—"
       ],
       "note": "Consequential and irreversible actions belong in a dialog, not an inline confirm."
+    },
+    {
+      "id": "tour",
+      "name": "Tour",
+      "anatomy": "A sequence of steps that points at parts of the interface.",
+      "states": [
+        "hidden",
+        "active",
+        "focus-visible"
+      ],
+      "material": "Frost step panel over a Mirage scrim",
+      "geometry": "Panel keeps panel radius; the highlight follows the target's own radius.",
+      "semantics": "Focus moves to each step; the sequence is escapable and its position is announced.",
+      "crystal": "Panel and scrim material, step motion, focus management",
+      "product": "Steps, targets and copy",
+      "parity": [
+        "antd:Tour",
+        "primereact:tour"
+      ]
+    },
+    {
+      "id": "semi-circle-progress",
+      "name": "Semi-circle progress",
+      "anatomy": "A half-ring showing progress toward a value.",
+      "states": [
+        "determinate",
+        "indeterminate"
+      ],
+      "material": "Haze track with a primary arc",
+      "geometry": "Stroke matches the ring progress contract.",
+      "semantics": "role=\"progressbar\" with a text value beside it.",
+      "crystal": "Arc rendering, track material, motion",
+      "product": "Value and label",
+      "parity": [
+        "mantine:SemiCircleProgress"
+      ]
+    },
+    {
+      "id": "meter-group",
+      "name": "Meter group",
+      "anatomy": "Several proportions shown on one bar.",
+      "states": [
+        "at-rest",
+        "focus-visible"
+      ],
+      "material": "Haze track with segment fills",
+      "geometry": "Track keeps the content radius; segments meet without gaps.",
+      "semantics": "Each segment is labelled; meaning never rests on colour alone.",
+      "crystal": "Track and segment materials, legend, label association",
+      "product": "Segments and their values",
+      "parity": [
+        "primereact:metergroup"
+      ]
     }
   ]
 }

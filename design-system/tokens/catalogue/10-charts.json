@@ -1,0 +1,269 @@
+{
+  "id": "charts",
+  "name": "Charts",
+  "description": "Data visualisation on one shared surface. Crystal named no charting component before 2.0 while every React benchmark shipped one; these are specified against MUI X Charts, PrimeReact Chart and Mantine Charts. Every chart owes a text equivalent of its data — a chart is a second representation, never the only one.",
+  "components": [
+    {
+      "id": "chart-surface",
+      "name": "Chart surface",
+      "anatomy": "The shared frame every chart draws into: plot area, axes, grid, legend and tooltip slots.",
+      "states": [
+        "at-rest",
+        "loading",
+        "empty",
+        "focus-visible"
+      ],
+      "material": "Haze plot fill on the surrounding material",
+      "geometry": "Plot area keeps the content radius; the legend is a list of pills.",
+      "semantics": "Each chart has an accessible name and a table equivalent of its data.",
+      "crystal": "Materials, grid and axis colour, focus order, empty and loading surfaces",
+      "product": "Data, scales, formatting",
+      "parity": [
+        "mui-x-charts:ChartContainer"
+      ]
+    },
+    {
+      "id": "bar-chart",
+      "name": "Bar chart",
+      "anatomy": "Categorical values as bars, grouped or stacked.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Bars keep a small radius on the value end only.",
+      "semantics": "Every series is named; values are reachable as text.",
+      "crystal": "Bar geometry, series colour from the palette, enter motion",
+      "product": "Data, stacking, axes",
+      "parity": [
+        "mui-x-charts:BarChart",
+        "primereact:chart"
+      ]
+    },
+    {
+      "id": "line-chart",
+      "name": "Line chart",
+      "anatomy": "Continuous values as lines, with optional points.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Line weight follows the stroke scale; points reach 44px of hit area.",
+      "semantics": "Series are distinguishable without colour alone.",
+      "crystal": "Stroke scale, point geometry, draw-on motion",
+      "product": "Data, curve type, axes",
+      "parity": [
+        "mui-x-charts:LineChart"
+      ]
+    },
+    {
+      "id": "area-chart",
+      "name": "Area chart",
+      "anatomy": "A line chart with the region beneath it filled.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Haze fill beneath the line",
+      "geometry": "Fill never obscures gridlines beneath it.",
+      "semantics": "As the line chart.",
+      "crystal": "Fill material and opacity so overlaps stay readable",
+      "product": "Data and stacking",
+      "parity": [
+        "mantine:AreaChart"
+      ]
+    },
+    {
+      "id": "pie-chart",
+      "name": "Pie chart",
+      "anatomy": "Parts of a whole as segments.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Segments separated by a hairline in the surface colour.",
+      "semantics": "Each segment is labelled with its value; the total is stated.",
+      "crystal": "Segment colour ordering, separation, enter motion",
+      "product": "Data and labels",
+      "parity": [
+        "mui-x-charts:PieChart"
+      ]
+    },
+    {
+      "id": "donut-chart",
+      "name": "Donut chart",
+      "anatomy": "A pie with a hole, often carrying a summary value.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Haze centre fill",
+      "geometry": "Ring thickness is a declared proportion of the radius.",
+      "semantics": "The centre value is text, not an image.",
+      "crystal": "Ring geometry, centre material",
+      "product": "Data and the centre summary",
+      "parity": [
+        "mantine:DonutChart"
+      ]
+    },
+    {
+      "id": "scatter-chart",
+      "name": "Scatter chart",
+      "anatomy": "Points in two dimensions.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Point size is a scale, not an arbitrary radius.",
+      "semantics": "Dense regions remain describable; a table equivalent is required.",
+      "crystal": "Point geometry, overlap treatment",
+      "product": "Data and scales",
+      "parity": [
+        "mui-x-charts:ScatterChart"
+      ]
+    },
+    {
+      "id": "radar-chart",
+      "name": "Radar chart",
+      "anatomy": "Several measures on radial axes.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Haze fill inside each series polygon",
+      "geometry": "Axis labels sit outside the outer ring.",
+      "semantics": "Axes are labelled; series are named.",
+      "crystal": "Fill opacity so overlapping series stay readable",
+      "product": "Data and axis set",
+      "parity": [
+        "mui-x-charts:RadarChart",
+        "primereact:chart"
+      ]
+    },
+    {
+      "id": "spark-line",
+      "name": "Spark line",
+      "anatomy": "A small trend line with no axes, sized to sit inside text or a cell.",
+      "states": [
+        "at-rest",
+        "empty"
+      ],
+      "material": "Inherits",
+      "geometry": "Fixed aspect; no padding of its own.",
+      "semantics": "Needs a text summary beside it; it is never the only carrier of the value.",
+      "crystal": "Stroke weight at small size",
+      "product": "Data and range",
+      "parity": [
+        "mui-x-charts:SparkLineChart",
+        "mantine:Sparkline"
+      ]
+    },
+    {
+      "id": "gauge",
+      "name": "Gauge",
+      "anatomy": "A single value against a range, drawn as an arc.",
+      "states": [
+        "determinate",
+        "empty"
+      ],
+      "material": "Haze track with a primary arc",
+      "geometry": "Matches the ring progress stroke.",
+      "semantics": "role=\"meter\" with a text value.",
+      "crystal": "Arc geometry, threshold colour from status tokens",
+      "product": "Value, range, thresholds",
+      "parity": [
+        "mui-x-charts:Gauge"
+      ]
+    },
+    {
+      "id": "heatmap",
+      "name": "Heatmap",
+      "anatomy": "A matrix of values shown as cell intensity.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Cells are square with a hairline gap.",
+      "semantics": "Intensity is paired with a value; colour alone never carries meaning.",
+      "crystal": "Scale construction, contrast floor at every step",
+      "product": "Data and bucketing",
+      "parity": [
+        "mui-x-charts:Heatmap"
+      ]
+    },
+    {
+      "id": "funnel-chart",
+      "name": "Funnel chart",
+      "anatomy": "Sequential stages narrowing toward an outcome.",
+      "states": [
+        "at-rest",
+        "hover",
+        "focus-visible",
+        "empty"
+      ],
+      "material": "Inherits the chart surface",
+      "geometry": "Stages meet without gaps; labels sit outside when they do not fit.",
+      "semantics": "Each stage states its absolute and relative value.",
+      "crystal": "Stage geometry, label placement",
+      "product": "Stages and values",
+      "parity": [
+        "mui-x-charts:FunnelChart"
+      ]
+    },
+    {
+      "id": "chart-legend",
+      "name": "Chart legend",
+      "anatomy": "Names the series in a chart and toggles them.",
+      "states": [
+        "at-rest",
+        "toggled-off",
+        "focus-visible"
+      ],
+      "material": "Haze entry fills",
+      "geometry": "Entries are pills and reach 44px.",
+      "semantics": "Toggles are buttons with a pressed state; hidden series are announced.",
+      "crystal": "Entry material, pressed state, selection by weight",
+      "product": "Which series are toggleable",
+      "parity": [
+        "mui-x-charts:ChartsLegend"
+      ]
+    },
+    {
+      "id": "chart-tooltip",
+      "name": "Chart tooltip",
+      "anatomy": "Values at a position, following the pointer or the focused item.",
+      "states": [
+        "hidden",
+        "shown"
+      ],
+      "material": "Frost panel",
+      "geometry": "Panel radius; never covers the point it describes.",
+      "semantics": "Mirrors the tooltip contract: reachable by keyboard, dismissible with Escape.",
+      "crystal": "Material, follow motion, placement",
+      "product": "Which values appear and their format",
+      "parity": [
+        "mui-x-charts:ChartsTooltip"
+      ]
+    }
+  ]
+}

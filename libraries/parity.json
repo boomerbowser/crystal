@@ -13,8 +13,8 @@
     "compose"
   ],
   "totals": {
-    "components": 119,
-    "categories": 9
+    "components": 174,
+    "categories": 10
   },
   "statusValues": [
     "not-started",
@@ -136,6 +136,39 @@
     {
       "id": "space",
       "name": "Space",
+      "category": "layout",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "app-bar",
+      "name": "App bar",
+      "category": "layout",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "masonry",
+      "name": "Masonry",
+      "category": "layout",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "overflow-list",
+      "name": "Overflow list",
       "category": "layout",
       "status": {
         "web": "not-started",
@@ -277,6 +310,39 @@
       }
     },
     {
+      "id": "bottom-navigation",
+      "name": "Bottom navigation",
+      "category": "navigation",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "navigation-menu",
+      "name": "Navigation menu",
+      "category": "navigation",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "table-of-contents",
+      "name": "Table of contents",
+      "category": "navigation",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
       "id": "button",
       "name": "Button",
       "category": "actions",
@@ -345,6 +411,28 @@
     {
       "id": "close-button",
       "name": "Close button",
+      "category": "actions",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "action-bar",
+      "name": "Action bar",
+      "category": "actions",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "speed-dial",
+      "name": "Speed dial",
       "category": "actions",
       "status": {
         "web": "not-started",
@@ -728,6 +816,116 @@
       }
     },
     {
+      "id": "autocomplete",
+      "name": "Autocomplete",
+      "category": "inputs",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "native-select",
+      "name": "Native select",
+      "category": "inputs",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "date-time-picker",
+      "name": "Date and time picker",
+      "category": "inputs",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "month-picker",
+      "name": "Month picker",
+      "category": "inputs",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "year-picker",
+      "name": "Year picker",
+      "category": "inputs",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "digital-clock",
+      "name": "Digital clock",
+      "category": "inputs",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "angle-slider",
+      "name": "Angle slider",
+      "category": "inputs",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "knob",
+      "name": "Knob",
+      "category": "inputs",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "mask-input",
+      "name": "Mask input",
+      "category": "inputs",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "json-input",
+      "name": "JSON input",
+      "category": "inputs",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
       "id": "card",
       "name": "Card",
       "category": "data-display",
@@ -970,6 +1168,105 @@
       }
     },
     {
+      "id": "calendar",
+      "name": "Calendar",
+      "category": "data-display",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "data-view",
+      "name": "Data view",
+      "category": "data-display",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "virtual-scroller",
+      "name": "Virtual scroller",
+      "category": "data-display",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "image-list",
+      "name": "Image list",
+      "category": "data-display",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "organization-chart",
+      "name": "Organization chart",
+      "category": "data-display",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "rolling-number",
+      "name": "Rolling number",
+      "category": "data-display",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "image-compare",
+      "name": "Image compare",
+      "category": "data-display",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "marquee",
+      "name": "Marquee",
+      "category": "data-display",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "overlay-badge",
+      "name": "Overlay badge",
+      "category": "data-display",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
       "id": "alert",
       "name": "Alert",
       "category": "feedback",
@@ -1091,6 +1388,39 @@
       }
     },
     {
+      "id": "tour",
+      "name": "Tour",
+      "category": "feedback",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "semi-circle-progress",
+      "name": "Semi-circle progress",
+      "category": "feedback",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "meter-group",
+      "name": "Meter group",
+      "category": "feedback",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
       "id": "dialog",
       "name": "Dialog",
       "category": "overlays",
@@ -1190,6 +1520,17 @@
       }
     },
     {
+      "id": "floating-window",
+      "name": "Floating window",
+      "category": "overlays",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
       "id": "title",
       "name": "Title",
       "category": "typography",
@@ -1236,6 +1577,28 @@
     {
       "id": "prose",
       "name": "Prose",
+      "category": "typography",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "highlight",
+      "name": "Highlight",
+      "category": "typography",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "number-formatter",
+      "name": "Number formatter",
       "category": "typography",
       "status": {
         "web": "not-started",
@@ -1325,6 +1688,248 @@
       "id": "resizable",
       "name": "Resizable region",
       "category": "utility",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "watermark",
+      "name": "Watermark",
+      "category": "utility",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "QR code",
+      "category": "utility",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "click-away",
+      "name": "Click away",
+      "category": "utility",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "animate-on-scroll",
+      "name": "Animate on scroll",
+      "category": "utility",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "no-ssr",
+      "name": "No SSR",
+      "category": "utility",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "global-styles",
+      "name": "Global styles",
+      "category": "utility",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "terminal",
+      "name": "Terminal",
+      "category": "utility",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "border-beam",
+      "name": "Border beam",
+      "category": "utility",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "chart-surface",
+      "name": "Chart surface",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "bar-chart",
+      "name": "Bar chart",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "line-chart",
+      "name": "Line chart",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "area-chart",
+      "name": "Area chart",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "pie-chart",
+      "name": "Pie chart",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "donut-chart",
+      "name": "Donut chart",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "scatter-chart",
+      "name": "Scatter chart",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "radar-chart",
+      "name": "Radar chart",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "spark-line",
+      "name": "Spark line",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "gauge",
+      "name": "Gauge",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "heatmap",
+      "name": "Heatmap",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "funnel-chart",
+      "name": "Funnel chart",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "chart-legend",
+      "name": "Chart legend",
+      "category": "charts",
+      "status": {
+        "web": "not-started",
+        "react-native": "not-started",
+        "swiftui": "not-started",
+        "compose": "not-started"
+      }
+    },
+    {
+      "id": "chart-tooltip",
+      "name": "Chart tooltip",
+      "category": "charts",
       "status": {
         "web": "not-started",
         "react-native": "not-started",

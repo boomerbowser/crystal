@@ -14,7 +14,7 @@ Branch `crystal-2.0`, ahead of `main` and **not merged**. Merging, publishing to
 | --- | --- | --- |
 | Which platform first | **Web.** It is cross-platform in itself, which makes it the cheapest place to prove the parity contract. | Meridian |
 | Icon set size | **~1000.** Source a permissively licensed set aligned with Crystal's grid if one exists; draw in-house otherwise. | Meridian |
-| Registry | **Publish, privately.** GitHub Packages under the repository's owner, `@meridian/crystal-*`, with the ZIP remaining a release asset for non-package consumers. Products pin a version, which is what makes "one version per product" and a CI parity check enforceable; vendoring can do neither. The cost is that every product needs registry auth in CI, which is accepted. Publishing itself stays a human-triggered release step. | Delegated, decided in-session |
+| Registry | **Publish, privately.** GitHub Packages under the repository's owner, `@crystal/core-*`, with the ZIP remaining a release asset for non-package consumers. Products pin a version, which is what makes "one version per product" and a CI parity check enforceable; vendoring can do neither. The cost is that every product needs registry auth in CI, which is accepted. Publishing itself stays a human-triggered release step. | Delegated, decided in-session |
 | Composite components | **Specify appearance; products bring their own accessible primitives.** Crystal defines anatomy, states, material and geometry. It does not ship focus management, menu keyboard behaviour or date arithmetic. | Meridian |
 
 ## Standing constraint

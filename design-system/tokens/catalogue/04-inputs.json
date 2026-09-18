@@ -17,7 +17,7 @@
         "read-only"
       ],
       "material": "Resin shell, Haze well; the native field keeps its functional boundary",
-      "geometry": "Field well radius = content radius \u2212 7px; shell 20px; 44px minimum height",
+      "geometry": "Field well radius = content radius − 7px; shell 20px; 44px minimum height",
       "semantics": "Native input with a programmatically associated label, aria-invalid and aria-describedby for errors",
       "crystal": "Shell material, badge vocabulary (hollow circle idle, filled focused, asterisk required, exclamation invalid), focus ring",
       "product": "Validation rules, error copy and submission",
@@ -46,7 +46,7 @@
         "read-only"
       ],
       "material": "Resin shell, Haze well",
-      "geometry": "Well radius = content radius \u2212 7px; minimum three visible lines",
+      "geometry": "Well radius = content radius − 7px; minimum three visible lines",
       "semantics": "Native textarea with an associated label; autosize must not trap the caret",
       "crystal": "Shell material, badge placement at the well's top edge, focus ring",
       "product": "Autosize policy, character limits and validation",
@@ -139,7 +139,7 @@
         "disabled"
       ],
       "material": "Resin shell, Haze well",
-      "geometry": "Well radius = content radius \u2212 7px",
+      "geometry": "Well radius = content radius − 7px",
       "semantics": "Native select wherever the option set allows it; the badge never covers the platform arrow",
       "crystal": "Shell material, badge placement clear of the disclosure, focus ring",
       "product": "Options, grouping and change handling",
@@ -229,7 +229,7 @@
         "mui:Checkbox",
         "antd:Checkbox"
       ],
-      "note": "The checked mark is a check glyph. That is the control's own semantics \u2014 a validated, entered value \u2014 not a selection badge placed over a focused item."
+      "note": "The checked mark is a check glyph. That is the control's own semantics — a validated, entered value — not a selection badge placed over a focused item."
     },
     {
       "id": "checkbox-group",
@@ -437,7 +437,7 @@
       "product": "Length, masking and verification",
       "parity": [
         "mantine:PinInput",
-        "mui:\u2014",
+        "mui:—",
         "antd:Input.OTP"
       ]
     },
@@ -505,7 +505,7 @@
       "product": "Colour space, format and the picker implementation",
       "parity": [
         "mantine:ColorInput",
-        "mui:\u2014",
+        "mui:—",
         "antd:ColorPicker"
       ]
     },
@@ -617,7 +617,7 @@
       "product": "Upload, accepted types, size limits and retry",
       "parity": [
         "mantine:FileInput",
-        "mui:\u2014",
+        "mui:—",
         "antd:Upload"
       ],
       "note": "Crystal supplies appearance only. A file input that does not actually upload must not be presented as working."
@@ -644,7 +644,7 @@
       ],
       "parity": [
         "mantine:Dropzone",
-        "mui:\u2014",
+        "mui:—",
         "antd:Upload.Dragger"
       ]
     },
@@ -711,7 +711,7 @@
       ],
       "parity": [
         "antd:Transfer",
-        "mui:\u2014",
+        "mui:—",
         "mantine:TransferList"
       ]
     },
@@ -734,8 +734,8 @@
       "product": "The hierarchy, lazy loading and the keyboard implementation",
       "parity": [
         "antd:Cascader",
-        "mui:\u2014",
-        "mantine:\u2014"
+        "mui:—",
+        "mantine:—"
       ]
     },
     {
@@ -756,8 +756,8 @@
       "product": "Trigger characters, the data source and insertion",
       "parity": [
         "antd:Mentions",
-        "mui:\u2014",
-        "mantine:\u2014"
+        "mui:—",
+        "mantine:—"
       ]
     },
     {
@@ -778,8 +778,8 @@
       "product": "The entire editing engine, serialisation and paste handling",
       "parity": [
         "mantine:RichTextEditor",
-        "mui:\u2014",
-        "antd:\u2014"
+        "mui:—",
+        "antd:—"
       ],
       "note": "Crystal specifies the surface only. Do not rebuild a rich-text engine to obtain this appearance."
     },
@@ -807,6 +807,203 @@
         "antd:Form.Item extra"
       ],
       "note": "Guidance is removed only after the field is complete, and never while the field is focused."
+    },
+    {
+      "id": "autocomplete",
+      "name": "Autocomplete",
+      "anatomy": "A text field that suggests values as it is typed, allowing free text.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "open",
+        "loading",
+        "invalid",
+        "disabled"
+      ],
+      "material": "Haze field fill inside a Resin shell; Frost popover",
+      "geometry": "Field radius is the content radius; the popover keeps panel radius.",
+      "semantics": "combobox with aria-autocomplete=\"list\"; the input keeps its own value.",
+      "crystal": "Materials, focus ring, list motion, empty and loading surfaces",
+      "product": "Where suggestions come from, debounce, free-text policy",
+      "parity": [
+        "antd:AutoComplete",
+        "mui:Autocomplete"
+      ]
+    },
+    {
+      "id": "native-select",
+      "name": "Native select",
+      "anatomy": "A platform select, for cases where the native picker is the right answer.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "invalid",
+        "disabled"
+      ],
+      "material": "Haze field fill inside a Resin shell",
+      "geometry": "Matches the text field; the indicator sits in the trailing inline edge.",
+      "semantics": "A real <select>. Its options are the platform's and are never restyled.",
+      "crystal": "Shell material, focus ring, indicator",
+      "product": "Options and value",
+      "parity": [
+        "mantine:NativeSelect",
+        "mui:NativeSelect"
+      ]
+    },
+    {
+      "id": "date-time-picker",
+      "name": "Date and time picker",
+      "anatomy": "One control that resolves both a date and a time.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "open",
+        "invalid",
+        "disabled"
+      ],
+      "material": "Haze field fill; Frost panel",
+      "geometry": "Segments are individually focusable; the panel keeps panel radius.",
+      "semantics": "Segmented input semantics; each segment announces its own role and bounds.",
+      "crystal": "Materials, segment focus, panel motion",
+      "product": "Locale, time zone, min and max",
+      "parity": [
+        "mui-x-date-pickers:DateTimePicker",
+        "primereact:datepicker"
+      ]
+    },
+    {
+      "id": "month-picker",
+      "name": "Month picker",
+      "anatomy": "A grid of months within a year.",
+      "states": [
+        "at-rest",
+        "selected",
+        "focus-visible",
+        "disabled"
+      ],
+      "material": "Frost panel with Haze cells",
+      "geometry": "Cells are square-ish and reach 44px.",
+      "semantics": "A grid; the selected month uses aria-selected, never a check mark.",
+      "crystal": "Cell material, selection by weight, motion",
+      "product": "Range limits and locale",
+      "parity": [
+        "mui-x-date-pickers:MonthCalendar"
+      ]
+    },
+    {
+      "id": "year-picker",
+      "name": "Year picker",
+      "anatomy": "A scrolling grid of years.",
+      "states": [
+        "at-rest",
+        "selected",
+        "focus-visible",
+        "disabled"
+      ],
+      "material": "Frost panel with Haze cells",
+      "geometry": "Matches the month picker.",
+      "semantics": "A grid; selection is announced, and the current year is marked as current.",
+      "crystal": "Cell material, selection, scroll anchoring",
+      "product": "Range limits",
+      "parity": [
+        "mui-x-date-pickers:YearCalendar"
+      ]
+    },
+    {
+      "id": "digital-clock",
+      "name": "Digital clock",
+      "anatomy": "A list of selectable times at a fixed interval.",
+      "states": [
+        "at-rest",
+        "selected",
+        "focus-visible",
+        "disabled"
+      ],
+      "material": "Frost panel with Haze rows",
+      "geometry": "Rows reach 44px; the list scrolls to the selected value.",
+      "semantics": "A listbox; the selected row is aria-selected and carries label weight.",
+      "crystal": "Row material, selection, scroll behaviour",
+      "product": "Interval, bounds, locale",
+      "parity": [
+        "mui-x-date-pickers:DigitalClock"
+      ]
+    },
+    {
+      "id": "angle-slider",
+      "name": "Angle slider",
+      "anatomy": "A circular control for an angle.",
+      "states": [
+        "at-rest",
+        "dragging",
+        "focus-visible",
+        "disabled"
+      ],
+      "material": "Resin track with a Resin thumb",
+      "geometry": "Circular; the thumb reaches 44px including its hit area.",
+      "semantics": "role=\"slider\" with aria-valuenow in degrees and a text equivalent.",
+      "crystal": "Track and thumb material, focus ring, motion on commit",
+      "product": "Range, step, what the angle means",
+      "parity": [
+        "mantine:AngleSlider"
+      ]
+    },
+    {
+      "id": "knob",
+      "name": "Knob",
+      "anatomy": "A rotary control for a bounded value.",
+      "states": [
+        "at-rest",
+        "dragging",
+        "focus-visible",
+        "disabled"
+      ],
+      "material": "Resin body with a Haze value arc",
+      "geometry": "Circular; keyboard steps match the slider contract.",
+      "semantics": "role=\"slider\"; the value is readable as text, not only as an arc.",
+      "crystal": "Material, arc rendering, focus ring",
+      "product": "Range, step, formatting",
+      "parity": [
+        "primereact:knob"
+      ]
+    },
+    {
+      "id": "mask-input",
+      "name": "Mask input",
+      "anatomy": "A text field that formats as it is typed.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "invalid",
+        "disabled"
+      ],
+      "material": "Haze field fill inside a Resin shell",
+      "geometry": "Matches the text field exactly.",
+      "semantics": "The mask never traps a screen reader; the raw value is what submits.",
+      "crystal": "Shell material, focus ring, invalid motion",
+      "product": "Mask pattern and raw-value policy",
+      "parity": [
+        "mantine:MaskInput",
+        "primereact:inputmask"
+      ]
+    },
+    {
+      "id": "json-input",
+      "name": "JSON input",
+      "anatomy": "A textarea that validates and formats JSON.",
+      "states": [
+        "at-rest",
+        "focus-visible",
+        "invalid",
+        "disabled"
+      ],
+      "material": "Haze field fill inside a Resin shell",
+      "geometry": "Monospace; matches the textarea otherwise.",
+      "semantics": "Parse errors are described in text and associated with the field.",
+      "crystal": "Material, invalid state, error surface",
+      "product": "Schema and formatting rules",
+      "parity": [
+        "mantine:JsonInput"
+      ]
     }
   ]
 }

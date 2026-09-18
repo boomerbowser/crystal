@@ -7,115 +7,225 @@
       "id": "dialog",
       "name": "Dialog",
       "anatomy": "A Mirage scrim, a Haze decision surface, a title, body and named actions.",
-      "states": ["closed", "opening", "open", "closing"],
+      "states": [
+        "closed",
+        "opening",
+        "open",
+        "closing"
+      ],
       "material": "Mirage scrim; 80% feathered Haze surface above it",
       "geometry": "Content radius; 12px minimum from content to the feathered edge",
       "semantics": "Real modal semantics with a named dialog, focus containment, Escape, and focus return to the trigger",
       "crystal": "Scrim, surface, entrance and exit motion, elevation",
       "product": "Modality, focus management, the decision itself and its consequences",
-      "motion": ["mirage", "mirage-out", "dismiss"],
-      "parity": ["mantine:Modal", "mui:Dialog", "antd:Modal"]
+      "motion": [
+        "mirage",
+        "mirage-out",
+        "dismiss"
+      ],
+      "parity": [
+        "mantine:Modal",
+        "mui:Dialog",
+        "antd:Modal"
+      ]
     },
     {
       "id": "drawer",
       "name": "Drawer",
       "anatomy": "An edge-anchored panel over a Mirage scrim, with a label and a close control.",
-      "states": ["closed", "open", "dragging"],
+      "states": [
+        "closed",
+        "open",
+        "dragging"
+      ],
       "material": "Mirage scrim, Frost or Resin panel by depth",
       "geometry": "Panel radius on the inner edges only",
       "semantics": "Dialog semantics when modal; a complementary region when not. Modality must be real, not implied.",
       "crystal": "Panel material, edge geometry, entrance direction",
       "product": "Modality, focus management and content",
-      "motion": ["drawer-in", "drawer-out"],
-      "parity": ["mantine:Drawer", "mui:Drawer", "antd:Drawer"]
+      "motion": [
+        "drawer-in",
+        "drawer-out"
+      ],
+      "parity": [
+        "mantine:Drawer",
+        "mui:Drawer",
+        "antd:Drawer"
+      ]
     },
     {
       "id": "menu",
       "name": "Menu",
       "anatomy": "A Resin popover of actions, with optional groups, separators and checkable items.",
-      "states": ["closed", "open", "highlighted", "disabled-item", "checked-item"],
+      "states": [
+        "closed",
+        "open",
+        "highlighted",
+        "disabled-item",
+        "checked-item"
+      ],
       "material": "Resin surface with Haze rows",
       "geometry": "Content radius; rows reserve leading room for the selection rail on every row",
       "semantics": "role=menu with full keyboard navigation, type-ahead and Escape; checkable items use aria-checked",
       "crystal": "Surface, row treatment, rail placement, separators",
       "product": "The menu implementation, actions and dismissal",
-      "motion": ["menu-in", "menu-out"],
-      "parity": ["mantine:Menu", "mui:Menu", "antd:Dropdown"]
+      "motion": [
+        "menu-in",
+        "menu-out"
+      ],
+      "parity": [
+        "mantine:Menu",
+        "mui:Menu",
+        "antd:Dropdown"
+      ]
     },
     {
       "id": "context-menu",
       "name": "Context menu",
       "anatomy": "Menu anatomy opened at a pointer position or from a keyboard context key.",
-      "states": ["closed", "open"],
+      "states": [
+        "closed",
+        "open"
+      ],
       "material": "Shared with Menu",
       "geometry": "Repositions to stay within the viewport",
       "semantics": "Must be reachable by keyboard, not pointer-only; never the sole route to an action",
       "crystal": "Surface and positioning behaviour",
       "product": "The actions and the keyboard route",
-      "parity": ["mantine:Menu", "mui:Menu", "antd:Dropdown"]
+      "parity": [
+        "mantine:Menu",
+        "mui:Menu",
+        "antd:Dropdown"
+      ]
     },
     {
       "id": "popover",
       "name": "Popover",
       "anatomy": "An anchored Resin surface holding arbitrary content, with optional arrow.",
-      "states": ["closed", "open", "repositioned"],
+      "states": [
+        "closed",
+        "open",
+        "repositioned"
+      ],
       "material": "Resin with Haze reading fill",
       "geometry": "Content radius; flips and shifts to stay in view",
       "semantics": "The trigger carries aria-expanded and aria-controls; focus moves in for interactive content",
       "crystal": "Surface, arrow, positioning behaviour",
       "product": "Content, dismissal and focus policy",
-      "motion": ["popover-in", "popover-out"],
-      "parity": ["mantine:Popover", "mui:Popover", "antd:Popover"]
+      "motion": [
+        "popover-in",
+        "popover-out"
+      ],
+      "parity": [
+        "mantine:Popover",
+        "mui:Popover",
+        "antd:Popover"
+      ]
     },
     {
       "id": "hover-card",
       "name": "Hover card",
       "anatomy": "A popover that opens on hover or focus after a delay, showing preview content.",
-      "states": ["closed", "opening", "open", "closing"],
+      "states": [
+        "closed",
+        "opening",
+        "open",
+        "closing"
+      ],
       "material": "Shared with Popover",
       "geometry": "Shared with Popover",
       "semantics": "Must also open on keyboard focus; never contains the only route to an action",
       "crystal": "Surface, open and close delays",
       "product": "Preview content and delay tuning",
-      "parity": ["mantine:HoverCard", "mui:—", "antd:Popover"]
+      "parity": [
+        "mantine:HoverCard",
+        "mui:—",
+        "antd:Popover"
+      ]
     },
     {
       "id": "tooltip",
       "name": "Tooltip",
       "anatomy": "Short supplemental text on a small Resin surface, anchored to its trigger.",
-      "states": ["hidden", "visible"],
+      "states": [
+        "hidden",
+        "visible"
+      ],
       "material": "Resin with Stone label backing",
       "geometry": "18px radius; compact padding",
       "semantics": "Never the sole accessible name. Opens on focus as well as hover, dismisses on Escape, and stays while hovered.",
       "crystal": "Surface, delay, placement",
       "product": "Content and whether a tooltip is the right disclosure at all",
-      "motion": ["tooltip-in", "tooltip-out"],
-      "parity": ["mantine:Tooltip", "mui:Tooltip", "antd:Tooltip"]
+      "motion": [
+        "tooltip-in",
+        "tooltip-out"
+      ],
+      "parity": [
+        "mantine:Tooltip",
+        "mui:Tooltip",
+        "antd:Tooltip"
+      ]
     },
     {
       "id": "scrim",
       "name": "Scrim",
       "anatomy": "The Mirage layer separating an overlay from the scene beneath it.",
-      "states": ["hidden", "visible"],
+      "states": [
+        "hidden",
+        "visible"
+      ],
       "material": "Mirage: chromatic diffusion of the real scene beneath",
       "geometry": "Full viewport, or region-scoped for a local overlay",
       "semantics": "Content beneath is inert; the scrim is not a focus target; clicking it dismisses only when dismissal is safe",
       "crystal": "The complete Mirage recipe and its reduced-transparency fallback",
       "product": "Inertness, dismissal policy and stack order",
-      "motion": ["mirage", "mirage-out"],
-      "parity": ["mui:Backdrop", "mantine:Overlay", "antd:—"]
+      "motion": [
+        "mirage",
+        "mirage-out"
+      ],
+      "parity": [
+        "mui:Backdrop",
+        "mantine:Overlay",
+        "antd:—"
+      ]
     },
     {
       "id": "portal",
       "name": "Portal",
       "anatomy": "A mechanism for rendering an overlay outside its layout parent.",
-      "states": ["mounted", "unmounted"],
+      "states": [
+        "mounted",
+        "unmounted"
+      ],
       "material": "None",
       "geometry": "None",
       "semantics": "Portalled content must preserve the logical focus and reading order of its trigger",
       "crystal": "Stacking contract and layer placement",
       "product": "The portal implementation",
-      "parity": ["mantine:Portal", "mui:Portal", "antd:—"]
+      "parity": [
+        "mantine:Portal",
+        "mui:Portal",
+        "antd:—"
+      ]
+    },
+    {
+      "id": "floating-window",
+      "name": "Floating window",
+      "anatomy": "A draggable, resizable panel that stays within the viewport.",
+      "states": [
+        "at-rest",
+        "dragging",
+        "resizing",
+        "focus-visible"
+      ],
+      "material": "Resin panel",
+      "geometry": "Panel radius; the resize handle reaches 44px.",
+      "semantics": "role=\"dialog\" when modal-like; focus is trapped only when it is modal.",
+      "crystal": "Material, elevation, drag and resize motion",
+      "product": "Content, bounds and persistence",
+      "parity": [
+        "mantine:FloatingWindow"
+      ]
     }
   ]
 }

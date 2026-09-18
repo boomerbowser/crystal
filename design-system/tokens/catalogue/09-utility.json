@@ -19,7 +19,7 @@
       "parity": [
         "mantine:VisuallyHidden",
         "mui:visuallyHidden",
-        "antd:\u2014"
+        "antd:—"
       ]
     },
     {
@@ -36,7 +36,7 @@
       "crystal": "Appearance on focus and placement",
       "product": "The target region",
       "parity": [
-        "\u2014"
+        "—"
       ]
     },
     {
@@ -55,7 +55,7 @@
       "parity": [
         "mantine:FocusTrap",
         "mui:FocusTrap",
-        "antd:\u2014"
+        "antd:—"
       ]
     },
     {
@@ -76,7 +76,7 @@
       "parity": [
         "mantine:Transition",
         "mui:Fade/Grow/Slide",
-        "antd:\u2014"
+        "antd:—"
       ]
     },
     {
@@ -94,7 +94,7 @@
       "product": "Locale detection and content direction",
       "parity": [
         "mantine:DirectionProvider",
-        "mui:\u2014",
+        "mui:—",
         "antd:ConfigProvider"
       ]
     },
@@ -133,7 +133,7 @@
       "crystal": "Every material's fallback and the guarantee that hierarchy survives",
       "product": "Exposing the preference and respecting the system setting",
       "parity": [
-        "\u2014"
+        "—"
       ],
       "note": "A compliant fallback never excuses an inaccessible default. Both presentations must pass."
     },
@@ -158,11 +158,149 @@
         "resize-settle"
       ],
       "parity": [
-        "mantine:\u2014",
-        "mui:\u2014",
+        "mantine:—",
+        "mui:—",
         "antd:Splitter"
       ],
       "note": "Layout settles after a measured size change; focus and hover states never animate."
+    },
+    {
+      "id": "watermark",
+      "name": "Watermark",
+      "anatomy": "A repeating mark layered over content.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "None of its own; sits above the content material",
+      "geometry": "Never intercepts pointer events.",
+      "semantics": "aria-hidden; it is decoration and must not be read.",
+      "crystal": "Opacity and contrast so it never obscures text",
+      "product": "The mark and its density",
+      "parity": [
+        "antd:Watermark"
+      ]
+    },
+    {
+      "id": "qr-code",
+      "name": "QR code",
+      "anatomy": "Renders a value as a scannable code.",
+      "states": [
+        "at-rest",
+        "loading",
+        "expired"
+      ],
+      "material": "Haze quiet zone",
+      "geometry": "Quiet zone preserved; contrast fixed regardless of palette.",
+      "semantics": "Carries a text alternative with the encoded value.",
+      "crystal": "Quiet-zone material, contrast floor, status surfaces",
+      "product": "The value and error correction level",
+      "parity": [
+        "antd:QRCode"
+      ]
+    },
+    {
+      "id": "click-away",
+      "name": "Click away",
+      "anatomy": "Calls back when a pointer or focus leaves a subtree.",
+      "states": [
+        "listening",
+        "idle"
+      ],
+      "material": "None",
+      "geometry": "None.",
+      "semantics": "Never the only way to dismiss something; Escape always works too.",
+      "crystal": "That dismissal is also keyboard reachable",
+      "product": "What dismissal does",
+      "parity": [
+        "mui:ClickAwayListener"
+      ]
+    },
+    {
+      "id": "animate-on-scroll",
+      "name": "Animate on scroll",
+      "anatomy": "Plays an entry recipe when an element first enters the viewport.",
+      "states": [
+        "pending",
+        "played"
+      ],
+      "material": "Inherits",
+      "geometry": "None.",
+      "semantics": "Content is present and readable before the animation runs, never revealed by it.",
+      "crystal": "Which recipes are allowed, the reduced-motion contract",
+      "product": "Thresholds and which elements opt in",
+      "parity": [
+        "primereact:animateonscroll"
+      ]
+    },
+    {
+      "id": "no-ssr",
+      "name": "No SSR",
+      "anatomy": "Defers rendering a subtree until the client.",
+      "states": [
+        "server",
+        "client"
+      ],
+      "material": "None",
+      "geometry": "Reserves the final size so nothing shifts on hydration.",
+      "semantics": "Falls back to content, not to emptiness, wherever it can.",
+      "crystal": "That layout does not shift when it resolves",
+      "product": "What is deferred and why",
+      "parity": [
+        "mui:NoSsr"
+      ]
+    },
+    {
+      "id": "global-styles",
+      "name": "Global styles",
+      "anatomy": "Applies Crystal's reset and base typography to a document.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "Plastic foundation on the document",
+      "geometry": "Sets the content radius, spacing and reading rhythm as custom properties.",
+      "semantics": "Does not change focus visibility or motion preferences on its own.",
+      "crystal": "The reset, the foundation, the token surface",
+      "product": "Where it is mounted",
+      "parity": [
+        "mui:CssBaseline",
+        "mantine:Global"
+      ]
+    },
+    {
+      "id": "terminal",
+      "name": "Terminal",
+      "anatomy": "A shell emulator.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "n/a",
+      "geometry": "n/a",
+      "semantics": "n/a",
+      "crystal": "n/a",
+      "product": "n/a",
+      "parity": [
+        "primereact:terminal"
+      ],
+      "status": "not-applicable",
+      "why": "A shell emulator is an application, not a design-system component."
+    },
+    {
+      "id": "border-beam",
+      "name": "Border beam",
+      "anatomy": "A travelling highlight around a border.",
+      "states": [
+        "at-rest"
+      ],
+      "material": "n/a",
+      "geometry": "n/a",
+      "semantics": "n/a",
+      "crystal": "n/a",
+      "product": "n/a",
+      "parity": [
+        "antd:border-beam"
+      ],
+      "status": "not-applicable",
+      "why": "Crystal specifies edge treatment as the Resin optical rim. A second, unrelated mechanism for a moving border would contradict the material spec, and the ambient tier that would have owned it is deferred."
     }
   ]
 }
