@@ -1,0 +1,98 @@
+# Crystal's gates, run on every push and pull request.
+#
+# Nothing here is a new check. Each step is a script that already exists and that
+# the project already runs by hand; the point of this file is that "already runs
+# by hand" stops being the only guarantee. The order is the order of dependency:
+# the token build writes the files the validators read, and the browser checks
+# need the preview site to be up.
+name: Verify
+
+on:
+  push:
+    branches: [main, 'crystal-*']
+  pull_request:
+
+# A superseded run has nothing to tell anyone.
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    name: Tokens, contracts and documentation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: design-system
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: npm ci --no-audit --no-fund
+
+      # Builds the tokens and the catalogue, then runs the core contracts, the
+      # token validator (contrast included), the motion validator, the visual
+      # gate contracts and the documentation validator.
+      - run: npm test
+
+      # Generated output is generated, not authored. If a build produces
+      # something different from what is committed, the committed copy is stale
+      # and every downstream gate is reading a file nobody has looked at.
+      #
+      # `validation/token-checks.json` is the exception, and only for its `date`:
+      # it records when the evidence was produced, so it differs on every run by
+      # design. Its numbers are held to the same rule as everything else — the
+      # second command fails if anything but the timestamp moved.
+      - name: Generated files match their source
+        run: |
+          git diff --exit-code -- . ':!validation/token-checks.json' || {
+            echo "::error::A build changed a committed file. Run the build and commit the result."
+            exit 1
+          }
+          drift=$(git diff -U0 -- validation/token-checks.json \
+            | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | grep -v '"date"' || true)
+          if [ -n "$drift" ]; then
+            echo "::error::The token evidence changed beyond its timestamp:"
+            echo "$drift"
+            exit 1
+          fi
+
+  browser:
+    name: Scrolling, interactions and deployability
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: design-system
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+
+      # The preview has no backend, but it is verified served rather than opened
+      # from the filesystem — `file:` and `http:` differ on enough of what these
+      # checks measure that one is not evidence for the other.
+      - name: Start the preview
+        run: |
+          python3 tools/serve.py &
+          for _ in $(seq 1 40); do
+            curl -sf http://127.0.0.1:4321/ >/dev/null && exit 0
+            sleep 0.5
+          done
+          echo "::error::The preview did not come up on 127.0.0.1:4321"
+          exit 1
+
+      - run: npm run verify:scroll
+        env:
+          CRYSTAL_ORIGIN: http://127.0.0.1:4321
+      - run: npm run verify:interactions
+      - run: npm run verify:deploy

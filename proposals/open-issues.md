@@ -74,6 +74,37 @@ assumption — but neither is closed.
 `design-system/tools/verify-scroll.mjs`. Closing either needs a real device or a
 browser that paints classic scrollbars headlessly.
 
+## D-4b · `crystal.css` writes both `backdrop-filter` forms too
+
+Crystal's own stylesheet pairs `backdrop-filter` with `-webkit-backdrop-filter` on
+every material. That is safe **here**, because this preview ships hand-written CSS
+that nothing minifies — the pair survives and both browsers get what they need.
+
+It was fatal in Crystal React, where the same pair went through autoprefixer and
+esbuild's CSS minifier: the two collapsed to the prefixed form alone, and Chromium
+does not understand the WebKit alias. Frost and Resin rendered with no diffusion
+at all, in every story, until it was found.
+
+`design-system/assets/crystal.css`. Nothing is broken today. It is listed because
+the moment this stylesheet is put through any build — a bundler, a minifier, a
+CDN that optimises CSS — it acquires the same defect silently, and because a
+platform library reading it as an example will copy the pattern.
+
+## D-6 · Neither repository had continuous integration
+
+**Closed.** `.github/workflows/verify.yml` here and in Crystal React. Every step
+is a script that already existed; what changes is that they run on a clean
+checkout before a change lands, rather than when somebody remembers.
+
+Crystal's has two jobs: the token, contract and documentation gates, and the
+browser ones — which start `tools/serve.py` first, because the preview is
+verified served and not opened from the filesystem.
+
+One gate is new: **a build must not change a committed file.** Generated output
+that has drifted from its source makes every check beneath it evidence about the
+wrong thing. The `date` in `validation/token-checks.json` is exempt, since it
+records when the evidence was produced; the rest of that file is held to the rule.
+
 ## D-5 · `IntersectionObserver` delivers nothing in the preview browser
 
 While building Crystal React's `AppBar`, an `IntersectionObserver` created in the
