@@ -1,6 +1,6 @@
 # Color architecture
 
-Crystal separates expressive identity from functional meaning. The bolder palettes expand beyond Gather’s original muted range; they do not create an exemption from accessibility.
+Crystal separates expressive identity from functional meaning. The bolder palettes expand beyond the original muted range; they do not create an exemption from accessibility.
 
 ## What “outside status colors” means
 
@@ -22,7 +22,7 @@ Prism, Fuchsia and Amethyst emphasize violet/magenta away from conventional traf
 | Harbor | `#4669B2` | `#8970B5` | `#72C4DF` |
 <!-- /generated:palettes -->
 
-The seed is not automatically a text color. The canonical [token JSON](../tokens/crystal.json) defines paired light/dark values. The bold palette entries are authored sRGB mixtures; they do not use or claim conformity to Material’s tonal generator. Harbor retains mapped source values from Gather’s original generated palette.
+The seed is not automatically a text color. The canonical [token JSON](../tokens/crystal.json) defines paired light/dark values. The bold palette entries are authored sRGB mixtures; they do not use or claim conformity to Material’s tonal generator. Harbor retains mapped values from the original generated palette.
 
 ## Token layers
 
@@ -54,7 +54,7 @@ Contrast calculations use sRGB relative luminance. Normal text pairs target at l
 
 ## Adding a company or product palette
 
-Add a complete entry under `palettes` in the canonical JSON, including both modes. Use brand seeds for identity, then define readable semantic pairs, independent functional states and tested gradients. Run the token validation and inspect full tasks, not just swatches. Do not modify the immutable source copies in `reference/` to disguise a new palette as Gather-approved.
+Add a complete entry under `palettes` in the canonical JSON, including both modes. Use brand seeds for identity, then define readable semantic pairs, independent functional states and tested gradients. Run the token validation and inspect full tasks, not just swatches. Do not modify the immutable source copies in `reference/` to disguise a new palette as approved.
 
 The controls deliberately offer curated presets rather than an unrestricted color picker; arbitrary colors would need new paired-token generation and composite validation. The design still supports new company palettes through explicit token authoring.
 

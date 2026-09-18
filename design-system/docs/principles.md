@@ -1,6 +1,6 @@
 # Crystal: a shared visual language
 
-Crystal 2.0 is an independent, reusable extension of Gather’s approved `crystal-03-balanced` design. It retains the material hierarchy and recognizable silhouettes while allowing stronger product color identities. Gather’s original proposal and application are not modified by this system.
+Crystal 2.0 is Meridian Digital's reusable design system, built out from the approved `crystal-03-balanced` design. It retains the material hierarchy and recognizable silhouettes while allowing stronger product color identities. The original proposal and application that design came from are not modified by this system.
 
 ## Governing hierarchy
 
@@ -17,7 +17,7 @@ Crystal names six materials: **Plastic, Frost, Resin, Haze, Stone, Mirage**. Haz
 | Paired shadows, defined contours, radius relationships and restrained highlights | Atmosphere intensity and depth within the documented ranges |
 | Clear ownership/direction expressed through an optional asymmetric corner | Whether a product needs messages, a dock, or any particular component |
 
-Visual continuity does not require every product to look like a messenger. Preserve the relationships between surfaces; adapt the components to the work. A data-intensive product can use flatter rows inside a lifted Haze panel. A media product can expose richer artwork around protected controls. Avoid copying Gather’s feature requirements into unrelated products.
+Visual continuity does not require every product to look like a messenger. Preserve the relationships between surfaces; adapt the components to the work. A data-intensive product can use flatter rows inside a lifted Haze panel. A media product can expose richer artwork around protected controls. Avoid copying one product's feature requirements into unrelated products.
 
 ## Foundation rules
 

@@ -66,7 +66,7 @@
 </tr>
 <tr>
 <td><code>reference/</code></td>
-<td>Immutable Gather source copies and SHA-256 provenance</td>
+<td>Immutable source copies and SHA-256 provenance</td>
 </tr>
 <tr>
 <td><code>tools/</code></td>
@@ -185,7 +185,7 @@ node tools/validate-tokens.cjs
 .venv/bin/python tools/report.py
 .venv/bin/python tools/package.py
 </code></pre>
-<p>Node is used for the same resolver/exporter consumed by the browser; no Node package installation is required. Python requirements support Markdown rendering and HTML link checks. Browser checks are recorded separately as actual UI observations. Rebuilding never reads or writes the Gather project. Keep dependencies and temporary environments out of distributable ZIPs.</p>
+<p>Node is used for the same resolver/exporter consumed by the browser; no Node package installation is required. Python requirements support Markdown rendering and HTML link checks. Browser checks are recorded separately as actual UI observations. Rebuilding never reads or writes the originating project. Keep dependencies and temporary environments out of distributable ZIPs.</p>
 <h2 id="deploying-the-preview">Deploying the preview</h2>
 <p>The preview is static. Every page, stylesheet, script, icon and shader in this directory is
 committed, so a host only has to serve the directory — there is no build step at deploy time,

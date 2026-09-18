@@ -45,7 +45,7 @@ The preview product-name form performs a real local update with native validatio
 
 ## Product patterns
 
-**Navigation:** Use a floating toolbar when it improves the task. Keep the active destination labeled and avoid nested floating material planes. Side navigation may be more appropriate for dense tools. Do not require Gather’s three destinations in unrelated products.
+**Navigation:** Use a floating toolbar when it improves the task. Keep the active destination labeled and avoid nested floating material planes. Side navigation may be more appropriate for dense tools. Do not require one product's destination set in unrelated products.
 
 **Editing:** Give content a stable 80% reading fill with feathered edges and crisp text, then surround it with tools at an appropriate elevation. Native input controls retain protected backgrounds and explicit boundaries. Separate draft state from publication and communicate unsaved/error states honestly.
 

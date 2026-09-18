@@ -23,6 +23,17 @@ design-system/reference/material-examples/
 design-system/reference/approved-crystal/
 design-system/reference/approved-controls/
 
+# The preserved source archive. These are immutable copies of the design Crystal
+# was built out from, kept with SHA-256 digests as an internal provenance record.
+# They are not published: the site describes Crystal as Meridian Digital's own
+# system, and the archive names its origin. Kept in the repository, where the
+# record belongs, rather than rewritten — a provenance record that has been
+# edited is not a provenance record.
+design-system/reference/gather-approved-baseline.md
+design-system/reference/gather-crystal-recipes.json
+design-system/reference/gather-materials.md
+design-system/reference/provenance.json
+
 # Never publishable.
 **/node_modules/
 **/.venv/

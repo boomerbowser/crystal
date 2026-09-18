@@ -1,6 +1,6 @@
 # Materials, depth and optical detail
 
-**The defining order is Plastic → Frost → Resin, from back to front.** Plastic is the foundation, Frost the intermediate material layer, and Resin the highest functional control layer. Haze reading wells preserve legibility within this hierarchy. It is a custom design system derived from Gather, not a vendor-certified combination of Microsoft and Apple systems.
+**The defining order is Plastic → Frost → Resin, from back to front.** Plastic is the foundation, Frost the intermediate material layer, and Resin the highest functional control layer. Haze reading wells preserve legibility within this hierarchy. It is a custom design system, not a vendor-certified combination of Microsoft and Apple systems.
 
 ## Visual acceptance requirement
 
@@ -55,7 +55,7 @@ Plastic, Frost and Resin are based in and inspired by their respective platform 
 | Stone | 55% light / 60% dark fill with a 1.95px feather inside the Resin plane | Navigation labels and material comparison captions |
 | Mirage | #111525 at 38% opacity; 28px backdrop blur, 165% saturation, 88% brightness; Haze decision surface above | Blocking decisions, focus managed by the dialog |
 
-Resin renders at a fixed 20% fill opacity in both modes, independent of the Frost base tint control. Frost retains its existing recipe (45% fill from the recommended 35% base). Text, rims and shadows retain their opacity. Label protection is 55% in light mode and 60% in dark mode, with the dark backing strengthened to preserve contrast over bright backdrops at this lower glass opacity. Opaque accessibility fallbacks remain fully opaque. This deliberately differs from the original Gather recipes preserved in `reference/gather-crystal-recipes.json`.
+Resin renders at a fixed 20% fill opacity in both modes, independent of the Frost base tint control. Frost retains its existing recipe (45% fill from the recommended 35% base). Text, rims and shadows retain their opacity. Label protection is 55% in light mode and 60% in dark mode, with the dark backing strengthened to preserve contrast over bright backdrops at this lower glass opacity. Opaque accessibility fallbacks remain fully opaque. This deliberately differs from the original recipes preserved in `reference/`.
 
 The persistent Frost task frame is an intentional Crystal hybrid, not a claim of strict Microsoft placement conformance. One frame can contain several softened content wells; avoid nesting independently blurred panes. All three live scenes show that same stack.
 

@@ -18,7 +18,7 @@
 | `src/overview.md` | The site's index page, editable |
 | `src/pages/*.html` | Editable body fragments for the Playground and motion studies |
 | `tools/shell.py` | The only copy of the page header, side menu and footer |
-| `reference/` | Immutable Gather source copies and SHA-256 provenance |
+| `reference/` | Immutable source copies and SHA-256 provenance |
 | `tools/` | Rebuild, validation and packaging commands |
 | `validation/` | Executed-check evidence and explicit limits |
 
@@ -143,7 +143,7 @@ node tools/validate-tokens.cjs
 .venv/bin/python tools/package.py
 ```
 
-Node is used for the same resolver/exporter consumed by the browser; no Node package installation is required. Python requirements support Markdown rendering and HTML link checks. Browser checks are recorded separately as actual UI observations. Rebuilding never reads or writes the Gather project. Keep dependencies and temporary environments out of distributable ZIPs.
+Node is used for the same resolver/exporter consumed by the browser; no Node package installation is required. Python requirements support Markdown rendering and HTML link checks. Browser checks are recorded separately as actual UI observations. Rebuilding never reads or writes the originating project. Keep dependencies and temporary environments out of distributable ZIPs.
 
 ## Deploying the preview
 

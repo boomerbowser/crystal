@@ -4,7 +4,7 @@
   "$meta": {
     "system": "Crystal",
     "version": "2.0.0",
-    "basis": "Gather crystal-03-balanced; independent reusable extension",
+    "basis": "crystal-03-balanced; Meridian Digital design system",
     "generatedFrom": "tokens/crystal.json"
   },
   "primitive": {
@@ -761,7 +761,7 @@
       },
       "harbor": {
         "$name": "Harbor",
-        "$description": "Gather’s original palette, mapped to shared roles.",
+        "$description": "The original palette, mapped to shared roles.",
         "seed": {
           "$type": "color",
           "$value": "#4669B2"

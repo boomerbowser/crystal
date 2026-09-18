@@ -1,6 +1,6 @@
 # Crystal design system
 
-Open [the interactive playground](index.html). This independent package extends Gather’s approved Crystal styling into a product-neutral design system with five bolder palettes, the original Harbor mapping, light/dark modes, real local adjustments and CSS/JSON exports.
+Open [the interactive playground](index.html). This package is Meridian Digital's Crystal design system: a product-neutral visual language with five bolder palettes, the original Harbor mapping, light/dark modes, real local adjustments and CSS/JSON exports.
 
 ## Visual acceptance baseline
 
@@ -18,7 +18,7 @@ Stone retains 55% light / 60% dark opacity and shares Haze’s 1.95px feather. M
 
 ## Included
 
-- Preserved original Gather specifications and token files with a SHA-256 provenance manifest.
+- Preserved original specification and token files with a SHA-256 provenance manifest.
 - Eight editable specification chapters covering identity, typography/layout, color, materials/elevation, components/patterns, accessibility, adoption, material motion and component motion.
 - Six full light/dark palettes, independent functional statuses, configurable atmosphere/tint/elevation/radius/density/font and reduced transparency.
 - Three local product scenes; working dialog, token inspection, local name editing, preference persistence and downloads.
@@ -28,7 +28,7 @@ Stone retains 55% light / 60% dark opacity and shares Haze’s 1.95px feather. M
 - Resin/Haze interaction surfaces and compact information shells, including tooltips, toasts, labels, tags and temporary menus.
 - Rebuild/validation tooling and actual verification results, separately labeled from product adoption requirements.
 
-The source Gather proposal and application remain unchanged. Company branding is intentionally not invented; Crystal is the shared design-system name, and products supply their own names and marks.
+The original source proposal and application remain unchanged. Company branding is intentionally not invented; Crystal is the shared design-system name, and products supply their own names and marks.
 
 ## Open locally
 
