@@ -1361,7 +1361,7 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 </table></div>
 <h2 id="semantic-tokens">Semantic tokens</h2>
 <p>What a value <em>means</em>: the surface a card sits on, the duration a control settles over. Components consume this tier and nothing below it.</p>
-<p>85 tokens.</p>
+<p>96 tokens.</p>
 <h3 id="semantic-material">Semantic · material</h3>
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
@@ -1852,6 +1852,98 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 </tr>
 </tbody>
 </table></div>
+<h3 id="semantic-spacing">Semantic · spacing</h3>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Token</th>
+<th>Type</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>semantic.spacing.2xs</code></td>
+<td>dimension</td>
+<td><code>4px</code></td>
+<td>Spacing step 2xs</td>
+</tr>
+<tr>
+<td><code>semantic.spacing.xs</code></td>
+<td>dimension</td>
+<td><code>8px</code></td>
+<td>Spacing step xs</td>
+</tr>
+<tr>
+<td><code>semantic.spacing.sm</code></td>
+<td>dimension</td>
+<td><code>12px</code></td>
+<td>Spacing step sm</td>
+</tr>
+<tr>
+<td><code>semantic.spacing.md</code></td>
+<td>dimension</td>
+<td><code>16px</code></td>
+<td>Spacing step md</td>
+</tr>
+<tr>
+<td><code>semantic.spacing.lg</code></td>
+<td>dimension</td>
+<td><code>24px</code></td>
+<td>Spacing step lg</td>
+</tr>
+<tr>
+<td><code>semantic.spacing.xl</code></td>
+<td>dimension</td>
+<td><code>32px</code></td>
+<td>Spacing step xl</td>
+</tr>
+<tr>
+<td><code>semantic.spacing.2xl</code></td>
+<td>dimension</td>
+<td><code>48px</code></td>
+<td>Spacing step 2xl</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="semantic-breakpoint">Semantic · breakpoint</h3>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Token</th>
+<th>Type</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>semantic.breakpoint.sm</code></td>
+<td>dimension</td>
+<td><code>600px</code></td>
+<td>Viewport width at which the sm layout begins</td>
+</tr>
+<tr>
+<td><code>semantic.breakpoint.md</code></td>
+<td>dimension</td>
+<td><code>850px</code></td>
+<td>Viewport width at which the md layout begins</td>
+</tr>
+<tr>
+<td><code>semantic.breakpoint.lg</code></td>
+<td>dimension</td>
+<td><code>1150px</code></td>
+<td>Viewport width at which the lg layout begins</td>
+</tr>
+<tr>
+<td><code>semantic.breakpoint.xl</code></td>
+<td>dimension</td>
+<td><code>1500px</code></td>
+<td>Viewport width at which the xl layout begins</td>
+</tr>
+</tbody>
+</table></div>
 <h3 id="semantic-shape">Semantic · shape</h3>
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
@@ -1965,7 +2057,7 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 </table></div>
 <h2 id="component-tokens">Component tokens</h2>
 <p>Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.</p>
-<p>17 tokens.</p>
+<p>22 tokens.</p>
 <h3 id="component-action">Component · action</h3>
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
@@ -2062,6 +2154,49 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 <td>dimension</td>
 <td><code>24px</code></td>
 <td>Depth of the scroll area edge fade, and the scroll padding that keeps focus clear of it</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="component-layout">Component · layout</h3>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Token</th>
+<th>Type</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>component.layout.containerMax</code></td>
+<td>dimension</td>
+<td><code>1536px</code></td>
+<td>Widest the page shell becomes</td>
+</tr>
+<tr>
+<td><code>component.layout.readingMax</code></td>
+<td>dimension</td>
+<td><code>920px</code></td>
+<td>Widest a column of prose becomes, so a line stays a comfortable length</td>
+</tr>
+<tr>
+<td><code>component.layout.gutterCompact</code></td>
+<td>dimension</td>
+<td><code>18px</code></td>
+<td>Shell gutter below the sm breakpoint</td>
+</tr>
+<tr>
+<td><code>component.layout.gutterBase</code></td>
+<td>dimension</td>
+<td><code>26px</code></td>
+<td>Shell gutter between the sm and lg breakpoints</td>
+</tr>
+<tr>
+<td><code>component.layout.gutterWide</code></td>
+<td>dimension</td>
+<td><code>44px</code></td>
+<td>Shell gutter at the lg breakpoint and above</td>
 </tr>
 </tbody>
 </table></div>

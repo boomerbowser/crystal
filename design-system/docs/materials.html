@@ -274,6 +274,38 @@ technique uses.</p>
 <p>Support claims must be verified on actual target browsers/devices. A native implementation should use supported compositor APIs where appropriate and deliberately adapt the custom hierarchy elsewhere. The browser preview does not prove native rendering, energy performance or accessibility parity.</p>
 <h2 id="performance-and-composition">Performance and composition</h2>
 <p>Keep backdrop filters confined to a few bounded surfaces, avoid continuous blur animations, and avoid putting a scrolling text layer under numerous overlapping filters. A low-power mode can select the opaque recipe without changing geometry. Measure actual scroll/compositor behavior before setting device-specific budgets.</p>
+<h2 id="spacing-and-the-layout-shell">Spacing and the layout shell</h2>
+<p>Two scales that had no tokens until the layout components needed them. Neither is a new design decision: they name what Crystal's own shell already does, so something other than the preview can reach the values.</p>
+<p><strong>The spacing scale</strong> is the 4px rhythm, tied at two points to the reading rhythm so it is not an arbitrary ladder: <code>md</code> is the 16px reading size and <code>lg</code> is the 24px leading, which makes a <code>lg</code> gap exactly one blank line between blocks.</p>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Step</th>
+<th><code>2xs</code></th>
+<th><code>xs</code></th>
+<th><code>sm</code></th>
+<th><code>md</code></th>
+<th><code>lg</code></th>
+<th><code>xl</code></th>
+<th><code>2xl</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value</td>
+<td>4px</td>
+<td>8px</td>
+<td>12px</td>
+<td>16px</td>
+<td>24px</td>
+<td>32px</td>
+<td>48px</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>--cr-space</code> is a different thing and stays: it is the density-aware padding step, 20px comfortable and 14px compact. The spacing scale does not vary with density, palette or mode.</p>
+<p><strong>The breakpoints</strong> are where the shell already changes: <code>sm</code> 600px, <code>md</code> 850px, <code>lg</code> 1150px, <code>xl</code> 1500px. They cannot be custom properties, because a custom property is not usable inside a media query — libraries compile against them from the generated exports.</p>
+<p><strong>The shell</strong> is a 1536px ceiling with gutters that step down at those breakpoints — 44px at <code>lg</code> and above, 26px between <code>sm</code> and <code>lg</code>, 18px below <code>sm</code> — and a 920px reading column inside it, which is what keeps a line of prose a comfortable length.</p>
 <h2 id="scrolling">Scrolling</h2>
 <p>A scrollbar belongs to the material it scrolls, not to the operating system. There are two, and which one a surface takes follows the hierarchy rather than taste.</p>
 <div class="cr-table-scroll"><table class="cr-table">

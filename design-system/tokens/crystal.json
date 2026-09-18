@@ -379,7 +379,23 @@
     },
     "scrollArea": {
       "fadeDepth": 24
+    },
+    "layout": {
+      "containerMax": 1536,
+      "readingMax": 920,
+      "gutterCompact": 18,
+      "gutterBase": 26,
+      "gutterWide": 44
     }
+  },
+  "spacing": {
+    "2xs": 4,
+    "xs": 8,
+    "sm": 12,
+    "md": 16,
+    "lg": 24,
+    "xl": 32,
+    "2xl": 48
   },
   "schemaNote": "Generated from tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.",
   "materials": {

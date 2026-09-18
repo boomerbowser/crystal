@@ -172,6 +172,28 @@ function migrate() {
   set(out.semantic, 'typography.readingSize', leaf('dimension', dim(flat.typography.readingSize)));
   set(out.semantic, 'typography.readingLeading', leaf('dimension', dim(flat.typography.readingLeading)));
 
+  /* semantic: spacing and breakpoints.
+     Neither existed as a token, and the layout tier cannot be built without
+     both — the catalogue makes "the spacing scale" and "breakpoint behaviour"
+     Crystal's obligation for every layout component, and a library with no
+     token to read has to write the numbers itself, which is CONTRACT §1's
+     definition of drift.
+
+     These are not new design decisions. They are the values the preview's own
+     shell already uses, named so something other than the preview can reach
+     them: the spacing scale is the 4px rhythm the catalogue names, tied at two
+     points to the reading rhythm so it is not an arbitrary ladder — `md` is the
+     16px reading size and `lg` is the 24px leading, which makes a `lg` gap
+     exactly one blank line between blocks. The breakpoints are where the shell
+     already changes: 600, 850, 1150 and 1500. */
+  for (const [step, value] of [['2xs', 4], ['xs', 8], ['sm', 12], ['md', 16], ['lg', 24], ['xl', 32], ['2xl', 48]]) {
+    set(out.semantic, `spacing.${step}`, leaf('dimension', dim(value), `Spacing step ${step}`));
+  }
+  for (const [name, value] of [['sm', 600], ['md', 850], ['lg', 1150], ['xl', 1500]]) {
+    set(out.semantic, `breakpoint.${name}`, leaf('dimension', dim(value),
+      `Viewport width at which the ${name} layout begins`));
+  }
+
   /* The material vocabulary was renamed Mica -> Plastic, Acrylic -> Frost and
      Glass -> Resin. Both names still ship so existing adopters keep working;
      the removal version is named here, at the moment of deprecation. */
@@ -221,6 +243,15 @@ function migrate() {
   const sa = (flat.component && flat.component.scrollArea) || { fadeDepth: 24 };
   set(out.component, 'scrollArea.fadeDepth', leaf('dimension', dim(sa.fadeDepth),
     'Depth of the scroll area edge fade, and the scroll padding that keeps focus clear of it'));
+  /* The container, as the preview's own shell has always drawn it: a 1536px
+     ceiling with gutters that step down at the breakpoints above, and a 920px
+     reading column inside it. The gutter values are the catalogue's 18/26/44. */
+  set(out.component, 'layout.containerMax', leaf('dimension', '1536px', 'Widest the page shell becomes'));
+  set(out.component, 'layout.readingMax', leaf('dimension', '920px',
+    'Widest a column of prose becomes, so a line stays a comfortable length'));
+  set(out.component, 'layout.gutterCompact', leaf('dimension', '18px', 'Shell gutter below the sm breakpoint'));
+  set(out.component, 'layout.gutterBase', leaf('dimension', '26px', 'Shell gutter between the sm and lg breakpoints'));
+  set(out.component, 'layout.gutterWide', leaf('dimension', '44px', 'Shell gutter at the lg breakpoint and above'));
   set(out.component, 'card.radius', leaf('dimension', '{semantic.shape.contentRadius}',
     'Card-shaped buttons keep the content radius so artwork is not clipped'));
   set(out.component, 'focus.coreWidth', leaf('dimension', '2px', 'Crisp focus core, never blurred'));
@@ -358,7 +389,15 @@ function buildFlat(tokens) {
     scrollArea: {
       fadeDepth: unpx(tokens.component.scrollArea.fadeDepth.$value),
     },
+    layout: Object.fromEntries(Object.entries(tokens.component.layout)
+      .map(([key, leafValue]) => [key, unpx(leafValue.$value)])),
   };
+  /* Spacing reaches CSS as custom properties because a product writing plain CSS
+     against Crystal needs the same scale the libraries compile against. It does
+     not vary with palette, mode or density — `--cr-space` is the density-aware
+     padding step and is a different thing. */
+  flat.spacing = Object.fromEntries(Object.entries(tokens.semantic.spacing)
+    .map(([key, leafValue]) => [key, unpx(leafValue.$value)]));
   flat.schemaNote = 'Generated from tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.';
   flat.materials = MATERIALS;
   return flat;

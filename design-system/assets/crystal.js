@@ -74,6 +74,13 @@
       '--cr-scrollbar-thumb-min':data.component.scrollbar.thumbMinLength+'px',
       '--cr-scrollbar-inset':data.component.scrollbar.inset+'px',
       '--cr-scroll-fade':data.component.scrollArea.fadeDepth+'px',
+      /* The spacing scale and the shell's geometry. Neither varies with palette,
+         mode or density; they are published as custom properties so a product
+         writing plain CSS reaches the same values the libraries compile against.
+         `--cr-space` above is the density-aware padding step and is separate. */
+      ...Object.fromEntries(Object.entries(data.spacing).map(([k,v])=>['--cr-spacing-'+k,v+'px'])),
+      ...Object.fromEntries(Object.entries(data.component.layout).map(
+        ([k,v])=>['--cr-layout-'+k.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase(),v+'px'])),
       '--cr-scrollbar-frost-thumb':s.reduced?p.text:rgba(p.text,0.55),
       '--cr-scrollbar-resin-thumb':s.reduced?p.primary:rgba(p.primary,0.80),
       '--cr-scrollbar-track':s.reduced?p.surfaceAlt:rgba(p.outline,0.12),

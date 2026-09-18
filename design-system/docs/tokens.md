@@ -268,7 +268,7 @@ Raw values. Never referenced by a component directly — a primitive is the thin
 
 What a value *means*: the surface a card sits on, the duration a control settles over. Components consume this tier and nothing below it.
 
-85 tokens.
+96 tokens.
 
 ### Semantic · material
 
@@ -363,6 +363,27 @@ What a value *means*: the surface a card sits on, the duration a control settles
 | `semantic.typography.readingSize` | dimension | `16px` | — |
 | `semantic.typography.readingLeading` | dimension | `24px` | — |
 
+### Semantic · spacing
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `semantic.spacing.2xs` | dimension | `4px` | Spacing step 2xs |
+| `semantic.spacing.xs` | dimension | `8px` | Spacing step xs |
+| `semantic.spacing.sm` | dimension | `12px` | Spacing step sm |
+| `semantic.spacing.md` | dimension | `16px` | Spacing step md |
+| `semantic.spacing.lg` | dimension | `24px` | Spacing step lg |
+| `semantic.spacing.xl` | dimension | `32px` | Spacing step xl |
+| `semantic.spacing.2xl` | dimension | `48px` | Spacing step 2xl |
+
+### Semantic · breakpoint
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `semantic.breakpoint.sm` | dimension | `600px` | Viewport width at which the sm layout begins |
+| `semantic.breakpoint.md` | dimension | `850px` | Viewport width at which the md layout begins |
+| `semantic.breakpoint.lg` | dimension | `1150px` | Viewport width at which the lg layout begins |
+| `semantic.breakpoint.xl` | dimension | `1500px` | Viewport width at which the xl layout begins |
+
 ### Semantic · shape
 
 | Token | Type | Value | Meaning |
@@ -394,7 +415,7 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.
 
-17 tokens.
+22 tokens.
 
 ### Component · action
 
@@ -420,6 +441,16 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
 | `component.scrollArea.fadeDepth` | dimension | `24px` | Depth of the scroll area edge fade, and the scroll padding that keeps focus clear of it |
+
+### Component · layout
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.layout.containerMax` | dimension | `1536px` | Widest the page shell becomes |
+| `component.layout.readingMax` | dimension | `920px` | Widest a column of prose becomes, so a line stays a comfortable length |
+| `component.layout.gutterCompact` | dimension | `18px` | Shell gutter below the sm breakpoint |
+| `component.layout.gutterBase` | dimension | `26px` | Shell gutter between the sm and lg breakpoints |
+| `component.layout.gutterWide` | dimension | `44px` | Shell gutter at the lg breakpoint and above |
 
 ### Component · card
 

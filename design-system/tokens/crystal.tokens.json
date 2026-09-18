@@ -1460,6 +1460,65 @@
         "$value": "24px"
       }
     },
+    "spacing": {
+      "2xs": {
+        "$type": "dimension",
+        "$value": "4px",
+        "$description": "Spacing step 2xs"
+      },
+      "xs": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "Spacing step xs"
+      },
+      "sm": {
+        "$type": "dimension",
+        "$value": "12px",
+        "$description": "Spacing step sm"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$description": "Spacing step md"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$description": "Spacing step lg"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "32px",
+        "$description": "Spacing step xl"
+      },
+      "2xl": {
+        "$type": "dimension",
+        "$value": "48px",
+        "$description": "Spacing step 2xl"
+      }
+    },
+    "breakpoint": {
+      "sm": {
+        "$type": "dimension",
+        "$value": "600px",
+        "$description": "Viewport width at which the sm layout begins"
+      },
+      "md": {
+        "$type": "dimension",
+        "$value": "850px",
+        "$description": "Viewport width at which the md layout begins"
+      },
+      "lg": {
+        "$type": "dimension",
+        "$value": "1150px",
+        "$description": "Viewport width at which the lg layout begins"
+      },
+      "xl": {
+        "$type": "dimension",
+        "$value": "1500px",
+        "$description": "Viewport width at which the xl layout begins"
+      }
+    },
     "shape": {
       "contentRadius": {
         "$type": "dimension",
@@ -1606,6 +1665,33 @@
         "$type": "dimension",
         "$value": "24px",
         "$description": "Depth of the scroll area edge fade, and the scroll padding that keeps focus clear of it"
+      }
+    },
+    "layout": {
+      "containerMax": {
+        "$type": "dimension",
+        "$value": "1536px",
+        "$description": "Widest the page shell becomes"
+      },
+      "readingMax": {
+        "$type": "dimension",
+        "$value": "920px",
+        "$description": "Widest a column of prose becomes, so a line stays a comfortable length"
+      },
+      "gutterCompact": {
+        "$type": "dimension",
+        "$value": "18px",
+        "$description": "Shell gutter below the sm breakpoint"
+      },
+      "gutterBase": {
+        "$type": "dimension",
+        "$value": "26px",
+        "$description": "Shell gutter between the sm and lg breakpoints"
+      },
+      "gutterWide": {
+        "$type": "dimension",
+        "$value": "44px",
+        "$description": "Shell gutter at the lg breakpoint and above"
       }
     },
     "card": {

@@ -147,6 +147,22 @@ Support claims must be verified on actual target browsers/devices. A native impl
 
 Keep backdrop filters confined to a few bounded surfaces, avoid continuous blur animations, and avoid putting a scrolling text layer under numerous overlapping filters. A low-power mode can select the opaque recipe without changing geometry. Measure actual scroll/compositor behavior before setting device-specific budgets.
 
+## Spacing and the layout shell
+
+Two scales that had no tokens until the layout components needed them. Neither is a new design decision: they name what Crystal's own shell already does, so something other than the preview can reach the values.
+
+**The spacing scale** is the 4px rhythm, tied at two points to the reading rhythm so it is not an arbitrary ladder: `md` is the 16px reading size and `lg` is the 24px leading, which makes a `lg` gap exactly one blank line between blocks.
+
+| Step | `2xs` | `xs` | `sm` | `md` | `lg` | `xl` | `2xl` |
+|---|---|---|---|---|---|---|---|
+| Value | 4px | 8px | 12px | 16px | 24px | 32px | 48px |
+
+`--cr-space` is a different thing and stays: it is the density-aware padding step, 20px comfortable and 14px compact. The spacing scale does not vary with density, palette or mode.
+
+**The breakpoints** are where the shell already changes: `sm` 600px, `md` 850px, `lg` 1150px, `xl` 1500px. They cannot be custom properties, because a custom property is not usable inside a media query — libraries compile against them from the generated exports.
+
+**The shell** is a 1536px ceiling with gutters that step down at those breakpoints — 44px at `lg` and above, 26px between `sm` and `lg`, 18px below `sm` — and a 920px reading column inside it, which is what keeps a line of prose a comfortable length.
+
 ## Scrolling
 
 A scrollbar belongs to the material it scrolls, not to the operating system. There are two, and which one a surface takes follows the hierarchy rather than taste.

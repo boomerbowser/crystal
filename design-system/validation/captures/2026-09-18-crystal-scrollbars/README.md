@@ -113,13 +113,22 @@ the two that are unchanged are the narrow ones, where the menu collapses.
 The tables, which were shifting in the first version of this change, are now
 byte-identical to their baselines.
 
-`haze-in-resin` was blessed again, for a different reason: the scrolling and
-edge-fade sections added to the materials documentation sit above the
-composition this frame is anchored to, so the anchor lands at a fractional
-scroll offset and the page re-rasterises half a pixel lower. The frame has two
-rasterisations and alternates between them with the document's height — both
-edits produced the same 2256 differing pixels and the same 1826 visible, to the
-pixel, in the same rectangle. 1826 pixels cross the visible
+`haze-in-resin` was blessed again, and this is worth understanding because it
+will recur. The frame is anchored to a composition part-way down the materials
+documentation, so **any** prose added above it moves the anchor to a different
+fractional scroll offset and the page re-rasterises. Nothing about the
+composition changes; sub-pixel text rendering does. It shows up only on the one
+monospace code block on screen, which is the only text with enough contrast for
+half a pixel to cross the visible threshold — the surrounding prose shifts by the
+same amount and stays under it.
+
+Three edits to that page during this change produced, in order: 1826 visible
+pixels in x 346–897 / y 469–526, the same 1826 in the same rectangle (the frame
+has two rasterisations and alternates between them with the document's height),
+and finally 24 visible pixels in x 346–350 / y 515–526 — a single closing brace.
+A diff that fits inside one glyph and matches no integer offset is a
+re-rasterisation, not a layout move, and that distinction is the thing to check
+rather than the pixel count. 1826 pixels cross the visible
 threshold and all of them are inside x 346–897, y 469–526 — the one monospace
 code block on screen, which is the only text with enough contrast for a
 sub-pixel shift to register. Both crops were compared at 8×: the same glyphs,
