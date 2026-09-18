@@ -25,7 +25,7 @@ Crystal specifies appearance. Products bring their own accessible primitives —
 ## 4. Preserve the behavioural contracts.
 
 - **Focus** is a crisp 2px core at 3px offset inside a four-layer feathered halo. Never delayed, never blurred, never replaced by a state badge.
-- **Selection** is a leading rail plus label weight. A check mark means validated or informational and never marks a selected, pressed or focused control.
+- **Selection** is label weight. A check mark means validated or informational and never marks a selected, pressed or focused control.
 - **Geometry**: action controls are pills, independent of the content radius. Card-shaped buttons keep the content radius.
 - **Motion** follows the documented timings, easings and travel limits, with a hard five-second ceiling. Interactions, data and focus respond immediately even mid-transition.
 - **Reduced motion** removes spatial change and keeps state feedback. **Reduced transparency** and **forced colours** remove diffusion while preserving shapes, readable pairs and hierarchy.
@@ -90,9 +90,13 @@ Non-negotiable properties:
   all. Each entry declares a `degradesTo`; a platform that cannot meet the
   contract degrades as declared rather than approximating it differently, since
   a divergent approximation damages parity more than an honest absence.
-- **Never at rest.** Shaders paint only while a motion is in flight. Gate G6
-  proves the web preview is pixel-identical across all twelve reference frames
-  with WebGL2 unavailable.
+- **During a motion, or during ambient.** Shaders paint while a motion is in flight
+  and while a surface is in its ambient rest state (§8). They never paint on a surface
+  that is doing neither. This rule read "never at rest" until Crystal 2.0; ambient
+  motion made the rest state a state a material actually has, so the rule was rewritten
+  rather than excepted. Reference frames capture ambient disabled — a moving surface
+  cannot be photographed deterministically — and gate G8 proves that with both the
+  shader layer and ambient unavailable, every page renders exactly its baseline.
 - **Never above content.** The optical layer belongs between a material's
   background and its content. On the web this is a negative `z-index` inside an
   isolated stacking context; the principle is that verified text contrast is

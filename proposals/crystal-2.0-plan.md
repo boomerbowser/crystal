@@ -339,3 +339,90 @@ site contains. The fix is not to restyle four copies. It is to leave one.
 - [x] **Step 4** — **GATE G7.** `validate.py` reports zero errors across the moved tree, every
   affected baseline is re-blessed with a README stating what moved and why, and the material
   audit is clean including the new specimens.
+
+---
+
+## Section I — Light, and materials that move at rest
+
+Meridian pointed at JolyUI's Liquid Metal button as an illustration of what "more motion"
+means, and restated the material rules it implies. The reference is instructive for
+*behaviour*, not for appearance: its bands are anisotropic reflection, which is a metal
+phenomenon. Crystal is glass. What transfers is that the surface is alive at rest, that
+light through it is chromatic, and that interaction adds energy rather than starting the
+effect.
+
+The requested rules:
+
+- **Resin and Frost** refract light *and colour* in their animations, in different amounts
+  and different ways.
+- **Plastic** carries the base glow of its primary colour plus the tint the active scheme
+  gives it.
+- Refraction **affects the shadow** a surface casts.
+- **Haze and Stone** have edges that appear to move on their own, travelling outward and
+  inward rather than tracing the perimeter.
+
+### The structural decision
+
+"Edges that appear to move on their own" means *at rest, by default*. That contradicts
+three things this repository currently states: `libraries/CONTRACT.md` §7 "never at rest",
+the motion memory's "nothing autoplays", and gate G6's pixel identity with WebGL2 absent.
+
+This is Meridian authorising a specification change, so the rules are rewritten rather than
+excepted:
+
+- Ambient motion becomes the material's **declared rest state**, on by default wherever
+  WebGL2, motion preference and transparency preference allow.
+- Reference frames seed ambient **off**, the same way they seed palette and mode. A moving
+  surface cannot be captured deterministically; this is a property of the gate, not a dodge.
+- §7 is rewritten: a shader paints during a motion **or during ambient**, and reference
+  frames capture ambient disabled.
+
+### Task 25: The CSS floor
+
+**Files:** `assets/crystal.js`, `assets/controls.css`, `tokens/motion-recipes.json`,
+`tools/capture-frames.mjs`, `validation/frames.json`
+
+- [ ] **Step 1** — Rewrite `haze-settle`, `haze-tide` and `stone-contour`. They were
+  authored as opacity oscillations, and opacity pulsing is not an edge that moves. They
+  become radial breathing of the boundary — `clipPath: inset(N round R)` on the isolated
+  paint layer with N travelling outward and inward. The recess shadow pair stays fixed,
+  because the light source does not move, and the text above never moves at all.
+- [ ] **Step 2** — Plastic emits rather than refracts, because it is opaque. A soft radial
+  bloom of `--cr-glow` over the existing atmosphere gradient, drifting slowly.
+- [ ] **Step 3** — Tint the shadow. Coloured glass casts a coloured shadow, so the palette's
+  companion mixes into `--cr-shadow-*` in `crystal.js`. The generated theme CSS stops being
+  byte-identical; that is deliberate and is recorded.
+- [ ] **Step 4** — Seed `ambient: false` in `preferencesFor()` so every frame captures a
+  still surface, and say so in each frame's `why`.
+- [ ] **Step 5** — Re-bless all eighteen frames with one README and one reason.
+
+### Task 26: The shader tier
+
+**Files:** `assets/motion-shaders.js`, `assets/shaders/*.frag`, `assets/shaders/manifest.json`
+
+- [ ] **Step 1** — Ambient loop: Resin and Frost attach at rest, only while intersecting the
+  viewport, released on `visibilitychange`, and hard-capped well under Chromium's ~16 live
+  WebGL contexts. Haze, Stone and Plastic stay CSS, which is cheap enough to be everywhere.
+- [ ] **Step 2** — Frost refracts differently from Resin, and physics decides how. At 40px
+  nothing sharp survives, so Frost's refraction is a slow, broad colour-temperature wander
+  at low amplitude. Resin at 20px keeps detail, so its dispersion stays sharp and
+  rim-concentrated. Light through frosted glass shows colour, not shape.
+- [ ] **Step 3** — Interaction adds energy instead of silencing it. `hush()` was written to
+  pause ambient on any interaction; the reference rises from 0.6 at rest to 1 on hover and
+  2.4 on press. Hover and press raise `u_intensity` and let it decay. Pausing is kept only
+  for text entry, because a surface being read is the one place motion must not compete.
+- [ ] **Step 4** — No new uniform. `u_intensity` carries ambient energy; every uniform added
+  is a contract change for three platforms.
+
+### Task 27: Say it in the specification
+
+**Files:** `docs/materials.md`, `libraries/CONTRACT.md`, `docs/motion.md`
+
+- [ ] **Step 1** — `materials.md` gains a **Light** section stating each material's optical
+  behaviour as a rule: what refracts, what emits, what breathes, and what that does to the
+  shadow.
+- [ ] **Step 2** — Rewrite CONTRACT §7 and extend §8. "Never at rest" becomes "during a
+  motion or during ambient", with reference capture stated as the reason frames stay stable.
+- [ ] **Step 3** — **GATE G8.** With WebGL2 unavailable *and* ambient disabled, every page
+  renders exactly the committed baselines. The CSS floor remains the floor: ambient is an
+  enhancement on top of it, never a requirement.

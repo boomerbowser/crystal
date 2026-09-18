@@ -132,3 +132,49 @@ inline would wreck the writing. `tools/validate-docs.cjs` protects them from the
 direction instead — every material recipe value, both engine versions, the recipe and
 category counts and the contrast total must appear in the chapter that documents them,
 so a token that moves without its prose fails `npm test`.
+
+## R17 — light, refraction and materials that move at rest (2026-09-17)
+
+Meridian cited JolyUI's Liquid Metal button as an illustration of "more motion" and
+restated the optical rules it implies. Section I, tasks 25-27, gate G8.
+
+| # | Requested | Status |
+| --- | --- | --- |
+| R17a | Resin and Frost refract light *and colour* in their animations, in different amounts and ways | specified; Resin sharp and rim-concentrated, Frost broad and chromatic. Shader tier is task 26, still open |
+| R17b | Plastic carries the base glow of its primary plus the active scheme's tint | done — `--cr-atmosphere-glow`, drifting over 38s |
+| R17c | Refraction affects the shadow the surface casts | done — the palette companion mixes into the shadow ink, colour only, alpha preserved |
+| R17d | Haze and Stone have edges that move on their own, outward and inward rather than around the perimeter | done — boundary travel on the isolated paint layer |
+
+**The reference is behaviour, not appearance.** Liquid Metal's sweeping bands are
+anisotropic reflection — a metal phenomenon. Crystal is glass, its optical model is edge
+lensing, and surface waves are already recorded as rejected. What transfers is that the
+surface is alive at rest, that light through it is chromatic, and that interaction adds
+energy rather than starting the effect.
+
+**This authorises a specification change.** "Edges that move on their own" means at rest by
+default, which contradicts `CONTRACT.md` §7 "never at rest" and "nothing autoplays". Those
+are rewritten rather than excepted, and reference frames seed ambient off — a moving surface
+cannot be captured deterministically.
+
+**It also corrects yesterday's work.** `haze-settle`, `haze-tide` and `stone-contour` were
+authored as opacity oscillations. Opacity pulsing is not an edge that moves; they are
+rewritten as radial boundary motion.
+
+## R18 — the selection rail must go (2026-09-17)
+
+Meridian: "just like the underlines had to go, this side bar thing needs to go. I
+understand the accessibility standard it's trying to account for, but this just isn't in
+line with Crystal, is offsetting the label text, and must go."
+
+This changes a standing Crystal invariant — "selection uses a leading rail plus label
+weight" — so it is recorded as a specification change rather than a styling tweak. The
+owner is authorising it.
+
+The rail exists to satisfy WCAG 1.4.1: selection must not be carried by colour alone.
+Removing it does not remove that obligation, so the replacement has to carry a non-colour
+signal. **Label weight** already does — it is typographic, not chromatic, and survives
+palette changes, dark mode and colour vision differences. The rail was a second
+non-colour signal on top of a sufficient one, and it was costing label alignment to be
+there.
+
+Status: done — both rails removed, tokens deprecated in place, six chapters updated.

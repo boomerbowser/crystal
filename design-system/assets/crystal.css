@@ -13,7 +13,20 @@
    crystal-theme.css or by a configuration exported from the playground. */
 :root{--cr-font:Manrope,system-ui,sans-serif;--cr-radius:28px;--cr-space:20px;--cr-reading:16px;--cr-leading:1.5;color-scheme:light}
 *{box-sizing:border-box}body{margin:0;color:var(--cr-text);background:var(--cr-canvas);font-family:var(--cr-font);font-size:16px;line-height:1.6}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}a{color:var(--cr-primary);text-underline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--cr-primary);outline-offset:3px;box-shadow:0 0 6px 2px color-mix(in srgb,var(--cr-primary) 46%,transparent),0 0 16px 6px color-mix(in srgb,var(--cr-primary) 30%,transparent),0 0 30px 12px color-mix(in srgb,var(--cr-primary) 17%,transparent),0 0 54px 22px color-mix(in srgb,var(--cr-primary) 8%,transparent)}button:disabled{cursor:not-allowed;opacity:.55}button{transition:background var(--cr-state),box-shadow var(--cr-state),transform var(--cr-press)}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{line-height:1.2;letter-spacing:-.04em}button:has(svg){display:inline-flex;align-items:center;justify-content:center;gap:9px}
-:is(.cr-plastic,.cr-foundation){background-color:var(--cr-canvas);background-image:radial-gradient(ellipse at 5% 12%,var(--cr-atmosphere-one),transparent 64%),radial-gradient(ellipse at 96% 88%,var(--cr-atmosphere-two),transparent 63%);isolation:isolate}
+:is(.cr-plastic,.cr-foundation){background-color:var(--cr-canvas);background-image:radial-gradient(ellipse 58% 44% at var(--cr-glow-x,26%) var(--cr-glow-y,34%),var(--cr-atmosphere-glow),transparent 72%),radial-gradient(ellipse at 5% 12%,var(--cr-atmosphere-one),transparent 64%),radial-gradient(ellipse at 96% 88%,var(--cr-atmosphere-two),transparent 63%);isolation:isolate;animation:cr-plastic-glow 38s ease-in-out infinite alternate}
+/* Plastic emits rather than refracts. The glow drifts slowly across the foundation so
+   the base is alive without ever competing with what sits on it: 38 seconds for a full
+   traverse, and only the gradient's centre moves — nothing reflows, nothing repaints
+   above it. */
+@keyframes cr-plastic-glow{from{--cr-glow-x:26%;--cr-glow-y:34%}to{--cr-glow-x:68%;--cr-glow-y:58%}}
+@property --cr-glow-x{syntax:'<percentage>';inherits:false;initial-value:26%}
+@property --cr-glow-y{syntax:'<percentage>';inherits:false;initial-value:34%}
+@media (prefers-reduced-motion:reduce){:is(.cr-plastic,.cr-foundation){animation:none}}
+@media (forced-colors:active){:is(.cr-plastic,.cr-foundation){animation:none}}
+/* One switch disables every ambient effect, CSS and script alike. Reference frames set
+   it: a surface that moves at rest cannot be captured deterministically, so the gate
+   photographs the material still. That is a property of the camera, not an exemption. */
+:root[data-ambient=off] :is(.cr-plastic,.cr-foundation){animation:none}
 :is(.cr-haze,.cr-surface){background:var(--cr-surface);border:1px solid var(--cr-edge);border-radius:var(--cr-radius);box-shadow:var(--cr-shadow-content);color:var(--cr-text)}
 :is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass){position:relative;isolation:isolate;border:1px solid var(--cr-rim);background:var(--cr-frost-fill);box-shadow:var(--cr-shadow-panel);border-radius:calc(var(--cr-radius) + 6px);backdrop-filter:blur(var(--cr-frost-blur)) saturate(var(--cr-frost-saturation));-webkit-backdrop-filter:blur(var(--cr-frost-blur)) saturate(var(--cr-frost-saturation))}
 :is(.cr-frost,.cr-acrylic):before{content:'';position:absolute;inset:0;pointer-events:none;z-index:-1;border-radius:inherit;opacity:var(--cr-grain-opacity);background-image:url('grain.svg')}

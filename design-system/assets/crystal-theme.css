@@ -26,6 +26,7 @@
   --cr-mica-inactive: #f1f1f3;
   --cr-atmosphere-one: rgba(115, 56, 239, 0.216);
   --cr-atmosphere-two: rgba(239, 72, 198, 0.171);
+  --cr-atmosphere-glow: rgba(82, 189, 243, 0.126);
   --cr-acrylic-fill: rgba(255, 255, 255, 0.45);
   --cr-glass-fill: rgba(255, 255, 255, 0.2);
   --cr-content-fill: rgba(255, 255, 255, 0.8);
@@ -48,9 +49,9 @@
   --cr-grain-opacity: 0.045;
   --cr-edge: rgba(98, 74, 159, 0.25);
   --cr-rim: rgba(255,255,255,.85);
-  --cr-shadow-content: 0 2.5px 3.75px rgba(39, 24, 68, .15), 0 8.75px 18.75px rgba(39, 24, 68, .18);
-  --cr-shadow-panel: inset 0 1px 0 rgba(255,255,255,.85), 0 3.75px 6.25px rgba(39, 24, 68, .15), 0 17.5px 35px rgba(39, 24, 68, .18);
-  --cr-shadow-float: inset 0 1px 1px rgba(255,255,255,.85), inset 0 -1px 1px rgba(39, 24, 68, .15), 0 5px 8.75px rgba(39, 24, 68, .15), 0 25px 50px rgba(39, 24, 68, .18);
+  --cr-shadow-content: 0 2.5px 3.75px rgba(107, 40, 112, .15), 0 8.75px 18.75px rgba(107, 40, 112, .18);
+  --cr-shadow-panel: inset 0 1px 0 rgba(255,255,255,.85), 0 3.75px 6.25px rgba(107, 40, 112, .15), 0 17.5px 35px rgba(107, 40, 112, .18);
+  --cr-shadow-float: inset 0 1px 1px rgba(255,255,255,.85), inset 0 -1px 1px rgba(107, 40, 112, .15), 0 5px 8.75px rgba(107, 40, 112, .15), 0 25px 50px rgba(107, 40, 112, .18);
   --cr-press: 120ms;
   --cr-state: 213.33ms;
   --cr-spatial: 293.33ms;
@@ -117,6 +118,7 @@
   --cr-mica-inactive: #f1f1f3;
   --cr-atmosphere-one: rgba(115, 56, 239, 0.216);
   --cr-atmosphere-two: rgba(239, 72, 198, 0.171);
+  --cr-atmosphere-glow: rgba(82, 189, 243, 0.126);
   --cr-acrylic-fill: rgba(255, 255, 255, 0.45);
   --cr-glass-fill: rgba(255, 255, 255, 0.2);
   --cr-content-fill: rgba(255, 255, 255, 0.8);
@@ -139,9 +141,9 @@
   --cr-grain-opacity: 0.045;
   --cr-edge: rgba(98, 74, 159, 0.25);
   --cr-rim: rgba(255,255,255,.85);
-  --cr-shadow-content: 0 2.5px 3.75px rgba(39, 24, 68, .15), 0 8.75px 18.75px rgba(39, 24, 68, .18);
-  --cr-shadow-panel: inset 0 1px 0 rgba(255,255,255,.85), 0 3.75px 6.25px rgba(39, 24, 68, .15), 0 17.5px 35px rgba(39, 24, 68, .18);
-  --cr-shadow-float: inset 0 1px 1px rgba(255,255,255,.85), inset 0 -1px 1px rgba(39, 24, 68, .15), 0 5px 8.75px rgba(39, 24, 68, .15), 0 25px 50px rgba(39, 24, 68, .18);
+  --cr-shadow-content: 0 2.5px 3.75px rgba(107, 40, 112, .15), 0 8.75px 18.75px rgba(107, 40, 112, .18);
+  --cr-shadow-panel: inset 0 1px 0 rgba(255,255,255,.85), 0 3.75px 6.25px rgba(107, 40, 112, .15), 0 17.5px 35px rgba(107, 40, 112, .18);
+  --cr-shadow-float: inset 0 1px 1px rgba(255,255,255,.85), inset 0 -1px 1px rgba(107, 40, 112, .15), 0 5px 8.75px rgba(107, 40, 112, .15), 0 25px 50px rgba(107, 40, 112, .18);
   --cr-press: 120ms;
   --cr-state: 213.33ms;
   --cr-spatial: 293.33ms;
@@ -208,6 +210,7 @@
   --cr-mica-inactive: #202126;
   --cr-atmosphere-one: rgba(126, 72, 240, 0.261);
   --cr-atmosphere-two: rgba(239, 72, 198, 0.207);
+  --cr-atmosphere-glow: rgba(82, 189, 243, 0.162);
   --cr-acrylic-fill: rgba(29, 23, 48, 0.45);
   --cr-glass-fill: rgba(29, 23, 48, 0.2);
   --cr-content-fill: rgba(29, 23, 48, 0.8);
@@ -230,9 +233,9 @@
   --cr-grain-opacity: 0.045;
   --cr-edge: rgba(191, 163, 248, 0.34);
   --cr-rim: rgba(255,255,255,.17);
-  --cr-shadow-content: 0 2.5px 3.75px rgba(0, 0, 0, .50), 0 8.75px 18.75px rgba(0, 0, 0, .55);
-  --cr-shadow-panel: inset 0 1px 0 rgba(255,255,255,.17), 0 3.75px 6.25px rgba(0, 0, 0, .50), 0 17.5px 35px rgba(0, 0, 0, .55);
-  --cr-shadow-float: inset 0 1px 1px rgba(255,255,255,.17), inset 0 -1px 1px rgba(0, 0, 0, .50), 0 5px 8.75px rgba(0, 0, 0, .50), 0 25px 50px rgba(0, 0, 0, .55);
+  --cr-shadow-content: 0 2.5px 3.75px rgba(96, 29, 79, .50), 0 8.75px 18.75px rgba(96, 29, 79, .55);
+  --cr-shadow-panel: inset 0 1px 0 rgba(255,255,255,.17), 0 3.75px 6.25px rgba(96, 29, 79, .50), 0 17.5px 35px rgba(96, 29, 79, .55);
+  --cr-shadow-float: inset 0 1px 1px rgba(255,255,255,.17), inset 0 -1px 1px rgba(96, 29, 79, .50), 0 5px 8.75px rgba(96, 29, 79, .50), 0 25px 50px rgba(96, 29, 79, .55);
   --cr-press: 120ms;
   --cr-state: 213.33ms;
   --cr-spatial: 293.33ms;

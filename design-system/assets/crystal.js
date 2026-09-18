@@ -25,7 +25,20 @@
     const s=normalize(value);mode=mode==='dark'?'dark':'light';const p=data.palettes[s.palette].modes[mode];const e=s.elevation/100;const tint=s.translucency/100;const dark=mode==='dark';
     const ms=duration=>(s.reduceMotion?0:Math.round(Math.min(data.motion.maxDuration,duration/s.motionSpeed)*100)/100)+'ms';
     const tokens={};for(const [key,val] of Object.entries(p))tokens['--cr-'+camelToKebab(key)]=val;
-    const shadow=dark?'rgba(0, 0, 0, .55)':'rgba(39, 24, 68, .18)';const contact=dark?'rgba(0, 0, 0, .50)':'rgba(39, 24, 68, .15)';const highlight=dark?'rgba(255,255,255,.17)':'rgba(255,255,255,.85)';
+    /* Coloured glass casts a coloured shadow. The light a material refracts is the light
+       that reaches the surface beneath it, so the shadow carries the palette's companion
+       hue rather than being neutral grey. The mix is on the colour only — the alpha of
+       each layer is preserved exactly, because tinting a shadow must not also deepen it. */
+    const mixInto=(base,tint,amount)=>{
+      const [br,bg,bb]=base,[tr,tg,tb]=rgb(tint);
+      const m=(a,b)=>Math.round(a+(b-a)*amount);
+      return [m(br,tr),m(bg,tg),m(bb,tb)];
+    };
+    const SHADOW_TINT=dark?0.40:0.34;
+    const base=dark?[0,0,0]:[39,24,68];
+    const tinted=mixInto(base,p.companion,SHADOW_TINT);
+    const ink=alpha=>`rgba(${tinted[0]}, ${tinted[1]}, ${tinted[2]}, ${alpha})`;
+    const shadow=ink(dark?'.55':'.18');const contact=ink(dark?'.50':'.15');const highlight=dark?'rgba(255,255,255,.17)':'rgba(255,255,255,.85)';
     Object.assign(tokens,{
       '--cr-font':s.font==='manrope'?'Manrope, system-ui, sans-serif':'system-ui, sans-serif',
       '--cr-radius':s.radius+'px','--cr-space':s.density==='compact'?'14px':'20px',
@@ -34,6 +47,10 @@
       '--cr-mica-inactive':data.material.micaInactive[mode],
       '--cr-atmosphere-one':rgba(p.decorative,s.atmosphere/100*(dark?.29:.24)),
       '--cr-atmosphere-two':rgba(p.companion,s.atmosphere/100*(dark?.23:.19)),
+      /* Plastic is opaque, so it cannot refract; it emits. This is the palette's own
+         glow carried by the foundation, at the intensity the active scheme's atmosphere
+         setting asks for — the base glow of the primary plus the scheme's tint. */
+      '--cr-atmosphere-glow':rgba(p.glow,s.atmosphere/100*(dark?.18:.14)),
       '--cr-acrylic-fill':s.reduced?p.surface:rgba(p.surface,Math.min(.94,tint+.1)),
       '--cr-glass-fill':s.reduced?p.surface:rgba(p.surface,data.material.glassOpacity),
       '--cr-content-fill':s.reduced?p.surface:rgba(p.surface,data.material.contentOpacity),

@@ -181,7 +181,7 @@ An explicit gap from the spacing scale.
 
 ## Navigation
 
-Moving between destinations. Current location is a dot; selection within a set is a leading rail. Neither is ever a check mark.
+Moving between destinations. Current location is a dot; selection within a set is label weight. Neither is ever a check mark.
 
 ### Anchor
 
@@ -1010,7 +1010,7 @@ Table anatomy with sorting, filtering, selection, column sizing and pagination.
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>default, sorted, filtered, selected, empty, loading, error</td></tr>
-<tr><th scope="row">Material</th><td>Shared with Table; selection uses the leading rail, not a check badge on the row</td></tr>
+<tr><th scope="row">Material</th><td>Shared with Table; selection uses label weight, not a check badge on the row</td></tr>
 <tr><th scope="row">Geometry</th><td>Shared with Table</td></tr>
 <tr><th scope="row">Semantics</th><td>aria-sort on sorted headers; row selection through real checkboxes with names</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>All Table treatment plus sort, filter and selection appearance</td></tr>
@@ -1120,7 +1120,7 @@ A small circular Resin mark attached to a control, carrying state.
 <tr><th scope="row">Parity</th><td>mantine:Indicator · mui:Badge · antd:Badge</td></tr>
 </tbody></table></div>
 
-> Selection resolves to a leading rail, not a badge. A check mark is not in this vocabulary.
+> Selection resolves to label weight, not a badge. A check mark is not in this vocabulary.
 
 ### Image
 

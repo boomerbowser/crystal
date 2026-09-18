@@ -137,7 +137,7 @@ Every state that is communicated with colour is also communicated another way:
 
 | State | Colour | Second signal |
 | --- | --- | --- |
-| Selected | Primary rail | Position (leading rail) and label weight |
+| Selected | Primary fill | Label weight, which is typographic rather than chromatic |
 | Focused | Primary ring | A 2px outline at 3px offset |
 | Error | Status red | Icon and message text |
 | Validated | Status green | A check mark |

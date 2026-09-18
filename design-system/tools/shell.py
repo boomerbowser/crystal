@@ -59,9 +59,9 @@ def rel(prefix, target):
 def menu(path):
     """The side menu, as Crystal pill controls.
 
-    The current entry is marked with `aria-current="page"` and, visually, with a
-    leading rail and heavier label — never a check mark, which in Crystal means
-    validated or informational, never selected.
+    The current entry is marked with `aria-current="page"` and, visually, with a heavier
+    label — never a check mark, which in Crystal means validated or informational, and
+    never a leading rail, which offsets the label it is meant to mark.
     """
     prefix = prefix_for(path)
     groups = []
@@ -70,7 +70,6 @@ def menu(path):
         for target, label in entries:
             current = ' aria-current="page"' if target == path else ''
             items.append(f'<a class="cr-control menu-item" href="{rel(prefix, target)}"{current}>'
-                         f'<span class="menu-rail" aria-hidden="true"></span>'
                          f'{html.escape(label)}</a>')
         ident = heading.lower()
         groups.append(f'<h2 class="menu-heading" id="menu-{ident}">{html.escape(heading)}</h2>'

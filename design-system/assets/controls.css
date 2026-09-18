@@ -199,14 +199,18 @@ span.cr-field-shell :is(input,select,textarea):focus-visible{outline:0;box-shado
 .cr-indicator[data-kind=busy]::after{content:'…';font-size:14px;}
 /* The rail is absolutely positioned inside existing padding, so selecting an item
    never reflows its group. currentColor resolves to the tested on-primary ink. */
-:is([aria-pressed=true],[aria-selected=true],[aria-checked=true])>.cr-indicator[data-kind=selection]{display:block;inset-block-start:50%;inset-inline-end:auto;inset-inline-start:7px;transform:translateY(-50%);width:3px;height:15px;min-width:3px;border:0;border-radius:99px;background:currentColor;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;}
+/* The selection rail was removed at Meridian's direction: it is not in line with
+   Crystal and it offsets the label it sits beside. Selection is carried by label
+   weight, which is typographic rather than chromatic and so still satisfies the
+   requirement that selection never rests on colour alone. */
+:is([aria-pressed=true],[aria-selected=true],[aria-checked=true])>.cr-indicator[data-kind=selection]{display:none}
 .cr-indicator[data-kind=selection]::before,.cr-indicator[data-kind=selection]::after{content:none;display:none;}
 :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true],[role=tab][aria-selected=true]){font-weight:800;}
-/* Round specimen swatches cannot carry a rail; they take a ring gap instead. */
+/* Round specimen swatches cannot carry a weight change; they take a ring gap instead. */
 button.swatch>.cr-indicator[data-kind=selection]{display:none;}
 button.swatch[aria-pressed=true]{box-shadow:inset 0 0 0 3px var(--cr-surface),0 0 0 2px var(--cr-primary);}
-/* Card-shaped selections anchor the rail to the label row, not the artwork. */
-.palette-card[aria-pressed=true]>.cr-indicator[data-kind=selection]{inset-block-start:auto;inset-block-end:14px;inset-inline-start:10px;transform:none;height:13px;background:var(--cr-primary);}
+
+
 span.cr-field-shell{padding-inline-end:40px;}
 span.cr-field-shell>.cr-indicator{inset-block-start:50%;inset-inline-end:10px;transform:translateY(-50%);width:24px;height:24px;}
 span.cr-field-shell>.cr-indicator::after{content:'○';font-size:15px;}

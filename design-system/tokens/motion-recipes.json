@@ -2350,15 +2350,18 @@
       "engine": "GSAP",
       "keyframes": [
         {
-          "opacity": 0.74,
+          "transform": "scale(0.972)",
+          "opacity": 0.82,
           "offset": 0
         },
         {
-          "opacity": 0.88,
-          "offset": 0.5
+          "transform": "scale(1.022)",
+          "opacity": 1,
+          "offset": 0.55
         },
         {
-          "opacity": 0.74,
+          "transform": "scale(0.972)",
+          "opacity": 0.82,
           "offset": 1
         }
       ],
@@ -2384,7 +2387,8 @@
             "mass": 1
           }
         }
-      }
+      },
+      "layer": "::before"
     },
     {
       "id": "stone-contour",
@@ -2396,15 +2400,15 @@
       "engine": "GSAP",
       "keyframes": [
         {
-          "opacity": 0.5,
+          "transform": "scale(1)",
           "offset": 0
         },
         {
-          "opacity": 0.64,
+          "transform": "scale(1.026)",
           "offset": 0.5
         },
         {
-          "opacity": 0.5,
+          "transform": "scale(1)",
           "offset": 1
         }
       ],
@@ -2430,7 +2434,8 @@
             "mass": 1
           }
         }
-      }
+      },
+      "layer": "::before"
     },
     {
       "id": "check-off",
@@ -2578,15 +2583,15 @@
       "loop": true,
       "keyframes": [
         {
-          "opacity": 0.78,
+          "transform": "scale(1)",
           "offset": 0
         },
         {
-          "opacity": 0.84,
+          "transform": "scale(1.018)",
           "offset": 0.5
         },
         {
-          "opacity": 0.78,
+          "transform": "scale(1)",
           "offset": 1
         }
       ],
@@ -2614,7 +2619,8 @@
             "mass": 1
           }
         }
-      }
+      },
+      "layer": "::before"
     },
     {
       "id": "mirage-current",

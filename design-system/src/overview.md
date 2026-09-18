@@ -79,7 +79,7 @@ layer — never to weaken Resin.
 [Why →](docs/materials.html#resin-never-contains-resin)
 
 **A check mark means validated or informational — never "selected".** Selection is a
-leading rail plus label weight. The side menu on this page is the pattern.
+label weight. The side menu on this page is the pattern.
 [Why →](docs/components.html#selection)
 
 **Selection in forced colours is a ring, never a fill.** Chromium paints an opaque

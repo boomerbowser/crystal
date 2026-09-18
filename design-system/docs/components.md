@@ -122,7 +122,7 @@ cannot disagree with what ships. The core is never feathered and the offset is n
 zero: a ring drawn *on* the border is hard to tell from a hover state, and on a pill it
 reads as a thicker stroke rather than as focus.
 
-A check mark is reserved for validation and information display — the status badges in `.cr-status` and a checkbox's own `:checked` indicator. It never marks a selected, pressed or focused control. Selection instead uses a 3px leading rail in the control's own foreground ink plus a heavier label weight; the rail is absolutely positioned inside existing padding, so selecting an item never reflows its group. Round specimen swatches, which cannot carry a rail, use an inset ring gap. Floating check text and the short field rail are replaced by these marks. Ordinary prose links retain their link styling. Badges are `aria-hidden`: the real control supplies its accessible name, required/invalid/selected/busy state and error association. The visual symbol never gets appended to the control's text content. Native checkbox/radio indicators and functional labels remain intact. Small controls retain full-sized hit targets. Badges have solid, unblurred alternatives under reduced transparency and forced colors.
+A check mark is reserved for validation and information display — the status badges in `.cr-status` and a checkbox's own `:checked` indicator. It never marks a selected, pressed or focused control. Selection instead uses a heavier label weight, which changes no metric that would reflow the group. Round specimen swatches, which cannot carry a weight change, use an inset ring gap.  Ordinary prose links retain their link styling. Badges are `aria-hidden`: the real control supplies its accessible name, required/invalid/selected/busy state and error association. The visual symbol never gets appended to the control's text content. Native checkbox/radio indicators and functional labels remain intact. Small controls retain full-sized hit targets. Badges have solid, unblurred alternatives under reduced transparency and forced colors.
 
 ## Geometry
 
@@ -187,15 +187,20 @@ focused state, or it silently reduces the recipe to a bare outline:
 Crystal's most frequently violated rule, because a check is the reflexive choice for
 selection in most systems.
 
-Selection is expressed with **a leading rail plus label weight**:
+Selection is expressed with **label weight**:
 
-- a 3px rail at the inline start of the row, in the primary colour
 - the label at weight 800 instead of 650
 - `aria-current="page"` for navigation, or `aria-selected` / `aria-pressed` as the control
   demands
 
-The side menu on this page is the reference implementation. The rail animates its height
-rather than its opacity, so the transition reads as the rail extending to meet the item.
+The side menu on this page is the reference implementation.
+
+**There was a leading rail here until September 2026.** It was removed at Meridian's
+direction: it was not in line with Crystal and, being drawn inside the control, it
+offset the very label it was meant to mark. The obligation it served — that selection
+never rests on colour alone — is met by weight, which is typographic rather than
+chromatic and survives every palette, dark mode and colour vision difference. The
+`component.selection.rail*` tokens are deprecated and still resolve.
 
 Why not a check: a check mark is a *statement about a value* — this field validated, this
 item is complete, this option is confirmed. If it also means "this is the current tab",

@@ -174,6 +174,51 @@ Use a luminous outer contour and soft paired shadows instead of a dark hairline 
 
 When adapting controls to different sizes, preserve enough exposed Resin to show the rim and enough protected Haze to keep text crisp. Do not blur the element or its foreground. Opaque, reduced-transparency and forced-color modes remain functional alternatives. Validate actual composed controls in both modes and at narrow widths; a beautiful isolated material swatch does not establish component fidelity.
 
+## Light
+
+Every material has an optical behaviour, and the behaviour follows from what the material
+physically is. These are rules, not effects.
+
+| Material | What it does with light | Why |
+| --- | --- | --- |
+| **Plastic** | **Emits.** Carries its palette's glow over the atmosphere tint, drifting slowly. | Opaque things cannot bend light. A foundation that refracted would be claiming a transparency it does not have. |
+| **Frost** | **Refracts broadly.** A slow, low-amplitude wander of colour temperature across the surface. | At 40px of diffusion nothing sharp survives. Light through frosted glass shows you colour, not shape — so Frost's refraction is chromatic and formless. |
+| **Resin** | **Refracts sharply.** Dispersion concentrated at the rim, with the specular band tracking interaction. | At 20px, detail survives. Resin is the front layer and the one the user is closest to, so its optics are the most defined of the three. |
+| **Haze** | **Breathes.** Its boundary travels outward and inward. | Haze *is* its feathered edge. A fill that pulses in opacity is not an edge that moves; it is the same edge getting fainter. |
+| **Stone** | **Breathes, more tightly.** The same boundary motion at a shorter period. | Stone is a label backing, so its edge is smaller and closer to text. It moves less far and settles sooner. |
+| **Mirage** | **Flows.** A slow current while a dialog is open. | The scrim is the only surface with nothing above it competing for attention. |
+
+Resin and Frost differ in **amount and in kind**, not merely in intensity. Turning Resin's
+dispersion down does not produce Frost; it produces weak Resin. The diffusion radius
+decides which is correct.
+
+### Light reaches the shadow
+
+The light a material refracts is the light that reaches the surface beneath it, so a
+Crystal shadow is not neutral grey. The active palette's companion mixes into the shadow
+ink — 34% in light mode, 40% in dark.
+
+**The mix is on the colour only.** Each shadow layer keeps its authored alpha exactly,
+because a shadow that is tinted must not also become heavier. Prism's content shadow moves
+from `rgba(39,24,68,.15)` to `rgba(107,40,112,.15)`: the same weight, carrying colour.
+
+### Motion at rest
+
+These behaviours are the material's **rest state**, not a response to being used. A Crystal
+surface is alive before anyone touches it, and interaction *adds* energy rather than
+starting the effect: rest, faster on hover, faster still on press, decaying back.
+
+The single exception is text entry. A field being typed into is the one place where motion
+genuinely competes with the task, so ambient pauses there and nowhere else.
+
+Three rules bound all of it. It runs on the rim and the fill and **never on a surface being
+read** — the same argument that makes Resin lens at its edge rather than ripple through its
+middle. It is the **first thing `prefers-reduced-motion` removes**, entirely rather than
+gently. And it is an **enhancement on top of a complete floor**: with the shader layer
+unavailable and ambient disabled, every page renders exactly its reference baseline, which
+is what gate G8 proves.
+
+
 ## Resin never contains Resin
 
 **A Resin surface may not contain another Resin surface.** When something has to sit on

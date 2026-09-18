@@ -1,7 +1,7 @@
 {
   "id": "navigation",
   "name": "Navigation",
-  "description": "Moving between destinations. Current location is a dot; selection within a set is a leading rail. Neither is ever a check mark.",
+  "description": "Moving between destinations. Current location is a dot; selection within a set is label weight. Neither is ever a check mark.",
   "components": [
     {
       "id": "anchor",

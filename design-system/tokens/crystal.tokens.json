@@ -761,7 +761,7 @@
       },
       "harbor": {
         "$name": "Harbor",
-        "$description": "Gather\u2019s original palette, mapped to shared roles.",
+        "$description": "Gather’s original palette, mapped to shared roles.",
         "seed": {
           "$type": "color",
           "$value": "#4669B2"
@@ -1216,7 +1216,7 @@
           },
           "symbol": {
             "$type": "string",
-            "$value": "\u2713",
+            "$value": "✓",
             "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
           },
           "label": {
@@ -1235,7 +1235,7 @@
           },
           "symbol": {
             "$type": "string",
-            "$value": "\u25b3",
+            "$value": "△",
             "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
           },
           "label": {
@@ -1294,7 +1294,7 @@
           },
           "symbol": {
             "$type": "string",
-            "$value": "\u2713",
+            "$value": "✓",
             "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
           },
           "label": {
@@ -1313,7 +1313,7 @@
           },
           "symbol": {
             "$type": "string",
-            "$value": "\u25b3",
+            "$value": "△",
             "$description": "Carries meaning without colour. A check mark means validated or informational, never selected."
           },
           "label": {
@@ -1586,12 +1586,15 @@
       "railWidth": {
         "$type": "dimension",
         "$value": "3px",
-        "$description": "Selection is a leading rail plus label weight, never a check mark"
+        "$description": "Deprecated. Was: selection rail width.",
+        "$deprecated": "Selection is label weight alone. The rail was removed in 2.0: it offset the label it marked and was not in line with Crystal."
       },
       "railHeight": {
         "$type": "dimension",
-        "$value": "15px"
-      }
+        "$value": "15px",
+        "$deprecated": "Selection is label weight alone. The rail was removed in 2.0."
+      },
+      "$description": "Selection is carried by label weight. A check mark means validated or informational and never selected."
     },
     "indicator": {
       "size": {

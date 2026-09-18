@@ -87,7 +87,13 @@ for (const frame of frames) {
        * an RTL frame that is byte-identical to its LTR twin. That is exactly what had
        * happened: the direction axis guarded nothing until this was fixed. */
       const applyDirection = () => {
-        if (document.documentElement) document.documentElement.setAttribute('dir', direction);
+        if (!document.documentElement) return;
+        document.documentElement.setAttribute('dir', direction);
+        /* Ambient motion is a material's declared rest state, so by default these
+           surfaces are moving. A moving surface cannot be captured deterministically,
+           so every reference frame photographs the material still. This is a property
+           of the camera, not an exemption from the rule. */
+        document.documentElement.setAttribute('data-ambient', 'off');
       };
       applyDirection();
       document.addEventListener('DOMContentLoaded', applyDirection);

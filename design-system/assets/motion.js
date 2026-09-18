@@ -146,10 +146,17 @@
     if(!recipe)throw new RangeError('Unknown Crystal motion: '+name);
     if(!recipe.loop)throw new RangeError(name+' is not an ambient recipe; ambient motion must declare loop');
     stopAmbient(element);
-    if(reduced()||typeof element.animate!=='function'){element.dataset.crAmbientState='static';return null;}
-    const effect=element.animate(recipe.keyframes,
-      {duration:recipe.duration,easing:'ease-in-out',iterations:Infinity,direction:'alternate',fill:'none'});
+    if(reduced()||document.documentElement.dataset.ambient==='off'
+      ||typeof element.animate!=='function'){element.dataset.crAmbientState='static';return null;}
+    /* A recipe may declare the layer it paints on. Haze and Stone breathe at their
+       boundary, which lives on the isolated paint layer — animating the element itself
+       would move the text with it, and feathering never touches content. */
+    const options={duration:recipe.duration,easing:'ease-in-out',iterations:Infinity,
+      direction:'alternate',fill:'none'};
+    if(recipe.layer)options.pseudoElement=recipe.layer;
+    const effect=element.animate(recipe.keyframes,options);
     element.dataset.crAmbient=name;element.dataset.crAmbientState='running';
+    effect.playbackRate=REST_RATE;
     ambients.set(element,effect);
     return effect;
   }
@@ -158,16 +165,35 @@
     if(effect){effect.cancel();ambients.delete(element);}
     if(element instanceof Element){delete element.dataset.crAmbient;element.dataset.crAmbientState='stopped';}
   }
-  /* Ambient yields to the user. Any interaction pauses every loop; they resume once the
-     page is quiet again, so ambient never competes with something being read or used. */
-  let quiet;
-  const hush=()=>{
-    for(const effect of ambients.values())effect.pause();
-    clearTimeout(quiet);
-    quiet=setTimeout(()=>{for(const effect of ambients.values())effect.play();},1200);
+  /* Interaction ADDS energy; it does not silence the surface. A material that goes still
+     the moment it is touched reads as broken rather than as calm, and it is the opposite
+     of what the reference behaviour does — rest, faster on hover, faster still on press,
+     decaying back. Ambient rate is what carries that.
+
+     The one exception is text entry. A field being typed into is the single place where
+     motion genuinely competes with the task, so ambient pauses there and nowhere else.
+     WCAG 2.2.2 is satisfied by reduced motion and stopAmbient, not by stopping on every
+     click. */
+  const REST_RATE=0.6, HOVER_RATE=1, PRESS_RATE=2.4;
+  let decay;
+  const energise=rate=>{
+    for(const effect of ambients.values())effect.playbackRate=rate;
+    clearTimeout(decay);
+    decay=setTimeout(()=>{for(const effect of ambients.values())effect.playbackRate=REST_RATE;},900);
   };
-  for(const type of ['pointerdown','keydown','focusin','wheel'])
-    root.addEventListener(type,hush,{passive:true});
+  root.addEventListener('pointerover',event=>{
+    if(event.target instanceof Element&&event.target.closest('button,a,[role=button],.cr-control'))
+      energise(HOVER_RATE);
+  },{passive:true});
+  root.addEventListener('pointerdown',()=>energise(PRESS_RATE),{passive:true});
+  root.addEventListener('focusin',event=>{
+    const field=event.target;
+    const typing=field instanceof Element&&field.matches(
+      'input:not([type=range],[type=checkbox],[type=radio],[type=button],[type=submit],[type=reset]),textarea,[contenteditable=true]');
+    for(const effect of ambients.values())
+      if(typing)effect.pause();else effect.play();
+  },{passive:true});
+  root.addEventListener('focusout',()=>{for(const effect of ambients.values())effect.play();},{passive:true});
   media.addEventListener('change',()=>{if(reduced())for(const element of [...ambients.keys()])stopAmbient(element);});
 
   root.CrystalMotion=Object.freeze({play,ambient,stopAmbient,layout,duration,recipes:Object.freeze(recipes),stop,stopAll,reduced,direction,presets:Object.freeze([...Object.keys(durationNames),...Object.keys(recipes)])});

@@ -62,7 +62,7 @@
         "loading",
         "error"
       ],
-      "material": "Shared with Table; selection uses the leading rail, not a check badge on the row",
+      "material": "Shared with Table; selection uses label weight, not a check badge on the row",
       "geometry": "Shared with Table",
       "semantics": "aria-sort on sorted headers; row selection through real checkboxes with names",
       "crystal": "All Table treatment plus sort, filter and selection appearance",
@@ -232,7 +232,7 @@
         "mui:Badge",
         "antd:Badge"
       ],
-      "note": "Selection resolves to a leading rail, not a badge. A check mark is not in this vocabulary."
+      "note": "Selection resolves to label weight, not a badge. A check mark is not in this vocabulary."
     },
     {
       "id": "image",

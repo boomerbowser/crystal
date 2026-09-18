@@ -420,7 +420,7 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
-| `component.selection.railWidth` | dimension | `3px` | Selection is a leading rail plus label weight, never a check mark |
+| `component.selection.railWidth` | dimension | `3px` | Deprecated. Was: selection rail width. |
 | `component.selection.railHeight` | dimension | `15px` | — |
 
 ### Component · indicator
