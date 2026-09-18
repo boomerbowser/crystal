@@ -88,7 +88,10 @@ async function capture(browser, surface, mode, clock) {
     const apply = () => {
       if (!document.documentElement) return;
       if (m === 'still') document.documentElement.dataset.ambient = 'off';
-      else document.documentElement.dataset.ambientClock = clock;
+      else {
+        document.documentElement.dataset.ambientClock = clock;
+        document.documentElement.style.setProperty('--cr-ambient-clock', clock + 's');
+      }
     };
     apply();
     document.addEventListener('DOMContentLoaded', () => {

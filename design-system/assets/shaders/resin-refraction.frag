@@ -34,7 +34,7 @@ void main(){
   vec2 uv = gl_FragCoord.xy / u_resolution;
   panelSpace(u_resolution);
 
-  float radius = 0.17;
+  float radius = u_radius;
   float sdf = roundedPanelSDF(uv, radius);
   /* The lens gets both shallower and NARROWER as progress falls. A thick band at
      low strength is a vignette, not a rim: it dims a fifth of the panel, which is

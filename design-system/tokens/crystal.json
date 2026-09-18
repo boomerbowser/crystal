@@ -318,6 +318,7 @@
     "contentOpacity": 0.8,
     "contentFeather": 1.95,
     "stoneFeather": 1.95,
+    "traceWidth": 1.5,
     "mirageColor": "#111525",
     "mirageOpacity": 0.38,
     "mirageBlur": 28,
@@ -352,6 +353,8 @@
     "flow": 1200,
     "departure": 650,
     "maxDuration": 5000,
+    "trace": 5200,
+    "traceStone": 7000,
     "maxTravel": 50,
     "travelPolicy": {
       "ordinaryRange": [

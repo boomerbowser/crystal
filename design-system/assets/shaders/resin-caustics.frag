@@ -45,7 +45,7 @@ void main(){
   float drift = 0.85 + 0.15 * sin(u_time * 0.9 + (uv.x - uv.y) * 5.0);
 
   vec3 colour = mix(u_tint, vec3(1.0), 0.6) * caustic * drift;
-  float mask = panelMask(uv, 0.17, 0.02);
+  float mask = panelMask(uv, u_radius, 0.02);
   float alpha = clamp(caustic * drift * u_progress * u_intensity, 0.0, 0.45) * mask;
 
   fragColor = vec4(colour, alpha);

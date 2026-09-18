@@ -15,7 +15,7 @@ opts that component out of every theme, mode and palette change made at the sema
 tier. <code>tools/validate-tokens.cjs</code> checks the direction of every reference.</p>
 <h2 id="primitive-tokens">Primitive tokens</h2>
 <p>Raw values. Never referenced by a component directly — a primitive is the thing a semantic token points at, so that the meaning can be re-pointed without editing every use site.</p>
-<p>213 tokens.</p>
+<p>216 tokens.</p>
 <h3 id="primitive-palette">Primitive · palette</h3>
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
@@ -1157,6 +1157,12 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 <td>—</td>
 </tr>
 <tr>
+<td><code>primitive.material.traceWidth</code></td>
+<td>dimension</td>
+<td><code>1.5px</code></td>
+<td>—</td>
+</tr>
+<tr>
 <td><code>primitive.material.mirageColor</code></td>
 <td>color</td>
 <td><code>#111525</code></td>
@@ -1271,6 +1277,18 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 <td><code>5000ms</code></td>
 <td>—</td>
 </tr>
+<tr>
+<td><code>primitive.duration.trace</code></td>
+<td>duration</td>
+<td><code>5200ms</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>primitive.duration.traceStone</code></td>
+<td>duration</td>
+<td><code>7000ms</code></td>
+<td>—</td>
+</tr>
 </tbody>
 </table></div>
 <h3 id="primitive-distance">Primitive · distance</h3>
@@ -1361,7 +1379,7 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 </table></div>
 <h2 id="semantic-tokens">Semantic tokens</h2>
 <p>What a value <em>means</em>: the surface a card sits on, the duration a control settles over. Components consume this tier and nothing below it.</p>
-<p>85 tokens.</p>
+<p>88 tokens.</p>
 <h3 id="semantic-material">Semantic · material</h3>
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
@@ -1438,6 +1456,12 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 <td>dimension</td>
 <td><code>{primitive.material.contentFeather}</code></td>
 <td>Haze feathered perimeter</td>
+</tr>
+<tr>
+<td><code>semantic.material.trace.width</code></td>
+<td>dimension</td>
+<td><code>{primitive.material.traceWidth}</code></td>
+<td>Width of the travelling edge light on Haze and Stone</td>
 </tr>
 <tr>
 <td><code>semantic.material.mirage.colour</code></td>
@@ -1754,6 +1778,18 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 <td>—</td>
 </tr>
 <tr>
+<td><code>semantic.motion.duration.trace</code></td>
+<td>duration</td>
+<td><code>{primitive.duration.trace}</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>semantic.motion.duration.traceStone</code></td>
+<td>duration</td>
+<td><code>{primitive.duration.traceStone}</code></td>
+<td>—</td>
+</tr>
+<tr>
 <td><code>semantic.motion.duration.ceiling</code></td>
 <td>duration</td>
 <td><code>{primitive.duration.maxDuration}</code></td>
@@ -2050,7 +2086,7 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 <td><code>component.selection.railWidth</code></td>
 <td>dimension</td>
 <td><code>3px</code></td>
-<td>Deprecated. Was: selection rail width.</td>
+<td>Selection is a leading rail plus label weight, never a check mark</td>
 </tr>
 <tr>
 <td><code>component.selection.railHeight</code></td>

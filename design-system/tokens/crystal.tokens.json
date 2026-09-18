@@ -959,6 +959,10 @@
         "$type": "dimension",
         "$value": "1.95px"
       },
+      "traceWidth": {
+        "$type": "dimension",
+        "$value": "1.5px"
+      },
       "mirageColor": {
         "$type": "color",
         "$value": "#111525"
@@ -1030,6 +1034,14 @@
       "maxDuration": {
         "$type": "duration",
         "$value": "5000ms"
+      },
+      "trace": {
+        "$type": "duration",
+        "$value": "5200ms"
+      },
+      "traceStone": {
+        "$type": "duration",
+        "$value": "7000ms"
       }
     },
     "distance": {
@@ -1154,6 +1166,13 @@
           "$type": "dimension",
           "$value": "{primitive.material.contentFeather}",
           "$description": "Haze feathered perimeter"
+        }
+      },
+      "trace": {
+        "width": {
+          "$type": "dimension",
+          "$value": "{primitive.material.traceWidth}",
+          "$description": "Width of the travelling edge light on Haze and Stone"
         }
       },
       "mirage": {
@@ -1395,6 +1414,14 @@
           "$type": "duration",
           "$value": "{primitive.duration.departure}"
         },
+        "trace": {
+          "$type": "duration",
+          "$value": "{primitive.duration.trace}"
+        },
+        "traceStone": {
+          "$type": "duration",
+          "$value": "{primitive.duration.traceStone}"
+        },
         "ceiling": {
           "$type": "duration",
           "$value": "{primitive.duration.maxDuration}",
@@ -1586,15 +1613,12 @@
       "railWidth": {
         "$type": "dimension",
         "$value": "3px",
-        "$description": "Deprecated. Was: selection rail width.",
-        "$deprecated": "Selection is label weight alone. The rail was removed in 2.0: it offset the label it marked and was not in line with Crystal."
+        "$description": "Selection is a leading rail plus label weight, never a check mark"
       },
       "railHeight": {
         "$type": "dimension",
-        "$value": "15px",
-        "$deprecated": "Selection is label weight alone. The rail was removed in 2.0."
-      },
-      "$description": "Selection is carried by label weight. A check mark means validated or informational and never selected."
+        "$value": "15px"
+      }
     },
     "indicator": {
       "size": {

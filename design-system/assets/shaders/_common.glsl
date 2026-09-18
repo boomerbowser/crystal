@@ -44,6 +44,12 @@ float fbm(vec2 p){
  * thickness mean the same thing in both axes.
  *
  * Set once per frame, at the top of main, before any helper is called. */
+/* The surface's own corner radius, in units of the short side: 0.5 is a pill.
+   Declared here so every shader sees it — a fragment that masks itself to a
+   different shape than the element it sits on paints a rectangle inside a
+   stadium, which is exactly what it looks like. */
+uniform float u_radius;
+
 vec2 g_aspect = vec2(1.0);
 void panelSpace(vec2 resolution){
   g_aspect = resolution / max(min(resolution.x, resolution.y), 1.0);
@@ -83,7 +89,7 @@ float edgeLens(float sdf, float thickness){
    piece of glass lenses more deeply — the reference makes larger elements
    simulate heavier material the same way. */
 float surface(vec2 uv, vec2 contact, float time, float progress, float pressure){
-  float radius = 0.17;
+  float radius = u_radius;
   float sdf = roundedPanelSDF(uv, radius);
   /* Depth and width are one quantity: a shallow lens is also a narrow one. At
      full displacement this is the original 0.20. */

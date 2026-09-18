@@ -2578,97 +2578,51 @@
       "id": "haze-settle",
       "category": "Ambient",
       "label": "Haze at rest",
-      "duration": 1900,
+      "duration": 5200,
       "engine": "GSAP",
       "loop": true,
       "keyframes": [
         {
-          "transform": "scale(1)",
+          "transform": "rotate(0deg)",
           "offset": 0
         },
         {
-          "transform": "scale(1.018)",
-          "offset": 0.5
-        },
-        {
-          "transform": "scale(1)",
+          "transform": "rotate(360deg)",
           "offset": 1
         }
       ],
-      "use": "A barely perceptible oscillation of a Haze content fill around its 80% value. Never drops far enough to affect the contrast of text on it.",
-      "reduced": "None. The fill holds at 80%.",
+      "use": "Light travelling around the perimeter of a Haze content fill. Haze IS its feathered edge, so its rest motion is light moving ALONG that edge rather than the edge advancing and retreating — that gesture belongs to Resin, which is a lens breathing. On the web this is a conic gradient masked to the rim; a platform rotates its own edge light.",
+      "reduced": "None. The edge holds still at its resting opacity.",
       "material": "haze",
       "signature": "feather",
-      "spring": {
-        "stiffness": 16.5053,
-        "damping": 7.4753,
-        "mass": 1,
-        "dampingRatio": 0.92,
-        "platform": {
-          "swiftUI": {
-            "response": 1.5466,
-            "dampingFraction": 0.92
-          },
-          "compose": {
-            "dampingRatio": 0.92,
-            "stiffness": 16.5053
-          },
-          "web": {
-            "stiffness": 16.5053,
-            "damping": 7.4753,
-            "mass": 1
-          }
-        }
-      },
-      "layer": "::before"
+      "layer": "::after",
+      "direction": "normal",
+      "easing": "linear"
     },
     {
       "id": "stone-settle",
       "category": "Ambient",
       "label": "Stone at rest",
-      "duration": 1600,
+      "duration": 7000,
       "engine": "GSAP",
       "loop": true,
       "keyframes": [
         {
-          "transform": "scale(1)",
+          "transform": "rotate(0deg)",
           "offset": 0
         },
         {
-          "transform": "scale(0.968)",
-          "offset": 0.5
-        },
-        {
-          "transform": "scale(1)",
+          "transform": "rotate(360deg)",
           "offset": 1
         }
       ],
-      "use": "The feathered edge of a Stone label backing, drawing inward and returning. Stone draws in where Haze breathes out, so a label backing and the content fill around it never pulse together. The label above it does not move.",
-      "reduced": "None. The backing holds at its resting opacity.",
+      "use": "Light travelling around a Stone label backing, slower and dimmer than Haze because a label backing is smaller and sits closer to text.",
+      "reduced": "None. The edge holds still at its resting opacity.",
       "material": "stone",
       "signature": "feather",
-      "spring": {
-        "stiffness": 23.5157,
-        "damping": 8.9227,
-        "mass": 1,
-        "dampingRatio": 0.92,
-        "platform": {
-          "swiftUI": {
-            "response": 1.2957,
-            "dampingFraction": 0.92
-          },
-          "compose": {
-            "dampingRatio": 0.92,
-            "stiffness": 23.5157
-          },
-          "web": {
-            "stiffness": 23.5157,
-            "damping": 8.9227,
-            "mass": 1
-          }
-        }
-      },
-      "layer": "::before"
+      "layer": "::after",
+      "direction": "normal",
+      "easing": "linear"
     },
     {
       "id": "mirage-current",

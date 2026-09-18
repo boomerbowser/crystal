@@ -289,3 +289,52 @@ Baseline note: even with ambient fully off, 29% of idle frames are late in this
 environment, so part of what is being measured is the harness. Confirmation on real
 hardware is wanted before committing to a fix — the quickest check is whether the preview
 feels smooth with `data-ambient="off"` set on `<html>`.
+
+## R21 — Haze and Stone trace their edge; ambient must survive (2026-09-18)
+
+Two instructions, one day apart, on the same subject.
+
+**On performance.** Meridian confirmed the preview is smooth with ambient off, and
+that ambient "really important to us (and something we anticipated would need to be
+rebuilt per-platform)". The direction: preserve the effect, fix the choppiness,
+**do not alter the material spec to do it** — make a Crystal React copy that can be
+adjusted instead. Third-party libraries are permitted where they help, provided
+they need no paid licence.
+
+**On the material spec.** "The ambient animations for Stone and Haze seem to be
+following the 'inward-outward' model we established for Resin (the fluctuating
+movements of liquid), whilst we were specific in stating that edge effects for
+Stone and Haze should trace around the edges like the Liquid Metal Button example."
+
+**The record contradicts this, and is noted once rather than argued.** R17 above
+carries Meridian's own words: "the animations should move from outwards to inwards
+(and the other way around) **instead of** tracing around the edges". That is what
+was built, and it is what they are now correcting. The current instruction governs.
+Both are left in the log so a later reader is not misled by either.
+
+The distinction is worth keeping for its own sake: a lens breathing is Resin,
+because Resin is a lens. Haze and Stone *are* their feathered edge, so their rest
+state is light travelling **along** it. One gesture shared by three materials
+erased the difference the hierarchy exists to make.
+
+Status: the trace is done — see `validation/captures/2026-09-18-tracing-edge/`.
+Haze and Stone moved off the Web Animations tier onto CSS, which also took idle
+frame lateness from 17–29% to 0% with the optical layer disabled, because the old
+implementation re-rasterised a blurred layer every frame.
+
+**The optical tier's cost is still unexplained.** On the preview, Resin and Frost
+canvases hold the page at 30fps; removing them restores 60. That survives every
+variable tested: canvas resolution (quarter-res still 30fps), blend mode, nested
+backdrop-filters, the Plastic glow, and shader complexity. A standalone benchmark
+running Crystal's *real* `resin-refraction.frag` on six canvases over nested
+backdrop-filtered surfaces measures 60fps and 0% late — the cost does not
+reproduce outside the preview, so it is an interaction with something structural
+in that page that has not been isolated. `bench/ambient.html` in the Crystal React
+repository is the harness.
+
+The next move is Crystal React's own ambient implementation: **one shared canvas**
+for all optical surfaces instead of one per surface, drawn in a single pass and
+living outside every element's filter chain. That collapses N composited layers to
+one, removes the six-context cap entirely, and cannot inherit whatever the preview
+is doing. It is the "copy that can be adjusted" Meridian asked for, and if it
+proves out it is a candidate to come back to the web preview.

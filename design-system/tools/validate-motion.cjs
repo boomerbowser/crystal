@@ -19,12 +19,25 @@ const AREA_TOLERANCE=0.005;
    pulse (press) and a shake (field-invalid) correctly return to where they started. */
 const withoutOffset=frame=>{const{offset,...rest}=frame;return JSON.stringify(rest);};
 for(const recipe of data.recipes){
-  assert(recipe.spring,recipe.id+' has no spring; run tools/fit-springs.cjs --write');
+  /* A travelling loop moves at constant speed around a perimeter. There is no
+     displacement returning to rest, so there is no spring to fit and a fitted
+     one would be a fiction — the honest description is linear. Every other
+     recipe is a damped oscillator and must carry its physics. */
+  const travelling = recipe.loop && recipe.direction === 'normal';
   assert(new Set(recipe.keyframes.map(withoutOffset)).size>1,
     recipe.id+' has no movement: every keyframe is identical, so it animates nothing');
-  const settle=spring.settleTime(recipe.spring);
-  const drift=Math.abs(settle-recipe.duration)/recipe.duration;
-  assert(drift<=SPRING_TOLERANCE,recipe.id+' spring settles in '+settle+'ms but is authored at '+recipe.duration+'ms');
+  if (travelling) {
+    /* Exempt from the spring contract ONLY. Every other rule below still
+       applies: an exemption that skips the rest of the loop is how a recipe
+       stops being checked at all. */
+    assert(!recipe.spring, recipe.id+' is a travelling loop and must not carry a spring');
+    assert(recipe.easing === 'linear', recipe.id+' travels, so its easing must be linear');
+  } else {
+    assert(recipe.spring, recipe.id+' has no spring; run tools/fit-springs.cjs --write');
+    const settle=spring.settleTime(recipe.spring);
+    const drift=Math.abs(settle-recipe.duration)/recipe.duration;
+    assert(drift<=SPRING_TOLERANCE,recipe.id+' spring settles in '+settle+'ms but is authored at '+recipe.duration+'ms');
+  }
   for(const frame of recipe.keyframes){
     for(const match of (frame.transform||'').matchAll(/scale\(\s*([\d.]+)\s*,\s*([\d.]+)\s*\)/g)){
       const area=Number(match[1])*Number(match[2]);
@@ -32,7 +45,16 @@ for(const recipe of data.recipes){
         recipe.id+' deformation "'+match[0]+'" has area '+area.toFixed(4)+'; a fluid conserves volume');
     }
   }
-assert(!ids.has(recipe.id),'Duplicate recipe '+recipe.id);ids.add(recipe.id);assert(recipe.duration>0&&recipe.duration<=2000);assert(['Motion','GSAP'].includes(recipe.engine));assert(recipe.use&&recipe.reduced&&recipe.material&&recipe.signature);assert(recipe.keyframes.length>=2);for(const frame of recipe.keyframes){for(const match of (frame.transform||'').matchAll(/translate[XYZ]?\((-?[\d.]+)px/g))assert(Math.abs(Number(match[1]))<=50||recipe.travelException,recipe.id+' requires a documented large-travel exception');}}
+assert(!ids.has(recipe.id),'Duplicate recipe '+recipe.id);ids.add(recipe.id);/* Crystal's 5000ms ceiling protects responsiveness: nobody may be stranded
+   inside a transition. An ambient loop is not a transition anybody waits for —
+   it never blocks an interaction and never gates a state change — so its limit
+   is about character instead. Two seconds is right for a gesture that repeats
+   in place, like a breath; it is wrong for one that travels a full perimeter,
+   which at that speed reads as a spinner rather than as light moving over a
+   surface. A travelling recipe declares itself and gets the wider bound. */
+const ceiling = recipe.loop && recipe.direction === 'normal' ? 8000 : 2000;
+assert(recipe.duration>0&&recipe.duration<=ceiling,
+  recipe.id+' duration '+recipe.duration+'ms exceeds the '+ceiling+'ms limit for its kind');assert(['Motion','GSAP'].includes(recipe.engine));assert(recipe.use&&recipe.reduced&&recipe.material&&recipe.signature);assert(recipe.keyframes.length>=2);for(const frame of recipe.keyframes){for(const match of (frame.transform||'').matchAll(/translate[XYZ]?\((-?[\d.]+)px/g))assert(Math.abs(Number(match[1]))<=50||recipe.travelException,recipe.id+' requires a documented large-travel exception');}}
 const pkg=JSON.parse(fs.readFileSync('package.json','utf8')),lock=JSON.parse(fs.readFileSync('package-lock.json','utf8'));
 assert.equal(pkg.dependencies.motion,'13.4.0');assert.equal(pkg.dependencies.gsap,'3.15.0');assert.equal(lock.packages['node_modules/motion'].version,pkg.dependencies.motion);assert.equal(lock.packages['node_modules/gsap'].version,pkg.dependencies.gsap);
 assert(fs.statSync('assets/vendor/crystal-engines.js').size>1000,'Missing real engine bundle');

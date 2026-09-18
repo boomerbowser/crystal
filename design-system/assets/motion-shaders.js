@@ -220,6 +220,16 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
     element.style.isolation = 'isolate';
     element.appendChild(canvas);
 
+    /* The shader must mask itself to the surface's real shape. A fixed 0.17 of
+       the short side is a rounded rectangle, and on a pill — every action control
+       in Crystal is one — that painted a visible rectangle inside a stadium: a
+       36px corner rendered as a 12px one. Read the computed radius instead,
+       expressed in the same short-side units the geometry uses, and clamp at 0.5,
+       which IS a pill. */
+    const shortSide = Math.min(rect.width, rect.height) || 1;
+    const corner = parseFloat(getComputedStyle(element).borderRadius) || 0;
+    const radius = Math.min(0.5, corner / shortSide);
+
     const tint = tintOf(element);
     const started = performance.now();
     const record = { canvas, gl, frame: 0, previousPosition, previousIsolation, element,
@@ -266,6 +276,7 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
       gl.uniform2f(locations.contact, contact?.[0] ?? 0.5, contact?.[1] ?? 0.5);
       gl.uniform3f(locations.tint, tint[0], tint[1], tint[2]);
       gl.uniform1f(locations.intensity, options.intensity ?? 1);
+      gl.uniform1f(locations.radius, radius);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
 
       if (options.duration && (now - started) >= options.duration) { detach(element); return; }

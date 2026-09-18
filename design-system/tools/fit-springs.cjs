@@ -73,6 +73,9 @@ const rows = [];
 let worst = 0;
 
 for (const recipe of data.recipes) {
+  /* Travelling loops are linear by definition; fitting a spring to one would
+     invent physics it does not have. */
+  if (recipe.loop && recipe.direction === 'normal') { delete recipe.spring; continue; }
   const zeta = DAMPING[recipe.signature] ?? DEFAULT_DAMPING;
   const fitted = fit(recipe.duration, zeta);
   const settle = spring.settleTime(fitted);

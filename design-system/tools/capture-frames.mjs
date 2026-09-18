@@ -97,7 +97,11 @@ for (const frame of frames) {
            full press deformation reached the preview with every gate green.
            A frame may now instead pin the ambient clock, which freezes the effect
            at a chosen instant and makes it as reviewable as anything else. */
-        if (ambient === 'rest') document.documentElement.setAttribute('data-ambient-clock', clock);
+        if (ambient === 'rest') {
+          document.documentElement.setAttribute('data-ambient-clock', clock);
+          /* The CSS tier seeks by negative delay, so it needs the value as a time. */
+          document.documentElement.style.setProperty('--cr-ambient-clock', clock + 's');
+        }
         else document.documentElement.setAttribute('data-ambient', 'off');
       };
       applyDirection();

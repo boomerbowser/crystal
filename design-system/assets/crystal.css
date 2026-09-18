@@ -83,6 +83,64 @@
   :is(:is(.cr-haze,.cr-surface),.cr-well,.cr-bubble,.cr-content-fill,.cr-dialog,.cr-dock-inner)::before{display:none}
 }
 
+/* The travelling edge.
+ *
+ * Haze and Stone ARE their feathered edge, so their rest motion is light moving
+ * along that edge — tracing the perimeter, the way a liquid-metal rim does. An
+ * earlier reading had them pulsing outward and inward instead; that is Resin's
+ * behaviour, which is a lens breathing, and giving the same gesture to three
+ * materials erased the distinction between them.
+ *
+ * A conic gradient rotated about the surface's centre, masked to a ring so only
+ * the rim is lit. `mask-composite: exclude` cuts the interior out of the mask,
+ * which is what keeps the light on the boundary and off the surface being read.
+ * The angle is a registered custom property so it interpolates; paint is
+ * confined to the ring rather than the whole surface.
+ *
+ * Content is never touched: this layer sits below it at z-index -1, is
+ * pointer-inert, and carries no blur of its own. */
+@property --cr-trace-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes cr-trace{to{--cr-trace-angle:360deg}}
+:is(.cr-haze,.cr-surface)::after,.cr-stone::after{
+  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  border-radius:inherit;padding:var(--cr-trace-width);
+  background:conic-gradient(from var(--cr-trace-angle) at 50% 50%,
+    transparent 0turn,var(--cr-trace-light) .06turn,transparent .18turn,transparent 1turn);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  animation:cr-trace var(--cr-trace-duration) linear infinite;
+}
+/* Stone draws a slower, dimmer trace than Haze: a label backing is smaller and
+   closer to text, so the same speed there reads as agitation. */
+.cr-stone::after{--cr-trace-duration:var(--cr-trace-duration-stone)}
+/* Every route that removes optical effect removes this too. */
+[data-effects=opaque] :is(.cr-haze,.cr-surface)::after,[data-effects=opaque] .cr-stone::after{display:none}
+/* display:none, not opacity:0 — a transparent layer still composites, and it
+   shifted antialiasing across every Haze surface in frames where ambient is off. */
+:root[data-ambient=off] :is(.cr-haze,.cr-surface)::after,:root[data-ambient=off] .cr-stone::after{display:none}
+@media(prefers-reduced-motion:reduce){:is(.cr-haze,.cr-surface)::after,.cr-stone::after{display:none}}
+@media(prefers-reduced-transparency:reduce){:is(.cr-haze,.cr-surface)::after,.cr-stone::after{display:none}}
+@media(forced-colors:active){:is(.cr-haze,.cr-surface)::after,.cr-stone::after{display:none}}
+
+/* The capture hook reaches the CSS tier too.
+ *
+ * `data-ambient-clock` freezes the optical layer at an instant so a reference
+ * frame can photograph a moving surface. The CSS rest states — the travelling
+ * edge and the Plastic glow — were outside it, which meant a gate could pin half
+ * the ambient state and photograph the other half at whatever phase the capture
+ * happened to land on. A negative delay on a paused animation seeks it to a
+ * chosen time, which is the CSS equivalent of setting currentTime.
+ *
+ * The harness sets `--cr-ambient-clock` alongside the attribute. Products have
+ * no reason to set either. */
+:root[data-ambient-clock] :is(.cr-haze,.cr-surface)::after,
+:root[data-ambient-clock] .cr-stone::after,
+:root[data-ambient-clock] :is(.cr-plastic,.cr-foundation){
+  animation-play-state:paused;
+  animation-delay:calc(-1 * var(--cr-ambient-clock, 0s));
+}
+
 /* Stone shares Haze's feather, with its own unchanged label opacity. */
 .cr-stone,.cr-dock-inner{position:relative;isolation:isolate;background:transparent;color:var(--cr-text)}
 .cr-stone::before,.cr-dock-inner::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:var(--cr-stone-fill);filter:blur(var(--cr-stone-feather))}

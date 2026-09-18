@@ -56,7 +56,7 @@ void main(){
      sanction; the separation only leans it warm or cool. */
   vec3 colour = mix(vec3(0.5), u_tint, 0.30) + signed * 0.085;
 
-  float mask = panelMask(uv, 0.16, 0.07);
+  float mask = panelMask(uv, u_radius, 0.07);
   float alpha = clamp(abs(luma) * 0.30 * u_progress * u_intensity, 0.0, 0.22) * mask;
 
   fragColor = vec4(colour, alpha);

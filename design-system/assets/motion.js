@@ -253,20 +253,25 @@
      with Stone. `.cr-dock-inner` is the opposite case: it carries the `.cr-stone` class
      but `controls.css` hides its paint layer, because the frame's own Haze fill already
      does that job. Animating it would move nothing. */
-  const AMBIENT_SURFACES=[
-    ['.cr-haze,.cr-surface,.cr-dock,.segmented,.suite-tabs','haze-settle'],
-    ['.cr-stone:not(.cr-dock-inner)','stone-settle'],
-  ];
+  /* Haze and Stone no longer run here. Their rest state is light travelling
+     around the perimeter, which CSS expresses as a rotating conic gradient masked
+     to the rim — compositable, and confined to the rim rather than re-rasterising
+     a blurred fill every frame. They join Plastic on the CSS tier; Resin and Frost
+     keep the optical tier; this one stays as an opt-in API for a product driving
+     its own surfaces.
+
+     An earlier version had Haze and Stone pulsing outward and inward. That is
+     Resin's gesture — a lens breathing — and giving it to three materials erased
+     the distinction the hierarchy exists to make. */
+  const AMBIENT_SURFACES=[];
   function ambientAll(scope=document){
     if(reduced()||document.documentElement.dataset.ambient==='off')return()=>{};
     if(typeof IntersectionObserver!=='function')return()=>{};
+    if(!AMBIENT_SURFACES.length)return()=>{};
     const observer=new IntersectionObserver(entries=>{
       for(const record of entries){
         const name=AMBIENT_SURFACES.find(([selector])=>record.target.matches(selector))?.[1];
         if(!name)continue;
-        /* Re-checked here rather than only at observe() time. The opt-out can be applied
-           after the observer is installed but before the callback runs, and filtering
-           only at registration let a surface be marked manual and animated anyway. */
         if(record.isIntersecting&&!record.target.closest('[data-cr-motion=manual]'))ambient(record.target,name);
         else stopAmbient(record.target);
       }
@@ -276,8 +281,6 @@
         if(!element.closest('[data-cr-motion=manual]'))observer.observe(element);
     return()=>observer.disconnect();
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>ambientAll());
-  else ambientAll();
 
   root.CrystalMotion=Object.freeze({play,ambient,stopAmbient,ambientAll,ambientRate:()=>ambientRate,layout,duration,recipes:Object.freeze(recipes),stop,stopAll,reduced,direction,presets:Object.freeze([...Object.keys(durationNames),...Object.keys(recipes)])});
 })(window);
