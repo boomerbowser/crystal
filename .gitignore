@@ -14,3 +14,9 @@ AGENTS.md
 CLAUDE.md
 CODEX.md
 .claude/
+
+# Secrets. Never committed: a token in history is a token to rotate,
+# and `git add -A` does not ask before staging a file nobody ignored.
+.env
+.env.*
+!.env.example

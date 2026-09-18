@@ -4,7 +4,8 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 deliberately not fixed yet. Each says what is wrong, why it matters, where it is,
 and what closing it would take.
 
-Nothing here is blocking. Two of them are decisions for Meridian rather than work.
+Nothing here is blocking. The two that were decisions for Meridian rather than
+work — M-1 and M-2 — were answered on 18 September 2026 and are closed.
 
 ---
 
@@ -199,7 +200,13 @@ still in the history and the working tree.
 Removing them from the tree is a commit. Removing them from history is a rewrite,
 which Meridian has given standing permission for when a reason is provided.
 
-**No action until Meridian says which.**
+**Decided, 18 September 2026: the archive stays.** Meridian's answer is to keep
+it. So there is nothing to remove from the tree and nothing to rewrite out of
+history, and the four files stay where they are — excluded from the published
+site by `.vercelignore` and present in the repository as provenance, which is
+what they were kept for.
+
+Closed.
 
 ## M-2 · The spacing scale, breakpoints and type scale were added without review
 
@@ -214,3 +221,10 @@ nothing changed appearance. But naming a value is a design decision even when th
 number is not new, and these were made mid-slice rather than proposed.
 
 Recorded so they can be reviewed as a set rather than found one at a time.
+
+**Reviewed and signed off in full, 18 September 2026.** Meridian has approved all
+three families — spacing, breakpoints and layout — as Crystal tokens. They are
+part of the system rather than provisional, and a platform library may rely on
+them.
+
+Closed.
