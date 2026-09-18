@@ -60,10 +60,16 @@
       "engine": "Motion",
       "keyframes": [
         {
-          "opacity": 1
+          "transform": "scale(1,1)",
+          "offset": 0
         },
         {
-          "opacity": 1
+          "transform": "scale(1.012,0.98814)",
+          "offset": 0.55
+        },
+        {
+          "transform": "scale(1.006,0.99404)",
+          "offset": 1
         }
       ],
       "use": "Fine-pointer affordance only; keyboard focus is immediate.",
@@ -278,10 +284,14 @@
       "engine": "Motion",
       "keyframes": [
         {
-          "opacity": 1
+          "transform": "scale(1.05,0.95238)",
+          "opacity": 0.75,
+          "offset": 0
         },
         {
-          "opacity": 1
+          "transform": "scale(1,1)",
+          "opacity": 1,
+          "offset": 1
         }
       ],
       "use": "Range outputs, steppers and scrubber labels; value updates immediately.",
@@ -410,10 +420,16 @@
       "engine": "Motion",
       "keyframes": [
         {
-          "opacity": 1
+          "transform": "scale(1,1)",
+          "offset": 0
         },
         {
-          "opacity": 1
+          "transform": "scale(1.008,0.99206)",
+          "offset": 0.6
+        },
+        {
+          "transform": "scale(1.004,0.99602)",
+          "offset": 1
         }
       ],
       "use": "Supplementary focus response; never animate or delay the actual focus ring.",
@@ -504,10 +520,16 @@
       "engine": "Motion",
       "keyframes": [
         {
-          "opacity": 1
+          "transform": "scale(1,1)",
+          "offset": 0
         },
         {
-          "opacity": 1
+          "transform": "scale(1.02,0.98039)",
+          "offset": 0.45
+        },
+        {
+          "transform": "scale(1,1)",
+          "offset": 1
         }
       ],
       "use": "After real local validation; never imply a remote operation succeeded.",
@@ -760,10 +782,19 @@
       "engine": "Motion",
       "keyframes": [
         {
-          "opacity": 1
+          "transform": "translateX(-10px)",
+          "opacity": 0,
+          "offset": 0
         },
         {
-          "opacity": 1
+          "transform": "translateX(2px)",
+          "opacity": 1,
+          "offset": 0.62
+        },
+        {
+          "transform": "translateX(0)",
+          "opacity": 1,
+          "offset": 1
         }
       ],
       "use": "New breadcrumb item; current-page semantics stay explicit.",
@@ -1370,10 +1401,20 @@
       "engine": "Motion",
       "keyframes": [
         {
-          "opacity": 1
+          "opacity": 0,
+          "offset": 0
         },
         {
-          "opacity": 1
+          "opacity": 1,
+          "offset": 0.3
+        },
+        {
+          "opacity": 1,
+          "offset": 0.68
+        },
+        {
+          "opacity": 0,
+          "offset": 1
         }
       ],
       "use": "A brief update cue paired with actual content or announcement.",
@@ -1626,10 +1667,19 @@
       "engine": "Motion",
       "keyframes": [
         {
-          "opacity": 1
+          "transform": "scale(1,1)",
+          "opacity": 1,
+          "offset": 0
         },
         {
-          "opacity": 1
+          "transform": "scale(1.04,0.96154)",
+          "opacity": 0.82,
+          "offset": 0.5
+        },
+        {
+          "transform": "scale(1,1)",
+          "opacity": 1,
+          "offset": 1
         }
       ],
       "use": "Single finite cue for important text; never flash or loop.",
@@ -1666,10 +1716,12 @@
       "engine": "Motion",
       "keyframes": [
         {
-          "opacity": 1
+          "clipPath": "inset(0 6% 0 0)",
+          "offset": 0
         },
         {
-          "opacity": 1
+          "clipPath": "inset(0 0 0 0)",
+          "offset": 1
         }
       ],
       "use": "Actual progress is set first; this animation does not fabricate completion.",
@@ -1706,10 +1758,16 @@
       "engine": "GSAP",
       "keyframes": [
         {
-          "opacity": 1
+          "opacity": 0.45,
+          "offset": 0
         },
         {
-          "opacity": 1
+          "opacity": 1,
+          "offset": 0.5
+        },
+        {
+          "opacity": 0.45,
+          "offset": 1
         }
       ],
       "use": "One cycle for an actual pending operation; keep a static busy label if it lasts longer.",
@@ -2292,10 +2350,16 @@
       "engine": "GSAP",
       "keyframes": [
         {
-          "opacity": 1
+          "opacity": 0.74,
+          "offset": 0
         },
         {
-          "opacity": 1
+          "opacity": 0.88,
+          "offset": 0.5
+        },
+        {
+          "opacity": 0.74,
+          "offset": 1
         }
       ],
       "use": "Explicit material choreography for a large specimen; replay is a visual study, not an application action.",
@@ -2332,10 +2396,16 @@
       "engine": "GSAP",
       "keyframes": [
         {
-          "opacity": 1
+          "opacity": 0.5,
+          "offset": 0
         },
         {
-          "opacity": 1
+          "opacity": 0.64,
+          "offset": 0.5
+        },
+        {
+          "opacity": 0.5,
+          "offset": 1
         }
       ],
       "use": "Explicit material choreography for a large specimen; replay is a visual study, not an application action.",
@@ -2361,9 +2431,248 @@
           }
         }
       }
+    },
+    {
+      "id": "check-off",
+      "category": "Controls",
+      "label": "Uncheck",
+      "duration": 300,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "clipPath": "circle(80% at 50% 50%)"
+        },
+        {
+          "clipPath": "circle(0% at 50% 65%)"
+        }
+      ],
+      "use": "Checkbox and radio indicators returning to unchecked. Paired with `check`; the iris closes toward the same point it opened from.",
+      "reduced": "Apply the unchecked state immediately; omit the iris.",
+      "material": "plastic",
+      "signature": "iris",
+      "spring": {
+        "stiffness": 1195.9014,
+        "damping": 55.3309,
+        "mass": 1,
+        "dampingRatio": 0.8,
+        "platform": {
+          "swiftUI": {
+            "response": 0.1817,
+            "dampingFraction": 0.8
+          },
+          "compose": {
+            "dampingRatio": 0.8,
+            "stiffness": 1195.9014
+          },
+          "web": {
+            "stiffness": 1195.9014,
+            "damping": 55.3309,
+            "mass": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "resin-breathe",
+      "category": "Ambient",
+      "label": "Resin at rest",
+      "duration": 2000,
+      "engine": "GSAP",
+      "loop": true,
+      "tier": "ambient",
+      "keyframes": [
+        {
+          "transform": "translateX(-6px)",
+          "opacity": 0.55,
+          "offset": 0
+        },
+        {
+          "transform": "translateX(6px)",
+          "opacity": 0.8,
+          "offset": 0.5
+        },
+        {
+          "transform": "translateX(-6px)",
+          "opacity": 0.55,
+          "offset": 1
+        }
+      ],
+      "use": "The specular band on a Resin surface at rest. Applies to the rim layer only; the content above it never moves.",
+      "reduced": "None. The surface is static.",
+      "material": "resin",
+      "signature": "refraction",
+      "spring": {
+        "stiffness": 27.1765,
+        "damping": 8.8623,
+        "mass": 1,
+        "dampingRatio": 0.85,
+        "platform": {
+          "swiftUI": {
+            "response": 1.2053,
+            "dampingFraction": 0.85
+          },
+          "compose": {
+            "dampingRatio": 0.85,
+            "stiffness": 27.1765
+          },
+          "web": {
+            "stiffness": 27.1765,
+            "damping": 8.8623,
+            "mass": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "frost-drift",
+      "category": "Ambient",
+      "label": "Frost at rest",
+      "duration": 2000,
+      "engine": "GSAP",
+      "loop": true,
+      "tier": "ambient",
+      "keyframes": [
+        {
+          "opacity": 0.82,
+          "offset": 0
+        },
+        {
+          "opacity": 0.93,
+          "offset": 0.5
+        },
+        {
+          "opacity": 0.82,
+          "offset": 1
+        }
+      ],
+      "use": "Slow drift of the Frost grain and tint on a panel that persists while content moves behind it.",
+      "reduced": "None. The surface is static.",
+      "material": "frost",
+      "signature": "feather",
+      "spring": {
+        "stiffness": 14.8465,
+        "damping": 7.0897,
+        "mass": 1,
+        "dampingRatio": 0.92,
+        "platform": {
+          "swiftUI": {
+            "response": 1.6307,
+            "dampingFraction": 0.92
+          },
+          "compose": {
+            "dampingRatio": 0.92,
+            "stiffness": 14.8465
+          },
+          "web": {
+            "stiffness": 14.8465,
+            "damping": 7.0897,
+            "mass": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "haze-settle",
+      "category": "Ambient",
+      "label": "Haze at rest",
+      "duration": 1900,
+      "engine": "GSAP",
+      "loop": true,
+      "tier": "ambient",
+      "keyframes": [
+        {
+          "opacity": 0.78,
+          "offset": 0
+        },
+        {
+          "opacity": 0.84,
+          "offset": 0.5
+        },
+        {
+          "opacity": 0.78,
+          "offset": 1
+        }
+      ],
+      "use": "A barely perceptible oscillation of a Haze content fill around its 80% value. Never drops far enough to affect the contrast of text on it.",
+      "reduced": "None. The fill holds at 80%.",
+      "material": "haze",
+      "signature": "feather",
+      "spring": {
+        "stiffness": 16.5053,
+        "damping": 7.4753,
+        "mass": 1,
+        "dampingRatio": 0.92,
+        "platform": {
+          "swiftUI": {
+            "response": 1.5466,
+            "dampingFraction": 0.92
+          },
+          "compose": {
+            "dampingRatio": 0.92,
+            "stiffness": 16.5053
+          },
+          "web": {
+            "stiffness": 16.5053,
+            "damping": 7.4753,
+            "mass": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "mirage-current",
+      "category": "Ambient",
+      "label": "Mirage at rest",
+      "duration": 2000,
+      "engine": "GSAP",
+      "loop": true,
+      "tier": "ambient",
+      "keyframes": [
+        {
+          "transform": "scale(1,1)",
+          "opacity": 0.9,
+          "offset": 0
+        },
+        {
+          "transform": "scale(1.01,0.990099)",
+          "opacity": 1,
+          "offset": 0.5
+        },
+        {
+          "transform": "scale(1,1)",
+          "opacity": 0.9,
+          "offset": 1
+        }
+      ],
+      "use": "Slow current in the modal scrim while a dialog is open. Stops when the dialog closes.",
+      "reduced": "None. The scrim is a flat fill.",
+      "material": "mirage",
+      "signature": "refraction",
+      "spring": {
+        "stiffness": 27.1765,
+        "damping": 8.8623,
+        "mass": 1,
+        "dampingRatio": 0.85,
+        "platform": {
+          "swiftUI": {
+            "response": 1.2053,
+            "dampingFraction": 0.85
+          },
+          "compose": {
+            "dampingRatio": 0.85,
+            "stiffness": 27.1765
+          },
+          "web": {
+            "stiffness": 27.1765,
+            "damping": 8.8623,
+            "mass": 1
+          }
+        }
+      }
     }
   ],
   "travelPolicy": "5–30px ordinary, 50px guidance; justified large transitions may exceed it. Haze and Stone paint moves locally while text stays fixed.",
   "springPolicy": "Every recipe carries a spring fitted to its authored duration, which remains the authority. Damping ratio is chosen by signature: inertia and coalesce overshoot because momentum is their material claim, feather and caustic do not because a soft edge that bounces is wrong. Disabling springs must reproduce the keyframes exactly.",
-  "incompressibility": "Deformations conserve volume: every scale(sx, sy) satisfies sx*sy = 1 within 0.005. Corrected by dividing both axes by the square root of the area, which preserves each deformation's aspect ratio exactly and removes only the compressibility error. Enforced by tools/validate-motion.cjs."
+  "incompressibility": "Deformations conserve volume: every scale(sx, sy) satisfies sx*sy = 1 within 0.005. Corrected by dividing both axes by the square root of the area, which preserves each deformation's aspect ratio exactly and removes only the compressibility error. Enforced by tools/validate-motion.cjs.",
+  "ambientPolicy": "Ambient motion is what a surface does at rest. It is a capability tier, not a default: a platform declares support, and a surface opts in. Two rules are absolute. Ambient runs on the rim and the fill and never on a surface the user is reading, for the same reason Resin lenses at its edge rather than rippling through its middle. And it is the first motion that prefers-reduced-motion removes — WCAG 2.2.2 requires that anything moving for more than five seconds can be stopped, and an ambient loop never stops on its own. Where a platform cannot honour it, ambient degrades to a static surface with no other change."
 }

@@ -105,7 +105,7 @@ function tokensPage() {
 function recipeSection() {
   const motion = read('tokens/motion-recipes.json');
   const lines = [
-    'All 54 recipes, generated from `tokens/motion-recipes.json`. **Damping ratio** and',
+    `All ${motion.recipes.length} recipes in ${new Set(motion.recipes.map(r => r.category)).size} categories, generated from \`tokens/motion-recipes.json\`. **Damping ratio** and`,
     '**overshoot** are derived from each recipe\'s spring by `assets/core/spring.js`, not',
     'authored — so a spring that was retuned cannot leave a stale number behind in this table.',
     '',

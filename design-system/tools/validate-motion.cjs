@@ -10,8 +10,18 @@ const SPRING_TOLERANCE=0.15;
    other by exactly the reciprocal, or it is not liquid — it is rubber losing
    volume, which is precisely how the 1.x deformations read. */
 const AREA_TOLERANCE=0.005;
+/* A recipe whose keyframes are all identical occupies a duration and a spring and
+   animates nothing. Eleven of the fifty-four shipped that way — [{opacity:1},{opacity:1}]
+   placeholders that passed every check, because the only keyframe contract was that there
+   were at least two of them. Counting keyframes is not the same as requiring movement.
+
+   The test is that *some* keyframe differs, not that the first differs from the last: a
+   pulse (press) and a shake (field-invalid) correctly return to where they started. */
+const withoutOffset=frame=>{const{offset,...rest}=frame;return JSON.stringify(rest);};
 for(const recipe of data.recipes){
   assert(recipe.spring,recipe.id+' has no spring; run tools/fit-springs.cjs --write');
+  assert(new Set(recipe.keyframes.map(withoutOffset)).size>1,
+    recipe.id+' has no movement: every keyframe is identical, so it animates nothing');
   const settle=spring.settleTime(recipe.spring);
   const drift=Math.abs(settle-recipe.duration)/recipe.duration;
   assert(drift<=SPRING_TOLERANCE,recipe.id+' spring settles in '+settle+'ms but is authored at '+recipe.duration+'ms');

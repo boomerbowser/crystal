@@ -57,10 +57,12 @@ function validate(categories) {
   }
   /* Material choreography animates a material, not a component. Those recipes are
      specified in the materials chapter and are exempt by category rather than by
-     inventing a component to absorb them. */
-  const MATERIAL_CATEGORY = 'Material compositions';
+     inventing a component to absorb them. Ambient motion is exempt for the same
+     reason and no other: it is what a Resin rim or a Haze fill does at rest, so it
+     belongs to the material and any component made of that material inherits it. */
+  const MATERIAL_CATEGORIES = new Set(['Material compositions', 'Ambient']);
   const orphans = recipes
-    .filter((r) => r.category !== MATERIAL_CATEGORY)
+    .filter((r) => !MATERIAL_CATEGORIES.has(r.category))
     .map((r) => r.id)
     .filter((id, i, all) => all.indexOf(id) === i && !claimed.has(id));
 

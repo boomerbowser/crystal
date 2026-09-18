@@ -146,7 +146,7 @@ CrystalMotion.direction(dialog, 'bottom');
 <p>The canonical motion definitions live in <code>tokens/crystal.json</code>; CSS and JSON exports include both compact and expressive durations and travel values. Always include <code>motion.css</code> for native dialog backdrop choreography and accessibility overrides. The reference provides real visual behavior, not a native compositor or a physics simulation.</p>
 <h2 id="installed-animation-engines">Installed animation engines</h2>
 <p>Both engines are now installed, bundled locally and used by the runtime. <a href="https://motion.dev/docs/animate">Motion’s animate API</a> drives element keyframes. <a href="https://gsap.com/docs/v3/GSAP/Timeline/">GSAP timelines</a> control material paint-layer clocks and selected component sequences. Native Web Animations effects paint actual pseudo-elements under those GSAP clocks; CSS supplies the native dialog backdrop fallback.</p>
-<p>See the <a href="motion-components.html">component motion suite</a> for all 54 recipes, engine assignments, API contracts, live component behavior, test instructions and future component-library/Storybook coverage. <a href="../reference/ASSET-NOTICES.md">License notices</a> accompany the local bundle.</p>
+<p>See the <a href="motion-components.html">component motion suite</a> for all 59 recipes, engine assignments, API contracts, live component behavior, test instructions and future component-library/Storybook coverage. <a href="../reference/ASSET-NOTICES.md">License notices</a> accompany the local bundle.</p>
 <p>The compact CSS timing tokens remain available for small state changes. The material-driven Resin press recipe uses 320ms for a complete compression/recovery sequence; hover light uses 700ms. These visual clocks never delay the actual action. The executable catalog lists the current duration of every recipe.</p>
 <h2 id="springs-are-the-portable-primitive">Springs are the portable primitive</h2>
 <p>Every recipe carries a spring — <code>{stiffness, damping, mass}</code> — fitted so that its derived
@@ -244,10 +244,84 @@ visible output on both white and dark backdrops.</p>
 <p><strong>Stacking.</strong> The shader canvas sits at <code>z-index:-1</code> inside an <code>isolation:isolate</code>
 container, so it paints behind the content rather than over it. Verified by proving label
 glyphs are pixel-identical with the shader on and off.</p>
+<h2 id="ambient-motion">Ambient motion</h2>
+<p>Ambient motion is what a surface does at rest — the specular band drifting along a Resin
+rim, a Haze fill breathing around its 80% value. It is the tenth category and the newest,
+and it is governed by three rules that are not negotiable.</p>
+<p><strong>It is a capability tier, not a default.</strong> A platform declares support and a surface opts
+in. Nothing ambient runs because a component was rendered. Where a platform cannot honour
+it, ambient degrades to a static surface with no other change — exactly the shape the
+shader layer already uses, and for the same reason: an enhancement that is load-bearing is
+not an enhancement.</p>
+<p><strong>It runs on the rim and the fill, never on a surface the user is reading.</strong> This is the
+edge-lensing argument again. Motion in the middle of a surface competes with the text on
+it; motion at the boundary does not. Text never moves, and an ambient recipe that would
+move text is wrong regardless of how subtle it is.</p>
+<p><strong>It is the first thing <code>prefers-reduced-motion</code> removes.</strong> Every ambient recipe declares
+<code>reduced: "None."</code> — not a shortened version, not a gentler version. WCAG 2.2.2 requires
+that anything moving for more than five seconds can be paused or stopped, and an ambient
+loop by definition never stops on its own. A surface with ambient motion removed must be
+identical to one that never had it.</p>
+<p>The high tier belongs in the shader layer, where <code>u_time</code> is already a declared uniform.
+The CSS keyframes below are the floor, not the ceiling.</p>
+<h2 id="what-triggers-a-recipe">What triggers a recipe</h2>
+<p>A recipe that nothing triggers is a specification, not a behaviour. Crystal binds motion
+to <strong>state, not to clicks</strong>:</p>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>State change</th>
+<th>Recipe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>checked</code> becomes true / false on a checkbox or radio</td>
+<td><code>check</code> / <code>check-off</code></td>
+</tr>
+<tr>
+<td><code>checked</code> or <code>aria-checked</code> on a switch</td>
+<td><code>switch-on</code> / <code>switch-off</code></td>
+</tr>
+<tr>
+<td>A range commits a value</td>
+<td><code>slider-step</code>, on the linked <code>&lt;output&gt;</code></td>
+</tr>
+<tr>
+<td>A text field takes focus</td>
+<td><code>field-focus</code></td>
+</tr>
+<tr>
+<td><code>aria-invalid</code> becomes true / returns to false</td>
+<td><code>field-invalid</code> / <code>field-valid</code></td>
+</tr>
+<tr>
+<td><code>aria-expanded</code> flips on a control with <code>aria-controls</code></td>
+<td><code>menu-in</code> / <code>menu-out</code></td>
+</tr>
+<tr>
+<td>A <code>&lt;details&gt;</code> opens or closes</td>
+<td><code>accordion-in</code> / <code>accordion-out</code></td>
+</tr>
+<tr>
+<td>A button is pressed or hovered</td>
+<td><code>press</code> / <code>hover</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Binding to <code>pointerdown</code> instead of to the state would give a mouse user motion that a
+keyboard user and a screen reader user never see. Binding to the state means every input
+method produces the same motion, and a programmatic change produces it too.</p>
+<p>Two guards matter in practice. A recipe never restarts itself while that same recipe is
+already running on that element — restarting mid-flight is what makes a continuous control
+feel choppy. And a page that drives a component itself marks that subtree
+<code>data-cr-motion="manual"</code>, so the delegated wiring does not fire the same recipe twice.</p>
+<p><code>npm run verify:interactions</code> asserts all of this in a real browser against plain controls,
+including that reduced motion still applies the state instantly.</p>
 <h2 id="recipe-reference">Recipe reference</h2>
 <!-- generated:recipes -->
 
-<p>All 54 recipes, generated from <code>tokens/motion-recipes.json</code>. <strong>Damping ratio</strong> and
+<p>All 59 recipes in 10 categories, generated from <code>tokens/motion-recipes.json</code>. <strong>Damping ratio</strong> and
 <strong>overshoot</strong> are derived from each recipe's spring by <code>assets/core/spring.js</code>, not
 authored — so a spring that was retuned cannot leave a stale number behind in this table.</p>
 <p>A damping ratio below 1 overshoots and settles back; exactly 1 is the fastest approach
@@ -357,6 +431,16 @@ correct is a material question, not a taste question — see the signature polic
 <td>8.4%</td>
 <td>Only after clipboard write succeeds; retain textual confirmation.</td>
 <td>Apply the semantic state immediately; omit decorative movement.</td>
+</tr>
+<tr>
+<td><code>check-off</code> — Uncheck</td>
+<td>300ms</td>
+<td>iris</td>
+<td>plastic</td>
+<td>0.800</td>
+<td>1.5%</td>
+<td>Checkbox and radio indicators returning to unchecked. Paired with <code>check</code>; the iris closes toward the same point it opened from.</td>
+<td>Apply the unchecked state immediately; omit the iris.</td>
 </tr>
 </tbody>
 </table></div>
@@ -943,6 +1027,63 @@ correct is a material question, not a taste question — see the signature polic
 <td>none</td>
 <td>Explicit material choreography for a large specimen; replay is a visual study, not an application action.</td>
 <td>Keep the resting material visible; omit choreography.</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="ambient">Ambient</h4>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Duration</th>
+<th>Signature</th>
+<th>Material</th>
+<th>Damping ζ</th>
+<th>Overshoot</th>
+<th>Use</th>
+<th>Reduced motion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>resin-breathe</code> — Resin at rest</td>
+<td>2000ms</td>
+<td>refraction</td>
+<td>resin</td>
+<td>0.850</td>
+<td>0.6%</td>
+<td>The specular band on a Resin surface at rest. Applies to the rim layer only; the content above it never moves.</td>
+<td>None. The surface is static.</td>
+</tr>
+<tr>
+<td><code>frost-drift</code> — Frost at rest</td>
+<td>2000ms</td>
+<td>feather</td>
+<td>frost</td>
+<td>0.920</td>
+<td>none</td>
+<td>Slow drift of the Frost grain and tint on a panel that persists while content moves behind it.</td>
+<td>None. The surface is static.</td>
+</tr>
+<tr>
+<td><code>haze-settle</code> — Haze at rest</td>
+<td>1900ms</td>
+<td>feather</td>
+<td>haze</td>
+<td>0.920</td>
+<td>none</td>
+<td>A barely perceptible oscillation of a Haze content fill around its 80% value. Never drops far enough to affect the contrast of text on it.</td>
+<td>None. The fill holds at 80%.</td>
+</tr>
+<tr>
+<td><code>mirage-current</code> — Mirage at rest</td>
+<td>2000ms</td>
+<td>refraction</td>
+<td>mirage</td>
+<td>0.850</td>
+<td>0.6%</td>
+<td>Slow current in the modal scrim while a dialog is open. Stops when the dialog closes.</td>
+<td>None. The scrim is a flat fill.</td>
 </tr>
 </tbody>
 </table></div>

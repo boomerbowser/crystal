@@ -221,7 +221,8 @@
       "crystal": "Box material, the contained mark, focus ring",
       "product": "Grouping semantics and validation",
       "motion": [
-        "check"
+        "check",
+        "check-off"
       ],
       "parity": [
         "mantine:Checkbox",
@@ -270,6 +271,10 @@
         "mantine:Radio",
         "mui:Radio",
         "antd:Radio"
+      ],
+      "motion": [
+        "check",
+        "check-off"
       ]
     },
     {

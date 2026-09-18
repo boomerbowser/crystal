@@ -62,3 +62,49 @@ URL or a subpath.
 Glass is most often criticised for: translucent content stacked on translucent content
 until nothing is legible. The fix is always to change the *upper* layer to Haze, never to
 weaken Resin. Haze exists precisely to be a readable fill inside a translucent frame.
+
+## R15 — the motion report (2026-09-17)
+
+Meridian reported the motion studies page as largely broken and the animations as far too
+sparse. Eleven symptoms; they resolve into four causes.
+
+| # | Reported | Cause | Status |
+| --- | --- | --- | --- |
+| R15a | Animations not playing | `motion-preview.js` dropped by the shell restructure | done — `959dc7d` |
+| R15b | Elements spaced too closely | `motion-suite.css` dropped | done — `959dc7d` |
+| R15c | Elements not covered by their backgrounds | `motion-suite.css` dropped | done — `959dc7d` |
+| R15d | Menus will not open | `motion-suite.js` dropped | done — `959dc7d` |
+| R15e | Menus that open are not Frost | `motion-suite.css` dropped | done — `959dc7d` |
+| R15f | Focus ring too thick by half | Halo spread in `component.focus.*` | open — needs a number agreed |
+| R15g | Slider animation choppy | `slider-step` is a hollow recipe | open |
+| R15h | Checkboxes have no check/uncheck animation | `check` exists but is wired to nothing | open |
+| R15i | Few or no transition animations | 52 of 54 recipes are wired to nothing | open |
+| R15j | No ambient animations for capable platforms | No ambient category exists | open |
+| R15k | Animations far too sparse | 11 of 54 recipes animate nothing | open |
+
+### The two findings behind R15g–R15k
+
+**Eleven of the fifty-four recipes are hollow.** Their keyframes are
+`[{"opacity":1},{"opacity":1}]` — a placeholder that shipped: `hover`, `slider-step`,
+`field-focus`, `field-valid`, `breadcrumb`, `highlight`, `attention`, `progress-change`,
+`busy`, `haze-tide`, `stone-contour`. They occupy a duration and a spring and animate
+nothing. This predates Crystal 2.0; it dates from the 1.0 restructure. It is 20% of the
+motion system, and it is the direct answer to "far too sparse".
+
+`press` and `field-invalid` look similar to a naive check because they return to their
+starting value, but a pulse and a shake are supposed to do that. The correct test is
+whether *every* keyframe is identical, not whether the first matches the last.
+
+**Only two recipes are wired to live interaction**, `press` and `hover` — and `hover` is
+one of the hollow ones. Everything else plays only from the catalogue's Replay button, so
+in ordinary use a checkbox, a switch, a menu or a page transition never animates. The
+recipes each carry a `use` field that states what should trigger them; that field is the
+wiring instruction and was never acted on.
+
+### Standing decisions taken while fixing this
+
+- Motion is wired to **state, not to clicks** — `check` fires when `checked` changes, so
+  keyboard and assistive technology get the same motion as a pointer.
+- Ambient motion is a **capability tier, not a default**: declared, opt-in, and degrading
+  to static. It never runs on a surface the user is reading, and it is the first thing
+  `prefers-reduced-motion` removes.

@@ -83,7 +83,7 @@ The canonical motion definitions live in `tokens/crystal.json`; CSS and JSON exp
 
 Both engines are now installed, bundled locally and used by the runtime. [Motion’s animate API](https://motion.dev/docs/animate) drives element keyframes. [GSAP timelines](https://gsap.com/docs/v3/GSAP/Timeline/) control material paint-layer clocks and selected component sequences. Native Web Animations effects paint actual pseudo-elements under those GSAP clocks; CSS supplies the native dialog backdrop fallback.
 
-See the [component motion suite](motion-components.html) for all 54 recipes, engine assignments, API contracts, live component behavior, test instructions and future component-library/Storybook coverage. [License notices](../reference/ASSET-NOTICES.md) accompany the local bundle.
+See the [component motion suite](motion-components.html) for all 59 recipes, engine assignments, API contracts, live component behavior, test instructions and future component-library/Storybook coverage. [License notices](../reference/ASSET-NOTICES.md) accompany the local bundle.
 
 The compact CSS timing tokens remain available for small state changes. The material-driven Resin press recipe uses 320ms for a complete compression/recovery sequence; hover light uses 700ms. These visual clocks never delay the actual action. The executable catalog lists the current duration of every recipe.
 
@@ -184,11 +184,66 @@ container, so it paints behind the content rather than over it. Verified by prov
 glyphs are pixel-identical with the shader on and off.
 
 
+## Ambient motion
+
+Ambient motion is what a surface does at rest — the specular band drifting along a Resin
+rim, a Haze fill breathing around its 80% value. It is the tenth category and the newest,
+and it is governed by three rules that are not negotiable.
+
+**It is a capability tier, not a default.** A platform declares support and a surface opts
+in. Nothing ambient runs because a component was rendered. Where a platform cannot honour
+it, ambient degrades to a static surface with no other change — exactly the shape the
+shader layer already uses, and for the same reason: an enhancement that is load-bearing is
+not an enhancement.
+
+**It runs on the rim and the fill, never on a surface the user is reading.** This is the
+edge-lensing argument again. Motion in the middle of a surface competes with the text on
+it; motion at the boundary does not. Text never moves, and an ambient recipe that would
+move text is wrong regardless of how subtle it is.
+
+**It is the first thing `prefers-reduced-motion` removes.** Every ambient recipe declares
+`reduced: "None."` — not a shortened version, not a gentler version. WCAG 2.2.2 requires
+that anything moving for more than five seconds can be paused or stopped, and an ambient
+loop by definition never stops on its own. A surface with ambient motion removed must be
+identical to one that never had it.
+
+The high tier belongs in the shader layer, where `u_time` is already a declared uniform.
+The CSS keyframes below are the floor, not the ceiling.
+
+## What triggers a recipe
+
+A recipe that nothing triggers is a specification, not a behaviour. Crystal binds motion
+to **state, not to clicks**:
+
+| State change | Recipe |
+| --- | --- |
+| `checked` becomes true / false on a checkbox or radio | `check` / `check-off` |
+| `checked` or `aria-checked` on a switch | `switch-on` / `switch-off` |
+| A range commits a value | `slider-step`, on the linked `<output>` |
+| A text field takes focus | `field-focus` |
+| `aria-invalid` becomes true / returns to false | `field-invalid` / `field-valid` |
+| `aria-expanded` flips on a control with `aria-controls` | `menu-in` / `menu-out` |
+| A `<details>` opens or closes | `accordion-in` / `accordion-out` |
+| A button is pressed or hovered | `press` / `hover` |
+
+Binding to `pointerdown` instead of to the state would give a mouse user motion that a
+keyboard user and a screen reader user never see. Binding to the state means every input
+method produces the same motion, and a programmatic change produces it too.
+
+Two guards matter in practice. A recipe never restarts itself while that same recipe is
+already running on that element — restarting mid-flight is what makes a continuous control
+feel choppy. And a page that drives a component itself marks that subtree
+`data-cr-motion="manual"`, so the delegated wiring does not fire the same recipe twice.
+
+`npm run verify:interactions` asserts all of this in a real browser against plain controls,
+including that reduced motion still applies the state instantly.
+
+
 ## Recipe reference
 
 <!-- generated:recipes -->
 
-All 54 recipes, generated from `tokens/motion-recipes.json`. **Damping ratio** and
+All 59 recipes in 10 categories, generated from `tokens/motion-recipes.json`. **Damping ratio** and
 **overshoot** are derived from each recipe's spring by `assets/core/spring.js`, not
 authored — so a spring that was retuned cannot leave a stale number behind in this table.
 
@@ -209,6 +264,7 @@ correct is a material question, not a taste question — see the signature polic
 | `slider-step` — Value response | 400ms | feather | stone | 0.920 | none | Range outputs, steppers and scrubber labels; value updates immediately. | Apply the semantic state immediately; omit decorative movement. |
 | `icon-turn` — Disclosure icon | 440ms | torsion | resin | 0.660 | 6.3% | Disclosure chevrons; parent expanded state is authoritative. | Apply the semantic state immediately; omit decorative movement. |
 | `copy-confirm` — Copy confirmation | 540ms | coalesce | resin | 0.620 | 8.4% | Only after clipboard write succeeds; retain textual confirmation. | Apply the semantic state immediately; omit decorative movement. |
+| `check-off` — Uncheck | 300ms | iris | plastic | 0.800 | 1.5% | Checkbox and radio indicators returning to unchecked. Paired with `check`; the iris closes toward the same point it opened from. | Apply the unchecked state immediately; omit the iris. |
 
 #### Forms
 
@@ -294,6 +350,15 @@ correct is a material question, not a taste question — see the signature polic
 | `plastic-settle` — Plastic settles into place | 1700ms | inertia | plastic | 0.550 | 12.6% | Explicit material choreography for a large specimen; replay is a visual study, not an application action. | Keep the resting material visible; omit choreography. |
 | `haze-tide` — Haze perimeter tide | 1800ms | feather | haze | 0.920 | none | Explicit material choreography for a large specimen; replay is a visual study, not an application action. | Keep the resting material visible; omit choreography. |
 | `stone-contour` — Stone contour ripple | 1300ms | feather | stone | 0.920 | none | Explicit material choreography for a large specimen; replay is a visual study, not an application action. | Keep the resting material visible; omit choreography. |
+
+#### Ambient
+
+| Recipe | Duration | Signature | Material | Damping ζ | Overshoot | Use | Reduced motion |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `resin-breathe` — Resin at rest | 2000ms | refraction | resin | 0.850 | 0.6% | The specular band on a Resin surface at rest. Applies to the rim layer only; the content above it never moves. | None. The surface is static. |
+| `frost-drift` — Frost at rest | 2000ms | feather | frost | 0.920 | none | Slow drift of the Frost grain and tint on a panel that persists while content moves behind it. | None. The surface is static. |
+| `haze-settle` — Haze at rest | 1900ms | feather | haze | 0.920 | none | A barely perceptible oscillation of a Haze content fill around its 80% value. Never drops far enough to affect the contrast of text on it. | None. The fill holds at 80%. |
+| `mirage-current` — Mirage at rest | 2000ms | refraction | mirage | 0.850 | 0.6% | Slow current in the modal scrim while a dialog is open. Stops when the dialog closes. | None. The scrim is a flat fill. |
 
 **Spring policy.** Every recipe carries a spring fitted to its authored duration, which remains the authority. Damping ratio is chosen by signature: inertia and coalesce overshoot because momentum is their material claim, feather and caustic do not because a soft edge that bounces is wrong. Disabling springs must reproduce the keyframes exactly.
 
