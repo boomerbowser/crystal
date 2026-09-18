@@ -243,6 +243,45 @@ check('the focus halo reaches anything focusable, not only native controls', () 
   assert.fail('no focus rule found to check');
 });
 
+/* The preview's own layout is what the layout tokens were derived from, which is
+   why nothing can drift *yet* — and why it will, the first time a token changes
+   and the stylesheet does not. Lengths are var() references now. Breakpoints
+   cannot be: `@media (max-width: 1150px)` will not take a custom property, and
+   no amount of wishing makes it. So they are checked instead.
+
+   Every width in a `@media` query in site.css must either be one of Crystal's
+   four shell breakpoints or be named below as something else — a component's own
+   threshold, which is a different kind of number and not Crystal's to own. The
+   allowlist is the point: it is short, each entry says what it is, and adding to
+   it is a decision somebody makes rather than a literal nobody notices. */
+const COMPONENT_WIDTHS = new Map([
+  [1000, 'the documentation shell narrows its sidebar before the marketing shell does'],
+  [860, 'the documentation shell drops its sidebar'],
+  [700, 'the reference image strip goes from three across to two'],
+  [450, 'the reference image strip goes to one'],
+]);
+
+check('every breakpoint in site.css is a token or a named exception', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const here = path.join(__dirname, '..');
+  const css = fs.readFileSync(path.join(here, 'assets/site.css'), 'utf8');
+  const tokens = JSON.parse(fs.readFileSync(path.join(here, 'tokens/crystal.tokens.json'), 'utf8'));
+  const shell = new Set(Object.values(tokens.semantic.breakpoint)
+    .map((leaf) => Number.parseInt(leaf.$value, 10)));
+  assert.equal(shell.size, 4, 'expected four shell breakpoints');
+
+  const stray = [];
+  for (const query of css.match(/@media[^{]*/g) ?? []) {
+    for (const [, width] of query.matchAll(/(?:max|min)-width:\s*(\d+)px/g)) {
+      const value = Number(width);
+      if (shell.has(value) || COMPONENT_WIDTHS.has(value)) continue;
+      stray.push(`${value}px in ${query.trim()}`);
+    }
+  }
+  assert.deepEqual(stray, [], 'breakpoints that match neither a token nor a named exception');
+});
+
 /* -------------------------------------------------------------- report */
 
 const failures = results.filter((r) => r.status === 'fail');

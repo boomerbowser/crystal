@@ -89,6 +89,22 @@ stylesheet does not, and the preview is the thing the tokens are checked against
 `design-system/assets/site.css`. A mechanical replacement, but it touches every
 frame, so it wants its own change and its own re-blessing.
 
+**Closed in the two halves it actually has.**
+
+The lengths are `var()` references: the shell's maximum width and its three
+gutters, the workbench's sidebar and the documentation column. All eighteen
+frames are byte-identical afterwards, which is the point — the tokens were
+derived from these numbers, so substituting them back changes nothing today and
+means a token change reaches the preview tomorrow.
+
+The breakpoints cannot be. `@media (max-width: 1150px)` will not take a custom
+property, so they are checked instead: `core-contracts.cjs` fails any `@media`
+width in `site.css` that is neither one of Crystal's four shell breakpoints nor
+named in a short allowlist of component thresholds — the documentation shell's
+own two, and the reference image strip's two. The allowlist is the point. Adding
+to it is a decision somebody makes rather than a literal nobody notices. Proved
+by moving 850 to 840 and watching the gate fail.
+
 ## D-4 · Two gates cannot see what they are named for
 
 Both are stated in the source and in the capture README, so neither is a hidden
