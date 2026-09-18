@@ -306,6 +306,67 @@ technique uses.</p>
 <p><code>--cr-space</code> is a different thing and stays: it is the density-aware padding step, 20px comfortable and 14px compact. The spacing scale does not vary with density, palette or mode.</p>
 <p><strong>The breakpoints</strong> are where the shell already changes: <code>sm</code> 600px, <code>md</code> 850px, <code>lg</code> 1150px, <code>xl</code> 1500px. They cannot be custom properties, because a custom property is not usable inside a media query — libraries compile against them from the generated exports.</p>
 <p><strong>The shell</strong> is a 1536px ceiling with gutters that step down at those breakpoints — 44px at <code>lg</code> and above, 26px between <code>sm</code> and <code>lg</code>, 18px below <code>sm</code> — and a 920px reading column inside it, which is what keeps a line of prose a comfortable length.</p>
+<h2 id="the-type-scale">The type scale</h2>
+<p>Crystal specifies a reading rhythm — Manrope at 16/24 — and the scale is derived from it rather than written down. Each step is a <strong>ratio</strong> of the reading size, so moving <code>typography.readingSize</code> moves all six instead of leaving six literals behind.</p>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Step</th>
+<th>Ratio</th>
+<th>Size</th>
+<th>Leading</th>
+<th>Tracking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>display</code></td>
+<td>2</td>
+<td>32px</td>
+<td>1.1</td>
+<td>−0.055em</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>1.5</td>
+<td>24px</td>
+<td>1.2</td>
+<td>−0.04em</td>
+</tr>
+<tr>
+<td><code>heading</code></td>
+<td>1.25</td>
+<td>20px</td>
+<td>1.3</td>
+<td>−0.03em</td>
+</tr>
+<tr>
+<td><code>subheading</code></td>
+<td>1.0625</td>
+<td>17px</td>
+<td>1.45</td>
+<td>−0.01em</td>
+</tr>
+<tr>
+<td><code>body</code></td>
+<td>1</td>
+<td>16px</td>
+<td>1.5</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>caption</code></td>
+<td>0.8125</td>
+<td>13px</td>
+<td>1.45</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></div>
+<p>The scale is deliberately modest. Crystal's hierarchy is carried by weight and material as much as by size, and a dramatic scale fights that.</p>
+<p>Leading tightens as size grows — large text needs proportionally less to read as a block rather than as a list of lines — and tracking tightens with it, because default tracking reads loose at display sizes.</p>
+<p>The steps reach CSS as <code>--cr-text-&lt;step&gt;-size</code>, <code>-leading</code> and <code>-tracking</code>. <strong>Density tightens leading and never the size</strong>: shrinking text at higher density trades legibility for space, which Crystal does not do — density tightens spacing and never touches a 44px target or a reading size.</p>
+<p><strong>The level and the step are chosen separately.</strong> A heading's level is its position in the document outline; its step is a design decision. A component where <code>level={2}</code> also means "medium" forces a choice between a correct outline and a correct appearance, and products reliably choose appearance.</p>
 <h2 id="scrolling">Scrolling</h2>
 <p>A scrollbar belongs to the material it scrolls, not to the operating system. There are two, and which one a surface takes follows the hierarchy rather than taste.</p>
 <div class="cr-table-scroll"><table class="cr-table">
@@ -494,7 +555,7 @@ only the correct composition is real.</p>
 <p>Haze is the readable fill <em>inside</em> a translucent frame. It is recessed rather than
 raised, because a fill that floats above its own frame reads as a separate object rather
 than as the frame's content:</p>
-<div class="cr-resin" style="padding:18px;max-width:420px">
+<div class="cr-resin" id="haze-in-resin-demo" style="padding:18px;max-width:420px">
 <div class="cr-haze" style="padding:14px 16px;border-radius:14px">
 <p>This paragraph sits on a Haze content fill inside a Resin frame. The fill is 80% opaque
 with a 1.95px feather, and it is recessed into the frame with an inset shadow.</p>

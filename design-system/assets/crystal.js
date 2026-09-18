@@ -91,6 +91,17 @@
          writing plain CSS reaches the same values the libraries compile against.
          `--cr-space` above is the density-aware padding step and is separate. */
       ...Object.fromEntries(Object.entries(data.spacing).map(([k,v])=>['--cr-spacing-'+k,v+'px'])),
+      /* The type scale, derived here rather than in each platform library. Density
+         tightens leading and never the size: shrinking text at higher density
+         trades legibility for space, which Crystal does not do. */
+      ...Object.fromEntries(Object.entries(data.typography.scale).flatMap(([step,v])=>{
+        const lead=Math.round(v.leading*(s.density==='compact'?0.92:1)*1000)/1000;
+        return [
+          ['--cr-text-'+step+'-size',Math.round(data.typography.readingSize*v.ratio*100)/100+'px'],
+          ['--cr-text-'+step+'-leading',String(lead)],
+          ['--cr-text-'+step+'-tracking',v.tracking],
+        ];
+      })),
       ...Object.fromEntries(Object.entries(data.component.layout).map(
         ([k,v])=>['--cr-layout-'+k.replace(/([a-z0-9])([A-Z])/g,'$1-$2').toLowerCase(),v+'px'])),
       '--cr-scrollbar-frost-thumb':s.reduced?p.text:rgba(p.text,0.55),

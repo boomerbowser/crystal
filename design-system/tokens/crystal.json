@@ -369,7 +369,39 @@
   "typography": {
     "readingSize": 16,
     "readingLeading": 24,
-    "family": "Manrope"
+    "family": "Manrope",
+    "scale": {
+      "display": {
+        "ratio": 2,
+        "leading": 1.1,
+        "tracking": "-0.055em"
+      },
+      "title": {
+        "ratio": 1.5,
+        "leading": 1.2,
+        "tracking": "-0.04em"
+      },
+      "heading": {
+        "ratio": 1.25,
+        "leading": 1.3,
+        "tracking": "-0.03em"
+      },
+      "subheading": {
+        "ratio": 1.0625,
+        "leading": 1.45,
+        "tracking": "-0.01em"
+      },
+      "body": {
+        "ratio": 1,
+        "leading": 1.5,
+        "tracking": "0"
+      },
+      "caption": {
+        "ratio": 0.8125,
+        "leading": 1.45,
+        "tracking": "0"
+      }
+    }
   },
   "component": {
     "scrollbar": {
@@ -379,6 +411,10 @@
     },
     "scrollArea": {
       "fadeDepth": 24
+    },
+    "icon": {
+      "size": 20,
+      "action": 24
     },
     "layout": {
       "containerMax": 1536,

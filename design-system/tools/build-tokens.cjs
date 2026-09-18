@@ -172,6 +172,38 @@ function migrate() {
   set(out.semantic, 'typography.readingSize', leaf('dimension', dim(flat.typography.readingSize)));
   set(out.semantic, 'typography.readingLeading', leaf('dimension', dim(flat.typography.readingLeading)));
 
+  /* semantic: the type scale.
+     Crystal specified a reading rhythm — Manrope at 16/24 — and no scale, so the
+     React library derived six steps of its own. Six ratios living in one platform
+     library is a type scale the other platforms cannot see, which is CONTRACT §1
+     again: the derivation belongs here, where every platform reads it.
+
+     Ratios rather than sizes, because the derivation is the design decision. Each
+     step is a multiple of the reading size, so moving `typography.readingSize`
+     moves the whole scale instead of leaving six literals behind. The scale is
+     deliberately modest: Crystal's hierarchy is carried by weight and material as
+     much as by size, and a dramatic scale fights that.
+
+     Leading tightens as size grows — large text needs proportionally less to read
+     as a block rather than a list of lines — and tracking tightens with it,
+     because default tracking reads loose at display sizes. */
+  const TYPE_SCALE = {
+    display: { ratio: 2, leading: 1.1, tracking: '-0.055em' },
+    title: { ratio: 1.5, leading: 1.2, tracking: '-0.04em' },
+    heading: { ratio: 1.25, leading: 1.3, tracking: '-0.03em' },
+    subheading: { ratio: 1.0625, leading: 1.45, tracking: '-0.01em' },
+    body: { ratio: 1, leading: 1.5, tracking: '0' },
+    caption: { ratio: 0.8125, leading: 1.45, tracking: '0' },
+  };
+  for (const [step, values] of Object.entries(TYPE_SCALE)) {
+    set(out.semantic, `typography.scale.${step}.ratio`, leaf('number', values.ratio,
+      `${step}: multiple of the reading size`));
+    set(out.semantic, `typography.scale.${step}.leading`, leaf('number', values.leading,
+      `${step}: line height as a multiple of its own size`));
+    set(out.semantic, `typography.scale.${step}.tracking`, leaf('dimension', values.tracking,
+      `${step}: letter spacing`));
+  }
+
   /* semantic: spacing and breakpoints.
      Neither existed as a token, and the layout tier cannot be built without
      both — the catalogue makes "the spacing scale" and "breakpoint behaviour"
@@ -260,6 +292,13 @@ function migrate() {
     'Narrowest an auto-flowing grid cell becomes before the grid drops a column'));
   set(out.component, 'layout.sidebarWidth', leaf('dimension', '280px',
     'Default width of a shell\'s supporting panel: a two-word label plus an icon at comfortable density'));
+  /* Icon sizes. `size` is what Crystal's own stylesheet has always drawn an icon
+     at; `action` is the larger one the catalogue specifies inside an icon button,
+     where the icon is the only content and carries the whole meaning. Both were
+     literals — one in the reset, one in prose — which is a size no platform
+     library could read. */
+  set(out.component, 'icon.size', leaf('dimension', '20px', 'An icon in running content or beside a label'));
+  set(out.component, 'icon.action', leaf('dimension', '24px', 'The single icon inside an icon button'));
   set(out.component, 'card.radius', leaf('dimension', '{semantic.shape.contentRadius}',
     'Card-shaped buttons keep the content radius so artwork is not clipped'));
   set(out.component, 'focus.coreWidth', leaf('dimension', '2px', 'Crisp focus core, never blurred'));
@@ -397,6 +436,10 @@ function buildFlat(tokens) {
     scrollArea: {
       fadeDepth: unpx(tokens.component.scrollArea.fadeDepth.$value),
     },
+    icon: {
+      size: unpx(tokens.component.icon.size.$value),
+      action: unpx(tokens.component.icon.action.$value),
+    },
     layout: Object.fromEntries(Object.entries(tokens.component.layout)
       .map(([key, leafValue]) => [key, unpx(leafValue.$value)])),
   };
@@ -406,6 +449,12 @@ function buildFlat(tokens) {
      padding step and is a different thing. */
   flat.spacing = Object.fromEntries(Object.entries(tokens.semantic.spacing)
     .map(([key, leafValue]) => [key, unpx(leafValue.$value)]));
+  flat.typography.scale = Object.fromEntries(Object.entries(tokens.semantic.typography.scale)
+    .map(([step, values]) => [step, {
+      ratio: values.ratio.$value,
+      leading: values.leading.$value,
+      tracking: values.tracking.$value,
+    }]));
   flat.schemaNote = 'Generated from tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.';
   flat.materials = MATERIALS;
   return flat;

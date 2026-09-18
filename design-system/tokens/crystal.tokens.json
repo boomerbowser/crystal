@@ -1458,6 +1458,110 @@
       "readingLeading": {
         "$type": "dimension",
         "$value": "24px"
+      },
+      "scale": {
+        "display": {
+          "ratio": {
+            "$type": "number",
+            "$value": 2,
+            "$description": "display: multiple of the reading size"
+          },
+          "leading": {
+            "$type": "number",
+            "$value": 1.1,
+            "$description": "display: line height as a multiple of its own size"
+          },
+          "tracking": {
+            "$type": "dimension",
+            "$value": "-0.055em",
+            "$description": "display: letter spacing"
+          }
+        },
+        "title": {
+          "ratio": {
+            "$type": "number",
+            "$value": 1.5,
+            "$description": "title: multiple of the reading size"
+          },
+          "leading": {
+            "$type": "number",
+            "$value": 1.2,
+            "$description": "title: line height as a multiple of its own size"
+          },
+          "tracking": {
+            "$type": "dimension",
+            "$value": "-0.04em",
+            "$description": "title: letter spacing"
+          }
+        },
+        "heading": {
+          "ratio": {
+            "$type": "number",
+            "$value": 1.25,
+            "$description": "heading: multiple of the reading size"
+          },
+          "leading": {
+            "$type": "number",
+            "$value": 1.3,
+            "$description": "heading: line height as a multiple of its own size"
+          },
+          "tracking": {
+            "$type": "dimension",
+            "$value": "-0.03em",
+            "$description": "heading: letter spacing"
+          }
+        },
+        "subheading": {
+          "ratio": {
+            "$type": "number",
+            "$value": 1.0625,
+            "$description": "subheading: multiple of the reading size"
+          },
+          "leading": {
+            "$type": "number",
+            "$value": 1.45,
+            "$description": "subheading: line height as a multiple of its own size"
+          },
+          "tracking": {
+            "$type": "dimension",
+            "$value": "-0.01em",
+            "$description": "subheading: letter spacing"
+          }
+        },
+        "body": {
+          "ratio": {
+            "$type": "number",
+            "$value": 1,
+            "$description": "body: multiple of the reading size"
+          },
+          "leading": {
+            "$type": "number",
+            "$value": 1.5,
+            "$description": "body: line height as a multiple of its own size"
+          },
+          "tracking": {
+            "$type": "dimension",
+            "$value": "0",
+            "$description": "body: letter spacing"
+          }
+        },
+        "caption": {
+          "ratio": {
+            "$type": "number",
+            "$value": 0.8125,
+            "$description": "caption: multiple of the reading size"
+          },
+          "leading": {
+            "$type": "number",
+            "$value": 1.45,
+            "$description": "caption: line height as a multiple of its own size"
+          },
+          "tracking": {
+            "$type": "dimension",
+            "$value": "0",
+            "$description": "caption: letter spacing"
+          }
+        }
       }
     },
     "spacing": {
@@ -1702,6 +1806,18 @@
         "$type": "dimension",
         "$value": "280px",
         "$description": "Default width of a shell's supporting panel: a two-word label plus an icon at comfortable density"
+      }
+    },
+    "icon": {
+      "size": {
+        "$type": "dimension",
+        "$value": "20px",
+        "$description": "An icon in running content or beside a label"
+      },
+      "action": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$description": "The single icon inside an icon button"
       }
     },
     "card": {

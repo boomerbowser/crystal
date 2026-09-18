@@ -163,6 +163,27 @@ Two scales that had no tokens until the layout components needed them. Neither i
 
 **The shell** is a 1536px ceiling with gutters that step down at those breakpoints — 44px at `lg` and above, 26px between `sm` and `lg`, 18px below `sm` — and a 920px reading column inside it, which is what keeps a line of prose a comfortable length.
 
+## The type scale
+
+Crystal specifies a reading rhythm — Manrope at 16/24 — and the scale is derived from it rather than written down. Each step is a **ratio** of the reading size, so moving `typography.readingSize` moves all six instead of leaving six literals behind.
+
+| Step | Ratio | Size | Leading | Tracking |
+|---|---|---|---|---|
+| `display` | 2 | 32px | 1.1 | −0.055em |
+| `title` | 1.5 | 24px | 1.2 | −0.04em |
+| `heading` | 1.25 | 20px | 1.3 | −0.03em |
+| `subheading` | 1.0625 | 17px | 1.45 | −0.01em |
+| `body` | 1 | 16px | 1.5 | 0 |
+| `caption` | 0.8125 | 13px | 1.45 | 0 |
+
+The scale is deliberately modest. Crystal's hierarchy is carried by weight and material as much as by size, and a dramatic scale fights that.
+
+Leading tightens as size grows — large text needs proportionally less to read as a block rather than as a list of lines — and tracking tightens with it, because default tracking reads loose at display sizes.
+
+The steps reach CSS as `--cr-text-<step>-size`, `-leading` and `-tracking`. **Density tightens leading and never the size**: shrinking text at higher density trades legibility for space, which Crystal does not do — density tightens spacing and never touches a 44px target or a reading size.
+
+**The level and the step are chosen separately.** A heading's level is its position in the document outline; its step is a design decision. A component where `level={2}` also means "medium" forces a choice between a correct outline and a correct appearance, and products reliably choose appearance.
+
 ## Scrolling
 
 A scrollbar belongs to the material it scrolls, not to the operating system. There are two, and which one a surface takes follows the hierarchy rather than taste.
@@ -331,7 +352,7 @@ Haze is the readable fill *inside* a translucent frame. It is recessed rather th
 raised, because a fill that floats above its own frame reads as a separate object rather
 than as the frame's content:
 
-<div class="cr-resin" style="padding:18px;max-width:420px" markdown="1">
+<div id="haze-in-resin-demo" class="cr-resin" style="padding:18px;max-width:420px" markdown="1">
 <div class="cr-haze" style="padding:14px 16px;border-radius:14px" markdown="1">
 This paragraph sits on a Haze content fill inside a Resin frame. The fill is 80% opaque
 with a 1.95px feather, and it is recessed into the frame with an inset shadow.

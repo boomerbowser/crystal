@@ -268,7 +268,7 @@ Raw values. Never referenced by a component directly — a primitive is the thin
 
 What a value *means*: the surface a card sits on, the duration a control settles over. Components consume this tier and nothing below it.
 
-96 tokens.
+114 tokens.
 
 ### Semantic · material
 
@@ -362,6 +362,24 @@ What a value *means*: the surface a card sits on, the duration a control settles
 | `semantic.typography.family` | fontFamily | `Manrope` | — |
 | `semantic.typography.readingSize` | dimension | `16px` | — |
 | `semantic.typography.readingLeading` | dimension | `24px` | — |
+| `semantic.typography.scale.display.ratio` | number | `2` | display: multiple of the reading size |
+| `semantic.typography.scale.display.leading` | number | `1.1` | display: line height as a multiple of its own size |
+| `semantic.typography.scale.display.tracking` | dimension | `-0.055em` | display: letter spacing |
+| `semantic.typography.scale.title.ratio` | number | `1.5` | title: multiple of the reading size |
+| `semantic.typography.scale.title.leading` | number | `1.2` | title: line height as a multiple of its own size |
+| `semantic.typography.scale.title.tracking` | dimension | `-0.04em` | title: letter spacing |
+| `semantic.typography.scale.heading.ratio` | number | `1.25` | heading: multiple of the reading size |
+| `semantic.typography.scale.heading.leading` | number | `1.3` | heading: line height as a multiple of its own size |
+| `semantic.typography.scale.heading.tracking` | dimension | `-0.03em` | heading: letter spacing |
+| `semantic.typography.scale.subheading.ratio` | number | `1.0625` | subheading: multiple of the reading size |
+| `semantic.typography.scale.subheading.leading` | number | `1.45` | subheading: line height as a multiple of its own size |
+| `semantic.typography.scale.subheading.tracking` | dimension | `-0.01em` | subheading: letter spacing |
+| `semantic.typography.scale.body.ratio` | number | `1` | body: multiple of the reading size |
+| `semantic.typography.scale.body.leading` | number | `1.5` | body: line height as a multiple of its own size |
+| `semantic.typography.scale.body.tracking` | dimension | `0` | body: letter spacing |
+| `semantic.typography.scale.caption.ratio` | number | `0.8125` | caption: multiple of the reading size |
+| `semantic.typography.scale.caption.leading` | number | `1.45` | caption: line height as a multiple of its own size |
+| `semantic.typography.scale.caption.tracking` | dimension | `0` | caption: letter spacing |
 
 ### Semantic · spacing
 
@@ -415,7 +433,7 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.
 
-24 tokens.
+26 tokens.
 
 ### Component · action
 
@@ -453,6 +471,13 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | `component.layout.gutterWide` | dimension | `44px` | Shell gutter at the lg breakpoint and above |
 | `component.layout.minCellWidth` | dimension | `240px` | Narrowest an auto-flowing grid cell becomes before the grid drops a column |
 | `component.layout.sidebarWidth` | dimension | `280px` | Default width of a shell's supporting panel: a two-word label plus an icon at comfortable density |
+
+### Component · icon
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.icon.size` | dimension | `20px` | An icon in running content or beside a label |
+| `component.icon.action` | dimension | `24px` | The single icon inside an icon button |
 
 ### Component · card
 

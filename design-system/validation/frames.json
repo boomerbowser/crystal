@@ -153,7 +153,8 @@
       "id": "haze-in-resin",
       "page": "docs/materials.html",
       "anchor": "#the-correct-composition-live",
-      "why": "The only composition on the site that exercises Haze inside a Resin frame. The rule forbidding Resin inside Resin is audited in the DOM, but the recess that makes the Haze fill read as the frame's content \u2014 an inset dark top edge and light bottom edge, under a light source above \u2014 is purely visual and was gated by nothing."
+      "why": "The only composition on the site that exercises Haze inside a Resin frame. The rule forbidding Resin inside Resin is audited in the DOM, but the recess that makes the Haze fill read as the frame's content — an inset dark top edge and light bottom edge, under a light source above — is purely visual and was gated by nothing. Clipped to the composition itself: anchored to the page, the frame re-rasterised on every edit to the prose above it, and a baseline that changes for reasons unrelated to what it guards is a baseline nobody reads carefully. Clipped to the composition itself: anchored to the page, the frame re-rasterised on every edit to the prose above it, and a baseline that changes for reasons unrelated to what it guards is a baseline nobody reads carefully.",
+      "clip": "#haze-in-resin-demo"
     }
   ],
   "reblessing": {
