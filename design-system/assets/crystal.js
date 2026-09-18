@@ -1,7 +1,19 @@
-/* Crystal 1.0. Pure token resolver + CSS exporter. No dependencies. */
+/* Crystal. Pure token resolver + CSS exporter. No dependencies.
+ *
+ * Loadable two ways, and both matter. In a browser it is a script that reads
+ * `window.CRYSTAL_TOKENS` and publishes `window.Crystal`. Under a module loader it
+ * takes the flat token file directly and exports the same object.
+ *
+ * The second path exists because a platform library needs `resolve()` — turning a
+ * palette, a mode and a set of preferences into the ~90 custom properties a
+ * surface actually renders from. Without it a library can only load the generated
+ * stylesheet, which carries one palette at `:root`; every per-scope palette and
+ * mode it offered was decoration. CONTRACT §1 says to reuse this arithmetic
+ * rather than reimplement it, and that is only possible if it can be imported. */
 (function(root){
   'use strict';
-  const data=root.CRYSTAL_TOKENS;
+  const data=root.CRYSTAL_TOKENS
+    || (typeof module!=='undefined'&&module.exports?require('../tokens/crystal.json'):null);
   if(!data) throw new Error('Load tokens.js before crystal.js');
   const camelToKebab=s=>s.replace(/[A-Z]/g,m=>'-'+m.toLowerCase());
   const rgb=hex=>[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));
@@ -127,5 +139,7 @@
     for(const name of ['success','attention','danger','info'])pairs.push([name[0].toUpperCase()+name.slice(1)+' status',name+'-ink',name+'-surface']);
     return pairs.map(([label,ink,bg])=>({label,foreground:t['--cr-'+ink],background:t['--cr-'+bg],ratio:contrast(t['--cr-'+ink],t['--cr-'+bg]),minimum:ink==='outline'?3:4.5}));
   }
-  root.Crystal=Object.freeze({normalize,resolve,contrast,exportCSS,exportJSON,audit,version:data.version});
+  const api=Object.freeze({normalize,resolve,contrast,exportCSS,exportJSON,audit,version:data.version});
+  root.Crystal=api;
+  if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

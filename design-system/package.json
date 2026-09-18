@@ -75,6 +75,10 @@
       "types": "./assets/core/presets.d.ts",
       "default": "./assets/core/presets.js"
     },
-    "./catalogue": "./tokens/catalogue.json"
+    "./catalogue": "./tokens/catalogue.json",
+    "./resolver": {
+      "types": "./assets/crystal.d.ts",
+      "default": "./assets/crystal.js"
+    }
   }
 }
