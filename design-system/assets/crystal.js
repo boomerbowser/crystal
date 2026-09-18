@@ -73,6 +73,7 @@
       '--cr-scrollbar-width':data.component.scrollbar.width+'px',
       '--cr-scrollbar-thumb-min':data.component.scrollbar.thumbMinLength+'px',
       '--cr-scrollbar-inset':data.component.scrollbar.inset+'px',
+      '--cr-scroll-fade':data.component.scrollArea.fadeDepth+'px',
       '--cr-scrollbar-frost-thumb':s.reduced?p.text:rgba(p.text,0.55),
       '--cr-scrollbar-resin-thumb':s.reduced?p.primary:rgba(p.primary,0.80),
       '--cr-scrollbar-track':s.reduced?p.surfaceAlt:rgba(p.outline,0.12),

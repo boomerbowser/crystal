@@ -96,6 +96,7 @@ public enum CrystalToken {
     public static let scrollbarWidth = "10px"
     public static let scrollbarThumbMinLength = "32px"
     public static let scrollbarInset = "2px"
+    public static let scrollAreaFadeDepth = "24px"
     public static let cardRadius = "28px"
     public static let focusCoreWidth = "2px"
     public static let focusCoreOffset = "3px"

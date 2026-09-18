@@ -96,6 +96,7 @@ object CrystalToken {
     const val scrollbarWidth = "10px"
     const val scrollbarThumbMinLength = "32px"
     const val scrollbarInset = "2px"
+    const val scrollAreaFadeDepth = "24px"
     const val cardRadius = "28px"
     const val focusCoreWidth = "2px"
     const val focusCoreOffset = "3px"

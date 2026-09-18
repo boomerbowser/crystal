@@ -394,7 +394,7 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.
 
-16 tokens.
+17 tokens.
 
 ### Component · action
 
@@ -414,6 +414,12 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | `component.scrollbar.width` | dimension | `10px` | Scrollbar track width |
 | `component.scrollbar.thumbMinLength` | dimension | `32px` | Shortest a thumb may become, so a very long surface stays draggable |
 | `component.scrollbar.inset` | dimension | `2px` | Gap between the thumb and the track edge |
+
+### Component · scrollArea
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.scrollArea.fadeDepth` | dimension | `24px` | Depth of the scroll area edge fade, and the scroll padding that keeps focus clear of it |
 
 ### Component · card
 

@@ -1601,6 +1601,13 @@
         "$description": "Gap between the thumb and the track edge"
       }
     },
+    "scrollArea": {
+      "fadeDepth": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$description": "Depth of the scroll area edge fade, and the scroll padding that keeps focus clear of it"
+      }
+    },
     "card": {
       "radius": {
         "$type": "dimension",

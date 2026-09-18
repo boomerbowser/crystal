@@ -164,6 +164,16 @@ A scrollbar belongs to the material it scrolls, not to the operating system. The
 
 Both thumbs clear 3:1 against every Crystal surface in all six palettes and both modes; the token gate asserts it. Under reduced transparency and forced colors the thumb goes solid and takes the system or outline colour.
 
+### Edge fades
+
+A scroll area fades its content where there is more beyond the edge — 24px, on the scrolling axis, at whichever ends have content past them. A fade says "there is more this way" on a touch device, where the scrollbar is an overlay that is not there until you are already scrolling.
+
+The fade is a **mask**, not a painted overlay. What an overlay would have to paint is the surrounding material, and a colour approximating a translucent material over an unknown backdrop is wrong at every edge except the one it was sampled at. A mask lets the real material show through.
+
+Set `data-cr-scroll` to `start`, `end` or `both` — which edges have content beyond them — together with `data-cr-scroll-axis` of `x` or `y`. `start` means the container is *at* its start, so only the far edge fades. Without the attribute nothing fades, so a container with no runtime driving it is unmasked rather than permanently faded at both ends. Start and end are logical: the horizontal gradient turns around in right-to-left.
+
+The same token is the container's `scroll-padding`, which is what keeps this accessible. Browsers scroll a newly focused element into view respecting scroll padding, so a focus ring can never come to rest underneath the fade — Crystal does not blur focus, and fading one would be the same defect by another route. Forced colors removes the fade entirely.
+
 What a native scrollbar cannot carry is the material itself — `backdrop-filter` has no effect on one, and the standard properties expose only two colours and a coarse width. A surface that needs the material in full uses the **scroll area** component, which draws its thumb as a real element.
 
 ## Acceptance

@@ -113,10 +113,13 @@ the two that are unchanged are the narrow ones, where the menu collapses.
 The tables, which were shifting in the first version of this change, are now
 byte-identical to their baselines.
 
-`haze-in-resin` was blessed a second time, for a different reason: the scrolling
-section added to the materials documentation sits above the composition this
-frame is anchored to, so the anchor now lands at a fractional scroll offset and
-the page re-rasterises half a pixel lower. 1826 pixels cross the visible
+`haze-in-resin` was blessed again, for a different reason: the scrolling and
+edge-fade sections added to the materials documentation sit above the
+composition this frame is anchored to, so the anchor lands at a fractional
+scroll offset and the page re-rasterises half a pixel lower. The frame has two
+rasterisations and alternates between them with the document's height — both
+edits produced the same 2256 differing pixels and the same 1826 visible, to the
+pixel, in the same rectangle. 1826 pixels cross the visible
 threshold and all of them are inside x 346–897, y 469–526 — the one monospace
 code block on screen, which is the only text with enough contrast for a
 sub-pixel shift to register. Both crops were compared at 8×: the same glyphs,

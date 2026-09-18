@@ -138,6 +138,54 @@
   :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog){scrollbar-color:CanvasText Canvas}
 }
 
+/* The scroll area's edge fade.
+ *
+ * A fade says there is more in that direction, which a scrollbar alone does not
+ * on a touch device where the scrollbar is an overlay that is not there yet. It
+ * is a mask rather than a painted overlay, because what a painted overlay would
+ * have to paint is the surrounding material, and a colour approximating a
+ * translucent material over an unknown backdrop is wrong at every edge except
+ * the one it was sampled at. Masking lets the real material show through.
+ *
+ * `data-cr-scroll` says which edges have content beyond them and is set by
+ * whatever runtime owns the container — Crystal React sets it from a scroll
+ * listener. Absent the attribute nothing fades, so a container that never gets a
+ * runtime is unmasked rather than permanently faded at both ends.
+ *
+ * `scroll-padding` is the part that keeps this accessible: browsers scroll a
+ * newly focused element into view respecting scroll padding, so a focus ring can
+ * never come to rest underneath the fade. Crystal does not blur focus, and a
+ * fade over one would be the same defect by another route. */
+:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll]{
+  --cr-scroll-fade-start:0px;--cr-scroll-fade-end:0px;
+  scroll-padding:var(--cr-scroll-fade);
+}
+:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll=both]{
+  --cr-scroll-fade-start:var(--cr-scroll-fade);--cr-scroll-fade-end:var(--cr-scroll-fade);
+}
+/* `start` means the container is AT its start, so only the far edge fades. */
+:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll=start]{--cr-scroll-fade-end:var(--cr-scroll-fade)}
+:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll=end]{--cr-scroll-fade-start:var(--cr-scroll-fade)}
+:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll][data-cr-scroll-axis=y]{
+  mask-image:linear-gradient(to bottom,transparent 0,#000 var(--cr-scroll-fade-start),
+    #000 calc(100% - var(--cr-scroll-fade-end)),transparent 100%);
+}
+:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll][data-cr-scroll-axis=x]{
+  mask-image:linear-gradient(to right,transparent 0,#000 var(--cr-scroll-fade-start),
+    #000 calc(100% - var(--cr-scroll-fade-end)),transparent 100%);
+}
+/* Start and end are logical, so the horizontal gradient turns around in RTL. */
+[dir=rtl] :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll][data-cr-scroll-axis=x],
+:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[dir=rtl][data-cr-scroll][data-cr-scroll-axis=x]{
+  mask-image:linear-gradient(to left,transparent 0,#000 var(--cr-scroll-fade-start),
+    #000 calc(100% - var(--cr-scroll-fade-end)),transparent 100%);
+}
+@media(forced-colors:active){
+  /* Forced colours exist to make everything legible. A fade is the opposite of
+     that, and the scrollbar is already system-coloured, so the edge says enough. */
+  :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll]{mask-image:none}
+}
+
 /* The older path, for engines that predate the standard properties — Safari
  * before 18.2, Chromium before 121. It is deliberately exclusive with the block
  * above rather than additional to it.

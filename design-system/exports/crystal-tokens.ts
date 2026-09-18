@@ -96,6 +96,7 @@ export const crystalTokens = {
   "scrollbar.width": "10px",
   "scrollbar.thumbMinLength": "32px",
   "scrollbar.inset": "2px",
+  "scrollArea.fadeDepth": "24px",
   "card.radius": "28px",
   "focus.coreWidth": "2px",
   "focus.coreOffset": "3px",

@@ -376,6 +376,9 @@
       "width": 10,
       "thumbMinLength": 32,
       "inset": 2
+    },
+    "scrollArea": {
+      "fadeDepth": 24
     }
   },
   "schemaNote": "Generated from tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.",

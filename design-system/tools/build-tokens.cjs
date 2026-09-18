@@ -214,6 +214,13 @@ function migrate() {
   set(out.component, 'scrollbar.thumbMinLength', leaf('dimension', dim(sb.thumbMinLength),
     'Shortest a thumb may become, so a very long surface stays draggable'));
   set(out.component, 'scrollbar.inset', leaf('dimension', dim(sb.inset), 'Gap between the thumb and the track edge'));
+  /* The scroll area's edge fade. It is a mask rather than a painted overlay, so
+     the surrounding material shows through it instead of a colour approximating
+     the material. The same value is the container's scroll padding, which is what
+     keeps a focused element from ever resting underneath the fade. */
+  const sa = (flat.component && flat.component.scrollArea) || { fadeDepth: 24 };
+  set(out.component, 'scrollArea.fadeDepth', leaf('dimension', dim(sa.fadeDepth),
+    'Depth of the scroll area edge fade, and the scroll padding that keeps focus clear of it'));
   set(out.component, 'card.radius', leaf('dimension', '{semantic.shape.contentRadius}',
     'Card-shaped buttons keep the content radius so artwork is not clipped'));
   set(out.component, 'focus.coreWidth', leaf('dimension', '2px', 'Crisp focus core, never blurred'));
@@ -347,6 +354,9 @@ function buildFlat(tokens) {
       width: unpx(tokens.component.scrollbar.width.$value),
       thumbMinLength: unpx(tokens.component.scrollbar.thumbMinLength.$value),
       inset: unpx(tokens.component.scrollbar.inset.$value),
+    },
+    scrollArea: {
+      fadeDepth: unpx(tokens.component.scrollArea.fadeDepth.$value),
     },
   };
   flat.schemaNote = 'Generated from tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.';
