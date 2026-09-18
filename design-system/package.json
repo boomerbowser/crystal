@@ -43,7 +43,8 @@
     "exports/",
     "docs/",
     "reference/licenses/",
-    "README.md"
+    "README.md",
+    "src/"
   ],
   "exports": {
     ".": "./exports/crystal-tokens.ts",
@@ -51,7 +52,23 @@
     "./css": "./assets/crystal.css",
     "./theme": "./assets/crystal-theme.css",
     "./controls": "./assets/controls.css",
-    "./core": "./assets/core/state.js",
-    "./icons": "./assets/icons/manifest.json"
+    "./core": {
+      "types": "./assets/core/state.d.ts",
+      "default": "./assets/core/state.js"
+    },
+    "./icons": "./assets/icons/manifest.json",
+    "./core/state": {
+      "types": "./assets/core/state.d.ts",
+      "default": "./assets/core/state.js"
+    },
+    "./core/preferences": {
+      "types": "./assets/core/preferences.d.ts",
+      "default": "./assets/core/preferences.js"
+    },
+    "./core/spring": "./assets/core/spring.js",
+    "./motion-recipes": "./tokens/motion-recipes.json",
+    "./engines": "./src/engines.js",
+    "./shaders/": "./assets/shaders/",
+    "./flat": "./tokens/crystal.json"
   }
 }
