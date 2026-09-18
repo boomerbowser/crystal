@@ -29,6 +29,23 @@ the hazard is documented — but it is still a loaded gun in a published export.
 the preview renders, which is a visual change across most frames. Worth doing
 deliberately with the frames re-blessed, not as a side effect.
 
+**Closed by removing the vector rather than the rules.** `./controls` is no longer
+in `package.json`'s `exports`: `@crystal/core/controls` does not resolve, and the
+preview reaches the file by relative path. CONTRACT §9's prohibition is now
+mechanical instead of advisory, which matters because a rule nothing enforces is
+a rule somebody will break — and somebody did.
+
+Scoping the selectors was the other option and is worse. Fifteen bare `<button>`
+elements in `playground.html` and `motion.html` depend on them, as does every bare
+`input[type=checkbox|radio|range|file]` in the preview, so scoping is a
+frame-wide re-blessing bought for a hazard that `@layer crystal.component`
+already half-mitigates — a consumer's unlayered CSS outranks the file for any
+property they declare. Half, because nobody writes a `::before` to cancel a
+`::before` they did not know was coming.
+
+What remains is the preview's own reliance on bare-element styling, which is
+hygiene rather than a consumer hazard, and is not worth a frame-wide change.
+
 ## D-2 · A horizontal `.cr-scroll-resin` still reserves a gutter it cannot use
 
 `.cr-scroll-resin` carries `scrollbar-gutter: stable` because most Resin scrollers

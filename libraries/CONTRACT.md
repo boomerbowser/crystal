@@ -140,18 +140,28 @@ duration of an interaction.
 `@crystal/core/css` and `@crystal/core/theme` are for everyone: the reset, the
 materials, the scroll contract, and the resolved token values.
 
-**`@crystal/core/controls` is the preview site's own control layer and a library
-must not load it.** It styles bare elements — `:is(button, a.cr-button)` gives
-every button in the document a Resin background, a feathered `::before` and a
-48px minimum height — which is exactly right for a page that writes
-`<button class="cr-control">` and exactly wrong underneath a library that ships
-its own controls. Loading both is two implementations of every control fighting,
-which is §1's drift with a stylesheet instead of a value.
+**`assets/controls.css` is the preview site's own control layer, and it is not
+exported.** `@crystal/core/controls` used to resolve; it no longer does, and the
+preview loads the file by relative path instead. There is nothing here for a
+library to obey, which is the point — the prohibition it replaces was obeyed
+right up until it wasn't.
+
+What made it dangerous: the file styles bare elements. `:is(button, a.cr-button)`
+gives every button in the document a Resin background, a feathered `::before` and
+a 48px minimum height, and bare `input[type=checkbox]`, `[type=radio]`,
+`[type=range]` and `[type=file]` are styled the same way. That is exactly right
+for a page that writes `<button class="cr-control">` and exactly wrong underneath
+a library that ships its own controls. Loading both is two implementations of
+every control fighting, which is §1's drift with a stylesheet instead of a value.
 
 Crystal React loaded it in its Storybook for one release. A 32px chip rendered
 50px tall, and every story was validated against styles a consumer of that
 package would never have had — which is the worse half: the components were
 fine, the evidence was not.
+
+The file sits in `@layer crystal.component`, so unlayered CSS outranks it for any
+property a consumer declares. That was never sufficient. Nobody writes a
+`::before` to cancel a `::before` they did not know was coming.
 
 A library that wants the resolved values in CSS takes `@crystal/core/resolver`
 and publishes them onto its own scope, which is what the provider does.

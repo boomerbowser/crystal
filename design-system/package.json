@@ -52,7 +52,6 @@
     "./tokens": "./tokens/crystal.tokens.json",
     "./css": "./assets/crystal.css",
     "./theme": "./assets/crystal-theme.css",
-    "./controls": "./assets/controls.css",
     "./core": {
       "types": "./assets/core/state.d.ts",
       "default": "./assets/core/state.js"
