@@ -40,6 +40,11 @@
   --cr-scrollbar-thumb-min: 32px;
   --cr-scrollbar-inset: 2px;
   --cr-scroll-fade: 24px;
+  --cr-control-edge: rgba(98, 74, 159, 0.18);
+  --cr-focus-core: #7338EF;
+  --cr-focus-core-width: 2px;
+  --cr-focus-core-offset: 3px;
+  --cr-focus-ring: 0 0 6px 2px rgba(115, 56, 239, 0.46),0 0 16px 6px rgba(115, 56, 239, 0.3),0 0 30px 12px rgba(115, 56, 239, 0.17),0 0 54px 22px rgba(115, 56, 239, 0.08);
   --cr-spacing-2xs: 4px;
   --cr-spacing-xs: 8px;
   --cr-spacing-sm: 12px;
@@ -171,6 +176,11 @@
   --cr-scrollbar-thumb-min: 32px;
   --cr-scrollbar-inset: 2px;
   --cr-scroll-fade: 24px;
+  --cr-control-edge: rgba(98, 74, 159, 0.18);
+  --cr-focus-core: #7338EF;
+  --cr-focus-core-width: 2px;
+  --cr-focus-core-offset: 3px;
+  --cr-focus-ring: 0 0 6px 2px rgba(115, 56, 239, 0.46),0 0 16px 6px rgba(115, 56, 239, 0.3),0 0 30px 12px rgba(115, 56, 239, 0.17),0 0 54px 22px rgba(115, 56, 239, 0.08);
   --cr-spacing-2xs: 4px;
   --cr-spacing-xs: 8px;
   --cr-spacing-sm: 12px;
@@ -302,6 +312,11 @@
   --cr-scrollbar-thumb-min: 32px;
   --cr-scrollbar-inset: 2px;
   --cr-scroll-fade: 24px;
+  --cr-control-edge: rgba(191, 163, 248, 0.18);
+  --cr-focus-core: #c8b1f9;
+  --cr-focus-core-width: 2px;
+  --cr-focus-core-offset: 3px;
+  --cr-focus-ring: 0 0 6px 2px rgba(200, 177, 249, 0.46),0 0 16px 6px rgba(200, 177, 249, 0.3),0 0 30px 12px rgba(200, 177, 249, 0.17),0 0 54px 22px rgba(200, 177, 249, 0.08);
   --cr-spacing-2xs: 4px;
   --cr-spacing-xs: 8px;
   --cr-spacing-sm: 12px;

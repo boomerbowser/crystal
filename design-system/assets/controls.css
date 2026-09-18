@@ -24,7 +24,7 @@
 /* Resin is the interaction plane. Haze is a separate, inset reading fill.
    Context light stays beneath Haze: nested white wells must not erase Resin. */
 @layer crystal.component {
-:root{--cr-control-light:color-mix(in srgb,var(--cr-glow) 12.6%,transparent);--cr-control-color:color-mix(in srgb,var(--cr-decorative) 8.4%,transparent);--cr-control-edge:color-mix(in srgb,var(--cr-outline) 18%,transparent);}
+:root{--cr-control-light:color-mix(in srgb,var(--cr-glow) 12.6%,transparent);--cr-control-color:color-mix(in srgb,var(--cr-decorative) 8.4%,transparent);}
 :root[data-crystal-mode=dark]{--cr-control-light:color-mix(in srgb,var(--cr-glow) 9.8%,transparent);--cr-control-color:color-mix(in srgb,var(--cr-decorative) 7%,transparent);}
 :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status){position:relative;isolation:isolate;background:var(--cr-resin-fill);color:var(--cr-text);border:1px solid var(--cr-rim);box-shadow:inset 0 2px 1px var(--cr-rim),inset 0 -1px 1px var(--cr-rim),0 5px 9px #080b2412,0 16px 30px #080b2420;backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));-webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));filter:none;}
 :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::before{content:'';position:absolute;inset:8px;z-index:-1;pointer-events:none;border-radius:inherit;background:var(--cr-haze-fill);filter:blur(var(--cr-haze-feather));box-shadow:none;}

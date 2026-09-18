@@ -235,7 +235,7 @@ check('every webkit scrollbar rule sits behind the legacy guard', () => {
 check('the focus halo reaches anything focusable, not only native controls', () => {
   const css = require('node:fs').readFileSync(require('node:path').join(__dirname, '../assets/crystal.css'), 'utf8');
   for (const rule of css.match(/[^{}]*:focus-visible[^{}]*\{[^}]*\}/g) ?? []) {
-    if (!/outline:\s*2px solid var\(--cr-primary\)/.test(rule)) continue;
+    if (!/outline:[^;]*var\(--cr-focus-core/.test(rule)) continue;
     assert.match(rule, /\[tabindex\]:focus-visible/,
       'the focus rule does not reach [tabindex]');
     return;

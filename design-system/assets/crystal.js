@@ -86,6 +86,25 @@
       '--cr-scrollbar-thumb-min':data.component.scrollbar.thumbMinLength+'px',
       '--cr-scrollbar-inset':data.component.scrollbar.inset+'px',
       '--cr-scroll-fade':data.component.scrollArea.fadeDepth+'px',
+      /* Focus, as two properties rather than as a recipe each platform retypes.
+         Crystal's focus is a crisp 2px primary core at 3px offset inside a
+         four-layer feathered halo, and it was written out longhand in
+         `crystal.css` — which is fine for a stylesheet that can use `:focus-visible`
+         on a native element, and no use at all to a library styling a shell that
+         wraps one. Crystal React named these two properties and nothing defined
+         them, so every field in it painted no focus ring whatever. Published here
+         so there is one recipe, in one place, and CONTRACT §1 is kept. */
+      /* The inner edge a control's well is drawn with. It lived only in
+         `controls.css`, which is the preview's own layer and the one a library
+         must not load — so Crystal React read it on a Card and a Slider and got
+         nothing, and those two inset shadows have never painted. A value two
+         components depend on belongs to the system. */
+      '--cr-control-edge':rgba(p.outline,0.18),
+      '--cr-focus-core':p.primary,
+      '--cr-focus-core-width':'2px',
+      '--cr-focus-core-offset':'3px',
+      '--cr-focus-ring':[[6,2,46],[16,6,30],[30,12,17],[54,22,8]]
+        .map(([blur,spread,pct])=>`0 0 ${blur}px ${spread}px ${rgba(p.primary,pct/100)}`).join(','),
       /* The spacing scale and the shell's geometry. Neither varies with palette,
          mode or density; they are published as custom properties so a product
          writing plain CSS reaches the same values the libraries compile against.
