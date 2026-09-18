@@ -75,12 +75,12 @@ sparse. Eleven symptoms; they resolve into four causes.
 | R15c | Elements not covered by their backgrounds | `motion-suite.css` dropped | done — `959dc7d` |
 | R15d | Menus will not open | `motion-suite.js` dropped | done — `959dc7d` |
 | R15e | Menus that open are not Frost | `motion-suite.css` dropped | done — `959dc7d` |
-| R15f | Focus ring too thick by half | Halo spread in `component.focus.*` | open — needs a number agreed |
-| R15g | Slider animation choppy | `slider-step` is a hollow recipe | open |
-| R15h | Checkboxes have no check/uncheck animation | `check` exists but is wired to nothing | open |
-| R15i | Few or no transition animations | 52 of 54 recipes are wired to nothing | open |
-| R15j | No ambient animations for capable platforms | No ambient category exists | open |
-| R15k | Animations far too sparse | 11 of 54 recipes animate nothing | open |
+| R15f | Focus ring too thick by half | Halo spread in `--cr-focus-ring` | done — spread halved, blur and the 2px core unchanged |
+| R15g | Slider animation choppy | `slider-step` is a hollow recipe | done — real keyframes, and a recipe no longer restarts itself mid-flight |
+| R15h | Checkboxes have no check/uncheck animation | `check` exists but is wired to nothing | done — wired to `checked`, and `check-off` added |
+| R15i | Few or no transition animations | 52 of 54 recipes are wired to nothing | done — bound to state; `npm run verify:interactions` gates it |
+| R15j | No ambient animations for capable platforms | No ambient category exists | done — Ambient is a tenth category, opt-in, degrading to static |
+| R15k | Animations far too sparse | 11 of 54 recipes animate nothing | done — all eleven authored; a movement contract now fails the build |
 
 ### The two findings behind R15g–R15k
 

@@ -152,7 +152,9 @@ Six layers in total, and each one is doing a job:
 | --- | --- |
 | `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | The crisp core. This is what proves focus at a glance and what survives forced colours. |
 | `inset 0 2px 1px var(--cr-rim)` | Keeps the control's own top edge readable inside the ring. |
-| 4 × feathered primary glows at 6/2, 16/6, 30/12 and 54/22 | The halo. Increasing blur at decreasing opacity, so the ring dissolves outward rather than ending on a hard edge. |
+| 4 × feathered primary glows at 6/1, 16/3, 30/6 and 54/11 | The halo. Increasing blur at decreasing opacity, so the ring dissolves outward rather than ending on a hard edge. |
+
+Each pair is blur radius / spread. The spread values were halved in September 2026; the blur radii were deliberately left alone, because halving both produces a tighter ring with a harder edge, which is a different thing from a thinner one.
 
 The core is never feathered. The offset is never zero — a ring drawn *on* the border is
 hard to distinguish from a hover state, and on a pill it reads as a thicker stroke rather

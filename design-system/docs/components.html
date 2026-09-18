@@ -260,11 +260,12 @@ Six layers in total, and each one is doing a job:</p>
 <td>Keeps the control's own top edge readable inside the ring.</td>
 </tr>
 <tr>
-<td>4 × feathered primary glows at 6/2, 16/6, 30/12 and 54/22</td>
+<td>4 × feathered primary glows at 6/1, 16/3, 30/6 and 54/11</td>
 <td>The halo. Increasing blur at decreasing opacity, so the ring dissolves outward rather than ending on a hard edge.</td>
 </tr>
 </tbody>
 </table></div>
+<p>Each pair is blur radius / spread. The spread values were halved in September 2026; the blur radii were deliberately left alone, because halving both produces a tighter ring with a harder edge, which is a different thing from a thinner one.</p>
 <p>The core is never feathered. The offset is never zero — a ring drawn <em>on</em> the border is
 hard to distinguish from a hover state, and on a pill it reads as a thicker stroke rather
 than as focus.</p>

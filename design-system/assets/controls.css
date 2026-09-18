@@ -119,7 +119,11 @@ span.cr-status>span{display:inline-grid;place-items:center;min-width:24px;height
 
 /* An immediate, contrast-bearing core sits inside a lightly feathered halo.
    Focus changes the elevation shadow's hue without blurring any foreground. */
-:root{--cr-focus-core:var(--cr-primary);--cr-focus-feather-1:color-mix(in srgb,var(--cr-primary) 46%,transparent);--cr-focus-feather-2:color-mix(in srgb,var(--cr-primary) 30%,transparent);--cr-focus-feather-3:color-mix(in srgb,var(--cr-primary) 17%,transparent);--cr-focus-feather-4:color-mix(in srgb,var(--cr-primary) 8%,transparent);--cr-focus-shadow:color-mix(in srgb,var(--cr-decorative) 27%,transparent);--cr-focus-ring:0 0 6px 2px var(--cr-focus-feather-1),0 0 16px 6px var(--cr-focus-feather-2),0 0 30px 12px var(--cr-focus-feather-3),0 0 54px 22px var(--cr-focus-feather-4),0 8px 18px var(--cr-focus-feather-2),0 22px 40px var(--cr-focus-shadow);}
+:root{--cr-focus-core:var(--cr-primary);--cr-focus-feather-1:color-mix(in srgb,var(--cr-primary) 46%,transparent);--cr-focus-feather-2:color-mix(in srgb,var(--cr-primary) 30%,transparent);--cr-focus-feather-3:color-mix(in srgb,var(--cr-primary) 17%,transparent);--cr-focus-feather-4:color-mix(in srgb,var(--cr-primary) 8%,transparent);--cr-focus-shadow:color-mix(in srgb,var(--cr-decorative) 27%,transparent);/* Halo spread halved (2/6/12/22 -> 1/3/6/11) at Meridian's request. The blur radii
+   are unchanged, so the ring gets thinner without the falloff flattening — halving
+   both would have produced a tighter but harder edge. The 2px core at 3px offset is
+   untouched: it is what proves focus at a glance and what survives forced colours. */
+--cr-focus-ring:0 0 6px 1px var(--cr-focus-feather-1),0 0 16px 3px var(--cr-focus-feather-2),0 0 30px 6px var(--cr-focus-feather-3),0 0 54px 11px var(--cr-focus-feather-4),0 8px 18px var(--cr-focus-feather-2),0 22px 40px var(--cr-focus-shadow);}
 /* Dark mode needs more light in the feather to read against a deep canvas. */
 :root[data-crystal-mode=dark]{--cr-focus-feather-1:color-mix(in srgb,var(--cr-primary) 56%,transparent);--cr-focus-feather-2:color-mix(in srgb,var(--cr-primary) 38%,transparent);--cr-focus-feather-3:color-mix(in srgb,var(--cr-primary) 22%,transparent);--cr-focus-feather-4:color-mix(in srgb,var(--cr-primary) 11%,transparent);}
 :is(button,a,input,select,textarea,summary,[tabindex]):focus-visible,
