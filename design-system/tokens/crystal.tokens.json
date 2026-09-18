@@ -959,10 +959,6 @@
         "$type": "dimension",
         "$value": "1.95px"
       },
-      "traceWidth": {
-        "$type": "dimension",
-        "$value": "1.5px"
-      },
       "mirageColor": {
         "$type": "color",
         "$value": "#111525"
@@ -1034,14 +1030,6 @@
       "maxDuration": {
         "$type": "duration",
         "$value": "5000ms"
-      },
-      "trace": {
-        "$type": "duration",
-        "$value": "5200ms"
-      },
-      "traceStone": {
-        "$type": "duration",
-        "$value": "7000ms"
       }
     },
     "distance": {
@@ -1166,13 +1154,6 @@
           "$type": "dimension",
           "$value": "{primitive.material.contentFeather}",
           "$description": "Haze feathered perimeter"
-        }
-      },
-      "trace": {
-        "width": {
-          "$type": "dimension",
-          "$value": "{primitive.material.traceWidth}",
-          "$description": "Width of the travelling edge light on Haze and Stone"
         }
       },
       "mirage": {
@@ -1413,14 +1394,6 @@
         "departure": {
           "$type": "duration",
           "$value": "{primitive.duration.departure}"
-        },
-        "trace": {
-          "$type": "duration",
-          "$value": "{primitive.duration.trace}"
-        },
-        "traceStone": {
-          "$type": "duration",
-          "$value": "{primitive.duration.traceStone}"
         },
         "ceiling": {
           "$type": "duration",

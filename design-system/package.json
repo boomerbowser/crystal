@@ -12,7 +12,6 @@
     "verify:visual": "node tools/verify-frames.mjs",
     "verify:floor": "node tools/verify-frames.mjs --no-webgl",
     "audit:materials": "node tools/audit-materials.mjs",
-    "audit:ambient": "node tools/audit-ambient.mjs",
     "verify:interactions": "node tools/verify-interactions.mjs",
     "validate:docs": "node tools/validate-docs.cjs"
   },

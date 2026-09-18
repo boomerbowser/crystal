@@ -2,7 +2,7 @@
 
 [Open the live component studies](../motion.html#component-motion) · [Search all recipes](../motion.html#recipe-library) · [Run browser contracts](../tests/motion-contracts.html)
 
-Crystal ships 60 executable component recipes in ten families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
+Crystal ships 55 executable component recipes in nine families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
 
 ## Engine responsibilities
 
@@ -124,11 +124,6 @@ Base times below are at 1×; the preview resolves the saved speed at playback. E
 | `haze-tide` | haze / feather | GSAP | 1800ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. |
 | `stone-contour` | stone / feather | GSAP | 1300ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. |
 | `check-off` | plastic / iris | Motion | 300ms | Checkbox and radio indicators returning to unchecked. Paired with `check`; the iris closes toward the same point it opened from. |
-| `resin-breathe` | resin / refraction | GSAP | 2000ms | The specular band on a Resin surface at rest. Applies to the rim layer only; the content above it never moves. |
-| `frost-drift` | frost / feather | GSAP | 2000ms | Slow drift of the Frost grain and tint on a panel that persists while content moves behind it. |
-| `haze-settle` | haze / feather | GSAP | 5200ms | Light travelling around the perimeter of a Haze content fill. Haze IS its feathered edge, so its rest motion is light moving ALONG that edge rather than the edge advancing and retreating — that gesture belongs to Resin, which is a lens breathing. On the web this is a conic gradient masked to the rim; a platform rotates its own edge light. |
-| `stone-settle` | stone / feather | GSAP | 7000ms | Light travelling around a Stone label backing, slower and dimmer than Haze because a label backing is smaller and sits closer to text. |
-| `mirage-current` | mirage / refraction | GSAP | 2000ms | Slow current in the modal scrim while a dialog is open. Stops when the dialog closes. |
 <!-- /generated:component-recipes -->
 
 ## Runtime API

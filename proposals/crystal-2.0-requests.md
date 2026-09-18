@@ -338,3 +338,57 @@ living outside every element's filter chain. That collapses N composited layers 
 one, removes the six-context cap entirely, and cannot inherit whatever the preview
 is doing. It is the "copy that can be adjusted" Meridian asked for, and if it
 proves out it is a candidate to come back to the web preview.
+
+## R22 — ambient withdrawn from 2.0 (2026-09-18)
+
+Meridian, in three steps over roughly an hour:
+
+1. The edge trace "should not be a colored bar, but an extension of the material
+   itself appearing to gently warp around it's edges (like a haze)"; remove ambient
+   from Stone and focus on Haze.
+2. "The backing rectangle problem has gotten worse, not better. Resin elements and
+   components should not have this unsettling ghost box behind them."
+3. "Remove ambient animations from the design system entirely. We'll introduce them
+   in a later version of Crystal."
+
+All three are done, and the third supersedes the first two.
+
+**The ghost box was two faults, both mine.** The shader masked itself to a rounded
+rectangle of 0.17 × the short side, so on a pill it painted a rectangle inside a
+stadium — a 36px corner rendered as 12px, on every action control in Crystal. It
+then got visibly worse because the travelling edge drew its ring at
+`inset: calc(-1 * width)` — *outside* the element, which is a halo box around it —
+and widening the trace from 1.5px to 7px made that unmissable. A ring drawn outside
+an element is a ghost rectangle at any width; the negative inset was wrong from the
+start and only looked acceptable while it was 1.5px.
+
+The `u_radius` fix stays: reading the surface's real corner radius is correct for
+interaction-driven optical layers too.
+
+**Withdrawn:** the optical rest tier, `CrystalMotion.ambient`/`stopAmbient`/
+`ambientAll` and the rate table, the Haze trace and its tokens, the `Ambient` recipe
+category (55 recipes in nine categories now), `audit-ambient.mjs`, and the two
+reference frames that photographed a rest state.
+
+**Kept:** Plastic's glow. R17 asked for two things in one sentence — that Plastic
+carry a glow of its primary lifted by the scheme's tint, and that materials move at
+rest. The first is a material property; only the drifting was ambient. The first
+pass removed both, and the frame diff is what caught it.
+
+**Two findings worth keeping for whenever ambient returns**, recorded in
+`CONTRACT.md` §8 rather than only here:
+
+- A rest state fails in two directions. Pinned at full press deformation it
+  embossed every control and measured 81; dialled back to feel safe it measured 2
+  and was invisible. A future tier needs a measured floor as well as a ceiling.
+- Its cost was structural, not tuning. Ambient surfaces halved the preview's frame
+  rate, and that survived canvas resolution, blend mode, nested backdrop-filters,
+  the Plastic glow and shader complexity — while the same shader on *more* surfaces
+  in a standalone page cost nothing. That should be understood before the tier
+  returns, not re-discovered.
+
+Fourteen of eighteen reference frames are byte-identical after removing an entire
+motion tier, which is the useful result: nothing about how Crystal looks at rest
+depended on it.
+
+Crystal React inherits none of this. Its plan no longer carries an ambient binding.

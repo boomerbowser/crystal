@@ -24,7 +24,7 @@ tier. `tools/validate-tokens.cjs` checks the direction of every reference.
 
 Raw values. Never referenced by a component directly — a primitive is the thing a semantic token points at, so that the meaning can be re-pointed without editing every use site.
 
-216 tokens.
+213 tokens.
 
 ### Primitive · palette
 
@@ -221,7 +221,6 @@ Raw values. Never referenced by a component directly — a primitive is the thin
 | `primitive.material.contentOpacity` | number | `0.8` | — |
 | `primitive.material.contentFeather` | dimension | `1.95px` | — |
 | `primitive.material.stoneFeather` | dimension | `1.95px` | — |
-| `primitive.material.traceWidth` | dimension | `1.5px` | — |
 | `primitive.material.mirageColor` | color | `#111525` | — |
 | `primitive.material.mirageOpacity` | number | `0.38` | — |
 | `primitive.material.mirageBlur` | dimension | `28px` | — |
@@ -244,8 +243,6 @@ Raw values. Never referenced by a component directly — a primitive is the thin
 | `primitive.duration.flow` | duration | `1200ms` | — |
 | `primitive.duration.departure` | duration | `650ms` | — |
 | `primitive.duration.maxDuration` | duration | `5000ms` | — |
-| `primitive.duration.trace` | duration | `5200ms` | — |
-| `primitive.duration.traceStone` | duration | `7000ms` | — |
 
 ### Primitive · distance
 
@@ -271,7 +268,7 @@ Raw values. Never referenced by a component directly — a primitive is the thin
 
 What a value *means*: the surface a card sits on, the duration a control settles over. Components consume this tier and nothing below it.
 
-88 tokens.
+85 tokens.
 
 ### Semantic · material
 
@@ -288,7 +285,6 @@ What a value *means*: the surface a card sits on, the duration a control settles
 | `semantic.material.stone.feather` | dimension | `{primitive.material.stoneFeather}` | Stone feathered perimeter |
 | `semantic.material.haze.fill` | number | `{primitive.material.contentOpacity}` | Haze content fill opacity |
 | `semantic.material.haze.feather` | dimension | `{primitive.material.contentFeather}` | Haze feathered perimeter |
-| `semantic.material.trace.width` | dimension | `{primitive.material.traceWidth}` | Width of the travelling edge light on Haze and Stone |
 | `semantic.material.mirage.colour` | color | `{primitive.material.mirageColor}` | Mirage scrim colour |
 | `semantic.material.mirage.opacity` | number | `{primitive.material.mirageOpacity}` | Mirage scrim opacity |
 | `semantic.material.mirage.diffusion` | dimension | `{primitive.material.mirageBlur}` | Mirage chromatic diffusion |
@@ -347,8 +343,6 @@ What a value *means*: the surface a card sits on, the duration a control settles
 | `semantic.motion.duration.liquid` | duration | `{primitive.duration.liquid}` | — |
 | `semantic.motion.duration.flow` | duration | `{primitive.duration.flow}` | — |
 | `semantic.motion.duration.departure` | duration | `{primitive.duration.departure}` | — |
-| `semantic.motion.duration.trace` | duration | `{primitive.duration.trace}` | — |
-| `semantic.motion.duration.traceStone` | duration | `{primitive.duration.traceStone}` | — |
 | `semantic.motion.duration.ceiling` | duration | `{primitive.duration.maxDuration}` | Hard ceiling for any single animation, including replay-rate adjustment |
 | `semantic.motion.easing.enter` | cubicBezier | `{primitive.easing.enter}` | — |
 | `semantic.motion.easing.settle` | cubicBezier | `{primitive.easing.settle}` | — |

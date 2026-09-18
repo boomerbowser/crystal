@@ -28,7 +28,7 @@
 in vec2 a_position;
 void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
 
-  const state = { manifest: null, common: null, sources: new Map(), active: new Map(), energy: 0.6 };
+  const state = { manifest: null, common: null, sources: new Map(), active: new Map() };
 
   const prefers = (query) => {
     try { return matchMedia(query).matches; } catch { return false; }
@@ -236,36 +236,13 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
       /* Ambient surfaces keep their own clock. Interaction advances it faster rather than
          brightening the surface, which is what "faster on press" physically means: the
          light moves quicker, it does not become more light. */
-      clock: 0, last: started, ambient: !!options.ambient };
+      clock: 0, last: started };
     state.active.set(element, record);
 
     const draw = (now) => {
       if (!permitted()) { detach(element); return; }
-      if (record.ambient && root.document.documentElement.dataset.ambient === 'off') { detach(element); return; }
-      const rate = record.ambient ? state.energy : 1;
-      record.clock += ((now - record.last) / 1000) * rate;
       record.last = now;
-      /* A surface that moves at rest cannot be photographed by a comparison gate, and
-         the previous answer — capture every frame with ambient switched off — meant the
-         rest state was never in a reference frame at all. That is how a Resin lens
-         pinned at full press deformation reached the preview unseen. Pinning the clock
-         instead freezes the effect at a chosen instant, so ambient appearance becomes
-         as reviewable as anything else. It is a capture hook, not a product feature:
-         reading it costs one attribute lookup per frame and it is documented as such. */
-      const frozen = Number(root.document.documentElement.dataset.ambientClock);
-      const seconds = Number.isFinite(frozen) && record.ambient
-        ? frozen
-        : (record.ambient ? record.clock : (now - started) / 1000);
-      const progress = typeof options.progress === 'function'
-        ? options.progress(seconds) : (options.progress ?? 1);
-      /* The contact point is where the light gathers. During a motion it is fixed —
-         the place the movement came from. At rest it is the one thing that moves:
-         the shader reads only its direction from centre, so walking it around a
-         circle sweeps the specular band along the rim without changing anything
-         else. Light travelling over a still surface is the whole rest effect. */
-      const contact = typeof options.contact === 'function'
-        ? options.contact(seconds) : options.contact;
-
+      const seconds = (now - started) / 1000;
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
@@ -290,119 +267,11 @@ void main(){ gl_Position = vec4(a_position, 0.0, 1.0); }`;
 
   document.addEventListener('visibilitychange', () => { if (document.hidden) detachAll(); });
 
-  /* Ambient energy. Rest, hover, press — the surface is always moving, and interaction
-     adds to it rather than stopping it. Text entry is the one exception, because a field
-     being typed into is where motion genuinely competes with the task.
-
-     The rate itself belongs to assets/motion.js, which owns the one table and broadcasts
-     it. This tier used to keep a second copy of the same numbers, and the copies had
-     already drifted apart: this one dropped to zero on text focus and had no blur
-     handler at all, so leaving a field by any route left every shader frozen until the
-     next click. Listening costs nothing and cannot drift. Loaded without that file, the
-     shaders simply stay at the resting rate. */
-  root.addEventListener('crystal:ambient-rate', (event) => {
-    const rate = Number(event.detail?.rate);
-    if (Number.isFinite(rate)) state.energy = rate;
-  });
-
-  /* A page has many material surfaces and a browser has few WebGL contexts — Chromium
-     starts discarding them around sixteen. Ambient shaders are therefore capped well
-     below that and given only to surfaces actually on screen; everything else keeps the
-     CSS floor, which is complete on its own. Haze, Stone and Plastic never take a
-     context at all: their motion is CSS, which is cheap enough to be everywhere. */
-  const MAX_AMBIENT = 6;
-
-  /* What "at rest" means, per material. This is the part an earlier draft got wrong:
-     it handed both shaders `progress: 1`, which is not a rest state but the peak of a
-     press. For Resin that pinned the lens at full deformation forever — a hard-edged
-     band a fifth of the panel deep, with its own dark inner shade, permanently
-     embossed around every Resin surface and showing through anything laid over it.
-     `progress` is a displacement, so at rest it must be small, and it must move.
-
-     Resin refracts: a shallow lens that breathes slightly while the specular band
-     travels around the rim. Frost diffuses: no lens at all, so its progress only
-     scales the grain's displacement and its light does not travel. The two materials
-     are deliberately given different rest behaviour, because the difference between
-     them is the point of the hierarchy.
-
-     Calibrated by measurement, not by eye, against a still capture of the same
-     surface (tools/audit-ambient.mjs keeps these numbers honest):
-
-       worst-channel delta        rim mean   rim max   interior mean
-       as shipped in 021e0a0         48.73        81            9.35
-       Resin at rest, now             1.90        34            0.02
-       Frost at rest, now             1.51        26            0.80
-
-     The shipped figures are the two faults compounded: a pinned progress, and a
-     panel geometry measured in 0..1 uv, which on a wide control stretched the
-     lens band until it reached the middle of the surface. With the geometry
-     corrected in _common.glsl the interior stays clean even at progress 1, so it
-     is the rim mean that now catches a lens pinned open — all three bounds are
-     load-bearing and each of them has been shown to fail on demand.
-
-     `intensity` is high because it scales alpha alone: the lens stays shallow and
-     narrow, and only the light travelling over it gets brighter. */
-  const REST = {
-    'resin-refraction': {
-      progress: (t) => 0.15 + 0.05 * Math.sin(t * 0.55),
-      contact: (t) => [0.5 + 0.4 * Math.cos(t * 0.22), 0.5 + 0.4 * Math.sin(t * 0.22)],
-      intensity: 16,
-    },
-    /* Frost has no lens, so its progress scales grain displacement rather than a
-       deformation, and 1 is not the same mistake here that it was for Resin. 0.85
-       is still measurably the better rest value: identical travel (7) and identical
-       rim max (26), with rim mean 1.51 against 2.00 and interior 0.80 against 1.13.
-       Quieter at rest for nothing given up. */
-    'frost-displacement': { progress: 0.85, intensity: 2.2 },
-  };
-  const AMBIENT_FOR = [['.cr-resin,.cr-glass', 'resin-refraction'], ['.cr-frost,.cr-acrylic', 'frost-displacement']];
-  const ambientHandles = new Map();
-
-  function ambient(element, shaderId) {
-    if (ambientHandles.has(element) || ambientHandles.size >= MAX_AMBIENT) return null;
-    const rest = REST[shaderId];
-    if (!rest) return null;
-    const pending = attach(element, shaderId, { ...rest, ambient: true });
-    ambientHandles.set(element, pending);
-    return pending;
-  }
-  function stopAmbient(element) {
-    const pending = ambientHandles.get(element);
-    ambientHandles.delete(element);
-    Promise.resolve(pending).then((handle) => handle && handle.detach()).catch(() => {});
-  }
-
-  /* Give every Resin and Frost surface on the page its rest state, as they come into
-     view. This is what the preview calls; a product opts surfaces in itself. */
-  function ambientAll(scope = document) {
-    if (!supported || !permitted()) return () => {};
-    const observer = new IntersectionObserver((entries) => {
-      for (const record of entries) {
-        const shaderId = AMBIENT_FOR.find(([selector]) => record.target.matches(selector))?.[1];
-        if (!shaderId) continue;
-        if (record.isIntersecting) ambient(record.target, shaderId);
-        else stopAmbient(record.target);
-      }
-    }, { rootMargin: '64px' });
-    for (const [selector] of AMBIENT_FOR)
-      for (const element of scope.querySelectorAll(selector)) observer.observe(element);
-    return () => { observer.disconnect(); for (const el of [...ambientHandles.keys()]) stopAmbient(el); };
-  }
+  /* The ambient tier is deferred to a later version of Crystal. What remains is
+     the optical layer for a motion a person starts, which is what `attach` is. */
 
   root.CrystalShaders = Object.freeze({
-    attach, detach, detachAll, supported, ambient, stopAmbient, ambientAll,
-    permitted, manifestUrl: MANIFEST_URL, maxAmbient: MAX_AMBIENT,
+    attach, detach, detachAll, supported, permitted, manifestUrl: MANIFEST_URL,
   });
 
-  /* Ambient is the rest state of Resin and Frost, so it starts on its own. It is not a
-     decision a page has to remember to make — a material that only comes alive when
-     asked is not a material with a rest state. `data-ambient="off"` on the document
-     turns it off everywhere, which is what reference captures set, and a product can
-     stop any single surface with `stopAmbient`. */
-  function startAmbient() {
-    if (document.documentElement.dataset.ambient === 'off') return;
-    ambientAll();
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startAmbient);
-  else startAmbient();
 })(window);

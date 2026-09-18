@@ -109,46 +109,28 @@ Non-negotiable properties:
   and forced colours each disable the layer outright.
 
 
-## 8. Ambient motion is a capability tier, not a baseline.
+## 8. Ambient motion is deferred.
 
-Ambient motion is what a surface does at rest — the specular band drifting along a Resin
-rim, a Haze fill breathing around its 80% value. The `Ambient` category in
-`design-system/tokens/motion-recipes.json` carries the recipes; each declares `loop: true`,
-and a recipe that loops is the only kind a platform may run continuously.
+Crystal 2.0 ships no ambient motion, and a library must not invent any. Materials are
+still at rest when nothing is happening to them; a surface that moves on its own is not
+Crystal until a later version says how.
 
-A platform is not required to implement this tier at all. A platform that does must honour
-all four properties:
+It was specified, built and measured, and then withdrawn at Meridian's direction. The
+work is not lost — `proposals/crystal-2.0-requests.md` R17 through R21 carry the
+specification, the measurements and the reasons — but nothing in this release depends on
+it, and a platform implementing Crystal 2.0 has nothing to implement here.
 
-- **On by default for Resin and Frost; stoppable everywhere.** Ambient is a material's
-  rest state, not a decision a page has to remember to make — a material that only comes
-  alive when asked does not have a rest state. Resin and Frost carry theirs on the optical
-  layer, Haze and Stone on the animation tier, and Plastic in CSS; all four start
-  themselves as a surface comes into view. A host can stop any single surface, and one
-  document-level switch disables every ambient effect at once. On the web those are
-  `CrystalMotion.stopAmbient(element)` / `CrystalShaders.stopAmbient(element)` and
-  `data-ambient="off"`; a platform provides the equivalents under its own names.
-- **Bounded by what the platform can hold.** A page has many material surfaces and a
-  browser has few live GPU contexts — Chromium starts discarding them around sixteen. The
-  web implementation caps ambient shaders at six and gives them only to surfaces on
-  screen. A platform sets its own ceiling and says what it is; an ambient tier that
-  exhausts the device is worse than none.
-- **Rim and fill only, never a surface being read.** Motion in the middle of a surface
-  competes with the text on it; motion at its boundary does not. This is the same argument
-  that makes Resin lens at its edge rather than ripple through its centre. Text never
-  moves, and an ambient recipe that would move text is wrong however subtle it is.
-- **The first thing reduced motion removes.** Every ambient recipe declares
-  `reduced: "None."` — not a shorter version, not a gentler one. WCAG 2.2.2 requires that
-  anything moving for more than five seconds can be paused or stopped, and an ambient loop
-  never stops on its own. A surface with ambient removed must be identical to one that
-  never had it.
-- **Yields to the user.** Interaction pauses every ambient loop; they resume once the page
-  is quiet. A loop that keeps running under the pointer is competing with the task.
+Two findings from that work are worth carrying forward, because they will apply again:
 
-This does not relax §7. A shader still paints only while a motion is in flight — an
-ambient loop *is* a motion, so the optical layer may drive it — and because ambient is off
-until a surface opts in, a reference frame captured with ambient disabled is unchanged.
-Gate G6 continues to hold for exactly that reason, not by exception.
+- **A rest state has two failure modes, not one.** It can be too strong — a Resin lens
+  pinned at full press deformation embossed every control — and it can be too weak, which
+  measured 2 on a scale where the emboss measured 81 and was invisible to a person. Any
+  future ambient tier needs a floor as well as a ceiling.
+- **Cost is not where it looks.** On the reference preview, ambient surfaces halved the
+  frame rate, and that survived every variable tested: canvas resolution, blend mode,
+  nested backdrop-filters and shader complexity. The same shader on more surfaces in a
+  standalone page cost nothing. Whatever the cause is, it is structural rather than a
+  matter of tuning, and it should be understood before the tier returns.
 
-Where a platform cannot honour the tier, ambient degrades to a static surface with no other
-change. As with the shader layer, an honest absence preserves parity better than a
-divergent approximation.
+Motion that a person starts is unaffected. So is §7: the optical layer still runs for the
+duration of an interaction.

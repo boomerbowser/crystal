@@ -47,7 +47,6 @@ const MATERIAL_ROLES = {
   contentOpacity: ['haze.fill', 'number', 'Haze content fill opacity'],
   contentFeather: ['haze.feather', 'dimension', 'Haze feathered perimeter'],
   stoneFeather: ['stone.feather', 'dimension', 'Stone feathered perimeter'],
-  traceWidth: ['trace.width', 'dimension', 'Width of the travelling edge light on Haze and Stone'],
   mirageColor: ['mirage.colour', 'color', 'Mirage scrim colour'],
   mirageOpacity: ['mirage.opacity', 'number', 'Mirage scrim opacity'],
   mirageBlur: ['mirage.diffusion', 'dimension', 'Mirage chromatic diffusion'],
@@ -121,7 +120,7 @@ function migrate() {
   }
 
   const mo = flat.motion;
-  for (const key of ['press', 'state', 'spatial', 'exit', 'material', 'liquid', 'flow', 'departure', 'maxDuration', 'trace', 'traceStone']) {
+  for (const key of ['press', 'state', 'spatial', 'exit', 'material', 'liquid', 'flow', 'departure', 'maxDuration']) {
     set(out.primitive, `duration.${key}`, leaf('duration', dur(mo[key])));
   }
   for (const [key, value] of Object.entries(mo.distance)) {
@@ -155,7 +154,7 @@ function migrate() {
   }
 
   /* semantic: motion roles */
-  for (const key of ['press', 'state', 'spatial', 'exit', 'material', 'liquid', 'flow', 'departure', 'trace', 'traceStone']) {
+  for (const key of ['press', 'state', 'spatial', 'exit', 'material', 'liquid', 'flow', 'departure']) {
     set(out.semantic, `motion.duration.${key}`, leaf('duration', `{primitive.duration.${key}}`));
   }
   set(out.semantic, 'motion.duration.ceiling', leaf('duration', '{primitive.duration.maxDuration}',
@@ -310,7 +309,7 @@ function buildFlat(tokens) {
   for (const [key, node] of Object.entries(p.distance)) {
     if (key !== 'maxTravel' && !key.startsWith('$')) flat.motion.distance[key] = unpx(node.$value);
   }
-  for (const key of ['material', 'liquid', 'flow', 'departure', 'maxDuration', 'trace', 'traceStone']) {
+  for (const key of ['material', 'liquid', 'flow', 'departure', 'maxDuration']) {
     flat.motion[key] = unms(p.duration[key].$value);
   }
   flat.motion.maxTravel = unpx(p.distance.maxTravel.$value);

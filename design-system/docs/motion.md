@@ -186,63 +186,16 @@ glyphs are pixel-identical with the shader on and off.
 
 ## Ambient motion
 
-Ambient motion is what a surface does at rest — the specular band drifting along a Resin
-rim, a Haze fill breathing around its 80% value. It is the tenth category and the newest,
-and it is governed by three rules that are not negotiable.
+**Deferred to a later version of Crystal.** Nothing in 2.0 moves at rest, and a surface
+that animates on its own is not Crystal until a later version specifies how.
 
-**It is a rest state, not a decision.** Every ambient material starts its own motion as it
-comes into view. Resin and Frost do it on the optical layer, through `CrystalShaders`; Haze
-and Stone do it on the Web Animations tier, through `CrystalMotion.ambientAll()`, because
-their rest state is their feathered edge travelling rather than light moving over them.
-Plastic alone is pure CSS, a keyframed glow on the foundation itself. A material that only comes alive when asked
-does not have a rest state. What *is* a decision is stopping it: any single surface can be
-stopped, and `data-ambient="off"` on the document disables every ambient effect at once.
+It was built and withdrawn rather than never attempted, and the reasoning is in the
+request log rather than lost. Two findings will apply whenever it returns: a rest state
+can fail by being too strong *or* too weak, so it needs a measured floor as well as a
+ceiling; and its cost on the reference preview did not follow resolution, blend mode,
+nesting or shader complexity, which means it was structural rather than a tuning problem.
 
-Most reference captures set that switch, because a moving surface cannot be photographed
-deterministically. Doing it on *every* frame turned out to be a hole rather than a
-convenience: it meant no reference frame had ever contained an ambient surface, and a
-Resin rest state pinned at full press deformation shipped with every frame identical. A
-frame may instead pin `data-ambient-clock` to a number of seconds, which freezes the
-optical layer at that instant and makes its appearance as reviewable as anything else.
-That attribute is a capture hook and nothing else; products have no reason to set it.
-
-**It is still never load-bearing.** Where a platform cannot honour it, ambient degrades to
-a static surface with no other change, exactly as the shader layer does. Gate G8 proves it:
-with WebGL2 unavailable *and* ambient disabled, every page renders precisely its committed
-baseline.
-
-**It is bounded by what the device can hold.** A page has many material surfaces and a
-browser has few live GPU contexts. Ambient shaders are capped at six and given only to
-surfaces on screen; everything else keeps the CSS floor, which is complete on its own.
-
-**It runs on the rim and the fill, never on a surface the user is reading.** This is the
-edge-lensing argument again. Motion in the middle of a surface competes with the text on
-it; motion at the boundary does not. Text never moves, and an ambient recipe that would
-move text is wrong regardless of how subtle it is.
-
-**It is the first thing `prefers-reduced-motion` removes.** Every ambient recipe declares
-`reduced: "None."` — not a shortened version, not a gentler version. WCAG 2.2.2 requires
-that anything moving for more than five seconds can be paused or stopped, and an ambient
-loop by definition never stops on its own. A surface with ambient motion removed must be
-identical to one that never had it.
-
-On the web the tier is `CrystalMotion.ambient(element, recipe)` /
-`CrystalMotion.stopAmbient(element)` for the CSS recipes and `CrystalShaders.ambientAll()` /
-`CrystalShaders.stopAmbient(element)` for the shader ones. Reduced motion refuses outright
-and marks the surface static, and a recipe that does not declare `loop` is refused.
-
-**Interaction adds energy; it does not stop the surface.** Rest is 0.6, hover 1, press 2.4,
-decaying back after 900ms — and for a shader that rate advances its clock rather than
-brightening it, because faster light means the light moves quicker, not that there is more
-of it. A material that goes still the moment it is touched reads as broken rather than as
-calm.
-
-The single exception is text entry. A field being typed into is the one place where motion
-genuinely competes with the task, so ambient pauses on focus there and nowhere else.
-
-The high tier belongs in the shader layer, where `u_time` is already a declared uniform.
-The CSS keyframes below are the floor, not the ceiling. The platform obligations are in
-`libraries/CONTRACT.md` §8.
+Motion a person starts is unaffected, and so is the optical layer that runs during it.
 
 ## What triggers a recipe
 
@@ -277,7 +230,7 @@ including that reduced motion still applies the state instantly.
 
 <!-- generated:recipes -->
 
-All 60 recipes in 10 categories, generated from `tokens/motion-recipes.json`. **Damping ratio** and
+All 55 recipes in 9 categories, generated from `tokens/motion-recipes.json`. **Damping ratio** and
 **overshoot** are derived from each recipe's spring by `assets/core/spring.js`, not
 authored — so a spring that was retuned cannot leave a stale number behind in this table.
 
@@ -384,16 +337,6 @@ correct is a material question, not a taste question — see the signature polic
 | `plastic-settle` — Plastic settles into place | 1700ms | inertia | plastic | 0.550 | 12.6% | Explicit material choreography for a large specimen; replay is a visual study, not an application action. | Keep the resting material visible; omit choreography. |
 | `haze-tide` — Haze perimeter tide | 1800ms | feather | haze | 0.920 | none | Explicit material choreography for a large specimen; replay is a visual study, not an application action. | Keep the resting material visible; omit choreography. |
 | `stone-contour` — Stone contour ripple | 1300ms | feather | stone | 0.920 | none | Explicit material choreography for a large specimen; replay is a visual study, not an application action. | Keep the resting material visible; omit choreography. |
-
-#### Ambient
-
-| Recipe | Duration | Signature | Material | Damping ζ | Overshoot | Use | Reduced motion |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| `resin-breathe` — Resin at rest | 2000ms | refraction | resin | 0.850 | 0.6% | The specular band on a Resin surface at rest. Applies to the rim layer only; the content above it never moves. | None. The surface is static. |
-| `frost-drift` — Frost at rest | 2000ms | feather | frost | 0.920 | none | Slow drift of the Frost grain and tint on a panel that persists while content moves behind it. | None. The surface is static. |
-| `haze-settle` — Haze at rest | 5200ms | feather | haze | 0.820 | 1.1% | Light travelling around the perimeter of a Haze content fill. Haze IS its feathered edge, so its rest motion is light moving ALONG that edge rather than the edge advancing and retreating — that gesture belongs to Resin, which is a lens breathing. On the web this is a conic gradient masked to the rim; a platform rotates its own edge light. | None. The edge holds still at its resting opacity. |
-| `stone-settle` — Stone at rest | 7000ms | feather | stone | 0.820 | 1.1% | Light travelling around a Stone label backing, slower and dimmer than Haze because a label backing is smaller and sits closer to text. | None. The edge holds still at its resting opacity. |
-| `mirage-current` — Mirage at rest | 2000ms | refraction | mirage | 0.850 | 0.6% | Slow current in the modal scrim while a dialog is open. Stops when the dialog closes. | None. The scrim is a flat fill. |
 
 **Spring policy.** Every recipe carries a spring fitted to its authored duration, which remains the authority. Damping ratio is chosen by signature: inertia and coalesce overshoot because momentum is their material claim, feather and caustic do not because a soft edge that bounces is wrong. Disabling springs must reproduce the keyframes exactly.
 

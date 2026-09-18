@@ -60,14 +60,6 @@
       '--cr-content-muted':s.palette==='harbor'?p.text:p.muted,
       '--cr-content-own-text':s.palette==='harbor'?p.text:p.onPrimarySoft,
       '--cr-stone-feather':s.reduced?'0px':data.material.stoneFeather+'px',
-      /* The travelling edge light on Haze and Stone. Its colour is the palette's
-         companion lifted toward white, so the trace is the scheme's own light
-         rather than a second accent; reduced effects remove it by zeroing the
-         width, which collapses the ring the mask cuts. */
-      '--cr-trace-width':s.reduced?'0px':data.material.traceWidth+'px',
-      '--cr-trace-light':rgba(p.companion,s.reduced?0:0.85),
-      '--cr-trace-duration':data.motion.trace+'ms',
-      '--cr-trace-duration-stone':data.motion.traceStone+'ms',
       '--cr-mirage-fill':rgba(data.material.mirageColor,s.reduced?data.material.mirageFallbackOpacity:data.material.mirageOpacity),
       '--cr-mirage-blur':s.reduced?'0px':data.material.mirageBlur+'px',
       '--cr-mirage-saturation':(s.reduced?100:data.material.mirageSaturation)+'%',

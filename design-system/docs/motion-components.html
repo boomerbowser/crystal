@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="Crystal: a reusable design system with expressive color, tactile depth and adjustable material previews."><title>Component motion suite · Crystal</title><link rel="icon" href="../assets/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/crystal-theme.css"><link rel="stylesheet" href="../assets/crystal.css"><link rel="stylesheet" href="../assets/site.css"><link rel="stylesheet" href="../assets/motion.css"><link rel="stylesheet" href="../assets/controls.css?v=pill-focus-2"><script src="../assets/tokens.js" defer></script><script src="../assets/crystal.js" defer></script><script src="../assets/core/state.js" defer></script><script src="../assets/core/preferences.js" defer></script><script src="../assets/core/spring.js" defer></script><script src="../assets/motion-shaders.js" defer></script><script src="../assets/menu.js" defer></script><script src="../assets/docs.js" defer></script><script src="../assets/controls.js?v=pill-focus-2" defer></script></head><body><a class="skip" href="#main">Skip to specification</a><div class="shell"><header class="site-header"><a class="wordmark" href="../index.html" aria-label="Crystal design system"><span class="mark" aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#crystal"/></svg></span>crystal <small>Design system</small></a><button class="cr-control menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="site-menu">Sections</button></header><div class="site-layout"><nav class="site-menu cr-frost" id="site-menu" aria-label="Sections"><h2 class="menu-heading" id="menu-start">Start</h2><div class="menu-group" role="group" aria-labelledby="menu-start"><a class="cr-control menu-item" href="../index.html">Overview</a><a class="cr-control menu-item" href="../playground.html">Playground</a></div><h2 class="menu-heading" id="menu-specification">Specification</h2><div class="menu-group" role="group" aria-labelledby="menu-specification"><a class="cr-control menu-item" href="../docs/principles.html">Foundations</a><a class="cr-control menu-item" href="../docs/colors.html">Color</a><a class="cr-control menu-item" href="../docs/materials.html">Materials</a><a class="cr-control menu-item" href="../docs/components.html">Components</a><a class="cr-control menu-item" href="../docs/catalogue.html">Catalogue</a><a class="cr-control menu-item" href="../docs/icons.html">Icons</a><a class="cr-control menu-item" href="../docs/tokens.html">Tokens</a><a class="cr-control menu-item" href="../docs/motion.html">Motion</a><a class="cr-control menu-item" href="../docs/motion-components.html" aria-current="page">Component motion</a><a class="cr-control menu-item" href="../docs/accessibility.html">Accessibility</a><a class="cr-control menu-item" href="../docs/adoption.html">Adoption</a></div><h2 class="menu-heading" id="menu-evidence">Evidence</h2><div class="menu-group" role="group" aria-labelledby="menu-evidence"><a class="cr-control menu-item" href="../motion.html">Motion studies</a><a class="cr-control menu-item" href="../validation/report.html">Verification</a></div></nav><main id="main" class="doc-body"><h1 id="component-motion-suite">Component motion suite</h1>
 <p><a href="../motion.html#component-motion">Open the live component studies</a> · <a href="../motion.html#recipe-library">Search all recipes</a> · <a href="../tests/motion-contracts.html">Run browser contracts</a></p>
-<p>Crystal ships 60 executable component recipes in ten families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.</p>
+<p>Crystal ships 55 executable component recipes in nine families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.</p>
 <h2 id="engine-responsibilities">Engine responsibilities</h2>
 <p><strong>Motion 13.4.0</strong> runs component and material element keyframes: translation, opacity, scale and state feedback. <strong>GSAP 3.15.0</strong> timelines coordinate the paint-layer clocks for feathered edges, optical highlights and rims, plus selected component sequences. Recipes declare a material and a motion signature: pressure, coalescence, meniscus movement, caustic light, surface tension, feathering, refraction or inertia. Optical layers share the component’s cancellation group and never animate text blur. GSAP drives paused native effects when targeting actual pseudo-elements. It does not clone private page content or replace the material with a screenshot.</p>
 <p>Both packages are installed with exact versions in <code>package.json</code>, resolved transitively in <code>package-lock.json</code>, and bundled locally as <code>assets/vendor/crystal-engines.js</code>. No runtime CDN is required. The pure token resolver remains independent of the engines. The preview’s native dialog backdrop keeps a CSS fallback with the same timing tokens. Frost unfolds in depth; Plastic settles with weight; Resin compresses and redistributes its light; Haze and Stone move through their perimeter. Five larger material studies have generously sized replay stages.</p>
@@ -556,41 +556,6 @@
 <td>Motion</td>
 <td>300ms</td>
 <td>Checkbox and radio indicators returning to unchecked. Paired with <code>check</code>; the iris closes toward the same point it opened from.</td>
-</tr>
-<tr>
-<td><code>resin-breathe</code></td>
-<td>resin / refraction</td>
-<td>GSAP</td>
-<td>2000ms</td>
-<td>The specular band on a Resin surface at rest. Applies to the rim layer only; the content above it never moves.</td>
-</tr>
-<tr>
-<td><code>frost-drift</code></td>
-<td>frost / feather</td>
-<td>GSAP</td>
-<td>2000ms</td>
-<td>Slow drift of the Frost grain and tint on a panel that persists while content moves behind it.</td>
-</tr>
-<tr>
-<td><code>haze-settle</code></td>
-<td>haze / feather</td>
-<td>GSAP</td>
-<td>5200ms</td>
-<td>Light travelling around the perimeter of a Haze content fill. Haze IS its feathered edge, so its rest motion is light moving ALONG that edge rather than the edge advancing and retreating — that gesture belongs to Resin, which is a lens breathing. On the web this is a conic gradient masked to the rim; a platform rotates its own edge light.</td>
-</tr>
-<tr>
-<td><code>stone-settle</code></td>
-<td>stone / feather</td>
-<td>GSAP</td>
-<td>7000ms</td>
-<td>Light travelling around a Stone label backing, slower and dimmer than Haze because a label backing is smaller and sits closer to text.</td>
-</tr>
-<tr>
-<td><code>mirage-current</code></td>
-<td>mirage / refraction</td>
-<td>GSAP</td>
-<td>2000ms</td>
-<td>Slow current in the modal scrim while a dialog is open. Stops when the dialog closes.</td>
 </tr>
 </tbody>
 </table></div>

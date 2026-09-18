@@ -83,7 +83,7 @@ this rule came from are in
 
 ## Reduced motion
 
-`prefers-reduced-motion: reduce` is honoured by every one of the 60 motion recipes. Each
+`prefers-reduced-motion: reduce` is honoured by every one of the 55 motion recipes. Each
 recipe declares its own `reduced` behaviour rather than being globally switched off,
 because "no animation" and "no *movement*" are different requirements.
 

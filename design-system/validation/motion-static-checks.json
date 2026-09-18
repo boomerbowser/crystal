@@ -1,6 +1,6 @@
 {
-  "recipes": 60,
-  "categories": 10,
+  "recipes": 55,
+  "categories": 9,
   "engines": {
     "gsap": "3.15.0",
     "motion": "13.4.0"
