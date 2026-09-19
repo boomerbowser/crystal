@@ -477,39 +477,77 @@ structural fix for D-9: when the website can only reach what the library exports
 a preview-only stylesheet cannot shape a blessed appearance without becoming part
 of the library first.
 
-### What only Meridian can do
+### Answered by Meridian, 19 September 2026
 
-These are raised rather than done, because none of them is mine to decide or
-authorise.
+Every open decision in this entry has been made. What follows replaces the list
+of questions that stood here.
 
-1. **Choose the package name and registry.** `@crystal` on the public npm
-   registry is almost certainly taken by an unrelated project; the local pnpm
-   store still holds a `@meridian/crystal` entry from an earlier attempt, which
-   suggests this has already been considered once. The options are the public
-   registry under a scope Meridian owns, GitHub Packages against the existing
-   private repository, or a private registry. **This decision blocks everything
-   else**, because it fixes the name every library imports.
-2. **Create the repository, if the library is to live in its own.** Crystal React
-   already needs a token to check Crystal out in CI; a third repository needs the
-   same grant.
-3. **Provision a publish token** as a repository secret, the way
-   `CRYSTAL_HEAD_TOKEN` was provisioned. I will not handle the token value — the
-   same rule as last time: I will give the exact `gh secret set` command and
-   Meridian runs it.
-4. **Decide whether the package is public or private.** It changes the registry,
-   the token and whether the Swift and Kotlin artefacts can be fetched by a
-   toolchain that cannot authenticate to npm.
-5. **Update the Vercel project.** If the website moves, its root directory,
-   output directory and build command all change, and the domain has to be
-   pointed at the new project. If it stays, `outputDirectory` still changes,
-   because `design-system/` will no longer be a servable directory.
-6. **Decide the first published version.** `2.0.0-alpha.1` is the current
-   `private` version and 2.0 is unreleased; whether the first publish is
-   `2.0.0-alpha.2`, `2.0.0-rc.1` or `2.0.0` is a release decision.
-7. **Confirm the deprecation path for `file:`.** Crystal React can move to a
-   version range immediately after the first publish, but a range makes local
-   development against an unpublished Crystal harder. A `pnpm` workspace or an
-   overrides entry solves it; which one is a workflow preference.
+**1. Scope and registry: `@crystal`, on the public npm registry.** Meridian had
+verified the scope was free and had said so; this entry claimed it was "almost
+certainly taken" anyway, which was a guess presented as near-fact and was wrong.
+Worse, the instruction was already recorded — Crystal React's
+`docs/requirements.md`, 18 September: *"There should be no @meridian/crystal.
+Crystal Design System packages should be under the @crystal scope."* The
+`@meridian/crystal` entry in the pnpm store, which this entry cited as evidence
+that the question had been considered before, was the residue of the same
+mistake made once already.
+
+Verified here rather than assumed, 19 September:
+
+```
+GET registry.npmjs.org/@crystal%2Fcore     404 {"error":"Not found"}
+GET registry.npmjs.org/@crystal%2Freact    404 {"error":"Not found"}
+GET registry.npmjs.org/-/v1/search?text=scope:crystal    total: 0
+```
+
+Packages are `@crystal/core` and `@crystal/react`. The stale
+`@meridian/crystal` name in `design-system/package-lock.json` is corrected.
+
+**2. The documentation and preview site gets its own repository: `crystal-preview`.**
+Already created.
+
+**3. `CRYSTAL_HEAD_TOKEN` is already set on `crystal-preview`** as a repository
+secret holding a PAT.
+
+**4. The `@crystal/core` repository is `crystal`, and it is now public.**
+
+**5. Meridian will re-base the Vercel project onto `crystal-preview`.**
+
+**6. The first published version is `2.0.0`.** Not an alpha or a release
+candidate — 2.0 ships as 2.0.0, and `2.0.0-alpha.1` is retired.
+
+**7. Local development and publishing, left to this project's judgement,
+"whichever is most conducive without introducing security vulnerabilities".**
+The choice and its reasoning:
+
+- **Consumers depend on a published range**, `"@crystal/core": "^2.0.0"`. No
+  `file:` and no `link:` in any committed manifest. A committed path is what
+  produced R-14, and a package published while carrying one would ship a
+  dependency that resolves to a directory on nobody else's machine.
+- **Local work against an unpublished Crystal uses `pnpm link`**, which is a
+  `node_modules` symlink rather than a copy — so an edit to Crystal is live, with
+  no cache to clear, which is R-14's actual cure rather than its workaround
+  (`optimizeDeps.force`). It is a working-copy state, never committed, and
+  `pnpm unlink` returns to the published version.
+- **Publishing uses npm Trusted Publishing (OIDC) from GitHub Actions, not a
+  long-lived token.** This is the security answer: with OIDC there is no npm
+  credential in the repository at all, so there is nothing to leak, rotate or
+  scope. A granular automation token is the fallback only if trusted publishing
+  cannot be enabled, and it would then want to be scoped to the single package
+  with a short expiry.
+- **`--provenance` on every publish**, which attests the tarball to the exact
+  commit and workflow that built it. A consumer can then verify that the
+  `@crystal/core` they installed came from `boomerbowser/crystal` and not from
+  someone who guessed a version number.
+- **Owning the scope publicly is itself the mitigation for dependency
+  confusion.** An unclaimed `@crystal` scope with private libraries importing
+  from it is the classic setup for that attack; publishing under a scope Meridian
+  controls closes it.
+- **Two release gates**, because both failure modes are silent: a published
+  tarball must contain no `file:` or `link:` dependency, and must contain no
+  website — no HTML, no `site.*`, no `controls.*`. The second is D-9's structural
+  fix, since a preview-only stylesheet cannot shape a blessed appearance if it
+  cannot leave the repository.
 
 ### What closing it needs from me
 
