@@ -148,6 +148,19 @@
       '--cr-acrylic-blur':s.reduced?'0px':data.material.acrylicBlur+'px','--cr-glass-blur':s.reduced?'0px':data.material.glassBlur+'px',
       '--cr-acrylic-saturation':data.material.acrylicSaturation+'%','--cr-glass-saturation':data.material.glassSaturation+'%','--cr-grain-opacity':String(data.material.grainOpacity),
       '--cr-edge':rgba(p.outline,dark?.34:.25),'--cr-rim':highlight,
+      /* The two inks the composed shadows are built from, exported so a one-off
+         shadow can be made of Crystal's ink instead of a literal.
+         
+         This is D-9's remaining half. `controls.css` carries eleven hard-coded
+         `#080b24…` values — a fixed dark navy that is not the ink Crystal uses
+         anywhere else. Crystal's is palette-tinted: the base violet mixed with
+         the palette's companion, so a shadow in Ion is a different colour from
+         a shadow in Fuchsia, and it darkens in dark mode. A literal cannot do
+         either, so those eleven shadows are the one part of the preview that
+         does not follow the palette. Naming the ink is what makes fixing them a
+         substitution rather than an invention. */
+      '--cr-shadow-contact':contact,
+      '--cr-shadow-cast':shadow,
       '--cr-shadow-content':`0 ${2*e}px ${3*e}px ${contact}, 0 ${7*e}px ${15*e}px ${shadow}`,
       '--cr-shadow-panel':`inset 0 1px 0 ${highlight}, 0 ${3*e}px ${5*e}px ${contact}, 0 ${14*e}px ${28*e}px ${shadow}`,
       /* Resin's float, reconciled with the appearance that was actually blessed.

@@ -47,22 +47,22 @@ select option{background:var(--cr-surface);color:var(--cr-text);}
 .cr-field-shell :focus-visible{outline:0;}
 /* Compact controls have a luminous shell and a contained contrast-bearing mark.
    The mark identifies the control without a dark wire around the outer material. */
-input:is([type=checkbox],[type=radio]){appearance:none;width:26px;height:26px;flex:none;vertical-align:middle;border:1px solid var(--cr-rim);border-radius:9px;background:linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);backdrop-filter:blur(20px);box-shadow:inset 0 2px 2px var(--cr-rim),0 2px 3px var(--cr-control-edge),0 5px 10px #080b2426;display:inline-grid;place-items:center;}
+input:is([type=checkbox],[type=radio]){appearance:none;width:26px;height:26px;flex:none;vertical-align:middle;border:1px solid var(--cr-rim);border-radius:9px;background:linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);backdrop-filter:blur(20px);box-shadow:inset 0 2px 2px var(--cr-rim),0 2px 3px var(--cr-control-edge),0 5px 10px var(--cr-shadow-contact);display:inline-grid;place-items:center;}
 input[type=radio]{border-radius:50%;}
 input:is([type=checkbox],[type=radio])::after{content:'';box-sizing:border-box;width:14px;height:14px;border:2px solid var(--cr-primary);border-radius:4px;background:var(--cr-surface);}
 input[type=radio]::after{border-radius:50%;}
 input[type=checkbox]:checked::after{content:'✓';font-size:14px;font-weight:800;background:var(--cr-primary);color:var(--cr-on-primary);border:0;line-height:18px;width:18px;height:18px;text-align:center;}
 input[type=radio]:checked::after{background:var(--cr-primary);box-shadow:inset 0 0 0 3px var(--cr-surface);}
 .suite-switch input{position:absolute;opacity:0;width:44px;height:28px;}
-.switch-track{border:1px solid var(--cr-rim);background:linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);box-shadow:inset 0 2px 1px var(--cr-rim),0 4px 10px #080b2426;backdrop-filter:blur(20px);}
-.switch-thumb{background:var(--cr-surface);border:0;box-shadow:inset 0 0 0 2px var(--cr-primary),inset 0 2px 1px var(--cr-rim),0 3px 5px #080b2433;}
+.switch-track{border:1px solid var(--cr-rim);background:linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);box-shadow:inset 0 2px 1px var(--cr-rim),0 4px 10px var(--cr-shadow-contact);backdrop-filter:blur(20px);}
+.switch-thumb{background:var(--cr-surface);border:0;box-shadow:inset 0 0 0 2px var(--cr-primary),inset 0 2px 1px var(--cr-rim),0 3px 5px var(--cr-shadow-cast);}
 .suite-switch input:checked+.switch-track{background:linear-gradient(90deg,var(--cr-primary-soft),var(--cr-control-light)),var(--cr-resin-fill);}
 input[type=range]{appearance:none;background:transparent;min-height:32px;--cr-range-progress:50%;}
 input[type=range]::-webkit-slider-runnable-track{height:8px;border:0;border-radius:99px;background:linear-gradient(to right,var(--cr-primary) 0 var(--cr-range-progress),var(--cr-primary-soft) var(--cr-range-progress) 100%);box-shadow:0 -1px 0 var(--cr-rim),0 2px 4px var(--cr-control-edge);}
-input[type=range]::-webkit-slider-thumb{appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;border:2px solid var(--cr-rim);background:radial-gradient(circle,var(--cr-primary) 0 3px,var(--cr-surface) 3.5px 7px,transparent 8px),linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);box-shadow:inset 0 2px 1px var(--cr-rim),0 2px 4px var(--cr-control-edge),0 5px 10px #080b2433;}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;border:2px solid var(--cr-rim);background:radial-gradient(circle,var(--cr-primary) 0 3px,var(--cr-surface) 3.5px 7px,transparent 8px),linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);box-shadow:inset 0 2px 1px var(--cr-rim),0 2px 4px var(--cr-control-edge),0 5px 10px var(--cr-shadow-cast);}
 input[type=range]::-moz-range-track{height:8px;border:0;border-radius:99px;background:var(--cr-primary-soft);box-shadow:0 -1px 0 var(--cr-rim),0 2px 4px var(--cr-control-edge);}
 input[type=range]::-moz-range-progress{height:8px;border-radius:99px;background:var(--cr-primary);}
-input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;border:2px solid var(--cr-rim);background:radial-gradient(circle,var(--cr-primary) 0 3px,var(--cr-surface) 3.5px 7px,transparent 8px),linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);box-shadow:inset 0 2px 1px var(--cr-rim),0 2px 4px var(--cr-control-edge),0 5px 10px #080b2433;}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;border:2px solid var(--cr-rim);background:radial-gradient(circle,var(--cr-primary) 0 3px,var(--cr-surface) 3.5px 7px,transparent 8px),linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);box-shadow:inset 0 2px 1px var(--cr-rim),0 2px 4px var(--cr-control-edge),0 5px 10px var(--cr-shadow-cast);}
 :root[dir=rtl] body input[type=range]::-webkit-slider-runnable-track{background:linear-gradient(to left,var(--cr-primary) 0 var(--cr-range-progress),var(--cr-primary-soft) var(--cr-range-progress) 100%);}
 .swatch::before{inset:8px;background:transparent;filter:none;}
 .palette-card::before{display:none;}
@@ -78,7 +78,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;bor
 
 nav a.cr-control{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:99px;min-height:44px;text-decoration:none;}
 nav a.cr-control[aria-current]{text-decoration:none;}
-input[type=file]::file-selector-button{min-height:44px;padding:10px 16px;border:1px solid var(--cr-rim);border-radius:99px;color:var(--cr-text);background:linear-gradient(var(--cr-haze-fill),var(--cr-haze-fill)) padding-box,var(--cr-resin-fill);box-shadow:inset 1px 1px 2px #fffc,0 4px 8px #0002;margin-inline-end:8px;cursor:pointer;}
+input[type=file]::file-selector-button{min-height:44px;padding:10px 16px;border:1px solid var(--cr-rim);border-radius:99px;color:var(--cr-text);background:linear-gradient(var(--cr-haze-fill),var(--cr-haze-fill)) padding-box,var(--cr-resin-fill);box-shadow:inset 1px 1px 2px var(--cr-rim),0 4px 8px var(--cr-shadow-contact);margin-inline-end:8px;cursor:pointer;}
 /* Palette colors are specimen content inside the Resin control, not its shell. */
 .swatch::before{inset:5px;background:var(--swatch);border-radius:inherit;filter:none;}
 
@@ -87,7 +87,7 @@ input[type=file]::file-selector-button{min-height:44px;padding:10px 16px;border:
 /* Broad Resin frame, soft inset fill, and one shared plane for grouped actions. */
 .cr-button{padding:15px 24px;}
 .export-controls .cr-button{padding-inline:14px;}
-.cr-field-shell{box-shadow:inset 0 2px 1px var(--cr-rim),0 3px 5px var(--cr-control-edge),0 12px 24px #080b241c;}
+.cr-field-shell{box-shadow:inset 0 2px 1px var(--cr-rim),0 3px 5px var(--cr-control-edge),0 12px 24px var(--cr-shadow-contact);}
 :is(.cr-tag,.cr-resin-haze){padding:17px 24px;}
 .cr-tag{min-height:48px;}
 :is(.cr-dock,.segmented,.suite-tabs){position:relative;isolation:isolate;background:var(--cr-resin-fill);border:1px solid var(--cr-rim);border-radius:999px;padding:9px;gap:4px;box-shadow:var(--cr-shadow-float);backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));}
@@ -96,7 +96,7 @@ input[type=file]::file-selector-button{min-height:44px;padding:10px 16px;border:
 .cr-dock-inner::before{display:none;}
 :is(.cr-dock,.segmented,.suite-tabs) button{border:0;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;border-radius:999px;color:var(--cr-text);}
 :is(.cr-dock,.segmented,.suite-tabs) button::before,:is(.cr-dock,.segmented,.suite-tabs) button::after{display:none;}
-:is(.cr-dock,.segmented,.suite-tabs) button:is([aria-pressed=true],[aria-selected=true]){background:var(--cr-primary);color:var(--cr-on-primary);box-shadow:0 3px 7px #080b2426;}
+:is(.cr-dock,.segmented,.suite-tabs) button:is([aria-pressed=true],[aria-selected=true]){background:var(--cr-primary);color:var(--cr-on-primary);box-shadow:0 3px 7px var(--cr-shadow-contact);}
 .cr-dock button{min-height:52px;padding:13px 18px;}
 .segmented button{min-height:44px;padding-inline:16px;}
 .suite-tabs{gap:2px;}
@@ -172,7 +172,7 @@ span.cr-field-shell :is(input,select,textarea):focus-visible{outline:0;box-shado
    Scoped rather than applied to every Haze surface, because a standalone Haze
    card genuinely is raised and its existing recipe is correct. */
 :is(.cr-resin,.cr-glass,.cr-resin-haze) :is(.cr-haze,.cr-surface,.cr-well,.cr-content-fill){
-  box-shadow:inset 0 1px 2px rgba(39,24,68,.15),inset 0 -1px 0 var(--cr-rim);
+  box-shadow:inset 0 1px 2px var(--cr-shadow-contact),inset 0 -1px 0 var(--cr-rim);
 }
 
 /* Resin never contains Resin.
@@ -210,7 +210,7 @@ span.cr-field-shell :is(input,select,textarea):focus-visible{outline:0;box-shado
    material specification. Haze exists for precisely this job — a readable 80%
    fill with a 1.95px feather on the background layer only, leaving the glyph
    crisp. Enforced by tools/audit-materials.cjs. */
-.cr-indicator{position:absolute;isolation:isolate;display:grid;place-items:center;inset-block-start:-4px;inset-inline-end:-3px;width:20px;height:20px;min-width:20px;border-radius:50%;border:1px solid var(--cr-rim);background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 2px 4px var(--cr-control-edge),0 4px 8px #080b2426;color:var(--cr-text);font:800 12px/1 var(--cr-font);z-index:2;pointer-events:none;text-decoration:none;text-shadow:none;}
+.cr-indicator{position:absolute;isolation:isolate;display:grid;place-items:center;inset-block-start:-4px;inset-inline-end:-3px;width:20px;height:20px;min-width:20px;border-radius:50%;border:1px solid var(--cr-rim);background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 2px 4px var(--cr-control-edge),0 4px 8px var(--cr-shadow-contact);color:var(--cr-text);font:800 12px/1 var(--cr-font);z-index:2;pointer-events:none;text-decoration:none;text-shadow:none;}
 /* The feathered background layer of the Haze fill. The glyph above it stays crisp. */
 .cr-indicator::before{content:'';position:absolute;inset:1px;z-index:-1;border-radius:50%;background:var(--cr-haze-fill);filter:blur(var(--cr-haze-feather));}
 /* A check mark means validated or informational, never "this one is selected".
