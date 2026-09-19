@@ -433,7 +433,7 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.
 
-37 tokens.
+38 tokens.
 
 ### Component · action
 
@@ -546,6 +546,12 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | `component.indicator.size` | dimension | `20px` | Circular state badge |
 | `component.indicator.fieldSize` | dimension | `24px` | — |
 | `component.indicator.lineWidth` | dimension | `3px` | A line that marks: a drop target's rule, a selected swatch's ring, a quotation's leading rule |
+
+### Component · anchor
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.anchor.underlineOffset` | dimension | `4px` | How far a link's underline sits below the baseline, so a descender is not struck through |
 
 ## Deprecations
 

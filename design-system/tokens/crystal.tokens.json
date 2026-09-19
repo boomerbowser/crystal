@@ -1927,6 +1927,13 @@
         "$value": "3px",
         "$description": "A line that marks: a drop target's rule, a selected swatch's ring, a quotation's leading rule"
       }
+    },
+    "anchor": {
+      "underlineOffset": {
+        "$type": "dimension",
+        "$value": "4px",
+        "$description": "How far a link's underline sits below the baseline, so a descender is not struck through"
+      }
     }
   },
   "$deprecated": {

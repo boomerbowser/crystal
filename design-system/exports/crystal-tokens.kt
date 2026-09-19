@@ -153,4 +153,5 @@ object CrystalToken {
     const val indicatorSize = "20px"
     const val indicatorFieldSize = "24px"
     const val indicatorLineWidth = "3px"
+    const val anchorUnderlineOffset = "4px"
 }

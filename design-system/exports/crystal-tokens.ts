@@ -153,6 +153,7 @@ export const crystalTokens = {
   "indicator.size": "20px",
   "indicator.fieldSize": "24px",
   "indicator.lineWidth": "3px",
+  "anchor.underlineOffset": "4px",
 } as const;
 
 export type CrystalToken = keyof typeof crystalTokens;

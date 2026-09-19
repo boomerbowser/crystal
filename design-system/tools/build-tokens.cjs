@@ -345,6 +345,11 @@ function migrate() {
      is a statement about one item among several. */
   set(out.component, 'indicator.lineWidth', leaf('dimension', '3px',
     "A line that marks: a drop target's rule, a selected swatch's ring, a quotation's leading rule"));
+  /* A link's underline is the non-colour signal that it is a link, so it is
+     present at rest and it has to clear the descenders it runs under — an
+     underline through the tail of a "g" is a strikethrough. */
+  set(out.component, 'anchor.underlineOffset', leaf('dimension', '4px',
+    'How far a link\'s underline sits below the baseline, so a descender is not struck through'));
 
   /* semantic: shape and the adjustable ranges the resolver clamps against */
   set(out.semantic, 'shape.contentRadius', leaf('dimension', dim(flat.default.radius),
