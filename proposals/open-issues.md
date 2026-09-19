@@ -350,16 +350,39 @@ to a control's shadow before this — now moves it.
 Twelve frames re-blessed, evidence in
 `validation/captures/2026-09-19-one-resin-shadow/`. 1,788 contrast cases pass.
 
-**What is still open is the shape of it.** `controls.css` holds eight more
-hard-coded shadow literals — `#080b2426`, `#080b2433`, `#080b241c` and others —
-each a value that does not tint with the palette and does not answer the
-elevation control. They are preview-only, since the file is no longer exported,
-so none of them can reach a platform library. But the two that just caused this
-were preview-only too, right up until the baseline was captured from them.
+**The remainder is now closed too.** `controls.css` held eleven more hard-coded
+shadow literals — `#080b2426` ×4, `#080b2433` ×3, `#080b241c`, `#0002`, `#fffc`
+and one `rgba(39,24,68,.15)`. Each was a fixed dark navy that does not tint with
+the palette and does not answer the elevation control; they were preview-only,
+but so were the two that caused this entry, right up until the baseline was
+captured from them.
+
+The resolver now exports the two inks the composed shadows are already built
+from, `--cr-shadow-contact` and `--cr-shadow-cast`, so replacing a literal is a
+substitution rather than an invention. Each was matched on alpha. Measured:
+10,999 of 1,792,000 pixels differ, 0.6138%, worst channel delta 15 of 255, and
+only on the controls that used a literal — the switch, the range, the checkbox,
+the file button, the field shell's outer cast, the selected dock pill, the
+indicator and the table hover. **The action buttons are pixel-identical**, which
+is the check that this is the change it claims to be: they were already built
+from `--cr-shadow-float`. Evidence in
+`validation/captures/2026-09-19-shadow-ink-follows-the-palette/`.
+
+Two literals remain and are a different question: `#ffffff30` and `#ffffff0a`,
+the two white stops of the optical sheen gradient. They are highlight rather than
+ink and they are white in every palette.
+
+`validation/baselines/` has **not** been re-captured — the driver that walks
+`frames.json` is still unwritten (crystal-2.0 plan, task 14), and those frames
+were taken manually. Any frame showing a switch, a slider, a dock pill or a table
+will differ by the amount above, and the capture README is the explanation that
+belongs beside them when they are re-taken.
 
 ## D-10 · `@crystal/core` is a folder inside a website, not a library
 
-**Requested by Meridian, 19 September 2026. Recorded in detail; not started.**
+**Requested by Meridian, 19 September 2026.**
+**Proposal written and the first two steps done, 19 September 2026. The rest is
+sequenced behind an npm scope that does not exist yet — see "Where this stands".**
 **Severity: high. It is the common cause behind D-9, R-13 and R-14.**
 
 ### What it is today
@@ -560,3 +583,56 @@ released package contains no website.
 
 Recorded in Crystal React's tracker as R-16, which is the same issue seen from
 the consumer's side.
+
+
+### Where this stands, 19 September 2026
+
+The proposal this entry asked for is
+[`proposals/2026-09-19-crystal-core-as-a-library.md`](2026-09-19-crystal-core-as-a-library.md).
+It answers the one decision this entry left open — what happens to
+`controls.css` — and recommends promoting its *recipes* incrementally rather than
+exporting or abandoning the file. R-15 is the worked example: one number became
+`component.haze.inset`, `controls.css` reads the token, the Swift and Kotlin
+exports picked it up for free, and the parity gate grew a `::before` comparison
+that fails if a consumer stops painting it. Doing it in one sweep would mean
+re-blessing every approved frame at once, which the change discipline exists to
+prevent.
+
+**Done, and reversible:**
+
+- **The boundary.** A published `@crystal/core` was 2.18 MB across 1,097 files
+  and **46% of it was the documentation website**. `files` now ships only the
+  library: 1.2 MB, no HTML, no `site.*`, no `controls.*`, no preview motion
+  suite, no `src/pages/`.
+- **Version `2.0.0`, `private` removed**, and `publishConfig` corrected — it was
+  still aimed at **GitHub Packages with `access: restricted`**, left from an
+  earlier assumption, and would have published to the wrong registry entirely.
+- **`tools/verify-package.cjs`**, in `npm test`, guarding three silent failures:
+  a `file:` or `link:` dependency in a published manifest; a website in the
+  tarball, which is this entry's structural fix; and an `exports` entry naming a
+  file `files` does not ship, which fails at the *consumer's* build. Each proven
+  to bite by planting it.
+- **`.github/workflows/publish.yml`**: tag-triggered, npm Trusted Publishing so
+  no credential exists in the repository at all, and `--provenance`. It also
+  builds `crystal-spec-<version>.zip` as a release asset — the DTCG source, the
+  flat tokens, the catalogue, the motion recipes, all three token exports,
+  `parity.json` and `CONTRACT.md` — which is the half npm cannot carry, and the
+  reason this is not simply "publish the package". A SwiftUI or Compose library
+  cannot install one.
+
+**Not done, and why.** Steps 3 to 6 of the proposal — the specifications
+rewritten around the core library, the website converted to a consumer, the
+repository split, and Crystal React moving to `"@crystal/core": "^2.0.0"` — are
+all gated on the `@crystal` scope existing on npm and something having been
+published to it. Committing a range that points at a version nobody can install
+is worse than an honest `file:` path, so the path stays until then.
+
+The repository split is also the one step that writes to `crystal-preview`, and
+this session has never pushed to that remote. The commands are in §7 of the
+proposal rather than run.
+
+**What only Meridian can do** is §6 of the proposal: create the `@crystal` scope,
+enable Trusted Publishing for `boomerbowser/crystal` and
+`.github/workflows/publish.yml`, push the website to `crystal-preview`, and
+re-base the Vercel project. `CRYSTAL_HEAD_TOKEN` and the public `crystal`
+repository are already in place and need nothing further.
