@@ -404,6 +404,14 @@
     }
   },
   "component": {
+    "action": {
+      "radius": 999,
+      "minTarget": 44,
+      "paddingBlock": 15,
+      "paddingInline": 24,
+      "gap": 9,
+      "disabledOpacity": 0.55
+    },
     "scrollbar": {
       "width": 10,
       "thumbMinLength": 32,
@@ -411,6 +419,15 @@
     },
     "scrollArea": {
       "fadeDepth": 24
+    },
+    "layout": {
+      "containerMax": 1536,
+      "readingMax": 920,
+      "gutterCompact": 18,
+      "gutterBase": 26,
+      "gutterWide": 44,
+      "minCellWidth": 240,
+      "sidebarWidth": 280
     },
     "icon": {
       "size": 20,
@@ -442,14 +459,17 @@
     "field": {
       "wellInset": 7
     },
-    "layout": {
-      "containerMax": 1536,
-      "readingMax": 920,
-      "gutterCompact": 18,
-      "gutterBase": 26,
-      "gutterWide": 44,
-      "minCellWidth": 240,
-      "sidebarWidth": 280
+    "card": {
+      "radius": 28
+    },
+    "focus": {
+      "coreWidth": 2,
+      "coreOffset": 3
+    },
+    "indicator": {
+      "size": 20,
+      "fieldSize": 24,
+      "lineWidth": 3
     }
   },
   "spacing": {

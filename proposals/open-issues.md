@@ -228,3 +228,62 @@ part of the system rather than provisional, and a platform library may rely on
 them.
 
 Closed.
+
+## D-7 · The documentation build ran outside the gate that watches generated files
+
+**Closed.**
+
+`docs/materials.html` was stale for a commit — the markdown gained a section and
+the published page did not — and neither gate could see it. `validate-docs.cjs`
+reads the markdown and the tokens and never opens the HTML. The CI drift gate
+runs `npm test`, and `npm test` built the tokens and the catalogue but not the
+pages: comparing generated output against its source proves nothing for output
+the build it runs never generates.
+
+`npm test` and `npm run build` now run `tools/build.py`, the superset that
+writes the tokens, the catalogue, the reference sections, the theme CSS and all
+fourteen pages. The gate itself did not change; its reach grew to match its
+name. Proved by reverting the page to the stale committed copy and running
+`npm test`, which rewrote it.
+
+The cost was one re-blessed baseline: restoring the paragraphs above the
+Haze-in-Resin composition moved it a fraction of a pixel down the page, so every
+glyph rasterised at a new sub-pixel offset. 17.8% of pixels differ and the two
+images are the same picture. Recorded in
+`validation/captures/2026-09-18-materials-page-rebuild/`, amplified difference
+included.
+
+## D-8 · A component token that never reaches the flat file is watched by nothing
+
+**Severity: low today, and it is the shape of the problem rather than the size.**
+
+The round-trip gate in `build-tokens.cjs` is the thing that makes a token value
+hard to change by accident: it rebuilds the flat runtime file from the DTCG
+source and fails if any value moved or disappeared. It compares flat against
+flat. So it only ever sees a token that `flat.component` maps.
+
+`component.indicator.*`, `component.action.*`, `component.card.radius` and
+`component.focus.*` are not in that map. They reach a platform library through
+`exports/crystal-tokens.{ts,swift,kt}` instead, which nothing compares against
+anything. Removing `component.selection` this cycle proved it from the other
+direction: two tokens vanished from the DTCG source and the gate printed
+"Round trip verified: no token value changed."
+
+That was the right outcome for a deliberate removal, and it would be the same
+output for an accidental one.
+
+**Closed by projecting the tier entire.** `flat.component` was a hand-written list
+of the families the resolver happened to read; it is now a generic projection of
+`tokens.component`, aliases dereferenced and dimensions unwrapped exactly as the
+hand-written version did. Four families joined the flat file — `action`, `card`,
+`focus` and `indicator` — announced by the gate as additions, with no value
+changed and all eighteen frames identical. `assets/crystal.js` reads named keys,
+so the generated theme CSS is byte-identical.
+
+The alternative was gating the exports separately, and it is worse: a token no
+runtime can read is a token somebody will write again by hand, which is the
+divergence CONTRACT §1 exists to prevent.
+
+Proved by planting two defects at once — deleting `component.focus.coreWidth`,
+which the gate could not see before, and moving `component.chip.height` to 33px,
+which it always could. Both failed the build in the same run.

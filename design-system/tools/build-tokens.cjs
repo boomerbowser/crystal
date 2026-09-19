@@ -459,49 +459,27 @@ function buildFlat(tokens) {
     readingLeading: unpx(tokens.semantic.typography.readingLeading.$value),
     family: tokens.semantic.typography.family.$value,
   };
-  /* Component-level values the runtime resolver needs. Until now the flat file
-     carried only primitives and semantics, so anything set on out.component was
-     invisible to assets/crystal.js — which meant a component token could be
-     defined and unreachable, and the only way to use it was to write the number
-     again somewhere else. */
-  flat.component = {
-    scrollbar: {
-      width: unpx(tokens.component.scrollbar.width.$value),
-      thumbMinLength: unpx(tokens.component.scrollbar.thumbMinLength.$value),
-      inset: unpx(tokens.component.scrollbar.inset.$value),
-    },
-    scrollArea: {
-      fadeDepth: unpx(tokens.component.scrollArea.fadeDepth.$value),
-    },
-    icon: {
-      size: unpx(tokens.component.icon.size.$value),
-      action: unpx(tokens.component.icon.action.$value),
-    },
-    choice: {
-      boxSize: unpx(tokens.component.choice.boxSize.$value),
-      boxRadius: unpx(tokens.component.choice.boxRadius.$value),
-    },
-    switch: {
-      trackWidth: unpx(tokens.component.switch.trackWidth.$value),
-      trackHeight: unpx(tokens.component.switch.trackHeight.$value),
-    },
-    slider: {
-      trackHeight: unpx(tokens.component.slider.trackHeight.$value),
-      thumbSize: unpx(tokens.component.slider.thumbSize.$value),
-    },
-    chip: { height: unpx(tokens.component.chip.height.$value) },
-    overlayArrow: {
-      size: unpx(tokens.component.overlayArrow.size.$value),
-      radius: unpx(tokens.component.overlayArrow.radius.$value),
-    },
-    overlay: {
-      maxWidth: unpx(tokens.component.overlay.maxWidth.$value),
-      tooltipMaxWidth: unpx(tokens.component.overlay.tooltipMaxWidth.$value),
-    },
-    field: { wellInset: unpx(tokens.component.field.wellInset.$value) },
-    layout: Object.fromEntries(Object.entries(tokens.component.layout)
-      .map(([key, leafValue]) => [key, unpx(leafValue.$value)])),
-  };
+  /* Every component token, projected whole.
+     
+     This used to be a hand-written list of the families the resolver happened to
+     read, and that list was the gate's blind spot: the round-trip guard compares
+     the rebuilt flat file against the committed one, so a token the projection
+     skipped could change or vanish with the build still reporting "no token value
+     changed". `component.selection` was deleted that way — correctly, that time.
+     
+     Projecting the tier entire means the guard covers the tier entire. Aliases are
+     dereferenced, because a flat file holding `{semantic.shape.contentRadius}` asks
+     every consumer to implement alias resolution a second time, which is the
+     divergence CONTRACT §1 exists to prevent. Dimensions become numbers, matching
+     how the resolver has always read the families it did know about. */
+  const projectComponent = (node) => Object.fromEntries(
+    Object.entries(node)
+      .filter(([key]) => !key.startsWith('$'))
+      .map(([key, child]) => [
+        key,
+        '$value' in child ? unpx(deref(tokens, child.$value)) : projectComponent(child),
+      ]));
+  flat.component = projectComponent(tokens.component);
   /* Spacing reaches CSS as custom properties because a product writing plain CSS
      against Crystal needs the same scale the libraries compile against. It does
      not vary with palette, mode or density — `--cr-space` is the density-aware
