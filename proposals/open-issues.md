@@ -356,3 +356,169 @@ each a value that does not tint with the palette and does not answer the
 elevation control. They are preview-only, since the file is no longer exported,
 so none of them can reach a platform library. But the two that just caused this
 were preview-only too, right up until the baseline was captured from them.
+
+## D-10 · `@crystal/core` is a folder inside a website, not a library
+
+**Requested by Meridian, 19 September 2026. Recorded in detail; not started.**
+**Severity: high. It is the common cause behind D-9, R-13 and R-14.**
+
+### What it is today
+
+`@crystal/core` version `2.0.0-alpha.1`, `"private": true`, published nowhere.
+Its package root is `design-system/`, and that one directory is three things at
+once:
+
+- **The library.** `tokens/`, the resolver in `assets/crystal.js`, the headless
+  core in `assets/core/`, `crystal.css`, `crystal-theme.css`, the icon set, the
+  motion recipes, the catalogue, and the generated TypeScript, Swift and Kotlin
+  exports. Sixteen export entry points. Two runtime dependencies, `gsap` and
+  `motion`.
+- **The documentation website.** `index.html`, `playground.html`, `motion.html`,
+  eleven pages under `docs/`, and the scripts and stylesheets that drive them —
+  `site.css`, `site.js`, `menu.js`, `docs.js`, `controls.css`, `controls.js`, the
+  motion suite, the shaders.
+- **The build and verification machinery.** `tools/`, `tests/`, `validation/`.
+
+Vercel deploys it with `"outputDirectory": "design-system"`: the website *is* the
+package directory, and `.vercelignore` exists to keep `tools/`, `src/` and
+`package.json` out of the upload. Crystal React consumes it as
+`file:../crystal-design-system/design-system` — a path on one contributor's disk.
+
+### Why this is the shape of several defects rather than a preference
+
+Every one of these is already in a tracker, and each is the same root cause seen
+from a different angle.
+
+**D-9 — the design system shipped one Resin shadow and rendered another.**
+`controls.css` is website-only and unexported, and because the preview loads it,
+it shaped the appearance that got *blessed* while `--cr-shadow-float` — the thing
+every platform library actually receives — said something else. A library
+following Crystal's own tokens could not reproduce Crystal's own appearance.
+There is nothing structural stopping that recurring: eight more hard-coded shadow
+literals remain in that file, and the only reason they are harmless today is that
+no baseline has been captured from a composition that uses them.
+
+**R-13 — Crystal React's materials had drifted and nothing compared them.**
+Closing it needed a gate that renders the same material in two *running servers*
+and diffs the computed style, because there is no artefact to compare against.
+A library cannot ask "what is Crystal's Resin recipe?" — it can only ask a
+browser what Crystal's website happened to paint.
+
+**R-14 — a `file:` dependency, pre-bundled once and served stale for hours.**
+Three investigations in one day. One began a wrong diagnosis of the theme
+provider. One is what Meridian saw when they reported that Crystal's
+specifications were absent from every component.
+
+**There is no version contract.** Crystal React cannot say it targets Crystal
+2.0.1; it resolves whatever is on the disk beside it. A change to a material
+token reaches every library instantly and silently, with no range to pin, no
+changelog entry to read and no way to stay on a known-good version while
+upgrading deliberately.
+
+**A consumer installs the documentation website.** `files` includes `docs/` — a
+megabyte of generated HTML — and the whole 4.6MB of `assets/`, most of which is
+the site: `site.css`, `menu.js`, `motion-suite.js`, the shader sources, the
+fonts. A product that wants the token resolver downloads the specification pages.
+
+**There is nothing for a non-JavaScript library to consume.** `libraries/` holds
+`CONTRACT.md` and `parity.json` and no artefact. The Swift and Kotlin exports are
+generated, and then they sit inside a package only npm can install. A Compose or
+SwiftUI library has to copy them, which is the retyping CONTRACT §1 exists to
+forbid.
+
+### What Meridian asked for
+
+1. `@crystal/core` becomes a **proper published library**, not a `file:` path.
+2. It supplies **context and specifications to every Crystal component library**,
+   not only the React one — so this class of drift stops recurring.
+3. The **documentation website and its interactive previews** are updated to
+   consume the new core, rather than being the same directory as it.
+4. The **specifications** are updated to refer to the core library and to explain
+   how it operates.
+5. `@crystal/core` is **separated from the website's deployment repository**.
+6. The steps only Meridian can take are **documented and raised with them** —
+   see "What only Meridian can do", below.
+
+### The shape this probably takes
+
+Recorded as a starting point for a proposal, not as a decision.
+
+**A package that is only the library.** Tokens in every generated form, the
+resolver, the headless core, `crystal.css` and the generated theme, the icons,
+the motion recipes, the catalogue and the parity manifest. No HTML, no `site.*`,
+no `controls.*`, no `tools/`. The test of whether the boundary is right: *a
+library that consumes this can render Crystal correctly with no browser and no
+website.*
+
+**`controls.css` is the boundary case and needs a decision.** It is the preview's
+own stylesheet, it is not exported, and it shaped the blessed appearance. Either
+its recipes belong in the library — in which case they stop being preview-only
+and every literal in them has to become a token — or the baseline needs
+re-capturing from compositions built only from exported surfaces. D-9 fixed the
+one instance that had already bitten; the file is still the hazard.
+
+**A specification artefact, not only prose.** What a Swift or Kotlin library can
+consume is the reason this is not simply "publish the npm package". The
+catalogue, the parity manifest, the token exports and the motion recipes are all
+already data; they need to be published somewhere a non-npm toolchain can fetch
+them and pin a version of them — a release asset, a second registry, or a
+versioned URL. `libraries/CONTRACT.md` then cites the artefact rather than
+describing it.
+
+**Versioning against the contract.** The README already says Crystal follows
+semantic versioning "against the public contract defined in the adoption
+chapter". Once there is a published package that sentence becomes enforceable,
+and the round-trip and material gates become the thing that decides whether a
+change is a patch, a minor or a major.
+
+**The website becomes a consumer.** It installs the library like any other
+product and its interactive previews read the published resolver. That is the
+structural fix for D-9: when the website can only reach what the library exports,
+a preview-only stylesheet cannot shape a blessed appearance without becoming part
+of the library first.
+
+### What only Meridian can do
+
+These are raised rather than done, because none of them is mine to decide or
+authorise.
+
+1. **Choose the package name and registry.** `@crystal` on the public npm
+   registry is almost certainly taken by an unrelated project; the local pnpm
+   store still holds a `@meridian/crystal` entry from an earlier attempt, which
+   suggests this has already been considered once. The options are the public
+   registry under a scope Meridian owns, GitHub Packages against the existing
+   private repository, or a private registry. **This decision blocks everything
+   else**, because it fixes the name every library imports.
+2. **Create the repository, if the library is to live in its own.** Crystal React
+   already needs a token to check Crystal out in CI; a third repository needs the
+   same grant.
+3. **Provision a publish token** as a repository secret, the way
+   `CRYSTAL_HEAD_TOKEN` was provisioned. I will not handle the token value — the
+   same rule as last time: I will give the exact `gh secret set` command and
+   Meridian runs it.
+4. **Decide whether the package is public or private.** It changes the registry,
+   the token and whether the Swift and Kotlin artefacts can be fetched by a
+   toolchain that cannot authenticate to npm.
+5. **Update the Vercel project.** If the website moves, its root directory,
+   output directory and build command all change, and the domain has to be
+   pointed at the new project. If it stays, `outputDirectory` still changes,
+   because `design-system/` will no longer be a servable directory.
+6. **Decide the first published version.** `2.0.0-alpha.1` is the current
+   `private` version and 2.0 is unreleased; whether the first publish is
+   `2.0.0-alpha.2`, `2.0.0-rc.1` or `2.0.0` is a release decision.
+7. **Confirm the deprecation path for `file:`.** Crystal React can move to a
+   version range immediately after the first publish, but a range makes local
+   development against an unpublished Crystal harder. A `pnpm` workspace or an
+   overrides entry solves it; which one is a workflow preference.
+
+### What closing it needs from me
+
+A written proposal before any code, because this moves every consumer at once and
+half of it is Meridian's decision. Then, in order: the package boundary and what
+leaves it; the website converted to a consumer with its previews reading the
+published resolver; the specifications rewritten to describe the core library and
+how a platform library consumes it; the deployment separation; and a gate that a
+released package contains no website.
+
+Recorded in Crystal React's tracker as R-16, which is the same issue seen from
+the consumer's side.
