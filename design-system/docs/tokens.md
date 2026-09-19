@@ -433,7 +433,7 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.
 
-38 tokens.
+39 tokens.
 
 ### Component · action
 
@@ -552,6 +552,12 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
 | `component.anchor.underlineOffset` | dimension | `4px` | How far a link's underline sits below the baseline, so a descender is not struck through |
+
+### Component · tree
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.tree.indentStep` | dimension | `20px` | How far one level of a tree is indented from its parent |
 
 ## Deprecations
 
