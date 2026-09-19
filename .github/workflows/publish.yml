@@ -1,0 +1,127 @@
+# Publish @crystal/core, and the specification bundle that platform libraries
+# outside npm consume.
+#
+# Triggered by a tag rather than by a push to main: a release is a deliberate
+# act, and the tag is what `--provenance` attests the tarball to.
+#
+# There is no npm token in this repository. Publishing uses npm Trusted
+# Publishing, which exchanges GitHub's OIDC identity for a short-lived
+# credential at publish time, so there is nothing here to leak, rotate or scope.
+# That is why `id-token: write` is below and why no secret is referenced.
+#
+# BEFORE THE FIRST RUN, on npmjs.com, someone with rights over the @crystal
+# scope must add a trusted publisher: repository boomerbowser/crystal, workflow
+# .github/workflows/publish.yml. npm cannot attach a trusted publisher to a
+# package that does not exist, so the very first version may need one manual
+# `npm publish` to create it. Everything after that is this workflow.
+name: publish
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write   # the specification bundle, as a release asset
+  id-token: write   # OIDC, in place of a stored npm token
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+      - uses: actions/setup-python@v6
+        with: { python-version: '3.13' }
+      - run: pip install markdown
+
+      - run: npm ci
+        working-directory: design-system
+
+      # The whole suite, because a published version cannot be taken back.
+      # `npm test` regenerates the tokens and the pages first, so this also
+      # proves the committed generated files match their source.
+      - run: npm test
+        working-directory: design-system
+
+      # Same rule as verify.yml, and the same one exception. `npm test` runs the
+      # build first, so a diff here means a committed generated file does not
+      # match its source — and publishing would ship a package that is not this
+      # commit. `validation/token-checks.json` records when the evidence was
+      # produced, so its `date` differs on every run by design; its numbers are
+      # held to the rule like everything else.
+      - name: Generated files match their source
+        run: |
+          git diff --exit-code -- ':(top)' \
+            ':(exclude,top)design-system/validation/token-checks.json' || {
+            echo "::error::A build changed a committed file. Publishing would ship a package that does not match this commit."
+            exit 1
+          }
+          drift=$(git diff -U0 -- ':(top)design-system/validation/token-checks.json' \
+            | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | grep -v '"date"' || true)
+          if [ -n "$drift" ]; then
+            echo "::error::The token evidence changed beyond its timestamp:"
+            echo "$drift"
+            exit 1
+          fi
+
+      # What the tarball may contain: no `file:` dependency, no website, and
+      # every export entry point actually shipped. Both of the first two are
+      # silent failures — the registry accepts them and the damage appears in
+      # somebody else's repository days later.
+      - run: node tools/verify-package.cjs
+        working-directory: design-system
+
+      - name: The tag and the manifest agree
+        working-directory: design-system
+        run: |
+          tagged="${GITHUB_REF_NAME#v}"
+          packaged="$(node -p "require('./package.json').version")"
+          if [ "$GITHUB_REF_TYPE" = tag ] && [ "$tagged" != "$packaged" ]; then
+            echo "::error::tag v$tagged does not match package.json $packaged"
+            exit 1
+          fi
+
+      # --provenance attests the tarball to this commit and this workflow, so a
+      # consumer can verify their @crystal/core came from boomerbowser/crystal
+      # and not from someone who guessed a version number. `access public`
+      # because a scoped package is private by default, and an unpublished
+      # scope that private libraries already import from is the textbook setup
+      # for dependency confusion — owning it publicly is what closes that.
+      - run: npm publish --provenance --access public
+        working-directory: design-system
+
+      # The half of this that npm cannot carry.
+      #
+      # A SwiftUI or Compose library cannot install an npm package, so the
+      # generated Swift and Kotlin exports would stay stranded inside one and
+      # those libraries would retype Crystal's values — the exact thing
+      # CONTRACT §1 forbids, made unavoidable by the packaging. A release asset
+      # is versioned, immutable, fetchable with curl, needs no new account, and
+      # is built by the same job that published to npm, so the two cannot drift.
+      - name: Build the specification bundle
+        working-directory: design-system
+        run: |
+          set -euo pipefail
+          out="crystal-spec-${GITHUB_REF_NAME#v}"
+          mkdir -p "$out/tokens" "$out/exports" "$out/libraries"
+          cp tokens/crystal.tokens.json tokens/crystal.json \
+             tokens/catalogue.json tokens/motion-recipes.json "$out/tokens/"
+          cp exports/crystal-tokens.swift exports/crystal-tokens.kt \
+             exports/crystal-tokens.ts "$out/exports/"
+          cp ../libraries/parity.json "$out/libraries/"
+          cp ../libraries/CONTRACT.md "$out/"
+          zip -rq "$out.zip" "$out"
+          echo "BUNDLE=design-system/$out.zip" >> "$GITHUB_ENV"
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.BUNDLE }}
+          generate_release_notes: true

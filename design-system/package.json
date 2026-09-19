@@ -1,10 +1,10 @@
 {
   "name": "@crystal/core",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0",
   "description": "Crystal design system: tokens, material primitives, headless core, icons and specifications.",
   "scripts": {
     "build:motion": "node tools/build-motion.cjs",
-    "test": "python3 tools/build.py && node tests/core-contracts.cjs && node tools/validate-tokens.cjs && node tools/validate-motion.cjs && python3 tests/visual-gate-contracts.py && node tools/validate-docs.cjs",
+    "test": "python3 tools/build.py && node tests/core-contracts.cjs && node tools/validate-tokens.cjs && node tools/validate-motion.cjs && python3 tests/visual-gate-contracts.py && node tools/validate-docs.cjs && node tools/verify-package.cjs",
     "build:tokens": "node tools/build-tokens.cjs",
     "build:catalogue": "node tools/build-catalogue.cjs",
     "build": "python3 tools/build.py && node tools/build-icons.cjs",
@@ -15,7 +15,8 @@
     "verify:interactions": "node tools/verify-interactions.mjs",
     "validate:docs": "node tools/validate-docs.cjs",
     "verify:deploy": "node tools/verify-deploy.mjs .",
-    "verify:scroll": "node tools/verify-scroll.mjs"
+    "verify:scroll": "node tools/verify-scroll.mjs",
+    "verify:package": "node tools/verify-package.cjs"
   },
   "keywords": [],
   "type": "commonjs",
@@ -28,10 +29,10 @@
     "lucide-static": "^1.47.0",
     "playwright": "^1.63.0"
   },
-  "private": true,
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "access": "restricted"
+    "registry": "https://registry.npmjs.org",
+    "access": "public",
+    "provenance": true
   },
   "repository": {
     "type": "git",
@@ -39,13 +40,26 @@
     "directory": "design-system"
   },
   "files": [
-    "assets/",
+    "assets/crystal.js",
+    "assets/crystal.d.ts",
+    "assets/crystal.css",
+    "assets/crystal-theme.css",
+    "assets/motion.js",
+    "assets/motion.css",
+    "assets/tokens.js",
+    "assets/icons.js",
+    "assets/icons.svg",
+    "assets/icon.svg",
+    "assets/grain.svg",
+    "assets/core/",
+    "assets/icons/",
+    "assets/shaders/",
+    "assets/fonts/",
     "tokens/",
     "exports/",
-    "docs/",
+    "src/engines.js",
     "reference/licenses/",
-    "README.md",
-    "src/"
+    "README.md"
   ],
   "exports": {
     ".": "./exports/crystal-tokens.ts",
