@@ -62,7 +62,7 @@ const ADDITIONS = {
       ['primereact:navigationmenu', 'antd:Menu']),
     c('table-of-contents', 'Table of contents', 'A list of the headings in a document, marking the one in view.',
       ['at-rest', 'active', 'focus-visible'], `${H} content fill`,
-      'Indentation follows heading depth; no rail marks the active entry.',
+      'Indentation follows heading depth; label weight marks the active entry.',
       'role="navigation" with an accessible name; the active entry uses aria-current="location".',
       'Active marking by label weight, spacing', 'Which headings are collected, scroll spy thresholds',
       ['mantine:TableOfContents']),

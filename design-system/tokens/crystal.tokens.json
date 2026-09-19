@@ -1912,17 +1912,6 @@
         "$value": "3px"
       }
     },
-    "selection": {
-      "railWidth": {
-        "$type": "dimension",
-        "$value": "3px",
-        "$description": "Selection is a leading rail plus label weight, never a check mark"
-      },
-      "railHeight": {
-        "$type": "dimension",
-        "$value": "15px"
-      }
-    },
     "indicator": {
       "size": {
         "$type": "dimension",
@@ -1932,6 +1921,11 @@
       "fieldSize": {
         "$type": "dimension",
         "$value": "24px"
+      },
+      "lineWidth": {
+        "$type": "dimension",
+        "$value": "3px",
+        "$description": "A line that marks: a drop target's rule, a selected swatch's ring, a quotation's leading rule"
       }
     }
   },

@@ -291,8 +291,8 @@ function contrastFigures() {
     `| Lowest normal-text result | ${Math.min(...text).toFixed(2)}:1 |`,
     `| Checks run | ${String(checks.date).slice(0, 10)} |`,
     '',
-    'Normal text is held to 4.5:1. Essential non-text — focus rings, control boundaries, the',
-    'selection rail — uses its separate 3:1 threshold, which is the correct standard for those',
+    'Normal text is held to 4.5:1. Essential non-text — focus rings, control boundaries,',
+    'indicator lines — uses its separate 3:1 threshold, which is the correct standard for those',
     'elements rather than a relaxation for them.',
   ].join('\n');
 }

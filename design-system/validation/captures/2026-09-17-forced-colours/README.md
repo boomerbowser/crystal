@@ -1,5 +1,7 @@
 # Forced colours — evidence
 
+> **Superseded in part.** The leading selection mark visible in these frames was withdrawn at Meridian's direction later the same day, because it offset the very label it marked. Selection is label weight alone; see `../2026-09-17-light-and-rest-motion/README.md`. The frames are kept as the record of the run that produced them, not as a picture of how Crystal looks now.
+
 Captured 17 September 2026, Chromium with `forced-colors: active` emulated in both the
 light and dark high-contrast palettes.
 

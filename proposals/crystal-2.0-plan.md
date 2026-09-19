@@ -120,7 +120,7 @@ A gate is a point where the work stops if verification fails, because everything
 - [ ] **Step 1:** Write the field shell and indicator elements directly into the HTML, so no element is created at runtime.
 - [ ] **Step 2:** Rewrite `controls.js` to only *read* state and set attributes/custom properties via the headless core. Remove `document.createElement`, `append`, `before`, and the `MutationObserver`.
 - [ ] **Step 3:** Assert in the browser that `controls.js` creates no elements: count `.cr-indicator` and `.cr-field-shell` before and after scripts run; the counts must match.
-- [ ] **Step 4:** Compare the six reference frames. Verify keyboard focus, selection rails, field badges and range fills all still behave.
+- [ ] **Step 4:** Compare the six reference frames. Verify keyboard focus, selection weight, field badges and range fills all still behave.
 - [ ] **Step 5:** Run `npm test`, `tools/validate.py`, and the real-engine motion contract checks in the browser. Commit.
 
 ### Task 8: Vendor and normalise the icon set
@@ -217,7 +217,7 @@ Parity is measured against the most fully-featured libraries in use — Mantine,
 - Modify: `design-system/assets/*.css`, `design-system/tools/validate.py`, `design-system/docs/accessibility.md`
 
 - [ ] **Step 1:** Audit every physical direction property and replace with logical properties where the meaning is directional.
-- [ ] **Step 2:** Confirm the directional bubble corner, the selection rail, field badges and the range track all mirror.
+- [ ] **Step 2:** Confirm the directional bubble corner, the drop indicator, field badges and the range track all mirror.
 - [ ] **Step 3:** Capture RTL frames in both modes and add them to the evidence.
 - [ ] **Step 4:** Add an RTL row to the verification report. Commit.
 
@@ -301,7 +301,7 @@ site contains. The fix is not to restyle four copies. It is to leave one.
 - [x] **Step 2** — Build the entries as Crystal pill controls, not bare links. Action controls
   are pill-shaped; the current `doc-nav a` uses a 10px radius, which violates that rule.
 - [x] **Step 3** — The current page is marked with `aria-current="page"`, and marked visually
-  with a rail and weight, never a check mark.
+  with label weight, never a check mark and never a mark set beside the label.
 - [x] **Step 4** — Forced colours: the current entry is a `Highlight` ring, never a fill.
   A filled `--cr-primary-soft` row is the same defect already fixed on the segmented control —
   Chromium's text backplate paints `Canvas` over the label and the text disappears.
@@ -332,7 +332,7 @@ site contains. The fix is not to restyle four copies. It is to leave one.
   `assets/shaders/manifest.json`.
 - [x] **Step 2** — Write the explanations that currently exist only in CSS comments and capture
   READMEs. Named gaps: Resin-never-inside-Resin and why; the Haze recess; the forced-colours
-  text backplate; why not ripples; the six-layer focus recipe; the selection rail.
+  text backplate; why not ripples; the six-layer focus recipe; selection as label weight.
 - [x] **Step 3** — Every rule gets a live specimen in the page, not a screenshot. The docs pages
   already load `crystal.css` and `controls.css`, so a specimen is real and is audited by
   `audit-materials.mjs` like any other composition.

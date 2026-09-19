@@ -87,7 +87,7 @@
       "material": "Haze rows on the surrounding surface",
       "geometry": "Content radius on rows; separators are hairlines",
       "semantics": "Real list semantics; interactive rows are buttons or links, not clickable divs",
-      "crystal": "Row treatment, separators, selection rail",
+      "crystal": "Row treatment, separators, label weight for the selected row",
       "product": "Content, virtualisation and row actions",
       "motion": [
         "list-in",

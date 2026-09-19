@@ -433,7 +433,7 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.
 
-34 tokens.
+37 tokens.
 
 ### Component · action
 
@@ -506,6 +506,20 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | --- | --- | --- | --- |
 | `component.chip.height` | dimension | `32px` | A compact chip, inside a 44px target |
 
+### Component · overlayArrow
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.overlayArrow.size` | dimension | `14px` | The side of the rotated square that points at an overlay's trigger |
+| `component.overlayArrow.radius` | dimension | `3px` | The arrow's tip radius, so a pointer is not a needle |
+
+### Component · overlay
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.overlay.maxWidth` | dimension | `480px` | How wide an anchored popover may grow before it stops being anchored to anything |
+| `component.overlay.tooltipMaxWidth` | dimension | `352px` | About sixty characters: a tooltip longer than this is documentation |
+
 ### Component · field
 
 | Token | Type | Value | Meaning |
@@ -525,19 +539,13 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | `component.focus.coreWidth` | dimension | `2px` | Crisp focus core, never blurred |
 | `component.focus.coreOffset` | dimension | `3px` | — |
 
-### Component · selection
-
-| Token | Type | Value | Meaning |
-| --- | --- | --- | --- |
-| `component.selection.railWidth` | dimension | `3px` | Selection is a leading rail plus label weight, never a check mark |
-| `component.selection.railHeight` | dimension | `15px` | — |
-
 ### Component · indicator
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
 | `component.indicator.size` | dimension | `20px` | Circular state badge |
 | `component.indicator.fieldSize` | dimension | `24px` | — |
+| `component.indicator.lineWidth` | dimension | `3px` | A line that marks: a drop target's rule, a selected swatch's ring, a quotation's leading rule |
 
 ## Deprecations
 

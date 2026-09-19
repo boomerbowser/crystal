@@ -309,20 +309,18 @@ selection in most systems.</p>
   demands</li>
 </ul>
 <p>The side menu on this page is the reference implementation.</p>
-<p><strong>There was a leading rail here until September 2026.</strong> It was removed at Meridian's
-direction: it was not in line with Crystal and, being drawn inside the control, it
-offset the very label it was meant to mark. The obligation it served — that selection
-never rests on colour alone — is met by weight, which is typographic rather than
-chromatic and survives every palette, dark mode and colour vision difference. The
-<code>component.selection.rail*</code> tokens are deprecated and still resolve.</p>
+<p>Nothing is drawn beside the label to mark it. A leading mark is drawn inside the
+control, so it offsets the very label it is meant to mark and the selected item stops
+lining up with the others. The obligation such a mark would serve — that selection
+never rests on colour alone — is already met by weight, which is typographic rather
+than chromatic and survives every palette, dark mode and colour vision difference.</p>
 <p>Why not a check: a check mark is a <em>statement about a value</em> — this field validated, this
 item is complete, this option is confirmed. If it also means "this is the current tab",
 then a list containing both validated items and a current item becomes unreadable, and a
 screen reader's "checked" state stops corresponding to anything the user can act on.</p>
-<p>Selection colour is never the only signal. A rail is positional, a weight change is
-typographic, and both survive the palette being changed, the mode being dark, and colour
-vision differences. This is WCAG 1.4.1 applied as a design rule rather than as a
-post-hoc check.</p>
+<p>Selection colour is never the only signal. A weight change is typographic, so it
+survives the palette being changed, the mode being dark, and colour vision differences.
+This is WCAG 1.4.1 applied as a design rule rather than as a post-hoc check.</p>
 <h3 id="selection-in-forced-colours">Selection in forced colours</h3>
 <p>A filled selected row is a defect in forced-colors mode — see
 <a href="accessibility.html#forced-colours">forced colours</a> for the reason and the correct

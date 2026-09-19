@@ -84,7 +84,7 @@
       "material": "Resin plane, Stone label backing, primary fill on the selected destination",
       "geometry": "Pill; 52px minimum destination height",
       "semantics": "nav landmark; aria-pressed or aria-current on the destination",
-      "crystal": "The single shared plane, selection rail and label weight, elevation",
+      "crystal": "The single shared plane, label weight for the current entry, elevation",
       "product": "Destinations and routing",
       "motion": [
         "selection",
@@ -134,7 +134,7 @@
       "material": "Resin strip, primary fill on the selected tab",
       "geometry": "Pill tabs inside a pill strip; 44px minimum",
       "semantics": "role=tablist/tab/tabpanel with arrow-key, Home and End navigation and aria-selected",
-      "crystal": "Strip material, selection rail and label weight, focus ring",
+      "crystal": "Strip material, label weight for the selected tab, focus ring",
       "product": "The roving tabindex implementation and panel content",
       "motion": [
         "tab-in"
@@ -255,7 +255,7 @@
       "material": "Haze rows on the surrounding surface",
       "geometry": "Indent step 20px; guides use the edge token",
       "semantics": "role=tree/treeitem/group with aria-expanded, aria-level and full arrow-key navigation",
-      "crystal": "Row treatment, indentation guides, selection rail",
+      "crystal": "Row treatment, indentation guides, label weight for the selected row",
       "product": "The keyboard navigation implementation, data and lazy loading",
       "motion": [
         "accordion-in",
@@ -334,7 +334,7 @@
         "focus-visible"
       ],
       "material": "Haze content fill",
-      "geometry": "Indentation follows heading depth; no rail marks the active entry.",
+      "geometry": "Indentation follows heading depth; label weight marks the active entry.",
       "semantics": "role=\"navigation\" with an accessible name; the active entry uses aria-current=\"location\".",
       "crystal": "Active marking by label weight, spacing",
       "product": "Which headings are collected, scroll spy thresholds",

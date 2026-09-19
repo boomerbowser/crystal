@@ -2165,7 +2165,7 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 </table></div>
 <h2 id="component-tokens">Component tokens</h2>
 <p>Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.</p>
-<p>34 tokens.</p>
+<p>37 tokens.</p>
 <h3 id="component-action">Component · action</h3>
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
@@ -2439,6 +2439,56 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 </tr>
 </tbody>
 </table></div>
+<h3 id="component-overlayarrow">Component · overlayArrow</h3>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Token</th>
+<th>Type</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>component.overlayArrow.size</code></td>
+<td>dimension</td>
+<td><code>14px</code></td>
+<td>The side of the rotated square that points at an overlay's trigger</td>
+</tr>
+<tr>
+<td><code>component.overlayArrow.radius</code></td>
+<td>dimension</td>
+<td><code>3px</code></td>
+<td>The arrow's tip radius, so a pointer is not a needle</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="component-overlay">Component · overlay</h3>
+<div class="cr-table-scroll"><table class="cr-table">
+<thead>
+<tr>
+<th>Token</th>
+<th>Type</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>component.overlay.maxWidth</code></td>
+<td>dimension</td>
+<td><code>480px</code></td>
+<td>How wide an anchored popover may grow before it stops being anchored to anything</td>
+</tr>
+<tr>
+<td><code>component.overlay.tooltipMaxWidth</code></td>
+<td>dimension</td>
+<td><code>352px</code></td>
+<td>About sixty characters: a tooltip longer than this is documentation</td>
+</tr>
+</tbody>
+</table></div>
 <h3 id="component-field">Component · field</h3>
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
@@ -2502,31 +2552,6 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 </tr>
 </tbody>
 </table></div>
-<h3 id="component-selection">Component · selection</h3>
-<div class="cr-table-scroll"><table class="cr-table">
-<thead>
-<tr>
-<th>Token</th>
-<th>Type</th>
-<th>Value</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>component.selection.railWidth</code></td>
-<td>dimension</td>
-<td><code>3px</code></td>
-<td>Selection is a leading rail plus label weight, never a check mark</td>
-</tr>
-<tr>
-<td><code>component.selection.railHeight</code></td>
-<td>dimension</td>
-<td><code>15px</code></td>
-<td>—</td>
-</tr>
-</tbody>
-</table></div>
 <h3 id="component-indicator">Component · indicator</h3>
 <div class="cr-table-scroll"><table class="cr-table">
 <thead>
@@ -2549,6 +2574,12 @@ tier. <code>tools/validate-tokens.cjs</code> checks the direction of every refer
 <td>dimension</td>
 <td><code>24px</code></td>
 <td>—</td>
+</tr>
+<tr>
+<td><code>component.indicator.lineWidth</code></td>
+<td>dimension</td>
+<td><code>3px</code></td>
+<td>A line that marks: a drop target's rule, a selected swatch's ring, a quotation's leading rule</td>
 </tr>
 </tbody>
 </table></div>

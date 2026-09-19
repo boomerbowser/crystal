@@ -124,7 +124,7 @@ dense layouts, because "dense" is a visual decision and the hand does not get mo
 
 Right-to-left is a verified axis, not an aspiration. Layout uses logical properties
 throughout — `inset-inline-start`, `padding-inline-start`, `margin-inline-end` — so mirroring
-is a direction change rather than a stylesheet. The selection rail, the menu indentation
+is a direction change rather than a stylesheet. The menu indentation, the drop indicator
 and the focus offset all follow.
 
 Physical properties are correct only where the meaning is physical: a light source is
@@ -161,10 +161,10 @@ backdrops with the fixed Resin fill.
 | Failures | 0 |
 | Lowest result of any kind | 3.07:1 |
 | Lowest normal-text result | 4.67:1 |
-| Checks run | 2026-09-18 |
+| Checks run | 2026-09-19 |
 
-Normal text is held to 4.5:1. Essential non-text — focus rings, control boundaries, the
-selection rail — uses its separate 3:1 threshold, which is the correct standard for those
+Normal text is held to 4.5:1. Essential non-text — focus rings, control boundaries,
+indicator lines — uses its separate 3:1 threshold, which is the correct standard for those
 elements rather than a relaxation for them.
 <!-- /generated:contrast -->
 

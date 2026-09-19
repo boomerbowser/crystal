@@ -150,8 +150,7 @@ public enum CrystalToken {
     public static let cardRadius = "28px"
     public static let focusCoreWidth = "2px"
     public static let focusCoreOffset = "3px"
-    public static let selectionRailWidth = "3px"
-    public static let selectionRailHeight = "15px"
     public static let indicatorSize = "20px"
     public static let indicatorFieldSize = "24px"
+    public static let indicatorLineWidth = "3px"
 }

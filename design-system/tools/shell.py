@@ -61,7 +61,7 @@ def menu(path):
 
     The current entry is marked with `aria-current="page"` and, visually, with a heavier
     label — never a check mark, which in Crystal means validated or informational, and
-    never a leading rail, which offsets the label it is meant to mark.
+    never a mark set beside the label, which offsets the very thing it points at.
     """
     prefix = prefix_for(path)
     groups = []

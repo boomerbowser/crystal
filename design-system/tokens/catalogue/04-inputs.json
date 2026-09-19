@@ -166,7 +166,7 @@
       "material": "Resin field shell, Resin popover with Haze rows",
       "geometry": "Popover content radius; rows inset 8px",
       "semantics": "role=combobox with aria-expanded, aria-controls and aria-activedescendant; the list is never focus-stealing",
-      "crystal": "Field and popover material, row treatment, selection rail, empty and loading appearance",
+      "crystal": "Field and popover material, row treatment, label weight for selection, empty and loading appearance",
       "product": "The accessible combobox implementation, filtering and async loading",
       "motion": [
         "popover-in",
@@ -384,7 +384,7 @@
       "material": "One Resin plane; primary fill on the selected segment",
       "geometry": "Pill strip and pill segments; 44px minimum",
       "semantics": "Radio group semantics, or aria-pressed on buttons; never aria-selected outside a tablist",
-      "crystal": "Shared plane, selection rail and label weight, focus ring",
+      "crystal": "Shared plane, label weight for the selected segment, focus ring",
       "product": "Options and change handling",
       "motion": [
         "selection"
@@ -703,7 +703,7 @@
       "material": "Haze list panels, Resin move actions",
       "geometry": "Content radius panels; pill actions",
       "semantics": "Each list is separately named; moves are announced; keyboard must move items without drag",
-      "crystal": "Panel and action treatment, selection rail in the lists",
+      "crystal": "Panel and action treatment, label weight for selection in the lists",
       "product": "The data, move rules and filtering",
       "motion": [
         "list-in",
@@ -730,7 +730,7 @@
       "material": "Resin popover, Haze columns",
       "geometry": "Content radius; columns separated by a hairline",
       "semantics": "Each column is a listbox; the composed value is announced as a path",
-      "crystal": "Popover and column treatment, selection rail",
+      "crystal": "Popover and column treatment, label weight for the selected column entry",
       "product": "The hierarchy, lazy loading and the keyboard implementation",
       "parity": [
         "antd:Cascader",

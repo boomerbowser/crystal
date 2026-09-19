@@ -65,9 +65,9 @@
         "checked-item"
       ],
       "material": "Resin surface with Haze rows",
-      "geometry": "Content radius; rows reserve leading room for the selection rail on every row",
+      "geometry": "Content radius; every row reserves leading room for a check mark, so ticking one does not shift its label",
       "semantics": "role=menu with full keyboard navigation, type-ahead and Escape; checkable items use aria-checked",
-      "crystal": "Surface, row treatment, rail placement, separators",
+      "crystal": "Surface, row treatment, row geometry, separators",
       "product": "The menu implementation, actions and dismissal",
       "motion": [
         "menu-in",

@@ -31,7 +31,7 @@ check('a check mark is never an indicator state', () => {
   assert.ok(every.every((v) => v !== 'check'));
 });
 
-check('selection resolves to the rail, not a badge glyph', () => {
+check('pressed, selected and checked all resolve to the selection kind', () => {
   assert.equal(state.resolveIndicator({ pressed: true }), 'selection');
   assert.equal(state.resolveIndicator({ selected: true }), 'selection');
   assert.equal(state.resolveIndicator({ checked: true }), 'selection');

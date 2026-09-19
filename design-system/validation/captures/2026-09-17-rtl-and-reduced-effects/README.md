@@ -1,5 +1,7 @@
 # Visual evidence — right-to-left and reduced effects
 
+> **Superseded in part.** The leading selection mark visible in these frames was withdrawn at Meridian's direction later the same day, because it offset the very label it marked. Selection is label weight alone; see `../2026-09-17-light-and-rest-motion/README.md`. The frames are kept as the record of the run that produced them, not as a picture of how Crystal looks now.
+
 Two axes the earlier gates did not cover. Adding them immediately found a real defect.
 
 | File | Shows |

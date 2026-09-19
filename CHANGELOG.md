@@ -23,7 +23,7 @@ Crystal 2.0 turns a design system with one web preview into a base that platform
 
 - **Controls no longer mutate the DOM.** Field shells, indicators and navigation classes are authored in markup or emitted by the renderer that owns the control. `controls.js` only reads state and sets attributes. This was the blocking item for every framework library.
 - **Focus rings are feathered** across four graded layers rather than a single hard-edged halo.
-- **Selection is a leading rail plus label weight.** A check mark now means validated or informational only.
+- **Selection is label weight alone.** A check mark now means validated or informational only, and nothing is drawn beside a label to mark it.
 - **Action controls are pills**, independent of the content radius. Card-shaped buttons keep the content radius.
 - **One shared header** across the playground, motion, specification and verification pages.
 

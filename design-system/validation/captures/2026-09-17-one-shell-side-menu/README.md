@@ -1,5 +1,7 @@
 # One shell, one side menu, and the documentation as the index
 
+> **Superseded in part.** The leading selection mark visible in these frames was withdrawn at Meridian's direction later the same day, because it offset the very label it marked. Selection is label weight alone; see `../2026-09-17-light-and-rest-motion/README.md`. The frames are kept as the record of the run that produced them, not as a picture of how Crystal looks now.
+
 Meridian asked for four things: the documentation home to become the index page, the
 navigation bar to become a side menu built from Crystal's own buttons, the Playground to be
 reformatted in line with the documentation and to link directly into it, and the

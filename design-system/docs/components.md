@@ -195,22 +195,20 @@ Selection is expressed with **label weight**:
 
 The side menu on this page is the reference implementation.
 
-**There was a leading rail here until September 2026.** It was removed at Meridian's
-direction: it was not in line with Crystal and, being drawn inside the control, it
-offset the very label it was meant to mark. The obligation it served — that selection
-never rests on colour alone — is met by weight, which is typographic rather than
-chromatic and survives every palette, dark mode and colour vision difference. The
-`component.selection.rail*` tokens are deprecated and still resolve.
+Nothing is drawn beside the label to mark it. A leading mark is drawn inside the
+control, so it offsets the very label it is meant to mark and the selected item stops
+lining up with the others. The obligation such a mark would serve — that selection
+never rests on colour alone — is already met by weight, which is typographic rather
+than chromatic and survives every palette, dark mode and colour vision difference.
 
 Why not a check: a check mark is a *statement about a value* — this field validated, this
 item is complete, this option is confirmed. If it also means "this is the current tab",
 then a list containing both validated items and a current item becomes unreadable, and a
 screen reader's "checked" state stops corresponding to anything the user can act on.
 
-Selection colour is never the only signal. A rail is positional, a weight change is
-typographic, and both survive the palette being changed, the mode being dark, and colour
-vision differences. This is WCAG 1.4.1 applied as a design rule rather than as a
-post-hoc check.
+Selection colour is never the only signal. A weight change is typographic, so it
+survives the palette being changed, the mode being dark, and colour vision differences.
+This is WCAG 1.4.1 applied as a design rule rather than as a post-hoc check.
 
 ### Selection in forced colours
 

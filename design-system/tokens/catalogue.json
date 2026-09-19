@@ -355,7 +355,7 @@
           "material": "Resin plane, Stone label backing, primary fill on the selected destination",
           "geometry": "Pill; 52px minimum destination height",
           "semantics": "nav landmark; aria-pressed or aria-current on the destination",
-          "crystal": "The single shared plane, selection rail and label weight, elevation",
+          "crystal": "The single shared plane, label weight for the current entry, elevation",
           "product": "Destinations and routing",
           "motion": [
             "selection",
@@ -405,7 +405,7 @@
           "material": "Resin strip, primary fill on the selected tab",
           "geometry": "Pill tabs inside a pill strip; 44px minimum",
           "semantics": "role=tablist/tab/tabpanel with arrow-key, Home and End navigation and aria-selected",
-          "crystal": "Strip material, selection rail and label weight, focus ring",
+          "crystal": "Strip material, label weight for the selected tab, focus ring",
           "product": "The roving tabindex implementation and panel content",
           "motion": [
             "tab-in"
@@ -526,7 +526,7 @@
           "material": "Haze rows on the surrounding surface",
           "geometry": "Indent step 20px; guides use the edge token",
           "semantics": "role=tree/treeitem/group with aria-expanded, aria-level and full arrow-key navigation",
-          "crystal": "Row treatment, indentation guides, selection rail",
+          "crystal": "Row treatment, indentation guides, label weight for the selected row",
           "product": "The keyboard navigation implementation, data and lazy loading",
           "motion": [
             "accordion-in",
@@ -605,7 +605,7 @@
             "focus-visible"
           ],
           "material": "Haze content fill",
-          "geometry": "Indentation follows heading depth; no rail marks the active entry.",
+          "geometry": "Indentation follows heading depth; label weight marks the active entry.",
           "semantics": "role=\"navigation\" with an accessible name; the active entry uses aria-current=\"location\".",
           "crystal": "Active marking by label weight, spacing",
           "product": "Which headings are collected, scroll spy thresholds",
@@ -1042,7 +1042,7 @@
           "material": "Resin field shell, Resin popover with Haze rows",
           "geometry": "Popover content radius; rows inset 8px",
           "semantics": "role=combobox with aria-expanded, aria-controls and aria-activedescendant; the list is never focus-stealing",
-          "crystal": "Field and popover material, row treatment, selection rail, empty and loading appearance",
+          "crystal": "Field and popover material, row treatment, label weight for selection, empty and loading appearance",
           "product": "The accessible combobox implementation, filtering and async loading",
           "motion": [
             "popover-in",
@@ -1260,7 +1260,7 @@
           "material": "One Resin plane; primary fill on the selected segment",
           "geometry": "Pill strip and pill segments; 44px minimum",
           "semantics": "Radio group semantics, or aria-pressed on buttons; never aria-selected outside a tablist",
-          "crystal": "Shared plane, selection rail and label weight, focus ring",
+          "crystal": "Shared plane, label weight for the selected segment, focus ring",
           "product": "Options and change handling",
           "motion": [
             "selection"
@@ -1579,7 +1579,7 @@
           "material": "Haze list panels, Resin move actions",
           "geometry": "Content radius panels; pill actions",
           "semantics": "Each list is separately named; moves are announced; keyboard must move items without drag",
-          "crystal": "Panel and action treatment, selection rail in the lists",
+          "crystal": "Panel and action treatment, label weight for selection in the lists",
           "product": "The data, move rules and filtering",
           "motion": [
             "list-in",
@@ -1606,7 +1606,7 @@
           "material": "Resin popover, Haze columns",
           "geometry": "Content radius; columns separated by a hairline",
           "semantics": "Each column is a listbox; the composed value is announced as a path",
-          "crystal": "Popover and column treatment, selection rail",
+          "crystal": "Popover and column treatment, label weight for the selected column entry",
           "product": "The hierarchy, lazy loading and the keyboard implementation",
           "parity": [
             "antd:Cascader",
@@ -2129,7 +2129,7 @@
           "material": "Haze rows on the surrounding surface",
           "geometry": "Content radius on rows; separators are hairlines",
           "semantics": "Real list semantics; interactive rows are buttons or links, not clickable divs",
-          "crystal": "Row treatment, separators, selection rail",
+          "crystal": "Row treatment, separators, label weight for the selected row",
           "product": "Content, virtualisation and row actions",
           "motion": [
             "list-in",
@@ -3225,9 +3225,9 @@
             "checked-item"
           ],
           "material": "Resin surface with Haze rows",
-          "geometry": "Content radius; rows reserve leading room for the selection rail on every row",
+          "geometry": "Content radius; every row reserves leading room for a check mark, so ticking one does not shift its label",
           "semantics": "role=menu with full keyboard navigation, type-ahead and Escape; checkable items use aria-checked",
-          "crystal": "Surface, row treatment, rail placement, separators",
+          "crystal": "Surface, row treatment, row geometry, separators",
           "product": "The menu implementation, actions and dismissal",
           "motion": [
             "menu-in",
@@ -3800,7 +3800,7 @@
             "rtl"
           ],
           "material": "None",
-          "geometry": "Mirrors directional geometry: bubble corners, selection rails, range tracks, drawer edges",
+          "geometry": "Mirrors directional geometry: bubble corners, range tracks, drawer edges, drop indicators",
           "semantics": "Sets a real dir attribute; logical properties do the rest",
           "crystal": "Which properties are directional and must mirror",
           "product": "Locale detection and content direction",

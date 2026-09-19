@@ -127,8 +127,8 @@
   .menu-item::before,.menu-item::after{content:none}
   .menu-item:hover{background:var(--cr-surface-alt);color:var(--cr-text)}
   /* Selection is label weight. Not a check mark, which means validated; and not a
-     leading rail, which offsets the very label it is meant to mark. Weight is
-     typographic rather than chromatic, so selection still never rests on colour alone. */
+     mark set beside the label, which offsets the very thing it is meant to mark. Weight
+     is typographic rather than chromatic, so selection still never rests on colour alone. */
   .menu-item[aria-current]{color:var(--cr-text);font-weight:800;background:var(--cr-surface-alt)}
   /* Forced colours: the current entry is a ring, never a fill. Chromium paints an opaque
      Canvas backplate behind text runs, above the element's own background, so a filled

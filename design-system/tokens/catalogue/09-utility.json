@@ -88,7 +88,7 @@
         "rtl"
       ],
       "material": "None",
-      "geometry": "Mirrors directional geometry: bubble corners, selection rails, range tracks, drawer edges",
+      "geometry": "Mirrors directional geometry: bubble corners, range tracks, drawer edges, drop indicators",
       "semantics": "Sets a real dir attribute; logical properties do the rest",
       "crystal": "Which properties are directional and must mirror",
       "product": "Locale detection and content direction",

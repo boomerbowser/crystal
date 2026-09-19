@@ -1,5 +1,7 @@
 # Visual evidence — focus, selection, geometry and header, 2026-09-17
 
+> **Superseded in part.** The leading selection mark visible in these frames was withdrawn at Meridian's direction later the same day, because it offset the very label it marked. Selection is label weight alone; see `../2026-09-17-light-and-rest-motion/README.md`. The frames are kept as the record of the run that produced them, not as a picture of how Crystal looks now.
+
 Captures taken in a real browser against the local preview, before and after the four Crystal 1.0 corrections. Desktop frames are 1440px wide; the narrow frame is 390px. Both light and dark appearances are represented.
 
 | File | Shows |

@@ -150,8 +150,7 @@ object CrystalToken {
     const val cardRadius = "28px"
     const val focusCoreWidth = "2px"
     const val focusCoreOffset = "3px"
-    const val selectionRailWidth = "3px"
-    const val selectionRailHeight = "15px"
     const val indicatorSize = "20px"
     const val indicatorFieldSize = "24px"
+    const val indicatorLineWidth = "3px"
 }

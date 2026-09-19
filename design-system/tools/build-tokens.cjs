@@ -338,11 +338,13 @@ function migrate() {
     'Card-shaped buttons keep the content radius so artwork is not clipped'));
   set(out.component, 'focus.coreWidth', leaf('dimension', '2px', 'Crisp focus core, never blurred'));
   set(out.component, 'focus.coreOffset', leaf('dimension', '3px'));
-  set(out.component, 'selection.railWidth', leaf('dimension', '3px',
-    'Selection is a leading rail plus label weight, never a check mark'));
-  set(out.component, 'selection.railHeight', leaf('dimension', '15px'));
   set(out.component, 'indicator.size', leaf('dimension', '20px', 'Circular state badge'));
   set(out.component, 'indicator.fieldSize', leaf('dimension', '24px'));
+  /* One thickness for every line that marks a thing rather than bounding it: a
+     hairline edge is 1px and belongs to the surface, this is heavier because it
+     is a statement about one item among several. */
+  set(out.component, 'indicator.lineWidth', leaf('dimension', '3px',
+    "A line that marks: a drop target's rule, a selected swatch's ring, a quotation's leading rule"));
 
   /* semantic: shape and the adjustable ranges the resolver clamps against */
   set(out.semantic, 'shape.contentRadius', leaf('dimension', dim(flat.default.radius),

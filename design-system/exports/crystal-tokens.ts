@@ -150,10 +150,9 @@ export const crystalTokens = {
   "card.radius": "28px",
   "focus.coreWidth": "2px",
   "focus.coreOffset": "3px",
-  "selection.railWidth": "3px",
-  "selection.railHeight": "15px",
   "indicator.size": "20px",
   "indicator.fieldSize": "24px",
+  "indicator.lineWidth": "3px",
 } as const;
 
 export type CrystalToken = keyof typeof crystalTokens;

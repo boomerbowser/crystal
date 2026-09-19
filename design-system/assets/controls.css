@@ -220,10 +220,11 @@ span.cr-field-shell :is(input,select,textarea):focus-visible{outline:0;box-shado
 [aria-busy=true]>.cr-indicator[data-kind=busy]{display:grid;}
 .cr-indicator[data-kind=current]::after{content:'●';font-size:9px;}
 .cr-indicator[data-kind=busy]::after{content:'…';font-size:14px;}
-/* The selection rail was removed at Meridian's direction: it is not in line with
-   Crystal and it offsets the label it sits beside. Selection is carried by label
-   weight, which is typographic rather than chromatic and so still satisfies the
-   requirement that selection never rests on colour alone. */
+/* Nothing is drawn for the selection kind. A mark set beside a label offsets the very
+   label it points at, so selection is carried by label weight instead — typographic
+   rather than chromatic, which still satisfies the requirement that selection never
+   rests on colour alone. The rules below suppress the badge the base indicator would
+   otherwise paint. */
 :is([aria-pressed=true],[aria-selected=true],[aria-checked=true])>.cr-indicator[data-kind=selection]{display:none}
 .cr-indicator[data-kind=selection]::before,.cr-indicator[data-kind=selection]::after{content:none;display:none;}
 :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true],[role=tab][aria-selected=true]){font-weight:800;}

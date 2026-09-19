@@ -282,7 +282,7 @@ One floating Resin plane holding labelled destinations on a shared Stone label g
 <tr><th scope="row">Material</th><td>Resin plane, Stone label backing, primary fill on the selected destination</td></tr>
 <tr><th scope="row">Geometry</th><td>Pill; 52px minimum destination height</td></tr>
 <tr><th scope="row">Semantics</th><td>nav landmark; aria-pressed or aria-current on the destination</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>The single shared plane, selection rail and label weight, elevation</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>The single shared plane, label weight for the current entry, elevation</td></tr>
 <tr><th scope="row">Product owns</th><td>Destinations and routing</td></tr>
 <tr><th scope="row">Motion</th><td><code>selection</code>, <code>page-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>mui:BottomNavigation · antd:Menu · mantine:SegmentedControl</td></tr>
@@ -314,7 +314,7 @@ A Resin tab strip with a selected tab and an associated panel.
 <tr><th scope="row">Material</th><td>Resin strip, primary fill on the selected tab</td></tr>
 <tr><th scope="row">Geometry</th><td>Pill tabs inside a pill strip; 44px minimum</td></tr>
 <tr><th scope="row">Semantics</th><td>role=tablist/tab/tabpanel with arrow-key, Home and End navigation and aria-selected</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Strip material, selection rail and label weight, focus ring</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Strip material, label weight for the selected tab, focus ring</td></tr>
 <tr><th scope="row">Product owns</th><td>The roving tabindex implementation and panel content</td></tr>
 <tr><th scope="row">Motion</th><td><code>tab-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Tabs · mui:Tabs · antd:Tabs</td></tr>
@@ -389,7 +389,7 @@ Nested disclosure rows with indentation guides and expand controls.
 <tr><th scope="row">Material</th><td>Haze rows on the surrounding surface</td></tr>
 <tr><th scope="row">Geometry</th><td>Indent step 20px; guides use the edge token</td></tr>
 <tr><th scope="row">Semantics</th><td>role=tree/treeitem/group with aria-expanded, aria-level and full arrow-key navigation</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Row treatment, indentation guides, selection rail</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Row treatment, indentation guides, label weight for the selected row</td></tr>
 <tr><th scope="row">Product owns</th><td>The keyboard navigation implementation, data and lazy loading</td></tr>
 <tr><th scope="row">Motion</th><td><code>accordion-in</code>, <code>accordion-out</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Tree · mui:TreeView · antd:Tree</td></tr>
@@ -444,7 +444,7 @@ A list of the headings in a document, marking the one in view.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>at-rest, active, focus-visible</td></tr>
 <tr><th scope="row">Material</th><td>Haze content fill</td></tr>
-<tr><th scope="row">Geometry</th><td>Indentation follows heading depth; no rail marks the active entry.</td></tr>
+<tr><th scope="row">Geometry</th><td>Indentation follows heading depth; label weight marks the active entry.</td></tr>
 <tr><th scope="row">Semantics</th><td>role="navigation" with an accessible name; the active entry uses aria-current="location".</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Active marking by label weight, spacing</td></tr>
 <tr><th scope="row">Product owns</th><td>Which headings are collected, scroll spy thresholds</td></tr>
@@ -715,7 +715,7 @@ A text field with a filtered popover list, keyboard highlight and optional creat
 <tr><th scope="row">Material</th><td>Resin field shell, Resin popover with Haze rows</td></tr>
 <tr><th scope="row">Geometry</th><td>Popover content radius; rows inset 8px</td></tr>
 <tr><th scope="row">Semantics</th><td>role=combobox with aria-expanded, aria-controls and aria-activedescendant; the list is never focus-stealing</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Field and popover material, row treatment, selection rail, empty and loading appearance</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Field and popover material, row treatment, label weight for selection, empty and loading appearance</td></tr>
 <tr><th scope="row">Product owns</th><td>The accessible combobox implementation, filtering and async loading</td></tr>
 <tr><th scope="row">Motion</th><td><code>popover-in</code>, <code>popover-out</code>, <code>list-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Autocomplete · mui:Autocomplete · antd:AutoComplete</td></tr>
@@ -848,7 +848,7 @@ A pill strip of mutually exclusive options sharing one Resin plane.
 <tr><th scope="row">Material</th><td>One Resin plane; primary fill on the selected segment</td></tr>
 <tr><th scope="row">Geometry</th><td>Pill strip and pill segments; 44px minimum</td></tr>
 <tr><th scope="row">Semantics</th><td>Radio group semantics, or aria-pressed on buttons; never aria-selected outside a tablist</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Shared plane, selection rail and label weight, focus ring</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Shared plane, label weight for the selected segment, focus ring</td></tr>
 <tr><th scope="row">Product owns</th><td>Options and change handling</td></tr>
 <tr><th scope="row">Motion</th><td><code>selection</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:SegmentedControl · mui:ToggleButtonGroup · antd:Segmented</td></tr>
@@ -1048,7 +1048,7 @@ Two lists with controls that move items between them.
 <tr><th scope="row">Material</th><td>Haze list panels, Resin move actions</td></tr>
 <tr><th scope="row">Geometry</th><td>Content radius panels; pill actions</td></tr>
 <tr><th scope="row">Semantics</th><td>Each list is separately named; moves are announced; keyboard must move items without drag</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Panel and action treatment, selection rail in the lists</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Panel and action treatment, label weight for selection in the lists</td></tr>
 <tr><th scope="row">Product owns</th><td>The data, move rules and filtering</td></tr>
 <tr><th scope="row">Motion</th><td><code>list-in</code>, <code>list-out</code></td></tr>
 <tr><th scope="row">Parity</th><td>antd:Transfer · mui:— · mantine:TransferList</td></tr>
@@ -1063,7 +1063,7 @@ Progressive columns narrowing a hierarchical selection.
 <tr><th scope="row">Material</th><td>Resin popover, Haze columns</td></tr>
 <tr><th scope="row">Geometry</th><td>Content radius; columns separated by a hairline</td></tr>
 <tr><th scope="row">Semantics</th><td>Each column is a listbox; the composed value is announced as a path</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Popover and column treatment, selection rail</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Popover and column treatment, label weight for the selected column entry</td></tr>
 <tr><th scope="row">Product owns</th><td>The hierarchy, lazy loading and the keyboard implementation</td></tr>
 <tr><th scope="row">Parity</th><td>antd:Cascader · mui:— · mantine:—</td></tr>
 </tbody></table></div>
@@ -1424,7 +1424,7 @@ Ordered or unordered rows with optional leading media and trailing actions.
 <tr><th scope="row">Material</th><td>Haze rows on the surrounding surface</td></tr>
 <tr><th scope="row">Geometry</th><td>Content radius on rows; separators are hairlines</td></tr>
 <tr><th scope="row">Semantics</th><td>Real list semantics; interactive rows are buttons or links, not clickable divs</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Row treatment, separators, selection rail</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Row treatment, separators, label weight for the selected row</td></tr>
 <tr><th scope="row">Product owns</th><td>Content, virtualisation and row actions</td></tr>
 <tr><th scope="row">Motion</th><td><code>list-in</code>, <code>list-out</code>, <code>reorder</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:List · mui:List · antd:List</td></tr>
@@ -2172,9 +2172,9 @@ A Resin popover of actions, with optional groups, separators and checkable items
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>closed, open, highlighted, disabled-item, checked-item</td></tr>
 <tr><th scope="row">Material</th><td>Resin surface with Haze rows</td></tr>
-<tr><th scope="row">Geometry</th><td>Content radius; rows reserve leading room for the selection rail on every row</td></tr>
+<tr><th scope="row">Geometry</th><td>Content radius; every row reserves leading room for a check mark, so ticking one does not shift its label</td></tr>
 <tr><th scope="row">Semantics</th><td>role=menu with full keyboard navigation, type-ahead and Escape; checkable items use aria-checked</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Surface, row treatment, rail placement, separators</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Surface, row treatment, row geometry, separators</td></tr>
 <tr><th scope="row">Product owns</th><td>The menu implementation, actions and dismissal</td></tr>
 <tr><th scope="row">Motion</th><td><code>menu-in</code>, <code>menu-out</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Menu · mui:Menu · antd:Dropdown</td></tr>
@@ -2605,7 +2605,7 @@ The scope declaring text direction for its subtree.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>ltr, rtl</td></tr>
 <tr><th scope="row">Material</th><td>None</td></tr>
-<tr><th scope="row">Geometry</th><td>Mirrors directional geometry: bubble corners, selection rails, range tracks, drawer edges</td></tr>
+<tr><th scope="row">Geometry</th><td>Mirrors directional geometry: bubble corners, range tracks, drawer edges, drop indicators</td></tr>
 <tr><th scope="row">Semantics</th><td>Sets a real dir attribute; logical properties do the rest</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Which properties are directional and must mirror</td></tr>
 <tr><th scope="row">Product owns</th><td>Locale detection and content direction</td></tr>
