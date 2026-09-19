@@ -433,7 +433,7 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.
 
-39 tokens.
+40 tokens.
 
 ### Component · action
 
@@ -558,6 +558,12 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
 | `component.tree.indentStep` | dimension | `20px` | How far one level of a tree is indented from its parent |
+
+### Component · haze
+
+| Token | Type | Value | Meaning |
+| --- | --- | --- | --- |
+| `component.haze.inset` | dimension | `8px` | How far a Resin surface holds its Haze content fill back from its own rim, so the glass edge still reads while the label sits on a stable ground. The fill is feathered and therefore lives on an isolated layer behind the content; feathering an element that contains text blurs the text. A Resin strip uses the same inset and its pills carry no material of their own. |
 
 ## Deprecations
 

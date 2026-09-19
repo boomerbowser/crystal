@@ -87,7 +87,7 @@ The `.cr-haze`, `.cr-well`, `.cr-bubble`, `.cr-content-fill` and `.cr-dialog` pr
 
 Neutral and tinted message surfaces both follow this recipe. The Harbor palette uses stronger supporting ink and a deeper authored-message fill to retain contrast with the added transparency. This is separate from the palette’s solid action/status colors. Actual input controls, status badges and consequential action buttons retain explicit boundaries and their protected color pairs; their surrounding content surface uses the softened fill. Stone retains its own label-backing opacity, separate from Haze.
 
-The reference includes a content card over a Resin panel. Its appearance follows the palette and light/dark controls, and opaque fallback restores a 100% fill with no feather. Reduced-transparency preferences and forced colors also restore stable surfaces. Exported CSS and JSON include `--cr-haze-fill`, `--cr-haze-own-fill`, `--cr-haze-feather`, and the corresponding content foreground roles.
+The reference includes a content card over a Resin panel. Its appearance follows the palette and light/dark controls, and opaque fallback restores a 100% fill with no feather. Reduced-transparency preferences and forced colors also restore stable surfaces. Exported CSS and JSON include `--cr-haze-fill`, `--cr-haze-own-fill`, `--cr-haze-feather`, `--cr-haze-inset`, and the corresponding content foreground roles.
 
 The contrast model tests 80% interior fill and a conservative 79% reading-area bound against RGB-corner backdrops in every palette and mode. It does not certify pixels along the intentionally fading perimeter; place no text in that perimeter and verify actual padding, imagery and layering in each product.
 
@@ -231,7 +231,7 @@ Inspect light/dark, every palette, strongest atmosphere, both Frost tint extreme
 
 ## Resin with Haze: interactive and compact surfaces
 
-Resin is the primary background for buttons and all interaction surfaces. Its body stays at 20% fill with the existing blur, saturation, illuminated rim and elevation. When contrast requires protection, put an 80% Haze reading fill inside that shell, with the existing 1.95px feather and an 8px visible Resin perimeter. Keep text sufficiently inset from the feather. The adjustable preview always uses this protected construction.
+Resin is the primary background for buttons and all interaction surfaces. Its body stays at 20% fill with the existing blur, saturation, illuminated rim and elevation. When contrast requires protection, put an 80% Haze reading fill inside that shell, with the existing 1.95px feather and an 8px visible Resin perimeter, exported as `--cr-haze-inset`. That inset is a token rather than a number each library retypes: the fill and its feather were always exported, the inset was not, and a library can carry every Haze token and still paint no fill at all. Keep text sufficiently inset from the feather. The adjustable preview always uses this protected construction.
 
 This same composition is required for small information displays—tooltips, toasts, labels, tags and badges—and temporary secondary menus, dropdowns, flyouts and popovers. It does not replace the structural Plastic → Frost → Resin hierarchy or turn every large component into Resin. Stone remains a named material with its own standalone specifications; compact UI labels now choose Resin/Haze instead of an isolated Stone slab.
 

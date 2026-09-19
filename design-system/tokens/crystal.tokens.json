@@ -1941,6 +1941,13 @@
         "$value": "20px",
         "$description": "How far one level of a tree is indented from its parent"
       }
+    },
+    "haze": {
+      "inset": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "How far a Resin surface holds its Haze content fill back from its own rim, so the glass edge still reads while the label sits on a stable ground. The fill is feathered and therefore lives on an isolated layer behind the content; feathering an element that contains text blurs the text. A Resin strip uses the same inset and its pills carry no material of their own."
+      }
     }
   },
   "$deprecated": {

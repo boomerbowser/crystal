@@ -69,6 +69,13 @@
       '--cr-content-own-base':p.contentOwnSurface||p.primarySoft,
       '--cr-content-own-fill':s.reduced?(p.contentOwnSurface||p.primarySoft):rgba(p.contentOwnSurface||p.primarySoft,data.material.contentOpacity),
       '--cr-content-feather':s.reduced?'0px':data.material.contentFeather+'px',
+      /* How far the Haze content fill is held back from a Resin surface's own
+         rim. The fill and its feather were always tokens; the inset was a
+         literal in a stylesheet Crystal does not export, so a platform library
+         could carry every Haze token and still paint no fill at all — which is
+         exactly what Crystal React did on sixteen surfaces. A recipe that only
+         one renderer knows is not a specification. */
+      '--cr-haze-inset':data.component.haze.inset+'px',
       '--cr-content-muted':s.palette==='harbor'?p.text:p.muted,
       '--cr-content-own-text':s.palette==='harbor'?p.text:p.onPrimarySoft,
       '--cr-stone-feather':s.reduced?'0px':data.material.stoneFeather+'px',

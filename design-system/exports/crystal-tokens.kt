@@ -155,4 +155,5 @@ object CrystalToken {
     const val indicatorLineWidth = "3px"
     const val anchorUnderlineOffset = "4px"
     const val treeIndentStep = "20px"
+    const val hazeInset = "8px"
 }

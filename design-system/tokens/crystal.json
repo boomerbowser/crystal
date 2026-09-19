@@ -476,6 +476,9 @@
     },
     "tree": {
       "indentStep": 20
+    },
+    "haze": {
+      "inset": 8
     }
   },
   "spacing": {

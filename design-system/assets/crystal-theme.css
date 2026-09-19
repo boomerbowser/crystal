@@ -33,6 +33,7 @@
   --cr-content-own-base: #e6dbfc;
   --cr-content-own-fill: rgba(230, 219, 252, 0.8);
   --cr-content-feather: 1.95px;
+  --cr-haze-inset: 8px;
   --cr-content-muted: #402e76;
   --cr-content-own-text: #2b195a;
   --cr-stone-feather: 1.95px;
@@ -173,6 +174,7 @@
   --cr-content-own-base: #e6dbfc;
   --cr-content-own-fill: rgba(230, 219, 252, 0.8);
   --cr-content-feather: 1.95px;
+  --cr-haze-inset: 8px;
   --cr-content-muted: #402e76;
   --cr-content-own-text: #2b195a;
   --cr-stone-feather: 1.95px;
@@ -313,6 +315,7 @@
   --cr-content-own-base: #331e65;
   --cr-content-own-fill: rgba(51, 30, 101, 0.8);
   --cr-content-feather: 1.95px;
+  --cr-haze-inset: 8px;
   --cr-content-muted: #dbcbfb;
   --cr-content-own-text: #ebe3fd;
   --cr-stone-feather: 1.95px;
