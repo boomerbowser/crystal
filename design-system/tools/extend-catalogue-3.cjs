@@ -21,7 +21,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const DIR = path.resolve(__dirname, '../tokens/catalogue');
+const DIR = path.resolve(__dirname, '../core/tokens/catalogue');
 const WRITE = process.argv.includes('--write');
 
 const R = 'Resin', H = 'Haze', F = 'Frost', S = 'Stone';

@@ -22,7 +22,7 @@ Prism, Fuchsia and Amethyst emphasize violet/magenta away from conventional traf
 | Harbor | `#4669B2` | `#8970B5` | `#72C4DF` |
 <!-- /generated:palettes -->
 
-The seed is not automatically a text color. The canonical [token JSON](../tokens/crystal.json) defines paired light/dark values. The bold palette entries are authored sRGB mixtures; they do not use or claim conformity to Material’s tonal generator. Harbor retains mapped values from the original generated palette.
+The seed is not automatically a text color. The canonical [token JSON](../core/tokens/crystal.json) defines paired light/dark values. The bold palette entries are authored sRGB mixtures; they do not use or claim conformity to Material’s tonal generator. Harbor retains mapped values from the original generated palette.
 
 ## Token layers
 
@@ -76,10 +76,10 @@ product. Brand identity is expressed in the primary; safety is not available for
 expression.
 
 <div class="feedback-grid">
-<span class="cr-status" data-status="success"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#check"/></svg></span>Ready</span>
-<span class="cr-status" data-status="attention"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#attention"/></svg></span>Needs review</span>
-<span class="cr-status" data-status="danger"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#alert"/></svg></span>Failed</span>
-<span class="cr-status" data-status="info"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#info"/></svg></span>Scheduled</span>
+<span class="cr-status" data-status="success"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../core/assets/icons.svg#check"/></svg></span>Ready</span>
+<span class="cr-status" data-status="attention"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../core/assets/icons.svg#attention"/></svg></span>Needs review</span>
+<span class="cr-status" data-status="danger"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../core/assets/icons.svg#alert"/></svg></span>Failed</span>
+<span class="cr-status" data-status="info"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../core/assets/icons.svg#info"/></svg></span>Scheduled</span>
 </div>
 
 These render identically under all six palettes. Switch palettes in the

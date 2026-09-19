@@ -12,10 +12,10 @@ const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
 const SOURCE = path.join(ROOT, 'node_modules/lucide-static/icons');
-const OUT = path.join(ROOT, 'assets/icons');
+const OUT = path.join(ROOT, 'core/assets/icons');
 const MANIFEST = path.join(OUT, 'manifest.json');
-const SPRITE = path.join(ROOT, 'assets/icons.svg');
-const LICENSE_OUT = path.join(ROOT, 'reference/licenses/lucide-LICENSE.txt');
+const SPRITE = path.join(ROOT, 'core/assets/icons.svg');
+const LICENSE_OUT = path.join(ROOT, 'core/licenses/lucide-LICENSE.txt');
 
 const TARGET = 1000;
 
@@ -123,7 +123,7 @@ fs.writeFileSync(MANIFEST, JSON.stringify({
   total: entries.length,
   sources: {
     crystal: { count: entries.filter((e) => e.source === 'crystal').length, license: 'Original work' },
-    lucide: { count: entries.filter((e) => e.source === 'lucide').length, license: 'ISC', notice: 'reference/licenses/lucide-LICENSE.txt' },
+    lucide: { count: entries.filter((e) => e.source === 'lucide').length, license: 'ISC', notice: 'core/licenses/lucide-LICENSE.txt' },
   },
   icons: entries,
 }, null, 2) + '\n');

@@ -1,5 +1,5 @@
 // Crystal 2.0.0 design tokens.
-// Generated from core/tokens/crystal.tokens.json. Do not edit by hand.
+// Generated from tokens/crystal.tokens.json. Do not edit by hand.
 
 export const crystalTokens = {
   "material.frost.diffusion": "40px",

@@ -490,7 +490,7 @@
     "xl": 32,
     "2xl": 48
   },
-  "schemaNote": "Generated from tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.",
+  "schemaNote": "Generated from core/tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.",
   "materials": {
     "plastic": {
       "name": "Plastic",

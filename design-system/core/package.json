@@ -1,0 +1,77 @@
+{
+  "name": "@crystal/core",
+  "version": "2.0.0",
+  "description": "Crystal design system: tokens, material primitives, headless core, icons and specifications.",
+  "keywords": [],
+  "type": "commonjs",
+  "license": "SEE LICENSE IN licenses",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boomerbowser/crystal.git",
+    "directory": "design-system/core"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public",
+    "provenance": true
+  },
+  "exports": {
+    ".": "./exports/crystal-tokens.ts",
+    "./tokens": "./tokens/crystal.tokens.json",
+    "./css": "./assets/crystal.css",
+    "./theme": "./assets/crystal-theme.css",
+    "./core": {
+      "types": "./assets/core/state.d.ts",
+      "default": "./assets/core/state.js"
+    },
+    "./icons": "./assets/icons/manifest.json",
+    "./core/state": {
+      "types": "./assets/core/state.d.ts",
+      "default": "./assets/core/state.js"
+    },
+    "./core/preferences": {
+      "types": "./assets/core/preferences.d.ts",
+      "default": "./assets/core/preferences.js"
+    },
+    "./core/spring": "./assets/core/spring.js",
+    "./motion-recipes": "./tokens/motion-recipes.json",
+    "./engines": "./engines.js",
+    "./shaders/": "./assets/shaders/",
+    "./flat": "./tokens/crystal.json",
+    "./core/presets": {
+      "types": "./assets/core/presets.d.ts",
+      "default": "./assets/core/presets.js"
+    },
+    "./catalogue": "./tokens/catalogue.json",
+    "./resolver": {
+      "types": "./assets/crystal.d.ts",
+      "default": "./assets/crystal.js"
+    }
+  },
+  "files": [
+    "assets/crystal.js",
+    "assets/crystal.d.ts",
+    "assets/crystal.css",
+    "assets/crystal-theme.css",
+    "assets/motion.js",
+    "assets/motion.css",
+    "assets/tokens.js",
+    "assets/icons.js",
+    "assets/icons.svg",
+    "assets/icon.svg",
+    "assets/grain.svg",
+    "assets/core/",
+    "assets/icons/",
+    "assets/shaders/",
+    "assets/fonts/",
+    "tokens/",
+    "exports/",
+    "engines.js",
+    "licenses/",
+    "README.md"
+  ],
+  "dependencies": {
+    "gsap": "3.15.0",
+    "motion": "13.4.0"
+  }
+}

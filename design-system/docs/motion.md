@@ -230,8 +230,8 @@ including that reduced motion still applies the state instantly.
 
 <!-- generated:recipes -->
 
-All 55 recipes in 9 categories, generated from `tokens/motion-recipes.json`. **Damping ratio** and
-**overshoot** are derived from each recipe's spring by `assets/core/spring.js`, not
+All 55 recipes in 9 categories, generated from `core/tokens/motion-recipes.json`. **Damping ratio** and
+**overshoot** are derived from each recipe's spring by `core/assets/core/spring.js`, not
 authored — so a spring that was retuned cannot leave a stale number behind in this table.
 
 A damping ratio below 1 overshoots and settles back; exactly 1 is the fastest approach
@@ -350,7 +350,7 @@ correct is a material question, not a taste question — see the signature polic
 
 <!-- generated:shaders -->
 
-Generated from `assets/shaders/manifest.json` (version 2.0.0).
+Generated from `core/assets/shaders/manifest.json` (version 2.0.0).
 
 **The contract is the uniform set, not the GLSL.** A platform that honours these
 uniforms has implemented Crystal's shader layer correctly, whether it does so in

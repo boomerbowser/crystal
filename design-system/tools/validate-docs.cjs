@@ -22,7 +22,7 @@ const expect = (where, needle, why) => {
 };
 
 /* Material recipe values. These are the numbers Crystal may never let drift. */
-const m = read('tokens/crystal.json').material;
+const m = read('core/tokens/crystal.json').material;
 const pct = v => `${Math.round(v * 100)}%`;
 for (const [needle, why] of [
   [`${m.acrylicBlur}px`, 'Frost diffusion (primitive.material.acrylicBlur)'],
@@ -38,15 +38,17 @@ for (const [needle, why] of [
 ]) expect('materials.md', needle, why);
 
 /* Engine versions, stated in two chapters. */
-const pkg = read('package.json');
+/* The published manifest, because the versions the documentation quotes are the
+   ones a consumer installs — not the ones the workspace happens to build with. */
+const pkg = read('core/package.json');
 for (const where of ['adoption.md', 'motion-components.md']) {
   expect(where, `Motion ${pkg.dependencies.motion}`, 'the pinned Motion version');
   expect(where, `GSAP ${pkg.dependencies.gsap}`, 'the pinned GSAP version');
 }
 
 /* Counts that prose states in words. */
-const recipes = read('tokens/motion-recipes.json').recipes.length;
-const categories = new Set(read('tokens/motion-recipes.json').recipes.map(r => r.category)).size;
+const recipes = read('core/tokens/motion-recipes.json').recipes.length;
+const categories = new Set(read('core/tokens/motion-recipes.json').recipes.map(r => r.category)).size;
 expect('motion-components.md', `${recipes} executable component recipes`, 'the recipe count');
 expect('accessibility.md', `${recipes} motion recipes`, 'the recipe count');
 const words = { 9: 'nine', 10: 'ten', 11: 'eleven', 12: 'twelve' };

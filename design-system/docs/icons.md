@@ -20,11 +20,11 @@ Icons beside text are decorative and hidden from assistive technology. An icon-o
 
 ## Gallery
 
-<div id="icon-gallery" data-manifest="../assets/icons/manifest.json">
+<div id="icon-gallery" data-manifest="../core/assets/icons/manifest.json">
   <p class="stage-note">Enable JavaScript to search the icon set. The complete list is in <code>assets/icons/manifest.json</code>.</p>
 </div>
 
-<script src="../assets/icons.js" defer></script>
+<script src="../core/assets/icons.js" defer></script>
 
 ## The sets
 
@@ -33,10 +33,10 @@ Icons beside text are decorative and hidden from assistive technology. An icon-o
 | Source | Count | Licence |
 |---|---|---|
 | crystal | 13 | Original work |
-| lucide | 998 | ISC ([notice](../reference/licenses/lucide-LICENSE.txt)) |
+| lucide | 998 | ISC ([notice](../core/licenses/lucide-LICENSE.txt)) |
 | **Total** | **1011** | |
 
 One grid: `0 0 24 24` view box, 1.8px strokes, round caps and round joins, and `currentColor` so every icon inherits a tested foreground colour.
 
-This site's own interface uses 13 of them, inlined as a sprite in `assets/icons.svg`; the full set is one file per icon under `assets/icons/`.
+This site's own interface uses 13 of them, inlined as a sprite in `core/assets/icons.svg`; the full set is one file per icon under `core/assets/icons/`.
 <!-- /generated:icon-counts -->

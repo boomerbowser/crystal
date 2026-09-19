@@ -4,8 +4,8 @@
  * design system promises has changed — check the specification before the code.
  */
 const assert = require('node:assert/strict');
-const state = require('../assets/core/state.js');
-const preferences = require('../assets/core/preferences.js');
+const state = require('../core/assets/core/state.js');
+const preferences = require('../core/assets/core/preferences.js');
 
 const results = [];
 function check(name, fn) {
@@ -132,7 +132,7 @@ check('a missing or invalid speed falls back to 1x', () => {
 
 /* ------------------------------------------------------------- springs */
 
-const spring = require('../assets/core/spring.js');
+const spring = require('../core/assets/core/spring.js');
 
 check('a critically damped spring does not overshoot', () => {
   const critical = { stiffness: 180, damping: 2 * Math.sqrt(180), mass: 1 };
@@ -206,7 +206,7 @@ check('the platform mapping round-trips the damping ratio', () => {
    This is a source check because it cannot be a runtime one: a branch that did
    not apply leaves nothing in the computed style to look at. */
 check('every webkit scrollbar rule sits behind the legacy guard', () => {
-  const source = require('node:fs').readFileSync(require('node:path').join(__dirname, '../assets/crystal.css'), 'utf8');
+  const source = require('node:fs').readFileSync(require('node:path').join(__dirname, '../core/assets/crystal.css'), 'utf8');
   /* Comments name the pseudo-element in order to explain it. Blanked rather than
      deleted so the offsets below still point at the real line. */
   const css = source.replace(/\/\*[\s\S]*?\*\//g, (comment) => comment.replace(/[^\n]/g, ' '));
@@ -233,7 +233,7 @@ check('every webkit scrollbar rule sits behind the legacy guard', () => {
    Crystal's, on the one component whose whole reason for being focusable is
    accessibility. */
 check('the focus halo reaches anything focusable, not only native controls', () => {
-  const css = require('node:fs').readFileSync(require('node:path').join(__dirname, '../assets/crystal.css'), 'utf8');
+  const css = require('node:fs').readFileSync(require('node:path').join(__dirname, '../core/assets/crystal.css'), 'utf8');
   for (const rule of css.match(/[^{}]*:focus-visible[^{}]*\{[^}]*\}/g) ?? []) {
     if (!/outline:[^;]*var\(--cr-focus-core/.test(rule)) continue;
     assert.match(rule, /\[tabindex\]:focus-visible/,
@@ -266,7 +266,7 @@ check('every breakpoint in site.css is a token or a named exception', () => {
   const path = require('node:path');
   const here = path.join(__dirname, '..');
   const css = fs.readFileSync(path.join(here, 'assets/site.css'), 'utf8');
-  const tokens = JSON.parse(fs.readFileSync(path.join(here, 'tokens/crystal.tokens.json'), 'utf8'));
+  const tokens = JSON.parse(fs.readFileSync(path.join(here, 'core/tokens/crystal.tokens.json'), 'utf8'));
   const shell = new Set(Object.values(tokens.semantic.breakpoint)
     .map((leaf) => Number.parseInt(leaf.$value, 10)));
   assert.equal(shell.size, 4, 'expected four shell breakpoints');

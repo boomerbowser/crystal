@@ -4,7 +4,7 @@ Crystal specifies **285 components** across 14 categories. Parity is measured ag
 
 Crystal specifies appearance: anatomy, states, material, geometry and the semantics a correct implementation must expose. It does not ship focus management, menu keyboard behaviour, date arithmetic or a rich-text engine. Products bring their own accessible primitives and dress them in Crystal. Every entry states this split explicitly, so what the system owes you and what you owe the system are never in doubt.
 
-This chapter is generated from `tokens/catalogue/`. The same source generates the parity manifest in `libraries/parity.json`, so a component cannot appear in one and not the other.
+This chapter is generated from `core/tokens/catalogue/`. The same source generates the parity manifest in `libraries/parity.json`, so a component cannot appear in one and not the other.
 
 ## Coverage
 

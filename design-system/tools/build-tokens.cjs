@@ -15,8 +15,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
-const FLAT = path.join(ROOT, 'tokens/crystal.json');
-const DTCG = path.join(ROOT, 'tokens/crystal.tokens.json');
+const FLAT = path.join(ROOT, 'core/tokens/crystal.json');
+const DTCG = path.join(ROOT, 'core/tokens/crystal.tokens.json');
 const EXPORTS = path.join(ROOT, 'exports');
 
 const MODE_ROLES = {
@@ -87,7 +87,7 @@ function migrate() {
       system: flat.name,
       version: flat.version,
       basis: flat.basis,
-      generatedFrom: 'tokens/crystal.json',
+      generatedFrom: 'core/tokens/crystal.json',
     },
     primitive: {},
     semantic: {},
@@ -502,7 +502,7 @@ function buildFlat(tokens) {
       leading: values.leading.$value,
       tracking: values.tracking.$value,
     }]));
-  flat.schemaNote = 'Generated from tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.';
+  flat.schemaNote = 'Generated from core/tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.';
   flat.materials = MATERIALS;
   return flat;
 }
@@ -538,7 +538,7 @@ function platformExports(tokens) {
   if (rows.length === semanticCount) throw new Error('Component tier produced no tokens');
 
   const camel = (s) => s.replace(/[.-](\w)/g, (_, c) => c.toUpperCase());
-  const banner = (c) => `${c} Crystal ${tokens.$meta.version} design tokens.\n${c} Generated from tokens/crystal.tokens.json. Do not edit by hand.\n`;
+  const banner = (c) => `${c} Crystal ${tokens.$meta.version} design tokens.\n${c} Generated from core/tokens/crystal.tokens.json. Do not edit by hand.\n`;
   const lit = (v) => JSON.stringify(String(v));
 
   fs.writeFileSync(path.join(EXPORTS, 'crystal-tokens.ts'),

@@ -29,7 +29,7 @@ for p in pages:
 # Every sprite symbol a page references must exist, and every icon the manifest
 # names must be present. A missing symbol renders as nothing at all, which no
 # link check catches because the file itself resolves.
-sprite=(ROOT/'assets/icons.svg').read_text()
+sprite=(ROOT/'core/assets/icons.svg').read_text()
 sprite_ids=set(re.findall(r'<symbol[^>]*id="([^"]+)"',sprite))
 used=set()
 for p_ in pages:
@@ -37,7 +37,7 @@ for p_ in pages:
         used.add(m.group(2))
         if m.group(2) not in sprite_ids:
             errors.append(f'{p_.relative_to(ROOT)}: sprite has no symbol #{m.group(2)}')
-manifest_path=ROOT/'assets/icons/manifest.json'
+manifest_path=ROOT/'core/assets/icons/manifest.json'
 icons_checked=0
 if manifest_path.exists():
     manifest=json.loads(manifest_path.read_text())
@@ -45,13 +45,16 @@ if manifest_path.exists():
         if icon['source']=='crystal':
             if icon['id'] not in sprite_ids:
                 errors.append(f"manifest: original symbol {icon['id']} missing from the sprite")
-        elif not (ROOT/'assets/icons'/f"{icon['id']}.svg").exists():
+        elif not (ROOT/'core/assets/icons'/f"{icon['id']}.svg").exists():
             errors.append(f"manifest: {icon['id']}.svg missing from assets/icons")
         icons_checked+=1
     if manifest['total']!=len(manifest['icons']):
         errors.append('manifest: total does not match the icon list')
 
-for css in (ROOT/'assets').glob('*.css'):
+# Both sides of the boundary: the library's stylesheets under core/ and the
+# preview's own. A url() that resolves in one tree and not the other is exactly
+# what a move like this breaks.
+for css in sorted(list((ROOT/'core/assets').glob('*.css'))+list((ROOT/'assets').glob('*.css'))):
     if re.search(r'(?im)^\s*<(?:!doctype|html\b)',css.read_text()):errors.append(f'{css.name}: HTML in stylesheet')
     for raw in re.findall(r'url\([\'"]?([^\)\'\"]+)',css.read_text()):
         if raw.startswith('data:'):continue
@@ -70,6 +73,14 @@ for p_ in pages:
             if not raw:continue
             name=urlsplit(raw).path.rsplit('/',1)[-1]
             if name:referenced.add(name)
+# Only the preview's own assets. A library asset's job is to be *exported*, not to
+# be loaded by a documentation page — `core/package.json`'s exports and
+# `tools/verify-package.cjs` are what hold that side. Globbing core/ here would
+# report every published file the site happens not to use as dead, which is how a
+# gate starts being argued with instead of obeyed.
+#
+# The other direction still works: the link check above resolves every path a page
+# references, so a library file that moves out from under the site fails there.
 for asset in sorted(list(ROOT.glob('assets/*.js'))+list(ROOT.glob('assets/*.css'))):
     if asset.name not in referenced:errors.append(f'assets/{asset.name}: referenced by no page')
 manifest=json.loads((ROOT/'reference/provenance.json').read_text())

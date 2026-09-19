@@ -1,5 +1,5 @@
 // Crystal 2.0.0 design tokens.
-// Generated from core/tokens/crystal.tokens.json. Do not edit by hand.
+// Generated from tokens/crystal.tokens.json. Do not edit by hand.
 
 public enum CrystalToken {
     public static let materialFrostDiffusion = "40px"

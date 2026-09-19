@@ -36,9 +36,9 @@ SITE = [
 ]
 
 # Loaded by every page. Order matters: tokens define the theme the rest reads.
-BASE_STYLES = ['assets/crystal-theme.css', 'assets/crystal.css', 'assets/site.css']
-BASE_SCRIPTS = ['assets/tokens.js', 'assets/crystal.js', 'assets/core/state.js',
-                'assets/core/preferences.js', 'assets/core/spring.js',
+BASE_STYLES = ['core/assets/crystal-theme.css', 'core/assets/crystal.css', 'assets/site.css']
+BASE_SCRIPTS = ['core/assets/tokens.js', 'core/assets/crystal.js', 'core/assets/core/state.js',
+                'core/assets/core/preferences.js', 'core/assets/core/spring.js',
                 'assets/motion-shaders.js', 'assets/menu.js']
 # Cache-busted together, because the pill focus recipe spans both files.
 CONTROLS = 'v=pill-focus-2'
@@ -98,7 +98,7 @@ def document(*, title, path, content, description=DESCRIPTION, styles=(), script
         '<meta name="color-scheme" content="light dark">'
         f'<meta name="description" content="{html.escape(description)}">'
         f'<title>{html.escape(title if title == "Crystal" else title + " · Crystal")}</title>'
-        f'<link rel="icon" href="{rel(prefix, "assets/icon.svg")}" type="image/svg+xml">'
+        f'<link rel="icon" href="{rel(prefix, "core/assets/icon.svg")}" type="image/svg+xml">'
         f'{css}'
         f'<link rel="stylesheet" href="{rel(prefix, "assets/controls.css")}?{CONTROLS}">'
         f'{js}'
@@ -110,7 +110,7 @@ def document(*, title, path, content, description=DESCRIPTION, styles=(), script
         '<header class="site-header">'
         f'<a class="wordmark" href="{rel(prefix, "index.html")}" aria-label="Crystal design system">'
         '<span class="mark" aria-hidden="true"><svg aria-hidden="true" focusable="false" '
-        f'viewBox="0 0 24 24"><use href="{rel(prefix, "assets/icons.svg")}#crystal"/></svg></span>'
+        f'viewBox="0 0 24 24"><use href="{rel(prefix, "core/assets/icons.svg")}#crystal"/></svg></span>'
         'crystal <small>Design system</small></a>'
         '<button class="cr-control menu-toggle" type="button" id="menu-toggle" '
         'aria-expanded="false" aria-controls="site-menu">Sections</button>'

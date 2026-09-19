@@ -15,10 +15,10 @@ import shell
 subprocess.run(['node', 'tools/build-tokens.cjs'], cwd=ROOT, check=True)
 subprocess.run(['node', 'tools/build-catalogue.cjs'], cwd=ROOT, check=True)
 subprocess.run(['node', 'tools/build-reference.cjs'], cwd=ROOT, check=True)
-data = json.loads((ROOT / 'tokens/crystal.json').read_text())
-(ROOT / 'assets/tokens.js').write_text(
+data = json.loads((ROOT / 'core/tokens/crystal.json').read_text())
+(ROOT / 'core/assets/tokens.js').write_text(
     'window.CRYSTAL_TOKENS = ' + json.dumps(data, separators=(',', ':')) + ';\n')
-subprocess.run(['node', '-e', "const f=require('fs'),v=require('vm');const c={window:{}};v.createContext(c);for(const p of ['assets/tokens.js','assets/crystal.js'])v.runInContext(f.readFileSync(p,'utf8'),c);f.writeFileSync('assets/crystal-theme.css',c.window.Crystal.exportCSS());"],
+subprocess.run(['node', '-e', "const f=require('fs'),v=require('vm');const c={window:{}};v.createContext(c);for(const p of ['core/assets/tokens.js','core/assets/crystal.js'])v.runInContext(f.readFileSync(p,'utf8'),c);f.writeFileSync('core/assets/crystal-theme.css',c.window.Crystal.exportCSS());"],
                cwd=ROOT, check=True)
 
 # Assets the interactive pages need on top of the shared base. These lists are the
@@ -28,13 +28,13 @@ subprocess.run(['node', '-e', "const f=require('fs'),v=require('vm');const c={wi
 # dropped entry here.
 INTERACTIVE = ['assets/vendor/crystal-engines.js?v=modal-cleanup-1', 'assets/motion-catalog.js',
                # The shared preset module must load before motion.js, which reads it.
-               'assets/core/presets.js', 'assets/motion.js', 'assets/motion-interactions.js']
+               'core/assets/core/presets.js', 'core/assets/motion.js', 'assets/motion-interactions.js']
 PAGE_ASSETS = {
-    'playground': {'styles': ['assets/motion.css'],
+    'playground': {'styles': ['core/assets/motion.css'],
                    'scripts': INTERACTIVE + ['assets/site.js']},
     # The motion studies page is the suite: its own layout, the preview player and the
     # suite chrome. Without these three the page renders as unstyled, unplayable markup.
-    'motion': {'styles': ['assets/motion.css', 'assets/motion-suite.css'],
+    'motion': {'styles': ['core/assets/motion.css', 'assets/motion-suite.css'],
                'scripts': INTERACTIVE + ['assets/motion-preview.js',
                                          'assets/motion-suite.js?v=pill-focus-2']},
 }
@@ -66,7 +66,7 @@ for p in sorted((ROOT / 'docs').glob('*.md')):
     title, content = render_markdown(p)
     (ROOT / 'docs' / f'{p.stem}.html').write_text(shell.document(
         title=title, path=f'docs/{p.stem}.html', content=content,
-        styles=['assets/motion.css'], scripts=['assets/docs.js'],
+        styles=['core/assets/motion.css'], scripts=['assets/docs.js'],
         skip='Skip to specification',
         footer_note='Crystal 2.0 · Editable specification',
         footer_link=(p.name, 'Markdown source')))
@@ -76,7 +76,7 @@ for p in sorted((ROOT / 'docs').glob('*.md')):
 title, content = render_markdown(ROOT / 'src/overview.md')
 (ROOT / 'index.html').write_text(shell.document(
     title=title, path='index.html', content=content,
-    styles=['assets/motion.css'], scripts=['assets/docs.js'],
+    styles=['core/assets/motion.css'], scripts=['assets/docs.js'],
     # Fragments never reach the server, so an inbound link to the old
     # index.html#playground anchor can only be forwarded in the page.
     head_extra='<script>if(location.hash&&/^#(playground|workbench|palettes|foundations|content-blending|supporting-materials|components|accessibility|motion|adoption|specification)$/.test(location.hash))'

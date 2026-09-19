@@ -15,9 +15,9 @@
  */
 const fs = require('node:fs');
 const path = require('node:path');
-const spring = require('../assets/core/spring.js');
+const spring = require('../core/assets/core/spring.js');
 
-const FILE = path.resolve(__dirname, '../tokens/motion-recipes.json');
+const FILE = path.resolve(__dirname, '../core/tokens/motion-recipes.json');
 const WRITE = process.argv.includes('--write');
 
 /* Damping ratio per signature. Below 1 the movement overshoots and reads as

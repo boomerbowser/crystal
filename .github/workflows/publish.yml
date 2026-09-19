@@ -13,7 +13,7 @@
 # publisher to a package that does not exist yet:
 #
 #   1. Create the @crystal scope on npmjs.com.
-#   2. Publish 2.0.0 once by hand, from design-system/:
+#   2. Publish 2.0.0 once by hand, from design-system/core/:
 #        npm publish --access public
 #   3. On the new package: Settings -> Publishing access -> add a trusted
 #      publisher, repository boomerbowser/crystal, workflow
@@ -85,8 +85,10 @@ jobs:
       - run: node tools/verify-package.cjs
         working-directory: design-system
 
+      # `core/`, because since the folder split there are two manifests and only
+      # one of them is published. The other is private workspace machinery.
       - name: The tag and the manifest agree
-        working-directory: design-system
+        working-directory: design-system/core
         run: |
           tagged="${GITHUB_REF_NAME#v}"
           packaged="$(node -p "require('./package.json').version")"
@@ -102,7 +104,7 @@ jobs:
       # scope that private libraries already import from is the textbook setup
       # for dependency confusion — owning it publicly is what closes that.
       - run: npm publish --provenance --access public
-        working-directory: design-system
+        working-directory: design-system/core
 
       # The half of this that npm cannot carry.
       #
@@ -118,10 +120,10 @@ jobs:
           set -euo pipefail
           out="crystal-spec-${GITHUB_REF_NAME#v}"
           mkdir -p "$out/tokens" "$out/exports" "$out/libraries"
-          cp tokens/crystal.tokens.json tokens/crystal.json \
-             tokens/catalogue.json tokens/motion-recipes.json "$out/tokens/"
-          cp exports/crystal-tokens.swift exports/crystal-tokens.kt \
-             exports/crystal-tokens.ts "$out/exports/"
+          cp core/tokens/crystal.tokens.json core/tokens/crystal.json \
+             core/tokens/catalogue.json core/tokens/motion-recipes.json "$out/tokens/"
+          cp core/exports/crystal-tokens.swift core/exports/crystal-tokens.kt \
+             core/exports/crystal-tokens.ts "$out/exports/"
           cp ../libraries/parity.json "$out/libraries/"
           cp ../libraries/CONTRACT.md "$out/"
           zip -rq "$out.zip" "$out"

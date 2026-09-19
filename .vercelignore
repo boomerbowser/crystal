@@ -14,6 +14,12 @@ design-system/src/
 design-system/package.json
 design-system/package-lock.json
 
+# The library's manifest and its README. `design-system/core/` itself is served
+# — the site loads the resolver, the theme, the icons and the fonts from it —
+# but the package's own metadata is not part of the site.
+design-system/core/package.json
+design-system/core/README.md
+
 # Verification evidence that no served page links to. The report links to the
 # capture READMEs, which are kept; the reference baselines and the approved image
 # sets are for reviewing this repository, not for publishing. Roughly 10MB of a

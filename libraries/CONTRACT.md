@@ -6,7 +6,7 @@ Crystal is the base. A library implements Crystal for a platform; it does not fo
 
 ## 1. Consume generated tokens. Never redeclare a value.
 
-The canonical source is `design-system/tokens/crystal.tokens.json`, a W3C DTCG file. Generated exports for TypeScript, Swift and Kotlin are emitted from it into `design-system/exports/`. A library imports those. A hard-coded `#7338EF`, `40px` or `1.95px` anywhere in a library is a defect, because it is a value that can no longer be changed centrally.
+The canonical source is `design-system/core/tokens/crystal.tokens.json`, a W3C DTCG file. Generated exports for TypeScript, Swift and Kotlin are emitted from it into `design-system/core/exports/`. A library imports those. A hard-coded `#7338EF`, `40px` or `1.95px` anywhere in a library is a defect, because it is a value that can no longer be changed centrally.
 
 Derived values — elevation-scaled shadows, rgba composites, scaled motion durations — are computed, not stored. Reuse the resolver's arithmetic rather than reimplementing it; two implementations of the same formula will diverge.
 
@@ -42,7 +42,7 @@ Record intentional platform compromises with actual device captures and review t
 ## 6. Honour the motion physics, not the keyframes.
 
 Crystal's motion is specified as a damped harmonic oscillator. Every recipe in
-`design-system/tokens/motion-recipes.json` carries a `spring` block with
+`design-system/core/tokens/motion-recipes.json` carries a `spring` block with
 `stiffness`, `damping` and `mass`, plus a `platform` block that pre-computes the
 parameterisation each platform actually exposes. Use it; do not re-derive it,
 because two libraries deriving the same spring slightly differently is exactly
@@ -74,7 +74,7 @@ deformation differently, preserve the invariant, not the syntax.
 
 ## 7. Treat the optical layer as an enhancement.
 
-`design-system/assets/shaders/manifest.json` is the portable artefact; the GLSL
+`design-system/core/assets/shaders/manifest.json` is the portable artefact; the GLSL
 files are one implementation of it. Honour the **uniform contract**, not the
 source.
 

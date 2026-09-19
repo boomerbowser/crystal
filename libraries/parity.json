@@ -1,5 +1,5 @@
 {
-  "$description": "Per-platform implementation status for every component Crystal specifies. Generated from design-system/tokens/catalogue/. A component present in one library is expected in the others, with the same states, semantics and token bindings.",
+  "$description": "Per-platform implementation status for every component Crystal specifies. Generated from design-system/core/tokens/catalogue/. A component present in one library is expected in the others, with the same states, semantics and token bindings.",
   "generated": "design-system/tools/build-catalogue.cjs",
   "benchmarks": [
     "mantine",

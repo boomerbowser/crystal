@@ -179,6 +179,21 @@ Both are written and both were proven to fail before being trusted — see
 
 1. **Package boundary and the two release gates.** Local, reversible, no
    consumer affected. *Done.*
+1b. **The folders themselves.** *Done — Meridian asked for this explicitly:
+   "separate the files that make up @crystal/core from the preview website into
+   different folders. That's part of what we meant originally." The `files` array
+   said what shipped; it did not stop anyone reaching across. Now
+   `design-system/core/` holds the library and nothing else, with its own
+   `package.json`, and the preview reaches it the way a consumer will — by a path
+   into the package, not by sitting in the same directory.*
+
+   `core/` is **inside** the deploy root rather than beside it, and that is a
+   constraint rather than a preference: Vercel serves `design-system/` as a
+   static upload with no build step, so a sibling folder would be unreachable and
+   every page would 404 on the resolver. The same arrangement is what makes the
+   eventual repository split a clean lift — `core/` goes to `crystal`, the rest
+   goes to `crystal-preview`, and the pages swap `core/assets/…` for
+   `node_modules/@crystal/core/assets/…` with one real install step.
 2. **The publish workflow**, OIDC and provenance, plus the spec bundle. *Written;
    it cannot run until Meridian enables trusted publishing.*
 3. **Specifications updated** to describe the core library and how a platform

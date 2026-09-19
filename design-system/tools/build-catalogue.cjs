@@ -14,7 +14,7 @@ const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
 const REPO = path.resolve(ROOT, '..');
-const DIR = path.join(ROOT, 'tokens/catalogue');
+const DIR = path.join(ROOT, 'core/tokens/catalogue');
 const CHAPTER = path.join(ROOT, 'docs/catalogue.md');
 const MANIFEST = path.join(REPO, 'libraries/parity.json');
 
@@ -50,7 +50,7 @@ function validate(categories) {
   }
 
   /* Every motion recipe family must belong to a documented component. */
-  const recipes = JSON.parse(fs.readFileSync(path.join(ROOT, 'tokens/motion-recipes.json'), 'utf8')).recipes;
+  const recipes = JSON.parse(fs.readFileSync(path.join(ROOT, 'core/tokens/motion-recipes.json'), 'utf8')).recipes;
   const claimed = new Set();
   for (const category of categories) {
     for (const c of category.components) for (const id of c.motion || []) claimed.add(id);
@@ -84,7 +84,7 @@ function chapter(categories, stats) {
   lines.push('');
   lines.push('Crystal specifies appearance: anatomy, states, material, geometry and the semantics a correct implementation must expose. It does not ship focus management, menu keyboard behaviour, date arithmetic or a rich-text engine. Products bring their own accessible primitives and dress them in Crystal. Every entry states this split explicitly, so what the system owes you and what you owe the system are never in doubt.');
   lines.push('');
-  lines.push('This chapter is generated from `tokens/catalogue/`. The same source generates the parity manifest in `libraries/parity.json`, so a component cannot appear in one and not the other.');
+  lines.push('This chapter is generated from `core/tokens/catalogue/`. The same source generates the parity manifest in `libraries/parity.json`, so a component cannot appear in one and not the other.');
   lines.push('');
   lines.push('## Coverage');
   lines.push('');
@@ -137,7 +137,7 @@ function manifest(categories, stats) {
   return {
     $description:
       'Per-platform implementation status for every component Crystal specifies. Generated from ' +
-      'design-system/tokens/catalogue/. A component present in one library is expected in the others, ' +
+      'design-system/core/tokens/catalogue/. A component present in one library is expected in the others, ' +
       'with the same states, semantics and token bindings.',
     generated: 'design-system/tools/build-catalogue.cjs',
     benchmarks: BENCHMARKS,
@@ -183,9 +183,9 @@ fs.writeFileSync(MANIFEST, JSON.stringify(manifest(categories, stats), null, 2) 
    needs the second to build a component and to document it, and reading fourteen
    files across a package boundary is not something a consumer should have to do. */
 fs.writeFileSync(
-  path.join(ROOT, 'tokens/catalogue.json'),
+  path.join(ROOT, 'core/tokens/catalogue.json'),
   JSON.stringify({
-    $description: 'Crystal component catalogue, combined. Generated from tokens/catalogue/.',
+    $description: 'Crystal component catalogue, combined. Generated from core/tokens/catalogue/.',
     generated: new Date().toISOString().slice(0, 10),
     categories: categories.map((category) => ({
       id: category.id, name: category.name, description: category.description,

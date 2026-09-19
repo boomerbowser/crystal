@@ -600,6 +600,28 @@ prevent.
 
 **Done, and reversible:**
 
+- **The folders.** Requested again by Meridian on 19 September — *"separate the
+  files that make up @crystal/core from the preview website into different
+  folders. That's part of what we meant originally."* `design-system/core/` is
+  now the library and nothing else, with its own `package.json`; the rest of
+  `design-system/` is the preview site and the machinery. A `files` array says
+  what ships and stops nobody reaching across; a directory boundary does.
+
+  `core/` sits **inside** the deploy root rather than beside it because Vercel
+  serves `design-system/` as a static upload with no build step — a sibling
+  folder would be unreachable and every page would 404 on the resolver. The
+  site's own URLs are unchanged, and nothing about the published tarball moved:
+  1,056 entries and 16 exports before and after.
+
+  Two things surfaced that a path rewrite could not see. `tools/build-icons.cjs`
+  built its output directory with `path.join(ROOT, 'assets/icons')`, so the first
+  run after the move wrote 999 icons into a *second* directory and left the real
+  one stale. And `gsap`/`motion` are `@crystal/core`'s runtime contract but the
+  preview's engine bundle is built from them, so both manifests must name them —
+  `validate-motion.cjs` now treats `core/package.json` as the authority and fails
+  if the workspace manifest or the lockfile disagrees, which turns a duplication
+  into a checked invariant.
+
 - **The boundary.** A published `@crystal/core` was 2.18 MB across 1,097 files
   and **46% of it was the documentation website**. `files` now ships only the
   library: 1.2 MB, no HTML, no `site.*`, no `controls.*`, no preview motion

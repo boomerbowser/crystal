@@ -1,7 +1,7 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),ctx={window:{}};vm.createContext(ctx);
-for(const name of ['tokens.js','crystal.js'])vm.runInContext(fs.readFileSync(path.join(root,'assets',name),'utf8'),ctx);
+for(const name of ['tokens.js','crystal.js'])vm.runInContext(fs.readFileSync(path.join(root,'core/assets',name),'utf8'),ctx);
 const C=ctx.window.Crystal,D=ctx.window.CRYSTAL_TOKENS;
 const fromHex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
 const toHex=a=>'#'+a.map(x=>Math.round(x).toString(16).padStart(2,'0')).join('');
@@ -101,7 +101,7 @@ assert.equal(C.normalize({motionSpeed:NaN}).motionSpeed,1);
 assert.equal(C.resolve()['--cr-travel-content'],'0px');
 assert.equal(C.resolve()['--cr-travel-depth'],'50px');
 assert.equal(C.resolve()['--cr-motion-max-travel'],'50px');
-const canonical=JSON.parse(fs.readFileSync(path.join(root,'tokens/crystal.json'),'utf8'));
+const canonical=JSON.parse(fs.readFileSync(path.join(root,'core/tokens/crystal.json'),'utf8'));
 assert.deepEqual(JSON.parse(JSON.stringify(D)),canonical);
 const report={date:new Date().toISOString(),scope:'Token pairs, bounded composite models, normalization and exported theme behavior. Not a WCAG certification.',checks:results.length,minimum:Math.min(...results.map(x=>x.ratio)),failures,results};
 fs.writeFileSync(path.join(root,'validation/token-checks.json'),JSON.stringify(report,null,2)+'\n');

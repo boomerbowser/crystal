@@ -28,7 +28,11 @@ const { execFileSync } = require('node:child_process');
 const { readFileSync } = require('node:fs');
 const { resolve } = require('node:path');
 
-const root = resolve(__dirname, '..');
+/* The package is `core/`, not the repository. Since the split those are two
+   different manifests: `core/package.json` is @crystal/core and is published,
+   and the one beside `tools/` is private machinery that runs the build. Pointing
+   this at the wrong one would check a manifest nobody installs. */
+const root = resolve(__dirname, '..', 'core');
 const manifest = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
 
 /* Named patterns rather than one regex, so a failure says which rule it broke

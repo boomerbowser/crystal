@@ -1,7 +1,7 @@
 /* Generate the parts of the documentation that are derivable from the sources.
  *
  * A token table transcribed by hand is a token table that is wrong within a
- * release. Everything here is written from `tokens/`, `assets/shaders/` and the
+ * release. Everything here is written from `tokens/`, `core/assets/shaders/` and the
  * motion recipes, so the documentation cannot disagree with what ships.
  *
  * Whole-file outputs are written directly. Sections inside a hand-written page
@@ -11,7 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
-const spring = require(path.join(ROOT, 'assets/core/spring.js'));
+const spring = require(path.join(ROOT, 'core/assets/core/spring.js'));
 
 const read = p => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 const esc = s => String(s).replace(/\|/g, '\\|');
@@ -39,12 +39,12 @@ const TIERS = {
 };
 
 function tokensPage() {
-  const tokens = read('tokens/crystal.tokens.json');
+  const tokens = read('core/tokens/crystal.tokens.json');
   const deprecated = tokens.$deprecated || {};
   const lines = [
     '# Tokens',
     '',
-    'Every value Crystal ships, generated from `tokens/crystal.tokens.json` — the W3C',
+    'Every value Crystal ships, generated from `core/tokens/crystal.tokens.json` — the W3C',
     'Design Tokens (DTCG) source of truth. This page is written by',
     '`tools/build-reference.cjs`; editing it by hand is pointless, because the next build',
     'overwrites it. Edit the token file and run `python3 tools/build.py`.',
@@ -103,10 +103,10 @@ function tokensPage() {
 /* ---------- motion recipes ---------- */
 
 function recipeSection() {
-  const motion = read('tokens/motion-recipes.json');
+  const motion = read('core/tokens/motion-recipes.json');
   const lines = [
-    `All ${motion.recipes.length} recipes in ${new Set(motion.recipes.map(r => r.category)).size} categories, generated from \`tokens/motion-recipes.json\`. **Damping ratio** and`,
-    '**overshoot** are derived from each recipe\'s spring by `assets/core/spring.js`, not',
+    `All ${motion.recipes.length} recipes in ${new Set(motion.recipes.map(r => r.category)).size} categories, generated from \`core/tokens/motion-recipes.json\`. **Damping ratio** and`,
+    '**overshoot** are derived from each recipe\'s spring by `core/assets/core/spring.js`, not',
     'authored — so a spring that was retuned cannot leave a stale number behind in this table.',
     '',
     'A damping ratio below 1 overshoots and settles back; exactly 1 is the fastest approach',
@@ -137,9 +137,9 @@ function recipeSection() {
 /* ---------- shader contract ---------- */
 
 function shaderSection() {
-  const m = read('assets/shaders/manifest.json');
+  const m = read('core/assets/shaders/manifest.json');
   const lines = [
-    `Generated from \`assets/shaders/manifest.json\` (version ${m.version}).`,
+    `Generated from \`core/assets/shaders/manifest.json\` (version ${m.version}).`,
     '',
     '**The contract is the uniform set, not the GLSL.** A platform that honours these',
     'uniforms has implemented Crystal\'s shader layer correctly, whether it does so in',
@@ -184,7 +184,7 @@ function shaderSection() {
 /* ---------- the component recipe catalog ---------- */
 
 function componentRecipeTable() {
-  const motion = read('tokens/motion-recipes.json');
+  const motion = read('core/tokens/motion-recipes.json');
   const lines = ['| ID | Material / behavior | Engine | Base duration | Intended use |',
                  '|---|---|---|---|---|'];
   for (const r of motion.recipes) {
@@ -197,12 +197,12 @@ function componentRecipeTable() {
 /* ---------- values that live in the token file ---------- */
 
 /* These tables were hand-maintained copies of numbers that already exist in
-   `tokens/crystal.json`. A material recipe transcribed into prose is a material recipe
+   `core/tokens/crystal.json`. A material recipe transcribed into prose is a material recipe
    that will disagree with the build sooner or later, and the material specification is
    the one thing in Crystal that may never drift. */
 
 function defaultsTable() {
-  const tokens = read('tokens/crystal.tokens.json');
+  const tokens = read('core/tokens/crystal.tokens.json');
   const ranges = tokens.semantic.range;
   const label = {
     atmosphere: 'Color atmosphere', translucency: 'Frost base tint', elevation: 'Elevation',
@@ -226,7 +226,7 @@ function defaultsTable() {
 }
 
 function materialRecipeTable() {
-  const r = read('tokens/crystal.json').material;
+  const r = read('core/tokens/crystal.json').material;
   const pct = v => `${Math.round(v * 100)}%`;
   const rows = [
     ['Plastic', 'Opaque. No backdrop filter at all.', '—'],
@@ -242,7 +242,7 @@ function materialRecipeTable() {
 }
 
 function paletteTable() {
-  const tokens = read('tokens/crystal.tokens.json');
+  const tokens = read('core/tokens/crystal.tokens.json');
   const lines = ['| Identity | Seed | Companion | Glow |', '|---|---|---|---|'];
   for (const [name, p] of Object.entries(tokens.primitive.palette)) {
     if (name.startsWith('$')) continue;
@@ -298,9 +298,9 @@ function contrastFigures() {
 }
 
 function iconFigures() {
-  const sprite = fs.readFileSync(path.join(ROOT, 'assets/icons.svg'), 'utf8');
+  const sprite = fs.readFileSync(path.join(ROOT, 'core/assets/icons.svg'), 'utf8');
   const ui = (sprite.match(/<symbol /g) || []).length;
-  const manifest = read('assets/icons/manifest.json');
+  const manifest = read('core/assets/icons/manifest.json');
   const g = manifest.grid || {};
   const lines = ['| Source | Count | Licence |', '|---|---|---|'];
   for (const [name, s] of Object.entries(manifest.sources || {})) {
@@ -314,7 +314,7 @@ function iconFigures() {
     'tested foreground colour.');
   lines.push('');
   lines.push(`This site's own interface uses ${ui} of them, inlined as a sprite in ` +
-    '`assets/icons.svg`; the full set is one file per icon under `assets/icons/`.');
+    '`core/assets/icons.svg`; the full set is one file per icon under `core/assets/icons/`.');
   return lines.join('\n');
 }
 

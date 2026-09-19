@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* Add the components the React benchmarks ship that Crystal had not specified.
  *
- * The catalogue in tokens/catalogue/ is the source; libraries/parity.json is
+ * The catalogue in core/tokens/catalogue/ is the source; libraries/parity.json is
  * GENERATED from it by build-catalogue.cjs. An earlier version of this tool
  * edited parity.json directly, and the next `npm test` silently reverted all 55
  * additions — a generated file accepted the edit and then threw it away. This
@@ -18,7 +18,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const DIR = path.resolve(__dirname, '../tokens/catalogue');
+const DIR = path.resolve(__dirname, '../core/tokens/catalogue');
 const WRITE = process.argv.includes('--write');
 
 const R = 'Resin', H = 'Haze', F = 'Frost', S = 'Stone';

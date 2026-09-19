@@ -1,9 +1,9 @@
 const assert=require('node:assert/strict'),fs=require('node:fs');
-const data=JSON.parse(fs.readFileSync('tokens/motion-recipes.json','utf8')),ids=new Set();
+const data=JSON.parse(fs.readFileSync('core/tokens/motion-recipes.json','utf8')),ids=new Set();
 /* Every recipe must carry a spring whose settling time reproduces the authored
    duration. Duration stays the authority: the spring is fitted to it, so a
    disagreement means someone changed one without the other. */
-const spring=require('../assets/core/spring.js');
+const spring=require('../core/assets/core/spring.js');
 const SPRING_TOLERANCE=0.15;
 
 /* A fluid is incompressible. Squeeze it on one axis and it must expand on the
@@ -55,8 +55,29 @@ assert(!ids.has(recipe.id),'Duplicate recipe '+recipe.id);ids.add(recipe.id);/* 
 const ceiling = recipe.loop && recipe.direction === 'normal' ? 8000 : 2000;
 assert(recipe.duration>0&&recipe.duration<=ceiling,
   recipe.id+' duration '+recipe.duration+'ms exceeds the '+ceiling+'ms limit for its kind');assert(['Motion','GSAP'].includes(recipe.engine));assert(recipe.use&&recipe.reduced&&recipe.material&&recipe.signature);assert(recipe.keyframes.length>=2);for(const frame of recipe.keyframes){for(const match of (frame.transform||'').matchAll(/translate[XYZ]?\((-?[\d.]+)px/g))assert(Math.abs(Number(match[1]))<=50||recipe.travelException,recipe.id+' requires a documented large-travel exception');}}
+/* The engine versions exist in three places and all three have to agree.
+ *
+ * `core/package.json` is the authority: gsap and motion are @crystal/core's
+ * runtime contract, and a consumer installs whatever it declares. The workspace
+ * manifest needs them too, because `tools/build-motion.cjs` bundles the
+ * preview's `assets/vendor/crystal-engines.js` out of them at build time — a
+ * build-time need, not a published one. And the lockfile is what actually gets
+ * installed.
+ *
+ * Two manifests naming the same version is the kind of duplication CONTRACT §1
+ * is about, and the answer here is not to remove one but to make the agreement a
+ * checked invariant: core states it, the workspace matches it, the lockfile
+ * resolves to it. Any one of the three moving alone fails. */
+const core=JSON.parse(fs.readFileSync('core/package.json','utf8'));
 const pkg=JSON.parse(fs.readFileSync('package.json','utf8')),lock=JSON.parse(fs.readFileSync('package-lock.json','utf8'));
-assert.equal(pkg.dependencies.motion,'13.4.0');assert.equal(pkg.dependencies.gsap,'3.15.0');assert.equal(lock.packages['node_modules/motion'].version,pkg.dependencies.motion);assert.equal(lock.packages['node_modules/gsap'].version,pkg.dependencies.gsap);
+for(const name of ['motion','gsap']){
+  const declared=core.dependencies[name];
+  assert(declared,`core/package.json does not declare ${name}`);
+  assert.equal(pkg.devDependencies[name],declared,
+    `the workspace builds the engine bundle from ${name} ${pkg.devDependencies[name]} while @crystal/core ships ${declared}`);
+  assert.equal(lock.packages['node_modules/'+name].version,declared,
+    `the lockfile installs ${name} ${lock.packages['node_modules/'+name].version}, not the ${declared} @crystal/core declares`);
+}
 assert(fs.statSync('assets/vendor/crystal-engines.js').size>1000,'Missing real engine bundle');
 
 /* The browser reads assets/motion-catalog.js, not the JSON. They are the same
