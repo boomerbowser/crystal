@@ -40,9 +40,16 @@ jobs:
       # The documentation tooling is Python and does not live on stdlib alone.
       - run: pip install -r tools/requirements.txt
 
-      # Builds the tokens and the catalogue, then runs the core contracts, the
-      # token validator (contrast included), the motion validator, the visual
-      # gate contracts and the documentation validator.
+      # Builds everything generated — tokens, catalogue, reference sections, the
+      # default theme CSS and the fourteen HTML pages — then runs the core
+      # contracts, the token validator (contrast included), the motion validator,
+      # the visual gate contracts and the documentation validator.
+      #
+      # `npm test` used to build only the tokens and the catalogue, which meant
+      # the drift gate below watched everything except the pages a reader
+      # actually opens. `docs/materials.html` sat stale for a commit because of
+      # it: the markdown said one thing and the published page said another, and
+      # both gates passed. The page build is Python, so it now runs here.
       - run: npm test
 
       # Generated output is generated, not authored. If a build produces

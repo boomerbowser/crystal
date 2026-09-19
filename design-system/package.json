@@ -4,10 +4,10 @@
   "description": "Crystal design system: tokens, material primitives, headless core, icons and specifications.",
   "scripts": {
     "build:motion": "node tools/build-motion.cjs",
-    "test": "node tools/build-tokens.cjs && node tools/build-catalogue.cjs && node tests/core-contracts.cjs && node tools/validate-tokens.cjs && node tools/validate-motion.cjs && python3 tests/visual-gate-contracts.py && node tools/validate-docs.cjs",
+    "test": "python3 tools/build.py && node tests/core-contracts.cjs && node tools/validate-tokens.cjs && node tools/validate-motion.cjs && python3 tests/visual-gate-contracts.py && node tools/validate-docs.cjs",
     "build:tokens": "node tools/build-tokens.cjs",
     "build:catalogue": "node tools/build-catalogue.cjs",
-    "build": "node tools/build-tokens.cjs && node tools/build-catalogue.cjs && node tools/build-icons.cjs",
+    "build": "python3 tools/build.py && node tools/build-icons.cjs",
     "capture:frames": "node tools/capture-frames.mjs",
     "verify:visual": "node tools/verify-frames.mjs",
     "verify:floor": "node tools/verify-frames.mjs --no-webgl",
