@@ -287,3 +287,35 @@ divergence CONTRACT §1 exists to prevent.
 Proved by planting two defects at once — deleting `component.focus.coreWidth`,
 which the gate could not see before, and moving `component.chip.height` to 33px,
 which it always could. Both failed the build in the same run.
+
+## M-3 · The catalogue asks a tree for roles it cannot have
+
+**A decision for Meridian. Nothing is broken; the catalogue line is.**
+
+`tree-view` specifies `role=tree/treeitem/group`, and in the same entry
+specifies "expand controls" in its anatomy and "indentation guides" in what
+Crystal supplies. Those two requirements are not compatible.
+
+A `treeitem` in the ARIA tree pattern is a **single navigable unit**. The whole
+widget is one tab stop and the arrow keys move between items, which is what makes
+a tree a tree — and it means an item must not contain independently focusable
+widgets, because there is no key left to reach them with. A row with a disclosure
+button in it has one.
+
+`treegrid` is the pattern ARIA provides for exactly this case. Rows still carry
+`aria-level`, `aria-expanded`, `aria-posinset` and `aria-setsize`; the arrow keys
+still walk the visible rows; and the keyboard can additionally move into a row to
+reach the control inside it. React Aria's `Tree` implements it, and implements
+only it — the alternative in the same library, `NavigationTree`, is for a nested
+set of links and drops selection entirely, which `tree-view` requires.
+
+Crystal React ships the `treegrid`. Everything the catalogue asks for *by
+behaviour* is present and verified: level, expansion, full arrow-key navigation,
+selection by label weight. Only the role names differ.
+
+**What Meridian decides:** whether the catalogue line becomes
+`role=treegrid/row/gridcell`, or whether the disclosure comes out of the anatomy
+so a plain `tree` becomes possible. The first is a documentation change and the
+second is a design change, which is why it is not made here.
+
+Left open, not closed.

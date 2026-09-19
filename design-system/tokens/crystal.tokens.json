@@ -1934,6 +1934,13 @@
         "$value": "4px",
         "$description": "How far a link's underline sits below the baseline, so a descender is not struck through"
       }
+    },
+    "tree": {
+      "indentStep": {
+        "$type": "dimension",
+        "$value": "20px",
+        "$description": "How far one level of a tree is indented from its parent"
+      }
     }
   },
   "$deprecated": {

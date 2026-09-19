@@ -473,6 +473,9 @@
     },
     "anchor": {
       "underlineOffset": 4
+    },
+    "tree": {
+      "indentStep": 20
     }
   },
   "spacing": {

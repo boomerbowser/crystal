@@ -154,4 +154,5 @@ object CrystalToken {
     const val indicatorFieldSize = "24px"
     const val indicatorLineWidth = "3px"
     const val anchorUnderlineOffset = "4px"
+    const val treeIndentStep = "20px"
 }

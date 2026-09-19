@@ -350,6 +350,11 @@ function migrate() {
      underline through the tail of a "g" is a strikethrough. */
   set(out.component, 'anchor.underlineOffset', leaf('dimension', '4px',
     'How far a link\'s underline sits below the baseline, so a descender is not struck through'));
+  /* Depth, as a length. One step per level, wide enough that the guide line for
+     a level is distinguishable from the one beside it at a glance and narrow
+     enough that a deep tree still fits a sidebar. */
+  set(out.component, 'tree.indentStep', leaf('dimension', '20px',
+    'How far one level of a tree is indented from its parent'));
 
   /* semantic: shape and the adjustable ranges the resolver clamps against */
   set(out.semantic, 'shape.contentRadius', leaf('dimension', dim(flat.default.radius),

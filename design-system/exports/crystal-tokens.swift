@@ -154,4 +154,5 @@ public enum CrystalToken {
     public static let indicatorFieldSize = "24px"
     public static let indicatorLineWidth = "3px"
     public static let anchorUnderlineOffset = "4px"
+    public static let treeIndentStep = "20px"
 }
