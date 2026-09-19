@@ -86,6 +86,12 @@
       '--cr-scrollbar-thumb-min':data.component.scrollbar.thumbMinLength+'px',
       '--cr-scrollbar-inset':data.component.scrollbar.inset+'px',
       '--cr-scroll-fade':data.component.scrollArea.fadeDepth+'px',
+      /* An overlay's pointer, and the widths past which an anchored surface stops
+         being anchored to anything. */
+      '--cr-overlay-arrow-size':data.component.overlayArrow.size+'px',
+      '--cr-overlay-arrow-radius':data.component.overlayArrow.radius+'px',
+      '--cr-overlay-max-width':data.component.overlay.maxWidth+'px',
+      '--cr-overlay-tooltip-max-width':data.component.overlay.tooltipMaxWidth+'px',
       /* Focus, as two properties rather than as a recipe each platform retypes.
          Crystal's focus is a crisp 2px primary core at 3px offset inside a
          four-layer feathered halo, and it was written out longhand in

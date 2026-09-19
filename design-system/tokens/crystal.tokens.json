@@ -1863,6 +1863,30 @@
         "$description": "A compact chip, inside a 44px target"
       }
     },
+    "overlayArrow": {
+      "size": {
+        "$type": "dimension",
+        "$value": "14px",
+        "$description": "The side of the rotated square that points at an overlay's trigger"
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "3px",
+        "$description": "The arrow's tip radius, so a pointer is not a needle"
+      }
+    },
+    "overlay": {
+      "maxWidth": {
+        "$type": "dimension",
+        "$value": "480px",
+        "$description": "How wide an anchored popover may grow before it stops being anchored to anything"
+      },
+      "tooltipMaxWidth": {
+        "$type": "dimension",
+        "$value": "352px",
+        "$description": "About sixty characters: a tooltip longer than this is documentation"
+      }
+    },
     "field": {
       "wellInset": {
         "$type": "dimension",

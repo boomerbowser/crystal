@@ -40,6 +40,10 @@
   --cr-scrollbar-thumb-min: 32px;
   --cr-scrollbar-inset: 2px;
   --cr-scroll-fade: 24px;
+  --cr-overlay-arrow-size: 14px;
+  --cr-overlay-arrow-radius: 3px;
+  --cr-overlay-max-width: 480px;
+  --cr-overlay-tooltip-max-width: 352px;
   --cr-control-edge: rgba(98, 74, 159, 0.18);
   --cr-focus-core: #7338EF;
   --cr-focus-core-width: 2px;
@@ -176,6 +180,10 @@
   --cr-scrollbar-thumb-min: 32px;
   --cr-scrollbar-inset: 2px;
   --cr-scroll-fade: 24px;
+  --cr-overlay-arrow-size: 14px;
+  --cr-overlay-arrow-radius: 3px;
+  --cr-overlay-max-width: 480px;
+  --cr-overlay-tooltip-max-width: 352px;
   --cr-control-edge: rgba(98, 74, 159, 0.18);
   --cr-focus-core: #7338EF;
   --cr-focus-core-width: 2px;
@@ -312,6 +320,10 @@
   --cr-scrollbar-thumb-min: 32px;
   --cr-scrollbar-inset: 2px;
   --cr-scroll-fade: 24px;
+  --cr-overlay-arrow-size: 14px;
+  --cr-overlay-arrow-radius: 3px;
+  --cr-overlay-max-width: 480px;
+  --cr-overlay-tooltip-max-width: 352px;
   --cr-control-edge: rgba(191, 163, 248, 0.18);
   --cr-focus-core: #c8b1f9;
   --cr-focus-core-width: 2px;

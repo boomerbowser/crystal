@@ -312,6 +312,24 @@ function migrate() {
   set(out.component, 'slider.trackHeight', leaf('dimension', '8px', 'Slider track thickness'));
   set(out.component, 'slider.thumbSize', leaf('dimension', '26px', 'Slider thumb, padded to the target floor'));
   set(out.component, 'chip.height', leaf('dimension', '32px', 'A compact chip, inside a 44px target'));
+  /* The pointer that ties an overlay to its trigger. It is a rotated square
+     carrying the overlay's own material rather than a filled triangle: a
+     diffusing surface and a flat shape of the same nominal colour do not match,
+     and the mismatch lands exactly where the eye is looking. Named here because
+     the size and the corner are what make the join invisible, and a platform
+     library guessing at them would guess differently. */
+  set(out.component, 'overlayArrow.size', leaf('dimension', '14px',
+    'The side of the rotated square that points at an overlay\'s trigger'));
+  set(out.component, 'overlayArrow.radius', leaf('dimension', '3px',
+    'The arrow\'s tip radius, so a pointer is not a needle'));
+  /* Reading widths for anchored surfaces. A popover holds arbitrary content and
+     may be as wide as a short column; a tooltip is one or two lines and is capped
+     at roughly sixty characters, which is the same measure the reading column
+     uses and the reason neither number is arbitrary. */
+  set(out.component, 'overlay.maxWidth', leaf('dimension', '480px',
+    'How wide an anchored popover may grow before it stops being anchored to anything'));
+  set(out.component, 'overlay.tooltipMaxWidth', leaf('dimension', '352px',
+    'About sixty characters: a tooltip longer than this is documentation'));
   /* The well inside a field shell is tighter than the shell around it, so the two
      radii nest rather than sitting concentric. */
   set(out.component, 'field.wellInset', leaf('dimension', '7px',
@@ -470,6 +488,14 @@ function buildFlat(tokens) {
       thumbSize: unpx(tokens.component.slider.thumbSize.$value),
     },
     chip: { height: unpx(tokens.component.chip.height.$value) },
+    overlayArrow: {
+      size: unpx(tokens.component.overlayArrow.size.$value),
+      radius: unpx(tokens.component.overlayArrow.radius.$value),
+    },
+    overlay: {
+      maxWidth: unpx(tokens.component.overlay.maxWidth.$value),
+      tooltipMaxWidth: unpx(tokens.component.overlay.tooltipMaxWidth.$value),
+    },
     field: { wellInset: unpx(tokens.component.field.wellInset.$value) },
     layout: Object.fromEntries(Object.entries(tokens.component.layout)
       .map(([key, leafValue]) => [key, unpx(leafValue.$value)])),
@@ -573,7 +599,17 @@ if (process.argv.includes('--migrate')) {
     delete c.version;
     return canonical(c);
   };
-  const diffs = [];
+  /* An addition is not a regression, and the guard used to treat them alike.
+     A token that is new — absent from the committed flat file, present in the
+     rebuilt one — is somebody deciding to name a value; a token whose value
+     *moved* is a material specification changing under everybody, which is the
+     thing this gate exists to catch. A token that disappeared is the same kind of
+     harm from the other direction, so it is fatal too.
+
+     Conflating them meant every genuine addition had to get past the gate rather
+     than through it, which is how a gate stops being believed. */
+  const changes = [];
+  const additions = [];
   (function compare(a, b, trail) {
     if (JSON.stringify(a) === JSON.stringify(b)) return;
     if (a && b && typeof a === 'object' && typeof b === 'object' && !Array.isArray(a)) {
@@ -582,14 +618,24 @@ if (process.argv.includes('--migrate')) {
       }
       return;
     }
-    diffs.push(`${trail.join('.')}: ${JSON.stringify(b)} -> ${JSON.stringify(a)}`);
+    const where = trail.join('.');
+    if (b === undefined) additions.push(`${where} = ${JSON.stringify(a)}`);
+    else changes.push(`${where}: ${JSON.stringify(b)} -> ${JSON.stringify(a)}`);
   })(strip(rebuilt), strip(current), []);
 
-  if (diffs.length) {
-    console.error('Round trip mismatch. A token value changed during restructuring:');
-    for (const d of diffs.slice(0, 40)) console.error('  ' + d);
-    if (diffs.length > 40) console.error(`  ...and ${diffs.length - 40} more`);
+  if (changes.length) {
+    console.error('Round trip mismatch. A token value changed or disappeared:');
+    for (const d of changes.slice(0, 40)) console.error('  ' + d);
+    if (changes.length > 40) console.error(`  ...and ${changes.length - 40} more`);
     process.exit(1);
+  }
+
+  /* Announced rather than silent. Naming a value is a design decision even when
+     the number is not new, and it should be visible in the build log of the
+     commit that does it. */
+  if (additions.length) {
+    console.log(`${additions.length} new token(s):`);
+    for (const a of additions) console.log('  + ' + a);
   }
 
   fs.writeFileSync(FLAT, JSON.stringify(rebuilt, null, 2) + '\n');

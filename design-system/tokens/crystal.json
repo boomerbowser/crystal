@@ -431,6 +431,14 @@
     "chip": {
       "height": 32
     },
+    "overlayArrow": {
+      "size": 14,
+      "radius": 3
+    },
+    "overlay": {
+      "maxWidth": 480,
+      "tooltipMaxWidth": 352
+    },
     "field": {
       "wellInset": 7
     },
