@@ -9,11 +9,17 @@
 # credential at publish time, so there is nothing here to leak, rotate or scope.
 # That is why `id-token: write` is below and why no secret is referenced.
 #
-# BEFORE THE FIRST RUN, on npmjs.com, someone with rights over the @crystal
-# scope must add a trusted publisher: repository boomerbowser/crystal, workflow
-# .github/workflows/publish.yml. npm cannot attach a trusted publisher to a
-# package that does not exist, so the very first version may need one manual
-# `npm publish` to create it. Everything after that is this workflow.
+# BEFORE THE FIRST RUN, and in this order, because npm cannot attach a trusted
+# publisher to a package that does not exist yet:
+#
+#   1. Create the @crystal scope on npmjs.com.
+#   2. Publish 2.0.0 once by hand, from design-system/:
+#        npm publish --access public
+#   3. On the new package: Settings -> Publishing access -> add a trusted
+#      publisher, repository boomerbowser/crystal, workflow
+#      .github/workflows/publish.yml.
+#
+# Everything after that is this workflow, from a tag, with no credential.
 name: publish
 
 on:

@@ -200,8 +200,9 @@ version that does not exist is worse than an honest path.
 
 | | |
 |---|---|
-| **Create the `@crystal` scope on npm** | Under whichever account or organisation should own it. Verified free on 19 September: `@crystal/core` and `@crystal/react` both 404, scope search returns 0. |
-| **Enable Trusted Publishing** | npm → the package or scope → *Publishing access* → add a trusted publisher: repository `boomerbowser/crystal`, workflow `.github/workflows/publish.yml`. This must exist before the first automated publish; the very first version may need one manual `npm publish` to create the package. |
+| **Create the `@crystal` scope on npm** | First, and under whichever account or organisation should own it. Verified free on 19 September: `@crystal/core` and `@crystal/react` both 404, scope search returns 0. |
+| **Publish 2.0.0 once, by hand** | npm cannot attach a trusted publisher to a package that does not exist yet, so the order matters and an earlier draft of this table had it backwards. From `design-system/`: `npm publish --access public`. |
+| **Then enable Trusted Publishing** | npm → the `@crystal/core` package → *Settings* → *Publishing access* → add a trusted publisher: repository `boomerbowser/crystal`, workflow `.github/workflows/publish.yml`. Every version after the first comes from a tag and needs no credential. |
 | **Re-base the Vercel project onto `crystal-preview`** | Already planned. The build settings change with it — see §7. |
 | **Push the website to `crystal-preview`** | Prepared here, not pushed: this session has never written to that repository, and a first push to a new remote is not something to do unasked. The command is in §7. |
 | **Decide whether `crystal-preview` publishes anything** | Recommendation: no. It is a site, it consumes `@crystal/core`, and it needs no package identity. |
