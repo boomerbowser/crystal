@@ -99,7 +99,7 @@
   --cr-rim: rgba(255,255,255,.85);
   --cr-shadow-content: 0 2.5px 3.75px rgba(107, 40, 112, .15), 0 8.75px 18.75px rgba(107, 40, 112, .18);
   --cr-shadow-panel: inset 0 1px 0 rgba(255,255,255,.85), 0 3.75px 6.25px rgba(107, 40, 112, .15), 0 17.5px 35px rgba(107, 40, 112, .18);
-  --cr-shadow-float: inset 0 1px 1px rgba(255,255,255,.85), inset 0 -1px 1px rgba(107, 40, 112, .15), 0 5px 8.75px rgba(107, 40, 112, .15), 0 25px 50px rgba(107, 40, 112, .18);
+  --cr-shadow-float: inset 0 2px 1px rgba(255,255,255,.85), inset 0 -1px 1px rgba(255,255,255,.85), 0 5px 9px rgba(107, 40, 112, .15), 0 16px 30px rgba(107, 40, 112, .18);
   --cr-press: 120ms;
   --cr-state: 213.33ms;
   --cr-spatial: 293.33ms;
@@ -239,7 +239,7 @@
   --cr-rim: rgba(255,255,255,.85);
   --cr-shadow-content: 0 2.5px 3.75px rgba(107, 40, 112, .15), 0 8.75px 18.75px rgba(107, 40, 112, .18);
   --cr-shadow-panel: inset 0 1px 0 rgba(255,255,255,.85), 0 3.75px 6.25px rgba(107, 40, 112, .15), 0 17.5px 35px rgba(107, 40, 112, .18);
-  --cr-shadow-float: inset 0 1px 1px rgba(255,255,255,.85), inset 0 -1px 1px rgba(107, 40, 112, .15), 0 5px 8.75px rgba(107, 40, 112, .15), 0 25px 50px rgba(107, 40, 112, .18);
+  --cr-shadow-float: inset 0 2px 1px rgba(255,255,255,.85), inset 0 -1px 1px rgba(255,255,255,.85), 0 5px 9px rgba(107, 40, 112, .15), 0 16px 30px rgba(107, 40, 112, .18);
   --cr-press: 120ms;
   --cr-state: 213.33ms;
   --cr-spatial: 293.33ms;
@@ -379,7 +379,7 @@
   --cr-rim: rgba(255,255,255,.17);
   --cr-shadow-content: 0 2.5px 3.75px rgba(96, 29, 79, .50), 0 8.75px 18.75px rgba(96, 29, 79, .55);
   --cr-shadow-panel: inset 0 1px 0 rgba(255,255,255,.17), 0 3.75px 6.25px rgba(96, 29, 79, .50), 0 17.5px 35px rgba(96, 29, 79, .55);
-  --cr-shadow-float: inset 0 1px 1px rgba(255,255,255,.17), inset 0 -1px 1px rgba(96, 29, 79, .50), 0 5px 8.75px rgba(96, 29, 79, .50), 0 25px 50px rgba(96, 29, 79, .55);
+  --cr-shadow-float: inset 0 2px 1px rgba(255,255,255,.17), inset 0 -1px 1px rgba(255,255,255,.17), 0 5px 9px rgba(96, 29, 79, .50), 0 16px 30px rgba(96, 29, 79, .55);
   --cr-press: 120ms;
   --cr-state: 213.33ms;
   --cr-spatial: 293.33ms;

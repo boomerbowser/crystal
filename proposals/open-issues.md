@@ -319,3 +319,40 @@ so a plain `tree` becomes possible. The first is a documentation change and the
 second is a design change, which is why it is not made here.
 
 Left open, not closed.
+
+
+## D-9 · Crystal exported one Resin shadow and rendered another
+
+**Closed, with Meridian's approval to change whatever aesthetic parity needs.**
+
+`--cr-shadow-float` is the exported token every platform library gets.
+`controls.css` wrote its own copy of the same recipe, twice, and because the
+preview loads it that copy is what the approved baseline shows. They disagreed on
+rim depth, on the lower rim's colour, and on the elevation's colour and spread.
+
+So a platform library that followed Crystal's tokens could not reproduce
+Crystal's appearance, and the parity bar in `libraries/CONTRACT.md` could not be
+met by following Crystal. It was Crystal React's material gate that found it,
+after Meridian looked at that library's Storybook and said none of it looked like
+Crystal.
+
+This is D-1's hazard a second time. `controls.css` shaped the appearance that got
+blessed and the exported surface said something else — the same file, for the
+same reason, and the reason the export was withdrawn in the first place.
+
+**One recipe now.** `controls.css` reads `var(--cr-shadow-float)` in both places,
+and the token carries what each side had right: the blessed rims, and the
+palette-tinted, elevation-responsive spread the literal never had. The
+coefficients are the blessed distances over the default 125% elevation, so the
+default renders what was approved and the elevation control — which did nothing
+to a control's shadow before this — now moves it.
+
+Twelve frames re-blessed, evidence in
+`validation/captures/2026-09-19-one-resin-shadow/`. 1,788 contrast cases pass.
+
+**What is still open is the shape of it.** `controls.css` holds eight more
+hard-coded shadow literals — `#080b2426`, `#080b2433`, `#080b241c` and others —
+each a value that does not tint with the palette and does not answer the
+elevation control. They are preview-only, since the file is no longer exported,
+so none of them can reach a platform library. But the two that just caused this
+were preview-only too, right up until the baseline was captured from them.

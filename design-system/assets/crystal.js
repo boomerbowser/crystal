@@ -143,7 +143,22 @@
       '--cr-edge':rgba(p.outline,dark?.34:.25),'--cr-rim':highlight,
       '--cr-shadow-content':`0 ${2*e}px ${3*e}px ${contact}, 0 ${7*e}px ${15*e}px ${shadow}`,
       '--cr-shadow-panel':`inset 0 1px 0 ${highlight}, 0 ${3*e}px ${5*e}px ${contact}, 0 ${14*e}px ${28*e}px ${shadow}`,
-      '--cr-shadow-float':`inset 0 1px 1px ${highlight}, inset 0 -1px 1px ${contact}, 0 ${4*e}px ${7*e}px ${contact}, 0 ${20*e}px ${40*e}px ${shadow}`,
+      /* Resin's float, reconciled with the appearance that was actually blessed.
+         `controls.css` carried a second, hand-written copy of this recipe —
+         `inset 0 2px 1px, inset 0 -1px 1px, 0 5px 9px #080b2412, 0 16px 30px
+         #080b2420` — and because the preview loads it, that copy is what the
+         approved baseline shows and this token is what every platform library
+         gets. They disagreed, so a library following Crystal's own token could
+         not reproduce Crystal's own appearance.
+         Two things were right on each side and both are kept. The rims are the
+         blessed ones: 2px of light along the top where it catches, and a light
+         edge returning underneath — a dark lower inset reads as an inner shadow
+         rather than as glass. The elevation is this token's: tinted with the
+         palette like every other Crystal shadow, and scaled by the elevation
+         control, neither of which the literal did. The coefficients are the
+         blessed distances divided by the default 125% elevation, so the default
+         renders what was approved and the slider now moves it. */
+      '--cr-shadow-float':`inset 0 2px 1px ${highlight}, inset 0 -1px 1px ${highlight}, 0 ${4*e}px ${7.2*e}px ${contact}, 0 ${12.8*e}px ${24*e}px ${shadow}`,
       '--cr-press':ms(data.motion.press),'--cr-state':ms(data.motion.state),'--cr-spatial':ms(data.motion.spatial),
       '--cr-exit':ms(data.motion.exit),'--cr-motion-enabled':s.reduceMotion?'0':'1',
       '--cr-travel-panel':data.motion.distance.panel+'px','--cr-travel-floating':data.motion.distance.floating+'px','--cr-travel-content':data.motion.distance.content+'px','--cr-travel-exit':data.motion.distance.exit+'px',
