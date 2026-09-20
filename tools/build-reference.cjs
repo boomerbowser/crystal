@@ -47,7 +47,7 @@ function tokensPage() {
     'Every value Crystal ships, generated from `core/tokens/crystal.tokens.json` — the W3C',
     'Design Tokens (DTCG) source of truth. This page is written by',
     '`tools/build-reference.cjs`; editing it by hand is pointless, because the next build',
-    'overwrites it. Edit the token file and run `python3 tools/build.py`.',
+    'overwrites it. Edit the token file and run `npm run build`.',
     '',
     '## How the three tiers work',
     '',
@@ -252,30 +252,39 @@ function paletteTable() {
   return lines.join('\n');
 }
 
-/* The focus recipe is composed in `assets/controls.css`, not in the token file, so it is
-   read from there. It was hand-transcribed into the components chapter and had to be
-   hand-corrected when the halo spread changed — which is the drift this prevents. */
+/* Read from the library's own exported theme, because this is the library's
+   specification and it may only describe what the library ships.
+   It used to read the preview site's `controls.css`, which overrides
+   `--cr-focus-ring` — so Crystal documented a recipe that came from a
+   stylesheet it does not publish, and a consumer following the table got
+   something else. That is D-11, and the repository split made it literal: the
+   preview is not here any more and the file cannot be opened at all.
+   The preview composes two further elevation layers on top of the halo. They
+   are not in this table because they are not in the package. Whether they
+   should be is a material question for Meridian, recorded in D-11 and not
+   decided here. */
 function focusRecipeTable() {
-  const css = fs.readFileSync(path.join(ROOT, 'website/assets/controls.css'), 'utf8');
-  const ring = /--cr-focus-ring:([^;]+);/.exec(css);
-  if (!ring) throw new Error('assets/controls.css: no --cr-focus-ring to read');
+  const css = fs.readFileSync(path.join(ROOT, 'core/assets/crystal-theme.css'), 'utf8');
+  const ring = /--cr-focus-ring:\s*([^;]+);/.exec(css);
+  if (!ring) throw new Error('core/assets/crystal-theme.css: no --cr-focus-ring to read');
   const layers = ring[1].split(/,(?![^(]*\))/).map(s => s.trim());
+  if (layers.length !== 4) throw new Error(`expected four halo layers, read ${layers.length}`);
   const lines = ['| Layer | Blur | Spread | Role |', '|---|---|---|---|',
     '| `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | — | — | The crisp core. Never feathered, and the only part that survives forced colours. |'];
-  for (const layer of layers) {
-    const m = /^(-?[\d.]+\w*)\s+(-?[\d.]+\w*)\s+([\d.]+\w*)(?:\s+([\d.]+\w*))?\s+var\(([^)]+)\)/.exec(layer);
-    if (!m) continue;
-    const [, , y, blur, spread, name] = m;
-    const role = /shadow/.test(name) ? 'Elevation beneath the control'
-      : y !== '0' ? 'Directional elevation'
-      : 'Feathered halo; increasing blur at decreasing opacity';
-    lines.push(`| \`${name}\` | ${blur} | ${spread || '0'} | ${role} |`);
-  }
+  layers.forEach((layer, index) => {
+    /* The exported theme resolves the colour, so a layer reads
+       `0 0 6px 1px rgba(115, 56, 239, 0.46)` rather than naming a variable.
+       The alpha is the part worth quoting — it is what makes the falloff. */
+    const m = /^(-?[\d.]+\w*)\s+(-?[\d.]+\w*)\s+([\d.]+\w*)\s+([\d.]+\w*)\s+rgba?\([^)]*?([\d.]+)\s*\)/.exec(layer);
+    if (!m) throw new Error(`unreadable focus halo layer: ${layer}`);
+    const [, , , blur, spread, alpha] = m;
+    lines.push(`| Halo ${index + 1} | ${blur} | ${spread} | ${Math.round(alpha * 100)}% of the primary colour |`);
+  });
   return lines.join('\n');
 }
 
 function contrastFigures() {
-  const checks = read('website/verification/token-checks.json');
+  const checks = read('validation/token-checks.json');
   const text = checks.results.filter(r => r.minimum === 4.5).map(r => r.ratio);
   return [
     `**${checks.checks.toLocaleString()} contrast cases** are computed across all six palettes in both`,

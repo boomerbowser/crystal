@@ -104,5 +104,5 @@ assert.equal(C.resolve()['--cr-motion-max-travel'],'50px');
 const canonical=JSON.parse(fs.readFileSync(path.join(root,'core/tokens/crystal.json'),'utf8'));
 assert.deepEqual(JSON.parse(JSON.stringify(D)),canonical);
 const report={date:new Date().toISOString(),scope:'Token pairs, bounded composite models, normalization and exported theme behavior. Not a WCAG certification.',checks:results.length,minimum:Math.min(...results.map(x=>x.ratio)),failures,results};
-fs.writeFileSync(path.join(root,'website/verification/token-checks.json'),JSON.stringify(report,null,2)+'\n');
+fs.writeFileSync(path.join(root,'validation/token-checks.json'),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({checks:report.checks,minimum:report.minimum,failures},null,2));if(failures.length)process.exitCode=1;

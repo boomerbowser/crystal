@@ -127,63 +127,35 @@ Anything else — internal selectors, generated file ordering, the preview site 
 
 **Deprecate before removing.** A deprecated name keeps working for at least one minor version, and the version that will remove it is named at the moment it is deprecated. Removal happens only in a major release. The legacy material vocabulary — `--cr-acrylic-*`, `--cr-glass-*`, `--cr-mica-*` and the `.cr-acrylic` and `.cr-glass` classes — is deprecated in 2.0.0 and will be removed in 3.0.0; they currently ship as aliases of the Frost, Resin and Plastic tokens.
 
-Crystal publishes privately to GitHub Packages under the `@meridian` scope. Products pin a version, which is what makes one-version-per-product and a CI parity check enforceable. The packaged ZIP remains available as a release asset for consumers that do not use a package manager.
+Crystal publishes publicly to npm as **`@crystal-ui/core`**:
+
+```sh
+npm install @crystal-ui/core
+```
+
+Products pin a version, which is what makes one-version-per-product and a CI parity check enforceable. Every release after 2.0.0 is published from a tag by GitHub Actions through npm Trusted Publishing and carries a provenance attestation, so a consumer can verify the tarball came from `boomerbowser/crystal` and from the commit the tag names. 2.0.0 itself was published by hand and is the one version without an attestation — npm cannot attach a trusted publisher to a package that does not exist yet.
+
+A specification bundle — the token files, the generated Swift and Kotlin exports and the parity contract — is attached to each GitHub release, for platform libraries that cannot install an npm package.
 
 ## Rebuild and validate
 
-Use an isolated environment for documentation tools, then run from the package root:
+From the `crystal` repository:
 
 ```sh
-python3 -m venv .venv
-.venv/bin/pip install -r tools/requirements.txt
-.venv/bin/python tools/build.py
-node tools/validate-tokens.cjs
-.venv/bin/python tools/validate.py
-.venv/bin/python tools/report.py
-.venv/bin/python tools/package.py
+npm ci
+npm run build
+npm test
 ```
 
-Node is used for the same resolver/exporter consumed by the browser; no Node package installation is required. Python requirements support Markdown rendering and HTML link checks. Browser checks are recorded separately as actual UI observations. Rebuilding never reads or writes the originating project. Keep dependencies and temporary environments out of distributable ZIPs.
+`npm run build` regenerates everything the library generates rather than stores: the flat token file from the DTCG source, `tokens.js`, the exported theme, and the reference sections in `docs/`. `npm test` runs that build and then checks token contracts and contrast, recipe uniqueness, duration and travel bounds, the engine versions against the lockfile, documentation drift, and what the published package may contain. Node and nothing else — the library has no Python tooling.
 
-## Deploying the preview
+The exported theme is produced by running the resolver, not by writing CSS. Any other method would be a second implementation of alias resolution, which is the divergence the token pipeline exists to prevent.
 
-The preview is static. Every page, stylesheet, script, icon and shader in this directory is
-committed, so a host only has to serve the directory — there is no build step at deploy time,
-and adding one would only introduce a way for the published site to disagree with the
-validated one.
+The documentation website is a separate repository, `crystal-preview`. It installs this package, renders the specification it installed, and runs the browser gates — pages, links, scrolling, interactions and the visual baselines — against what was published rather than against a working copy.
 
-`vercel.json` at the repository root serves `design-system/` as the site root with no build
-and no install. The constraints worth knowing before changing it:
+## Deploying the documentation website
 
-**Every path is relative and must stay that way.** Nothing references an absolute `/path`, so
-the site works at a domain root, under a subpath, or from a preview URL without alteration.
-An absolute path added anywhere would break the last two.
-
-**Scripts that fetch must resolve against their own URL, not the page's.** `motion-shaders.js`
-derives its base from `document.currentScript.src`. A page-relative `assets/…` only works for
-pages at the site root; from `/docs/materials.html` it resolves to `/docs/assets/…`. Because
-the shader runtime fails quietly by design, that broke the optical layer on ten documentation
-pages with no visible symptom until it was measured.
-
-**Caching assumes filenames are not content-hashed, because they are not.** Assets carry
-`max-age=0, must-revalidate` for browsers and a long `s-maxage` for the edge, which Vercel
-purges on each deployment: the edge serves cached bytes, browsers always revalidate, and a
-redeploy is picked up immediately. Fonts are the exception and are cached immutably for a
-year. Do not mark the stylesheets or scripts `immutable` unless their names gain hashes;
-clients would hold a stale Crystal for a year.
-
-**Shader sources are served as text.** `.frag` and `.glsl` are given an explicit
-`text/plain` content type, which matters because `X-Content-Type-Options: nosniff` is set.
-
-**`cleanUrls` is deliberately off.** Every internal link is written with its `.html`
-extension and `tools/validate.py` checks that link graph. Enabling clean URLs would redirect
-each of those and publish a site whose routes differ from the validated ones.
-
-`.vercelignore` keeps the build and test machinery out of the upload. Only two directories
-are excluded, `tools/` and `src/`, and both were verified to be referenced by no page. The
-link graph resolves with zero errors against the exact tree that gets uploaded; `tests/`,
-`reference/`, `tokens/`, `artifacts/` and the Markdown sources are all linked and are all
-published.
+The website is `crystal-preview`, a separate repository that installs this package. How it is deployed — the Vercel settings, the caching rules, the relative-path and clean-URL constraints — is documented there, because it is a fact about that site rather than about Crystal. Nothing in this package depends on it.
 
 ### User animation speed
 
@@ -192,8 +164,12 @@ published.
 
 ### Motion engine dependencies
 
-The motion runtime now requires the locally bundled engines and recipe catalog. Load `assets/vendor/crystal-engines.js`, `assets/motion-catalog.js`, then `assets/motion.js`. `npm ci` reproduces the pinned Motion 13.4.0 and GSAP 3.15.0 dependencies; `npm run build:motion` rebuilds the bundle with esbuild. Preserve the vendor legal-comment file and `reference/licenses/` when distributing it. The token resolver and static material CSS do not require these libraries. See [component motion](motion-components.html) for integration and cancellation contracts.
+The motion runtime needs the engines and the recipe catalogue. `@crystal-ui/core` declares Motion 13.4.0 and GSAP 3.15.0 as dependencies and ships `engines.js`, which re-exports both; bundle it however your product bundles anything else. The recipes are `@crystal-ui/core/motion-recipes`. Ship `licenses/` with any bundle that includes the engines.
+
+**The token resolver and the static material CSS do not need either library.** A product that uses Crystal's colour, materials and geometry without its motion installs nothing extra. See [component motion](motion-components.html) for the integration and cancellation contracts.
 
 ### Interaction surfaces and revised motion
 
-Include `assets/controls.css` after base/layout styles. Use `assets/controls.js` for the preview's native field shells, or render equivalent shells in your component framework. Compact information surfaces and ephemeral menus use `.cr-resin-haze`. Do not transplant the legacy solid button rules without this material layer. The 54-recipe catalog declares material signatures and justified extended travel; the old 50px token describes compact motion only.
+Render the field shells in your component framework: a bare `<input>` cannot carry Crystal's focus ring, because the ring belongs to the shell around it and the input itself takes `outline: 0`. Compact information surfaces and ephemeral menus use `.cr-resin-haze`. Do not transplant the legacy solid button rules without this material layer. The 54-recipe catalogue declares material signatures and justified extended travel; the old 50px token describes compact motion only.
+
+`controls.css` is **not** part of this package and never will be. It is the documentation site's own stylesheet, it styles bare elements, and exporting it once already caused a 32px chip to render 50px tall in Crystal React — D-9. `tools/verify-package.cjs` fails a tarball that contains it.

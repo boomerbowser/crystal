@@ -59,10 +59,10 @@ assert(recipe.duration>0&&recipe.duration<=ceiling,
  *
  * `core/package.json` is the authority: gsap and motion are @crystal-ui/core's
  * runtime contract, and a consumer installs whatever it declares. The workspace
- * manifest needs them too, because `tools/build-motion.cjs` bundles the
- * preview's `assets/vendor/crystal-engines.js` out of them at build time — a
- * build-time need, not a published one. And the lockfile is what actually gets
- * installed.
+ * manifest needs them too, because `tools/sync-licences.cjs` copies their
+ * licence notices out of `node_modules/` and into `core/licenses/`, which the
+ * library ships. A notice for a version the library does not declare would be
+ * the wrong notice. And the lockfile is what actually gets installed.
  *
  * Two manifests naming the same version is the kind of duplication CONTRACT §1
  * is about, and the answer here is not to remove one but to make the agreement a
@@ -78,17 +78,9 @@ for(const name of ['motion','gsap']){
   assert.equal(lock.packages['node_modules/'+name].version,declared,
     `the lockfile installs ${name} ${lock.packages['node_modules/'+name].version}, not the ${declared} @crystal-ui/core declares`);
 }
-assert(fs.statSync('website/assets/vendor/crystal-engines.js').size>1000,'Missing real engine bundle');
-
-/* The browser reads assets/motion-catalog.js, not the JSON. They are the same
-   data through a generator, so they can silently diverge: correcting a recipe
-   and forgetting `npm run build:motion` leaves the page serving the old
-   motion while every source-level check passes. That happened once during the
-   incompressibility work and was caught in the browser rather than here. */
-const catalogText=fs.readFileSync('website/assets/motion-catalog.js','utf8');
-const catalog=JSON.parse(catalogText.replace(/^window\.CRYSTAL_MOTION_RECIPES = /,'').replace(/;\s*$/,''));
-assert.deepEqual(catalog,data.recipes,
-  'assets/motion-catalog.js is stale; run: npm run build:motion');
-
+/* The engine bundle and the browser's motion catalogue are built by the
+   website, from this library's recipes, and are checked in crystal-preview
+   where they are produced. What is this library's to guarantee is the recipe
+   data itself and the versions it declares, which is everything above. */
 const result={recipes:ids.size,categories:new Set(data.recipes.map(r=>r.category)).size,engines:pkg.dependencies,staticContracts:'passed'};
-fs.writeFileSync('website/verification/motion-static-checks.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
+fs.writeFileSync('validation/motion-static-checks.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

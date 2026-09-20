@@ -164,16 +164,13 @@ The catalog replays visual recipes on isolated specimens; a menu recipe replay i
 
 ```sh
 npm ci
-npm run build:motion
+npm run build
 npm test
-python3 tools/build.py
-python3 tools/validate.py
-python3 tools/package.py
 ```
 
-Python documentation tooling needs the packages listed in `tools/requirements.txt`. Prebuilt assets are included for offline viewing; no install is required to open the preview through a local static server. `node_modules` is excluded from the ZIP; sources, pinned lockfile, catalog, bundle, notices and tests are included.
+`npm run build` regenerates the token data, the exported theme and the reference sections in `docs/`. `npm test` runs that build and then checks token contracts and contrast, recipe uniqueness, duration and travel bounds, engine declarations against the lockfile, documentation drift, and what the published package may contain. It needs Node and nothing else — the library has no Python tooling.
 
-`npm test` checks token contracts, recipe uniqueness, duration/travel bounds, engine declarations and installed dependency metadata. The browser check page uses the real installed engines to verify recipe completion, cancellation, supersession, property restoration, reduced motion, duration limits, stationary foregrounds, every material signature and the component page in a 320px browsing context. Test results are evidence for the exercised browser, not a full WCAG, native-renderer or cross-browser certification.
+The motion engines are bundled for a browser by the documentation website, not here: `@crystal-ui/core` ships `engines.js` and declares gsap and motion as dependencies, and a consumer bundles them as it prefers. The browser contract page that exercises the real engines — recipe completion, cancellation, supersession, property restoration, reduced motion, duration limits, stationary foregrounds and every material signature — lives in `crystal-preview` and runs against the published package. Its results are evidence for the exercised browser, not a full WCAG, native-renderer or cross-browser certification.
 
 ### Storybook and future component packages
 

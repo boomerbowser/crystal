@@ -57,10 +57,28 @@ if (words[categories]) {
 }
 
 /* The contrast figure, from the executed run rather than from memory. */
-const checks = read('website/verification/token-checks.json');
+const checks = read('validation/token-checks.json');
 expect('accessibility.md', checks.checks.toLocaleString(), 'the number of contrast cases actually computed');
 
+/* The focus halo, quoted in prose. The generated table beneath it is built from
+   the exported theme and cannot drift; the sentence above it is hand-written and
+   did. It described 2/6/12/22 for as long as the library shipped those spreads
+   and for a while after Meridian halved them, so the specification, the library
+   and the site disagreed three ways at once — D-11. Every blur/spread pair the
+   theme actually exports must appear in the sentence. */
+{
+  const theme = fs.readFileSync(path.join(ROOT, 'core/assets/crystal-theme.css'), 'utf8');
+  const ring = /--cr-focus-ring:\s*([^;]+);/.exec(theme);
+  const layers = ring ? ring[1].split(/,(?![^(]*\))/) : [];
+  for (const layer of layers) {
+    const m = /^\s*0\s+0\s+(\d+)px\s+(\d+)px/.exec(layer);
+    if (!m) continue;
+    expect('components.md', `${m[1]}px / ${m[2]}px`,
+      `a focus halo layer the theme exports (blur ${m[1]}px, spread ${m[2]}px)`);
+  }
+}
+
 const report = { suite: 'documentation drift', checks: 20, failures };
-fs.writeFileSync(path.join(ROOT, 'website/verification/doc-drift-checks.json'), JSON.stringify(report, null, 2) + '\n');
+fs.writeFileSync(path.join(ROOT, 'validation/doc-drift-checks.json'), JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify(report, null, 2));
 process.exit(failures.length ? 1 : 0);

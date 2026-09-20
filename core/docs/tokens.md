@@ -3,7 +3,7 @@
 Every value Crystal ships, generated from `core/tokens/crystal.tokens.json` — the W3C
 Design Tokens (DTCG) source of truth. This page is written by
 `tools/build-reference.cjs`; editing it by hand is pointless, because the next build
-overwrites it. Edit the token file and run `python3 tools/build.py`.
+overwrites it. Edit the token file and run `npm run build`.
 
 ## How the three tiers work
 

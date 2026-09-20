@@ -1,29 +1,21 @@
 {
   "name": "crystal-workspace",
   "private": true,
-  "description": "Build and verification machinery for Crystal, and the preview website. Not published: the package is core/, which is published as @crystal-ui/core.",
+  "description": "Build and verification machinery for Crystal. Not published: the package is core/, which is published as @crystal-ui/core. The documentation website is its own repository, crystal-preview, and consumes that package.",
   "type": "commonjs",
   "scripts": {
-    "build:motion": "node tools/build-motion.cjs",
-    "test": "python3 tools/build.py && node tests/core-contracts.cjs && node tools/validate-tokens.cjs && node tools/validate-motion.cjs && python3 tests/visual-gate-contracts.py && node tools/validate-docs.cjs && node tools/verify-package.cjs",
+    "build": "node tools/build-library.mjs",
     "build:tokens": "node tools/build-tokens.cjs",
     "build:catalogue": "node tools/build-catalogue.cjs",
-    "build": "python3 tools/build.py && node tools/build-icons.cjs",
-    "capture:frames": "node tools/capture-frames.mjs",
-    "verify:visual": "node tools/verify-frames.mjs",
-    "verify:floor": "node tools/verify-frames.mjs --no-webgl",
-    "audit:materials": "node tools/audit-materials.mjs",
-    "verify:interactions": "node tools/verify-interactions.mjs",
+    "build:icons": "node tools/build-icons.cjs",
+    "build:licences": "node tools/sync-licences.cjs",
+    "test": "node tools/build-library.mjs && node tests/core-contracts.cjs && node tools/validate-tokens.cjs && node tools/validate-motion.cjs && node tools/validate-docs.cjs && node tools/verify-package.cjs",
     "validate:docs": "node tools/validate-docs.cjs",
-    "verify:deploy": "node tools/verify-deploy.mjs website",
-    "verify:scroll": "node tools/verify-scroll.mjs",
     "verify:package": "node tools/verify-package.cjs"
   },
   "devDependencies": {
-    "esbuild": "0.28.2",
     "gsap": "3.15.0",
     "lucide-static": "^1.47.0",
-    "motion": "13.4.0",
-    "playwright": "^1.63.0"
+    "motion": "13.4.0"
   }
 }

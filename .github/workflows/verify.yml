@@ -1,10 +1,13 @@
-# Crystal's gates, run on every push and pull request.
+# The library's gates, run on every push and pull request.
 #
 # Nothing here is a new check. Each step is a script that already exists and that
 # the project already runs by hand; the point of this file is that "already runs
 # by hand" stops being the only guarantee. The order is the order of dependency:
-# the token build writes the files the validators read, and the browser checks
-# need the preview site to be up.
+# the token build writes the files the validators read.
+#
+# The browser half of this file is gone, along with the website it tested. The
+# pages, the link check, scrolling, interactions and the visual baselines are
+# crystal-preview's, and are run there against the published package.
 name: Verify
 
 on:
@@ -30,23 +33,17 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.12'
       - run: npm ci --no-audit --no-fund
-      # The documentation tooling is Python and does not live on stdlib alone.
-      - run: pip install -r tools/requirements.txt
 
-      # Builds everything generated — tokens, catalogue, reference sections, the
-      # default theme CSS and the fourteen HTML pages — then runs the core
-      # contracts, the token validator (contrast included), the motion validator,
-      # the visual gate contracts and the documentation validator.
+      # Builds everything the library generates — tokens, catalogue, the
+      # exported theme and the reference sections in core/docs/ — then runs the
+      # core contracts, the token validator (contrast included), the motion
+      # validator, the documentation drift gate and the package boundary.
       #
-      # `npm test` used to build only the tokens and the catalogue, which meant
-      # the drift gate below watched everything except the pages a reader
-      # actually opens. `docs/materials.html` sat stale for a commit because of
-      # it: the markdown said one thing and the published page said another, and
-      # both gates passed. The page build is Python, so it now runs here.
+      # These are the gates `publish.yml` runs before publishing, which is why
+      # they stayed in this repository when the website left it. The website's
+      # own gates — the pages, the links, scrolling, interactions and the visual
+      # baselines — moved to crystal-preview with the pages they are about.
       - run: npm test
 
       # Generated output is generated, not authored. If a build produces
@@ -61,18 +58,18 @@ jobs:
       # `design-system/design-system/…` and excluded nothing, and passed locally
       # because there happened to be no diff for it to exclude.
       #
-      # `website/verification/token-checks.json` is the exception, and only for
-      # its `date`: it records when the evidence was produced, so it differs on
+      # `validation/token-checks.json` is the exception, and only for its
+      # `date`: it records when the evidence was produced, so it differs on
       # every run by design. Its numbers are held to the same rule as everything else — the
       # second command fails if anything but the timestamp moved.
       - name: Generated files match their source
         run: |
           git diff --exit-code -- ':(top)' \
-            ':(exclude,top)website/verification/token-checks.json' || {
+            ':(exclude,top)validation/token-checks.json' || {
             echo "::error::A build changed a committed file. Run the build and commit the result."
             exit 1
           }
-          drift=$(git diff -U0 -- ':(top)website/verification/token-checks.json' \
+          drift=$(git diff -U0 -- ':(top)validation/token-checks.json' \
             | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | grep -v '"date"' || true)
           if [ -n "$drift" ]; then
             echo "::error::The token evidence changed beyond its timestamp:"
@@ -80,45 +77,3 @@ jobs:
             exit 1
           fi
 
-  browser:
-    name: Scrolling, interactions and deployability
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 22
-      - uses: actions/setup-python@v6
-        with:
-          python-version: '3.12'
-      - run: npm ci --no-audit --no-fund
-      - run: pip install -r tools/requirements.txt
-      - run: npx playwright install --with-deps chromium
-
-      # The website reaches the library through a copy of it, and that copy is
-      # generated rather than committed. This job does not run `npm test`, so
-      # nothing else here would make it. Without this step the site comes up
-      # with no library at all, and the symptom is not "the library is missing"
-      # — it is every scroll container reporting `scrollbar-color: auto`,
-      # because .cr-scroll-frost is defined in a stylesheet that never loaded.
-      # That is what this job reported the first time it ran after the split.
-      - run: node tools/assemble-site.mjs
-
-      # The preview has no backend, but it is verified served rather than opened
-      # from the filesystem — `file:` and `http:` differ on enough of what these
-      # checks measure that one is not evidence for the other.
-      - name: Start the preview
-        run: |
-          python3 tools/serve.py &
-          for _ in $(seq 1 40); do
-            curl -sf http://127.0.0.1:4321/ >/dev/null && exit 0
-            sleep 0.5
-          done
-          echo "::error::The preview did not come up on 127.0.0.1:4321"
-          exit 1
-
-      - run: npm run verify:scroll
-        env:
-          CRYSTAL_ORIGIN: http://127.0.0.1:4321
-      - run: npm run verify:interactions
-      - run: npm run verify:deploy

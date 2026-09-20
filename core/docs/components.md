@@ -100,7 +100,7 @@ Icons next to text are decorative and hidden from assistive technology. Icon-onl
 
 ## Focus light and circular state badges
 
-Focus uses an immediate 2px primary-color core at a 3px offset, surrounded by a broadly feathered halo. The halo is four graded layers of the primary color — 46% at 6px blur / 2px spread, 30% at 16px / 6px, 17% at 30px / 12px and 8% at 54px / 22px — so the light falls off smoothly instead of ending on a hard edge. Dark mode raises those alphas to 56/38/22/11% to carry the same falloff against a deep canvas. Its elevation shadow stays chromatic: the 30% layer supplies the close glow and decorative color at 27% supplies the broad shadow. The single token `--cr-focus-ring` composes the halo so every focusable surface shares one recipe. The core remains defined for visibility; text and icons are never blurred. Keyboard focus applies to all interactive elements. Text entry lights its Resin shell through `:focus-within`. Motion must neither delay nor remove the focus cue. Forced colors substitute a system Highlight outline and remove decorative shadows.
+Focus uses an immediate 2px primary-color core at a 3px offset, surrounded by a broadly feathered halo. The halo is four graded layers of the primary color — 46% at 6px / 1px, 30% at 16px / 3px, 17% at 30px / 6px and 8% at 54px / 11px (blur / spread) — so the light falls off smoothly instead of ending on a hard edge. The spreads were halved from 2/6/12/22 at Meridian's request; the blur radii were deliberately left alone, so the ring thins without the falloff flattening. The single token `--cr-focus-ring` composes the halo so every focusable surface shares one recipe. The core remains defined for visibility; text and icons are never blurred. Keyboard focus applies to all interactive elements. Text entry lights its Resin shell through `:focus-within`. Motion must neither delay nor remove the focus cue. Forced colors substitute a system Highlight outline and remove decorative shadows.
 
 A `.cr-indicator` is a 20px circular Resin surface with a 3px-inset 80% Haze fill and a 1px feather on that fill. Field badges are 24px. Their foreground remains crisp and uses the tested body ink. They sit beside the content, never over text or a native select arrow. These are informational, non-interactive marks, not small click targets.
 
@@ -109,12 +109,10 @@ A `.cr-indicator` is a 20px circular Resin surface with a 3px-inset 80% Haze fil
 | Layer | Blur | Spread | Role |
 |---|---|---|---|
 | `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | — | — | The crisp core. Never feathered, and the only part that survives forced colours. |
-| `--cr-focus-feather-1` | 6px | 1px | Feathered halo; increasing blur at decreasing opacity |
-| `--cr-focus-feather-2` | 16px | 3px | Feathered halo; increasing blur at decreasing opacity |
-| `--cr-focus-feather-3` | 30px | 6px | Feathered halo; increasing blur at decreasing opacity |
-| `--cr-focus-feather-4` | 54px | 11px | Feathered halo; increasing blur at decreasing opacity |
-| `--cr-focus-feather-2` | 18px | 0 | Directional elevation |
-| `--cr-focus-shadow` | 40px | 0 | Elevation beneath the control |
+| Halo 1 | 6px | 1px | 46% of the primary colour |
+| Halo 2 | 16px | 3px | 30% of the primary colour |
+| Halo 3 | 30px | 6px | 17% of the primary colour |
+| Halo 4 | 54px | 11px | 8% of the primary colour |
 <!-- /generated:focus-recipe -->
 
 Each halo layer is read from `--cr-focus-ring` in `assets/controls.css`, so this table

@@ -53,10 +53,6 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-      - uses: actions/setup-python@v6
-        with: { python-version: '3.13' }
-      - run: pip install markdown
-
       - run: npm ci
 
       # The whole suite, because a published version cannot be taken back.
@@ -67,17 +63,17 @@ jobs:
       # Same rule as verify.yml, and the same one exception. `npm test` runs the
       # build first, so a diff here means a committed generated file does not
       # match its source — and publishing would ship a package that is not this
-      # commit. `website/verification/token-checks.json` records when the evidence was
+      # commit. `validation/token-checks.json` records when the evidence was
       # produced, so its `date` differs on every run by design; its numbers are
       # held to the rule like everything else.
       - name: Generated files match their source
         run: |
           git diff --exit-code -- ':(top)' \
-            ':(exclude,top)website/verification/token-checks.json' || {
+            ':(exclude,top)validation/token-checks.json' || {
             echo "::error::A build changed a committed file. Publishing would ship a package that does not match this commit."
             exit 1
           }
-          drift=$(git diff -U0 -- ':(top)website/verification/token-checks.json' \
+          drift=$(git diff -U0 -- ':(top)validation/token-checks.json' \
             | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | grep -v '"date"' || true)
           if [ -n "$drift" ]; then
             echo "::error::The token evidence changed beyond its timestamp:"
