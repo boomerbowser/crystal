@@ -6,10 +6,13 @@
  * the whole world. So the build places a copy of the library inside the site,
  * at `website/vendor/@crystal-ui/core/`, and every page addresses it there.
  *
- * That path is the point. It is `node_modules/@crystal-ui/core/` with one
- * segment changed. When the library is published and the site installs it
- * instead of copying it, `shell.py`'s CORE constant moves by one word and no
- * page, stylesheet or script changes at all.
+ * `vendor/@crystal-ui/core/` stays the site path permanently, because a static
+ * deployment uploads `website/` and `node_modules/` is not inside it — a page
+ * cannot load from a directory that was never uploaded. What changes when the
+ * library is published is the *source* of this copy, one constant below:
+ * `../core` becomes `node_modules/@crystal-ui/core`. No page, stylesheet,
+ * script or specification link changes, which is why the copy is named after
+ * the package rather than after the folder it currently comes from.
  *
  * Node built-ins only, and no arguments. Vercel runs this as the whole build
  * with no install step, so anything this needed to be installed first would

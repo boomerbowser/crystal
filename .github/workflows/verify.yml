@@ -25,9 +25,6 @@ jobs:
   gates:
     name: Tokens, contracts and documentation
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: design-system
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -56,30 +53,26 @@ jobs:
       # something different from what is committed, the committed copy is stale
       # and every downstream gate is reading a file nobody has looked at.
       #
-      # The pathspec is repository-wide rather than this subtree: the catalogue
-      # build writes `libraries/parity.json`, a sibling of `design-system/`, and
-      # drift there would otherwise be invisible.
+      # The pathspec stays repository-wide and stays anchored with `:(top)`.
+      # These steps no longer run in a subdirectory — the library and the website
+      # are folders at the repository root — so a bare pathspec would resolve the
+      # same way today. It is written anchored anyway, because the last time the
+      # anchoring was left implicit the exclude resolved to
+      # `design-system/design-system/…` and excluded nothing, and passed locally
+      # because there happened to be no diff for it to exclude.
       #
-      # `:(top)` on **both** halves, because this step runs in `design-system/`
-      # and a bare exclude is read relative to the working directory. The first
-      # version wrote `:/` for the include and `:!design-system/…` for the
-      # exclude, which resolved to `design-system/design-system/…` and therefore
-      # excluded nothing. It passed locally — because at that moment there was no
-      # diff for it to exclude. CI caught it on the first run, which is the whole
-      # reason for having it.
-      #
-      # `validation/token-checks.json` is the exception, and only for its `date`:
-      # it records when the evidence was produced, so it differs on every run by
-      # design. Its numbers are held to the same rule as everything else — the
+      # `website/verification/token-checks.json` is the exception, and only for
+      # its `date`: it records when the evidence was produced, so it differs on
+      # every run by design. Its numbers are held to the same rule as everything else — the
       # second command fails if anything but the timestamp moved.
       - name: Generated files match their source
         run: |
           git diff --exit-code -- ':(top)' \
-            ':(exclude,top)design-system/validation/token-checks.json' || {
+            ':(exclude,top)website/verification/token-checks.json' || {
             echo "::error::A build changed a committed file. Run the build and commit the result."
             exit 1
           }
-          drift=$(git diff -U0 -- ':(top)design-system/validation/token-checks.json' \
+          drift=$(git diff -U0 -- ':(top)website/verification/token-checks.json' \
             | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | grep -v '"date"' || true)
           if [ -n "$drift" ]; then
             echo "::error::The token evidence changed beyond its timestamp:"
@@ -90,9 +83,6 @@ jobs:
   browser:
     name: Scrolling, interactions and deployability
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: design-system
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5

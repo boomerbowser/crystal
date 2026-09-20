@@ -13,7 +13,7 @@
 # publisher to a package that does not exist yet:
 #
 #   1. Create the @crystal-ui scope on npmjs.com.
-#   2. Publish 2.0.0 once by hand, from design-system/core/:
+#   2. Publish 2.0.0 once by hand, from core/:
 #        npm publish --access public
 #   3. On the new package: Settings -> Publishing access -> add a trusted
 #      publisher, repository boomerbowser/crystal, workflow
@@ -49,28 +49,26 @@ jobs:
       - run: pip install markdown
 
       - run: npm ci
-        working-directory: design-system
 
       # The whole suite, because a published version cannot be taken back.
       # `npm test` regenerates the tokens and the pages first, so this also
       # proves the committed generated files match their source.
       - run: npm test
-        working-directory: design-system
 
       # Same rule as verify.yml, and the same one exception. `npm test` runs the
       # build first, so a diff here means a committed generated file does not
       # match its source — and publishing would ship a package that is not this
-      # commit. `validation/token-checks.json` records when the evidence was
+      # commit. `website/verification/token-checks.json` records when the evidence was
       # produced, so its `date` differs on every run by design; its numbers are
       # held to the rule like everything else.
       - name: Generated files match their source
         run: |
           git diff --exit-code -- ':(top)' \
-            ':(exclude,top)design-system/validation/token-checks.json' || {
+            ':(exclude,top)website/verification/token-checks.json' || {
             echo "::error::A build changed a committed file. Publishing would ship a package that does not match this commit."
             exit 1
           }
-          drift=$(git diff -U0 -- ':(top)design-system/validation/token-checks.json' \
+          drift=$(git diff -U0 -- ':(top)website/verification/token-checks.json' \
             | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | grep -v '"date"' || true)
           if [ -n "$drift" ]; then
             echo "::error::The token evidence changed beyond its timestamp:"
@@ -83,12 +81,12 @@ jobs:
       # silent failures — the registry accepts them and the damage appears in
       # somebody else's repository days later.
       - run: node tools/verify-package.cjs
-        working-directory: design-system
 
-      # `core/`, because since the folder split there are two manifests and only
-      # one of them is published. The other is private workspace machinery.
+      # `core/`, because there are two manifests and only one of them is
+      # published. The other, at the repository root, is private machinery that
+      # builds the library and the website and installs nothing for a consumer.
       - name: The tag and the manifest agree
-        working-directory: design-system/core
+        working-directory: core
         run: |
           tagged="${GITHUB_REF_NAME#v}"
           packaged="$(node -p "require('./package.json').version")"
@@ -104,7 +102,7 @@ jobs:
       # scope that private libraries already import from is the textbook setup
       # for dependency confusion — owning it publicly is what closes that.
       - run: npm publish --provenance --access public
-        working-directory: design-system/core
+        working-directory: core
 
       # The half of this that npm cannot carry.
       #
@@ -115,7 +113,6 @@ jobs:
       # is versioned, immutable, fetchable with curl, needs no new account, and
       # is built by the same job that published to npm, so the two cannot drift.
       - name: Build the specification bundle
-        working-directory: design-system
         run: |
           set -euo pipefail
           out="crystal-spec-${GITHUB_REF_NAME#v}"
@@ -124,10 +121,10 @@ jobs:
              core/tokens/catalogue.json core/tokens/motion-recipes.json "$out/tokens/"
           cp core/exports/crystal-tokens.swift core/exports/crystal-tokens.kt \
              core/exports/crystal-tokens.ts "$out/exports/"
-          cp ../libraries/parity.json "$out/libraries/"
-          cp ../libraries/CONTRACT.md "$out/"
+          cp libraries/parity.json "$out/libraries/"
+          cp libraries/CONTRACT.md "$out/"
           zip -rq "$out.zip" "$out"
-          echo "BUNDLE=design-system/$out.zip" >> "$GITHUB_ENV"
+          echo "BUNDLE=$out.zip" >> "$GITHUB_ENV"
 
       - uses: softprops/action-gh-release@v2
         with:

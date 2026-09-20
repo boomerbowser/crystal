@@ -12,7 +12,7 @@ from zipfile import ZipFile,ZIP_DEFLATED
 ROOT=Path(__file__).resolve().parents[1]
 archive=ROOT/'crystal-design-system.zip'
 with ZipFile(archive,'w',ZIP_DEFLATED) as z:
-    PARTS=('core','website','tools','tests','validation','reference')
+    PARTS=('core','website','tools','tests','validation')
     for part in PARTS:
         for p in sorted((ROOT/part).rglob('*')):
             if not p.is_file() or any(x in p.parts for x in ('.venv','__pycache__','node_modules','.git','.playwright-mcp','.remember')):
