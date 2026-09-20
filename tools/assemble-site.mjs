@@ -26,12 +26,25 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const LIBRARY = resolve(ROOT, 'core');
 const SITE = resolve(ROOT, 'website');
 const VENDOR = resolve(SITE, 'vendor/@crystal-ui/core');
 
-if (!existsSync(LIBRARY)) {
-  console.error(`No library at ${LIBRARY}. The site has nothing to be built against.`);
+/* The installed package first, the sibling folder second. In this repository
+   the library is `core/` beside the website; in the website's own repository it
+   will be a dependency and there will be no `core/` to find. Asking in this
+   order means the same script is correct in both, and the split does not have
+   to edit it — which is the whole reason the vendored copy is named after the
+   package rather than after the folder it happens to come from today. */
+const CANDIDATES = [
+  resolve(ROOT, 'node_modules/@crystal-ui/core'),
+  resolve(ROOT, 'core'),
+];
+const LIBRARY = CANDIDATES.find((path) => existsSync(path));
+
+if (!LIBRARY) {
+  console.error('No library to build the site against. Looked in:');
+  for (const path of CANDIDATES) console.error(`  ${path}`);
+  console.error('Install @crystal-ui/core, or run this beside the library.');
   process.exit(1);
 }
 
@@ -60,6 +73,6 @@ for (const part of COPIED) {
 
 console.log(JSON.stringify({
   assembled: 'website/vendor/@crystal-ui/core',
-  from: 'core',
+  from: LIBRARY.startsWith(resolve(ROOT, 'node_modules')) ? 'node_modules/@crystal-ui/core' : 'core',
   parts: COPIED.map((part) => `${part}/ (${readdirSync(resolve(VENDOR, part)).length} entries)`),
 }, null, 2));
