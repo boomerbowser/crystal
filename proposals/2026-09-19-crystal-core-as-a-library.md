@@ -1,7 +1,8 @@
 # `@crystal-ui/core` as a published library
 
-**Proposal. D-10 in `proposals/open-issues.md`, and R-16 in Crystal React's
-tracker, which is the same issue from the consumer's side.**
+**Proposal. D-10 in `proposals/closed-issues.md`, and R-16 in Crystal React's
+closed tracker, which is the same issue from the consumer's side. Both are done:
+the library is published and both consumers install it.**
 **19 September 2026. Every decision in it has been made by Meridian; what
 follows is the shape, the order, and the parts only they can do.**
 
@@ -220,7 +221,7 @@ version that does not exist is worse than an honest path.
 
 | | |
 |---|---|
-| **Create the `@crystal-ui` scope on npm** | First, and under whichever account or organisation should own it. `@crystal` itself is taken — Meridian verified that directly on 20 September, after an earlier check here asked the wrong question (a package 404 says nothing about a scope; see D-10 in `open-issues.md`). `@crystal-ui` is the scope Meridian holds. |
+| **Create the `@crystal-ui` scope on npm** | First, and under whichever account or organisation should own it. `@crystal` itself is taken — Meridian verified that directly on 20 September, after an earlier check here asked the wrong question (a package 404 says nothing about a scope; see D-10 in `closed-issues.md`). `@crystal-ui` is the scope Meridian holds. |
 | **Publish 2.0.0 once, by hand** | npm cannot attach a trusted publisher to a package that does not exist yet, so the order matters and an earlier draft of this table had it backwards. From `core/`: `npm publish --access public`. This one version carries no provenance attestation, unavoidably — provenance needs a CI provider npm recognises, and this publish cannot come from CI because the trusted publisher does not exist until after it. Every version from the first tag onward is attested. |
 | **Then enable Trusted Publishing** | npm → the `@crystal-ui/core` package → *Settings* → *Publishing access* → add a trusted publisher: repository `boomerbowser/crystal`, workflow `.github/workflows/publish.yml`. Every version after the first comes from a tag and needs no credential. |
 | **Re-base the Vercel project onto `crystal-preview`** | Already planned. The build settings change with it — see §7. |
