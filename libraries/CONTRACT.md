@@ -166,11 +166,11 @@ is a different problem from one that does not.
 
 ### What not to load
 
-`@crystal/core/css` and `@crystal/core/theme` are for everyone: the reset, the
+`@crystal-ui/core/css` and `@crystal-ui/core/theme` are for everyone: the reset, the
 materials, the scroll contract, and the resolved token values.
 
 **`assets/controls.css` is the preview site's own control layer, and it is not
-exported.** `@crystal/core/controls` used to resolve; it no longer does, and the
+exported.** `@crystal-ui/core/controls` used to resolve; it no longer does, and the
 preview loads the file by relative path instead. There is nothing here for a
 library to obey, which is the point — the prohibition it replaces was obeyed
 right up until it wasn't.
@@ -192,7 +192,7 @@ The file sits in `@layer crystal.component`, so unlayered CSS outranks it for an
 property a consumer declares. That was never sufficient. Nobody writes a
 `::before` to cancel a `::before` they did not know was coming.
 
-A library that wants the resolved values in CSS takes `@crystal/core/resolver`
+A library that wants the resolved values in CSS takes `@crystal-ui/core/resolver`
 and publishes them onto its own scope, which is what the provider does.
 
 ---

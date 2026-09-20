@@ -1,4 +1,4 @@
-# Publish @crystal/core, and the specification bundle that platform libraries
+# Publish @crystal-ui/core, and the specification bundle that platform libraries
 # outside npm consume.
 #
 # Triggered by a tag rather than by a push to main: a release is a deliberate
@@ -12,7 +12,7 @@
 # BEFORE THE FIRST RUN, and in this order, because npm cannot attach a trusted
 # publisher to a package that does not exist yet:
 #
-#   1. Create the @crystal scope on npmjs.com.
+#   1. Create the @crystal-ui scope on npmjs.com.
 #   2. Publish 2.0.0 once by hand, from design-system/core/:
 #        npm publish --access public
 #   3. On the new package: Settings -> Publishing access -> add a trusted
@@ -98,7 +98,7 @@ jobs:
           fi
 
       # --provenance attests the tarball to this commit and this workflow, so a
-      # consumer can verify their @crystal/core came from boomerbowser/crystal
+      # consumer can verify their @crystal-ui/core came from boomerbowser/crystal
       # and not from someone who guessed a version number. `access public`
       # because a scoped package is private by default, and an unpublished
       # scope that private libraries already import from is the textbook setup

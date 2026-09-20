@@ -1,4 +1,4 @@
-/* What a published @crystal/core may and may not contain.
+/* What a published @crystal-ui/core may and may not contain.
  *
  * Both failure modes here are silent. A package publishes, the registry accepts
  * it, every test stays green, and the damage shows up in somebody else's
@@ -18,18 +18,24 @@
  * stylesheet cannot shape a blessed appearance if it cannot leave the
  * repository, and this is what stops it leaving.
  *
- * **Every export entry point is actually in the tarball.** The third silent
- * failure: `exports` can name a file `files` does not ship, and the error a
- * consumer gets is `ERR_PACKAGE_PATH_NOT_EXPORTED` at *their* build time.
+ * **Every export entry point resolves, and is in the tarball.** The third
+ * silent failure: `exports` can name a file `files` does not ship, and the
+ * error a consumer gets is `ERR_PACKAGE_PATH_NOT_EXPORTED` at *their* build
+ * time. Presence alone is not enough to prevent it — an export whose files all
+ * ship can still be unresolvable, which is how `./shaders/` stayed broken
+ * under a green gate — so the subpath is resolved the way a consumer resolves
+ * it.
  *
  *   node tools/verify-package.cjs
  */
 const { execFileSync } = require('node:child_process');
-const { readFileSync } = require('node:fs');
-const { resolve } = require('node:path');
+const { readFileSync, mkdtempSync, mkdirSync, symlinkSync, rmSync } = require('node:fs');
+const { resolve, join, relative } = require('node:path');
+const { createRequire } = require('node:module');
+const { tmpdir } = require('node:os');
 
 /* The package is `core/`, not the repository. Since the split those are two
-   different manifests: `core/package.json` is @crystal/core and is published,
+   different manifests: `core/package.json` is @crystal-ui/core and is published,
    and the one beside `tools/` is private machinery that runs the build. Pointing
    this at the wrong one would check a manifest nobody installs. */
 const root = resolve(__dirname, '..', 'core');
@@ -75,13 +81,23 @@ for (const path of files) {
 }
 
 const present = new Set(files);
+
+/* A wildcard target names a family rather than a file. Pick a real shipped
+   member of it, so both checks below have something concrete to ask about. */
+const member = (target) => {
+  const [prefix, suffix = ''] = target.replace(/^\.\//, '').split('*');
+  const hit = files.find((path) => path.startsWith(prefix) && path.endsWith(suffix) && path.length > prefix.length + suffix.length);
+  return hit ? hit.slice(prefix.length, hit.length - suffix.length) : null;
+};
+
 for (const [name, target] of Object.entries(manifest.exports ?? {})) {
   const targets = typeof target === 'string' ? [target] : Object.values(target);
   for (const each of targets) {
     const rel = each.replace(/^\.\//, '');
-    const ok = rel.endsWith('/')
-      ? files.some((path) => path.startsWith(rel))
-      : present.has(rel);
+    let ok;
+    if (rel.includes('*')) ok = member(each) !== null;
+    else if (rel.endsWith('/')) ok = files.some((path) => path.startsWith(rel));
+    else ok = present.has(rel);
     if (!ok) {
       failures.push(
         `exports["${name}"] points at ${each}, which "files" does not ship — a `
@@ -89,6 +105,52 @@ for (const [name, target] of Object.entries(manifest.exports ?? {})) {
       );
     }
   }
+}
+
+/* Shipping the file is not the same as exporting it, and the difference is
+   invisible from inside the repository. `"./shaders/": "./assets/shaders/"`
+   shipped every shader, satisfied the loop above, and still answered
+   ERR_PACKAGE_PATH_NOT_EXPORTED for every path beneath it: trailing-slash
+   export targets were deprecated and then removed from Node, and the
+   replacement is the `*` pattern. The check that would have caught it is the
+   one a consumer performs — ask Node to resolve the subpath. So do that, from
+   a sandbox where the package sits at its published name. */
+const sandbox = mkdtempSync(join(tmpdir(), 'crystal-exports-'));
+try {
+  const [scope, bare] = manifest.name.split('/');
+  mkdirSync(join(sandbox, 'node_modules', scope), { recursive: true });
+  symlinkSync(root, join(sandbox, 'node_modules', scope, bare), 'dir');
+  const from = createRequire(join(sandbox, 'probe.cjs'));
+
+  for (const [name, target] of Object.entries(manifest.exports ?? {})) {
+    const first = typeof target === 'string' ? target : Object.values(target)[0];
+    let subpath = name;
+    if (name.includes('*')) {
+      const star = member(first);
+      if (star === null) continue;   // already reported as unshipped above
+      subpath = name.replace('*', star);
+    }
+    const specifier = subpath === '.' ? manifest.name : `${manifest.name}/${subpath.slice(2)}`;
+    let resolved;
+    try {
+      resolved = from.resolve(specifier);
+    } catch (error) {
+      failures.push(
+        `exports["${name}"] does not resolve: \`require("${specifier}")\` fails with `
+        + `${error.code ?? error.message}. The files may all be present — Node still `
+        + 'refuses the subpath, and so will every consumer.',
+      );
+      continue;
+    }
+    const rel = relative(root, resolved).split(/[\\/]/).join('/');
+    if (!present.has(rel)) {
+      failures.push(
+        `exports["${name}"] resolves to ${rel}, which "files" does not ship`,
+      );
+    }
+  }
+} finally {
+  rmSync(sandbox, { recursive: true, force: true });
 }
 
 console.log(JSON.stringify({

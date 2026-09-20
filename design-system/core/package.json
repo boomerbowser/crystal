@@ -1,5 +1,5 @@
 {
-  "name": "@crystal/core",
+  "name": "@crystal-ui/core",
   "version": "2.0.0",
   "description": "Crystal design system: tokens, material primitives, headless core, icons and specifications.",
   "keywords": [],
@@ -36,7 +36,7 @@
     "./core/spring": "./assets/core/spring.js",
     "./motion-recipes": "./tokens/motion-recipes.json",
     "./engines": "./engines.js",
-    "./shaders/": "./assets/shaders/",
+    "./shaders/*": "./assets/shaders/*",
     "./flat": "./tokens/crystal.json",
     "./core/presets": {
       "types": "./assets/core/presets.d.ts",

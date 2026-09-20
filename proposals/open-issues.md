@@ -11,7 +11,7 @@ work — M-1 and M-2 — were answered on 18 September 2026 and are closed.
 
 ## D-1 · `controls.css` styles bare elements
 
-**Severity: high for anyone consuming `@crystal/core/controls`.**
+**Severity: high for anyone consuming `@crystal-ui/core/controls`.**
 
 `:is(button, a.cr-button)` gives **every** `button` in the document a Resin
 background, a feathered `::before` and a 48px minimum height. That is correct for
@@ -31,7 +31,7 @@ the preview renders, which is a visual change across most frames. Worth doing
 deliberately with the frames re-blessed, not as a side effect.
 
 **Closed by removing the vector rather than the rules.** `./controls` is no longer
-in `package.json`'s `exports`: `@crystal/core/controls` does not resolve, and the
+in `package.json`'s `exports`: `@crystal-ui/core/controls` does not resolve, and the
 preview reaches the file by relative path. CONTRACT §9's prohibition is now
 mechanical instead of advisory, which matters because a rule nothing enforces is
 a rule somebody will break — and somebody did.
@@ -378,7 +378,7 @@ were taken manually. Any frame showing a switch, a slider, a dock pill or a tabl
 will differ by the amount above, and the capture README is the explanation that
 belongs beside them when they are re-taken.
 
-## D-10 · `@crystal/core` is a folder inside a website, not a library
+## D-10 · `@crystal-ui/core` is a folder inside a website, not a library
 
 **Requested by Meridian, 19 September 2026.**
 **Proposal written and the first two steps done, 19 September 2026. The rest is
@@ -387,7 +387,7 @@ sequenced behind an npm scope that does not exist yet — see "Where this stands
 
 ### What it is today
 
-`@crystal/core` version `2.0.0-alpha.1`, `"private": true`, published nowhere.
+`@crystal-ui/core` version `2.0.0-alpha.1`, `"private": true`, published nowhere.
 Its package root is `design-system/`, and that one directory is three things at
 once:
 
@@ -451,14 +451,14 @@ forbid.
 
 ### What Meridian asked for
 
-1. `@crystal/core` becomes a **proper published library**, not a `file:` path.
+1. `@crystal-ui/core` becomes a **proper published library**, not a `file:` path.
 2. It supplies **context and specifications to every Crystal component library**,
    not only the React one — so this class of drift stops recurring.
 3. The **documentation website and its interactive previews** are updated to
    consume the new core, rather than being the same directory as it.
 4. The **specifications** are updated to refer to the core library and to explain
    how it operates.
-5. `@crystal/core` is **separated from the website's deployment repository**.
+5. `@crystal-ui/core` is **separated from the website's deployment repository**.
 6. The steps only Meridian can take are **documented and raised with them** —
    see "What only Meridian can do", below.
 
@@ -505,17 +505,18 @@ of the library first.
 Every open decision in this entry has been made. What follows replaces the list
 of questions that stood here.
 
-**1. Scope and registry: `@crystal`, on the public npm registry.** Meridian had
-verified the scope was free and had said so; this entry claimed it was "almost
-certainly taken" anyway, which was a guess presented as near-fact and was wrong.
-Worse, the instruction was already recorded — Crystal React's
-`docs/requirements.md`, 18 September: *"There should be no @meridian/crystal.
-Crystal Design System packages should be under the @crystal scope."* The
-`@meridian/crystal` entry in the pnpm store, which this entry cited as evidence
-that the question had been considered before, was the residue of the same
-mistake made once already.
+**1. Scope and registry: `@crystal-ui`, on the public npm registry.** Meridian had
+verified a scope was free and had said so; this entry claimed it was "almost
+certainly taken" anyway, which was a guess presented as near-fact. Worse, the
+instruction was already recorded — Crystal React's `docs/requirements.md`,
+18 September: *"There should be no @meridian/crystal. Crystal Design System
+packages should be under the @crystal scope."* The `@meridian/crystal` entry in
+the pnpm store, which this entry cited as evidence that the question had been
+considered before, was the residue of the same mistake made once already.
 
-Verified here rather than assumed, 19 September:
+**The check recorded here on 19 September was the wrong check**, and its
+conclusion has since been overturned. What it asked was whether two *packages*
+existed:
 
 ```
 GET registry.npmjs.org/@crystal%2Fcore     404 {"error":"Not found"}
@@ -523,8 +524,23 @@ GET registry.npmjs.org/@crystal%2Freact    404 {"error":"Not found"}
 GET registry.npmjs.org/-/v1/search?text=scope:crystal    total: 0
 ```
 
-Packages are `@crystal/core` and `@crystal/react`. The stale
+A 404 on `@crystal/core` proves that `@crystal/core` has never been published.
+It proves nothing about the `@crystal` **scope**, because npm reserves scopes —
+organisations and user scopes — independently of any package under them. A scope
+can be held with nothing published in it, and then all three lines above still
+read exactly as they do. The search line is no better: `scope:crystal` searches
+published packages too. The check that answers the question is
+`GET registry.npmjs.org/-/org/crystal` or `npm org ls crystal`, or simply
+`https://www.npmjs.com/org/crystal` in a browser.
+
+Meridian ran that check directly on 20 September: **`@crystal` is taken.** The
+scope Meridian holds, and the one Crystal publishes under, is **`@crystal-ui`**.
+Packages are `@crystal-ui/core` and `@crystal-ui/react`. The stale
 `@meridian/crystal` name in `design-system/package-lock.json` is corrected.
+
+This is the second npm-registry claim in this tracker that was wrong in the same
+direction — an absence of evidence read as evidence of absence. The general form:
+*a 404 answers only the exact question the URL asked.*
 
 **2. The documentation and preview site gets its own repository: `crystal-preview`.**
 Already created.
@@ -532,7 +548,7 @@ Already created.
 **3. `CRYSTAL_HEAD_TOKEN` is already set on `crystal-preview`** as a repository
 secret holding a PAT.
 
-**4. The `@crystal/core` repository is `crystal`, and it is now public.**
+**4. The `@crystal-ui/core` repository is `crystal`, and it is now public.**
 
 **5. Meridian will re-base the Vercel project onto `crystal-preview`.**
 
@@ -543,7 +559,7 @@ candidate — 2.0 ships as 2.0.0, and `2.0.0-alpha.1` is retired.
 "whichever is most conducive without introducing security vulnerabilities".**
 The choice and its reasoning:
 
-- **Consumers depend on a published range**, `"@crystal/core": "^2.0.0"`. No
+- **Consumers depend on a published range**, `"@crystal-ui/core": "^2.0.0"`. No
   `file:` and no `link:` in any committed manifest. A committed path is what
   produced R-14, and a package published while carrying one would ship a
   dependency that resolves to a directory on nobody else's machine.
@@ -560,10 +576,10 @@ The choice and its reasoning:
   with a short expiry.
 - **`--provenance` on every publish**, which attests the tarball to the exact
   commit and workflow that built it. A consumer can then verify that the
-  `@crystal/core` they installed came from `boomerbowser/crystal` and not from
+  `@crystal-ui/core` they installed came from `boomerbowser/crystal` and not from
   someone who guessed a version number.
 - **Owning the scope publicly is itself the mitigation for dependency
-  confusion.** An unclaimed `@crystal` scope with private libraries importing
+  confusion.** An unclaimed `@crystal-ui` scope with private libraries importing
   from it is the classic setup for that attack; publishing under a scope Meridian
   controls closes it.
 - **Two release gates**, because both failure modes are silent: a published
@@ -601,7 +617,7 @@ prevent.
 **Done, and reversible:**
 
 - **The folders.** Requested again by Meridian on 19 September — *"separate the
-  files that make up @crystal/core from the preview website into different
+  files that make up @crystal-ui/core from the preview website into different
   folders. That's part of what we meant originally."* `design-system/core/` is
   now the library and nothing else, with its own `package.json`; the rest of
   `design-system/` is the preview site and the machinery. A `files` array says
@@ -616,13 +632,13 @@ prevent.
   Two things surfaced that a path rewrite could not see. `tools/build-icons.cjs`
   built its output directory with `path.join(ROOT, 'assets/icons')`, so the first
   run after the move wrote 999 icons into a *second* directory and left the real
-  one stale. And `gsap`/`motion` are `@crystal/core`'s runtime contract but the
+  one stale. And `gsap`/`motion` are `@crystal-ui/core`'s runtime contract but the
   preview's engine bundle is built from them, so both manifests must name them —
   `validate-motion.cjs` now treats `core/package.json` as the authority and fails
   if the workspace manifest or the lockfile disagrees, which turns a duplication
   into a checked invariant.
 
-- **The boundary.** A published `@crystal/core` was 2.18 MB across 1,097 files
+- **The boundary.** A published `@crystal-ui/core` was 2.18 MB across 1,097 files
   and **46% of it was the documentation website**. `files` now ships only the
   library: 1.2 MB, no HTML, no `site.*`, no `controls.*`, no preview motion
   suite, no `src/pages/`.
@@ -644,8 +660,8 @@ prevent.
 
 **Not done, and why.** Steps 3 to 6 of the proposal — the specifications
 rewritten around the core library, the website converted to a consumer, the
-repository split, and Crystal React moving to `"@crystal/core": "^2.0.0"` — are
-all gated on the `@crystal` scope existing on npm and something having been
+repository split, and Crystal React moving to `"@crystal-ui/core": "^2.0.0"` — are
+all gated on the `@crystal-ui` scope existing on npm and something having been
 published to it. Committing a range that points at a version nobody can install
 is worse than an honest `file:` path, so the path stays until then.
 
@@ -653,7 +669,7 @@ The repository split is also the one step that writes to `crystal-preview`, and
 this session has never pushed to that remote. The commands are in §7 of the
 proposal rather than run.
 
-**What only Meridian can do** is §6 of the proposal: create the `@crystal` scope,
+**What only Meridian can do** is §6 of the proposal: publish under the `@crystal-ui` scope,
 enable Trusted Publishing for `boomerbowser/crystal` and
 `.github/workflows/publish.yml`, push the website to `crystal-preview`, and
 re-base the Vercel project. `CRYSTAL_HEAD_TOKEN` and the public `crystal`

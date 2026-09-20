@@ -26,7 +26,7 @@ export interface CrystalPreferences {
  * Clamp and default an arbitrary object into a valid preference set. Values
  * outside Crystal's ranges are replaced, never passed through.
  *
- * `defaults` is Crystal's own `default` block from `@crystal/core/flat`,
+ * `defaults` is Crystal's own `default` block from `@crystal-ui/core/flat`,
  * and is required: the function fills from it rather than carrying a second
  * copy of the defaults. Pass `palettes` alongside to have an unknown palette
  * name rejected instead of accepted.

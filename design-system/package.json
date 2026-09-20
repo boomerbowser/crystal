@@ -1,7 +1,7 @@
 {
   "name": "crystal-workspace",
   "private": true,
-  "description": "Build and verification machinery for Crystal, and the preview website. Not published: the package is core/, which is published as @crystal/core.",
+  "description": "Build and verification machinery for Crystal, and the preview website. Not published: the package is core/, which is published as @crystal-ui/core.",
   "type": "commonjs",
   "scripts": {
     "build:motion": "node tools/build-motion.cjs",

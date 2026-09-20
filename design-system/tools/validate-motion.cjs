@@ -57,7 +57,7 @@ assert(recipe.duration>0&&recipe.duration<=ceiling,
   recipe.id+' duration '+recipe.duration+'ms exceeds the '+ceiling+'ms limit for its kind');assert(['Motion','GSAP'].includes(recipe.engine));assert(recipe.use&&recipe.reduced&&recipe.material&&recipe.signature);assert(recipe.keyframes.length>=2);for(const frame of recipe.keyframes){for(const match of (frame.transform||'').matchAll(/translate[XYZ]?\((-?[\d.]+)px/g))assert(Math.abs(Number(match[1]))<=50||recipe.travelException,recipe.id+' requires a documented large-travel exception');}}
 /* The engine versions exist in three places and all three have to agree.
  *
- * `core/package.json` is the authority: gsap and motion are @crystal/core's
+ * `core/package.json` is the authority: gsap and motion are @crystal-ui/core's
  * runtime contract, and a consumer installs whatever it declares. The workspace
  * manifest needs them too, because `tools/build-motion.cjs` bundles the
  * preview's `assets/vendor/crystal-engines.js` out of them at build time — a
@@ -74,9 +74,9 @@ for(const name of ['motion','gsap']){
   const declared=core.dependencies[name];
   assert(declared,`core/package.json does not declare ${name}`);
   assert.equal(pkg.devDependencies[name],declared,
-    `the workspace builds the engine bundle from ${name} ${pkg.devDependencies[name]} while @crystal/core ships ${declared}`);
+    `the workspace builds the engine bundle from ${name} ${pkg.devDependencies[name]} while @crystal-ui/core ships ${declared}`);
   assert.equal(lock.packages['node_modules/'+name].version,declared,
-    `the lockfile installs ${name} ${lock.packages['node_modules/'+name].version}, not the ${declared} @crystal/core declares`);
+    `the lockfile installs ${name} ${lock.packages['node_modules/'+name].version}, not the ${declared} @crystal-ui/core declares`);
 }
 assert(fs.statSync('assets/vendor/crystal-engines.js').size>1000,'Missing real engine bundle');
 

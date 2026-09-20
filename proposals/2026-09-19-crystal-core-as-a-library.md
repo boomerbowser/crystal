@@ -1,4 +1,4 @@
-# `@crystal/core` as a published library
+# `@crystal-ui/core` as a published library
 
 **Proposal. D-10 in `proposals/open-issues.md`, and R-16 in Crystal React's
 tracker, which is the same issue from the consumer's side.**
@@ -16,7 +16,7 @@ once. This is it.
 build machinery. That is not a tidiness complaint — it is the common cause behind
 three separate tracker entries, and it is measurable.
 
-A published `@crystal/core` today would be **2.18 MB unpacked across 1,097
+A published `@crystal-ui/core` today would be **2.18 MB unpacked across 1,097
 files**, and this is what a consumer would be installing:
 
 | | size | is it the library? |
@@ -157,7 +157,7 @@ short expiry.
 from `boomerbowser/crystal` at a known commit rather than from someone who
 guessed a version number.
 
-**Owning `@crystal` publicly is itself the mitigation** for dependency confusion.
+**Owning `@crystal-ui` publicly is itself the mitigation** for dependency confusion.
 An unclaimed scope that private libraries already import from is the textbook
 setup for that attack.
 
@@ -180,7 +180,7 @@ Both are written and both were proven to fail before being trusted — see
 1. **Package boundary and the two release gates.** Local, reversible, no
    consumer affected. *Done.*
 1b. **The folders themselves.** *Done — Meridian asked for this explicitly:
-   "separate the files that make up @crystal/core from the preview website into
+   "separate the files that make up @crystal-ui/core from the preview website into
    different folders. That's part of what we meant originally." The `files` array
    said what shipped; it did not stop anyone reaching across. Now
    `design-system/core/` holds the library and nothing else, with its own
@@ -193,15 +193,15 @@ Both are written and both were proven to fail before being trusted — see
    every page would 404 on the resolver. The same arrangement is what makes the
    eventual repository split a clean lift — `core/` goes to `crystal`, the rest
    goes to `crystal-preview`, and the pages swap `core/assets/…` for
-   `node_modules/@crystal/core/assets/…` with one real install step.
+   `node_modules/@crystal-ui/core/assets/…` with one real install step.
 2. **The publish workflow**, OIDC and provenance, plus the spec bundle. *Written;
    it cannot run until Meridian enables trusted publishing.*
 3. **Specifications updated** to describe the core library and how a platform
    library consumes it.
-4. **The website becomes a consumer**: it installs `@crystal/core` and its
+4. **The website becomes a consumer**: it installs `@crystal-ui/core` and its
    previews read the published resolver.
 5. **The repository split**, which is the step with Meridian's hand in it.
-6. **Crystal React moves to `"@crystal/core": "^2.0.0"`**, `pnpm link` for local
+6. **Crystal React moves to `"@crystal-ui/core": "^2.0.0"`**, `pnpm link` for local
    work, and `optimizeDeps.force` retires — it is R-14's workaround, and a real
    dependency is its cure.
 
@@ -215,12 +215,12 @@ version that does not exist is worse than an honest path.
 
 | | |
 |---|---|
-| **Create the `@crystal` scope on npm** | First, and under whichever account or organisation should own it. Verified free on 19 September: `@crystal/core` and `@crystal/react` both 404, scope search returns 0. |
+| **Create the `@crystal-ui` scope on npm** | First, and under whichever account or organisation should own it. `@crystal` itself is taken — Meridian verified that directly on 20 September, after an earlier check here asked the wrong question (a package 404 says nothing about a scope; see D-10 in `open-issues.md`). `@crystal-ui` is the scope Meridian holds. |
 | **Publish 2.0.0 once, by hand** | npm cannot attach a trusted publisher to a package that does not exist yet, so the order matters and an earlier draft of this table had it backwards. From `design-system/`: `npm publish --access public`. |
-| **Then enable Trusted Publishing** | npm → the `@crystal/core` package → *Settings* → *Publishing access* → add a trusted publisher: repository `boomerbowser/crystal`, workflow `.github/workflows/publish.yml`. Every version after the first comes from a tag and needs no credential. |
+| **Then enable Trusted Publishing** | npm → the `@crystal-ui/core` package → *Settings* → *Publishing access* → add a trusted publisher: repository `boomerbowser/crystal`, workflow `.github/workflows/publish.yml`. Every version after the first comes from a tag and needs no credential. |
 | **Re-base the Vercel project onto `crystal-preview`** | Already planned. The build settings change with it — see §7. |
 | **Push the website to `crystal-preview`** | Prepared here, not pushed: this session has never written to that repository, and a first push to a new remote is not something to do unasked. The command is in §7. |
-| **Decide whether `crystal-preview` publishes anything** | Recommendation: no. It is a site, it consumes `@crystal/core`, and it needs no package identity. |
+| **Decide whether `crystal-preview` publishes anything** | Recommendation: no. It is a site, it consumes `@crystal-ui/core`, and it needs no package identity. |
 
 `CRYSTAL_HEAD_TOKEN` is already set on `crystal-preview`, and the `crystal`
 repository is already public. Neither needs anything further.
@@ -236,8 +236,8 @@ After the split:
 **`crystal-preview`** holds `index.html`, `playground.html`, `motion.html`,
 `docs/`, and the preview's own assets — `site.css`, `site.js`, `menu.js`,
 `docs.js`, `controls.css`, `controls.js`, the motion suite, `assets/vendor/`.
-It declares `"@crystal/core": "^2.0.0"` and its pages load the resolver, the
-theme and the icons from `node_modules/@crystal/core/…` rather than from a
+It declares `"@crystal-ui/core": "^2.0.0"` and its pages load the resolver, the
+theme and the icons from `node_modules/@crystal-ui/core/…` rather than from a
 sibling path.
 
 **`crystal`** keeps the library, `tokens/`, `tools/`, `tests/` and `validation/`

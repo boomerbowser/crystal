@@ -14,7 +14,7 @@ What stays here is the record of how Crystal React relates to the design system.
 
 `libraries/README.md` always intended each platform library to be extracted into its own
 repository. Crystal React is the first, at `boomerbowser/crystal-react`, consuming
-`@crystal/core` rather than vendoring it. The design system does not depend on it.
+`@crystal-ui/core` rather than vendoring it. The design system does not depend on it.
 
 ## What the design system had to provide
 
@@ -24,7 +24,7 @@ arithmetic. The package did not make that possible — it exported only `./core`
 them: `core/state`, `core/preferences`, `core/spring`, `motion-recipes`, `engines`, the
 shader directory, and `./flat` for the runtime defaults and palette list.
 
-The package is `@crystal/core`. Everything Crystal publishes sits under the `@crystal`
+The package is `@crystal-ui/core`. Everything Crystal publishes sits under the `@crystal-ui`
 scope; there is no `@meridian` scope.
 
 ## What the catalogue had to admit
