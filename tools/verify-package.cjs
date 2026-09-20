@@ -26,6 +26,11 @@
  * under a green gate — so the subpath is resolved the way a consumer resolves
  * it.
  *
+ * **Nothing in the manifest demands provenance.** The fourth: provenance is
+ * only available inside a recognised CI provider, so a manifest that demands
+ * it cannot be published by hand at all — which is what the first publish of
+ * any package has to be.
+ *
  *   node tools/verify-package.cjs
  */
 const { execFileSync } = require('node:child_process');
@@ -66,6 +71,32 @@ for (const [name, range] of Object.entries({
       + 'package carrying it resolves to a directory nobody else has.',
     );
   }
+}
+
+/* Provenance belongs to the publisher, not to the package.
+   `publishConfig.provenance: true` applies to *every* publish of this manifest,
+   and npm can only generate provenance inside a CI provider it recognises —
+   GitHub Actions or GitLab CI, via OIDC. Anywhere else it does not warn and
+   skip; it refuses, with `Automatic provenance generation not supported for
+   provider: null`, after building the whole tarball.
+
+   That makes the manifest field precisely backwards. The one publish that
+   cannot be done from CI is the first one — npm will not attach a trusted
+   publisher to a package that does not exist yet — so demanding provenance in
+   the manifest blocks the only publish that has to happen by hand, while doing
+   nothing for CI, which passes `--provenance` on the command line anyway.
+
+   `npm publish --dry-run` does not catch this: dry-run never reaches the
+   provenance step, so it reports success on a manifest that cannot publish.
+   This is the only mechanical check there is. */
+if (manifest.publishConfig?.provenance) {
+  failures.push(
+    'publishConfig.provenance is true, which applies to every publish of this '
+    + 'manifest. npm can only generate provenance inside a recognised CI '
+    + 'provider, so this fails outright anywhere else — including the first '
+    + 'publish, which cannot come from CI. Pass --provenance in the workflow '
+    + 'instead; .github/workflows/publish.yml already does.',
+  );
 }
 
 const packed = JSON.parse(

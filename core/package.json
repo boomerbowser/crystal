@@ -8,12 +8,11 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/boomerbowser/crystal.git",
-    "directory": "design-system/core"
+    "directory": "core"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "exports": {
     ".": "./exports/crystal-tokens.ts",

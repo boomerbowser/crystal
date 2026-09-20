@@ -20,6 +20,15 @@
 #      .github/workflows/publish.yml.
 #
 # Everything after that is this workflow, from a tag, with no credential.
+#
+# 2.0.0 will therefore be the one version with no provenance attestation, and
+# that is unavoidable rather than an oversight: npm can only generate
+# provenance inside a CI provider it recognises, and step 2 cannot run in CI
+# because step 3 has not happened yet. Requiring it in the manifest does not
+# solve that — it only makes step 2 fail after building the tarball, with
+# "Automatic provenance generation not supported for provider: null", which is
+# exactly what happened on the first attempt. `--provenance` is passed on the
+# command line below, by the publisher that can honour it.
 name: publish
 
 on:

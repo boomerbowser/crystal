@@ -187,13 +187,18 @@ Both are written and both were proven to fail before being trusted — see
    `package.json`, and the preview reaches it the way a consumer will — by a path
    into the package, not by sitting in the same directory.*
 
-   `core/` is **inside** the deploy root rather than beside it, and that is a
-   constraint rather than a preference: Vercel serves `design-system/` as a
-   static upload with no build step, so a sibling folder would be unreachable and
-   every page would 404 on the resolver. The same arrangement is what makes the
-   eventual repository split a clean lift — `core/` goes to `crystal`, the rest
-   goes to `crystal-preview`, and the pages swap `core/assets/…` for
-   `node_modules/@crystal-ui/core/assets/…` with one real install step.
+   **Superseded on 20 September**, and the reasoning above is worth keeping for
+   the shape of its error. It said `core/` had to be *inside* the deploy root
+   rather than beside it, and called that "a constraint rather than a
+   preference": Vercel served the site as a static upload with no build step, so
+   a sibling folder would be unreachable. The premise was true and the
+   conclusion did not follow. The absence of a build step was itself a setting,
+   not a law, and Meridian then asked for the two to be entirely separate
+   folders — which is what they now are, `core/` and `website/` at the
+   repository root, with `tools/assemble-site.mjs` copying the library into
+   `website/vendor/@crystal-ui/core/` as the whole of a twenty-line build
+   command. When a constraint blocks what is being asked for, check whether it
+   is a fact about the world or a line in a config file. See D-12.
 2. **The publish workflow**, OIDC and provenance, plus the spec bundle. *Written;
    it cannot run until Meridian enables trusted publishing.*
 3. **Specifications updated** to describe the core library and how a platform
@@ -216,7 +221,7 @@ version that does not exist is worse than an honest path.
 | | |
 |---|---|
 | **Create the `@crystal-ui` scope on npm** | First, and under whichever account or organisation should own it. `@crystal` itself is taken — Meridian verified that directly on 20 September, after an earlier check here asked the wrong question (a package 404 says nothing about a scope; see D-10 in `open-issues.md`). `@crystal-ui` is the scope Meridian holds. |
-| **Publish 2.0.0 once, by hand** | npm cannot attach a trusted publisher to a package that does not exist yet, so the order matters and an earlier draft of this table had it backwards. From `design-system/`: `npm publish --access public`. |
+| **Publish 2.0.0 once, by hand** | npm cannot attach a trusted publisher to a package that does not exist yet, so the order matters and an earlier draft of this table had it backwards. From `core/`: `npm publish --access public`. This one version carries no provenance attestation, unavoidably — provenance needs a CI provider npm recognises, and this publish cannot come from CI because the trusted publisher does not exist until after it. Every version from the first tag onward is attested. |
 | **Then enable Trusted Publishing** | npm → the `@crystal-ui/core` package → *Settings* → *Publishing access* → add a trusted publisher: repository `boomerbowser/crystal`, workflow `.github/workflows/publish.yml`. Every version after the first comes from a tag and needs no credential. |
 | **Re-base the Vercel project onto `crystal-preview`** | Already planned. The build settings change with it — see §7. |
 | **Push the website to `crystal-preview`** | Prepared here, not pushed: this session has never written to that repository, and a first push to a new remote is not something to do unasked. The command is in §7. |
@@ -229,9 +234,15 @@ repository is already public. Neither needs anything further.
 
 ## 7. The split, concretely
 
-The website's build currently deploys `design-system/` itself, with
-`.vercelignore` keeping `tools/`, `src/` and `package.json` out of the upload.
-After the split:
+**Mostly done as of 20 September**, and by a different route than described
+below. The two are already separate folders in one repository — `core/` and
+`website/` — and `crystal-preview` has been populated from `website/` and
+committed locally, consuming the library as a dependency. What has not happened
+is the push and the Vercel cutover, and the order matters: removing `website/`
+from `crystal` before Vercel is re-based takes the live site down, and
+`crystal-preview` cannot take over until `@crystal-ui/core` is installable. See
+D-12 for the sequence. The description below is what was planned; the
+paragraphs that follow it are still accurate about *what* goes where.
 
 **`crystal-preview`** holds `index.html`, `playground.html`, `motion.html`,
 `docs/`, and the preview's own assets — `site.css`, `site.js`, `menu.js`,
@@ -243,17 +254,21 @@ sibling path.
 **`crystal`** keeps the library, `tokens/`, `tools/`, `tests/` and `validation/`
 — every gate stays with the thing it gates.
 
-The generated pages are the wrinkle worth naming: `tools/build.py` generates
-fourteen of them from Markdown in the `crystal` repository. Two honest options,
-and this proposal recommends the first:
+The generated pages were named here as the wrinkle, with two options and a
+recommendation. **Neither was taken, and the third answer is better than both.**
 
-- **Generate in `crystal`, publish the HTML as a release asset, and have
-  `crystal-preview` fetch it at build time.** The generator stays beside the
-  specifications it reads, which is where the drift gate already lives, and the
-  preview repository holds only what a person edits.
-- Move `tools/build.py` and the Markdown to `crystal-preview`. Simpler to deploy
-  and it moves the specification text away from the tokens it is checked
-  against, which is the drift gate D-7 exists for.
+The concern was that moving `tools/build.py` and the Markdown to
+`crystal-preview` would separate the specification text from the tokens it is
+checked against, which is what the D-7 drift gate exists to prevent. That is
+true — but only because the Markdown was being treated as the website's. It is
+not. The specification is the design system's.
+
+So `core/docs/` holds the eleven specification pages, they ship in the package,
+and `@crystal-ui/core/docs/*` exports them. The generator and the drift gate
+stay beside the tokens in `crystal`, exactly as the recommendation wanted, and
+`crystal-preview` renders the specification it installed — no release asset, no
+fetch step, and nothing to keep in sync, because there is only one copy and it
+arrives the same way every other part of the library does.
 
 ---
 
