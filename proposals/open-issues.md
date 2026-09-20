@@ -809,3 +809,60 @@ render, currently sharing a file.
 **One more, named rather than fixed:** Crystal React's material-parity gate
 serves Crystal's preview from `../crystal-design-system/tools/serve.py`. After
 the split that is a third checkout, and the gate needs to say so.
+
+---
+
+## D-13 · The visual regression gate is red, and nothing was watching it
+
+**Found 2026-09-20. Not fixed — and deliberately not blessed.**
+
+`npm run verify:floor` fails on nine of its frames:
+
+```
+catalogue.png                          3191 px differ, worst delta 229; 2626 visible (>24)
+playground-dark.png                   48997 px differ, worst delta  52; 11358 visible (>24)
+playground-light.png                  30077 px differ, worst delta  18; none visible
+playground-narrow.png                  8189 px differ, worst delta  19; none visible
+playground-opaque.png                 29857 px differ, worst delta  18; none visible
+playground-reduced-transparency.png   29995 px differ, worst delta  18; none visible
+playground-rtl.png                    30053 px differ, worst delta  18; none visible
+components-light.png                    647 px differ, worst delta  11; none visible
+motion.png                             1656 px differ, worst delta  15; none visible
+```
+
+**It is not the restructure and it is not D-11.** The suite was run twice against
+the same server, once with the corrected focus halo and once with the withdrawn
+one restored, and the failures are identical to the pixel — the only movement
+was five pixels on `playground-opaque`, which is antialiasing noise. That is the
+expected result: the halo paints on `:focus-visible` and no baseline frame has
+anything focused. Whatever this is, it predates today.
+
+**Why nobody knew.** `.github/workflows/verify.yml` runs the scroll, interaction
+and deployability gates. It does not run `verify:visual` or `verify:floor`. The
+visual gate is manual, and a manual gate is one nobody runs. It has been red for
+an unknown length of time — the baselines were last *touched* on 2026-09-20 by
+the folder move, which only relocated the files, so the last real capture is
+older than that and the git history no longer distinguishes them.
+
+**Two different problems are hiding in that list.** Seven frames differ by a
+maximum channel delta under 20 with **no pixel past the visible threshold** —
+sub-threshold drift, most likely rendering-environment difference, and the kind
+of thing a pixel baseline captured on one machine always eventually reports on
+another. Two frames — `catalogue` and `playground-dark` — have thousands of
+*visibly* changed pixels and worst deltas of 229 and 52. Those are not
+antialiasing. On `playground-light` the differences cluster in the right-hand
+control panel rather than scattering along glyph edges, which is also not what
+environment drift looks like.
+
+**Do not bless these baselines to make the gate green.** Blessing is how a real
+regression becomes the new reference, and at least two of these frames have not
+been explained. The entry is here rather than a fix because deciding what the
+`catalogue` and `playground-dark` differences *are* needs the two images looked
+at side by side, and because if part of it is environment drift then the answer
+is a tolerance or a pinned browser, not a re-capture.
+
+**What to do, in order:** pin the capture environment (browser version is the
+obvious candidate) so the question can be asked reproducibly; look at
+`catalogue` and `playground-dark` before and after; then decide per frame. And
+wire whichever variant survives into CI, because the specific way this went
+unnoticed is that it was never asked.
