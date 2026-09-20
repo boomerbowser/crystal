@@ -37,6 +37,7 @@
     "./motion-recipes": "./tokens/motion-recipes.json",
     "./engines": "./engines.js",
     "./shaders/*": "./assets/shaders/*",
+    "./docs/*": "./docs/*",
     "./flat": "./tokens/crystal.json",
     "./core/presets": {
       "types": "./assets/core/presets.d.ts",
@@ -68,7 +69,8 @@
     "exports/",
     "engines.js",
     "licenses/",
-    "README.md"
+    "README.md",
+    "docs/"
   ],
   "dependencies": {
     "gsap": "3.15.0",

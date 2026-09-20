@@ -24,7 +24,7 @@ Icons beside text are decorative and hidden from assistive technology. An icon-o
   <p class="stage-note">Enable JavaScript to search the icon set. The complete list is in <code>assets/icons/manifest.json</code>.</p>
 </div>
 
-<script src="../vendor/@crystal-ui/core/assets/icons.js" defer></script>
+<script src="../assets/icons.js" defer></script>
 
 ## The sets
 
@@ -33,7 +33,7 @@ Icons beside text are decorative and hidden from assistive technology. An icon-o
 | Source | Count | Licence |
 |---|---|---|
 | crystal | 13 | Original work |
-| lucide | 998 | ISC ([notice](../vendor/@crystal-ui/core/licenses/lucide-LICENSE.txt)) |
+| lucide | 998 | ISC ([notice](../licenses/lucide-LICENSE.txt)) |
 | **Total** | **1011** | |
 
 One grid: `0 0 24 24` view box, 1.8px strokes, round caps and round joins, and `currentColor` so every icon inherits a tested foreground colour.

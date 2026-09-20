@@ -304,12 +304,11 @@ function iconFigures() {
   const g = manifest.grid || {};
   const lines = ['| Source | Count | Licence |', '|---|---|---|'];
   for (const [name, s] of Object.entries(manifest.sources || {})) {
-    /* The manifest records the notice's path inside the library. The page that
-       links it lives in the website, which reaches the library through the copy
-       at `vendor/@crystal-ui/core/`, so the library-relative path is rewritten
-       into a site path here rather than stored as one: the manifest describes
-       the library and should not know where a website puts it. */
-    const notice = s.notice ? ` ([notice](../vendor/@crystal-ui/${s.notice}))` : '';
+    /* The manifest records a path from the library root; this table lives in
+       the library's own docs/, one level down. Package-relative, so the link
+       resolves inside @crystal-ui/core wherever it is installed. The website's
+       renderer maps it onto the site. */
+    const notice = s.notice ? ` ([notice](../${s.notice.replace(/^core\//, '')}))` : '';
     lines.push(`| ${name} | ${s.count} | ${esc(s.license || '—')}${notice} |`);
   }
   lines.push(`| **Total** | **${manifest.total}** | |`);
@@ -341,18 +340,18 @@ function replaceSection(file, name, body) {
   return next !== text;
 }
 
-fs.writeFileSync(path.join(ROOT, 'website/docs/tokens.md'), tokensPage() + '\n');
+fs.writeFileSync(path.join(ROOT, 'core/docs/tokens.md'), tokensPage() + '\n');
 const changed = [
-  replaceSection('website/docs/motion.md', 'recipes', recipeSection()),
-  replaceSection('website/docs/motion.md', 'shaders', shaderSection()),
+  replaceSection('core/docs/motion.md', 'recipes', recipeSection()),
+  replaceSection('core/docs/motion.md', 'shaders', shaderSection()),
   /* This was a hand-maintained 54-row copy of the recipe file. It had already fallen
      behind by five recipes, which is what a duplicated table always does. */
-  replaceSection('website/docs/motion-components.md', 'component-recipes', componentRecipeTable()),
-  replaceSection('website/docs/materials.md', 'defaults', defaultsTable()),
-  replaceSection('website/docs/materials.md', 'material-recipes', materialRecipeTable()),
-  replaceSection('website/docs/colors.md', 'palettes', paletteTable()),
-  replaceSection('website/docs/components.md', 'focus-recipe', focusRecipeTable()),
-  replaceSection('website/docs/accessibility.md', 'contrast', contrastFigures()),
-  replaceSection('website/docs/icons.md', 'icon-counts', iconFigures()),
+  replaceSection('core/docs/motion-components.md', 'component-recipes', componentRecipeTable()),
+  replaceSection('core/docs/materials.md', 'defaults', defaultsTable()),
+  replaceSection('core/docs/materials.md', 'material-recipes', materialRecipeTable()),
+  replaceSection('core/docs/colors.md', 'palettes', paletteTable()),
+  replaceSection('core/docs/components.md', 'focus-recipe', focusRecipeTable()),
+  replaceSection('core/docs/accessibility.md', 'contrast', contrastFigures()),
+  replaceSection('core/docs/icons.md', 'icon-counts', iconFigures()),
 ];
-console.log(`Generated website/docs/tokens.md and ${changed.length} reference sections.`);
+console.log(`Generated core/docs/tokens.md and ${changed.length} reference sections.`);

@@ -22,5 +22,5 @@ content=f'''<h1>Verification and limits</h1><p>Checks executed September 17, 202
     title='Verification', path='verification/report.html', content=content,
     main_class='doc-body', skip='Skip to the verification summary',
     footer_note='Crystal 2.0 · Reproducible evidence, bounded claims.',
-    footer_link=('../docs/adoption.html','Build and adoption guide')))
+    footer_link=('docs/adoption.html','Build and adoption guide')))
 print('Rendered verification summary from actual check records.')

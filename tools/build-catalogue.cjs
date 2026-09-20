@@ -15,7 +15,7 @@ const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
 const REPO = path.resolve(ROOT, '..');
 const DIR = path.join(ROOT, 'core/tokens/catalogue');
-const CHAPTER = path.join(ROOT, 'website/docs/catalogue.md');
+const CHAPTER = path.join(ROOT, 'core/docs/catalogue.md');
 const MANIFEST = path.join(REPO, 'libraries/parity.json');
 
 /* Libraries Crystal's parity is measured against. Named explicitly so the claim

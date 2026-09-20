@@ -58,11 +58,21 @@ def fragment(name):
     return p.read_text().strip() if p.exists() else ''
 
 
+# The specification is the library's, not the website's: it ships inside
+# @crystal-ui/core and the site renders the copy it installed. Links in that
+# markdown are written relative to the package — `../assets/icons.svg` resolves
+# inside @crystal-ui/core wherever it sits — and the site is where they have to
+# become site paths, because the package cannot know what a website calls the
+# folder it put the library in.
+SPEC = SITE / shell.CORE / 'docs'
+LIBRARY_RELATIVE = re.compile(r'(?<=\.\./)(assets|tokens|licenses|exports)/')
+
+
 def render_markdown(path):
     """Markdown to HTML, with tables wrapped so wide ones scroll rather than
     overflow the page. `md_in_html` lets a live specimen be written as plain
     HTML in the markdown source and still contain formatted prose."""
-    text = path.read_text()
+    text = LIBRARY_RELATIVE.sub(lambda m: f'{shell.CORE}/{m.group(1)}/', path.read_text())
     title = text.splitlines()[0].removeprefix('# ')
     body = markdown.markdown(text, extensions=['tables', 'fenced_code', 'toc', 'md_in_html'])
     # Only wrap real document tables — a table inside an example belongs to the
@@ -75,14 +85,14 @@ def render_markdown(path):
 built = []
 
 # 1. The specification pages.
-for p in sorted((SITE / 'docs').glob('*.md')):
+for p in sorted(SPEC.glob('*.md')):
     title, content = render_markdown(p)
     (SITE / 'docs' / f'{p.stem}.html').write_text(shell.document(
         title=title, path=f'docs/{p.stem}.html', content=content,
         styles=[f'{shell.CORE}/assets/motion.css'], scripts=['assets/docs.js'],
         skip='Skip to specification',
         footer_note='Crystal 2.0 · Editable specification',
-        footer_link=(p.name, 'Markdown source')))
+        footer_link=(f'{shell.CORE}/docs/{p.name}', 'Specification source')))
     built.append(f'docs/{p.stem}.html')
 
 # 2. The overview, which is the site's index page.

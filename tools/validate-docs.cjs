@@ -14,7 +14,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
 const read = p => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
-const doc = name => fs.readFileSync(path.join(ROOT, 'website/docs', name), 'utf8');
+const doc = name => fs.readFileSync(path.join(ROOT, 'core/docs', name), 'utf8');
 
 const failures = [];
 const expect = (where, needle, why) => {

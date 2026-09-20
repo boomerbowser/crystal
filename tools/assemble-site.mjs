@@ -38,12 +38,13 @@ if (!existsSync(LIBRARY)) {
 rmSync(VENDOR, { recursive: true, force: true });
 
 /* What the site loads is `assets/`, plus `tokens/` for the pages that read the
-   token source directly and `licenses/` for the attribution the icons page
-   links. Not `exports/` — those are for consumers of the package, not for the
-   browser — and not `package.json`, which describes a package nobody installs
-   from here. Listed rather than inferred, so adding something to the library
-   does not silently enlarge the deployment. */
-const COPIED = ['assets', 'tokens', 'licenses'];
+   token source directly, `licenses/` for the attribution the icons page links,
+   and `docs/` — the specification itself, which belongs to the library and is
+   rendered by the site rather than owned by it. Not `exports/`: those are for
+   consumers of the package, not for a browser. Not `package.json`, which
+   describes a package nobody installs from here. Listed rather than inferred,
+   so adding something to the library does not silently enlarge the site. */
+const COPIED = ['assets', 'tokens', 'licenses', 'docs'];
 
 for (const part of COPIED) {
   const from = resolve(LIBRARY, part);

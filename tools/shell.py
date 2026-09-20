@@ -99,8 +99,12 @@ def document(*, title, path, content, description=DESCRIPTION, styles=(), script
                  for s in list(BASE_SCRIPTS) + list(scripts))
     foot = f'<p>{html.escape(footer_note)}</p>'
     if footer_link:
+        # Site-root-relative, like every other link this shell writes. It used to
+        # be page-relative, alone among them, and the two callers happened to be
+        # at depths where that made no difference — so the inconsistency could
+        # not show itself until a third caller sat somewhere else.
         href, label = footer_link
-        foot += f'<a href="{href}">{html.escape(label)}</a>'
+        foot += f'<a href="{rel(prefix, href)}">{html.escape(label)}</a>'
     return (
         '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
