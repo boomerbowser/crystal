@@ -674,3 +674,138 @@ enable Trusted Publishing for `boomerbowser/crystal` and
 `.github/workflows/publish.yml`, push the website to `crystal-preview`, and
 re-base the Vercel project. `CRYSTAL_HEAD_TOKEN` and the public `crystal`
 repository are already in place and need nothing further.
+
+---
+
+## D-11 · The library shipped a focus halo Meridian had withdrawn
+
+**Found 2026-09-20. Fixed the same day.**
+
+The focus halo's spreads were halved at Meridian's request — `2/6/12/22` to
+`1/3/6/11`, blur radii deliberately unchanged so the ring thins without the
+falloff flattening. The change was made in `website/assets/controls.css`, the
+preview's own stylesheet, which overrides the library's.
+
+So three things were true at once:
+
+- **Crystal's site rendered the halved halo.** `controls.css` wins.
+- **The specification documented the halved halo.** `build-reference.cjs`
+  generates the focus-recipe table by reading `controls.css`, precisely so the
+  table cannot be hand-transcribed and drift. It read the override.
+- **The library shipped the withdrawn halo to every consumer.**
+  `core/assets/crystal.js` still emitted `[[6,2,46],[16,6,30],[30,12,17],
+  [54,22,8]]` into the exported theme, and the exported theme is what a consumer
+  reads. Crystal React's focus ring has been visibly wider than Crystal's own
+  for as long as that has been true.
+
+Blur radii and alphas were identical throughout. Only the spread was behind,
+which is why it survived: the ring was the right colour, the right softness and
+the right shape, and simply too big.
+
+**This is D-9 again.** D-9 was Crystal exporting one Resin shadow and rendering
+another; the preview's stylesheet shaped the blessed appearance while the
+exported token said something else. `verify-package.cjs` was built to stop the
+preview's stylesheet *leaving the repository*. It cannot stop the preview's
+stylesheet **overriding** the library inside it, which is the same failure
+through a different door.
+
+**Nothing caught it.** Crystal React's `verify-appearance`, `verify-theme` and
+`verify-materials` were each run against the withdrawn value deliberately, and
+all three passed. They assert that `--cr-focus-ring` is *defined* — the correct
+check when the defect was that it was read by everything and defined by nothing,
+and no check at all against a wrong number.
+
+`tests/core-contracts.cjs` now compares the exported halo against the rendered
+one, layer by layer, blur and spread. Reverting `crystal.js` turns it red with
+the four pairs printed side by side.
+
+**Still open, and Meridian's to decide:** the preview raises the feather's alpha
+in dark mode (`56/38/22/11` against the library's `46/30/17/8`) to hold up
+against a deep canvas. The library does not. Nobody has said which is correct,
+so the contract compares geometry only and the divergence stands recorded rather
+than frozen. Either the library should carry the dark-mode lift, or the preview
+should stop applying it.
+
+**The wider question this leaves.** Every value the preview overrides is a place
+this can happen again, and the override list has never been enumerated. Worth
+doing: a check that `controls.css` redefines no custom property the library
+already defines, with an explicit allow-list for the ones that are deliberate.
+
+---
+
+## D-12 · Separating the library from the website, and what is left of it
+
+**Done 2026-09-20.** `design-system/` is gone. `core/` is the library and
+`website/` is the documentation site, as two folders at the repository root with
+neither inside the other; `tools/`, `tests/` and `validation/` are machinery
+belonging to neither.
+
+**How the website reaches the library.** A browser cannot follow `../core/` out
+of a deployed site, so `tools/assemble-site.mjs` copies the library into
+`website/vendor/@crystal-ui/core/`, which is gitignored. That path is shaped
+like `node_modules/@crystal-ui/core/` and **stays** — a static deployment
+uploads `website/` and `node_modules` is not inside it. What changes when the
+library is published is where the copy is read from, one constant in that
+script.
+
+Vercel therefore has a build command where it had none:
+`node tools/assemble-site.mjs`, with `outputDirectory: "website"`. It is Node
+built-ins only and takes no arguments, because `installCommand` is empty and
+anything it needed installed would have to be installed there too.
+
+**The specification ships in the package.** `core/docs/` holds the eleven
+specification pages and `@crystal-ui/core/docs/*` exports them; the website
+renders the copy it installed. Before this, `build-reference.cjs` — a library
+generator reading the library's own token files — wrote into the website's
+folder, which stops working entirely the day these are two repositories.
+
+**Four defects the move exposed, none of them caused by it:**
+
+1. `build-tokens.cjs` wrote the language exports to a bare `exports/` beside the
+   tools rather than into the library. The package shipped one copy while every
+   build refreshed another that nobody installed. They were still byte-identical
+   apart from a header — a fork caught before it diverged.
+2. `"./shaders/"` resolved for nothing. See the `verify-package.cjs` note below.
+3. Both GitHub workflows still ran in `design-system/` after it ceased to exist,
+   and had been pushed that way. `publish.yml` would have failed at `npm ci`, on
+   a tag, in front of whoever cut it.
+4. The browser job never built, so it served a site with no library in it — and
+   what it reported was fifty-four scroll containers announcing
+   `scrollbar-color: auto`, the exact shape of a deliberate regression in the
+   scroll contract. `serve.py` now refuses to start without the library rather
+   than serving a convincing ruin.
+
+**`verify-package.cjs` had a rule for (2) and did not catch it.** It asked
+whether the files were in the tarball. They all were. Shipping a file and
+exporting it are different properties, and only the second is the one a consumer
+depends on; it now resolves every subpath from a sandbox where the package sits
+at its published name, and checks that what resolved is also shipped.
+
+**What remains — the repository split.** `crystal-preview` exists, is
+initialised and is connected to `/home/oshun/Development/Proposals/crystal-preview`.
+The website has not been moved into it, and the move cannot simply be pushed,
+because of an ordering constraint worth stating plainly:
+
+> Vercel currently builds the site from the `crystal` repository. The moment
+> `website/` is removed from `crystal` and pushed, the site is down — and
+> `crystal-preview` cannot take over until `@crystal-ui/core` is installable,
+> because a preview repository consuming the library by
+> `file:../crystal-design-system/core` resolves to nothing on Vercel.
+
+So the order is: publish `2.0.0` → push `crystal-preview` → re-base the Vercel
+project onto it → *then* remove `website/` from `crystal`. Only the last step is
+reversible cheaply, and only the first two are Meridian's alone.
+
+**Also unresolved by the split:** `tools/` divides cleanly enough — the token,
+catalogue, reference and icon builds and `verify-package.cjs` are the library's;
+the page build, `shell.py`, `report.py`, `validate.py`, `serve.py` and the
+browser gates are the website's — but three validators (`validate-tokens.cjs`,
+`validate-motion.cjs`, `validate-docs.cjs`) check the library and write their
+records into the website. They belong with the website, which is where the
+records are published from; gating the library on its own side is a separate
+piece of work. And `build.py` is two scripts in one: a library build and a site
+render, currently sharing a file.
+
+**One more, named rather than fixed:** Crystal React's material-parity gate
+serves Crystal's preview from `../crystal-design-system/tools/serve.py`. After
+the split that is a third checkout, and the gate needs to say so.
