@@ -282,6 +282,46 @@ check('every breakpoint in site.css is a token or a named exception', () => {
   assert.deepEqual(stray, [], 'breakpoints that match neither a token nor a named exception');
 });
 
+/* The preview overrides the library's focus halo, so the two can disagree and
+   only a person reading both stylesheets would know. They did disagree. The
+   halo was halved at Meridian's request — 2/6/12/22 to 1/3/6/11 — in
+   `controls.css`, which is what the site renders and what the specification is
+   generated from. `crystal.js` kept emitting the withdrawn spreads into the
+   exported theme, which is what every consumer reads, so Crystal React's focus
+   ring was visibly wider than Crystal's own for as long as that was true.
+
+   Nothing caught it. Crystal React's appearance, theme and material gates all
+   pass with either value, because they check that `--cr-focus-ring` is defined
+   rather than what it says — which was the right check when the bug was that it
+   was defined by nothing, and is no check at all against a wrong number.
+
+   Blur and spread only. Alpha deliberately is not compared: the preview raises
+   the feather in dark mode to hold up against a deep canvas, and whether the
+   library should do the same is a material question for Meridian, not a
+   contract to freeze here. */
+check('the exported focus halo is the one the site renders', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const here = path.join(__dirname, '..');
+  const geometry = (css, what) => {
+    const value = /--cr-focus-ring:\s*([^;]+);/.exec(css);
+    assert.ok(value, `${what} defines no --cr-focus-ring`);
+    /* `0 0 <blur> <spread>` is a halo layer. The preview composes two further
+       layers with a vertical offset — those are the elevation shadow, not the
+       halo, and they are why this matches rather than compares whole strings. */
+    return [...value[1].matchAll(/0\s+0\s+(\d+)px\s+(\d+)px/g)]
+      .map(([, blur, spread]) => `${blur}/${spread}`);
+  };
+  const exported = geometry(
+    fs.readFileSync(path.join(here, 'core/assets/crystal-theme.css'), 'utf8'), 'the exported theme');
+  const rendered = geometry(
+    fs.readFileSync(path.join(here, 'website/assets/controls.css'), 'utf8'), 'the preview');
+
+  assert.equal(exported.length, 4, 'expected four halo layers in the exported theme');
+  assert.deepEqual(exported, rendered.slice(0, 4),
+    'the exported halo and the halo the site renders have drifted apart');
+});
+
 /* -------------------------------------------------------------- report */
 
 const failures = results.filter((r) => r.status === 'fail');

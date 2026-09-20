@@ -116,7 +116,15 @@
       '--cr-focus-core':p.primary,
       '--cr-focus-core-width':'2px',
       '--cr-focus-core-offset':'3px',
-      '--cr-focus-ring':[[6,2,46],[16,6,30],[30,12,17],[54,22,8]]
+      /* Spreads 1/3/6/11, not 2/6/12/22. The halo was halved at Meridian's
+         request and the change was made in the preview's own stylesheet, which
+         overrides this one — so Crystal's site rendered the halved halo, the
+         specification was generated from that stylesheet and documented the
+         halved halo, and the library went on shipping the withdrawn one to
+         every consumer that reads the theme. Crystal React's focus ring was
+         visibly wider than Crystal's for as long as that was true. The blur
+         radii and alphas were always identical; only the spread was behind. */
+      '--cr-focus-ring':[[6,1,46],[16,3,30],[30,6,17],[54,11,8]]
         .map(([blur,spread,pct])=>`0 0 ${blur}px ${spread}px ${rgba(p.primary,pct/100)}`).join(','),
       /* The spacing scale and the shell's geometry. Neither varies with palette,
          mode or density; they are published as custom properties so a product
