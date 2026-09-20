@@ -19,6 +19,17 @@ class PreviewHandler(SimpleHTTPRequestHandler):
 
 if __name__ == "__main__":
     root = Path(__file__).resolve().parent.parent / 'website'
+    # Refuse rather than serve a site with no library in it. The copy under
+    # vendor/ is generated, so it is absent on a fresh checkout, and a site
+    # missing it does not look broken — it looks like a design regression.
+    # Every scroll container loses .cr-scroll-frost, every material loses its
+    # recipe, and the failure that gets reported is the symptom rather than
+    # the cause. Saying so here costs one line and an afternoon of confusion.
+    if not (root / 'vendor/@crystal-ui/core/assets/crystal.css').exists():
+        raise SystemExit(
+            'The library is not assembled into the website: '
+            'website/vendor/@crystal-ui/core is missing or incomplete.\n'
+            'Run: node tools/assemble-site.mjs')
     handler = partial(PreviewHandler, directory=str(root))
     with ThreadingHTTPServer(("127.0.0.1", 4321), handler) as server:
         print("Crystal preview: http://127.0.0.1:4321/", flush=True)

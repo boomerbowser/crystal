@@ -95,6 +95,15 @@ jobs:
       - run: pip install -r tools/requirements.txt
       - run: npx playwright install --with-deps chromium
 
+      # The website reaches the library through a copy of it, and that copy is
+      # generated rather than committed. This job does not run `npm test`, so
+      # nothing else here would make it. Without this step the site comes up
+      # with no library at all, and the symptom is not "the library is missing"
+      # — it is every scroll container reporting `scrollbar-color: auto`,
+      # because .cr-scroll-frost is defined in a stylesheet that never loaded.
+      # That is what this job reported the first time it ran after the split.
+      - run: node tools/assemble-site.mjs
+
       # The preview has no backend, but it is verified served rather than opened
       # from the filesystem — `file:` and `http:` differ on enough of what these
       # checks measure that one is not evidence for the other.
