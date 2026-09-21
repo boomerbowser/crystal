@@ -188,30 +188,32 @@ time — two whole layers.
    equivalent and inlines its alphas straight into `--cr-focus-ring`, which is
    why the dark-mode lift had nowhere to be compared.
 
-   **The larger direction: 50 declarations set by both, across 14 of Crystal's
-   own classes.**
+   **The larger direction, and the first measurement of it was wrong.** An
+   earlier pass here reported "50 declarations set by both, across 14 of
+   Crystal's own classes". That number was produced by intersecting *class
+   names* per stylesheet, which flattens every context: it counted a
+   `@media (forced-colors: active)` override against a base rule, and
+   `span.cr-status > span` against `.cr-status`. Its value-level companion
+   claimed `.cr-button { background: Canvas !important }` and
+   `.cr-status { border-radius: 50% }` were Crystal's, which they are not.
+   **Do not use it.**
 
-   ```
-   .cr-button       10   .cr-dock         10   .cr-status        7   .cr-resin    5
-   .cr-dock-inner    4   .cr-glass         4   .cr-table-scroll  3
-   .cr-content-fill  1   .cr-dialog        1   .cr-frost         1   .cr-haze     1
-   .cr-input         1   .cr-surface       1   .cr-well          1
-   ```
+   Parsed properly with postcss, keying each declaration by its full context —
+   enclosing at-rules, exact selector, property — the library sets 510
+   declarations and `controls.css` sets 502, and **the number they share is
+   zero**. Not one selector-and-property pair is set by both.
 
-   The ones that matter are on the materials: `backdrop-filter` and `box-shadow`
-   on `.cr-resin` and `.cr-glass`, `box-shadow` on `.cr-haze`, `.cr-surface`,
-   `.cr-well` and `.cr-content-fill`, `border-color` on `.cr-frost`. The site is
-   re-stating parts of the material recipes it is supposed to be *showing*.
+   That is not a clean bill of health; it relocates the question. `controls.css`
+   wins by **cascade rather than by collision**: it styles compound selectors
+   like `:is(button, a.cr-button, .cr-control, .cr-field-shell, …)` where the
+   library styles a bare `.cr-button`, so the two never textually agree and the
+   site's declaration still lands on the same element. A static diff cannot see
+   that, and no amount of care with the parser will make it.
 
-   **What this measurement is and is not.** It is a property-name intersection
-   per class, computed by parsing both stylesheets — it says the two both set a
-   declaration, not that they set it to different values, and it does not model
-   cascade layers or specificity. A restatement of an identical value is
-   harmless and a changed one is D-9's defect again; the two are
-   indistinguishable from the name alone. What the count establishes is the
-   size of the surface: this is 50 decisions, not a handful, and every one of
-   them is a place where the blessed appearance can come from a stylesheet the
-   library does not export.
+   **The only honest measure is computed style on a rendered element** — the
+   same page with `controls.css` enabled and disabled, in both modes and with
+   forced colours emulated, diffed over every element carrying a `cr-*` class.
+   That is the experiment this item needs and it has not been run yet.
 
    **What to build once the values are compared**: the check this entry always
    wanted, in `tests/site-contracts.cjs` in crystal-preview — the site redefines
