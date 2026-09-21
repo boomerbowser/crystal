@@ -1022,6 +1022,48 @@ stayed with the preview, 2 were dropped from both.
   `materials.md` says a label on a Resin dock takes its own chip, and which of
   those two is right is Meridian's line to draw.
 
+**How the second pass was checked.** Not by reading, and not only in the state
+where nothing was adopted. `controls.css` was toggled on and off against a fixed
+library across **16 pages x 7 states x 2 modes — 233,226 elements, every
+longhand compared**: default, hover, keyboard focus, `[data-effects=opaque]`,
+a 600px viewport, forced colours, and reduced transparency (Playwright exposes
+`prefers-reduced-transparency`; it was asked, not assumed). **104 differences
+remain on elements that belong to Crystal, and all 104 are accounted for**: 88
+are the `.cr-dock-inner` exemption above and the geometry that cascades from it,
+14 are `.export-controls .cr-button { padding-inline: 14px }` — the preview
+placing a Crystal button inside its own furniture — and 2 are a `.cr-indicator`
+inheriting `white-space: nowrap` from a `.tiny-button` around it. Both of those
+were confirmed by reading the ancestor chain off the running page rather than
+off the stylesheet.
+
+**What changed on the preview, and it is exactly one thing.** The site as it
+ships against the site on this library: every computed difference is either the
+focus feather properties re-serialising (`color-mix(in srgb, #7338EF 46%,
+transparent)` from the site's `:root` becoming `rgba(115, 56, 239, 0.46)` from
+the library's theme — the same colour, inherited by all 1,134 elements, which is
+why the raw count is 6,804), or one of two things that paint nothing: the
+`gap` correction, which applies to thirteen `.cr-button`s that all have a single
+child box, and a `text-underline-offset` left behind by the removed dock
+underline, which never drew because the preview already set
+`text-decoration: none` over it.
+
+Five frames in both modes, with a control focused so the ring paints, then say
+where the remaining pixels are: **one band, at the top left of every page, on
+the focused skip link.** Its box, its rect and both its pseudo-elements are
+identical. Its `box-shadow` is not:
+
+```
+shipped site   5 layers:  inset rim, then halo 6/16/30/54
+this library   7 layers:  inset rim, then halo 6/16/30/54,
+                          then 0 8px 18px and 0 22px 40px
+```
+
+**That is D-11's first divergence arriving.** Meridian's answer was to put the
+two elevation layers in the library; the preview's `:root` override was what had
+been holding them off, and removing that override is what makes them paint. The
+only visible change this work makes to the documentation site is the change that
+was asked for.
+
 One thing that comparison caught and a stylesheet diff could not: written as
 resolved `rgba()`, the sheen tints came back quantised to 8 bits — 0.126
 serialising as 0.125 — for a worst channel delta of 2 across the playground.
