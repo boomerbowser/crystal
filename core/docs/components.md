@@ -9,18 +9,18 @@ The package contains working CSS primitives and a bounded interactive reference.
 | Foundation | Opaque canvas and contextual gradients; light/dark | `.cr-plastic`; product chooses composition |
 | Haze content card | 80% fill, 1.95px feathered perimeter, radius, content depth | `.cr-haze`; use semantic article or button according to behavior |
 | Frost panel | Frosted surround, grain, Haze reading wells | `.cr-frost`; app supplies menu/sheet behavior and focus |
-| Resin toolbar | Single floating plane, protected label group, selected destination | `.cr-resin`, `.cr-dock`, `.cr-dock-inner`; local preview switches actual scenes; app supplies routing |
+| Resin toolbar | Single floating plane, protected label group, selected destination | `.cr-resin`, `.cr-dock` (a Resin pill, 9px padding, Haze perimeter, 7px when narrow), `.cr-dock-inner`; local preview switches actual scenes; app supplies routing |
 | Stone label backing | 55% light / 60% dark, 1.95px feather, crisp text | `.cr-stone`; `.cr-dock-inner` shares the recipe |
 | Mirage modal scrim | Dark tint with chromatic diffusion of the scene behind the active modal | `.cr-mirage` and dialog `::backdrop`; standalone paint requires real application modal behavior |
 | Primary action | Resin shell, Haze reading fill, optical pressure and light; hover/pressed/focus/disabled | `.cr-button`; real action and progress/error handling are app-owned |
 | Secondary/quiet action | Resin shell with neutral Haze reading fill | `.secondary`, `.quiet`; same semantics as primary |
 | Destructive action | Resin/Haze with independent danger boundary and explicit label | `.danger`; app supplies consequence-specific confirmation and recovery |
 | Text field | Visible label, state badge, glowing focus ring, validation, helper/error association | `.cr-input`; working native form example; app supplies validation rules |
-| Selection control | Explicit selected state plus text/mark | Native checkbox/select and preview button groups; keyboard semantics must match the component |
-| Range control | Visible label/value, keyboard adjustable range | Native sliders in the lab; product limits require domain validation |
+| Selection control | Explicit selected state plus text/mark | Native checkbox, radio and select, styled by `assets/crystal.css` as of 2.1.0; keyboard semantics must match the component |
+| Range control | Visible label/value, keyboard adjustable range | Native `input[type=range]`, styled by `assets/crystal.css` as of 2.1.0, including its RTL track direction; product limits require domain validation |
 | Authored bubble | Haze, directional tight corner, optional author metadata | `.cr-bubble`, `.own`; app supplies content/Markdown semantics |
 | Composer surround | Frost frame and softened content well around protected input controls | CSS composition; no rich-text editor or delivery service is implemented |
-| Status badge | Independent ink/surface pair, symbol and visible label | `.cr-status` with `data-status`; dynamic announcements are app-owned |
+| Status badge | Independent ink/surface pair, symbol and visible label | `.cr-status` with `data-status`; 18px radius, 12px/18px padding, 36px floor, as the preview has always rendered it; dynamic announcements are app-owned |
 | Avatar | Circular image/initials, accessible identity when needed | Reference styling; app handles real identity, image failure and privacy |
 | Dialog | 80% feathered surface over Mirage; title, body and named actions | Working native HTML dialog example; Escape/focus return; app owns transactions |
 | Tooltip | Short supplemental text; never sole label | Working Resin/Haze tooltip in the motion suite; focus, hover and Escape |

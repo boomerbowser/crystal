@@ -360,6 +360,52 @@ check('the stylesheet fallback is the same recipe as the exported theme', () => 
     'the fallback in crystal.css is not the recipe the theme exports');
 });
 
+/* ------------------------------------------------- tokens vs stylesheet */
+
+/* `crystal.css` is hand-authored; `crystal.tokens.json` is the source of truth.
+   Nothing compared them, and for as long as nothing did, the stylesheet said a
+   button is padded `10px 19px` while the tokens, the reference table, the
+   preview site and crystal-react all said `15px 24px`. The binding is not
+   systematic — a hand-authored sheet has no generated link to the token file —
+   so the pairs are listed by hand, and a listed pair that cannot be found in
+   the stylesheet fails rather than passing quietly. */
+const TOKEN_BOUND = [
+  { token: 'component.action.paddingBlock', rule: '.cr-button', prop: 'padding', part: 0 },
+  { token: 'component.action.paddingInline', rule: '.cr-button', prop: 'padding', part: 1 },
+  { token: 'component.action.radius', rule: '.cr-button', prop: 'border-radius' },
+  { token: 'component.action.minTarget', rule: '.cr-button', prop: 'min-height' },
+  { token: 'component.action.gap', rule: '.cr-button', prop: 'gap' },
+];
+
+check('the stylesheet honours the token values it is bound to', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const tokens = JSON.parse(fs.readFileSync(
+    path.join(__dirname, '../core/tokens/crystal.tokens.json'), 'utf8'));
+  const css = fs.readFileSync(
+    path.join(__dirname, '../core/assets/crystal.css'), 'utf8')
+    .replace(/\/\*[\s\S]*?\*\//g, '');
+
+  const value = (dotted) => dotted.split('.').reduce((node, key) => {
+    assert.ok(node && node[key], `no such token: ${dotted}`);
+    return node[key];
+  }, tokens).$value;
+
+  for (const bound of TOKEN_BOUND) {
+    /* The declaration as the reset layer writes it: `.cr-button{…}` exactly,
+       not `.cr-button.danger` and not `.cr-dock .cr-button`. */
+    const rule = new RegExp(`(?:^|[},])\\s*${bound.rule.replace('.', '\\.')}\\s*\\{([^{}]*)\\}`)
+      .exec(css);
+    assert.ok(rule, `${bound.rule} has no rule of its own in crystal.css`);
+    const decl = new RegExp(`(?:^|;)\\s*${bound.prop}\\s*:([^;]*)`).exec(rule[1]);
+    assert.ok(decl, `${bound.rule} does not set ${bound.prop}`);
+    const parts = decl[1].trim().split(/\s+/);
+    const actual = bound.part === undefined ? parts[0] : parts[bound.part];
+    assert.equal(actual, value(bound.token),
+      `${bound.rule} { ${bound.prop} } is ${actual}, but ${bound.token} is ${value(bound.token)}`);
+  }
+});
+
 /* -------------------------------------------------------------- report */
 
 const failures = results.filter((r) => r.status === 'fail');

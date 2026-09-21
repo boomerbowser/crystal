@@ -152,3 +152,61 @@ grow to swallow a visible change.
 at least now green, documented, and backed by the contract test that had gone
 missing — so running it is worth something, and `npm run verify:visual` in
 `crystal-preview` is the command.
+---
+
+## D-16 · Two specification pages disagree about `.cr-dock-inner`, and the preview blanks its own Stone specimen
+
+**Found 21 September 2026, while measuring what `controls.css` still overrode
+after the first adoption pass. Not fixed — the decision is Meridian's.**
+
+The library and the preview render `.cr-dock-inner` differently, and each has a
+page of this specification behind it.
+
+| Page | What it says |
+|---|---|
+| `components.md` | *Stone label backing … `.cr-stone`; `.cr-dock-inner` shares the recipe* |
+| `materials.md` | *`.cr-stone` paints `--cr-stone-fill` on an isolated `::before` layer … The dock's `.cr-dock-inner` uses the same recipe* |
+| `materials.md`, the same page | *A label on a Resin dock → **Give the label its own Resin chip** → Give it a Haze content fill, or Stone if the backdrop is unknown* |
+
+The library follows the first two: `.cr-dock-inner` is Stone-backed. The preview
+follows the third: now that `.cr-dock` is a Resin pill, the inner is transparent
+and its `::before` is switched off, because a Stone fill inside a Resin plane is
+a second backing over the first.
+
+Both readings are defensible and the material hierarchy does not settle it, so
+the second adoption pass left the preview's rule where it is rather than
+adopting it or deleting it. It is named in `crystal-preview`'s
+`tests/site-contracts.cjs` `ALLOWED_RULES` with this issue as the reason, which
+is the only rule in that file exempted on a decision rather than on ownership.
+
+**The part that is not a matter of opinion.** The preview's rule is
+`.cr-dock-inner::before { display: none }`, and it therefore also blanks
+`.cr-dock-inner.cr-stone` — which is the markup of the preview's *own* Stone
+specimen on `playground.html`:
+
+```html
+<div class="study-floating cr-resin">
+  <div class="cr-dock-inner cr-stone"><span>Stone on Resin</span>…</div>
+</div>
+```
+
+So the card captioned "Stone · label backing — 55% light / 60% dark fill, now
+with the same 1.95px feather as Haze" currently demonstrates no Stone at all.
+Measured on the running site, not inferred:
+
+```
+as the branch ships it    display:none   background:rgba(255,255,255,0.55)  filter:blur(1.95px)
+with :not(.cr-stone)      display:block  background:rgba(255,255,255,0.55)  filter:blur(1.95px)
+```
+
+**The fix, verified before being written down**, is to narrow the preview's
+selector to `.cr-dock-inner:not(.cr-stone)`. The fill and feather that come back
+are exactly the ones `materials.md` specifies. It is *not* applied here, because
+the specimen is on `playground.html` and six of the eighteen visual baselines
+are playground frames; changing it means re-blessing them, and re-blessing needs
+WebGL2 this machine does not have — see D-15. It is a one-selector change for
+whoever has the hardware.
+
+**Whichever way D-16 is decided**, the specimen fix stands on its own: a
+documentation site that shows an empty card where a material should be is wrong
+under either reading.

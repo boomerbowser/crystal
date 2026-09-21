@@ -952,8 +952,15 @@ and it is D-9's root cause rather than another instance of it.
 own layer order already reserved. Selector lists were filtered to the Crystal
 parts; the preview keeps its switches, segmented controls and range inputs.
 `--cr-control-color` and `--cr-control-light` came with them, and
-`.cr-status` now narrows `--cr-outline` to `var(--status-ink)` so a danger chip's
-rim follows its status instead of the generic outline colour.
+`.cr-status` now narrows `--cr-outline` to `var(--status-ink)` for the chip's
+subtree. *(Corrected 21 September 2026: this entry said it made "a danger chip's
+rim follow its status". It does not. `--cr-outline` is read by
+`.cr-button.quiet`, `.cr-input`, `.cr-dialog`, the Frost/Resin border-color and
+the two scrollbar rules, none of which can match inside a chip — every
+`.cr-status` on the preview is a bare span holding an icon and a label — and the
+chip's own rim comes from `--cr-rim`. The declaration renders nothing today. It
+is kept because the preview carries it and a consumer may nest something that
+reads it; it was described as a visible effect, and that was wrong.)*
 
 **The adoption was verified by rendering, not by reading.** The site as it ships
 — published 2.0.0 plus `controls.css` — against the site built on this library
@@ -961,6 +968,59 @@ with every lifted rule *removed* from `controls.css`: 10,534 computed values
 compared across three pages in both modes, and six full-page screenshots with a
 control focused so the halo and both lifts painted. **All six frames are
 pixel-identical at zero tolerance.**
+
+**That proof was sound and the conclusion drawn from it was too narrow.** It
+compared the site with the lifted rules moved against the site with them in
+place, and both sides kept `controls.css`. So it could show the lift was
+*faithful* and could not show whether the lift was *complete* — whatever the
+sheet still overrode, it overrode identically on both sides. A second pass
+measured that directly, with the library fixed and the site's sheet as the only
+variable, and found a great deal still there: a `.cr-table-scroll` carrying the
+whole Resin surface over a library rule that gave it scrollbar colours and no
+`overflow` at all; a `.cr-dock` as a Resin pill over a library rule that made it
+a bare flex row; a status chip at 18px radius and 12px/18px padding over the
+library's 9px and 5px/9px; and every native form control there is — checkbox,
+radio, range, file button, select option, menu item — none of which the library
+styled anywhere.
+
+Classifying that residual by selector shape gave three different answers (29
+declarations by subject, 151 by selector root, and still leaking: rules like
+`:is(button[aria-pressed=true], …)` name no class at all yet the library claims
+bare `button`). So the question was inverted to one that fails closed — a rule
+is the preview's only if it names a class or id outside the `cr-` namespace —
+and the partition it produces is generated rather than transcribed, so the two
+sides cannot drift. **75 rules and 238 declarations** moved to the library, 50
+stayed with the preview, 2 were dropped from both.
+
+**Four things the second pass found that were not divergences but defects.**
+
+- `.cr-button { padding: 10px 19px }` in `crystal.css`, against
+  `component.action.paddingBlock: 15px` / `paddingInline: 24px` in
+  `crystal.tokens.json`, `tokens.md`, crystal-react and the preview. The
+  stylesheet matched nothing, including its own source of truth. `gap` was
+  8px against a token of 9px. Nothing compared the hand-authored stylesheet to
+  the token file — `build-tokens.cjs` and `build-reference.cjs` both read the
+  tokens and neither reads `crystal.css` — so there was no gate to fail.
+  `tests/core-contracts.cjs` now holds that comparison, and found the `gap`
+  drift itself on its first run.
+- `.cr-button.secondary`, `.quiet` and `.danger` carried fills from before the
+  Resin surface existed. The component layer outranks the reset layer, so from
+  the moment the surface was adopted all four button variants computed
+  identically — measured, not inferred. For secondary and quiet that matches
+  `components.md` ("same semantics as primary") and the fills were simply
+  stale. For danger it deleted the "independent danger boundary" the same page
+  requires, which is a regression the first pass introduced and did not notice.
+  The boundary is restored in the component layer, where it wins.
+- `.cr-dock button[aria-pressed=true]` drew an underline under a selected dock
+  label. Selection is carried by label weight alone. It was already beaten by
+  the preview's `text-decoration: none`, so it rendered nowhere and contradicted
+  the specification everywhere it was read.
+- The preview's `.cr-dock-inner` rule blanks `::before` for anything with that
+  class, including `.cr-dock-inner.cr-stone` — the preview's own "Stone on
+  Resin" specimen, which therefore renders with no Stone. That is filed, not
+  adopted: `components.md` says `.cr-dock-inner` shares the Stone recipe and
+  `materials.md` says a label on a Resin dock takes its own chip, and which of
+  those two is right is Meridian's line to draw.
 
 One thing that comparison caught and a stylesheet diff could not: written as
 resolved `rgba()`, the sheen tints came back quantised to 8 bits — 0.126
