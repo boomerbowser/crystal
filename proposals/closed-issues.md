@@ -688,3 +688,79 @@ serves Crystal's preview from `../crystal-design-system/tools/serve.py`. After
 the split that is a third checkout, and the gate needs to say so.
 
 ---
+
+---
+
+## D-14 · The documentation site's first deployment was blocked before it built
+
+**Found 20 September 2026. Not fixable from here.**
+
+The Vercel project was re-based onto `crystal-preview` and the first push to that
+repository produced deployment `dpl_6KYJdLjbo8gxZX8ZULTHzb3dHfjH`, in state
+**`BLOCKED`**. It never built: `createdAt`, `buildingAt` and `ready` are the same
+instant, and the deployment has no build logs at all — the API returns
+`not_found` for them, because there was no build.
+
+Vercel's own error link on the deployment points at
+`vercel.com/docs/deployments/troubleshoot-project-collaboration#account-configuration`,
+which is the account-configuration section. This is a state the Vercel account is
+in, not something the repository did: the commit is fine, CI on that commit is
+green in both jobs, and the same configuration built successfully three times
+from the `crystal` repository earlier the same day.
+
+**Only Meridian can clear it**, from the Vercel dashboard. Until it is cleared
+the published site is whatever the last `READY` deployment served, which is
+`dpl_DawzarTyBmjXL4bMXjaCjqkfBB3b` — built from the **`crystal`** repository,
+from commit `85c9c06`, and therefore from a copy of the website that no longer
+exists in that repository. The live site is a snapshot of a deleted directory.
+Nothing is broken for a reader, and nothing will update either.
+
+**Unrelated and worth not confusing with it:** the project has Vercel
+Authentication turned on, so every URL answers `302` to `vercel.com/sso-api`
+for an unauthenticated request. That is deployment protection working as
+configured, not a failure, and it is why the site cannot be checked with `curl`
+from outside. It was left alone.
+
+**What to check once it is cleared**, because it has never been exercised: the
+build command is `node tools/assemble-site.mjs` and `installCommand` is
+`npm ci --omit=dev`, so the deployment is the first thing that will prove the
+library is installed from npm and copied into the site by the build rather than
+found on disk. A `404` on `/vendor/@crystal-ui/core/assets/crystal.css` means the
+build did not run; every page would render unstyled.
+
+**Closed 21 September 2026 — cleared by Meridian, and the deployment it had
+never exercised has now run.**
+
+Meridian fixed the account-level git configuration and asked for a commit to be
+pushed to `crystal-preview`. Deployment `dpl_49kwxpdt4qqmWCwgqv9y3gbw8YMt`, from
+`crystal-preview@9fc6bf9`, is **`READY`** — the first production deployment ever
+built from that repository, and the first built from the published package
+rather than from a copy of the website on disk.
+
+**What `READY` proves, and it is the thing this entry was waiting for.**
+`vercel.json` sets `installCommand: "npm ci --omit=dev"` and
+`buildCommand: "node tools/assemble-site.mjs"`, and that script exits `1` both
+when it can find no library (neither `node_modules/@crystal-ui/core` nor a
+sibling `core/`) and when any of `assets`, `tokens`, `licenses`, `docs` is
+missing from the one it found. Vercel fails a deployment whose build command
+exits non-zero. So a `READY` state is only reachable if `@crystal-ui/core@^2.0.0`
+was installed **from the registry** — there is no sibling checkout on a Vercel
+builder — and then copied into `website/vendor/@crystal-ui/core/`. The loop the
+restructure was for is closed: the site is a consumer of the package.
+
+**What it does not prove, stated because the distinction is the point of the
+check.** This is evidence the file was *produced by the build*, not that it is
+*served at that URL*. The remaining half —
+
+```
+/vendor/@crystal-ui/core/assets/crystal.css
+```
+
+— cannot be fetched from here: the API token can list deployments but is refused
+on both build logs and deployment files, and the project's Vercel Authentication
+answers `302` to `vercel.com/sso-api` for anything unauthenticated. A signed-in
+browser is the only place left to confirm it, and a `404` there would still mean
+the build did not run. Worth one look.
+
+The blocked deployment `dpl_6KYJdLjbo8gxZX8ZULTHzb3dHfjH` remains in the
+project's history in state `BLOCKED`. It is inert.

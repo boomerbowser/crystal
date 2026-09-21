@@ -10,7 +10,7 @@ What is left divides into three kinds:
 - **Waiting on hardware.** D-4 and D-5 need a real device or a headless browser
   that paints classic scrollbars. Both are documented where a reader meets them,
   and neither can be closed in this repository.
-- **Waiting on Meridian.** M-3 and the two divergences recorded in D-11 are
+- **Waiting on Meridian.** M-3 and the three divergences recorded in D-11 are
   decisions about what Crystal *should* be, not defects against what it is. They
   are written so the decision can be made, not so it can be deferred.
 - **Genuinely open.** D-13: the visual regression gate is red on nine frames and
@@ -250,42 +250,3 @@ obvious candidate) so the question can be asked reproducibly; look at
 wire whichever variant survives into crystal-preview's CI, which now has a
 browser job and does not run this gate in it — the specific way this went
 unnoticed is that it was never asked.
-
----
-
-## D-14 · The documentation site's first deployment was blocked before it built
-
-**Found 20 September 2026. Not fixable from here.**
-
-The Vercel project was re-based onto `crystal-preview` and the first push to that
-repository produced deployment `dpl_6KYJdLjbo8gxZX8ZULTHzb3dHfjH`, in state
-**`BLOCKED`**. It never built: `createdAt`, `buildingAt` and `ready` are the same
-instant, and the deployment has no build logs at all — the API returns
-`not_found` for them, because there was no build.
-
-Vercel's own error link on the deployment points at
-`vercel.com/docs/deployments/troubleshoot-project-collaboration#account-configuration`,
-which is the account-configuration section. This is a state the Vercel account is
-in, not something the repository did: the commit is fine, CI on that commit is
-green in both jobs, and the same configuration built successfully three times
-from the `crystal` repository earlier the same day.
-
-**Only Meridian can clear it**, from the Vercel dashboard. Until it is cleared
-the published site is whatever the last `READY` deployment served, which is
-`dpl_DawzarTyBmjXL4bMXjaCjqkfBB3b` — built from the **`crystal`** repository,
-from commit `85c9c06`, and therefore from a copy of the website that no longer
-exists in that repository. The live site is a snapshot of a deleted directory.
-Nothing is broken for a reader, and nothing will update either.
-
-**Unrelated and worth not confusing with it:** the project has Vercel
-Authentication turned on, so every URL answers `302` to `vercel.com/sso-api`
-for an unauthenticated request. That is deployment protection working as
-configured, not a failure, and it is why the site cannot be checked with `curl`
-from outside. It was left alone.
-
-**What to check once it is cleared**, because it has never been exercised: the
-build command is `node tools/assemble-site.mjs` and `installCommand` is
-`npm ci --omit=dev`, so the deployment is the first thing that will prove the
-library is installed from npm and copied into the site by the build rather than
-found on disk. A `404` on `/vendor/@crystal-ui/core/assets/crystal.css` means the
-build did not run; every page would render unstyled.
