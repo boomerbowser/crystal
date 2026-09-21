@@ -991,3 +991,119 @@ generated theme got the withdrawn halo for a further day.
 
 Shipped as **2.1.0** — new public custom properties and five components that were
 specified but absent, which is a minor rather than a patch.
+
+---
+
+## D-13 · The visual regression gate is red, and nothing was watching it
+
+**Found 2026-09-20. Not fixed — and deliberately not blessed.**
+
+`npm run verify:floor` fails on nine of its frames:
+
+```
+catalogue.png                          3191 px differ, worst delta 229; 2626 visible (>24)
+playground-dark.png                   48997 px differ, worst delta  52; 11358 visible (>24)
+playground-light.png                  30077 px differ, worst delta  18; none visible
+playground-narrow.png                  8189 px differ, worst delta  19; none visible
+playground-opaque.png                 29857 px differ, worst delta  18; none visible
+playground-reduced-transparency.png   29995 px differ, worst delta  18; none visible
+playground-rtl.png                    30053 px differ, worst delta  18; none visible
+components-light.png                    647 px differ, worst delta  11; none visible
+motion.png                             1656 px differ, worst delta  15; none visible
+```
+
+**It is not the restructure and it is not D-11.** The suite was run twice against
+the same server, once with the corrected focus halo and once with the withdrawn
+one restored, and the failures are identical to the pixel — the only movement
+was five pixels on `playground-opaque`, which is antialiasing noise. That is the
+expected result: the halo paints on `:focus-visible` and no baseline frame has
+anything focused. Whatever this is, it predates today.
+
+**Why nobody knew.** `.github/workflows/verify.yml` runs the scroll, interaction
+and deployability gates. It does not run `verify:visual` or `verify:floor`. The
+visual gate is manual, and a manual gate is one nobody runs. It has been red for
+an unknown length of time — the baselines were last *touched* on 2026-09-20 by
+the folder move, which only relocated the files, so the last real capture is
+older than that and the git history no longer distinguishes them.
+
+**Two different problems are hiding in that list.** Seven frames differ by a
+maximum channel delta under 20 with **no pixel past the visible threshold** —
+sub-threshold drift, most likely rendering-environment difference, and the kind
+of thing a pixel baseline captured on one machine always eventually reports on
+another. Two frames — `catalogue` and `playground-dark` — have thousands of
+*visibly* changed pixels and worst deltas of 229 and 52. Those are not
+antialiasing. On `playground-light` the differences cluster in the right-hand
+control panel rather than scattering along glyph edges, which is also not what
+environment drift looks like.
+
+**Do not bless these baselines to make the gate green.** Blessing is how a real
+regression becomes the new reference, and at least two of these frames have not
+been explained. The entry is here rather than a fix because deciding what the
+`catalogue` and `playground-dark` differences *are* needs the two images looked
+at side by side, and because if part of it is environment drift then the answer
+is a tolerance or a pinned browser, not a re-capture.
+
+**Where it lives now.** The baselines, the frame set and the whole visual gate
+moved to **crystal-preview** with the site they photograph — `validation/baselines/`
+and `tools/verify-frames.mjs` there. This repository has neither, which is why
+this entry stays here rather than moving with them: the finding is about
+Crystal's appearance, and the decision about what those two frames show is
+Crystal's to make.
+
+**What to do, in order:** pin the capture environment (browser version is the
+obvious candidate) so the question can be asked reproducibly; look at
+`catalogue` and `playground-dark` before and after; then decide per frame. And
+wire whichever variant survives into crystal-preview's CI, which now has a
+browser job and does not run this gate in it — the specific way this went
+unnoticed is that it was never asked.
+
+**Closed 21 September 2026. Each of the nine was looked at, which is what this
+entry asked for and refused to skip.**
+
+**`catalogue.png` — a real change, and correct.** All 2,626 visibly-changed
+pixels fall in one 15px band at `y 461–475`, and the band is a single line of
+prose: the chapter is generated from `core/tokens/catalogue/` where the baseline
+says `tokens/catalogue/`. That is the restructure that moved the library into
+`core/`. The worst channel delta of 229 is dark text on a light ground — which is
+what a text change looks like, and is why "visibly different" was the right alarm
+and the wrong conclusion.
+
+**`playground-dark.png` — not a change.** 11,358 pixels past the threshold,
+worst delta 52, **spread** across `x 404–1213, y 348–808` rather than clustered.
+The two densest regions are the card-stack illustration behind the headline and
+the segmented control; cropped and magnified, both are indistinguishable. Both
+are multi-stop gradients on a near-black ground, which is where GPU rasterisation
+dithers — and where a *fixed absolute* threshold of 24 corresponds to nothing
+visible at all, because the same channel step that is obvious on a light field is
+invisible at low luminance. The threshold is right for the other seventeen frames
+and wrong for this one, so the frame was re-captured rather than the threshold
+weakened for everything.
+
+**The other seven** had no pixel past the threshold to begin with, worst deltas
+11 to 19: the sub-threshold drift a pixel baseline captured on one machine always
+eventually reports on another. This entry guessed that about seven of the nine
+and was right.
+
+**The entry's own instruction was followed in order.** Look at the two, decide
+per frame, then wire the survivor into CI. What it did not anticipate is that the
+proof the gate rests on had gone missing. `validation/baselines/README.md` and
+`verify-frames.mjs` both cite `tests/visual-gate-contracts.py` as the reason the
+400-pixel allowance is safe — "one black pixel on a grey field still fails with
+the allowance set to a million" — and that file did not exist anywhere. It was
+lost when the site moved to its own repository, so the safety argument for the
+only gate that looks at Crystal's appearance rested on a test nobody could run.
+It is restored, with four contracts, the fourth being the boundary itself: a
+delta of 24 is forgiven and 25 is not, whatever the allowance says. Blessing
+without that would have been blessing on an unbacked claim.
+
+**And the gate is no longer manual**, which is the specific mechanism by which
+this stayed red. It runs in `crystal-preview`'s browser job on every push, as
+`verify:floor` — a runner has no GPU, so `--no-webgl` excludes the frames that
+photograph WebGL output. That is a smaller gate than the one a person runs
+locally and the largest this environment honestly supports. Blessing is refused
+outright without WebGL2, so a green CI run can never quietly re-baseline
+anything.
+
+One thing worth knowing before reading a blessing commit's diff: `--bless`
+re-captures the whole set rather than only the failing frames, so
+`haze-in-resin.png` was replaced too and was never failing.
