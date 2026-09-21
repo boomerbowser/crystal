@@ -12,7 +12,7 @@
 /* Crystal 1.0: framework-independent primitives. Theme variables are supplied by
    crystal-theme.css or by a configuration exported from the playground. */
 :root{--cr-font:Manrope,system-ui,sans-serif;--cr-radius:28px;--cr-space:20px;--cr-reading:16px;--cr-leading:1.5;color-scheme:light}
-*{box-sizing:border-box}body{margin:0;color:var(--cr-text);background:var(--cr-canvas);font-family:var(--cr-font);font-size:16px;line-height:1.6}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}a{color:var(--cr-primary);text-underline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:var(--cr-focus-core-width,2px) solid var(--cr-focus-core,var(--cr-primary));outline-offset:var(--cr-focus-core-offset,3px);box-shadow:var(--cr-focus-ring,0 0 6px 2px color-mix(in srgb,var(--cr-primary) 46%,transparent),0 0 16px 6px color-mix(in srgb,var(--cr-primary) 30%,transparent),0 0 30px 12px color-mix(in srgb,var(--cr-primary) 17%,transparent),0 0 54px 22px color-mix(in srgb,var(--cr-primary) 8%,transparent))}button:disabled{cursor:not-allowed;opacity:.55}button{transition:background var(--cr-state),box-shadow var(--cr-state),transform var(--cr-press)}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{line-height:1.2;letter-spacing:-.04em}button:has(svg){display:inline-flex;align-items:center;justify-content:center;gap:9px}
+*{box-sizing:border-box}body{margin:0;color:var(--cr-text);background:var(--cr-canvas);font-family:var(--cr-font);font-size:16px;line-height:1.6}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}a{color:var(--cr-primary);text-underline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:var(--cr-focus-core-width,2px) solid var(--cr-focus-core,var(--cr-primary));outline-offset:var(--cr-focus-core-offset,3px);box-shadow:var(--cr-focus-ring,0 0 6px 1px var(--cr-focus-feather-1,color-mix(in srgb,var(--cr-primary) 46%,transparent)),0 0 16px 3px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 0 30px 6px var(--cr-focus-feather-3,color-mix(in srgb,var(--cr-primary) 17%,transparent)),0 0 54px 11px var(--cr-focus-feather-4,color-mix(in srgb,var(--cr-primary) 8%,transparent)),0 8px 18px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 22px 40px var(--cr-focus-shadow,color-mix(in srgb,var(--cr-decorative) 27%,transparent)))}button:disabled{cursor:not-allowed;opacity:.55}button{transition:background var(--cr-state),box-shadow var(--cr-state),transform var(--cr-press)}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{line-height:1.2;letter-spacing:-.04em}button:has(svg){display:inline-flex;align-items:center;justify-content:center;gap:9px}
 /* Plastic carries a glow of its own — the primary lifted by the scheme's tint —
    which is a material property and stays. What was ambient was the glow drifting
    across the foundation; that is deferred with the rest of the tier, so the
@@ -26,7 +26,7 @@
 .cr-button{min-height:44px;padding:10px 19px;border-radius:999px;border:1px solid transparent;background:var(--cr-primary);color:var(--cr-on-primary);font-weight:750;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;line-height:1.3}
 .cr-button:hover{box-shadow:var(--cr-shadow-content);filter:brightness(1.04)}.cr-button.secondary{background:var(--cr-primary-soft);color:var(--cr-on-primary-soft)}.cr-button.quiet{background:var(--cr-surface);color:var(--cr-text);border-color:var(--cr-outline)}.cr-button.danger{background:var(--cr-danger-surface);color:var(--cr-danger-ink);border-color:var(--cr-danger-ink)}
 .cr-input{min-height:44px;border:1px solid var(--cr-outline);border-radius:12px;background:var(--cr-surface);padding:10px 12px;width:100%;color:var(--cr-text)}.cr-input::placeholder{color:var(--cr-muted)}
-.cr-status{display:inline-flex;align-items:center;gap:7px;border-radius:9px;padding:5px 9px;background:var(--status-surface);color:var(--status-ink);font-size:13px;font-weight:750;line-height:1.4}.cr-status[data-status=success]{--status-surface:var(--cr-success-surface);--status-ink:var(--cr-success-ink)}.cr-status[data-status=attention]{--status-surface:var(--cr-attention-surface);--status-ink:var(--cr-attention-ink)}.cr-status[data-status=danger]{--status-surface:var(--cr-danger-surface);--status-ink:var(--cr-danger-ink)}.cr-status[data-status=info]{--status-surface:var(--cr-info-surface);--status-ink:var(--cr-info-ink)}
+.cr-status{display:inline-flex;align-items:center;gap:7px;border-radius:9px;padding:5px 9px;background:var(--status-surface);color:var(--status-ink);font-size:13px;font-weight:750;line-height:1.4;/* The chip's rim follows its own status rather than the generic outline colour: a danger chip outlined in the neutral --cr-outline reads as a neutral chip that happens to be red inside. --status-ink is this library's own property, set per [data-status] just above, and the preview narrowed --cr-outline to it while the library never did. Adopted 21 September 2026 with D-11's third divergence. */--cr-outline:var(--status-ink)}.cr-status[data-status=success]{--status-surface:var(--cr-success-surface);--status-ink:var(--cr-success-ink)}.cr-status[data-status=attention]{--status-surface:var(--cr-attention-surface);--status-ink:var(--cr-attention-ink)}.cr-status[data-status=danger]{--status-surface:var(--cr-danger-surface);--status-ink:var(--cr-danger-ink)}.cr-status[data-status=info]{--status-surface:var(--cr-info-surface);--status-ink:var(--cr-info-ink)}
 .cr-bubble{background:var(--cr-surface);color:var(--cr-text);border:1px solid var(--cr-edge);border-radius:6px var(--cr-radius) var(--cr-radius) var(--cr-radius);box-shadow:var(--cr-shadow-content);padding:14px 18px;line-height:1.5;font-size:16px}.cr-bubble.own{border-radius:var(--cr-radius) 6px var(--cr-radius) var(--cr-radius);background:var(--cr-primary-soft);color:var(--cr-on-primary-soft)}[dir=rtl] .cr-bubble{border-radius:var(--cr-radius) 6px var(--cr-radius) var(--cr-radius)}[dir=rtl] .cr-bubble.own{border-radius:6px var(--cr-radius) var(--cr-radius) var(--cr-radius)}
 .cr-dock{display:flex;align-items:center;gap:4px;padding:8px;max-width:100%}.cr-dock-inner{display:flex;gap:3px;align-items:center;border-radius:999px;background:var(--cr-label-fill);padding:3px;width:100%}.cr-dock button{min-height:44px;border:0;background:none;padding:10px 17px;border-radius:999px;font-weight:700;white-space:nowrap;color:var(--cr-text)}.cr-dock button[aria-pressed=true]{background:var(--cr-primary);color:var(--cr-on-primary);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;box-shadow:0 2px 5px #0002}.cr-dock button:hover:not([aria-pressed=true]){background:var(--cr-surface)}
 .cr-dialog{border:1px solid var(--cr-outline);background:var(--cr-surface);color:var(--cr-text);padding:30px;border-radius:calc(var(--cr-radius) + 6px);width:min(560px,calc(100% - 32px));box-shadow:var(--cr-shadow-float);max-height:85dvh;overflow:auto;overflow-x:hidden}.cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fill);backdrop-filter:blur(var(--cr-mirage-blur)) saturate(var(--cr-mirage-saturation)) brightness(var(--cr-mirage-brightness));-webkit-backdrop-filter:blur(var(--cr-mirage-blur)) saturate(var(--cr-mirage-saturation)) brightness(var(--cr-mirage-brightness))}.cr-dialog header{display:flex;justify-content:space-between;align-items:start;gap:20px}.cr-dialog h2{font-size:26px}.cr-dialog footer{display:flex;gap:10px;justify-content:flex-end;margin-top:24px}.cr-dialog pre{max-height:300px;overflow:auto}
@@ -273,5 +273,339 @@
 /* Mirage draws its chroma from the actual backdrop, never an invented overlay gradient. */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fallback-fill)}
+}
+}
+
+/* ---------------------------------------------------------------------------
+   The Resin interaction surface, and the four Crystal components that were
+   only ever in the preview's stylesheet.
+
+   `.cr-control`, `.cr-field-shell`, `.cr-indicator`, `.cr-resin-haze` and
+   `.cr-tag` are named throughout `docs/components.md` — the indicator's 20px
+   circle with its 3px-inset 80% Haze fill, `.cr-resin-haze` as the composition
+   small display elements use — and until 21 September 2026 the library shipped
+   none of them. `components.md` said "use `assets/controls.css` after the base
+   and layout styles", and `assets/controls.css` is not in this package and never
+   was. A consumer following the specification reached for five components that
+   did not exist, which is why Crystal React had to rebuild the control surface
+   in SCSS rather than consume it.
+
+   That is D-11's third divergence, and Meridian decided on 21 September that the
+   library adopts rather than the preview drops. Lifted from
+   `crystal-preview/website/assets/controls.css` with its selector lists filtered
+   to the Crystal parts: the preview's own furniture — `.suite-switch`,
+   `.segmented`, the range inputs — shares those rules and stays with the site.
+
+   In `@layer crystal.component`, which is where the preview had it and where the
+   layer order at the top of this file already reserves a slot. That matters for
+   more than tidiness: the rules above are unlayered and therefore beat these, so
+   a property the library already sets keeps the library's value and these supply
+   only what it left unset. The cascade is the one the preview has been rendering
+   all along, which is what makes this an adoption rather than a redesign.
+   --------------------------------------------------------------------------- */
+@layer crystal.component {
+:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status) {
+    position: relative;
+    isolation: isolate;
+    background: var(--cr-resin-fill);
+    color: var(--cr-text);
+    border: 1px solid var(--cr-rim);
+    box-shadow: var(--cr-shadow-float);
+    backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
+    -webkit-backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
+    filter: none;
+}
+:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::before {
+    content: '';
+    position: absolute;
+    inset: var(--cr-haze-inset);
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+    background: var(--cr-haze-fill);
+    filter: blur(var(--cr-haze-feather));
+    box-shadow: none;
+}
+:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(115deg,transparent 20%,#ffffff30 43%,#ffffff0a 55%,transparent 72%),radial-gradient(ellipse at 12% 0%,var(--cr-control-light),transparent 75%),linear-gradient(135deg,var(--cr-control-color),transparent 60%,var(--cr-control-light));
+    background-size: 220% 100%,100% 100%,100% 100%;
+    background-position: 100% 0;
+    box-shadow: inset 0 2px 1px var(--cr-rim),inset 0 -1px 1px var(--cr-rim);
+}
+.cr-field-shell {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    border-radius: 20px;
+    padding: 8px;
+    vertical-align: middle;
+}
+.cr-field-shell:has(.cr-input) {
+    width: 100%;
+}
+.cr-field-shell :is(input,select,textarea) {
+    position: relative;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    border-radius: 12px;
+    min-width: 0;
+    color: var(--cr-text);
+    min-height: 44px;
+    max-width: 100%;
+}
+.cr-field-shell:focus-within {
+    outline: 2px solid var(--cr-focus-core);
+    outline-offset: 3px;
+}
+.cr-field-shell :focus-visible {
+    outline: 0;
+}
+[data-effects=opaque] :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status) {
+    background: var(--cr-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+[data-effects=opaque] :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after {
+    display: none;
+}
+.cr-resin-haze {
+    border-radius: 18px;
+    padding: 16px;
+    line-height: 1.5;
+}
+.cr-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 700;
+}
+nav a.cr-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border-radius: 99px;
+    min-height: 44px;
+    text-decoration: none;
+}
+nav a.cr-control[aria-current] {
+    text-decoration: none;
+}
+.cr-field-shell {
+    box-shadow: inset 0 2px 1px var(--cr-rim),0 3px 5px var(--cr-control-edge),0 12px 24px var(--cr-shadow-contact);
+}
+:is(.cr-tag,.cr-resin-haze) {
+    padding: 17px 24px;
+}
+.cr-tag {
+    min-height: 48px;
+}
+span.cr-field-shell {
+    border-color: var(--cr-rim);
+}
+span.cr-field-shell::after {
+    background-image: radial-gradient(ellipse at 12% 0%,var(--cr-control-light),transparent 75%),linear-gradient(135deg,var(--cr-control-color),transparent 60%,var(--cr-control-light));
+    background-size: 100% 100%,100% 100%;
+    background-position: 0 0,0 0;
+    background-repeat: no-repeat;
+}
+span.cr-field-shell:has([aria-invalid=true])::after {
+    background-image: radial-gradient(ellipse at 12% 0%,var(--cr-control-light),transparent 75%),linear-gradient(135deg,var(--cr-control-color),transparent 60%,var(--cr-control-light));
+}
+[data-effects=opaque] span.cr-field-shell::after {
+    display: none;
+}
+span.cr-field-shell:focus-within {
+    outline: 2px solid var(--cr-focus-core);
+    outline-offset: 3px;
+    box-shadow: inset 0 2px 1px var(--cr-rim),var(--cr-focus-ring);
+}
+span.cr-field-shell :is(input,select,textarea):focus-visible {
+    outline: 0;
+    box-shadow: none;
+}
+:is(.cr-resin,.cr-glass,.cr-resin-haze) :is(.cr-haze,.cr-surface,.cr-well,.cr-content-fill) {
+    box-shadow: inset 0 1px 2px var(--cr-shadow-contact),inset 0 -1px 0 var(--cr-rim);
+}
+:is(.cr-resin,.cr-glass,.cr-resin-haze) :is(button,a.cr-button,.cr-button,.cr-control) {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    /* backdrop-filter silently creates a stacking context, and these controls
+     paint their fill on a ::before at z-index -1 which was relying on it. Drop
+     the filter alone and that pseudo-element escapes to the nearest ancestor
+     context and paints behind the button's own background instead of above it —
+     which erased the selected dock label completely. Isolation restores the
+     containment without restoring the second blur. */
+    isolation: isolate;
+}
+.cr-indicator {
+    position: absolute;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    inset-block-start: -4px;
+    inset-inline-end: -3px;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 50%;
+    border: 1px solid var(--cr-rim);
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 2px 4px var(--cr-control-edge),0 4px 8px var(--cr-shadow-contact);
+    color: var(--cr-text);
+    font: 800 12px/1 var(--cr-font);
+    z-index: 2;
+    pointer-events: none;
+    text-decoration: none;
+    text-shadow: none;
+}
+.cr-indicator::before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    z-index: -1;
+    border-radius: 50%;
+    background: var(--cr-haze-fill);
+    filter: blur(var(--cr-haze-feather));
+}
+.cr-indicator:is([data-kind=selection],[data-kind=current],[data-kind=busy]) {
+    display: none;
+}
+[aria-current]:not([aria-current=false])>.cr-indicator[data-kind=current] {
+    display: grid;
+}
+[aria-busy=true]>.cr-indicator[data-kind=busy] {
+    display: grid;
+}
+.cr-indicator[data-kind=current]::after {
+    content: '●';
+    font-size: 9px;
+}
+.cr-indicator[data-kind=busy]::after {
+    content: '…';
+    font-size: 14px;
+}
+:is([aria-pressed=true],[aria-selected=true],[aria-checked=true])>.cr-indicator[data-kind=selection] {
+    display: none
+}
+.cr-indicator[data-kind=selection]::before,.cr-indicator[data-kind=selection]::after {
+    content: none;
+    display: none;
+}
+span.cr-field-shell {
+    padding-inline-end: 40px;
+}
+span.cr-field-shell>.cr-indicator {
+    inset-block-start: 50%;
+    inset-inline-end: 10px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+}
+span.cr-field-shell>.cr-indicator::after {
+    content: '○';
+    font-size: 15px;
+}
+span.cr-field-shell:focus-within>.cr-indicator::after {
+    content: '●';
+    font-size: 9px;
+}
+span.cr-field-shell:has(:is([required],[aria-required=true]))>.cr-indicator::after {
+    content: '*';
+    font-size: 19px;
+}
+span.cr-field-shell:has([aria-invalid=true])>.cr-indicator::after {
+    content: '!';
+    font-size: 15px;
+}
+:is(button[aria-pressed],button[aria-selected],button[aria-checked],a.cr-control[aria-current]) {
+    text-decoration: none;
+}
+[data-effects=opaque] .cr-indicator {
+    background: var(--cr-surface);
+    backdrop-filter: none;
+}
+[data-effects=opaque] .cr-indicator::before {
+    filter: none;
+}
+}
+
+@layer crystal.component {
+@media (prefers-reduced-transparency:reduce) {
+:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status) {
+    background: var(--cr-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none
+}
+:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after {
+    display: none
+}
+span.cr-field-shell::after {
+    display: none;
+}
+.cr-indicator {
+    background: var(--cr-surface);
+    backdrop-filter: none
+}
+.cr-indicator::before {
+    filter: none
+}
+}
+}
+
+@layer crystal.component {
+@media (forced-colors:active) {
+:is(button,a.cr-button,.cr-control,.cr-field-shell,input) {
+    background: Canvas!important;
+    color: CanvasText!important;
+    border: 1px solid ButtonText;
+    box-shadow: none;
+    backdrop-filter: none
+}
+:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::before,:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after {
+    display: none
+}
+span.cr-field-shell {
+    border: 1px solid ButtonText
+}
+span.cr-field-shell::after {
+    display: none
+}
+.cr-indicator {
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid ButtonText;
+    box-shadow: none;
+    backdrop-filter: none
+}
+.cr-indicator::before {
+    display: none
+}
+span.cr-field-shell:focus-within {
+    outline: 2px solid Highlight;
+    box-shadow: none
+}
+}
+}
+
+@layer crystal.component {
+@media (max-width:600px) {
+.cr-tag {
+    padding: 10px 15px;
+    min-height: 40px;
+    white-space: nowrap
+}
 }
 }

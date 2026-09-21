@@ -245,6 +245,121 @@ check('the focus halo reaches anything focusable, not only native controls', () 
 
 
 
+/* ------------------------------------------------------------- the halo */
+
+/* The focus recipe, held to exactly what Meridian approved.
+ *
+ * D-11 recorded that this file "compares the exported halo against the rendered
+ * one, layer by layer, blur and spread". It did not. That check went to
+ * `crystal-preview/tests/site-contracts.cjs` with the site it photographs, and
+ * the entry was never corrected — so for a day the tracker named a gate in this
+ * repository that was not here. This is that gate, and it is written now
+ * because the two divergences it would have had to stay silent about are
+ * decided: the library carries the elevation layers and the dark-mode lift.
+ *
+ * Geometry *and* alpha, all six layers, both modes. The earlier check compared
+ * geometry only and the first four layers only, deliberately, so that running it
+ * could not freeze an undecided divergence into a gate. That reason has expired.
+ */
+const FOCUS = {
+  halo: [[6, 1], [16, 3], [30, 6], [54, 11]],
+  lift: [[8, 18], [22, 40]],
+  alpha: { light: [46, 30, 17, 8], dark: [56, 38, 22, 11] },
+  shadow: 27,
+};
+
+function focusBlocks() {
+  const css = require('node:fs').readFileSync(
+    require('node:path').join(__dirname, '../core/assets/crystal-theme.css'), 'utf8');
+  /* The theme writes a light block and a dark one. Split on the ring so each
+     block's feathers are read beside the ring that references them, rather than
+     both resolving to the first definition in the file — which would have made
+     the dark-mode alphas untestable in exactly the way that let them diverge. */
+  const blocks = [];
+  const re = /--cr-focus-ring:\s*([^;]+);/g;
+  let m;
+  while ((m = re.exec(css))) {
+    const before = css.slice(0, m.index);
+    const start = before.lastIndexOf('{');
+    /* The selector — and any `@media` wrapping it, which lands in the same
+       slice — so the mode is read from what the block is *for* rather than
+       inferred from the alphas it contains. Inferring from the alphas made a
+       reverted dark value report itself as a wrong *light* block: a correct
+       failure with a misleading name, and a misleading name on a gate is how
+       the next person looks in the wrong file.
+
+       Comments are stripped first. Without that, the file's own header — which
+       says `Set data-crystal-mode="light" or "dark"` — falls inside the first
+       block's slice and classifies `:root` as dark. */
+    const head = before
+      .slice(before.lastIndexOf('}', start) + 1, start)
+      .replace(/\/\*[\s\S]*?\*\//g, '');
+    blocks.push({
+      ring: m[1].trim(),
+      scope: css.slice(start, m.index),
+      mode: /dark/.test(head) ? 'dark' : 'light',
+    });
+  }
+  return blocks;
+}
+
+check('the focus ring is six layers with the approved geometry, in every mode', () => {
+  const blocks = focusBlocks();
+  assert.ok(blocks.length >= 2, `expected a light and a dark focus ring, found ${blocks.length}`);
+  for (const { ring } of blocks) {
+    const layers = ring.split(/,(?![^(]*\))/).map((l) => l.trim());
+    assert.equal(layers.length, 6, `expected six focus layers, read ${layers.length}: ${ring}`);
+    FOCUS.halo.forEach(([blur, spread], i) => {
+      assert.match(layers[i], new RegExp(`^0\\s+0\\s+${blur}px\\s+${spread}px\\b`),
+        `halo layer ${i + 1} should be 0 0 ${blur}px ${spread}px, read "${layers[i]}"`);
+    });
+    FOCUS.lift.forEach(([offset, blur], i) => {
+      assert.match(layers[4 + i], new RegExp(`^0\\s+${offset}px\\s+${blur}px\\b`),
+        `elevation layer ${i + 1} should be 0 ${offset}px ${blur}px, read "${layers[4 + i]}"`);
+    });
+  }
+});
+
+check('the feather alphas lift in dark mode and hold in light', () => {
+  const seen = new Set();
+  for (const { scope, mode } of focusBlocks()) {
+    const alphas = [1, 2, 3, 4].map((n) => {
+      const m = new RegExp(`--cr-focus-feather-${n}:\\s*rgba?\\([^)]*?([\\d.]+)\\s*\\)`).exec(scope);
+      assert.ok(m, `no --cr-focus-feather-${n} beside this ring`);
+      return Math.round(Number(m[1]) * 100);
+    });
+    assert.deepEqual(alphas, FOCUS.alpha[mode],
+      `${mode} feather alphas should be ${FOCUS.alpha[mode].join('/')}, read ${alphas.join('/')}`);
+    const shadow = /--cr-focus-shadow:\s*rgba?\([^)]*?([\d.]+)\s*\)/.exec(scope);
+    assert.ok(shadow, 'no --cr-focus-shadow beside this ring');
+    assert.equal(Math.round(Number(shadow[1]) * 100), FOCUS.shadow,
+      `--cr-focus-shadow should be ${FOCUS.shadow}% of the decorative colour`);
+    seen.add(mode);
+  }
+  assert.deepEqual([...seen].sort(), ['dark', 'light'],
+    `expected both modes to be checked, saw ${[...seen].join(', ') || 'none'}`);
+});
+
+/* A consumer that loads `crystal.css` and not the generated theme still gets a
+   focus ring, out of the `var(--cr-focus-ring, …)` fallback. It shipped the
+   withdrawn spreads 2/6/12/22 for as long as D-11 was open *and one day after it
+   was closed*, because the fix went into the resolver and nobody looked at the
+   stylesheet. Same geometry or it is a second recipe. */
+check('the stylesheet fallback is the same recipe as the exported theme', () => {
+  const css = require('node:fs').readFileSync(
+    require('node:path').join(__dirname, '../core/assets/crystal.css'), 'utf8');
+  const m = /box-shadow:\s*var\(--cr-focus-ring,([\s\S]*?)\)\}/.exec(css);
+  assert.ok(m, 'no --cr-focus-ring fallback in crystal.css');
+  const geometry = [...m[1].matchAll(/0\s+(\d+px|0)\s+(\d+px)(?:\s+(\d+px))?/g)]
+    .map((g) => [g[1], g[2], g[3]].filter(Boolean).join(' '));
+  const want = [
+    ...FOCUS.halo.map(([blur, spread]) => `0 ${blur}px ${spread}px`),
+    ...FOCUS.lift.map(([offset, blur]) => `${offset}px ${blur}px`),
+  ];
+  assert.deepEqual(geometry, want,
+    'the fallback in crystal.css is not the recipe the theme exports');
+});
+
 /* -------------------------------------------------------------- report */
 
 const failures = results.filter((r) => r.status === 'fail');

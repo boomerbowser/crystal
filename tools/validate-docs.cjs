@@ -17,7 +17,13 @@ const read = p => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 const doc = name => fs.readFileSync(path.join(ROOT, 'core/docs', name), 'utf8');
 
 const failures = [];
+/* Counted rather than declared. The total used to be a literal at the bottom of
+   this file, so adding a check and forgetting to bump it reported fewer checks
+   than ran — and the number is evidence, published in
+   `validation/doc-drift-checks.json`. */
+let checked = 0;
 const expect = (where, needle, why) => {
+  checked += 1;
   if (!doc(where).includes(needle)) failures.push(`docs/${where}: no mention of ${needle} — ${why}`);
 };
 
@@ -70,15 +76,32 @@ expect('accessibility.md', checks.checks.toLocaleString(), 'the number of contra
   const theme = fs.readFileSync(path.join(ROOT, 'core/assets/crystal-theme.css'), 'utf8');
   const ring = /--cr-focus-ring:\s*([^;]+);/.exec(theme);
   const layers = ring ? ring[1].split(/,(?![^(]*\))/) : [];
+  if (layers.length === 0) {
+    failures.push('core/assets/crystal-theme.css: no --cr-focus-ring to read, so the prose was not checked at all');
+  }
   for (const layer of layers) {
-    const m = /^\s*0\s+0\s+(\d+)px\s+(\d+)px/.exec(layer);
-    if (!m) continue;
-    expect('components.md', `${m[1]}px / ${m[2]}px`,
-      `a focus halo layer the theme exports (blur ${m[1]}px, spread ${m[2]}px)`);
+    const halo = /^\s*0\s+0\s+(\d+)px\s+(\d+)px/.exec(layer);
+    if (halo) {
+      expect('components.md', `${halo[1]}px / ${halo[2]}px`,
+        `a focus halo layer the theme exports (blur ${halo[1]}px, spread ${halo[2]}px)`);
+      continue;
+    }
+    /* The two elevation layers, which this check used to skip with a bare
+       `continue` — so the lift could have changed in the theme and the prose
+       said whatever it liked. They have a y-offset and no spread, so they are
+       quoted as offset/blur. */
+    const lift = /^\s*0\s+(\d+)px\s+(\d+)px/.exec(layer);
+    if (lift) {
+      expect('components.md', `${lift[1]}px / ${lift[2]}px`,
+        `a focus elevation layer the theme exports (offset ${lift[1]}px, blur ${lift[2]}px)`);
+      continue;
+    }
+    failures.push(`core/assets/crystal-theme.css: unreadable --cr-focus-ring layer "${layer.trim()}" — `
+      + 'it is neither a halo nor an elevation layer, so nothing in the prose was held to it');
   }
 }
 
-const report = { suite: 'documentation drift', checks: 20, failures };
+const report = { suite: 'documentation drift', checks: checked, failures };
 fs.writeFileSync(path.join(ROOT, 'validation/doc-drift-checks.json'), JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify(report, null, 2));
 process.exit(failures.length ? 1 : 0);

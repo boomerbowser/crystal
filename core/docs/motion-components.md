@@ -128,7 +128,7 @@ Base times below are at 1×; the preview resolves the saved speed at playback. E
 
 ## Runtime API
 
-Load `controls.css` after the other preview styles; `controls.js` adds Resin shells around native text fields and selects while preserving their labels, validation and keyboard behavior. Load scripts in this order: theme CSS, primitive CSS, motion CSS, `assets/vendor/crystal-engines.js`, `assets/motion-catalog.js`, then `assets/motion.js`. Load `tokens.js` and `crystal.js` first if resolving user preferences dynamically. `motion-interactions.js` optionally installs delegated button feedback; omit it when your component library owns gesture handling to avoid duplicate effects.
+`controls.js` adds Resin shells around native text fields and selects while preserving their labels, validation and keyboard behavior; the shells' appearance is in `crystal.css` as of 2.1.0, and no longer needs the preview's own `controls.css`. Load scripts in this order: theme CSS, primitive CSS, motion CSS, `assets/vendor/crystal-engines.js`, `assets/motion-catalog.js`, then `assets/motion.js`. Load `tokens.js` and `crystal.js` first if resolving user preferences dynamically. `motion-interactions.js` optionally installs delegated button feedback; omit it when your component library owns gesture handling to avoid duplicate effects.
 
 ```js
 // Apply real UI state before giving it visual feedback.

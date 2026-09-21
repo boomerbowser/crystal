@@ -113,19 +113,82 @@
          nothing, and those two inset shadows have never painted. A value two
          components depend on belongs to the system. */
       '--cr-control-edge':rgba(p.outline,0.18),
+      /* The two tints the Resin control sheen is built from, and the same story
+         as `--cr-control-edge` above: they lived only in the preview's
+         `controls.css`, so the optical sheen on every Crystal control was a
+         thing the library described and did not ship. Adopted 21 September 2026
+         with the rest of D-11.
+
+         `--cr-control-color` is the decorative tint that gives the control its
+         body; `--cr-control-light` is the glow that lights its top-left corner.
+         Both go *down* in dark mode rather than up — the opposite of the focus
+         feathers, and deliberately: on a deep canvas the sheen is already
+         reading against very little, and holding it at the light-mode strength
+         makes a control look lit from inside rather than lit from above. */
+      /* `color-mix` rather than a resolved `rgba`, and it is the one place in
+         this theme that departs from the convention. Two reasons, both checked
+         rather than assumed. A resolved `rgba` alpha is quantised to 8 bits by
+         the time a browser serialises it — 0.126 comes back as 0.125 — and an
+         A/B of the site against this library put a worst channel delta of 2 on
+         the playground's controls purely from that. And a mix keeps the tint
+         tracking `--cr-glow` and `--cr-decorative`, so a product that retints
+         either gets a sheen that follows; a resolved value silently would not.
+         The preview has always written these as mixes, so this is also what
+         makes the adoption exact. */
+      '--cr-control-color':`color-mix(in srgb,var(--cr-decorative) ${dark?7:8.4}%,transparent)`,
+      '--cr-control-light':`color-mix(in srgb,var(--cr-glow) ${dark?9.8:12.6}%,transparent)`,
       '--cr-focus-core':p.primary,
       '--cr-focus-core-width':'2px',
       '--cr-focus-core-offset':'3px',
-      /* Spreads 1/3/6/11, not 2/6/12/22. The halo was halved at Meridian's
-         request and the change was made in the preview's own stylesheet, which
-         overrides this one — so Crystal's site rendered the halved halo, the
-         specification was generated from that stylesheet and documented the
-         halved halo, and the library went on shipping the withdrawn one to
-         every consumer that reads the theme. Crystal React's focus ring was
-         visibly wider than Crystal's for as long as that was true. The blur
-         radii and alphas were always identical; only the spread was behind. */
-      '--cr-focus-ring':[[6,1,46],[16,3,30],[30,6,17],[54,11,8]]
-        .map(([blur,spread,pct])=>`0 0 ${blur}px ${spread}px ${rgba(p.primary,pct/100)}`).join(','),
+      /* The four feather colours, published rather than inlined.
+         
+         They were the preview's own — `--cr-focus-feather-1` … `-4` in
+         `controls.css` — and the library had no equivalent, because it baked its
+         alphas straight into `--cr-focus-ring`. That is precisely why the
+         dark-mode divergence could hide for so long: there was no property to
+         compare, so no gate could have been written that would have caught it.
+         Naming them is half of D-11's fix; the other half is that a product can
+         now retint the falloff without restating the whole recipe.
+
+         **Dark mode lifts them**, 56/38/22/11 against light's 46/30/17/8. The
+         preview has carried the lift since the halo was specified and the
+         library never did, so Crystal's site held its falloff against a deep
+         canvas and every consumer's went thin. Meridian decided on 21 September
+         2026 that the library carries it. */
+      ...Object.fromEntries((dark?[56,38,22,11]:[46,30,17,8])
+        .map((pct,i)=>[`--cr-focus-feather-${i+1}`,rgba(p.primary,pct/100)])),
+      /* The broad layer's colour, and the one part of focus that is not the
+         primary: it is `--cr-decorative`, so the lift under a focused control
+         carries the palette's own shadow hue rather than tinting everything
+         purple. Also the preview's, also never exported. */
+      '--cr-focus-shadow':rgba(p.decorative,0.27),
+      /* Six layers: the four-layer halo, then two that lift.
+         
+         Spreads 1/3/6/11, not 2/6/12/22 — the halo was halved at Meridian's
+         request, the change was made in the preview's stylesheet, and the
+         library went on shipping the withdrawn one to every consumer. That much
+         was fixed on 20 September.
+         
+         What was still missing is the pair beneath: `0 8px 18px` directional and
+         `0 22px 40px` broad. A focused control on Crystal's site lifts, and in
+         every consumer it did not — not a spread this time but two whole layers,
+         and `components.md` had described lifting on focus as Crystal's own
+         behaviour throughout. Meridian decided on 21 September that the library
+         carries them, so this is now the whole recipe and the preview's copy is
+         redundant rather than authoritative.
+         
+         Written as `var()` references to the properties above, which is the
+         shape the preview used. It keeps the recipe readable at the point of
+         use and it is what lets the two be compared layer by layer. */
+      '--cr-focus-ring':[
+        ...[[6,1,1],[16,3,2],[30,6,3],[54,11,4]]
+          .map(([blur,spread,n])=>`0 0 ${blur}px ${spread}px var(--cr-focus-feather-${n})`),
+        /* The directional layer borrows the second feather rather than naming a
+           fifth colour — the preview's choice, kept, because a lift that is a
+           shade of the halo above it reads as the same light source. */
+        '0 8px 18px var(--cr-focus-feather-2)',
+        '0 22px 40px var(--cr-focus-shadow)',
+      ].join(','),
       /* The spacing scale and the shell's geometry. Neither varies with palette,
          mode or density; they are published as custom properties so a product
          writing plain CSS reaches the same values the libraries compile against.

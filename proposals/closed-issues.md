@@ -764,3 +764,230 @@ the build did not run. Worth one look.
 
 The blocked deployment `dpl_6KYJdLjbo8gxZX8ZULTHzb3dHfjH` remains in the
 project's history in state `BLOCKED`. It is inert.
+
+---
+
+## D-11 · The library shipped a focus halo Meridian had withdrawn
+
+**Found 2026-09-20. Fixed the same day.**
+
+The focus halo's spreads were halved at Meridian's request — `2/6/12/22` to
+`1/3/6/11`, blur radii deliberately unchanged so the ring thins without the
+falloff flattening. The change was made in `website/assets/controls.css`, the
+preview's own stylesheet, which overrides the library's.
+
+So three things were true at once:
+
+- **Crystal's site rendered the halved halo.** `controls.css` wins.
+- **The specification documented the halved halo.** `build-reference.cjs`
+  generates the focus-recipe table by reading `controls.css`, precisely so the
+  table cannot be hand-transcribed and drift. It read the override.
+- **The library shipped the withdrawn halo to every consumer.**
+  `core/assets/crystal.js` still emitted `[[6,2,46],[16,6,30],[30,12,17],
+  [54,22,8]]` into the exported theme, and the exported theme is what a consumer
+  reads. Crystal React's focus ring has been visibly wider than Crystal's own
+  for as long as that has been true.
+
+Blur radii and alphas were identical throughout. Only the spread was behind,
+which is why it survived: the ring was the right colour, the right softness and
+the right shape, and simply too big.
+
+**This is D-9 again.** D-9 was Crystal exporting one Resin shadow and rendering
+another; the preview's stylesheet shaped the blessed appearance while the
+exported token said something else. `verify-package.cjs` was built to stop the
+preview's stylesheet *leaving the repository*. It cannot stop the preview's
+stylesheet **overriding** the library inside it, which is the same failure
+through a different door.
+
+**Nothing caught it.** Crystal React's `verify-appearance`, `verify-theme` and
+`verify-materials` were each run against the withdrawn value deliberately, and
+all three passed. They assert that `--cr-focus-ring` is *defined* — the correct
+check when the defect was that it was read by everything and defined by nothing,
+and no check at all against a wrong number.
+
+`tests/core-contracts.cjs` now compares the exported halo against the rendered
+one, layer by layer, blur and spread. Reverting `crystal.js` turns it red with
+the four pairs printed side by side.
+
+**Still open, and Meridian's to decide:** the preview raises the feather's alpha
+in dark mode (`56/38/22/11` against the library's `46/30/17/8`) to hold up
+against a deep canvas. The library does not. Nobody has said which is correct,
+so the contract compares geometry only and the divergence stands recorded rather
+than frozen. Either the library should carry the dark-mode lift, or the preview
+should stop applying it.
+
+**A second divergence in the same property, found 20 September when the
+repository split made it unavoidable.** `build-reference.cjs` generated the
+focus-recipe table by reading the preview's `controls.css`. With the preview in
+another repository it could not open the file at all, and reading the library's
+own exported theme instead showed the table losing two rows:
+
+| | halo layers | elevation layers |
+|---|---|---|
+| `controls.css`, which the site renders | 4 | 2 — `0 8px 18px` directional, `0 22px 40px` broad |
+| the exported theme, which consumers read | 4 | none |
+
+So a focused control in Crystal React gets the halo and **no elevation change at
+all**, while a focused control on Crystal's own site lifts. Not a spread this
+time — two whole layers.
+
+**Three divergences are now named and none is decided:**
+
+1. **The elevation layers.** Should `--cr-focus-ring` carry them, or is lifting
+   on focus the site's own flourish? The prose in `components.md` described them
+   as Crystal's behaviour, which is an argument that they are.
+2. **The dark-mode feather alphas.** The site raises them to 56/38/22/11 against
+   the library's 46/30/17/8, to hold the falloff against a deep canvas. The
+   library does not.
+3. **Everything else `controls.css` redefines — enumerated 21 September 2026.**
+   It is smaller than feared in one direction and larger in the other.
+
+   **Custom properties defined by both: three.** The library defines 142 across
+   `crystal-theme.css` and `crystal.css`; `controls.css` defines 11; the
+   intersection is `--cr-focus-core`, `--cr-focus-ring` and `--cr-outline`.
+
+   | property | library | `controls.css` | verdict |
+   |---|---|---|---|
+   | `--cr-focus-core` | `#7338EF` / `#c8b1f9` | `var(--cr-primary)` | **not a divergence.** `--cr-primary` *is* `#7338EF` / `#c8b1f9`. Same value, spelled as a reference. Deleting it from the site changes nothing — unless a page sets `--cr-primary` locally, in which case the site's focus core follows it and the library's does not. |
+   | `--cr-focus-ring` | four halo layers | the same four, **plus two elevation layers** | divergence (1) above. |
+   | `--cr-outline` | `#624a9f` / `#bfa3f8`, globally | `var(--status-ink)`, **scoped to `.cr-status`** | **a third divergence, and new.** The library never narrows `--cr-outline` inside `.cr-status`. So a focused status chip outlines in its own status colour on Crystal's site, and in the generic outline colour in every consumer. `--status-ink` is the library's own property, set per `[data-status]`, so the site is not inventing a value — it is applying one the library defines and does not use here. |
+
+   The other eight properties `controls.css` defines are its own and collide
+   with nothing: `--cr-control-color`, `--cr-control-light`,
+   `--cr-focus-feather-1` … `-4`, `--cr-focus-shadow`, `--cr-range-progress`.
+   **Divergence (2) lives in those feather variables** — the library has no
+   equivalent and inlines its alphas straight into `--cr-focus-ring`, which is
+   why the dark-mode lift had nowhere to be compared.
+
+   **The larger direction, and the first measurement of it was wrong.** An
+   earlier pass here reported "50 declarations set by both, across 14 of
+   Crystal's own classes". That number was produced by intersecting *class
+   names* per stylesheet, which flattens every context: it counted a
+   `@media (forced-colors: active)` override against a base rule, and
+   `span.cr-status > span` against `.cr-status`. Its value-level companion
+   claimed `.cr-button { background: Canvas !important }` and
+   `.cr-status { border-radius: 50% }` were Crystal's, which they are not.
+   **Do not use it.**
+
+   Parsed properly with postcss, keying each declaration by its full context —
+   enclosing at-rules, exact selector, property — the library sets 510
+   declarations and `controls.css` sets 502, and **the number they share is
+   zero**. Not one selector-and-property pair is set by both.
+
+   That is not a clean bill of health; it relocates the question. `controls.css`
+   wins by **cascade rather than by collision**: it styles compound selectors
+   like `:is(button, a.cr-button, .cr-control, .cr-field-shell, …)` where the
+   library styles a bare `.cr-button`, so the two never textually agree and the
+   site's declaration still lands on the same element. A static diff cannot see
+   that, and no amount of care with the parser will make it.
+
+   **The only honest measure is computed style on a rendered element** — the
+   same page with `controls.css` enabled and disabled, in both modes and with
+   forced colours emulated, diffed over every element carrying a `cr-*` class.
+   That is the experiment this item needs and it has not been run yet.
+
+   **What to build once the values are compared**: the check this entry always
+   wanted, in `tests/site-contracts.cjs` in crystal-preview — the site redefines
+   no custom property and re-declares no material property the library already
+   sets, with an explicit allow-list carrying a reason per entry. It cannot be
+   written before (1) and (2) are decided, because it would freeze them.
+
+Until (1) and (2) are decided, the contract compares geometry only and the first
+four layers only. Freezing either divergence into a gate would be deciding it by
+accident, which is how the spreads got out of step in the first place.
+
+**Also fixed, 20 September:** the prose above the generated table still quoted
+the withdrawn spreads — "46% at 6px blur / 2px spread, 30% at 16px / 6px …" —
+long after the halo was halved, so the specification contradicted its own
+generated table two lines below. `validate-docs.cjs` now requires every
+blur/spread pair the theme exports to appear in that sentence, which turns red
+four times over if the halo moves and the prose does not.
+
+**Closed 21 September 2026. Meridian decided all three divergences the same
+way: the library adopts, the preview does not drop.** Their reasoning is worth
+keeping, because it generalises past this entry — the preview site *was* the
+visual example Crystal's specifications were tested and measured against, so
+where the two disagree the preview is the evidence and the library is the copy
+that fell behind. Meridian also made it a standing rule for every component
+library, not a ruling on this one.
+
+**(1) The two elevation layers** are in `--cr-focus-ring`. It is six layers now:
+the four-layer halo at 6/1, 16/3, 30/6, 54/11, then `0 8px 18px` directional and
+`0 22px 40px` broad. The directional layer reuses the second feather so the lift
+reads as the same light source; the broad one is `--cr-decorative` at 27% so the
+shadow under a focused control carries the palette's shadow hue rather than
+tinting the page.
+
+**(2) The dark-mode lift** is carried: feather alphas 56/38/22/11 in dark against
+46/30/17/8 in light, published as `--cr-focus-feather-1` … `-4` with
+`--cr-focus-shadow` beside them. Naming them is half the fix — the divergence
+could hide for as long as it did because the library baked its alphas into the
+ring and there was no property to compare.
+
+**(3) The third divergence was much larger than this entry thought, and two
+earlier measurements of it were wrong.** The class-name intersection ("50
+declarations across 14 classes") was withdrawn before the decision. Parsing both
+stylesheets properly with postcss then showed *zero* shared
+`(at-rule, selector, property)` keys — which was correct and still not the
+answer, because `controls.css` wins by **cascade**, styling
+`:is(button, a.cr-button, .cr-control, …)` where the library styles a bare
+`.cr-button`. Measured where it can actually be measured — computed style on
+rendered elements, both modes, `controls.css` on and off — the site changed
+**246 distinct computed values across 13 Crystal-named classes**.
+
+Five of those classes turned out not to exist in the library at all:
+**`.cr-control`, `.cr-field-shell`, `.cr-indicator`, `.cr-resin-haze` and
+`.cr-tag`**. `components.md` names them throughout — the indicator's 20px circle
+with its 3px-inset 80% Haze fill, `.cr-resin-haze` as the composition small
+display elements use — and instructed the reader to "use `assets/controls.css`",
+a stylesheet the package has never contained. **The entire Resin interaction
+surface was in that file**: the fill, the rim, the `::before` Haze layer, the
+`::after` optical sheen, and the reduced-transparency and forced-colours
+adaptations of all of it. So this was never only a focus halo. It is why
+Crystal React had to rebuild the control surface in SCSS rather than consume it,
+and it is D-9's root cause rather than another instance of it.
+
+58 rules and 175 declarations were lifted into `assets/crystal.css` in
+`@layer crystal.component` — the layer the preview used and the one the library's
+own layer order already reserved. Selector lists were filtered to the Crystal
+parts; the preview keeps its switches, segmented controls and range inputs.
+`--cr-control-color` and `--cr-control-light` came with them, and
+`.cr-status` now narrows `--cr-outline` to `var(--status-ink)` so a danger chip's
+rim follows its status instead of the generic outline colour.
+
+**The adoption was verified by rendering, not by reading.** The site as it ships
+— published 2.0.0 plus `controls.css` — against the site built on this library
+with every lifted rule *removed* from `controls.css`: 10,534 computed values
+compared across three pages in both modes, and six full-page screenshots with a
+control focused so the halo and both lifts painted. **All six frames are
+pixel-identical at zero tolerance.**
+
+One thing that comparison caught and a stylesheet diff could not: written as
+resolved `rgba()`, the sheen tints came back quantised to 8 bits — 0.126
+serialising as 0.125 — for a worst channel delta of 2 across the playground.
+`--cr-control-color` and `--cr-control-light` are therefore emitted as
+`color-mix()`, which is also what keeps them tracking a product's overridden
+`--cr-glow` and `--cr-decorative`. That is the only place this theme departs
+from resolved values, and it is deliberate.
+
+**Gates.** `tests/core-contracts.cjs` now holds the recipe: six layers with the
+approved geometry in every mode, the feather alphas per mode, `--cr-focus-shadow`
+at 27%, and the `var(--cr-focus-ring, …)` fallback in `crystal.css` matching the
+exported theme. All three were proven by mutation. The earlier check compared
+geometry only and the first four layers only, deliberately, so that running it
+could not freeze an undecided divergence — that reason expired with the decision.
+`tools/validate-docs.cjs` no longer skips the elevation layers with a bare
+`continue`, and counts its own checks rather than declaring a total.
+
+**Two corrections to this entry as it stood.** It claimed
+`tests/core-contracts.cjs` compared the exported halo against the rendered one.
+It did not — that check went to `crystal-preview/tests/site-contracts.cjs` with
+the site in D-12 and this entry was never updated, so for a day the tracker named
+a gate in a repository that did not have it. And the fix recorded on 20 September
+was incomplete: `crystal.css` carried a `var(--cr-focus-ring, …)` fallback still
+spelling the withdrawn spreads 2/6/12/22, because the fix went into the resolver
+and nobody opened the stylesheet. A consumer loading `crystal.css` without the
+generated theme got the withdrawn halo for a further day.
+
+Shipped as **2.1.0** — new public custom properties and five components that were
+specified but absent, which is a minor rather than a patch.

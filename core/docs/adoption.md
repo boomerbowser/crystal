@@ -34,12 +34,13 @@ The site uses relative local assets without fetching fonts or services. Review i
 
 ## Static CSS adoption
 
-Copy `assets/crystal.css`, `assets/controls.css`, `assets/fonts/`, `assets/grain.svg`, and the theme CSS into the product. Preserve the primitive stylesheet’s relative asset paths. Load theme CSS before primitive CSS. The reference-site CSS/JS are not needed by a product.
+Copy `assets/crystal.css`, `assets/fonts/`, `assets/grain.svg`, and the theme CSS into the product. Preserve the primitive stylesheet’s relative asset paths. Load theme CSS before primitive CSS. The reference-site CSS/JS are not needed by a product.
+
+`assets/crystal.css` carries the Resin interaction surface and the components built on it — `.cr-control`, `.cr-field-shell`, `.cr-indicator`, `.cr-resin-haze` and `.cr-tag`. Before 2.1.0 it did not, and this page told you to copy a second stylesheet, `assets/controls.css`, that the package has never contained. There is no second stylesheet to copy.
 
 ```html
 <link rel="stylesheet" href="crystal-theme.css">
 <link rel="stylesheet" href="assets/crystal.css">
-<link rel="stylesheet" href="assets/controls.css">
 <section class="cr-plastic">
   <section class="cr-frost">
     <article class="cr-haze">Readable product content</article>
@@ -172,4 +173,4 @@ The motion runtime needs the engines and the recipe catalogue. `@crystal-ui/core
 
 Render the field shells in your component framework: a bare `<input>` cannot carry Crystal's focus ring, because the ring belongs to the shell around it and the input itself takes `outline: 0`. Compact information surfaces and ephemeral menus use `.cr-resin-haze`. Do not transplant the legacy solid button rules without this material layer. The 54-recipe catalogue declares material signatures and justified extended travel; the old 50px token describes compact motion only.
 
-`controls.css` is **not** part of this package and never will be. It is the documentation site's own stylesheet, it styles bare elements, and exporting it once already caused a 32px chip to render 50px tall in Crystal React — D-9. `tools/verify-package.cjs` fails a tarball that contains it.
+`controls.css` is **not** part of this package and never will be — but as of 2.1.0 the part of it you needed is. It was the documentation site's own stylesheet and it carried five Crystal components this specification describes and the library did not ship, so a product following this page reached for `.cr-indicator` and `.cr-resin-haze` and got nothing. Those rules now live in `assets/crystal.css`, lifted with their selector lists filtered to the Crystal parts; the site keeps what is genuinely its own — its switches, its segmented controls, its range inputs. What remains of `controls.css` is still not exportable: it styles bare elements, and exporting it once already caused a 32px chip to render 50px tall in Crystal React — D-9. `tools/verify-package.cjs` fails a tarball that contains it.

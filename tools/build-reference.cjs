@@ -259,27 +259,63 @@ function paletteTable() {
    stylesheet it does not publish, and a consumer following the table got
    something else. That is D-11, and the repository split made it literal: the
    preview is not here any more and the file cannot be opened at all.
-   The preview composes two further elevation layers on top of the halo. They
-   are not in this table because they are not in the package. Whether they
-   should be is a material question for Meridian, recorded in D-11 and not
-   decided here. */
+
+   Six layers since 21 September 2026, not four. The two elevation layers were
+   the preview's and Meridian decided the library carries them, so they belong
+   in this table — they *are* in the package now. They are classified by their
+   y-offset rather than counted by position: a halo layer is `0 0 blur spread`
+   and an elevation layer is `0 Ny blur` with no spread at all, so reading the
+   second and third numbers as blur and spread would report the lift as
+   "blur 8, spread 18" and be quietly wrong in a generated table. */
 function focusRecipeTable() {
   const css = fs.readFileSync(path.join(ROOT, 'core/assets/crystal-theme.css'), 'utf8');
   const ring = /--cr-focus-ring:\s*([^;]+);/.exec(css);
   if (!ring) throw new Error('core/assets/crystal-theme.css: no --cr-focus-ring to read');
-  const layers = ring[1].split(/,(?![^(]*\))/).map(s => s.trim());
-  if (layers.length !== 4) throw new Error(`expected four halo layers, read ${layers.length}`);
+
+  /* The ring names its colours rather than inlining them, so the alpha — the
+     part worth quoting, because it is what makes the falloff — has to be looked
+     up. First occurrence of each: the theme carries a light block and a dark
+     one, and this table documents the light. */
+  const colour = (name) => {
+    const m = new RegExp(`--${name}:\\s*([^;]+);`).exec(css);
+    if (!m) throw new Error(`core/assets/crystal-theme.css: no --${name} to resolve`);
+    return m[1].trim();
+  };
+  const alphaOf = (value) => {
+    const ref = /var\(\s*--([a-z0-9-]+)/.exec(value);
+    const resolved = ref ? colour(ref[1]) : value;
+    const m = /rgba?\([^)]*?([\d.]+)\s*\)/.exec(resolved);
+    if (!m) throw new Error(`unreadable focus colour: ${value}`);
+    return Math.round(Number(m[1]) * 100);
+  };
+
+  const layers = ring[1].split(/,(?![^(]*\))/).map((s) => s.trim());
+  if (layers.length !== 6) throw new Error(`expected six focus layers, read ${layers.length}`);
+
   const lines = ['| Layer | Blur | Spread | Role |', '|---|---|---|---|',
     '| `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | — | — | The crisp core. Never feathered, and the only part that survives forced colours. |'];
-  layers.forEach((layer, index) => {
-    /* The exported theme resolves the colour, so a layer reads
-       `0 0 6px 1px rgba(115, 56, 239, 0.46)` rather than naming a variable.
-       The alpha is the part worth quoting — it is what makes the falloff. */
-    const m = /^(-?[\d.]+\w*)\s+(-?[\d.]+\w*)\s+([\d.]+\w*)\s+([\d.]+\w*)\s+rgba?\([^)]*?([\d.]+)\s*\)/.exec(layer);
-    if (!m) throw new Error(`unreadable focus halo layer: ${layer}`);
-    const [, , , blur, spread, alpha] = m;
-    lines.push(`| Halo ${index + 1} | ${blur} | ${spread} | ${Math.round(alpha * 100)}% of the primary colour |`);
-  });
+  let halo = 0;
+  let lift = 0;
+  for (const layer of layers) {
+    const feathered = /^0\s+0\s+([\d.]+\w*)\s+([\d.]+\w*)\s+(.+)$/.exec(layer);
+    if (feathered) {
+      const [, blur, spread, value] = feathered;
+      halo += 1;
+      lines.push(`| Halo ${halo} | ${blur} | ${spread} | ${alphaOf(value)}% of the primary colour |`);
+      continue;
+    }
+    const elevated = /^0\s+([\d.]+\w*)\s+([\d.]+\w*)\s+(.+)$/.exec(layer);
+    if (!elevated) throw new Error(`unreadable focus layer: ${layer}`);
+    const [, offset, blur, value] = elevated;
+    lift += 1;
+    const role = lift === 1
+      ? `${alphaOf(value)}% of the primary colour, offset ${offset} — the directional lift`
+      : `${alphaOf(value)}% of the decorative colour, offset ${offset} — the broad lift`;
+    lines.push(`| Elevation ${lift} | ${blur} | — | ${role} |`);
+  }
+  if (halo !== 4 || lift !== 2) {
+    throw new Error(`expected four halo layers and two elevation layers, read ${halo} and ${lift}`);
+  }
   return lines.join('\n');
 }
 

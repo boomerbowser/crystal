@@ -63,7 +63,9 @@ Maintain a production Storybook or equivalent gallery for actual components with
 
 ## Resin interaction and information surfaces
 
-Use `assets/controls.css` after the base and layout styles. Buttons, action links, tabs, selectable controls and field shells use Resin as their interaction surface. The preview supplies Haze reading protection inside a visible Resin perimeter. `assets/controls.js` adds only a nonsemantic shell to native fields; labels, input values, validation and form submission remain native.
+Buttons, action links, tabs, selectable controls and field shells use Resin as their interaction surface, with Haze reading protection inside a visible Resin perimeter. The recipe is in `assets/crystal.css`, in `@layer crystal.component`: a Resin fill with a rim and a float shadow, a `::before` carrying the inset Haze fill at the material's feather, and a `::after` carrying the optical sheen from `--cr-control-color` and `--cr-control-light`. Both pseudo-elements are dropped under reduced transparency and under forced colours.
+
+Until 2.1.0 this paragraph told you to load `assets/controls.css`, which is the documentation site's stylesheet and has never been in the package — so the surface this specification describes was one no consumer could obtain. `assets/controls.js` adds only a nonsemantic shell to native fields; labels, input values, validation and form submission remain native.
 
 Small display elements (tooltips, toasts, labels, tags and badges) and temporary menus (secondary menus, dropdowns, flyouts and popovers) use `.cr-resin-haze`. This is a reusable composition of existing materials, not a seventh material. Larger persistent components retain their structural material. Native OS popup internals are platform-owned; use an actual accessible custom component when full Crystal popup rendering is required.
 
@@ -100,7 +102,13 @@ Icons next to text are decorative and hidden from assistive technology. Icon-onl
 
 ## Focus light and circular state badges
 
-Focus uses an immediate 2px primary-color core at a 3px offset, surrounded by a broadly feathered halo. The halo is four graded layers of the primary color — 46% at 6px / 1px, 30% at 16px / 3px, 17% at 30px / 6px and 8% at 54px / 11px (blur / spread) — so the light falls off smoothly instead of ending on a hard edge. The spreads were halved from 2/6/12/22 at Meridian's request; the blur radii were deliberately left alone, so the ring thins without the falloff flattening. The single token `--cr-focus-ring` composes the halo so every focusable surface shares one recipe. The core remains defined for visibility; text and icons are never blurred. Keyboard focus applies to all interactive elements. Text entry lights its Resin shell through `:focus-within`. Motion must neither delay nor remove the focus cue. Forced colors substitute a system Highlight outline and remove decorative shadows.
+Focus uses an immediate 2px primary-color core at a 3px offset, surrounded by a broadly feathered halo. The halo is four graded layers of the primary color — 46% at 6px / 1px, 30% at 16px / 3px, 17% at 30px / 6px and 8% at 54px / 11px (blur / spread) — so the light falls off smoothly instead of ending on a hard edge. The spreads were halved from 2/6/12/22 at Meridian's request; the blur radii were deliberately left alone, so the ring thins without the falloff flattening.
+
+**A focused control also lifts.** Beneath the halo sit two elevation layers: a directional 8px / 18px (offset / blur) at 30% of the primary color, and a broad 22px / 40px at 27% of the *decorative* color. The directional layer reuses the halo's second feather so the lift reads as the same light source; the broad one is decorative rather than primary so the shadow under a focused control carries the palette's own shadow hue instead of tinting the page purple. Focus changes the elevation shadow's hue without blurring any foreground.
+
+**In dark mode the feather alphas lift**, to 56 / 38 / 22 / 11 against light's 46 / 30 / 17 / 8. A deep canvas swallows the falloff at the lighter values, so the ring reads as a hard edge with nothing around it. Blur, spread and the elevation layers are identical in both modes.
+
+The four feather colors are published as `--cr-focus-feather-1` through `-4` and the broad shadow as `--cr-focus-shadow`, so a product can retint the falloff without restating the recipe. The single token `--cr-focus-ring` composes all six layers so every focusable surface shares one recipe. The core remains defined for visibility; text and icons are never blurred. Keyboard focus applies to all interactive elements. Text entry lights its Resin shell through `:focus-within`. Motion must neither delay nor remove the focus cue. Forced colors substitute a system Highlight outline and remove decorative shadows.
 
 A `.cr-indicator` is a 20px circular Resin surface with a 3px-inset 80% Haze fill and a 1px feather on that fill. Field badges are 24px. Their foreground remains crisp and uses the tested body ink. They sit beside the content, never over text or a native select arrow. These are informational, non-interactive marks, not small click targets.
 
@@ -113,12 +121,16 @@ A `.cr-indicator` is a 20px circular Resin surface with a 3px-inset 80% Haze fil
 | Halo 2 | 16px | 3px | 30% of the primary colour |
 | Halo 3 | 30px | 6px | 17% of the primary colour |
 | Halo 4 | 54px | 11px | 8% of the primary colour |
+| Elevation 1 | 18px | — | 30% of the primary colour, offset 8px — the directional lift |
+| Elevation 2 | 40px | — | 27% of the decorative colour, offset 22px — the broad lift |
 <!-- /generated:focus-recipe -->
 
-Each halo layer is read from `--cr-focus-ring` in `assets/controls.css`, so this table
-cannot disagree with what ships. The core is never feathered and the offset is never
-zero: a ring drawn *on* the border is hard to tell from a hover state, and on a pill it
-reads as a thicker stroke rather than as focus.
+Every layer is read from `--cr-focus-ring` in the library's own exported theme, so this
+table cannot disagree with what ships. It used to be read from the preview site's
+`assets/controls.css` — a stylesheet the package does not contain — which is how Crystal
+came to document a halo it did not export and a lift no consumer received. The core is
+never feathered and the offset is never zero: a ring drawn *on* the border is hard to
+tell from a hover state, and on a pill it reads as a thicker stroke rather than as focus.
 
 A check mark is reserved for validation and information display — the status badges in `.cr-status` and a checkbox's own `:checked` indicator. It never marks a selected, pressed or focused control. Selection instead uses a heavier label weight, which changes no metric that would reflow the group. Round specimen swatches, which cannot carry a weight change, use an inset ring gap.  Ordinary prose links retain their link styling. Badges are `aria-hidden`: the real control supplies its accessible name, required/invalid/selected/busy state and error association. The visual symbol never gets appended to the control's text content. Native checkbox/radio indicators and functional labels remain intact. Small controls retain full-sized hit targets. Badges have solid, unblurred alternatives under reduced transparency and forced colors.
 
