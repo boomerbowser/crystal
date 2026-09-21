@@ -969,9 +969,17 @@ compared across three pages in both modes, and six full-page screenshots with a
 control focused so the halo and both lifts painted. **All six frames are
 pixel-identical at zero tolerance.**
 
-**That proof was sound and the conclusion drawn from it was too narrow.** It
-compared the site with the lifted rules moved against the site with them in
-place, and both sides kept `controls.css`. So it could show the lift was
+**That proof was sound for a narrower claim than this entry made for it, and
+this entry also described it wrongly.** It is recorded above as "published 2.0.0
+plus `controls.css`" against the new library. It was not: the capture script
+swapped stylesheets inside the page and never swapped the vendored library, so
+both sides ran on *this* library. That has to be true — the resolver gained the
+two elevation layers in the same commit as the first adoption, so a comparison
+of 2.0.0 against 2.1.0 with a control focused could not have come back
+identical, as the measurement further down demonstrates. What the six frames
+proved is that **moving those rules changed nothing**, which is exactly the
+question worth asking of a lift, and it remains proven. What they could not show
+is whether the lift was *complete*: both sides kept `controls.css`. So it could show the lift was
 *faithful* and could not show whether the lift was *complete* — whatever the
 sheet still overrode, it overrode identically on both sides. A second pass
 measured that directly, with the library fixed and the site's sheet as the only
@@ -1048,8 +1056,11 @@ underline, which never drew because the preview already set
 `text-decoration: none` over it.
 
 Five frames in both modes, with a control focused so the ring paints, then say
-where the remaining pixels are: **one band, at the top left of every page, on
-the focused skip link.** Its box, its rect and both its pseudo-elements are
+where the remaining pixels are: **one band, at the top left of every page that
+loaded, on the focused skip link.** (Four pages, not five: the capture list
+asked for `/catalogue.html`, which this site does not have — the page is
+`docs/catalogue.html` — so that frame was a 404 on both sides and its
+"identical" verdict means nothing. The four that loaded all show the same band.) Its box, its rect and both its pseudo-elements are
 identical. Its `box-shadow` is not:
 
 ```
@@ -1058,11 +1069,22 @@ this library   7 layers:  inset rim, then halo 6/16/30/54,
                           then 0 8px 18px and 0 22px 40px
 ```
 
-**That is D-11's first divergence arriving.** Meridian's answer was to put the
-two elevation layers in the library; the preview's `:root` override was what had
-been holding them off, and removing that override is what makes them paint. The
-only visible change this work makes to the documentation site is the change that
-was asked for.
+**That is D-11's first divergence arriving**, and the mechanism is not the one
+this entry first gave. It said the preview's `:root` override had been holding
+the layers off. It had not: `crystal-theme.css` contains no `@layer` at all, so
+the unlayered theme outranks a `:root` sitting inside `@layer crystal.component`,
+and the preview's override never won anything. What changed is the theme itself —
+**2.0.0 exports a four-layer `--cr-focus-ring` and 2.1.0 exports six.**
+
+Which is worth saying plainly to Meridian: D-11's premise was that the preview
+had the two elevation layers and the library did not. That was true of the
+preview's *stylesheet* and false of its *rendering*. **Nothing painted those two
+layers anywhere — not the site, not the library — until 2.1.0.** The divergence
+was real in the source and invisible on screen, which is why looking at the site
+never revealed it.
+
+The only visible change this work makes to the documentation site is the change
+that was asked for.
 
 One thing that comparison caught and a stylesheet diff could not: written as
 resolved `rgba()`, the sheen tints came back quantised to 8 bits — 0.126
