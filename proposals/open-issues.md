@@ -168,12 +168,56 @@ time — two whole layers.
 2. **The dark-mode feather alphas.** The site raises them to 56/38/22/11 against
    the library's 46/30/17/8, to hold the falloff against a deep canvas. The
    library does not.
-3. **Everything else `controls.css` redefines**, which has still never been
-   enumerated. Worth doing: a check that the site redefines no custom property
-   the library already defines, with an explicit allow-list for the deliberate
-   ones. `tests/site-contracts.cjs` in crystal-preview is where it would go — it
-   already compares the halo geometry, which is one property out of an unknown
-   number.
+3. **Everything else `controls.css` redefines — enumerated 21 September 2026.**
+   It is smaller than feared in one direction and larger in the other.
+
+   **Custom properties defined by both: three.** The library defines 142 across
+   `crystal-theme.css` and `crystal.css`; `controls.css` defines 11; the
+   intersection is `--cr-focus-core`, `--cr-focus-ring` and `--cr-outline`.
+
+   | property | library | `controls.css` | verdict |
+   |---|---|---|---|
+   | `--cr-focus-core` | `#7338EF` / `#c8b1f9` | `var(--cr-primary)` | **not a divergence.** `--cr-primary` *is* `#7338EF` / `#c8b1f9`. Same value, spelled as a reference. Deleting it from the site changes nothing — unless a page sets `--cr-primary` locally, in which case the site's focus core follows it and the library's does not. |
+   | `--cr-focus-ring` | four halo layers | the same four, **plus two elevation layers** | divergence (1) above. |
+   | `--cr-outline` | `#624a9f` / `#bfa3f8`, globally | `var(--status-ink)`, **scoped to `.cr-status`** | **a third divergence, and new.** The library never narrows `--cr-outline` inside `.cr-status`. So a focused status chip outlines in its own status colour on Crystal's site, and in the generic outline colour in every consumer. `--status-ink` is the library's own property, set per `[data-status]`, so the site is not inventing a value — it is applying one the library defines and does not use here. |
+
+   The other eight properties `controls.css` defines are its own and collide
+   with nothing: `--cr-control-color`, `--cr-control-light`,
+   `--cr-focus-feather-1` … `-4`, `--cr-focus-shadow`, `--cr-range-progress`.
+   **Divergence (2) lives in those feather variables** — the library has no
+   equivalent and inlines its alphas straight into `--cr-focus-ring`, which is
+   why the dark-mode lift had nowhere to be compared.
+
+   **The larger direction: 50 declarations set by both, across 14 of Crystal's
+   own classes.**
+
+   ```
+   .cr-button       10   .cr-dock         10   .cr-status        7   .cr-resin    5
+   .cr-dock-inner    4   .cr-glass         4   .cr-table-scroll  3
+   .cr-content-fill  1   .cr-dialog        1   .cr-frost         1   .cr-haze     1
+   .cr-input         1   .cr-surface       1   .cr-well          1
+   ```
+
+   The ones that matter are on the materials: `backdrop-filter` and `box-shadow`
+   on `.cr-resin` and `.cr-glass`, `box-shadow` on `.cr-haze`, `.cr-surface`,
+   `.cr-well` and `.cr-content-fill`, `border-color` on `.cr-frost`. The site is
+   re-stating parts of the material recipes it is supposed to be *showing*.
+
+   **What this measurement is and is not.** It is a property-name intersection
+   per class, computed by parsing both stylesheets — it says the two both set a
+   declaration, not that they set it to different values, and it does not model
+   cascade layers or specificity. A restatement of an identical value is
+   harmless and a changed one is D-9's defect again; the two are
+   indistinguishable from the name alone. What the count establishes is the
+   size of the surface: this is 50 decisions, not a handful, and every one of
+   them is a place where the blessed appearance can come from a stylesheet the
+   library does not export.
+
+   **What to build once the values are compared**: the check this entry always
+   wanted, in `tests/site-contracts.cjs` in crystal-preview — the site redefines
+   no custom property and re-declares no material property the library already
+   sets, with an explicit allow-list carrying a reason per entry. It cannot be
+   written before (1) and (2) are decided, because it would freeze them.
 
 Until (1) and (2) are decided, the contract compares geometry only and the first
 four layers only. Freezing either divergence into a gate would be deciding it by
