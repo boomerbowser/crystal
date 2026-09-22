@@ -33,6 +33,35 @@ The seed is not automatically a text color. The canonical [token JSON](../tokens
 | Functional | `success`, `attention`, `danger`, `info` ink/surface pairs | Independent of brand palette and mode-aware |
 | Component/material | Resin fill, Stone backing, edge, shadows, radii | Derived from the chosen palette and settings |
 
+### There is no secondary colour, and that is a decision
+
+Crystal defines **one action pair per palette** — `primary` with `onPrimary`, and
+`primarySoft` with `onPrimarySoft` for the container form. There is no
+`secondary`, and nothing in the token set, the exported theme or the component
+vocabulary names one.
+
+A palette is not one hue: each carries a seed, a **companion** and a **glow**, and
+all three ship as `--cr-decorative`, `--cr-companion` and `--cr-glow`. What they
+do not carry is an ink. They sit in the Expressive layer above precisely because
+they have never been given a tested foreground, and the resolver consumes them in
+four places, all of them paint rather than ground: the three atmosphere stops and
+the focus shadow.
+
+Promoting the companion is not a matter of renaming it. As a solid reading fill it
+fails the 4.5 floor with **both** candidate inks in a third of the matrix — Prism
+dark 3.27 against white and 3.00 against the text ink, Amethyst dark 4.02 / 3.68,
+Harbor 4.16 / 3.07 in light and 4.16 / 3.32 in dark. The other eight
+palette-and-mode combinations clear it between 4.54 and 6.60, and a role that
+works in eight of twelve is not a role. A secondary action colour would need its
+own tuned tones and its own tested ink authored per palette per mode, which is
+work nobody has done and not an omission anybody can close by promotion.
+
+The consequence for components is that **no variant may be named after it**. A
+`.secondary` button existed until 22 September 2026 and was withdrawn for exactly
+this reason: a variant named after a colour the system does not define is a
+promise it cannot keep. Emphasis is carried by `.primary` being opt-in, by label
+weight, and by placement.
+
 CSS variables use the `--cr-` namespace and kebab-case names. Source JSON uses camelCase keys and the explicit `Crystal token schema v1`; it is not advertised as a Design Tokens Community Group interchange schema.
 
 ## Functional meanings

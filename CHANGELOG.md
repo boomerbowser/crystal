@@ -8,8 +8,28 @@ A minor release with no new API. What changed is what the stylesheet *renders*:
 2.0.0 shipped a control surface whose variant signals had been silently
 outranked, and this release puts each one back where it belongs.
 
+### Removed
+
+- **The `.secondary` button variant.** It named a second action colour, and
+  Crystal has no such role: the palettes publish one action pair, and the
+  companion and glow hues are expressive paint that is never assumed to be
+  text-safe. Promoting the companion is not available either — as a solid reading
+  fill it fails the 4.5 floor with both candidate inks in four of the twelve
+  palette-and-mode combinations. `docs/colors.md` now states the decision.
+  Markup using `.cr-button.secondary` renders as an ordinary action, which is
+  what it already looked like; a caller that meant "the emphatic one" wants
+  `.cr-button.primary`.
+
 ### Changed
 
+- **The primary tint is opt-in, on `.cr-button.primary`.** A bare `.cr-button` is
+  the neutral action. The rule used to read
+  `:not(.secondary):not(.quiet):not(.danger)` — it had to enumerate every variant
+  it was *not* meant to paint, and was one forgotten modifier away from tinting
+  the whole surface. The reset layer's `background:var(--cr-primary)` and
+  `color:var(--cr-on-primary)` on `.cr-button` are gone with it: they had not
+  rendered since the Resin surface was adopted, and would now be wrong as well as
+  dead.
 - **The primary action's reading fill is the primary colour.** `crystal.reset`
   asks for `background:var(--cr-primary)` on `.cr-button`, and the Resin control
   rule in `crystal.component` has outranked it since the surface was adopted — so

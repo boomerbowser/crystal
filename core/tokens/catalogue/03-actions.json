@@ -15,7 +15,7 @@
         "disabled",
         "loading"
       ],
-      "material": "Resin shell with Haze fill; primary, secondary, quiet and danger variants",
+      "material": "Resin shell with Haze fill; the fill is neutral by default, the primary colour on .primary, and absent on .quiet. A danger boundary on .danger",
       "geometry": "Pill (999px); 48px height; 15px/24px padding; 44px minimum target",
       "semantics": "Native button. A disabled button must not be the only explanation of unavailability.",
       "crystal": "Material, pill geometry, optical pressure, focus ring, variant hierarchy",

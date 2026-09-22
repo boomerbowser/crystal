@@ -406,18 +406,26 @@ check('the stylesheet honours the token values it is bound to', () => {
   }
 });
 
-/* The primary action's reading fill carries the palette's colour, and the three
-   modifiers do not.
+/* The button vocabulary: what is tinted, what is not, and what no longer exists.
  *
- * Meridian asked for the colour to move from the rim to the Haze content fill,
- * with the ink adjusted per palette. Both values already existed — the fill had
- * simply never been pointed at them — so what can go wrong here is not the
- * arithmetic, it is the *scope*: a rule that stops excluding `.secondary` tints
- * seventy-two buttons on the preview alone and the hierarchy disappears, which
- * is the same failure the colour-in-the-rim accident produced from the other
- * direction.
+ * Three separate failures live here, and each has happened.
+ *
+ * The tint is *opt-in*. It used to be `:not(.secondary):not(.quiet):not(.danger)`
+ * — a rule that had to enumerate every variant it was not meant to paint, and was
+ * one forgotten modifier away from tinting the whole surface. Seventy-two
+ * secondary buttons on the preview alone depended on that list being complete.
+ *
+ * `.secondary` is withdrawn. It named a second action colour and Crystal has no
+ * such role: the palettes publish one action pair, and the companion and glow
+ * hues are expressive paint that `docs/colors.md` says is never assumed to be
+ * text-safe. A class that survives its own deletion in one file and not another
+ * is how a withdrawn variant comes back.
+ *
+ * And a quiet button has no reading fill at all — a suppressed pseudo-element,
+ * invisible in a diff of the rules that create it, because the base control rule
+ * paints a `::before` on every button and one line stops it.
  */
-check('the primary action is tinted and its three modifiers are not', () => {
+check('the button vocabulary is primary, quiet, danger — and not secondary', () => {
   const fs = require('node:fs');
   const path = require('node:path');
   const css = fs.readFileSync(
@@ -429,46 +437,42 @@ check('the primary action is tinted and its three modifiers are not', () => {
     .map(([, selector, body]) => ({ selector: selector.trim(), body }))
     .filter(({ selector }) => /\.cr-button\b/.test(selector) && !selector.startsWith('@'));
 
-  /* The scoped component-layer rules, not the reset layer's `.cr-button`, which
-     asks for the same ink and has been outranked on it since the Resin surface
-     was adopted. Matching both would count the dead declaration as evidence. */
-  const scoped = rules.filter(({ selector }) => selector.includes(':not(.secondary)'));
+  /* Withdrawn, and the comments that explain the withdrawal were stripped above,
+     so a match here is a live rule rather than a mention of one. */
+  const secondary = rules.find(({ selector }) => /\.secondary\b/.test(selector));
+  assert.ok(!secondary,
+    `${secondary?.selector} still exists; .secondary names an action colour Crystal does not define`);
 
-  const fill = scoped.filter(({ selector, body }) => /::before/.test(selector)
+  const fill = rules.filter(({ selector, body }) => /\.cr-button\.primary::before/.test(selector)
     && /background\s*:\s*var\(--cr-primary\)/.test(body));
   assert.equal(fill.length, 1,
-    `expected exactly one rule painting a button's Haze fill in the primary colour, found ${fill.length}`);
+    `expected exactly one rule painting the primary button's Haze fill in the primary colour, found ${fill.length}`);
 
-  const ink = scoped.filter(({ selector, body }) => !/::(before|after)/.test(selector)
+  const ink = rules.filter(({ selector, body }) => /\.cr-button\.primary$/.test(selector)
     && /color\s*:\s*var\(--cr-on-primary\)/.test(body));
   assert.equal(ink.length, 1,
-    `expected exactly one rule giving a button the tested ink for that fill, found ${ink.length}`);
+    `expected exactly one rule giving the primary button the tested ink for that fill, found ${ink.length}`);
 
-  /* The scope, which is the part that can silently widen. */
-  for (const { selector } of [...fill, ...ink]) {
-    for (const modifier of ['secondary', 'quiet', 'danger']) {
-      assert.ok(selector.includes(`:not(.${modifier})`),
-        `${selector} would tint a .${modifier} button; the tint is what makes the primary one primary`);
-    }
+  /* Opt-in. A tint that applies to anything *other* than `.primary` is the
+     enumerate-the-exceptions shape coming back. */
+  for (const { selector, body } of rules) {
+    if (!/background\s*:\s*var\(--cr-primary\)/.test(body)) continue;
+    assert.ok(/\.cr-button\.primary\b/.test(selector),
+      `${selector} paints a button in the primary colour without asking for .primary`);
   }
 
-  /* Quiet has no reading fill at all — Meridian's distinction between it and the
-     neutral pad, and the thing that makes a *quiet* button quiet. It is checked
-     here rather than left to the eye because a suppressed pseudo-element is
-     invisible in a diff of the rules that create it: the base control rule still
-     paints a `::before` on every button, and this is the one line that stops it. */
   const quiet = rules.find(({ selector, body }) => /\.cr-button\.quiet::before/.test(selector)
     && /display\s*:\s*none/.test(body));
   assert.ok(quiet, 'a quiet button still paints the Haze reading fill every control gets');
 
-  /* And the accident it replaced: nothing in the component layer may put the
-     solid primary back on the element, where it shows only as the ring of
-     background left exposed around the inset fill. */
-  const ring = rules.find(({ selector, body }) => /^\.cr-button$/.test(selector)
-    && /background\s*:\s*var\(--cr-primary\)/.test(body)
-    && css.indexOf(selector + '{' + body) > css.indexOf('@layer crystal.component'));
-  assert.ok(!ring, 'a component-layer rule paints .cr-button in the solid primary again');
+  /* And the accident all of this replaced: nothing may put the solid primary
+     back on the element, where it shows only as the ring of background left
+     exposed around the inset fill. */
+  const ring = rules.find(({ selector, body }) => /^\.cr-button(\.[a-z-]+)?$/.test(selector)
+    && /background\s*:\s*var\(--cr-primary\)/.test(body));
+  assert.ok(!ring, `${ring?.selector} paints the element in the solid primary again`);
 });
+
 
 /* -------------------------------------------------------------- report */
 

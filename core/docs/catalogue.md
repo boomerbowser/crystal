@@ -489,7 +489,7 @@ Resin shell, 8px-inset Haze reading fill, directional optical sheen, label and o
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>default, hover, pressed, focus, disabled, loading</td></tr>
-<tr><th scope="row">Material</th><td>Resin shell with Haze fill; primary, secondary, quiet and danger variants</td></tr>
+<tr><th scope="row">Material</th><td>Resin shell with Haze fill; the fill is neutral by default, the primary colour on .primary, and absent on .quiet. A danger boundary on .danger</td></tr>
 <tr><th scope="row">Geometry</th><td>Pill (999px); 48px height; 15px/24px padding; 44px minimum target</td></tr>
 <tr><th scope="row">Semantics</th><td>Native button. A disabled button must not be the only explanation of unavailability.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Material, pill geometry, optical pressure, focus ring, variant hierarchy</td></tr>
