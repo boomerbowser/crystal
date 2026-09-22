@@ -680,6 +680,42 @@ span.cr-field-shell:focus-within {
     border-color: var(--cr-danger-ink)
 }
 
+/* The primary action's *reading fill* carries the palette's colour — not its
+   perimeter.
+ *
+ * Meridian, 22 September 2026: "the Haze content fill should adopt the primary
+ * color, not the rim. The text color will need to be adjusted depending on the
+ * primary color."
+ *
+ * What made that necessary: the reset layer asks for `background:var(--cr-primary)`
+ * on `.cr-button`, and the Resin control rule in this layer has outranked it since
+ * the surface was adopted — so the primary colour survived only as the 8px ring of
+ * element background left exposed around an inset, white Haze fill. The colour was
+ * in the rim by accident, and a primary button was otherwise identical to a
+ * secondary one.
+ *
+ * Both values are Crystal's own, already exported and already contrast-tested:
+ * `--cr-haze-own-fill` is the palette's content-own surface at Haze's 80%, and
+ * `--cr-content-own-text` is the ink tested against it — which is per-palette,
+ * because Harbor takes its ordinary text ink where the other five take
+ * `onPrimarySoft`. That is the "adjusted depending on the primary color" part, and
+ * it is why the fill is the soft tone rather than the solid one: the full primary
+ * at 80% transmits the backdrop, and composited over Crystal's own canvas and
+ * surface it lands between 3.37 and 4.55 against `onPrimary` in every light
+ * palette — below the 4.5 floor in all six. The pair below is 8.40 to 12.34
+ * everywhere, in both modes.
+ *
+ * Scoped away from the three modifiers so the hierarchy stays legible: secondary,
+ * quiet and danger keep the neutral reading fill, which is what makes the tinted
+ * one mean "this is the primary action".
+ */
+.cr-button:not(.secondary):not(.quiet):not(.danger) {
+    color: var(--cr-content-own-text)
+}
+.cr-button:not(.secondary):not(.quiet):not(.danger)::before {
+    background: var(--cr-haze-own-fill)
+}
+
 :is(button,a.cr-button,.cr-control)::after {
     inset:2px;
     filter:blur(2px);

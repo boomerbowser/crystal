@@ -406,6 +406,56 @@ check('the stylesheet honours the token values it is bound to', () => {
   }
 });
 
+/* The primary action's reading fill carries the palette's colour, and the three
+   modifiers do not.
+ *
+ * Meridian asked for the colour to move from the rim to the Haze content fill,
+ * with the ink adjusted per palette. Both values already existed — the fill had
+ * simply never been pointed at them — so what can go wrong here is not the
+ * arithmetic, it is the *scope*: a rule that stops excluding `.secondary` tints
+ * seventy-two buttons on the preview alone and the hierarchy disappears, which
+ * is the same failure the colour-in-the-rim accident produced from the other
+ * direction.
+ */
+check('the primary action is tinted and its three modifiers are not', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const css = fs.readFileSync(
+    path.join(__dirname, '../core/assets/crystal.css'), 'utf8')
+    .replace(/\/\*[\s\S]*?\*\//g, '');
+
+  /* Every rule whose selector names `.cr-button`, in document order. */
+  const rules = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
+    .map(([, selector, body]) => ({ selector: selector.trim(), body }))
+    .filter(({ selector }) => /\.cr-button\b/.test(selector) && !selector.startsWith('@'));
+
+  const fill = rules.filter(({ selector, body }) => /::before/.test(selector)
+    && /background\s*:\s*var\(--cr-haze-own-fill\)/.test(body));
+  assert.equal(fill.length, 1,
+    `expected exactly one rule painting a button's Haze fill in the own colour, found ${fill.length}`);
+
+  const ink = rules.filter(({ selector, body }) => !/::(before|after)/.test(selector)
+    && /color\s*:\s*var\(--cr-content-own-text\)/.test(body));
+  assert.equal(ink.length, 1,
+    `expected exactly one rule giving a button the tested ink for that fill, found ${ink.length}`);
+
+  /* The scope, which is the part that can silently widen. */
+  for (const { selector } of [...fill, ...ink]) {
+    for (const modifier of ['secondary', 'quiet', 'danger']) {
+      assert.ok(selector.includes(`:not(.${modifier})`),
+        `${selector} would tint a .${modifier} button; the tint is what makes the primary one primary`);
+    }
+  }
+
+  /* And the accident it replaced: nothing in the component layer may put the
+     solid primary back on the element, where it shows only as the ring of
+     background left exposed around the inset fill. */
+  const ring = rules.find(({ selector, body }) => /^\.cr-button$/.test(selector)
+    && /background\s*:\s*var\(--cr-primary\)/.test(body)
+    && css.indexOf(selector + '{' + body) > css.indexOf('@layer crystal.component'));
+  assert.ok(!ring, 'a component-layer rule paints .cr-button in the solid primary again');
+});
+
 /* -------------------------------------------------------------- report */
 
 const failures = results.filter((r) => r.status === 'fail');
