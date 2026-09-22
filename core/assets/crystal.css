@@ -730,6 +730,28 @@ span.cr-field-shell:focus-within {
     background: var(--cr-primary)
 }
 
+/* A quiet button has no Haze reading fill.
+ *
+ * Meridian, 22 September 2026: "remove the Haze content fill from the Quiet
+ * buttons." With the pad gone, quiet is the only one of the four that is glass
+ * all the way through — a Resin shell, its rim, its float shadow and its sheen,
+ * and the label directly on the material. That is what makes it quiet, and it is
+ * the distinction that was missing when quiet took the base surface an hour
+ * earlier: primary is tinted, secondary is the neutral pad, quiet is neither.
+ *
+ * The consequence is worth stating where it lives rather than being discovered.
+ * The pad is what makes a label's contrast independent of whatever is behind the
+ * control; without it the label reads against the Resin fill and therefore
+ * against the backdrop. On Crystal's own foundation that is a wide margin —
+ * measured across all six palettes and both modes, `--cr-text` over the Resin
+ * fill over canvas, surface, surface-alt and foundation is 10.88 to 18.28 — but
+ * a quiet button placed over artwork has no protected ground, and that is the
+ * one composition to avoid.
+ */
+.cr-button.quiet::before {
+    display: none
+}
+
 :is(button,a.cr-button,.cr-control)::after {
     inset:2px;
     filter:blur(2px);

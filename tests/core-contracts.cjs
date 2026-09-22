@@ -452,6 +452,15 @@ check('the primary action is tinted and its three modifiers are not', () => {
     }
   }
 
+  /* Quiet has no reading fill at all — Meridian's distinction between it and the
+     neutral pad, and the thing that makes a *quiet* button quiet. It is checked
+     here rather than left to the eye because a suppressed pseudo-element is
+     invisible in a diff of the rules that create it: the base control rule still
+     paints a `::before` on every button, and this is the one line that stops it. */
+  const quiet = rules.find(({ selector, body }) => /\.cr-button\.quiet::before/.test(selector)
+    && /display\s*:\s*none/.test(body));
+  assert.ok(quiet, 'a quiet button still paints the Haze reading fill every control gets');
+
   /* And the accident it replaced: nothing in the component layer may put the
      solid primary back on the element, where it shows only as the ring of
      background left exposed around the inset fill. */

@@ -30,6 +30,13 @@ outranked, and this release puts each one back where it belongs.
   clears 4.5 (3.37–4.55 with `onPrimary`, 2.95–5.06 with `text`, failing in every
   light palette). A reading ground whose job is to make the label independent of
   the backdrop cannot be the one thing that depends on it.
+- **A quiet button has no Haze reading fill.** `.cr-button.quiet` keeps the whole
+  Resin shell — rim, float shadow, sheen — and drops the pad, which makes it the
+  only variant that is glass all the way through: primary is tinted, secondary is
+  the neutral pad, quiet is neither. The pad is what makes a label's contrast
+  independent of the backdrop, so a quiet label now reads against the material:
+  10.88 to 18.28 on Crystal's own foundation across all six palettes and both
+  modes, and unprotected over artwork.
 - **The destructive boundary is back.** `.cr-button.danger` had the same problem
   and now carries the independent danger boundary `components.md` requires.
 - **The control surface is the library's.** A second adoption pass moved the rest
