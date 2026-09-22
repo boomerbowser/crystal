@@ -429,13 +429,18 @@ check('the primary action is tinted and its three modifiers are not', () => {
     .map(([, selector, body]) => ({ selector: selector.trim(), body }))
     .filter(({ selector }) => /\.cr-button\b/.test(selector) && !selector.startsWith('@'));
 
-  const fill = rules.filter(({ selector, body }) => /::before/.test(selector)
-    && /background\s*:\s*var\(--cr-haze-own-fill\)/.test(body));
-  assert.equal(fill.length, 1,
-    `expected exactly one rule painting a button's Haze fill in the own colour, found ${fill.length}`);
+  /* The scoped component-layer rules, not the reset layer's `.cr-button`, which
+     asks for the same ink and has been outranked on it since the Resin surface
+     was adopted. Matching both would count the dead declaration as evidence. */
+  const scoped = rules.filter(({ selector }) => selector.includes(':not(.secondary)'));
 
-  const ink = rules.filter(({ selector, body }) => !/::(before|after)/.test(selector)
-    && /color\s*:\s*var\(--cr-content-own-text\)/.test(body));
+  const fill = scoped.filter(({ selector, body }) => /::before/.test(selector)
+    && /background\s*:\s*var\(--cr-primary\)/.test(body));
+  assert.equal(fill.length, 1,
+    `expected exactly one rule painting a button's Haze fill in the primary colour, found ${fill.length}`);
+
+  const ink = scoped.filter(({ selector, body }) => !/::(before|after)/.test(selector)
+    && /color\s*:\s*var\(--cr-on-primary\)/.test(body));
   assert.equal(ink.length, 1,
     `expected exactly one rule giving a button the tested ink for that fill, found ${ink.length}`);
 

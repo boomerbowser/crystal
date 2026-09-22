@@ -680,40 +680,54 @@ span.cr-field-shell:focus-within {
     border-color: var(--cr-danger-ink)
 }
 
-/* The primary action's *reading fill* carries the palette's colour — not its
-   perimeter.
+/* The primary action's *reading fill* is the primary colour.
  *
- * Meridian, 22 September 2026: "the Haze content fill should adopt the primary
- * color, not the rim. The text color will need to be adjusted depending on the
- * primary color."
+ * Meridian, 22 September 2026, twice. First: "the Haze content fill should adopt
+ * the primary color, not the rim. The text color will need to be adjusted
+ * depending on the primary color." Then, against the first attempt: "the Primary
+ * button now has no Haze content fill … return Primary's Haze content fill, and
+ * make the color of that content fill the primary color."
  *
- * What made that necessary: the reset layer asks for `background:var(--cr-primary)`
- * on `.cr-button`, and the Resin control rule in this layer has outranked it since
- * the surface was adopted — so the primary colour survived only as the 8px ring of
- * element background left exposed around an inset, white Haze fill. The colour was
- * in the rim by accident, and a primary button was otherwise identical to a
- * secondary one.
+ * What was wrong before either of those: the reset layer asks for
+ * `background:var(--cr-primary)` on `.cr-button`, and the Resin control rule in
+ * this layer has outranked it since the surface was adopted — so the primary
+ * colour survived only as the 8px ring of element background left exposed around
+ * an inset, white Haze fill, with white `onPrimary` text sitting on that white
+ * fill. The colour was in the rim by accident and the label was barely legible.
  *
- * Both values are Crystal's own, already exported and already contrast-tested:
- * `--cr-haze-own-fill` is the palette's content-own surface at Haze's 80%, and
- * `--cr-content-own-text` is the ink tested against it — which is per-palette,
- * because Harbor takes its ordinary text ink where the other five take
- * `onPrimarySoft`. That is the "adjusted depending on the primary color" part, and
- * it is why the fill is the soft tone rather than the solid one: the full primary
- * at 80% transmits the backdrop, and composited over Crystal's own canvas and
- * surface it lands between 3.37 and 4.55 against `onPrimary` in every light
- * palette — below the 4.5 floor in all six. The pair below is 8.40 to 12.34
- * everywhere, in both modes.
+ * What was wrong with the first attempt: it used `--cr-haze-own-fill`, the
+ * palette's content-own surface at Haze's 80%. That is a *soft* tone, and over
+ * Crystal's own light atmosphere an 80% soft tone is within a few percent of the
+ * Resin shell around it. The fill was there and nobody could see it — which is
+ * what Meridian reported, and it is also not "the primary color".
+ *
+ * So the fill is `--cr-primary` itself, and the ink is `--cr-on-primary`: the
+ * palette's own tested pair, which `validate-tokens` already holds across all six
+ * palettes and both modes. Measured against the rendered composite it is 4.74 to
+ * 10.31, tightest on Ion in light mode.
+ *
+ * The fill is opaque where Haze's neutral fill is 80%, and that is the one
+ * deliberate deviation here rather than an oversight. An 80% fill transmits a
+ * fifth of whatever is behind it; white over a light page is still white, so the
+ * neutral pad loses nothing, but a mid-tone primary at 80% over the Resin shell
+ * composites to a washed-out lilac that sits at the exact luminance where neither
+ * a white nor a near-black label clears 4.5 — measured, it is 3.37 to 4.55 with
+ * `onPrimary` and 2.95 to 5.06 with `text`, failing in every light palette. A
+ * reading ground whose whole job is to make the label independent of the backdrop
+ * cannot be the one thing that depends on it.
+ *
+ * The rim stays the Resin rim. The colour is in the fill; the perimeter is glass,
+ * the same glass every other control has.
  *
  * Scoped away from the three modifiers so the hierarchy stays legible: secondary,
- * quiet and danger keep the neutral reading fill, which is what makes the tinted
- * one mean "this is the primary action".
+ * quiet and danger keep the neutral reading fill, which is what makes the primary
+ * one read as primary.
  */
 .cr-button:not(.secondary):not(.quiet):not(.danger) {
-    color: var(--cr-content-own-text)
+    color: var(--cr-on-primary)
 }
 .cr-button:not(.secondary):not(.quiet):not(.danger)::before {
-    background: var(--cr-haze-own-fill)
+    background: var(--cr-primary)
 }
 
 :is(button,a.cr-button,.cr-control)::after {

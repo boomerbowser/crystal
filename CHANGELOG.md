@@ -10,20 +10,26 @@ outranked, and this release puts each one back where it belongs.
 
 ### Changed
 
-- **The primary action's colour is in its reading fill, not its perimeter.**
-  `crystal.reset` asks for `background:var(--cr-primary)` on `.cr-button`, and
-  the Resin control rule in `crystal.component` has outranked it since the
-  surface was adopted — so the colour survived only as the ring of element
-  background left exposed around the inset Haze fill, and a primary button was
-  otherwise identical to a secondary one. `.cr-button` with no modifier now takes
-  `--cr-haze-own-fill` and `--cr-content-own-text`, the same already-exported,
-  already-tested pair the authored message bubble uses. The soft tone rather than
-  the solid one, because a Haze fill is 80% opaque and transmits what is behind
-  it: the solid primary composited over Crystal's own surfaces reaches at best
-  4.55 against `onPrimary` in light mode and no ink clears 4.5 in all six
-  palettes, while the exported pair clears it everywhere at 8.40–12.34.
-  `.secondary`, `.quiet` and `.danger` keep the neutral reading fill, which is
-  what makes the tinted one read as primary.
+- **The primary action's reading fill is the primary colour.** `crystal.reset`
+  asks for `background:var(--cr-primary)` on `.cr-button`, and the Resin control
+  rule in `crystal.component` has outranked it since the surface was adopted — so
+  the colour survived only as the ring of element background left exposed around
+  the inset Haze fill, with white `onPrimary` text sitting on a white fill.
+  `.cr-button` with no modifier now paints its `::before` in `--cr-primary` and
+  takes `--cr-on-primary` as its ink: the palette's own tested pair, 4.74 to
+  10.31 against the rendered composite across all six palettes and both modes.
+  The perimeter is the ordinary Resin rim. `.secondary`, `.quiet` and `.danger`
+  keep the neutral reading fill, which is what makes the primary one read as
+  primary.
+
+  The fill is opaque there where the neutral one is 80%, and that is the one
+  deliberate deviation in the recipe. An 80% fill transmits a fifth of what is
+  behind it — white over a light page is still white, so the neutral pad loses
+  nothing, but a mid-tone primary at 80% over the Resin shell composites to a
+  washed-out lilac at the luminance where neither a white nor a near-black label
+  clears 4.5 (3.37–4.55 with `onPrimary`, 2.95–5.06 with `text`, failing in every
+  light palette). A reading ground whose job is to make the label independent of
+  the backdrop cannot be the one thing that depends on it.
 - **The destructive boundary is back.** `.cr-button.danger` had the same problem
   and now carries the independent danger boundary `components.md` requires.
 - **The control surface is the library's.** A second adoption pass moved the rest
