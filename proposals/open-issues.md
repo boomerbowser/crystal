@@ -4,8 +4,10 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 not fixed. Each says what is wrong, why it matters, where it is, and what closing
 it would take.
 
-**One entry is left, and it is waiting on hardware.** D-4's remaining half needs
-a real phone: what a person's thumb meets on a device Playwright cannot emulate
+**Two entries are left.** D-4's remaining half is waiting on hardware, and D-17
+is a flake nobody can diagnose until it happens again with the evidence kept.
+
+D-4's remaining half needs a real phone: what a person's thumb meets on a device Playwright cannot emulate
 is not something this repository can answer. It is documented where a reader
 meets it.
 
@@ -69,3 +71,45 @@ space. Closing this needs a real device. It is stated in `verify-scroll.mjs` and
 in the capture README where a reader meets it.
 
 **Documented, not closable here.** Left open deliberately rather than marked done.
+
+---
+
+## D-17 · `forced-colours-dark` differs on the runner about one run in two
+
+*(Opened 22 September 2026.)*
+
+**What happened.** The first push to `crystal-preview` after the visual gate went
+into CI failed on one frame:
+
+```
+FAIL forced-colours-dark.png: 287 of 1152000 pixels differ (0.0249%),
+worst channel delta 229; 231 pixel(s) changed visibly (delta over 24)
+```
+
+Re-running the same job on the same commit, with no change of any kind, passed
+23 of 23. So the frame is nondeterministic on the runner.
+
+**Why it matters more than 287 pixels.** A gate that fails at random is a gate
+people learn to re-run rather than read, and the next real regression arrives
+looking exactly like this one. It is also the failure mode D-15 was closed to
+prevent — "capture where you compare" fixed *systematic* disagreement between
+the desk and the runner, and this is the residual *random* kind.
+
+**What is ruled out.** The commit that first showed it changed only class names
+on buttons — `cr-button secondary` to `cr-button`, `cr-button` to `cr-button
+primary`. Neither class has a rule in the 2.0.0 the site installs, neither
+appears in any of the site's three stylesheets, and the same build is 23 of 23
+identical against the desk baselines. The markup is not the cause.
+
+**What is not yet known.** Which 287 pixels. The gate captured to a temporary
+directory the process deleted on its way out, so the first failure it ever
+produced left nothing to look at — which is itself now fixed: `verify-frames`
+takes `--keep`, and the CI job uploads `actual-` and `expected-` for every
+differing frame on failure.
+
+**Closing it needs** the next occurrence with that artifact. The candidates worth
+checking against the image, in order: the atmosphere gradient's dither under
+forced colours, where a 229 delta on a handful of pixels would be a banding seam
+moving by one step; a focus ring or caret caught mid-blink in the clipped region;
+and the Manrope fallback resolving differently on a cold run, which is what
+broke this gate the first time it was added.
