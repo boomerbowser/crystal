@@ -2,6 +2,54 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
+## [Unreleased] — 2.1.0
+
+A minor release with no new API. What changed is what the stylesheet *renders*:
+2.0.0 shipped a control surface whose variant signals had been silently
+outranked, and this release puts each one back where it belongs.
+
+### Changed
+
+- **The primary action's colour is in its reading fill, not its perimeter.**
+  `crystal.reset` asks for `background:var(--cr-primary)` on `.cr-button`, and
+  the Resin control rule in `crystal.component` has outranked it since the
+  surface was adopted — so the colour survived only as the ring of element
+  background left exposed around the inset Haze fill, and a primary button was
+  otherwise identical to a secondary one. `.cr-button` with no modifier now takes
+  `--cr-haze-own-fill` and `--cr-content-own-text`, the same already-exported,
+  already-tested pair the authored message bubble uses. The soft tone rather than
+  the solid one, because a Haze fill is 80% opaque and transmits what is behind
+  it: the solid primary composited over Crystal's own surfaces reaches at best
+  4.55 against `onPrimary` in light mode and no ink clears 4.5 in all six
+  palettes, while the exported pair clears it everywhere at 8.40–12.34.
+  `.secondary`, `.quiet` and `.danger` keep the neutral reading fill, which is
+  what makes the tinted one read as primary.
+- **The destructive boundary is back.** `.cr-button.danger` had the same problem
+  and now carries the independent danger boundary `components.md` requires.
+- **The control surface is the library's.** A second adoption pass moved the rest
+  of the preview's control rules into `@layer crystal.component`, so a consumer
+  of the package renders what the preview renders rather than what it renders
+  minus the site's own stylesheet.
+- **Reset-layer geometry corrected** against what the preview has always
+  rendered: `.cr-button` padding, gap, and the dock and status chip geometry.
+  Three dead variant fills and a stale dock underline were removed.
+
+### Added
+
+- **Component geometry tokens** for the action control, bound to the stylesheet
+  and checked: `tests/core-contracts.cjs` compares the exported value against the
+  rule that is supposed to carry it.
+- **A visual gate in CI**, against baselines captured on the runner rather than
+  on a desk (D-15).
+
+### Note for consumers
+
+The primary and danger buttons change appearance. Both are corrections to signals
+2.0.0 intended and did not render, and both are improvements in contrast rather
+than trades against it — but a product that had compensated for the flat primary
+in its own stylesheet should re-check it, and any visual baseline that contains a
+button needs re-blessing.
+
 ## [Unreleased] — 2.0.0
 
 Crystal 2.0 turns a design system with one web preview into a base that platform component libraries consume. The visual identity does not change: the material hierarchy, palettes, defaults, typography and motion timings all carry forward, and the generated theme CSS is byte-identical to 1.0.1.

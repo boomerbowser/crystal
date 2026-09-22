@@ -4,22 +4,24 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 not fixed. Each says what is wrong, why it matters, where it is, and what closing
 it would take.
 
-**Nothing here is blocking**, and nothing here is work that is simply outstanding.
-What is left divides into three kinds:
+**One entry is left, and it is waiting on hardware.** D-4's remaining half needs
+a real phone: what a person's thumb meets on a device Playwright cannot emulate
+is not something this repository can answer. It is documented where a reader
+meets it.
 
-- **Waiting on hardware.** D-4 and D-5 need a real device or a headless browser
-  that paints classic scrollbars. Both are documented where a reader meets them,
-  and neither can be closed in this repository.
-- **Waiting on Meridian.** M-3 is a decision about what Crystal *should* be,
-  not a defect against what it is. D-11's three divergences were the others and
-  Meridian decided all three on 21 September 2026 — the library adopts, the
-  preview does not drop — so that entry is closed.
-- **Genuinely open.** D-15: the visual gate cannot run in CI, because the
-  baselines are machine-specific.
+Everything else closed on 21 and 22 September 2026, and the reasoning is in
+[`closed-issues.md`](closed-issues.md) rather than summarised away:
 
-D-13 — the visual gate red on nine frames with nobody running it — was closed on
-21 September 2026: every frame was looked at and decided. Half of its remedy did
-not survive the day, and D-15 is that half.
+- **D-11**, the three divergences between the library and the preview — Meridian
+  decided all three: the library adopts, the preview does not drop.
+- **D-13**, the visual gate red on nine frames with nobody running it — every
+  frame looked at and decided, and the gate put in CI.
+- **D-15**, which was the half of D-13's remedy that did not survive the day:
+  the baselines were machine-specific, so the gate could not run on a runner.
+  Closed by capturing the baselines *on* the runner, which is where they are
+  compared.
+- **M-3**, **D-5** and **D-16**, and the half of **D-4** that turned out to be a
+  fact about a Playwright flag rather than about browsers.
 
 Closed entries are in [`closed-issues.md`](closed-issues.md), with the reasoning
 intact — several are cited by name from the code they produced.
