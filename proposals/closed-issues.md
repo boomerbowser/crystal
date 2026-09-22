@@ -1442,3 +1442,100 @@ the stale-exemption check said so without being asked — the first time that
 check has earned its place. `ALLOWED_RULES` is now empty, and the gate still
 goes red if the suppression comes back.
 
+---
+
+## D-15 · The visual baselines are machine-specific, so the gate cannot run in CI
+
+**Found 21 September 2026, by trying it. Fixed and closed 22 September 2026.**
+
+D-13 closed with the gate wired into `crystal-preview`'s browser job, on the
+argument that a manual gate is one nobody runs. That commit's own CI run failed
+**16 of the 18 frames**:
+
+```
+docs-menu-forced-colours.png   46,058 pixels visibly changed, worst delta 255
+icons.png                      25,866                        worst delta 229
+playground-reduced-transp.png  12,297                        worst delta 192
+overview-dark.png               7,531                        worst delta 230
+docs-menu-light.png             7,098                        worst delta 229
+catalogue.png                   5,075                        worst delta 229
+…and ten more
+```
+
+The same frames pass locally at **zero tolerance**. The frames that fail hardest
+are the text-heavy ones — the menu, the icon sheet, the overview — and the
+deltas are at the extremes rather than in the middle, which is what glyph edges
+look like when they land on different pixels. **A GitHub runner does not
+rasterise type the way this machine does.** The comparison there measures the
+font stack, not Crystal.
+
+So the gate was taken back out within the hour, and the reasoning is recorded
+because it is a real trade rather than a retreat: a gate that fails on every push
+is worse than a manual one, because it teaches everybody to ignore a red mark.
+
+**What this establishes** — D-13 suspected it about seven of its nine frames and
+could not demonstrate it: **these baselines are machine-specific**, and a pixel
+baseline is only meaningful in the environment that captured it.
+
+**What closing it takes.** Capture where you compare. A second baseline set,
+captured *by* a runner and committed from one — a `workflow_dispatch` job that
+runs `capture-frames.mjs` and opens a pull request with the result, and a gate
+that compares CI captures against CI baselines while a person keeps comparing
+local captures against local ones. Two sets is not duplication here; it is the
+only honest arrangement, because the two environments genuinely draw different
+pixels and neither is wrong.
+
+**Do not** reach for a larger tolerance instead. The deltas are 192–255. A
+tolerance that forgives them forgives anything, and
+`tests/visual-gate-contracts.py` exists precisely to prove the allowance cannot
+grow to swallow a visible change.
+
+**Until then the gate is manual**, which is the condition D-13 opened on. It is
+at least now green, documented, and backed by the contract test that had gone
+missing — so running it is worth something, and `npm run verify:visual` in
+`crystal-preview` is the command.
+
+## Fixed — capture where you compare
+
+The diagnosis was right and the conclusion drawn from it was too pessimistic.
+"The baselines are machine-specific" does not mean a visual gate cannot run in
+CI. It means a baseline is only a baseline for the renderer that produced it,
+and CI was being handed somebody else's.
+
+There are now two sets:
+
+- `validation/baselines` — the desk set, re-blessed by a person who looked at
+  the images, as its README has always required.
+- `validation/baselines-ci` — captured **on the runner**, by a
+  `workflow_dispatch` job called *Capture runner baselines*, and committed.
+
+`verify-frames.mjs` takes `--baselines <dir>`; `npm run verify:visual:ci` points
+it at the runner set; and the `browser` job runs it. Both that job and the
+capture workflow are pinned to `ubuntu-24.04` rather than `ubuntu-latest`,
+because a gate whose premise is "the renderer stays put" cannot float.
+
+**The measurement that closed it.** Comparing the two sets reproduces this
+entry's numbers exactly — `docs-menu-forced-colours` 46,058 visible pixels,
+`icons` 25,866, `playground-reduced-transparency` 12,297, `overview-dark` 7,531.
+Same frames, same magnitudes, a day later and from the opposite direction, which
+is as close to a controlled confirmation as this gets. Against the runner's own
+set, the same runner passes:
+
+```
+Scrolling, interactions, appearance and deployability: success
+    The gate that proves the allowance cannot hide a change: success
+    Appearance: success
+```
+
+**What it costs.** Two sets to keep in step, and a manual capture step when a
+frame legitimately changes — written into `validation/baselines-ci/README.md`
+beside the procedure. That is a real cost and it buys a gate that runs on every
+push instead of one that runs when somebody remembers. The alternative
+considered and rejected was raising the tolerance until the desk set passed on a
+runner, which would have left a gate that could no longer see a real change —
+the failure this project keeps naming.
+
+**Still true, and still worth knowing:** these numbers are why a screenshot from
+one machine is not evidence about another. The two sets are expected to differ
+forever, and neither is wrong.
+
