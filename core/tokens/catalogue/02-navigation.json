@@ -254,7 +254,7 @@
       ],
       "material": "Haze rows on the surrounding surface",
       "geometry": "Indent step 20px; guides use the edge token",
-      "semantics": "role=tree/treeitem/group with aria-expanded, aria-level and full arrow-key navigation",
+      "semantics": "role=treegrid/row/gridcell with aria-expanded, aria-level, aria-posinset, aria-setsize and full arrow-key navigation. Not role=tree: a treeitem is a single navigable unit, so it cannot contain the expand control this anatomy requires — treegrid is the pattern ARIA provides for a row that holds its own control. See M-3.",
       "crystal": "Row treatment, indentation guides, label weight for the selected row",
       "product": "The keyboard navigation implementation, data and lazy loading",
       "motion": [

@@ -388,7 +388,7 @@ Nested disclosure rows with indentation guides and expand controls.
 <tr><th scope="row">States</th><td>collapsed, expanded, selected, focus, disabled, loading</td></tr>
 <tr><th scope="row">Material</th><td>Haze rows on the surrounding surface</td></tr>
 <tr><th scope="row">Geometry</th><td>Indent step 20px; guides use the edge token</td></tr>
-<tr><th scope="row">Semantics</th><td>role=tree/treeitem/group with aria-expanded, aria-level and full arrow-key navigation</td></tr>
+<tr><th scope="row">Semantics</th><td>role=treegrid/row/gridcell with aria-expanded, aria-level, aria-posinset, aria-setsize and full arrow-key navigation. Not role=tree: a treeitem is a single navigable unit, so it cannot contain the expand control this anatomy requires — treegrid is the pattern ARIA provides for a row that holds its own control. See M-3.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Row treatment, indentation guides, label weight for the selected row</td></tr>
 <tr><th scope="row">Product owns</th><td>The keyboard navigation implementation, data and lazy loading</td></tr>
 <tr><th scope="row">Motion</th><td><code>accordion-in</code>, <code>accordion-out</code></td></tr>

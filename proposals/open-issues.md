@@ -26,81 +26,47 @@ intact — several are cited by name from the code they produced.
 
 ---
 
-## D-4 · Two gates cannot see what they are named for
+## D-4 · The phone leg of `verify-scroll` proves behaviour, not appearance
 
-Both are stated in the source and in the capture README, so neither is a hidden
-assumption — but neither is closed.
+*(Halved 22 September 2026. This issue held two claims; the first was wrong and
+its half is closed. What is left is the one below, and it is now demonstrated
+rather than asserted.)*
 
-- **Scrollbar appearance has no visual gate.** Headless Chromium paints no
-  scrollbar at all, so no reference frame contains one. What guards the two
-  scrollbars is the contrast gate, across twelve palette-and-mode combinations —
-  stronger than a screenshot in one respect and blind to geometry in another.
-- **The phone leg of `verify-scroll` proves behaviour, not appearance.**
-  Playwright's mobile emulation uses overlay scrollbars, where `scrollbar-gutter`
-  is a no-op. What it proves is that swipes stop chaining.
+**The claim that was wrong.** D-4 said: "Headless Chromium paints no scrollbar at
+all, so no reference frame contains one," and concluded that closing it needed
+"a browser that paints classic scrollbars headlessly." That is a fact about a
+flag, not a browser. Playwright pushes `--hide-scrollbars` whenever `headless` is
+true:
 
-`design-system/tools/verify-scroll.mjs`. Closing either needs a real device or a
-browser that paints classic scrollbars headlessly.
+```
+arm A  default headless                          scrollbar 0px
+arm B  ignoreDefaultArgs: ['--hide-scrollbars']   scrollbar 15px
+arm C  ignore it, then pass it back explicitly    scrollbar 15px
+```
 
-**Documented, not closable here.** Both are stated in `verify-scroll.mjs` and in
-the capture README, where a reader meets them. Closing either needs hardware this
-repository does not have: a real device, or a headless browser that paints
-classic scrollbars. Left open deliberately rather than marked done.
+Arm C looks like a contradiction and is not: `ignoreDefaultArgs` filters the
+final argument list, so it strips the flag again even when it is passed by hand.
+Flag present, no scrollbar; flag absent, a classic 15px one. `crystal-preview`
+now has `scrollbar-resin` and `scrollbar-frost` frames that opt out of the flag,
+and both were mutated at the resolver and watched go red — the Resin thumb from
+80% to 50%, the Frost thumb from ink to primary, each failing its own frame and
+only its own frame.
 
-## D-5 · `IntersectionObserver` delivers nothing in the preview browser
+**What remains, and it is real.** Playwright's mobile emulation uses overlay
+scrollbars, where `scrollbar-gutter` is a no-op — and it does so independently of
+the flag, which is what the first claim got wrong about itself:
 
-While building Crystal React's `AppBar`, an `IntersectionObserver` created in the
-in-app preview browser never fired — not even its initial callback, on a target
-with real area and an explicit root. A freshly constructed observer in the page
-console behaved the same way.
+```
+desktop, flag dropped            scrollbar 15px, scrollbar-gutter:stable
+mobile emulation, flag dropped   scrollbar  0px, scrollbar-gutter:stable
+```
 
-That may be an environment limitation rather than a browser one, but it means any
-Crystal work that relies on `IntersectionObserver` cannot be verified where the
-rest of the visual work is verified. `AppBar` uses a passive scroll listener
-instead and says why in its source.
+So the phone leg of `verify-scroll` proves that swipes stop chaining, and cannot
+prove that a gutter reserves space, because on that device nothing ever reserves
+space. Closing this needs a real device. It is stated in `verify-scroll.mjs` and
+in the capture README where a reader meets it.
 
-Worth knowing before `animate-on-scroll` or a virtualiser is reviewed the same way.
-
----
-
-**Documented, not closable here.** The trade is written where somebody meeting it
-would look — in `AppBar`'s own source, beside the passive scroll listener that
-replaced the observer. It is a limitation of the preview browser, not a defect in
-Crystal, and there is nothing here to repair.
-
-## M-3 · The catalogue asks a tree for roles it cannot have
-
-**A decision for Meridian. Nothing is broken; the catalogue line is.**
-
-`tree-view` specifies `role=tree/treeitem/group`, and in the same entry
-specifies "expand controls" in its anatomy and "indentation guides" in what
-Crystal supplies. Those two requirements are not compatible.
-
-A `treeitem` in the ARIA tree pattern is a **single navigable unit**. The whole
-widget is one tab stop and the arrow keys move between items, which is what makes
-a tree a tree — and it means an item must not contain independently focusable
-widgets, because there is no key left to reach them with. A row with a disclosure
-button in it has one.
-
-`treegrid` is the pattern ARIA provides for exactly this case. Rows still carry
-`aria-level`, `aria-expanded`, `aria-posinset` and `aria-setsize`; the arrow keys
-still walk the visible rows; and the keyboard can additionally move into a row to
-reach the control inside it. React Aria's `Tree` implements it, and implements
-only it — the alternative in the same library, `NavigationTree`, is for a nested
-set of links and drops selection entirely, which `tree-view` requires.
-
-Crystal React ships the `treegrid`. Everything the catalogue asks for *by
-behaviour* is present and verified: level, expansion, full arrow-key navigation,
-selection by label weight. Only the role names differ.
-
-**What Meridian decides:** whether the catalogue line becomes
-`role=treegrid/row/gridcell`, or whether the disclosure comes out of the anatomy
-so a plain `tree` becomes possible. The first is a documentation change and the
-second is a design change, which is why it is not made here.
-
-Left open, not closed.
-
----
+**Documented, not closable here.** Left open deliberately rather than marked done.
 
 ## D-15 · The visual baselines are machine-specific, so the gate cannot run in CI
 
@@ -153,69 +119,3 @@ at least now green, documented, and backed by the contract test that had gone
 missing — so running it is worth something, and `npm run verify:visual` in
 `crystal-preview` is the command.
 ---
-
-## D-16 · The preview suppresses Stone on `.cr-dock-inner` and blanks its own Stone specimen
-
-**Found 21 September 2026, while measuring what `controls.css` still overrode
-after the first adoption pass. Not fixed — the fix is verified but changes
-visual baselines this machine cannot re-bless.**
-
-*(Rewritten the same day. This entry first said two specification pages
-disagreed about whether `.cr-dock-inner` is Stone, and that Meridian had to
-choose. That was a misreading: the table in `materials.md` has the columns
-**Situation | Wrong | Right**, and I read its "Wrong" column as a
-recommendation. It is not a disagreement, and it is not a decision.)*
-
-All three places the specification mentions this element say the same thing:
-
-| Page | What it says |
-|---|---|
-| `components.md` | *Stone label backing … `.cr-stone`; `.cr-dock-inner` shares the recipe* |
-| `materials.md` prose | *The dock's `.cr-dock-inner` uses the same recipe* |
-| `materials.md` table | A label on a Resin dock — **Wrong:** give the label its own Resin chip. **Right:** give it a Haze content fill, **or Stone if the backdrop is unknown** |
-
-The library follows all three: `.cr-dock-inner` is Stone-backed, and 2.1.0 keeps
-it that way. The preview does not — `controls.css` carries
-
-```css
-.cr-dock-inner{background:transparent;padding:0;isolation:auto;}
-.cr-dock-inner::before{display:none;}
-```
-
-which switches the Stone layer off. Because the second selector matches the
-class rather than the context, it also blanks `.cr-dock-inner.cr-stone` — the
-markup of the preview's *own* Stone specimen on `playground.html`:
-
-```html
-<div class="study-floating cr-resin">
-  <div class="cr-dock-inner cr-stone"><span>Stone on Resin</span>…</div>
-</div>
-```
-
-So the card captioned "Stone · label backing — 55% light / 60% dark fill, now
-with the same 1.95px feather as Haze" demonstrates no Stone. Measured on the
-running site:
-
-```
-as the branch ships it    display:none   background:rgba(255,255,255,0.55)  filter:blur(1.95px)
-with :not(.cr-stone)      display:block  background:rgba(255,255,255,0.55)  filter:blur(1.95px)
-```
-
-The fill and feather that come back are exactly the ones `materials.md`
-specifies.
-
-**Why it was not simply adopted or deleted.** The second adoption pass moves
-everything that is Crystal's out of `controls.css`; this rule is the one thing
-left there that is about a Crystal component. Adopting it would put a
-suppression of a documented material into the library. Deleting it restores
-Stone on the preview's dock, which is a visual change on `playground.html` and
-the docs shell — and six of the eighteen visual baselines are playground frames.
-Re-blessing needs WebGL2 this machine does not have (D-15). So it stays,
-named in `crystal-preview`'s `tests/site-contracts.cjs` `ALLOWED_RULES` with
-this issue as its reason, and it is the only rule in that file exempted on
-anything other than ownership.
-
-**What to do**, for whoever has the hardware: narrow the selector to
-`.cr-dock-inner:not(.cr-stone)` to fix the specimen with no other change, or
-delete both rules to bring the preview back in line with the specification, and
-re-capture the affected baselines either way.

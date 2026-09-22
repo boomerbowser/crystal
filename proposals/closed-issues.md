@@ -1231,3 +1231,214 @@ anything.
 One thing worth knowing before reading a blessing commit's diff: `--bless`
 re-captures the whole set rather than only the failing frames, so
 `haze-in-resin.png` was replaced too and was never failing.
+
+---
+
+## M-3 · The catalogue asks a tree for roles it cannot have
+
+**Closed 21 September 2026. The catalogue line was the thing that was wrong, and it is fixed.**
+
+`tree-view` specifies `role=tree/treeitem/group`, and in the same entry
+specifies "expand controls" in its anatomy and "indentation guides" in what
+Crystal supplies. Those two requirements are not compatible.
+
+A `treeitem` in the ARIA tree pattern is a **single navigable unit**. The whole
+widget is one tab stop and the arrow keys move between items, which is what makes
+a tree a tree — and it means an item must not contain independently focusable
+widgets, because there is no key left to reach them with. A row with a disclosure
+button in it has one.
+
+`treegrid` is the pattern ARIA provides for exactly this case. Rows still carry
+`aria-level`, `aria-expanded`, `aria-posinset` and `aria-setsize`; the arrow keys
+still walk the visible rows; and the keyboard can additionally move into a row to
+reach the control inside it. React Aria's `Tree` implements it, and implements
+only it — the alternative in the same library, `NavigationTree`, is for a nested
+set of links and drops selection entirely, which `tree-view` requires.
+
+Crystal React ships the `treegrid`. Everything the catalogue asks for *by
+behaviour* is present and verified: level, expansion, full arrow-key navigation,
+selection by label weight. Only the role names differ.
+
+**What Meridian decides:** whether the catalogue line becomes
+`role=treegrid/row/gridcell`, or whether the disclosure comes out of the anatomy
+so a plain `tree` becomes possible. The first is a documentation change and the
+second is a design change, which is why it is not made here.
+
+Left open, not closed.
+
+## The answer
+
+The catalogue line becomes `role=treegrid/row/gridcell`. The disclosure control
+stays in the anatomy.
+
+Inferred from what Meridian has already decided rather than asked again, because
+the two standing rules both point the same way and neither is ambiguous here:
+
+- **Adopt, never drop.** Faced with a choice between keeping something and
+  dropping it, keep it. The second option — taking the expand control out of the
+  anatomy so a plain `tree` becomes possible — is the dropping one.
+- **Specifications may be improved, never regressed.** Removing a control from a
+  component's anatomy to make a role name fit is a regression of the
+  specification in service of the documentation, which is backwards.
+- And the third D-11 answer said the docs should be updated to the values and
+  specifications that were actually built and measured. Crystal React ships the
+  `treegrid`, its tests assert it by name, and every behaviour the catalogue
+  asked for — level, expansion, arrow-key navigation, selection by label weight
+  — is present and verified. Only the role names in the catalogue were wrong.
+
+`core/tokens/catalogue/02-navigation.json` now reads `role=treegrid/row/gridcell`
+with `aria-expanded`, `aria-level`, `aria-posinset` and `aria-setsize`, and says
+in the entry itself why it is not `role=tree` — so the next person to read it
+meets the reasoning rather than the conclusion. `catalogue.json` and
+`core/docs/catalogue.md` regenerate from it.
+
+Nothing in Crystal React changes: it was already right, and the note in
+`TreeView.test.tsx` that cites M-3 now cites a closed issue that agrees with it.
+
+---
+
+## D-5 · `IntersectionObserver` delivers nothing in the preview browser
+
+While building Crystal React's `AppBar`, an `IntersectionObserver` created in the
+in-app preview browser never fired — not even its initial callback, on a target
+with real area and an explicit root. A freshly constructed observer in the page
+console behaved the same way.
+
+That may be an environment limitation rather than a browser one, but it means any
+Crystal work that relies on `IntersectionObserver` cannot be verified where the
+rest of the visual work is verified. `AppBar` uses a passive scroll listener
+instead and says why in its source.
+
+Worth knowing before `animate-on-scroll` or a virtualiser is reviewed the same way.
+
+---
+
+**Closed 22 September 2026. The limitation is real; the consequence drawn from
+it was wrong.**
+
+The observation stands: a fresh `IntersectionObserver` in the in-app preview
+browser never fires, not even its initial callback. What does not stand is the
+sentence after it — "it means any Crystal work that relies on
+`IntersectionObserver` cannot be verified where the rest of the visual work is
+verified."
+
+The rest of the visual work is not verified in that browser. It is verified in
+Playwright, in every case, in both repositories:
+
+```
+crystal-preview   capture-frames.mjs  verify-scroll.mjs  verify-interactions.mjs  audit-materials.mjs
+crystal-react     verify-theme.mjs  verify-targets.mjs  verify-materials.mjs
+                  verify-appearance.mjs  verify-behaviour.mjs
+```
+
+and in Playwright's Chromium the observer delivers its initial callback
+correctly, with the right `isIntersecting` for a target held out of view:
+
+```
+IntersectionObserver: fired: 1 entry, isIntersecting=false
+```
+
+So the in-app preview browser is an authoring convenience with a gap in it, and
+the gates are somewhere else entirely. `AppBar`'s passive scroll listener is not
+wrong and is not being changed — it works, and nothing about this makes it worse
+— but the note beside it should not be read as saying that an observer could not
+be gated here. It could.
+
+This is the second claim in this tracker that turned out to be about the tool in
+front of me rather than about the world; D-4's scrollbar half was the first, in
+the same sitting. Both had the same shape: an error message or an absence read
+as a statement about the environment instead of a question to ask it.
+
+---
+
+## D-16 · The preview suppresses Stone on `.cr-dock-inner` and blanks its own Stone specimen
+
+**Found 21 September 2026. Fixed and closed 22 September 2026.**
+
+*(Rewritten the same day. This entry first said two specification pages
+disagreed about whether `.cr-dock-inner` is Stone, and that Meridian had to
+choose. That was a misreading: the table in `materials.md` has the columns
+**Situation | Wrong | Right**, and I read its "Wrong" column as a
+recommendation. It is not a disagreement, and it is not a decision.)*
+
+All three places the specification mentions this element say the same thing:
+
+| Page | What it says |
+|---|---|
+| `components.md` | *Stone label backing … `.cr-stone`; `.cr-dock-inner` shares the recipe* |
+| `materials.md` prose | *The dock's `.cr-dock-inner` uses the same recipe* |
+| `materials.md` table | A label on a Resin dock — **Wrong:** give the label its own Resin chip. **Right:** give it a Haze content fill, **or Stone if the backdrop is unknown** |
+
+The library follows all three: `.cr-dock-inner` is Stone-backed, and 2.1.0 keeps
+it that way. The preview does not — `controls.css` carries
+
+```css
+.cr-dock-inner{background:transparent;padding:0;isolation:auto;}
+.cr-dock-inner::before{display:none;}
+```
+
+which switches the Stone layer off. Because the second selector matches the
+class rather than the context, it also blanks `.cr-dock-inner.cr-stone` — the
+markup of the preview's *own* Stone specimen on `playground.html`:
+
+```html
+<div class="study-floating cr-resin">
+  <div class="cr-dock-inner cr-stone"><span>Stone on Resin</span>…</div>
+</div>
+```
+
+So the card captioned "Stone · label backing — 55% light / 60% dark fill, now
+with the same 1.95px feather as Haze" demonstrates no Stone. Measured on the
+running site:
+
+```
+as the branch ships it    display:none   background:rgba(255,255,255,0.55)  filter:blur(1.95px)
+with :not(.cr-stone)      display:block  background:rgba(255,255,255,0.55)  filter:blur(1.95px)
+```
+
+The fill and feather that come back are exactly the ones `materials.md`
+specifies.
+
+**Why it was not simply adopted or deleted.** The second adoption pass moves
+everything that is Crystal's out of `controls.css`; this rule is the one thing
+left there that is about a Crystal component. Adopting it would put a
+suppression of a documented material into the library. Deleting it restores
+Stone on the preview's dock, which is a visual change on `playground.html` and
+the docs shell — and six of the eighteen visual baselines are playground frames.
+Re-blessing needs WebGL2 this machine does not have (D-15). So it stays,
+named in `crystal-preview`'s `tests/site-contracts.cjs` `ALLOWED_RULES` with
+this issue as its reason, and it is the only rule in that file exempted on
+anything other than ownership.
+
+**What to do**, for whoever has the hardware: narrow the selector to
+`.cr-dock-inner:not(.cr-stone)` to fix the specimen with no other change, or
+delete both rules to bring the preview back in line with the specification, and
+re-capture the affected baselines either way.
+
+## Fixed
+
+Both rules are gone from `controls.css`, on `main` and on
+`adopt-crystal-2.1.0`. The dock's `.cr-dock-inner` takes the library's Stone
+recipe again, and the "Stone on Resin" specimen shows Stone.
+
+**The blocker in this entry was not real.** It said re-blessing "needs WebGL2
+this machine does not have (D-15)". `verify-frames.mjs` refuses only
+`--bless` *combined with* `--no-webgl` — blessing baselines captured with WebGL2
+deliberately blocked, which is gate G8's business. It has never refused to bless
+on a machine without WebGL2, and this machine has WebGL2 anyway; the gate prints
+`"webgl2": "available"` on every run. I read a guard's error message as a
+statement about the environment instead of reading the guard's condition. That
+is the same mistake as D-4's scrollbar half and D-5's, all three in two sittings.
+
+Eight baselines were re-blessed after looking at them, with the reason written
+into `validation/baselines/README.md` as the procedure requires. Six normal
+frames gain the protected label group; the two forced-colours frames change by
+geometry alone, because the library keeps `.cr-dock-inner::before` hidden there
+and removing the site's `padding:0` restores the library's `padding:3px`. Both
+states were read off the running page before anything was blessed.
+
+Removing the rule also made `crystal-preview`'s `ALLOWED_RULES` entry stale, and
+the stale-exemption check said so without being asked — the first time that
+check has earned its place. `ALLOWED_RULES` is now empty, and the gate still
+goes red if the suppression comes back.
+
