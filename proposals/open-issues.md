@@ -4,8 +4,10 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 not fixed. Each says what is wrong, why it matters, where it is, and what closing
 it would take.
 
-**Two entries are left.** D-4's remaining half is waiting on hardware, and D-17
-is a flake nobody can diagnose until it happens again with the evidence kept.
+**Three entries are left.** D-4's remaining half is waiting on hardware, D-17
+is a flake nobody can diagnose until it happens again with the evidence kept,
+and D-19 is a gap in the motion chapter that a consumer has already had to work
+around.
 D-18 closed on 23 September 2026 — its premise was wrong, and the reasoning is in
 [`closed-issues.md`](closed-issues.md).
 
@@ -148,3 +150,60 @@ it by reflowing the label beside it, which is not this.)
 now writes and the CI job now uploads: `actual-forced-colours-dark.png` beside
 `expected-`, differenced, to say *where* the 287 pixels are. The three sentences
 above are what that image has to be read against.
+
+---
+
+## D-19 · Crystal specifies three continuous activity indicators and publishes no vocabulary for one
+
+*(Opened 23 September 2026, building Crystal React's feedback slice.)*
+
+**What is missing.** `core/tokens/catalogue/06-feedback.json` puts the motion of
+three components on Crystal's side of the line:
+
+- `loader` — "Crystal: Mark, **motion** and reduced-motion fallback", and
+  "reduced motion replaces **spin** with a static, still-legible state".
+- `skeleton` — "Haze fill with a slow **luminance sweep**"; "Crystal: Fill,
+  **sweep**, reduced-motion fallback, resolve transition".
+- `progress` — "Crystal: Track, fill, **indeterminate motion** and
+  reduced-motion fallback".
+
+`core/docs/motion.md` publishes fifty-four recipes and none of them is any of
+those three. Every recipe Crystal has is a **finite, spring-fitted transition**
+from one state to another — `busy` is explicitly "one cycle for an actual pending
+operation", `attention` is "single finite cue… never flash or loop", and
+`skeleton-resolve` describes the moment a skeleton is *replaced*, not the time it
+spends waiting. The motion chapter also states outright that "no effects autoplay
+or loop".
+
+**Why that is a gap rather than a decision.** The two statements are both
+Crystal's and they contradict each other: the catalogue asks three components to
+spin, sweep and travel continuously, and the motion chapter says nothing loops
+and provides nothing that does. A consumer cannot satisfy both, and the one
+reading that is certainly wrong is "the catalogue means a spinner that does not
+spin" — a loader with no motion is indistinguishable from a static glyph, which
+is the state the catalogue reserves for *reduced motion*.
+
+**What a consumer did about it.** `crystal-react` shipped all three. Each takes
+its **duration and easing from Crystal's published tokens** — `--cr-flow` for the
+travelling progress fill, `--cr-departure` for the turning ring — and authors only
+the shape of the movement, which for a travelling bar and a turning arc is
+determined by the geometry rather than chosen. Each is multiplied by
+`--cr-motion-enabled` and divided by `--cr-motion-speed` like everything else
+that moves in that library, and each is removed outright under
+`prefers-reduced-motion: reduce`, where it becomes the static legible state the
+catalogue asks for. `Marquee` set this precedent earlier in the same library, for
+the same reason.
+
+**Why it should not stay there.** Two renderers that each pick their own spinner
+period is exactly the drift `component.chart.stroke` and
+`component.progress.ringStroke` were added to prevent, one release ago. The
+durations above are a stand-in, not a specification.
+
+**Closing it needs a decision from Meridian first**, because it changes what
+Crystal's motion chapter claims: either a small class of **continuous** recipes
+(an activity period and its easing, distinct from the fifty-four transitions, and
+the sentence about looping qualified to exempt them), or a ruling that these
+three components carry no continuous motion at all — in which case the catalogue
+entries for `loader`, `skeleton` and `progress` need rewriting, and the three
+components in `crystal-react` need their motion removed.
+
