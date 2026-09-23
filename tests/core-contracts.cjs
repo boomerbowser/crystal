@@ -474,6 +474,140 @@ check('the button vocabulary is primary, quiet, danger — and not secondary', (
 });
 
 
+/* --------------------------------------------------- the chart series scale */
+
+/* Six categorical colours per palette per mode, derived in `build-tokens.cjs`.
+   The derivation is a means; these are the ends, and they are what a chart is
+   allowed to rely on. A palette added later, or a lightness moved to make a
+   scale prettier, meets these before it ships. */
+
+const charts = (() => {
+  const tokens = require('../core/tokens/crystal.json');
+  const channels = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+  const linear = (v) => (v / 255 <= 0.04045 ? v / 255 / 12.92 : (((v / 255) + 0.055) / 1.055) ** 2.4);
+  const luminance = (hex) => {
+    const [r, g, b] = channels(hex).map(linear);
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  const contrast = (a, b) => {
+    const [lo, hi] = [luminance(a), luminance(b)].sort((x, y) => x - y);
+    return (hi + 0.05) / (lo + 0.05);
+  };
+  /* OKLab distance, which is the only reason to convert at all: two colours a
+     reader can tell apart are two colours a perceptual space puts a distance
+     between, and sRGB does not. */
+  const oklab = (hex) => {
+    const [r, g, b] = channels(hex).map(linear);
+    const m = [
+      [0.4122214708, 0.5363325363, 0.0514459929],
+      [0.2119034982, 0.6806995451, 0.1073969566],
+      [0.0883024619, 0.2817188376, 0.6299787005],
+    ].map((row) => Math.cbrt(row[0] * r + row[1] * g + row[2] * b));
+    return [
+      [0.2104542553, 0.7936177850, -0.0040720468],
+      [1.9779984951, -2.4285922050, 0.4505937099],
+      [0.0259040371, 0.7827717662, -0.8086757660],
+    ].map((row) => row[0] * m[0] + row[1] * m[1] + row[2] * m[2]);
+  };
+  const distance = (a, b) => Math.hypot(...oklab(a).map((v, i) => v - oklab(b)[i]));
+  const every = [];
+  for (const [id, palette] of Object.entries(tokens.palettes)) {
+    for (const mode of ['light', 'dark']) {
+      const roles = palette.modes[mode];
+      const series = Array.from({ length: tokens.component.chart.seriesCount },
+        (_, i) => roles[`chartSeries${i + 1}`]);
+      every.push({ id, mode, roles, series });
+    }
+  }
+  return { every, contrast, distance, tokens };
+})();
+
+check('every palette and mode carries the full series scale', () => {
+  const want = charts.tokens.component.chart.seriesCount;
+  assert.equal(charts.every.length, 12, 'six palettes in two modes');
+  for (const { id, mode, series } of charts.every) {
+    assert.equal(series.length, want, `${id} ${mode} has ${series.length} series colours`);
+    assert.ok(series.every((hex) => /^#[0-9A-F]{6}$/.test(hex ?? '')),
+      `${id} ${mode} has a series colour that is not a hex colour: ${series.join(' ')}`);
+  }
+});
+
+/* A data mark is a graphical object that carries information, so WCAG 1.4.11
+   applies to it. Both grounds, because a chart is drawn on a Haze fill over
+   whatever it was put on, and the two opaque extremes that fill can sit over are
+   the mode's surface and its canvas. */
+check('every series colour clears 3:1 against both grounds of its mode', () => {
+  const floor = charts.tokens.component.chart.seriesContrast;
+  for (const { id, mode, roles, series } of charts.every) {
+    series.forEach((hex, i) => {
+      for (const ground of ['surface', 'canvas']) {
+        const ratio = charts.contrast(hex, roles[ground]);
+        assert.ok(ratio >= floor,
+          `${id} ${mode} series ${i + 1} (${hex}) is ${ratio.toFixed(2)}:1 on ${ground}`);
+      }
+    });
+  }
+});
+
+/* Clearing the ground is not enough: stacked bars, pie segments and adjacent
+   heatmap cells are next to *each other*, and a scale whose members are only
+   distinguishable from the background is a scale with one colour in it. */
+check('no two series colours in a scale are closer than a visible step', () => {
+  const least = 0.10;
+  for (const { id, mode, series } of charts.every) {
+    for (let i = 0; i < series.length; i += 1) {
+      for (let j = i + 1; j < series.length; j += 1) {
+        const apart = charts.distance(series[i], series[j]);
+        assert.ok(apart >= least,
+          `${id} ${mode} series ${i + 1} and ${j + 1} are ${apart.toFixed(3)} apart in OKLab`);
+      }
+    }
+  }
+});
+
+/* A series colour is for data marks, and it is not the action colour. That is
+   what `component.chart.seriesHueOffset` is for: the ring of hues is centred on
+   the palette rather than started from it, precisely so that no slot lands on
+   the seed hue at the lightness these are drawn at, which is where the primary
+   already is. The closest any of the seventy-two comes to its palette's primary
+   today is 0.050.
+
+   The threshold here is deliberately far below that. This check is not policing
+   how near a series may come to the action colour — the offset decides that, and
+   a palette added later may legitimately come nearer. It is here to catch the
+   collapse: somebody "simplifying" the first slot to `var(--cr-primary)`, after
+   which a chart's first series is the colour of every button on the page it sits
+   in and nothing else in this file would notice. */
+check('no series colour is the action colour', () => {
+  for (const { id, mode, roles, series } of charts.every) {
+    series.forEach((hex, i) => {
+      assert.ok(charts.distance(hex, roles.primary) >= 0.02,
+        `${id} ${mode} series ${i + 1} (${hex}) is the action colour ${roles.primary}`);
+    });
+  }
+});
+
+/* What this proves and what it does not: both sides read the same flat token
+   file, so it cannot tell you the order is right — it tells you the scale is
+   *published*, under the name a stylesheet indexes with
+   `var(--cr-chart-series-#{$i})`, and that it stops where the token says. Drop
+   the digit rule from `camelToKebab` and every one of these becomes
+   `--cr-chart-series1`, which resolves to nothing in every chart in every
+   consumer and throws nothing anywhere. */
+check('the series scale is published as --cr-chart-series-N, and ends', () => {
+  const crystal = require('../core/assets/crystal.js');
+  for (const { id, mode, series } of charts.every) {
+    const resolved = crystal.resolve({ palette: id }, mode);
+    series.forEach((hex, i) => {
+      assert.equal(resolved[`--cr-chart-series-${i + 1}`], hex,
+        `${id} ${mode} publishes --cr-chart-series-${i + 1} as `
+        + `${resolved[`--cr-chart-series-${i + 1}`]}, not ${hex}`);
+    });
+    assert.equal(resolved[`--cr-chart-series-${series.length + 1}`], undefined,
+      'the scale ends where the token says it ends');
+  }
+});
+
 /* -------------------------------------------------------------- report */
 
 const failures = results.filter((r) => r.status === 'fail');

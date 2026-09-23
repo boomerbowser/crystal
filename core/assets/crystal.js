@@ -15,7 +15,12 @@
   const data=root.CRYSTAL_TOKENS
     || (typeof module!=='undefined'&&module.exports?require('../tokens/crystal.json'):null);
   if(!data) throw new Error('Load tokens.js before crystal.js');
-  const camelToKebab=s=>s.replace(/[A-Z]/g,m=>'-'+m.toLowerCase());
+  /* `chartSeries1` is `--cr-chart-series-1`, not `--cr-chart-series1`. The digit
+     boundary is a word boundary here because Crystal already writes its numbered
+     properties that way — `--cr-focus-feather-1` predates this — and a scale a
+     stylesheet indexes with `var(--cr-chart-series-#{$i})` reads as one. No role
+     name carried a digit before the series scale, so nothing renamed. */
+  const camelToKebab=s=>s.replace(/[A-Z]/g,m=>'-'+m.toLowerCase()).replace(/([a-z])(\d)/g,'$1-$2');
   const rgb=hex=>[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));
   const rgba=(hex,alpha)=>`rgba(${rgb(hex).join(', ')}, ${Number(alpha.toFixed(3))})`;
   function luminance(hex){const c=rgb(hex).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return c[0]*.2126+c[1]*.7152+c[2]*.0722;}
@@ -76,6 +81,20 @@
          exactly what Crystal React did on sixteen surfaces. A recipe that only
          one renderer knows is not a specification. */
       '--cr-haze-inset':data.component.haze.inset+'px',
+      /* Chart geometry. A chart's colours vary with the palette and arrive with
+         the other roles above; these do not vary at all. They are published
+         rather than left to each renderer because the catalogue says "line
+         weight follows the stroke scale" and "point size is a scale, not an
+         arbitrary radius" as though both scales existed, and until now neither
+         did — which is how two renderers end up with two of them. */
+      '--cr-chart-stroke':data.component.chart.stroke+'px',
+      '--cr-chart-hairline':data.component.chart.hairline+'px',
+      '--cr-chart-point-min':data.component.chart.pointMin+'px',
+      '--cr-chart-point-max':data.component.chart.pointMax+'px',
+      '--cr-chart-bar-radius':data.component.chart.barRadius+'px',
+      '--cr-chart-cell-gap':data.component.chart.cellGap+'px',
+      '--cr-chart-ring-thickness':String(data.component.chart.ringThickness),
+      '--cr-progress-ring-stroke':data.component.progress.ringStroke+'px',
       '--cr-content-muted':s.palette==='harbor'?p.text:p.muted,
       '--cr-content-own-text':s.palette==='harbor'?p.text:p.onPrimarySoft,
       '--cr-stone-feather':s.reduced?'0px':data.material.stoneFeather+'px',

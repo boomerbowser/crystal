@@ -1948,6 +1948,82 @@
         "$value": "8px",
         "$description": "How far a Resin surface holds its Haze content fill back from its own rim, so the glass edge still reads while the label sits on a stable ground. The fill is feathered and therefore lives on an isolated layer behind the content; feathering an element that contains text blurs the text. A Resin strip uses the same inset and its pills carry no material of their own."
       }
+    },
+    "chart": {
+      "seriesCount": {
+        "$type": "number",
+        "$value": 6,
+        "$description": "How many categorical series the palette can tell apart by colour. A seventh series repeats the first colour and must differ by another channel — a dash pattern, a fill pattern or a marker shape — because six hues is where perceptual separation runs out, not where charts do."
+      },
+      "seriesLightness": {
+        "light": {
+          "$type": "number",
+          "$value": 0.55,
+          "$description": "OKLab lightness every light-mode series colour is drawn at. One lightness for all six is what makes them read as one family rather than a ramp: a categorical scale must not imply an order it does not have."
+        },
+        "dark": {
+          "$type": "number",
+          "$value": 0.72,
+          "$description": "The same, for dark mode. Higher than light, because the ground is dark and a mark must be lighter than it — but not as high as the ground allows. At 0.80 sRGB can no longer hold the chroma at the violet and blue hues, the colours there go pale, and the first series of a violet palette lands on the same colour as the palette's own action colour, which is a data mark that reads as a button."
+        }
+      },
+      "seriesChroma": {
+        "$type": "number",
+        "$value": 0.18,
+        "$description": "OKLab chroma asked for at each series hue, reduced per hue only where sRGB cannot hold it. Asking for one chroma and clipping is what keeps the six equally saturated to the eye."
+      },
+      "seriesHueOffset": {
+        "$type": "number",
+        "$value": 30,
+        "$description": "Degrees the ring of series hues is turned from the palette's own seed hue. Half a step, so the palette hue falls exactly between the first and last series rather than on the first. The ring is centred on the palette rather than started from it for one reason: a series colour sitting on the seed hue at the lightness these are drawn at is the palette's action colour, and a data mark that is the colour of every button on the page is a data mark people try to press."
+      },
+      "seriesContrast": {
+        "$type": "number",
+        "$value": 3,
+        "$description": "The floor every series colour clears against both the surface and the canvas of its mode. A data mark is a graphical object carrying information, so WCAG 1.4.11 applies to it and 3:1 is the bar. Where a hue cannot reach the floor at the stated lightness, its lightness moves until it does — the floor is not negotiable and the family resemblance is."
+      },
+      "stroke": {
+        "$type": "dimension",
+        "$value": "2px",
+        "$description": "Line and edge weight for a data mark: a chart line, a polygon edge, a candle wick."
+      },
+      "hairline": {
+        "$type": "dimension",
+        "$value": "1px",
+        "$description": "The separation a chart draws in the surface colour rather than in ink — between pie segments, heatmap cells, treemap rectangles and map regions. It is a gap, not a border: it shows the ground through."
+      },
+      "pointMin": {
+        "$type": "dimension",
+        "$value": "6px",
+        "$description": "Smallest drawn point diameter. Points are sized on a scale between this and pointMax; the hit area is the action minimum regardless, so a 6px point is still a 44px target."
+      },
+      "pointMax": {
+        "$type": "dimension",
+        "$value": "18px",
+        "$description": "Largest drawn point diameter."
+      },
+      "barRadius": {
+        "$type": "dimension",
+        "$value": "4px",
+        "$description": "Radius on the value end of a bar only. The base end stays square because it sits on the axis, and rounding it would lift the bar off the line it is measured from."
+      },
+      "cellGap": {
+        "$type": "dimension",
+        "$value": "2px",
+        "$description": "Gap between the square cells of a heatmap or calendar heatmap."
+      },
+      "ringThickness": {
+        "$type": "number",
+        "$value": 0.32,
+        "$description": "A donut's ring thickness as a proportion of its outer radius. Declared rather than chosen per chart so a donut is recognisably the same object at every size."
+      }
+    },
+    "progress": {
+      "ringStroke": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$description": "Stroke of a circular progress ring, and of the gauge arc that the catalogue says matches it. One value so the two cannot drift: a gauge is a progress ring that has been told what it is measuring."
+      }
     }
   },
   "$deprecated": {

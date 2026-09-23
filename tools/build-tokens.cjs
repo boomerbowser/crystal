@@ -60,6 +60,140 @@ const MATERIAL_ROLES = {
   mirageFallbackOpacity: ['mirage.fallback', 'number', 'Mirage opacity without backdrop filtering'],
 };
 
+/* ------------------------------------------------- the chart series scale
+
+   Six categorical colours per palette per mode, derived rather than picked.
+   They are derived because picking them would be seventy-two hexes nobody
+   could check, and because the thing that has to be true of them is a
+   measurement — every one clears 3:1 against both grounds of its mode, and no
+   two are closer than a visible step apart — which an algorithm can be held to
+   and a swatch cannot.
+
+   This is the one place the pipeline computes a colour rather than copying one,
+   and it earns that the way the header says derived values earn it: the inputs
+   are tokens (`component.chart.series*`), the output is asserted in
+   `tests/core-contracts.cjs`, and the round-trip guard reports every value it
+   adds.
+
+   The construction: take the palette's own seed hue, turn half a step off it,
+   step six times around the hue circle, and draw all six at one OKLab lightness
+   and one chroma.
+   One lightness for all six is deliberate — a categorical scale must not imply
+   an order, and a ramp does. Where sRGB cannot hold the chroma at that hue the
+   chroma is reduced for that hue alone; where the hue cannot clear the contrast
+   floor at that lightness the lightness moves for that hue alone, because the
+   floor is a promise to a reader and the family resemblance is a preference.
+
+   A series colour is for data marks and nothing else. It is never ink, never an
+   action fill, and it is not a secondary colour — Crystal has none, and
+   `docs/colors.md` says why. */
+
+const OKLAB_M1 = [
+  [0.4122214708, 0.5363325363, 0.0514459929],
+  [0.2119034982, 0.6806995451, 0.1073969566],
+  [0.0883024619, 0.2817188376, 0.6299787005],
+];
+const OKLAB_M2 = [
+  [0.2104542553, 0.7936177850, -0.0040720468],
+  [1.9779984951, -2.4285922050, 0.4505937099],
+  [0.0259040371, 0.7827717662, -0.8086757660],
+];
+const channels = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+const toLinear = (v) => (v / 255 <= 0.04045 ? v / 255 / 12.92 : (((v / 255) + 0.055) / 1.055) ** 2.4);
+const fromLinear = (v) => {
+  const s = v <= 0.0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) - 0.055;
+  return Math.max(0, Math.min(255, Math.round(s * 255)));
+};
+const relativeLuminance = (hex) => {
+  const [r, g, b] = channels(hex).map(toLinear);
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+const contrastRatio = (a, b) => {
+  const [lo, hi] = [relativeLuminance(a), relativeLuminance(b)].sort((x, y) => x - y);
+  return (hi + 0.05) / (lo + 0.05);
+};
+const toOklab = (hex) => {
+  const [r, g, b] = channels(hex).map(toLinear);
+  const cone = OKLAB_M1.map((row) => row[0] * r + row[1] * g + row[2] * b)
+    .map((v) => Math.cbrt(v));
+  return OKLAB_M2.map((row) => row[0] * cone[0] + row[1] * cone[1] + row[2] * cone[2]);
+};
+/* The inverse, returning the linear channels too so the caller can ask whether
+   the colour it wanted exists in sRGB at all rather than silently taking the
+   clipped one. */
+const fromOklab = ([L, a, b]) => {
+  const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3;
+  const m = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3;
+  const s = (L - 0.0894841775 * a - 1.2914855480 * b) ** 3;
+  const linear = [
+    4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+    -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+    -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s,
+  ];
+  return {
+    hex: '#' + linear.map(fromLinear).map((v) => v.toString(16).padStart(2, '0')).join(''),
+    inGamut: linear.every((v) => v >= -0.001 && v <= 1.001),
+  };
+};
+const seriesHue = (hex) => {
+  const [, a, b] = toOklab(hex);
+  return Math.atan2(b, a);
+};
+/* The most chroma sRGB will hold at this lightness and hue, never more than
+   asked for. Bisection rather than a formula because the sRGB solid's cross
+   section is not a shape with one. */
+const fitChroma = (L, hue, want) => {
+  const at = (C) => fromOklab([L, C * Math.cos(hue), C * Math.sin(hue)]);
+  if (at(want).inGamut) return want;
+  let lo = 0;
+  let hi = want;
+  for (let i = 0; i < 30; i += 1) {
+    const mid = (lo + hi) / 2;
+    if (at(mid).inGamut) lo = mid;
+    else hi = mid;
+  }
+  return lo;
+};
+const seriesColour = (L, hue, chroma) => fromOklab([
+  L, fitChroma(L, hue, chroma) * Math.cos(hue), fitChroma(L, hue, chroma) * Math.sin(hue),
+]).hex;
+
+function chartSeries(seed, roles, mode, policy) {
+  const L0 = policy.lightness[mode];
+  const chroma = policy.chroma;
+  const floor = policy.contrast;
+  /* Toward the ground, until it clears it. In light mode a mark gets darker; in
+     dark mode it gets lighter. The margin is a rounding guard, not a second
+     floor: these values are compared at two decimal places by the contract
+     test, and landing exactly on 3.00 makes that comparison a coin toss. */
+  const step = mode === 'light' ? -0.01 : 0.01;
+  const grounds = [roles.surface, roles.canvas];
+  const clears = (hex) => Math.min(...grounds.map((g) => contrastRatio(hex, g)));
+  const out = {};
+  for (let i = 0; i < policy.count; i += 1) {
+    const hue = seriesHue(seed) + (policy.offset * Math.PI) / 180 + (i * 2 * Math.PI) / policy.count;
+    let L = L0;
+    let hex = seriesColour(L, hue, chroma);
+    for (let guard = 0; clears(hex) < floor + 0.05 && guard < 80; guard += 1) {
+      L += step;
+      hex = seriesColour(L, hue, chroma);
+    }
+    if (clears(hex) < floor) {
+      throw new Error(`No lightness clears ${floor}:1 for series ${i + 1} in ${mode}`);
+    }
+    out[`chartSeries${i + 1}`] = hex.toUpperCase();
+  }
+  return out;
+}
+
+/* Gridlines and the axis rule. The axis is a boundary and takes the palette's
+   boundary colour; a gridline is a reading aid behind the data and must not
+   compete with it, so it is the body ink at the opacity a hairline needs to be
+   followed and not read. Both are written as colours rather than as opacity for
+   a consumer to apply, because a chart draws them on whatever material it was
+   put on and an alpha is the only form that survives that. */
+const gridInk = (hex, alpha) => `rgba(${channels(hex).join(', ')}, ${alpha})`;
+
 const leaf = ($type, $value, $description) =>
   $description ? { $type, $value, $description } : { $type, $value };
 
@@ -428,6 +562,19 @@ function buildFlat(tokens) {
       for (const [role, node] of Object.entries(palette[mode] ?? {})) {
         if (!(role in entry.modes[mode])) entry.modes[mode][role] = node.$value;
       }
+      /* Derived, and last, so a hand-authored role of the same name would win.
+         Nothing authors these today; the ordering is there so that the day one
+         is overridden for a palette that needs it, the override is what ships. */
+      const chart = tokens.component.chart;
+      Object.assign(entry.modes[mode], chartSeries(palette.seed.$value, entry.modes[mode], mode, {
+        count: chart.seriesCount.$value,
+        lightness: { light: chart.seriesLightness.light.$value, dark: chart.seriesLightness.dark.$value },
+        chroma: chart.seriesChroma.$value,
+        offset: chart.seriesHueOffset.$value,
+        contrast: chart.seriesContrast.$value,
+      }));
+      entry.modes[mode].chartAxis = entry.modes[mode].outline;
+      entry.modes[mode].chartGrid = gridInk(entry.modes[mode].text, mode === 'light' ? 0.12 : 0.16);
     }
     flat.palettes[id] = entry;
   }

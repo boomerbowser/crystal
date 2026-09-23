@@ -4,9 +4,39 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
 
 ## [Unreleased] — 2.1.0
 
-A minor release with no new API. What changed is what the stylesheet *renders*:
+A minor release in two halves. What changed is what the stylesheet *renders*:
 2.0.0 shipped a control surface whose variant signals had been silently
-outranked, and this release puts each one back where it belongs.
+outranked, and this release puts each one back where it belongs. What is new is
+the vocabulary charts need — Crystal named chart components in its catalogue and
+published nothing a chart could be drawn with.
+
+### Added
+
+- **The chart series scale.** Six categorical colours per palette per mode, as
+  `--cr-chart-series-1` through `--cr-chart-series-6`, with `--cr-chart-axis` and
+  `--cr-chart-grid` beside them. They are derived from the palette's own seed
+  hue, and every one of the seventy-two clears 3:1 against both the surface and
+  the canvas of its mode, with no two in a scale closer than a visible step.
+  `docs/colors.md` sets out the construction and, just as importantly, says what
+  this is not: a series colour is for data marks only, it is never ink or an
+  action fill, and it is not the secondary colour arriving by another door.
+
+  This is the first time the pipeline computes a colour rather than copying one.
+  It earns that the way the other derived values do — the inputs are tokens
+  (`component.chart.series*`), and the outputs are asserted in
+  `tests/core-contracts.cjs` across all twelve palette-and-mode combinations.
+- **Chart geometry.** `--cr-chart-stroke`, `--cr-chart-hairline`,
+  `--cr-chart-point-min`, `--cr-chart-point-max`, `--cr-chart-bar-radius`,
+  `--cr-chart-cell-gap` and `--cr-chart-ring-thickness`. The catalogue has said
+  "line weight follows the stroke scale" and "point size is a scale, not an
+  arbitrary radius" since 2.0; neither scale existed, which is how two renderers
+  end up with two of them.
+- **`--cr-progress-ring-stroke`.** One value for a circular progress ring and for
+  the gauge arc the catalogue says matches it, so the two cannot drift.
+
+**For consumers:** the generated theme CSS gains 98 values and changes none. A
+palette added after this release meets the four assertions in
+`tests/core-contracts.cjs` before it ships; there is no manual step.
 
 ### Removed
 

@@ -36,7 +36,15 @@
           "outline": "#624a9f",
           "decorative": "#7338EF",
           "companion": "#EF48C6",
-          "glow": "#52BDF3"
+          "glow": "#52BDF3",
+          "chartSeries1": "#9D45B2",
+          "chartSeries2": "#C43444",
+          "chartSeries3": "#956800",
+          "chartSeries4": "#298800",
+          "chartSeries5": "#008287",
+          "chartSeries6": "#286CD8",
+          "chartAxis": "#624a9f",
+          "chartGrid": "rgba(23, 17, 48, 0.12)"
         },
         "dark": {
           "canvas": "#120d26",
@@ -51,7 +59,15 @@
           "outline": "#bfa3f8",
           "decorative": "#7e48f0",
           "companion": "#EF48C6",
-          "glow": "#52BDF3"
+          "glow": "#52BDF3",
+          "chartSeries1": "#D57BEA",
+          "chartSeries2": "#FF7077",
+          "chartSeries3": "#D59800",
+          "chartSeries4": "#60BE48",
+          "chartSeries5": "#00BBC2",
+          "chartSeries6": "#6CA4FF",
+          "chartAxis": "#bfa3f8",
+          "chartGrid": "rgba(247, 243, 254, 0.16)"
         }
       }
     },
@@ -75,7 +91,15 @@
           "outline": "#813e7a",
           "decorative": "#C01993",
           "companion": "#7C4DFF",
-          "glow": "#FF96DA"
+          "glow": "#FF96DA",
+          "chartSeries1": "#C33353",
+          "chartSeries2": "#9B6400",
+          "chartSeries3": "#4B8300",
+          "chartSeries4": "#008380",
+          "chartSeries5": "#0071D0",
+          "chartSeries6": "#9549BB",
+          "chartAxis": "#813e7a",
+          "chartGrid": "rgba(33, 13, 37, 0.12)"
         },
         "dark": {
           "canvas": "#190a1e",
@@ -90,7 +114,15 @@
           "outline": "#e295cd",
           "decorative": "#c52b9c",
           "companion": "#7C4DFF",
-          "glow": "#FF96DA"
+          "glow": "#FF96DA",
+          "chartSeries1": "#FF6D85",
+          "chartSeries2": "#DE9200",
+          "chartSeries3": "#76BB32",
+          "chartSeries4": "#00BCB9",
+          "chartSeries5": "#5AA8FF",
+          "chartSeries6": "#CB7EF4",
+          "chartAxis": "#e295cd",
+          "chartGrid": "rgba(251, 241, 249, 0.16)"
         }
       }
     },
@@ -114,7 +146,15 @@
           "outline": "#44579c",
           "decorative": "#2758E8",
           "companion": "#6D47F2",
-          "glow": "#48C6F0"
+          "glow": "#48C6F0",
+          "chartSeries1": "#7C54CD",
+          "chartSeries2": "#BC3577",
+          "chartSeries3": "#AD5700",
+          "chartSeries4": "#707900",
+          "chartSeries5": "#00856E",
+          "chartSeries6": "#007BAC",
+          "chartAxis": "#44579c",
+          "chartGrid": "rgba(13, 21, 48, 0.12)"
         },
         "dark": {
           "canvas": "#0b1025",
@@ -129,7 +169,15 @@
           "outline": "#9cb2f4",
           "decorative": "#3865ea",
           "companion": "#6D47F2",
-          "glow": "#48C6F0"
+          "glow": "#48C6F0",
+          "chartSeries1": "#AD8DFF",
+          "chartSeries2": "#F86DAA",
+          "chartSeries3": "#F78000",
+          "chartSeries4": "#A3AF00",
+          "chartSeries5": "#00C09F",
+          "chartSeries6": "#00B2F6",
+          "chartAxis": "#9cb2f4",
+          "chartGrid": "rgba(242, 245, 254, 0.16)"
         }
       }
     },
@@ -153,7 +201,15 @@
           "outline": "#34667c",
           "decorative": "#007E97",
           "companion": "#3D45E5",
-          "glow": "#36DCD1"
+          "glow": "#36DCD1",
+          "chartSeries1": "#0075C4",
+          "chartSeries2": "#8F4CC0",
+          "chartSeries3": "#C2335D",
+          "chartSeries4": "#9F6200",
+          "chartSeries5": "#588000",
+          "chartSeries6": "#00837C",
+          "chartAxis": "#34667c",
+          "chartGrid": "rgba(8, 26, 37, 0.12)"
         },
         "dark": {
           "canvas": "#07141e",
@@ -168,7 +224,15 @@
           "outline": "#8ac4cf",
           "decorative": "#14889f",
           "companion": "#3D45E5",
-          "glow": "#36DCD1"
+          "glow": "#36DCD1",
+          "chartSeries1": "#4AAAFF",
+          "chartSeries2": "#C481FA",
+          "chartSeries3": "#FE6C8F",
+          "chartSeries4": "#E48E00",
+          "chartSeries5": "#83B81E",
+          "chartSeries6": "#00BDB3",
+          "chartAxis": "#8ac4cf",
+          "chartGrid": "rgba(240, 247, 249, 0.16)"
         }
       }
     },
@@ -192,7 +256,15 @@
           "outline": "#69478f",
           "decorative": "#8430C6",
           "companion": "#CE49B2",
-          "glow": "#9198FF"
+          "glow": "#9198FF",
+          "chartSeries1": "#AD3D9A",
+          "chartSeries2": "#C43B15",
+          "chartSeries3": "#867000",
+          "chartSeries4": "#00884D",
+          "chartSeries5": "#007F95",
+          "chartSeries6": "#5761D8",
+          "chartAxis": "#69478f",
+          "chartGrid": "rgba(25, 16, 43, 0.12)"
         },
         "dark": {
           "canvas": "#130d22",
@@ -207,7 +279,15 @@
           "outline": "#c6a0e5",
           "decorative": "#8e41cb",
           "companion": "#CE49B2",
-          "glow": "#9198FF"
+          "glow": "#9198FF",
+          "chartSeries1": "#E773D0",
+          "chartSeries2": "#FF7452",
+          "chartSeries3": "#C2A200",
+          "chartSeries4": "#00C471",
+          "chartSeries5": "#00B8D6",
+          "chartSeries6": "#8B9BFF",
+          "chartAxis": "#c6a0e5",
+          "chartGrid": "rgba(248, 243, 252, 0.16)"
         }
       }
     },
@@ -231,7 +311,15 @@
           "outline": "#787a84",
           "decorative": "#4669B2",
           "companion": "#8970B5",
-          "glow": "#72C4DF"
+          "glow": "#72C4DF",
+          "chartSeries1": "#7955CF",
+          "chartSeries2": "#BB367A",
+          "chartSeries3": "#AE5600",
+          "chartSeries4": "#727800",
+          "chartSeries5": "#00856C",
+          "chartSeries6": "#007BAA",
+          "chartAxis": "#787a84",
+          "chartGrid": "rgba(48, 50, 58, 0.12)"
         },
         "dark": {
           "canvas": "#0d0e12",
@@ -247,7 +335,15 @@
           "decorative": "#4669B2",
           "companion": "#8970B5",
           "glow": "#72C4DF",
-          "contentOwnSurface": "#283c60"
+          "contentOwnSurface": "#283c60",
+          "chartSeries1": "#AA8EFF",
+          "chartSeries2": "#F76EAD",
+          "chartSeries3": "#F87E08",
+          "chartSeries4": "#A5AE00",
+          "chartSeries5": "#00C09D",
+          "chartSeries6": "#00B2F3",
+          "chartAxis": "#73757f",
+          "chartGrid": "rgba(228, 229, 240, 0.16)"
         }
       }
     }
@@ -479,6 +575,26 @@
     },
     "haze": {
       "inset": 8
+    },
+    "chart": {
+      "seriesCount": 6,
+      "seriesLightness": {
+        "light": 0.55,
+        "dark": 0.72
+      },
+      "seriesChroma": 0.18,
+      "seriesHueOffset": 30,
+      "seriesContrast": 3,
+      "stroke": 2,
+      "hairline": 1,
+      "pointMin": 6,
+      "pointMax": 18,
+      "barRadius": 4,
+      "cellGap": 2,
+      "ringThickness": 0.32
+    },
+    "progress": {
+      "ringStroke": 8
     }
   },
   "spacing": {

@@ -156,6 +156,20 @@ export const crystalTokens = {
   "anchor.underlineOffset": "4px",
   "tree.indentStep": "20px",
   "haze.inset": "8px",
+  "chart.seriesCount": "6",
+  "chart.seriesLightness.light": "0.55",
+  "chart.seriesLightness.dark": "0.72",
+  "chart.seriesChroma": "0.18",
+  "chart.seriesHueOffset": "30",
+  "chart.seriesContrast": "3",
+  "chart.stroke": "2px",
+  "chart.hairline": "1px",
+  "chart.pointMin": "6px",
+  "chart.pointMax": "18px",
+  "chart.barRadius": "4px",
+  "chart.cellGap": "2px",
+  "chart.ringThickness": "0.32",
+  "progress.ringStroke": "8px",
 } as const;
 
 export type CrystalToken = keyof typeof crystalTokens;

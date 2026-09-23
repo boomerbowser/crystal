@@ -62,6 +62,49 @@ this reason: a variant named after a colour the system does not define is a
 promise it cannot keep. Emphasis is carried by `.primary` being opt-in, by label
 weight, and by placement.
 
+### The chart series scale, which is not that
+
+Charts need several colours at once and a palette gives one. Crystal 2.1.0
+therefore publishes a **series scale**: six categorical colours per palette per
+mode, as `--cr-chart-series-1` through `--cr-chart-series-6`, alongside
+`--cr-chart-axis` and `--cr-chart-grid`.
+
+This is not the secondary colour arriving by another door, and the distinction is
+worth being exact about. A series colour is **for data marks only** — a bar, a
+line, a segment, a cell. It is never ink, never an action fill, never a surface
+and never a state. It has no tested foreground, because nothing is ever set on
+top of it; that is precisely the property the companion lacks and cannot be given
+by renaming.
+
+They are derived rather than picked, in `tools/build-tokens.cjs`, because the
+thing that has to be true of seventy-two colours is a measurement and not a
+preference. Take the palette's seed hue, turn half a step off it, step six times
+around the hue circle, and draw all six at one OKLab lightness (0.55 light, 0.72
+dark) and one chroma (0.18). Then:
+
+- **Every one clears 3:1 against both the surface and the canvas of its mode.** A
+  data mark is a graphical object carrying information, so WCAG 1.4.11 applies.
+  Where a hue cannot reach the floor at the stated lightness its lightness moves
+  until it does — the floor is a promise, the family resemblance is a preference.
+- **No two in a scale are closer than 0.10 in OKLab.** Segments and stacked bars
+  are adjacent to each other, not only to the ground.
+- **One lightness for all six**, deliberately: a categorical scale must not imply
+  an order, and a ramp does.
+- **The ring is centred on the palette hue rather than started from it.** A slot
+  on the seed hue at these lightnesses is the palette's action colour, and a data
+  mark the colour of every button on the page is one people try to press.
+
+All four are asserted in `tests/core-contracts.cjs` for all twelve
+palette-and-mode combinations.
+
+Six is where hue separation runs out, not where charts do. **A seventh series
+repeats the first colour and must differ by another channel** — a dash pattern, a
+fill pattern, a marker shape. That rule is not a fallback for the seventh series
+only: colour is never the sole carrier of a series at any count, because six hues
+at sixty degrees do not survive dichromatic vision, and the scale is not built to
+pretend otherwise. Two of the six also sit near the danger and success hues; they
+carry no such meaning, and a chart that needs to say "bad" says it in words.
+
 CSS variables use the `--cr-` namespace and kebab-case names. Source JSON uses camelCase keys and the explicit `Crystal token schema v1`; it is not advertised as a Design Tokens Community Group interchange schema.
 
 ## Functional meanings
