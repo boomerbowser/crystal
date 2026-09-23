@@ -183,16 +183,19 @@ reading that is certainly wrong is "the catalogue means a spinner that does not
 spin" — a loader with no motion is indistinguishable from a static glyph, which
 is the state the catalogue reserves for *reduced motion*.
 
-**What a consumer did about it.** `crystal-react` shipped all three. Each takes
-its **duration and easing from Crystal's published tokens** — `--cr-flow` for the
-travelling progress fill, `--cr-departure` for the turning ring — and authors only
-the shape of the movement, which for a travelling bar and a turning arc is
-determined by the geometry rather than chosen. Each is multiplied by
-`--cr-motion-enabled` and divided by `--cr-motion-speed` like everything else
-that moves in that library, and each is removed outright under
-`prefers-reduced-motion: reduce`, where it becomes the static legible state the
-catalogue asks for. `Marquee` set this precedent earlier in the same library, for
-the same reason.
+**What a consumer did about it.** `crystal-react` is building these components
+now. Each continuous indicator takes **one** duration — `--cr-flow`, Crystal's
+own published 1200ms — and authors only the *shape* of the movement, which for a
+travelling bar and a turning arc is determined by the geometry rather than
+chosen. One period across all of them, not one per component: two indicators in
+the same library ticking at different rates is the same drift as two renderers
+doing it, only closer together. Each is multiplied by `--cr-motion-enabled` and
+divided by `--cr-motion-speed` like everything else that moves there, and each
+is removed under `prefers-reduced-motion: reduce`, where it becomes the static
+legible state the catalogue asks for — and "static" there means *the whole
+track*, because a travelling segment frozen two fifths along reports a
+measurement nobody took. `Marquee` set this precedent earlier in the same
+library, for the same reason.
 
 **Why it should not stay there.** Two renderers that each pick their own spinner
 period is exactly the drift `component.chart.stroke` and
