@@ -183,8 +183,8 @@ reading that is certainly wrong is "the catalogue means a spinner that does not
 spin" — a loader with no motion is indistinguishable from a static glyph, which
 is the state the catalogue reserves for *reduced motion*.
 
-**What a consumer did about it.** `crystal-react` is building these components
-now. Each continuous indicator takes **one** duration — `--cr-flow`, Crystal's
+**What a consumer did about it.** `crystal-react` shipped all three on
+23 September 2026. Each continuous indicator takes **one** duration — `--cr-flow`, Crystal's
 own published 1200ms — and authors only the *shape* of the movement, which for a
 travelling bar and a turning arc is determined by the geometry rather than
 chosen. One period across all of them, not one per component: two indicators in
