@@ -62,17 +62,27 @@ jobs:
       # `date`: it records when the evidence was produced, so it differs on
       # every run by design. Its numbers are held to the same rule as everything else — the
       # second command fails if anything but the timestamp moved.
+      # Two files carry the date their evidence was produced, and a date that
+      # changes with the calendar rather than with the source is not drift. This
+      # job failed at midnight on 23 September 2026 on a commit that touched
+      # neither — `core/docs/accessibility.md`'s "Checks run" row had rolled over
+      # — which is a gate crying wolf once a day and training everybody to
+      # re-run it. Both are excluded from the exact comparison and then checked
+      # for changes *beyond* their timestamp, which is the thing worth catching.
       - name: Generated files match their source
         run: |
           git diff --exit-code -- ':(top)' \
-            ':(exclude,top)validation/token-checks.json' || {
+            ':(exclude,top)validation/token-checks.json' \
+            ':(exclude,top)core/docs/accessibility.md' || {
             echo "::error::A build changed a committed file. Run the build and commit the result."
             exit 1
           }
           drift=$(git diff -U0 -- ':(top)validation/token-checks.json' \
-            | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | grep -v '"date"' || true)
+            ':(top)core/docs/accessibility.md' \
+            | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' \
+            | grep -v '"date"' | grep -v 'Checks run' || true)
           if [ -n "$drift" ]; then
-            echo "::error::The token evidence changed beyond its timestamp:"
+            echo "::error::The evidence changed beyond its timestamp:"
             echo "$drift"
             exit 1
           fi
