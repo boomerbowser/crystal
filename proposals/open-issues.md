@@ -4,8 +4,9 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 not fixed. Each says what is wrong, why it matters, where it is, and what closing
 it would take.
 
-**Two entries are left.** D-4's remaining half is waiting on hardware, and D-17
-is a flake nobody can diagnose until it happens again with the evidence kept.
+**Three entries are left.** D-4's remaining half is waiting on hardware, D-17 is
+a flake nobody can diagnose until it happens again with the evidence kept, and
+D-18 is a keyboard path nothing in either repository can currently drive.
 
 D-4's remaining half needs a real phone: what a person's thumb meets on a device Playwright cannot emulate
 is not something this repository can answer. It is documented where a reader
@@ -113,3 +114,46 @@ forced colours, where a 229 delta on a handful of pixels would be a banding seam
 moving by one step; a focus ring or caret caught mid-blink in the clipped region;
 and the Manrope fallback resolving differently on a cold run, which is what
 broke this gate the first time it was added.
+
+---
+
+## D-18 · The resizable table's keyboard path cannot be driven from a gate
+
+*(Opened 23 September 2026, building `resizable-table`.)*
+
+**What the catalogue asks for.** "The resizer is a slider: arrow keys resize, and
+the new width is announced."
+
+**What is verified.** That the resizer *is* a slider — `input[type=range]` with a
+range to move in and `aria-valuetext` reading "N pixels" — in a unit test; and
+that the width it announces is the width the browser draws, in
+`verify:behaviour`. The second one matters more than it looks: React Aria applies
+each column's width to its header cell as an inline style, and under
+`table-layout: auto` a width on a cell is a suggestion the browser may override
+from the content, so a resizer could go on announcing a width its column no
+longer has.
+
+**What is not verified.** That pressing an arrow key changes the column. React
+Aria's table is a composite widget with a roving tab stop, and three ways of
+reaching the resizer from Playwright all failed:
+
+- `locator.focus()` on the resizer input leaves `document.activeElement` as the
+  table's `tr` — the grid takes focus back.
+- Clicking the column header focuses an input, and a following `Tab` moves focus
+  to `body` — out of the widget entirely.
+- Pressing `Enter` first, in case the resizer needs to be engaged before arrow
+  keys act, changes nothing.
+
+In each case `aria-valuetext` stayed at its initial value, so React Aria's own
+state never moved — this is about reaching the control, not about the resize.
+
+**Why it matters.** It is the one interaction in this component the catalogue
+names explicitly, and it is exactly the kind of thing that works on a desk and
+breaks in a release nobody drove. A gate that asserts the half it can reach is
+better than one that asserts nothing, but the half it cannot reach is the half a
+keyboard user needs.
+
+**Closing it needs** one of: a way to drive React Aria's roving focus into a cell
+child from Playwright that this attempt missed; React Aria's own test utilities,
+which ship for exactly this and are not yet used here; or a manual check
+recorded against a specific build, which is worth less but is not worth nothing.
