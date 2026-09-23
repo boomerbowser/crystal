@@ -186,6 +186,70 @@ function chartSeries(seed, roles, mode, policy) {
   return out;
 }
 
+/* ------------------------------------------------ the intensity ramp
+
+   A heatmap cell and a calendar day carry a value by how strongly they are
+   painted. The catalogue puts "scale construction, contrast floor at every step"
+   on Crystal's side of the line for both, and the floor it means is not the one
+   the series colours clear: a cell is a *ground*, the value is written on it,
+   and what has to clear 4.5:1 is the ink on each step.
+
+   So each step ships with its ink. Five steps from a near-ground tint to a strong
+   one along the palette's own seed hue, and for each the better of the mode's two
+   available inks — its body text, or the ink it puts on the action colour.
+
+   The ink is chosen per step and changes partway along in some palettes, which
+   is not a defect: a ramp that spans light to dark has to change ink somewhere,
+   and pretending otherwise would mean a ramp too short to read as intensity. The
+   constraint that actually binds is the *gap* — a mid-lightness where neither of
+   a mode's inks reaches 4.5:1 — and the far end is pulled back until no step
+   falls in it. */
+
+function intensityRamp(seed, roles, mode, steps) {
+  const hue = seriesHue(seed);
+  /* The near end is a tint of the ground rather than a colour on it: a heatmap's
+     lowest bucket should read as "almost nothing here". */
+  const near = mode === 'light' ? 0.955 : 0.225;
+  const [chromaFrom, chromaTo] = mode === 'light' ? [0.02, 0.15] : [0.03, 0.14];
+  const inks = [roles.text, roles.onPrimary];
+  const bestInk = (hex) => inks.reduce((a, b) => (contrastRatio(b, hex) > contrastRatio(a, hex) ? b : a));
+
+  const build = (far) => {
+    const ramp = [];
+    for (let i = 0; i < steps; i += 1) {
+      const t = steps === 1 ? 1 : i / (steps - 1);
+      const L = near + (far - near) * t;
+      ramp.push(seriesColour(L, hue, chromaFrom + (chromaTo - chromaFrom) * t).toUpperCase());
+    }
+    return ramp;
+  };
+
+  /* The far end is pulled back until every step has *an* ink that clears 4.5:1,
+     rather than being a constant that happens to work for five palettes out of
+     six. Harbor is the one a constant does not work for: its body ink is a soft
+     grey rather than a near-black, which is a decision that palette makes
+     everywhere else too, and a ramp that ignored it would be unreadable in
+     exactly the palette that chose to be quiet. */
+  let far = mode === 'light' ? 0.66 : 0.45;
+  const step = mode === 'light' ? -0.01 : 0.01;
+  let ramp = build(far);
+  for (let guard = 0; guard < 60 && ramp.some((hex) => contrastRatio(bestInk(hex), hex) < 4.5); guard += 1) {
+    far += step;
+    ramp = build(far);
+  }
+
+  const out = {};
+  ramp.forEach((hex, i) => {
+    const ink = bestInk(hex);
+    if (contrastRatio(ink, hex) < 4.5) {
+      throw new Error(`No ink clears 4.5:1 on intensity step ${i + 1} in ${mode} (${hex})`);
+    }
+    out[`chartHeat${i + 1}`] = hex;
+    out[`chartOnHeat${i + 1}`] = ink;
+  });
+  return out;
+}
+
 /* Gridlines and the axis rule. The axis is a boundary and takes the palette's
    boundary colour; a gridline is a reading aid behind the data and must not
    compete with it, so it is the body ink at the opacity a hairline needs to be
@@ -573,6 +637,9 @@ function buildFlat(tokens) {
         offset: chart.seriesHueOffset.$value,
         contrast: chart.seriesContrast.$value,
       }));
+      Object.assign(entry.modes[mode], intensityRamp(
+        palette.seed.$value, entry.modes[mode], mode, chart.intensitySteps.$value,
+      ));
       entry.modes[mode].chartAxis = entry.modes[mode].outline;
       entry.modes[mode].chartGrid = gridInk(entry.modes[mode].text, mode === 'light' ? 0.12 : 0.16);
     }

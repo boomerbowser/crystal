@@ -169,5 +169,9 @@ object CrystalToken {
     const val chartBarRadius = "4px"
     const val chartCellGap = "2px"
     const val chartRingThickness = "0.32"
+    const val chartFillOpacity = "0.25"
+    const val chartLinkOpacity = "0.45"
+    const val chartIntensitySteps = "5"
+    const val chartGaugeSweep = "270"
     const val progressRingStroke = "8px"
 }

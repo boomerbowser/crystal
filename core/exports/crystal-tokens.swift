@@ -169,5 +169,9 @@ public enum CrystalToken {
     public static let chartBarRadius = "4px"
     public static let chartCellGap = "2px"
     public static let chartRingThickness = "0.32"
+    public static let chartFillOpacity = "0.25"
+    public static let chartLinkOpacity = "0.45"
+    public static let chartIntensitySteps = "5"
+    public static let chartGaugeSweep = "270"
     public static let progressRingStroke = "8px"
 }

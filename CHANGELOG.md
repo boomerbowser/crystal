@@ -25,16 +25,21 @@ published nothing a chart could be drawn with.
   It earns that the way the other derived values do — the inputs are tokens
   (`component.chart.series*`), and the outputs are asserted in
   `tests/core-contracts.cjs` across all twelve palette-and-mode combinations.
+- **The intensity ramp.** `--cr-chart-heat-1` to `--cr-chart-heat-5` for a
+  heatmap cell or a calendar day, each with the ink that reads on it as
+  `--cr-chart-on-heat-N`. A cell is a ground rather than a mark, so the floor is
+  the text one and it is met at every step.
 - **Chart geometry.** `--cr-chart-stroke`, `--cr-chart-hairline`,
   `--cr-chart-point-min`, `--cr-chart-point-max`, `--cr-chart-bar-radius`,
-  `--cr-chart-cell-gap` and `--cr-chart-ring-thickness`. The catalogue has said
+  `--cr-chart-cell-gap`, `--cr-chart-ring-thickness`, `--cr-chart-fill-opacity`,
+  `--cr-chart-link-opacity` and `--cr-chart-gauge-sweep`. The catalogue has said
   "line weight follows the stroke scale" and "point size is a scale, not an
   arbitrary radius" since 2.0; neither scale existed, which is how two renderers
   end up with two of them.
 - **`--cr-progress-ring-stroke`.** One value for a circular progress ring and for
   the gauge arc the catalogue says matches it, so the two cannot drift.
 
-**For consumers:** the generated theme CSS gains 98 values and changes none. A
+**For consumers:** the generated theme CSS gains values and changes none. A
 palette added after this release meets the four assertions in
 `tests/core-contracts.cjs` before it ships; there is no manual step.
 

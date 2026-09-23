@@ -169,6 +169,10 @@ export const crystalTokens = {
   "chart.barRadius": "4px",
   "chart.cellGap": "2px",
   "chart.ringThickness": "0.32",
+  "chart.fillOpacity": "0.25",
+  "chart.linkOpacity": "0.45",
+  "chart.intensitySteps": "5",
+  "chart.gaugeSweep": "270",
   "progress.ringStroke": "8px",
 } as const;
 

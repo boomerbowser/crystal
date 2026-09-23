@@ -519,7 +519,7 @@ const charts = (() => {
       every.push({ id, mode, roles, series });
     }
   }
-  return { every, contrast, distance, tokens };
+  return { every, contrast, distance, luminance, tokens };
 })();
 
 check('every palette and mode carries the full series scale', () => {
@@ -605,6 +605,57 @@ check('the series scale is published as --cr-chart-series-N, and ends', () => {
     });
     assert.equal(resolved[`--cr-chart-series-${series.length + 1}`], undefined,
       'the scale ends where the token says it ends');
+  }
+});
+
+/* ------------------------------------------------------ the intensity ramp */
+
+/* A heatmap cell and a calendar day are *grounds*, not marks: the value is
+   written on them. So the floor that applies is the text one, and it applies to
+   every step — a ramp whose middle bucket is unreadable is a ramp that hides
+   exactly the values a reader is trying to compare. */
+
+check('every intensity step ships an ink that clears 4.5:1 on it', () => {
+  const steps = charts.tokens.component.chart.intensitySteps;
+  for (const { id, mode, roles } of charts.every) {
+    for (let i = 1; i <= steps; i += 1) {
+      const ground = roles[`chartHeat${i}`];
+      const ink = roles[`chartOnHeat${i}`];
+      assert.ok(ground && ink, `${id} ${mode} has no step ${i}`);
+      const ratio = charts.contrast(ink, ground);
+      assert.ok(ratio >= 4.5,
+        `${id} ${mode} step ${i}: ${ink} on ${ground} is ${ratio.toFixed(2)}:1`);
+    }
+    assert.equal(roles[`chartHeat${steps + 1}`], undefined, 'the ramp ends where the token says');
+  }
+});
+
+/* And the ramp has to read as a ramp. Consecutive steps a reader cannot tell
+   apart make the scale shorter than it claims to be, which is worse than a
+   shorter scale honestly declared. */
+check('consecutive intensity steps are distinguishable', () => {
+  const steps = charts.tokens.component.chart.intensitySteps;
+  for (const { id, mode, roles } of charts.every) {
+    for (let i = 1; i < steps; i += 1) {
+      const apart = charts.distance(roles[`chartHeat${i}`], roles[`chartHeat${i + 1}`]);
+      assert.ok(apart >= 0.05,
+        `${id} ${mode} steps ${i} and ${i + 1} are ${apart.toFixed(3)} apart in OKLab`);
+    }
+  }
+});
+
+/* The ramp is monotone in lightness, in the direction its mode reads. A scale
+   that brightened and then dimmed would have two buckets a reader would read as
+   the same amount. */
+check('the intensity ramp moves one way', () => {
+  const steps = charts.tokens.component.chart.intensitySteps;
+  for (const { id, mode, roles } of charts.every) {
+    for (let i = 1; i < steps; i += 1) {
+      const from = charts.luminance(roles[`chartHeat${i}`]);
+      const to = charts.luminance(roles[`chartHeat${i + 1}`]);
+      const forward = mode === 'light' ? to < from : to > from;
+      assert.ok(forward, `${id} ${mode} step ${i + 1} reverses the ramp`);
+    }
   }
 });
 

@@ -2016,6 +2016,26 @@
         "$type": "number",
         "$value": 0.32,
         "$description": "A donut's ring thickness as a proportion of its outer radius. Declared rather than chosen per chart so a donut is recognisably the same object at every size."
+      },
+      "fillOpacity": {
+        "$type": "number",
+        "$value": 0.25,
+        "$description": "Opacity of a fill whose job is to show extent without hiding what is behind it — the region under a line, the inside of a radar polygon. Low enough that two overlapping series are still two, and that the gridlines a reader measures against are still legible through both."
+      },
+      "linkOpacity": {
+        "$type": "number",
+        "$value": 0.45,
+        "$description": "Opacity of a flow between two nodes. Higher than a fill because a link is the mark rather than its backing, and low enough that a crossing reads as two links rather than as a third shape."
+      },
+      "intensitySteps": {
+        "$type": "number",
+        "$value": 5,
+        "$description": "How many buckets an intensity scale has — a heatmap cell, a calendar day. Five, because a reader comparing cells is matching them to a key rather than reading a gradient, and a key with more entries than a hand has fingers is a key nobody uses."
+      },
+      "gaugeSweep": {
+        "$type": "number",
+        "$value": 270,
+        "$description": "Degrees an arc gauge sweeps, centred on the bottom. Not a full circle, because a full circle has no ends and a gauge is a value between two of them; not a half, because three quarters gives the same travel half the diameter would and leaves the centre square for the value."
       }
     },
     "progress": {

@@ -97,6 +97,18 @@ dark) and one chroma (0.18). Then:
 All four are asserted in `tests/core-contracts.cjs` for all twelve
 palette-and-mode combinations.
 
+Beside the series scale, and on the same principle from the other direction,
+Crystal 2.1.0 publishes an **intensity ramp**: `--cr-chart-heat-1` through
+`--cr-chart-heat-5`, for a heatmap cell or a calendar day, each with its own ink
+as `--cr-chart-on-heat-N`. A cell is a *ground* rather than a mark — the value is
+written on it — so the floor that applies is the text one, 4.5:1, and it applies
+to every step. The ink changes partway along the ramp in some palettes, which is
+what a ramp spanning light to dark has to do; what the construction guarantees is
+that no step falls in the gap where neither of a mode's inks reaches the floor.
+Harbor is why that is a search and not a constant: its body ink is a soft grey
+rather than a near-black, and a ramp built for the other five would be unreadable
+in exactly the palette that chose to be quiet.
+
 Six is where hue separation runs out, not where charts do. **A seventh series
 repeats the first colour and must differ by another channel** — a dash pattern, a
 fill pattern, a marker shape. That rule is not a fallback for the seventh series

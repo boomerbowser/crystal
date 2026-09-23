@@ -433,7 +433,7 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.
 
-54 tokens.
+58 tokens.
 
 ### Component · action
 
@@ -582,6 +582,10 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | `component.chart.barRadius` | dimension | `4px` | Radius on the value end of a bar only. The base end stays square because it sits on the axis, and rounding it would lift the bar off the line it is measured from. |
 | `component.chart.cellGap` | dimension | `2px` | Gap between the square cells of a heatmap or calendar heatmap. |
 | `component.chart.ringThickness` | number | `0.32` | A donut's ring thickness as a proportion of its outer radius. Declared rather than chosen per chart so a donut is recognisably the same object at every size. |
+| `component.chart.fillOpacity` | number | `0.25` | Opacity of a fill whose job is to show extent without hiding what is behind it — the region under a line, the inside of a radar polygon. Low enough that two overlapping series are still two, and that the gridlines a reader measures against are still legible through both. |
+| `component.chart.linkOpacity` | number | `0.45` | Opacity of a flow between two nodes. Higher than a fill because a link is the mark rather than its backing, and low enough that a crossing reads as two links rather than as a third shape. |
+| `component.chart.intensitySteps` | number | `5` | How many buckets an intensity scale has — a heatmap cell, a calendar day. Five, because a reader comparing cells is matching them to a key rather than reading a gradient, and a key with more entries than a hand has fingers is a key nobody uses. |
+| `component.chart.gaugeSweep` | number | `270` | Degrees an arc gauge sweeps, centred on the bottom. Not a full circle, because a full circle has no ends and a gauge is a value between two of them; not a half, because three quarters gives the same travel half the diameter would and leaves the centre square for the value. |
 
 ### Component · progress
 
