@@ -4,9 +4,10 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 not fixed. Each says what is wrong, why it matters, where it is, and what closing
 it would take.
 
-**Three entries are left.** D-4's remaining half is waiting on hardware, D-17 is
-a flake nobody can diagnose until it happens again with the evidence kept, and
-D-18 is a keyboard path nothing in either repository can currently drive.
+**Two entries are left.** D-4's remaining half is waiting on hardware, and D-17
+is a flake nobody can diagnose until it happens again with the evidence kept.
+D-18 closed on 23 September 2026 — its premise was wrong, and the reasoning is in
+[`closed-issues.md`](closed-issues.md).
 
 D-4's remaining half needs a real phone: what a person's thumb meets on a device Playwright cannot emulate
 is not something this repository can answer. It is documented where a reader
@@ -108,52 +109,42 @@ produced left nothing to look at — which is itself now fixed: `verify-frames`
 takes `--keep`, and the CI job uploads `actual-` and `expected-` for every
 differing frame on failure.
 
-**Closing it needs** the next occurrence with that artifact. The candidates worth
-checking against the image, in order: the atmosphere gradient's dither under
-forced colours, where a 229 delta on a handful of pixels would be a banding seam
-moving by one step; a focus ring or caret caught mid-blink in the clipped region;
-and the Manrope fallback resolving differently on a cold run, which is what
-broke this gate the first time it was added.
+**It does not reproduce on the desk.** 23 September 2026: the frame was captured
+eight times, each in a fresh browser context with the frame's own settings
+(`forcedColors: 'active'`, `colorScheme: 'dark'`, `deviceScaleFactor: 1`, 1280×900,
+900ms settle), and each compared against the first with
+`tools/compare-captures.py --tolerance 2 --max-differing 400` — the gate's own
+comparison, at the gate's own tolerance. Seven of seven came back SAME. Eight
+captures is not a proof of determinism, but it does say the nondeterminism is not
+cheaply available here, so the artifact from the runner remains the way in.
 
----
+**Two of the three candidates are now ruled out by measuring the baseline**
+(`validation/baselines-ci/forced-colours-dark.png`, 1,152,000 pixels):
 
-## D-18 · The resizable table's keyboard path cannot be driven from a gate
+- *The atmosphere gradient's dither.* There is no gradient left to dither.
+  92.03% of the frame is pure black and 2.98% is pure white; the intermediate
+  greys are 3.46%, and they are spread over a bounding box of 44,0–1235,877 —
+  that is glyph anti-aliasing across the whole frame, not a shaded region with
+  banding seams in it. A seam moving one quantisation step would also be a *small*
+  delta, and 231 of the 287 pixels crossed the gate's visible threshold of 24.
+- *The Manrope fallback resolving differently.* A different typeface moves every
+  glyph edge. There are 39,828 anti-aliased glyph pixels in this frame; 287 is
+  0.7% of them. A font swap cannot be that small.
 
-*(Opened 23 September 2026, building `resizable-table`.)*
+**What the magnitude does say.** In a frame that is 95% two pure tones, 231
+pixels changing by up to 229 is one small thing drawn or not drawn at full
+contrast — for scale, the string `15.78:1` in this frame is 187 pixels of ink
+above that same threshold. And whatever it is, **it does not reflow**: if the
+thing that changed had altered any inline box's width, the text after it would
+have moved and the count would be in the thousands. So the candidate is something
+painted in place — a caret, a focus ring, a hover or pressed state, a glyph
+substitution of equal advance — and not a piece of content arriving late. (Worth
+knowing while reading the artifact: `#contrast-metric` is the only readout in
+this region whose shipped markup, `—`, differs from what `site.js` renders. It is
+therefore the one element a half-rendered page would betray — and it would betray
+it by reflowing the label beside it, which is not this.)
 
-**What the catalogue asks for.** "The resizer is a slider: arrow keys resize, and
-the new width is announced."
-
-**What is verified.** That the resizer *is* a slider — `input[type=range]` with a
-range to move in and `aria-valuetext` reading "N pixels" — in a unit test; and
-that the width it announces is the width the browser draws, in
-`verify:behaviour`. The second one matters more than it looks: React Aria applies
-each column's width to its header cell as an inline style, and under
-`table-layout: auto` a width on a cell is a suggestion the browser may override
-from the content, so a resizer could go on announcing a width its column no
-longer has.
-
-**What is not verified.** That pressing an arrow key changes the column. React
-Aria's table is a composite widget with a roving tab stop, and three ways of
-reaching the resizer from Playwright all failed:
-
-- `locator.focus()` on the resizer input leaves `document.activeElement` as the
-  table's `tr` — the grid takes focus back.
-- Clicking the column header focuses an input, and a following `Tab` moves focus
-  to `body` — out of the widget entirely.
-- Pressing `Enter` first, in case the resizer needs to be engaged before arrow
-  keys act, changes nothing.
-
-In each case `aria-valuetext` stayed at its initial value, so React Aria's own
-state never moved — this is about reaching the control, not about the resize.
-
-**Why it matters.** It is the one interaction in this component the catalogue
-names explicitly, and it is exactly the kind of thing that works on a desk and
-breaks in a release nobody drove. A gate that asserts the half it can reach is
-better than one that asserts nothing, but the half it cannot reach is the half a
-keyboard user needs.
-
-**Closing it needs** one of: a way to drive React Aria's roving focus into a cell
-child from Playwright that this attempt missed; React Aria's own test utilities,
-which ship for exactly this and are not yet used here; or a manual check
-recorded against a specific build, which is worth less but is not worth nothing.
+**Closing it needs** the next occurrence with the artifact `verify-frames --keep`
+now writes and the CI job now uploads: `actual-forced-colours-dark.png` beside
+`expected-`, differenced, to say *where* the 287 pixels are. The three sentences
+above are what that image has to be read against.

@@ -1539,3 +1539,66 @@ the failure this project keeps naming.
 one machine is not evidence about another. The two sets are expected to differ
 forever, and neither is wrong.
 
+---
+
+## D-18 · The resizable table's keyboard path cannot be driven from a gate
+
+**Opened 23 September 2026, building `resizable-table`. Closed the same day, by
+discovering that the premise was wrong.**
+
+The entry said focus could not be driven into the resizer: three ways of reaching
+it from Playwright all left `aria-valuetext` at its initial value, so React
+Aria's own state never moved. The conclusion drawn from that — "this is about
+reaching the control, not about the resize" — is the part that was wrong.
+
+**What is actually true.** Focus reaches the resizer fine. React Aria's
+`ColumnResizer` gates its arrow keys on `editModeEnabled`, which is the table's
+`isKeyboardNavigationDisabled`: `Enter` on a focused resizer calls `startResize`,
+which turns off the grid's own arrow-key navigation and hands the arrows to the
+resizer. Without that `Enter` the arrows arrive at the focused input, are not
+`defaultPrevented`, and do nothing — which is exactly the symptom the entry
+recorded and misread as "focus never landed". The affordance is announced: React
+Aria describes the resizer with "press Enter to start resizing" under keyboard
+modality. It is not guessable, and it was not guessed.
+
+The original entry says `Enter` was tried "in case the resizer needs to be
+engaged before arrow keys act, changes nothing". It was tried on a focus that had
+been taken back by the grid, so the `Enter` went to the row. Both halves had to be
+right at once, and each attempt had one of them.
+
+**How it was found.** Playwright was the wrong instrument for the question,
+because every failure looked the same from inside it — `aria-valuetext`
+unchanged, no way to tell a control that had not been reached from one that had
+been reached and had declined. Driving the real Storybook page through Claude in
+Chrome, one key at a time with the DOM read between each, separated those two: the
+resizer *was* `document.activeElement`, and `data-resizing` was absent. That is
+the observation the whole entry turned on, and it took a tool that could pause
+between keystrokes to make it.
+
+**What now proves it.** `verify:behaviour` in `crystal-react` clicks the wrapper
+(`[data-resizable-direction]` — a programmatic focus on a cell's child is taken
+back by the grid, and the real input is a visually-hidden box the wrapper
+intercepts pointers for), presses `Enter`, then sends ten right-arrows, and
+asserts four things:
+
+- the resizer reports `data-resizing` after the `Enter` — without this the three
+  assertions below would be measuring keys sent to a control that never took them;
+- the first column is drawn wider after the arrows than before;
+- `aria-valuetext` changed and still reads in pixels;
+- the width announced and the width drawn agree to within a pixel, under
+  `table-layout: fixed`.
+
+The last one is the one that was already there and is worth keeping in view:
+React Aria applies each computed width to its header cell as an inline style, and
+under `table-layout: auto` a width on a cell is a suggestion the browser may
+override from the content, so a resizer can go on announcing a width its column
+no longer has. The fixed layout that prevents it is React Aria's own, set inline
+by `ResizableTableContainer` — which is also why an earlier attempt to *guard*
+that layout with a CSS rule guarded nothing: planting `auto` in the stylesheet
+changed no computed value, because the inline style outranks it.
+
+**What it cost to be wrong.** One tracker entry that told the next reader the
+control was unreachable. An entry that says "cannot be driven" is a standing
+instruction not to try, and it was written from three attempts that shared a
+single missing keystroke. The lesson is the one already in
+`read-the-guard-not-the-message`: "impossible" usually describes the tool.
