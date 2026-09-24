@@ -117,7 +117,7 @@ public enum CrystalToken {
     public static let defaultReduced = "false"
     public static let defaultReduceMotion = "false"
     public static let actionRadius = "999px"
-    public static let actionMinTarget = "44px"
+    public static let actionMinTarget = "48px"
     public static let actionPaddingBlock = "15px"
     public static let actionPaddingInline = "24px"
     public static let actionGap = "9px"

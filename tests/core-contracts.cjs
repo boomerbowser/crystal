@@ -377,6 +377,35 @@ const TOKEN_BOUND = [
   { token: 'component.action.gap', rule: '.cr-button', prop: 'gap' },
 ];
 
+/* Selectors that may legitimately carry a different value from the plain
+   control: a variant is a different thing, not a contradiction. */
+const VARIANT_MAY_DIFFER = [
+  /\.cr-button\s*\.|\.cr-button\./,   /* .cr-button.danger and friends */
+  /\.cr-dock/,                        /* the dock's own compact controls */
+  /aria-(pressed|selected|current)/,  /* selection weight, not geometry */
+];
+
+/* Every rule that sets `prop` and could reach a `<button class="cr-button">`.
+   Declaration order and layer are not resolved here — the assertion is the
+   stricter "they all agree", which needs neither. */
+function rulesReaching(css, prop) {
+  const out = [];
+  const rule = /([^{}]+)\{([^{}]*)\}/g;
+  let match;
+  while ((match = rule.exec(css)) !== null) {
+    const selector = match[1].trim().replace(/\s+/g, ' ');
+    /* A pseudo-element is a different box. `::before` on a control is the Haze
+       reading pad, and `border-radius: inherit` there is not a contradiction of
+       the control's radius — it is how the pad follows it. */
+    if (/::(before|after|placeholder|selection|marker|backdrop)/.test(selector)) continue;
+    const reaches = /cr-button/.test(selector) || /(?<![\w.#-])button(?![\w-])/.test(selector);
+    if (!reaches) continue;
+    const decl = new RegExp(`(?:^|;)\\s*${prop}\\s*:([^;]*)`).exec(match[2]);
+    if (decl) out.push({ selector, value: decl[1].trim().split(/\s+/)[0] });
+  }
+  return out;
+}
+
 check('the stylesheet honours the token values it is bound to', () => {
   const fs = require('node:fs');
   const path = require('node:path');
@@ -403,8 +432,34 @@ check('the stylesheet honours the token values it is bound to', () => {
     const actual = bound.part === undefined ? parts[0] : parts[bound.part];
     assert.equal(actual, value(bound.token),
       `${bound.rule} { ${bound.prop} } is ${actual}, but ${bound.token} is ${value(bound.token)}`);
+
+    /* And nothing later takes it back.
+     *
+     * The check above reads the first `.cr-button` rule, which is in
+     * `crystal.reset` — and for two years it was green while the value it read
+     * never rendered. `:is(button,a.cr-button)` in `crystal.component` set a
+     * different `min-height`, and a later layer wins regardless of specificity,
+     * so the bound declaration was dead and the token disagreed with every
+     * button Crystal drew (D-20).
+     *
+     * So the pair is only honoured if every *other* rule that could apply to
+     * the same element agrees. "Could apply" is approximated by hand, because a
+     * text scan cannot resolve selectors: a rule naming `cr-button`, or one
+     * selecting the bare `button` element, can reach a `<button class="cr-button">`.
+     * A variant that genuinely differs belongs in `VARIANT_MAY_DIFFER` with a
+     * reason, so that it is a decision rather than an omission. */
+    for (const other of rulesReaching(css, bound.prop)) {
+      if (other.selector === bound.rule) continue;
+      if (VARIANT_MAY_DIFFER.some((re) => re.test(other.selector))) continue;
+      assert.equal(other.value, value(bound.token),
+        `${other.selector} { ${bound.prop}: ${other.value} } overrides `
+        + `${bound.rule}'s ${value(bound.token)} — the token is bound to a rule `
+        + 'that does not render');
+    }
   }
 });
+
+
 
 /* The button vocabulary: what is tinted, what is not, and what no longer exists.
  *

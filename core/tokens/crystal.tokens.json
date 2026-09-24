@@ -1723,8 +1723,8 @@
       },
       "minTarget": {
         "$type": "dimension",
-        "$value": "44px",
-        "$description": "Minimum interactive target"
+        "$value": "48px",
+        "$description": "Minimum interactive target. Above the 44px floor Crystal specifies, which this must never fall below."
       },
       "paddingBlock": {
         "$type": "dimension",

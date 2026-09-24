@@ -117,7 +117,7 @@ object CrystalToken {
     const val defaultReduced = "false"
     const val defaultReduceMotion = "false"
     const val actionRadius = "999px"
-    const val actionMinTarget = "44px"
+    const val actionMinTarget = "48px"
     const val actionPaddingBlock = "15px"
     const val actionPaddingInline = "24px"
     const val actionGap = "9px"

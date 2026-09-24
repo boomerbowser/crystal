@@ -117,7 +117,7 @@ export const crystalTokens = {
   "default.reduced": "false",
   "default.reduceMotion": "false",
   "action.radius": "999px",
-  "action.minTarget": "44px",
+  "action.minTarget": "48px",
   "action.paddingBlock": "15px",
   "action.paddingInline": "24px",
   "action.gap": "9px",

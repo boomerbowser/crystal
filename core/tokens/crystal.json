@@ -622,7 +622,7 @@
   "component": {
     "action": {
       "radius": 999,
-      "minTarget": 44,
+      "minTarget": 48,
       "paddingBlock": 15,
       "paddingInline": 24,
       "gap": 9,

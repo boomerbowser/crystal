@@ -2,6 +2,40 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
+## [Unreleased]
+
+### Changed
+
+- **The action control's minimum target is 48px, and now says so.** It has been
+  48px in every Crystal page since the control surface was adopted — the
+  component layer's `:is(button,a.cr-button)` set it, and a later layer wins
+  regardless of specificity, so the `.cr-button` rule in `crystal.reset` that
+  said 44px never rendered for anything. Meanwhile the package published
+  `component.action.minTarget` as **44px**, and that is the value platform
+  libraries consume: Crystal React read it and drew its buttons four pixels
+  shorter than the preview, correctly and invisibly.
+
+  The token moves to 48px rather than the rendering moving to 44px, because a
+  target may be improved and never regressed, and 48px is what people have been
+  pressing. The floor remains 44px; this is above it and must stay above it.
+
+  **For consumers:** a library that consumed `action.minTarget` grows its action
+  controls by 4px and thereby matches Crystal for the first time. Nothing that
+  reads the stylesheet changes at all.
+
+### Fixed
+
+- **`tests/core-contracts.cjs` was green on a rule that did not render.** It
+  bound each geometry token to the first `.cr-button` rule it found, which is
+  the reset-layer one, and asked nothing about whether a later layer took the
+  value back. It now requires every other rule that could reach the same element
+  to agree, with pseudo-elements excluded — a `::before` is a different box, and
+  `border-radius: inherit` on the reading pad follows the control rather than
+  contradicting it — and with variant selectors listed explicitly, so that a
+  variant which genuinely differs is a decision rather than an omission.
+
+  Planted on the original defect before being believed.
+
 ## [2.1.0] — 2026-09-24
 
 A minor release in two halves. What changed is what the stylesheet *renders*:

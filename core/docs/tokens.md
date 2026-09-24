@@ -440,7 +440,7 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
 | `component.action.radius` | dimension | `999px` | Action controls are pill-shaped, independent of the content radius |
-| `component.action.minTarget` | dimension | `44px` | Minimum interactive target |
+| `component.action.minTarget` | dimension | `48px` | Minimum interactive target. Above the 44px floor Crystal specifies, which this must never fall below. |
 | `component.action.paddingBlock` | dimension | `15px` | Action control block padding |
 | `component.action.paddingInline` | dimension | `24px` | Action control inline padding |
 | `component.action.gap` | dimension | `9px` | Gap between an action's icon and its label |
