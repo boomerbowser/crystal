@@ -4,10 +4,10 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 not fixed. Each says what is wrong, why it matters, where it is, and what closing
 it would take.
 
-**Three entries are left.** D-4's remaining half is waiting on hardware, D-17
+**Four entries are left.** D-4's remaining half is waiting on hardware, D-17
 is a flake nobody can diagnose until it happens again with the evidence kept,
-and D-19 is a gap in the motion chapter that a consumer has already had to work
-around.
+D-19 is a gap in the motion chapter that a consumer has already had to work
+around, and D-20 is a published token whose value nothing renders.
 D-18 closed on 23 September 2026 — its premise was wrong, and the reasoning is in
 [`closed-issues.md`](closed-issues.md).
 
@@ -213,3 +213,63 @@ three components carry no continuous motion at all — in which case the catalog
 entries for `loader`, `skeleton` and `progress` need rewriting, and the three
 components in `crystal-react` need their motion removed.
 
+## D-20 · `action.minTarget` is published as 44px and every button renders 48px
+
+**Found 24 September 2026, measuring for R-19 against the freshly published
+2.1.0.** Not a regression in that release — it is older than it, and 2.1.0 is
+simply the first version a consumer could measure it in.
+
+Two rules in `assets/crystal.css` set the action control's target, and they
+disagree:
+
+    @layer crystal.reset     .cr-button              { min-height: 44px }
+    @layer crystal.component :is(button,a.cr-button) { min-height: 48px }
+
+The layer order is `crystal.reset, crystal.base, crystal.component,
+crystal.override`, and **a later layer wins regardless of specificity**. So the
+reset declaration never renders, for any element: every selector it can match is
+also matched by the component-layer rule. A real `.cr-button` measures 48px in a
+browser — confirmed by planting one into a page with 2.1.0 loaded and reading
+`getComputedStyle`.
+
+Meanwhile the package publishes `component.action.minTarget` as **44px**, and
+that is the value platform libraries consume. Crystal React reads it, renders
+its buttons at 44px, and so does not match what Crystal's own stylesheet renders
+— which is how this was found: a computed-style diff between the library's
+button and a planted `.cr-button` differed on exactly two properties, and this
+was one of them. (The other is `font-weight`: 700 in the library against 750 in
+core, from the same pair of rules.)
+
+**Why it matters.** Not as an accessibility failure — 48px clears the 44px floor
+rather than falling short of it. It matters because the token and the rendering
+disagree, and the token is the half that leaves the building. Every platform
+library that does what the contract asks and consumes the published value will
+draw a control four pixels shorter than the web preview, forever, and be correct
+to have done so.
+
+It also means **`tests/core-contracts.cjs` is green on a rule that never
+renders.** The 2.1.0 changelog says component geometry tokens are "bound to the
+stylesheet and checked: `tests/core-contracts.cjs` compares the exported value
+against the rule that is supposed to carry it" — and the rule it compares
+against is the dead one. A check that reads a declaration without asking whether
+anything downstream of it still applies is the shape this project keeps finding.
+
+**Where.** `core/assets/crystal.css`, the two rules above;
+`core/tokens/crystal.tokens.json` at `component.action.minTarget`;
+`tests/core-contracts.cjs` where the geometry assertions read the reset layer.
+
+**What closing it takes**, and it is Meridian's call rather than a fix:
+
+  1. Decide which value is Crystal. 44px is the published token and the
+     documented floor; 48px is what every Crystal page has actually rendered.
+  2. Make the other one agree — either the token moves to 48px, or the
+     component-layer rule moves to 44px and the reset rule is deleted as the
+     duplicate it now is.
+  3. Make the contract test read the rule that *renders*, not the first one it
+     finds, so the two cannot part again. Plant it by changing one of them.
+
+Whichever way it goes, the standing constraint applies: a material specification
+may be improved, never regressed. Moving the rendered control from 48px to 44px
+reduces a touch target, so if 44px is chosen it should be on the grounds that it
+is the specification and still clears the floor — not on the grounds that it is
+the smaller number.
