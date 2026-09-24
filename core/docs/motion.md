@@ -230,7 +230,7 @@ including that reduced motion still applies the state instantly.
 
 <!-- generated:recipes -->
 
-All 55 recipes in 9 categories, generated from `core/tokens/motion-recipes.json`. **Damping ratio** and
+All 57 recipes in 9 categories, generated from `core/tokens/motion-recipes.json`. **Damping ratio** and
 **overshoot** are derived from each recipe's spring by `core/assets/core/spring.js`, not
 authored — so a spring that was retuned cannot leave a stale number behind in this table.
 
@@ -270,6 +270,8 @@ correct is a material question, not a taste question — see the signature polic
 | `tab-in` — Tab content arrival | 650ms | refraction | frost | 0.850 | 0.6% | Selected tab panels; apply aria-selected and hidden state synchronously. | Apply the semantic state immediately; omit decorative movement. |
 | `page-in` — View arrival | 1050ms | inertia | plastic | 0.550 | 12.6% | New local view after routing is committed; preserve focus and history. | Apply the semantic state immediately; omit decorative movement. |
 | `page-out` — View departure | 760ms | inertia | plastic | 0.550 | 12.6% | Departing view only; never postpone route authorization or loading. | Apply the semantic state immediately; omit decorative movement. |
+| `view-push-in` — Pushed view arrival | 700ms | inertia | plastic | 0.550 | 12.6% | A view pushed onto a stack. It arrives from the inline-end edge, along the reading direction, so the movement says the stack went forward. Mirror it for a pop, and again for right-to-left. | Apply the semantic state immediately; omit decorative movement. |
+| `view-push-out` — Pushed view departure | 700ms | inertia | plastic | 0.550 | 12.6% | The view a push covered. It travels a fraction of the incoming view's distance and stays behind it, so the two read as one stack rather than two independent slides; it is still there, which is what makes the back gesture legible. | Apply the semantic state immediately; omit decorative movement. |
 | `breadcrumb` — Location update | 500ms | coalesce | resin | 0.620 | 8.4% | New breadcrumb item; current-page semantics stay explicit. | Apply the semantic state immediately; omit decorative movement. |
 
 #### Overlays

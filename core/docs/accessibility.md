@@ -83,7 +83,7 @@ this rule came from are in
 
 ## Reduced motion
 
-`prefers-reduced-motion: reduce` is honoured by every one of the 55 motion recipes. Each
+`prefers-reduced-motion: reduce` is honoured by every one of the 57 motion recipes. Each
 recipe declares its own `reduced` behaviour rather than being globally switched off,
 because "no animation" and "no *movement*" are different requirements.
 
@@ -161,7 +161,7 @@ backdrops with the fixed Resin fill.
 | Failures | 0 |
 | Lowest result of any kind | 3.07:1 |
 | Lowest normal-text result | 4.67:1 |
-| Checks run | 2026-09-23 |
+| Checks run | 2026-09-24 |
 
 Normal text is held to 4.5:1. Essential non-text — focus rings, control boundaries,
 indicator lines — uses its separate 3:1 threshold, which is the correct standard for those

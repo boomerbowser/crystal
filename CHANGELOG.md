@@ -36,6 +36,21 @@ published nothing a chart could be drawn with.
   "line weight follows the stroke scale" and "point size is a scale, not an
   arbitrary radius" since 2.0; neither scale existed, which is how two renderers
   end up with two of them.
+- **The pushed-view recipes.** `view-push-in` and `view-push-out`, in the
+  Navigation family. The catalogue has said since 2.0 that a view stack's views
+  "enter and leave along the reading direction", and the nearest thing Crystal
+  published was `page-in`, which is a view arriving *forward* on the block axis —
+  a different movement saying a different thing. A stack that used it said "new
+  location" where it meant "one step deeper".
+
+  Two recipes rather than four, because a pop is a push mirrored and
+  right-to-left is a push mirrored again: the reorientation a consumer already
+  has points an authored movement, and a second copy of a movement is a second
+  fitted spring to keep in step with the first. The departing view travels a
+  fraction of the arriving one's distance and stays behind it, which is what
+  makes the two read as one stack rather than as two independent slides — and
+  what makes a back gesture legible before it has been made.
+
 - **`--cr-progress-ring-stroke`.** One value for a circular progress ring and for
   the gauge arc the catalogue says matches it, so the two cannot drift.
 

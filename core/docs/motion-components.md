@@ -2,7 +2,7 @@
 
 [Open the live component studies](../motion.html#component-motion) · [Search all recipes](../motion.html#recipe-library) · [Run browser contracts](../motion-contracts.html)
 
-Crystal ships 55 executable component recipes in nine families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
+Crystal ships 57 executable component recipes in nine families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
 
 ## Engine responsibilities
 
@@ -86,6 +86,8 @@ Base times below are at 1×; the preview resolves the saved speed at playback. E
 | `tab-in` | frost / refraction | Motion | 650ms | Selected tab panels; apply aria-selected and hidden state synchronously. |
 | `page-in` | plastic / inertia | Motion | 1050ms | New local view after routing is committed; preserve focus and history. |
 | `page-out` | plastic / inertia | Motion | 760ms | Departing view only; never postpone route authorization or loading. |
+| `view-push-in` | plastic / inertia | GSAP | 700ms | A view pushed onto a stack. It arrives from the inline-end edge, along the reading direction, so the movement says the stack went forward. Mirror it for a pop, and again for right-to-left. |
+| `view-push-out` | plastic / inertia | GSAP | 700ms | The view a push covered. It travels a fraction of the incoming view's distance and stays behind it, so the two read as one stack rather than two independent slides; it is still there, which is what makes the back gesture legible. |
 | `breadcrumb` | resin / coalesce | Motion | 500ms | New breadcrumb item; current-page semantics stay explicit. |
 | `drawer-in` | frost / refraction | GSAP | 1000ms | Side sheets and inspector panels; establish modality first. |
 | `drawer-out` | frost / refraction | GSAP | 650ms | Keep modal focus contained until dismissal completes. |

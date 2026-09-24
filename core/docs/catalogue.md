@@ -3694,6 +3694,7 @@ Pushed views with a back affordance.
 <tr><th scope="row">Semantics</th><td>Focus moves to the new view and returns on pop; the back control is a real button.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Enter and exit recipes, focus management</td></tr>
 <tr><th scope="row">Product owns</th><td>The stack and routing</td></tr>
+<tr><th scope="row">Motion</th><td><code>view-push-in</code>, <code>view-push-out</code></td></tr>
 <tr><th scope="row">Parity</th><td>react-aria:RouterProvider</td></tr>
 </tbody></table></div>
 

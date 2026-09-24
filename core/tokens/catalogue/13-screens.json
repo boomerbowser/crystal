@@ -54,6 +54,10 @@
       "semantics": "Focus moves to the new view and returns on pop; the back control is a real button.",
       "crystal": "Enter and exit recipes, focus management",
       "product": "The stack and routing",
+      "motion": [
+        "view-push-in",
+        "view-push-out"
+      ],
       "parity": [
         "react-aria:RouterProvider"
       ]

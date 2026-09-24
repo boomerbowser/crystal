@@ -775,6 +775,98 @@
       }
     },
     {
+      "id": "view-push-in",
+      "category": "Navigation",
+      "label": "Pushed view arrival",
+      "duration": 700,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "transform": "perspective(1400px) translateX(100%) rotateY(-4deg)",
+          "offset": 0
+        },
+        {
+          "transform": "perspective(1400px) translateX(-6px) rotateY(0.4deg)",
+          "offset": 0.55
+        },
+        {
+          "transform": "perspective(1400px) translateX(0) rotateY(0)",
+          "offset": 1
+        }
+      ],
+      "use": "A view pushed onto a stack. It arrives from the inline-end edge, along the reading direction, so the movement says the stack went forward. Mirror it for a pop, and again for right-to-left.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "plastic",
+      "signature": "inertia",
+      "travelException": "A pushed view must cross its own width from outside the viewport.",
+      "spring": {
+        "stiffness": 452.3775,
+        "damping": 23.3961,
+        "mass": 1,
+        "dampingRatio": 0.55,
+        "platform": {
+          "swiftUI": {
+            "response": 0.2954,
+            "dampingFraction": 0.55
+          },
+          "compose": {
+            "dampingRatio": 0.55,
+            "stiffness": 452.3775
+          },
+          "web": {
+            "stiffness": 452.3775,
+            "damping": 23.3961,
+            "mass": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "view-push-out",
+      "category": "Navigation",
+      "label": "Pushed view departure",
+      "duration": 700,
+      "engine": "GSAP",
+      "keyframes": [
+        {
+          "transform": "perspective(1400px) translateX(0) rotateY(0)",
+          "opacity": 1,
+          "offset": 0
+        },
+        {
+          "transform": "perspective(1400px) translateX(-28%) rotateY(2deg)",
+          "opacity": 0.55,
+          "offset": 1
+        }
+      ],
+      "use": "The view a push covered. It travels a fraction of the incoming view's distance and stays behind it, so the two read as one stack rather than two independent slides; it is still there, which is what makes the back gesture legible.",
+      "reduced": "Apply the semantic state immediately; omit decorative movement.",
+      "material": "plastic",
+      "signature": "inertia",
+      "travelException": "A covered view travels with the stack rather than within its own bounds.",
+      "spring": {
+        "stiffness": 452.3775,
+        "damping": 23.3961,
+        "mass": 1,
+        "dampingRatio": 0.55,
+        "platform": {
+          "swiftUI": {
+            "response": 0.2954,
+            "dampingFraction": 0.55
+          },
+          "compose": {
+            "dampingRatio": 0.55,
+            "stiffness": 452.3775
+          },
+          "web": {
+            "stiffness": 452.3775,
+            "damping": 23.3961,
+            "mass": 1
+          }
+        }
+      }
+    },
+    {
       "id": "breadcrumb",
       "category": "Navigation",
       "label": "Location update",
