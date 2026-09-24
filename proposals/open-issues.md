@@ -155,7 +155,10 @@ above are what that image has to be read against.
 
 ## D-19 · Crystal specifies three continuous activity indicators and publishes no vocabulary for one
 
-*(Opened 23 September 2026, building Crystal React's feedback slice.)*
+*(Opened 23 September 2026, building Crystal React's feedback slice. Filed on the
+tracker as [boomerbowser/crystal#1](https://github.com/boomerbowser/crystal/issues/1)
+on 24 September 2026, because closing it is a decision rather than a change and
+the decision wants somewhere public to be made.)*
 
 **What is missing.** `core/tokens/catalogue/06-feedback.json` puts the motion of
 three components on Crystal's side of the line:
