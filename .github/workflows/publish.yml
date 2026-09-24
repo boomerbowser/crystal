@@ -53,6 +53,40 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
+      # Before anything expensive, because this is the check that decides
+      # whether the run may publish at all.
+      #
+      # `core/`, because there are two manifests and only one of them is
+      # published. The other, at the repository root, is private machinery that
+      # builds the library and the website and installs nothing for a consumer.
+      #
+      # It used to read `if [ "$GITHUB_REF_TYPE" = tag ] && [ ... ]`, which is a
+      # guard that passes rather than a guard that checks. Dispatched from a
+      # branch the condition short-circuits, nothing is compared, and the job
+      # goes on to publish whatever version `core/package.json` happens to hold
+      # — with no tag for `--provenance` to attest the tarball to, and a
+      # specification bundle named after the branch. It was green on every
+      # dispatch and had never once compared a version.
+      #
+      # `workflow_dispatch` stays, because a publish that fails after the tag is
+      # pushed needs a way to be re-run without inventing a version. It is
+      # dispatched *against the tag*:
+      #
+      #   gh workflow run publish.yml --ref vX.Y.Z
+      - name: The tag and the manifest agree
+        working-directory: core
+        run: |
+          if [ "$GITHUB_REF_TYPE" != tag ]; then
+            echo "::error::publish runs from a tag only; this ref is a $GITHUB_REF_TYPE. Dispatch against the tag: gh workflow run publish.yml --ref vX.Y.Z"
+            exit 1
+          fi
+          tagged="${GITHUB_REF_NAME#v}"
+          packaged="$(node -p "require('./package.json').version")"
+          if [ "$tagged" != "$packaged" ]; then
+            echo "::error::tag v$tagged does not match package.json $packaged"
+            exit 1
+          fi
+
       - run: npm ci
 
       # The whole suite, because a published version cannot be taken back.
@@ -86,19 +120,6 @@ jobs:
       # silent failures — the registry accepts them and the damage appears in
       # somebody else's repository days later.
       - run: node tools/verify-package.cjs
-
-      # `core/`, because there are two manifests and only one of them is
-      # published. The other, at the repository root, is private machinery that
-      # builds the library and the website and installs nothing for a consumer.
-      - name: The tag and the manifest agree
-        working-directory: core
-        run: |
-          tagged="${GITHUB_REF_NAME#v}"
-          packaged="$(node -p "require('./package.json').version")"
-          if [ "$GITHUB_REF_TYPE" = tag ] && [ "$tagged" != "$packaged" ]; then
-            echo "::error::tag v$tagged does not match package.json $packaged"
-            exit 1
-          fi
 
       # --provenance attests the tarball to this commit and this workflow, so a
       # consumer can verify their @crystal-ui/core came from boomerbowser/crystal

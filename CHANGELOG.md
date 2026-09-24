@@ -2,7 +2,7 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
-## [Unreleased] — 2.1.0
+## [2.1.0] — 2026-09-24
 
 A minor release in two halves. What changed is what the stylesheet *renders*:
 2.0.0 shipped a control surface whose variant signals had been silently
@@ -133,7 +133,7 @@ than trades against it — but a product that had compensated for the flat prima
 in its own stylesheet should re-check it, and any visual baseline that contains a
 button needs re-blessing.
 
-## [Unreleased] — 2.0.0
+## [2.0.0] — 2026-09-20
 
 Crystal 2.0 turns a design system with one web preview into a base that platform component libraries consume. The visual identity does not change: the material hierarchy, palettes, defaults, typography and motion timings all carry forward, and the generated theme CSS is byte-identical to 1.0.1.
 
