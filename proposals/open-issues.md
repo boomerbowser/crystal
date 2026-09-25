@@ -216,3 +216,47 @@ the sentence about looping qualified to exempt them), or a ruling that these
 three components carry no continuous motion at all — in which case the catalogue
 entries for `loader`, `skeleton` and `progress` need rewriting, and the three
 components in `crystal-react` need their motion removed.
+
+## D-21 · Crystal specifies a hover treatment for its button that layer order erases
+
+**Found 24 September 2026, by Crystal React's R-19 sweep, and it is D-20's
+sibling.**
+
+`controls.css` writes a hover treatment for the action button:
+
+    .cr-button:hover { box-shadow: var(--cr-shadow-content); filter: brightness(1.04) }
+
+That rule is in `@layer crystal.reset`. Two rules in `@layer crystal.component`
+land on the same element:
+
+    :is(button, a.cr-button, .cr-control, …) { box-shadow: var(--cr-shadow-float) }
+    :is(button, a.cr-button):hover           { background: var(--cr-resin-fill); filter: none }
+
+A later layer wins regardless of specificity, so the component layer takes both
+halves: `filter: none` cancels the brightness lift, and the resting
+`--cr-shadow-float` outranks the hover `--cr-shadow-content` even though the
+hover rule is more specific. **Crystal's button has no hover treatment at all.**
+Measured in a browser, a `.cr-button` and a bare `<button>` are identical at rest
+and on hover, in every one of `background`, `filter` and `box-shadow`.
+
+This is the same defect as D-20 — a rule authored in `crystal.reset` that the
+component layer erases, published and rendering nothing — and it was found the
+same way, by planting Crystal's own element beside a consumer's and diffing the
+computed style.
+
+**Which of the two is wanted is Meridian's call, and they are different designs.**
+`crystal.component` says the resting state of a Resin control already *is* the
+floating state, so there is nowhere further to lift; on that reading the reset
+rule is stale and should go. `crystal.reset` says a pressable control brightens
+and settles toward the surface when the pointer is over it; on that reading the
+component rule needs a hover clause and the treatment should move into it. What
+is not wanted is the present state, where the stylesheet says one thing and
+renders the other.
+
+**Crystal React has stopped compensating for it.** The library had
+`filter: brightness(1.04)` on `[data-hovered]`, attributed in a comment to
+"the one Crystal writes for its own filled button" — which is the reset rule,
+the one that does not render. The R-19 sweep deleted it, so the library now
+matches what Crystal renders rather than what Crystal says. If the reset rule is
+restored to life, the library inherits it with no change.
+
