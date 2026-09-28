@@ -4,12 +4,13 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 not fixed. Each says what is wrong, why it matters, where it is, and what closing
 it would take.
 
-**Four entries are left.** D-4's remaining half is waiting on hardware, D-17
+**Five entries are left.** D-4's remaining half is waiting on hardware, D-17
 is a flake nobody can diagnose until it happens again with the evidence kept,
 D-21 is a hover treatment the stylesheet specifies and layer order erases —
 Meridian's to rule on, with a recommendation in §4.3 of
-[`2026-09-28-component-recipes.md`](2026-09-28-component-recipes.md) — and D-25
-holds three findings from Crystal React's surface sweep.
+[`2026-09-28-component-recipes.md`](2026-09-28-component-recipes.md) — D-25
+holds three findings from Crystal React's surface sweep, and D-26 two things the
+dock surface names that `.cr-dock` does not yet draw.
 D-22, D-23 and D-24 closed on 28 September 2026, each by Meridian's ruling: the
 navigation entry draws its location dot, the catalogue's surfaces match what
 renders, and the field shell is adopted as written.
@@ -225,3 +226,31 @@ restored to life, the library inherits it with no change.
 - **The documentation site vendors Crystal 2.0.0**, two releases behind, so Crystal React's
   material-parity gate compares against a Crystal that no longer ships.
 
+## D-26 · The dock surface names controls `.cr-dock` cannot reach, and a grouping it does not draw
+
+*(Opened 28 September 2026, by Crystal React's adoption of the corrected surfaces.)*
+
+D-23 named nine components as the `dock` surface. Two things stop a consumer
+wearing `.cr-dock` for all of them as written:
+
+- **The dock's controls are keyed on `button`.** `.cr-dock button`, its selected
+  rule `:is([aria-pressed=true],[aria-selected=true])`, its focus rule and its
+  forced-colours ring reach only a `<button>`. A tab is commonly
+  `[role=tab]` on another element, a segmented control is commonly radio inputs
+  inside labels, and a dock or bottom-navigation destination is a link carrying
+  `aria-current`. None of them is reached. Crystal React restates the dock-button
+  values on those three and compares them with a planted `.cr-dock button` in a
+  gate — correct today, and a second copy. Closing it: extend the dock's control
+  selector to `[role=tab]`, a label holding a radio (`label:has(input[type=radio])`,
+  selected by `:checked`), and `a` (selected by `aria-current`), in a way that
+  does not raise the specificity of the existing `button` rules consumers
+  already sit against.
+- **A button group and a split button are docks whose segments touch.** The
+  catalogue asks for "interior corners square against neighbours" and "a hairline
+  between the two targets". `.cr-dock` spaces its buttons 4px apart inside 9px of
+  padding and rounds each one to a pill, so wearing it would mean overriding the
+  class back. Crystal React keeps its own grouped geometry and restates the dock's
+  material, now with the rim it lacked. Closing it: a grouped variant of the dock
+  — no padding or gap, the children square inside and the pill outside, and a
+  hairline in `--cr-edge` between them — or a ruling that a group is a different
+  surface.
