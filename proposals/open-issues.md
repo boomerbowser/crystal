@@ -204,3 +204,47 @@ the one that does not render. The R-19 sweep deleted it, so the library now
 matches what Crystal renders rather than what Crystal says. If the reset rule is
 restored to life, the library inherits it with no change.
 
+## D-22 · The catalogue specifies a current-location dot that no recipe draws
+
+*(Opened 28 September 2026, during Crystal React's R-24 sweep.)* `nav-link`'s
+anatomy is "icon, label and current-location dot", with the dot among what
+Crystal supplies, and the navigation category says "current location is a dot;
+selection within a set is label weight". `.cr-nav-item` draws no dot, and neither
+does the side menu it was lifted from. Crystal React keeps the dot the catalogue
+asks for. Either the recipe gains the dot or the catalogue drops it.
+
+## D-23 · The catalogue's surface field disagrees with its own prose and geometry
+
+*(Opened 28 September 2026, during Crystal React's R-24 sweep; each measured.)*
+
+- `nav-rail`: surface `[frost, nav-item]`, prose "Resin active destination".
+  Crystal React follows the surface; the prose wants correcting.
+- `resizable`, `image-compare`: surface `drag-handle`, prose "Resin handle".
+  The drag-handle recipe is a grab-to-move grip — on a 4px splitter it adds 32px
+  of padding and a dot grid, and over photographs it is a muted grip on no
+  material. Crystal React wears neither; a splitter recipe or `resin` is wanted.
+- `media-controls`: surface `resin-panel`, geometry "Pill".
+- `tabs`, `segmented-control`, `toolbar`, `button-group`: surface `resin`, but
+  measured, they render as `.cr-dock` (Resin with a Haze pad) in every material
+  property — which is what their strip was measured from. `.cr-resin` is a
+  different composition (sheen and optical rim, no pad).
+- `dialog`: geometry "Content radius"; `.cr-dialog` draws the panel radius, and
+  scrolls the surface itself, which Crystal's own edge-fade rule argues against.
+- `tooltip`: geometry "18px radius", published only as prose — a token wanted.
+
+## D-24 · The field shell's boundary measures 1.06:1
+
+*(Opened 28 September 2026.)* `.cr-field-shell`'s border is the white rim.
+Measured against the page it sits on: **1.06:1** in light mode and **1.63:1** in
+dark, against the 3:1 `accessibility.md` states for control boundaries. The
+documentation site renders fields exactly so. Crystal React's fields use
+`--cr-outline` (6.55:1 / 8.83:1) and have not adopted the class, because doing so
+regresses every form. Meridian's to rule: adopt the rim, or give the field shell
+a boundary that meets the stated threshold.
+
+Two smaller findings from the same sweep: an overlay inside a pane has no Crystal
+recipe with a visible boundary (`.cr-haze` has no edge or shadow, so a menu over
+a Haze dialog vanishes), and the documentation site still vendors Crystal
+**2.0.0**, so Crystal React's material-parity gate compares against a Crystal two
+releases old.
+
