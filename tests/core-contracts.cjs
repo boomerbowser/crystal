@@ -809,6 +809,28 @@ check('a navigation entry is selected by label weight and never by a mark', () =
   assert.match(rest, /backdrop-filter:\s*none/);
 });
 
+/* D-22: current location is a dot, selection is weight, and they are two
+   indicators. The dot is keyed on aria-current alone — a selected or pressed
+   entry is selection and must not gain it — it is flat (no shadow, no blur, no
+   material), and it sits inside the entry's own inline-start padding so the
+   label never moves. */
+check('a navigation entry marks its current location with a flat dot inside its padding', () => {
+  const selector = '.cr-nav-item:is([aria-current]:not([aria-current=false]))::before';
+  const dot = block(selector);
+  assert.match(dot, /content:\s*''/, 'the current entry draws no dot');
+  assert.match(dot, /position:\s*absolute/, 'a dot in the flow would move the label');
+  assert.match(dot, /background:\s*var\(--cr-primary\)/);
+  assert.ok(!/box-shadow|backdrop-filter|filter:/.test(dot), 'the dot carries material or elevation');
+  const start = Number(/inset-inline-start:\s*(\d+)px/.exec(dot)?.[1]);
+  const size = Number(/width:\s*(\d+)px/.exec(dot)?.[1]);
+  const rest = block(':is(button, a, [role=link], .cr-nav-item).cr-nav-item');
+  const padding = Number(/padding:\s*\d+px\s+(\d+)px/.exec(rest)?.[1]);
+  assert.ok(start + size < padding, `the dot ends at ${start + size}px and the label starts at ${padding}px`);
+  for (const selection of ['[aria-selected', '[aria-pressed']) {
+    assert.ok(!selector.includes(selection), `the dot is keyed on ${selection}, which is selection`);
+  }
+});
+
 /* The stylesheet reads the geometry the package publishes, so the two cannot
    part: the token in the theme, the literal only as the fallback. */
 check('the switch and the choice box read their published tokens', () => {

@@ -18,7 +18,7 @@
         "dialog",
         "mirage"
       ],
-      "geometry": "Content radius; 12px minimum from content to the feathered edge",
+      "geometry": "Panel radius (the content radius plus 6px), as .cr-dialog draws it; 12px minimum from content to the feathered edge",
       "semantics": "Real modal semantics with a named dialog, focus containment, Escape, and focus return to the trigger",
       "crystal": "Scrim, surface, entrance and exit motion, elevation",
       "product": "Modality, focus management, the decision itself and its consequences",
@@ -183,7 +183,7 @@
       "surface": [
         "frost"
       ],
-      "geometry": "18px radius; compact padding",
+      "geometry": "18px radius (component.overlay.tooltipRadius); compact padding",
       "semantics": "Never the sole accessible name. Opens on focus as well as hover, dismisses on Escape, and stays while hovered.",
       "crystal": "Surface, delay, placement",
       "product": "Content and whether a tooltip is the right disclosure at all",

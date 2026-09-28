@@ -1292,7 +1292,18 @@ span.cr-status>span {
  * geometry stays, because "go here" is an action.
  *
  * Selection is label weight, 650 at rest and 800 when current. Nothing is drawn
- * beside the label. `.stacked` puts the icon above the label for a rail.
+ * beside the label for selection. `.stacked` puts the icon above the label for a
+ * rail.
+ *
+ * Current *location* is a different indicator, and the catalogue says so: "current
+ * location is a dot; selection within a set is label weight" (D-22, ruled on
+ * 28 September 2026). The dot is drawn on `aria-current` only — never for
+ * `aria-selected` or `aria-pressed`, which are selection — and it sits inside the
+ * entry's own inline-start padding, absolutely positioned, so the label does not
+ * move by a pixel when the page changes. It is a flat mark in the primary colour:
+ * no material, no elevation, no blur. An entry is furniture on the panel beneath
+ * it, and a dot that floated or diffused would be one more plane in a column the
+ * hierarchy keeps quiet.
  */
 :is(button, a, [role=link], .cr-nav-item).cr-nav-item {
     position: relative;
@@ -1333,6 +1344,21 @@ span.cr-status>span {
     color: var(--cr-text);
     font-weight: 800;
 }
+/* The location dot. 6px is twice `component.indicator.lineWidth`, so a dot and a
+   marking line read as one weight of mark. */
+.cr-nav-item:is([aria-current]:not([aria-current=false]))::before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cr-primary);
+    translate: 0 -50%;
+    pointer-events: none;
+}
 .cr-nav-item.stacked {
     flex-direction: column;
     justify-content: center;
@@ -1345,6 +1371,14 @@ span.cr-status>span {
 .cr-nav-item svg {
     width: 24px;
     height: 24px;
+}
+/* Stacked, the inline start is beside the icon, so the dot sits above it instead,
+   centred in the entry's own block-start padding. */
+.cr-nav-item.stacked:is([aria-current]:not([aria-current=false]))::before {
+    inset-block-start: 2px;
+    inset-inline: 0;
+    margin-inline: auto;
+    translate: none;
 }
 
 /* A Resin panel: the Resin plane with the content radius instead of the pill,
@@ -1443,6 +1477,9 @@ button:disabled,
     color: CanvasText;
     outline: 2px solid Highlight;
     outline-offset: -3px;
+}
+.cr-nav-item:is([aria-current]:not([aria-current=false]))::before {
+    background: Highlight;
 }
 .cr-nav-item,
 .cr-bare {

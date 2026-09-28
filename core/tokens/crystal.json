@@ -670,7 +670,8 @@
     },
     "overlay": {
       "maxWidth": 480,
-      "tooltipMaxWidth": 352
+      "tooltipMaxWidth": 352,
+      "tooltipRadius": 18
     },
     "field": {
       "wellInset": 7

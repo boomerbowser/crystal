@@ -34,11 +34,11 @@ Every component is made of one or more of these, named in its **Surface** row, o
 | --- | --- | --- | --- | --- |
 | <a id="surface-plastic"></a>**Plastic foundation** `plastic` | Plastic | <code>.cr-plastic</code> | 6 | The root scene or window. One contextual, opaque foundation per view; never a component. |
 | <a id="surface-frost"></a>**Frost panel** `frost` | Frost | <code>.cr-frost</code> | 45 | Intermediate task frames and every transient surface that opens over content: side panels, drawers, sheets, app bars, and — at Meridian's direction (R15e) — menus, popovers, tooltips and toasts. Reading content inside it sits on Haze. |
-| <a id="surface-haze"></a>**Haze reading surface** `haze` | Haze | <code>.cr-haze</code> | 83 | Anything read: cards, rows, panels, wells, forms, messages, decisions. 80% fill, 1.95px feather on an isolated paint layer, crisp foreground. `.cr-well` is the same recipe recessed into a Frost or Resin frame. |
-| <a id="surface-resin"></a>**Resin plane** `resin` | Resin | <code>.cr-resin</code> | 12 | One clustered navigation or control plane, pill-shaped: toolbars, action bars, shared button planes, segmented strips, the transport bar of a player. Controls inside it lose their own backdrop filter — Resin never contains Resin. |
-| <a id="surface-resin-panel"></a>**Resin panel** `resin-panel` | Resin | <code>.cr-resin.panel</code> | 2 | The Resin plane with the content radius instead of the pill, for a floating control plane that is a rectangle: a floating window, a media control bar wider than it is tall. Same fill, rim, blur and float shadow; only the geometry changes. |
+| <a id="surface-haze"></a>**Haze reading surface** `haze` | Haze | <code>.cr-haze</code> | 82 | Anything read: cards, rows, panels, wells, forms, messages, decisions. 80% fill, 1.95px feather on an isolated paint layer, crisp foreground. `.cr-well` is the same recipe recessed into a Frost or Resin frame. |
+| <a id="surface-resin"></a>**Resin plane** `resin` | Resin | <code>.cr-resin</code> | 7 | One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter — Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock. |
+| <a id="surface-resin-panel"></a>**Resin panel** `resin-panel` | Resin | <code>.cr-resin.panel</code> | 1 | The Resin plane with the content radius instead of the pill, for a floating control plane that is a rectangle: a floating window, a media control bar wider than it is tall. Same fill, rim, blur and float shadow; only the geometry changes. |
 | <a id="surface-control"></a>**Resin control** `control` | Resin + Haze | <code>.cr-button</code> | 16 | An action: a Resin shell with the 8px-inset Haze reading pad and the optical sheen. Pill geometry. `.primary` tints the pad, `.quiet` removes it, `.danger` adds the destructive boundary. Selected state is the primary pad plus label weight 800. |
-| <a id="surface-field"></a>**Field shell** `field` | Resin + Haze | <code>.cr-field-shell</code> | 27 | The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics. |
+| <a id="surface-field"></a>**Field shell** `field` | Resin + Haze | <code>.cr-field-shell</code> | 28 | The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics. |
 | <a id="surface-compact"></a>**Compact display** `compact` | Resin + Haze | <code>.cr-resin-haze</code> | 5 | Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens — transient overlays are Frost. |
 | <a id="surface-stone"></a>**Stone label backing** `stone` | Stone | <code>.cr-stone</code> | 2 | A label over an unknown or moving backdrop — a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text. |
 | <a id="surface-mirage"></a>**Mirage scrim** `mirage` | Mirage | <code>.cr-mirage</code> | 10 | The chromatic diffusion of the real scene behind a modal. Never a content surface; the decision surface above it is Haze. |
@@ -47,10 +47,10 @@ Every component is made of one or more of these, named in its **Surface** row, o
 | <a id="surface-status"></a>**Status badge** `status` | Resin + Haze | <code>.cr-status</code> | 1 | The semantic ink and surface pair behind a symbol, with words beside it. Status colours are independent of the palette and are never redefined by it. |
 | <a id="surface-bubble"></a>**Authored bubble** `bubble` | Haze | <code>.cr-bubble</code> | 1 | A Haze message surface with a directional tight corner. `.own` uses the palette's own-content pair. |
 | <a id="surface-table"></a>**Table** `table` | Resin + Haze | <code>.cr-table-scroll</code> | 5 | A Resin shell with an inset Haze fill holding the table, with the primary-soft header and the Resin scrollbar. Rows are read on the Haze; sort and selection are announced, and selection is label weight. |
-| <a id="surface-dock"></a>**Dock** `dock` | Resin + Haze | <code>.cr-dock</code> | 3 | The floating destination group: a Resin pill with a Haze perimeter, transparent destinations inside it, primary fill and weight 800 on the current one. |
+| <a id="surface-dock"></a>**Dock** `dock` | Resin + Haze | <code>.cr-dock</code> | 10 | A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars, button groups. The controls inside are transparent; the current or selected one takes weight 800 and a fill — primary for a dock's destination, primary-soft for a strip's segment. |
 | <a id="surface-nav-item"></a>**Navigation entry** `nav-item` | Plastic | <code>.cr-nav-item</code> | 2 | An entry in side navigation, a rail or a tree of destinations. It has no material of its own — it is furniture on the panel beneath it — and carries selection by label weight alone. Pill hit area, 44px target. `.stacked` puts the icon above the label for a rail. Adopted from the documentation site's side menu, which docs/components.md names as the reference implementation of selection. |
 | <a id="surface-bare"></a>**Bare control** `bare` | — | <code>.cr-bare</code> | 0 | A control that must not wear the Resin coat because it sits inside a surface that already has one: a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows, a dismiss button on a toast. Crystal paints every button by element, so bare means subtracting the fill, the shadow, the backdrop filter and both pseudo-layers — this class does all four. The focus ring and the target floor stay. |
-| <a id="surface-drag-handle"></a>**Drag handle** `drag-handle` | — | <code>.cr-drag-handle</code> | 3 | A bare control with a grip glyph and a lift while dragging. Keyboard drag is the product's; the handle only says it can be grabbed and when it has been. |
+| <a id="surface-drag-handle"></a>**Drag handle** `drag-handle` | — | <code>.cr-drag-handle</code> | 1 | A bare control with a grip glyph and a lift while dragging. Keyboard drag is the product's; the handle only says it can be grabbed and when it has been. |
 | <a id="surface-choice"></a>**Selection control** `choice` | Resin | <code>input:is([type=checkbox],[type=radio])</code> | 5 | Native checkbox, radio, switch and range, styled by element: a Resin box, circle or track with a contained mark, and the marked glass thumb. Semantics stay native. |
 | <a id="surface-native"></a>**Native control furniture** `native` | — | <code>select option</code> | 0 | Parts of native controls the browser draws and Crystal tints: select options, the file button. Platform-owned popups keep platform drawing. |
 | <a id="surface-none"></a>**No surface of its own** `none` | — | — | 110 | Layout, typography, behaviour and drawing components that inherit whatever they sit on. A chart's marks, a divider, a provider. Nothing to paint and nothing to wear. |
@@ -310,7 +310,7 @@ A vertical Frost panel of nav links, collapsible to icons.
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>expanded, collapsed, narrow</td></tr>
-<tr><th scope="row">Material</th><td>Frost panel, Resin active destination</td></tr>
+<tr><th scope="row">Material</th><td>Frost panel; its destinations are navigation entries, the current one at weight 800 on the surface-alt fill with the location dot</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-frost">Frost panel</a> → <a href="#surface-nav-item">Navigation entry</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Panel radius = content radius + 6px</td></tr>
 <tr><th scope="row">Semantics</th><td>nav landmark with an accessible name; collapsed items keep accessible names</td></tr>
@@ -361,7 +361,7 @@ A Resin tab strip with a selected tab and an associated panel.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>default, hover, focus, selected, disabled</td></tr>
 <tr><th scope="row">Material</th><td>Resin strip, primary fill on the selected tab</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill tabs inside a pill strip; 44px minimum</td></tr>
 <tr><th scope="row">Semantics</th><td>role=tablist/tab/tabpanel with arrow-key, Home and End navigation and aria-selected</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Strip material, label weight for the selected tab, focus ring</td></tr>
@@ -590,7 +590,7 @@ Adjacent actions sharing one Resin plane with internal hairlines.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>default, hover, focus, disabled</td></tr>
 <tr><th scope="row">Material</th><td>One shared Resin plane, not one plane per button</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill outer geometry; interior corners square against neighbours</td></tr>
 <tr><th scope="row">Semantics</th><td>group role with an accessible name when the buttons are related</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>The shared plane and interior separation</td></tr>
@@ -606,7 +606,7 @@ A default action and an adjacent disclosure that opens related actions.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>default, hover, focus, open, disabled</td></tr>
 <tr><th scope="row">Material</th><td>Shared Resin plane with a hairline between the two targets</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill outer geometry; both halves meet the 44px floor independently</td></tr>
 <tr><th scope="row">Semantics</th><td>Two buttons; the disclosure carries aria-expanded and aria-haspopup="menu"</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Shared plane, separation, menu material</td></tr>
@@ -672,7 +672,7 @@ A Resin group of actions that appears when a selection exists.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>hidden, shown, focus-visible</td></tr>
 <tr><th scope="row">Material</th><td>Resin plane</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill; floats above content with the floating elevation.</td></tr>
 <tr><th scope="row">Semantics</th><td>role="toolbar"; announces how many items are selected.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Material, entry and exit motion, elevation</td></tr>
@@ -948,7 +948,7 @@ A pill strip of mutually exclusive options sharing one Resin plane.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>default, hover, focus, selected, disabled</td></tr>
 <tr><th scope="row">Material</th><td>One Resin plane; primary fill on the selected segment</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill strip and pill segments; 44px minimum</td></tr>
 <tr><th scope="row">Semantics</th><td>Radio group semantics, or aria-pressed on buttons; never aria-selected outside a tablist</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Shared plane, label weight for the selected segment, focus ring</td></tr>
@@ -1220,7 +1220,7 @@ A toolbar of formatting actions above an editable content surface.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>idle, focus, selection-active, disabled, read-only</td></tr>
 <tr><th scope="row">Material</th><td>Resin toolbar, Haze editing surface</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a> → <a href="#surface-haze">Haze reading surface</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-field">Field shell</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Toolbar is a pill group; surface at content radius</td></tr>
 <tr><th scope="row">Semantics</th><td>Toolbar actions use aria-pressed for active formatting; the editor exposes its own semantics</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Toolbar and surface appearance, active-format treatment</td></tr>
@@ -1994,7 +1994,7 @@ Two images under a draggable divider.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>at-rest, dragging, focus-visible</td></tr>
 <tr><th scope="row">Material</th><td>Resin handle over the images</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-drag-handle">Drag handle</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Handle is a pill and reaches 44px.</td></tr>
 <tr><th scope="row">Semantics</th><td>The divider is a slider with a percentage value and keyboard steps.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Handle material, focus ring, drag motion</td></tr>
@@ -2389,7 +2389,7 @@ A Mirage scrim, a Haze decision surface, a title, body and named actions.
 <tr><th scope="row">States</th><td>closed, opening, open, closing</td></tr>
 <tr><th scope="row">Material</th><td>Mirage scrim; 80% feathered Haze surface above it</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-dialog">Dialog</a> → <a href="#surface-mirage">Mirage scrim</a></td></tr>
-<tr><th scope="row">Geometry</th><td>Content radius; 12px minimum from content to the feathered edge</td></tr>
+<tr><th scope="row">Geometry</th><td>Panel radius (the content radius plus 6px), as .cr-dialog draws it; 12px minimum from content to the feathered edge</td></tr>
 <tr><th scope="row">Semantics</th><td>Real modal semantics with a named dialog, focus containment, Escape, and focus return to the trigger</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Scrim, surface, entrance and exit motion, elevation</td></tr>
 <tr><th scope="row">Product owns</th><td>Modality, focus management, the decision itself and its consequences</td></tr>
@@ -2485,7 +2485,7 @@ Short supplemental text on a small Resin surface, anchored to its trigger.
 <tr><th scope="row">States</th><td>hidden, visible</td></tr>
 <tr><th scope="row">Material</th><td>Frost, as every transient overlay is (R15e); the text sits directly on the panel</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-frost">Frost panel</a></td></tr>
-<tr><th scope="row">Geometry</th><td>18px radius; compact padding</td></tr>
+<tr><th scope="row">Geometry</th><td>18px radius (component.overlay.tooltipRadius); compact padding</td></tr>
 <tr><th scope="row">Semantics</th><td>Never the sole accessible name. Opens on focus as well as hover, dismisses on Escape, and stays while hovered.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Surface, delay, placement</td></tr>
 <tr><th scope="row">Product owns</th><td>Content and whether a tooltip is the right disclosure at all</td></tr>
@@ -2934,7 +2934,7 @@ A region whose size the person controls, with a visible grab handle.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>idle, hover, dragging, at-min, at-max, disabled</td></tr>
 <tr><th scope="row">Material</th><td>Resin handle on the region's own surface</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-drag-handle">Drag handle</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Handle meets 44px even when the visible grip is narrower</td></tr>
 <tr><th scope="row">Semantics</th><td>role=separator with aria-valuenow and arrow-key resizing. Pointer dragging is never the only route.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Handle treatment, bound states and the settle after a size change</td></tr>
@@ -3163,7 +3163,7 @@ A grouped set of controls with one tab stop.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>at-rest, focus-visible</td></tr>
 <tr><th scope="row">Material</th><td>Resin plane or inherits</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Controls are pills; the group reaches 44px.</td></tr>
 <tr><th scope="row">Semantics</th><td>role="toolbar": one tab stop, arrows move within, orientation declared.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Material, grouping geometry, focus ring</td></tr>
@@ -3613,7 +3613,7 @@ The shared transport used by both players.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>idle, playing, paused, buffering, focus-visible</td></tr>
 <tr><th scope="row">Material</th><td>Resin plane</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-resin-panel">Resin panel</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill; 44px targets throughout.</td></tr>
 <tr><th scope="row">Semantics</th><td>Each control is a button with a name; play and pause are one toggle with a pressed state.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Materials, the press recipe on every control</td></tr>
@@ -4121,7 +4121,7 @@ A context-sensitive row of actions for the current view.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>at-rest, focus-visible, overflowing</td></tr>
 <tr><th scope="row">Material</th><td>Resin plane</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill; overflow to a menu.</td></tr>
 <tr><th scope="row">Semantics</th><td>role="toolbar" with one tab stop.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Material, overflow behaviour, press recipes</td></tr>

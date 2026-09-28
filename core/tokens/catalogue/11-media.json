@@ -73,7 +73,7 @@
       ],
       "material": "Resin plane",
       "surface": [
-        "resin-panel"
+        "resin"
       ],
       "geometry": "Pill; 44px targets throughout.",
       "semantics": "Each control is a button with a name; play and pause are one toggle with a pressed state.",

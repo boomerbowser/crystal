@@ -313,7 +313,7 @@
       "name": "Tabs",
       "category": "navigation",
       "surface": [
-        "resin"
+        "dock"
       ],
       "motion": [
         "tab-in"
@@ -562,7 +562,7 @@
       "name": "Button group",
       "category": "actions",
       "surface": [
-        "resin"
+        "dock"
       ],
       "motion": [
         "press"
@@ -579,7 +579,7 @@
       "name": "Split button",
       "category": "actions",
       "surface": [
-        "resin"
+        "dock"
       ],
       "motion": [
         "menu-in",
@@ -649,7 +649,7 @@
       "name": "Action bar",
       "category": "actions",
       "surface": [
-        "resin"
+        "dock"
       ],
       "motion": [
         "press"
@@ -961,7 +961,7 @@
       "name": "Segmented control",
       "category": "inputs",
       "surface": [
-        "resin"
+        "dock"
       ],
       "motion": [
         "selection"
@@ -1288,8 +1288,7 @@
       "name": "Rich text surface",
       "category": "inputs",
       "surface": [
-        "resin",
-        "haze"
+        "field"
       ],
       "status": {
         "web": "implemented",
@@ -2130,7 +2129,7 @@
       "name": "Image compare",
       "category": "data-display",
       "surface": [
-        "drag-handle"
+        "resin"
       ],
       "motion": [
         "drag-pickup",
@@ -3085,7 +3084,7 @@
       "name": "Resizable region",
       "category": "utility",
       "surface": [
-        "drag-handle"
+        "resin"
       ],
       "motion": [
         "resize-settle"
@@ -3304,7 +3303,7 @@
       "name": "Toolbar",
       "category": "utility",
       "surface": [
-        "resin"
+        "dock"
       ],
       "status": {
         "web": "implemented",
@@ -3734,7 +3733,7 @@
       "name": "Media controls",
       "category": "media",
       "surface": [
-        "resin-panel"
+        "resin"
       ],
       "status": {
         "web": "implemented",
@@ -4266,7 +4265,7 @@
       "name": "Command bar",
       "category": "screens",
       "surface": [
-        "resin"
+        "dock"
       ],
       "status": {
         "web": "implemented",

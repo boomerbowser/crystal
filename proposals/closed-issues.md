@@ -1791,3 +1791,68 @@ previous runtime gives one iteration on the default curve.
 `loader`, `progress` and `skeleton` claim the recipes
 (`tools/extend-catalogue-5.cjs` is the record). Crystal React binds them, which
 closes the consumer's side.
+
+## D-22 · The catalogue specifies a current-location dot that no recipe draws
+
+*(Opened 28 September 2026, during Crystal React's R-24 sweep.)* `nav-link`'s
+anatomy is "icon, label and current-location dot", with the dot among what
+Crystal supplies, and the navigation category says "current location is a dot;
+selection within a set is label weight". `.cr-nav-item` draws no dot, and neither
+does the side menu it was lifted from. Crystal React keeps the dot the catalogue
+asks for. Either the recipe gains the dot or the catalogue drops it.
+
+**Closed 28 September 2026.** Meridian ruled that the recipe draws the dot, respecting the
+material hierarchy. `.cr-nav-item` now draws a 6px primary dot on `aria-current` only —
+never on `aria-selected` or `aria-pressed`, which are selection — absolutely positioned in
+the entry's own inline-start padding, so the label does not move: measured, the label
+starts at the same pixel at rest, current and selected. It is flat, with no material,
+shadow or blur; stacked, it sits above the icon; right to left, it mirrors; under forced
+colours it is `Highlight`. `tests/core-contracts.cjs` holds it, and was planted red three
+ways — the dot in the flow, over the label, and with a shadow.
+
+## D-23 · The catalogue's surface field disagrees with its own prose and geometry
+
+*(Opened 28 September 2026, during Crystal React's R-24 sweep; each measured.)*
+
+- `nav-rail`: surface `[frost, nav-item]`, prose "Resin active destination".
+  Crystal React follows the surface; the prose wants correcting.
+- `resizable`, `image-compare`: surface `drag-handle`, prose "Resin handle".
+  The drag-handle recipe is a grab-to-move grip — on a 4px splitter it adds 32px
+  of padding and a dot grid, and over photographs it is a muted grip on no
+  material. Crystal React wears neither; a splitter recipe or `resin` is wanted.
+- `media-controls`: surface `resin-panel`, geometry "Pill".
+- `tabs`, `segmented-control`, `toolbar`, `button-group`: surface `resin`, but
+  measured, they render as `.cr-dock` (Resin with a Haze pad) in every material
+  property — which is what their strip was measured from. `.cr-resin` is a
+  different composition (sheen and optical rim, no pad).
+- `dialog`: geometry "Content radius"; `.cr-dialog` draws the panel radius, and
+  scrolls the surface itself, which Crystal's own edge-fade rule argues against.
+- `tooltip`: geometry "18px radius", published only as prose — a token wanted.
+
+**Closed 28 September 2026.** Meridian ruled: fix the catalogue surfaces. Recorded in
+`tools/extend-catalogue-6.cjs`, old values quoted. Seven strips — tabs, the segmented
+control, the toolbar, the command bar, the action bar, the button group and the split
+button — are `dock`, because each measured identical to `.cr-dock`; the vocabulary's
+`resin` and `dock` descriptions say so now, `resin` being the plane with no reading fill of
+its own. The resizable handle and the image comparison's thumb are `resin`, as their prose
+said. The media controls are `resin` at the pill. The rich text surface is a `field`. The
+rail's prose describes the navigation entry it is made of; the dialog's geometry is the
+panel radius `.cr-dialog` draws; the tooltip's 18px is the token
+`component.overlay.tooltipRadius`. The two items that were not surface questions — the
+dialog scrolling its own surface, and overlays inside a pane — moved to D-25.
+
+## D-24 · The field shell's boundary measures 1.06:1
+
+*(Opened 28 September 2026.)* `.cr-field-shell`'s border is the white rim.
+Measured against the page it sits on: **1.06:1** in light mode and **1.63:1** in
+dark, against the 3:1 `accessibility.md` states for control boundaries. The
+documentation site renders fields exactly so. Crystal React's fields use
+`--cr-outline` (6.55:1 / 8.83:1) and have not adopted the class, because doing so
+regresses every form. Meridian's to rule: adopt the rim, or give the field shell
+a boundary that meets the stated threshold.
+
+**Closed 28 September 2026.** Meridian ruled that Crystal React adopts the field shell as
+written, rim included. The measurement stands and is recorded where a reader meets it:
+`docs/accessibility.md` now states that the rim measures 1.06:1 and 1.63:1, is treated as
+decorative, and that a field is identified by its shell's fill and float shadow, its Haze
+well and its visible label — none of which the token checks cover.

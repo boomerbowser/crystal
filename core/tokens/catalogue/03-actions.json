@@ -75,7 +75,7 @@
       ],
       "material": "One shared Resin plane, not one plane per button",
       "surface": [
-        "resin"
+        "dock"
       ],
       "geometry": "Pill outer geometry; interior corners square against neighbours",
       "semantics": "group role with an accessible name when the buttons are related",
@@ -103,7 +103,7 @@
       ],
       "material": "Shared Resin plane with a hairline between the two targets",
       "surface": [
-        "resin"
+        "dock"
       ],
       "geometry": "Pill outer geometry; both halves meet the 44px floor independently",
       "semantics": "Two buttons; the disclosure carries aria-expanded and aria-haspopup=\"menu\"",
@@ -215,7 +215,7 @@
       ],
       "material": "Resin plane",
       "surface": [
-        "resin"
+        "dock"
       ],
       "geometry": "Pill; floats above content with the floating elevation.",
       "semantics": "role=\"toolbar\"; announces how many items are selected.",

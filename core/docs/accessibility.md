@@ -175,6 +175,15 @@ indicator lines — uses its separate 3:1 threshold, which is the correct standa
 elements rather than a relaxation for them.
 <!-- /generated:contrast -->
 
+**The field shell's rim is decorative, by ruling.** `.cr-field-shell` draws its edge in the
+white rim, which measures 1.06:1 against the page in light mode and 1.63:1 in dark — well
+under the 3:1 above. Meridian ruled on 28 September 2026 (D-24) that the field is drawn as
+written: the rim is not the thing that identifies a field. What does is the Resin shell's
+fill and float shadow, the Haze well the value is read on, and the visible label every
+Crystal field carries. Those are not covered by the 1,788 checks above, and a product that
+needs a field boundary it can defend against WCAG 1.4.11 on its own terms should measure its
+own backdrops rather than rely on this table.
+
 What that does and does not establish is stated plainly in the
 [verification report](../verification/report.html): it is evidence about this reference
 package, not a claim of complete WCAG conformance for a product built with it.

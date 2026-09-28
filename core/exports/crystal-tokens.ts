@@ -146,6 +146,7 @@ export const crystalTokens = {
   "overlayArrow.radius": "3px",
   "overlay.maxWidth": "480px",
   "overlay.tooltipMaxWidth": "352px",
+  "overlay.tooltipRadius": "18px",
   "field.wellInset": "7px",
   "card.radius": "28px",
   "focus.coreWidth": "2px",

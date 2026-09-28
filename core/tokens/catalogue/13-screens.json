@@ -135,7 +135,7 @@
       ],
       "material": "Resin plane",
       "surface": [
-        "resin"
+        "dock"
       ],
       "geometry": "Pill; overflow to a menu.",
       "semantics": "role=\"toolbar\" with one tab stop.",

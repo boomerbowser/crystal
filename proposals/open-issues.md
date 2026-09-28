@@ -4,11 +4,15 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 not fixed. Each says what is wrong, why it matters, where it is, and what closing
 it would take.
 
-**Three entries are left.** D-4's remaining half is waiting on hardware, D-17
+**Four entries are left.** D-4's remaining half is waiting on hardware, D-17
 is a flake nobody can diagnose until it happens again with the evidence kept,
-and D-21 is a hover treatment the stylesheet specifies and layer order erases —
+D-21 is a hover treatment the stylesheet specifies and layer order erases —
 Meridian's to rule on, with a recommendation in §4.3 of
-[`2026-09-28-component-recipes.md`](2026-09-28-component-recipes.md).
+[`2026-09-28-component-recipes.md`](2026-09-28-component-recipes.md) — and D-25
+holds three findings from Crystal React's surface sweep.
+D-22, D-23 and D-24 closed on 28 September 2026, each by Meridian's ruling: the
+navigation entry draws its location dot, the catalogue's surfaces match what
+renders, and the field shell is adopted as written.
 D-19 closed on 28 September 2026: Meridian adopted three continuous recipes for
 work that is genuinely pending, and the motion chapter now says a loop by any
 other name is refused. The reasoning is in [`closed-issues.md`](closed-issues.md).
@@ -204,47 +208,20 @@ the one that does not render. The R-19 sweep deleted it, so the library now
 matches what Crystal renders rather than what Crystal says. If the reset rule is
 restored to life, the library inherits it with no change.
 
-## D-22 · The catalogue specifies a current-location dot that no recipe draws
+## D-25 · Three findings from the surface sweep that are not surface questions
 
-*(Opened 28 September 2026, during Crystal React's R-24 sweep.)* `nav-link`'s
-anatomy is "icon, label and current-location dot", with the dot among what
-Crystal supplies, and the navigation category says "current location is a dot;
-selection within a set is label weight". `.cr-nav-item` draws no dot, and neither
-does the side menu it was lifted from. Crystal React keeps the dot the catalogue
-asks for. Either the recipe gains the dot or the catalogue drops it.
+*(Opened 28 September 2026, split from D-23 and D-24 when those were ruled.)*
 
-## D-23 · The catalogue's surface field disagrees with its own prose and geometry
-
-*(Opened 28 September 2026, during Crystal React's R-24 sweep; each measured.)*
-
-- `nav-rail`: surface `[frost, nav-item]`, prose "Resin active destination".
-  Crystal React follows the surface; the prose wants correcting.
-- `resizable`, `image-compare`: surface `drag-handle`, prose "Resin handle".
-  The drag-handle recipe is a grab-to-move grip — on a 4px splitter it adds 32px
-  of padding and a dot grid, and over photographs it is a muted grip on no
-  material. Crystal React wears neither; a splitter recipe or `resin` is wanted.
-- `media-controls`: surface `resin-panel`, geometry "Pill".
-- `tabs`, `segmented-control`, `toolbar`, `button-group`: surface `resin`, but
-  measured, they render as `.cr-dock` (Resin with a Haze pad) in every material
-  property — which is what their strip was measured from. `.cr-resin` is a
-  different composition (sheen and optical rim, no pad).
-- `dialog`: geometry "Content radius"; `.cr-dialog` draws the panel radius, and
-  scrolls the surface itself, which Crystal's own edge-fade rule argues against.
-- `tooltip`: geometry "18px radius", published only as prose — a token wanted.
-
-## D-24 · The field shell's boundary measures 1.06:1
-
-*(Opened 28 September 2026.)* `.cr-field-shell`'s border is the white rim.
-Measured against the page it sits on: **1.06:1** in light mode and **1.63:1** in
-dark, against the 3:1 `accessibility.md` states for control boundaries. The
-documentation site renders fields exactly so. Crystal React's fields use
-`--cr-outline` (6.55:1 / 8.83:1) and have not adopted the class, because doing so
-regresses every form. Meridian's to rule: adopt the rim, or give the field shell
-a boundary that meets the stated threshold.
-
-Two smaller findings from the same sweep: an overlay inside a pane has no Crystal
-recipe with a visible boundary (`.cr-haze` has no edge or shadow, so a menu over
-a Haze dialog vanishes), and the documentation site still vendors Crystal
-**2.0.0**, so Crystal React's material-parity gate compares against a Crystal two
-releases old.
+- **A dialog that scrolls its own surface.** `.cr-dialog` sets `overflow: auto` on the
+  surface. Crystal's edge-fade rule is the argument against it — a mask fades an element's
+  own fill and border along with its content, so a surface that scrolls dissolves itself —
+  and a title that scrolls out of a tall dialog takes its context with it. Crystal React
+  scrolls the body inside a surface that does not, and keeps doing so until this is ruled.
+- **An overlay inside a pane has no Crystal recipe with a visible boundary.** On the page an
+  overlay is `.cr-frost`. Inside a Haze pane it recesses into Haze, and `.cr-haze` has no
+  edge and no shadow, so a menu drawn that way over a Haze dialog cannot be told apart from
+  the dialog. Crystal React keeps its own recessed Haze there, with an edge and the content
+  shadow.
+- **The documentation site vendors Crystal 2.0.0**, two releases behind, so Crystal React's
+  material-parity gate compares against a Crystal that no longer ships.
 

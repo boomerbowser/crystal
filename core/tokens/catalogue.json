@@ -36,7 +36,7 @@
         "Resin"
       ],
       "class": ".cr-resin",
-      "use": "One clustered navigation or control plane, pill-shaped: toolbars, action bars, shared button planes, segmented strips, the transport bar of a player. Controls inside it lose their own backdrop filter — Resin never contains Resin."
+      "use": "One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter — Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock."
     },
     {
       "id": "resin-panel",
@@ -168,7 +168,7 @@
       "also": [
         ".cr-dock-inner"
       ],
-      "use": "The floating destination group: a Resin pill with a Haze perimeter, transparent destinations inside it, primary fill and weight 800 on the current one."
+      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars, button groups. The controls inside are transparent; the current or selected one takes weight 800 and a fill — primary for a dock's destination, primary-soft for a strip's segment."
     },
     {
       "id": "nav-item",
@@ -605,7 +605,7 @@
             "collapsed",
             "narrow"
           ],
-          "material": "Frost panel, Resin active destination",
+          "material": "Frost panel; its destinations are navigation entries, the current one at weight 800 on the surface-alt fill with the location dot",
           "surface": [
             "frost",
             "nav-item"
@@ -692,7 +692,7 @@
           ],
           "material": "Resin strip, primary fill on the selected tab",
           "surface": [
-            "resin"
+            "dock"
           ],
           "geometry": "Pill tabs inside a pill strip; 44px minimum",
           "semantics": "role=tablist/tab/tabpanel with arrow-key, Home and End navigation and aria-selected",
@@ -1086,7 +1086,7 @@
           ],
           "material": "One shared Resin plane, not one plane per button",
           "surface": [
-            "resin"
+            "dock"
           ],
           "geometry": "Pill outer geometry; interior corners square against neighbours",
           "semantics": "group role with an accessible name when the buttons are related",
@@ -1114,7 +1114,7 @@
           ],
           "material": "Shared Resin plane with a hairline between the two targets",
           "surface": [
-            "resin"
+            "dock"
           ],
           "geometry": "Pill outer geometry; both halves meet the 44px floor independently",
           "semantics": "Two buttons; the disclosure carries aria-expanded and aria-haspopup=\"menu\"",
@@ -1226,7 +1226,7 @@
           ],
           "material": "Resin plane",
           "surface": [
-            "resin"
+            "dock"
           ],
           "geometry": "Pill; floats above content with the floating elevation.",
           "semantics": "role=\"toolbar\"; announces how many items are selected.",
@@ -1738,7 +1738,7 @@
           ],
           "material": "One Resin plane; primary fill on the selected segment",
           "surface": [
-            "resin"
+            "dock"
           ],
           "geometry": "Pill strip and pill segments; 44px minimum",
           "semantics": "Radio group semantics, or aria-pressed on buttons; never aria-selected outside a tablist",
@@ -2257,8 +2257,7 @@
           ],
           "material": "Resin toolbar, Haze editing surface",
           "surface": [
-            "resin",
-            "haze"
+            "field"
           ],
           "geometry": "Toolbar is a pill group; surface at content radius",
           "semantics": "Toolbar actions use aria-pressed for active formatting; the editor exposes its own semantics",
@@ -3550,7 +3549,7 @@
           ],
           "material": "Resin handle over the images",
           "surface": [
-            "drag-handle"
+            "resin"
           ],
           "geometry": "Handle is a pill and reaches 44px.",
           "semantics": "The divider is a slider with a percentage value and keyboard steps.",
@@ -4193,7 +4192,7 @@
             "dialog",
             "mirage"
           ],
-          "geometry": "Content radius; 12px minimum from content to the feathered edge",
+          "geometry": "Panel radius (the content radius plus 6px), as .cr-dialog draws it; 12px minimum from content to the feathered edge",
           "semantics": "Real modal semantics with a named dialog, focus containment, Escape, and focus return to the trigger",
           "crystal": "Scrim, surface, entrance and exit motion, elevation",
           "product": "Modality, focus management, the decision itself and its consequences",
@@ -4358,7 +4357,7 @@
           "surface": [
             "frost"
           ],
-          "geometry": "18px radius; compact padding",
+          "geometry": "18px radius (component.overlay.tooltipRadius); compact padding",
           "semantics": "Never the sole accessible name. Opens on focus as well as hover, dismisses on Escape, and stays while hovered.",
           "crystal": "Surface, delay, placement",
           "product": "Content and whether a tooltip is the right disclosure at all",
@@ -5000,7 +4999,7 @@
           ],
           "material": "Resin handle on the region's own surface",
           "surface": [
-            "drag-handle"
+            "resin"
           ],
           "geometry": "Handle meets 44px even when the visible grip is narrower",
           "semantics": "role=separator with aria-valuenow and arrow-key resizing. Pointer dragging is never the only route.",
@@ -5321,7 +5320,7 @@
           ],
           "material": "Resin plane or inherits",
           "surface": [
-            "resin"
+            "dock"
           ],
           "geometry": "Controls are pills; the group reaches 44px.",
           "semantics": "role=\"toolbar\": one tab stop, arrows move within, orientation declared.",
@@ -5993,7 +5992,7 @@
           ],
           "material": "Resin plane",
           "surface": [
-            "resin-panel"
+            "resin"
           ],
           "geometry": "Pill; 44px targets throughout.",
           "semantics": "Each control is a button with a name; play and pause are one toggle with a pressed state.",
@@ -6778,7 +6777,7 @@
           ],
           "material": "Resin plane",
           "surface": [
-            "resin"
+            "dock"
           ],
           "geometry": "Pill; overflow to a menu.",
           "semantics": "role=\"toolbar\" with one tab stop.",

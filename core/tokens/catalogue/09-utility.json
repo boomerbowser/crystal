@@ -172,7 +172,7 @@
       ],
       "material": "Resin handle on the region's own surface",
       "surface": [
-        "drag-handle"
+        "resin"
       ],
       "geometry": "Handle meets 44px even when the visible grip is narrower",
       "semantics": "role=separator with aria-valuenow and arrow-key resizing. Pointer dragging is never the only route.",
@@ -493,7 +493,7 @@
       ],
       "material": "Resin plane or inherits",
       "surface": [
-        "resin"
+        "dock"
       ],
       "geometry": "Controls are pills; the group reaches 44px.",
       "semantics": "role=\"toolbar\": one tab stop, arrows move within, orientation declared.",

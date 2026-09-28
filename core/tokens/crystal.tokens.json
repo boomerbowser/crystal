@@ -1885,6 +1885,11 @@
         "$type": "dimension",
         "$value": "352px",
         "$description": "About sixty characters: a tooltip longer than this is documentation"
+      },
+      "tooltipRadius": {
+        "$type": "dimension",
+        "$value": "18px",
+        "$description": "A tooltip's corner radius. Smaller than the content radius the other overlays share, because a tooltip is a compact panel of one or two lines."
       }
     },
     "field": {

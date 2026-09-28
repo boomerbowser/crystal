@@ -4,6 +4,35 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
 
 ## [Unreleased]
 
+### Added
+
+- **A navigation entry marks its current location with a dot** (D-22, ruled on
+  28 September). The catalogue has always said "current location is a dot;
+  selection within a set is label weight", and `.cr-nav-item` drew no dot.
+  It does now: a flat 6px primary mark on `aria-current` only — never on
+  `aria-selected` or `aria-pressed`, which are selection — positioned inside the
+  entry's own inline-start padding so the label does not move by a pixel, and
+  carrying no material, shadow or blur. Above the icon when stacked; mirrored
+  right to left; `Highlight` under forced colours.
+- `component.overlay.tooltipRadius`, 18px — the tooltip's radius, which the
+  catalogue stated only as prose.
+
+### Changed
+
+- **The catalogue's surfaces match what renders** (D-23, ruled on 28 September).
+  Tabs, the segmented control, the toolbar, the command bar, the action bar, the
+  button group and the split button are `dock`, not `resin`: each measures
+  identical to `.cr-dock`, Resin holding one Haze fill under its controls. The
+  resizable handle and the image comparison's thumb are `resin`, as their own
+  prose said, not the grab-to-move `drag-handle`; the media controls are `resin`
+  at the pill; the rich text surface is a `field`. The `resin` and `dock`
+  descriptions in `surfaces.json` now say which is which. The rail's prose, the
+  dialog's radius and the tooltip's radius agree with their surfaces and
+  recipes. Recorded in `tools/extend-catalogue-6.cjs` with the old values.
+- `docs/accessibility.md` states how the field shell's rim is treated (D-24,
+  ruled on 28 September): measured at 1.06:1, decorative, the field identified by
+  its shell, its well and its label.
+
 ## [2.2.0] — 2026-09-28
 
 A minor release that gives the catalogue something to be checked against. Every

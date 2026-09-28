@@ -146,6 +146,7 @@ public enum CrystalToken {
     public static let overlayArrowRadius = "3px"
     public static let overlayMaxWidth = "480px"
     public static let overlayTooltipMaxWidth = "352px"
+    public static let overlayTooltipRadius = "18px"
     public static let fieldWellInset = "7px"
     public static let cardRadius = "28px"
     public static let focusCoreWidth = "2px"

@@ -327,7 +327,10 @@ Everything the installed core already publishes and the library was not using:
 > **Ruled on 28 September 2026.** Adopted as recommended: **4.1** (D-19 — the three
 > continuous recipes) and **4.2** (R-21 — `mark-in`), plus the quantity stepper's
 > wording (Crystal React's R-22 — the entry now describes a typable numeric field, not a
-> spin button). **4.3** (D-21) and **4.4** remain open. What was built from each ruling,
+> spin button). **4.3** (D-21) and **4.4** remain open. Three more were ruled the same day
+> from Crystal React's surface sweep: the navigation entry draws the current-location dot
+> (D-22), seven strips are docks and four other surfaces are corrected (D-23), and the field
+> shell is adopted as written (D-24). What was built from each ruling,
 > and how it is checked, is in `CHANGELOG.md` and in D-19's closed entry.
 
 Each has a recommended answer and, where it is a recipe, the JSON that would be

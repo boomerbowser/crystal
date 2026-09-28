@@ -18,7 +18,7 @@ The package contains working CSS primitives and a bounded interactive reference.
 | Destructive action | Resin/Haze with independent danger boundary and explicit label | `.danger`; app supplies consequence-specific confirmation and recovery |
 | Text field | Visible label, state badge, glowing focus ring, validation, helper/error association | `.cr-input`; working native form example; app supplies validation rules |
 | Selection control | Explicit selected state plus text/mark | Native checkbox, radio and select, styled by `assets/crystal.css` as of 2.1.0, and the native switch (`input[type=checkbox][role=switch]`) as of 2.2.0; keyboard semantics must match the component |
-| Navigation entry | No material of its own; pill hit area; selection by label weight and `aria-current` | `.cr-nav-item`, `.stacked` for a rail. Routing and the current-page state are app-owned |
+| Navigation entry | No material of its own; pill hit area; selection by label weight; current location by a flat primary dot on `aria-current`, inside the entry's own padding so the label never moves | `.cr-nav-item`, `.stacked` for a rail. Routing and the current-page state are app-owned |
 | Bare control | A control inside a coated surface: no fill, shadow, blur or pseudo-layers; target and focus ring kept | `.cr-bare`; the action itself is app-owned |
 | Drag handle | Grip glyph, grab cursor, lift while held | `.cr-drag-handle` with `aria-grabbed` or `data-dragging`; pointer capture, keyboard drag and drop validation are app-owned |
 | Resin panel | The Resin plane at the content radius | `.cr-resin.panel`; a floating window or wide control bar |
@@ -84,7 +84,7 @@ The catalogue gives every one of its components a **surface** — the material c
 
 | Surface | Recipe | What it is |
 |---|---|---|
-| Navigation entry | `.cr-nav-item`, `.stacked` for a rail | Furniture on the panel beneath it: no material of its own, pill hit area, 44px target, selection by label weight (650 → 800) and `aria-current`. Lifted from this site's own side menu, which this page has always named as the reference implementation of selection. |
+| Navigation entry | `.cr-nav-item`, `.stacked` for a rail | Furniture on the panel beneath it: no material of its own, pill hit area, 44px target, selection by label weight (650 → 800), and current location by a 6px primary dot on `aria-current` only — never on `aria-selected` or `aria-pressed`, which are selection. The dot is flat (no material, no elevation) and sits in the entry's inline-start padding, so the label does not move. Lifted from this site's own side menu, which this page has always named as the reference implementation of selection; the dot is what the catalogue added (D-22). |
 | Bare control | `.cr-bare` | A control inside a surface that already has a coat — a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows, a dismiss button. Crystal paints every `<button>` by element in five layers; this removes all five and keeps the target and the focus ring. |
 | Drag handle | `.cr-drag-handle` | A bare control with a grip and a lift while `aria-grabbed` or `data-dragging` is set. Pointer capture, the keyboard alternative and drop validation are the product's. |
 | Resin panel | `.cr-resin.panel` | The Resin plane with the content radius instead of the pill, for a floating window or a wide control bar. |

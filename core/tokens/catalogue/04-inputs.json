@@ -466,7 +466,7 @@
       ],
       "material": "One Resin plane; primary fill on the selected segment",
       "surface": [
-        "resin"
+        "dock"
       ],
       "geometry": "Pill strip and pill segments; 44px minimum",
       "semantics": "Radio group semantics, or aria-pressed on buttons; never aria-selected outside a tablist",
@@ -985,8 +985,7 @@
       ],
       "material": "Resin toolbar, Haze editing surface",
       "surface": [
-        "resin",
-        "haze"
+        "field"
       ],
       "geometry": "Toolbar is a pill group; surface at content radius",
       "semantics": "Toolbar actions use aria-pressed for active formatting; the editor exposes its own semantics",

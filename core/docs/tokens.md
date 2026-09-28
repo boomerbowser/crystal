@@ -433,7 +433,7 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 Values that belong to one component family and would be wrong to reuse elsewhere. This tier exists so a component can be specific without inventing a private constant.
 
-58 tokens.
+59 tokens.
 
 ### Component · action
 
@@ -519,6 +519,7 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | --- | --- | --- | --- |
 | `component.overlay.maxWidth` | dimension | `480px` | How wide an anchored popover may grow before it stops being anchored to anything |
 | `component.overlay.tooltipMaxWidth` | dimension | `352px` | About sixty characters: a tooltip longer than this is documentation |
+| `component.overlay.tooltipRadius` | dimension | `18px` | A tooltip's corner radius. Smaller than the content radius the other overlays share, because a tooltip is a compact panel of one or two lines. |
 
 ### Component · field
 

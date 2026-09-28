@@ -146,6 +146,7 @@ object CrystalToken {
     const val overlayArrowRadius = "3px"
     const val overlayMaxWidth = "480px"
     const val overlayTooltipMaxWidth = "352px"
+    const val overlayTooltipRadius = "18px"
     const val fieldWellInset = "7px"
     const val cardRadius = "28px"
     const val focusCoreWidth = "2px"

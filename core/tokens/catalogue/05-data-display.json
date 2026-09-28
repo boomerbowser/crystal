@@ -751,7 +751,7 @@
       ],
       "material": "Resin handle over the images",
       "surface": [
-        "drag-handle"
+        "resin"
       ],
       "geometry": "Handle is a pill and reaches 44px.",
       "semantics": "The divider is a slider with a percentage value and keyboard steps.",

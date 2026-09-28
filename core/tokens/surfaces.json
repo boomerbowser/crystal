@@ -28,7 +28,7 @@
       "name": "Resin plane",
       "materials": ["Resin"],
       "class": ".cr-resin",
-      "use": "One clustered navigation or control plane, pill-shaped: toolbars, action bars, shared button planes, segmented strips, the transport bar of a player. Controls inside it lose their own backdrop filter — Resin never contains Resin."
+      "use": "One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter — Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock."
     },
     {
       "id": "resin-panel",
@@ -117,7 +117,7 @@
       "materials": ["Resin", "Haze"],
       "class": ".cr-dock",
       "also": [".cr-dock-inner"],
-      "use": "The floating destination group: a Resin pill with a Haze perimeter, transparent destinations inside it, primary fill and weight 800 on the current one."
+      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars, button groups. The controls inside are transparent; the current or selected one takes weight 800 and a fill — primary for a dock's destination, primary-soft for a strip's segment."
     },
     {
       "id": "nav-item",
