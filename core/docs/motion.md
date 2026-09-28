@@ -43,7 +43,7 @@ Mirage uses an expanding elliptical mask with a broad feathered front rather tha
 
 ## Working examples
 
-Each Replay button runs a finite animation. **Replay Mirage exit** withdraws and hides the specimen; **Replay Mirage** brings it back. Animation speed ranges from 0.25× to 2× and applies to specimens, scene transitions, button feedback and modal/backdrop timings. It is saved as `motionSpeed` alongside appearance and included in CSS/JSON exports. Labels show the resolved duration. Each resolved duration is `min(5000ms, baseDuration / motionSpeed)`; reduced motion resolves it to zero. Default sequences should stay within 0–2 seconds. Five seconds is a hard ceiling, including any extra API replay-rate adjustment. At 0.25×, Resin would take 5.6 seconds and is capped at 5 seconds; other effects retain their own scaled timings. Interactions, data and focus respond immediately even during a long visual transition. Appearance and reduced-motion preferences are shared with the main playground. No effects autoplay or loop.
+Each Replay button runs a finite animation. **Replay Mirage exit** withdraws and hides the specimen; **Replay Mirage** brings it back. Animation speed ranges from 0.25× to 2× and applies to specimens, scene transitions, button feedback and modal/backdrop timings. It is saved as `motionSpeed` alongside appearance and included in CSS/JSON exports. Labels show the resolved duration. Each resolved duration is `min(5000ms, baseDuration / motionSpeed)`; reduced motion resolves it to zero. Default sequences should stay within 0–2 seconds. Five seconds is a hard ceiling, including any extra API replay-rate adjustment. At 0.25×, Resin would take 5.6 seconds and is capped at 5 seconds; other effects retain their own scaled timings. Interactions, data and focus respond immediately even during a long visual transition. Appearance and reduced-motion preferences are shared with the main playground. No effect autoplays, and nothing loops, with one exception: a **continuous indicator** — `activity-turn`, `activity-travel`, `skeleton-sweep` — repeats while the work it reports is genuinely pending and stops when that work resolves. It is not ambient motion, which is what a surface does at rest; a continuous indicator has no rest state, only a pending one. All three share one period, `motion.flow`, and reduced motion replaces each with its whole track or fill, static. The rule is enforced by `tools/validate-motion.cjs`, which refuses a loop by any other name.
 
 The native modal opens with Haze’s in-place edge motion, matching its content material, while Mirage reveals the backdrop. Its content stays fixed on entrance; dismissal fades it in place while its edge settles. Focus and modality take effect immediately. The 650ms default exit (scaled by the speed preference, capped at five seconds) finishes before the dialog closes and focus returns. Escape uses that same path; repeated dismissal requests do not stack.
 
@@ -230,7 +230,7 @@ including that reduced motion still applies the state instantly.
 
 <!-- generated:recipes -->
 
-All 57 recipes in 9 categories, generated from `core/tokens/motion-recipes.json`. **Damping ratio** and
+All 61 recipes in 9 categories, generated from `core/tokens/motion-recipes.json`. **Damping ratio** and
 **overshoot** are derived from each recipe's spring by `core/assets/core/spring.js`, not
 authored — so a spring that was retuned cannot leave a stale number behind in this table.
 
@@ -299,6 +299,8 @@ correct is a material question, not a taste question — see the signature polic
 | `highlight` — Updated content | 500ms | feather | haze | 0.920 | none | A brief update cue paired with actual content or announcement. | Apply the semantic state immediately; omit decorative movement. |
 | `message-in` — Message arrival | 650ms | feather | haze | 0.920 | none | Only on a new message; do not replay on virtualized history or steal scroll. | Apply the semantic state immediately; omit decorative movement. |
 | `reaction` — Reaction response | 680ms | coalesce | resin | 0.620 | 8.4% | Toggle the real reaction state and count before the response. | Apply the semantic state immediately; omit decorative movement. |
+| `skeleton-sweep` — Luminance sweep | 1200ms | feather | haze | linear loop | — | A skeleton while its content is genuinely loading, on the Haze fill and never on the text that replaces it. Ends with skeleton-resolve. | Static Haze fill. |
+| `mark-in` — Mark arriving | 500ms | feather | haze | 1.000 | none | A data mark — a bar, a series, a segment — growing from its baseline when a chart first appears, and not when its data later changes. transform-origin is the baseline. Staggered by index up to 24 marks; past that every mark arrives together, because a sequence nobody can count is decoration. Staggered 24ms per mark, up to 24. | Marks appear in place at their values. |
 
 #### Feedback
 
@@ -312,6 +314,8 @@ correct is a material question, not a taste question — see the signature polic
 | `busy` — Finite busy cue | 680ms | feather | stone | 0.920 | none | One cycle for an actual pending operation; keep a static busy label if it lasts longer. | Apply the semantic state immediately; omit decorative movement. |
 | `skeleton-resolve` — Loading content resolve | 650ms | feather | haze | 0.920 | none | Replace a skeleton only when real data arrives; no endless shimmer. | Apply the semantic state immediately; omit decorative movement. |
 | `empty-in` — Empty-state reveal | 500ms | coalesce | resin | 0.620 | 8.4% | Shown only when the collection is actually empty. | Apply the semantic state immediately; omit decorative movement. |
+| `activity-turn` — Indeterminate arc | 1200ms | feather | stone | linear loop | — | A loader, or an indeterminate progress ring, while an operation is genuinely pending — and only then. Starts when the work starts and stops when it resolves. One period for every continuous indicator, so two in one view never tick against each other. | Static: the whole track visible and nothing turning. Never a partial arc, which reports a measurement nobody took. |
+| `activity-travel` — Indeterminate bar | 1200ms | feather | stone | linear loop | — | Indeterminate linear progress while an operation is genuinely pending, stopping when it resolves or becomes measurable. | Static: the whole track visible. A segment frozen part of the way along reports a measurement nobody took. |
 
 #### Media
 
@@ -341,6 +345,10 @@ correct is a material question, not a taste question — see the signature polic
 | `stone-contour` — Stone contour ripple | 1300ms | feather | stone | 0.920 | none | Explicit material choreography for a large specimen; replay is a visual study, not an application action. | Keep the resting material visible; omit choreography. |
 
 **Spring policy.** Every recipe carries a spring fitted to its authored duration, which remains the authority. Damping ratio is chosen by signature: inertia and coalesce overshoot because momentum is their material claim, feather and caustic do not because a soft edge that bounces is wrong. Disabling springs must reproduce the keyframes exactly.
+
+**Continuous policy.** A continuous recipe is the one kind of motion that repeats, and it is not ambient: it reports work that is genuinely pending, runs only while that work is pending, and stops when it resolves. Nothing loops at rest. Every continuous recipe travels linearly at one period, motion.flow, so no two indicators in a view tick against each other, and none carries a spring, because a loop has no rest position to settle to. Reduced motion removes it and leaves the whole track or fill in place — never a partial segment, which would report a measurement nobody took.
+
+**Stagger policy.** A recipe that animates many marks at once may declare a stagger: a step between consecutive marks and a ceiling on how many are staggered. Past the ceiling every mark arrives together. The whole staggered sequence stays within the recipe's duration ceiling, and a recipe that shows data declares overshoot never and is critically damped — a mark that overshoots its value has shown a number that is not true.
 
 **Travel policy.** 5–30px ordinary, 50px guidance; justified large transitions may exceed it. Haze and Stone paint moves locally while text stays fixed.
 

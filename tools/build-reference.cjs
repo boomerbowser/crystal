@@ -121,14 +121,26 @@ function recipeSection() {
       '| Recipe | Duration | Signature | Material | Damping ζ | Overshoot | Use | Reduced motion |',
       '| --- | --- | --- | --- | --- | --- | --- | --- |');
     for (const r of rows) {
-      const zeta = spring.dampingRatio(r.spring);
-      const peak = spring.peakOvershoot(r.spring);
-      const over = peak > 0.001 ? `${(peak * 100).toFixed(1)}%` : 'none';
-      lines.push(`| \`${r.id}\` — ${esc(r.label)} | ${r.duration}ms | ${r.signature || '—'} | ${r.material || '—'} | ${zeta.toFixed(3)} | ${over} | ${esc(r.use || '—')} | ${esc(r.reduced || '—')} |`);
+      /* A continuous recipe has no spring, on purpose — it has no rest position to
+         settle to. Asking spring.js for its damping ratio would return the
+         defaults' ratio and print physics the recipe does not have. */
+      let zetaCell, over;
+      if (!r.spring) {
+        zetaCell = 'linear loop';
+        over = '—';
+      } else {
+        const peak = spring.peakOvershoot(r.spring);
+        zetaCell = spring.dampingRatio(r.spring).toFixed(3);
+        over = peak > 0.001 ? `${(peak * 100).toFixed(1)}%` : 'none';
+      }
+      const stagger = r.stagger ? ` Staggered ${r.stagger.step}ms per mark, up to ${r.stagger.maxMarks}.` : '';
+      lines.push(`| \`${r.id}\` — ${esc(r.label)} | ${r.duration}ms | ${r.signature || '—'} | ${r.material || '—'} | ${zetaCell} | ${over} | ${esc((r.use || '—') + stagger)} | ${esc(r.reduced || '—')} |`);
     }
     lines.push('');
   }
   lines.push('**Spring policy.** ' + motion.springPolicy, '');
+  lines.push('**Continuous policy.** ' + motion.continuousPolicy, '');
+  lines.push('**Stagger policy.** ' + motion.staggerPolicy, '');
   lines.push('**Travel policy.** ' + motion.travelPolicy, '');
   lines.push('**Incompressibility.** ' + motion.incompressibility, '');
   return lines.join('\n');
@@ -188,7 +200,8 @@ function componentRecipeTable() {
   const lines = ['| ID | Material / behavior | Engine | Base duration | Intended use |',
                  '|---|---|---|---|---|'];
   for (const r of motion.recipes) {
-    lines.push(`| \`${r.id}\` | ${r.material} / ${r.signature} | ${r.engine} | ${r.duration}ms | ${esc(r.use || '—')} |`);
+    const length = r.loop ? `${r.duration}ms per cycle, while pending` : `${r.duration}ms`;
+    lines.push(`| \`${r.id}\` | ${r.material} / ${r.signature} | ${r.engine} | ${length} | ${esc(r.use || '—')} |`);
   }
   return lines.join('\n');
 }

@@ -1,4 +1,6 @@
-/* Crystal material choreography. All effects are finite and cancellable. */
+/* Crystal material choreography. Every effect is cancellable, and every effect is finite
+   except a continuous indicator — activity-turn, activity-travel, skeleton-sweep — which
+   repeats while its work is pending and is stopped by the caller when the work resolves. */
 (function(root){
   'use strict';
   const media=matchMedia('(prefers-reduced-motion: reduce)'),active=new Map();
@@ -53,8 +55,21 @@
     element.dataset.crMotionSignature=recipe.signature||'measured-layout';
     if(reduced()){element.dataset.crMotionState='instant';return Promise.resolve({status:'instant'});}
     const opts={duration:duration(base,options.rate),engine,easing:recipe.signature==='inertia'?'cubic-bezier(0.16, 0.7, 0.2, 1)':recipe.signature==='coalesce'?'cubic-bezier(0.34, 0.08, 0.24, 1)':'cubic-bezier(0.22, 0.65, 0.22, 1)'};
+    /* A continuous recipe travels at constant speed and repeats until stop() — the
+       returned promise settles only when it is cancelled, which is the caller's to do
+       the moment the pending work resolves. */
+    if(recipe.loop){opts.easing=recipe.easing||'linear';opts.repeat=Infinity;}
+    /* A staggered mark waits its turn: `index` is its position and `count` how many
+       marks arrive together. Past the recipe's ceiling every mark arrives at once, so
+       a stagger never needs a count nobody can see; without a count there is no
+       stagger, because a mark cannot know it is the last. */
+    if(recipe.stagger&&Number.isInteger(options.index)&&Number.isInteger(options.count)&&options.count<=recipe.stagger.maxMarks)
+      opts.delay=duration(options.index*recipe.stagger.step,options.rate);
     const animations=[CrystalEngines.frames(element,frames,opts)];
-    opticalLayers(element,recipe,opts,animations);
+    /* The optical layers are finite decoration on a transition. On a loop they would
+       repeat with it, and a feathered edge that ripples for as long as something is
+       loading is ambient motion by another route. */
+    if(!recipe.loop)opticalLayers(element,recipe,opts,animations);
     active.set(element,animations);element.dataset.crMotionState='running';
     return Promise.all(animations.map(animation=>animation.finished.then(()=>true,error=>{if(error.name!=='AbortError')throw error;return false;}))).then(results=>{
       const status=results.every(Boolean)?'finished':'cancelled';

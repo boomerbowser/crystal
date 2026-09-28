@@ -108,7 +108,9 @@
       "product": "Real progress. Never simulate progress for work that is not measurable.",
       "motion": [
         "progress-change",
-        "busy"
+        "busy",
+        "activity-travel",
+        "activity-turn"
       ],
       "parity": [
         "mantine:Progress",
@@ -161,7 +163,8 @@
       "crystal": "Mark, motion and reduced-motion fallback",
       "product": "When it appears and what it describes",
       "motion": [
-        "busy"
+        "busy",
+        "activity-turn"
       ],
       "parity": [
         "mantine:Loader",
@@ -186,7 +189,8 @@
       "crystal": "Fill, sweep, reduced-motion fallback, resolve transition",
       "product": "Which shapes match which content",
       "motion": [
-        "skeleton-resolve"
+        "skeleton-resolve",
+        "skeleton-sweep"
       ],
       "parity": [
         "mantine:Skeleton",

@@ -43,6 +43,9 @@
       "semantics": "Every series is named; values are reachable as text.",
       "crystal": "Bar geometry, series colour from the palette, enter motion",
       "product": "Data, stacking, axes",
+      "motion": [
+        "mark-in"
+      ],
       "parity": [
         "mui-x-charts:BarChart",
         "primereact:chart"
@@ -64,8 +67,11 @@
       ],
       "geometry": "Line weight follows the stroke scale; points reach 44px of hit area.",
       "semantics": "Series are distinguishable without colour alone.",
-      "crystal": "Stroke scale, point geometry, draw-on motion",
+      "crystal": "Stroke scale, point geometry, enter motion (mark-in)",
       "product": "Data, curve type, axes",
+      "motion": [
+        "mark-in"
+      ],
       "parity": [
         "mui-x-charts:LineChart"
       ]
@@ -110,6 +116,9 @@
       "semantics": "Each segment is labelled with its value; the total is stated.",
       "crystal": "Segment colour ordering, separation, enter motion",
       "product": "Data and labels",
+      "motion": [
+        "mark-in"
+      ],
       "parity": [
         "mui-x-charts:PieChart"
       ]

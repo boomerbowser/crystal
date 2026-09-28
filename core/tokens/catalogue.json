@@ -1354,7 +1354,7 @@
             "field"
           ],
           "geometry": "Stepper targets meet 44px even when visually compact",
-          "semantics": "Native number input or a text input with inputmode and role=spinbutton; arrow keys must step",
+          "semantics": "A text input with inputmode=numeric whose bounds are announced when reached; arrow keys must step. Not role=spinbutton, which VoiceOver cannot focus.",
           "crystal": "Shell, stepper treatment, at-bound states",
           "product": "Step size, precision, clamping and locale formatting",
           "motion": [
@@ -3873,7 +3873,9 @@
           "product": "Real progress. Never simulate progress for work that is not measurable.",
           "motion": [
             "progress-change",
-            "busy"
+            "busy",
+            "activity-travel",
+            "activity-turn"
           ],
           "parity": [
             "mantine:Progress",
@@ -3926,7 +3928,8 @@
           "crystal": "Mark, motion and reduced-motion fallback",
           "product": "When it appears and what it describes",
           "motion": [
-            "busy"
+            "busy",
+            "activity-turn"
           ],
           "parity": [
             "mantine:Loader",
@@ -3951,7 +3954,8 @@
           "crystal": "Fill, sweep, reduced-motion fallback, resolve transition",
           "product": "Which shapes match which content",
           "motion": [
-            "skeleton-resolve"
+            "skeleton-resolve",
+            "skeleton-sweep"
           ],
           "parity": [
             "mantine:Skeleton",
@@ -5413,6 +5417,9 @@
           "semantics": "Every series is named; values are reachable as text.",
           "crystal": "Bar geometry, series colour from the palette, enter motion",
           "product": "Data, stacking, axes",
+          "motion": [
+            "mark-in"
+          ],
           "parity": [
             "mui-x-charts:BarChart",
             "primereact:chart"
@@ -5434,8 +5441,11 @@
           ],
           "geometry": "Line weight follows the stroke scale; points reach 44px of hit area.",
           "semantics": "Series are distinguishable without colour alone.",
-          "crystal": "Stroke scale, point geometry, draw-on motion",
+          "crystal": "Stroke scale, point geometry, enter motion (mark-in)",
           "product": "Data, curve type, axes",
+          "motion": [
+            "mark-in"
+          ],
           "parity": [
             "mui-x-charts:LineChart"
           ]
@@ -5480,6 +5490,9 @@
           "semantics": "Each segment is labelled with its value; the total is stated.",
           "crystal": "Segment colour ordering, separation, enter motion",
           "product": "Data and labels",
+          "motion": [
+            "mark-in"
+          ],
           "parity": [
             "mui-x-charts:PieChart"
           ]
@@ -6126,7 +6139,7 @@
             "field"
           ],
           "geometry": "Pill; both controls reach 44px.",
-          "semantics": "A spin button: the value is typable, and the bounds are announced when reached.",
+          "semantics": "A typable numeric field: the value is read as its text, and the bounds are announced when reached. Not role=spinbutton — a spin button cannot be focused with VoiceOver, so the role would put the control out of some readers' reach.",
           "crystal": "Materials, press recipe on each control",
           "product": "Bounds, step, stock rules",
           "motion": [

@@ -82,7 +82,7 @@
         "field"
       ],
       "geometry": "Stepper targets meet 44px even when visually compact",
-      "semantics": "Native number input or a text input with inputmode and role=spinbutton; arrow keys must step",
+      "semantics": "A text input with inputmode=numeric whose bounds are announced when reached; arrow keys must step. Not role=spinbutton, which VoiceOver cannot focus.",
       "crystal": "Shell, stepper treatment, at-bound states",
       "product": "Step size, precision, clamping and locale formatting",
       "motion": [

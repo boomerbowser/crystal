@@ -2,7 +2,7 @@
 
 [Open the live component studies](../motion.html#component-motion) · [Search all recipes](../motion.html#recipe-library) · [Run browser contracts](../motion-contracts.html)
 
-Crystal ships 57 executable component recipes in nine families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
+Crystal ships 61 executable component recipes in nine families — three of them continuous indicators of pending work — the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
 
 ## Engine responsibilities
 
@@ -51,8 +51,9 @@ The same formula applies to **display labels, tags, badges and keyboard caps**. 
 | Resizable panel / split view | `resize-settle`, `layout()` | Host owns resize handles and keyboard bounds |
 | Chat message / reaction / activity entry | `message-in`, `reaction`, `highlight` | Real local/remote data state; no forced scroll or replay on history |
 | Toast / snackbar / banner | `toast-in/out`, `attention` | Persistent readable status; manual dismissal in this preview |
-| Progress bar / transfer indicator | `progress-change`, `success` | Actual measured progress; never animate a fabricated success |
-| Busy indicator / skeleton | `busy`, `skeleton-resolve` | Real pending/ready state, no inference from animation completion |
+| Progress bar / transfer indicator | `progress-change`, `success`; indeterminate: `activity-travel` (bar) or `activity-turn` (ring) | Actual measured progress; never animate a fabricated success. Indeterminate only while the work cannot be measured, and determinate the moment it can |
+| Busy indicator / skeleton | `busy`, `skeleton-resolve`; while pending: `activity-turn` (loader), `skeleton-sweep` (skeleton) | Real pending/ready state, no inference from animation completion. The continuous recipe runs only while the work is pending and stops when it resolves |
+| Chart mark — bar, series, segment | `mark-in`, staggered by index | Plays when the chart first appears, never when its data changes; critically damped, so no mark ever shows a value it does not have |
 | Empty state / no-results panel | `empty-in` | Actual empty collection or search result |
 | Image / video surface / lightbox | `media-in`, `caption-in`, Haze/Mirage if modal | Decode/readiness event, reserved layout space, media controls owned by host |
 | Carousel / gallery / thumbnail strip | `carousel-next/previous`, `selection` | Explicit navigation, item count, descriptive text; no autoplay |
@@ -126,6 +127,10 @@ Base times below are at 1×; the preview resolves the saved speed at playback. E
 | `haze-tide` | haze / feather | GSAP | 1800ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. |
 | `stone-contour` | stone / feather | GSAP | 1300ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. |
 | `check-off` | plastic / iris | Motion | 300ms | Checkbox and radio indicators returning to unchecked. Paired with `check`; the iris closes toward the same point it opened from. |
+| `activity-turn` | stone / feather | Motion | 1200ms per cycle, while pending | A loader, or an indeterminate progress ring, while an operation is genuinely pending — and only then. Starts when the work starts and stops when it resolves. One period for every continuous indicator, so two in one view never tick against each other. |
+| `activity-travel` | stone / feather | Motion | 1200ms per cycle, while pending | Indeterminate linear progress while an operation is genuinely pending, stopping when it resolves or becomes measurable. |
+| `skeleton-sweep` | haze / feather | Motion | 1200ms per cycle, while pending | A skeleton while its content is genuinely loading, on the Haze fill and never on the text that replaces it. Ends with skeleton-resolve. |
+| `mark-in` | haze / feather | Motion | 500ms | A data mark — a bar, a series, a segment — growing from its baseline when a chart first appears, and not when its data later changes. transform-origin is the baseline. Staggered by index up to 24 marks; past that every mark arrives together, because a sequence nobody can count is decoration. |
 <!-- /generated:component-recipes -->
 
 ## Runtime API

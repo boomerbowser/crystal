@@ -19,12 +19,12 @@ This chapter is generated from `core/tokens/catalogue/`. The same source generat
 | [Overlays](#overlays) | 11 | 9 |
 | [Typography](#typography) | 17 | 2 |
 | [Utility and behaviour](#utility-and-behaviour) | 25 | 2 |
-| [Charts](#charts) | 24 | 2 |
+| [Charts](#charts) | 24 | 5 |
 | [Media](#media) | 5 | 4 |
 | [Commerce](#commerce) | 24 | 15 |
 | [Screens](#screens) | 15 | 10 |
 | [Blocks](#blocks) | 20 | 6 |
-| **Total** | **285** | **162** |
+| **Total** | **285** | **165** |
 
 ## Surfaces
 
@@ -742,7 +742,7 @@ Text input anatomy with increment and decrement controls.
 <tr><th scope="row">Material</th><td>Resin shell; steppers share the plane rather than floating separately</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-field">Field shell</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Stepper targets meet 44px even when visually compact</td></tr>
-<tr><th scope="row">Semantics</th><td>Native number input or a text input with inputmode and role=spinbutton; arrow keys must step</td></tr>
+<tr><th scope="row">Semantics</th><td>A text input with inputmode=numeric whose bounds are announced when reached; arrow keys must step. Not role=spinbutton, which VoiceOver cannot focus.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Shell, stepper treatment, at-bound states</td></tr>
 <tr><th scope="row">Product owns</th><td>Step size, precision, clamping and locale formatting</td></tr>
 <tr><th scope="row">Motion</th><td><code>field-focus</code>, <code>field-invalid</code>, <code>field-valid</code></td></tr>
@@ -2194,7 +2194,7 @@ A determinate or indeterminate track showing work in flight.
 <tr><th scope="row">Semantics</th><td>role=progressbar with aria-valuenow when determinate; indeterminate omits the value rather than faking one</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Track, fill, indeterminate motion and reduced-motion fallback</td></tr>
 <tr><th scope="row">Product owns</th><td>Real progress. Never simulate progress for work that is not measurable.</td></tr>
-<tr><th scope="row">Motion</th><td><code>progress-change</code>, <code>busy</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>progress-change</code>, <code>busy</code>, <code>activity-travel</code>, <code>activity-turn</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Progress · mui:LinearProgress · antd:Progress</td></tr>
 </tbody></table></div>
 
@@ -2226,7 +2226,7 @@ A compact indeterminate activity mark.
 <tr><th scope="row">Semantics</th><td>Accompanied by text saying what is loading; reduced motion replaces spin with a static, still-legible state</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Mark, motion and reduced-motion fallback</td></tr>
 <tr><th scope="row">Product owns</th><td>When it appears and what it describes</td></tr>
-<tr><th scope="row">Motion</th><td><code>busy</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>busy</code>, <code>activity-turn</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Loader · mui:CircularProgress · antd:Spin</td></tr>
 </tbody></table></div>
 
@@ -2242,7 +2242,7 @@ Placeholder shapes matching the layout of content that is loading.
 <tr><th scope="row">Semantics</th><td>aria-hidden with a live region announcing loading; must not be read as content</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Fill, sweep, reduced-motion fallback, resolve transition</td></tr>
 <tr><th scope="row">Product owns</th><td>Which shapes match which content</td></tr>
-<tr><th scope="row">Motion</th><td><code>skeleton-resolve</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>skeleton-resolve</code>, <code>skeleton-sweep</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Skeleton · mui:Skeleton · antd:Skeleton</td></tr>
 </tbody></table></div>
 
@@ -3232,6 +3232,7 @@ Categorical values as bars, grouped or stacked.
 <tr><th scope="row">Semantics</th><td>Every series is named; values are reachable as text.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Bar geometry, series colour from the palette, enter motion</td></tr>
 <tr><th scope="row">Product owns</th><td>Data, stacking, axes</td></tr>
+<tr><th scope="row">Motion</th><td><code>mark-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>mui-x-charts:BarChart · primereact:chart</td></tr>
 </tbody></table></div>
 
@@ -3245,8 +3246,9 @@ Continuous values as lines, with optional points.
 <tr><th scope="row">Surface</th><td><a href="#surface-none">No surface of its own</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Line weight follows the stroke scale; points reach 44px of hit area.</td></tr>
 <tr><th scope="row">Semantics</th><td>Series are distinguishable without colour alone.</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Stroke scale, point geometry, draw-on motion</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Stroke scale, point geometry, enter motion (mark-in)</td></tr>
 <tr><th scope="row">Product owns</th><td>Data, curve type, axes</td></tr>
+<tr><th scope="row">Motion</th><td><code>mark-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>mui-x-charts:LineChart</td></tr>
 </tbody></table></div>
 
@@ -3277,6 +3279,7 @@ Parts of a whole as segments.
 <tr><th scope="row">Semantics</th><td>Each segment is labelled with its value; the total is stated.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Segment colour ordering, separation, enter motion</td></tr>
 <tr><th scope="row">Product owns</th><td>Data and labels</td></tr>
+<tr><th scope="row">Motion</th><td><code>mark-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>mui-x-charts:PieChart</td></tr>
 </tbody></table></div>
 
@@ -3709,7 +3712,7 @@ A bounded integer with decrement and increment.
 <tr><th scope="row">Material</th><td>Resin shell with a Haze well</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-field">Field shell</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill; both controls reach 44px.</td></tr>
-<tr><th scope="row">Semantics</th><td>A spin button: the value is typable, and the bounds are announced when reached.</td></tr>
+<tr><th scope="row">Semantics</th><td>A typable numeric field: the value is read as its text, and the bounds are announced when reached. Not role=spinbutton — a spin button cannot be focused with VoiceOver, so the role would put the control out of some readers' reach.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Materials, press recipe on each control</td></tr>
 <tr><th scope="row">Product owns</th><td>Bounds, step, stock rules</td></tr>
 <tr><th scope="row">Motion</th><td><code>slider-step</code></td></tr>

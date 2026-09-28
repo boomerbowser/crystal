@@ -1696,3 +1696,98 @@ One correction to the entry above: it attributed the `font-weight` difference to
 the same pair of rules. It is not. `font-weight: 750` is set once, in the reset
 rule, and nothing overrides it — so 750 is what Crystal renders and the React
 library's 700 was a divergence of its own, fixed there rather than here.
+
+## D-19 · Crystal specifies three continuous activity indicators and publishes no vocabulary for one
+
+*(Opened 23 September 2026, building Crystal React's feedback slice. Filed on the
+tracker as [boomerbowser/crystal#1](https://github.com/boomerbowser/crystal/issues/1)
+on 24 September 2026, because closing it is a decision rather than a change and
+the decision wants somewhere public to be made.)*
+
+**What is missing.** `core/tokens/catalogue/06-feedback.json` puts the motion of
+three components on Crystal's side of the line:
+
+- `loader` — "Crystal: Mark, **motion** and reduced-motion fallback", and
+  "reduced motion replaces **spin** with a static, still-legible state".
+- `skeleton` — "Haze fill with a slow **luminance sweep**"; "Crystal: Fill,
+  **sweep**, reduced-motion fallback, resolve transition".
+- `progress` — "Crystal: Track, fill, **indeterminate motion** and
+  reduced-motion fallback".
+
+`core/docs/motion.md` publishes fifty-four recipes and none of them is any of
+those three. Every recipe Crystal has is a **finite, spring-fitted transition**
+from one state to another — `busy` is explicitly "one cycle for an actual pending
+operation", `attention` is "single finite cue… never flash or loop", and
+`skeleton-resolve` describes the moment a skeleton is *replaced*, not the time it
+spends waiting. The motion chapter also states outright that "no effects autoplay
+or loop".
+
+**Why that is a gap rather than a decision.** The two statements are both
+Crystal's and they contradict each other: the catalogue asks three components to
+spin, sweep and travel continuously, and the motion chapter says nothing loops
+and provides nothing that does. A consumer cannot satisfy both, and the one
+reading that is certainly wrong is "the catalogue means a spinner that does not
+spin" — a loader with no motion is indistinguishable from a static glyph, which
+is the state the catalogue reserves for *reduced motion*.
+
+**What a consumer did about it.** `crystal-react` shipped all three on
+23 September 2026. Each continuous indicator takes **one** duration — `--cr-flow`, Crystal's
+own published 1200ms — and authors only the *shape* of the movement, which for a
+travelling bar and a turning arc is determined by the geometry rather than
+chosen. One period across all of them, not one per component: two indicators in
+the same library ticking at different rates is the same drift as two renderers
+doing it, only closer together. Each is multiplied by `--cr-motion-enabled` and
+divided by `--cr-motion-speed` like everything else that moves there, and each
+is removed under `prefers-reduced-motion: reduce`, where it becomes the static
+legible state the catalogue asks for — and "static" there means *the whole
+track*, because a travelling segment frozen two fifths along reports a
+measurement nobody took. `Marquee` set this precedent earlier in the same
+library, for the same reason.
+
+**Why it should not stay there.** Two renderers that each pick their own spinner
+period is exactly the drift `component.chart.stroke` and
+`component.progress.ringStroke` were added to prevent, one release ago. The
+durations above are a stand-in, not a specification.
+
+**Closing it needs a decision from Meridian first**, because it changes what
+Crystal's motion chapter claims: either a small class of **continuous** recipes
+(an activity period and its easing, distinct from the fifty-four transitions, and
+the sentence about looping qualified to exempt them), or a ruling that these
+three components carry no continuous motion at all — in which case the catalogue
+entries for `loader`, `skeleton` and `progress` need rewriting, and the three
+components in `crystal-react` need their motion removed.
+
+**Closed 28 September 2026, by Meridian's ruling on §4.1 of
+[`2026-09-28-component-recipes.md`](2026-09-28-component-recipes.md): adopt what
+the consumer renders, as a small class of continuous recipes.**
+
+Three recipes, in `core/tokens/motion-recipes.json`: `activity-turn` (an
+indeterminate arc, for a loader or a progress ring), `activity-travel` (an
+indeterminate bar) and `skeleton-sweep` (the skeleton's luminance sweep). All
+three travel linearly at one period — `motion.flow`, the 1200ms Crystal React
+had already chosen and that is a published token, so "two indicators never tick
+against each other" is a value a platform library reads rather than a promise.
+None carries a spring, because a loop has no rest position to settle to. Under
+reduced motion each becomes its whole track or fill, static.
+
+**What keeps it from reopening the ambient tier.** The motion chapter's "no
+effects autoplay or loop" is qualified to name the exception, and the exception
+is enforced rather than described: `tools/validate-motion.cjs` refuses a looping
+recipe that is not one of the three, a continuous recipe that does not travel,
+and one at any period but `motion.flow`. Each rule was planted red — `press`
+made to loop, `activity-turn` at 1000ms, `skeleton-sweep` set to alternate —
+before being trusted. `continuousPolicy` in the recipe file says the same thing
+for a platform library that reads data rather than chapters.
+
+**The runtime had to learn it too.** `core/assets/motion.js` and
+`core/engines.js` played every recipe once on an ease curve; a continuous recipe
+handed to them would have run a single cycle that surged and slowed. They now
+repeat a continuous recipe until `stop()`, at constant speed, and leave out the
+optical layers — a feathered edge rippling for as long as something is loading
+would be ambient motion by another route. Measured in a browser against the
+bundled engine: infinite iterations, linear, 1200ms; the same test against the
+previous runtime gives one iteration on the default curve.
+
+`loader`, `progress` and `skeleton` claim the recipes
+(`tools/extend-catalogue-5.cjs` is the record). Crystal React binds them, which
+closes the consumer's side.

@@ -6,6 +6,36 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
 
 ### Added
 
+- **Continuous indicators, for work that is genuinely pending** (D-19, ruled by
+  Meridian on 28 September). `activity-turn` (a loader, or an indeterminate
+  progress ring), `activity-travel` (an indeterminate bar) and `skeleton-sweep`
+  (the skeleton's luminance sweep) are the only recipes that repeat. They run
+  while the work they report is pending and stop when it resolves; all three
+  travel linearly at one period, `motion.flow`, and carry no spring; reduced
+  motion leaves the whole track or fill, static. The motion chapter's "no
+  effects autoplay or loop" names the exception, and `tools/validate-motion.cjs`
+  refuses a loop by any other name, at any other period, or one that rocks
+  rather than travels. `loader`, `progress` and `skeleton` claim them. Closes
+  [#1](https://github.com/boomerbowser/crystal/issues/1).
+
+- **`mark-in`, a data mark arriving** (Crystal React's R-21, ruled on 28
+  September). A bar, series or segment grows from its baseline when a chart first
+  appears — 500ms, staggered 24ms per mark up to 24 marks, all together past that.
+  It declares `overshoot: "never"` and is fitted critically damped, because a
+  mark that overshoots its value has shown a number that is not true; that and
+  the new `stagger` field are validated, and a staggered sequence is held to the
+  same 2000ms ceiling as a single transition. `bar-chart`, `line-chart` and
+  `pie-chart` claim it.
+
+- **The browser runtime plays both.** `core/assets/motion.js` and
+  `core/engines.js` played every recipe once on an ease curve. A continuous
+  recipe now repeats at constant speed until `stop()`, without the optical
+  layers — a feathered edge rippling for as long as something is loading would
+  be ambient motion by another route — and a staggered one takes
+  `{ index, count }` and waits its turn. Measured in a browser against the
+  bundled engine, and against the previous runtime, which gives one cycle on the
+  default curve and no stagger.
+
 - **Every component names its surface.** `core/tokens/surfaces.json` is a closed
   vocabulary of 22 material compositions — Plastic, Frost, Haze, the Resin plane
   and panel, the control, the field shell, compact display, Stone, Mirage, the
@@ -62,6 +92,15 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
 
 ### Changed
 
+- **The quantity stepper is not a spin button, and neither is the number
+  input** (Crystal React's R-22, ruled on 28 September). Both entries asked for
+  `role=spinbutton`; the accessible primitive underneath removes it on purpose,
+  because a spin button cannot be focused with VoiceOver, and trading
+  reachability for a role name regresses the accessible surface. Both now
+  describe a typable numeric field whose bounds are announced when reached.
+  `line-chart`'s "draw-on motion" is the enter motion it now has. The old
+  sentences are quoted in `tools/extend-catalogue-5.cjs`.
+
 - **Transient overlays are Frost, and the specification now says so
   everywhere.** Meridian moved tooltip, popover, menu and toast to Frost on
   17 September 2026 (R15e), and the documentation site has rendered them so
@@ -86,6 +125,11 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
   and not in the package.
 
 ### Fixed
+
+- The recipe table in the motion chapter asked `spring.js` for the damping
+  ratio of every recipe, including any without a spring — which returns the
+  defaults' ratio and would have printed physics a loop does not have. A recipe
+  with no spring is shown as a linear loop.
 
 - **`tools/build-catalogue.cjs` wrote the parity manifest outside the
   repository** — to `../libraries/parity.json`, a path left from the monorepo
@@ -121,8 +165,6 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
   **For consumers:** a library that consumed `action.minTarget` grows its action
   controls by 4px and thereby matches Crystal for the first time. Nothing that
   reads the stylesheet changes at all.
-
-### Fixed
 
 - **`tests/core-contracts.cjs` was green on a rule that did not render.** It
   bound each geometry token to the first `.cr-button` rule it found, which is

@@ -2568,10 +2568,134 @@
           }
         }
       }
+    },
+    {
+      "id": "activity-turn",
+      "category": "Feedback",
+      "label": "Indeterminate arc",
+      "duration": 1200,
+      "engine": "Motion",
+      "loop": true,
+      "direction": "normal",
+      "easing": "linear",
+      "keyframes": [
+        {
+          "transform": "rotate(0deg)",
+          "offset": 0
+        },
+        {
+          "transform": "rotate(360deg)",
+          "offset": 1
+        }
+      ],
+      "use": "A loader, or an indeterminate progress ring, while an operation is genuinely pending — and only then. Starts when the work starts and stops when it resolves. One period for every continuous indicator, so two in one view never tick against each other.",
+      "reduced": "Static: the whole track visible and nothing turning. Never a partial arc, which reports a measurement nobody took.",
+      "material": "stone",
+      "signature": "feather"
+    },
+    {
+      "id": "activity-travel",
+      "category": "Feedback",
+      "label": "Indeterminate bar",
+      "duration": 1200,
+      "engine": "Motion",
+      "loop": true,
+      "direction": "normal",
+      "easing": "linear",
+      "keyframes": [
+        {
+          "transform": "translateX(-100%)",
+          "offset": 0
+        },
+        {
+          "transform": "translateX(100%)",
+          "offset": 1
+        }
+      ],
+      "travelException": "A travelling segment crosses its own track, and the track is its bound; the travel is a fraction of the track rather than a distance on the page.",
+      "use": "Indeterminate linear progress while an operation is genuinely pending, stopping when it resolves or becomes measurable.",
+      "reduced": "Static: the whole track visible. A segment frozen part of the way along reports a measurement nobody took.",
+      "material": "stone",
+      "signature": "feather"
+    },
+    {
+      "id": "skeleton-sweep",
+      "category": "Content",
+      "label": "Luminance sweep",
+      "duration": 1200,
+      "engine": "Motion",
+      "loop": true,
+      "direction": "normal",
+      "easing": "linear",
+      "keyframes": [
+        {
+          "backgroundPosition": "200% 0",
+          "offset": 0
+        },
+        {
+          "backgroundPosition": "-200% 0",
+          "offset": 1
+        }
+      ],
+      "use": "A skeleton while its content is genuinely loading, on the Haze fill and never on the text that replaces it. Ends with skeleton-resolve.",
+      "reduced": "Static Haze fill.",
+      "material": "haze",
+      "signature": "feather"
+    },
+    {
+      "id": "mark-in",
+      "category": "Content",
+      "label": "Mark arriving",
+      "duration": 500,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "scaleY(0)",
+          "opacity": 0,
+          "offset": 0
+        },
+        {
+          "transform": "scaleY(1)",
+          "opacity": 1,
+          "offset": 1
+        }
+      ],
+      "overshoot": "never",
+      "stagger": {
+        "step": 24,
+        "maxMarks": 24
+      },
+      "use": "A data mark — a bar, a series, a segment — growing from its baseline when a chart first appears, and not when its data later changes. transform-origin is the baseline. Staggered by index up to 24 marks; past that every mark arrives together, because a sequence nobody can count is decoration.",
+      "reduced": "Marks appear in place at their values.",
+      "material": "haze",
+      "signature": "feather",
+      "spring": {
+        "stiffness": 644.657,
+        "damping": 50.7802,
+        "mass": 1,
+        "dampingRatio": 1,
+        "platform": {
+          "swiftUI": {
+            "response": 0.2475,
+            "dampingFraction": 1
+          },
+          "compose": {
+            "dampingRatio": 1,
+            "stiffness": 644.657
+          },
+          "web": {
+            "stiffness": 644.657,
+            "damping": 50.7802,
+            "mass": 1
+          }
+        }
+      }
     }
   ],
   "travelPolicy": "5–30px ordinary, 50px guidance; justified large transitions may exceed it. Haze and Stone paint moves locally while text stays fixed.",
   "springPolicy": "Every recipe carries a spring fitted to its authored duration, which remains the authority. Damping ratio is chosen by signature: inertia and coalesce overshoot because momentum is their material claim, feather and caustic do not because a soft edge that bounces is wrong. Disabling springs must reproduce the keyframes exactly.",
+  "continuousPolicy": "A continuous recipe is the one kind of motion that repeats, and it is not ambient: it reports work that is genuinely pending, runs only while that work is pending, and stops when it resolves. Nothing loops at rest. Every continuous recipe travels linearly at one period, motion.flow, so no two indicators in a view tick against each other, and none carries a spring, because a loop has no rest position to settle to. Reduced motion removes it and leaves the whole track or fill in place — never a partial segment, which would report a measurement nobody took.",
+  "staggerPolicy": "A recipe that animates many marks at once may declare a stagger: a step between consecutive marks and a ceiling on how many are staggered. Past the ceiling every mark arrives together. The whole staggered sequence stays within the recipe's duration ceiling, and a recipe that shows data declares overshoot never and is critically damped — a mark that overshoots its value has shown a number that is not true.",
   "incompressibility": "Deformations conserve volume: every scale(sx, sy) satisfies sx*sy = 1 within 0.005. Corrected by dividing both axes by the square root of the area, which preserves each deformation's aspect ratio exactly and removes only the compressibility error. Enforced by tools/validate-motion.cjs.",
   "ambientPolicy": "Ambient motion is what a surface does at rest. It is a capability tier, not a default: a platform declares support, and a surface opts in. Two rules are absolute. Ambient runs on the rim and the fill and never on a surface the user is reading, for the same reason Resin lenses at its edge rather than rippling through its middle. And it is the first motion that prefers-reduced-motion removes — WCAG 2.2.2 requires that anything moving for more than five seconds can be stopped, and an ambient loop never stops on its own. Where a platform cannot honour it, ambient degrades to a static surface with no other change."
 }

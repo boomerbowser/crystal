@@ -76,7 +76,11 @@ for (const recipe of data.recipes) {
   /* Travelling loops are linear by definition; fitting a spring to one would
      invent physics it does not have. */
   if (recipe.loop && recipe.direction === 'normal') { delete recipe.spring; continue; }
-  const zeta = DAMPING[recipe.signature] ?? DEFAULT_DAMPING;
+  /* A recipe that shows data overrides its signature. A mark that overshoots its
+     value has, for part of a second, shown a number that is not true — so a
+     recipe declaring `overshoot: "never"` is fitted critically damped whatever
+     material it is made of. */
+  const zeta = recipe.overshoot === 'never' ? 1 : (DAMPING[recipe.signature] ?? DEFAULT_DAMPING);
   const fitted = fit(recipe.duration, zeta);
   const settle = spring.settleTime(fitted);
   const driftPct = Math.abs(settle - recipe.duration) / recipe.duration * 100;

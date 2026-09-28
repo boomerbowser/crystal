@@ -6,16 +6,16 @@ it would take.
 
 **Three entries are left.** D-4's remaining half is waiting on hardware, D-17
 is a flake nobody can diagnose until it happens again with the evidence kept,
-and D-19 is a gap in the motion chapter that a consumer has already had to work
-around.
+and D-21 is a hover treatment the stylesheet specifies and layer order erases —
+Meridian's to rule on, with a recommendation in §4.3 of
+[`2026-09-28-component-recipes.md`](2026-09-28-component-recipes.md).
+D-19 closed on 28 September 2026: Meridian adopted three continuous recipes for
+work that is genuinely pending, and the motion chapter now says a loop by any
+other name is refused. The reasoning is in [`closed-issues.md`](closed-issues.md).
 D-20 closed on 24 September 2026: Meridian chose 48px, the value Crystal has
 always rendered, so the token moved up to meet the stylesheet rather than the
 stylesheet down to meet the token. The reasoning is in
 [`closed-issues.md`](closed-issues.md).
-**D-19 and D-21 each have a recommended resolution, with the recipe JSON written out,
-in §4 of [`2026-09-28-component-recipes.md`](2026-09-28-component-recipes.md)** — the
-proposal that gave every catalogue entry a surface and every surface a recipe. Neither
-is implemented; both are Meridian's.
 D-18 closed on 23 September 2026 — its premise was wrong, and the reasoning is in
 [`closed-issues.md`](closed-issues.md).
 
@@ -160,66 +160,6 @@ now writes and the CI job now uploads: `actual-forced-colours-dark.png` beside
 above are what that image has to be read against.
 
 ---
-
-## D-19 · Crystal specifies three continuous activity indicators and publishes no vocabulary for one
-
-*(Opened 23 September 2026, building Crystal React's feedback slice. Filed on the
-tracker as [boomerbowser/crystal#1](https://github.com/boomerbowser/crystal/issues/1)
-on 24 September 2026, because closing it is a decision rather than a change and
-the decision wants somewhere public to be made.)*
-
-**What is missing.** `core/tokens/catalogue/06-feedback.json` puts the motion of
-three components on Crystal's side of the line:
-
-- `loader` — "Crystal: Mark, **motion** and reduced-motion fallback", and
-  "reduced motion replaces **spin** with a static, still-legible state".
-- `skeleton` — "Haze fill with a slow **luminance sweep**"; "Crystal: Fill,
-  **sweep**, reduced-motion fallback, resolve transition".
-- `progress` — "Crystal: Track, fill, **indeterminate motion** and
-  reduced-motion fallback".
-
-`core/docs/motion.md` publishes fifty-four recipes and none of them is any of
-those three. Every recipe Crystal has is a **finite, spring-fitted transition**
-from one state to another — `busy` is explicitly "one cycle for an actual pending
-operation", `attention` is "single finite cue… never flash or loop", and
-`skeleton-resolve` describes the moment a skeleton is *replaced*, not the time it
-spends waiting. The motion chapter also states outright that "no effects autoplay
-or loop".
-
-**Why that is a gap rather than a decision.** The two statements are both
-Crystal's and they contradict each other: the catalogue asks three components to
-spin, sweep and travel continuously, and the motion chapter says nothing loops
-and provides nothing that does. A consumer cannot satisfy both, and the one
-reading that is certainly wrong is "the catalogue means a spinner that does not
-spin" — a loader with no motion is indistinguishable from a static glyph, which
-is the state the catalogue reserves for *reduced motion*.
-
-**What a consumer did about it.** `crystal-react` shipped all three on
-23 September 2026. Each continuous indicator takes **one** duration — `--cr-flow`, Crystal's
-own published 1200ms — and authors only the *shape* of the movement, which for a
-travelling bar and a turning arc is determined by the geometry rather than
-chosen. One period across all of them, not one per component: two indicators in
-the same library ticking at different rates is the same drift as two renderers
-doing it, only closer together. Each is multiplied by `--cr-motion-enabled` and
-divided by `--cr-motion-speed` like everything else that moves there, and each
-is removed under `prefers-reduced-motion: reduce`, where it becomes the static
-legible state the catalogue asks for — and "static" there means *the whole
-track*, because a travelling segment frozen two fifths along reports a
-measurement nobody took. `Marquee` set this precedent earlier in the same
-library, for the same reason.
-
-**Why it should not stay there.** Two renderers that each pick their own spinner
-period is exactly the drift `component.chart.stroke` and
-`component.progress.ringStroke` were added to prevent, one release ago. The
-durations above are a stand-in, not a specification.
-
-**Closing it needs a decision from Meridian first**, because it changes what
-Crystal's motion chapter claims: either a small class of **continuous** recipes
-(an activity period and its easing, distinct from the fifty-four transitions, and
-the sentence about looping qualified to exempt them), or a ruling that these
-three components carry no continuous motion at all — in which case the catalogue
-entries for `loader`, `skeleton` and `progress` need rewriting, and the three
-components in `crystal-react` need their motion removed.
 
 ## D-21 · Crystal specifies a hover treatment for its button that layer order erases
 

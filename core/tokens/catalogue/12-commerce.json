@@ -79,7 +79,7 @@
         "field"
       ],
       "geometry": "Pill; both controls reach 44px.",
-      "semantics": "A spin button: the value is typable, and the bounds are announced when reached.",
+      "semantics": "A typable numeric field: the value is read as its text, and the bounds are announced when reached. Not role=spinbutton — a spin button cannot be focused with VoiceOver, so the role would put the control out of some readers' reach.",
       "crystal": "Materials, press recipe on each control",
       "product": "Bounds, step, stock rules",
       "motion": [

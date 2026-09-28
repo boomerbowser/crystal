@@ -83,7 +83,7 @@ this rule came from are in
 
 ## Reduced motion
 
-`prefers-reduced-motion: reduce` is honoured by every one of the 57 motion recipes. Each
+`prefers-reduced-motion: reduce` is honoured by every one of the 61 motion recipes. Each
 recipe declares its own `reduced` behaviour rather than being globally switched off,
 because "no animation" and "no *movement*" are different requirements.
 
@@ -92,6 +92,13 @@ travel does not.** A menu that opens still opens. A button that has been pressed
 shows it has been pressed. What is removed is the travel, the overshoot and the shader
 layer. Reduced motion resolves to zero displacement regardless of the recipe's spring —
 this is asserted by `tools/validate-motion.cjs`, not left to each implementation.
+
+The three continuous indicators are the one place this reads differently, because what they
+report is not a change but a state that lasts: work that is pending. Under reduced motion the
+movement goes and the whole track or fill stays, static — never a segment frozen part of the way
+along, which would report a measurement nobody took — and the text beside the indicator still
+says what is loading. With or without reduced motion, a continuous indicator stops when the work
+resolves; none of them repeats at rest.
 
 ## Reduced transparency
 
@@ -161,7 +168,7 @@ backdrops with the fixed Resin fill.
 | Failures | 0 |
 | Lowest result of any kind | 3.07:1 |
 | Lowest normal-text result | 4.67:1 |
-| Checks run | 2026-09-24 |
+| Checks run | 2026-09-28 |
 
 Normal text is held to 4.5:1. Essential non-text — focus rings, control boundaries,
 indicator lines — uses its separate 3:1 threshold, which is the correct standard for those
