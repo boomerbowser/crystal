@@ -33,6 +33,15 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
   ruled on 28 September): measured at 1.06:1, decorative, the field identified by
   its shell, its well and its label.
 
+### Fixed
+
+- The `dock` surface's description said a strip's selected segment takes the
+  primary-soft fill. It takes the primary fill, as the tab and segmented-control
+  entries say, as `.cr-dock button:is([aria-pressed=true],[aria-selected=true])`
+  draws it, and as the documentation site renders a selected tab. The wrong
+  sentence was written from Crystal React's strip rather than from Crystal, in
+  the same change that corrected the surfaces.
+
 ## [2.2.0] — 2026-09-28
 
 A minor release that gives the catalogue something to be checked against. Every

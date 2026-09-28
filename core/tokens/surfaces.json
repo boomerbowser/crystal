@@ -117,7 +117,7 @@
       "materials": ["Resin", "Haze"],
       "class": ".cr-dock",
       "also": [".cr-dock-inner"],
-      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars, button groups. The controls inside are transparent; the current or selected one takes weight 800 and a fill — primary for a dock's destination, primary-soft for a strip's segment."
+      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars, button groups. The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment."
     },
     {
       "id": "nav-item",
