@@ -4,13 +4,14 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 not fixed. Each says what is wrong, why it matters, where it is, and what closing
 it would take.
 
-**Five entries are left.** D-4's remaining half is waiting on hardware, D-17
+**Six entries are left.** D-4's remaining half is waiting on hardware, D-17
 is a flake nobody can diagnose until it happens again with the evidence kept,
 D-21 is a hover treatment the stylesheet specifies and layer order erases —
 Meridian's to rule on, with a recommendation in §4.3 of
 [`2026-09-28-component-recipes.md`](2026-09-28-component-recipes.md) — D-25
-holds three findings from Crystal React's surface sweep, and D-26 two things the
-dock surface names that `.cr-dock` does not yet draw.
+holds three findings from Crystal React's surface sweep, D-26 two things the
+dock surface names that `.cr-dock` does not yet draw, and D-27 two small marks
+whose recipes do not reach the element a consumer has.
 D-22, D-23 and D-24 closed on 28 September 2026, each by Meridian's ruling: the
 navigation entry draws its location dot, the catalogue's surfaces match what
 renders, and the field shell is adopted as written.
@@ -254,3 +255,25 @@ wearing `.cr-dock` for all of them as written:
   — no padding or gap, the children square inside and the pill outside, and a
   hairline in `--cr-edge` between them — or a ruling that a group is a different
   surface.
+
+## D-27 · Two small marks the compact and indicator recipes do not reach
+
+*(Opened 28 September 2026, by Crystal React's per-surface check.)*
+
+- **A count badge is `compact`, and `.cr-resin-haze` is sized for a tag.** Its
+  Haze pad is inset by `--cr-haze-inset`, 8px, and its block padding is a tag's
+  17px. On a 20px count badge the first leaves a pad a few pixels across with the
+  digit mostly outside it, and the second makes the badge 55px tall. Crystal
+  React releases both on its badge and fills to the badge's own edge; its gate
+  names the inset as the one allowed difference. Closing it: a compact size for
+  counts — the inset scaled to the mark, no block padding — or a ruling that a
+  count badge is a different surface.
+- **The indicator's field glyphs are keyed on `span.cr-field-shell`.** ○ idle,
+  ● focused, * required and ! invalid are drawn only when `.cr-indicator` is a
+  child of a `span` field shell. A field shell that holds a label, a textarea or
+  a row of chips is a block, and a consumer writes it as a `div` — every one in
+  Crystal React is — so the glyphs never reach it. Closing it: key those rules on
+  `.cr-field-shell` whatever its element, or on a `data-` attribute the field
+  sets, without disturbing the `span` form's own padding rule. Crystal React's
+  `Indicator` waits on this (its R-25).
+
