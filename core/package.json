@@ -1,6 +1,6 @@
 {
   "name": "@crystal-ui/core",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Crystal design system: tokens, material primitives, headless core, icons and specifications.",
   "keywords": [],
   "type": "commonjs",
@@ -43,6 +43,7 @@
       "default": "./assets/core/presets.js"
     },
     "./catalogue": "./tokens/catalogue.json",
+    "./surfaces": "./tokens/surfaces.json",
     "./resolver": {
       "types": "./assets/crystal.d.ts",
       "default": "./assets/crystal.js"

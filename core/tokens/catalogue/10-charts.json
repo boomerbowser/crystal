@@ -14,6 +14,9 @@
         "focus-visible"
       ],
       "material": "Haze plot fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Plot area keeps the content radius; the legend is a list of pills.",
       "semantics": "Each chart has an accessible name and a table equivalent of its data.",
       "crystal": "Materials, grid and axis colour, focus order, empty and loading surfaces",
@@ -33,6 +36,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Bars keep a small radius on the value end only.",
       "semantics": "Every series is named; values are reachable as text.",
       "crystal": "Bar geometry, series colour from the palette, enter motion",
@@ -53,6 +59,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Line weight follows the stroke scale; points reach 44px of hit area.",
       "semantics": "Series are distinguishable without colour alone.",
       "crystal": "Stroke scale, point geometry, draw-on motion",
@@ -72,6 +81,9 @@
         "empty"
       ],
       "material": "Haze fill beneath the line",
+      "surface": [
+        "none"
+      ],
       "geometry": "Fill never obscures gridlines beneath it.",
       "semantics": "As the line chart.",
       "crystal": "Fill material and opacity so overlaps stay readable",
@@ -91,6 +103,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Segments separated by a hairline in the surface colour.",
       "semantics": "Each segment is labelled with its value; the total is stated.",
       "crystal": "Segment colour ordering, separation, enter motion",
@@ -110,6 +125,9 @@
         "empty"
       ],
       "material": "Haze centre fill",
+      "surface": [
+        "none"
+      ],
       "geometry": "Ring thickness is a declared proportion of the radius.",
       "semantics": "The centre value is text, not an image.",
       "crystal": "Ring geometry, centre material",
@@ -129,6 +147,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Point size is a scale, not an arbitrary radius.",
       "semantics": "Dense regions remain describable; a table equivalent is required.",
       "crystal": "Point geometry, overlap treatment",
@@ -148,6 +169,9 @@
         "empty"
       ],
       "material": "Haze fill inside each series polygon",
+      "surface": [
+        "none"
+      ],
       "geometry": "Axis labels sit outside the outer ring.",
       "semantics": "Axes are labelled; series are named.",
       "crystal": "Fill opacity so overlapping series stay readable",
@@ -166,6 +190,9 @@
         "empty"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Fixed aspect; no padding of its own.",
       "semantics": "Needs a text summary beside it; it is never the only carrier of the value.",
       "crystal": "Stroke weight at small size",
@@ -184,6 +211,9 @@
         "empty"
       ],
       "material": "Haze track with a primary arc",
+      "surface": [
+        "none"
+      ],
       "geometry": "Matches the ring progress stroke.",
       "semantics": "role=\"meter\" with a text value.",
       "crystal": "Arc geometry, threshold colour from status tokens",
@@ -203,6 +233,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Cells are square with a hairline gap.",
       "semantics": "Intensity is paired with a value; colour alone never carries meaning.",
       "crystal": "Scale construction, contrast floor at every step",
@@ -222,6 +255,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Stages meet without gaps; labels sit outside when they do not fit.",
       "semantics": "Each stage states its absolute and relative value.",
       "crystal": "Stage geometry, label placement",
@@ -240,10 +276,16 @@
         "focus-visible"
       ],
       "material": "Haze entry fills",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Entries are pills and reach 44px.",
       "semantics": "Toggles are buttons with a pressed state; hidden series are announced.",
       "crystal": "Entry material, pressed state, selection by weight",
       "product": "Which series are toggleable",
+      "motion": [
+        "selection"
+      ],
       "parity": [
         "mui-x-charts:ChartsLegend"
       ]
@@ -257,10 +299,17 @@
         "shown"
       ],
       "material": "Frost panel",
+      "surface": [
+        "frost"
+      ],
       "geometry": "Panel radius; never covers the point it describes.",
       "semantics": "Mirrors the tooltip contract: reachable by keyboard, dismissible with Escape.",
       "crystal": "Material, follow motion, placement",
       "product": "Which values appear and their format",
+      "motion": [
+        "tooltip-in",
+        "tooltip-out"
+      ],
       "parity": [
         "mui-x-charts:ChartsTooltip"
       ]
@@ -276,6 +325,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Square cells with a hairline gap; week and month labels outside.",
       "semantics": "Every cell states its date and value; intensity is paired with a number.",
       "crystal": "Scale construction and the contrast floor at every step",
@@ -295,6 +347,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Hairline separation; labels drop out rather than overflow.",
       "semantics": "Navigable as a tree, with each node stating its share.",
       "crystal": "Nesting depth rendering, label policy",
@@ -314,6 +369,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Link opacity keeps crossings readable.",
       "semantics": "Each link states its endpoints and volume as text.",
       "crystal": "Link material and opacity so overlaps stay legible",
@@ -333,6 +391,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Wick and body share one x centre; body has no radius.",
       "semantics": "Each period is reachable and states all four values.",
       "crystal": "Rise and fall colour from the status tokens, never red and green alone",
@@ -352,6 +413,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Connectors align with bar edges.",
       "semantics": "Each step states its delta and the running total.",
       "crystal": "Increase, decrease and total colour from the status tokens",
@@ -370,6 +434,9 @@
         "empty"
       ],
       "material": "Haze range bands",
+      "surface": [
+        "none"
+      ],
       "geometry": "Single row; the target is a crisp marker, not a bar.",
       "semantics": "role=\"meter\" with the target stated in text.",
       "crystal": "Band materials, marker crispness",
@@ -389,6 +456,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Whisker caps align with the box width.",
       "semantics": "Each summary statistic is reachable as text; outliers are counted, not only drawn.",
       "crystal": "Box and whisker geometry",
@@ -408,6 +478,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Bins meet without gaps; the value end keeps a small radius.",
       "semantics": "Bin bounds and counts are text.",
       "crystal": "Bin geometry, series colour",
@@ -427,6 +500,9 @@
         "empty"
       ],
       "material": "Inherits the chart surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Region borders are hairlines in the rim colour.",
       "semantics": "Regions are reachable by keyboard and state their name and value; a table equivalent is required.",
       "crystal": "Scale construction, border treatment, contrast floor",
@@ -446,6 +522,9 @@
         "empty"
       ],
       "material": "Haze node fills",
+      "surface": [
+        "none"
+      ],
       "geometry": "Node size is a scale; edges are hairlines.",
       "semantics": "Nodes are reachable by keyboard; each states its degree and neighbours.",
       "crystal": "Node material, edge treatment, focus ring on a node",

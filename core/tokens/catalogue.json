@@ -1,6 +1,229 @@
 {
   "$description": "Crystal component catalogue, combined. Generated from core/tokens/catalogue/.",
-  "generated": "2026-09-24",
+  "generated": "2026-09-28",
+  "surfaces": [
+    {
+      "id": "plastic",
+      "name": "Plastic foundation",
+      "materials": [
+        "Plastic"
+      ],
+      "class": ".cr-plastic",
+      "use": "The root scene or window. One contextual, opaque foundation per view; never a component."
+    },
+    {
+      "id": "frost",
+      "name": "Frost panel",
+      "materials": [
+        "Frost"
+      ],
+      "class": ".cr-frost",
+      "use": "Intermediate task frames and every transient surface that opens over content: side panels, drawers, sheets, app bars, and — at Meridian's direction (R15e) — menus, popovers, tooltips and toasts. Reading content inside it sits on Haze."
+    },
+    {
+      "id": "haze",
+      "name": "Haze reading surface",
+      "materials": [
+        "Haze"
+      ],
+      "class": ".cr-haze",
+      "use": "Anything read: cards, rows, panels, wells, forms, messages, decisions. 80% fill, 1.95px feather on an isolated paint layer, crisp foreground. `.cr-well` is the same recipe recessed into a Frost or Resin frame."
+    },
+    {
+      "id": "resin",
+      "name": "Resin plane",
+      "materials": [
+        "Resin"
+      ],
+      "class": ".cr-resin",
+      "use": "One clustered navigation or control plane, pill-shaped: toolbars, action bars, shared button planes, segmented strips, the transport bar of a player. Controls inside it lose their own backdrop filter — Resin never contains Resin."
+    },
+    {
+      "id": "resin-panel",
+      "name": "Resin panel",
+      "materials": [
+        "Resin"
+      ],
+      "class": ".cr-resin.panel",
+      "use": "The Resin plane with the content radius instead of the pill, for a floating control plane that is a rectangle: a floating window, a media control bar wider than it is tall. Same fill, rim, blur and float shadow; only the geometry changes."
+    },
+    {
+      "id": "control",
+      "name": "Resin control",
+      "materials": [
+        "Resin",
+        "Haze"
+      ],
+      "class": ".cr-button",
+      "also": [
+        ".cr-control",
+        "button",
+        "a.cr-button"
+      ],
+      "use": "An action: a Resin shell with the 8px-inset Haze reading pad and the optical sheen. Pill geometry. `.primary` tints the pad, `.quiet` removes it, `.danger` adds the destructive boundary. Selected state is the primary pad plus label weight 800."
+    },
+    {
+      "id": "field",
+      "name": "Field shell",
+      "materials": [
+        "Resin",
+        "Haze"
+      ],
+      "class": ".cr-field-shell",
+      "use": "The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics."
+    },
+    {
+      "id": "compact",
+      "name": "Compact display",
+      "materials": [
+        "Resin",
+        "Haze"
+      ],
+      "class": ".cr-resin-haze",
+      "also": [
+        ".cr-tag"
+      ],
+      "use": "Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens — transient overlays are Frost."
+    },
+    {
+      "id": "stone",
+      "name": "Stone label backing",
+      "materials": [
+        "Stone"
+      ],
+      "class": ".cr-stone",
+      "use": "A label over an unknown or moving backdrop — a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text."
+    },
+    {
+      "id": "mirage",
+      "name": "Mirage scrim",
+      "materials": [
+        "Mirage"
+      ],
+      "class": ".cr-mirage",
+      "also": [
+        ".cr-dialog::backdrop"
+      ],
+      "use": "The chromatic diffusion of the real scene behind a modal. Never a content surface; the decision surface above it is Haze."
+    },
+    {
+      "id": "dialog",
+      "name": "Dialog",
+      "materials": [
+        "Haze",
+        "Mirage"
+      ],
+      "class": ".cr-dialog",
+      "use": "A Haze decision surface over a Mirage scrim, with the float shadow. Modality, focus and dismissal are the product's."
+    },
+    {
+      "id": "indicator",
+      "name": "Indicator",
+      "materials": [
+        "Haze"
+      ],
+      "class": ".cr-indicator",
+      "use": "A 20px informational circle painting Haze on an isolated layer, or the moving pill behind a selected segment. Haze rather than Resin, because it sits on a surface that is often already translucent. Never a selection mark."
+    },
+    {
+      "id": "status",
+      "name": "Status badge",
+      "materials": [
+        "Resin",
+        "Haze"
+      ],
+      "class": ".cr-status",
+      "use": "The semantic ink and surface pair behind a symbol, with words beside it. Status colours are independent of the palette and are never redefined by it."
+    },
+    {
+      "id": "bubble",
+      "name": "Authored bubble",
+      "materials": [
+        "Haze"
+      ],
+      "class": ".cr-bubble",
+      "use": "A Haze message surface with a directional tight corner. `.own` uses the palette's own-content pair."
+    },
+    {
+      "id": "table",
+      "name": "Table",
+      "materials": [
+        "Resin",
+        "Haze"
+      ],
+      "class": ".cr-table-scroll",
+      "also": [
+        ".cr-table"
+      ],
+      "use": "A Resin shell with an inset Haze fill holding the table, with the primary-soft header and the Resin scrollbar. Rows are read on the Haze; sort and selection are announced, and selection is label weight."
+    },
+    {
+      "id": "dock",
+      "name": "Dock",
+      "materials": [
+        "Resin",
+        "Haze"
+      ],
+      "class": ".cr-dock",
+      "also": [
+        ".cr-dock-inner"
+      ],
+      "use": "The floating destination group: a Resin pill with a Haze perimeter, transparent destinations inside it, primary fill and weight 800 on the current one."
+    },
+    {
+      "id": "nav-item",
+      "name": "Navigation entry",
+      "materials": [
+        "Plastic"
+      ],
+      "class": ".cr-nav-item",
+      "use": "An entry in side navigation, a rail or a tree of destinations. It has no material of its own — it is furniture on the panel beneath it — and carries selection by label weight alone. Pill hit area, 44px target. `.stacked` puts the icon above the label for a rail. Adopted from the documentation site's side menu, which docs/components.md names as the reference implementation of selection."
+    },
+    {
+      "id": "bare",
+      "name": "Bare control",
+      "materials": [],
+      "class": ".cr-bare",
+      "use": "A control that must not wear the Resin coat because it sits inside a surface that already has one: a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows, a dismiss button on a toast. Crystal paints every button by element, so bare means subtracting the fill, the shadow, the backdrop filter and both pseudo-layers — this class does all four. The focus ring and the target floor stay."
+    },
+    {
+      "id": "drag-handle",
+      "name": "Drag handle",
+      "materials": [],
+      "class": ".cr-drag-handle",
+      "use": "A bare control with a grip glyph and a lift while dragging. Keyboard drag is the product's; the handle only says it can be grabbed and when it has been."
+    },
+    {
+      "id": "choice",
+      "name": "Selection control",
+      "materials": [
+        "Resin"
+      ],
+      "class": "input:is([type=checkbox],[type=radio])",
+      "also": [
+        "input[type=checkbox][role=switch]",
+        "input[type=range]"
+      ],
+      "use": "Native checkbox, radio, switch and range, styled by element: a Resin box, circle or track with a contained mark, and the marked glass thumb. Semantics stay native."
+    },
+    {
+      "id": "native",
+      "name": "Native control furniture",
+      "materials": [],
+      "class": "select option",
+      "also": [
+        "input[type=file]::file-selector-button"
+      ],
+      "use": "Parts of native controls the browser draws and Crystal tints: select options, the file button. Platform-owned popups keep platform drawing."
+    },
+    {
+      "id": "none",
+      "name": "No surface of its own",
+      "materials": [],
+      "class": null,
+      "use": "Layout, typography, behaviour and drawing components that inherit whatever they sit on. A chart's marks, a divider, a provider. Nothing to paint and nothing to wear."
+    }
+  ],
   "categories": [
     {
       "id": "layout",
@@ -17,6 +240,11 @@
             "narrow"
           ],
           "material": "Plastic foundation; Frost supporting panels; Resin destination plane",
+          "surface": [
+            "plastic",
+            "frost",
+            "dock"
+          ],
           "geometry": "Panel radius = content radius + 6px",
           "semantics": "Landmark roles: banner, navigation, main, contentinfo. One main per view.",
           "crystal": "Material assignment per region, elevation ordering, safe-area handling",
@@ -35,6 +263,9 @@
             "default"
           ],
           "material": "None; inherits the surface beneath",
+          "surface": [
+            "none"
+          ],
           "geometry": "Gutters follow the 4px rhythm: 18/26/44px by viewport",
           "semantics": "Presentational only; must not introduce a landmark",
           "crystal": "Width ceiling and gutter scale",
@@ -53,6 +284,9 @@
             "default"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "Gutters from the 4px rhythm; 12-column reference",
           "semantics": "Presentational; reading order must match visual order",
           "crystal": "Gutter scale and breakpoint behaviour",
@@ -71,6 +305,9 @@
             "default"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "Shared gutter with Grid",
           "semantics": "Presentational",
           "crystal": "Minimum cell width and gutter",
@@ -89,6 +326,9 @@
             "default"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "Spacing from the 4px rhythm",
           "semantics": "Presentational",
           "crystal": "Spacing scale",
@@ -108,6 +348,9 @@
             "wrapped"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "Spacing from the 4px rhythm",
           "semantics": "Presentational",
           "crystal": "Spacing scale and wrap behaviour",
@@ -128,6 +371,9 @@
             "vertical"
           ],
           "material": "Edge colour token; never a heavy rule",
+          "surface": [
+            "none"
+          ],
           "geometry": "1px, full-bleed within its container",
           "semantics": "role=separator with an accessible name when labelled; decorative dividers are aria-hidden",
           "crystal": "Rule colour and label treatment",
@@ -146,6 +392,9 @@
             "default"
           ],
           "material": "Inherits; commonly wraps Image or a media surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Content radius when clipping media",
           "semantics": "Presentational",
           "crystal": "Reserving space so loading media does not shift layout",
@@ -166,6 +415,9 @@
             "at-end"
           ],
           "material": "Inherits; edge fade uses the surrounding material",
+          "surface": [
+            "none"
+          ],
           "geometry": "Inherits container radius; fade depth 24px",
           "semantics": "Keyboard scrollable; must be focusable when it is the only way to reach content",
           "crystal": "Scrollbar appearance, edge fade, reduced-motion behaviour",
@@ -184,6 +436,9 @@
             "default"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "None",
           "semantics": "Presentational",
           "crystal": "Nothing beyond layout",
@@ -202,6 +457,9 @@
             "default"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "4px rhythm",
           "semantics": "Presentational; never used to convey grouping to assistive technology",
           "crystal": "Spacing scale",
@@ -222,6 +480,9 @@
             "condensed"
           ],
           "material": "Frost band over the Plastic foundation",
+          "surface": [
+            "frost"
+          ],
           "geometry": "Full-bleed; no radius on the outer edges; actions are pills.",
           "semantics": "role=\"banner\" unless nested; the title is the page heading or labels one.",
           "crystal": "Material, elevation on scroll, action geometry",
@@ -240,6 +501,9 @@
             "reflowing"
           ],
           "material": "None of its own; children carry material",
+          "surface": [
+            "none"
+          ],
           "geometry": "Gap follows the spacing scale; columns respond to container width.",
           "semantics": "A list when the items are a set; otherwise presentational.",
           "crystal": "Spacing, breakpoint behaviour, reduced-motion reflow",
@@ -259,6 +523,10 @@
             "menu-open"
           ],
           "material": "Children keep theirs; the overflow menu is Frost",
+          "surface": [
+            "none",
+            "frost"
+          ],
           "geometry": "Overflow trigger is a pill and reaches 44px.",
           "semantics": "The overflow trigger names how many items it holds; hidden items stay reachable.",
           "crystal": "Measurement, the trigger, the menu material",
@@ -286,6 +554,9 @@
             "external"
           ],
           "material": "None; inherits reading surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Underline offset 4px",
           "semantics": "Native anchor with an href. A link that acts is a button, not a link.",
           "crystal": "Colour, underline offset, focus ring",
@@ -307,7 +578,10 @@
             "current",
             "disabled"
           ],
-          "material": "Resin shell with Haze fill",
+          "material": "None of its own: a navigation entry is furniture on the panel beneath it. Selection is label weight alone; hover and the current entry take the surface-alt fill",
+          "surface": [
+            "nav-item"
+          ],
           "geometry": "Pill; minimum 44px target",
           "semantics": "aria-current=\"page\" for the active destination, never aria-selected",
           "crystal": "Material, pill geometry, current-location dot, focus ring",
@@ -332,10 +606,18 @@
             "narrow"
           ],
           "material": "Frost panel, Resin active destination",
+          "surface": [
+            "frost",
+            "nav-item"
+          ],
           "geometry": "Panel radius = content radius + 6px",
           "semantics": "nav landmark with an accessible name; collapsed items keep accessible names",
           "crystal": "Panel material, collapse geometry, active treatment",
           "product": "Destination list, routing, collapse persistence",
+          "motion": [
+            "selection",
+            "page-in"
+          ],
           "parity": [
             "mantine:NavLink",
             "mui:Drawer",
@@ -353,6 +635,9 @@
             "focus"
           ],
           "material": "Resin plane, Stone label backing, primary fill on the selected destination",
+          "surface": [
+            "dock"
+          ],
           "geometry": "Pill; 52px minimum destination height",
           "semantics": "nav landmark; aria-pressed or aria-current on the destination",
           "crystal": "The single shared plane, label weight for the current entry, elevation",
@@ -378,6 +663,9 @@
             "current"
           ],
           "material": "None; sits on the reading surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Separator from the icon set; 44px targets on touch",
           "semantics": "nav landmark with an ordered list; aria-current=\"page\" on the final crumb",
           "crystal": "Separator, collapse behaviour, current treatment",
@@ -403,6 +691,9 @@
             "disabled"
           ],
           "material": "Resin strip, primary fill on the selected tab",
+          "surface": [
+            "resin"
+          ],
           "geometry": "Pill tabs inside a pill strip; 44px minimum",
           "semantics": "role=tablist/tab/tabpanel with arrow-key, Home and End navigation and aria-selected",
           "crystal": "Strip material, label weight for the selected tab, focus ring",
@@ -428,10 +719,16 @@
             "focus"
           ],
           "material": "Resin shells with Haze fill",
+          "surface": [
+            "control"
+          ],
           "geometry": "Pill; 44px minimum target",
           "semantics": "nav landmark with an accessible name; aria-current=\"page\" on the active page",
           "crystal": "Pill geometry, current treatment, elision rules",
           "product": "Page count, routing and the data fetch",
+          "motion": [
+            "selection"
+          ],
           "parity": [
             "mantine:Pagination",
             "mui:Pagination",
@@ -450,10 +747,18 @@
             "disabled"
           ],
           "material": "Resin step markers on a Haze track",
+          "surface": [
+            "control",
+            "haze"
+          ],
           "geometry": "Circular markers; connector 2px",
           "semantics": "Ordered list; the current step carries aria-current=\"step\"; state is announced in text, not by colour",
           "crystal": "Marker geometry, connector, state treatment",
           "product": "Step validation and whether steps are navigable",
+          "motion": [
+            "selection",
+            "page-in"
+          ],
           "parity": [
             "mantine:Stepper",
             "mui:Stepper",
@@ -472,6 +777,9 @@
             "focus"
           ],
           "material": "Resin shell",
+          "surface": [
+            "control"
+          ],
           "geometry": "Pill or circle; 44px minimum",
           "semantics": "button with aria-expanded and aria-controls, and a real accessible name",
           "crystal": "Material, geometry, the open/closed icon transition",
@@ -497,6 +805,11 @@
             "loading"
           ],
           "material": "Mirage scrim, Haze decision surface, Resin field shell",
+          "surface": [
+            "mirage",
+            "dialog",
+            "field"
+          ],
           "geometry": "Content radius; results list inset 8px",
           "semantics": "Modal dialog with a combobox; aria-activedescendant for the highlighted result",
           "crystal": "Overlay material, result row treatment, keyboard hint styling",
@@ -524,6 +837,9 @@
             "loading"
           ],
           "material": "Haze rows on the surrounding surface",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Indent step 20px; guides use the edge token",
           "semantics": "role=treegrid/row/gridcell with aria-expanded, aria-level, aria-posinset, aria-setsize and full arrow-key navigation. Not role=tree: a treeitem is a single navigable unit, so it cannot contain the expand control this anatomy requires — treegrid is the pattern ARIA provides for a row that holds its own control. See M-3.",
           "crystal": "Row treatment, indentation guides, label weight for the selected row",
@@ -547,6 +863,9 @@
             "pinned"
           ],
           "material": "Resin once pinned, to separate it from the content it floats over",
+          "surface": [
+            "resin"
+          ],
           "geometry": "Inherits the pinned element's geometry",
           "semantics": "Must not cover the focused element or the final content",
           "crystal": "The material change on pin and the elevation it takes",
@@ -568,10 +887,17 @@
             "focus-visible"
           ],
           "material": "Resin plane holding Haze label fills",
+          "surface": [
+            "dock"
+          ],
           "geometry": "Pill; targets at least 44px; respects the safe area.",
           "semantics": "role=\"navigation\"; the current destination carries aria-current=\"page\".",
           "crystal": "Material, geometry, selection by label weight, safe-area inset",
           "product": "Destinations and routing",
+          "motion": [
+            "selection",
+            "page-in"
+          ],
           "parity": [
             "mui:BottomNavigation"
           ]
@@ -586,10 +912,18 @@
             "focus-visible"
           ],
           "material": "Trigger inherits; panel is Frost",
+          "surface": [
+            "none",
+            "frost"
+          ],
           "geometry": "Panel radius = content radius + 6px.",
           "semantics": "Menubar semantics; arrow keys move between triggers, Escape closes.",
           "crystal": "Panel material, motion, focus handling",
           "product": "Menu structure and content",
+          "motion": [
+            "menu-in",
+            "menu-out"
+          ],
           "parity": [
             "primereact:navigationmenu",
             "antd:Menu"
@@ -605,10 +939,16 @@
             "focus-visible"
           ],
           "material": "Haze content fill",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Indentation follows heading depth; label weight marks the active entry.",
           "semantics": "role=\"navigation\" with an accessible name; the active entry uses aria-current=\"location\".",
           "crystal": "Active marking by label weight, spacing",
           "product": "Which headings are collected, scroll spy thresholds",
+          "motion": [
+            "selection"
+          ],
           "parity": [
             "mantine:TableOfContents"
           ]
@@ -623,10 +963,18 @@
             "focus-visible"
           ],
           "material": "Bar inherits; menus are Frost",
+          "surface": [
+            "none",
+            "frost"
+          ],
           "geometry": "Triggers are pills; menus keep panel radius.",
           "semantics": "Menubar semantics: arrows move between triggers, Home and End jump, typeahead selects.",
           "crystal": "Materials, open and close motion, focus handling",
           "product": "Menu structure and actions",
+          "motion": [
+            "menu-in",
+            "menu-out"
+          ],
           "parity": [
             "react-aria:Menu",
             "primereact:menubar",
@@ -643,10 +991,17 @@
             "focus-visible"
           ],
           "material": "Frost panel",
+          "surface": [
+            "frost"
+          ],
           "geometry": "Offset from its parent item; flips at the viewport edge.",
           "semantics": "The parent item carries aria-haspopup and aria-expanded; the submenu is reachable by arrow key and closes with Escape without closing its parent.",
           "crystal": "Panel material, stagger, edge flipping",
           "product": "Nesting depth and content",
+          "motion": [
+            "menu-in",
+            "menu-out"
+          ],
           "parity": [
             "react-aria:SubmenuTrigger",
             "primereact:tieredmenu"
@@ -672,6 +1027,9 @@
             "loading"
           ],
           "material": "Resin shell with Haze fill; the fill is neutral by default, the primary colour on .primary, and absent on .quiet. A danger boundary on .danger",
+          "surface": [
+            "control"
+          ],
           "geometry": "Pill (999px); 48px height; 15px/24px padding; 44px minimum target",
           "semantics": "Native button. A disabled button must not be the only explanation of unavailability.",
           "crystal": "Material, pill geometry, optical pressure, focus ring, variant hierarchy",
@@ -699,6 +1057,9 @@
             "toggled"
           ],
           "material": "Resin shell with Haze fill",
+          "surface": [
+            "control"
+          ],
           "geometry": "Pill or circle; 44px minimum target regardless of icon size",
           "semantics": "Requires an accessible name; the icon itself is aria-hidden. Toggles use aria-pressed.",
           "crystal": "Material, geometry, target floor, focus ring",
@@ -724,10 +1085,16 @@
             "disabled"
           ],
           "material": "One shared Resin plane, not one plane per button",
+          "surface": [
+            "resin"
+          ],
           "geometry": "Pill outer geometry; interior corners square against neighbours",
           "semantics": "group role with an accessible name when the buttons are related",
           "crystal": "The shared plane and interior separation",
           "product": "Which actions are grouped",
+          "motion": [
+            "press"
+          ],
           "parity": [
             "mantine:Button.Group",
             "mui:ButtonGroup",
@@ -746,6 +1113,9 @@
             "disabled"
           ],
           "material": "Shared Resin plane with a hairline between the two targets",
+          "surface": [
+            "resin"
+          ],
           "geometry": "Pill outer geometry; both halves meet the 44px floor independently",
           "semantics": "Two buttons; the disclosure carries aria-expanded and aria-haspopup=\"menu\"",
           "crystal": "Shared plane, separation, menu material",
@@ -772,6 +1142,9 @@
             "extended"
           ],
           "material": "Resin with the clearest floating shadow",
+          "surface": [
+            "control"
+          ],
           "geometry": "Circle, or pill when extended with a label",
           "semantics": "Requires an accessible name; must not cover the final content or the focused element",
           "crystal": "Material, elevation, extend behaviour, safe-area offset",
@@ -798,6 +1171,9 @@
             "error"
           ],
           "material": "Resin shell; the confirmation is a transient label change",
+          "surface": [
+            "control"
+          ],
           "geometry": "Pill; 44px minimum",
           "semantics": "The confirmation must reach assistive technology through a live region, not colour alone",
           "crystal": "Material, the confirmation transition and its timing",
@@ -823,10 +1199,16 @@
             "pressed"
           ],
           "material": "Resin shell, quiet variant",
+          "surface": [
+            "control"
+          ],
           "geometry": "Pill or circle; 44px minimum target",
           "semantics": "Accessible name naming what closes, not just \"Close\"; Escape must do the same thing",
           "crystal": "Material, geometry, placement within overlays",
           "product": "What dismissal does and whether it is destructive",
+          "motion": [
+            "press"
+          ],
           "parity": [
             "mantine:CloseButton",
             "mui:IconButton",
@@ -843,10 +1225,16 @@
             "focus-visible"
           ],
           "material": "Resin plane",
+          "surface": [
+            "resin"
+          ],
           "geometry": "Pill; floats above content with the floating elevation.",
           "semantics": "role=\"toolbar\"; announces how many items are selected.",
           "crystal": "Material, entry and exit motion, elevation",
           "product": "Which actions apply to a selection",
+          "motion": [
+            "press"
+          ],
           "parity": [
             "mantine:ActionBar"
           ]
@@ -862,10 +1250,18 @@
             "focus-visible"
           ],
           "material": "Resin trigger and Resin action pills",
+          "surface": [
+            "control"
+          ],
           "geometry": "Circular trigger; actions are pills; 44px minimum throughout.",
           "semantics": "The trigger is a button with aria-expanded; actions are labelled, never icon-only without a name.",
           "crystal": "Material, stagger on expansion, geometry",
           "product": "Which actions appear and what they do",
+          "motion": [
+            "press",
+            "menu-in",
+            "menu-out"
+          ],
           "parity": [
             "mui:SpeedDial",
             "primereact:speeddial",
@@ -893,6 +1289,9 @@
             "read-only"
           ],
           "material": "Resin shell, Haze well; the native field keeps its functional boundary",
+          "surface": [
+            "field"
+          ],
           "geometry": "Field well radius = content radius − 7px; shell 20px; 44px minimum height",
           "semantics": "Native input with a programmatically associated label, aria-invalid and aria-describedby for errors",
           "crystal": "Shell material, badge vocabulary (hollow circle idle, filled focused, asterisk required, exclamation invalid), focus ring",
@@ -922,6 +1321,9 @@
             "read-only"
           ],
           "material": "Resin shell, Haze well",
+          "surface": [
+            "field"
+          ],
           "geometry": "Well radius = content radius − 7px; minimum three visible lines",
           "semantics": "Native textarea with an associated label; autosize must not trap the caret",
           "crystal": "Shell material, badge placement at the well's top edge, focus ring",
@@ -948,10 +1350,18 @@
             "at-max"
           ],
           "material": "Resin shell; steppers share the plane rather than floating separately",
+          "surface": [
+            "field"
+          ],
           "geometry": "Stepper targets meet 44px even when visually compact",
           "semantics": "Native number input or a text input with inputmode and role=spinbutton; arrow keys must step",
           "crystal": "Shell, stepper treatment, at-bound states",
           "product": "Step size, precision, clamping and locale formatting",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid"
+          ],
           "parity": [
             "mantine:NumberInput",
             "mui:TextField",
@@ -970,10 +1380,18 @@
             "disabled"
           ],
           "material": "Resin shell; the toggle shares the shell",
+          "surface": [
+            "field"
+          ],
           "geometry": "Toggle meets the 44px floor",
           "semantics": "The reveal toggle is a button with aria-pressed and a real accessible name; never a decorative icon",
           "crystal": "Shell, toggle placement, strength meter treatment",
           "product": "Strength policy and what it reveals",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid"
+          ],
           "parity": [
             "mantine:PasswordInput",
             "mui:TextField",
@@ -992,10 +1410,18 @@
             "disabled"
           ],
           "material": "Resin shell, Haze well",
+          "surface": [
+            "field"
+          ],
           "geometry": "Pill well is permitted here, as search reads as an action surface",
           "semantics": "role=searchbox or type=search inside a search landmark; the clear control is a named button",
           "crystal": "Shell, icon placement, clear affordance, loading treatment",
           "product": "Debounce, the query and result rendering",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid"
+          ],
           "parity": [
             "mantine:TextInput",
             "mui:TextField",
@@ -1015,10 +1441,21 @@
             "disabled"
           ],
           "material": "Resin shell, Haze well",
+          "surface": [
+            "field",
+            "frost"
+          ],
           "geometry": "Well radius = content radius − 7px",
           "semantics": "Native select wherever the option set allows it; the badge never covers the platform arrow",
           "crystal": "Shell material, badge placement clear of the disclosure, focus ring",
           "product": "Options, grouping and change handling",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid",
+            "menu-in",
+            "menu-out"
+          ],
           "parity": [
             "mantine:NativeSelect",
             "mui:Select",
@@ -1040,6 +1477,10 @@
             "disabled"
           ],
           "material": "Resin field shell, Resin popover with Haze rows",
+          "surface": [
+            "field",
+            "frost"
+          ],
           "geometry": "Popover content radius; rows inset 8px",
           "semantics": "role=combobox with aria-expanded, aria-controls and aria-activedescendant; the list is never focus-stealing",
           "crystal": "Field and popover material, row treatment, label weight for selection, empty and loading appearance",
@@ -1069,10 +1510,24 @@
             "disabled"
           ],
           "material": "Resin shell, Haze chips",
+          "surface": [
+            "field",
+            "compact",
+            "frost"
+          ],
           "geometry": "Chips are pills; the shell grows in whole line steps",
           "semantics": "Each chip's remove control is a named button; removal must be reachable by keyboard",
           "crystal": "Chip geometry within the shell, overflow treatment, growth behaviour",
           "product": "Selection limits, the option set and the accessible implementation",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid",
+            "menu-in",
+            "menu-out",
+            "list-in",
+            "list-out"
+          ],
           "parity": [
             "mantine:MultiSelect",
             "mui:Autocomplete multiple",
@@ -1092,6 +1547,9 @@
             "invalid"
           ],
           "material": "Resin box, primary fill when checked",
+          "surface": [
+            "choice"
+          ],
           "geometry": "26px box, 9px radius; the whole label is a target meeting 44px",
           "semantics": "Native checkbox; indeterminate set through the property, not a class",
           "crystal": "Box material, the contained mark, focus ring",
@@ -1117,6 +1575,9 @@
             "disabled"
           ],
           "material": "Inherits the surrounding surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Spacing from the 4px rhythm",
           "semantics": "fieldset and legend, or role=group with an accessible name; errors describe the group",
           "crystal": "Grouping rhythm and error association treatment",
@@ -1139,18 +1600,21 @@
             "invalid"
           ],
           "material": "Resin circle, primary centre when selected",
+          "surface": [
+            "choice"
+          ],
           "geometry": "26px circle; label target meets 44px",
           "semantics": "Native radio in a named group; arrow keys move within the group",
           "crystal": "Circle material, contained centre mark, focus ring",
           "product": "Group naming and validation",
+          "motion": [
+            "check",
+            "check-off"
+          ],
           "parity": [
             "mantine:Radio",
             "mui:Radio",
             "antd:Radio"
-          ],
-          "motion": [
-            "check",
-            "check-off"
           ]
         },
         {
@@ -1163,6 +1627,9 @@
             "disabled"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "4px rhythm",
           "semantics": "fieldset and legend, or role=radiogroup with an accessible name",
           "crystal": "Grouping rhythm and error association",
@@ -1185,6 +1652,9 @@
             "loading"
           ],
           "material": "Resin track, primary-soft track when on, opaque thumb",
+          "surface": [
+            "choice"
+          ],
           "geometry": "44x28px track, circular thumb; 44px target",
           "semantics": "Native checkbox with role=switch, or a button with aria-checked; state must not rely on position alone",
           "crystal": "Track and thumb material, travel, focus ring on the track",
@@ -1211,6 +1681,9 @@
             "disabled"
           ],
           "material": "Primary fill to the value, primary-soft beyond; Resin thumb",
+          "surface": [
+            "choice"
+          ],
           "geometry": "8px track, 26px thumb; the thumb is the target and meets 44px in practice through padding",
           "semantics": "Native range or role=slider with aria-valuenow, valuemin, valuemax and valuetext",
           "crystal": "Track fill, thumb material, tick treatment, RTL mirroring",
@@ -1236,10 +1709,16 @@
             "collapsed"
           ],
           "material": "Primary fill between the thumbs",
+          "surface": [
+            "choice"
+          ],
           "geometry": "Shared with Slider; thumbs must remain separable when they meet",
           "semantics": "Two sliders with distinct accessible names; each announces its own bound",
           "crystal": "Span fill, thumb collision behaviour",
           "product": "Minimum span and what the range drives",
+          "motion": [
+            "slider-step"
+          ],
           "parity": [
             "mantine:RangeSlider",
             "mui:Slider range",
@@ -1258,6 +1737,9 @@
             "disabled"
           ],
           "material": "One Resin plane; primary fill on the selected segment",
+          "surface": [
+            "resin"
+          ],
           "geometry": "Pill strip and pill segments; 44px minimum",
           "semantics": "Radio group semantics, or aria-pressed on buttons; never aria-selected outside a tablist",
           "crystal": "Shared plane, label weight for the selected segment, focus ring",
@@ -1284,10 +1766,16 @@
             "read-only"
           ],
           "material": "Primary fill on the active symbols",
+          "surface": [
+            "none"
+          ],
           "geometry": "24px symbols on the icon grid; 44px targets when interactive",
           "semantics": "Radio group when interactive; plain text with a visible value when read-only. Never symbol-only.",
           "crystal": "Symbol treatment and fractional fill",
           "product": "Scale, precision and what the score means",
+          "motion": [
+            "selection"
+          ],
           "parity": [
             "mantine:Rating",
             "mui:Rating",
@@ -1307,10 +1795,18 @@
             "disabled"
           ],
           "material": "Resin shells with Haze wells",
+          "surface": [
+            "field"
+          ],
           "geometry": "Square-ish wells at the field radius; 44px minimum",
           "semantics": "One labelled group; paste must fill the whole value; backspace must move back",
           "crystal": "Well geometry, advance and focus treatment",
           "product": "Length, masking and verification",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid"
+          ],
           "parity": [
             "mantine:PinInput",
             "mui:—",
@@ -1330,10 +1826,21 @@
             "invalid"
           ],
           "material": "Resin shell, Haze chips",
+          "surface": [
+            "field",
+            "compact"
+          ],
           "geometry": "Pill chips; shell grows in whole line steps",
           "semantics": "Each chip has a named remove control; additions and removals are announced",
           "crystal": "Chip geometry, duplicate and limit treatment",
           "product": "Delimiters, validation and limits",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid",
+            "list-in",
+            "list-out"
+          ],
           "parity": [
             "mantine:TagsInput",
             "mui:Autocomplete freeSolo",
@@ -1353,10 +1860,17 @@
             "removable"
           ],
           "material": "Haze fill on a Resin rim; primary fill when selected",
+          "surface": [
+            "control"
+          ],
           "geometry": "Pill; 32px compact height with a 44px target",
           "semantics": "Selectable chips use aria-pressed; the remove control is a separate named button",
           "crystal": "Pill geometry, selected treatment, remove affordance",
           "product": "What the chip filters or represents",
+          "motion": [
+            "selection",
+            "press"
+          ],
           "parity": [
             "mantine:Chip",
             "mui:Chip",
@@ -1375,10 +1889,18 @@
             "disabled"
           ],
           "material": "Resin shell; the swatch is specimen content, not a reading well",
+          "surface": [
+            "field"
+          ],
           "geometry": "Circular swatch; picker at content radius",
           "semantics": "A text value must always be editable; colour alone is never the only representation",
           "crystal": "Swatch treatment, picker surface material",
           "product": "Colour space, format and the picker implementation",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid"
+          ],
           "parity": [
             "mantine:ColorInput",
             "mui:—",
@@ -1398,10 +1920,18 @@
             "open"
           ],
           "material": "Resin shell, Haze well",
+          "surface": [
+            "field"
+          ],
           "geometry": "Field radius; calendar at content radius",
           "semantics": "Typing must always be possible; the calendar is an enhancement, never the only route",
           "crystal": "Shell, disclosure placement, calendar surface",
           "product": "Locale, parsing, validation and the calendar implementation",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid"
+          ],
           "parity": [
             "mantine:DateInput",
             "mui:DatePicker",
@@ -1421,10 +1951,24 @@
             "out-of-month"
           ],
           "material": "Resin surface, Haze day cells, primary fill on the selection",
+          "surface": [
+            "field",
+            "frost",
+            "haze"
+          ],
           "geometry": "Circular day cells; 44px targets",
           "semantics": "role=grid with full arrow-key navigation; the selected date is announced in words",
           "crystal": "Surface, cell geometry, selection and range treatment",
           "product": "Date arithmetic, locale, disabled ranges and the grid keyboard implementation",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid",
+            "menu-in",
+            "menu-out",
+            "selection",
+            "page-in"
+          ],
           "parity": [
             "mantine:DatePicker",
             "mui:DateCalendar",
@@ -1443,10 +1987,24 @@
             "disabled"
           ],
           "material": "Primary-soft span fill between endpoints",
+          "surface": [
+            "field",
+            "frost",
+            "haze"
+          ],
           "geometry": "Span fill joins cells without breaking the 44px target",
           "semantics": "Start and end are separately named and separately announced",
           "crystal": "Span treatment and preview appearance",
           "product": "Range rules, minimum and maximum spans",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid",
+            "menu-in",
+            "menu-out",
+            "selection",
+            "page-in"
+          ],
           "parity": [
             "mantine:DatePicker type=range",
             "mui:DateRangePicker",
@@ -1465,10 +2023,18 @@
             "disabled"
           ],
           "material": "Resin shell, Haze well",
+          "surface": [
+            "field"
+          ],
           "geometry": "Field radius; segment targets meet 44px",
           "semantics": "Segments are individually focusable and individually announced",
           "crystal": "Shell and segment treatment",
           "product": "Locale, 12- or 24-hour policy and validation",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid"
+          ],
           "parity": [
             "mantine:TimeInput",
             "mui:TimePicker",
@@ -1487,10 +2053,19 @@
             "disabled"
           ],
           "material": "Resin action, Haze file rows",
+          "surface": [
+            "control",
+            "haze"
+          ],
           "geometry": "Pill action; rows at content radius",
           "semantics": "Native file input with a real label; progress and errors reach a live region",
           "crystal": "Action and row treatment, progress appearance",
           "product": "Upload, accepted types, size limits and retry",
+          "motion": [
+            "list-in",
+            "list-out",
+            "progress-change"
+          ],
           "parity": [
             "mantine:FileInput",
             "mui:—",
@@ -1510,6 +2085,9 @@
             "disabled"
           ],
           "material": "Haze surface with a dashed edge at rest, primary-soft while accepting",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; minimum 120px height",
           "semantics": "Must have a keyboard-reachable file action; drag and drop is never the only route",
           "crystal": "Surface, edge treatment and state appearance",
@@ -1535,6 +2113,9 @@
             "disabled"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Label to control 7px; control to helper 6px",
           "semantics": "Programmatic association through label, aria-describedby and aria-invalid. Errors are text, never colour alone.",
           "crystal": "Rhythm, label and helper treatment, error appearance",
@@ -1555,6 +2136,9 @@
             "invalid"
           ],
           "material": "Optional Haze panel for visually grouped sections",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius when a surface is used",
           "semantics": "Native fieldset and legend; disabling the set disables its controls",
           "crystal": "Grouping rhythm and optional panel treatment",
@@ -1577,6 +2161,10 @@
             "disabled"
           ],
           "material": "Haze list panels, Resin move actions",
+          "surface": [
+            "haze",
+            "control"
+          ],
           "geometry": "Content radius panels; pill actions",
           "semantics": "Each list is separately named; moves are announced; keyboard must move items without drag",
           "crystal": "Panel and action treatment, label weight for selection in the lists",
@@ -1604,10 +2192,22 @@
             "disabled"
           ],
           "material": "Resin popover, Haze columns",
+          "surface": [
+            "field",
+            "frost",
+            "haze"
+          ],
           "geometry": "Content radius; columns separated by a hairline",
           "semantics": "Each column is a listbox; the composed value is announced as a path",
           "crystal": "Popover and column treatment, label weight for the selected column entry",
           "product": "The hierarchy, lazy loading and the keyboard implementation",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid",
+            "menu-in",
+            "menu-out"
+          ],
           "parity": [
             "antd:Cascader",
             "mui:—",
@@ -1626,10 +2226,18 @@
             "disabled"
           ],
           "material": "Resin popover with Haze rows over the field",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Popover at content radius, anchored to the caret",
           "semantics": "Combobox semantics attached to the text surface; the inserted value is announced",
           "crystal": "Popover, row and inserted-token treatment",
           "product": "Trigger characters, the data source and insertion",
+          "motion": [
+            "menu-in",
+            "menu-out"
+          ],
           "parity": [
             "antd:Mentions",
             "mui:—",
@@ -1648,6 +2256,10 @@
             "read-only"
           ],
           "material": "Resin toolbar, Haze editing surface",
+          "surface": [
+            "resin",
+            "haze"
+          ],
           "geometry": "Toolbar is a pill group; surface at content radius",
           "semantics": "Toolbar actions use aria-pressed for active formatting; the editor exposes its own semantics",
           "crystal": "Toolbar and surface appearance, active-format treatment",
@@ -1669,6 +2281,9 @@
             "error"
           ],
           "material": "None; sits on the surrounding surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "6px below the control; never overlaps the field shell",
           "semantics": "Associated through aria-describedby. When an error replaces the hint, the error must also be associated and announced.",
           "crystal": "Rhythm, colour role, and the transition between hint and error",
@@ -1697,10 +2312,21 @@
             "disabled"
           ],
           "material": "Haze field fill inside a Resin shell; Frost popover",
+          "surface": [
+            "field",
+            "frost"
+          ],
           "geometry": "Field radius is the content radius; the popover keeps panel radius.",
           "semantics": "combobox with aria-autocomplete=\"list\"; the input keeps its own value.",
           "crystal": "Materials, focus ring, list motion, empty and loading surfaces",
           "product": "Where suggestions come from, debounce, free-text policy",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid",
+            "menu-in",
+            "menu-out"
+          ],
           "parity": [
             "antd:AutoComplete",
             "mui:Autocomplete"
@@ -1717,10 +2343,20 @@
             "disabled"
           ],
           "material": "Haze field fill inside a Resin shell",
+          "surface": [
+            "field"
+          ],
           "geometry": "Matches the text field; the indicator sits in the trailing inline edge.",
           "semantics": "A real <select>. Its options are the platform's and are never restyled.",
           "crystal": "Shell material, focus ring, indicator",
           "product": "Options and value",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid",
+            "menu-in",
+            "menu-out"
+          ],
           "parity": [
             "mantine:NativeSelect",
             "mui:NativeSelect"
@@ -1738,10 +2374,23 @@
             "disabled"
           ],
           "material": "Haze field fill; Frost panel",
+          "surface": [
+            "field",
+            "frost"
+          ],
           "geometry": "Segments are individually focusable; the panel keeps panel radius.",
           "semantics": "Segmented input semantics; each segment announces its own role and bounds.",
           "crystal": "Materials, segment focus, panel motion",
           "product": "Locale, time zone, min and max",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid",
+            "menu-in",
+            "menu-out",
+            "selection",
+            "page-in"
+          ],
           "parity": [
             "mui-x-date-pickers:DateTimePicker",
             "primereact:datepicker"
@@ -1758,10 +2407,18 @@
             "disabled"
           ],
           "material": "Frost panel with Haze cells",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Cells are square-ish and reach 44px.",
           "semantics": "A grid; the selected month uses aria-selected, never a check mark.",
           "crystal": "Cell material, selection by weight, motion",
           "product": "Range limits and locale",
+          "motion": [
+            "selection",
+            "page-in"
+          ],
           "parity": [
             "mui-x-date-pickers:MonthCalendar"
           ]
@@ -1777,10 +2434,18 @@
             "disabled"
           ],
           "material": "Frost panel with Haze cells",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Matches the month picker.",
           "semantics": "A grid; selection is announced, and the current year is marked as current.",
           "crystal": "Cell material, selection, scroll anchoring",
           "product": "Range limits",
+          "motion": [
+            "selection",
+            "page-in"
+          ],
           "parity": [
             "mui-x-date-pickers:YearCalendar"
           ]
@@ -1796,10 +2461,17 @@
             "disabled"
           ],
           "material": "Frost panel with Haze rows",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Rows reach 44px; the list scrolls to the selected value.",
           "semantics": "A listbox; the selected row is aria-selected and carries label weight.",
           "crystal": "Row material, selection, scroll behaviour",
           "product": "Interval, bounds, locale",
+          "motion": [
+            "selection"
+          ],
           "parity": [
             "mui-x-date-pickers:DigitalClock"
           ]
@@ -1815,10 +2487,16 @@
             "disabled"
           ],
           "material": "Resin track with a Resin thumb",
+          "surface": [
+            "none"
+          ],
           "geometry": "Circular; the thumb reaches 44px including its hit area.",
           "semantics": "role=\"slider\" with aria-valuenow in degrees and a text equivalent.",
           "crystal": "Track and thumb material, focus ring, motion on commit",
           "product": "Range, step, what the angle means",
+          "motion": [
+            "slider-step"
+          ],
           "parity": [
             "mantine:AngleSlider"
           ]
@@ -1834,10 +2512,16 @@
             "disabled"
           ],
           "material": "Resin body with a Haze value arc",
+          "surface": [
+            "none"
+          ],
           "geometry": "Circular; keyboard steps match the slider contract.",
           "semantics": "role=\"slider\"; the value is readable as text, not only as an arc.",
           "crystal": "Material, arc rendering, focus ring",
           "product": "Range, step, formatting",
+          "motion": [
+            "slider-step"
+          ],
           "parity": [
             "primereact:knob"
           ]
@@ -1853,10 +2537,18 @@
             "disabled"
           ],
           "material": "Haze field fill inside a Resin shell",
+          "surface": [
+            "field"
+          ],
           "geometry": "Matches the text field exactly.",
           "semantics": "The mask never traps a screen reader; the raw value is what submits.",
           "crystal": "Shell material, focus ring, invalid motion",
           "product": "Mask pattern and raw-value policy",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid"
+          ],
           "parity": [
             "mantine:MaskInput",
             "primereact:inputmask"
@@ -1873,10 +2565,18 @@
             "disabled"
           ],
           "material": "Haze field fill inside a Resin shell",
+          "surface": [
+            "field"
+          ],
           "geometry": "Monospace; matches the textarea otherwise.",
           "semantics": "Parse errors are described in text and associated with the field.",
           "crystal": "Material, invalid state, error surface",
           "product": "Schema and formatting rules",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid"
+          ],
           "parity": [
             "mantine:JsonInput"
           ]
@@ -1892,10 +2592,16 @@
             "disabled"
           ],
           "material": "Resin thumb over the gradient field",
+          "surface": [
+            "none"
+          ],
           "geometry": "Thumb reaches 44px including its hit area.",
           "semantics": "Two linked sliders; each axis announces its own value and responds to arrow keys.",
           "crystal": "Thumb material, focus ring, contrast of the thumb against any underlying colour",
           "product": "Colour space and value",
+          "motion": [
+            "slider-step"
+          ],
           "parity": [
             "react-aria:ColorArea"
           ]
@@ -1911,10 +2617,16 @@
             "disabled"
           ],
           "material": "Resin thumb on a gradient track",
+          "surface": [
+            "none"
+          ],
           "geometry": "Matches the slider contract.",
           "semantics": "role=\"slider\" with the channel named and the value in that channel's units.",
           "crystal": "Thumb and track material, focus ring",
           "product": "Which channel, and the colour space",
+          "motion": [
+            "slider-step"
+          ],
           "parity": [
             "react-aria:ColorSlider"
           ]
@@ -1930,10 +2642,16 @@
             "disabled"
           ],
           "material": "Resin thumb on the hue ring",
+          "surface": [
+            "none"
+          ],
           "geometry": "Ring thickness is a declared proportion of the radius.",
           "semantics": "role=\"slider\" in degrees, wrapping at 360.",
           "crystal": "Thumb material, ring geometry, focus ring",
           "product": "Colour space",
+          "motion": [
+            "slider-step"
+          ],
           "parity": [
             "react-aria:ColorWheel"
           ]
@@ -1948,10 +2666,16 @@
             "focus-visible"
           ],
           "material": "Haze chequerboard beneath a transparent colour",
+          "surface": [
+            "none"
+          ],
           "geometry": "Content radius; selection is a ring, never a check mark.",
           "semantics": "Carries the colour name as text, because colour cannot be the only carrier.",
           "crystal": "Transparency treatment, selection ring, contrast",
           "product": "The colour and its name",
+          "motion": [
+            "selection"
+          ],
           "parity": [
             "react-aria:ColorSwatch"
           ]
@@ -1966,10 +2690,16 @@
             "focus-visible"
           ],
           "material": "Inherits from its swatches",
+          "surface": [
+            "none"
+          ],
           "geometry": "Grid gap follows the spacing scale.",
           "semantics": "A listbox of swatches; arrow keys move, and the selected one is announced by name.",
           "crystal": "Selection rendering, focus order",
           "product": "The palette offered",
+          "motion": [
+            "selection"
+          ],
           "parity": [
             "react-aria:ColorSwatchPicker"
           ]
@@ -1985,10 +2715,21 @@
             "disabled"
           ],
           "material": "Haze field fill; tokens are Haze chips",
+          "surface": [
+            "field",
+            "compact"
+          ],
           "geometry": "Field keeps the content radius; tokens are pills.",
           "semantics": "Each token is removable by keyboard and announces its removal; the field keeps its own value.",
           "crystal": "Token material, add and remove motion, focus return after removal",
           "product": "What may be tokenised, and duplicate policy",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid",
+            "list-in",
+            "list-out"
+          ],
           "parity": [
             "react-aria:TokenField",
             "mantine:PillsInput"
@@ -2007,10 +2748,19 @@
             "focus-visible"
           ],
           "material": "Resin control with Haze file rows",
+          "surface": [
+            "control",
+            "haze"
+          ],
           "geometry": "Rows keep the content radius; the trigger is a pill.",
           "semantics": "Progress is announced politely; a failure is announced assertively and is retryable by keyboard.",
           "crystal": "Materials, progress rendering, status colour from the status tokens, retry affordance",
           "product": "Transport, chunking, retry policy, accepted types",
+          "motion": [
+            "list-in",
+            "list-out",
+            "progress-change"
+          ],
           "parity": [
             "primereact:fileupload",
             "antd:Upload"
@@ -2028,10 +2778,17 @@
             "focus-visible"
           ],
           "material": "Haze fill with a dashed rim",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; the whole zone is a 44px-plus target.",
           "semantics": "Dragging is never the only route: the zone is also a button, and paste works. Rejections say why.",
           "crystal": "Drag-over material change, rejection surface, motion on drop",
           "product": "Accepted types, size limits, transport",
+          "motion": [
+            "drag-pickup",
+            "drag-settle"
+          ],
           "parity": [
             "react-aria:DropZone",
             "primereact:fileupload",
@@ -2058,10 +2815,17 @@
             "disabled"
           ],
           "material": "Haze, 80% fill with a 1.95px feathered perimeter",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; at least 12px between content and the feathered edge",
           "semantics": "An article when it is content, a button when the whole card acts. Never both.",
           "crystal": "Fill, feather, elevation, interactive treatment",
           "product": "Content and what an interactive card does",
+          "motion": [
+            "list-in",
+            "list-out"
+          ],
           "parity": [
             "mantine:Card",
             "mui:Card",
@@ -2081,10 +2845,18 @@
             "loading"
           ],
           "material": "Resin shell, Haze fill, primary-soft header",
+          "surface": [
+            "table"
+          ],
           "geometry": "Content radius shell; header corners inset 8px; 14px/18px cells",
           "semantics": "Real table semantics with header associations; sort controls are buttons carrying aria-sort",
           "crystal": "Shell, header band, separators, sticky behaviour, reduced-effect fallbacks",
           "product": "Data, sorting, pagination and selection behaviour",
+          "motion": [
+            "list-in",
+            "list-out",
+            "highlight"
+          ],
           "parity": [
             "mantine:Table",
             "mui:Table",
@@ -2105,10 +2877,18 @@
             "error"
           ],
           "material": "Shared with Table; selection uses label weight, not a check badge on the row",
+          "surface": [
+            "table"
+          ],
           "geometry": "Shared with Table",
           "semantics": "aria-sort on sorted headers; row selection through real checkboxes with names",
           "crystal": "All Table treatment plus sort, filter and selection appearance",
           "product": "The data layer, virtualisation, and the sorting and filtering implementation",
+          "motion": [
+            "list-in",
+            "list-out",
+            "highlight"
+          ],
           "parity": [
             "mui:DataGrid",
             "antd:Table",
@@ -2127,6 +2907,9 @@
             "empty"
           ],
           "material": "Haze rows on the surrounding surface",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius on rows; separators are hairlines",
           "semantics": "Real list semantics; interactive rows are buttons or links, not clickable divs",
           "crystal": "Row treatment, separators, label weight for the selected row",
@@ -2151,6 +2934,9 @@
             "empty"
           ],
           "material": "Haze panel when grouped",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; term column aligned to the 4px rhythm",
           "semantics": "Real definition-list semantics so term and value stay associated",
           "crystal": "Pair rhythm and panel treatment",
@@ -2173,6 +2959,9 @@
             "error"
           ],
           "material": "Surface-alt fill behind initials; 2px surface ring for separation",
+          "surface": [
+            "none"
+          ],
           "geometry": "Always circular; sizes on the 4px rhythm",
           "semantics": "Decorative avatars are aria-hidden; identifying avatars carry the person's name",
           "crystal": "Shape, ring, fallback treatment",
@@ -2192,6 +2981,9 @@
             "overflowing"
           ],
           "material": "Shared with Avatar",
+          "surface": [
+            "none"
+          ],
           "geometry": "-7px overlap; overflow chip matches avatar size",
           "semantics": "The group has one accessible name; the overflow count is announced, not implied",
           "crystal": "Overlap, stacking order, overflow treatment",
@@ -2214,10 +3006,17 @@
             "hidden"
           ],
           "material": "Resin shell with Haze fill; status badges use their semantic ink pair",
+          "surface": [
+            "compact"
+          ],
           "geometry": "Pill or circle; never smaller than legible",
           "semantics": "The count reaches assistive technology through the host's accessible name or a live region",
           "crystal": "Shell, placement, overflow formatting",
           "product": "The count and when it is meaningful",
+          "motion": [
+            "highlight",
+            "attention"
+          ],
           "parity": [
             "mantine:Indicator",
             "mui:Badge",
@@ -2236,6 +3035,9 @@
             "neutral"
           ],
           "material": "Tested semantic ink and surface pair behind the symbol; never a coloured perimeter stroke",
+          "surface": [
+            "status"
+          ],
           "geometry": "Pill; 24px symbol well; 36px minimum height",
           "semantics": "The word carries the meaning. Symbol and colour are reinforcement, never the only signal.",
           "crystal": "Symbol vocabulary, tested colour pairs, geometry",
@@ -2264,7 +3066,10 @@
             "required",
             "invalid"
           ],
-          "material": "Resin shell with a 3px-inset Haze fill and a 1px feather on that fill",
+          "material": "Haze: a 20px circle painting the Haze fill on an isolated layer with a 1px feather; no Resin, because it sits on surfaces that are often already translucent",
+          "surface": [
+            "indicator"
+          ],
           "geometry": "20px, or 24px on fields; never a click target",
           "semantics": "aria-hidden. The real control supplies the state; the mark only shows it.",
           "crystal": "The complete mark vocabulary and its precedence",
@@ -2286,6 +3091,9 @@
             "error"
           ],
           "material": "Haze placeholder while loading",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius when clipped; never distorts aspect",
           "semantics": "Meaningful images carry alt text; decorative images carry empty alt",
           "crystal": "Placeholder, fallback and radius treatment",
@@ -2310,10 +3118,17 @@
             "error"
           ],
           "material": "Resin markers on a Haze connector",
+          "surface": [
+            "indicator",
+            "haze"
+          ],
           "geometry": "Circular markers; 2px connector",
           "semantics": "Ordered list; the current item carries aria-current",
           "crystal": "Marker and connector treatment, state appearance",
           "product": "Events and their ordering",
+          "motion": [
+            "list-in"
+          ],
           "parity": [
             "mantine:Timeline",
             "mui:Timeline",
@@ -2332,6 +3147,9 @@
             "disabled"
           ],
           "material": "Haze rows; expanded content shares the row surface",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; header meets 44px",
           "semantics": "Header is a button with aria-expanded and aria-controls; content is not hidden from search when collapsed unless intended",
           "crystal": "Row treatment, chevron rotation, expansion appearance",
@@ -2356,6 +3174,9 @@
             "transitioning"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Inherits",
           "semantics": "The trigger carries aria-expanded; hidden content is genuinely hidden from assistive technology",
           "crystal": "Transition timing and reduced-motion behaviour",
@@ -2379,10 +3200,17 @@
             "expanded"
           ],
           "material": "Edge fade drawn from the surrounding material",
+          "surface": [
+            "none"
+          ],
           "geometry": "Fade depth 24px",
           "semantics": "The control carries aria-expanded; truncated text remains in the accessibility tree",
           "crystal": "Fade and control treatment",
           "product": "Threshold and content",
+          "motion": [
+            "accordion-in",
+            "accordion-out"
+          ],
           "parity": [
             "mantine:Spoiler",
             "mui:—",
@@ -2400,6 +3228,10 @@
             "single-slide"
           ],
           "material": "Resin controls floating over Haze slides",
+          "surface": [
+            "control",
+            "haze"
+          ],
           "geometry": "Content radius slides; pill controls meeting 44px",
           "semantics": "role=group with an accessible name; indicators are buttons; never autoplay without a pause control",
           "crystal": "Slide and control treatment, indicator appearance",
@@ -2425,10 +3257,16 @@
             "loading"
           ],
           "material": "Haze panel when grouped into a row",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; tabular figures",
           "semantics": "Trend direction is stated in text, not by colour or arrow alone",
           "crystal": "Value typography, trend treatment",
           "product": "The value, formatting and what the trend compares",
+          "motion": [
+            "highlight"
+          ],
           "parity": [
             "antd:Statistic",
             "mantine:—",
@@ -2445,6 +3283,9 @@
             "with-copy"
           ],
           "material": "Canvas fill with an edge rim; never feathered, as code must stay exact",
+          "surface": [
+            "none"
+          ],
           "geometry": "14px radius inline, content radius for blocks",
           "semantics": "Real code and pre elements; blocks are focusable when scrollable",
           "crystal": "Surface, rhythm and copy-action placement",
@@ -2463,6 +3304,9 @@
             "default"
           ],
           "material": "Resin cap with a defined lower rim",
+          "surface": [
+            "compact"
+          ],
           "geometry": "8px radius; compact but legible",
           "semantics": "Real kbd element; key names are spelled, not drawn as symbols alone",
           "crystal": "Cap treatment",
@@ -2481,6 +3325,9 @@
             "default"
           ],
           "material": "Primary-soft or surface-alt fill",
+          "surface": [
+            "none"
+          ],
           "geometry": "Content radius or circle; 24px icon",
           "semantics": "Decorative and aria-hidden unless it is the only carrier of meaning",
           "crystal": "Container fill and icon sizing",
@@ -2503,6 +3350,9 @@
             "failed"
           ],
           "material": "Haze; own messages use the primary-container pair",
+          "surface": [
+            "bubble"
+          ],
           "geometry": "6/22/22/22px incoming, 22/6/22/22px own, mirrored for right-to-left",
           "semantics": "Author and time are text, not implied by side alone",
           "crystal": "Silhouette, corner asymmetry, own and incoming pairs, mirroring",
@@ -2526,6 +3376,9 @@
             "overlaid"
           ],
           "material": "Stone label backing when overlaid on media, so contrast does not depend on the image",
+          "surface": [
+            "stone"
+          ],
           "geometry": "Content radius when overlaid; 12px inset from the media edge",
           "semantics": "Real figure and figcaption. A caption never replaces alt text; the two say different things.",
           "crystal": "Backing material, placement and protected contrast",
@@ -2552,10 +3405,18 @@
             "disabled"
           ],
           "material": "Frost panel with Haze day cells",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Cells reach 44px; the panel keeps panel radius.",
           "semantics": "A grid with row and column headers; today is marked as current, selection as selected.",
           "crystal": "Cell materials, range rendering, selection by weight",
           "product": "Locale, events, min and max",
+          "motion": [
+            "selection",
+            "page-in"
+          ],
           "parity": [
             "mui-x-date-pickers:DateCalendar",
             "primereact:datepicker"
@@ -2572,10 +3433,17 @@
             "focus-visible"
           ],
           "material": "Haze item fills on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Item radius is the content radius; layout switches at a declared breakpoint.",
           "semantics": "A list; the layout switch is a control with a pressed state, not a hidden toggle.",
           "crystal": "Item material, layout motion, empty and loading surfaces",
           "product": "Data, sorting, paging",
+          "motion": [
+            "list-in",
+            "list-out"
+          ],
           "parity": [
             "primereact:dataview"
           ]
@@ -2590,6 +3458,9 @@
             "loading"
           ],
           "material": "None of its own",
+          "surface": [
+            "none"
+          ],
           "geometry": "Scroll container follows the scroll-area contract.",
           "semantics": "Rows keep their position in the set via aria-setsize and aria-posinset.",
           "crystal": "Scroll surface, focus retention across recycling",
@@ -2607,10 +3478,16 @@
             "focus-visible"
           ],
           "material": "Haze caption bars over the image",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Uniform gap; caption bars keep the content radius at the bottom corners.",
           "semantics": "A list; each image needs an accessible name or is marked decorative.",
           "crystal": "Caption material, focus ring, aspect handling",
           "product": "Images, captions, columns",
+          "motion": [
+            "media-in"
+          ],
           "parity": [
             "mui:ImageList",
             "primereact:gallery"
@@ -2627,10 +3504,17 @@
             "focus-visible"
           ],
           "material": "Haze nodes on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Nodes keep the content radius; connectors use the rim colour.",
           "semantics": "A tree; collapse state is announced, and the chart is navigable by keyboard.",
           "crystal": "Node material, connector colour, selection by weight",
           "product": "Hierarchy data and layout direction",
+          "motion": [
+            "accordion-in",
+            "accordion-out"
+          ],
           "parity": [
             "primereact:organizationchart"
           ]
@@ -2644,6 +3528,9 @@
             "changing"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Tabular figures so the width does not jump.",
           "semantics": "The value is announced once it settles, not on every frame.",
           "crystal": "Digit motion, reduced-motion fallback to an instant change",
@@ -2662,10 +3549,17 @@
             "focus-visible"
           ],
           "material": "Resin handle over the images",
+          "surface": [
+            "drag-handle"
+          ],
           "geometry": "Handle is a pill and reaches 44px.",
           "semantics": "The divider is a slider with a percentage value and keyboard steps.",
           "crystal": "Handle material, focus ring, drag motion",
           "product": "The two images and their labels",
+          "motion": [
+            "drag-pickup",
+            "drag-settle"
+          ],
           "parity": [
             "primereact:imagecompare"
           ]
@@ -2679,6 +3573,9 @@
             "paused"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Edges fade using the surrounding material, not a hard cut.",
           "semantics": "Pausable on hover and focus; removed entirely under reduced motion.",
           "crystal": "Edge treatment, motion, the reduced-motion contract",
@@ -2696,10 +3593,16 @@
             "hidden"
           ],
           "material": "Haze fill with a crisp glyph",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Offset from the corner; never clipped by its host.",
           "semantics": "Labels its host rather than standing alone; decorative badges are hidden from assistive technology.",
           "crystal": "Material, offset, glyph crispness",
           "product": "Count or status shown",
+          "motion": [
+            "attention"
+          ],
           "parity": [
             "primereact:overlaybadge"
           ]
@@ -2715,10 +3618,17 @@
             "focus-visible"
           ],
           "material": "Haze rows",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Indentation per level; rows reach 44px.",
           "semantics": "A tree with aria-current on the active destination; expansion is announced.",
           "crystal": "Row material, expansion motion, current marking by label weight",
           "product": "The destination set and routing",
+          "motion": [
+            "accordion-in",
+            "accordion-out"
+          ],
           "parity": [
             "react-aria:NavigationTree"
           ]
@@ -2733,10 +3643,19 @@
             "focus-visible"
           ],
           "material": "Inherits the table surface",
+          "surface": [
+            "table"
+          ],
           "geometry": "The resizer is a 44px target that does not shift the column it borders.",
           "semantics": "The resizer is a slider: arrow keys resize, and the new width is announced.",
           "crystal": "Resizer affordance, focus ring, live layout while dragging",
           "product": "Which columns resize, and persistence",
+          "motion": [
+            "list-in",
+            "list-out",
+            "highlight",
+            "resize-settle"
+          ],
           "parity": [
             "react-aria:ResizableTableContainer",
             "mui-x-data-grid:GridColumnResizer"
@@ -2752,10 +3671,16 @@
             "empty"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "The figure and its trend are one readable sentence, not a number beside an arrow.",
           "crystal": "Material, figure typography, trend colour from the status tokens",
           "product": "The data and its period",
+          "motion": [
+            "highlight"
+          ],
           "parity": [
             "mantine:Card",
             "antd:Statistic"
@@ -2772,10 +3697,16 @@
             "loading"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Target attainment is stated in words as well as shown.",
           "crystal": "Material, progress rendering, status colour",
           "product": "Targets and thresholds",
+          "motion": [
+            "highlight"
+          ],
           "parity": [
             "antd:Statistic",
             "primereact:card"
@@ -2791,10 +3722,16 @@
             "flat"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Sits inline with the figure it qualifies.",
           "semantics": "Direction is carried by a word and a symbol, never by colour alone.",
           "crystal": "Status colour, symbol pairing",
           "product": "What counts as a meaningful change",
+          "motion": [
+            "highlight"
+          ],
           "parity": [
             "antd:Statistic",
             "mantine:Text"
@@ -2810,10 +3747,16 @@
             "neutral"
           ],
           "material": "Haze fill",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Pill.",
           "semantics": "The sign is a character, not a colour.",
           "crystal": "Status tokens, pill geometry",
           "product": "Formatting and precision",
+          "motion": [
+            "highlight"
+          ],
           "parity": [
             "antd:Tag"
           ]
@@ -2837,6 +3780,9 @@
             "dismissible"
           ],
           "material": "Haze surface with the semantic ink pair on the symbol well",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; 12px minimum from content to the feathered edge",
           "semantics": "role=alert only for genuinely urgent, interrupting content; otherwise a plain region",
           "crystal": "Surface, symbol well, semantic pairs, action placement",
@@ -2861,7 +3807,10 @@
             "persistent",
             "stacked"
           ],
-          "material": "Resin with Haze reading fill and the clearest floating shadow",
+          "material": "Frost panel with Haze reading fill and the panel shadow (R15e); status accent from the semantic pair",
+          "surface": [
+            "frost"
+          ],
           "geometry": "Content radius; stacked with a 12px offset",
           "semantics": "Polite live region; an urgent toast is assertive. Auto-dismiss must never remove the only route to an action.",
           "crystal": "Surface, stacking, entry and exit motion",
@@ -2885,7 +3834,10 @@
             "read",
             "dismissed"
           ],
-          "material": "Resin surface with Haze reading fill",
+          "material": "Frost panel with Haze reading fill (R15e)",
+          "surface": [
+            "frost"
+          ],
           "geometry": "Content radius",
           "semantics": "Announced politely; the dismiss control is named for what it dismisses",
           "crystal": "Surface, unread treatment, action row",
@@ -2912,6 +3864,9 @@
             "paused"
           ],
           "material": "Primary fill on a primary-soft track",
+          "surface": [
+            "none"
+          ],
           "geometry": "8px track at pill radius, matching the slider track",
           "semantics": "role=progressbar with aria-valuenow when determinate; indeterminate omits the value rather than faking one",
           "crystal": "Track, fill, indeterminate motion and reduced-motion fallback",
@@ -2937,10 +3892,17 @@
             "error"
           ],
           "material": "Primary arc on a primary-soft ring",
+          "surface": [
+            "none"
+          ],
           "geometry": "Stroke matches the icon stroke weight family; label is tabular",
           "semantics": "Shared with Progress; the centre label is not the only representation",
           "crystal": "Ring, arc, label treatment",
           "product": "Real progress",
+          "motion": [
+            "progress-change",
+            "success"
+          ],
           "parity": [
             "mantine:RingProgress",
             "mui:CircularProgress",
@@ -2956,6 +3918,9 @@
             "hidden"
           ],
           "material": "Primary on the surrounding material",
+          "surface": [
+            "none"
+          ],
           "geometry": "Sizes on the 4px rhythm",
           "semantics": "Accompanied by text saying what is loading; reduced motion replaces spin with a static, still-legible state",
           "crystal": "Mark, motion and reduced-motion fallback",
@@ -2978,6 +3943,9 @@
             "resolving"
           ],
           "material": "Haze fill with a slow luminance sweep",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Matches the real content's radius and rhythm exactly",
           "semantics": "aria-hidden with a live region announcing loading; must not be read as content",
           "crystal": "Fill, sweep, reduced-motion fallback, resolve transition",
@@ -3001,6 +3969,9 @@
             "visible"
           ],
           "material": "Mirage at region scope",
+          "surface": [
+            "mirage"
+          ],
           "geometry": "Inherits the region's radius",
           "semantics": "Blocked content is inert; focus does not enter it; the reason is announced",
           "crystal": "Scrim, mark placement, inert treatment",
@@ -3022,6 +3993,9 @@
             "unauthorised"
           ],
           "material": "Haze panel",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; centred within its region",
           "semantics": "Real text; never an illustration alone. No-results and truly-empty are different states and read differently.",
           "crystal": "Panel, rhythm and action placement",
@@ -3048,10 +4022,16 @@
             "unauthorised"
           ],
           "material": "Haze panel with the semantic ink pair on the symbol",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius",
           "semantics": "The outcome is stated in the heading; symbol and colour reinforce it",
           "crystal": "Panel, symbol treatment, action row",
           "product": "The outcome, explanation and recovery routes",
+          "motion": [
+            "success"
+          ],
           "parity": [
             "antd:Result",
             "mui:—",
@@ -3067,7 +4047,10 @@
             "open",
             "pending"
           ],
-          "material": "Resin popover with Haze reading fill",
+          "material": "Frost panel with Haze reading fill (R15e)",
+          "surface": [
+            "frost"
+          ],
           "geometry": "Content radius; anchored to the trigger",
           "semantics": "Focus moves into the popover, returns to the trigger on dismiss, and Escape cancels",
           "crystal": "Popover surface and action row",
@@ -3093,10 +4076,18 @@
             "focus-visible"
           ],
           "material": "Frost step panel over a Mirage scrim",
+          "surface": [
+            "frost",
+            "mirage"
+          ],
           "geometry": "Panel keeps panel radius; the highlight follows the target's own radius.",
           "semantics": "Focus moves to each step; the sequence is escapable and its position is announced.",
           "crystal": "Panel and scrim material, step motion, focus management",
           "product": "Steps, targets and copy",
+          "motion": [
+            "popover-in",
+            "popover-out"
+          ],
           "parity": [
             "antd:Tour",
             "primereact:tour"
@@ -3111,10 +4102,16 @@
             "indeterminate"
           ],
           "material": "Haze track with a primary arc",
+          "surface": [
+            "none"
+          ],
           "geometry": "Stroke matches the ring progress contract.",
           "semantics": "role=\"progressbar\" with a text value beside it.",
           "crystal": "Arc rendering, track material, motion",
           "product": "Value and label",
+          "motion": [
+            "progress-change"
+          ],
           "parity": [
             "mantine:SemiCircleProgress"
           ]
@@ -3128,10 +4125,16 @@
             "focus-visible"
           ],
           "material": "Haze track with segment fills",
+          "surface": [
+            "none"
+          ],
           "geometry": "Track keeps the content radius; segments meet without gaps.",
           "semantics": "Each segment is labelled; meaning never rests on colour alone.",
           "crystal": "Track and segment materials, legend, label association",
           "product": "Segments and their values",
+          "motion": [
+            "progress-change"
+          ],
           "parity": [
             "primereact:metergroup"
           ]
@@ -3147,10 +4150,18 @@
             "focus-visible"
           ],
           "material": "Haze fill with a status accent",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Full-bleed within its region; the dismiss control is a 44px pill.",
           "semantics": "role=\"status\" for information, role=\"alert\" for urgency. Dismissal returns focus sensibly.",
           "crystal": "Material, status colour from the status tokens, entry and exit motion",
           "product": "Copy, urgency, and whether it persists",
+          "motion": [
+            "toast-in",
+            "toast-out",
+            "attention"
+          ],
           "parity": [
             "antd:Alert.Banner",
             "mantine:Notification"
@@ -3174,6 +4185,10 @@
             "closing"
           ],
           "material": "Mirage scrim; 80% feathered Haze surface above it",
+          "surface": [
+            "dialog",
+            "mirage"
+          ],
           "geometry": "Content radius; 12px minimum from content to the feathered edge",
           "semantics": "Real modal semantics with a named dialog, focus containment, Escape, and focus return to the trigger",
           "crystal": "Scrim, surface, entrance and exit motion, elevation",
@@ -3199,6 +4214,10 @@
             "dragging"
           ],
           "material": "Mirage scrim, Frost or Resin panel by depth",
+          "surface": [
+            "frost",
+            "mirage"
+          ],
           "geometry": "Panel radius on the inner edges only",
           "semantics": "Dialog semantics when modal; a complementary region when not. Modality must be real, not implied.",
           "crystal": "Panel material, edge geometry, entrance direction",
@@ -3224,7 +4243,10 @@
             "disabled-item",
             "checked-item"
           ],
-          "material": "Resin surface with Haze rows",
+          "material": "Frost panel with Haze rows (R15e)",
+          "surface": [
+            "frost"
+          ],
           "geometry": "Content radius; every row reserves leading room for a check mark, so ticking one does not shift its label",
           "semantics": "role=menu with full keyboard navigation, type-ahead and Escape; checkable items use aria-checked",
           "crystal": "Surface, row treatment, row geometry, separators",
@@ -3248,10 +4270,17 @@
             "open"
           ],
           "material": "Shared with Menu",
+          "surface": [
+            "frost"
+          ],
           "geometry": "Repositions to stay within the viewport",
           "semantics": "Must be reachable by keyboard, not pointer-only; never the sole route to an action",
           "crystal": "Surface and positioning behaviour",
           "product": "The actions and the keyboard route",
+          "motion": [
+            "menu-in",
+            "menu-out"
+          ],
           "parity": [
             "mantine:Menu",
             "mui:Menu",
@@ -3267,7 +4296,10 @@
             "open",
             "repositioned"
           ],
-          "material": "Resin with Haze reading fill",
+          "material": "Frost panel with Haze reading fill (R15e)",
+          "surface": [
+            "frost"
+          ],
           "geometry": "Content radius; flips and shifts to stay in view",
           "semantics": "The trigger carries aria-expanded and aria-controls; focus moves in for interactive content",
           "crystal": "Surface, arrow, positioning behaviour",
@@ -3293,10 +4325,17 @@
             "closing"
           ],
           "material": "Shared with Popover",
+          "surface": [
+            "frost"
+          ],
           "geometry": "Shared with Popover",
           "semantics": "Must also open on keyboard focus; never contains the only route to an action",
           "crystal": "Surface, open and close delays",
           "product": "Preview content and delay tuning",
+          "motion": [
+            "popover-in",
+            "popover-out"
+          ],
           "parity": [
             "mantine:HoverCard",
             "mui:—",
@@ -3311,7 +4350,10 @@
             "hidden",
             "visible"
           ],
-          "material": "Resin with Stone label backing",
+          "material": "Frost, as every transient overlay is (R15e); the text sits directly on the panel",
+          "surface": [
+            "frost"
+          ],
           "geometry": "18px radius; compact padding",
           "semantics": "Never the sole accessible name. Opens on focus as well as hover, dismisses on Escape, and stays while hovered.",
           "crystal": "Surface, delay, placement",
@@ -3335,6 +4377,9 @@
             "visible"
           ],
           "material": "Mirage: chromatic diffusion of the real scene beneath",
+          "surface": [
+            "mirage"
+          ],
           "geometry": "Full viewport, or region-scoped for a local overlay",
           "semantics": "Content beneath is inert; the scrim is not a focus target; clicking it dismisses only when dismissal is safe",
           "crystal": "The complete Mirage recipe and its reduced-transparency fallback",
@@ -3358,6 +4403,9 @@
             "unmounted"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "None",
           "semantics": "Portalled content must preserve the logical focus and reading order of its trigger",
           "crystal": "Stacking contract and layer placement",
@@ -3379,10 +4427,17 @@
             "focus-visible"
           ],
           "material": "Resin panel",
+          "surface": [
+            "resin-panel"
+          ],
           "geometry": "Panel radius; the resize handle reaches 44px.",
           "semantics": "role=\"dialog\" when modal-like; focus is trapped only when it is modal.",
           "crystal": "Material, elevation, drag and resize motion",
           "product": "Content, bounds and persistence",
+          "motion": [
+            "drawer-in",
+            "drawer-out"
+          ],
           "parity": [
             "mantine:FloatingWindow"
           ]
@@ -3395,6 +4450,9 @@
             "at-rest"
           ],
           "material": "Inherits its overlay",
+          "surface": [
+            "none"
+          ],
           "geometry": "Follows the overlay radius; flips with placement.",
           "semantics": "Decorative: hidden from assistive technology.",
           "crystal": "That it matches the overlay material exactly, including under reduced effects",
@@ -3418,6 +4476,9 @@
             "default"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "1.2 line height; -0.04em tracking; sizes on a modular scale",
           "semantics": "The visual level must not be chosen independently of the document outline; use a level, style separately",
           "crystal": "Scale, tracking and leading",
@@ -3439,6 +4500,9 @@
             "clamped"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "16px/24px reading rhythm; 78ch maximum measure",
           "semantics": "Truncated text keeps its full value in the accessibility tree and in a title where useful",
           "crystal": "Rhythm, measure, colour roles",
@@ -3458,6 +4522,9 @@
             "attributed"
           ],
           "material": "Haze panel when set apart",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; 3px leading rule",
           "semantics": "Real blockquote with cite where the source is known",
           "crystal": "Rule, panel and attribution treatment",
@@ -3476,6 +4543,9 @@
             "default"
           ],
           "material": "Primary-soft fill with its tested ink pair",
+          "surface": [
+            "none"
+          ],
           "geometry": "4px radius; does not disturb the line box",
           "semantics": "Real mark element; highlighting is never the only indication of a match",
           "crystal": "Fill pair and geometry",
@@ -3497,6 +4567,9 @@
             "default"
           ],
           "material": "Inherits; embedded surfaces follow their own components",
+          "surface": [
+            "none"
+          ],
           "geometry": "78ch measure; 1.8 line height; 4px-rhythm vertical spacing",
           "semantics": "Anchor navigation must preserve focus when sections change",
           "crystal": "The complete reading rhythm and embedded-element treatment",
@@ -3515,10 +4588,16 @@
             "at-rest"
           ],
           "material": "Haze fill behind the matched run",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Fill hugs the text; no radius change at line breaks.",
           "semantics": "Uses <mark>; the surrounding sentence remains readable as one string.",
           "crystal": "Fill material, contrast against the surface",
           "product": "What is matched and how",
+          "motion": [
+            "highlight"
+          ],
           "parity": [
             "mantine:Highlight"
           ]
@@ -3531,6 +4610,9 @@
             "at-rest"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Tabular figures.",
           "semantics": "The formatted value is the text content; no separate visual and spoken form.",
           "crystal": "Typography, figure style",
@@ -3547,6 +4629,9 @@
             "at-rest"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Tightest tracking of the scale; one line where possible.",
           "semantics": "Exactly one per view, and it is the h1 unless the page says otherwise.",
           "crystal": "The step, tracking and leading",
@@ -3564,6 +4649,9 @@
             "at-rest"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Step per level; leading tightens as size grows.",
           "semantics": "The level is the document structure, never chosen for size — size comes from the step.",
           "crystal": "The scale and its tracking",
@@ -3581,6 +4669,9 @@
             "at-rest"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "One step above body; measure capped for reading.",
           "semantics": "A paragraph, not a heading.",
           "crystal": "Step and measure",
@@ -3597,6 +4688,9 @@
             "at-rest"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Marker inset follows the spacing scale; hanging indent preserved.",
           "semantics": "Real ul and ol so the count and nesting are announced.",
           "crystal": "Marker treatment, spacing, nesting rhythm",
@@ -3616,6 +4710,9 @@
             "focus-visible"
           ],
           "material": "Haze fill with a crisp monospace face",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; the copy control is a pill.",
           "semantics": "Focusable and scrollable by keyboard; the language is announced; the copy button says what it copied.",
           "crystal": "Fill material, the monospace pairing, copy feedback motion",
@@ -3634,6 +4731,9 @@
             "expanded"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Clamp by line count, never by pixel height.",
           "semantics": "The full text remains available to assistive technology; expansion is a real control.",
           "crystal": "The fade, if any, and the expand motion",
@@ -3651,6 +4751,9 @@
             "at-rest"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Sits beneath the quote at one step down.",
           "semantics": "Uses cite, and is associated with its blockquote.",
           "crystal": "Step and colour",
@@ -3668,6 +4771,9 @@
             "focus-visible"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "No visual weight change; underline on hover only.",
           "semantics": "Uses abbr with a title, and is focusable so the expansion is reachable without a pointer.",
           "crystal": "The underline treatment",
@@ -3684,6 +4790,9 @@
             "at-rest"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Balances wrapping without changing the step.",
           "semantics": "Purely visual: the text content is unchanged.",
           "crystal": "Where balancing applies, and its fallback",
@@ -3700,6 +4809,9 @@
             "at-rest"
           ],
           "material": "Palette gradient clipped to the glyphs",
+          "surface": [
+            "none"
+          ],
           "geometry": "No change to step or tracking.",
           "semantics": "Contrast is checked against the surface at both gradient ends, and a solid fallback applies where the clip is unsupported.",
           "crystal": "The gradient, and the contrast floor at every point",
@@ -3724,6 +4836,9 @@
             "focusable"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "None",
           "semantics": "Must not use display:none. Focusable variants become visible when focused, as the skip link does.",
           "crystal": "The clipping recipe and the focusable variant",
@@ -3743,6 +4858,9 @@
             "focused"
           ],
           "material": "Surface fill when visible",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Pill; appears at the top-left inset",
           "semantics": "First focusable element in the document; its target must be focusable",
           "crystal": "Appearance on focus and placement",
@@ -3760,6 +4878,9 @@
             "active"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "None",
           "semantics": "Restores focus to the trigger on release; never traps without a visible, keyboard-reachable exit",
           "crystal": "The contract only",
@@ -3781,6 +4902,9 @@
             "exited"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "Travel from the motion scale: 5-30px ordinary, up to 50px expressive",
           "semantics": "Reduced motion removes spatial change and keeps state feedback; transitions are interruptible and never delay a semantic change",
           "crystal": "Timings, easings, travel limits, the 5s ceiling, reduced-motion behaviour",
@@ -3800,6 +4924,9 @@
             "rtl"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "Mirrors directional geometry: bubble corners, range tracks, drawer edges, drop indicators",
           "semantics": "Sets a real dir attribute; logical properties do the rest",
           "crystal": "Which properties are directional and must mirror",
@@ -3820,6 +4947,9 @@
             "system"
           ],
           "material": "Supplies every material's resolved values",
+          "surface": [
+            "none"
+          ],
           "geometry": "Supplies the content radius and spacing scale",
           "semantics": "Sets color-scheme so native controls and scrollbars match; respects the system preference when set to system",
           "crystal": "Token resolution, mode switching, preference persistence, reduced-effect handling",
@@ -3840,6 +4970,9 @@
             "forced-colors"
           ],
           "material": "Solid surfaces replacing every translucent fill; hierarchy preserved by tone and contour",
+          "surface": [
+            "none"
+          ],
           "geometry": "Unchanged. Shapes, silhouettes and spacing never change with effects.",
           "semantics": "Honours prefers-reduced-transparency and forced-colors, and an explicit product preference",
           "crystal": "Every material's fallback and the guarantee that hierarchy survives",
@@ -3862,6 +4995,9 @@
             "disabled"
           ],
           "material": "Resin handle on the region's own surface",
+          "surface": [
+            "drag-handle"
+          ],
           "geometry": "Handle meets 44px even when the visible grip is narrower",
           "semantics": "role=separator with aria-valuenow and arrow-key resizing. Pointer dragging is never the only route.",
           "crystal": "Handle treatment, bound states and the settle after a size change",
@@ -3884,6 +5020,9 @@
             "at-rest"
           ],
           "material": "None of its own; sits above the content material",
+          "surface": [
+            "none"
+          ],
           "geometry": "Never intercepts pointer events.",
           "semantics": "aria-hidden; it is decoration and must not be read.",
           "crystal": "Opacity and contrast so it never obscures text",
@@ -3902,6 +5041,9 @@
             "expired"
           ],
           "material": "Haze quiet zone",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Quiet zone preserved; contrast fixed regardless of palette.",
           "semantics": "Carries a text alternative with the encoded value.",
           "crystal": "Quiet-zone material, contrast floor, status surfaces",
@@ -3919,6 +5061,9 @@
             "idle"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "None.",
           "semantics": "Never the only way to dismiss something; Escape always works too.",
           "crystal": "That dismissal is also keyboard reachable",
@@ -3936,6 +5081,9 @@
             "played"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "None.",
           "semantics": "Content is present and readable before the animation runs, never revealed by it.",
           "crystal": "Which recipes are allowed, the reduced-motion contract",
@@ -3953,6 +5101,9 @@
             "client"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "Reserves the final size so nothing shifts on hydration.",
           "semantics": "Falls back to content, not to emptiness, wherever it can.",
           "crystal": "That layout does not shift when it resolves",
@@ -3969,6 +5120,9 @@
             "at-rest"
           ],
           "material": "Plastic foundation on the document",
+          "surface": [
+            "plastic"
+          ],
           "geometry": "Sets the content radius, spacing and reading rhythm as custom properties.",
           "semantics": "Does not change focus visibility or motion preferences on its own.",
           "crystal": "The reset, the foundation, the token surface",
@@ -3986,6 +5140,9 @@
             "at-rest"
           ],
           "material": "n/a",
+          "surface": [
+            "none"
+          ],
           "geometry": "n/a",
           "semantics": "n/a",
           "crystal": "n/a",
@@ -4004,6 +5161,9 @@
             "at-rest"
           ],
           "material": "n/a",
+          "surface": [
+            "none"
+          ],
           "geometry": "n/a",
           "semantics": "n/a",
           "crystal": "n/a",
@@ -4025,6 +5185,9 @@
             "disabled"
           ],
           "material": "None of its own",
+          "surface": [
+            "none"
+          ],
           "geometry": "Enforces the 44px minimum target on whatever it wraps.",
           "semantics": "Gives its child button semantics unless told otherwise; never swallows keyboard activation.",
           "crystal": "That the press recipe plays and the focus ring appears",
@@ -4043,6 +5206,9 @@
             "disabled"
           ],
           "material": "None of its own",
+          "surface": [
+            "none"
+          ],
           "geometry": "Focus ring at the documented offset.",
           "semantics": "Adds a tab stop without inventing a role.",
           "crystal": "The focus recipe",
@@ -4062,10 +5228,17 @@
             "focus-visible"
           ],
           "material": "Resin while lifted; Haze drop indicator",
+          "surface": [
+            "drag-handle"
+          ],
           "geometry": "Handle is a 44px target; the lifted item keeps its own radius.",
           "semantics": "Keyboard drag is required, not optional: Enter lifts, arrows move, Enter drops, Escape cancels. Every state is announced.",
           "crystal": "Lift elevation, drop-indicator material, the motion of the lift and the settle",
           "product": "What may be dragged where, and what a drop means",
+          "motion": [
+            "drag-pickup",
+            "drag-settle"
+          ],
           "parity": [
             "react-aria:useDragAndDrop",
             "mui-x-tree-view:TreeItemDragAndDropOverlay"
@@ -4081,6 +5254,9 @@
             "invalid-target"
           ],
           "material": "Haze line or fill",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Follows the gap between items rather than covering one.",
           "semantics": "Announced as the drag moves, so a keyboard drag is followable without sight.",
           "crystal": "Indicator material and motion",
@@ -4099,6 +5275,9 @@
             "loading"
           ],
           "material": "None of its own",
+          "surface": [
+            "none"
+          ],
           "geometry": "Preserves scroll position and item size across recycling.",
           "semantics": "Keeps aria-setsize and aria-posinset correct, and never drops focus when a focused row recycles.",
           "crystal": "Scroll surface, focus retention",
@@ -4117,6 +5296,9 @@
             "transitioning"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "The element keeps its own geometry through the transition.",
           "semantics": "Removed entirely under reduced motion; never the only way a view change is signalled.",
           "crystal": "Which recipes apply, and the reduced-motion contract",
@@ -4134,6 +5316,9 @@
             "focus-visible"
           ],
           "material": "Resin plane or inherits",
+          "surface": [
+            "resin"
+          ],
           "geometry": "Controls are pills; the group reaches 44px.",
           "semantics": "role=\"toolbar\": one tab stop, arrows move within, orientation declared.",
           "crystal": "Material, grouping geometry, focus ring",
@@ -4151,6 +5336,9 @@
             "at-rest"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "None.",
           "semantics": "Every link and navigable item routes through the host router rather than reloading the page.",
           "crystal": "That navigation is consistent across every component that links",
@@ -4167,6 +5355,9 @@
             "at-rest"
           ],
           "material": "None",
+          "surface": [
+            "none"
+          ],
           "geometry": "None.",
           "semantics": "Prevents hydration mismatches in ids that label and describe controls.",
           "crystal": "That labelling survives hydration",
@@ -4193,6 +5384,9 @@
             "focus-visible"
           ],
           "material": "Haze plot fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Plot area keeps the content radius; the legend is a list of pills.",
           "semantics": "Each chart has an accessible name and a table equivalent of its data.",
           "crystal": "Materials, grid and axis colour, focus order, empty and loading surfaces",
@@ -4212,6 +5406,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Bars keep a small radius on the value end only.",
           "semantics": "Every series is named; values are reachable as text.",
           "crystal": "Bar geometry, series colour from the palette, enter motion",
@@ -4232,6 +5429,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Line weight follows the stroke scale; points reach 44px of hit area.",
           "semantics": "Series are distinguishable without colour alone.",
           "crystal": "Stroke scale, point geometry, draw-on motion",
@@ -4251,6 +5451,9 @@
             "empty"
           ],
           "material": "Haze fill beneath the line",
+          "surface": [
+            "none"
+          ],
           "geometry": "Fill never obscures gridlines beneath it.",
           "semantics": "As the line chart.",
           "crystal": "Fill material and opacity so overlaps stay readable",
@@ -4270,6 +5473,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Segments separated by a hairline in the surface colour.",
           "semantics": "Each segment is labelled with its value; the total is stated.",
           "crystal": "Segment colour ordering, separation, enter motion",
@@ -4289,6 +5495,9 @@
             "empty"
           ],
           "material": "Haze centre fill",
+          "surface": [
+            "none"
+          ],
           "geometry": "Ring thickness is a declared proportion of the radius.",
           "semantics": "The centre value is text, not an image.",
           "crystal": "Ring geometry, centre material",
@@ -4308,6 +5517,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Point size is a scale, not an arbitrary radius.",
           "semantics": "Dense regions remain describable; a table equivalent is required.",
           "crystal": "Point geometry, overlap treatment",
@@ -4327,6 +5539,9 @@
             "empty"
           ],
           "material": "Haze fill inside each series polygon",
+          "surface": [
+            "none"
+          ],
           "geometry": "Axis labels sit outside the outer ring.",
           "semantics": "Axes are labelled; series are named.",
           "crystal": "Fill opacity so overlapping series stay readable",
@@ -4345,6 +5560,9 @@
             "empty"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Fixed aspect; no padding of its own.",
           "semantics": "Needs a text summary beside it; it is never the only carrier of the value.",
           "crystal": "Stroke weight at small size",
@@ -4363,6 +5581,9 @@
             "empty"
           ],
           "material": "Haze track with a primary arc",
+          "surface": [
+            "none"
+          ],
           "geometry": "Matches the ring progress stroke.",
           "semantics": "role=\"meter\" with a text value.",
           "crystal": "Arc geometry, threshold colour from status tokens",
@@ -4382,6 +5603,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Cells are square with a hairline gap.",
           "semantics": "Intensity is paired with a value; colour alone never carries meaning.",
           "crystal": "Scale construction, contrast floor at every step",
@@ -4401,6 +5625,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Stages meet without gaps; labels sit outside when they do not fit.",
           "semantics": "Each stage states its absolute and relative value.",
           "crystal": "Stage geometry, label placement",
@@ -4419,10 +5646,16 @@
             "focus-visible"
           ],
           "material": "Haze entry fills",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Entries are pills and reach 44px.",
           "semantics": "Toggles are buttons with a pressed state; hidden series are announced.",
           "crystal": "Entry material, pressed state, selection by weight",
           "product": "Which series are toggleable",
+          "motion": [
+            "selection"
+          ],
           "parity": [
             "mui-x-charts:ChartsLegend"
           ]
@@ -4436,10 +5669,17 @@
             "shown"
           ],
           "material": "Frost panel",
+          "surface": [
+            "frost"
+          ],
           "geometry": "Panel radius; never covers the point it describes.",
           "semantics": "Mirrors the tooltip contract: reachable by keyboard, dismissible with Escape.",
           "crystal": "Material, follow motion, placement",
           "product": "Which values appear and their format",
+          "motion": [
+            "tooltip-in",
+            "tooltip-out"
+          ],
           "parity": [
             "mui-x-charts:ChartsTooltip"
           ]
@@ -4455,6 +5695,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Square cells with a hairline gap; week and month labels outside.",
           "semantics": "Every cell states its date and value; intensity is paired with a number.",
           "crystal": "Scale construction and the contrast floor at every step",
@@ -4474,6 +5717,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Hairline separation; labels drop out rather than overflow.",
           "semantics": "Navigable as a tree, with each node stating its share.",
           "crystal": "Nesting depth rendering, label policy",
@@ -4493,6 +5739,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Link opacity keeps crossings readable.",
           "semantics": "Each link states its endpoints and volume as text.",
           "crystal": "Link material and opacity so overlaps stay legible",
@@ -4512,6 +5761,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Wick and body share one x centre; body has no radius.",
           "semantics": "Each period is reachable and states all four values.",
           "crystal": "Rise and fall colour from the status tokens, never red and green alone",
@@ -4531,6 +5783,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Connectors align with bar edges.",
           "semantics": "Each step states its delta and the running total.",
           "crystal": "Increase, decrease and total colour from the status tokens",
@@ -4549,6 +5804,9 @@
             "empty"
           ],
           "material": "Haze range bands",
+          "surface": [
+            "none"
+          ],
           "geometry": "Single row; the target is a crisp marker, not a bar.",
           "semantics": "role=\"meter\" with the target stated in text.",
           "crystal": "Band materials, marker crispness",
@@ -4568,6 +5826,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Whisker caps align with the box width.",
           "semantics": "Each summary statistic is reachable as text; outliers are counted, not only drawn.",
           "crystal": "Box and whisker geometry",
@@ -4587,6 +5848,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Bins meet without gaps; the value end keeps a small radius.",
           "semantics": "Bin bounds and counts are text.",
           "crystal": "Bin geometry, series colour",
@@ -4606,6 +5870,9 @@
             "empty"
           ],
           "material": "Inherits the chart surface",
+          "surface": [
+            "none"
+          ],
           "geometry": "Region borders are hairlines in the rim colour.",
           "semantics": "Regions are reachable by keyboard and state their name and value; a table equivalent is required.",
           "crystal": "Scale construction, border treatment, contrast floor",
@@ -4625,6 +5892,9 @@
             "empty"
           ],
           "material": "Haze node fills",
+          "surface": [
+            "none"
+          ],
           "geometry": "Node size is a scale; edges are hairlines.",
           "semantics": "Nodes are reachable by keyboard; each states its degree and neighbours.",
           "crystal": "Node material, edge treatment, focus ring on a node",
@@ -4653,10 +5923,17 @@
             "focus-visible"
           ],
           "material": "Resin control bar over the video; Haze fills behind readable labels",
+          "surface": [
+            "resin",
+            "haze"
+          ],
           "geometry": "Control bar is a pill; every control reaches 44px.",
           "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus.",
           "crystal": "Control-bar material, transport geometry, the motion of showing and hiding controls",
           "product": "Sources, captions, DRM, analytics",
+          "motion": [
+            "media-in"
+          ],
           "parity": [
             "primereact:galleria",
             "mui:CardMedia"
@@ -4675,10 +5952,17 @@
             "focus-visible"
           ],
           "material": "Resin plane with Haze readable regions",
+          "surface": [
+            "resin",
+            "haze"
+          ],
           "geometry": "Pill; the scrubber is a slider with a 44px thumb.",
           "semantics": "A real audio element. The scrubber is a slider announcing time, not a progress bar.",
           "crystal": "Material, scrubber geometry, time formatting",
           "product": "Sources, playlists, streaming",
+          "motion": [
+            "media-in"
+          ],
           "parity": [
             "mantine:Audio"
           ]
@@ -4695,6 +5979,9 @@
             "focus-visible"
           ],
           "material": "Resin plane",
+          "surface": [
+            "resin-panel"
+          ],
           "geometry": "Pill; 44px targets throughout.",
           "semantics": "Each control is a button with a name; play and pause are one toggle with a pressed state.",
           "crystal": "Materials, the press recipe on every control",
@@ -4713,10 +6000,19 @@
             "focus-visible"
           ],
           "material": "Thumbnails are Haze; the viewer sits on a Mirage scrim",
+          "surface": [
+            "haze",
+            "mirage"
+          ],
           "geometry": "Thumbnails keep the content radius; the viewer is full-bleed within the scrim.",
           "semantics": "The viewer is a dialog: focus is contained, Escape closes, and arrows move between items with position announced.",
           "crystal": "Scrim material, thumbnail material, the transition between thumbnail and viewer",
           "product": "The media set and its captions",
+          "motion": [
+            "media-in",
+            "caption-in",
+            "selection"
+          ],
           "parity": [
             "primereact:galleria",
             "mui:ImageList"
@@ -4732,10 +6028,17 @@
             "focus-visible"
           ],
           "material": "Mirage scrim; the item sits above it",
+          "surface": [
+            "mirage"
+          ],
           "geometry": "The item keeps its own aspect; the scrim is full-bleed.",
           "semantics": "A dialog. Zoom and pan are keyboard reachable, and closing returns focus to the thumbnail.",
           "crystal": "Scrim material, the open and close motion",
           "product": "The item and its caption",
+          "motion": [
+            "media-in",
+            "caption-in"
+          ],
           "parity": [
             "primereact:image"
           ]
@@ -4755,6 +6058,9 @@
             "at-rest"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Tabular figures so a column of prices aligns.",
           "semantics": "The formatted value is the text content; currency is stated, not implied by a symbol alone.",
           "crystal": "Figure style and step",
@@ -4771,6 +6077,9 @@
             "at-rest"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Matches price.",
           "semantics": "Reads as a sentence rather than two numbers with a dash.",
           "crystal": "Typography",
@@ -4787,10 +6096,16 @@
             "at-rest"
           ],
           "material": "Haze fill with a status accent",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Pill.",
           "semantics": "States what is reduced from what; a percentage alone is not a claim.",
           "crystal": "Status tokens, pill geometry",
           "product": "Discount rules and rounding",
+          "motion": [
+            "attention"
+          ],
           "parity": [
             "antd:Tag"
           ]
@@ -4807,10 +6122,16 @@
             "disabled"
           ],
           "material": "Resin shell with a Haze well",
+          "surface": [
+            "field"
+          ],
           "geometry": "Pill; both controls reach 44px.",
           "semantics": "A spin button: the value is typable, and the bounds are announced when reached.",
           "crystal": "Materials, press recipe on each control",
           "product": "Bounds, step, stock rules",
+          "motion": [
+            "slider-step"
+          ],
           "parity": [
             "react-aria:NumberField",
             "primereact:inputnumber"
@@ -4827,10 +6148,16 @@
             "focus-visible"
           ],
           "material": "Haze option fills",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Options are pills; swatch variants are circles.",
           "semantics": "Unavailable options stay perceivable and say why; selection is label weight, never a check mark.",
           "crystal": "Option material, selection weight, unavailable treatment",
           "product": "Variant axes and stock",
+          "motion": [
+            "selection"
+          ],
           "parity": [
             "mantine:SegmentedControl"
           ]
@@ -4846,6 +6173,9 @@
             "backorder"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Inline with the price or the action.",
           "semantics": "Words carry the state; status colour reinforces it.",
           "crystal": "Status tokens",
@@ -4865,10 +6195,17 @@
             "unavailable"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "The whole card is not a link; the name is, and the action is a button. One tab stop each.",
           "crystal": "Material, media aspect, action geometry, hover recipe",
           "product": "Which attributes appear",
+          "motion": [
+            "list-in",
+            "list-out"
+          ],
           "parity": [
             "primereact:card",
             "mantine:Card"
@@ -4884,10 +6221,18 @@
             "focus-visible"
           ],
           "material": "Haze thumbnails; Mirage scrim when enlarged",
+          "surface": [
+            "haze",
+            "mirage"
+          ],
           "geometry": "Thumbnails keep the content radius; the viewer is full-bleed within the scrim.",
           "semantics": "Arrow keys move between items with position announced; zoom is keyboard reachable.",
           "crystal": "Scrim and thumbnail materials, the transition into the viewer",
           "product": "The media set",
+          "motion": [
+            "media-in",
+            "selection"
+          ],
           "parity": [
             "primereact:galleria"
           ]
@@ -4903,10 +6248,17 @@
             "focus-visible"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Removal is announced and undoable; quantity changes announce the new subtotal.",
           "crystal": "Material, the update and remove motion",
           "product": "Pricing and stock rules",
+          "motion": [
+            "list-in",
+            "list-out"
+          ],
           "parity": [
             "antd:List.Item"
           ]
@@ -4921,6 +6273,9 @@
             "empty"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "A description list, so each line is a labelled pair; the total is marked as such.",
           "crystal": "Material, figure alignment, the motion of a changing total",
@@ -4941,10 +6296,18 @@
             "invalid"
           ],
           "material": "Haze well in a Resin shell",
+          "surface": [
+            "field"
+          ],
           "geometry": "Field and action share one pill row.",
           "semantics": "Success and failure are announced; an applied code is removable.",
           "crystal": "Materials, field-valid and field-invalid recipes",
           "product": "Validation and stacking rules",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid"
+          ],
           "parity": [
             "antd:Input.Search"
           ]
@@ -4961,10 +6324,17 @@
             "focus-visible"
           ],
           "material": "Haze step fills",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Steps are pills; connectors are hairlines.",
           "semantics": "The current step is aria-current; completion is stated in words, and a check mark here means validated rather than selected.",
           "crystal": "Step materials, connector treatment, the advance motion",
           "product": "The steps and their validation",
+          "motion": [
+            "selection",
+            "page-in"
+          ],
           "parity": [
             "antd:Steps",
             "mui:Stepper"
@@ -4981,10 +6351,16 @@
             "focus-visible"
           ],
           "material": "Haze option fills",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Options keep the content radius; the selected one carries label weight.",
           "semantics": "A radio group. Card fields are never reimplemented — the host supplies its provider element.",
           "crystal": "Option material, selection, focus ring",
           "product": "The provider, tokenisation, and PCI scope — this component never handles raw card data",
+          "motion": [
+            "selection"
+          ],
           "parity": [
             "antd:Radio.Group"
           ]
@@ -5000,10 +6376,18 @@
             "submitting"
           ],
           "material": "Haze wells in Resin shells",
+          "surface": [
+            "field"
+          ],
           "geometry": "Fields follow the input geometry.",
           "semantics": "Field order, labels and required-ness change by country; postcode validation is per-locale, not one regular expression.",
           "crystal": "Materials, validation recipes",
           "product": "Countries supported and their field rules",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid"
+          ],
           "parity": [
             "antd:Form"
           ]
@@ -5019,6 +6403,9 @@
             "cancelled"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Status is a word; the status colour reinforces it.",
           "crystal": "Material, status tokens",
@@ -5038,10 +6425,16 @@
             "focus-visible"
           ],
           "material": "Haze option fills",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Options keep the content radius.",
           "semantics": "A radio group; each option states price and estimate together.",
           "crystal": "Option material, selection weight",
           "product": "Rates and estimates",
+          "motion": [
+            "selection"
+          ],
           "parity": [
             "antd:Radio.Group"
           ]
@@ -5056,6 +6449,9 @@
             "unavailable"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Inline.",
           "semantics": "An absolute date, not only a relative phrase.",
           "crystal": "Typography and colour",
@@ -5075,10 +6471,17 @@
             "focus-visible"
           ],
           "material": "Resin pill or icon button",
+          "surface": [
+            "control"
+          ],
           "geometry": "Pill; 44px target.",
           "semantics": "A toggle with a pressed state and a name that says what it will do.",
           "crystal": "Press recipe, the state-change recipe",
           "product": "Persistence",
+          "motion": [
+            "press",
+            "selection"
+          ],
           "parity": [
             "mantine:ActionIcon"
           ]
@@ -5092,10 +6495,17 @@
             "expanded"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "The rating is text as well as stars.",
           "crystal": "Material, rating rendering, expansion motion",
           "product": "Moderation and sorting",
+          "motion": [
+            "list-in",
+            "list-out"
+          ],
           "parity": [
             "primereact:rating"
           ]
@@ -5109,6 +6519,9 @@
             "empty"
           ],
           "material": "Haze distribution bars",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "The average and the count are both stated; bars are labelled.",
           "crystal": "Bar material, figure typography",
@@ -5128,6 +6541,10 @@
             "focus-visible"
           ],
           "material": "Frost panel with Haze groups",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Panel radius; controls are pills.",
           "semantics": "Applied filters are announced and individually removable; counts update politely.",
           "crystal": "Panel and group materials, the apply and clear motion",
@@ -5147,10 +6564,20 @@
             "open"
           ],
           "material": "Haze well in a Resin shell",
+          "surface": [
+            "field"
+          ],
           "geometry": "Pill.",
           "semantics": "A select whose current ordering is announced on change.",
           "crystal": "Materials, open motion",
           "product": "The orderings offered",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid",
+            "menu-in",
+            "menu-out"
+          ],
           "parity": [
             "antd:Select"
           ]
@@ -5164,6 +6591,9 @@
             "focus-visible"
           ],
           "material": "Inherits the table surface",
+          "surface": [
+            "table"
+          ],
           "geometry": "Sticky first column and header; differences are marked, not only coloured.",
           "semantics": "A real table with row and column headers; differences are stated in text.",
           "crystal": "Table surface, sticky treatment, difference marking",
@@ -5182,10 +6612,16 @@
             "focus-visible"
           ],
           "material": "Inherits from its cards",
+          "surface": [
+            "none"
+          ],
           "geometry": "Scrolls within its own container; never the page.",
           "semantics": "A labelled list; the strip is keyboard scrollable.",
           "crystal": "Scroll surface, edge fade from the surrounding material",
           "product": "Retention and privacy policy",
+          "motion": [
+            "list-in"
+          ],
           "parity": [
             "primereact:carousel"
           ]
@@ -5207,6 +6643,10 @@
             "error"
           ],
           "material": "Plastic foundation with Frost chrome",
+          "surface": [
+            "plastic",
+            "frost"
+          ],
           "geometry": "Full-bleed; safe areas respected.",
           "semantics": "One main per view; the heading is the view name.",
           "crystal": "Region materials, elevation ordering, safe-area handling",
@@ -5225,6 +6665,9 @@
             "condensed"
           ],
           "material": "Frost band or inherits",
+          "surface": [
+            "frost"
+          ],
           "geometry": "Actions are pills.",
           "semantics": "Contains the h1; breadcrumbs are a navigation landmark.",
           "crystal": "Material, condense behaviour on scroll",
@@ -5244,6 +6687,9 @@
             "popping"
           ],
           "material": "Inherits per view",
+          "surface": [
+            "none"
+          ],
           "geometry": "Views enter and leave along the reading direction.",
           "semantics": "Focus moves to the new view and returns on pop; the back control is a real button.",
           "crystal": "Enter and exit recipes, focus management",
@@ -5266,10 +6712,18 @@
             "narrow"
           ],
           "material": "Frost list pane; Haze detail surface",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Collapses to a stack below the layout breakpoint.",
           "semantics": "Selection moves focus to the detail only when the layout has collapsed.",
           "crystal": "Pane materials, the collapse transition",
           "product": "The data and routing",
+          "motion": [
+            "page-in",
+            "page-out"
+          ],
           "parity": [
             "antd:Layout"
           ]
@@ -5285,10 +6739,16 @@
             "focus-visible"
           ],
           "material": "Inherits per pane",
+          "surface": [
+            "none"
+          ],
           "geometry": "The divider is a 44px target.",
           "semantics": "The divider is a separator with a value, resizable by keyboard.",
           "crystal": "Divider material, focus ring",
           "product": "Panes and persistence",
+          "motion": [
+            "resize-settle"
+          ],
           "parity": [
             "primereact:splitter",
             "antd:Splitter"
@@ -5304,6 +6764,9 @@
             "overflowing"
           ],
           "material": "Resin plane",
+          "surface": [
+            "resin"
+          ],
           "geometry": "Pill; overflow to a menu.",
           "semantics": "role=\"toolbar\" with one tab stop.",
           "crystal": "Material, overflow behaviour, press recipes",
@@ -5322,6 +6785,9 @@
             "error"
           ],
           "material": "Stone backing",
+          "surface": [
+            "stone"
+          ],
           "geometry": "Full-bleed; text stays crisp.",
           "semantics": "role=\"status\"; errors escalate to assertive.",
           "crystal": "Material, status tokens",
@@ -5339,6 +6805,10 @@
             "focus-mode"
           ],
           "material": "Plastic foundation with Frost panels",
+          "surface": [
+            "plastic",
+            "frost"
+          ],
           "geometry": "Panels keep panel radius.",
           "semantics": "Each pane is a labelled region; focus order follows the visual order.",
           "crystal": "Panel materials, pane transitions",
@@ -5357,10 +6827,17 @@
             "transitioning"
           ],
           "material": "Inherits",
+          "surface": [
+            "none"
+          ],
           "geometry": "Chrome leaves along its own edge.",
           "semantics": "Entering and leaving are announced; nothing becomes unreachable, only hidden.",
           "crystal": "The enter and exit recipes",
           "product": "What counts as chrome",
+          "motion": [
+            "page-in",
+            "page-out"
+          ],
           "parity": [
             "mantine:AppShell"
           ]
@@ -5373,10 +6850,16 @@
             "at-rest"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Says what would be here and offers the action that creates it.",
           "crystal": "Material, illustration treatment",
           "product": "The copy and the action",
+          "motion": [
+            "empty-in"
+          ],
           "parity": [
             "antd:Empty",
             "mantine:Center"
@@ -5390,10 +6873,16 @@
             "at-rest"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "role=\"alert\"; states what failed and what to try, never only a code.",
           "crystal": "Material, status tokens",
           "product": "The error taxonomy",
+          "motion": [
+            "page-in"
+          ],
           "parity": [
             "antd:Result"
           ]
@@ -5406,10 +6895,16 @@
             "at-rest"
           ],
           "material": "Skeletons on the surrounding material",
+          "surface": [
+            "none"
+          ],
           "geometry": "Skeletons match the shape of what is coming.",
           "semantics": "aria-busy on the region; the wait is announced once, not repeatedly.",
           "crystal": "Skeleton material and the reduced-motion contract",
           "product": "What is loading",
+          "motion": [
+            "skeleton-resolve"
+          ],
           "parity": [
             "antd:Skeleton",
             "mantine:Skeleton"
@@ -5424,10 +6919,16 @@
             "reconnecting"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Announced politely; retry is a real button.",
           "crystal": "Material, status tokens",
           "product": "What is available offline",
+          "motion": [
+            "page-in"
+          ],
           "parity": [
             "antd:Result"
           ]
@@ -5440,10 +6941,16 @@
             "at-rest"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "States what was not found and offers a route onward.",
           "crystal": "Material",
           "product": "The copy and the routes",
+          "motion": [
+            "page-in"
+          ],
           "parity": [
             "antd:Result"
           ]
@@ -5457,10 +6964,16 @@
             "requesting"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Says which permission and why; the request is a real button.",
           "crystal": "Material, status tokens",
           "product": "The permission model",
+          "motion": [
+            "page-in"
+          ],
           "parity": [
             "antd:Result"
           ]
@@ -5482,6 +6995,11 @@
             "narrow"
           ],
           "material": "Plastic foundation, Frost chrome, Resin actions",
+          "surface": [
+            "plastic",
+            "frost",
+            "control"
+          ],
           "geometry": "Panel radius throughout; safe areas respected.",
           "semantics": "Landmarks in place: banner, navigation, main, contentinfo. One main.",
           "crystal": "Region materials and elevation ordering",
@@ -5501,6 +7019,9 @@
             "empty"
           ],
           "material": "Inherits from its tiles",
+          "surface": [
+            "none"
+          ],
           "geometry": "Gap from the scale.",
           "semantics": "A labelled list of figures.",
           "crystal": "Reflow behaviour",
@@ -5520,6 +7041,9 @@
             "error"
           ],
           "material": "Haze panel on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "The chart carries a table equivalent; controls are real controls.",
           "crystal": "Panel material, control geometry",
@@ -5541,6 +7065,10 @@
             "error"
           ],
           "material": "Table surface with Frost overlays",
+          "surface": [
+            "table",
+            "frost"
+          ],
           "geometry": "Toolbar controls are pills; the table keeps its own surface.",
           "semantics": "Selection count is announced; bulk actions describe what they will affect.",
           "crystal": "Surfaces, selection treatment, the motion of entering bulk mode",
@@ -5562,6 +7090,10 @@
             "error"
           ],
           "material": "Haze sections in a Frost panel",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Errors summarise at the top and link to their fields; submission state is announced.",
           "crystal": "Section materials, field recipes, the submit transition",
@@ -5581,6 +7113,9 @@
             "saved"
           ],
           "material": "Haze groups",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Each group is a labelled region; unsaved changes are announced before navigation.",
           "crystal": "Group material, the save transition",
@@ -5600,6 +7135,10 @@
             "locked"
           ],
           "material": "Haze card on the Plastic foundation",
+          "surface": [
+            "plastic",
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Real form semantics with autocomplete tokens; failures never reveal which factor was wrong.",
           "crystal": "Card material, field recipes",
@@ -5619,6 +7158,9 @@
             "saving"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Destructive actions confirm and say what they remove.",
           "crystal": "Material, avatar geometry",
@@ -5638,10 +7180,17 @@
             "live"
           ],
           "material": "Haze rows",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Live updates are announced politely and never steal focus.",
           "crystal": "Row material, the insert motion",
           "product": "The event model",
+          "motion": [
+            "list-in",
+            "list-out"
+          ],
           "parity": [
             "antd:Timeline",
             "mantine:Timeline"
@@ -5658,10 +7207,20 @@
             "focus-visible"
           ],
           "material": "Frost panel with Haze rows",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Panel radius; rows reach 44px.",
           "semantics": "Unread count is announced; marking read is undoable.",
           "crystal": "Panel and row materials, the read transition",
           "product": "The notification model",
+          "motion": [
+            "toast-in",
+            "toast-out",
+            "list-in",
+            "list-out"
+          ],
           "parity": [
             "antd:Notification"
           ]
@@ -5678,6 +7237,10 @@
             "full-screen"
           ],
           "material": "Resin transport over the media; Haze metadata",
+          "surface": [
+            "resin",
+            "haze"
+          ],
           "geometry": "Transport is a pill; controls reach 44px.",
           "semantics": "Real media elements; captions and their state announced; transport reachable by keyboard.",
           "crystal": "Transport material, the show and hide motion",
@@ -5697,10 +7260,18 @@
             "focus-visible"
           ],
           "material": "Haze rows",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Reorder works by keyboard; the now-playing row is aria-current.",
           "crystal": "Row material, the drag lift and settle",
           "product": "The queue model",
+          "motion": [
+            "list-in",
+            "list-out",
+            "reorder"
+          ],
           "parity": [
             "react-aria:GridList"
           ]
@@ -5716,6 +7287,9 @@
             "filtering"
           ],
           "material": "Inherits from its cards and panels",
+          "surface": [
+            "none"
+          ],
           "geometry": "Grid gap from the scale; reflows by container width.",
           "semantics": "Result count is announced on filter change; the grid is a labelled list.",
           "crystal": "Card and panel materials, the filter transition",
@@ -5734,6 +7308,9 @@
             "adding"
           ],
           "material": "Inherits from its parts",
+          "surface": [
+            "none"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Variant changes update price and stock together, and say so.",
           "crystal": "Composition of materials, the add-to-cart transition",
@@ -5753,6 +7330,10 @@
             "error"
           ],
           "material": "Haze sections in a Frost panel",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "Each step is a labelled region; errors summarise and link; raw card data never touches this component.",
           "crystal": "Section materials, step transitions",
@@ -5773,10 +7354,18 @@
             "empty"
           ],
           "material": "Frost drawer with Haze rows",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Drawer keeps panel radius on its inner edge.",
           "semantics": "Opening moves focus in and returns it on close; total changes are announced.",
           "crystal": "Drawer material, the enter and exit recipes",
           "product": "The cart model",
+          "motion": [
+            "drawer-in",
+            "drawer-out"
+          ],
           "parity": [
             "antd:Drawer"
           ]
@@ -5791,6 +7380,9 @@
             "focus-visible"
           ],
           "material": "Haze content fill on the surrounding material",
+          "surface": [
+            "haze"
+          ],
           "geometry": "Content radius; spacing from the scale.",
           "semantics": "The recommended plan is stated in words, not only styled.",
           "crystal": "Card materials, emphasis treatment",
@@ -5810,10 +7402,18 @@
             "skipped"
           ],
           "material": "Frost panel over a Mirage scrim",
+          "surface": [
+            "frost",
+            "mirage"
+          ],
           "geometry": "Panel radius; the highlight follows the target radius.",
           "semantics": "Escapable at every step; progress announced; focus moves with the step.",
           "crystal": "Panel and scrim materials, step motion, focus management",
           "product": "The steps and their copy",
+          "motion": [
+            "page-in",
+            "page-out"
+          ],
           "parity": [
             "antd:Tour"
           ]
@@ -5830,10 +7430,20 @@
             "focus-visible"
           ],
           "material": "Frost overlay with Haze rows",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Overlay keeps panel radius; rows reach 44px.",
           "semantics": "A combobox: results are announced by count, and arrow keys move without losing the typed value.",
           "crystal": "Overlay material, the open motion, row treatment",
           "product": "The search backend and ranking",
+          "motion": [
+            "menu-in",
+            "menu-out",
+            "list-in",
+            "list-out"
+          ],
           "parity": [
             "mantine:Spotlight",
             "primereact:autocomplete"
@@ -5851,6 +7461,10 @@
             "saved"
           ],
           "material": "Haze surface in a Frost frame",
+          "surface": [
+            "frost",
+            "haze"
+          ],
           "geometry": "Toolbar controls are pills; the surface keeps the content radius.",
           "semantics": "The toolbar is a real toolbar with one tab stop; formatting state is announced.",
           "crystal": "Surface and toolbar materials, the save transition",

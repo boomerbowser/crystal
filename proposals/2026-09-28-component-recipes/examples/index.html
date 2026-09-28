@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en" data-crystal-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crystal surfaces — specimen sheet</title>
+<!-- The real library, by relative path: what a consumer gets, nothing the page adds. -->
+<link rel="stylesheet" href="../../../core/assets/crystal-theme.css">
+<link rel="stylesheet" href="../../../core/assets/crystal.css">
+<style>
+  /* Layout only. Nothing here restyles a Crystal recipe; every specimen is the
+     library's own class on the library's own element. The page background is the
+     Plastic foundation, which is a specimen too. */
+  body{font-family:var(--cr-font);min-height:100vh}
+  .sheet{max-width:1180px;margin:0 auto;padding:32px 24px 96px}
+  .sheet-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:28px}
+  .sheet-head h1{font-size:30px;letter-spacing:-.045em;margin:0 0 6px}
+  .sheet-head p{margin:0;color:var(--cr-muted);max-width:64ch;font-size:14px;line-height:1.6}
+  .controls{display:flex;gap:8px;align-items:center}
+  h2{font-size:22px;letter-spacing:-.03em;margin:44px 0 14px}
+  h2 small{font-weight:600;color:var(--cr-muted);font-size:13px;letter-spacing:0;margin-inline-start:10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+  .specimen{display:flex;flex-direction:column;gap:10px;min-width:0}
+  .specimen>figcaption{font-size:12px;color:var(--cr-muted);line-height:1.55;padding:0 4px}
+  .specimen>figcaption b{color:var(--cr-text);font-weight:800}
+  .specimen>figcaption code{font-size:11px}
+  /* A vivid scene under every specimen so diffusion, tint and rims are visible —
+     the same device the approved material studies use. Content, not material. */
+  .scene{position:relative;isolation:isolate;min-height:180px;border-radius:calc(var(--cr-radius) + 10px);overflow:hidden;display:grid;place-items:center;padding:24px;background:var(--cr-canvas)}
+  .scene::before{content:'';position:absolute;z-index:-1;width:320px;height:150px;left:-60px;top:70px;transform:rotate(-32deg);border-radius:120px;background:linear-gradient(45deg,var(--cr-decorative),var(--cr-companion))}
+  .scene::after{content:'';position:absolute;z-index:-1;width:150px;height:150px;right:-30px;top:-30px;border-radius:50%;background:var(--cr-glow)}
+  .scene.tall{min-height:260px}
+  .specimen.wide{grid-column:1/-1}
+  .specimen.two-up{grid-column:span 2}
+  @media (max-width:700px){.specimen.two-up{grid-column:auto}.two{grid-template-columns:1fr}}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+  .stack{display:flex;flex-direction:column;gap:6px;min-width:220px}
+  .pad{padding:16px 20px}
+  .label{font-size:13px;font-weight:800}
+  .muted{font-size:13px;color:var(--cr-muted)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%}
+  .two>div{display:flex;flex-direction:column;gap:8px;align-items:center}
+  .two .label{opacity:.85}
+  .art{width:200px;height:110px;border-radius:18px;background:linear-gradient(130deg,var(--cr-decorative),var(--cr-companion));display:grid;place-items:end center;padding:10px}
+  .mirage-box{position:relative;width:100%;height:150px;border-radius:22px;overflow:hidden;background:linear-gradient(120deg,var(--cr-glow),var(--cr-decorative) 55%,var(--cr-companion))}
+  .mirage-box .cr-mirage{position:absolute;inset:0 0 0 50%}
+  .mirage-box .mark{position:absolute;bottom:10px;font-size:12px;font-weight:800;color:#fff;text-shadow:0 1px 2px #0008}
+  .mirage-box .mark.l{left:14px}.mirage-box .mark.r{right:14px}
+  .cr-frost.pad,.cr-resin.pad{min-width:240px}
+  .list{display:flex;flex-direction:column;gap:2px;padding:8px;min-width:220px}
+  .rail{display:flex;gap:4px;padding:8px}
+  .handle-row{display:flex;align-items:center;gap:12px;padding:8px 8px 8px 12px;min-width:260px}
+  .handle-row span{flex:1}
+  .choices{display:grid;grid-template-columns:auto 1fr;gap:12px 14px;align-items:center;padding:18px 22px}
+  .choices label{font-size:14px;font-weight:650}
+  .dock-stage{width:100%;display:grid;place-items:center}
+  .note{margin:14px 0 0;font-size:13px;color:var(--cr-muted);line-height:1.6;max-width:78ch}
+  table.spec{width:100%;font-size:13px}
+  dialog.cr-dialog p{margin:0 0 8px}
+</style>
+</head>
+<body class="cr-plastic">
+<main class="sheet">
+  <header class="sheet-head">
+    <div>
+      <h1>Every component is made of one of these.</h1>
+      <p>The 22 surfaces in <code>core/tokens/surfaces.json</code>, each rendered by the recipe that implements it in <code>core/assets/crystal.css</code>, over the artwork the approved material studies use. Four are new in 2.2.0 and marked. The page loads the library by relative path and adds only layout; toggle the mode and every specimen follows.</p>
+    </div>
+    <div class="controls" data-cr-motion="manual">
+      <button type="button" class="cr-button" id="mode" aria-pressed="false">Dark mode</button>
+      <button type="button" class="cr-button quiet" id="open-dialog">Open the dialog</button>
+    </div>
+  </header>
+
+  <h2>The hierarchy <small>Plastic → Frost → Resin, and the fills that live on them</small></h2>
+  <div class="grid">
+    <figure class="specimen">
+      <div class="scene"><div class="cr-plastic pad" style="border-radius:22px;min-width:220px;box-shadow:var(--cr-shadow-content)"><span class="label">Plastic</span><div class="muted">Opaque. Emits the palette's glow; never reveals what is behind it.</div></div></div>
+      <figcaption><b>plastic</b> · <code>.cr-plastic</code> — the foundation. This page's body is one.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><div class="cr-frost pad"><span class="label">Frost</span><div class="muted">40px diffusion, tint, fine grain. Panels, sheets — and every transient overlay.</div></div></div>
+      <figcaption><b>frost</b> · <code>.cr-frost</code> — intermediate panels; menus, popovers, tooltips and toasts (R15e).</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><article class="cr-haze pad" style="max-width:260px"><span class="label">Haze</span><div class="muted">80% fill, 1.95px feathered edge, crisp text. Anything read.</div></article></div>
+      <figcaption><b>haze</b> · <code>.cr-haze</code> — cards, rows, wells, forms, decisions.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><nav class="cr-resin" aria-label="Specimen toolbar" style="padding:8px;display:flex;gap:6px"><button type="button" class="cr-button quiet">Cut</button><button type="button" class="cr-button quiet">Copy</button><button type="button" class="cr-button quiet" aria-pressed="true">Paste</button></nav></div>
+      <figcaption><b>resin</b> · <code>.cr-resin</code> — one clustered control plane, pill-shaped. Controls inside it lose their own blur.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><div class="cr-resin panel pad" style="min-width:240px"><span class="label">Resin panel</span><div class="muted">The same plane at the content radius: a floating window, a wide control bar.</div></div></div>
+      <figcaption><b>resin-panel</b> · <code>.cr-resin.panel</code> — <b>new in 2.2.0</b>.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><div class="mirage-box"><div class="cr-mirage"></div><span class="mark l">scene</span><span class="mark r">Mirage over it</span></div></div>
+      <figcaption><b>mirage</b> · <code>.cr-mirage</code> — the modal scrim: chromatic diffusion of the real scene, never a content surface.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Controls <small>Resin with Haze inside it</small></h2>
+  <div class="grid">
+    <figure class="specimen">
+      <div class="scene"><div class="row"><button type="button" class="cr-button">Action</button><button type="button" class="cr-button primary">Primary</button><button type="button" class="cr-button quiet">Quiet</button><button type="button" class="cr-button danger">Delete</button></div><div class="row" style="margin-top:12px"><button type="button" class="cr-button" aria-pressed="true">Selected</button><button type="button" class="cr-button" disabled>Disabled</button><a class="cr-button" href="#" aria-disabled="true">Disabled link</a></div></div>
+      <figcaption><b>control</b> · <code>.cr-button</code>, <code>.cr-control</code> — a Resin shell with the 8px-inset Haze pad. Selected is the primary pad and weight 800. The disabled link is <b>new in 2.2.0</b>: links had no disabled state.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><div class="stack"><label class="label" for="f1">Project name</label><span class="cr-field-shell"><input class="cr-input" id="f1" value="Gather" required><span class="cr-indicator" aria-hidden="true"></span></span></div></div>
+      <figcaption><b>field</b> · <code>.cr-field-shell</code> — the Resin surround of a native field, the Haze well the value is read on, the field-state badge.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><div class="row"><span class="cr-resin-haze cr-tag">Design</span><span class="cr-resin-haze cr-tag">Accessibility</span><kbd class="cr-resin-haze cr-tag">⌘K</kbd></div></div>
+      <figcaption><b>compact</b> · <code>.cr-resin-haze</code>, <code>.cr-tag</code> — display elements that sit <i>on</i> content: tags, badges, keyboard caps.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><div class="row"><span class="cr-status" data-status="success"><span aria-hidden="true">✓</span>Validated</span><span class="cr-status" data-status="attention"><span aria-hidden="true">!</span>Needs review</span><span class="cr-status" data-status="danger"><span aria-hidden="true">×</span>Failed</span><span class="cr-status" data-status="info"><span aria-hidden="true">i</span>Note</span></div></div>
+      <figcaption><b>status</b> · <code>.cr-status</code> — the semantic pair behind a symbol, with words. A check here means validated; it never means selected.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><div class="choices cr-haze"><input type="checkbox" id="c1" checked><label for="c1">Checkbox</label><input type="radio" id="r1" name="r" checked><label for="r1">Radio</label><input type="checkbox" role="switch" id="s1" checked><label for="s1">Switch</label><input type="checkbox" role="switch" id="s2"><label for="s2">Switch, off</label><input type="range" id="rg" value="60" style="--cr-range-progress:60%"><label for="rg">Range</label></div></div>
+      <figcaption><b>choice</b> · native checkbox, radio, range — and the switch, <b>new in 2.2.0</b>: <code>input[type=checkbox][role=switch]</code> reading the published track tokens.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><div class="row"><button type="button" class="cr-control" aria-current="page">Current <span class="cr-indicator" data-kind="current" aria-hidden="true"></span></button><button type="button" class="cr-control" aria-busy="true">Saving <span class="cr-indicator" data-kind="busy" aria-hidden="true"></span></button></div></div>
+      <figcaption><b>indicator</b> · <code>.cr-indicator</code> — a 20px Haze circle marking activity or location. Informational, never selection.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Navigation and bare controls <small>the recipes a consumer had to invent — new in 2.2.0</small></h2>
+  <div class="grid">
+    <figure class="specimen two-up">
+      <div class="scene tall"><div class="two"><div><span class="label">Before: <code>.cr-control</code></span><nav class="cr-frost list" aria-label="Before"><a class="cr-control" href="#">Overview</a><a class="cr-control" href="#" aria-current="page">Materials</a><a class="cr-control" href="#">Motion</a><a class="cr-control" href="#">Tokens</a></nav></div><div><span class="label">After: <code>.cr-nav-item</code></span><nav class="cr-frost list" aria-label="After"><a class="cr-nav-item" href="#">Overview</a><a class="cr-nav-item" href="#" aria-current="page">Materials</a><a class="cr-nav-item" href="#">Motion</a><a class="cr-nav-item" href="#">Tokens</a></nav></div></div></div>
+      <figcaption><b>nav-item</b> · <code>.cr-nav-item</code> — a navigation entry is furniture on the panel beneath it. Selection is label weight, 650 → 800. Lifted from the documentation site's side menu, which the specification names as the reference implementation and which lived only in the site's stylesheet. Left: what a consumer got from the catalogue's "Resin shell" — capsules.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><nav class="cr-frost rail" aria-label="Rail"><a class="cr-nav-item stacked" href="#"><svg aria-hidden="true" viewBox="0 0 24 24"><use href="../../../core/assets/icons.svg#workspace"></use></svg>Work</a><a class="cr-nav-item stacked" href="#" aria-current="page"><svg aria-hidden="true" viewBox="0 0 24 24"><use href="../../../core/assets/icons.svg#conversation"></use></svg>Chat</a><a class="cr-nav-item stacked" href="#"><svg aria-hidden="true" viewBox="0 0 24 24"><use href="../../../core/assets/icons.svg#library"></use></svg>Library</a></nav></div>
+      <figcaption><b>nav-item</b> · <code>.cr-nav-item.stacked</code> — the rail: icon above label, same selection rule.</figcaption>
+    </figure>
+    <figure class="specimen two-up">
+      <div class="scene tall"><div class="two"><div><span class="label">Before: <code>background:transparent</code></span><article class="cr-haze pad" style="display:flex;gap:6px;align-items:center"><span>Accordion row</span><button type="button" style="background:transparent" aria-label="Expand"><svg aria-hidden="true" viewBox="0 0 24 24"><use href="../../../core/assets/icons.svg#chevron"></use></svg></button><button type="button" style="background:transparent" aria-label="Remove">×</button></article></div><div><span class="label">After: <code>.cr-bare</code></span><article class="cr-haze pad" style="display:flex;gap:6px;align-items:center"><span>Accordion row</span><button type="button" class="cr-bare" aria-label="Expand"><svg aria-hidden="true" viewBox="0 0 24 24"><use href="../../../core/assets/icons.svg#chevron"></use></svg></button><button type="button" class="cr-bare" aria-label="Remove">×</button></article></div></div></div>
+      <figcaption><b>bare</b> · <code>.cr-bare</code> — Crystal paints every <code>&lt;button&gt;</code> by element in five layers, so a control that declared itself transparent kept the blur, the float shadow and both feathered pads (left). Bare takes off all five and keeps the 44px target and the focus ring. Eighteen controls and 127 instances in Crystal React were the left-hand column.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><div class="stack"><div class="cr-haze handle-row"><button type="button" class="cr-bare cr-drag-handle" aria-label="Drag to reorder"></button><span>Quarterly review</span></div><div class="cr-haze handle-row"><button type="button" class="cr-bare cr-drag-handle" aria-label="Drag to reorder" data-dragging="true"></button><span>Held: lifted, grabbing</span></div></div></div>
+      <figcaption><b>drag-handle</b> · <code>.cr-drag-handle</code> — a bare control with a grip and a lift while <code>aria-grabbed</code> or <code>data-dragging</code> is set. Pointer capture and the keyboard alternative are the product's.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Compositions <small>surfaces that are recipes in their own right</small></h2>
+  <div class="grid">
+    <figure class="specimen">
+      <div class="scene"><div class="dock-stage"><nav class="cr-dock" aria-label="Destinations"><button type="button" aria-pressed="true">Home</button><button type="button">Projects</button><button type="button">Library</button></nav></div></div>
+      <figcaption><b>dock</b> · <code>.cr-dock</code> — the floating destination group: Resin pill, Haze perimeter, primary fill and weight 800 on the current destination.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><div class="stack" style="max-width:260px"><p class="cr-bubble">Can the surface vocabulary carry motion too?</p><p class="cr-bubble own">It names the family; the entry names the recipes.</p></div></div>
+      <figcaption><b>bubble</b> · <code>.cr-bubble</code>, <code>.own</code> — Haze with a directional tight corner.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><div class="art"><span class="cr-stone" style="padding:8px 14px;border-radius:999px;font-size:12px;font-weight:800">Stone caption over media</span></div></div>
+      <figcaption><b>stone</b> · <code>.cr-stone</code> — a label over an unknown backdrop: 55% light / 60% dark, feathered, crisp text.</figcaption>
+    </figure>
+    <figure class="specimen wide">
+      <div class="scene"><div class="cr-table-scroll cr-scroll-resin" style="width:100%"><table class="cr-table"><thead><tr><th scope="col">Surface</th><th scope="col">Recipe</th><th scope="col">Components</th></tr></thead><tbody><tr><td>haze</td><td><code>.cr-haze</code></td><td>75</td></tr><tr><td>none</td><td>—</td><td>101</td></tr><tr><td>control</td><td><code>.cr-button</code></td><td>15</td></tr><tr><td>frost</td><td><code>.cr-frost</code></td><td>39</td></tr></tbody></table></div></div>
+      <figcaption><b>table</b> · <code>.cr-table-scroll</code> + <code>.cr-table</code> — a Resin shell, an inset Haze fill, the primary-soft header, the Resin scrollbar.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Transient overlays are Frost <small>R15e — what the chapters said, and what Meridian decided</small></h2>
+  <div class="grid">
+    <figure class="specimen two-up">
+      <div class="scene tall"><div class="two"><div><span class="label">The chapters said: <code>.cr-resin-haze</code></span><div class="cr-resin-haze" role="presentation" style="min-width:200px;padding:8px"><div class="cr-bare" style="display:flex;justify-content:flex-start;font-weight:650">Comfortable</div><div class="cr-bare" style="display:flex;justify-content:flex-start;font-weight:800">Compact</div><div class="cr-bare" style="display:flex;justify-content:flex-start;font-weight:650">Dense</div></div></div><div><span class="label">The site renders: <code>.cr-frost</code></span><div class="cr-frost" role="presentation" style="min-width:200px;padding:8px;border-radius:22px"><div class="cr-bare" style="display:flex;justify-content:flex-start;font-weight:650">Comfortable</div><div class="cr-bare" style="display:flex;justify-content:flex-start;font-weight:800">Compact</div><div class="cr-bare" style="display:flex;justify-content:flex-start;font-weight:650">Dense</div></div></div></div></div>
+      <figcaption>A menu, both ways. <code>materials.md</code>, <code>components.md</code> and <code>motion-components.md</code> still said menus, popovers, tooltips and toasts take the compact Resin/Haze composition; Meridian moved them to Frost on 17 September (R15e) and the approved site has rendered Frost since. The chapters and eight catalogue entries now agree with the site. Selection in both is weight alone.</figcaption>
+    </figure>
+    <figure class="specimen">
+      <div class="scene"><div class="cr-frost" role="tooltip" style="padding:8px 14px;border-radius:14px;font-size:13px;font-weight:650;max-width:240px">Reduced motion always takes priority over speed.</div></div>
+      <figcaption><b>frost</b> as a tooltip — text directly on the panel, as the site's motion suite renders it.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Dialog <small>Haze over Mirage</small></h2>
+  <p class="note">The <b>dialog</b> surface is the real thing: press <i>Open the dialog</i> in the header. It is <code>&lt;dialog class="cr-dialog"&gt;</code>, whose <code>::backdrop</code> is Mirage. Escape closes it; focus returns.</p>
+  <dialog class="cr-dialog" id="dialog" aria-labelledby="dialog-title">
+    <header><h2 id="dialog-title" style="margin:0">Publish 2.2.0?</h2></header>
+    <p>Twenty-two surfaces, four new recipes, 114 entries claiming their motion, and a parity manifest that finally remembers what exists.</p>
+    <p class="muted">The Haze surface has no arrival of its own; the Mirage wash brings it in and withdraws it.</p>
+    <footer><button type="button" class="cr-button quiet" id="close-dialog">Not yet</button><button type="button" class="cr-button primary" id="confirm-dialog">Publish</button></footer>
+  </dialog>
+</main>
+<script>
+  /* Page furniture only: the mode toggle and the real dialog. No motion is
+     scripted — nothing here moves at rest, and the dialog's wash is motion.css's
+     business when that stylesheet is loaded. */
+  const root = document.documentElement;
+  const mode = document.getElementById('mode');
+  const setMode = (dark) => {
+    root.dataset.crystalMode = dark ? 'dark' : 'light';
+    mode.setAttribute('aria-pressed', String(dark));
+    mode.textContent = dark ? 'Light mode' : 'Dark mode';
+  };
+  mode.addEventListener('click', () => setMode(root.dataset.crystalMode !== 'dark'));
+  if (location.hash === '#dark') setMode(true);
+  const dialog = document.getElementById('dialog');
+  document.getElementById('open-dialog').addEventListener('click', () => dialog.showModal());
+  document.getElementById('close-dialog').addEventListener('click', () => dialog.close());
+  document.getElementById('confirm-dialog').addEventListener('click', () => dialog.close());
+</script>
+</body>
+</html>

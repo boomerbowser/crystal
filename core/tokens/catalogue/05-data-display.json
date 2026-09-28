@@ -16,10 +16,17 @@
         "disabled"
       ],
       "material": "Haze, 80% fill with a 1.95px feathered perimeter",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; at least 12px between content and the feathered edge",
       "semantics": "An article when it is content, a button when the whole card acts. Never both.",
       "crystal": "Fill, feather, elevation, interactive treatment",
       "product": "Content and what an interactive card does",
+      "motion": [
+        "list-in",
+        "list-out"
+      ],
       "parity": [
         "mantine:Card",
         "mui:Card",
@@ -39,10 +46,18 @@
         "loading"
       ],
       "material": "Resin shell, Haze fill, primary-soft header",
+      "surface": [
+        "table"
+      ],
       "geometry": "Content radius shell; header corners inset 8px; 14px/18px cells",
       "semantics": "Real table semantics with header associations; sort controls are buttons carrying aria-sort",
       "crystal": "Shell, header band, separators, sticky behaviour, reduced-effect fallbacks",
       "product": "Data, sorting, pagination and selection behaviour",
+      "motion": [
+        "list-in",
+        "list-out",
+        "highlight"
+      ],
       "parity": [
         "mantine:Table",
         "mui:Table",
@@ -63,10 +78,18 @@
         "error"
       ],
       "material": "Shared with Table; selection uses label weight, not a check badge on the row",
+      "surface": [
+        "table"
+      ],
       "geometry": "Shared with Table",
       "semantics": "aria-sort on sorted headers; row selection through real checkboxes with names",
       "crystal": "All Table treatment plus sort, filter and selection appearance",
       "product": "The data layer, virtualisation, and the sorting and filtering implementation",
+      "motion": [
+        "list-in",
+        "list-out",
+        "highlight"
+      ],
       "parity": [
         "mui:DataGrid",
         "antd:Table",
@@ -85,6 +108,9 @@
         "empty"
       ],
       "material": "Haze rows on the surrounding surface",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius on rows; separators are hairlines",
       "semantics": "Real list semantics; interactive rows are buttons or links, not clickable divs",
       "crystal": "Row treatment, separators, label weight for the selected row",
@@ -109,6 +135,9 @@
         "empty"
       ],
       "material": "Haze panel when grouped",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; term column aligned to the 4px rhythm",
       "semantics": "Real definition-list semantics so term and value stay associated",
       "crystal": "Pair rhythm and panel treatment",
@@ -131,6 +160,9 @@
         "error"
       ],
       "material": "Surface-alt fill behind initials; 2px surface ring for separation",
+      "surface": [
+        "none"
+      ],
       "geometry": "Always circular; sizes on the 4px rhythm",
       "semantics": "Decorative avatars are aria-hidden; identifying avatars carry the person's name",
       "crystal": "Shape, ring, fallback treatment",
@@ -150,6 +182,9 @@
         "overflowing"
       ],
       "material": "Shared with Avatar",
+      "surface": [
+        "none"
+      ],
       "geometry": "-7px overlap; overflow chip matches avatar size",
       "semantics": "The group has one accessible name; the overflow count is announced, not implied",
       "crystal": "Overlap, stacking order, overflow treatment",
@@ -172,10 +207,17 @@
         "hidden"
       ],
       "material": "Resin shell with Haze fill; status badges use their semantic ink pair",
+      "surface": [
+        "compact"
+      ],
       "geometry": "Pill or circle; never smaller than legible",
       "semantics": "The count reaches assistive technology through the host's accessible name or a live region",
       "crystal": "Shell, placement, overflow formatting",
       "product": "The count and when it is meaningful",
+      "motion": [
+        "highlight",
+        "attention"
+      ],
       "parity": [
         "mantine:Indicator",
         "mui:Badge",
@@ -194,6 +236,9 @@
         "neutral"
       ],
       "material": "Tested semantic ink and surface pair behind the symbol; never a coloured perimeter stroke",
+      "surface": [
+        "status"
+      ],
       "geometry": "Pill; 24px symbol well; 36px minimum height",
       "semantics": "The word carries the meaning. Symbol and colour are reinforcement, never the only signal.",
       "crystal": "Symbol vocabulary, tested colour pairs, geometry",
@@ -222,7 +267,10 @@
         "required",
         "invalid"
       ],
-      "material": "Resin shell with a 3px-inset Haze fill and a 1px feather on that fill",
+      "material": "Haze: a 20px circle painting the Haze fill on an isolated layer with a 1px feather; no Resin, because it sits on surfaces that are often already translucent",
+      "surface": [
+        "indicator"
+      ],
       "geometry": "20px, or 24px on fields; never a click target",
       "semantics": "aria-hidden. The real control supplies the state; the mark only shows it.",
       "crystal": "The complete mark vocabulary and its precedence",
@@ -244,6 +292,9 @@
         "error"
       ],
       "material": "Haze placeholder while loading",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius when clipped; never distorts aspect",
       "semantics": "Meaningful images carry alt text; decorative images carry empty alt",
       "crystal": "Placeholder, fallback and radius treatment",
@@ -268,10 +319,17 @@
         "error"
       ],
       "material": "Resin markers on a Haze connector",
+      "surface": [
+        "indicator",
+        "haze"
+      ],
       "geometry": "Circular markers; 2px connector",
       "semantics": "Ordered list; the current item carries aria-current",
       "crystal": "Marker and connector treatment, state appearance",
       "product": "Events and their ordering",
+      "motion": [
+        "list-in"
+      ],
       "parity": [
         "mantine:Timeline",
         "mui:Timeline",
@@ -290,6 +348,9 @@
         "disabled"
       ],
       "material": "Haze rows; expanded content shares the row surface",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; header meets 44px",
       "semantics": "Header is a button with aria-expanded and aria-controls; content is not hidden from search when collapsed unless intended",
       "crystal": "Row treatment, chevron rotation, expansion appearance",
@@ -314,6 +375,9 @@
         "transitioning"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Inherits",
       "semantics": "The trigger carries aria-expanded; hidden content is genuinely hidden from assistive technology",
       "crystal": "Transition timing and reduced-motion behaviour",
@@ -337,10 +401,17 @@
         "expanded"
       ],
       "material": "Edge fade drawn from the surrounding material",
+      "surface": [
+        "none"
+      ],
       "geometry": "Fade depth 24px",
       "semantics": "The control carries aria-expanded; truncated text remains in the accessibility tree",
       "crystal": "Fade and control treatment",
       "product": "Threshold and content",
+      "motion": [
+        "accordion-in",
+        "accordion-out"
+      ],
       "parity": [
         "mantine:Spoiler",
         "mui:—",
@@ -358,6 +429,10 @@
         "single-slide"
       ],
       "material": "Resin controls floating over Haze slides",
+      "surface": [
+        "control",
+        "haze"
+      ],
       "geometry": "Content radius slides; pill controls meeting 44px",
       "semantics": "role=group with an accessible name; indicators are buttons; never autoplay without a pause control",
       "crystal": "Slide and control treatment, indicator appearance",
@@ -383,10 +458,16 @@
         "loading"
       ],
       "material": "Haze panel when grouped into a row",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; tabular figures",
       "semantics": "Trend direction is stated in text, not by colour or arrow alone",
       "crystal": "Value typography, trend treatment",
       "product": "The value, formatting and what the trend compares",
+      "motion": [
+        "highlight"
+      ],
       "parity": [
         "antd:Statistic",
         "mantine:—",
@@ -403,6 +484,9 @@
         "with-copy"
       ],
       "material": "Canvas fill with an edge rim; never feathered, as code must stay exact",
+      "surface": [
+        "none"
+      ],
       "geometry": "14px radius inline, content radius for blocks",
       "semantics": "Real code and pre elements; blocks are focusable when scrollable",
       "crystal": "Surface, rhythm and copy-action placement",
@@ -421,6 +505,9 @@
         "default"
       ],
       "material": "Resin cap with a defined lower rim",
+      "surface": [
+        "compact"
+      ],
       "geometry": "8px radius; compact but legible",
       "semantics": "Real kbd element; key names are spelled, not drawn as symbols alone",
       "crystal": "Cap treatment",
@@ -439,6 +526,9 @@
         "default"
       ],
       "material": "Primary-soft or surface-alt fill",
+      "surface": [
+        "none"
+      ],
       "geometry": "Content radius or circle; 24px icon",
       "semantics": "Decorative and aria-hidden unless it is the only carrier of meaning",
       "crystal": "Container fill and icon sizing",
@@ -461,6 +551,9 @@
         "failed"
       ],
       "material": "Haze; own messages use the primary-container pair",
+      "surface": [
+        "bubble"
+      ],
       "geometry": "6/22/22/22px incoming, 22/6/22/22px own, mirrored for right-to-left",
       "semantics": "Author and time are text, not implied by side alone",
       "crystal": "Silhouette, corner asymmetry, own and incoming pairs, mirroring",
@@ -484,6 +577,9 @@
         "overlaid"
       ],
       "material": "Stone label backing when overlaid on media, so contrast does not depend on the image",
+      "surface": [
+        "stone"
+      ],
       "geometry": "Content radius when overlaid; 12px inset from the media edge",
       "semantics": "Real figure and figcaption. A caption never replaces alt text; the two say different things.",
       "crystal": "Backing material, placement and protected contrast",
@@ -510,10 +606,18 @@
         "disabled"
       ],
       "material": "Frost panel with Haze day cells",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Cells reach 44px; the panel keeps panel radius.",
       "semantics": "A grid with row and column headers; today is marked as current, selection as selected.",
       "crystal": "Cell materials, range rendering, selection by weight",
       "product": "Locale, events, min and max",
+      "motion": [
+        "selection",
+        "page-in"
+      ],
       "parity": [
         "mui-x-date-pickers:DateCalendar",
         "primereact:datepicker"
@@ -530,10 +634,17 @@
         "focus-visible"
       ],
       "material": "Haze item fills on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Item radius is the content radius; layout switches at a declared breakpoint.",
       "semantics": "A list; the layout switch is a control with a pressed state, not a hidden toggle.",
       "crystal": "Item material, layout motion, empty and loading surfaces",
       "product": "Data, sorting, paging",
+      "motion": [
+        "list-in",
+        "list-out"
+      ],
       "parity": [
         "primereact:dataview"
       ]
@@ -548,6 +659,9 @@
         "loading"
       ],
       "material": "None of its own",
+      "surface": [
+        "none"
+      ],
       "geometry": "Scroll container follows the scroll-area contract.",
       "semantics": "Rows keep their position in the set via aria-setsize and aria-posinset.",
       "crystal": "Scroll surface, focus retention across recycling",
@@ -565,10 +679,16 @@
         "focus-visible"
       ],
       "material": "Haze caption bars over the image",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Uniform gap; caption bars keep the content radius at the bottom corners.",
       "semantics": "A list; each image needs an accessible name or is marked decorative.",
       "crystal": "Caption material, focus ring, aspect handling",
       "product": "Images, captions, columns",
+      "motion": [
+        "media-in"
+      ],
       "parity": [
         "mui:ImageList",
         "primereact:gallery"
@@ -585,10 +705,17 @@
         "focus-visible"
       ],
       "material": "Haze nodes on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Nodes keep the content radius; connectors use the rim colour.",
       "semantics": "A tree; collapse state is announced, and the chart is navigable by keyboard.",
       "crystal": "Node material, connector colour, selection by weight",
       "product": "Hierarchy data and layout direction",
+      "motion": [
+        "accordion-in",
+        "accordion-out"
+      ],
       "parity": [
         "primereact:organizationchart"
       ]
@@ -602,6 +729,9 @@
         "changing"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Tabular figures so the width does not jump.",
       "semantics": "The value is announced once it settles, not on every frame.",
       "crystal": "Digit motion, reduced-motion fallback to an instant change",
@@ -620,10 +750,17 @@
         "focus-visible"
       ],
       "material": "Resin handle over the images",
+      "surface": [
+        "drag-handle"
+      ],
       "geometry": "Handle is a pill and reaches 44px.",
       "semantics": "The divider is a slider with a percentage value and keyboard steps.",
       "crystal": "Handle material, focus ring, drag motion",
       "product": "The two images and their labels",
+      "motion": [
+        "drag-pickup",
+        "drag-settle"
+      ],
       "parity": [
         "primereact:imagecompare"
       ]
@@ -637,6 +774,9 @@
         "paused"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Edges fade using the surrounding material, not a hard cut.",
       "semantics": "Pausable on hover and focus; removed entirely under reduced motion.",
       "crystal": "Edge treatment, motion, the reduced-motion contract",
@@ -654,10 +794,16 @@
         "hidden"
       ],
       "material": "Haze fill with a crisp glyph",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Offset from the corner; never clipped by its host.",
       "semantics": "Labels its host rather than standing alone; decorative badges are hidden from assistive technology.",
       "crystal": "Material, offset, glyph crispness",
       "product": "Count or status shown",
+      "motion": [
+        "attention"
+      ],
       "parity": [
         "primereact:overlaybadge"
       ]
@@ -673,10 +819,17 @@
         "focus-visible"
       ],
       "material": "Haze rows",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Indentation per level; rows reach 44px.",
       "semantics": "A tree with aria-current on the active destination; expansion is announced.",
       "crystal": "Row material, expansion motion, current marking by label weight",
       "product": "The destination set and routing",
+      "motion": [
+        "accordion-in",
+        "accordion-out"
+      ],
       "parity": [
         "react-aria:NavigationTree"
       ]
@@ -691,10 +844,19 @@
         "focus-visible"
       ],
       "material": "Inherits the table surface",
+      "surface": [
+        "table"
+      ],
       "geometry": "The resizer is a 44px target that does not shift the column it borders.",
       "semantics": "The resizer is a slider: arrow keys resize, and the new width is announced.",
       "crystal": "Resizer affordance, focus ring, live layout while dragging",
       "product": "Which columns resize, and persistence",
+      "motion": [
+        "list-in",
+        "list-out",
+        "highlight",
+        "resize-settle"
+      ],
       "parity": [
         "react-aria:ResizableTableContainer",
         "mui-x-data-grid:GridColumnResizer"
@@ -710,10 +872,16 @@
         "empty"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "The figure and its trend are one readable sentence, not a number beside an arrow.",
       "crystal": "Material, figure typography, trend colour from the status tokens",
       "product": "The data and its period",
+      "motion": [
+        "highlight"
+      ],
       "parity": [
         "mantine:Card",
         "antd:Statistic"
@@ -730,10 +898,16 @@
         "loading"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Target attainment is stated in words as well as shown.",
       "crystal": "Material, progress rendering, status colour",
       "product": "Targets and thresholds",
+      "motion": [
+        "highlight"
+      ],
       "parity": [
         "antd:Statistic",
         "primereact:card"
@@ -749,10 +923,16 @@
         "flat"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Sits inline with the figure it qualifies.",
       "semantics": "Direction is carried by a word and a symbol, never by colour alone.",
       "crystal": "Status colour, symbol pairing",
       "product": "What counts as a meaningful change",
+      "motion": [
+        "highlight"
+      ],
       "parity": [
         "antd:Statistic",
         "mantine:Text"
@@ -768,10 +948,16 @@
         "neutral"
       ],
       "material": "Haze fill",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Pill.",
       "semantics": "The sign is a character, not a colour.",
       "crystal": "Status tokens, pill geometry",
       "product": "Formatting and precision",
+      "motion": [
+        "highlight"
+      ],
       "parity": [
         "antd:Tag"
       ]

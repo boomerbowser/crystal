@@ -17,6 +17,9 @@
         "read-only"
       ],
       "material": "Resin shell, Haze well; the native field keeps its functional boundary",
+      "surface": [
+        "field"
+      ],
       "geometry": "Field well radius = content radius − 7px; shell 20px; 44px minimum height",
       "semantics": "Native input with a programmatically associated label, aria-invalid and aria-describedby for errors",
       "crystal": "Shell material, badge vocabulary (hollow circle idle, filled focused, asterisk required, exclamation invalid), focus ring",
@@ -46,6 +49,9 @@
         "read-only"
       ],
       "material": "Resin shell, Haze well",
+      "surface": [
+        "field"
+      ],
       "geometry": "Well radius = content radius − 7px; minimum three visible lines",
       "semantics": "Native textarea with an associated label; autosize must not trap the caret",
       "crystal": "Shell material, badge placement at the well's top edge, focus ring",
@@ -72,10 +78,18 @@
         "at-max"
       ],
       "material": "Resin shell; steppers share the plane rather than floating separately",
+      "surface": [
+        "field"
+      ],
       "geometry": "Stepper targets meet 44px even when visually compact",
       "semantics": "Native number input or a text input with inputmode and role=spinbutton; arrow keys must step",
       "crystal": "Shell, stepper treatment, at-bound states",
       "product": "Step size, precision, clamping and locale formatting",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid"
+      ],
       "parity": [
         "mantine:NumberInput",
         "mui:TextField",
@@ -94,10 +108,18 @@
         "disabled"
       ],
       "material": "Resin shell; the toggle shares the shell",
+      "surface": [
+        "field"
+      ],
       "geometry": "Toggle meets the 44px floor",
       "semantics": "The reveal toggle is a button with aria-pressed and a real accessible name; never a decorative icon",
       "crystal": "Shell, toggle placement, strength meter treatment",
       "product": "Strength policy and what it reveals",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid"
+      ],
       "parity": [
         "mantine:PasswordInput",
         "mui:TextField",
@@ -116,10 +138,18 @@
         "disabled"
       ],
       "material": "Resin shell, Haze well",
+      "surface": [
+        "field"
+      ],
       "geometry": "Pill well is permitted here, as search reads as an action surface",
       "semantics": "role=searchbox or type=search inside a search landmark; the clear control is a named button",
       "crystal": "Shell, icon placement, clear affordance, loading treatment",
       "product": "Debounce, the query and result rendering",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid"
+      ],
       "parity": [
         "mantine:TextInput",
         "mui:TextField",
@@ -139,10 +169,21 @@
         "disabled"
       ],
       "material": "Resin shell, Haze well",
+      "surface": [
+        "field",
+        "frost"
+      ],
       "geometry": "Well radius = content radius − 7px",
       "semantics": "Native select wherever the option set allows it; the badge never covers the platform arrow",
       "crystal": "Shell material, badge placement clear of the disclosure, focus ring",
       "product": "Options, grouping and change handling",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "menu-in",
+        "menu-out"
+      ],
       "parity": [
         "mantine:NativeSelect",
         "mui:Select",
@@ -164,6 +205,10 @@
         "disabled"
       ],
       "material": "Resin field shell, Resin popover with Haze rows",
+      "surface": [
+        "field",
+        "frost"
+      ],
       "geometry": "Popover content radius; rows inset 8px",
       "semantics": "role=combobox with aria-expanded, aria-controls and aria-activedescendant; the list is never focus-stealing",
       "crystal": "Field and popover material, row treatment, label weight for selection, empty and loading appearance",
@@ -193,10 +238,24 @@
         "disabled"
       ],
       "material": "Resin shell, Haze chips",
+      "surface": [
+        "field",
+        "compact",
+        "frost"
+      ],
       "geometry": "Chips are pills; the shell grows in whole line steps",
       "semantics": "Each chip's remove control is a named button; removal must be reachable by keyboard",
       "crystal": "Chip geometry within the shell, overflow treatment, growth behaviour",
       "product": "Selection limits, the option set and the accessible implementation",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "menu-in",
+        "menu-out",
+        "list-in",
+        "list-out"
+      ],
       "parity": [
         "mantine:MultiSelect",
         "mui:Autocomplete multiple",
@@ -216,6 +275,9 @@
         "invalid"
       ],
       "material": "Resin box, primary fill when checked",
+      "surface": [
+        "choice"
+      ],
       "geometry": "26px box, 9px radius; the whole label is a target meeting 44px",
       "semantics": "Native checkbox; indeterminate set through the property, not a class",
       "crystal": "Box material, the contained mark, focus ring",
@@ -241,6 +303,9 @@
         "disabled"
       ],
       "material": "Inherits the surrounding surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Spacing from the 4px rhythm",
       "semantics": "fieldset and legend, or role=group with an accessible name; errors describe the group",
       "crystal": "Grouping rhythm and error association treatment",
@@ -263,18 +328,21 @@
         "invalid"
       ],
       "material": "Resin circle, primary centre when selected",
+      "surface": [
+        "choice"
+      ],
       "geometry": "26px circle; label target meets 44px",
       "semantics": "Native radio in a named group; arrow keys move within the group",
       "crystal": "Circle material, contained centre mark, focus ring",
       "product": "Group naming and validation",
+      "motion": [
+        "check",
+        "check-off"
+      ],
       "parity": [
         "mantine:Radio",
         "mui:Radio",
         "antd:Radio"
-      ],
-      "motion": [
-        "check",
-        "check-off"
       ]
     },
     {
@@ -287,6 +355,9 @@
         "disabled"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "4px rhythm",
       "semantics": "fieldset and legend, or role=radiogroup with an accessible name",
       "crystal": "Grouping rhythm and error association",
@@ -309,6 +380,9 @@
         "loading"
       ],
       "material": "Resin track, primary-soft track when on, opaque thumb",
+      "surface": [
+        "choice"
+      ],
       "geometry": "44x28px track, circular thumb; 44px target",
       "semantics": "Native checkbox with role=switch, or a button with aria-checked; state must not rely on position alone",
       "crystal": "Track and thumb material, travel, focus ring on the track",
@@ -335,6 +409,9 @@
         "disabled"
       ],
       "material": "Primary fill to the value, primary-soft beyond; Resin thumb",
+      "surface": [
+        "choice"
+      ],
       "geometry": "8px track, 26px thumb; the thumb is the target and meets 44px in practice through padding",
       "semantics": "Native range or role=slider with aria-valuenow, valuemin, valuemax and valuetext",
       "crystal": "Track fill, thumb material, tick treatment, RTL mirroring",
@@ -360,10 +437,16 @@
         "collapsed"
       ],
       "material": "Primary fill between the thumbs",
+      "surface": [
+        "choice"
+      ],
       "geometry": "Shared with Slider; thumbs must remain separable when they meet",
       "semantics": "Two sliders with distinct accessible names; each announces its own bound",
       "crystal": "Span fill, thumb collision behaviour",
       "product": "Minimum span and what the range drives",
+      "motion": [
+        "slider-step"
+      ],
       "parity": [
         "mantine:RangeSlider",
         "mui:Slider range",
@@ -382,6 +465,9 @@
         "disabled"
       ],
       "material": "One Resin plane; primary fill on the selected segment",
+      "surface": [
+        "resin"
+      ],
       "geometry": "Pill strip and pill segments; 44px minimum",
       "semantics": "Radio group semantics, or aria-pressed on buttons; never aria-selected outside a tablist",
       "crystal": "Shared plane, label weight for the selected segment, focus ring",
@@ -408,10 +494,16 @@
         "read-only"
       ],
       "material": "Primary fill on the active symbols",
+      "surface": [
+        "none"
+      ],
       "geometry": "24px symbols on the icon grid; 44px targets when interactive",
       "semantics": "Radio group when interactive; plain text with a visible value when read-only. Never symbol-only.",
       "crystal": "Symbol treatment and fractional fill",
       "product": "Scale, precision and what the score means",
+      "motion": [
+        "selection"
+      ],
       "parity": [
         "mantine:Rating",
         "mui:Rating",
@@ -431,10 +523,18 @@
         "disabled"
       ],
       "material": "Resin shells with Haze wells",
+      "surface": [
+        "field"
+      ],
       "geometry": "Square-ish wells at the field radius; 44px minimum",
       "semantics": "One labelled group; paste must fill the whole value; backspace must move back",
       "crystal": "Well geometry, advance and focus treatment",
       "product": "Length, masking and verification",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid"
+      ],
       "parity": [
         "mantine:PinInput",
         "mui:—",
@@ -454,10 +554,21 @@
         "invalid"
       ],
       "material": "Resin shell, Haze chips",
+      "surface": [
+        "field",
+        "compact"
+      ],
       "geometry": "Pill chips; shell grows in whole line steps",
       "semantics": "Each chip has a named remove control; additions and removals are announced",
       "crystal": "Chip geometry, duplicate and limit treatment",
       "product": "Delimiters, validation and limits",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "list-in",
+        "list-out"
+      ],
       "parity": [
         "mantine:TagsInput",
         "mui:Autocomplete freeSolo",
@@ -477,10 +588,17 @@
         "removable"
       ],
       "material": "Haze fill on a Resin rim; primary fill when selected",
+      "surface": [
+        "control"
+      ],
       "geometry": "Pill; 32px compact height with a 44px target",
       "semantics": "Selectable chips use aria-pressed; the remove control is a separate named button",
       "crystal": "Pill geometry, selected treatment, remove affordance",
       "product": "What the chip filters or represents",
+      "motion": [
+        "selection",
+        "press"
+      ],
       "parity": [
         "mantine:Chip",
         "mui:Chip",
@@ -499,10 +617,18 @@
         "disabled"
       ],
       "material": "Resin shell; the swatch is specimen content, not a reading well",
+      "surface": [
+        "field"
+      ],
       "geometry": "Circular swatch; picker at content radius",
       "semantics": "A text value must always be editable; colour alone is never the only representation",
       "crystal": "Swatch treatment, picker surface material",
       "product": "Colour space, format and the picker implementation",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid"
+      ],
       "parity": [
         "mantine:ColorInput",
         "mui:—",
@@ -522,10 +648,18 @@
         "open"
       ],
       "material": "Resin shell, Haze well",
+      "surface": [
+        "field"
+      ],
       "geometry": "Field radius; calendar at content radius",
       "semantics": "Typing must always be possible; the calendar is an enhancement, never the only route",
       "crystal": "Shell, disclosure placement, calendar surface",
       "product": "Locale, parsing, validation and the calendar implementation",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid"
+      ],
       "parity": [
         "mantine:DateInput",
         "mui:DatePicker",
@@ -545,10 +679,24 @@
         "out-of-month"
       ],
       "material": "Resin surface, Haze day cells, primary fill on the selection",
+      "surface": [
+        "field",
+        "frost",
+        "haze"
+      ],
       "geometry": "Circular day cells; 44px targets",
       "semantics": "role=grid with full arrow-key navigation; the selected date is announced in words",
       "crystal": "Surface, cell geometry, selection and range treatment",
       "product": "Date arithmetic, locale, disabled ranges and the grid keyboard implementation",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "menu-in",
+        "menu-out",
+        "selection",
+        "page-in"
+      ],
       "parity": [
         "mantine:DatePicker",
         "mui:DateCalendar",
@@ -567,10 +715,24 @@
         "disabled"
       ],
       "material": "Primary-soft span fill between endpoints",
+      "surface": [
+        "field",
+        "frost",
+        "haze"
+      ],
       "geometry": "Span fill joins cells without breaking the 44px target",
       "semantics": "Start and end are separately named and separately announced",
       "crystal": "Span treatment and preview appearance",
       "product": "Range rules, minimum and maximum spans",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "menu-in",
+        "menu-out",
+        "selection",
+        "page-in"
+      ],
       "parity": [
         "mantine:DatePicker type=range",
         "mui:DateRangePicker",
@@ -589,10 +751,18 @@
         "disabled"
       ],
       "material": "Resin shell, Haze well",
+      "surface": [
+        "field"
+      ],
       "geometry": "Field radius; segment targets meet 44px",
       "semantics": "Segments are individually focusable and individually announced",
       "crystal": "Shell and segment treatment",
       "product": "Locale, 12- or 24-hour policy and validation",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid"
+      ],
       "parity": [
         "mantine:TimeInput",
         "mui:TimePicker",
@@ -611,10 +781,19 @@
         "disabled"
       ],
       "material": "Resin action, Haze file rows",
+      "surface": [
+        "control",
+        "haze"
+      ],
       "geometry": "Pill action; rows at content radius",
       "semantics": "Native file input with a real label; progress and errors reach a live region",
       "crystal": "Action and row treatment, progress appearance",
       "product": "Upload, accepted types, size limits and retry",
+      "motion": [
+        "list-in",
+        "list-out",
+        "progress-change"
+      ],
       "parity": [
         "mantine:FileInput",
         "mui:—",
@@ -634,6 +813,9 @@
         "disabled"
       ],
       "material": "Haze surface with a dashed edge at rest, primary-soft while accepting",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; minimum 120px height",
       "semantics": "Must have a keyboard-reachable file action; drag and drop is never the only route",
       "crystal": "Surface, edge treatment and state appearance",
@@ -659,6 +841,9 @@
         "disabled"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Label to control 7px; control to helper 6px",
       "semantics": "Programmatic association through label, aria-describedby and aria-invalid. Errors are text, never colour alone.",
       "crystal": "Rhythm, label and helper treatment, error appearance",
@@ -679,6 +864,9 @@
         "invalid"
       ],
       "material": "Optional Haze panel for visually grouped sections",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius when a surface is used",
       "semantics": "Native fieldset and legend; disabling the set disables its controls",
       "crystal": "Grouping rhythm and optional panel treatment",
@@ -701,6 +889,10 @@
         "disabled"
       ],
       "material": "Haze list panels, Resin move actions",
+      "surface": [
+        "haze",
+        "control"
+      ],
       "geometry": "Content radius panels; pill actions",
       "semantics": "Each list is separately named; moves are announced; keyboard must move items without drag",
       "crystal": "Panel and action treatment, label weight for selection in the lists",
@@ -728,10 +920,22 @@
         "disabled"
       ],
       "material": "Resin popover, Haze columns",
+      "surface": [
+        "field",
+        "frost",
+        "haze"
+      ],
       "geometry": "Content radius; columns separated by a hairline",
       "semantics": "Each column is a listbox; the composed value is announced as a path",
       "crystal": "Popover and column treatment, label weight for the selected column entry",
       "product": "The hierarchy, lazy loading and the keyboard implementation",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "menu-in",
+        "menu-out"
+      ],
       "parity": [
         "antd:Cascader",
         "mui:—",
@@ -750,10 +954,18 @@
         "disabled"
       ],
       "material": "Resin popover with Haze rows over the field",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Popover at content radius, anchored to the caret",
       "semantics": "Combobox semantics attached to the text surface; the inserted value is announced",
       "crystal": "Popover, row and inserted-token treatment",
       "product": "Trigger characters, the data source and insertion",
+      "motion": [
+        "menu-in",
+        "menu-out"
+      ],
       "parity": [
         "antd:Mentions",
         "mui:—",
@@ -772,6 +984,10 @@
         "read-only"
       ],
       "material": "Resin toolbar, Haze editing surface",
+      "surface": [
+        "resin",
+        "haze"
+      ],
       "geometry": "Toolbar is a pill group; surface at content radius",
       "semantics": "Toolbar actions use aria-pressed for active formatting; the editor exposes its own semantics",
       "crystal": "Toolbar and surface appearance, active-format treatment",
@@ -793,6 +1009,9 @@
         "error"
       ],
       "material": "None; sits on the surrounding surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "6px below the control; never overlaps the field shell",
       "semantics": "Associated through aria-describedby. When an error replaces the hint, the error must also be associated and announced.",
       "crystal": "Rhythm, colour role, and the transition between hint and error",
@@ -821,10 +1040,21 @@
         "disabled"
       ],
       "material": "Haze field fill inside a Resin shell; Frost popover",
+      "surface": [
+        "field",
+        "frost"
+      ],
       "geometry": "Field radius is the content radius; the popover keeps panel radius.",
       "semantics": "combobox with aria-autocomplete=\"list\"; the input keeps its own value.",
       "crystal": "Materials, focus ring, list motion, empty and loading surfaces",
       "product": "Where suggestions come from, debounce, free-text policy",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "menu-in",
+        "menu-out"
+      ],
       "parity": [
         "antd:AutoComplete",
         "mui:Autocomplete"
@@ -841,10 +1071,20 @@
         "disabled"
       ],
       "material": "Haze field fill inside a Resin shell",
+      "surface": [
+        "field"
+      ],
       "geometry": "Matches the text field; the indicator sits in the trailing inline edge.",
       "semantics": "A real <select>. Its options are the platform's and are never restyled.",
       "crystal": "Shell material, focus ring, indicator",
       "product": "Options and value",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "menu-in",
+        "menu-out"
+      ],
       "parity": [
         "mantine:NativeSelect",
         "mui:NativeSelect"
@@ -862,10 +1102,23 @@
         "disabled"
       ],
       "material": "Haze field fill; Frost panel",
+      "surface": [
+        "field",
+        "frost"
+      ],
       "geometry": "Segments are individually focusable; the panel keeps panel radius.",
       "semantics": "Segmented input semantics; each segment announces its own role and bounds.",
       "crystal": "Materials, segment focus, panel motion",
       "product": "Locale, time zone, min and max",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "menu-in",
+        "menu-out",
+        "selection",
+        "page-in"
+      ],
       "parity": [
         "mui-x-date-pickers:DateTimePicker",
         "primereact:datepicker"
@@ -882,10 +1135,18 @@
         "disabled"
       ],
       "material": "Frost panel with Haze cells",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Cells are square-ish and reach 44px.",
       "semantics": "A grid; the selected month uses aria-selected, never a check mark.",
       "crystal": "Cell material, selection by weight, motion",
       "product": "Range limits and locale",
+      "motion": [
+        "selection",
+        "page-in"
+      ],
       "parity": [
         "mui-x-date-pickers:MonthCalendar"
       ]
@@ -901,10 +1162,18 @@
         "disabled"
       ],
       "material": "Frost panel with Haze cells",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Matches the month picker.",
       "semantics": "A grid; selection is announced, and the current year is marked as current.",
       "crystal": "Cell material, selection, scroll anchoring",
       "product": "Range limits",
+      "motion": [
+        "selection",
+        "page-in"
+      ],
       "parity": [
         "mui-x-date-pickers:YearCalendar"
       ]
@@ -920,10 +1189,17 @@
         "disabled"
       ],
       "material": "Frost panel with Haze rows",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Rows reach 44px; the list scrolls to the selected value.",
       "semantics": "A listbox; the selected row is aria-selected and carries label weight.",
       "crystal": "Row material, selection, scroll behaviour",
       "product": "Interval, bounds, locale",
+      "motion": [
+        "selection"
+      ],
       "parity": [
         "mui-x-date-pickers:DigitalClock"
       ]
@@ -939,10 +1215,16 @@
         "disabled"
       ],
       "material": "Resin track with a Resin thumb",
+      "surface": [
+        "none"
+      ],
       "geometry": "Circular; the thumb reaches 44px including its hit area.",
       "semantics": "role=\"slider\" with aria-valuenow in degrees and a text equivalent.",
       "crystal": "Track and thumb material, focus ring, motion on commit",
       "product": "Range, step, what the angle means",
+      "motion": [
+        "slider-step"
+      ],
       "parity": [
         "mantine:AngleSlider"
       ]
@@ -958,10 +1240,16 @@
         "disabled"
       ],
       "material": "Resin body with a Haze value arc",
+      "surface": [
+        "none"
+      ],
       "geometry": "Circular; keyboard steps match the slider contract.",
       "semantics": "role=\"slider\"; the value is readable as text, not only as an arc.",
       "crystal": "Material, arc rendering, focus ring",
       "product": "Range, step, formatting",
+      "motion": [
+        "slider-step"
+      ],
       "parity": [
         "primereact:knob"
       ]
@@ -977,10 +1265,18 @@
         "disabled"
       ],
       "material": "Haze field fill inside a Resin shell",
+      "surface": [
+        "field"
+      ],
       "geometry": "Matches the text field exactly.",
       "semantics": "The mask never traps a screen reader; the raw value is what submits.",
       "crystal": "Shell material, focus ring, invalid motion",
       "product": "Mask pattern and raw-value policy",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid"
+      ],
       "parity": [
         "mantine:MaskInput",
         "primereact:inputmask"
@@ -997,10 +1293,18 @@
         "disabled"
       ],
       "material": "Haze field fill inside a Resin shell",
+      "surface": [
+        "field"
+      ],
       "geometry": "Monospace; matches the textarea otherwise.",
       "semantics": "Parse errors are described in text and associated with the field.",
       "crystal": "Material, invalid state, error surface",
       "product": "Schema and formatting rules",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid"
+      ],
       "parity": [
         "mantine:JsonInput"
       ]
@@ -1016,10 +1320,16 @@
         "disabled"
       ],
       "material": "Resin thumb over the gradient field",
+      "surface": [
+        "none"
+      ],
       "geometry": "Thumb reaches 44px including its hit area.",
       "semantics": "Two linked sliders; each axis announces its own value and responds to arrow keys.",
       "crystal": "Thumb material, focus ring, contrast of the thumb against any underlying colour",
       "product": "Colour space and value",
+      "motion": [
+        "slider-step"
+      ],
       "parity": [
         "react-aria:ColorArea"
       ]
@@ -1035,10 +1345,16 @@
         "disabled"
       ],
       "material": "Resin thumb on a gradient track",
+      "surface": [
+        "none"
+      ],
       "geometry": "Matches the slider contract.",
       "semantics": "role=\"slider\" with the channel named and the value in that channel's units.",
       "crystal": "Thumb and track material, focus ring",
       "product": "Which channel, and the colour space",
+      "motion": [
+        "slider-step"
+      ],
       "parity": [
         "react-aria:ColorSlider"
       ]
@@ -1054,10 +1370,16 @@
         "disabled"
       ],
       "material": "Resin thumb on the hue ring",
+      "surface": [
+        "none"
+      ],
       "geometry": "Ring thickness is a declared proportion of the radius.",
       "semantics": "role=\"slider\" in degrees, wrapping at 360.",
       "crystal": "Thumb material, ring geometry, focus ring",
       "product": "Colour space",
+      "motion": [
+        "slider-step"
+      ],
       "parity": [
         "react-aria:ColorWheel"
       ]
@@ -1072,10 +1394,16 @@
         "focus-visible"
       ],
       "material": "Haze chequerboard beneath a transparent colour",
+      "surface": [
+        "none"
+      ],
       "geometry": "Content radius; selection is a ring, never a check mark.",
       "semantics": "Carries the colour name as text, because colour cannot be the only carrier.",
       "crystal": "Transparency treatment, selection ring, contrast",
       "product": "The colour and its name",
+      "motion": [
+        "selection"
+      ],
       "parity": [
         "react-aria:ColorSwatch"
       ]
@@ -1090,10 +1418,16 @@
         "focus-visible"
       ],
       "material": "Inherits from its swatches",
+      "surface": [
+        "none"
+      ],
       "geometry": "Grid gap follows the spacing scale.",
       "semantics": "A listbox of swatches; arrow keys move, and the selected one is announced by name.",
       "crystal": "Selection rendering, focus order",
       "product": "The palette offered",
+      "motion": [
+        "selection"
+      ],
       "parity": [
         "react-aria:ColorSwatchPicker"
       ]
@@ -1109,10 +1443,21 @@
         "disabled"
       ],
       "material": "Haze field fill; tokens are Haze chips",
+      "surface": [
+        "field",
+        "compact"
+      ],
       "geometry": "Field keeps the content radius; tokens are pills.",
       "semantics": "Each token is removable by keyboard and announces its removal; the field keeps its own value.",
       "crystal": "Token material, add and remove motion, focus return after removal",
       "product": "What may be tokenised, and duplicate policy",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "list-in",
+        "list-out"
+      ],
       "parity": [
         "react-aria:TokenField",
         "mantine:PillsInput"
@@ -1131,10 +1476,19 @@
         "focus-visible"
       ],
       "material": "Resin control with Haze file rows",
+      "surface": [
+        "control",
+        "haze"
+      ],
       "geometry": "Rows keep the content radius; the trigger is a pill.",
       "semantics": "Progress is announced politely; a failure is announced assertively and is retryable by keyboard.",
       "crystal": "Materials, progress rendering, status colour from the status tokens, retry affordance",
       "product": "Transport, chunking, retry policy, accepted types",
+      "motion": [
+        "list-in",
+        "list-out",
+        "progress-change"
+      ],
       "parity": [
         "primereact:fileupload",
         "antd:Upload"
@@ -1152,10 +1506,17 @@
         "focus-visible"
       ],
       "material": "Haze fill with a dashed rim",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; the whole zone is a 44px-plus target.",
       "semantics": "Dragging is never the only route: the zone is also a button, and paste works. Rejections say why.",
       "crystal": "Drag-over material change, rejection surface, motion on drop",
       "product": "Accepted types, size limits, transport",
+      "motion": [
+        "drag-pickup",
+        "drag-settle"
+      ],
       "parity": [
         "react-aria:DropZone",
         "primereact:fileupload",

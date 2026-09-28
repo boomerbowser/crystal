@@ -16,10 +16,17 @@
         "focus-visible"
       ],
       "material": "Resin control bar over the video; Haze fills behind readable labels",
+      "surface": [
+        "resin",
+        "haze"
+      ],
       "geometry": "Control bar is a pill; every control reaches 44px.",
       "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus.",
       "crystal": "Control-bar material, transport geometry, the motion of showing and hiding controls",
       "product": "Sources, captions, DRM, analytics",
+      "motion": [
+        "media-in"
+      ],
       "parity": [
         "primereact:galleria",
         "mui:CardMedia"
@@ -38,10 +45,17 @@
         "focus-visible"
       ],
       "material": "Resin plane with Haze readable regions",
+      "surface": [
+        "resin",
+        "haze"
+      ],
       "geometry": "Pill; the scrubber is a slider with a 44px thumb.",
       "semantics": "A real audio element. The scrubber is a slider announcing time, not a progress bar.",
       "crystal": "Material, scrubber geometry, time formatting",
       "product": "Sources, playlists, streaming",
+      "motion": [
+        "media-in"
+      ],
       "parity": [
         "mantine:Audio"
       ]
@@ -58,6 +72,9 @@
         "focus-visible"
       ],
       "material": "Resin plane",
+      "surface": [
+        "resin-panel"
+      ],
       "geometry": "Pill; 44px targets throughout.",
       "semantics": "Each control is a button with a name; play and pause are one toggle with a pressed state.",
       "crystal": "Materials, the press recipe on every control",
@@ -76,10 +93,19 @@
         "focus-visible"
       ],
       "material": "Thumbnails are Haze; the viewer sits on a Mirage scrim",
+      "surface": [
+        "haze",
+        "mirage"
+      ],
       "geometry": "Thumbnails keep the content radius; the viewer is full-bleed within the scrim.",
       "semantics": "The viewer is a dialog: focus is contained, Escape closes, and arrows move between items with position announced.",
       "crystal": "Scrim material, thumbnail material, the transition between thumbnail and viewer",
       "product": "The media set and its captions",
+      "motion": [
+        "media-in",
+        "caption-in",
+        "selection"
+      ],
       "parity": [
         "primereact:galleria",
         "mui:ImageList"
@@ -95,10 +121,17 @@
         "focus-visible"
       ],
       "material": "Mirage scrim; the item sits above it",
+      "surface": [
+        "mirage"
+      ],
       "geometry": "The item keeps its own aspect; the scrim is full-bleed.",
       "semantics": "A dialog. Zoom and pan are keyboard reachable, and closing returns focus to the thumbnail.",
       "crystal": "Scrim material, the open and close motion",
       "product": "The item and its caption",
+      "motion": [
+        "media-in",
+        "caption-in"
+      ],
       "parity": [
         "primereact:image"
       ]

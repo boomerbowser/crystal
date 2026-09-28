@@ -36,7 +36,9 @@ The site uses relative local assets without fetching fonts or services. Review i
 
 Copy `assets/crystal.css`, `assets/fonts/`, `assets/grain.svg`, and the theme CSS into the product. Preserve the primitive stylesheet’s relative asset paths. Load theme CSS before primitive CSS. The reference-site CSS/JS are not needed by a product.
 
-`assets/crystal.css` carries the Resin interaction surface, the components built on it — `.cr-control`, `.cr-field-shell`, `.cr-indicator`, `.cr-resin-haze` and `.cr-tag` — the dock, the table and its scroller, and every native form control: checkbox, radio, range, file button, select option and menu item. Before 2.1.0 it carried none of that, and this page told you to copy a second stylesheet, `assets/controls.css`, that the package has never contained. There is no second stylesheet to copy.
+`assets/crystal.css` carries the Resin interaction surface, the components built on it — `.cr-control`, `.cr-field-shell`, `.cr-indicator`, `.cr-resin-haze` and `.cr-tag` — the dock, the table and its scroller, and every native form control: checkbox, radio, switch, range, file button, select option and menu item. As of 2.2.0 it also carries the four recipes the catalogue needed and no consumer could obtain: `.cr-nav-item` (a navigation entry, selected by label weight), `.cr-bare` (a control with no Resin coat, for controls inside a surface that already has one), `.cr-drag-handle`, and `.cr-resin.panel` (the Resin plane with the content radius). Before 2.1.0 it carried none of the control surface, and this page told you to copy a second stylesheet, `assets/controls.css`, that the package has never contained. There is no second stylesheet to copy.
+
+Every component in the catalogue names the surface it is made of, from the closed vocabulary in `tokens/surfaces.json` (exported as `@crystal-ui/core/surfaces`). A library implements each surface once — as a class, a mixin or a native view — and every component made of it inherits the implementation. The catalogue chapter lists the vocabulary with the `crystal.css` recipe behind each entry.
 
 ```html
 <link rel="stylesheet" href="crystal-theme.css">

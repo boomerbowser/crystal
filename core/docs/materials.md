@@ -233,7 +233,7 @@ Inspect light/dark, every palette, strongest atmosphere, both Frost tint extreme
 
 Resin is the primary background for buttons and all interaction surfaces. Its body stays at 20% fill with the existing blur, saturation, illuminated rim and elevation. When contrast requires protection, put an 80% Haze reading fill inside that shell, with the existing 1.95px feather and an 8px visible Resin perimeter, exported as `--cr-haze-inset`. That inset is a token rather than a number each library retypes: the fill and its feather were always exported, the inset was not, and a library can carry every Haze token and still paint no fill at all. Keep text sufficiently inset from the feather. The adjustable preview always uses this protected construction.
 
-This same composition is required for small information displays—tooltips, toasts, labels, tags and badges—and temporary secondary menus, dropdowns, flyouts and popovers. It does not replace the structural Plastic → Frost → Resin hierarchy or turn every large component into Resin. Stone remains a named material with its own standalone specifications; compact UI labels now choose Resin/Haze instead of an isolated Stone slab.
+This same composition is required for small information displays that sit on content — labels, tags, badges and keyboard caps. Transient overlays — tooltips, toasts, menus, dropdowns, flyouts and popovers — are **Frost** (R15e): they open over content, so they are intermediate panels rather than compact controls, and their reading content sits on Haze inside them. It does not replace the structural Plastic → Frost → Resin hierarchy or turn every large component into Resin. Stone remains a named material with its own standalone specifications; compact UI labels now choose Resin/Haze instead of an isolated Stone slab.
 
 Optical highlights remain below the Haze reading fill, including during animation. They can cross the exposed Resin perimeter without bleaching the protected label background. Contrast models check this actual ordering across all six palettes, both modes and RGB-corner backdrops.
 
@@ -282,9 +282,17 @@ from `rgba(39,24,68,.15)` to `rgba(107,40,112,.15)`: the same weight, carrying c
 
 ### Motion at rest
 
-These behaviours are the material's **rest state**, not a response to being used. A Crystal
-surface is alive before anyone touches it, and interaction *adds* energy rather than
-starting the effect: rest, faster on hover, faster still on press, decaying back.
+**Deferred.** This subsection describes the ambient tier Crystal 2.0 specified, built,
+measured and then withdrew at Meridian's direction (R22; §8 of the library contract). It is
+kept as the record of what will return, not as a rule in force: **nothing in 2.x moves at
+rest**, and the optical behaviours in the table above run only for the duration of a
+motion a person started. Plastic's glow is a material property and stays; its drift was
+ambient and does not.
+
+What was specified, for when it returns: these behaviours are the material's **rest
+state**, not a response to being used. A Crystal surface is alive before anyone touches it,
+and interaction *adds* energy rather than starting the effect: rest, faster on hover,
+faster still on press, decaying back.
 
 The single exception is text entry. A field being typed into is the one place where motion
 genuinely competes with the task, so ambient pauses there and nowhere else.

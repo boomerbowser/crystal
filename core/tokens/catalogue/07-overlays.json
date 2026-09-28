@@ -14,6 +14,10 @@
         "closing"
       ],
       "material": "Mirage scrim; 80% feathered Haze surface above it",
+      "surface": [
+        "dialog",
+        "mirage"
+      ],
       "geometry": "Content radius; 12px minimum from content to the feathered edge",
       "semantics": "Real modal semantics with a named dialog, focus containment, Escape, and focus return to the trigger",
       "crystal": "Scrim, surface, entrance and exit motion, elevation",
@@ -39,6 +43,10 @@
         "dragging"
       ],
       "material": "Mirage scrim, Frost or Resin panel by depth",
+      "surface": [
+        "frost",
+        "mirage"
+      ],
       "geometry": "Panel radius on the inner edges only",
       "semantics": "Dialog semantics when modal; a complementary region when not. Modality must be real, not implied.",
       "crystal": "Panel material, edge geometry, entrance direction",
@@ -64,7 +72,10 @@
         "disabled-item",
         "checked-item"
       ],
-      "material": "Resin surface with Haze rows",
+      "material": "Frost panel with Haze rows (R15e)",
+      "surface": [
+        "frost"
+      ],
       "geometry": "Content radius; every row reserves leading room for a check mark, so ticking one does not shift its label",
       "semantics": "role=menu with full keyboard navigation, type-ahead and Escape; checkable items use aria-checked",
       "crystal": "Surface, row treatment, row geometry, separators",
@@ -88,10 +99,17 @@
         "open"
       ],
       "material": "Shared with Menu",
+      "surface": [
+        "frost"
+      ],
       "geometry": "Repositions to stay within the viewport",
       "semantics": "Must be reachable by keyboard, not pointer-only; never the sole route to an action",
       "crystal": "Surface and positioning behaviour",
       "product": "The actions and the keyboard route",
+      "motion": [
+        "menu-in",
+        "menu-out"
+      ],
       "parity": [
         "mantine:Menu",
         "mui:Menu",
@@ -107,7 +125,10 @@
         "open",
         "repositioned"
       ],
-      "material": "Resin with Haze reading fill",
+      "material": "Frost panel with Haze reading fill (R15e)",
+      "surface": [
+        "frost"
+      ],
       "geometry": "Content radius; flips and shifts to stay in view",
       "semantics": "The trigger carries aria-expanded and aria-controls; focus moves in for interactive content",
       "crystal": "Surface, arrow, positioning behaviour",
@@ -133,10 +154,17 @@
         "closing"
       ],
       "material": "Shared with Popover",
+      "surface": [
+        "frost"
+      ],
       "geometry": "Shared with Popover",
       "semantics": "Must also open on keyboard focus; never contains the only route to an action",
       "crystal": "Surface, open and close delays",
       "product": "Preview content and delay tuning",
+      "motion": [
+        "popover-in",
+        "popover-out"
+      ],
       "parity": [
         "mantine:HoverCard",
         "mui:—",
@@ -151,7 +179,10 @@
         "hidden",
         "visible"
       ],
-      "material": "Resin with Stone label backing",
+      "material": "Frost, as every transient overlay is (R15e); the text sits directly on the panel",
+      "surface": [
+        "frost"
+      ],
       "geometry": "18px radius; compact padding",
       "semantics": "Never the sole accessible name. Opens on focus as well as hover, dismisses on Escape, and stays while hovered.",
       "crystal": "Surface, delay, placement",
@@ -175,6 +206,9 @@
         "visible"
       ],
       "material": "Mirage: chromatic diffusion of the real scene beneath",
+      "surface": [
+        "mirage"
+      ],
       "geometry": "Full viewport, or region-scoped for a local overlay",
       "semantics": "Content beneath is inert; the scrim is not a focus target; clicking it dismisses only when dismissal is safe",
       "crystal": "The complete Mirage recipe and its reduced-transparency fallback",
@@ -198,6 +232,9 @@
         "unmounted"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "None",
       "semantics": "Portalled content must preserve the logical focus and reading order of its trigger",
       "crystal": "Stacking contract and layer placement",
@@ -219,10 +256,17 @@
         "focus-visible"
       ],
       "material": "Resin panel",
+      "surface": [
+        "resin-panel"
+      ],
       "geometry": "Panel radius; the resize handle reaches 44px.",
       "semantics": "role=\"dialog\" when modal-like; focus is trapped only when it is modal.",
       "crystal": "Material, elevation, drag and resize motion",
       "product": "Content, bounds and persistence",
+      "motion": [
+        "drawer-in",
+        "drawer-out"
+      ],
       "parity": [
         "mantine:FloatingWindow"
       ]
@@ -235,6 +279,9 @@
         "at-rest"
       ],
       "material": "Inherits its overlay",
+      "surface": [
+        "none"
+      ],
       "geometry": "Follows the overlay radius; flips with placement.",
       "semantics": "Decorative: hidden from assistive technology.",
       "crystal": "That it matches the overlay material exactly, including under reduced effects",

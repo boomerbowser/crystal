@@ -329,10 +329,12 @@
 
    In `@layer crystal.component`, which is where the preview had it and where the
    layer order at the top of this file already reserves a slot. That matters for
-   more than tidiness: the rules above are unlayered and therefore beat these, so
-   a property the library already sets keeps the library's value and these supply
-   only what it left unset. The cascade is the one the preview has been rendering
-   all along, which is what makes this an adoption rather than a redesign.
+   more than tidiness: the rules above sit in `crystal.reset`, an earlier layer,
+   so these win regardless of specificity — which is what let a reset-layer hover
+   (D-21) and a reset-layer target size (D-20) publish values that never
+   rendered. A component recipe belongs in this layer or nowhere. The cascade is
+   the one the preview has been rendering all along, which is what makes this an
+   adoption rather than a redesign.
    --------------------------------------------------------------------------- */
 @layer crystal.component {
 :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status) {
@@ -1164,6 +1166,299 @@ span.cr-status>span {
 }
 .cr-table-scroll::before {
     display:none
+}
+}
+}
+
+
+/* ---------------------------------------------------------------------------
+   Component recipes for the catalogue — 28 September 2026.
+
+   `core/tokens/surfaces.json` names the closed set of material compositions a
+   component may be made of, and every catalogue entry now says which it is.
+   Most of the vocabulary was already here. Four compositions were not, and
+   each was found the same way: Crystal React reached a component the catalogue
+   specified, looked for the recipe, and rebuilt it locally with a comment
+   saying Crystal had none. The R-19 sweep named them — a navigation link, a
+   nav rail item, a drag handle, and the "bare" control that eighteen distinct
+   controls and 127 instances had been approximating with `background:
+   transparent`, which takes off one layer of the Resin coat and leaves four.
+
+   Each recipe is authored here, in `@layer crystal.component`, and nowhere
+   else. Not in `crystal.reset`: D-20 and D-21 were both rules authored there
+   that this layer erased, and a recipe that may not render is worse than none.
+
+   Everything reads tokens where a token exists and falls back to the literal
+   the token publishes, so a stylesheet loaded without the generated theme
+   still renders the same recipe.
+   --------------------------------------------------------------------------- */
+@layer crystal.component {
+
+/* A bare control.
+ *
+ * Selector note, which applies to the three recipes below: the coat is keyed on
+ * `:is(button, a.cr-button, …)`, specificity (0,1,1), in this same layer. A lone
+ * class is (0,1,0) and loses to it whatever the source order — measured, a
+ * `<button class="cr-bare">` kept the fill, the rim and the blur. Each recipe
+ * therefore carries the element compound and reaches (0,2,0). A rule that must
+ * beat the coat and does not say so in its selector is D-20 by another route.
+ *
+ * Crystal paints the Resin coat by element — `:is(button, …)` above — so a
+ * `<button>` wears the fill, the rim, the float shadow, the backdrop blur and
+ * both feathered pseudo-layers whether or not anything asked. A control that
+ * sits inside a surface which already has a coat must not wear a second one: a
+ * disclosure chevron, a chip's remove button, a sort header, a stepper's arrows,
+ * the dismiss button on a toast. Declaring `background: transparent` on one of
+ * those takes off one layer of five. This takes off all five and keeps what a
+ * control still owes — the 44px target, the pill hit area, the focus ring.
+ *
+ * It is not `.cr-button.quiet`. Quiet keeps the whole shell and drops only the
+ * reading pad, which is what makes a quiet *button* quiet; a chevron is not a
+ * Resin control that has been quietened.
+ */
+:is(button, a, [role=button], .cr-bare).cr-bare {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-inline-size: 44px;
+    min-block-size: 44px;
+    padding: 0 10px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    filter: none;
+    font-weight: inherit;
+}
+.cr-bare::before,
+.cr-bare::after {
+    content: none;
+    display: none;
+}
+/* Resting state only: focus is a box-shadow recipe, and a blanket `none`
+   would silently reduce it to a bare outline. */
+.cr-bare:not(:focus-visible) {
+    box-shadow: none;
+}
+.cr-bare:hover:not(:disabled):not([aria-disabled=true]) {
+    background: var(--cr-surface-alt);
+    filter: none;
+}
+/* An on state without a reading pad has nothing to tint, so it takes the
+   weight half of the selection rule and keeps the surface ink — the element
+   rule above would otherwise leave on-primary ink on a transparent ground. */
+.cr-bare:is([aria-pressed=true],[aria-selected=true],[aria-checked=true]) {
+    color: var(--cr-text);
+    font-weight: 800;
+}
+
+/* A drag handle: a bare control with a grip and a lift while it is held.
+ * Pointer capture, the keyboard alternative and drop validation are the
+ * product's; the handle says only that it can be grabbed and when it has been. */
+:is(button, [role=button], .cr-drag-handle).cr-drag-handle {
+    cursor: grab;
+    touch-action: none;
+    color: var(--cr-muted);
+    padding: 12px 16px;
+    background-image: radial-gradient(circle at center, currentColor 1.25px, transparent 1.75px);
+    background-size: 6px 6px;
+    background-repeat: repeat;
+    background-position: center;
+    background-clip: content-box;
+    background-color: transparent;
+}
+.cr-drag-handle:hover:not([aria-disabled=true]) {
+    color: var(--cr-text);
+}
+.cr-drag-handle:is([aria-grabbed=true],[data-dragging],[data-dragging=true]) {
+    cursor: grabbing;
+    color: var(--cr-text);
+    background-color: var(--cr-surface);
+    box-shadow: var(--cr-shadow-float);
+}
+
+/* A navigation entry.
+ *
+ * `docs/components.md` names the documentation site's side menu as the
+ * reference implementation of selection, and until now that recipe lived only
+ * in the site's own stylesheet — the same shape as D-9, a specification only
+ * one renderer could read. Lifted from `crystal-preview` `.menu-item` as it
+ * renders: an entry is furniture on the panel beneath it, so it has no material
+ * of its own and no Resin coat. Thirteen floating capsules in a sidebar would
+ * be exactly the legibility noise the hierarchy exists to prevent. The pill
+ * geometry stays, because "go here" is an action.
+ *
+ * Selection is label weight, 650 at rest and 800 when current. Nothing is drawn
+ * beside the label. `.stacked` puts the icon above the label for a rail.
+ */
+:is(button, a, [role=link], .cr-nav-item).cr-nav-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    min-height: 44px;
+    padding: 10px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--cr-muted);
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1.35;
+    text-align: start;
+    text-decoration: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    filter: none;
+}
+.cr-nav-item::before,
+.cr-nav-item::after {
+    content: none;
+    display: none;
+}
+.cr-nav-item:not(:focus-visible) {
+    box-shadow: none;
+}
+.cr-nav-item:hover:not([aria-disabled=true]) {
+    background: var(--cr-surface-alt);
+    color: var(--cr-text);
+    filter: none;
+}
+.cr-nav-item:is([aria-current]:not([aria-current=false]),[aria-selected=true],[aria-pressed=true]) {
+    background: var(--cr-surface-alt);
+    color: var(--cr-text);
+    font-weight: 800;
+}
+.cr-nav-item.stacked {
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    min-width: 64px;
+    padding: 8px 10px;
+    font-size: 12px;
+    line-height: 1.25;
+}
+.cr-nav-item svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* A Resin panel: the Resin plane with the content radius instead of the pill,
+   for a floating control plane that is a rectangle — a floating window, a wide
+   media control bar. Fill, rim, blur and shadow are the plane's; only the
+   geometry changes, and it matches the Frost panel's so nested radii line up. */
+:is(.cr-resin,.cr-glass).panel {
+    border-radius: calc(var(--cr-radius) + 6px);
+}
+
+/* A switch is a checkbox with a track. Native `<input type=checkbox
+   role=switch>`, styled by element like the checkbox and radio above: the
+   track is the Resin box stretched to the published track size, the thumb is
+   the opaque surface with the contact shadow, and the on state is the
+   primary-soft pair. The thumb travels the difference between the two
+   dimensions, so changing either token moves it correctly. */
+input[type=checkbox][role=switch] {
+    width: var(--cr-switch-track-width, 44px);
+    height: var(--cr-switch-track-height, 28px);
+    border-radius: 999px;
+    display: inline-block;
+    position: relative;
+}
+input[type=checkbox][role=switch]::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 2px;
+    inset-inline-start: 2px;
+    width: calc(var(--cr-switch-track-height, 28px) - 6px);
+    height: calc(var(--cr-switch-track-height, 28px) - 6px);
+    border: 0;
+    border-radius: 50%;
+    background: var(--cr-surface);
+    box-shadow: 0 2px 4px var(--cr-control-edge), 0 4px 8px var(--cr-shadow-contact);
+    transition: translate var(--cr-state) var(--cr-ease-settle);
+}
+input[type=checkbox][role=switch]:checked {
+    background: var(--cr-primary-soft);
+}
+input[type=checkbox][role=switch]:checked::after {
+    content: '';
+    width: calc(var(--cr-switch-track-height, 28px) - 6px);
+    height: calc(var(--cr-switch-track-height, 28px) - 6px);
+    background: var(--cr-primary);
+    box-shadow: 0 2px 4px var(--cr-control-edge), 0 4px 8px var(--cr-shadow-contact);
+    translate: calc(var(--cr-switch-track-width, 44px) - var(--cr-switch-track-height, 28px)) 0;
+}
+:root[dir=rtl] input[type=checkbox][role=switch]:checked::after {
+    translate: calc(var(--cr-switch-track-height, 28px) - var(--cr-switch-track-width, 44px)) 0;
+}
+
+/* The checkbox and radio read their geometry from the tokens that publish it,
+   with the literal the token publishes as the fallback. Same rendering; one
+   source. */
+input:is([type=checkbox],[type=radio]) {
+    width: var(--cr-choice-box-size, 26px);
+    height: var(--cr-choice-box-size, 26px);
+    border-radius: var(--cr-choice-box-radius, 9px);
+}
+input[type=radio] {
+    border-radius: 50%;
+}
+
+/* Disabled. The reset layer dims a native `button:disabled` and nothing else,
+   so an action link, a control span and a navigation entry had no disabled
+   state at all. The opacity is the published token; a disabled element must
+   still not be the only explanation of unavailability, and the product still
+   has to refuse the action — this only shows that it will. */
+button:disabled,
+:is(a.cr-button,.cr-control,.cr-nav-item,.cr-bare,.cr-drag-handle)[aria-disabled=true] {
+    opacity: var(--cr-action-disabled-opacity, .55);
+    cursor: not-allowed;
+    filter: none;
+}
+
+/* Controls inside a Resin plane lose their own backdrop filter — the rule above
+   lists the action controls, and these are controls too. */
+:is(.cr-resin,.cr-glass,.cr-resin-haze) :is(.cr-bare,.cr-nav-item,.cr-drag-handle) {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    isolation: isolate;
+}
+
+@media (prefers-reduced-transparency:reduce) {
+.cr-drag-handle:is([aria-grabbed=true],[data-dragging],[data-dragging=true]) {
+    background-color: var(--cr-surface);
+}
+}
+
+@media (forced-colors:active) {
+/* The current entry is a ring, never a fill: Chromium paints an opaque Canvas
+   backplate behind text runs, above the element's own background, so a filled
+   row loses its label entirely. */
+.cr-nav-item:is([aria-current]:not([aria-current=false]),[aria-selected=true],[aria-pressed=true]) {
+    background: Canvas;
+    color: CanvasText;
+    outline: 2px solid Highlight;
+    outline-offset: -3px;
+}
+.cr-nav-item,
+.cr-bare {
+    border-color: transparent;
+    box-shadow: none;
+}
+.cr-drag-handle:is([aria-grabbed=true],[data-dragging],[data-dragging=true]) {
+    background-color: Canvas;
+    outline: 2px solid Highlight;
+    outline-offset: -3px;
+    box-shadow: none;
+}
+input[type=checkbox][role=switch] {
+    appearance: auto;
+    width: auto;
+    height: auto;
 }
 }
 }

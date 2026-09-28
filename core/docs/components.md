@@ -17,19 +17,23 @@ The package contains working CSS primitives and a bounded interactive reference.
 | Quiet action | The same shell with **no** reading fill, so the label sits directly on the material | `.cr-button.quiet`; same semantics as any action |
 | Destructive action | Resin/Haze with independent danger boundary and explicit label | `.danger`; app supplies consequence-specific confirmation and recovery |
 | Text field | Visible label, state badge, glowing focus ring, validation, helper/error association | `.cr-input`; working native form example; app supplies validation rules |
-| Selection control | Explicit selected state plus text/mark | Native checkbox, radio and select, styled by `assets/crystal.css` as of 2.1.0; keyboard semantics must match the component |
+| Selection control | Explicit selected state plus text/mark | Native checkbox, radio and select, styled by `assets/crystal.css` as of 2.1.0, and the native switch (`input[type=checkbox][role=switch]`) as of 2.2.0; keyboard semantics must match the component |
+| Navigation entry | No material of its own; pill hit area; selection by label weight and `aria-current` | `.cr-nav-item`, `.stacked` for a rail. Routing and the current-page state are app-owned |
+| Bare control | A control inside a coated surface: no fill, shadow, blur or pseudo-layers; target and focus ring kept | `.cr-bare`; the action itself is app-owned |
+| Drag handle | Grip glyph, grab cursor, lift while held | `.cr-drag-handle` with `aria-grabbed` or `data-dragging`; pointer capture, keyboard drag and drop validation are app-owned |
+| Resin panel | The Resin plane at the content radius | `.cr-resin.panel`; a floating window or wide control bar |
 | Range control | Visible label/value, keyboard adjustable range | Native `input[type=range]`, styled by `assets/crystal.css` as of 2.1.0, including its RTL track direction; product limits require domain validation |
 | Authored bubble | Haze, directional tight corner, optional author metadata | `.cr-bubble`, `.own`; app supplies content/Markdown semantics |
 | Composer surround | Frost frame and softened content well around protected input controls | CSS composition; no rich-text editor or delivery service is implemented |
 | Status badge | Independent ink/surface pair, symbol and visible label | `.cr-status` with `data-status`; 18px radius, 12px/18px padding, 36px floor, as the preview has always rendered it; dynamic announcements are app-owned |
 | Avatar | Circular image/initials, accessible identity when needed | Reference styling; app handles real identity, image failure and privacy |
 | Dialog | 80% feathered surface over Mirage; title, body and named actions | Working native HTML dialog example; Escape/focus return; app owns transactions |
-| Tooltip | Short supplemental text; never sole label | Working Resin/Haze tooltip in the motion suite; focus, hover and Escape |
-| Menu/popover | Supporting surface with keyboard navigation and dismissal | Working Resin/Haze local menu and popover in the motion suite; production adoption still requires testing |
+| Tooltip | Short supplemental text; never sole label | Frost (`.cr-frost`, R15e); working tooltip in the motion suite with focus, hover and Escape |
+| Menu/popover | Frost panel with Haze rows; keyboard navigation and dismissal | `.cr-frost` (R15e); working local menu and popover in the motion suite; production adoption still requires testing |
 | Drawer/sheet | Overlay support with label, close, focus management | Working modal inspector in the motion suite; app decides production modality |
 | Table/list | Soft content panel, clear header relationships, explicit sort/filter states | Native table in contrast report; production data controls not implemented |
 | Tabs | Labeled selected item with keyboard pattern matching actual semantics | Working ARIA tabs in the motion suite; scene navigation separately uses pressed buttons |
-| Notification/toast | Clear result plus useful next action | Manually dismissed Resin/Haze notification in the motion suite; production queue remains app-owned |
+| Notification/toast | Clear result plus useful next action; Frost panel with Haze reading fill | `.cr-frost` (R15e); manually dismissed notification in the motion suite; production queue remains app-owned |
 | Loading | Preserve layout, communicate pending work, no false success | Specification only; user-triggered work needs real lifecycle state |
 | Empty/error/denied | Explain situation and a valid next step | Specification only; must reflect actual service/permission state |
 | Chart/data visualization | Direct labels, pattern/shape, accessible equivalent | Specification only; brand palettes are not prevalidated chart palettes |
@@ -40,7 +44,7 @@ Every production control needs default, hover where meaningful, pressed, focus-v
 
 Primary application buttons are at least 44px high. Compact documentation controls may be smaller but must meet applicable target-size/spacing criteria; do not infer that every clickable element is 44px from the button class. Validate touch use, not only a desktop screenshot.
 
-The selected preview destination has both a circular check badge and a pressed state. Palette selections have a visible check. Functional statuses have words and distinct symbols. These cues survive color changes.
+The selected destination carries its state by `aria-pressed` and by label weight; palette swatches, which cannot carry a weight change, use an inset ring gap. Functional statuses have words and distinct symbols. These cues survive color changes, and none of them is a check mark — a check means validated, never selected.
 
 The preview product-name form performs a real local update with native validation; it does not save a brand to a remote service. Dialogs inspect actual specifications or exported tokens. The export buttons produce files from the current configuration. Fictional messages, avatars and library cards remain clearly labeled design content.
 
@@ -68,11 +72,24 @@ Buttons, action links, tabs, selectable controls and field shells use Resin as t
 
 **A quiet button has no reading fill.** It keeps the whole Resin shell — rim, float shadow, sheen — and drops the pad, which makes it the only variant that is glass all the way through. The cost is the pad's whole purpose: a quiet label reads against the Resin fill and therefore against whatever is behind the control. On Crystal's own foundation that is a wide margin — `--cr-text` over the Resin fill over canvas, surface, surface-alt and foundation measures 10.88 to 18.28 across all six palettes and both modes — but a quiet button placed over artwork has no protected ground, and that composition is the one to avoid. The recipe is in `assets/crystal.css`, in `@layer crystal.component`: a Resin fill with a rim and a float shadow, a `::before` carrying the inset Haze fill at the material's feather, and a `::after` carrying the optical sheen from `--cr-control-color` and `--cr-control-light`. Both pseudo-elements are dropped under reduced transparency and under forced colours.
 
-Until 2.1.0 this paragraph told you to load `assets/controls.css`, which is the documentation site's stylesheet and has never been in the package — so the surface this specification describes was one no consumer could obtain. `assets/controls.js` adds only a nonsemantic shell to native fields; labels, input values, validation and form submission remain native.
+Until 2.1.0 this paragraph told you to load `assets/controls.css`, which is the documentation site's stylesheet and has never been in the package — so the surface this specification describes was one no consumer could obtain. The field shell is markup a product wraps around a native field — `<span class="cr-field-shell">` around the `<input>` — and adds no semantics of its own; labels, input values, validation and form submission remain native.
 
-Small display elements (tooltips, toasts, labels, tags and badges) and temporary menus (secondary menus, dropdowns, flyouts and popovers) use `.cr-resin-haze`. This is a reusable composition of existing materials, not a seventh material. Larger persistent components retain their structural material. Native OS popup internals are platform-owned; use an actual accessible custom component when full Crystal popup rendering is required.
+Small display elements that sit *on* content — labels, tags, badges and keyboard caps — use `.cr-resin-haze`. This is a reusable composition of existing materials, not a seventh material. Transient overlays — tooltips, toasts, menus, dropdowns, flyouts and popovers — are **Frost** (`.cr-frost`), at Meridian's direction (R15e): a surface that opens over content is an intermediate panel, not a compact control, and its reading content sits on Haze inside it. Larger persistent components retain their structural material. Native OS popup internals are platform-owned; use an actual accessible custom component when full Crystal popup rendering is required.
 
-Selected controls retain circular symbol badges and correct ARIA state. Disabled controls retain legible content but cannot activate. Opaque and forced-color modes replace decorative optics while preserving control boundaries. Motion uses material deformation and changing light, with crisp foreground text.
+Selected controls carry correct ARIA state and label weight; a circular badge marks activity or information, never selection. Disabled controls retain legible content but cannot activate. Opaque and forced-color modes replace decorative optics while preserving control boundaries. Motion uses material deformation and changing light, with crisp foreground text.
+
+### Every component names its surface
+
+The catalogue gives every one of its components a **surface** — the material composition it is made of — from the closed vocabulary in `tokens/surfaces.json`, and each surface is one recipe in `assets/crystal.css`. The build refuses a component naming a surface with no recipe, so the catalogue cannot specify a material Crystal has not published. The vocabulary is listed, with counts, at the top of the [catalogue](catalogue.html#surfaces). Four of its entries arrived in 2.2.0 because a consumer had reached them and found nothing:
+
+| Surface | Recipe | What it is |
+|---|---|---|
+| Navigation entry | `.cr-nav-item`, `.stacked` for a rail | Furniture on the panel beneath it: no material of its own, pill hit area, 44px target, selection by label weight (650 → 800) and `aria-current`. Lifted from this site's own side menu, which this page has always named as the reference implementation of selection. |
+| Bare control | `.cr-bare` | A control inside a surface that already has a coat — a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows, a dismiss button. Crystal paints every `<button>` by element in five layers; this removes all five and keeps the target and the focus ring. |
+| Drag handle | `.cr-drag-handle` | A bare control with a grip and a lift while `aria-grabbed` or `data-dragging` is set. Pointer capture, the keyboard alternative and drop validation are the product's. |
+| Resin panel | `.cr-resin.panel` | The Resin plane with the content radius instead of the pill, for a floating window or a wide control bar. |
+
+A native switch is a checkbox with a track — `<input type="checkbox" role="switch">` — styled by element like the checkbox and radio: the track reads `--cr-switch-track-width` and `-height`, the thumb is the opaque surface, and the on state is the primary-soft pair.
 
 ### Interaction surface geometry
 
@@ -113,7 +130,7 @@ Focus uses an immediate 2px primary-color core at a 3px offset, surrounded by a 
 
 The four feather colors are published as `--cr-focus-feather-1` through `-4` and the broad shadow as `--cr-focus-shadow`, so a product can retint the falloff without restating the recipe. The single token `--cr-focus-ring` composes all six layers so every focusable surface shares one recipe. The core remains defined for visibility; text and icons are never blurred. Keyboard focus applies to all interactive elements. Text entry lights its Resin shell through `:focus-within`. Motion must neither delay nor remove the focus cue. Forced colors substitute a system Highlight outline and remove decorative shadows.
 
-A `.cr-indicator` is a 20px circular Resin surface with a 3px-inset 80% Haze fill and a 1px feather on that fill. Field badges are 24px. Their foreground remains crisp and uses the tested body ink. They sit beside the content, never over text or a native select arrow. These are informational, non-interactive marks, not small click targets.
+A `.cr-indicator` is a 20px circle painting an 80% Haze fill on an isolated layer with a 1px feather — Haze rather than Resin, for the reason given under [Indicators](#indicators). Field badges are 24px. Their foreground remains crisp and uses the tested body ink. They sit beside the content, never over text or a native select arrow. These are informational, non-interactive marks, not small click targets.
 
 <!-- generated:focus-recipe -->
 

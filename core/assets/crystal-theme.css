@@ -52,6 +52,11 @@
   --cr-content-own-fill: rgba(230, 219, 252, 0.8);
   --cr-content-feather: 1.95px;
   --cr-haze-inset: 8px;
+  --cr-action-disabled-opacity: 0.55;
+  --cr-choice-box-size: 26px;
+  --cr-choice-box-radius: 9px;
+  --cr-switch-track-width: 44px;
+  --cr-switch-track-height: 28px;
   --cr-chart-stroke: 2px;
   --cr-chart-hairline: 1px;
   --cr-chart-point-min: 6px;
@@ -231,6 +236,11 @@
   --cr-content-own-fill: rgba(230, 219, 252, 0.8);
   --cr-content-feather: 1.95px;
   --cr-haze-inset: 8px;
+  --cr-action-disabled-opacity: 0.55;
+  --cr-choice-box-size: 26px;
+  --cr-choice-box-radius: 9px;
+  --cr-switch-track-width: 44px;
+  --cr-switch-track-height: 28px;
   --cr-chart-stroke: 2px;
   --cr-chart-hairline: 1px;
   --cr-chart-point-min: 6px;
@@ -410,6 +420,11 @@
   --cr-content-own-fill: rgba(51, 30, 101, 0.8);
   --cr-content-feather: 1.95px;
   --cr-haze-inset: 8px;
+  --cr-action-disabled-opacity: 0.55;
+  --cr-choice-box-size: 26px;
+  --cr-choice-box-radius: 9px;
+  --cr-switch-track-width: 44px;
+  --cr-switch-track-height: 28px;
   --cr-chart-stroke: 2px;
   --cr-chart-hairline: 1px;
   --cr-chart-point-min: 6px;

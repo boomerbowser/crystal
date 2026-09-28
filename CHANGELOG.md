@@ -4,7 +4,106 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
 
 ## [Unreleased]
 
+### Added
+
+- **Every component names its surface.** `core/tokens/surfaces.json` is a closed
+  vocabulary of 22 material compositions — Plastic, Frost, Haze, the Resin plane
+  and panel, the control, the field shell, compact display, Stone, Mirage, the
+  dialog, indicator, status badge, bubble, table, dock, navigation entry, bare
+  control, drag handle, the native selection controls, native furniture, and
+  none — each tied to the `crystal.css` recipe that implements it. All 285
+  catalogue entries carry a `surface` field drawn from it, outer to inner, and
+  `tools/build-catalogue.cjs` refuses an entry naming a surface the vocabulary
+  lacks or a vocabulary entry whose recipe the stylesheet lacks. Exported as
+  `@crystal-ui/core/surfaces`; listed with counts at the top of the catalogue
+  chapter. Before this the only machine-readable link from a component to a
+  recipe was `motion`, `material` was prose that 102 entries left empty of any
+  material name, and a library could satisfy it with any recipe it liked —
+  Crystal React wrote 43 of its own.
+
+- **Four recipes the catalogue specified and no consumer could obtain**, each
+  found by Crystal React reaching for it and rebuilding it locally under a
+  comment saying Crystal had none: `.cr-nav-item` (a navigation entry, selected
+  by label weight — lifted from the documentation site's side menu, which
+  `components.md` has always called the reference implementation of selection
+  and which lived only in the site's stylesheet), `.cr-bare` (a control that
+  must not wear the Resin coat because it sits inside a surface that already
+  has one; Crystal paints every `<button>` by element in five layers and
+  `background: transparent` took off one), `.cr-drag-handle`, and
+  `.cr-resin.panel`. Plus the native switch —
+  `input[type=checkbox][role=switch]` — styled by element beside the checkbox
+  and radio, and a disabled state for action links, control spans and entries,
+  which had none. All in `@layer crystal.component`, each with reduced-
+  transparency and forced-colours clauses, and each held by
+  `tests/core-contracts.cjs`.
+
+- **114 more catalogue entries claim the motion they were always owed.** The
+  family table in `motion-components.md` has said since 2.0 that a date picker
+  takes `menu-in/out`, `selection` and `page-in`, a table row `list-in/out` and
+  `highlight`, a badge `attention`; the entries did not carry it, and a
+  consumer that plays "what the catalogue assigns" therefore shipped 145
+  components with no motion at all. Every recipe claimed already existed. 162
+  of 285 entries now carry motion; the two gaps that need a decision — D-19's
+  continuous indicators and R-21's chart mark enter — are deliberately still
+  empty. `tools/extend-catalogue-4.cjs` is the record.
+
+- **Parity status is merged, not regenerated.** `libraries/status/<platform>.json`
+  is the record a platform library keeps; the build merges it into
+  `libraries/parity.json`. The web record is seeded from Crystal React's own
+  manifest: 265 implemented. The manifest used to be regenerated as `not-started`
+  for every component on every build, so the file the README called "the single
+  source of truth for what exists" said 283 of 285 did not.
+
+- Five control tokens the package published and the stylesheet restated as
+  literals now reach CSS: `--cr-action-disabled-opacity`, `--cr-choice-box-size`,
+  `--cr-choice-box-radius`, `--cr-switch-track-width`, `--cr-switch-track-height`.
+  The checkbox, radio and switch read them. The generated theme grows by these
+  fifteen lines and changes in no other way.
+
 ### Changed
+
+- **Transient overlays are Frost, and the specification now says so
+  everywhere.** Meridian moved tooltip, popover, menu and toast to Frost on
+  17 September 2026 (R15e), and the documentation site has rendered them so
+  since. `materials.md`, `components.md` and `motion-components.md` still said
+  those surfaces use `.cr-resin-haze`, and eight catalogue entries said Resin or
+  Stone. All corrected; `.cr-resin-haze` is for display elements that sit *on*
+  content — tags, badges, labels, keyboard caps. The old sentences are quoted
+  in `tools/extend-catalogue-4.cjs`.
+
+- The catalogue's `nav-link` was "Resin shell with Haze fill"; the reference
+  implementation is Plastic, and the site's own comment says why ("thirteen
+  floating capsules would be exactly the legibility noise the hierarchy exists
+  to prevent"). Its `indicator` was "Resin shell"; `components.md` says an
+  indicator is Haze, not Resin. Both now agree with the specification.
+
+- `components.md` and `motion-components.md` each said a selected item carries
+  "a circular check badge". A check mark means validated, never selected —
+  Crystal's most frequently violated rule, violated by its own chapters.
+  `materials.md`'s "Motion at rest" is marked deferred, with the reason, rather
+  than reading as a rule in force. The runtime paragraph in
+  `motion-components.md` named four scripts that are the documentation site's
+  and not in the package.
+
+### Fixed
+
+- **`tools/build-catalogue.cjs` wrote the parity manifest outside the
+  repository** — to `../libraries/parity.json`, a path left from the monorepo
+  layout — so the committed file was never regenerated and the rule that a
+  generator may not touch anything outside the repository was broken on every
+  build. It writes inside the repository now.
+
+- The catalogue's motion references were never checked against the recipes.
+  `dialog` and `scrim` named `mirage`, `mirage-out` and `dismiss`, which exist
+  as material presets in `core/presets` and not as recipes; the orphan check
+  ran only the other way. Both directions are checked now, a preset name being
+  a valid claim. The exemption for an `Ambient` recipe category, withdrawn in
+  R22, is gone with the category.
+
+- The comment introducing the component layer in `crystal.css` said the reset
+  rules "are unlayered and therefore beat these". They are in `crystal.reset`
+  and lose — which is D-20 and D-21's mechanism, described backwards at the
+  place it happens.
 
 - **The action control's minimum target is 48px, and now says so.** It has been
   48px in every Crystal page since the control surface was adopted — the

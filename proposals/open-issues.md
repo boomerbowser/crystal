@@ -12,6 +12,10 @@ D-20 closed on 24 September 2026: Meridian chose 48px, the value Crystal has
 always rendered, so the token moved up to meet the stylesheet rather than the
 stylesheet down to meet the token. The reasoning is in
 [`closed-issues.md`](closed-issues.md).
+**D-19 and D-21 each have a recommended resolution, with the recipe JSON written out,
+in §4 of [`2026-09-28-component-recipes.md`](2026-09-28-component-recipes.md)** — the
+proposal that gave every catalogue entry a surface and every surface a recipe. Neither
+is implemented; both are Meridian's.
 D-18 closed on 23 September 2026 — its premise was wrong, and the reasoning is in
 [`closed-issues.md`](closed-issues.md).
 

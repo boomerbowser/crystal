@@ -383,6 +383,10 @@ const VARIANT_MAY_DIFFER = [
   /\.cr-button\s*\.|\.cr-button\./,   /* .cr-button.danger and friends */
   /\.cr-dock/,                        /* the dock's own compact controls */
   /aria-(pressed|selected|current)/,  /* selection weight, not geometry */
+  /* The 2.2.0 recipes that a <button> may wear instead of the action geometry:
+     a bare control, a navigation entry and a drag handle are decided to differ
+     from the action (44px floor, no pad, their own padding) — see surfaces.json. */
+  /\.cr-bare\b/, /\.cr-nav-item\b/, /\.cr-drag-handle\b/,
 ];
 
 /* Every rule that sets `prop` and could reach a `<button class="cr-button">`.
@@ -712,6 +716,111 @@ check('the intensity ramp moves one way', () => {
       assert.ok(forward, `${id} ${mode} step ${i + 1} reverses the ramp`);
     }
   }
+});
+
+/* ----------------------------------------------------- surfaces and recipes */
+
+/* A component is specified in a surface, a surface is implemented by a recipe,
+   and the two are held together here: a surface named in the vocabulary with no
+   rule in the stylesheet is a specification only one renderer can read (D-9,
+   R-15, D-11 — the same defect three times), and a catalogue entry naming a
+   surface outside the vocabulary is a material Crystal never defined. */
+const surfaces = require('../core/tokens/surfaces.json').surfaces;
+const catalogue = require('node:fs').readdirSync(require('node:path').join(__dirname, '../core/tokens/catalogue'))
+  .filter((f) => f.endsWith('.json')).sort()
+  .flatMap((f) => require(require('node:path').join(__dirname, '../core/tokens/catalogue', f)).components);
+const stylesheet = require('node:fs').readFileSync(
+  require('node:path').join(__dirname, '../core/assets/crystal.css'), 'utf8');
+const stylesheetCode = stylesheet.replace(/\/\*[\s\S]*?\*\//g, '');
+
+check('every surface in the vocabulary has a recipe in crystal.css', () => {
+  for (const s of surfaces) {
+    for (const selector of [s.class, ...(s.also || [])]) {
+      if (!selector) continue;
+      const tokens = selector.startsWith('.') ? selector.split('.').filter(Boolean).map((t) => '.' + t) : [selector];
+      for (const token of tokens) {
+        assert.ok(stylesheetCode.includes(token), `surface ${s.id}: ${token} has no rule`);
+      }
+    }
+  }
+});
+
+check('every catalogue entry names a surface from the vocabulary', () => {
+  const ids = new Set(surfaces.map((s) => s.id));
+  for (const c of catalogue) {
+    assert.ok(Array.isArray(c.surface) && c.surface.length, `${c.id} names no surface`);
+    for (const s of c.surface) assert.ok(ids.has(s), `${c.id} names surface "${s}", which is not in the vocabulary`);
+  }
+});
+
+check('every motion id the catalogue claims is a recipe or a material preset', () => {
+  const recipes = new Set(require('../core/tokens/motion-recipes.json').recipes.map((r) => r.id));
+  const presets = new Set(require('../core/assets/core/presets.js').PRESETS);
+  for (const c of catalogue) {
+    for (const id of c.motion || []) {
+      assert.ok(recipes.has(id) || presets.has(id), `${c.id} claims "${id}", which is neither`);
+    }
+  }
+});
+
+/* A rule authored in `crystal.reset` that the component layer also reaches is a
+   rule that may never render — D-20 and D-21 were both that. The recipes added
+   for the catalogue live in the component layer only. */
+check('the catalogue recipes are authored in the component layer, never the reset layer', () => {
+  const reset = stylesheetCode.slice(0, stylesheetCode.indexOf('@layer crystal.component {'));
+  for (const selector of ['.cr-bare', '.cr-nav-item', '.cr-drag-handle', '[role=switch]', '.panel']) {
+    assert.ok(!reset.includes(selector), `${selector} has a rule in the reset layer`);
+    assert.ok(stylesheetCode.includes(selector), `${selector} has no rule at all`);
+  }
+});
+
+const block = (selector) => {
+  const at = stylesheetCode.indexOf(selector + ' {');
+  assert.ok(at !== -1, `no rule for ${selector}`);
+  return stylesheetCode.slice(at, stylesheetCode.indexOf('}', at));
+};
+
+/* Crystal paints the Resin coat by element, in five layers. Measured across 488
+   Crystal React stories, eighteen controls that had declared themselves
+   transparent were transparent in exactly one of the five. Bare means all five. */
+check('a bare control takes off every layer of the coat and keeps the target', () => {
+  const bare = block(':is(button, a, [role=button], .cr-bare).cr-bare');
+  /* The coat is (0,1,1) and lives in the same layer; a lone class never wins. */
+  for (const selector of [':is(button, a, [role=button], .cr-bare).cr-bare', ':is(button, a, [role=link], .cr-nav-item).cr-nav-item', ':is(button, [role=button], .cr-drag-handle).cr-drag-handle']) {
+    assert.ok(stylesheetCode.includes(selector + ' {'), `${selector} does not carry the element compound that outranks the coat`);
+  }
+  assert.match(bare, /background:\s*transparent/);
+  assert.match(bare, /backdrop-filter:\s*none/);
+  assert.match(bare, /min-inline-size:\s*44px/);
+  assert.match(block('.cr-bare:not(:focus-visible)'), /box-shadow:\s*none/);
+  const pseudo = stylesheetCode.slice(stylesheetCode.indexOf('.cr-bare::before'));
+  assert.match(pseudo.slice(0, pseudo.indexOf('}')), /content:\s*none/);
+});
+
+/* The reference implementation of selection, now exported. Weight, and nothing
+   drawn beside the label. */
+check('a navigation entry is selected by label weight and never by a mark', () => {
+  const current = block('.cr-nav-item:is([aria-current]:not([aria-current=false]),[aria-selected=true],[aria-pressed=true])');
+  assert.match(current, /font-weight:\s*800/);
+  assert.ok(!/content:/.test(current), 'the current entry draws something');
+  const rest = block(':is(button, a, [role=link], .cr-nav-item).cr-nav-item');
+  assert.match(rest, /font-weight:\s*650/);
+  assert.match(rest, /background:\s*transparent/, 'an entry is furniture, not a Resin capsule');
+  assert.match(rest, /backdrop-filter:\s*none/);
+});
+
+/* The stylesheet reads the geometry the package publishes, so the two cannot
+   part: the token in the theme, the literal only as the fallback. */
+check('the switch and the choice box read their published tokens', () => {
+  const theme = require('node:fs').readFileSync(
+    require('node:path').join(__dirname, '../core/assets/crystal-theme.css'), 'utf8');
+  for (const name of ['--cr-switch-track-width', '--cr-switch-track-height', '--cr-choice-box-size', '--cr-choice-box-radius', '--cr-action-disabled-opacity']) {
+    assert.ok(theme.includes(name + ':'), `${name} is not exported by the theme`);
+    assert.ok(stylesheetCode.includes(`var(${name}`), `${name} is exported and nothing reads it`);
+  }
+  const tokens = require('../core/tokens/crystal.tokens.json').component;
+  assert.match(theme, new RegExp(`--cr-switch-track-width:\\s*${tokens.switch.trackWidth.$value}`));
+  assert.match(theme, new RegExp(`--cr-choice-box-size:\\s*${tokens.choice.boxSize.$value}`));
 });
 
 /* -------------------------------------------------------------- report */

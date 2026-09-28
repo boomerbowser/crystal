@@ -12,6 +12,9 @@
         "focusable"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "None",
       "semantics": "Must not use display:none. Focusable variants become visible when focused, as the skip link does.",
       "crystal": "The clipping recipe and the focusable variant",
@@ -31,6 +34,9 @@
         "focused"
       ],
       "material": "Surface fill when visible",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Pill; appears at the top-left inset",
       "semantics": "First focusable element in the document; its target must be focusable",
       "crystal": "Appearance on focus and placement",
@@ -48,6 +54,9 @@
         "active"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "None",
       "semantics": "Restores focus to the trigger on release; never traps without a visible, keyboard-reachable exit",
       "crystal": "The contract only",
@@ -69,6 +78,9 @@
         "exited"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "Travel from the motion scale: 5-30px ordinary, up to 50px expressive",
       "semantics": "Reduced motion removes spatial change and keeps state feedback; transitions are interruptible and never delay a semantic change",
       "crystal": "Timings, easings, travel limits, the 5s ceiling, reduced-motion behaviour",
@@ -88,6 +100,9 @@
         "rtl"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "Mirrors directional geometry: bubble corners, range tracks, drawer edges, drop indicators",
       "semantics": "Sets a real dir attribute; logical properties do the rest",
       "crystal": "Which properties are directional and must mirror",
@@ -108,6 +123,9 @@
         "system"
       ],
       "material": "Supplies every material's resolved values",
+      "surface": [
+        "none"
+      ],
       "geometry": "Supplies the content radius and spacing scale",
       "semantics": "Sets color-scheme so native controls and scrollbars match; respects the system preference when set to system",
       "crystal": "Token resolution, mode switching, preference persistence, reduced-effect handling",
@@ -128,6 +146,9 @@
         "forced-colors"
       ],
       "material": "Solid surfaces replacing every translucent fill; hierarchy preserved by tone and contour",
+      "surface": [
+        "none"
+      ],
       "geometry": "Unchanged. Shapes, silhouettes and spacing never change with effects.",
       "semantics": "Honours prefers-reduced-transparency and forced-colors, and an explicit product preference",
       "crystal": "Every material's fallback and the guarantee that hierarchy survives",
@@ -150,6 +171,9 @@
         "disabled"
       ],
       "material": "Resin handle on the region's own surface",
+      "surface": [
+        "drag-handle"
+      ],
       "geometry": "Handle meets 44px even when the visible grip is narrower",
       "semantics": "role=separator with aria-valuenow and arrow-key resizing. Pointer dragging is never the only route.",
       "crystal": "Handle treatment, bound states and the settle after a size change",
@@ -172,6 +196,9 @@
         "at-rest"
       ],
       "material": "None of its own; sits above the content material",
+      "surface": [
+        "none"
+      ],
       "geometry": "Never intercepts pointer events.",
       "semantics": "aria-hidden; it is decoration and must not be read.",
       "crystal": "Opacity and contrast so it never obscures text",
@@ -190,6 +217,9 @@
         "expired"
       ],
       "material": "Haze quiet zone",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Quiet zone preserved; contrast fixed regardless of palette.",
       "semantics": "Carries a text alternative with the encoded value.",
       "crystal": "Quiet-zone material, contrast floor, status surfaces",
@@ -207,6 +237,9 @@
         "idle"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "None.",
       "semantics": "Never the only way to dismiss something; Escape always works too.",
       "crystal": "That dismissal is also keyboard reachable",
@@ -224,6 +257,9 @@
         "played"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "None.",
       "semantics": "Content is present and readable before the animation runs, never revealed by it.",
       "crystal": "Which recipes are allowed, the reduced-motion contract",
@@ -241,6 +277,9 @@
         "client"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "Reserves the final size so nothing shifts on hydration.",
       "semantics": "Falls back to content, not to emptiness, wherever it can.",
       "crystal": "That layout does not shift when it resolves",
@@ -257,6 +296,9 @@
         "at-rest"
       ],
       "material": "Plastic foundation on the document",
+      "surface": [
+        "plastic"
+      ],
       "geometry": "Sets the content radius, spacing and reading rhythm as custom properties.",
       "semantics": "Does not change focus visibility or motion preferences on its own.",
       "crystal": "The reset, the foundation, the token surface",
@@ -274,6 +316,9 @@
         "at-rest"
       ],
       "material": "n/a",
+      "surface": [
+        "none"
+      ],
       "geometry": "n/a",
       "semantics": "n/a",
       "crystal": "n/a",
@@ -292,6 +337,9 @@
         "at-rest"
       ],
       "material": "n/a",
+      "surface": [
+        "none"
+      ],
       "geometry": "n/a",
       "semantics": "n/a",
       "crystal": "n/a",
@@ -313,6 +361,9 @@
         "disabled"
       ],
       "material": "None of its own",
+      "surface": [
+        "none"
+      ],
       "geometry": "Enforces the 44px minimum target on whatever it wraps.",
       "semantics": "Gives its child button semantics unless told otherwise; never swallows keyboard activation.",
       "crystal": "That the press recipe plays and the focus ring appears",
@@ -331,6 +382,9 @@
         "disabled"
       ],
       "material": "None of its own",
+      "surface": [
+        "none"
+      ],
       "geometry": "Focus ring at the documented offset.",
       "semantics": "Adds a tab stop without inventing a role.",
       "crystal": "The focus recipe",
@@ -350,10 +404,17 @@
         "focus-visible"
       ],
       "material": "Resin while lifted; Haze drop indicator",
+      "surface": [
+        "drag-handle"
+      ],
       "geometry": "Handle is a 44px target; the lifted item keeps its own radius.",
       "semantics": "Keyboard drag is required, not optional: Enter lifts, arrows move, Enter drops, Escape cancels. Every state is announced.",
       "crystal": "Lift elevation, drop-indicator material, the motion of the lift and the settle",
       "product": "What may be dragged where, and what a drop means",
+      "motion": [
+        "drag-pickup",
+        "drag-settle"
+      ],
       "parity": [
         "react-aria:useDragAndDrop",
         "mui-x-tree-view:TreeItemDragAndDropOverlay"
@@ -369,6 +430,9 @@
         "invalid-target"
       ],
       "material": "Haze line or fill",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Follows the gap between items rather than covering one.",
       "semantics": "Announced as the drag moves, so a keyboard drag is followable without sight.",
       "crystal": "Indicator material and motion",
@@ -387,6 +451,9 @@
         "loading"
       ],
       "material": "None of its own",
+      "surface": [
+        "none"
+      ],
       "geometry": "Preserves scroll position and item size across recycling.",
       "semantics": "Keeps aria-setsize and aria-posinset correct, and never drops focus when a focused row recycles.",
       "crystal": "Scroll surface, focus retention",
@@ -405,6 +472,9 @@
         "transitioning"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "The element keeps its own geometry through the transition.",
       "semantics": "Removed entirely under reduced motion; never the only way a view change is signalled.",
       "crystal": "Which recipes apply, and the reduced-motion contract",
@@ -422,6 +492,9 @@
         "focus-visible"
       ],
       "material": "Resin plane or inherits",
+      "surface": [
+        "resin"
+      ],
       "geometry": "Controls are pills; the group reaches 44px.",
       "semantics": "role=\"toolbar\": one tab stop, arrows move within, orientation declared.",
       "crystal": "Material, grouping geometry, focus ring",
@@ -439,6 +512,9 @@
         "at-rest"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "None.",
       "semantics": "Every link and navigable item routes through the host router rather than reloading the page.",
       "crystal": "That navigation is consistent across every component that links",
@@ -455,6 +531,9 @@
         "at-rest"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "None.",
       "semantics": "Prevents hydration mismatches in ids that label and describe controls.",
       "crystal": "That labelling survives hydration",

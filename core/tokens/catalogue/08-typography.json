@@ -11,6 +11,9 @@
         "default"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "1.2 line height; -0.04em tracking; sizes on a modular scale",
       "semantics": "The visual level must not be chosen independently of the document outline; use a level, style separately",
       "crystal": "Scale, tracking and leading",
@@ -32,6 +35,9 @@
         "clamped"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "16px/24px reading rhythm; 78ch maximum measure",
       "semantics": "Truncated text keeps its full value in the accessibility tree and in a title where useful",
       "crystal": "Rhythm, measure, colour roles",
@@ -51,6 +57,9 @@
         "attributed"
       ],
       "material": "Haze panel when set apart",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; 3px leading rule",
       "semantics": "Real blockquote with cite where the source is known",
       "crystal": "Rule, panel and attribution treatment",
@@ -69,6 +78,9 @@
         "default"
       ],
       "material": "Primary-soft fill with its tested ink pair",
+      "surface": [
+        "none"
+      ],
       "geometry": "4px radius; does not disturb the line box",
       "semantics": "Real mark element; highlighting is never the only indication of a match",
       "crystal": "Fill pair and geometry",
@@ -90,6 +102,9 @@
         "default"
       ],
       "material": "Inherits; embedded surfaces follow their own components",
+      "surface": [
+        "none"
+      ],
       "geometry": "78ch measure; 1.8 line height; 4px-rhythm vertical spacing",
       "semantics": "Anchor navigation must preserve focus when sections change",
       "crystal": "The complete reading rhythm and embedded-element treatment",
@@ -108,10 +123,16 @@
         "at-rest"
       ],
       "material": "Haze fill behind the matched run",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Fill hugs the text; no radius change at line breaks.",
       "semantics": "Uses <mark>; the surrounding sentence remains readable as one string.",
       "crystal": "Fill material, contrast against the surface",
       "product": "What is matched and how",
+      "motion": [
+        "highlight"
+      ],
       "parity": [
         "mantine:Highlight"
       ]
@@ -124,6 +145,9 @@
         "at-rest"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Tabular figures.",
       "semantics": "The formatted value is the text content; no separate visual and spoken form.",
       "crystal": "Typography, figure style",
@@ -140,6 +164,9 @@
         "at-rest"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Tightest tracking of the scale; one line where possible.",
       "semantics": "Exactly one per view, and it is the h1 unless the page says otherwise.",
       "crystal": "The step, tracking and leading",
@@ -157,6 +184,9 @@
         "at-rest"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Step per level; leading tightens as size grows.",
       "semantics": "The level is the document structure, never chosen for size — size comes from the step.",
       "crystal": "The scale and its tracking",
@@ -174,6 +204,9 @@
         "at-rest"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "One step above body; measure capped for reading.",
       "semantics": "A paragraph, not a heading.",
       "crystal": "Step and measure",
@@ -190,6 +223,9 @@
         "at-rest"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Marker inset follows the spacing scale; hanging indent preserved.",
       "semantics": "Real ul and ol so the count and nesting are announced.",
       "crystal": "Marker treatment, spacing, nesting rhythm",
@@ -209,6 +245,9 @@
         "focus-visible"
       ],
       "material": "Haze fill with a crisp monospace face",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; the copy control is a pill.",
       "semantics": "Focusable and scrollable by keyboard; the language is announced; the copy button says what it copied.",
       "crystal": "Fill material, the monospace pairing, copy feedback motion",
@@ -227,6 +266,9 @@
         "expanded"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Clamp by line count, never by pixel height.",
       "semantics": "The full text remains available to assistive technology; expansion is a real control.",
       "crystal": "The fade, if any, and the expand motion",
@@ -244,6 +286,9 @@
         "at-rest"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Sits beneath the quote at one step down.",
       "semantics": "Uses cite, and is associated with its blockquote.",
       "crystal": "Step and colour",
@@ -261,6 +306,9 @@
         "focus-visible"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "No visual weight change; underline on hover only.",
       "semantics": "Uses abbr with a title, and is focusable so the expansion is reachable without a pointer.",
       "crystal": "The underline treatment",
@@ -277,6 +325,9 @@
         "at-rest"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Balances wrapping without changing the step.",
       "semantics": "Purely visual: the text content is unchanged.",
       "crystal": "Where balancing applies, and its fallback",
@@ -293,6 +344,9 @@
         "at-rest"
       ],
       "material": "Palette gradient clipped to the glyphs",
+      "surface": [
+        "none"
+      ],
       "geometry": "No change to step or tracking.",
       "semantics": "Contrast is checked against the surface at both gradient ends, and a solid fallback applies where the clip is unsupported.",
       "crystal": "The gradient, and the contrast floor at every point",

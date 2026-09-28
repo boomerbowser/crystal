@@ -81,6 +81,16 @@
          exactly what Crystal React did on sixteen surfaces. A recipe that only
          one renderer knows is not a specification. */
       '--cr-haze-inset':data.component.haze.inset+'px',
+      /* Control geometry that `crystal.css` used to carry as literals — 26px
+         boxes, a 44×28 track, .55 for a disabled control — while the same
+         numbers were published as tokens a platform library reads. Two
+         statements of one value is the drift CONTRACT §1 forbids, so the
+         stylesheet now reads these and the literal is the fallback only. */
+      '--cr-action-disabled-opacity':String(data.component.action.disabledOpacity),
+      '--cr-choice-box-size':data.component.choice.boxSize+'px',
+      '--cr-choice-box-radius':data.component.choice.boxRadius+'px',
+      '--cr-switch-track-width':data.component.switch.trackWidth+'px',
+      '--cr-switch-track-height':data.component.switch.trackHeight+'px',
       /* Chart geometry. A chart's colours vary with the palette and arrive with
          the other roles above; these do not vary at all. They are published
          rather than left to each renderer because the catalogue says "line

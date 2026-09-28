@@ -11,6 +11,9 @@
         "at-rest"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Tabular figures so a column of prices aligns.",
       "semantics": "The formatted value is the text content; currency is stated, not implied by a symbol alone.",
       "crystal": "Figure style and step",
@@ -27,6 +30,9 @@
         "at-rest"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Matches price.",
       "semantics": "Reads as a sentence rather than two numbers with a dash.",
       "crystal": "Typography",
@@ -43,10 +49,16 @@
         "at-rest"
       ],
       "material": "Haze fill with a status accent",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Pill.",
       "semantics": "States what is reduced from what; a percentage alone is not a claim.",
       "crystal": "Status tokens, pill geometry",
       "product": "Discount rules and rounding",
+      "motion": [
+        "attention"
+      ],
       "parity": [
         "antd:Tag"
       ]
@@ -63,10 +75,16 @@
         "disabled"
       ],
       "material": "Resin shell with a Haze well",
+      "surface": [
+        "field"
+      ],
       "geometry": "Pill; both controls reach 44px.",
       "semantics": "A spin button: the value is typable, and the bounds are announced when reached.",
       "crystal": "Materials, press recipe on each control",
       "product": "Bounds, step, stock rules",
+      "motion": [
+        "slider-step"
+      ],
       "parity": [
         "react-aria:NumberField",
         "primereact:inputnumber"
@@ -83,10 +101,16 @@
         "focus-visible"
       ],
       "material": "Haze option fills",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Options are pills; swatch variants are circles.",
       "semantics": "Unavailable options stay perceivable and say why; selection is label weight, never a check mark.",
       "crystal": "Option material, selection weight, unavailable treatment",
       "product": "Variant axes and stock",
+      "motion": [
+        "selection"
+      ],
       "parity": [
         "mantine:SegmentedControl"
       ]
@@ -102,6 +126,9 @@
         "backorder"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Inline with the price or the action.",
       "semantics": "Words carry the state; status colour reinforces it.",
       "crystal": "Status tokens",
@@ -121,10 +148,17 @@
         "unavailable"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "The whole card is not a link; the name is, and the action is a button. One tab stop each.",
       "crystal": "Material, media aspect, action geometry, hover recipe",
       "product": "Which attributes appear",
+      "motion": [
+        "list-in",
+        "list-out"
+      ],
       "parity": [
         "primereact:card",
         "mantine:Card"
@@ -140,10 +174,18 @@
         "focus-visible"
       ],
       "material": "Haze thumbnails; Mirage scrim when enlarged",
+      "surface": [
+        "haze",
+        "mirage"
+      ],
       "geometry": "Thumbnails keep the content radius; the viewer is full-bleed within the scrim.",
       "semantics": "Arrow keys move between items with position announced; zoom is keyboard reachable.",
       "crystal": "Scrim and thumbnail materials, the transition into the viewer",
       "product": "The media set",
+      "motion": [
+        "media-in",
+        "selection"
+      ],
       "parity": [
         "primereact:galleria"
       ]
@@ -159,10 +201,17 @@
         "focus-visible"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Removal is announced and undoable; quantity changes announce the new subtotal.",
       "crystal": "Material, the update and remove motion",
       "product": "Pricing and stock rules",
+      "motion": [
+        "list-in",
+        "list-out"
+      ],
       "parity": [
         "antd:List.Item"
       ]
@@ -177,6 +226,9 @@
         "empty"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "A description list, so each line is a labelled pair; the total is marked as such.",
       "crystal": "Material, figure alignment, the motion of a changing total",
@@ -197,10 +249,18 @@
         "invalid"
       ],
       "material": "Haze well in a Resin shell",
+      "surface": [
+        "field"
+      ],
       "geometry": "Field and action share one pill row.",
       "semantics": "Success and failure are announced; an applied code is removable.",
       "crystal": "Materials, field-valid and field-invalid recipes",
       "product": "Validation and stacking rules",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid"
+      ],
       "parity": [
         "antd:Input.Search"
       ]
@@ -217,10 +277,17 @@
         "focus-visible"
       ],
       "material": "Haze step fills",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Steps are pills; connectors are hairlines.",
       "semantics": "The current step is aria-current; completion is stated in words, and a check mark here means validated rather than selected.",
       "crystal": "Step materials, connector treatment, the advance motion",
       "product": "The steps and their validation",
+      "motion": [
+        "selection",
+        "page-in"
+      ],
       "parity": [
         "antd:Steps",
         "mui:Stepper"
@@ -237,10 +304,16 @@
         "focus-visible"
       ],
       "material": "Haze option fills",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Options keep the content radius; the selected one carries label weight.",
       "semantics": "A radio group. Card fields are never reimplemented — the host supplies its provider element.",
       "crystal": "Option material, selection, focus ring",
       "product": "The provider, tokenisation, and PCI scope — this component never handles raw card data",
+      "motion": [
+        "selection"
+      ],
       "parity": [
         "antd:Radio.Group"
       ]
@@ -256,10 +329,18 @@
         "submitting"
       ],
       "material": "Haze wells in Resin shells",
+      "surface": [
+        "field"
+      ],
       "geometry": "Fields follow the input geometry.",
       "semantics": "Field order, labels and required-ness change by country; postcode validation is per-locale, not one regular expression.",
       "crystal": "Materials, validation recipes",
       "product": "Countries supported and their field rules",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid"
+      ],
       "parity": [
         "antd:Form"
       ]
@@ -275,6 +356,9 @@
         "cancelled"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Status is a word; the status colour reinforces it.",
       "crystal": "Material, status tokens",
@@ -294,10 +378,16 @@
         "focus-visible"
       ],
       "material": "Haze option fills",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Options keep the content radius.",
       "semantics": "A radio group; each option states price and estimate together.",
       "crystal": "Option material, selection weight",
       "product": "Rates and estimates",
+      "motion": [
+        "selection"
+      ],
       "parity": [
         "antd:Radio.Group"
       ]
@@ -312,6 +402,9 @@
         "unavailable"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Inline.",
       "semantics": "An absolute date, not only a relative phrase.",
       "crystal": "Typography and colour",
@@ -331,10 +424,17 @@
         "focus-visible"
       ],
       "material": "Resin pill or icon button",
+      "surface": [
+        "control"
+      ],
       "geometry": "Pill; 44px target.",
       "semantics": "A toggle with a pressed state and a name that says what it will do.",
       "crystal": "Press recipe, the state-change recipe",
       "product": "Persistence",
+      "motion": [
+        "press",
+        "selection"
+      ],
       "parity": [
         "mantine:ActionIcon"
       ]
@@ -348,10 +448,17 @@
         "expanded"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "The rating is text as well as stars.",
       "crystal": "Material, rating rendering, expansion motion",
       "product": "Moderation and sorting",
+      "motion": [
+        "list-in",
+        "list-out"
+      ],
       "parity": [
         "primereact:rating"
       ]
@@ -365,6 +472,9 @@
         "empty"
       ],
       "material": "Haze distribution bars",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "The average and the count are both stated; bars are labelled.",
       "crystal": "Bar material, figure typography",
@@ -384,6 +494,10 @@
         "focus-visible"
       ],
       "material": "Frost panel with Haze groups",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Panel radius; controls are pills.",
       "semantics": "Applied filters are announced and individually removable; counts update politely.",
       "crystal": "Panel and group materials, the apply and clear motion",
@@ -403,10 +517,20 @@
         "open"
       ],
       "material": "Haze well in a Resin shell",
+      "surface": [
+        "field"
+      ],
       "geometry": "Pill.",
       "semantics": "A select whose current ordering is announced on change.",
       "crystal": "Materials, open motion",
       "product": "The orderings offered",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "menu-in",
+        "menu-out"
+      ],
       "parity": [
         "antd:Select"
       ]
@@ -420,6 +544,9 @@
         "focus-visible"
       ],
       "material": "Inherits the table surface",
+      "surface": [
+        "table"
+      ],
       "geometry": "Sticky first column and header; differences are marked, not only coloured.",
       "semantics": "A real table with row and column headers; differences are stated in text.",
       "crystal": "Table surface, sticky treatment, difference marking",
@@ -438,10 +565,16 @@
         "focus-visible"
       ],
       "material": "Inherits from its cards",
+      "surface": [
+        "none"
+      ],
       "geometry": "Scrolls within its own container; never the page.",
       "semantics": "A labelled list; the strip is keyboard scrollable.",
       "crystal": "Scroll surface, edge fade from the surrounding material",
       "product": "Retention and privacy policy",
+      "motion": [
+        "list-in"
+      ],
       "parity": [
         "primereact:carousel"
       ]

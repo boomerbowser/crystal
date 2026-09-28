@@ -13,6 +13,11 @@
         "narrow"
       ],
       "material": "Plastic foundation; Frost supporting panels; Resin destination plane",
+      "surface": [
+        "plastic",
+        "frost",
+        "dock"
+      ],
       "geometry": "Panel radius = content radius + 6px",
       "semantics": "Landmark roles: banner, navigation, main, contentinfo. One main per view.",
       "crystal": "Material assignment per region, elevation ordering, safe-area handling",
@@ -31,6 +36,9 @@
         "default"
       ],
       "material": "None; inherits the surface beneath",
+      "surface": [
+        "none"
+      ],
       "geometry": "Gutters follow the 4px rhythm: 18/26/44px by viewport",
       "semantics": "Presentational only; must not introduce a landmark",
       "crystal": "Width ceiling and gutter scale",
@@ -49,6 +57,9 @@
         "default"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "Gutters from the 4px rhythm; 12-column reference",
       "semantics": "Presentational; reading order must match visual order",
       "crystal": "Gutter scale and breakpoint behaviour",
@@ -67,6 +78,9 @@
         "default"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "Shared gutter with Grid",
       "semantics": "Presentational",
       "crystal": "Minimum cell width and gutter",
@@ -85,6 +99,9 @@
         "default"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "Spacing from the 4px rhythm",
       "semantics": "Presentational",
       "crystal": "Spacing scale",
@@ -104,6 +121,9 @@
         "wrapped"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "Spacing from the 4px rhythm",
       "semantics": "Presentational",
       "crystal": "Spacing scale and wrap behaviour",
@@ -124,6 +144,9 @@
         "vertical"
       ],
       "material": "Edge colour token; never a heavy rule",
+      "surface": [
+        "none"
+      ],
       "geometry": "1px, full-bleed within its container",
       "semantics": "role=separator with an accessible name when labelled; decorative dividers are aria-hidden",
       "crystal": "Rule colour and label treatment",
@@ -142,6 +165,9 @@
         "default"
       ],
       "material": "Inherits; commonly wraps Image or a media surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Content radius when clipping media",
       "semantics": "Presentational",
       "crystal": "Reserving space so loading media does not shift layout",
@@ -162,6 +188,9 @@
         "at-end"
       ],
       "material": "Inherits; edge fade uses the surrounding material",
+      "surface": [
+        "none"
+      ],
       "geometry": "Inherits container radius; fade depth 24px",
       "semantics": "Keyboard scrollable; must be focusable when it is the only way to reach content",
       "crystal": "Scrollbar appearance, edge fade, reduced-motion behaviour",
@@ -180,6 +209,9 @@
         "default"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "None",
       "semantics": "Presentational",
       "crystal": "Nothing beyond layout",
@@ -198,6 +230,9 @@
         "default"
       ],
       "material": "None",
+      "surface": [
+        "none"
+      ],
       "geometry": "4px rhythm",
       "semantics": "Presentational; never used to convey grouping to assistive technology",
       "crystal": "Spacing scale",
@@ -218,6 +253,9 @@
         "condensed"
       ],
       "material": "Frost band over the Plastic foundation",
+      "surface": [
+        "frost"
+      ],
       "geometry": "Full-bleed; no radius on the outer edges; actions are pills.",
       "semantics": "role=\"banner\" unless nested; the title is the page heading or labels one.",
       "crystal": "Material, elevation on scroll, action geometry",
@@ -236,6 +274,9 @@
         "reflowing"
       ],
       "material": "None of its own; children carry material",
+      "surface": [
+        "none"
+      ],
       "geometry": "Gap follows the spacing scale; columns respond to container width.",
       "semantics": "A list when the items are a set; otherwise presentational.",
       "crystal": "Spacing, breakpoint behaviour, reduced-motion reflow",
@@ -255,6 +296,10 @@
         "menu-open"
       ],
       "material": "Children keep theirs; the overflow menu is Frost",
+      "surface": [
+        "none",
+        "frost"
+      ],
       "geometry": "Overflow trigger is a pill and reaches 44px.",
       "semantics": "The overflow trigger names how many items it holds; hidden items stay reachable.",
       "crystal": "Measurement, the trigger, the menu material",

@@ -13,6 +13,10 @@
         "error"
       ],
       "material": "Plastic foundation with Frost chrome",
+      "surface": [
+        "plastic",
+        "frost"
+      ],
       "geometry": "Full-bleed; safe areas respected.",
       "semantics": "One main per view; the heading is the view name.",
       "crystal": "Region materials, elevation ordering, safe-area handling",
@@ -31,6 +35,9 @@
         "condensed"
       ],
       "material": "Frost band or inherits",
+      "surface": [
+        "frost"
+      ],
       "geometry": "Actions are pills.",
       "semantics": "Contains the h1; breadcrumbs are a navigation landmark.",
       "crystal": "Material, condense behaviour on scroll",
@@ -50,6 +57,9 @@
         "popping"
       ],
       "material": "Inherits per view",
+      "surface": [
+        "none"
+      ],
       "geometry": "Views enter and leave along the reading direction.",
       "semantics": "Focus moves to the new view and returns on pop; the back control is a real button.",
       "crystal": "Enter and exit recipes, focus management",
@@ -72,10 +82,18 @@
         "narrow"
       ],
       "material": "Frost list pane; Haze detail surface",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Collapses to a stack below the layout breakpoint.",
       "semantics": "Selection moves focus to the detail only when the layout has collapsed.",
       "crystal": "Pane materials, the collapse transition",
       "product": "The data and routing",
+      "motion": [
+        "page-in",
+        "page-out"
+      ],
       "parity": [
         "antd:Layout"
       ]
@@ -91,10 +109,16 @@
         "focus-visible"
       ],
       "material": "Inherits per pane",
+      "surface": [
+        "none"
+      ],
       "geometry": "The divider is a 44px target.",
       "semantics": "The divider is a separator with a value, resizable by keyboard.",
       "crystal": "Divider material, focus ring",
       "product": "Panes and persistence",
+      "motion": [
+        "resize-settle"
+      ],
       "parity": [
         "primereact:splitter",
         "antd:Splitter"
@@ -110,6 +134,9 @@
         "overflowing"
       ],
       "material": "Resin plane",
+      "surface": [
+        "resin"
+      ],
       "geometry": "Pill; overflow to a menu.",
       "semantics": "role=\"toolbar\" with one tab stop.",
       "crystal": "Material, overflow behaviour, press recipes",
@@ -128,6 +155,9 @@
         "error"
       ],
       "material": "Stone backing",
+      "surface": [
+        "stone"
+      ],
       "geometry": "Full-bleed; text stays crisp.",
       "semantics": "role=\"status\"; errors escalate to assertive.",
       "crystal": "Material, status tokens",
@@ -145,6 +175,10 @@
         "focus-mode"
       ],
       "material": "Plastic foundation with Frost panels",
+      "surface": [
+        "plastic",
+        "frost"
+      ],
       "geometry": "Panels keep panel radius.",
       "semantics": "Each pane is a labelled region; focus order follows the visual order.",
       "crystal": "Panel materials, pane transitions",
@@ -163,10 +197,17 @@
         "transitioning"
       ],
       "material": "Inherits",
+      "surface": [
+        "none"
+      ],
       "geometry": "Chrome leaves along its own edge.",
       "semantics": "Entering and leaving are announced; nothing becomes unreachable, only hidden.",
       "crystal": "The enter and exit recipes",
       "product": "What counts as chrome",
+      "motion": [
+        "page-in",
+        "page-out"
+      ],
       "parity": [
         "mantine:AppShell"
       ]
@@ -179,10 +220,16 @@
         "at-rest"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Says what would be here and offers the action that creates it.",
       "crystal": "Material, illustration treatment",
       "product": "The copy and the action",
+      "motion": [
+        "empty-in"
+      ],
       "parity": [
         "antd:Empty",
         "mantine:Center"
@@ -196,10 +243,16 @@
         "at-rest"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "role=\"alert\"; states what failed and what to try, never only a code.",
       "crystal": "Material, status tokens",
       "product": "The error taxonomy",
+      "motion": [
+        "page-in"
+      ],
       "parity": [
         "antd:Result"
       ]
@@ -212,10 +265,16 @@
         "at-rest"
       ],
       "material": "Skeletons on the surrounding material",
+      "surface": [
+        "none"
+      ],
       "geometry": "Skeletons match the shape of what is coming.",
       "semantics": "aria-busy on the region; the wait is announced once, not repeatedly.",
       "crystal": "Skeleton material and the reduced-motion contract",
       "product": "What is loading",
+      "motion": [
+        "skeleton-resolve"
+      ],
       "parity": [
         "antd:Skeleton",
         "mantine:Skeleton"
@@ -230,10 +289,16 @@
         "reconnecting"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Announced politely; retry is a real button.",
       "crystal": "Material, status tokens",
       "product": "What is available offline",
+      "motion": [
+        "page-in"
+      ],
       "parity": [
         "antd:Result"
       ]
@@ -246,10 +311,16 @@
         "at-rest"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "States what was not found and offers a route onward.",
       "crystal": "Material",
       "product": "The copy and the routes",
+      "motion": [
+        "page-in"
+      ],
       "parity": [
         "antd:Result"
       ]
@@ -263,10 +334,16 @@
         "requesting"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Says which permission and why; the request is a real button.",
       "crystal": "Material, status tokens",
       "product": "The permission model",
+      "motion": [
+        "page-in"
+      ],
       "parity": [
         "antd:Result"
       ]

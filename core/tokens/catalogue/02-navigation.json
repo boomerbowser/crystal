@@ -15,6 +15,9 @@
         "external"
       ],
       "material": "None; inherits reading surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Underline offset 4px",
       "semantics": "Native anchor with an href. A link that acts is a button, not a link.",
       "crystal": "Colour, underline offset, focus ring",
@@ -36,7 +39,10 @@
         "current",
         "disabled"
       ],
-      "material": "Resin shell with Haze fill",
+      "material": "None of its own: a navigation entry is furniture on the panel beneath it. Selection is label weight alone; hover and the current entry take the surface-alt fill",
+      "surface": [
+        "nav-item"
+      ],
       "geometry": "Pill; minimum 44px target",
       "semantics": "aria-current=\"page\" for the active destination, never aria-selected",
       "crystal": "Material, pill geometry, current-location dot, focus ring",
@@ -61,10 +67,18 @@
         "narrow"
       ],
       "material": "Frost panel, Resin active destination",
+      "surface": [
+        "frost",
+        "nav-item"
+      ],
       "geometry": "Panel radius = content radius + 6px",
       "semantics": "nav landmark with an accessible name; collapsed items keep accessible names",
       "crystal": "Panel material, collapse geometry, active treatment",
       "product": "Destination list, routing, collapse persistence",
+      "motion": [
+        "selection",
+        "page-in"
+      ],
       "parity": [
         "mantine:NavLink",
         "mui:Drawer",
@@ -82,6 +96,9 @@
         "focus"
       ],
       "material": "Resin plane, Stone label backing, primary fill on the selected destination",
+      "surface": [
+        "dock"
+      ],
       "geometry": "Pill; 52px minimum destination height",
       "semantics": "nav landmark; aria-pressed or aria-current on the destination",
       "crystal": "The single shared plane, label weight for the current entry, elevation",
@@ -107,6 +124,9 @@
         "current"
       ],
       "material": "None; sits on the reading surface",
+      "surface": [
+        "none"
+      ],
       "geometry": "Separator from the icon set; 44px targets on touch",
       "semantics": "nav landmark with an ordered list; aria-current=\"page\" on the final crumb",
       "crystal": "Separator, collapse behaviour, current treatment",
@@ -132,6 +152,9 @@
         "disabled"
       ],
       "material": "Resin strip, primary fill on the selected tab",
+      "surface": [
+        "resin"
+      ],
       "geometry": "Pill tabs inside a pill strip; 44px minimum",
       "semantics": "role=tablist/tab/tabpanel with arrow-key, Home and End navigation and aria-selected",
       "crystal": "Strip material, label weight for the selected tab, focus ring",
@@ -157,10 +180,16 @@
         "focus"
       ],
       "material": "Resin shells with Haze fill",
+      "surface": [
+        "control"
+      ],
       "geometry": "Pill; 44px minimum target",
       "semantics": "nav landmark with an accessible name; aria-current=\"page\" on the active page",
       "crystal": "Pill geometry, current treatment, elision rules",
       "product": "Page count, routing and the data fetch",
+      "motion": [
+        "selection"
+      ],
       "parity": [
         "mantine:Pagination",
         "mui:Pagination",
@@ -179,10 +208,18 @@
         "disabled"
       ],
       "material": "Resin step markers on a Haze track",
+      "surface": [
+        "control",
+        "haze"
+      ],
       "geometry": "Circular markers; connector 2px",
       "semantics": "Ordered list; the current step carries aria-current=\"step\"; state is announced in text, not by colour",
       "crystal": "Marker geometry, connector, state treatment",
       "product": "Step validation and whether steps are navigable",
+      "motion": [
+        "selection",
+        "page-in"
+      ],
       "parity": [
         "mantine:Stepper",
         "mui:Stepper",
@@ -201,6 +238,9 @@
         "focus"
       ],
       "material": "Resin shell",
+      "surface": [
+        "control"
+      ],
       "geometry": "Pill or circle; 44px minimum",
       "semantics": "button with aria-expanded and aria-controls, and a real accessible name",
       "crystal": "Material, geometry, the open/closed icon transition",
@@ -226,6 +266,11 @@
         "loading"
       ],
       "material": "Mirage scrim, Haze decision surface, Resin field shell",
+      "surface": [
+        "mirage",
+        "dialog",
+        "field"
+      ],
       "geometry": "Content radius; results list inset 8px",
       "semantics": "Modal dialog with a combobox; aria-activedescendant for the highlighted result",
       "crystal": "Overlay material, result row treatment, keyboard hint styling",
@@ -253,6 +298,9 @@
         "loading"
       ],
       "material": "Haze rows on the surrounding surface",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Indent step 20px; guides use the edge token",
       "semantics": "role=treegrid/row/gridcell with aria-expanded, aria-level, aria-posinset, aria-setsize and full arrow-key navigation. Not role=tree: a treeitem is a single navigable unit, so it cannot contain the expand control this anatomy requires — treegrid is the pattern ARIA provides for a row that holds its own control. See M-3.",
       "crystal": "Row treatment, indentation guides, label weight for the selected row",
@@ -276,6 +324,9 @@
         "pinned"
       ],
       "material": "Resin once pinned, to separate it from the content it floats over",
+      "surface": [
+        "resin"
+      ],
       "geometry": "Inherits the pinned element's geometry",
       "semantics": "Must not cover the focused element or the final content",
       "crystal": "The material change on pin and the elevation it takes",
@@ -297,10 +348,17 @@
         "focus-visible"
       ],
       "material": "Resin plane holding Haze label fills",
+      "surface": [
+        "dock"
+      ],
       "geometry": "Pill; targets at least 44px; respects the safe area.",
       "semantics": "role=\"navigation\"; the current destination carries aria-current=\"page\".",
       "crystal": "Material, geometry, selection by label weight, safe-area inset",
       "product": "Destinations and routing",
+      "motion": [
+        "selection",
+        "page-in"
+      ],
       "parity": [
         "mui:BottomNavigation"
       ]
@@ -315,10 +373,18 @@
         "focus-visible"
       ],
       "material": "Trigger inherits; panel is Frost",
+      "surface": [
+        "none",
+        "frost"
+      ],
       "geometry": "Panel radius = content radius + 6px.",
       "semantics": "Menubar semantics; arrow keys move between triggers, Escape closes.",
       "crystal": "Panel material, motion, focus handling",
       "product": "Menu structure and content",
+      "motion": [
+        "menu-in",
+        "menu-out"
+      ],
       "parity": [
         "primereact:navigationmenu",
         "antd:Menu"
@@ -334,10 +400,16 @@
         "focus-visible"
       ],
       "material": "Haze content fill",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Indentation follows heading depth; label weight marks the active entry.",
       "semantics": "role=\"navigation\" with an accessible name; the active entry uses aria-current=\"location\".",
       "crystal": "Active marking by label weight, spacing",
       "product": "Which headings are collected, scroll spy thresholds",
+      "motion": [
+        "selection"
+      ],
       "parity": [
         "mantine:TableOfContents"
       ]
@@ -352,10 +424,18 @@
         "focus-visible"
       ],
       "material": "Bar inherits; menus are Frost",
+      "surface": [
+        "none",
+        "frost"
+      ],
       "geometry": "Triggers are pills; menus keep panel radius.",
       "semantics": "Menubar semantics: arrows move between triggers, Home and End jump, typeahead selects.",
       "crystal": "Materials, open and close motion, focus handling",
       "product": "Menu structure and actions",
+      "motion": [
+        "menu-in",
+        "menu-out"
+      ],
       "parity": [
         "react-aria:Menu",
         "primereact:menubar",
@@ -372,10 +452,17 @@
         "focus-visible"
       ],
       "material": "Frost panel",
+      "surface": [
+        "frost"
+      ],
       "geometry": "Offset from its parent item; flips at the viewport edge.",
       "semantics": "The parent item carries aria-haspopup and aria-expanded; the submenu is reachable by arrow key and closes with Escape without closing its parent.",
       "crystal": "Panel material, stagger, edge flipping",
       "product": "Nesting depth and content",
+      "motion": [
+        "menu-in",
+        "menu-out"
+      ],
       "parity": [
         "react-aria:SubmenuTrigger",
         "primereact:tieredmenu"

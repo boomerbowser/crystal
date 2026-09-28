@@ -13,6 +13,11 @@
         "narrow"
       ],
       "material": "Plastic foundation, Frost chrome, Resin actions",
+      "surface": [
+        "plastic",
+        "frost",
+        "control"
+      ],
       "geometry": "Panel radius throughout; safe areas respected.",
       "semantics": "Landmarks in place: banner, navigation, main, contentinfo. One main.",
       "crystal": "Region materials and elevation ordering",
@@ -32,6 +37,9 @@
         "empty"
       ],
       "material": "Inherits from its tiles",
+      "surface": [
+        "none"
+      ],
       "geometry": "Gap from the scale.",
       "semantics": "A labelled list of figures.",
       "crystal": "Reflow behaviour",
@@ -51,6 +59,9 @@
         "error"
       ],
       "material": "Haze panel on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "The chart carries a table equivalent; controls are real controls.",
       "crystal": "Panel material, control geometry",
@@ -72,6 +83,10 @@
         "error"
       ],
       "material": "Table surface with Frost overlays",
+      "surface": [
+        "table",
+        "frost"
+      ],
       "geometry": "Toolbar controls are pills; the table keeps its own surface.",
       "semantics": "Selection count is announced; bulk actions describe what they will affect.",
       "crystal": "Surfaces, selection treatment, the motion of entering bulk mode",
@@ -93,6 +108,10 @@
         "error"
       ],
       "material": "Haze sections in a Frost panel",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Errors summarise at the top and link to their fields; submission state is announced.",
       "crystal": "Section materials, field recipes, the submit transition",
@@ -112,6 +131,9 @@
         "saved"
       ],
       "material": "Haze groups",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Each group is a labelled region; unsaved changes are announced before navigation.",
       "crystal": "Group material, the save transition",
@@ -131,6 +153,10 @@
         "locked"
       ],
       "material": "Haze card on the Plastic foundation",
+      "surface": [
+        "plastic",
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Real form semantics with autocomplete tokens; failures never reveal which factor was wrong.",
       "crystal": "Card material, field recipes",
@@ -150,6 +176,9 @@
         "saving"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Destructive actions confirm and say what they remove.",
       "crystal": "Material, avatar geometry",
@@ -169,10 +198,17 @@
         "live"
       ],
       "material": "Haze rows",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Live updates are announced politely and never steal focus.",
       "crystal": "Row material, the insert motion",
       "product": "The event model",
+      "motion": [
+        "list-in",
+        "list-out"
+      ],
       "parity": [
         "antd:Timeline",
         "mantine:Timeline"
@@ -189,10 +225,20 @@
         "focus-visible"
       ],
       "material": "Frost panel with Haze rows",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Panel radius; rows reach 44px.",
       "semantics": "Unread count is announced; marking read is undoable.",
       "crystal": "Panel and row materials, the read transition",
       "product": "The notification model",
+      "motion": [
+        "toast-in",
+        "toast-out",
+        "list-in",
+        "list-out"
+      ],
       "parity": [
         "antd:Notification"
       ]
@@ -209,6 +255,10 @@
         "full-screen"
       ],
       "material": "Resin transport over the media; Haze metadata",
+      "surface": [
+        "resin",
+        "haze"
+      ],
       "geometry": "Transport is a pill; controls reach 44px.",
       "semantics": "Real media elements; captions and their state announced; transport reachable by keyboard.",
       "crystal": "Transport material, the show and hide motion",
@@ -228,10 +278,18 @@
         "focus-visible"
       ],
       "material": "Haze rows",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Reorder works by keyboard; the now-playing row is aria-current.",
       "crystal": "Row material, the drag lift and settle",
       "product": "The queue model",
+      "motion": [
+        "list-in",
+        "list-out",
+        "reorder"
+      ],
       "parity": [
         "react-aria:GridList"
       ]
@@ -247,6 +305,9 @@
         "filtering"
       ],
       "material": "Inherits from its cards and panels",
+      "surface": [
+        "none"
+      ],
       "geometry": "Grid gap from the scale; reflows by container width.",
       "semantics": "Result count is announced on filter change; the grid is a labelled list.",
       "crystal": "Card and panel materials, the filter transition",
@@ -265,6 +326,9 @@
         "adding"
       ],
       "material": "Inherits from its parts",
+      "surface": [
+        "none"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Variant changes update price and stock together, and say so.",
       "crystal": "Composition of materials, the add-to-cart transition",
@@ -284,6 +348,10 @@
         "error"
       ],
       "material": "Haze sections in a Frost panel",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Each step is a labelled region; errors summarise and link; raw card data never touches this component.",
       "crystal": "Section materials, step transitions",
@@ -304,10 +372,18 @@
         "empty"
       ],
       "material": "Frost drawer with Haze rows",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Drawer keeps panel radius on its inner edge.",
       "semantics": "Opening moves focus in and returns it on close; total changes are announced.",
       "crystal": "Drawer material, the enter and exit recipes",
       "product": "The cart model",
+      "motion": [
+        "drawer-in",
+        "drawer-out"
+      ],
       "parity": [
         "antd:Drawer"
       ]
@@ -322,6 +398,9 @@
         "focus-visible"
       ],
       "material": "Haze content fill on the surrounding material",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "The recommended plan is stated in words, not only styled.",
       "crystal": "Card materials, emphasis treatment",
@@ -341,10 +420,18 @@
         "skipped"
       ],
       "material": "Frost panel over a Mirage scrim",
+      "surface": [
+        "frost",
+        "mirage"
+      ],
       "geometry": "Panel radius; the highlight follows the target radius.",
       "semantics": "Escapable at every step; progress announced; focus moves with the step.",
       "crystal": "Panel and scrim materials, step motion, focus management",
       "product": "The steps and their copy",
+      "motion": [
+        "page-in",
+        "page-out"
+      ],
       "parity": [
         "antd:Tour"
       ]
@@ -361,10 +448,20 @@
         "focus-visible"
       ],
       "material": "Frost overlay with Haze rows",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Overlay keeps panel radius; rows reach 44px.",
       "semantics": "A combobox: results are announced by count, and arrow keys move without losing the typed value.",
       "crystal": "Overlay material, the open motion, row treatment",
       "product": "The search backend and ranking",
+      "motion": [
+        "menu-in",
+        "menu-out",
+        "list-in",
+        "list-out"
+      ],
       "parity": [
         "mantine:Spotlight",
         "primereact:autocomplete"
@@ -382,6 +479,10 @@
         "saved"
       ],
       "material": "Haze surface in a Frost frame",
+      "surface": [
+        "frost",
+        "haze"
+      ],
       "geometry": "Toolbar controls are pills; the surface keeps the content radius.",
       "semantics": "The toolbar is a real toolbar with one tab stop; formatting state is announced.",
       "crystal": "Surface and toolbar materials, the save transition",

@@ -15,6 +15,9 @@
         "dismissible"
       ],
       "material": "Haze surface with the semantic ink pair on the symbol well",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; 12px minimum from content to the feathered edge",
       "semantics": "role=alert only for genuinely urgent, interrupting content; otherwise a plain region",
       "crystal": "Surface, symbol well, semantic pairs, action placement",
@@ -39,7 +42,10 @@
         "persistent",
         "stacked"
       ],
-      "material": "Resin with Haze reading fill and the clearest floating shadow",
+      "material": "Frost panel with Haze reading fill and the panel shadow (R15e); status accent from the semantic pair",
+      "surface": [
+        "frost"
+      ],
       "geometry": "Content radius; stacked with a 12px offset",
       "semantics": "Polite live region; an urgent toast is assertive. Auto-dismiss must never remove the only route to an action.",
       "crystal": "Surface, stacking, entry and exit motion",
@@ -63,7 +69,10 @@
         "read",
         "dismissed"
       ],
-      "material": "Resin surface with Haze reading fill",
+      "material": "Frost panel with Haze reading fill (R15e)",
+      "surface": [
+        "frost"
+      ],
       "geometry": "Content radius",
       "semantics": "Announced politely; the dismiss control is named for what it dismisses",
       "crystal": "Surface, unread treatment, action row",
@@ -90,6 +99,9 @@
         "paused"
       ],
       "material": "Primary fill on a primary-soft track",
+      "surface": [
+        "none"
+      ],
       "geometry": "8px track at pill radius, matching the slider track",
       "semantics": "role=progressbar with aria-valuenow when determinate; indeterminate omits the value rather than faking one",
       "crystal": "Track, fill, indeterminate motion and reduced-motion fallback",
@@ -115,10 +127,17 @@
         "error"
       ],
       "material": "Primary arc on a primary-soft ring",
+      "surface": [
+        "none"
+      ],
       "geometry": "Stroke matches the icon stroke weight family; label is tabular",
       "semantics": "Shared with Progress; the centre label is not the only representation",
       "crystal": "Ring, arc, label treatment",
       "product": "Real progress",
+      "motion": [
+        "progress-change",
+        "success"
+      ],
       "parity": [
         "mantine:RingProgress",
         "mui:CircularProgress",
@@ -134,6 +153,9 @@
         "hidden"
       ],
       "material": "Primary on the surrounding material",
+      "surface": [
+        "none"
+      ],
       "geometry": "Sizes on the 4px rhythm",
       "semantics": "Accompanied by text saying what is loading; reduced motion replaces spin with a static, still-legible state",
       "crystal": "Mark, motion and reduced-motion fallback",
@@ -156,6 +178,9 @@
         "resolving"
       ],
       "material": "Haze fill with a slow luminance sweep",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Matches the real content's radius and rhythm exactly",
       "semantics": "aria-hidden with a live region announcing loading; must not be read as content",
       "crystal": "Fill, sweep, reduced-motion fallback, resolve transition",
@@ -179,6 +204,9 @@
         "visible"
       ],
       "material": "Mirage at region scope",
+      "surface": [
+        "mirage"
+      ],
       "geometry": "Inherits the region's radius",
       "semantics": "Blocked content is inert; focus does not enter it; the reason is announced",
       "crystal": "Scrim, mark placement, inert treatment",
@@ -200,6 +228,9 @@
         "unauthorised"
       ],
       "material": "Haze panel",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius; centred within its region",
       "semantics": "Real text; never an illustration alone. No-results and truly-empty are different states and read differently.",
       "crystal": "Panel, rhythm and action placement",
@@ -226,10 +257,16 @@
         "unauthorised"
       ],
       "material": "Haze panel with the semantic ink pair on the symbol",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Content radius",
       "semantics": "The outcome is stated in the heading; symbol and colour reinforce it",
       "crystal": "Panel, symbol treatment, action row",
       "product": "The outcome, explanation and recovery routes",
+      "motion": [
+        "success"
+      ],
       "parity": [
         "antd:Result",
         "mui:—",
@@ -245,7 +282,10 @@
         "open",
         "pending"
       ],
-      "material": "Resin popover with Haze reading fill",
+      "material": "Frost panel with Haze reading fill (R15e)",
+      "surface": [
+        "frost"
+      ],
       "geometry": "Content radius; anchored to the trigger",
       "semantics": "Focus moves into the popover, returns to the trigger on dismiss, and Escape cancels",
       "crystal": "Popover surface and action row",
@@ -271,10 +311,18 @@
         "focus-visible"
       ],
       "material": "Frost step panel over a Mirage scrim",
+      "surface": [
+        "frost",
+        "mirage"
+      ],
       "geometry": "Panel keeps panel radius; the highlight follows the target's own radius.",
       "semantics": "Focus moves to each step; the sequence is escapable and its position is announced.",
       "crystal": "Panel and scrim material, step motion, focus management",
       "product": "Steps, targets and copy",
+      "motion": [
+        "popover-in",
+        "popover-out"
+      ],
       "parity": [
         "antd:Tour",
         "primereact:tour"
@@ -289,10 +337,16 @@
         "indeterminate"
       ],
       "material": "Haze track with a primary arc",
+      "surface": [
+        "none"
+      ],
       "geometry": "Stroke matches the ring progress contract.",
       "semantics": "role=\"progressbar\" with a text value beside it.",
       "crystal": "Arc rendering, track material, motion",
       "product": "Value and label",
+      "motion": [
+        "progress-change"
+      ],
       "parity": [
         "mantine:SemiCircleProgress"
       ]
@@ -306,10 +360,16 @@
         "focus-visible"
       ],
       "material": "Haze track with segment fills",
+      "surface": [
+        "none"
+      ],
       "geometry": "Track keeps the content radius; segments meet without gaps.",
       "semantics": "Each segment is labelled; meaning never rests on colour alone.",
       "crystal": "Track and segment materials, legend, label association",
       "product": "Segments and their values",
+      "motion": [
+        "progress-change"
+      ],
       "parity": [
         "primereact:metergroup"
       ]
@@ -325,10 +385,18 @@
         "focus-visible"
       ],
       "material": "Haze fill with a status accent",
+      "surface": [
+        "haze"
+      ],
       "geometry": "Full-bleed within its region; the dismiss control is a 44px pill.",
       "semantics": "role=\"status\" for information, role=\"alert\" for urgency. Dismissal returns focus sensibly.",
       "crystal": "Material, status colour from the status tokens, entry and exit motion",
       "product": "Copy, urgency, and whether it persists",
+      "motion": [
+        "toast-in",
+        "toast-out",
+        "attention"
+      ],
       "parity": [
         "antd:Alert.Banner",
         "mantine:Notification"
