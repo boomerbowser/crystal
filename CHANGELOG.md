@@ -4,6 +4,18 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
 
 ## [Unreleased]
 
+## [2.2.0] — 2026-09-28
+
+A minor release that gives the catalogue something to be checked against. Every
+component names its surface from a closed vocabulary of 22, and every surface
+has a recipe in the stylesheet — including four the catalogue had specified and
+no consumer could obtain. Motion that the specification always assigned is now
+carried by the entries, and three decisions Meridian made on 28 September close
+the gaps that were deliberately left: continuous indicators for pending work, a
+data mark arriving, and a number field that stays reachable. Nothing that reads
+the stylesheet changes appearance, except that an action control's minimum
+target is published as the 48px it has always rendered.
+
 ### Added
 
 - **Continuous indicators, for work that is genuinely pending** (D-19, ruled by
