@@ -99,16 +99,22 @@ jobs:
       # match its source — and publishing would ship a package that is not this
       # commit. `validation/token-checks.json` records when the evidence was
       # produced, so its `date` differs on every run by design; its numbers are
-      # held to the rule like everything else.
+      # held to the rule like everything else. `core/docs/accessibility.md`
+      # quotes that date in its "Checks run" row, so it is exempted the same way
+      # and for the same reason — verify.yml learned this and this file did not,
+      # which would have failed any publish run on a later day than its commit.
       - name: Generated files match their source
         run: |
           git diff --exit-code -- ':(top)' \
-            ':(exclude,top)validation/token-checks.json' || {
+            ':(exclude,top)validation/token-checks.json' \
+            ':(exclude,top)core/docs/accessibility.md' || {
             echo "::error::A build changed a committed file. Publishing would ship a package that does not match this commit."
             exit 1
           }
           drift=$(git diff -U0 -- ':(top)validation/token-checks.json' \
-            | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' | grep -v '"date"' || true)
+            ':(top)core/docs/accessibility.md' \
+            | grep -E '^[+-]' | grep -vE '^(\+\+\+|---)' \
+            | grep -v '"date"' | grep -v 'Checks run' || true)
           if [ -n "$drift" ]; then
             echo "::error::The token evidence changed beyond its timestamp:"
             echo "$drift"

@@ -297,7 +297,13 @@ fs.writeFileSync(
   path.join(ROOT, 'core/tokens/catalogue.json'),
   JSON.stringify({
     $description: 'Crystal component catalogue, combined. Generated from core/tokens/catalogue/.',
-    generated: new Date().toISOString().slice(0, 10),
+    /* The version this catalogue ships in, not the day it was built. It was the
+       build date, which made a committed generated file depend on the calendar:
+       rebuilt on a later UTC day it differed, and both workflows refuse a build
+       that changes a committed file. A commit made at 21:18 in New York on
+       24 September failed CI because the runner's clock already said the 25th.
+       A version changes when the source does, and only then. */
+    version: require('../core/package.json').version,
     surfaces: surfaces.surfaces,
     categories: categories.map((category) => ({
       id: category.id, name: category.name, description: category.description,

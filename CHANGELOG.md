@@ -138,6 +138,20 @@ target is published as the 48px it has always rendered.
 
 ### Fixed
 
+- **`catalogue.json` carried the day it was built**, as `generated`. A
+  committed generated file that depends on the calendar fails both workflows'
+  check that a build changes nothing, on any run after midnight UTC — which is
+  what failed CI on 24 September, for a commit made at 21:18 in New York. It
+  carries `version` instead, the release it ships in. Nothing in this
+  repository, Crystal React or the documentation site read `generated`; a
+  consumer that did should read `version`. Proved by rebuilding with the clock
+  moved three days forward: only the evidence timestamp changes.
+
+- The publish workflow exempted the token evidence's timestamp and not the
+  "Checks run" row that quotes it in `docs/accessibility.md`. `verify.yml` had
+  learned that; `publish.yml` had not, so a release tagged on a later day than
+  its commit would have been refused.
+
 - The recipe table in the motion chapter asked `spring.js` for the damping
   ratio of every recipe, including any without a spring — which returns the
   defaults' ratio and would have printed physics a loop does not have. A recipe
