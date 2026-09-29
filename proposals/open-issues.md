@@ -341,6 +341,7 @@ library's:
   the offsets and margins the browser supplies to a `<dialog>`, so that the class
   means the same thing on any element. The surfaces vocabulary already assumes
   the native element — it pairs the class with `.cr-dialog::backdrop`, which only
-  a `<dialog>` has. Either is a change to generated CSS; nothing in the preview
-  wears the class, so neither changes what the preview renders.
+  a `<dialog>` has. Either is a change to generated CSS. The preview wears the
+  class only on native `<dialog>` elements — the specification dialog and the
+  suite drawer — so the first would render it exactly as it does now.
 
