@@ -4,6 +4,15 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
 
 ## [Unreleased]
 
+## [2.3.0] — 2026-09-29
+
+A minor release of the three rulings Meridian made on 28 September. A navigation
+entry now marks where the reader is with a dot as well as weight; the
+catalogue's surfaces say what actually renders, so a consumer that adopts a
+surface gets the element it was shown; and the field shell's decorative rim is
+stated as decorative. The tooltip's radius becomes a token. The only change a
+reader of the stylesheet will see is the dot on `aria-current`.
+
 ### Added
 
 - **A navigation entry marks its current location with a dot** (D-22, ruled on
@@ -31,7 +40,9 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
   recipes. Recorded in `tools/extend-catalogue-6.cjs` with the old values.
 - `docs/accessibility.md` states how the field shell's rim is treated (D-24,
   ruled on 28 September): measured at 1.06:1, decorative, the field identified by
-  its shell, its well and its label.
+  its shell, its well and its label. The "colour is never the only signal"
+  table says the same of the current page: a primary dot, which is a mark rather
+  than a tint, and the label's weight.
 
 ### Fixed
 

@@ -1,6 +1,6 @@
 {
   "$description": "Crystal component catalogue, combined. Generated from core/tokens/catalogue/.",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "surfaces": [
     {
       "id": "plastic",

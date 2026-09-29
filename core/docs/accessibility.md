@@ -148,7 +148,7 @@ Every state that is communicated with colour is also communicated another way:
 | Focused | Primary ring | A 2px outline at 3px offset |
 | Error | Status red | Icon and message text |
 | Validated | Status green | A check mark |
-| Current page | Primary | `aria-current="page"` and weight |
+| Current page | A primary dot | The dot is a mark rather than a tint, and the label takes weight; `aria-current="page"` |
 
 Status colours are independent of the six brand palettes, so none of these signals changes
 meaning when a product re-themes. See [Color](colors.html#status).
@@ -168,7 +168,7 @@ backdrops with the fixed Resin fill.
 | Failures | 0 |
 | Lowest result of any kind | 3.07:1 |
 | Lowest normal-text result | 4.67:1 |
-| Checks run | 2026-09-28 |
+| Checks run | 2026-09-29 |
 
 Normal text is held to 4.5:1. Essential non-text — focus rings, control boundaries,
 indicator lines — uses its separate 3:1 threshold, which is the correct standard for those
