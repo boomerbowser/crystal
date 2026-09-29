@@ -4,7 +4,7 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 not fixed. Each says what is wrong, why it matters, where it is, and what closing
 it would take.
 
-**Eight entries are left.** D-4's remaining half is waiting on hardware, D-17
+**Every entry left was ruled on 29 September 2026** — the questions, the options and the answers are in [`2026-09-29-rulings.md`](2026-09-29-rulings.md) — and each closes as its ruling is built. **Eight entries are left.** D-4's remaining half is waiting on hardware, D-17
 is a flake nobody can diagnose until it happens again with the evidence kept,
 D-21 is a hover treatment the stylesheet specifies and layer order erases —
 Meridian's to rule on, with a recommendation in §4.3 of
@@ -52,6 +52,8 @@ intact — several are cited by name from the code they produced.
 
 ## D-4 · The phone leg of `verify-scroll` proves behaviour, not appearance
 
+**Ruled 29 September 2026:** a real Android phone over ADB, as a device leg of `verify-scroll`; Meridian supplies the device. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
+
 *(Halved 22 September 2026. This issue held two claims; the first was wrong and
 its half is closed. What is left is the one below, and it is now demonstrated
 rather than asserted.)*
@@ -95,6 +97,8 @@ in the capture README where a reader meets it.
 ---
 
 ## D-17 · `forced-colours-dark` differs on the runner about one run in two
+
+**Ruled 29 September 2026:** hunt it now — dispatch the visual job repeatedly on the runner and close on the evidence. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
 
 *(Opened 22 September 2026.)*
 
@@ -171,6 +175,8 @@ above are what that image has to be read against.
 
 ## D-21 · Crystal specifies a hover treatment for its button that layer order erases
 
+**Ruled 29 September 2026:** delete the reset rule; Crystal's button has no hover lift, and the `hover` caustic is its pointer affordance. `.tiny-button` (4.4) moves to the preview. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
+
 **Found 24 September 2026, by Crystal React's R-19 sweep, and it is D-20's
 sibling.**
 
@@ -214,6 +220,8 @@ restored to life, the library inherits it with no change.
 
 ## D-25 · Three findings from the surface sweep that are not surface questions
 
+**Ruled 29 September 2026:** the dialog scrolls a `.cr-dialog-body` child; a recessed overlay recipe is authored for overlays inside a pane; the preview moves to the latest published core and is re-baselined. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
+
 *(Opened 28 September 2026, split from D-23 and D-24 when those were ruled.)*
 
 - **A dialog that scrolls its own surface.** `.cr-dialog` sets `overflow: auto` on the
@@ -230,6 +238,8 @@ restored to life, the library inherits it with no change.
   material-parity gate compares against a Crystal that no longer ships.
 
 ## D-26 · The dock surface names controls `.cr-dock` cannot reach, and a grouping it does not draw
+
+**Ruled 29 September 2026:** the dock's control rules extend to tabs, radio labels and links through `:where()`; a button group and a split button are a new surface, `group` (`.cr-group`). See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
 
 *(Opened 28 September 2026, by Crystal React's adoption of the corrected surfaces.)*
 
@@ -260,6 +270,8 @@ wearing `.cr-dock` for all of them as written:
 
 ## D-27 · Two small marks the compact and indicator recipes do not reach
 
+**Ruled 29 September 2026:** a compact count size, `.cr-resin-haze.count`; the field glyphs keyed on `.cr-field-shell` whatever its element. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
+
 *(Opened 28 September 2026, by Crystal React's per-surface check.)*
 
 - **A count badge is `compact`, and `.cr-resin-haze` is sized for a tag.** Its
@@ -280,6 +292,8 @@ wearing `.cr-dock` for all of them as written:
   `Indicator` waits on this (its R-25).
 
 ## D-28 · Motion the catalogue assigns that no component can play as written
+
+**Ruled 29 September 2026:** all five assignments come off the catalogue. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
 
 *(Opened 28 September 2026, by Crystal React binding every assignment in 2.2.0.)*
 
@@ -309,6 +323,8 @@ does. Each wants either a narrower assignment or a ruling:
   value. Either the entries gain an output, or the recipe comes off them.
 
 ## D-29 · A component listed twice, and a dialog class that centres only a `<dialog>`
+
+**Ruled 29 September 2026:** keep `virtualizer` and remove `virtual-scroller` (284 components); `position: fixed` keyed on `dialog.cr-dialog`. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
 
 *(Opened 29 September 2026, by Crystal React finishing its blocks.)*
 
