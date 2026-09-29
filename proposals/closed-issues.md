@@ -2171,3 +2171,100 @@ in crystal-preview's `tools/capture-frames.mjs` (commit `a65821c`). 102 runs
 without the select, 42 without the transition. Round four's other eighteen jobs
 were not started at all: GitHub reported that the account's recent payments had
 failed or its spending limit needed raising.
+
+## D-4 · The phone leg of `verify-scroll` proves behaviour, not appearance
+
+**Ruled 29 September 2026:** a real Android phone over ADB, as a device leg of `verify-scroll`; Meridian supplies the device. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
+
+**Built 29 September 2026, waiting on the phone.** crystal-preview's
+`npm run verify:scroll:device` (`tools/verify-scroll-device.mjs`) runs the scroll
+contract in Chrome on a connected Android phone and measures what emulation
+cannot: whether content shifts when a scrollbar appears, as a container's
+content width with its block overflow on and off. On desktop Chromium with
+classic scrollbars that measurement reads 0 for a stable gutter and 15 without
+one, so it discriminates. It closes this entry the first time it runs green on a
+device. The phone needs USB debugging with this computer allowed, and Chrome's
+"Enable command line on non-rooted devices" flag, which Playwright's Android
+driver requires.
+
+*(Halved 22 September 2026. This issue held two claims; the first was wrong and
+its half is closed. What is left is the one below, and it is now demonstrated
+rather than asserted.)*
+
+**The claim that was wrong.** D-4 said: "Headless Chromium paints no scrollbar at
+all, so no reference frame contains one," and concluded that closing it needed
+"a browser that paints classic scrollbars headlessly." That is a fact about a
+flag, not a browser. Playwright pushes `--hide-scrollbars` whenever `headless` is
+true:
+
+```
+arm A  default headless                          scrollbar 0px
+arm B  ignoreDefaultArgs: ['--hide-scrollbars']   scrollbar 15px
+arm C  ignore it, then pass it back explicitly    scrollbar 15px
+```
+
+Arm C looks like a contradiction and is not: `ignoreDefaultArgs` filters the
+final argument list, so it strips the flag again even when it is passed by hand.
+Flag present, no scrollbar; flag absent, a classic 15px one. `crystal-preview`
+now has `scrollbar-resin` and `scrollbar-frost` frames that opt out of the flag,
+and both were mutated at the resolver and watched go red — the Resin thumb from
+80% to 50%, the Frost thumb from ink to primary, each failing its own frame and
+only its own frame.
+
+**What remains, and it is real.** Playwright's mobile emulation uses overlay
+scrollbars, where `scrollbar-gutter` is a no-op — and it does so independently of
+the flag, which is what the first claim got wrong about itself:
+
+```
+desktop, flag dropped            scrollbar 15px, scrollbar-gutter:stable
+mobile emulation, flag dropped   scrollbar  0px, scrollbar-gutter:stable
+```
+
+So the phone leg of `verify-scroll` proves that swipes stop chaining, and cannot
+prove that a gutter reserves space, because on that device nothing ever reserves
+space. Closing this needs a real device. It is stated in `verify-scroll.mjs` and
+in the capture README where a reader meets it.
+
+**Documented, not closable here.** Left open deliberately rather than marked done.
+
+---
+
+**Closed 29 September 2026, on a Pixel 6 Pro.** Meridian ran
+`verify:scroll:device` on the phone, and it passed — on fifty-one containers
+that all scrolled across, because on a phone the pages show no vertical
+scroller at rest, so the shift question was never asked. The script now fails
+closed on that, and opens the playground's specification dialog with the
+exported CSS through the site's own control. The next run measured the dialog's
+code block: **0px shift on the device**, no failures. It also reported that
+block's `scrollbar-gutter: auto`, which on a desktop moves its text 10px —
+fixed in 2.3.1, and now opened and measured by `verify-scroll` itself.
+
+## D-25 · Three findings from the surface sweep that are not surface questions
+
+**Ruled 29 September 2026:** the dialog scrolls a `.cr-dialog-body` child; a recessed overlay recipe is authored for overlays inside a pane; the preview moves to the latest published core and is re-baselined. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
+
+**Built in 2.3.0:** `.cr-dialog-body` and `.cr-haze.overlay`, both measured in a browser. The third finding is built too, on crystal-preview's `adopt-crystal-2.3.0` branch: the site installs 2.3.0 from the registry, its tests, scroll, interaction and deploy gates pass, and the seven frames 2.3.0 changes are identified and explained in that commit. What remains is re-capturing the runner baselines with the capture workflow — which GitHub refused to start on 29 September because the account's recent payments failed or its spending limit needs raising — then looking at every frame and merging. Crystal React's material gate already compares against the site on 2.3.0.
+
+*(Opened 28 September 2026, split from D-23 and D-24 when those were ruled.)*
+
+- **A dialog that scrolls its own surface.** `.cr-dialog` sets `overflow: auto` on the
+  surface. Crystal's edge-fade rule is the argument against it — a mask fades an element's
+  own fill and border along with its content, so a surface that scrolls dissolves itself —
+  and a title that scrolls out of a tall dialog takes its context with it. Crystal React
+  scrolls the body inside a surface that does not, and keeps doing so until this is ruled.
+- **An overlay inside a pane has no Crystal recipe with a visible boundary.** On the page an
+  overlay is `.cr-frost`. Inside a Haze pane it recesses into Haze, and `.cr-haze` has no
+  edge and no shadow, so a menu drawn that way over a Haze dialog cannot be told apart from
+  the dialog. Crystal React keeps its own recessed Haze there, with an edge and the content
+  shadow.
+- **The documentation site vendors Crystal 2.0.0**, two releases behind, so Crystal React's
+  material-parity gate compares against a Crystal that no longer ships.
+
+**Closed 29 September 2026.** The dialog body and the recessed overlay are in
+2.3.0. The preview installs 2.3.0 from the registry; its runner baselines were
+re-captured on the pinned image, five frames changing visibly, each explained in
+crystal-preview's `website/verification/captures/2026-09-29-crystal-2.3.0/`;
+its `main` passes CI on them. Crystal React's material gate compares against it.
+The re-capture had been refused for a while that day: the repository was then
+private, its jobs drew on the account's included Actions minutes, and GitHub
+declines jobs with a payments-or-spending-limit message once those are used up.

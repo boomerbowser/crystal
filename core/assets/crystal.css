@@ -160,6 +160,11 @@ dialog.cr-dialog{position:fixed}
    gutter on one side alone would sit it off-centre. */
 .cr-scroll,.cr-scroll-frost,.cr-scroll-resin{scrollbar-gutter:stable}
 .cr-dialog{scrollbar-gutter:stable both-edges}
+/* A dialog's code block scrolls down past 300px, and it had the contract's other
+   parts and not this one: on a desktop its text moved 10px when the scrollbar
+   arrived. Found by the scroll gate on a Pixel 6 Pro, which opened a dialog with
+   code in it for the first time (D-4); a phone's overlay scrollbar hid it. */
+.cr-dialog pre{scrollbar-gutter:stable}
 /* A horizontal-only scroller says so, because the stylesheet cannot tell. Setting
    `overflow-x: auto` alone makes `overflow-y` compute to `auto` as well, so the
    browser reserves the inline gutter for a vertical scrollbar that can never

@@ -4,6 +4,22 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
 
 ## [Unreleased]
 
+## [2.3.1] — 2026-09-29
+
+A patch release for one scroll container that broke Crystal's own contract.
+
+### Fixed
+
+- **A dialog's code block keeps a stable gutter.** `.cr-dialog pre` scrolls
+  down past 300px and had the scroll contract's containment, gesture handling
+  and Frost scrollbar, but not its gutter: on a desktop its text moved 10px the
+  moment its scrollbar appeared. It was invisible to the scroll gate, which
+  opened dialogs empty, and to a phone, whose overlay scrollbar takes no room;
+  the device leg of the gate on a Pixel 6 Pro opened a dialog with code in it
+  for the first time and reported the container's `scrollbar-gutter: auto`
+  (D-4). Measured on desktop Chromium with classic scrollbars: 10px before,
+  0px after.
+
 ## [2.3.0] — 2026-09-29
 
 A minor release of the rulings Meridian made on 28 and 29 September — every
