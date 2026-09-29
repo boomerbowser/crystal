@@ -4,14 +4,15 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 not fixed. Each says what is wrong, why it matters, where it is, and what closing
 it would take.
 
-**Six entries are left.** D-4's remaining half is waiting on hardware, D-17
+**Seven entries are left.** D-4's remaining half is waiting on hardware, D-17
 is a flake nobody can diagnose until it happens again with the evidence kept,
 D-21 is a hover treatment the stylesheet specifies and layer order erases —
 Meridian's to rule on, with a recommendation in §4.3 of
 [`2026-09-28-component-recipes.md`](2026-09-28-component-recipes.md) — D-25
 holds three findings from Crystal React's surface sweep, D-26 two things the
-dock surface names that `.cr-dock` does not yet draw, and D-27 two small marks
-whose recipes do not reach the element a consumer has.
+dock surface names that `.cr-dock` does not yet draw, D-27 two small marks
+whose recipes do not reach the element a consumer has, and D-28 motion the
+catalogue assigns that no component can play as written.
 D-22, D-23 and D-24 closed on 28 September 2026, each by Meridian's ruling: the
 navigation entry draws its location dot, the catalogue's surfaces match what
 renders, and the field shell is adopted as written.
@@ -276,4 +277,33 @@ wearing `.cr-dock` for all of them as written:
   `.cr-field-shell` whatever its element, or on a `data-` attribute the field
   sets, without disturbing the `span` form's own padding rule. Crystal React's
   `Indicator` waits on this (its R-25).
+
+## D-28 · Motion the catalogue assigns that no component can play as written
+
+*(Opened 28 September 2026, by Crystal React binding every assignment in 2.2.0.)*
+
+Crystal React now plays the motion the catalogue gives its components, bound to
+state and checked in a browser. A few assignments cannot be honoured by any
+implementation, because of what the catalogue says rather than what a library
+does. Each wants either a narrower assignment or a ruling:
+
+- **`page-in` and `page-out` on navigation** — NavLink, the rail, the dock, the
+  bottom bar, the stepper, checkout steps. These recipes mark "a new local view
+  after routing is committed"; the navigation does not render that view, the
+  product does. The navigation's own motion is `selection`, which it plays. The
+  assignment belongs to the view, or to a routing surface the catalogue does not
+  have.
+- **`busy` on progress and the loader** — "one cycle for an actual pending
+  operation". D-19 gave pending work continuous recipes (`activity-turn`,
+  `activity-travel`), which these play; a one-shot cycle beside a loop is two
+  answers to one question. `activity-turn` on a *linear* progress bar is the same
+  question: it plays `activity-travel`.
+- **`resin-confluence` on the floating action** — the recipe's own text is "a
+  visual study, not an application action".
+- **`reaction` on the authored bubble** — the entry's anatomy has no reactions to
+  toggle.
+- **`slider-step` on the colour area, slider and wheel** — the recipe is for
+  "range outputs, steppers and scrubber labels", and these controls have no
+  readout; the thumb is the only thing that moves, and its position is the
+  value. Either the entries gain an output, or the recipe comes off them.
 
