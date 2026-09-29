@@ -24,7 +24,7 @@
 :is(.cr-resin,.cr-glass){background:var(--cr-resin-fill);border-radius:999px;box-shadow:var(--cr-shadow-float);backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));-webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation))}
 .cr-well{background:var(--cr-surface);border-radius:calc(var(--cr-radius) - 7px);color:var(--cr-text);border:1px solid var(--cr-edge)}
 .cr-button{min-height:48px;padding:15px 24px;border-radius:999px;border:1px solid transparent;font-weight:750;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;line-height:1.3}
-.cr-button:hover{box-shadow:var(--cr-shadow-content);filter:brightness(1.04)}/* The button vocabulary is four names and none of them is a colour Crystal
+/* The button vocabulary is four names and none of them is a colour Crystal
    does not have.
 
    `.cr-button` is the action control: a Resin shell with the neutral Haze
@@ -90,7 +90,10 @@
 .cr-bubble.own{background:transparent;color:var(--cr-content-own-text)}
 .cr-bubble.own::before{background:var(--cr-haze-own-fill)}
 .cr-well::before,.cr-content-fill::before{box-shadow:none}
-.cr-dialog{position:fixed}
+/* Fixed centres a native <dialog>, which the browser gives inset:0 and auto
+   margins when it is modal. On any other element the class is the material and
+   the host positions it (D-29). */
+dialog.cr-dialog{position:fixed}
 .cr-dialog::before{box-shadow:var(--cr-shadow-float)}
 :is(:is(.cr-haze,.cr-surface),.cr-well,.cr-bubble,.cr-content-fill,.cr-dialog) a:not(.cr-button){color:inherit;text-decoration:underline}
 /* Place content >=12px from the feathered edge; functional boundaries remain explicit. */
@@ -540,26 +543,26 @@ span.cr-field-shell :is(input,select,textarea):focus-visible {
 span.cr-field-shell {
     padding-inline-end: 40px;
 }
-span.cr-field-shell>.cr-indicator {
+.cr-field-shell>.cr-indicator {
     inset-block-start: 50%;
     inset-inline-end: 10px;
     transform: translateY(-50%);
     width: 24px;
     height: 24px;
 }
-span.cr-field-shell>.cr-indicator::after {
+.cr-field-shell>.cr-indicator::after {
     content: '○';
     font-size: 15px;
 }
-span.cr-field-shell:focus-within>.cr-indicator::after {
+.cr-field-shell:focus-within>.cr-indicator::after {
     content: '●';
     font-size: 9px;
 }
-span.cr-field-shell:has(:is([required],[aria-required=true]))>.cr-indicator::after {
+.cr-field-shell:has(:is([required],[aria-required=true]))>.cr-indicator::after {
     content: '*';
     font-size: 19px;
 }
-span.cr-field-shell:has([aria-invalid=true])>.cr-indicator::after {
+.cr-field-shell:has([aria-invalid=true])>.cr-indicator::after {
     content: '!';
     font-size: 15px;
 }
@@ -1497,5 +1500,304 @@ input[type=checkbox][role=switch] {
     width: auto;
     height: auto;
 }
+}
+}
+
+
+/* ---------------------------------------------------------------------------
+   Rulings of 29 September 2026 — proposals/2026-09-29-rulings.md.
+
+   Each recipe below closes an open issue that a consumer found by reaching for
+   Crystal and finding it did not reach: a dock whose controls were not buttons,
+   a group whose segments touch, a dialog whose body scrolls, an overlay inside a
+   pane, a count badge. As in the block above, each is authored in
+   `@layer crystal.component` and nowhere else, and each carries its own
+   reduced-transparency and forced-colours branches.
+   --------------------------------------------------------------------------- */
+@layer crystal.component {
+
+/* The dock's controls, whatever the element (D-26).
+ *
+ * `.cr-dock button` reaches only a <button>. A tab is often `[role=tab]` on
+ * another element, a segmented control is often radio inputs inside labels, and
+ * a dock or bottom-bar destination is a link carrying `aria-current`. Each gets
+ * the dock button's values here, selected by its own state — `aria-selected`, a
+ * checked radio, `aria-current`.
+ *
+ * Every selector is inside `:where()`, so it adds no specificity to `.cr-dock`,
+ * and the existing `.cr-dock button` rules (0,1,1) keep winning on a <button>
+ * that is also `[role=tab]`. Nothing a consumer already sits against moves. */
+.cr-dock :where([role=tab], a, label:has(> input[type=radio])) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 52px;
+    padding: 13px 18px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--cr-text);
+    font-weight: 700;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+}
+.cr-dock :where([role=tab][aria-selected=true], a[aria-current]:not([aria-current=false]), label:has(> input[type=radio]:checked)) {
+    background: var(--cr-primary);
+    color: var(--cr-on-primary);
+    box-shadow: 0 3px 7px var(--cr-shadow-contact);
+}
+.cr-dock :where([role=tab]:not([aria-selected=true]), a:not([aria-current]:not([aria-current=false])), label:has(> input[type=radio]:not(:checked))):hover {
+    background: var(--cr-surface);
+}
+/* The radio is the control and the label is what is seen; the input stays in the
+   accessibility tree and takes focus, and its ring is drawn on the label. */
+.cr-dock :where(label:has(> input[type=radio])) > input[type=radio] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.cr-dock :where(label:has(> input[type=radio]:focus-visible)) {
+    outline: 2px solid var(--cr-focus-core);
+    outline-offset: 3px;
+    box-shadow: inset 0 2px 1px var(--cr-rim), var(--cr-focus-ring);
+}
+@media (max-width:600px) {
+.cr-dock :where([role=tab], a, label:has(> input[type=radio])) {
+    padding: 10px 9px;
+    font-size: 11px;
+    min-height: 44px;
+}
+}
+@media (forced-colors:active) {
+.cr-dock :where([role=tab][aria-selected=true], a[aria-current]:not([aria-current=false]), label:has(> input[type=radio]:checked)) {
+    background: Canvas;
+    color: CanvasText;
+    outline: 2px solid Highlight;
+    outline-offset: -3px;
+    box-shadow: none;
+}
+.cr-dock :where(label:has(> input[type=radio]:focus-visible)) {
+    outline-color: Highlight;
+    box-shadow: none;
+}
+}
+
+/* A group — the `group` surface (D-26).
+ *
+ * A button group and a split button are one Resin plane whose segments touch:
+ * the silhouette is a single pill, the interior corners square off against
+ * their neighbours, and a hairline in `--cr-edge` separates them. The plane is
+ * the group's, so the children give up their own elevation and diffusion — a
+ * Resin button on a Resin plane is the composition Crystal forbids — and keep
+ * their fill, so a primary action's ink still has its fill beneath it.
+ *
+ * The child selector is `:is(button, a.cr-button, .cr-button, .cr-control)`
+ * under the group, (0,2,1), because the Resin coat it subtracts from is keyed on
+ * the element at (0,1,1) in this same layer. */
+.cr-group {
+    display: inline-flex;
+    align-items: stretch;
+    position: relative;
+    isolation: isolate;
+    border: 1px solid var(--cr-rim);
+    border-radius: 999px;
+    background: var(--cr-resin-fill);
+    box-shadow: var(--cr-shadow-float);
+    backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
+    -webkit-backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
+}
+.cr-group::before {
+    content: '';
+    position: absolute;
+    inset: var(--cr-haze-inset);
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+    background: var(--cr-haze-fill);
+    filter: blur(var(--cr-haze-feather));
+}
+.cr-group > :is(button, a.cr-button, .cr-button, .cr-control) {
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    isolation: isolate;
+}
+.cr-group > :is(button, a.cr-button, .cr-button, .cr-control):first-child {
+    border-start-start-radius: 999px;
+    border-end-start-radius: 999px;
+}
+.cr-group > :is(button, a.cr-button, .cr-button, .cr-control):last-child {
+    border-start-end-radius: 999px;
+    border-end-end-radius: 999px;
+}
+.cr-group > :is(button, a.cr-button, .cr-button, .cr-control) + :is(button, a.cr-button, .cr-button, .cr-control) {
+    border-inline-start: 1px solid var(--cr-edge);
+}
+/* Stacked, the pill radius clamps to a stadium whose ends meet the first and
+   last children's own. */
+.cr-group.vertical {
+    flex-direction: column;
+}
+.cr-group.vertical > :is(button, a.cr-button, .cr-button, .cr-control) + :is(button, a.cr-button, .cr-button, .cr-control) {
+    border-inline-start: 0;
+    border-block-start: 1px solid var(--cr-edge);
+}
+.cr-group.vertical > :is(button, a.cr-button, .cr-button, .cr-control):first-child {
+    border-radius: 0;
+    border-start-start-radius: 999px;
+    border-start-end-radius: 999px;
+}
+.cr-group.vertical > :is(button, a.cr-button, .cr-button, .cr-control):last-child {
+    border-radius: 0;
+    border-end-start-radius: 999px;
+    border-end-end-radius: 999px;
+}
+[data-effects=opaque] .cr-group {
+    background: var(--cr-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+@media (prefers-reduced-transparency:reduce) {
+.cr-group {
+    background: var(--cr-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+.cr-group::before {
+    filter: none;
+}
+}
+@media (forced-colors:active) {
+.cr-group {
+    background: ButtonFace;
+    border: 1px solid ButtonText;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+.cr-group::before {
+    display: none;
+}
+.cr-group > :is(button, a.cr-button, .cr-button, .cr-control) + :is(button, a.cr-button, .cr-button, .cr-control) {
+    border-inline-start-color: ButtonText;
+    border-block-start-color: ButtonText;
+}
+}
+
+/* A dialog's body scrolls; the dialog does not (D-25).
+ *
+ * A surface that scrolls takes its title out of view in a tall dialog, and
+ * cannot take the edge fade, because a mask fades an element's own fill and rim
+ * along with its content. So the surface is a column that does not scroll, and
+ * `.cr-dialog-body` scrolls inside it — with `.cr-scroll-frost` beside it for
+ * the scroll contract, the Frost scrollbar and the edge fade, since a dialog is
+ * a reading surface.
+ *
+ * Keyed on the body's presence, so a 2.2 dialog written without one goes on
+ * scrolling as its surface, exactly as before. And only an open native dialog is
+ * shown: an author `display` would otherwise beat the browser's
+ * `dialog:not([open]) { display: none }`. */
+.cr-dialog:has(> .cr-dialog-body) {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+}
+dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
+    display: none;
+}
+/* The header's gap, which body paragraphs' own margins used to supply. It
+   matches the gap inside the header, as the footer's 24px matches its own. */
+.cr-dialog > header + .cr-dialog-body {
+    margin-top: 20px;
+}
+.cr-dialog-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    /* Both edges, as the dialog had: its content is centred, and a gutter on one
+       side alone would sit it off-centre. */
+    scrollbar-gutter: stable both-edges;
+}
+
+/* An overlay inside a pane (D-25).
+ *
+ * On the page a transient overlay is Frost. Inside a pane that is already
+ * lifted — a Haze dialog, a Frost panel — it recesses into Haze rather than
+ * floating a second pane of glass, and plain Haze has no edge: a menu drawn that
+ * way over a Haze dialog cannot be told from the dialog. The recessed overlay is
+ * Haze given the one boundary it needs: a flat fill, the `--cr-edge` rim and the
+ * content shadow. There is no feather — a bordered box has no perimeter to
+ * dissolve into its surroundings. */
+:is(.cr-haze,.cr-surface).overlay {
+    border: 1px solid var(--cr-edge);
+    border-radius: var(--cr-radius);
+    background: var(--cr-haze-fill);
+    box-shadow: var(--cr-shadow-content);
+}
+:is(.cr-haze,.cr-surface).overlay::before {
+    display: none;
+}
+[data-effects=opaque] :is(.cr-haze,.cr-surface).overlay {
+    background: var(--cr-surface);
+}
+@media (prefers-reduced-transparency:reduce) {
+:is(.cr-haze,.cr-surface).overlay {
+    background: var(--cr-surface);
+}
+}
+@media (forced-colors:active) {
+:is(.cr-haze,.cr-surface).overlay {
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid CanvasText;
+    box-shadow: none;
+}
+}
+
+/* A count (D-27).
+ *
+ * `.cr-resin-haze` is sized for a tag: its Haze pad is inset by
+ * `--cr-haze-inset`, 8px, and its block padding is 17px. On a 20px count badge
+ * the first leaves a pad a few pixels across with the digit mostly outside it,
+ * and the second makes the badge 55px tall. A count fills to its own edge — it
+ * is smaller than the perimeter the inset protects — has no block padding, and
+ * is a circle that becomes a pill as the digits need it: a square minimum and a
+ * pill radius, so the shape follows the content. 20px is
+ * `component.indicator.size`; 4px is the smallest spacing step. */
+.cr-resin-haze.count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0 4px;
+    border-radius: 999px;
+    font-size: var(--cr-text-caption-size, 13px);
+    /* One line in a circle: the caption's reading leading plus the rim would
+       make the circle 21px and no longer round. */
+    line-height: 1;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+.cr-resin-haze.count::before {
+    inset: 0;
+}
+
+/* The indicator's field glyphs now reach any field shell (D-27); a shell that is
+   a block — a label, a textarea, a row of chips — makes the same room for the
+   glyph that the inline shell always has. `:where()` so this adds nothing to the
+   shell's own specificity; the inline shell's padding rule is unchanged. */
+:where(.cr-field-shell:not(span)):has(> .cr-indicator) {
+    padding-inline-end: 40px;
 }
 }

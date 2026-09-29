@@ -21,7 +21,8 @@
       "name": "Haze reading surface",
       "materials": ["Haze"],
       "class": ".cr-haze",
-      "use": "Anything read: cards, rows, panels, wells, forms, messages, decisions. 80% fill, 1.95px feather on an isolated paint layer, crisp foreground. `.cr-well` is the same recipe recessed into a Frost or Resin frame."
+      "use": "Anything read: cards, rows, panels, wells, forms, messages, decisions. 80% fill, 1.95px feather on an isolated paint layer, crisp foreground. `.cr-well` is the same recipe recessed into a Frost or Resin frame. `.cr-haze.overlay` is the recessed overlay: a transient overlay opened inside a pane that is already lifted, drawn as a flat Haze fill with the `--cr-edge` rim and the content shadow, so it can be told from the pane it sits in.",
+      "also": [".cr-haze.overlay"]
     },
     {
       "id": "resin",
@@ -57,8 +58,8 @@
       "name": "Compact display",
       "materials": ["Resin", "Haze"],
       "class": ".cr-resin-haze",
-      "also": [".cr-tag"],
-      "use": "Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens — transient overlays are Frost."
+      "also": [".cr-tag", ".cr-resin-haze.count"],
+      "use": "Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens — transient overlays are Frost. `.count` is the size for a count: a 20px circle that grows to a pill, filled to its own edge, with no block padding."
     },
     {
       "id": "stone",
@@ -80,7 +81,8 @@
       "name": "Dialog",
       "materials": ["Haze", "Mirage"],
       "class": ".cr-dialog",
-      "use": "A Haze decision surface over a Mirage scrim, with the float shadow. Modality, focus and dismissal are the product's."
+      "use": "A Haze decision surface over a Mirage scrim, with the float shadow. Modality, focus and dismissal are the product's. The surface does not scroll: `.cr-dialog-body`, worn with `.cr-scroll-frost`, scrolls inside it, so the title stays in view and the edge fade does not dissolve the surface. `position: fixed` is for a native `<dialog>`; on any other element the host positions it.",
+      "also": [".cr-dialog-body"]
     },
     {
       "id": "indicator",
@@ -117,7 +119,15 @@
       "materials": ["Resin", "Haze"],
       "class": ".cr-dock",
       "also": [".cr-dock-inner"],
-      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars, button groups. The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment."
+      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars. The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment. The controls may be buttons, tabs (`[role=tab]`, selected by `aria-selected`), radio labels (selected by `:checked`) or links (current by `aria-current`); only buttons were reached before 2.3.0."
+    },
+    {
+      "id": "group",
+      "name": "Group",
+      "materials": ["Resin", "Haze"],
+      "class": ".cr-group",
+      "also": [".cr-group.vertical"],
+      "use": "A Resin plane whose controls touch: button groups and split buttons. The silhouette is one pill, the interior corners square off against their neighbours, and a hairline in `--cr-edge` separates them. The children keep their fill and give up their own elevation and diffusion, because the plane is the group's. `.vertical` stacks them. Not a dock: a dock spaces its controls apart on its Haze fill."
     },
     {
       "id": "nav-item",

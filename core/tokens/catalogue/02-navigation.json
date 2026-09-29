@@ -48,8 +48,7 @@
       "crystal": "Material, pill geometry, current-location dot, focus ring",
       "product": "Routing and which destination is current",
       "motion": [
-        "page-in",
-        "page-out"
+        "selection"
       ],
       "parity": [
         "mantine:NavLink",
@@ -76,8 +75,7 @@
       "crystal": "Panel material, collapse geometry, active treatment",
       "product": "Destination list, routing, collapse persistence",
       "motion": [
-        "selection",
-        "page-in"
+        "selection"
       ],
       "parity": [
         "mantine:NavLink",
@@ -104,8 +102,7 @@
       "crystal": "The single shared plane, label weight for the current entry, elevation",
       "product": "Destinations and routing",
       "motion": [
-        "selection",
-        "page-in"
+        "selection"
       ],
       "parity": [
         "mui:BottomNavigation",
@@ -217,8 +214,7 @@
       "crystal": "Marker geometry, connector, state treatment",
       "product": "Step validation and whether steps are navigable",
       "motion": [
-        "selection",
-        "page-in"
+        "selection"
       ],
       "parity": [
         "mantine:Stepper",
@@ -356,8 +352,7 @@
       "crystal": "Material, geometry, selection by label weight, safe-area inset",
       "product": "Destinations and routing",
       "motion": [
-        "selection",
-        "page-in"
+        "selection"
       ],
       "parity": [
         "mui:BottomNavigation"

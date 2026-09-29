@@ -13,7 +13,7 @@
     "compose"
   ],
   "totals": {
-    "components": 285,
+    "components": 284,
     "categories": 14
   },
   "statusValues": [
@@ -244,8 +244,7 @@
         "nav-item"
       ],
       "motion": [
-        "page-in",
-        "page-out"
+        "selection"
       ],
       "status": {
         "web": "implemented",
@@ -263,8 +262,7 @@
         "nav-item"
       ],
       "motion": [
-        "selection",
-        "page-in"
+        "selection"
       ],
       "status": {
         "web": "implemented",
@@ -281,8 +279,7 @@
         "dock"
       ],
       "motion": [
-        "selection",
-        "page-in"
+        "selection"
       ],
       "status": {
         "web": "implemented",
@@ -351,8 +348,7 @@
         "haze"
       ],
       "motion": [
-        "selection",
-        "page-in"
+        "selection"
       ],
       "status": {
         "web": "implemented",
@@ -438,8 +434,7 @@
         "dock"
       ],
       "motion": [
-        "selection",
-        "page-in"
+        "selection"
       ],
       "status": {
         "web": "implemented",
@@ -562,7 +557,7 @@
       "name": "Button group",
       "category": "actions",
       "surface": [
-        "dock"
+        "group"
       ],
       "motion": [
         "press"
@@ -579,7 +574,7 @@
       "name": "Split button",
       "category": "actions",
       "surface": [
-        "dock"
+        "group"
       ],
       "motion": [
         "menu-in",
@@ -600,8 +595,7 @@
         "control"
       ],
       "motion": [
-        "press",
-        "resin-confluence"
+        "press"
       ],
       "status": {
         "web": "implemented",
@@ -1517,9 +1511,6 @@
       "surface": [
         "none"
       ],
-      "motion": [
-        "slider-step"
-      ],
       "status": {
         "web": "implemented",
         "react-native": "not-started",
@@ -1534,9 +1525,6 @@
       "surface": [
         "none"
       ],
-      "motion": [
-        "slider-step"
-      ],
       "status": {
         "web": "implemented",
         "react-native": "not-started",
@@ -1550,9 +1538,6 @@
       "category": "inputs",
       "surface": [
         "none"
-      ],
-      "motion": [
-        "slider-step"
       ],
       "status": {
         "web": "implemented",
@@ -1997,8 +1982,7 @@
         "bubble"
       ],
       "motion": [
-        "message-in",
-        "reaction"
+        "message-in"
       ],
       "status": {
         "web": "implemented",
@@ -2053,20 +2037,6 @@
       "motion": [
         "list-in",
         "list-out"
-      ],
-      "status": {
-        "web": "implemented",
-        "react-native": "not-started",
-        "swiftui": "not-started",
-        "compose": "not-started"
-      }
-    },
-    {
-      "id": "virtual-scroller",
-      "name": "Virtual scroller",
-      "category": "data-display",
-      "surface": [
-        "none"
       ],
       "status": {
         "web": "implemented",
@@ -2341,9 +2311,7 @@
       ],
       "motion": [
         "progress-change",
-        "busy",
-        "activity-travel",
-        "activity-turn"
+        "activity-travel"
       ],
       "status": {
         "web": "implemented",
@@ -2378,7 +2346,6 @@
         "none"
       ],
       "motion": [
-        "busy",
         "activity-turn"
       ],
       "status": {
@@ -3969,8 +3936,7 @@
         "haze"
       ],
       "motion": [
-        "selection",
-        "page-in"
+        "selection"
       ],
       "status": {
         "web": "implemented",

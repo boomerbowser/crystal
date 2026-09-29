@@ -89,6 +89,16 @@ The catalogue gives every one of its components a **surface** — the material c
 | Drag handle | `.cr-drag-handle` | A bare control with a grip and a lift while `aria-grabbed` or `data-dragging` is set. Pointer capture, the keyboard alternative and drop validation are the product's. |
 | Resin panel | `.cr-resin.panel` | The Resin plane with the content radius instead of the pill, for a floating window or a wide control bar. |
 
+Five more arrived in 2.3.0, each from a ruling of 29 September 2026 on something a consumer had reached for and not found:
+
+| Surface | Recipe | What it is |
+|---|---|---|
+| Group | `.cr-group`, `.vertical` to stack | A new surface in the vocabulary. A button group and a split button are one Resin plane whose controls touch: one pill outside, the interior corners square against their neighbours, a hairline in `--cr-edge` between. The children keep their fill and give up their own elevation and diffusion, because the plane is the group's. A dock spaces its controls apart; a group does not. |
+| Dock controls that are not buttons | `.cr-dock` | The dock now reaches `[role=tab]` (selected by `aria-selected`), a `label` holding a radio (selected by `:checked`, its focus ring drawn on the label) and a link (current by `aria-current`), with the dock button's values. Every selector is inside `:where()`, so nothing a consumer already sits against changes specificity. |
+| Dialog body | `.cr-dialog-body`, with `.cr-scroll-frost` | The dialog's surface does not scroll; its body does, so a tall dialog keeps its title in view and takes the edge fade without dissolving its own fill. Give the body `tabindex="0"` and a name when it scrolls, so a keyboard can reach and scroll it. A dialog written without a body scrolls its surface as before. `position: fixed` now applies to a native `dialog.cr-dialog` only, which the browser centres; on any other element the host positions the surface. |
+| Recessed overlay | `.cr-haze.overlay` | A menu, popover or listbox opened inside a pane that is already lifted. On the page a transient overlay is Frost; inside a Haze dialog or a Frost panel it recesses into Haze, and plain Haze has no edge. This is a flat Haze fill with the `--cr-edge` rim and the content shadow, and no feather. |
+| Count | `.cr-resin-haze.count` | The compact display sized for a count: a 20px circle that grows to a pill with its digits, filled to its own edge, with no block padding. The tag's 8px Haze inset and 17px block padding made a count badge 55px tall. |
+
 A native switch is a checkbox with a track — `<input type="checkbox" role="switch">` — styled by element like the checkbox and radio: the track reads `--cr-switch-track-width` and `-height`, the thumb is the opaque surface, and the on state is the primary-soft pair.
 
 ### Interaction surface geometry

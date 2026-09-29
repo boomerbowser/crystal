@@ -75,7 +75,7 @@
       ],
       "material": "One shared Resin plane, not one plane per button",
       "surface": [
-        "dock"
+        "group"
       ],
       "geometry": "Pill outer geometry; interior corners square against neighbours",
       "semantics": "group role with an accessible name when the buttons are related",
@@ -103,7 +103,7 @@
       ],
       "material": "Shared Resin plane with a hairline between the two targets",
       "surface": [
-        "dock"
+        "group"
       ],
       "geometry": "Pill outer geometry; both halves meet the 44px floor independently",
       "semantics": "Two buttons; the disclosure carries aria-expanded and aria-haspopup=\"menu\"",
@@ -139,8 +139,7 @@
       "crystal": "Material, elevation, extend behaviour, safe-area offset",
       "product": "The action and when it is present",
       "motion": [
-        "press",
-        "resin-confluence"
+        "press"
       ],
       "parity": [
         "mui:Fab",

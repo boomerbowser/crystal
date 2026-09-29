@@ -27,7 +27,10 @@
         "Haze"
       ],
       "class": ".cr-haze",
-      "use": "Anything read: cards, rows, panels, wells, forms, messages, decisions. 80% fill, 1.95px feather on an isolated paint layer, crisp foreground. `.cr-well` is the same recipe recessed into a Frost or Resin frame."
+      "use": "Anything read: cards, rows, panels, wells, forms, messages, decisions. 80% fill, 1.95px feather on an isolated paint layer, crisp foreground. `.cr-well` is the same recipe recessed into a Frost or Resin frame. `.cr-haze.overlay` is the recessed overlay: a transient overlay opened inside a pane that is already lifted, drawn as a flat Haze fill with the `--cr-edge` rim and the content shadow, so it can be told from the pane it sits in.",
+      "also": [
+        ".cr-haze.overlay"
+      ]
     },
     {
       "id": "resin",
@@ -81,9 +84,10 @@
       ],
       "class": ".cr-resin-haze",
       "also": [
-        ".cr-tag"
+        ".cr-tag",
+        ".cr-resin-haze.count"
       ],
-      "use": "Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens — transient overlays are Frost."
+      "use": "Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens — transient overlays are Frost. `.count` is the size for a count: a 20px circle that grows to a pill, filled to its own edge, with no block padding."
     },
     {
       "id": "stone",
@@ -114,7 +118,10 @@
         "Mirage"
       ],
       "class": ".cr-dialog",
-      "use": "A Haze decision surface over a Mirage scrim, with the float shadow. Modality, focus and dismissal are the product's."
+      "use": "A Haze decision surface over a Mirage scrim, with the float shadow. Modality, focus and dismissal are the product's. The surface does not scroll: `.cr-dialog-body`, worn with `.cr-scroll-frost`, scrolls inside it, so the title stays in view and the edge fade does not dissolve the surface. `position: fixed` is for a native `<dialog>`; on any other element the host positions it.",
+      "also": [
+        ".cr-dialog-body"
+      ]
     },
     {
       "id": "indicator",
@@ -168,7 +175,20 @@
       "also": [
         ".cr-dock-inner"
       ],
-      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars, button groups. The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment."
+      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars. The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment. The controls may be buttons, tabs (`[role=tab]`, selected by `aria-selected`), radio labels (selected by `:checked`) or links (current by `aria-current`); only buttons were reached before 2.3.0."
+    },
+    {
+      "id": "group",
+      "name": "Group",
+      "materials": [
+        "Resin",
+        "Haze"
+      ],
+      "class": ".cr-group",
+      "also": [
+        ".cr-group.vertical"
+      ],
+      "use": "A Resin plane whose controls touch: button groups and split buttons. The silhouette is one pill, the interior corners square off against their neighbours, and a hairline in `--cr-edge` separates them. The children keep their fill and give up their own elevation and diffusion, because the plane is the group's. `.vertical` stacks them. Not a dock: a dock spaces its controls apart on its Haze fill."
     },
     {
       "id": "nav-item",
@@ -587,8 +607,7 @@
           "crystal": "Material, pill geometry, current-location dot, focus ring",
           "product": "Routing and which destination is current",
           "motion": [
-            "page-in",
-            "page-out"
+            "selection"
           ],
           "parity": [
             "mantine:NavLink",
@@ -615,8 +634,7 @@
           "crystal": "Panel material, collapse geometry, active treatment",
           "product": "Destination list, routing, collapse persistence",
           "motion": [
-            "selection",
-            "page-in"
+            "selection"
           ],
           "parity": [
             "mantine:NavLink",
@@ -643,8 +661,7 @@
           "crystal": "The single shared plane, label weight for the current entry, elevation",
           "product": "Destinations and routing",
           "motion": [
-            "selection",
-            "page-in"
+            "selection"
           ],
           "parity": [
             "mui:BottomNavigation",
@@ -756,8 +773,7 @@
           "crystal": "Marker geometry, connector, state treatment",
           "product": "Step validation and whether steps are navigable",
           "motion": [
-            "selection",
-            "page-in"
+            "selection"
           ],
           "parity": [
             "mantine:Stepper",
@@ -895,8 +911,7 @@
           "crystal": "Material, geometry, selection by label weight, safe-area inset",
           "product": "Destinations and routing",
           "motion": [
-            "selection",
-            "page-in"
+            "selection"
           ],
           "parity": [
             "mui:BottomNavigation"
@@ -1086,7 +1101,7 @@
           ],
           "material": "One shared Resin plane, not one plane per button",
           "surface": [
-            "dock"
+            "group"
           ],
           "geometry": "Pill outer geometry; interior corners square against neighbours",
           "semantics": "group role with an accessible name when the buttons are related",
@@ -1114,7 +1129,7 @@
           ],
           "material": "Shared Resin plane with a hairline between the two targets",
           "surface": [
-            "dock"
+            "group"
           ],
           "geometry": "Pill outer geometry; both halves meet the 44px floor independently",
           "semantics": "Two buttons; the disclosure carries aria-expanded and aria-haspopup=\"menu\"",
@@ -1150,8 +1165,7 @@
           "crystal": "Material, elevation, extend behaviour, safe-area offset",
           "product": "The action and when it is present",
           "motion": [
-            "press",
-            "resin-confluence"
+            "press"
           ],
           "parity": [
             "mui:Fab",
@@ -2598,9 +2612,7 @@
           "semantics": "Two linked sliders; each axis announces its own value and responds to arrow keys.",
           "crystal": "Thumb material, focus ring, contrast of the thumb against any underlying colour",
           "product": "Colour space and value",
-          "motion": [
-            "slider-step"
-          ],
+          "motion": [],
           "parity": [
             "react-aria:ColorArea"
           ]
@@ -2623,9 +2635,7 @@
           "semantics": "role=\"slider\" with the channel named and the value in that channel's units.",
           "crystal": "Thumb and track material, focus ring",
           "product": "Which channel, and the colour space",
-          "motion": [
-            "slider-step"
-          ],
+          "motion": [],
           "parity": [
             "react-aria:ColorSlider"
           ]
@@ -2648,9 +2658,7 @@
           "semantics": "role=\"slider\" in degrees, wrapping at 360.",
           "crystal": "Thumb material, ring geometry, focus ring",
           "product": "Colour space",
-          "motion": [
-            "slider-step"
-          ],
+          "motion": [],
           "parity": [
             "react-aria:ColorWheel"
           ]
@@ -3357,8 +3365,7 @@
           "crystal": "Silhouette, corner asymmetry, own and incoming pairs, mirroring",
           "product": "Delivery, grouping rules and failure recovery",
           "motion": [
-            "message-in",
-            "reaction"
+            "message-in"
           ],
           "parity": [
             "—"
@@ -3445,27 +3452,6 @@
           ],
           "parity": [
             "primereact:dataview"
-          ]
-        },
-        {
-          "id": "virtual-scroller",
-          "name": "Virtual scroller",
-          "anatomy": "A long list that renders only what is near the viewport.",
-          "states": [
-            "at-rest",
-            "scrolling",
-            "loading"
-          ],
-          "material": "None of its own",
-          "surface": [
-            "none"
-          ],
-          "geometry": "Scroll container follows the scroll-area contract.",
-          "semantics": "Rows keep their position in the set via aria-setsize and aria-posinset.",
-          "crystal": "Scroll surface, focus retention across recycling",
-          "product": "Row height strategy, data source",
-          "parity": [
-            "primereact:virtualscroller"
           ]
         },
         {
@@ -3872,9 +3858,7 @@
           "product": "Real progress. Never simulate progress for work that is not measurable.",
           "motion": [
             "progress-change",
-            "busy",
-            "activity-travel",
-            "activity-turn"
+            "activity-travel"
           ],
           "parity": [
             "mantine:Progress",
@@ -3927,7 +3911,6 @@
           "crystal": "Mark, motion and reduced-motion fallback",
           "product": "When it appears and what it describes",
           "motion": [
-            "busy",
             "activity-turn"
           ],
           "parity": [
@@ -6344,8 +6327,7 @@
           "crystal": "Step materials, connector treatment, the advance motion",
           "product": "The steps and their validation",
           "motion": [
-            "selection",
-            "page-in"
+            "selection"
           ],
           "parity": [
             "antd:Steps",

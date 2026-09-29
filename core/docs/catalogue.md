@@ -1,6 +1,6 @@
 # Component catalogue
 
-Crystal specifies **285 components** across 14 categories. Parity is measured against the most fully-featured libraries in use — Mantine, Ant Design and MUI — rather than a shorter list Crystal finds convenient.
+Crystal specifies **284 components** across 14 categories. Parity is measured against the most fully-featured libraries in use — Mantine, Ant Design and MUI — rather than a shorter list Crystal finds convenient.
 
 Crystal specifies appearance: anatomy, states, material, geometry and the semantics a correct implementation must expose. It does not ship focus management, menu keyboard behaviour, date arithmetic or a rich-text engine. Products bring their own accessible primitives and dress them in Crystal. Every entry states this split explicitly, so what the system owes you and what you owe the system are never in doubt.
 
@@ -13,8 +13,8 @@ This chapter is generated from `core/tokens/catalogue/`. The same source generat
 | [Layout and structure](#layout-and-structure) | 14 | 0 |
 | [Navigation](#navigation) | 17 | 15 |
 | [Actions](#actions) | 9 | 9 |
-| [Inputs and forms](#inputs-and-forms) | 52 | 47 |
-| [Data display](#data-display) | 37 | 27 |
+| [Inputs and forms](#inputs-and-forms) | 52 | 44 |
+| [Data display](#data-display) | 36 | 27 |
 | [Feedback and status](#feedback-and-status) | 15 | 14 |
 | [Overlays](#overlays) | 11 | 9 |
 | [Typography](#typography) | 17 | 2 |
@@ -24,7 +24,7 @@ This chapter is generated from `core/tokens/catalogue/`. The same source generat
 | [Commerce](#commerce) | 24 | 15 |
 | [Screens](#screens) | 15 | 10 |
 | [Blocks](#blocks) | 20 | 6 |
-| **Total** | **285** | **165** |
+| **Total** | **284** | **162** |
 
 ## Surfaces
 
@@ -34,26 +34,27 @@ Every component is made of one or more of these, named in its **Surface** row, o
 | --- | --- | --- | --- | --- |
 | <a id="surface-plastic"></a>**Plastic foundation** `plastic` | Plastic | <code>.cr-plastic</code> | 6 | The root scene or window. One contextual, opaque foundation per view; never a component. |
 | <a id="surface-frost"></a>**Frost panel** `frost` | Frost | <code>.cr-frost</code> | 45 | Intermediate task frames and every transient surface that opens over content: side panels, drawers, sheets, app bars, and — at Meridian's direction (R15e) — menus, popovers, tooltips and toasts. Reading content inside it sits on Haze. |
-| <a id="surface-haze"></a>**Haze reading surface** `haze` | Haze | <code>.cr-haze</code> | 82 | Anything read: cards, rows, panels, wells, forms, messages, decisions. 80% fill, 1.95px feather on an isolated paint layer, crisp foreground. `.cr-well` is the same recipe recessed into a Frost or Resin frame. |
+| <a id="surface-haze"></a>**Haze reading surface** `haze` | Haze | <code>.cr-haze</code> | 82 | Anything read: cards, rows, panels, wells, forms, messages, decisions. 80% fill, 1.95px feather on an isolated paint layer, crisp foreground. `.cr-well` is the same recipe recessed into a Frost or Resin frame. `.cr-haze.overlay` is the recessed overlay: a transient overlay opened inside a pane that is already lifted, drawn as a flat Haze fill with the `--cr-edge` rim and the content shadow, so it can be told from the pane it sits in. |
 | <a id="surface-resin"></a>**Resin plane** `resin` | Resin | <code>.cr-resin</code> | 7 | One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter — Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock. |
 | <a id="surface-resin-panel"></a>**Resin panel** `resin-panel` | Resin | <code>.cr-resin.panel</code> | 1 | The Resin plane with the content radius instead of the pill, for a floating control plane that is a rectangle: a floating window, a media control bar wider than it is tall. Same fill, rim, blur and float shadow; only the geometry changes. |
 | <a id="surface-control"></a>**Resin control** `control` | Resin + Haze | <code>.cr-button</code> | 16 | An action: a Resin shell with the 8px-inset Haze reading pad and the optical sheen. Pill geometry. `.primary` tints the pad, `.quiet` removes it, `.danger` adds the destructive boundary. Selected state is the primary pad plus label weight 800. |
 | <a id="surface-field"></a>**Field shell** `field` | Resin + Haze | <code>.cr-field-shell</code> | 28 | The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics. |
-| <a id="surface-compact"></a>**Compact display** `compact` | Resin + Haze | <code>.cr-resin-haze</code> | 5 | Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens — transient overlays are Frost. |
+| <a id="surface-compact"></a>**Compact display** `compact` | Resin + Haze | <code>.cr-resin-haze</code> | 5 | Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens — transient overlays are Frost. `.count` is the size for a count: a 20px circle that grows to a pill, filled to its own edge, with no block padding. |
 | <a id="surface-stone"></a>**Stone label backing** `stone` | Stone | <code>.cr-stone</code> | 2 | A label over an unknown or moving backdrop — a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text. |
 | <a id="surface-mirage"></a>**Mirage scrim** `mirage` | Mirage | <code>.cr-mirage</code> | 10 | The chromatic diffusion of the real scene behind a modal. Never a content surface; the decision surface above it is Haze. |
-| <a id="surface-dialog"></a>**Dialog** `dialog` | Haze + Mirage | <code>.cr-dialog</code> | 2 | A Haze decision surface over a Mirage scrim, with the float shadow. Modality, focus and dismissal are the product's. |
+| <a id="surface-dialog"></a>**Dialog** `dialog` | Haze + Mirage | <code>.cr-dialog</code> | 2 | A Haze decision surface over a Mirage scrim, with the float shadow. Modality, focus and dismissal are the product's. The surface does not scroll: `.cr-dialog-body`, worn with `.cr-scroll-frost`, scrolls inside it, so the title stays in view and the edge fade does not dissolve the surface. `position: fixed` is for a native `&lt;dialog&gt;`; on any other element the host positions it. |
 | <a id="surface-indicator"></a>**Indicator** `indicator` | Haze | <code>.cr-indicator</code> | 2 | A 20px informational circle painting Haze on an isolated layer, or the moving pill behind a selected segment. Haze rather than Resin, because it sits on a surface that is often already translucent. Never a selection mark. |
 | <a id="surface-status"></a>**Status badge** `status` | Resin + Haze | <code>.cr-status</code> | 1 | The semantic ink and surface pair behind a symbol, with words beside it. Status colours are independent of the palette and are never redefined by it. |
 | <a id="surface-bubble"></a>**Authored bubble** `bubble` | Haze | <code>.cr-bubble</code> | 1 | A Haze message surface with a directional tight corner. `.own` uses the palette's own-content pair. |
 | <a id="surface-table"></a>**Table** `table` | Resin + Haze | <code>.cr-table-scroll</code> | 5 | A Resin shell with an inset Haze fill holding the table, with the primary-soft header and the Resin scrollbar. Rows are read on the Haze; sort and selection are announced, and selection is label weight. |
-| <a id="surface-dock"></a>**Dock** `dock` | Resin + Haze | <code>.cr-dock</code> | 10 | A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars, button groups. The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment. |
+| <a id="surface-dock"></a>**Dock** `dock` | Resin + Haze | <code>.cr-dock</code> | 8 | A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars. The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment. The controls may be buttons, tabs (`[role=tab]`, selected by `aria-selected`), radio labels (selected by `:checked`) or links (current by `aria-current`); only buttons were reached before 2.3.0. |
+| <a id="surface-group"></a>**Group** `group` | Resin + Haze | <code>.cr-group</code> | 2 | A Resin plane whose controls touch: button groups and split buttons. The silhouette is one pill, the interior corners square off against their neighbours, and a hairline in `--cr-edge` separates them. The children keep their fill and give up their own elevation and diffusion, because the plane is the group's. `.vertical` stacks them. Not a dock: a dock spaces its controls apart on its Haze fill. |
 | <a id="surface-nav-item"></a>**Navigation entry** `nav-item` | Plastic | <code>.cr-nav-item</code> | 2 | An entry in side navigation, a rail or a tree of destinations. It has no material of its own — it is furniture on the panel beneath it — and carries selection by label weight alone. Pill hit area, 44px target. `.stacked` puts the icon above the label for a rail. Adopted from the documentation site's side menu, which docs/components.md names as the reference implementation of selection. |
 | <a id="surface-bare"></a>**Bare control** `bare` | — | <code>.cr-bare</code> | 0 | A control that must not wear the Resin coat because it sits inside a surface that already has one: a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows, a dismiss button on a toast. Crystal paints every button by element, so bare means subtracting the fill, the shadow, the backdrop filter and both pseudo-layers — this class does all four. The focus ring and the target floor stay. |
 | <a id="surface-drag-handle"></a>**Drag handle** `drag-handle` | — | <code>.cr-drag-handle</code> | 1 | A bare control with a grip glyph and a lift while dragging. Keyboard drag is the product's; the handle only says it can be grabbed and when it has been. |
 | <a id="surface-choice"></a>**Selection control** `choice` | Resin | <code>input:is([type=checkbox],[type=radio])</code> | 5 | Native checkbox, radio, switch and range, styled by element: a Resin box, circle or track with a contained mark, and the marked glass thumb. Semantics stay native. |
 | <a id="surface-native"></a>**Native control furniture** `native` | — | <code>select option</code> | 0 | Parts of native controls the browser draws and Crystal tints: select options, the file button. Platform-owned popups keep platform drawing. |
-| <a id="surface-none"></a>**No surface of its own** `none` | — | — | 110 | Layout, typography, behaviour and drawing components that inherit whatever they sit on. A chart's marks, a divider, a provider. Nothing to paint and nothing to wear. |
+| <a id="surface-none"></a>**No surface of its own** `none` | — | — | 109 | Layout, typography, behaviour and drawing components that inherit whatever they sit on. A chart's marks, a divider, a provider. Nothing to paint and nothing to wear. |
 
 ## Layout and structure
 
@@ -300,7 +301,7 @@ Pill-shaped destination with optional icon, label and current-location dot.
 <tr><th scope="row">Semantics</th><td>aria-current="page" for the active destination, never aria-selected</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Material, pill geometry, current-location dot, focus ring</td></tr>
 <tr><th scope="row">Product owns</th><td>Routing and which destination is current</td></tr>
-<tr><th scope="row">Motion</th><td><code>page-in</code>, <code>page-out</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>selection</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:NavLink · mui:ListItemButton · antd:Menu.Item</td></tr>
 </tbody></table></div>
 
@@ -316,7 +317,7 @@ A vertical Frost panel of nav links, collapsible to icons.
 <tr><th scope="row">Semantics</th><td>nav landmark with an accessible name; collapsed items keep accessible names</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Panel material, collapse geometry, active treatment</td></tr>
 <tr><th scope="row">Product owns</th><td>Destination list, routing, collapse persistence</td></tr>
-<tr><th scope="row">Motion</th><td><code>selection</code>, <code>page-in</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>selection</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:NavLink · mui:Drawer · antd:Menu</td></tr>
 </tbody></table></div>
 
@@ -332,7 +333,7 @@ One floating Resin plane holding labelled destinations on a shared Stone label g
 <tr><th scope="row">Semantics</th><td>nav landmark; aria-pressed or aria-current on the destination</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>The single shared plane, label weight for the current entry, elevation</td></tr>
 <tr><th scope="row">Product owns</th><td>Destinations and routing</td></tr>
-<tr><th scope="row">Motion</th><td><code>selection</code>, <code>page-in</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>selection</code></td></tr>
 <tr><th scope="row">Parity</th><td>mui:BottomNavigation · antd:Menu · mantine:SegmentedControl</td></tr>
 </tbody></table></div>
 
@@ -398,7 +399,7 @@ Ordered steps with a connector, each showing its own completion state.
 <tr><th scope="row">Semantics</th><td>Ordered list; the current step carries aria-current="step"; state is announced in text, not by colour</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Marker geometry, connector, state treatment</td></tr>
 <tr><th scope="row">Product owns</th><td>Step validation and whether steps are navigable</td></tr>
-<tr><th scope="row">Motion</th><td><code>selection</code>, <code>page-in</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>selection</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Stepper · mui:Stepper · antd:Steps</td></tr>
 </tbody></table></div>
 
@@ -479,7 +480,7 @@ A Resin destination group pinned to the bottom of a narrow view.
 <tr><th scope="row">Semantics</th><td>role="navigation"; the current destination carries aria-current="page".</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Material, geometry, selection by label weight, safe-area inset</td></tr>
 <tr><th scope="row">Product owns</th><td>Destinations and routing</td></tr>
-<tr><th scope="row">Motion</th><td><code>selection</code>, <code>page-in</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>selection</code></td></tr>
 <tr><th scope="row">Parity</th><td>mui:BottomNavigation</td></tr>
 </tbody></table></div>
 
@@ -590,7 +591,7 @@ Adjacent actions sharing one Resin plane with internal hairlines.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>default, hover, focus, disabled</td></tr>
 <tr><th scope="row">Material</th><td>One shared Resin plane, not one plane per button</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-group">Group</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill outer geometry; interior corners square against neighbours</td></tr>
 <tr><th scope="row">Semantics</th><td>group role with an accessible name when the buttons are related</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>The shared plane and interior separation</td></tr>
@@ -606,7 +607,7 @@ A default action and an adjacent disclosure that opens related actions.
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>default, hover, focus, open, disabled</td></tr>
 <tr><th scope="row">Material</th><td>Shared Resin plane with a hairline between the two targets</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-group">Group</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill outer geometry; both halves meet the 44px floor independently</td></tr>
 <tr><th scope="row">Semantics</th><td>Two buttons; the disclosure carries aria-expanded and aria-haspopup="menu"</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Shared plane, separation, menu material</td></tr>
@@ -627,7 +628,7 @@ A persistent circular Resin action floating above content.
 <tr><th scope="row">Semantics</th><td>Requires an accessible name; must not cover the final content or the focused element</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Material, elevation, extend behaviour, safe-area offset</td></tr>
 <tr><th scope="row">Product owns</th><td>The action and when it is present</td></tr>
-<tr><th scope="row">Motion</th><td><code>press</code>, <code>resin-confluence</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>press</code></td></tr>
 <tr><th scope="row">Parity</th><td>mui:Fab · mantine:— · antd:FloatButton</td></tr>
 </tbody></table></div>
 
@@ -1420,7 +1421,6 @@ A two-dimensional field for saturation and brightness.
 <tr><th scope="row">Semantics</th><td>Two linked sliders; each axis announces its own value and responds to arrow keys.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Thumb material, focus ring, contrast of the thumb against any underlying colour</td></tr>
 <tr><th scope="row">Product owns</th><td>Colour space and value</td></tr>
-<tr><th scope="row">Motion</th><td><code>slider-step</code></td></tr>
 <tr><th scope="row">Parity</th><td>react-aria:ColorArea</td></tr>
 </tbody></table></div>
 
@@ -1436,7 +1436,6 @@ One channel of a colour, as a track.
 <tr><th scope="row">Semantics</th><td>role="slider" with the channel named and the value in that channel's units.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Thumb and track material, focus ring</td></tr>
 <tr><th scope="row">Product owns</th><td>Which channel, and the colour space</td></tr>
-<tr><th scope="row">Motion</th><td><code>slider-step</code></td></tr>
 <tr><th scope="row">Parity</th><td>react-aria:ColorSlider</td></tr>
 </tbody></table></div>
 
@@ -1452,7 +1451,6 @@ Hue as a ring.
 <tr><th scope="row">Semantics</th><td>role="slider" in degrees, wrapping at 360.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Thumb material, ring geometry, focus ring</td></tr>
 <tr><th scope="row">Product owns</th><td>Colour space</td></tr>
-<tr><th scope="row">Motion</th><td><code>slider-step</code></td></tr>
 <tr><th scope="row">Parity</th><td>react-aria:ColorWheel</td></tr>
 </tbody></table></div>
 
@@ -1871,7 +1869,7 @@ A reading surface with one intentionally tightened corner indicating authorship 
 <tr><th scope="row">Semantics</th><td>Author and time are text, not implied by side alone</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Silhouette, corner asymmetry, own and incoming pairs, mirroring</td></tr>
 <tr><th scope="row">Product owns</th><td>Delivery, grouping rules and failure recovery</td></tr>
-<tr><th scope="row">Motion</th><td><code>message-in</code>, <code>reaction</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>message-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>—</td></tr>
 </tbody></table></div>
 
@@ -1923,21 +1921,6 @@ A collection rendered as a list or grid, with sorting and paging.
 <tr><th scope="row">Product owns</th><td>Data, sorting, paging</td></tr>
 <tr><th scope="row">Motion</th><td><code>list-in</code>, <code>list-out</code></td></tr>
 <tr><th scope="row">Parity</th><td>primereact:dataview</td></tr>
-</tbody></table></div>
-
-### Virtual scroller
-
-A long list that renders only what is near the viewport.
-
-<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
-<tr><th scope="row">States</th><td>at-rest, scrolling, loading</td></tr>
-<tr><th scope="row">Material</th><td>None of its own</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-none">No surface of its own</a></td></tr>
-<tr><th scope="row">Geometry</th><td>Scroll container follows the scroll-area contract.</td></tr>
-<tr><th scope="row">Semantics</th><td>Rows keep their position in the set via aria-setsize and aria-posinset.</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Scroll surface, focus retention across recycling</td></tr>
-<tr><th scope="row">Product owns</th><td>Row height strategy, data source</td></tr>
-<tr><th scope="row">Parity</th><td>primereact:virtualscroller</td></tr>
 </tbody></table></div>
 
 ### Image list
@@ -2194,7 +2177,7 @@ A determinate or indeterminate track showing work in flight.
 <tr><th scope="row">Semantics</th><td>role=progressbar with aria-valuenow when determinate; indeterminate omits the value rather than faking one</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Track, fill, indeterminate motion and reduced-motion fallback</td></tr>
 <tr><th scope="row">Product owns</th><td>Real progress. Never simulate progress for work that is not measurable.</td></tr>
-<tr><th scope="row">Motion</th><td><code>progress-change</code>, <code>busy</code>, <code>activity-travel</code>, <code>activity-turn</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>progress-change</code>, <code>activity-travel</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Progress · mui:LinearProgress · antd:Progress</td></tr>
 </tbody></table></div>
 
@@ -2226,7 +2209,7 @@ A compact indeterminate activity mark.
 <tr><th scope="row">Semantics</th><td>Accompanied by text saying what is loading; reduced motion replaces spin with a static, still-legible state</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Mark, motion and reduced-motion fallback</td></tr>
 <tr><th scope="row">Product owns</th><td>When it appears and what it describes</td></tr>
-<tr><th scope="row">Motion</th><td><code>busy</code>, <code>activity-turn</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>activity-turn</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Loader · mui:CircularProgress · antd:Spin</td></tr>
 </tbody></table></div>
 
@@ -3841,7 +3824,7 @@ Progress through a purchase.
 <tr><th scope="row">Semantics</th><td>The current step is aria-current; completion is stated in words, and a check mark here means validated rather than selected.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Step materials, connector treatment, the advance motion</td></tr>
 <tr><th scope="row">Product owns</th><td>The steps and their validation</td></tr>
-<tr><th scope="row">Motion</th><td><code>selection</code>, <code>page-in</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>selection</code></td></tr>
 <tr><th scope="row">Parity</th><td>antd:Steps · mui:Stepper</td></tr>
 </tbody></table></div>
 

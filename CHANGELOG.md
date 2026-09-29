@@ -6,12 +6,18 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
 
 ## [2.3.0] — 2026-09-29
 
-A minor release of the three rulings Meridian made on 28 September. A navigation
-entry now marks where the reader is with a dot as well as weight; the
-catalogue's surfaces say what actually renders, so a consumer that adopts a
-surface gets the element it was shown; and the field shell's decorative rim is
-stated as decorative. The tooltip's radius becomes a token. The only change a
-reader of the stylesheet will see is the dot on `aria-current`.
+A minor release of the rulings Meridian made on 28 and 29 September — every
+decision left open in either tracker, answered in
+`proposals/2026-09-29-rulings.md`. A navigation entry marks where the reader is
+with a dot as well as weight; the catalogue's surfaces say what renders, and a
+button group is now a surface of its own; the dock reaches tabs, radio labels
+and links as well as buttons; a dialog scrolls its body rather than itself; an
+overlay inside a pane has a recipe with an edge; a count badge has a size; and
+motion no component could play comes off the catalogue, with the two recipes
+that left orphaned withdrawn. The catalogue is 284 components and the motion
+vocabulary 59 recipes. What a reader of the stylesheet sees change: the dot on
+`aria-current`, and a dialog written with the new body. Everything else is new
+recipes, reached only by the markup that asks for them.
 
 ### Added
 
@@ -26,8 +32,52 @@ reader of the stylesheet will see is the dot on `aria-current`.
 - `component.overlay.tooltipRadius`, 18px — the tooltip's radius, which the
   catalogue stated only as prose.
 
+- **The `group` surface, `.cr-group`** (D-26, ruled 29 September). A button
+  group and a split button are one Resin plane whose controls touch: a single
+  pill outside, square interior corners, a hairline in `--cr-edge` between. The
+  children keep their fill and give up their own elevation and diffusion.
+  `.vertical` stacks them. Both entries move from `dock` to `group`.
+- **The dock reaches controls that are not buttons** (D-26). `[role=tab]`
+  (selected by `aria-selected`), a `label` holding a radio (selected by
+  `:checked`, its focus ring drawn on the label) and a link (current by
+  `aria-current`) take the dock button's values, with their own narrow-screen and
+  forced-colours branches. Every selector is inside `:where()`, so no existing
+  rule's specificity moves.
+- **`.cr-dialog-body`** (D-25). The dialog's surface no longer scrolls when it
+  has a body; the body does, worn with `.cr-scroll-frost` for the scroll
+  contract, the Frost scrollbar and the edge fade, so a tall dialog keeps its
+  title in view and the fade no longer dissolves the surface. A dialog written
+  without a body scrolls its surface exactly as before.
+- **The recessed overlay, `.cr-haze.overlay`** (D-25). A menu or popover opened
+  inside a pane that is already lifted recesses into Haze, which has no edge; this
+  is a flat Haze fill with the `--cr-edge` rim and the content shadow, and its
+  three fallbacks.
+- **A count size, `.cr-resin-haze.count`** (D-27). A 20px circle that becomes a
+  pill as its digits need, filled to its own edge, with no block padding. The
+  tag-sized compact display made a count badge 55px tall.
+
 ### Changed
 
+- **`position: fixed` is for a native `dialog.cr-dialog` only** (D-29, ruled
+  29 September). The browser centres a modal `<dialog>` by giving it `inset: 0`
+  and auto margins; any other element that wore the class kept its static
+  position — top-left corner at the middle of the screen — which is how Crystal
+  React's dialogs shipped off-centre. On a non-dialog host the class is now the
+  material, and the host positions it.
+- **The indicator's field glyphs reach any `.cr-field-shell`** (D-27), not only
+  a `span`. A shell holding a label, a textarea or a row of chips is a `div`, and
+  never received ○, ●, * or !. A block shell with an indicator makes the same
+  40px of room the inline one always has.
+- **Motion no component could play comes off the catalogue** (D-28, ruled 29
+  September): `page-in`/`page-out` from the six navigation entries, which keep
+  `selection`; `busy` from progress and the loader, and `activity-turn` from the
+  linear progress bar, which plays `activity-travel`; `resin-confluence` from the
+  floating action; `reaction` from the authored bubble; `slider-step` from the
+  colour area, slider and wheel. Recorded in `tools/extend-catalogue-7.cjs` with
+  the old values.
+- **The catalogue is 284 components** (D-29). The virtualizer was listed twice;
+  `virtual-scroller` is removed and `virtualizer`, whose semantics are the
+  complete ones, remains.
 - **The catalogue's surfaces match what renders** (D-23, ruled on 28 September).
   Tabs, the segmented control, the toolbar, the command bar, the action bar, the
   button group and the split button are `dock`, not `resin`: each measures
@@ -43,6 +93,21 @@ reader of the stylesheet will see is the dot on `aria-current`.
   its shell, its well and its label. The "colour is never the only signal"
   table says the same of the current page: a primary dot, which is a mark rather
   than a tint, and the label's weight.
+
+### Removed
+
+- **The `busy` and `reaction` recipes are withdrawn** (D-28). Once their
+  assignments came off, no component claimed either, and the build refuses a
+  recipe no component claims. `busy` is superseded by D-19's continuous
+  indicators; no component has reactions to toggle. Either returns with a
+  component that needs it. The motion vocabulary is 59 recipes.
+- **The reset layer's button hover** (D-21, ruled 29 September). It brightened
+  and lowered a hovered `.cr-button` in `crystal.reset`, and `crystal.component`
+  erased both halves, so it never rendered. The resting Resin control already is
+  the floating state; the `hover` caustic is the pointer affordance. Nothing that
+  renders changes.
+- **`.tiny-button` from `motion.css`** (4.4). It is the documentation site's
+  class, and the site now carries its own transition for it.
 
 ### Fixed
 

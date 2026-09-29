@@ -559,8 +559,7 @@
       "crystal": "Silhouette, corner asymmetry, own and incoming pairs, mirroring",
       "product": "Delivery, grouping rules and failure recovery",
       "motion": [
-        "message-in",
-        "reaction"
+        "message-in"
       ],
       "parity": [
         "—"
@@ -647,27 +646,6 @@
       ],
       "parity": [
         "primereact:dataview"
-      ]
-    },
-    {
-      "id": "virtual-scroller",
-      "name": "Virtual scroller",
-      "anatomy": "A long list that renders only what is near the viewport.",
-      "states": [
-        "at-rest",
-        "scrolling",
-        "loading"
-      ],
-      "material": "None of its own",
-      "surface": [
-        "none"
-      ],
-      "geometry": "Scroll container follows the scroll-area contract.",
-      "semantics": "Rows keep their position in the set via aria-setsize and aria-posinset.",
-      "crystal": "Scroll surface, focus retention across recycling",
-      "product": "Row height strategy, data source",
-      "parity": [
-        "primereact:virtualscroller"
       ]
     },
     {

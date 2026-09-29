@@ -230,7 +230,7 @@ including that reduced motion still applies the state instantly.
 
 <!-- generated:recipes -->
 
-All 61 recipes in 9 categories, generated from `core/tokens/motion-recipes.json`. **Damping ratio** and
+All 59 recipes in 9 categories, generated from `core/tokens/motion-recipes.json`. **Damping ratio** and
 **overshoot** are derived from each recipe's spring by `core/assets/core/spring.js`, not
 authored — so a spring that was retuned cannot leave a stale number behind in this table.
 
@@ -298,7 +298,6 @@ correct is a material question, not a taste question — see the signature polic
 | `reorder` — Reorder settle | 500ms | inertia | plastic | 0.550 | 12.6% | Supplement DOM reordering; use layout() for measured bounded displacement. | Apply the semantic state immediately; omit decorative movement. |
 | `highlight` — Updated content | 500ms | feather | haze | 0.920 | none | A brief update cue paired with actual content or announcement. | Apply the semantic state immediately; omit decorative movement. |
 | `message-in` — Message arrival | 650ms | feather | haze | 0.920 | none | Only on a new message; do not replay on virtualized history or steal scroll. | Apply the semantic state immediately; omit decorative movement. |
-| `reaction` — Reaction response | 680ms | coalesce | resin | 0.620 | 8.4% | Toggle the real reaction state and count before the response. | Apply the semantic state immediately; omit decorative movement. |
 | `skeleton-sweep` — Luminance sweep | 1200ms | feather | haze | linear loop | — | A skeleton while its content is genuinely loading, on the Haze fill and never on the text that replaces it. Ends with skeleton-resolve. | Static Haze fill. |
 | `mark-in` — Mark arriving | 500ms | feather | haze | 1.000 | none | A data mark — a bar, a series, a segment — growing from its baseline when a chart first appears, and not when its data later changes. transform-origin is the baseline. Staggered by index up to 24 marks; past that every mark arrives together, because a sequence nobody can count is decoration. Staggered 24ms per mark, up to 24. | Marks appear in place at their values. |
 
@@ -311,7 +310,6 @@ correct is a material question, not a taste question — see the signature polic
 | `success` — Success acknowledgement | 600ms | feather | stone | 0.920 | none | Use after a successful operation with text and a recognizable mark. | Apply the semantic state immediately; omit decorative movement. |
 | `attention` — Attention cue | 500ms | feather | stone | 0.920 | none | Single finite cue for important text; never flash or loop. | Apply the semantic state immediately; omit decorative movement. |
 | `progress-change` — Progress settle | 500ms | feather | stone | 0.920 | none | Actual progress is set first; this animation does not fabricate completion. | Apply the semantic state immediately; omit decorative movement. |
-| `busy` — Finite busy cue | 680ms | feather | stone | 0.920 | none | One cycle for an actual pending operation; keep a static busy label if it lasts longer. | Apply the semantic state immediately; omit decorative movement. |
 | `skeleton-resolve` — Loading content resolve | 650ms | feather | haze | 0.920 | none | Replace a skeleton only when real data arrives; no endless shimmer. | Apply the semantic state immediately; omit decorative movement. |
 | `empty-in` — Empty-state reveal | 500ms | coalesce | resin | 0.620 | 8.4% | Shown only when the collection is actually empty. | Apply the semantic state immediately; omit decorative movement. |
 | `activity-turn` — Indeterminate arc | 1200ms | feather | stone | linear loop | — | A loader, or an indeterminate progress ring, while an operation is genuinely pending — and only then. Starts when the work starts and stops when it resolves. One period for every continuous indicator, so two in one view never tick against each other. | Static: the whole track visible and nothing turning. Never a partial arc, which reports a measurement nobody took. |

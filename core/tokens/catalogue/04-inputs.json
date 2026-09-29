@@ -1326,9 +1326,7 @@
       "semantics": "Two linked sliders; each axis announces its own value and responds to arrow keys.",
       "crystal": "Thumb material, focus ring, contrast of the thumb against any underlying colour",
       "product": "Colour space and value",
-      "motion": [
-        "slider-step"
-      ],
+      "motion": [],
       "parity": [
         "react-aria:ColorArea"
       ]
@@ -1351,9 +1349,7 @@
       "semantics": "role=\"slider\" with the channel named and the value in that channel's units.",
       "crystal": "Thumb and track material, focus ring",
       "product": "Which channel, and the colour space",
-      "motion": [
-        "slider-step"
-      ],
+      "motion": [],
       "parity": [
         "react-aria:ColorSlider"
       ]
@@ -1376,9 +1372,7 @@
       "semantics": "role=\"slider\" in degrees, wrapping at 360.",
       "crystal": "Thumb material, ring geometry, focus ring",
       "product": "Colour space",
-      "motion": [
-        "slider-step"
-      ],
+      "motion": [],
       "parity": [
         "react-aria:ColorWheel"
       ]

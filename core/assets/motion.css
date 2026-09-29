@@ -11,11 +11,11 @@
 .cr-dialog[data-flow-direction=bottom]::backdrop{--flow-x:35%;--flow-y:100%;--flow-exit-x:65%;--flow-exit-y:0%}
 .cr-dialog[open]::backdrop{animation:cr-flow-in var(--cr-flow) var(--cr-ease-enter)}
 .cr-dialog[data-closing]::backdrop{animation:cr-flow-out var(--cr-departure) var(--cr-ease-exit) forwards}
-.cr-button,.tiny-button,.cr-dock button{transition:transform var(--cr-press) var(--cr-ease-settle),background-color var(--cr-state) var(--cr-ease-settle)}
+.cr-button,.cr-dock button{transition:transform var(--cr-press) var(--cr-ease-settle),background-color var(--cr-state) var(--cr-ease-settle)}
 @media(hover:hover) and (pointer:fine){
-  .cr-button:hover:not(:disabled),.tiny-button:hover:not(:disabled){transform:none}
+  .cr-button:hover:not(:disabled){transform:none}
 }
-.cr-button:active:not(:disabled),.tiny-button:active:not(:disabled),.cr-dock button:active:not(:disabled){transform:none}
+.cr-button:active:not(:disabled),.cr-dock button:active:not(:disabled){transform:none}
 /* Immediate semantic state and focus; motion is supplemental. */
 html[data-motion=reduce] *,html[data-motion=reduce] *::before,html[data-motion=reduce] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 html[data-motion=reduce] button:hover,html[data-motion=reduce] button:active{transform:none!important}

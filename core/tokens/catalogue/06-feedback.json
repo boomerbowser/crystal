@@ -108,9 +108,7 @@
       "product": "Real progress. Never simulate progress for work that is not measurable.",
       "motion": [
         "progress-change",
-        "busy",
-        "activity-travel",
-        "activity-turn"
+        "activity-travel"
       ],
       "parity": [
         "mantine:Progress",
@@ -163,7 +161,6 @@
       "crystal": "Mark, motion and reduced-motion fallback",
       "product": "When it appears and what it describes",
       "motion": [
-        "busy",
         "activity-turn"
       ],
       "parity": [

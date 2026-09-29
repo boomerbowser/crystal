@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" data-crystal-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crystal 2.3.0 — specimen sheet</title>
+<!-- The real library, by relative path: what a consumer gets, nothing the page adds. -->
+<link rel="stylesheet" href="../../../core/assets/crystal-theme.css">
+<link rel="stylesheet" href="../../../core/assets/crystal.css">
+<style>
+  /* Layout only, as on the 2.2.0 sheet. Nothing here restyles a Crystal recipe. */
+  body{font-family:var(--cr-font);min-height:100vh}
+  .sheet{max-width:1180px;margin:0 auto;padding:32px 24px 96px}
+  h1{font-size:30px;letter-spacing:-.045em;margin:0 0 6px}
+  .lede{margin:0 0 20px;color:var(--cr-muted);max-width:70ch;font-size:14px;line-height:1.6}
+  h2{font-size:22px;letter-spacing:-.03em;margin:40px 0 14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+  .specimen{display:flex;flex-direction:column;gap:10px;min-width:0;margin:0}
+  .specimen>figcaption{font-size:12px;color:var(--cr-muted);line-height:1.55;padding:0 4px}
+  .specimen>figcaption b{color:var(--cr-text);font-weight:800}
+  .scene{position:relative;isolation:isolate;min-height:180px;border-radius:calc(var(--cr-radius) + 10px);overflow:hidden;display:grid;place-items:center;padding:24px;background:var(--cr-canvas)}
+  .scene::before{content:'';position:absolute;z-index:-1;width:320px;height:150px;left:-60px;top:70px;transform:rotate(-32deg);border-radius:120px;background:linear-gradient(45deg,var(--cr-decorative),var(--cr-companion))}
+  .scene::after{content:'';position:absolute;z-index:-1;width:150px;height:150px;right:-30px;top:-30px;border-radius:50%;background:var(--cr-glow)}
+  .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center}
+  .pane{padding:20px;min-width:260px}
+  .menu{display:grid;gap:2px;padding:6px;margin-top:10px;list-style:none}
+  .menu li{padding:10px 12px;font-size:14px}
+  .host{position:relative;display:inline-flex}
+  .host .cr-resin-haze.count{position:absolute;inset-block-start:-8px;inset-inline-end:-8px}
+  .field-row{display:grid;gap:12px;width:100%;max-width:300px}
+</style>
+</head>
+<body class="cr-plastic">
+<main class="sheet">
+<h1>Crystal 2.3.0</h1>
+<p class="lede">The recipes the rulings of 29 September 2026 added. Every specimen is the library's own class on the element a consumer actually writes — which is the point of each: a dock whose controls are not buttons, a group whose segments touch, a dialog whose body scrolls, an overlay inside a pane, a count.</p>
+
+<h2>Dock controls that are not buttons</h2>
+<div class="grid">
+  <figure class="specimen" id="dock-tabs"><div class="scene">
+    <div class="cr-dock" role="tablist" aria-label="Views">
+      <span role="tab" tabindex="0" aria-selected="true">Overview</span>
+      <span role="tab" tabindex="-1" aria-selected="false">Activity</span>
+      <span role="tab" tabindex="-1" aria-selected="false">Settings</span>
+    </div></div>
+    <figcaption><b>Tabs</b> as <code>[role=tab]</code> spans, selected by <code>aria-selected</code>.</figcaption></figure>
+  <figure class="specimen" id="dock-radios"><div class="scene">
+    <div class="cr-dock" role="radiogroup" aria-label="Density">
+      <label><input type="radio" name="density" checked> Comfortable</label>
+      <label><input type="radio" name="density"> Compact</label>
+    </div></div>
+    <figcaption><b>A segmented control</b> as radios in labels, selected by <code>:checked</code>.</figcaption></figure>
+  <figure class="specimen" id="dock-links"><div class="scene">
+    <nav class="cr-dock" aria-label="Destinations">
+      <a href="#home" aria-current="page">Home</a>
+      <a href="#library">Library</a>
+      <a href="#search">Search</a>
+    </nav></div>
+    <figcaption><b>Destinations</b> as links, current by <code>aria-current</code>.</figcaption></figure>
+  <figure class="specimen" id="dock-buttons"><div class="scene">
+    <div class="cr-dock" aria-label="Reference">
+      <button type="button" aria-pressed="true">Day</button>
+      <button type="button" aria-pressed="false">Week</button>
+      <button type="button" aria-pressed="false">Month</button>
+    </div></div>
+    <figcaption><b>Buttons</b>, as before — the reference the others are measured against.</figcaption></figure>
+</div>
+
+<h2>Group</h2>
+<div class="grid">
+  <figure class="specimen" id="group-row"><div class="scene">
+    <div class="cr-group" role="group" aria-label="Alignment">
+      <button type="button" class="cr-button">Left</button>
+      <button type="button" class="cr-button">Centre</button>
+      <button type="button" class="cr-button">Right</button>
+    </div></div>
+    <figcaption><b><code>.cr-group</code></b>: one pill outside, square inside, a hairline between.</figcaption></figure>
+  <figure class="specimen" id="group-split"><div class="scene">
+    <div class="cr-group" role="group" aria-label="Save">
+      <button type="button" class="cr-button primary">Save</button>
+      <button type="button" class="cr-button primary" aria-label="More save options" aria-haspopup="menu">▾</button>
+    </div></div>
+    <figcaption><b>A split button</b>: the children keep their fill, so the primary ink stays legible.</figcaption></figure>
+  <figure class="specimen" id="group-vertical"><div class="scene">
+    <div class="cr-group vertical" role="group" aria-label="Zoom">
+      <button type="button" class="cr-button">In</button>
+      <button type="button" class="cr-button">Out</button>
+    </div></div>
+    <figcaption><b><code>.cr-group.vertical</code></b>.</figcaption></figure>
+</div>
+
+<h2>Recessed overlay and count</h2>
+<div class="grid">
+  <figure class="specimen" id="overlay"><div class="scene">
+    <div class="cr-haze pane">
+      <strong>A Haze pane</strong>
+      <ul class="cr-haze overlay menu" role="menu" aria-label="Actions">
+        <li role="menuitem">Rename</li><li role="menuitem">Duplicate</li><li role="menuitem">Move to…</li>
+      </ul>
+    </div></div>
+    <figcaption><b><code>.cr-haze.overlay</code></b> inside a Haze pane: the edge and the content shadow are what tell it apart.</figcaption></figure>
+  <figure class="specimen" id="counts"><div class="scene">
+    <div class="row">
+      <span class="cr-resin-haze count">3</span>
+      <span class="cr-resin-haze count">42</span>
+      <span class="cr-resin-haze count">999+</span>
+      <span class="host"><button type="button" class="cr-button">Inbox</button><span class="cr-resin-haze count" aria-hidden="true">8</span></span>
+    </div></div>
+    <figcaption><b><code>.cr-resin-haze.count</code></b>: a circle that grows to a pill.</figcaption></figure>
+  <figure class="specimen" id="glyphs"><div class="scene">
+    <div class="field-row">
+      <div class="cr-field-shell"><input class="cr-input" aria-label="Required field" required><span class="cr-indicator" aria-hidden="true"></span></div>
+      <div class="cr-field-shell"><input class="cr-input" aria-label="Invalid field" aria-invalid="true" value="not an email"><span class="cr-indicator" aria-hidden="true"></span></div>
+    </div></div>
+    <figcaption><b>Field glyphs on a <code>div</code> shell</b>: * required, ! invalid.</figcaption></figure>
+</div>
+
+<h2>Dialog</h2>
+<p class="lede"><button type="button" class="cr-button" id="open-dialog">Open a tall dialog</button></p>
+<dialog class="cr-dialog" id="dialog" aria-labelledby="dialog-title">
+  <header><h2 id="dialog-title" style="margin:0">Terms of the pilot</h2></header>
+  <div class="cr-dialog-body cr-scroll-frost" tabindex="0" aria-label="Terms">
+    <p>The body scrolls; the surface does not. The title above stays in view however far this goes, and the actions below stay where they are.</p>
+    <p>Line two.</p><p>Line three.</p><p>Line four.</p><p>Line five.</p><p>Line six.</p><p>Line seven.</p><p>Line eight.</p><p>Line nine.</p><p>Line ten.</p><p>Line eleven.</p><p>Line twelve.</p><p>Line thirteen.</p><p>Line fourteen.</p><p>Line fifteen.</p><p>Line sixteen.</p><p>Line seventeen.</p><p>Line eighteen.</p><p>Line nineteen.</p><p>Line twenty.</p><p>The end.</p>
+  </div>
+  <footer><button type="button" class="cr-button quiet" id="close-dialog">Decline</button><button type="button" class="cr-button primary" id="confirm-dialog">Accept</button></footer>
+</dialog>
+</main>
+<script>
+  /* Page furniture only. */
+  const root = document.documentElement;
+  if (location.hash === '#dark') root.dataset.crystalMode = 'dark';
+  const dialog = document.getElementById('dialog');
+  document.getElementById('open-dialog').addEventListener('click', () => dialog.showModal());
+  for (const id of ['close-dialog', 'confirm-dialog']) document.getElementById(id).addEventListener('click', () => dialog.close());
+</script>
+</body>
+</html>

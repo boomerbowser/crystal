@@ -387,6 +387,10 @@ const VARIANT_MAY_DIFFER = [
      a bare control, a navigation entry and a drag handle are decided to differ
      from the action (44px floor, no pad, their own padding) — see surfaces.json. */
   /\.cr-bare\b/, /\.cr-nav-item\b/, /\.cr-drag-handle\b/,
+  /* A button inside a group (2.3.0, D-26): its interior corners square off
+     against its neighbours and only the group's ends are round — the `group`
+     surface, decided to differ from a lone action's pill. */
+  /\.cr-group\b/,
 ];
 
 /* Every rule that sets `prop` and could reach a `<button class="cr-button">`.
@@ -843,6 +847,38 @@ check('the switch and the choice box read their published tokens', () => {
   const tokens = require('../core/tokens/crystal.tokens.json').component;
   assert.match(theme, new RegExp(`--cr-switch-track-width:\\s*${tokens.switch.trackWidth.$value}`));
   assert.match(theme, new RegExp(`--cr-choice-box-size:\\s*${tokens.choice.boxSize.$value}`));
+});
+
+/* The rulings of 29 September 2026 (proposals/2026-09-29-rulings.md), each as
+   the one thing a later edit could quietly undo. What they look like is checked
+   in a browser by proposals/2026-09-29-rulings/examples/verify.mjs; these hold
+   the text of the decision. */
+check('the rulings of 29 September 2026 hold in the stylesheet', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const motionCss = fs.readFileSync(path.join(__dirname, '../core/assets/motion.css'), 'utf8');
+  /* D-21: the reset hover that never rendered stays deleted. */
+  assert.ok(!/\.cr-button:hover\s*\{[^}]*brightness/.test(stylesheetCode),
+    'the reset layer brightens a hovered .cr-button again, which crystal.component erases (D-21)');
+  /* 4.4: the preview's class is the preview's. */
+  assert.ok(!/tiny-button/.test(stylesheetCode + motionCss), '.tiny-button is back in the library');
+  /* D-29: fixed only centres a native dialog. */
+  assert.ok(/dialog\.cr-dialog\s*\{\s*position:\s*fixed/.test(stylesheetCode), 'dialog.cr-dialog is not fixed');
+  assert.ok(!/(^|[},\s])\.cr-dialog\s*\{\s*position:\s*fixed/.test(stylesheetCode),
+    '.cr-dialog is fixed on every element again, which leaves a non-dialog host off-centre (D-29)');
+  /* D-25: the body scrolls, a body-less dialog still does. */
+  assert.ok(/\.cr-dialog:has\(> \.cr-dialog-body\)\s*\{[^}]*overflow:\s*visible/.test(stylesheetCode), 'a dialog with a body scrolls its surface');
+  assert.ok(/\.cr-dialog-body\s*\{[^}]*overflow:\s*auto/.test(stylesheetCode), '.cr-dialog-body does not scroll');
+  /* D-26: the dock reaches its other controls without raising specificity. */
+  assert.ok(/\.cr-dock :where\(\[role=tab\], a, label:has\(> input\[type=radio\]\)\)/.test(stylesheetCode),
+    'the dock no longer reaches tabs, links and radio labels, or does so outside :where()');
+  /* The new recipes exist. */
+  for (const recipe of ['.cr-group', '.cr-group.vertical', ':is(.cr-haze,.cr-surface).overlay', '.cr-resin-haze.count']) {
+    assert.ok(stylesheetCode.includes(recipe + ' {') || stylesheetCode.includes(recipe + '{'), `${recipe} has no rule`);
+  }
+  /* D-27: the glyphs reach any field shell. */
+  assert.ok(!/span\.cr-field-shell(:[\w-]+(\([^)]*\))?)*>\.cr-indicator/.test(stylesheetCode),
+    'the field glyphs are keyed on span.cr-field-shell again, which a div shell never matches (D-27)');
 });
 
 /* -------------------------------------------------------------- report */

@@ -285,8 +285,7 @@
       "crystal": "Step materials, connector treatment, the advance motion",
       "product": "The steps and their validation",
       "motion": [
-        "selection",
-        "page-in"
+        "selection"
       ],
       "parity": [
         "antd:Steps",

@@ -1578,56 +1578,6 @@
       }
     },
     {
-      "id": "reaction",
-      "category": "Content",
-      "label": "Reaction response",
-      "duration": 680,
-      "engine": "Motion",
-      "keyframes": [
-        {
-          "transform": "scale(0.9155,1.0923) rotate(-4deg)",
-          "offset": 0
-        },
-        {
-          "transform": "scale(1.1193,0.8934) rotate(3deg)",
-          "offset": 0.3333333333333333
-        },
-        {
-          "transform": "scale(0.9658,1.0355) rotate(-1deg)",
-          "offset": 0.6666666666666666
-        },
-        {
-          "transform": "scale(1) rotate(0)",
-          "offset": 1
-        }
-      ],
-      "use": "Toggle the real reaction state and count before the response.",
-      "reduced": "Apply the semantic state immediately; omit decorative movement.",
-      "material": "resin",
-      "signature": "coalesce",
-      "spring": {
-        "stiffness": 307.72,
-        "damping": 21.752,
-        "mass": 1,
-        "dampingRatio": 0.62,
-        "platform": {
-          "swiftUI": {
-            "response": 0.3582,
-            "dampingFraction": 0.62
-          },
-          "compose": {
-            "dampingRatio": 0.62,
-            "stiffness": 307.72
-          },
-          "web": {
-            "stiffness": 307.72,
-            "damping": 21.752,
-            "mass": 1
-          }
-        }
-      }
-    },
-    {
       "id": "toast-in",
       "category": "Feedback",
       "label": "Notification arrival",
@@ -1837,52 +1787,6 @@
           "web": {
             "stiffness": 251.636,
             "damping": 29.188,
-            "mass": 1
-          }
-        }
-      }
-    },
-    {
-      "id": "busy",
-      "category": "Feedback",
-      "label": "Finite busy cue",
-      "duration": 680,
-      "engine": "GSAP",
-      "keyframes": [
-        {
-          "opacity": 0.45,
-          "offset": 0
-        },
-        {
-          "opacity": 1,
-          "offset": 0.5
-        },
-        {
-          "opacity": 0.45,
-          "offset": 1
-        }
-      ],
-      "use": "One cycle for an actual pending operation; keep a static busy label if it lasts longer.",
-      "reduced": "Apply the semantic state immediately; omit decorative movement.",
-      "material": "stone",
-      "signature": "feather",
-      "spring": {
-        "stiffness": 134.9372,
-        "damping": 21.3739,
-        "mass": 1,
-        "dampingRatio": 0.92,
-        "platform": {
-          "swiftUI": {
-            "response": 0.5409,
-            "dampingFraction": 0.92
-          },
-          "compose": {
-            "dampingRatio": 0.92,
-            "stiffness": 134.9372
-          },
-          "web": {
-            "stiffness": 134.9372,
-            "damping": 21.3739,
             "mass": 1
           }
         }
