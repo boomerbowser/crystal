@@ -8,15 +8,19 @@
  * a non-dialog host; and D-21's hover, which must not change.
  *
  * Serve the repository (`node proposals/2026-09-28-component-recipes/examples/
- * serve.cjs 4331`) and run this with Playwright resolvable — this repository
- * does not install it; crystal-preview and crystal-react do.
+ * serve.cjs 4331`) and run this from a checkout that installs Playwright —
+ * crystal-preview or crystal-react — e.g. `node ../crystal-design-system/
+ * proposals/2026-09-29-rulings/examples/verify.mjs`.
  *
  * RED=1 BEFORE=<an older crystal.css> serves that stylesheet in place of the
  * current one, so each check can be watched failing. Against 2.2's, eleven
  * fail; the three that pass are the ones that must not change (a primary
  * child's ink, D-21's hover, a closed dialog staying hidden).
  */
-import { chromium } from 'playwright';
+import { createRequire } from 'node:module';
+/* Playwright from wherever this is run: this repository does not install it. */
+const playwright = await import(createRequire(`${process.cwd()}/`).resolve('playwright'));
+const chromium = playwright.chromium ?? playwright.default.chromium;
 import { readFileSync } from 'node:fs';
 const RED = process.env.RED === '1';
 const URL = 'http://127.0.0.1:4331/proposals/2026-09-29-rulings/examples/';
@@ -27,11 +31,11 @@ const out = [];
 const rec = (name, ok, detail) => out.push({ name, ok, detail });
 const cs = (sel, prop, pseudo) => p.evaluate(([s, pr, ps]) => { const e = document.querySelector(s); return e ? getComputedStyle(e, ps || null)[pr] : null; }, [sel, prop, pseudo]);
 
-const ref = { bg: await cs('#dock-buttons button[aria-pressed=true]', 'backgroundColor'), h: await cs('#dock-buttons button[aria-pressed=true]', 'height') };
+const ref = { bg: await cs('#dock-buttons button[aria-pressed=true]', 'backgroundColor'), h: await cs('#dock-buttons button[aria-pressed=true]', 'height'), w: await cs('#dock-buttons button[aria-pressed=true]', 'fontWeight') };
 for (const [id, sel, unsel] of [['tabs', '#dock-tabs [aria-selected=true]', '#dock-tabs [aria-selected=false]'], ['radios', '#dock-radios label:has(:checked)', '#dock-radios label:not(:has(:checked))'], ['links', '#dock-links [aria-current]', '#dock-links a:not([aria-current])']]) {
   const s = { bg: await cs(sel, 'backgroundColor'), h: await cs(sel, 'height'), r: await cs(sel, 'borderTopLeftRadius'), w: await cs(sel, 'fontWeight') };
   const u = await cs(unsel, 'backgroundColor');
-  rec(`dock ${id}: selected takes the dock button's primary fill and height; unselected is clear`, s.bg === ref.bg && s.h === ref.h && u === 'rgba(0, 0, 0, 0)' && s.r === '999px', JSON.stringify({ s, u, ref }));
+  rec(`dock ${id}: selected takes the dock button's primary fill, height and weight; unselected is clear`, s.bg === ref.bg && s.h === ref.h && s.w === ref.w && s.w === '800' && u === 'rgba(0, 0, 0, 0)' && s.r === '999px', JSON.stringify({ s, u, ref }));
 }
 await p.focus('#dock-tabs [aria-selected=true]');
 await p.keyboard.press('Tab');

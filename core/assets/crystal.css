@@ -1547,6 +1547,9 @@ input[type=checkbox][role=switch] {
     background: var(--cr-primary);
     color: var(--cr-on-primary);
     box-shadow: 0 3px 7px var(--cr-shadow-contact);
+    /* Selection is weight first, as a selected dock button's is: typographic, so
+       it never rests on the fill's colour alone. */
+    font-weight: 800;
 }
 .cr-dock :where([role=tab]:not([aria-selected=true]), a:not([aria-current]:not([aria-current=false])), label:has(> input[type=radio]:not(:checked))):hover {
     background: var(--cr-surface);
