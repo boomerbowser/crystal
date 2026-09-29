@@ -7,8 +7,8 @@ it would take.
 **Two entries are left, each ruled on 29 September 2026 and waiting on
 something outside this repository** — the questions, the options and the
 answers are in [`2026-09-29-rulings.md`](2026-09-29-rulings.md). D-4 waits on
-a phone to drive; D-25's last finding on 2.3.0 reaching the registry, so the
-preview can adopt it. D-17 closed the same day, on the evidence of its hunt.
+a phone to drive; D-25's last step on GitHub Actions being able to run again,
+so the preview's runner baselines can be re-captured. D-17 closed the same day, on the evidence of its hunt.
 D-21, D-26, D-27, D-28 and D-29 closed on 29 September 2026, built into 2.3.0;
 their records are in [`closed-issues.md`](closed-issues.md).
 D-22, D-23 and D-24 closed on 28 September 2026, each by Meridian's ruling: the
@@ -97,7 +97,7 @@ in the capture README where a reader meets it.
 
 **Ruled 29 September 2026:** the dialog scrolls a `.cr-dialog-body` child; a recessed overlay recipe is authored for overlays inside a pane; the preview moves to the latest published core and is re-baselined. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
 
-**Built in 2.3.0:** `.cr-dialog-body` and `.cr-haze.overlay`, both measured in a browser. What remains is the third finding — the preview adopting a published Crystal — which waits on 2.3.0 reaching the registry.
+**Built in 2.3.0:** `.cr-dialog-body` and `.cr-haze.overlay`, both measured in a browser. The third finding is built too, on crystal-preview's `adopt-crystal-2.3.0` branch: the site installs 2.3.0 from the registry, its tests, scroll, interaction and deploy gates pass, and the seven frames 2.3.0 changes are identified and explained in that commit. What remains is re-capturing the runner baselines with the capture workflow — which GitHub refused to start on 29 September because the account's recent payments failed or its spending limit needs raising — then looking at every frame and merging. Crystal React's material gate already compares against the site on 2.3.0.
 
 *(Opened 28 September 2026, split from D-23 and D-24 when those were ruled.)*
 
