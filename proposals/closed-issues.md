@@ -2067,3 +2067,107 @@ library's:
 a native modal dialog is centred as before, and on any other element the class
 is the material. Measured: a native dialog opens centred at 1280x900, and a
 `section.cr-dialog` is not fixed.
+
+## D-17 · `forced-colours-dark` differs on the runner about one run in two
+
+**Ruled 29 September 2026:** hunt it now — dispatch the visual job repeatedly on the runner and close on the evidence. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
+
+*(Opened 22 September 2026.)*
+
+**What happened.** The first push to `crystal-preview` after the visual gate went
+into CI failed on one frame:
+
+```
+FAIL forced-colours-dark.png: 287 of 1152000 pixels differ (0.0249%),
+worst channel delta 229; 231 pixel(s) changed visibly (delta over 24)
+```
+
+Re-running the same job on the same commit, with no change of any kind, passed
+23 of 23. So the frame is nondeterministic on the runner.
+
+**Why it matters more than 287 pixels.** A gate that fails at random is a gate
+people learn to re-run rather than read, and the next real regression arrives
+looking exactly like this one. It is also the failure mode D-15 was closed to
+prevent — "capture where you compare" fixed *systematic* disagreement between
+the desk and the runner, and this is the residual *random* kind.
+
+**What is ruled out.** The commit that first showed it changed only class names
+on buttons — `cr-button secondary` to `cr-button`, `cr-button` to `cr-button
+primary`. Neither class has a rule in the 2.0.0 the site installs, neither
+appears in any of the site's three stylesheets, and the same build is 23 of 23
+identical against the desk baselines. The markup is not the cause.
+
+**What is not yet known.** Which 287 pixels. The gate captured to a temporary
+directory the process deleted on its way out, so the first failure it ever
+produced left nothing to look at — which is itself now fixed: `verify-frames`
+takes `--keep`, and the CI job uploads `actual-` and `expected-` for every
+differing frame on failure.
+
+**It does not reproduce on the desk.** 23 September 2026: the frame was captured
+eight times, each in a fresh browser context with the frame's own settings
+(`forcedColors: 'active'`, `colorScheme: 'dark'`, `deviceScaleFactor: 1`, 1280×900,
+900ms settle), and each compared against the first with
+`tools/compare-captures.py --tolerance 2 --max-differing 400` — the gate's own
+comparison, at the gate's own tolerance. Seven of seven came back SAME. Eight
+captures is not a proof of determinism, but it does say the nondeterminism is not
+cheaply available here, so the artifact from the runner remains the way in.
+
+**Two of the three candidates are now ruled out by measuring the baseline**
+(`validation/baselines-ci/forced-colours-dark.png`, 1,152,000 pixels):
+
+- *The atmosphere gradient's dither.* There is no gradient left to dither.
+  92.03% of the frame is pure black and 2.98% is pure white; the intermediate
+  greys are 3.46%, and they are spread over a bounding box of 44,0–1235,877 —
+  that is glyph anti-aliasing across the whole frame, not a shaded region with
+  banding seams in it. A seam moving one quantisation step would also be a *small*
+  delta, and 231 of the 287 pixels crossed the gate's visible threshold of 24.
+- *The Manrope fallback resolving differently.* A different typeface moves every
+  glyph edge. There are 39,828 anti-aliased glyph pixels in this frame; 287 is
+  0.7% of them. A font swap cannot be that small.
+
+**What the magnitude does say.** In a frame that is 95% two pure tones, 231
+pixels changing by up to 229 is one small thing drawn or not drawn at full
+contrast — for scale, the string `15.78:1` in this frame is 187 pixels of ink
+above that same threshold. And whatever it is, **it does not reflow**: if the
+thing that changed had altered any inline box's width, the text after it would
+have moved and the count would be in the thousands. So the candidate is something
+painted in place — a caret, a focus ring, a hover or pressed state, a glyph
+substitution of equal advance — and not a piece of content arriving late. (Worth
+knowing while reading the artifact: `#contrast-metric` is the only readout in
+this region whose shipped markup, `—`, differs from what `site.js` renders. It is
+therefore the one element a half-rendered page would betray — and it would betray
+it by reflowing the label beside it, which is not this.)
+
+**Closing it needs** the next occurrence with the artifact `verify-frames --keep`
+now writes and the CI job now uploads: `actual-forced-colours-dark.png` beside
+`expected-`, differenced, to say *where* the 287 pixels are. The three sentences
+above are what that image has to be read against.
+
+---
+
+**Closed 29 September 2026, on the evidence of a hunt** (ruled that day: "hunt
+it now"). The visual gate was run 20, 60, 60 and 60 times at once on the pinned
+runner image, from a temporary workflow on a branch of crystal-preview.
+
+The frame was never the point. Every select-text failure was the playground's
+typeface `<select>`: 287 or 288 pixels, the word "Manrope" set 0.8px high inside
+a box that did not move — in `forced-colours-dark` and `-light`, `playground-rtl`
+and `playground-reduced-transparency` alike. That is the "something painted in
+place that does not reflow" this entry predicted: Chromium lays a native select's
+text out itself and, one run in twenty, keeps a layout from before the page
+settled.
+
+| Round | Capture harness | Runs | Select text | Mid-transition |
+|---|---|---|---|---|
+| 1 | as it was | 20 | 1 | 0 |
+| 2 | every font face loaded first | 60 | 5 frames in 4 runs | 0 |
+| 3 | and every select laid out again | 60 | 0 | 1 |
+| 4 | and every finite animation awaited | 42 | 0 | 0 |
+
+Round three's one failure was different — a button's rim photographed a sub-pixel
+into a transition in `focus-ring-light` — and round four waits for every finite
+animation, bounded at three seconds, before the picture is taken. Both fixes are
+in crystal-preview's `tools/capture-frames.mjs` (commit `a65821c`). 102 runs
+without the select, 42 without the transition. Round four's other eighteen jobs
+were not started at all: GitHub reported that the account's recent payments had
+failed or its spending limit needed raising.
