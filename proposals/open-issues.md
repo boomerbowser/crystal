@@ -51,6 +51,17 @@ intact — several are cited by name from the code they produced.
 
 **Ruled 29 September 2026:** a real Android phone over ADB, as a device leg of `verify-scroll`; Meridian supplies the device. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
 
+**Built 29 September 2026, waiting on the phone.** crystal-preview's
+`npm run verify:scroll:device` (`tools/verify-scroll-device.mjs`) runs the scroll
+contract in Chrome on a connected Android phone and measures what emulation
+cannot: whether content shifts when a scrollbar appears, as a container's
+content width with its block overflow on and off. On desktop Chromium with
+classic scrollbars that measurement reads 0 for a stable gutter and 15 without
+one, so it discriminates. It closes this entry the first time it runs green on a
+device. The phone needs USB debugging with this computer allowed, and Chrome's
+"Enable command line on non-rooted devices" flag, which Playwright's Android
+driver requires.
+
 *(Halved 22 September 2026. This issue held two claims; the first was wrong and
 its half is closed. What is left is the one below, and it is now demonstrated
 rather than asserted.)*
