@@ -2,8 +2,8 @@
   "$description": "What the web platform library, @crystal-ui/react, has implemented. Merged into libraries/parity.json by tools/build-catalogue.cjs; a component absent here is not-started on this platform. This is the record a library keeps, not a generated file: update it from the library's own component manifest when a slice ships, and say which build it came from.",
   "platform": "web",
   "library": "@crystal-ui/react",
-  "source": "dist/component-manifest.json in crystal-react at 00635bb (24 September 2026)",
-  "updated": "2026-09-28",
+  "source": "dist/component-manifest.json in crystal-react at d49e75a (29 September 2026)",
+  "updated": "2026-09-29",
   "components": {
     "app-shell": "implemented",
     "container": "implemented",
@@ -269,6 +269,24 @@
     "permission-screen": "implemented",
     "dashboard-shell": "implemented",
     "metrics-row": "implemented",
-    "analytics-panel": "implemented"
+    "analytics-panel": "implemented",
+    "virtualizer": "implemented",
+    "data-table-block": "implemented",
+    "crud-form-block": "implemented",
+    "settings-block": "implemented",
+    "auth-block": "implemented",
+    "profile-block": "implemented",
+    "activity-feed": "implemented",
+    "notification-centre": "implemented",
+    "player-shell": "implemented",
+    "playlist-block": "implemented",
+    "storefront-block": "implemented",
+    "product-detail-block": "implemented",
+    "checkout-block": "implemented",
+    "cart-drawer": "implemented",
+    "pricing-block": "implemented",
+    "onboarding-block": "implemented",
+    "search-block": "implemented",
+    "editor-block": "implemented"
   }
 }

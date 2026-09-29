@@ -4,15 +4,16 @@ Things noticed during Crystal 2.0 and the React library's implementation that ar
 not fixed. Each says what is wrong, why it matters, where it is, and what closing
 it would take.
 
-**Seven entries are left.** D-4's remaining half is waiting on hardware, D-17
+**Eight entries are left.** D-4's remaining half is waiting on hardware, D-17
 is a flake nobody can diagnose until it happens again with the evidence kept,
 D-21 is a hover treatment the stylesheet specifies and layer order erases —
 Meridian's to rule on, with a recommendation in §4.3 of
 [`2026-09-28-component-recipes.md`](2026-09-28-component-recipes.md) — D-25
 holds three findings from Crystal React's surface sweep, D-26 two things the
 dock surface names that `.cr-dock` does not yet draw, D-27 two small marks
-whose recipes do not reach the element a consumer has, and D-28 motion the
-catalogue assigns that no component can play as written.
+whose recipes do not reach the element a consumer has, D-28 motion the
+catalogue assigns that no component can play as written, and D-29 a component
+the catalogue lists twice and a class that centres only the element it expects.
 D-22, D-23 and D-24 closed on 28 September 2026, each by Meridian's ruling: the
 navigation entry draws its location dot, the catalogue's surfaces match what
 renders, and the field shell is adopted as written.
@@ -306,4 +307,40 @@ does. Each wants either a narrower assignment or a ruling:
   "range outputs, steppers and scrubber labels", and these controls have no
   readout; the thumb is the only thing that moves, and its position is the
   value. Either the entries gain an output, or the recipe comes off them.
+
+## D-29 · A component listed twice, and a dialog class that centres only a `<dialog>`
+
+*(Opened 29 September 2026, by Crystal React finishing its blocks.)*
+
+Two findings from the last slice, both small and both Crystal's rather than the
+library's:
+
+- **The catalogue lists the virtualizer twice.** `virtual-scroller` in
+  `05-data-display.json` ("a long list that renders only what is near the
+  viewport", parity `primereact:virtualscroller`) and `virtualizer` in
+  `09-utility.json` ("renders only what is near the viewport, for lists, grids
+  and tables", parity `react-aria:Virtualizer` and the same primereact
+  component). The states and the material are identical, and the utility entry's
+  semantics — set counts across recycling, a focused row never dropped — are the
+  data-display entry's with one clause added. Crystal React maps its one
+  `Virtualizer` export to both ids and verifies the fuller set of promises in a
+  browser, so parity reads correctly either way; but the catalogue's count of 285
+  includes one component twice, and every other platform will build it twice or
+  wonder why not. Closing it: keep `virtualizer` (its semantics are the complete
+  ones and its parity names both references), remove `virtual-scroller`, and let
+  the count become 284 — which moves `libraries/parity.json` and the figure the
+  documentation quotes, so it is Meridian's to decide.
+- **`.cr-dialog { position: fixed }` centres only a native `<dialog>`.** The
+  browser gives a modal `<dialog>` `inset: 0` and auto margins, and a fixed box
+  with those is centred. Any other element that wears the class — React Aria's
+  dialog is a `section` — keeps its static position instead: its top-left corner
+  at the middle of the screen and, on a phone, half of it past the right edge.
+  Crystal React wore the class from 2.2.0 and every dialog shipped that way until
+  a screenshot showed it; it now overrides the position and measures where the
+  dialog opens. Closing it: key the rule on `dialog.cr-dialog`, or give the class
+  the offsets and margins the browser supplies to a `<dialog>`, so that the class
+  means the same thing on any element. The surfaces vocabulary already assumes
+  the native element — it pairs the class with `.cr-dialog::backdrop`, which only
+  a `<dialog>` has. Either is a change to generated CSS; nothing in the preview
+  wears the class, so neither changes what the preview renders.
 

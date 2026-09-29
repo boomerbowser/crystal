@@ -3278,7 +3278,7 @@
         "none"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4476,7 +4476,7 @@
         "frost"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4491,7 +4491,7 @@
         "haze"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4505,7 +4505,7 @@
         "haze"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4520,7 +4520,7 @@
         "haze"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4534,7 +4534,7 @@
         "haze"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4552,7 +4552,7 @@
         "list-out"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4573,7 +4573,7 @@
         "list-out"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4588,7 +4588,7 @@
         "haze"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4607,7 +4607,7 @@
         "reorder"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4621,7 +4621,7 @@
         "none"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4635,7 +4635,7 @@
         "none"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4650,7 +4650,7 @@
         "haze"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4669,7 +4669,7 @@
         "drawer-out"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4683,7 +4683,7 @@
         "haze"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4702,7 +4702,7 @@
         "page-out"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4723,7 +4723,7 @@
         "list-out"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
@@ -4738,7 +4738,7 @@
         "haze"
       ],
       "status": {
-        "web": "not-started",
+        "web": "implemented",
         "react-native": "not-started",
         "swiftui": "not-started",
         "compose": "not-started"
