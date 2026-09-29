@@ -1856,3 +1856,214 @@ written, rim included. The measurement stands and is recorded where a reader mee
 `docs/accessibility.md` now states that the rim measures 1.06:1 and 1.63:1, is treated as
 decorative, and that a field is identified by its shell's fill and float shadow, its Haze
 well and its visible label — none of which the token checks cover.
+
+## D-21 · Crystal specifies a hover treatment for its button that layer order erases
+
+**Ruled 29 September 2026:** delete the reset rule; Crystal's button has no hover lift, and the `hover` caustic is its pointer affordance. `.tiny-button` (4.4) moves to the preview. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
+
+**Found 24 September 2026, by Crystal React's R-19 sweep, and it is D-20's
+sibling.**
+
+`controls.css` writes a hover treatment for the action button:
+
+    .cr-button:hover { box-shadow: var(--cr-shadow-content); filter: brightness(1.04) }
+
+That rule is in `@layer crystal.reset`. Two rules in `@layer crystal.component`
+land on the same element:
+
+    :is(button, a.cr-button, .cr-control, …) { box-shadow: var(--cr-shadow-float) }
+    :is(button, a.cr-button):hover           { background: var(--cr-resin-fill); filter: none }
+
+A later layer wins regardless of specificity, so the component layer takes both
+halves: `filter: none` cancels the brightness lift, and the resting
+`--cr-shadow-float` outranks the hover `--cr-shadow-content` even though the
+hover rule is more specific. **Crystal's button has no hover treatment at all.**
+Measured in a browser, a `.cr-button` and a bare `<button>` are identical at rest
+and on hover, in every one of `background`, `filter` and `box-shadow`.
+
+This is the same defect as D-20 — a rule authored in `crystal.reset` that the
+component layer erases, published and rendering nothing — and it was found the
+same way, by planting Crystal's own element beside a consumer's and diffing the
+computed style.
+
+**Which of the two is wanted is Meridian's call, and they are different designs.**
+`crystal.component` says the resting state of a Resin control already *is* the
+floating state, so there is nowhere further to lift; on that reading the reset
+rule is stale and should go. `crystal.reset` says a pressable control brightens
+and settles toward the surface when the pointer is over it; on that reading the
+component rule needs a hover clause and the treatment should move into it. What
+is not wanted is the present state, where the stylesheet says one thing and
+renders the other.
+
+**Crystal React has stopped compensating for it.** The library had
+`filter: brightness(1.04)` on `[data-hovered]`, attributed in a comment to
+"the one Crystal writes for its own filled button" — which is the reset rule,
+the one that does not render. The R-19 sweep deleted it, so the library now
+matches what Crystal renders rather than what Crystal says. If the reset rule is
+restored to life, the library inherits it with no change.
+
+**Closed 29 September 2026.** Meridian ruled the component layer's reading
+correct: the reset rule is deleted, Crystal's button has no hover lift, and the
+`hover` caustic is its pointer affordance. Nothing that renders changed. The
+other half of the proposal's 4.4 went with it: `.tiny-button`, the site's class,
+left `motion.css`, and crystal-preview carries its transition. A contract in
+`tests/core-contracts.cjs` refuses both returning, seen red against the
+stylesheet of that morning.
+
+## D-26 · The dock surface names controls `.cr-dock` cannot reach, and a grouping it does not draw
+
+**Ruled 29 September 2026:** the dock's control rules extend to tabs, radio labels and links through `:where()`; a button group and a split button are a new surface, `group` (`.cr-group`). See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
+
+*(Opened 28 September 2026, by Crystal React's adoption of the corrected surfaces.)*
+
+D-23 named nine components as the `dock` surface. Two things stop a consumer
+wearing `.cr-dock` for all of them as written:
+
+- **The dock's controls are keyed on `button`.** `.cr-dock button`, its selected
+  rule `:is([aria-pressed=true],[aria-selected=true])`, its focus rule and its
+  forced-colours ring reach only a `<button>`. A tab is commonly
+  `[role=tab]` on another element, a segmented control is commonly radio inputs
+  inside labels, and a dock or bottom-navigation destination is a link carrying
+  `aria-current`. None of them is reached. Crystal React restates the dock-button
+  values on those three and compares them with a planted `.cr-dock button` in a
+  gate — correct today, and a second copy. Closing it: extend the dock's control
+  selector to `[role=tab]`, a label holding a radio (`label:has(input[type=radio])`,
+  selected by `:checked`), and `a` (selected by `aria-current`), in a way that
+  does not raise the specificity of the existing `button` rules consumers
+  already sit against.
+- **A button group and a split button are docks whose segments touch.** The
+  catalogue asks for "interior corners square against neighbours" and "a hairline
+  between the two targets". `.cr-dock` spaces its buttons 4px apart inside 9px of
+  padding and rounds each one to a pill, so wearing it would mean overriding the
+  class back. Crystal React keeps its own grouped geometry and restates the dock's
+  material, now with the rim it lacked. Closing it: a grouped variant of the dock
+  — no padding or gap, the children square inside and the pill outside, and a
+  hairline in `--cr-edge` between them — or a ruling that a group is a different
+  surface.
+
+**Closed 29 September 2026, in 2.3.0.** The dock's control, selected, hover,
+narrow-screen and forced-colours rules reach `[role=tab]`, a radio label and a
+link, all inside `:where()`, so no existing selector's specificity moved. And a
+group is a surface of its own, `group` — Meridian's choice over a dock variant:
+`.cr-group` is one Resin plane whose controls touch, pill outside, square
+inside, a hairline between, with `.vertical`; `button-group` and `split-button`
+name it. Measured in a browser on `proposals/2026-09-29-rulings/examples`: a tab,
+a radio label and a link each take a dock button's fill and height, and the
+group's corners, hairline and rim hold; red against the stylesheet of that
+morning.
+
+## D-27 · Two small marks the compact and indicator recipes do not reach
+
+**Ruled 29 September 2026:** a compact count size, `.cr-resin-haze.count`; the field glyphs keyed on `.cr-field-shell` whatever its element. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
+
+*(Opened 28 September 2026, by Crystal React's per-surface check.)*
+
+- **A count badge is `compact`, and `.cr-resin-haze` is sized for a tag.** Its
+  Haze pad is inset by `--cr-haze-inset`, 8px, and its block padding is a tag's
+  17px. On a 20px count badge the first leaves a pad a few pixels across with the
+  digit mostly outside it, and the second makes the badge 55px tall. Crystal
+  React releases both on its badge and fills to the badge's own edge; its gate
+  names the inset as the one allowed difference. Closing it: a compact size for
+  counts — the inset scaled to the mark, no block padding — or a ruling that a
+  count badge is a different surface.
+- **The indicator's field glyphs are keyed on `span.cr-field-shell`.** ○ idle,
+  ● focused, * required and ! invalid are drawn only when `.cr-indicator` is a
+  child of a `span` field shell. A field shell that holds a label, a textarea or
+  a row of chips is a block, and a consumer writes it as a `div` — every one in
+  Crystal React is — so the glyphs never reach it. Closing it: key those rules on
+  `.cr-field-shell` whatever its element, or on a `data-` attribute the field
+  sets, without disturbing the `span` form's own padding rule. Crystal React's
+  `Indicator` waits on this (its R-25).
+
+**Closed 29 September 2026, in 2.3.0.** `.cr-resin-haze.count` is the
+compact display sized for a count — a 20px circle that grows to a pill, filled
+to its own edge, no block padding, one line — and the field glyphs are keyed on
+`.cr-field-shell` whatever its element, a block shell making the same room for
+the glyph as the inline one. Both measured in a browser, red against the
+stylesheet of that morning. Crystal React's R-25 follows.
+
+## D-28 · Motion the catalogue assigns that no component can play as written
+
+**Ruled 29 September 2026:** all five assignments come off the catalogue. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
+
+*(Opened 28 September 2026, by Crystal React binding every assignment in 2.2.0.)*
+
+Crystal React now plays the motion the catalogue gives its components, bound to
+state and checked in a browser. A few assignments cannot be honoured by any
+implementation, because of what the catalogue says rather than what a library
+does. Each wants either a narrower assignment or a ruling:
+
+- **`page-in` and `page-out` on navigation** — NavLink, the rail, the dock, the
+  bottom bar, the stepper, checkout steps. These recipes mark "a new local view
+  after routing is committed"; the navigation does not render that view, the
+  product does. The navigation's own motion is `selection`, which it plays. The
+  assignment belongs to the view, or to a routing surface the catalogue does not
+  have.
+- **`busy` on progress and the loader** — "one cycle for an actual pending
+  operation". D-19 gave pending work continuous recipes (`activity-turn`,
+  `activity-travel`), which these play; a one-shot cycle beside a loop is two
+  answers to one question. `activity-turn` on a *linear* progress bar is the same
+  question: it plays `activity-travel`.
+- **`resin-confluence` on the floating action** — the recipe's own text is "a
+  visual study, not an application action".
+- **`reaction` on the authored bubble** — the entry's anatomy has no reactions to
+  toggle.
+- **`slider-step` on the colour area, slider and wheel** — the recipe is for
+  "range outputs, steppers and scrubber labels", and these controls have no
+  readout; the thumb is the only thing that moves, and its position is the
+  value. Either the entries gain an output, or the recipe comes off them.
+
+**Closed 29 September 2026, in 2.3.0.** Meridian ruled all five off, and none
+honoured by growing a component. `tools/extend-catalogue-7.cjs` records the old
+values: the six navigation entries keep `selection`; progress plays
+`progress-change` and `activity-travel`, the loader `activity-turn`; the floating
+action `press`; the authored bubble `message-in`; the colour controls nothing.
+`busy` and `reaction` were then claimed by no component, and the build refuses
+an unclaimed recipe, so a second question was asked and both were withdrawn:
+the motion vocabulary is 59 recipes.
+
+## D-29 · A component listed twice, and a dialog class that centres only a `<dialog>`
+
+**Ruled 29 September 2026:** keep `virtualizer` and remove `virtual-scroller` (284 components); `position: fixed` keyed on `dialog.cr-dialog`. See [`2026-09-29-rulings.md`](2026-09-29-rulings.md).
+
+*(Opened 29 September 2026, by Crystal React finishing its blocks.)*
+
+Two findings from the last slice, both small and both Crystal's rather than the
+library's:
+
+- **The catalogue lists the virtualizer twice.** `virtual-scroller` in
+  `05-data-display.json` ("a long list that renders only what is near the
+  viewport", parity `primereact:virtualscroller`) and `virtualizer` in
+  `09-utility.json` ("renders only what is near the viewport, for lists, grids
+  and tables", parity `react-aria:Virtualizer` and the same primereact
+  component). The states and the material are identical, and the utility entry's
+  semantics — set counts across recycling, a focused row never dropped — are the
+  data-display entry's with one clause added. Crystal React maps its one
+  `Virtualizer` export to both ids and verifies the fuller set of promises in a
+  browser, so parity reads correctly either way; but the catalogue's count of 285
+  includes one component twice, and every other platform will build it twice or
+  wonder why not. Closing it: keep `virtualizer` (its semantics are the complete
+  ones and its parity names both references), remove `virtual-scroller`, and let
+  the count become 284 — which moves `libraries/parity.json` and the figure the
+  documentation quotes, so it is Meridian's to decide.
+- **`.cr-dialog { position: fixed }` centres only a native `<dialog>`.** The
+  browser gives a modal `<dialog>` `inset: 0` and auto margins, and a fixed box
+  with those is centred. Any other element that wears the class — React Aria's
+  dialog is a `section` — keeps its static position instead: its top-left corner
+  at the middle of the screen and, on a phone, half of it past the right edge.
+  Crystal React wore the class from 2.2.0 and every dialog shipped that way until
+  a screenshot showed it; it now overrides the position and measures where the
+  dialog opens. Closing it: key the rule on `dialog.cr-dialog`, or give the class
+  the offsets and margins the browser supplies to a `<dialog>`, so that the class
+  means the same thing on any element. The surfaces vocabulary already assumes
+  the native element — it pairs the class with `.cr-dialog::backdrop`, which only
+  a `<dialog>` has. Either is a change to generated CSS. The preview wears the
+  class only on native `<dialog>` elements — the specification dialog and the
+  suite drawer — so the first would render it exactly as it does now.
+
+**Closed 29 September 2026, in 2.3.0.** `virtual-scroller` is removed and
+`virtualizer` remains; the catalogue is 284 components, and `web.json` and
+`parity.json` moved with it. `position: fixed` is keyed on `dialog.cr-dialog`:
+a native modal dialog is centred as before, and on any other element the class
+is the material. Measured: a native dialog opens centred at 1280x900, and a
+`section.cr-dialog` is not fixed.
