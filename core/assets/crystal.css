@@ -1527,7 +1527,7 @@ input[type=checkbox][role=switch] {
  * Every selector is inside `:where()`, so it adds no specificity to `.cr-dock`,
  * and the existing `.cr-dock button` rules (0,1,1) keep winning on a <button>
  * that is also `[role=tab]`. Nothing a consumer already sits against moves. */
-.cr-dock :where([role=tab], a, label:has(> input[type=radio])) {
+.cr-dock :where([role=tab], a, label:has(input[type=radio])) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1543,7 +1543,7 @@ input[type=checkbox][role=switch] {
     text-decoration: none;
     cursor: pointer;
 }
-.cr-dock :where([role=tab][aria-selected=true], a[aria-current]:not([aria-current=false]), label:has(> input[type=radio]:checked)) {
+.cr-dock :where([role=tab][aria-selected=true], a[aria-current]:not([aria-current=false]), label:has(input[type=radio]:checked)) {
     background: var(--cr-primary);
     color: var(--cr-on-primary);
     box-shadow: 0 3px 7px var(--cr-shadow-contact);
@@ -1551,11 +1551,14 @@ input[type=checkbox][role=switch] {
        it never rests on the fill's colour alone. */
     font-weight: 800;
 }
-.cr-dock :where([role=tab]:not([aria-selected=true]), a:not([aria-current]:not([aria-current=false])), label:has(> input[type=radio]:not(:checked))):hover {
+.cr-dock :where([role=tab]:not([aria-selected=true]), a:not([aria-current]:not([aria-current=false])), label:has(input[type=radio]:not(:checked))):hover {
     background: var(--cr-surface);
 }
 /* The radio is the control and the label is what is seen; the input stays in the
-   accessibility tree and takes focus, and its ring is drawn on the label. */
+   accessibility tree and takes focus, and its ring is drawn on the label. The
+   label is matched by a radio anywhere inside it — React Aria, for one, wraps
+   its input in a visually hidden span — and only a radio that is the label's own
+   child is hidden here, because a wrapped one is already hidden by its wrapper. */
 .cr-dock :where(label:has(> input[type=radio])) > input[type=radio] {
     position: absolute;
     inset: 0;
@@ -1565,27 +1568,27 @@ input[type=checkbox][role=switch] {
     opacity: 0;
     cursor: pointer;
 }
-.cr-dock :where(label:has(> input[type=radio]:focus-visible)) {
+.cr-dock :where(label:has(input[type=radio]:focus-visible)) {
     outline: 2px solid var(--cr-focus-core);
     outline-offset: 3px;
     box-shadow: inset 0 2px 1px var(--cr-rim), var(--cr-focus-ring);
 }
 @media (max-width:600px) {
-.cr-dock :where([role=tab], a, label:has(> input[type=radio])) {
+.cr-dock :where([role=tab], a, label:has(input[type=radio])) {
     padding: 10px 9px;
     font-size: 11px;
     min-height: 44px;
 }
 }
 @media (forced-colors:active) {
-.cr-dock :where([role=tab][aria-selected=true], a[aria-current]:not([aria-current=false]), label:has(> input[type=radio]:checked)) {
+.cr-dock :where([role=tab][aria-selected=true], a[aria-current]:not([aria-current=false]), label:has(input[type=radio]:checked)) {
     background: Canvas;
     color: CanvasText;
     outline: 2px solid Highlight;
     outline-offset: -3px;
     box-shadow: none;
 }
-.cr-dock :where(label:has(> input[type=radio]:focus-visible)) {
+.cr-dock :where(label:has(input[type=radio]:focus-visible)) {
     outline-color: Highlight;
     box-shadow: none;
 }

@@ -50,6 +50,12 @@
       <label><input type="radio" name="density"> Compact</label>
     </div></div>
     <figcaption><b>A segmented control</b> as radios in labels, selected by <code>:checked</code>.</figcaption></figure>
+  <figure class="specimen" id="dock-radios-wrapped"><div class="scene">
+    <div class="cr-dock" role="radiogroup" aria-label="Units">
+      <label><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap"><input type="radio" name="units" checked></span>Metric</label>
+      <label><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap"><input type="radio" name="units"></span>Imperial</label>
+    </div></div>
+    <figcaption><b>Radios wrapped</b> in a visually hidden span, as React Aria renders them.</figcaption></figure>
   <figure class="specimen" id="dock-links"><div class="scene">
     <nav class="cr-dock" aria-label="Destinations">
       <a href="#home" aria-current="page">Home</a>

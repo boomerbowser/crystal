@@ -870,7 +870,7 @@ check('the rulings of 29 September 2026 hold in the stylesheet', () => {
   assert.ok(/\.cr-dialog:has\(> \.cr-dialog-body\)\s*\{[^}]*overflow:\s*visible/.test(stylesheetCode), 'a dialog with a body scrolls its surface');
   assert.ok(/\.cr-dialog-body\s*\{[^}]*overflow:\s*auto/.test(stylesheetCode), '.cr-dialog-body does not scroll');
   /* D-26: the dock reaches its other controls without raising specificity. */
-  assert.ok(/\.cr-dock :where\(\[role=tab\], a, label:has\(> input\[type=radio\]\)\)/.test(stylesheetCode),
+  assert.ok(/\.cr-dock :where\(\[role=tab\], a, label:has\(input\[type=radio\]\)\)/.test(stylesheetCode),
     'the dock no longer reaches tabs, links and radio labels, or does so outside :where()');
   /* The new recipes exist. */
   for (const recipe of ['.cr-group', '.cr-group.vertical', ':is(.cr-haze,.cr-surface).overlay', '.cr-resin-haze.count']) {

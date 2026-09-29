@@ -1,6 +1,6 @@
 /* What the rulings of 29 September 2026 look like, measured in a browser.
  *
- * Fourteen checks on the specimen sheet beside this file: each 2.3.0 recipe on
+ * Fifteen checks on the specimen sheet beside this file: each 2.3.0 recipe on
  * the element a consumer actually writes, against the reference it must match —
  * a tab, a radio label and a link against a dock button; a group's corners and
  * hairline; the recessed overlay's edge; a count's circle; the field glyphs on
@@ -32,7 +32,7 @@ const rec = (name, ok, detail) => out.push({ name, ok, detail });
 const cs = (sel, prop, pseudo) => p.evaluate(([s, pr, ps]) => { const e = document.querySelector(s); return e ? getComputedStyle(e, ps || null)[pr] : null; }, [sel, prop, pseudo]);
 
 const ref = { bg: await cs('#dock-buttons button[aria-pressed=true]', 'backgroundColor'), h: await cs('#dock-buttons button[aria-pressed=true]', 'height'), w: await cs('#dock-buttons button[aria-pressed=true]', 'fontWeight') };
-for (const [id, sel, unsel] of [['tabs', '#dock-tabs [aria-selected=true]', '#dock-tabs [aria-selected=false]'], ['radios', '#dock-radios label:has(:checked)', '#dock-radios label:not(:has(:checked))'], ['links', '#dock-links [aria-current]', '#dock-links a:not([aria-current])']]) {
+for (const [id, sel, unsel] of [['tabs', '#dock-tabs [aria-selected=true]', '#dock-tabs [aria-selected=false]'], ['radios', '#dock-radios label:has(:checked)', '#dock-radios label:not(:has(:checked))'], ['wrapped radios', '#dock-radios-wrapped label:has(:checked)', '#dock-radios-wrapped label:not(:has(:checked))'], ['links', '#dock-links [aria-current]', '#dock-links a:not([aria-current])']]) {
   const s = { bg: await cs(sel, 'backgroundColor'), h: await cs(sel, 'height'), r: await cs(sel, 'borderTopLeftRadius'), w: await cs(sel, 'fontWeight') };
   const u = await cs(unsel, 'backgroundColor');
   rec(`dock ${id}: selected takes the dock button's primary fill, height and weight; unselected is clear`, s.bg === ref.bg && s.h === ref.h && s.w === ref.w && s.w === '800' && u === 'rgba(0, 0, 0, 0)' && s.r === '999px', JSON.stringify({ s, u, ref }));
