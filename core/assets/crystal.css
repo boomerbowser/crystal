@@ -58,7 +58,7 @@
 @supports not (backdrop-filter:blur(1px)){:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass){background:var(--cr-surface);border-color:var(--cr-outline)}}
 @media(prefers-reduced-transparency:reduce){:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass){background:var(--cr-surface);-webkit-backdrop-filter:none;backdrop-filter:none}:is(.cr-frost,.cr-acrylic):before{display:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}button:active:not(:disabled){transform:none}}
-@media(forced-colors:active){:is(.cr-plastic,.cr-foundation),:is(.cr-haze,.cr-surface),.cr-bubble,:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass),.cr-well,.cr-dock-inner{background:Canvas!important;color:CanvasText!important;box-shadow:none!important;backdrop-filter:none!important;border:1px solid CanvasText}:is(.cr-frost,.cr-acrylic):before{display:none}.cr-button,.cr-status{forced-color-adjust:auto;border:1px solid ButtonText}.cr-dock button[aria-pressed=true]{outline:2px solid Highlight}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline-color:Highlight}}
+@media(forced-colors:active){:is(.cr-plastic,.cr-foundation),:is(.cr-haze,.cr-surface),.cr-bubble,:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass),.cr-well,.cr-dock-inner{background:Canvas!important;color:CanvasText!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border:1px solid CanvasText}:is(.cr-frost,.cr-acrylic):before{display:none}.cr-button,.cr-status{forced-color-adjust:auto;border:1px solid ButtonText}.cr-dock button[aria-pressed=true]{outline:2px solid Highlight}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline-color:Highlight}}
 
 /* Smooth optical body and illuminated rim distinguish Glass from grainy Acrylic. */
 :is(.cr-resin,.cr-glass)::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;background:linear-gradient(145deg,rgba(255,255,255,.23),transparent 32%,transparent 69%,rgba(255,255,255,.10))}
@@ -559,6 +559,7 @@ span.cr-field-shell {
 }
 [data-effects=opaque] .cr-indicator {
     background: var(--cr-surface);
+    -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
 [data-effects=opaque] .cr-indicator::before {
@@ -581,6 +582,7 @@ span.cr-field-shell::after {
 }
 .cr-indicator {
     background: var(--cr-surface);
+    -webkit-backdrop-filter: none;
     backdrop-filter: none
 }
 .cr-indicator::before {
@@ -596,6 +598,7 @@ span.cr-field-shell::after {
     color: CanvasText!important;
     border: 1px solid ButtonText;
     box-shadow: none;
+    -webkit-backdrop-filter: none;
     backdrop-filter: none
 }
 :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::before,:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after {
@@ -622,6 +625,7 @@ span.cr-field-shell::after {
     color: CanvasText;
     border: 1px solid ButtonText;
     box-shadow: none;
+    -webkit-backdrop-filter: none;
     backdrop-filter: none
 }
 .cr-indicator::before {
@@ -786,7 +790,8 @@ input:is([type=checkbox],[type=radio]) {
     border:1px solid var(--cr-rim);
     border-radius:9px;
     background:linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);
-    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(var(--cr-resin-blur));
+    backdrop-filter:blur(var(--cr-resin-blur));
     box-shadow:inset 0 2px 2px var(--cr-rim),0 2px 3px var(--cr-control-edge),0 5px 10px var(--cr-shadow-contact);
     display:inline-grid;
     place-items:center
@@ -895,6 +900,7 @@ input[type=file]::file-selector-button {
     padding:9px;
     gap:4px;
     box-shadow:var(--cr-shadow-float);
+    -webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
     backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation))
 }
 .cr-dock::before {
@@ -934,6 +940,7 @@ input[type=file]::file-selector-button {
 }
 [data-effects=opaque] .cr-dock {
     background:var(--cr-surface);
+    -webkit-backdrop-filter:none;
     backdrop-filter:none
 }
 span.cr-status {
@@ -1088,6 +1095,7 @@ input:is([type=checkbox],[type=radio])::after {
     background:Canvas;
     border:1px solid ButtonText;
     box-shadow:none;
+    -webkit-backdrop-filter:none;
     backdrop-filter:none
 }
 .cr-dock::before {
@@ -1122,6 +1130,7 @@ span.cr-status>span {
     background:Canvas;
     border:1px solid CanvasText;
     box-shadow:none;
+    -webkit-backdrop-filter:none;
     backdrop-filter:none
 }
 .cr-table-scroll::before {
@@ -1140,6 +1149,7 @@ span.cr-status>span {
 @media (prefers-reduced-transparency:reduce) {
 .cr-dock {
     background:var(--cr-surface);
+    -webkit-backdrop-filter:none;
     backdrop-filter:none
 }
 .cr-table-scroll {
@@ -1665,6 +1675,7 @@ input[type=checkbox][role=switch] {
     background: ButtonFace;
     border: 1px solid ButtonText;
     box-shadow: none;
+    -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
 .cr-group::before {

@@ -69,7 +69,12 @@
         "button",
         "a.cr-button"
       ],
-      "use": "An action: a Resin shell with the 8px-inset Haze reading pad and the optical sheen. Pill geometry. `.primary` tints the pad, `.quiet` removes it, `.danger` adds the destructive boundary. Selected state is the primary pad plus label weight 800."
+      "use": "An action: a Resin shell with the 8px-inset Haze reading pad and the optical sheen. Pill geometry with `.cr-button`, which coats a `button` or an `a`; `.cr-control` coats any element. `.primary` tints the pad, `.quiet` removes it, `.danger` adds the destructive boundary. Selected state is the primary pad plus label weight 800.",
+      "partial": {
+        ".cr-button": "Element-keyed: `.cr-button` coats a `button` or an `a`. On any other element, wear `.cr-control`, which coats any element.",
+        ".cr-control": "Takes the radius of what it is: the pill comes with `.cr-button`, and a card-shaped control keeps the content radius of the surface it also wears.",
+        "button": "Takes the radius of what it is: the pill comes with `.cr-button`, and a card-shaped button keeps the content radius of the surface it also wears."
+      }
     },
     {
       "id": "field",
@@ -82,7 +87,10 @@
       "use": "The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics. `.cr-editor` is the editable surface inside a rich text field: the shared prose vocabulary (headings, lists, checklists, marks, insertions and deletions) with the primary caret and a 28% primary selection, distinct from the primary-soft highlight (D-34). `.cr-editor-toolbar` is its toolbar, above the text on a fine pointer and below it, clear of the touch keyboard, on a coarse one.",
       "also": [
         ".cr-editor"
-      ]
+      ],
+      "partial": {
+        ".cr-editor": "A part: the document inside the field shell, which carries the Resin surround and the Haze well."
+      }
     },
     {
       "id": "compact",
@@ -96,7 +104,10 @@
         ".cr-tag",
         ".cr-resin-haze.count"
       ],
-      "use": "Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens. Transient overlays are Frost. `.count` is the size for a count: a 20px circle that grows to a pill, filled to its own edge, with no block padding."
+      "use": "Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens. Transient overlays are Frost. `.count` is the size for a count: a 20px circle that grows to a pill, filled to its own edge, with no block padding.",
+      "partial": {
+        ".cr-tag": "The tag's geometry (the pill, the 48px floor, the type size), worn with `.cr-resin-haze`, which carries the coat."
+      }
     },
     {
       "id": "stone",
@@ -108,7 +119,11 @@
       "use": "A label over an unknown or moving backdrop: a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text. `.cr-media-caption` is a caption cue rendered by the library: the Stone backing on a box above the transport, never under it. `::cue` on a `.cr-media` video is the flat fill for the browser's own renderer.",
       "also": [
         ".cr-media-caption"
-      ]
+      ],
+      "partial": {
+        ".cr-stone": "Stone backs a label and takes the radius of the element it backs.",
+        ".cr-media-caption": "A part: the outer element positions the cue, and its inner box (`.cr-media-caption > *`) carries the Stone backing and the radius."
+      }
     },
     {
       "id": "mirage",
@@ -133,7 +148,10 @@
       "use": "A Haze decision surface over a Mirage scrim, with the float shadow. Modality, focus and dismissal are the product's. The surface does not scroll: `.cr-dialog-body`, worn with `.cr-scroll-frost`, scrolls inside it, so the title stays in view and the edge fade does not dissolve the surface. `position: fixed` is for a native `<dialog>`; on any other element the host positions it.",
       "also": [
         ".cr-dialog-body"
-      ]
+      ],
+      "partial": {
+        ".cr-dialog-body": "A part: the scrolling body inside the dialog's Haze surface, which carries the material; the body adds the scroll contract."
+      }
     },
     {
       "id": "indicator",
@@ -174,20 +192,27 @@
       "also": [
         ".cr-table"
       ],
-      "use": "A Resin shell with an inset Haze fill holding the table, with the primary-soft header and the Resin scrollbar. Rows are read on the Haze; sort and selection are announced, and selection is label weight."
+      "use": "A Resin shell with an inset Haze fill holding the table, with the primary-soft header and the Resin scrollbar. Rows are read on the Haze; sort and selection are announced, and selection is label weight.",
+      "partial": {
+        ".cr-table": "A part: the table inside `.cr-table-scroll`, which carries the Resin shell and the Haze fill; the table is transparent on it."
+      }
     },
     {
       "id": "dock",
       "name": "Dock",
       "materials": [
         "Resin",
-        "Haze"
+        "Haze",
+        "Stone"
       ],
       "class": ".cr-dock",
       "also": [
         ".cr-dock-inner"
       ],
-      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way (tab strips, segmented controls, toolbars, command and action bars). The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment. The controls may be buttons, tabs (`[role=tab]`, selected by `aria-selected`), radio labels (selected by `:checked`) or links (current by `aria-current`); only buttons were reached before 2.3.0."
+      "use": "A Resin plane with a Haze perimeter, holding labelled controls on one Stone label backing (`.cr-dock-inner`), so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way (tab strips, segmented controls, toolbars, command and action bars). The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment. The controls may be buttons, tabs (`[role=tab]`, selected by `aria-selected`), radio labels (selected by `:checked`) or links (current by `aria-current`); only buttons were reached before 2.3.0.",
+      "partial": {
+        ".cr-dock-inner": "The Stone label backing inside the dock. The dock carries the Resin blur, and Resin never contains Resin, so the inner fill has none."
+      }
     },
     {
       "id": "group",
@@ -205,9 +230,7 @@
     {
       "id": "nav-item",
       "name": "Navigation entry",
-      "materials": [
-        "Plastic"
-      ],
+      "materials": [],
       "class": ".cr-nav-item",
       "use": "An entry in side navigation, a rail or a tree of destinations. It has no material of its own, sits on the panel beneath it, and carries selection by label weight alone. Pill hit area, 44px target. `.stacked` puts the icon above the label for a rail. Adopted from the documentation site's side menu, which docs/components.md names as the reference implementation of selection."
     },
@@ -236,7 +259,10 @@
         "input[type=checkbox][role=switch]",
         "input[type=range]"
       ],
-      "use": "Native checkbox, radio, switch and range, styled by element: a Resin box, circle or track with a contained mark, and the marked glass thumb. Semantics stay native."
+      "use": "Native checkbox, radio, switch and range, styled by element: a Resin box, circle or track with a contained mark, and the marked glass thumb. Semantics stay native.",
+      "partial": {
+        "input[type=range]": "A track and a thumb, painted on the slider's pseudo-elements (`::-webkit-slider-runnable-track`, `::-webkit-slider-thumb` and their `::-moz-range-` forms), which this record does not read."
+      }
     },
     {
       "id": "native",

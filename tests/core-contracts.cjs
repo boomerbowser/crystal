@@ -756,6 +756,9 @@ check('every surface publishes its recipe as token references, and the file is c
   const onDisk = fs.readFileSync(file, 'utf8');
   assert.equal(onDisk, buildSurfaceRecipes(), 'core/tokens/surface-recipes.json is stale: run node tools/build-surface-recipes.cjs');
   const recipes = JSON.parse(onDisk).surfaces;
+  /* Every surface resolves fully, or its record says why it cannot (C-S1). */
+  const { unexplainedGaps } = require('../tools/build-surface-recipes.cjs');
+  assert.deepEqual(unexplainedGaps(recipes), [], 'a recipe misses a material it names and surfaces.json gives no reason');
 
   assert.deepEqual(recipes.map((r) => r.id), surfaces.map((s) => s.id), 'the recipes do not cover the vocabulary in order');
   for (const s of surfaces) {
@@ -1036,12 +1039,18 @@ check('the media and text recipes hold their geometry and their rules', () => {
    and adds the prefix back only for targets that need it. */
 check('every backdrop-filter is written after its -webkit- form', () => {
   const late = [];
+  const alone = [];
   for (const [, selector, body] of stylesheetCode.matchAll(/([^{};]*)\{([^{}]*)\}/g)) {
     const standard = body.search(/(?<![-\w])backdrop-filter\s*:/);
     const prefixed = body.search(/-webkit-backdrop-filter\s*:/);
     if (standard >= 0 && prefixed >= 0 && standard < prefixed) late.push(selector.trim().slice(0, 60));
+    /* Safari before 18 reads only the prefixed form, so a blur written without
+       it renders no diffusion there, and a reset written without it leaves a
+       prefixed blur in place (C-S1). */
+    if (standard >= 0 && prefixed < 0) alone.push(selector.trim().slice(0, 60));
   }
   assert.deepEqual(late, [], `${late.length} rule(s) write -webkit-backdrop-filter last, which a minifier keeps alone`);
+  assert.deepEqual(alone, [], `${alone.length} rule(s) write backdrop-filter without its -webkit- form`);
 });
 
 /* Under forced colours no surface keeps a backdrop blur (D-36). The browser
