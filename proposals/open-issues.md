@@ -5,39 +5,12 @@ not fixed. Each entry says what is wrong, why it matters, where it is, and what
 closing it would take.
 
 <!-- rulings-summary -->
-**Three entries are open**, D-36, D-37 and D-39, all from the media, text and recipe work of 2 October
+**Two entries are open**, D-37 and D-39, all from the media, text and recipe work of 2 October
 2026 ([`2026-10-02-media-text-and-recipe-parity.md`](2026-10-02-media-text-and-recipe-parity.md)).
-One waits on a ruling by Meridian; one is ruled ([`2026-10-02-rulings.md`](2026-10-02-rulings.md)) and open until built; D-36 is a defect with a fix specified. Every
+One waits on a ruling by Meridian; one is ruled ([`2026-10-02-rulings.md`](2026-10-02-rulings.md)) and open until built. Every
 decision left on 29 September 2026 was ruled on
 ([`2026-09-29-rulings.md`](2026-09-29-rulings.md)) and is built.
 <!-- /rulings-summary -->
-
-## D-36 · A backdrop blur survives forced colours
-
-**What.** The surface-recipes generator, reading the cascade statically,
-reported that under `forced-colors: active` the status badge keeps its rim
-border and the choice controls keep their blur, rim and shadow, because the
-forced-colours rules lose the cascade. Measured in Chromium with forced colours
-emulated, most of that does not render: the browser's own forced-colours
-adjustment draws the status border in a system colour, removes every shadow,
-and the choices fall back to native controls. What survives is
-`backdrop-filter` (`blur(20px) saturate(1.65)` on `.cr-status`, `blur(20px)`
-on the checkbox, radio and switch), which the browser does not adjust.
-
-**Why it matters.** Little, visually: a blur behind a system-coloured control.
-It is a forced-colours declaration that does not do what it says, and the
-next one that loses the same way may matter more.
-
-**Fix.** Order the forced-colours `backdrop-filter: none` after the base rules
-in the component layer, and add a check that measures the computed style under
-emulated forced colours rather than reading the cascade. No aesthetic change.
-Task C-R2.
-
-The static report, and its correction by measurement, are in the proposal's
-F-2.
-
-Closed entries are in [`closed-issues.md`](closed-issues.md), with the reasoning
-intact. Several are cited by name from the code they produced.
 
 ## D-37 · Selection that travels between segments
 
@@ -113,6 +86,7 @@ tints of each palette's primary over its primary-soft.
 
 | Closed | Entries | How |
 |---|---|---|
+| 2 October 2026 | D-36 | Measured, fixed, and found two more surfaces than the static report. |
 | 2 October 2026 | D-30, D-31, D-32, D-33, D-34, D-35 | Built from Meridian's rulings of the same day. D-39 opened from D-34's measurements. |
 | 2 October 2026 | D-38 | Opened and closed the same day: `crystal.css` writes the WebKit alias first, so a consumer's minifier keeps the unprefixed property. |
 | 29 September 2026 | D-4 | On a Pixel 6 Pro. |

@@ -37,7 +37,7 @@
       "repo": "core",
       "area": "Accessibility",
       "priority": "P2",
-      "status": "ready",
+      "status": "done",
       "title": "Remove the backdrop blur that survives forced colours (D-36)",
       "depends": [],
       "target": ".cr-status and the choice controls compute backdrop-filter: none under forced-colors: active.",
@@ -59,7 +59,8 @@
       ],
       "target": "crystal-preview on 2.4.0, with specimens of the stage, transport, caption, audio card, editor and selection bar in the playground.",
       "acceptance": [
-        "Baselines re-captured on the runner, every changed frame disclosed"
+        "Baselines re-captured on the runner, every changed frame disclosed",
+        "A browser gate measures backdrop-filter with forced colours emulated on every Crystal surface (D-36), seen failing on 2.3.1 and passing on 2.4.0"
       ],
       "where": "crystal-preview/website"
     },

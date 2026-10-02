@@ -2389,6 +2389,35 @@ cap. (c) Leave each library to draw its own.
 
 **Closed** on 2 October 2026 by C-I1. `tools/build-icons.cjs` keeps a named `REQUIRED` list whatever the slice picks, and the manifest lists it; the set is 1022 icons. Icon identifiers are public contract, so in 2.x no icon leaves to make room: the build reports every icon that arrives or leaves against the committed manifest and refuses a removal outside a major release. Crystal React draws the eleven from the set once it depends on the release that ships them.
 
+## D-36 · A backdrop blur survives forced colours
+
+**What.** The surface-recipes generator, reading the cascade statically,
+reported that under `forced-colors: active` the status badge keeps its rim
+border and the choice controls keep their blur, rim and shadow, because the
+forced-colours rules lose the cascade. Measured in Chromium with forced colours
+emulated, most of that does not render: the browser's own forced-colours
+adjustment draws the status border in a system colour, removes every shadow,
+and the choices fall back to native controls. What survives is
+`backdrop-filter` (`blur(20px) saturate(1.65)` on `.cr-status`, `blur(20px)`
+on the checkbox, radio and switch), which the browser does not adjust.
+
+**Why it matters.** Little, visually: a blur behind a system-coloured control.
+It is a forced-colours declaration that does not do what it says, and the
+next one that loses the same way may matter more.
+
+**Fix.** Order the forced-colours `backdrop-filter: none` after the base rules
+in the component layer, and add a check that measures the computed style under
+emulated forced colours rather than reading the cascade. No aesthetic change.
+Task C-R2.
+
+The static report, and its correction by measurement, are in the proposal's
+F-2.
+
+Closed entries are in [`closed-issues.md`](closed-issues.md), with the reasoning
+intact. Several are cited by name from the code they produced.
+
+**Closed** on 2 October 2026 by C-R2. Measured on a page loading only Crystal's two stylesheets, six elements kept a backdrop blur under forced colours: the three D-36 named and also the tag and the count (`.cr-resin-haze`), which the static report had not reached. The choices' base rule has the reset's specificity and comes later; the badge and the tag were not in the reset's list. The reset now names them and is important. After the change no element on that page keeps a backdrop-filter under forced colours, in either mode, and nothing changes without forced colours. The measured check, a browser gate with forced colours emulated, belongs to crystal-preview, which runs a browser in CI; it is part of C-R3 and will be seen failing on 2.3.1 before the preview adopts the release.
+
 ## D-38 · Resin renders flat once a consumer minifies `crystal.css`
 
 **What.** Crystal React's CI, the first run in three days that GitHub started,

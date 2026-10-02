@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-44 tasks: 19 done, 20 ready, 4 blocked, 1 needs a ruling, 0 dropped.
+44 tasks: 20 done, 19 ready, 4 blocked, 1 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -42,7 +42,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | ID | Priority | Status | Task | Depends on |
 |---|---|---|---|---|
 | [C-R1](#c-r1) | P0 | Ready | Publish @crystal-ui/core 2.4.0 | – |
-| [C-R2](#c-r2) | P2 | Ready | Remove the backdrop blur that survives forced colours (D-36) | – |
+| [C-R2](#c-r2) | P2 | Done | Remove the backdrop blur that survives forced colours (D-36) | – |
 | [C-S1](#c-s1) | P2 | Ready | Resolve the partial surface recipes (F-2 items 3 to 9) | – |
 | [C-S2](#c-s2) | P1 | Ready | Platform guide for surface-recipes.json in CONTRACT.md | – |
 | [C-S3](#c-s3) | P2 | Ready | Measure before assigning, as a contract rule (re-evaluation rec. 1) | – |
@@ -73,14 +73,14 @@ Where: `CHANGELOG.md, core/package.json`.
 
 ### C-R2
 
-**Remove the backdrop blur that survives forced colours (D-36).** Accessibility, P2, ready.
+**Remove the backdrop blur that survives forced colours (D-36).** Accessibility, P2, done.
 
 Target: .cr-status and the choice controls compute backdrop-filter: none under forced-colors: active.
 
 Done when:
 
-- [ ] A check measures the computed style under emulated forced colours (Playwright emulateMedia), not the cascade read statically
-- [ ] Captured under forced-colors: active, both modes
+- [x] A check measures the computed style under emulated forced colours (Playwright emulateMedia), not the cascade read statically
+- [x] Captured under forced-colors: active, both modes
 
 Where: `core/assets/crystal.css, tests/core-contracts.cjs`.
 
@@ -257,6 +257,7 @@ Target: crystal-preview on 2.4.0, with specimens of the stage, transport, captio
 Done when:
 
 - [ ] Baselines re-captured on the runner, every changed frame disclosed
+- [ ] A browser gate measures backdrop-filter with forced colours emulated on every Crystal surface (D-36), seen failing on 2.3.1 and passing on 2.4.0
 
 Where: `crystal-preview/website`. Depends on C-R1.
 
