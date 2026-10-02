@@ -1,10 +1,16 @@
 /* Crystal headless core: the motion presets.
  *
- * A preset is the movement a material makes when it enters or leaves: Plastic
- * rising, Frost coming toward the viewer, Resin flowing in, Mirage washing across
- * the scene, and the shared dismissal. A recipe is a stored keyframe list. A
- * preset's geometry is computed from the travel, depth and feather tokens, so
- * changing a travel token changes every preset at once.
+ * A preset is a material's signature movement: Plastic rising, Frost coming
+ * toward the viewer, Resin flowing in, Haze and Stone moving their feathered
+ * edges, Mirage washing across the scene, and the shared dismissal. A recipe is
+ * a stored keyframe list. A preset's geometry is computed from the travel, depth
+ * and feather tokens, so changing a travel token changes every preset at once.
+ *
+ * In 2.x only `mirage`, `mirage-out` and `dismiss` are entrances and exits: the
+ * catalogue assigns them to the dialog and its scrim. `plastic`, `frost`,
+ * `resin`, `haze` and `stone` are studies, which the motion chapter shows and
+ * no catalogue entry assigns. Which surface enters with which preset is decided
+ * per surface in 3.0 (D-31).
  *
  * Pure functions. No DOM access, no globals, no side effects: the caller measures
  * its own environment and passes the numbers in. The web runtime, a React
