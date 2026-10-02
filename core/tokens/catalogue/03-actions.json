@@ -117,7 +117,8 @@
         "antd:Dropdown.Button",
         "mui:ButtonGroup",
         "mantine:Menu"
-      ]
+      ],
+      "note": "The menu the disclosure opens is the product's child, a menu entry of its own. The split button owns the two segments and the disclosure; menu-in and menu-out are played by the menu the product renders, not by the button."
     },
     {
       "id": "floating-action",

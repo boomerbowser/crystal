@@ -402,8 +402,7 @@
         "haze"
       ],
       "motion": [
-        "accordion-in",
-        "accordion-out"
+        "accordion-in"
       ],
       "status": {
         "web": "implemented",
@@ -799,8 +798,7 @@
       ],
       "motion": [
         "popover-in",
-        "popover-out",
-        "list-in"
+        "popover-out"
       ],
       "status": {
         "web": "implemented",
@@ -1225,8 +1223,7 @@
         "control"
       ],
       "motion": [
-        "list-in",
-        "list-out"
+        "list-in"
       ],
       "status": {
         "web": "implemented",
@@ -1694,7 +1691,6 @@
       ],
       "motion": [
         "list-in",
-        "list-out",
         "highlight"
       ],
       "status": {
@@ -1894,8 +1890,7 @@
         "none"
       ],
       "motion": [
-        "accordion-in",
-        "accordion-out"
+        "accordion-in"
       ],
       "status": {
         "web": "implemented",
@@ -2078,8 +2073,7 @@
         "haze"
       ],
       "motion": [
-        "accordion-in",
-        "accordion-out"
+        "accordion-in"
       ],
       "status": {
         "web": "implemented",
@@ -2159,8 +2153,7 @@
         "haze"
       ],
       "motion": [
-        "accordion-in",
-        "accordion-out"
+        "accordion-in"
       ],
       "status": {
         "web": "implemented",
@@ -2178,7 +2171,6 @@
       ],
       "motion": [
         "list-in",
-        "list-out",
         "highlight",
         "resize-settle"
       ],
@@ -4215,8 +4207,7 @@
         "haze"
       ],
       "motion": [
-        "page-in",
-        "page-out"
+        "page-in"
       ],
       "status": {
         "web": "implemented",

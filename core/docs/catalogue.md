@@ -449,7 +449,7 @@ Nested disclosure rows with indentation guides and expand controls.
 <tr><th scope="row">Semantics</th><td>role=treegrid/row/gridcell with aria-expanded, aria-level, aria-posinset, aria-setsize and full arrow-key navigation. Not role=tree: a treeitem is a single navigable unit, so it cannot contain the expand control this anatomy requires, and treegrid is the pattern ARIA provides for a row that holds its own control. See M-3.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Row treatment, indentation guides, label weight for the selected row</td></tr>
 <tr><th scope="row">Product owns</th><td>The keyboard navigation implementation, data and lazy loading</td></tr>
-<tr><th scope="row">Motion</th><td><code>accordion-in</code>, <code>accordion-out</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>accordion-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Tree · mui:TreeView · antd:Tree</td></tr>
 </tbody></table></div>
 
@@ -531,6 +531,8 @@ A horizontal bar of menu triggers, each opening its own menu.
 <tr><th scope="row">Motion</th><td><code>menu-in</code>, <code>menu-out</code></td></tr>
 <tr><th scope="row">Parity</th><td>react-aria:Menu · primereact:menubar · antd:Menu</td></tr>
 </tbody></table></div>
+
+> Each menu the bar opens is the product's child, a menu entry of its own. The bar owns the triggers and their roving focus; menu-in and menu-out are played by the menu the product renders, not by the bar.
 
 ### Submenu
 
@@ -615,6 +617,8 @@ A default action and an adjacent disclosure that opens related actions.
 <tr><th scope="row">Motion</th><td><code>menu-in</code>, <code>menu-out</code></td></tr>
 <tr><th scope="row">Parity</th><td>antd:Dropdown.Button · mui:ButtonGroup · mantine:Menu</td></tr>
 </tbody></table></div>
+
+> The menu the disclosure opens is the product's child, a menu entry of its own. The split button owns the two segments and the disclosure; menu-in and menu-out are played by the menu the product renders, not by the button.
 
 ### Floating action
 
@@ -810,7 +814,7 @@ A text field with a filtered popover list, keyboard highlight and optional creat
 <tr><th scope="row">Semantics</th><td>role=combobox with aria-expanded, aria-controls and aria-activedescendant; the list is never focus-stealing</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Field and popover material, row treatment, label weight for selection, empty and loading appearance</td></tr>
 <tr><th scope="row">Product owns</th><td>The accessible combobox implementation, filtering and async loading</td></tr>
-<tr><th scope="row">Motion</th><td><code>popover-in</code>, <code>popover-out</code>, <code>list-in</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>popover-in</code>, <code>popover-out</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Autocomplete · mui:Autocomplete · antd:AutoComplete</td></tr>
 </tbody></table></div>
 
@@ -1178,7 +1182,7 @@ Two lists with controls that move items between them.
 <tr><th scope="row">Semantics</th><td>Each list is separately named; moves are announced; keyboard must move items without drag</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Panel and action treatment, label weight for selection in the lists</td></tr>
 <tr><th scope="row">Product owns</th><td>The data, move rules and filtering</td></tr>
-<tr><th scope="row">Motion</th><td><code>list-in</code>, <code>list-out</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>list-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>antd:Transfer · mui:— · mantine:TransferList</td></tr>
 </tbody></table></div>
 
@@ -1230,7 +1234,7 @@ A formatting toolbar and an editable surface. The toolbar holds Crystal's format
 <tr><th scope="row">Parity</th><td>mantine:RichTextEditor · mui:— · antd:—</td></tr>
 </tbody></table></div>
 
-> Crystal specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. Whether a library may ship an optional binding of its own is D-30.
+> Crystal specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. A library may ship an optional binding of an engine from its own entry point, with the engine an optional peer dependency, so a product that never imports the binding never installs or bundles the engine. The format vocabulary is the contract a binding implements: every block type and mark it offers renders as the surface and prose render it (D-30).
 
 ### Helper text
 
@@ -1585,7 +1589,7 @@ Table anatomy with sorting, filtering, selection, column sizing and pagination.
 <tr><th scope="row">Semantics</th><td>aria-sort on sorted headers; row selection through real checkboxes with names</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>All Table treatment plus sort, filter and selection appearance</td></tr>
 <tr><th scope="row">Product owns</th><td>The data layer, virtualisation, and the sorting and filtering implementation</td></tr>
-<tr><th scope="row">Motion</th><td><code>list-in</code>, <code>list-out</code>, <code>highlight</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>list-in</code>, <code>highlight</code></td></tr>
 <tr><th scope="row">Parity</th><td>mui:DataGrid · antd:Table · mantine:DataTable</td></tr>
 </tbody></table></div>
 
@@ -1777,7 +1781,7 @@ Content truncated to a height with a reveal control and an edge fade.
 <tr><th scope="row">Semantics</th><td>The control carries aria-expanded; truncated text remains in the accessibility tree</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Fade and control treatment</td></tr>
 <tr><th scope="row">Product owns</th><td>Threshold and content</td></tr>
-<tr><th scope="row">Motion</th><td><code>accordion-in</code>, <code>accordion-out</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>accordion-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Spoiler · mui:— · antd:Typography ellipsis</td></tr>
 </tbody></table></div>
 
@@ -1952,7 +1956,7 @@ A hierarchy drawn as connected nodes.
 <tr><th scope="row">Semantics</th><td>A tree; collapse state is announced, and the chart is navigable by keyboard.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Node material, connector colour, selection by weight</td></tr>
 <tr><th scope="row">Product owns</th><td>Hierarchy data and layout direction</td></tr>
-<tr><th scope="row">Motion</th><td><code>accordion-in</code>, <code>accordion-out</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>accordion-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>primereact:organizationchart</td></tr>
 </tbody></table></div>
 
@@ -2030,7 +2034,7 @@ A tree whose items are navigation destinations rather than data.
 <tr><th scope="row">Semantics</th><td>A tree with aria-current on the active destination; expansion is announced.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Row material, expansion motion, current marking by label weight</td></tr>
 <tr><th scope="row">Product owns</th><td>The destination set and routing</td></tr>
-<tr><th scope="row">Motion</th><td><code>accordion-in</code>, <code>accordion-out</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>accordion-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>react-aria:NavigationTree</td></tr>
 </tbody></table></div>
 
@@ -2046,7 +2050,7 @@ A table whose columns can be resized by pointer and keyboard.
 <tr><th scope="row">Semantics</th><td>The resizer is a slider: arrow keys resize, and the new width is announced.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Resizer affordance, focus ring, live layout while dragging</td></tr>
 <tr><th scope="row">Product owns</th><td>Which columns resize, and persistence</td></tr>
-<tr><th scope="row">Motion</th><td><code>list-in</code>, <code>list-out</code>, <code>highlight</code>, <code>resize-settle</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>list-in</code>, <code>highlight</code>, <code>resize-settle</code></td></tr>
 <tr><th scope="row">Parity</th><td>react-aria:ResizableTableContainer · mui-x-data-grid:GridColumnResizer</td></tr>
 </tbody></table></div>
 
@@ -4078,7 +4082,7 @@ A list beside the detail of its selection.
 <tr><th scope="row">Semantics</th><td>Selection moves focus to the detail only when the layout has collapsed.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Pane materials, the collapse transition</td></tr>
 <tr><th scope="row">Product owns</th><td>The data and routing</td></tr>
-<tr><th scope="row">Motion</th><td><code>page-in</code>, <code>page-out</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>page-in</code></td></tr>
 <tr><th scope="row">Parity</th><td>antd:Layout</td></tr>
 </tbody></table></div>
 

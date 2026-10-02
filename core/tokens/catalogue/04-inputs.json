@@ -215,8 +215,7 @@
       "product": "The accessible combobox implementation, filtering and async loading",
       "motion": [
         "popover-in",
-        "popover-out",
-        "list-in"
+        "popover-out"
       ],
       "parity": [
         "mantine:Autocomplete",
@@ -898,8 +897,7 @@
       "crystal": "Panel and action treatment, label weight for selection in the lists",
       "product": "The data, move rules and filtering",
       "motion": [
-        "list-in",
-        "list-out"
+        "list-in"
       ],
       "parity": [
         "antd:Transfer",
@@ -999,7 +997,7 @@
         "mui:—",
         "antd:—"
       ],
-      "note": "Crystal specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. Whether a library may ship an optional binding of its own is D-30.",
+      "note": "Crystal specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. A library may ship an optional binding of an engine from its own entry point, with the engine an optional peer dependency, so a product that never imports the binding never installs or bundles the engine. The format vocabulary is the contract a binding implements: every block type and mark it offers renders as the surface and prose render it (D-30).",
       "motion": [
         "field-focus",
         "field-invalid",

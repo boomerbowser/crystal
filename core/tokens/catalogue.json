@@ -873,8 +873,7 @@
           "crystal": "Row treatment, indentation guides, label weight for the selected row",
           "product": "The keyboard navigation implementation, data and lazy loading",
           "motion": [
-            "accordion-in",
-            "accordion-out"
+            "accordion-in"
           ],
           "parity": [
             "mantine:Tree",
@@ -1006,7 +1005,8 @@
             "react-aria:Menu",
             "primereact:menubar",
             "antd:Menu"
-          ]
+          ],
+          "note": "Each menu the bar opens is the product's child, a menu entry of its own. The bar owns the triggers and their roving focus; menu-in and menu-out are played by the menu the product renders, not by the bar."
         },
         {
           "id": "submenu",
@@ -1155,7 +1155,8 @@
             "antd:Dropdown.Button",
             "mui:ButtonGroup",
             "mantine:Menu"
-          ]
+          ],
+          "note": "The menu the disclosure opens is the product's child, a menu entry of its own. The split button owns the two segments and the disclosure; menu-in and menu-out are played by the menu the product renders, not by the button."
         },
         {
           "id": "floating-action",
@@ -1513,8 +1514,7 @@
           "product": "The accessible combobox implementation, filtering and async loading",
           "motion": [
             "popover-in",
-            "popover-out",
-            "list-in"
+            "popover-out"
           ],
           "parity": [
             "mantine:Autocomplete",
@@ -2196,8 +2196,7 @@
           "crystal": "Panel and action treatment, label weight for selection in the lists",
           "product": "The data, move rules and filtering",
           "motion": [
-            "list-in",
-            "list-out"
+            "list-in"
           ],
           "parity": [
             "antd:Transfer",
@@ -2297,7 +2296,7 @@
             "mui:—",
             "antd:—"
           ],
-          "note": "Crystal specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. Whether a library may ship an optional binding of its own is D-30.",
+          "note": "Crystal specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. A library may ship an optional binding of an engine from its own entry point, with the engine an optional peer dependency, so a product that never imports the binding never installs or bundles the engine. The format vocabulary is the contract a binding implements: every block type and mark it offers renders as the surface and prose render it (D-30).",
           "motion": [
             "field-focus",
             "field-invalid",
@@ -2915,7 +2914,6 @@
           "product": "The data layer, virtualisation, and the sorting and filtering implementation",
           "motion": [
             "list-in",
-            "list-out",
             "highlight"
           ],
           "parity": [
@@ -3237,8 +3235,7 @@
           "crystal": "Fade and control treatment",
           "product": "Threshold and content",
           "motion": [
-            "accordion-in",
-            "accordion-out"
+            "accordion-in"
           ],
           "parity": [
             "mantine:Spoiler",
@@ -3519,8 +3516,7 @@
           "crystal": "Node material, connector colour, selection by weight",
           "product": "Hierarchy data and layout direction",
           "motion": [
-            "accordion-in",
-            "accordion-out"
+            "accordion-in"
           ],
           "parity": [
             "primereact:organizationchart"
@@ -3633,8 +3629,7 @@
           "crystal": "Row material, expansion motion, current marking by label weight",
           "product": "The destination set and routing",
           "motion": [
-            "accordion-in",
-            "accordion-out"
+            "accordion-in"
           ],
           "parity": [
             "react-aria:NavigationTree"
@@ -3659,7 +3654,6 @@
           "product": "Which columns resize, and persistence",
           "motion": [
             "list-in",
-            "list-out",
             "highlight",
             "resize-settle"
           ],
@@ -6754,8 +6748,7 @@
           "crystal": "Pane materials, the collapse transition",
           "product": "The data and routing",
           "motion": [
-            "page-in",
-            "page-out"
+            "page-in"
           ],
           "parity": [
             "antd:Layout"

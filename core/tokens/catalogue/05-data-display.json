@@ -87,7 +87,6 @@
       "product": "The data layer, virtualisation, and the sorting and filtering implementation",
       "motion": [
         "list-in",
-        "list-out",
         "highlight"
       ],
       "parity": [
@@ -409,8 +408,7 @@
       "crystal": "Fade and control treatment",
       "product": "Threshold and content",
       "motion": [
-        "accordion-in",
-        "accordion-out"
+        "accordion-in"
       ],
       "parity": [
         "mantine:Spoiler",
@@ -691,8 +689,7 @@
       "crystal": "Node material, connector colour, selection by weight",
       "product": "Hierarchy data and layout direction",
       "motion": [
-        "accordion-in",
-        "accordion-out"
+        "accordion-in"
       ],
       "parity": [
         "primereact:organizationchart"
@@ -805,8 +802,7 @@
       "crystal": "Row material, expansion motion, current marking by label weight",
       "product": "The destination set and routing",
       "motion": [
-        "accordion-in",
-        "accordion-out"
+        "accordion-in"
       ],
       "parity": [
         "react-aria:NavigationTree"
@@ -831,7 +827,6 @@
       "product": "Which columns resize, and persistence",
       "motion": [
         "list-in",
-        "list-out",
         "highlight",
         "resize-settle"
       ],

@@ -302,8 +302,7 @@
       "crystal": "Row treatment, indentation guides, label weight for the selected row",
       "product": "The keyboard navigation implementation, data and lazy loading",
       "motion": [
-        "accordion-in",
-        "accordion-out"
+        "accordion-in"
       ],
       "parity": [
         "mantine:Tree",
@@ -435,7 +434,8 @@
         "react-aria:Menu",
         "primereact:menubar",
         "antd:Menu"
-      ]
+      ],
+      "note": "Each menu the bar opens is the product's child, a menu entry of its own. The bar owns the triggers and their roving focus; menu-in and menu-out are played by the menu the product renders, not by the bar."
     },
     {
       "id": "submenu",
