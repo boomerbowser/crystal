@@ -26,6 +26,12 @@ Icons beside text are decorative and hidden from assistive technology. An icon-o
 
 <script src="../assets/icons.js" defer></script>
 
+## Icons the vocabularies require
+
+The set is an evenly spaced slice of Lucide's, so an icon a Crystal vocabulary needs can fall outside it. `tools/build-icons.cjs` keeps a named list of required icons whatever the slice picks: today the rich text format vocabulary's `heading-2`, `heading-3`, `heading-4`, `link`, `unlink`, `list`, `list-ordered`, `quote`, `subscript`, `undo` and `redo` (D-35). The manifest lists them under `required`. A library draws these glyphs from the set rather than by hand.
+
+Icon identifiers are public contract, so an icon leaves the set only in a major version. The build reports every icon that arrives or leaves against the committed manifest and refuses a removal outside a major release.
+
 ## The sets
 
 <!-- generated:icon-counts -->
@@ -33,8 +39,8 @@ Icons beside text are decorative and hidden from assistive technology. An icon-o
 | Source | Count | Licence |
 |---|---|---|
 | crystal | 13 | Original work |
-| lucide | 998 | ISC ([notice](../licenses/lucide-LICENSE.txt)) |
-| **Total** | **1011** | |
+| lucide | 1009 | ISC ([notice](../licenses/lucide-LICENSE.txt)) |
+| **Total** | **1022** | |
 
 One grid: `0 0 24 24` view box, 1.8px strokes, round caps and round joins, and `currentColor` so every icon inherits a tested foreground colour.
 

@@ -6,14 +6,27 @@
     "linecap": "round",
     "linejoin": "round"
   },
-  "total": 1011,
+  "total": 1022,
+  "required": [
+    "heading-2",
+    "heading-3",
+    "heading-4",
+    "link",
+    "list",
+    "list-ordered",
+    "quote",
+    "redo",
+    "subscript",
+    "undo",
+    "unlink"
+  ],
   "sources": {
     "crystal": {
       "count": 13,
       "license": "Original work"
     },
     "lucide": {
-      "count": 998,
+      "count": 1009,
       "license": "ISC",
       "notice": "core/licenses/lucide-LICENSE.txt"
     }
@@ -2852,6 +2865,24 @@
       "license": "ISC"
     },
     {
+      "id": "heading-2",
+      "name": "Heading 2",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "heading-3",
+      "name": "Heading 3",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "heading-4",
+      "name": "Heading 4",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
       "id": "headphone-off",
       "name": "Headphone Off",
       "source": "lucide",
@@ -3242,8 +3273,20 @@
       "license": "ISC"
     },
     {
+      "id": "link",
+      "name": "Link",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
       "id": "link-2-off",
       "name": "Link 2 Off",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list",
+      "name": "List",
       "source": "lucide",
       "license": "ISC"
     },
@@ -3286,6 +3329,12 @@
     {
       "id": "list-music",
       "name": "List Music",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "list-ordered",
+      "name": "List Ordered",
       "source": "lucide",
       "license": "ISC"
     },
@@ -4310,6 +4359,12 @@
       "license": "ISC"
     },
     {
+      "id": "quote",
+      "name": "Quote",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
       "id": "rabbit",
       "name": "Rabbit",
       "source": "lucide",
@@ -4396,6 +4451,12 @@
     {
       "id": "recycle",
       "name": "Recycle",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "redo",
+      "name": "Redo",
       "source": "lucide",
       "license": "ISC"
     },
@@ -5276,6 +5337,12 @@
       "license": "ISC"
     },
     {
+      "id": "subscript",
+      "name": "Subscript",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
       "id": "subtitles",
       "name": "Subtitles",
       "source": "lucide",
@@ -5672,6 +5739,12 @@
       "license": "ISC"
     },
     {
+      "id": "undo",
+      "name": "Undo",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
       "id": "undo-dot",
       "name": "Undo Dot",
       "source": "lucide",
@@ -5686,6 +5759,12 @@
     {
       "id": "university",
       "name": "University",
+      "source": "lucide",
+      "license": "ISC"
+    },
+    {
+      "id": "unlink",
+      "name": "Unlink",
       "source": "lucide",
       "license": "ISC"
     },

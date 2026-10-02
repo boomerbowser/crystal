@@ -12,7 +12,7 @@ npm install @crystal-ui/core
 
 | Folder | Contents |
 |---|---|
-| [`core/`](core/) | The published package. It holds the DTCG token source and every generated form of it, the resolver, the headless core, the stylesheets and the exported theme, 1011 icons, the shader sources, Manrope, the TypeScript, Swift and Kotlin exports, the third-party licences, and the eleven specification chapters in [`core/docs/`](core/docs/). |
+| [`core/`](core/) | The published package. It holds the DTCG token source and every generated form of it, the resolver, the headless core, the stylesheets and the exported theme, 1022 icons, the shader sources, Manrope, the TypeScript, Swift and Kotlin exports, the third-party licences, and the eleven specification chapters in [`core/docs/`](core/docs/). |
 | [`libraries/`](libraries/) | The contract for platform component libraries, the parity manifest, and each platform's status record. |
 | [`tools/`](tools/), [`tests/`](tests/), [`validation/`](validation/) | The build, the checks, and the records the checks write. Node only. |
 | [`proposals/`](proposals/) | Design proposals and the issue trackers. |

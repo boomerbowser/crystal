@@ -69,7 +69,7 @@ icons, hit areas and focus rings are never blurred.
 | `@crystal-ui/core/core/presets` | Keyframes for the material motion presets, computed from tokens. |
 | `@crystal-ui/core/motion-recipes` | The 59 motion recipes, each with its spring and per-platform values. |
 | `@crystal-ui/core/engines` | The Motion and GSAP engine entry. |
-| `@crystal-ui/core/icons` | The icon manifest. There are 1011 icons on a 24px grid. |
+| `@crystal-ui/core/icons` | The icon manifest. There are 1022 icons on a 24px grid. |
 | `@crystal-ui/core/shaders/*` | The optical layer's shader sources and their manifest. |
 | `@crystal-ui/core/catalogue` | The component catalogue: 284 components in 14 categories. |
 | `@crystal-ui/core/surfaces` | The 23 surfaces a component can be made of, each with its recipe. |
