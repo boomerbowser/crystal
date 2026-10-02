@@ -130,7 +130,7 @@
       "repo": "core",
       "area": "Motion",
       "priority": "P2",
-      "status": "ruling",
+      "status": "done",
       "title": "Material presets as entrances (D-31)",
       "depends": [],
       "target": "Either the presets stay studies and the motion chapter says so, or each surface a person opens names the preset it enters with.",
@@ -145,7 +145,7 @@
       "repo": "core",
       "area": "Motion",
       "priority": "P2",
-      "status": "ruling",
+      "status": "done",
       "title": "Rule on the 20 unplayed assignments (D-32)",
       "depends": [],
       "target": "No catalogue assignment that no implementation can play.",
@@ -175,7 +175,7 @@
       "repo": "core",
       "area": "Icons",
       "priority": "P1",
-      "status": "ruling",
+      "status": "done",
       "title": "Keep the icons the vocabulary needs (D-35)",
       "depends": [],
       "target": "link, unlink, list, list-ordered, quote, undo, redo, subscript and heading-2 to heading-4 are in the set whatever the cap.",
@@ -191,7 +191,7 @@
       "repo": "core",
       "area": "Docs",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "title": "Describe the media and text recipes in the specification chapters",
       "depends": [],
       "target": "components.md and materials.md describe the stage, transport, caption, audio card, prose and editor recipes.",
@@ -206,7 +206,7 @@
       "repo": "core",
       "area": "Text",
       "priority": "P2",
-      "status": "ruling",
+      "status": "done",
       "title": "Highlight and selection colours (D-34)",
       "depends": [],
       "target": "mark and the editor selection are distinct in every palette and mode.",
@@ -221,7 +221,7 @@
       "repo": "core",
       "area": "Text",
       "priority": "P1",
-      "status": "ruling",
+      "status": "done",
       "title": "Engine binding policy for platform libraries (D-30)",
       "depends": [],
       "target": "The catalogue says whether a library may ship an optional editor binding.",
@@ -229,6 +229,21 @@
         "rich-text-surface's note updated to the ruling"
       ],
       "where": "core/tokens/catalogue/04-inputs.json"
+    },
+    {
+      "id": "C-T3",
+      "repo": "core",
+      "area": "Text",
+      "priority": "P0",
+      "status": "ruling",
+      "title": "Selected highlight contrast (D-39)",
+      "depends": [],
+      "target": "A highlighted word that is selected keeps 4.5:1 in every palette and mode.",
+      "acceptance": [
+        "Ruling recorded",
+        "A check in validate-tokens.cjs for the selected-highlight pair, seen failing on the current values first"
+      ],
+      "where": "core/assets/crystal.css, tools/validate-tokens.cjs"
     },
     {
       "id": "R-M1",
@@ -1023,6 +1038,46 @@
             "task": {
               "status": "ready",
               "target": "surfaces.json's indicator entry drops \"or the moving pill behind a selected segment\", so the vocabulary describes what crystal.css draws."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "D-39",
+      "title": "A selected highlight falls below 4.5:1 in Harbor",
+      "task": "C-T3",
+      "after": [],
+      "summary": "A highlighted word that is then selected keeps its on-primary-soft ink while the 28% selection tint composites over the primary-soft fill. Five palettes measure 5.7:1 or better; Harbor measures 4.34:1 in light and 3.74:1 in dark, under the 4.5:1 text minimum.",
+      "options": [
+        {
+          "id": "a",
+          "label": "A selected highlight takes primary with on-primary ink, the action pair the resolver already holds at 4.5:1 in every palette",
+          "recommended": true,
+          "effects": {
+            "task": {
+              "status": "ready",
+              "target": ".cr-editor mark::selection takes primary with on-primary ink; a check holds it at 4.5:1 in every palette (lowest today 4.74:1)."
+            }
+          }
+        },
+        {
+          "id": "b",
+          "label": "The selection tint over a highlight drops to 16%",
+          "effects": {
+            "task": {
+              "status": "ready",
+              "target": ".cr-editor mark::selection tints at 16%; a check holds it at 4.5:1 in every palette (lowest today 4.53:1)."
+            }
+          }
+        },
+        {
+          "id": "c",
+          "label": "Keep as built and record Harbor as an exception",
+          "effects": {
+            "task": {
+              "status": "dropped",
+              "target": "The selected highlight stays as built; the accessibility chapter records the Harbor exception."
             }
           }
         }

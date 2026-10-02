@@ -61,7 +61,9 @@ export function effective(data, record) {
   const byId = new Map(tasks.map((task) => [task.id, task]));
   const apply = (task, change, ruling) => {
     if (!task) return;
-    if (change.status) task.status = change.status;
+    /* A ruling makes a task ready; building it makes it done, and a ruling
+       already in force does not undo that. */
+    if (change.status && task.status !== 'done') task.status = change.status;
     if (change.target) task.target = change.target;
     task.ruledBy = { decision: ruling.decision, option: ruling.option };
   };

@@ -100,21 +100,23 @@ function writeIssues(data, decisions) {
   let text = readFileSync(ISSUES, 'utf8');
   const original = text;
 
-  /* The count at the top, which the first ruling would otherwise leave stale.
-     With nothing ruled it is the sentence written by hand on 2 October. */
-  const waiting = decisions.filter((d) => d.state === 'open' || d.state === 'waiting').length;
-  const ruled = decisions.filter((d) => d.state === 'ruled').length;
-  const moot = decisions.filter((d) => d.state === 'moot').length;
-  const counted = ruled || moot
-    ? `${NUMBER[waiting]} wait${waiting === 1 ? 's' : ''} on a ruling by Meridian; ${NUMBER[ruled].toLowerCase()} ${ruled === 1 ? 'is' : 'are'} ruled ([\`2026-10-02-rulings.md\`](2026-10-02-rulings.md)) and open until built${moot ? `; ${NUMBER[moot].toLowerCase()} ${moot === 1 ? 'is' : 'are'} no longer needed` : ''};\nD-36 is a small defect with a fix specified. Every`
-    : `${NUMBER[waiting]} wait on a ruling by Meridian; D-36 is a small defect with a fix specified. Every`;
-  /* How many entries are open, and their range, read from the file itself, so
-     an entry filed later (D-37) is counted without editing this script. */
-  const filed = [...text.matchAll(/^## D-(\d+) · /gm)].map((m) => Number(m[1]));
-  const open = `**${NUMBER[filed.length]} entries are open**, D-${Math.min(...filed)} to D-${Math.max(...filed)}`;
-  const summary = `${open}, all from the media, text and recipe work of 2 October
+  /* The count at the top, read from the file itself, so an entry filed later
+     (D-37, D-39) or closed into closed-issues.md is counted without editing
+     this script. Only decisions whose entry is still open are counted. */
+  const filed = [...text.matchAll(/^## D-(\d+) · /gm)].map((m) => `D-${m[1]}`);
+  const stillOpen = decisions.filter((d) => filed.includes(d.id));
+  const waiting = stillOpen.filter((d) => d.state === 'open' || d.state === 'waiting').length;
+  const ruled = stillOpen.filter((d) => d.state === 'ruled').length;
+  const moot = stillOpen.filter((d) => d.state === 'moot').length;
+  const defects = filed.filter((id) => !decisions.some((d) => d.id === id));
+  const parts = [`${NUMBER[waiting]} wait${waiting === 1 ? 's' : ''} on a ruling by Meridian`];
+  if (ruled) parts.push(`${NUMBER[ruled].toLowerCase()} ${ruled === 1 ? 'is' : 'are'} ruled ([\`2026-10-02-rulings.md\`](2026-10-02-rulings.md)) and open until built`);
+  if (moot) parts.push(`${NUMBER[moot].toLowerCase()} ${moot === 1 ? 'is' : 'are'} no longer needed`);
+  if (defects.length) parts.push(`${defects.join(', ')} ${defects.length === 1 ? 'is a defect' : 'are defects'} with a fix specified`);
+  const list = filed.length > 1 ? `${filed.slice(0, -1).join(', ')} and ${filed.at(-1)}` : filed[0];
+  const summary = `**${NUMBER[filed.length]} ${filed.length === 1 ? 'entry is' : 'entries are'} open**, ${list}, all from the media, text and recipe work of 2 October
 2026 ([\`2026-10-02-media-text-and-recipe-parity.md\`](2026-10-02-media-text-and-recipe-parity.md)).
-${counted}
+${parts.join('; ')}. Every
 decision left on 29 September 2026 was ruled on
 ([\`2026-09-29-rulings.md\`](2026-09-29-rulings.md)) and is built.`;
   const summaryBlock = `<!-- rulings-summary -->\n${summary}\n<!-- /rulings-summary -->`;
@@ -127,7 +129,10 @@ decision left on 29 September 2026 was ruled on
     text = text.slice(0, start) + summaryBlock + text.slice(end);
   }
 
+  const closed = readFileSync(join(PROPOSALS, 'closed-issues.md'), 'utf8');
   for (const decision of decisions) {
+    /* An entry built and moved to closed-issues.md carries its ruling there. */
+    if (!text.includes(`## ${decision.id} · `) && closed.includes(`## ${decision.id} · `)) continue;
     let body = '';
     if (decision.state === 'ruled') {
       const option = decision.options.find((o) => o.id === decision.ruling.option);

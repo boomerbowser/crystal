@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-43 tasks: 13 done, 26 ready, 4 blocked, 0 needs a ruling, 0 dropped.
+44 tasks: 19 done, 20 ready, 4 blocked, 1 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -35,6 +35,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | D-34 · Highlight and selection | C-T1 | Ruled | (a) Keep both as built, by Meridian Digital on 2026-10-02 |
 | D-35 · The icon set drops the editor's glyphs | C-I1 | Ruled | (a) A named list of icons the vocabulary requires, kept whatever the cap, with every icon that leaves disclosed, by Meridian Digital on 2026-10-02 |
 | D-37 · Selection that travels between segments | C-M3 | Ruled | (a) Specify a travelling pill for every strip: one .cr-indicator.pill behind the selected segment, moved by a new critically damped recipe between measured positions, on tabs, the segmented control, the dock, bottom navigation and toggle button groups; selection stays label weight, by Meridian Digital on 2026-10-02 |
+| D-39 · A selected highlight falls below 4.5:1 in Harbor | C-T3 | Needs a ruling | – |
 
 ## Crystal (`@crystal-ui/core`)
 
@@ -46,13 +47,14 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-S2](#c-s2) | P1 | Ready | Platform guide for surface-recipes.json in CONTRACT.md | – |
 | [C-S3](#c-s3) | P2 | Ready | Measure before assigning, as a contract rule (re-evaluation rec. 1) | – |
 | [C-S4](#c-s4) | P2 | Ready | Check prose against surface in the build (re-evaluation rec. 3) | – |
-| [C-M1](#c-m1) | P2 | Ready | Material presets as entrances (D-31) | – |
-| [C-M2](#c-m2) | P2 | Ready | Rule on the 20 unplayed assignments (D-32) | – |
+| [C-M1](#c-m1) | P2 | Done | Material presets as entrances (D-31) | – |
+| [C-M2](#c-m2) | P2 | Done | Rule on the 20 unplayed assignments (D-32) | – |
 | [C-M3](#c-m3) | P2 | Ready | Selection motion for strips and groups (D-37) | – |
-| [C-I1](#c-i1) | P1 | Ready | Keep the icons the vocabulary needs (D-35) | – |
-| [C-D1](#c-d1) | P1 | Ready | Describe the media and text recipes in the specification chapters | – |
-| [C-T1](#c-t1) | P2 | Ready | Highlight and selection colours (D-34) | – |
-| [C-T2](#c-t2) | P1 | Ready | Engine binding policy for platform libraries (D-30) | – |
+| [C-I1](#c-i1) | P1 | Done | Keep the icons the vocabulary needs (D-35) | – |
+| [C-D1](#c-d1) | P1 | Done | Describe the media and text recipes in the specification chapters | – |
+| [C-T1](#c-t1) | P2 | Done | Highlight and selection colours (D-34) | – |
+| [C-T2](#c-t2) | P1 | Done | Engine binding policy for platform libraries (D-30) | – |
+| [C-T3](#c-t3) | P0 | Needs a ruling | Selected highlight contrast (D-39) | – |
 
 ### C-R1
 
@@ -138,27 +140,27 @@ Where: `tools/build-catalogue.cjs, core/tokens/catalogue/`.
 
 ### C-M1
 
-**Material presets as entrances (D-31).** Motion, P2, ready, by the ruling on D-31.
+**Material presets as entrances (D-31).** Motion, P2, done, by the ruling on D-31.
 
 Target: presets.js and motion.md both call the presets studies for 2.x, and the 3.0 plan lists entrances per surface as an open question.
 
 Done when:
 
-- [ ] Meridian's ruling recorded
-- [ ] motion.md and presets.js say the same thing
+- [x] Meridian's ruling recorded
+- [x] motion.md and presets.js say the same thing
 
 Where: `core/docs/motion.md, core/assets/core/presets.js`.
 
 ### C-M2
 
-**Rule on the 20 unplayed assignments (D-32).** Motion, P2, ready, by the ruling on D-32.
+**Rule on the 20 unplayed assignments (D-32).** Motion, P2, done, by the ruling on D-32.
 
 Target: extend-catalogue-9.cjs takes off list-out on the transfer list, data table and resizable table, accordion-out on the four trees and the spoiler, page-out on master and detail, and list-in on the combobox, and says the menubar's and split button's menus are the product's.
 
 Done when:
 
-- [ ] extend-catalogue-9.cjs applies the ruling
-- [ ] Crystal React's audit reports 0 unplayed, or each remaining one is a React task
+- [x] extend-catalogue-9.cjs applies the ruling
+- [x] Crystal React's audit reports 0 unplayed, or each remaining one is a React task
 
 Where: `core/tokens/catalogue/`.
 
@@ -177,55 +179,68 @@ Where: `core/assets/crystal.css, core/tokens/surfaces.json, core/tokens/motion-r
 
 ### C-I1
 
-**Keep the icons the vocabulary needs (D-35).** Icons, P1, ready, by the ruling on D-35.
+**Keep the icons the vocabulary needs (D-35).** Icons, P1, done, by the ruling on D-35.
 
 Target: link, unlink, list, list-ordered, quote, undo, redo, subscript and heading-2 to heading-4 are in the set whatever the cap.
 
 Done when:
 
-- [ ] build-icons.cjs has a named REQUIRED list
-- [ ] Every icon that leaves the set to make room is disclosed
-- [ ] Crystal React's formats.tsx uses the set for all glyphs
+- [x] build-icons.cjs has a named REQUIRED list
+- [x] Every icon that leaves the set to make room is disclosed
+- [x] Crystal React's formats.tsx uses the set for all glyphs
 
 Where: `tools/build-icons.cjs`.
 
 ### C-D1
 
-**Describe the media and text recipes in the specification chapters.** Docs, P1, ready.
+**Describe the media and text recipes in the specification chapters.** Docs, P1, done.
 
 Target: components.md and materials.md describe the stage, transport, caption, audio card, prose and editor recipes.
 
 Done when:
 
-- [ ] validate-docs passes
-- [ ] Each recipe links to its specimen
+- [x] validate-docs passes
+- [x] Each recipe links to its specimen
 
 Where: `core/docs/components.md, core/docs/materials.md`.
 
 ### C-T1
 
-**Highlight and selection colours (D-34).** Text, P2, ready, by the ruling on D-34.
+**Highlight and selection colours (D-34).** Text, P2, done, by the ruling on D-34.
 
 Target: Contrast checks for mark text on primary-soft in every palette and mode, and a note in the text chapter that selection and highlight differ.
 
 Done when:
 
-- [ ] Ruling recorded
-- [ ] Contrast checks for mark text on its fill in all palettes
+- [x] Ruling recorded
+- [x] Contrast checks for mark text on its fill in all palettes
 
 Where: `core/assets/crystal.css`.
 
 ### C-T2
 
-**Engine binding policy for platform libraries (D-30).** Text, P1, ready, by the ruling on D-30.
+**Engine binding policy for platform libraries (D-30).** Text, P1, done, by the ruling on D-30.
 
 Target: rich-text-surface's note says a library may ship an optional engine binding from its own entry point, with the engine an optional peer, and that the format vocabulary is the contract.
 
 Done when:
 
-- [ ] rich-text-surface's note updated to the ruling
+- [x] rich-text-surface's note updated to the ruling
 
 Where: `core/tokens/catalogue/04-inputs.json`.
+
+### C-T3
+
+**Selected highlight contrast (D-39).** Text, P0, needs a ruling.
+
+Target: A highlighted word that is selected keeps 4.5:1 in every palette and mode.
+
+Done when:
+
+- [ ] Ruling recorded
+- [ ] A check in validate-tokens.cjs for the selected-highlight pair, seen failing on the current values first
+
+Where: `core/assets/crystal.css, tools/validate-tokens.cjs`.
 
 ## crystal-preview
 

@@ -2269,6 +2269,126 @@ The re-capture had been refused for a while that day: the repository was then
 private, its jobs drew on the account's included Actions minutes, and GitHub
 declines jobs with a payments-or-spending-limit message once those are used up.
 
+## D-30 · An optional editor engine binding
+
+**What.** The catalogue says the rich text surface's engine is the product's,
+and Crystal React kept to that: `RichTextSurface` takes any engine. Meridian's
+brief of 2 October asked for headings, lists, checklists, underline,
+strikethrough and touch support, which an engine-agnostic surface cannot give
+a product. Crystal React now also ships `RichTextEditor` from its own entry,
+`@crystal-ui/react/editor`, binding TipTap 3 to Crystal's format vocabulary,
+with TipTap as optional peer dependencies. The main entry reaches no TipTap
+module.
+
+**Why it matters.** Every platform library will meet the same request. If one
+binds an engine and the others do not, "the rich text surface" means different
+things on different platforms.
+
+**Options.** (a) A library may ship an optional binding from its own entry
+point, the engine an optional peer; the catalogue says so and names the format
+vocabulary as the contract **(rec.)**. (b) Bindings live outside the libraries,
+as separate packages. (c) No bindings; remove `@crystal-ui/react/editor`.
+
+**Where.** `core/tokens/catalogue/04-inputs.json` (`rich-text-surface.note`),
+Crystal React `src/editor/`. **Closing it:** the ruling, applied to the note;
+for (c), deleting `src/editor/`, `src/editor.ts` and the `./editor` export,
+which breaks nothing else. Task C-T2.
+
+**Ruled on 2026-10-02 by Meridian Digital: (a) A library may ship an optional binding from its own entry point, the engine an optional peer; the catalogue names the format vocabulary as the contract.** C-T2 becomes ready; unblocks R-T7. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-T2).
+
+**Closed** on 2 October 2026 by C-T2. `tools/extend-catalogue-9.cjs` writes the ruling into the rich text surface's note: a library may ship an optional engine binding from its own entry point, the engine an optional peer, and the format vocabulary is the contract the binding implements. Crystal React's `@crystal-ui/react/editor` is that binding, as built.
+
+## D-31 · Material presets as entrances
+
+**What.** No component plays the `plastic`, `resin`, `haze` or `stone`
+presets, and none plays the five material compositions. `presets.js` calls the
+presets "the movement a material makes when it enters or leaves"; `motion.md`
+calls them replay studies. They are now visible (Crystal React's motion
+catalogue story, the proposal's `motion.html`), and nothing else changed.
+
+**Options.** (a) They stay studies in 2.x; `presets.js` says so; entrances are
+decided per surface in 3.0 against the approved baseline **(rec.)**. (b) Each
+surface a person opens names its preset now: Frost for a side sheet, Resin for
+a floating transport appearing, Plastic for a new view. (c) Withdraw the five
+from the package.
+
+**Where.** `core/assets/core/presets.js`, `core/docs/motion.md`. Task C-M1.
+
+**Ruled on 2026-10-02 by Meridian Digital: (a) They stay studies in 2.x, presets.js says so, and entrances are decided per surface in 3.0.** C-M1 becomes ready. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-M1).
+
+**Closed** on 2 October 2026 by C-M1. `presets.js` and `motion.md` both say the five material presets and the five compositions are studies in 2.x, which no catalogue entry assigns; only `mirage`, `mirage-out` and `dismiss` are entrances and exits, on the dialog and its scrim. **Carried to 3.0:** which preset each surface a person opens enters with (Frost for a side sheet, Resin for a floating transport) is decided per surface, against the approved baseline. There is no 3.0 plan yet; this entry is where the question is recorded until there is.
+
+## D-32 · Twenty assignments no component plays
+
+**What.** With composition credited, 20 of 338 motion assignments across 15
+entries are played by nothing (proposal, F-5). Eleven cannot be played by the
+component as written; two are the product's child menus; seven are gaps in
+Crystal React.
+
+**Options.** As D-28: (a) take off `list-out` on the transfer list, the data
+table and the resizable table, `accordion-out` on the tree view, navigation
+tree, organisation chart and spoiler, `page-out` on master and detail and
+`list-in` on the combobox; say in prose that the menubar's and split button's
+menus are the product's; keep the rest as Crystal React tasks **(rec.)**.
+(b) Grow each component to play them.
+
+**Where.** `core/tokens/catalogue/`. Task C-M2.
+
+**Ruled on 2026-10-02 by Meridian Digital: (a) As D-28: take off the eleven the components cannot play, say in prose that the menubar's and split button's menus are the product's, and keep the rest as Crystal React tasks.** C-M2 becomes ready. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-M2).
+
+**Closed** on 2 October 2026 by C-M2. `tools/extend-catalogue-9.cjs` takes off the assignments the ruling names, and gives the menubar and the split button notes saying their menus are the product's children. The ruling and the proposal called the removals "eleven"; the list they name is nine (list-out three times, accordion-out four times, page-out and list-in once each), and with the menus' four and Crystal React's seven gaps it accounts for all twenty. The seven gaps stay assigned and are Crystal React tasks R-A3 to R-A5.
+
+## D-33 · What "an intelligent cursor" means
+
+**What.** The brief asked for an intelligent cursor. Crystal React built this
+reading of it: formatting state follows the caret; a gap cursor lets the caret
+stop between two blocks that are not text; a drop cursor shows where a drag
+lands; Markdown typed at the start of a line becomes its block; a format
+changed by a shortcut is announced; Alt+F10 moves focus to the toolbar.
+
+**Options.** (a) That is what was meant **(rec.)**. (b) It meant something
+else, such as a caret drawn by Crystal or caret-following suggestions, to be
+specified.
+
+**Where.** Crystal React `src/editor/RichTextEditor.tsx`.
+
+**Ruled on 2026-10-02 by Meridian Digital: (a) That is what was meant.** Records the answer; no task changes. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). Nothing is left to build; the entry closes with the next tracker review.
+
+**Closed** on 2 October 2026 with the ruling. Nothing was left to build.
+
+## D-34 · Highlight and selection
+
+**What.** `mark` and the editor's selection would both have been primary-soft,
+so a highlighted word that is then selected would not look selected. The
+selection is now a 28% primary tint under unchanged text, and `mark` keeps the
+primary-soft pair that `Prose` renders.
+
+**Options.** (a) Keep both as built **(rec.)**. (b) `mark` takes the attention
+pair (the highlighter's yellow), a visible change to `Prose`.
+
+**Where.** `core/assets/crystal.css`. Task C-T1.
+
+**Ruled on 2026-10-02 by Meridian Digital: (a) Keep both as built.** C-T1 becomes ready. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-T1).
+
+**Closed** on 2 October 2026 by C-T1 and C-D1. `tools/validate-tokens.cjs` checks the highlight (6.06:1 or better) and the editor selection on the surface and on Haze (7.63:1 or better) in every palette and mode, and the components chapter says the two differ. Measuring them found one composite that fails: a highlighted word that is then selected, under 4.5:1 in Harbor. That is D-39, open for Meridian.
+
+## D-35 · The icon set drops the editor's glyphs
+
+**What.** `tools/build-icons.cjs` keeps the first 1000 icons alphabetically
+after its filters, so `link`, `list`, `list-ordered`, `quote`, `redo`,
+`subscript` and `undo` fall past the cap, and the `-digit` filter drops
+`heading-2` to `heading-4`. Crystal React draws these six in place.
+
+**Options.** (a) A named list of icons the vocabulary requires, kept whatever
+the cap; disclose every icon that leaves to make room **(rec.)**. (b) Raise the
+cap. (c) Leave each library to draw its own.
+
+**Where.** `tools/build-icons.cjs`. Task C-I1.
+
+**Ruled on 2026-10-02 by Meridian Digital: (a) A named list of icons the vocabulary requires, kept whatever the cap, with every icon that leaves disclosed.** C-I1 becomes ready. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-I1).
+
+**Closed** on 2 October 2026 by C-I1. `tools/build-icons.cjs` keeps a named `REQUIRED` list whatever the slice picks, and the manifest lists it; the set is 1022 icons. Icon identifiers are public contract, so in 2.x no icon leaves to make room: the build reports every icon that arrives or leaves against the committed manifest and refuses a removal outside a major release. Crystal React draws the eleven from the set once it depends on the release that ships them.
+
 ## D-38 · Resin renders flat once a consumer minifies `crystal.css`
 
 **What.** Crystal React's CI, the first run in three days that GitHub started,
