@@ -601,6 +601,16 @@ span.cr-field-shell::after {
 :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::before,:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after {
     display: none
 }
+/* The browser's forced-colours adjustment replaces colours and drops shadows,
+   but leaves backdrop-filter alone. Measured in Chromium with forced colours
+   emulated, the status badge, the tag, the count and the three choices kept
+   their blur: the choices' own rule has this rule's specificity and comes
+   later, and the badge and the tag were not listed (D-36). Important, as the
+   material resets in the reset layer are, so no later rule can restore it. */
+:is(button,a.cr-button,.cr-control,.cr-field-shell,input,.cr-resin-haze,.cr-status) {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important
+}
 span.cr-field-shell {
     border: 1px solid ButtonText
 }

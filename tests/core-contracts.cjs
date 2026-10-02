@@ -1044,6 +1044,19 @@ check('every backdrop-filter is written after its -webkit- form', () => {
   assert.deepEqual(late, [], `${late.length} rule(s) write -webkit-backdrop-filter last, which a minifier keeps alone`);
 });
 
+/* Under forced colours no surface keeps a backdrop blur (D-36). The browser
+   leaves backdrop-filter alone, and a normal declaration here lost to the
+   choices' later rule of equal specificity, so the reset is important. This
+   reads the stylesheet; crystal-preview's browser gate measures the computed
+   style with forced colours emulated. */
+check('forced colours reset every control surface\'s backdrop-filter, importantly', () => {
+  const reset = [...stylesheetCode.matchAll(/([^{};]*)\{([^{}]*backdrop-filter:\s*none\s*!important[^{}]*)\}/g)]
+    .map(([, selector]) => selector);
+  for (const surface of ['input', '.cr-status', '.cr-resin-haze', 'button', '.cr-field-shell']) {
+    assert.ok(reset.some((selector) => selector.includes(surface)), `${surface} has no important backdrop-filter reset`);
+  }
+});
+
 /* -------------------------------------------------------------- report */
 
 const failures = results.filter((r) => r.status === 'fail');

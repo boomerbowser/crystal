@@ -859,6 +859,7 @@
             },
             "forcedColors": {
               "declarations": {
+                "-webkit-backdrop-filter": "none",
                 "backdrop-filter": "none",
                 "background": "Canvas",
                 "border": "1px solid ButtonText",
@@ -964,6 +965,7 @@
             },
             "forcedColors": {
               "declarations": {
+                "-webkit-backdrop-filter": "none",
                 "backdrop-filter": "none",
                 "background": "Canvas",
                 "border": "1px solid ButtonText",
@@ -1074,6 +1076,7 @@
             },
             "forcedColors": {
               "declarations": {
+                "-webkit-backdrop-filter": "none",
                 "backdrop-filter": "none",
                 "background": "Canvas",
                 "border": "1px solid ButtonText",
@@ -1201,6 +1204,7 @@
         },
         "forcedColors": {
           "declarations": {
+            "-webkit-backdrop-filter": "none",
             "backdrop-filter": "none",
             "background": "Canvas",
             "border": "1px solid ButtonText",
@@ -1372,6 +1376,10 @@
           }
         },
         "forcedColors": {
+          "declarations": {
+            "-webkit-backdrop-filter": "none",
+            "backdrop-filter": "none"
+          },
           "layers": {
             "::after": {
               "display": "none"
@@ -1516,6 +1524,10 @@
               }
             },
             "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none"
+              },
               "layers": {
                 "::after": {
                   "display": "none"
@@ -2168,6 +2180,8 @@
         },
         "forcedColors": {
           "declarations": {
+            "-webkit-backdrop-filter": "none",
+            "backdrop-filter": "none",
             "forced-color-adjust": "auto"
           },
           "layers": {
@@ -3028,7 +3042,9 @@
             "reducedTransparency": null,
             "forcedColors": {
               "declarations": {
+                "-webkit-backdrop-filter": "none",
                 "appearance": "auto",
+                "backdrop-filter": "none",
                 "background": "Canvas",
                 "color": "CanvasText"
               },
@@ -3042,13 +3058,6 @@
           },
           "conditions": {},
           "shadowed": [
-            {
-              "branch": "forcedColors",
-              "layer": null,
-              "property": "backdrop-filter",
-              "value": "none",
-              "by": "blur(20px)"
-            },
             {
               "branch": "forcedColors",
               "layer": null,
@@ -3107,7 +3116,9 @@
             "reducedTransparency": null,
             "forcedColors": {
               "declarations": {
+                "-webkit-backdrop-filter": "none",
                 "appearance": "auto",
+                "backdrop-filter": "none",
                 "background": "Canvas",
                 "color": "CanvasText"
               },
@@ -3121,13 +3132,6 @@
           },
           "conditions": {},
           "shadowed": [
-            {
-              "branch": "forcedColors",
-              "layer": null,
-              "property": "backdrop-filter",
-              "value": "none",
-              "by": "blur(20px)"
-            },
             {
               "branch": "forcedColors",
               "layer": null,
@@ -3195,7 +3199,9 @@
             "reducedTransparency": null,
             "forcedColors": {
               "declarations": {
+                "-webkit-backdrop-filter": "none",
                 "appearance": "auto",
+                "backdrop-filter": "none",
                 "background": "Canvas",
                 "color": "CanvasText",
                 "height": "auto",
@@ -3211,13 +3217,6 @@
           },
           "conditions": {},
           "shadowed": [
-            {
-              "branch": "forcedColors",
-              "layer": null,
-              "property": "backdrop-filter",
-              "value": "none",
-              "by": "blur(20px)"
-            },
             {
               "branch": "forcedColors",
               "layer": null,
@@ -3301,6 +3300,7 @@
             "reducedTransparency": null,
             "forcedColors": {
               "declarations": {
+                "-webkit-backdrop-filter": "none",
                 "appearance": "auto",
                 "backdrop-filter": "none",
                 "background": "Canvas",
