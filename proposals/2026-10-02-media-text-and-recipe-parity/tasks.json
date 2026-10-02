@@ -69,7 +69,7 @@
       "repo": "core",
       "area": "Recipes",
       "priority": "P2",
-      "status": "ready",
+      "status": "done",
       "title": "Resolve the partial surface recipes (F-2 items 3 to 9)",
       "depends": [],
       "target": "Every surface in surface-recipes.json resolves fully, or its record says why it cannot.",

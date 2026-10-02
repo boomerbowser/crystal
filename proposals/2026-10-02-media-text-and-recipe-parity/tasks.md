@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-44 tasks: 20 done, 19 ready, 4 blocked, 1 needs a ruling, 0 dropped.
+44 tasks: 21 done, 18 ready, 4 blocked, 1 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -43,7 +43,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 |---|---|---|---|---|
 | [C-R1](#c-r1) | P0 | Ready | Publish @crystal-ui/core 2.4.0 | – |
 | [C-R2](#c-r2) | P2 | Done | Remove the backdrop blur that survives forced colours (D-36) | – |
-| [C-S1](#c-s1) | P2 | Ready | Resolve the partial surface recipes (F-2 items 3 to 9) | – |
+| [C-S1](#c-s1) | P2 | Done | Resolve the partial surface recipes (F-2 items 3 to 9) | – |
 | [C-S2](#c-s2) | P1 | Ready | Platform guide for surface-recipes.json in CONTRACT.md | – |
 | [C-S3](#c-s3) | P2 | Ready | Measure before assigning, as a contract rule (re-evaluation rec. 1) | – |
 | [C-S4](#c-s4) | P2 | Ready | Check prose against surface in the build (re-evaluation rec. 3) | – |
@@ -86,16 +86,16 @@ Where: `core/assets/crystal.css, tests/core-contracts.cjs`.
 
 ### C-S1
 
-**Resolve the partial surface recipes (F-2 items 3 to 9).** Recipes, P2, ready.
+**Resolve the partial surface recipes (F-2 items 3 to 9).** Recipes, P2, done.
 
 Target: Every surface in surface-recipes.json resolves fully, or its record says why it cannot.
 
 Done when:
 
-- [ ] .cr-button coats any element, or the vocabulary says it is element-keyed
-- [ ] .cr-stone has a radius or the record says it inherits
-- [ ] The dock's description and .cr-dock-inner agree on Stone or Haze
-- [ ] -webkit-backdrop-filter twins on .cr-dock and the choices; the choices' blur is a token
+- [x] .cr-button coats any element, or the vocabulary says it is element-keyed
+- [x] .cr-stone has a radius or the record says it inherits
+- [x] The dock's description and .cr-dock-inner agree on Stone or Haze
+- [x] -webkit-backdrop-filter twins on .cr-dock and the choices; the choices' blur is a token
 
 Where: `core/assets/crystal.css, core/tokens/surfaces.json`.
 
