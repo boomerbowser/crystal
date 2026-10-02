@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-46 tasks: 28 done, 13 ready, 4 blocked, 1 needs a ruling, 0 dropped.
+47 tasks: 31 done, 11 ready, 4 blocked, 1 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -47,6 +47,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-S2](#c-s2) | P1 | Done | Platform guide for surface-recipes.json in CONTRACT.md | – |
 | [C-S3](#c-s3) | P2 | Done | Measure before assigning, as a contract rule (re-evaluation rec. 1) | – |
 | [C-S4](#c-s4) | P2 | Done | Check prose against surface in the build (re-evaluation rec. 3) | – |
+| [C-S5](#c-s5) | P2 | Ready | Caption style in the media recipe | – |
 | [C-M1](#c-m1) | P2 | Done | Material presets as entrances (D-31) | – |
 | [C-M2](#c-m2) | P2 | Done | Rule on the 20 unplayed assignments (D-32) | – |
 | [C-M3](#c-m3) | P2 | Ready | Selection motion for strips and groups (D-37) | – |
@@ -137,6 +138,20 @@ Done when:
 - [x] The 27 entries that fail today are corrected, the four stale overlay anatomies first
 
 Where: `tools/build-catalogue.cjs, core/tokens/catalogue/`.
+
+### C-S5
+
+**Caption style in the media recipe.** Recipes, P2, ready.
+
+Target: .cr-media-caption publishes the reader's caption style (a larger size and a solid backing on --cr-surface), and the video player's entry names the caption-style choice, so every platform offers what Crystal React does since R-M12.
+
+Done when:
+
+- [ ] crystal.css carries the size and backing variants, with their forced-colours and reduced-transparency branches
+- [ ] surface-recipes.json records them
+- [ ] The video player entry names the choice in its anatomy and semantics
+
+Where: `core/assets/crystal.css, core/tokens/catalogue/11-media.json`.
 
 ### C-M1
 
@@ -275,15 +290,15 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-M8](#r-m8) | P2 | Done | Real media fixtures for stories and gates | – |
 | [R-M9](#r-m9) | P1 | Blocked | Wear the published media recipes and delete the copies | C-R1 |
 | [R-M10](#r-m10) | P1 | Ready | Prove audio-track switching in Safari | – |
-| [R-M11](#r-m11) | P3 | Ready | Draw the first cue before playback starts | – |
-| [R-M12](#r-m12) | P2 | Ready | Caption appearance settings (size and backing) | – |
+| [R-M11](#r-m11) | P3 | Done | Draw the first cue before playback starts | – |
+| [R-M12](#r-m12) | P2 | Done | Caption appearance settings (size and backing) | – |
 | [R-T1](#r-t1) | P1 | Done | RichTextSurface wears .cr-field-shell, carries the vocabulary, places the toolbar by pointer | – |
 | [R-T2](#r-t2) | P1 | Done | The format vocabulary, exported from the main entry | – |
 | [R-T3](#r-t3) | P1 | Done | RichTextEditor at @crystal-ui/react/editor | – |
 | [R-T4](#r-t4) | P1 | Done | Text decorations and the edit elements | – |
 | [R-T5](#r-t5) | P1 | Ready | Prove the touch toolbar on real devices | – |
 | [R-T6](#r-t6) | P2 | Done | Mentions popover wears .cr-frost | – |
-| [R-T7](#r-t7) | P2 | Ready | EditorBlock offers the bound editor in a story | D-30 |
+| [R-T7](#r-t7) | P2 | Done | EditorBlock offers the bound editor in a story | D-30 |
 | [R-T8](#r-t8) | P3 | Ready | Screen-reader pass on the editor | – |
 | [R-T9](#r-t9) | P1 | Blocked | Wear the published prose and editor recipes and delete the copies | C-R1 |
 | [R-A0](#r-a0) | P1 | Done | Motion catalogue story | – |
@@ -427,26 +442,26 @@ Where: `scripts/verify-behaviour.mjs`.
 
 ### R-M11
 
-**Draw the first cue before playback starts.** Media, P3, ready.
+**Draw the first cue before playback starts.** Media, P3, done.
 
 Target: A cue active at 0:00 shows without a time update.
 
 Done when:
 
-- [ ] Chromium's empty activeCues at load handled, for example by a one-time seek to currentTime on loadeddata
+- [x] Chromium's empty activeCues at load handled, for example by a one-time seek to currentTime on loadeddata
 
 Where: `src/media/useMediaTracks.ts`.
 
 ### R-M12
 
-**Caption appearance settings (size and backing).** Media, P2, ready.
+**Caption appearance settings (size and backing).** Media, P2, done.
 
 Target: A reader can enlarge captions and make the backing opaque, as broadcast caption rules require.
 
 Done when:
 
-- [ ] A Captions style submenu; the choice persists
-- [ ] Opaque backing uses --cr-surface, not a new colour
+- [x] A Captions style submenu; the choice persists
+- [x] Opaque backing uses --cr-surface, not a new colour
 
 Where: `src/components/MediaControls/MediaSettings.tsx`.
 
@@ -530,13 +545,13 @@ Where: `src/components/RichTextSurface/RichTextSurface.module.scss`.
 
 ### R-T7
 
-**EditorBlock offers the bound editor in a story.** Text, P2, ready.
+**EditorBlock offers the bound editor in a story.** Text, P2, done.
 
 Target: The editor block shown with RichTextEditor, save state and announcements together.
 
 Done when:
 
-- [ ] Story and unit test
+- [x] Story and unit test
 
 Where: `src/components/EditorBlock/`. Depends on D-30.
 

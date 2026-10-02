@@ -808,7 +808,7 @@ A text field with a filtered popover list, keyboard highlight and optional creat
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>idle, focus, open, filtering, empty, loading, invalid, disabled</td></tr>
-<tr><th scope="row">Material</th><td>Resin field shell, Resin popover with Haze rows</td></tr>
+<tr><th scope="row">Material</th><td>Resin field shell, Frost popover with Haze rows (R15e)</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-field">Field shell</a> → <a href="#surface-frost">Frost panel</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Popover content radius; rows inset 8px</td></tr>
 <tr><th scope="row">Semantics</th><td>role=combobox with aria-expanded, aria-controls and aria-activedescendant; the list is never focus-stealing</td></tr>
@@ -1192,7 +1192,7 @@ Progressive columns narrowing a hierarchical selection.
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>idle, open, partial, complete, loading, disabled</td></tr>
-<tr><th scope="row">Material</th><td>Resin popover, Haze columns</td></tr>
+<tr><th scope="row">Material</th><td>Frost popover with Haze columns (R15e), from a Resin field shell</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-field">Field shell</a> → <a href="#surface-frost">Frost panel</a> → <a href="#surface-haze">Haze reading surface</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Content radius; columns separated by a hairline</td></tr>
 <tr><th scope="row">Semantics</th><td>Each column is a listbox; the composed value is announced as a path</td></tr>

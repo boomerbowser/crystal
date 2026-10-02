@@ -85,6 +85,8 @@ ruled and follows in a later minor version.
   assigned only where a component wearing it was measured; six entries whose
   prose specifies a material no component draws yet are listed as awaiting a
   measurement.
+- **The combobox's and the cascader's popovers are Frost** (R15e), as their
+  surfaces already said (`tools/extend-catalogue-11.cjs`).
 - **The vocabulary.** The navigation entry has no material of its own, and the
   dock is Resin, Haze and Stone, which is what `.cr-dock-inner` paints.
   `.cr-button` is element-keyed (it coats a `button` or an `a`; `.cr-control`

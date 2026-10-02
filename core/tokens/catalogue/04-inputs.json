@@ -204,7 +204,7 @@
         "invalid",
         "disabled"
       ],
-      "material": "Resin field shell, Resin popover with Haze rows",
+      "material": "Resin field shell, Frost popover with Haze rows (R15e)",
       "surface": [
         "field",
         "frost"
@@ -917,7 +917,7 @@
         "loading",
         "disabled"
       ],
-      "material": "Resin popover, Haze columns",
+      "material": "Frost popover with Haze columns (R15e), from a Resin field shell",
       "surface": [
         "field",
         "frost",
