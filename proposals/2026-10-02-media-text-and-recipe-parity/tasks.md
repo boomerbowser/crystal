@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-44 tasks: 21 done, 18 ready, 4 blocked, 1 needs a ruling, 0 dropped.
+44 tasks: 22 done, 17 ready, 4 blocked, 1 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -46,7 +46,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-S1](#c-s1) | P2 | Done | Resolve the partial surface recipes (F-2 items 3 to 9) | – |
 | [C-S2](#c-s2) | P1 | Ready | Platform guide for surface-recipes.json in CONTRACT.md | – |
 | [C-S3](#c-s3) | P2 | Ready | Measure before assigning, as a contract rule (re-evaluation rec. 1) | – |
-| [C-S4](#c-s4) | P2 | Ready | Check prose against surface in the build (re-evaluation rec. 3) | – |
+| [C-S4](#c-s4) | P2 | Done | Check prose against surface in the build (re-evaluation rec. 3) | – |
 | [C-M1](#c-m1) | P2 | Done | Material presets as entrances (D-31) | – |
 | [C-M2](#c-m2) | P2 | Done | Rule on the 20 unplayed assignments (D-32) | – |
 | [C-M3](#c-m3) | P2 | Ready | Selection motion for strips and groups (D-37) | – |
@@ -127,14 +127,14 @@ Where: `libraries/CONTRACT.md`.
 
 ### C-S4
 
-**Check prose against surface in the build (re-evaluation rec. 3).** Catalogue, P2, ready.
+**Check prose against surface in the build (re-evaluation rec. 3).** Catalogue, P2, done.
 
 Target: A material named in an entry's material or anatomy belongs to one of its surfaces.
 
 Done when:
 
-- [ ] build-catalogue.cjs fails on a mismatch
-- [ ] The 27 entries that fail today are corrected, the four stale overlay anatomies first
+- [x] build-catalogue.cjs fails on a mismatch
+- [x] The 27 entries that fail today are corrected, the four stale overlay anatomies first
 
 Where: `tools/build-catalogue.cjs, core/tokens/catalogue/`.
 

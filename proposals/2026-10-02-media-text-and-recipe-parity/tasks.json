@@ -116,7 +116,7 @@
       "repo": "core",
       "area": "Catalogue",
       "priority": "P2",
-      "status": "ready",
+      "status": "done",
       "title": "Check prose against surface in the build (re-evaluation rec. 3)",
       "depends": [],
       "target": "A material named in an entry's material or anatomy belongs to one of its surfaces.",
