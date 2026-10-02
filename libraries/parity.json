@@ -1442,7 +1442,7 @@
       "name": "Angle slider",
       "category": "inputs",
       "surface": [
-        "none"
+        "resin"
       ],
       "motion": [
         "slider-step"
@@ -1459,7 +1459,7 @@
       "name": "Knob",
       "category": "inputs",
       "surface": [
-        "none"
+        "resin"
       ],
       "motion": [
         "slider-step"
@@ -1514,7 +1514,7 @@
       "name": "Colour area",
       "category": "inputs",
       "surface": [
-        "none"
+        "resin"
       ],
       "status": {
         "web": "implemented",
@@ -1528,7 +1528,7 @@
       "name": "Colour slider",
       "category": "inputs",
       "surface": [
-        "none"
+        "resin"
       ],
       "status": {
         "web": "implemented",
@@ -1542,7 +1542,7 @@
       "name": "Colour wheel",
       "category": "inputs",
       "surface": [
-        "none"
+        "resin"
       ],
       "status": {
         "web": "implemented",
@@ -2271,7 +2271,8 @@
       "name": "Toast",
       "category": "feedback",
       "surface": [
-        "frost"
+        "frost",
+        "haze"
       ],
       "motion": [
         "toast-in",
@@ -2289,7 +2290,8 @@
       "name": "Notification",
       "category": "feedback",
       "surface": [
-        "frost"
+        "frost",
+        "haze"
       ],
       "motion": [
         "toast-in",
@@ -2426,7 +2428,8 @@
       "name": "Inline confirm",
       "category": "feedback",
       "surface": [
-        "frost"
+        "frost",
+        "haze"
       ],
       "motion": [
         "popover-in",
@@ -2555,7 +2558,8 @@
       "name": "Menu",
       "category": "overlays",
       "surface": [
-        "frost"
+        "frost",
+        "haze"
       ],
       "motion": [
         "menu-in",
@@ -2591,7 +2595,8 @@
       "name": "Popover",
       "category": "overlays",
       "surface": [
-        "frost"
+        "frost",
+        "haze"
       ],
       "motion": [
         "popover-in",

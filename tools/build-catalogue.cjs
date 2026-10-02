@@ -113,6 +113,16 @@ function validate(categories, surfaces, presets) {
       for (const s of c.surface || []) {
         if (!surfaces.byId.has(s)) problems.push(`${where}: surface "${s}" is not in surfaces.json`);
       }
+      /* The prose and the surface say the same thing (C-S4): a material named in
+         the material or the anatomy is one an entry's surface is made of. A
+         token in a code span is a colour, not a material claim. */
+      const made = new Set((c.surface || []).flatMap((s) => surfaces.byId.get(s)?.materials ?? []));
+      for (const field of ['material', 'anatomy']) {
+        const prose = String(c[field] || '').replace(/`[^`]*`/g, '');
+        for (const m of prose.match(/\b(Plastic|Frost|Resin|Haze|Stone|Mirage)\b/g) || []) {
+          if (!made.has(m)) problems.push(`${where}: ${field} names ${m}, and none of its surfaces (${(c.surface || []).join(', ')}) is made of it`);
+        }
+      }
       for (const id of c.motion || []) {
         if (!recipeIds.has(id) && !presets.has(id)) problems.push(`${where}: motion "${id}" is neither a recipe nor a material preset`);
       }

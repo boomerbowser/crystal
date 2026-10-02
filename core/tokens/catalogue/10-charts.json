@@ -86,7 +86,7 @@
         "focus-visible",
         "empty"
       ],
-      "material": "Haze fill beneath the line",
+      "material": "The series colour at `--cr-chart-fill-opacity` beneath the line",
       "surface": [
         "none"
       ],
@@ -133,7 +133,7 @@
         "focus-visible",
         "empty"
       ],
-      "material": "Haze centre fill",
+      "material": "A centre fill in `--cr-haze-fill`",
       "surface": [
         "none"
       ],
@@ -177,7 +177,7 @@
         "focus-visible",
         "empty"
       ],
-      "material": "Haze fill inside each series polygon",
+      "material": "The series colour at `--cr-chart-fill-opacity` inside each series polygon",
       "surface": [
         "none"
       ],
@@ -219,7 +219,7 @@
         "determinate",
         "empty"
       ],
-      "material": "Haze track with a primary arc",
+      "material": "A track in `--cr-haze-fill` with a primary arc",
       "surface": [
         "none"
       ],
@@ -442,7 +442,7 @@
         "focus-visible",
         "empty"
       ],
-      "material": "Haze range bands",
+      "material": "Range bands in `--cr-haze-fill`",
       "surface": [
         "none"
       ],
@@ -530,7 +530,7 @@
         "focus-visible",
         "empty"
       ],
-      "material": "Haze node fills",
+      "material": "Node fills in `--cr-haze-fill`",
       "surface": [
         "none"
       ],

@@ -403,7 +403,7 @@
         "drop-target",
         "focus-visible"
       ],
-      "material": "Resin while lifted; Haze drop indicator",
+      "material": "No material of its own: the opaque surface with the float shadow while lifted, and a drop indicator in `--cr-haze-fill`",
       "surface": [
         "drag-handle"
       ],

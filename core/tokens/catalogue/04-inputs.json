@@ -951,7 +951,7 @@
         "empty",
         "disabled"
       ],
-      "material": "Resin popover with Haze rows over the field",
+      "material": "Frost popover with Haze rows over the field (R15e)",
       "surface": [
         "frost",
         "haze"
@@ -1223,7 +1223,7 @@
       ],
       "material": "Resin track with a Resin thumb",
       "surface": [
-        "none"
+        "resin"
       ],
       "geometry": "Circular; the thumb reaches 44px including its hit area.",
       "semantics": "role=\"slider\" with aria-valuenow in degrees and a text equivalent.",
@@ -1246,9 +1246,9 @@
         "focus-visible",
         "disabled"
       ],
-      "material": "Resin body with a Haze value arc",
+      "material": "Resin body with a primary value arc",
       "surface": [
-        "none"
+        "resin"
       ],
       "geometry": "Circular; keyboard steps match the slider contract.",
       "semantics": "role=\"slider\"; the value is readable as text, not only as an arc.",
@@ -1328,7 +1328,7 @@
       ],
       "material": "Resin thumb over the gradient field",
       "surface": [
-        "none"
+        "resin"
       ],
       "geometry": "Thumb reaches 44px including its hit area.",
       "semantics": "Two linked sliders; each axis announces its own value and responds to arrow keys.",
@@ -1351,7 +1351,7 @@
       ],
       "material": "Resin thumb on a gradient track",
       "surface": [
-        "none"
+        "resin"
       ],
       "geometry": "Matches the slider contract.",
       "semantics": "role=\"slider\" with the channel named and the value in that channel's units.",
@@ -1374,7 +1374,7 @@
       ],
       "material": "Resin thumb on the hue ring",
       "surface": [
-        "none"
+        "resin"
       ],
       "geometry": "Ring thickness is a declared proportion of the radius.",
       "semantics": "role=\"slider\" in degrees, wrapping at 360.",
@@ -1394,7 +1394,7 @@
         "selected",
         "focus-visible"
       ],
-      "material": "Haze chequerboard beneath a transparent colour",
+      "material": "A chequerboard beneath a transparent colour, so its alpha shows",
       "surface": [
         "none"
       ],

@@ -256,7 +256,7 @@
     {
       "id": "indicator",
       "name": "Indicator",
-      "anatomy": "A small circular Resin mark attached to a control, carrying state.",
+      "anatomy": "A small circular Haze mark attached to a control, carrying state.",
       "states": [
         "selection",
         "current",
@@ -266,7 +266,7 @@
         "required",
         "invalid"
       ],
-      "material": "Haze: a 20px circle painting the Haze fill on an isolated layer with a 1px feather; no Resin, because it sits on surfaces that are often already translucent",
+      "material": "Haze: a 20px circle painting the Haze fill on an isolated layer with a 1px feather, and no coat of its own, because it sits on surfaces that are often already translucent",
       "surface": [
         "indicator"
       ],
@@ -317,7 +317,7 @@
         "upcoming",
         "error"
       ],
-      "material": "Resin markers on a Haze connector",
+      "material": "Indicator markers on a Haze connector",
       "surface": [
         "indicator",
         "haze"

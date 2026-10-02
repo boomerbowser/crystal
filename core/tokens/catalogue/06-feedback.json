@@ -34,7 +34,7 @@
     {
       "id": "toast",
       "name": "Toast",
-      "anatomy": "A transient floating Resin notification with a message and an optional single action.",
+      "anatomy": "A transient floating Frost notification with a message and an optional single action.",
       "states": [
         "entering",
         "visible",
@@ -44,7 +44,8 @@
       ],
       "material": "Frost panel with Haze reading fill and the panel shadow (R15e); status accent from the semantic pair",
       "surface": [
-        "frost"
+        "frost",
+        "haze"
       ],
       "geometry": "Content radius; stacked with a 12px offset",
       "semantics": "Polite live region; an urgent toast is assertive. Auto-dismiss must never remove the only route to an action.",
@@ -71,7 +72,8 @@
       ],
       "material": "Frost panel with Haze reading fill (R15e)",
       "surface": [
-        "frost"
+        "frost",
+        "haze"
       ],
       "geometry": "Content radius",
       "semantics": "Announced politely; the dismiss control is named for what it dismisses",
@@ -285,7 +287,8 @@
       ],
       "material": "Frost panel with Haze reading fill (R15e)",
       "surface": [
-        "frost"
+        "frost",
+        "haze"
       ],
       "geometry": "Content radius; anchored to the trigger",
       "semantics": "Focus moves into the popover, returns to the trigger on dismiss, and Escape cancels",
@@ -337,7 +340,7 @@
         "determinate",
         "indeterminate"
       ],
-      "material": "Haze track with a primary arc",
+      "material": "A track in `--cr-haze-fill` with a primary arc",
       "surface": [
         "none"
       ],
@@ -360,7 +363,7 @@
         "at-rest",
         "focus-visible"
       ],
-      "material": "Haze track with segment fills",
+      "material": "A track in `--cr-haze-fill` with segment fills",
       "surface": [
         "none"
       ],
