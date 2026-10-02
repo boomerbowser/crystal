@@ -5,10 +5,12 @@
  * tools/build-catalogue.cjs now refuses an entry whose `material` or `anatomy`
  * names Plastic, Frost, Resin, Haze, Stone or Mirage when none of the entry's
  * surfaces is made of it. A token in a code span is a colour, not a material
- * claim, and is not read. Twenty-six entries failed; each is corrected here
- * against Crystal's own vocabulary and tokens, never against what a library
- * happens to draw, and a surface is assigned only where a component wearing it
- * was measured (C-S3):
+ * claim, and is not read. Twenty-six entries failed. Twenty-two are corrected
+ * here, 25 fields, against Crystal's own vocabulary and tokens, never against
+ * what a library happens to draw, and a surface is assigned only where a
+ * component wearing it was measured (C-S3). Six are listed in build-catalogue.cjs
+ * as awaiting a measurement; the menu and the popover are in both sets, their
+ * anatomy corrected here and their Haze awaiting:
  *
  *   - The four overlay anatomies, and the mentions list, still said Resin.
  *     Transient overlays are Frost (R15e), as their material fields already said.

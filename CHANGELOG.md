@@ -78,9 +78,9 @@ ruled and follows in a later minor version.
   product's children (D-32).
 - **Catalogue prose agrees with its surfaces** (`tools/extend-catalogue-10.cjs`).
   `tools/build-catalogue.cjs` refuses an entry whose material or anatomy names
-  a material none of its surfaces is made of. 26 entries are corrected: the
-  overlay anatomies say Frost (R15e), the toast and the notification add
-  `haze`, the indicator's anatomy says Haze, the angle slider and the knob
+  a material none of its surfaces is made of. 26 entries failed, and 22 are
+  corrected: the overlay anatomies say Frost (R15e), the toast and the
+  notification add `haze`, the indicator's anatomy says Haze, the angle slider and the knob
   take `resin`, and charts name the token they colour with. A surface is
   assigned only where a component wearing it was measured; six entries whose
   prose specifies a material no component draws yet are listed as awaiting a
