@@ -1,15 +1,15 @@
 /* Crystal. Pure token resolver + CSS exporter. No dependencies.
  *
- * Loadable two ways, and both matter. In a browser it is a script that reads
+ * Loadable two ways. In a browser it is a script that reads
  * `window.CRYSTAL_TOKENS` and publishes `window.Crystal`. Under a module loader it
  * takes the flat token file directly and exports the same object.
  *
- * The second path exists because a platform library needs `resolve()` — turning a
- * palette, a mode and a set of preferences into the ~90 custom properties a
- * surface actually renders from. Without it a library can only load the generated
- * stylesheet, which carries one palette at `:root`; every per-scope palette and
- * mode it offered was decoration. CONTRACT §1 says to reuse this arithmetic
- * rather than reimplement it, and that is only possible if it can be imported. */
+ * The second path exists because a platform library needs `resolve()`, which
+ * turns a palette, a mode and a set of preferences into the ~90 custom
+ * properties a surface renders from. Without it a library can only load the
+ * generated stylesheet, which carries one palette at `:root`, so every per-scope
+ * palette and mode it offered was decoration. CONTRACT §1 says to reuse this
+ * arithmetic rather than reimplement it, which requires that it can be imported. */
 (function(root){
   'use strict';
   const data=root.CRYSTAL_TOKENS
@@ -17,7 +17,7 @@
   if(!data) throw new Error('Load tokens.js before crystal.js');
   /* `chartSeries1` is `--cr-chart-series-1`, not `--cr-chart-series1`. The digit
      boundary is a word boundary here because Crystal already writes its numbered
-     properties that way — `--cr-focus-feather-1` predates this — and a scale a
+     properties that way (`--cr-focus-feather-1` predates this), and a scale a
      stylesheet indexes with `var(--cr-chart-series-#{$i})` reads as one. No role
      name carried a digit before the series scale, so nothing renamed. */
   const camelToKebab=s=>s.replace(/[A-Z]/g,m=>'-'+m.toLowerCase()).replace(/([a-z])(\d)/g,'$1-$2');
@@ -44,8 +44,8 @@
     const tokens={};for(const [key,val] of Object.entries(p))tokens['--cr-'+camelToKebab(key)]=val;
     /* Coloured glass casts a coloured shadow. The light a material refracts is the light
        that reaches the surface beneath it, so the shadow carries the palette's companion
-       hue rather than being neutral grey. The mix is on the colour only — the alpha of
-       each layer is preserved exactly, because tinting a shadow must not also deepen it. */
+       hue instead of neutral grey. The mix is on the colour only. The alpha of each
+       layer is preserved exactly, because tinting a shadow must not also deepen it. */
     const mixInto=(base,tint,amount)=>{
       const [br,bg,bb]=base,[tr,tg,tb]=rgb(tint);
       const m=(a,b)=>Math.round(a+(b-a)*amount);
@@ -66,7 +66,7 @@
       '--cr-atmosphere-two':rgba(p.companion,s.atmosphere/100*(dark?.23:.19)),
       /* Plastic is opaque, so it cannot refract; it emits. This is the palette's own
          glow carried by the foundation, at the intensity the active scheme's atmosphere
-         setting asks for — the base glow of the primary plus the scheme's tint. */
+         setting asks for: the base glow of the primary plus the scheme's tint. */
       '--cr-atmosphere-glow':rgba(p.glow,s.atmosphere/100*(dark?.18:.14)),
       '--cr-acrylic-fill':s.reduced?p.surface:rgba(p.surface,Math.min(.94,tint+.1)),
       '--cr-glass-fill':s.reduced?p.surface:rgba(p.surface,data.material.glassOpacity),
@@ -75,17 +75,15 @@
       '--cr-content-own-fill':s.reduced?(p.contentOwnSurface||p.primarySoft):rgba(p.contentOwnSurface||p.primarySoft,data.material.contentOpacity),
       '--cr-content-feather':s.reduced?'0px':data.material.contentFeather+'px',
       /* How far the Haze content fill is held back from a Resin surface's own
-         rim. The fill and its feather were always tokens; the inset was a
-         literal in a stylesheet Crystal does not export, so a platform library
-         could carry every Haze token and still paint no fill at all — which is
-         exactly what Crystal React did on sixteen surfaces. A recipe that only
-         one renderer knows is not a specification. */
+         rim. The fill and its feather are tokens, and the inset is published
+         with them: a platform library that reads only the tokens could
+         otherwise carry every Haze token and still paint no fill. */
       '--cr-haze-inset':data.component.haze.inset+'px',
-      /* Control geometry that `crystal.css` used to carry as literals — 26px
-         boxes, a 44×28 track, .55 for a disabled control — while the same
-         numbers were published as tokens a platform library reads. Two
-         statements of one value is the drift CONTRACT §1 forbids, so the
-         stylesheet now reads these and the literal is the fallback only. */
+      /* Control geometry: 26px boxes, a 44×28 track, .55 for a disabled
+         control. The same numbers are published as tokens a platform library
+         reads, and two statements of one value is the drift CONTRACT §1
+         forbids, so `crystal.css` reads these and its literal is the fallback
+         only. */
       '--cr-action-disabled-opacity':String(data.component.action.disabledOpacity),
       '--cr-choice-box-size':data.component.choice.boxSize+'px',
       '--cr-choice-box-radius':data.component.choice.boxRadius+'px',
@@ -93,10 +91,9 @@
       '--cr-switch-track-height':data.component.switch.trackHeight+'px',
       /* Chart geometry. A chart's colours vary with the palette and arrive with
          the other roles above; these do not vary at all. They are published
-         rather than left to each renderer because the catalogue says "line
-         weight follows the stroke scale" and "point size is a scale, not an
-         arbitrary radius" as though both scales existed, and until now neither
-         did — which is how two renderers end up with two of them. */
+         here because the catalogue says "line weight follows the stroke scale"
+         and "point size is a scale, not an arbitrary radius", and a scale
+         left to each renderer becomes two scales. */
       '--cr-chart-stroke':data.component.chart.stroke+'px',
       '--cr-chart-hairline':data.component.chart.hairline+'px',
       '--cr-chart-point-min':data.component.chart.pointMin+'px',
@@ -112,14 +109,13 @@
       '--cr-content-own-text':s.palette==='harbor'?p.text:p.onPrimarySoft,
       '--cr-stone-feather':s.reduced?'0px':data.material.stoneFeather+'px',
       /* Scrollbars.
-         The thumb is ink, not material. Painting it in the material's own
-         surface colour is the mistake that made it invisible: a white thumb at
-         62% over a white Frost panel is a white panel. So the Frost thumb is the
-         palette's ink — it belongs to the panel the way the panel's own text
-         does — and the Resin thumb is the palette's primary, because Resin is
-         the floating control plane and a scrollbar there is a control. Both
-         clear 3:1 against surface, surfaceAlt and canvas in every palette and
-         both modes, which validate-tokens asserts.
+         The thumb is ink, not material. A thumb painted in the material's own
+         surface colour is invisible: a white thumb at 62% over a white Frost
+         panel is a white panel. The Frost thumb is the palette's ink, as the
+         panel's own text is, and the Resin thumb is the palette's primary,
+         because Resin is the floating control plane and a scrollbar there is a
+         control. Both clear 3:1 against surface, surfaceAlt and canvas in every
+         palette and both modes, which validate-tokens asserts.
          The track stays a faint channel so the panel shows through. */
       '--cr-scrollbar-width':data.component.scrollbar.width+'px',
       '--cr-scrollbar-thumb-min':data.component.scrollbar.thumbMinLength+'px',
@@ -133,91 +129,75 @@
       '--cr-overlay-tooltip-max-width':data.component.overlay.tooltipMaxWidth+'px',
       /* Focus, as two properties rather than as a recipe each platform retypes.
          Crystal's focus is a crisp 2px primary core at 3px offset inside a
-         four-layer feathered halo, and it was written out longhand in
-         `crystal.css` — which is fine for a stylesheet that can use `:focus-visible`
-         on a native element, and no use at all to a library styling a shell that
-         wraps one. Crystal React named these two properties and nothing defined
-         them, so every field in it painted no focus ring whatever. Published here
-         so there is one recipe, in one place, and CONTRACT §1 is kept. */
-      /* The inner edge a control's well is drawn with. It lived only in
-         `controls.css`, which is the preview's own layer and the one a library
-         must not load — so Crystal React read it on a Card and a Slider and got
-         nothing, and those two inset shadows have never painted. A value two
-         components depend on belongs to the system. */
+         four-layer feathered halo. `crystal.css` writes it out longhand, which
+         works for a stylesheet that can use `:focus-visible` on a native
+         element and is no use to a library styling a shell that wraps one.
+         Published here so there is one recipe, in one place, and CONTRACT §1
+         is kept. */
+      /* The inner edge a control's well is drawn with. A Card and a Slider both
+         read it, so it belongs to the system; the preview's own `controls.css`
+         is a layer a library must not load. */
       '--cr-control-edge':rgba(p.outline,0.18),
-      /* The two tints the Resin control sheen is built from, and the same story
-         as `--cr-control-edge` above: they lived only in the preview's
-         `controls.css`, so the optical sheen on every Crystal control was a
-         thing the library described and did not ship. Adopted 21 September 2026
-         with the rest of D-11.
+      /* The two tints the Resin control sheen is built from. Like
+         `--cr-control-edge` above, they are published here so the sheen ships
+         with the library and does not live only in the preview's
+         `controls.css`. Adopted 21 September 2026 with the rest of D-11.
 
          `--cr-control-color` is the decorative tint that gives the control its
          body; `--cr-control-light` is the glow that lights its top-left corner.
-         Both go *down* in dark mode rather than up — the opposite of the focus
-         feathers, and deliberately: on a deep canvas the sheen is already
-         reading against very little, and holding it at the light-mode strength
-         makes a control look lit from inside rather than lit from above. */
-      /* `color-mix` rather than a resolved `rgba`, and it is the one place in
-         this theme that departs from the convention. Two reasons, both checked
-         rather than assumed. A resolved `rgba` alpha is quantised to 8 bits by
-         the time a browser serialises it — 0.126 comes back as 0.125 — and an
-         A/B of the site against this library put a worst channel delta of 2 on
-         the playground's controls purely from that. And a mix keeps the tint
-         tracking `--cr-glow` and `--cr-decorative`, so a product that retints
-         either gets a sheen that follows; a resolved value silently would not.
-         The preview has always written these as mixes, so this is also what
-         makes the adoption exact. */
+         Both go down in dark mode, the opposite of the focus feathers. On a
+         deep canvas the sheen is already reading against very little, and
+         holding it at the light-mode strength makes a control look lit from
+         inside rather than lit from above. */
+      /* `color-mix` rather than a resolved `rgba`, the one place in this theme
+         that departs from the convention, for two measured reasons. A resolved
+         `rgba` alpha is quantised to 8 bits by the time a browser serialises it
+         (0.126 comes back as 0.125), and an A/B of the site against this
+         library put a worst channel delta of 2 on the playground's controls
+         from that alone. And a mix keeps the tint tracking `--cr-glow` and
+         `--cr-decorative`, so a product that retints either gets a sheen that
+         follows, where a resolved value would not. The preview writes these as
+         mixes, so a mix is also what makes the adoption exact. */
       '--cr-control-color':`color-mix(in srgb,var(--cr-decorative) ${dark?7:8.4}%,transparent)`,
       '--cr-control-light':`color-mix(in srgb,var(--cr-glow) ${dark?9.8:12.6}%,transparent)`,
       '--cr-focus-core':p.primary,
       '--cr-focus-core-width':'2px',
       '--cr-focus-core-offset':'3px',
-      /* The four feather colours, published rather than inlined.
-         
-         They were the preview's own — `--cr-focus-feather-1` … `-4` in
-         `controls.css` — and the library had no equivalent, because it baked its
-         alphas straight into `--cr-focus-ring`. That is precisely why the
-         dark-mode divergence could hide for so long: there was no property to
-         compare, so no gate could have been written that would have caught it.
-         Naming them is half of D-11's fix; the other half is that a product can
-         now retint the falloff without restating the whole recipe.
+      /* The four feather colours, `--cr-focus-feather-1` to `-4`, published
+         rather than inlined into `--cr-focus-ring`. A named property can be
+         compared by a gate, and a product can retint the falloff without
+         restating the whole recipe (D-11).
 
-         **Dark mode lifts them**, 56/38/22/11 against light's 46/30/17/8. The
-         preview has carried the lift since the halo was specified and the
-         library never did, so Crystal's site held its falloff against a deep
-         canvas and every consumer's went thin. Meridian decided on 21 September
-         2026 that the library carries it. */
+         Dark mode lifts them: 56/38/22/11 against light's 46/30/17/8. Without
+         the lift the falloff goes thin against a deep canvas. Meridian decided
+         on 21 September 2026 that the library carries it. */
       ...Object.fromEntries((dark?[56,38,22,11]:[46,30,17,8])
         .map((pct,i)=>[`--cr-focus-feather-${i+1}`,rgba(p.primary,pct/100)])),
       /* The broad layer's colour, and the one part of focus that is not the
          primary: it is `--cr-decorative`, so the lift under a focused control
-         carries the palette's own shadow hue rather than tinting everything
-         purple. Also the preview's, also never exported. */
+         carries the palette's own shadow hue instead of tinting everything
+         purple. */
       '--cr-focus-shadow':rgba(p.decorative,0.27),
       /* Six layers: the four-layer halo, then two that lift.
-         
-         Spreads 1/3/6/11, not 2/6/12/22 — the halo was halved at Meridian's
-         request, the change was made in the preview's stylesheet, and the
-         library went on shipping the withdrawn one to every consumer. That much
-         was fixed on 20 September.
-         
-         What was still missing is the pair beneath: `0 8px 18px` directional and
-         `0 22px 40px` broad. A focused control on Crystal's site lifts, and in
-         every consumer it did not — not a spread this time but two whole layers,
-         and `components.md` had described lifting on focus as Crystal's own
-         behaviour throughout. Meridian decided on 21 September that the library
-         carries them, so this is now the whole recipe and the preview's copy is
-         redundant rather than authoritative.
-         
-         Written as `var()` references to the properties above, which is the
-         shape the preview used. It keeps the recipe readable at the point of
-         use and it is what lets the two be compared layer by layer. */
+
+         Spreads are 1/3/6/11, not 2/6/12/22: the halo was halved at Meridian's
+         request, and 2/6/12/22 is the withdrawn recipe.
+
+         The pair beneath, `0 8px 18px` directional and `0 22px 40px` broad, is
+         the lift a focused control makes, which `components.md` describes as
+         Crystal's own behaviour. Meridian decided on 21 September that the
+         library carries them, so this is the whole recipe and the preview's
+         copy is redundant.
+
+         Written as `var()` references to the properties above, the shape the
+         preview uses. It keeps the recipe readable at the point of use and
+         lets the two be compared layer by layer. */
       '--cr-focus-ring':[
         ...[[6,1,1],[16,3,2],[30,6,3],[54,11,4]]
           .map(([blur,spread,n])=>`0 0 ${blur}px ${spread}px var(--cr-focus-feather-${n})`),
-        /* The directional layer borrows the second feather rather than naming a
-           fifth colour — the preview's choice, kept, because a lift that is a
-           shade of the halo above it reads as the same light source. */
+        /* The directional layer borrows the second feather instead of naming a
+           fifth colour: a lift that is a shade of the halo above it reads as
+           the same light source. */
         '0 8px 18px var(--cr-focus-feather-2)',
         '0 22px 40px var(--cr-focus-shadow)',
       ].join(','),
@@ -253,34 +233,31 @@
       '--cr-edge':rgba(p.outline,dark?.34:.25),'--cr-rim':highlight,
       /* The two inks the composed shadows are built from, exported so a one-off
          shadow can be made of Crystal's ink instead of a literal.
-         
-         This is D-9's remaining half. `controls.css` carries eleven hard-coded
-         `#080b24…` values — a fixed dark navy that is not the ink Crystal uses
-         anywhere else. Crystal's is palette-tinted: the base violet mixed with
-         the palette's companion, so a shadow in Ion is a different colour from
-         a shadow in Fuchsia, and it darkens in dark mode. A literal cannot do
-         either, so those eleven shadows are the one part of the preview that
-         does not follow the palette. Naming the ink is what makes fixing them a
-         substitution rather than an invention. */
+
+         Crystal's shadow ink is palette-tinted: the base violet mixed with the
+         palette's companion, so a shadow in Ion is a different colour from a
+         shadow in Fuchsia, and it darkens in dark mode. A literal cannot do
+         either. `controls.css` carries eleven hard-coded `#080b24…` values, a
+         fixed dark navy, and those eleven shadows are the one part of the
+         preview that does not follow the palette. Naming the ink makes
+         replacing them a substitution (D-9). */
       '--cr-shadow-contact':contact,
       '--cr-shadow-cast':shadow,
       '--cr-shadow-content':`0 ${2*e}px ${3*e}px ${contact}, 0 ${7*e}px ${15*e}px ${shadow}`,
       '--cr-shadow-panel':`inset 0 1px 0 ${highlight}, 0 ${3*e}px ${5*e}px ${contact}, 0 ${14*e}px ${28*e}px ${shadow}`,
-      /* Resin's float, reconciled with the appearance that was actually blessed.
-         `controls.css` carried a second, hand-written copy of this recipe —
-         `inset 0 2px 1px, inset 0 -1px 1px, 0 5px 9px #080b2412, 0 16px 30px
-         #080b2420` — and because the preview loads it, that copy is what the
-         approved baseline shows and this token is what every platform library
-         gets. They disagreed, so a library following Crystal's own token could
-         not reproduce Crystal's own appearance.
-         Two things were right on each side and both are kept. The rims are the
-         blessed ones: 2px of light along the top where it catches, and a light
-         edge returning underneath — a dark lower inset reads as an inner shadow
-         rather than as glass. The elevation is this token's: tinted with the
-         palette like every other Crystal shadow, and scaled by the elevation
-         control, neither of which the literal did. The coefficients are the
-         blessed distances divided by the default 125% elevation, so the default
-         renders what was approved and the slider now moves it. */
+      /* Resin's float, matching the approved baseline. The preview loads its
+         own hand-written literal from `controls.css`, `inset 0 2px 1px, inset
+         0 -1px 1px, 0 5px 9px #080b2412, 0 16px 30px #080b2420`, so that
+         literal is what the approved baseline shows, and this token is what
+         every platform library gets. The two must agree, or a library
+         following the token cannot reproduce the approved appearance.
+         The rims are the approved ones: 2px of light along the top where it
+         catches, and a light edge returning underneath. A dark lower inset
+         reads as an inner shadow instead of glass. The elevation is this
+         token's: tinted with the palette like every other Crystal shadow, and
+         scaled by the elevation control. The coefficients are the approved
+         distances divided by the default 125% elevation, so the default renders
+         what was approved and the slider moves it. */
       '--cr-shadow-float':`inset 0 2px 1px ${highlight}, inset 0 -1px 1px ${highlight}, 0 ${4*e}px ${7.2*e}px ${contact}, 0 ${12.8*e}px ${24*e}px ${shadow}`,
       '--cr-press':ms(data.motion.press),'--cr-state':ms(data.motion.state),'--cr-spatial':ms(data.motion.spatial),
       '--cr-exit':ms(data.motion.exit),'--cr-motion-enabled':s.reduceMotion?'0':'1',

@@ -1,35 +1,30 @@
 /* What a published @crystal-ui/core may and may not contain.
  *
- * Both failure modes here are silent. A package publishes, the registry accepts
- * it, every test stays green, and the damage shows up in somebody else's
- * repository days later.
+ * Each failure checked here is silent: the package publishes, the registry
+ * accepts it, every test stays green, and the damage shows up in somebody
+ * else's repository later.
  *
- * **No `file:` or `link:` dependency.** A manifest published carrying one ships
- * a dependency that resolves to a directory on nobody else's machine. `npm
- * install` then either fails or — worse — succeeds against whatever happens to
- * be at that path.
+ * No `file:` or `link:` dependency. A published manifest carrying one ships a
+ * dependency that resolves to a directory on nobody else's machine. `npm
+ * install` then fails, or succeeds against whatever happens to be at that path.
  *
- * **No website.** `design-system/` is the library *and* the documentation site,
- * and 46% of what the package contained before this gate was the site. That is
- * not only weight. `assets/controls.css` is the preview's own stylesheet, it
- * styles bare elements, and it shaped the appearance that got blessed while the
- * exported token said something else — D-9. It was exported once before, and a
- * 32px chip rendered 50px tall in Crystal React because of it. A preview-only
- * stylesheet cannot shape a blessed appearance if it cannot leave the
- * repository, and this is what stops it leaving.
+ * No website. `design-system/` holds both the library and the documentation
+ * site, and the site was 46% of the package before this gate.
+ * `assets/controls.css` is the preview's own stylesheet; it styles bare
+ * elements, and it shaped the approved appearance while the exported token said
+ * something else (D-9). When it was exported, a 32px chip rendered 50px tall in
+ * Crystal React. Keeping preview-only stylesheets out of the package stops them
+ * shaping what consumers see.
  *
- * **Every export entry point resolves, and is in the tarball.** The third
- * silent failure: `exports` can name a file `files` does not ship, and the
- * error a consumer gets is `ERR_PACKAGE_PATH_NOT_EXPORTED` at *their* build
- * time. Presence alone is not enough to prevent it — an export whose files all
- * ship can still be unresolvable, which is how `./shaders/` stayed broken
- * under a green gate — so the subpath is resolved the way a consumer resolves
- * it.
+ * Every export entry point resolves and is in the tarball. `exports` can name a
+ * file `files` does not ship, and the consumer gets
+ * `ERR_PACKAGE_PATH_NOT_EXPORTED` at their own build time. An export whose
+ * files all ship can still be unresolvable, as `./shaders/` was, so the subpath
+ * is resolved the way a consumer resolves it.
  *
- * **Nothing in the manifest demands provenance.** The fourth: provenance is
- * only available inside a recognised CI provider, so a manifest that demands
- * it cannot be published by hand at all — which is what the first publish of
- * any package has to be.
+ * Nothing in the manifest demands provenance. Provenance is only available
+ * inside a recognised CI provider, so a manifest that demands it cannot be
+ * published by hand, and the first publish of any package has to be by hand.
  *
  *   node tools/verify-package.cjs
  */
@@ -39,10 +34,9 @@ const { resolve, join, relative } = require('node:path');
 const { createRequire } = require('node:module');
 const { tmpdir } = require('node:os');
 
-/* The package is `core/`, not the repository. Since the split those are two
-   different manifests: `core/package.json` is @crystal-ui/core and is published,
-   and the one beside `tools/` is private machinery that runs the build. Pointing
-   this at the wrong one would check a manifest nobody installs. */
+/* The package is `core/`. There are two manifests: `core/package.json` is
+   @crystal-ui/core and is published, and the one beside `tools/` is private
+   machinery that runs the build and is never installed. */
 const root = resolve(__dirname, '..', 'core');
 const manifest = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
 
@@ -73,22 +67,21 @@ for (const [name, range] of Object.entries({
   }
 }
 
-/* Provenance belongs to the publisher, not to the package.
-   `publishConfig.provenance: true` applies to *every* publish of this manifest,
-   and npm can only generate provenance inside a CI provider it recognises —
-   GitHub Actions or GitLab CI, via OIDC. Anywhere else it does not warn and
-   skip; it refuses, with `Automatic provenance generation not supported for
-   provider: null`, after building the whole tarball.
+/* Provenance is set by the publisher and must stay out of the package.
+   `publishConfig.provenance: true` applies to every publish of this manifest,
+   and npm can only generate provenance inside a CI provider it recognises
+   (GitHub Actions or GitLab CI, via OIDC). Anywhere else it refuses, with
+   `Automatic provenance generation not supported for provider: null`, after
+   building the whole tarball.
 
-   That makes the manifest field precisely backwards. The one publish that
-   cannot be done from CI is the first one — npm will not attach a trusted
-   publisher to a package that does not exist yet — so demanding provenance in
-   the manifest blocks the only publish that has to happen by hand, while doing
-   nothing for CI, which passes `--provenance` on the command line anyway.
+   The first publish cannot be done from CI, because npm will not attach a
+   trusted publisher to a package that does not exist yet. Demanding provenance
+   in the manifest therefore blocks the one publish that has to happen by hand,
+   and adds nothing for CI, which passes `--provenance` on the command line.
 
-   `npm publish --dry-run` does not catch this: dry-run never reaches the
-   provenance step, so it reports success on a manifest that cannot publish.
-   This is the only mechanical check there is. */
+   `npm publish --dry-run` never reaches the provenance step, so it reports
+   success on a manifest that cannot publish. This check is the only one that
+   catches it. */
 if (manifest.publishConfig?.provenance) {
   failures.push(
     'publishConfig.provenance is true, which applies to every publish of this '
@@ -138,14 +131,13 @@ for (const [name, target] of Object.entries(manifest.exports ?? {})) {
   }
 }
 
-/* Shipping the file is not the same as exporting it, and the difference is
-   invisible from inside the repository. `"./shaders/": "./assets/shaders/"`
-   shipped every shader, satisfied the loop above, and still answered
-   ERR_PACKAGE_PATH_NOT_EXPORTED for every path beneath it: trailing-slash
-   export targets were deprecated and then removed from Node, and the
-   replacement is the `*` pattern. The check that would have caught it is the
-   one a consumer performs — ask Node to resolve the subpath. So do that, from
-   a sandbox where the package sits at its published name. */
+/* A shipped file can still fail to export, and the difference is invisible
+   from inside the repository. `"./shaders/": "./assets/shaders/"` shipped
+   every shader, satisfied the loop above, and still answered
+   ERR_PACKAGE_PATH_NOT_EXPORTED for every path beneath it: Node deprecated and
+   then removed trailing-slash export targets in favour of the `*` pattern. So
+   this asks Node to resolve each subpath, as a consumer would, from a sandbox
+   where the package sits at its published name. */
 const sandbox = mkdtempSync(join(tmpdir(), 'crystal-exports-'));
 try {
   const [scope, bare] = manifest.name.split('/');

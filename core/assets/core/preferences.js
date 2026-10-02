@@ -1,9 +1,9 @@
 /* Crystal headless core: preferences and motion resolution.
  *
- * Pure functions. The clamps and the duration ceiling are contract, not
- * defensive coding: a product that lets a preference drift outside these ranges
- * is no longer rendering Crystal, and an animation that runs past the ceiling
- * breaks the responsiveness the motion specification promises.
+ * Pure functions. The clamps and the duration ceiling are part of the contract.
+ * A product that lets a preference drift outside these ranges is no longer
+ * rendering Crystal, and an animation that runs past the ceiling breaks the
+ * responsiveness the motion specification promises.
  */
 (function (root, factory) {
   const api = factory();

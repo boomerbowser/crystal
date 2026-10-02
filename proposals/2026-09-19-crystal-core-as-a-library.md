@@ -1,74 +1,72 @@
 # `@crystal-ui/core` as a published library
 
-**Proposal. D-10 in `proposals/closed-issues.md`, and R-16 in Crystal React's
+Proposal. D-10 in `proposals/closed-issues.md`, and R-16 in Crystal React's
 closed tracker, which is the same issue from the consumer's side. Both are done:
-the library is published and both consumers install it.**
-**19 September 2026. Every decision in it has been made by Meridian; what
-follows is the shape, the order, and the parts only they can do.**
+the library is published and both consumers install it.
+
+19 September 2026. Meridian has made every decision in it. What follows is the
+shape, the order, and the parts only Meridian can do.
 
 D-10 says a proposal comes before any code, because this moves every consumer at
-once. This is it.
+once. This document is that proposal.
 
 ---
 
 ## 1. What is wrong, measured
 
 `design-system/` is simultaneously the library, the documentation website and the
-build machinery. That is not a tidiness complaint — it is the common cause behind
-three separate tracker entries, and it is measurable.
+build machinery. That is the common cause behind three separate tracker entries,
+and it can be measured.
 
-A published `@crystal-ui/core` today would be **2.18 MB unpacked across 1,097
-files**, and this is what a consumer would be installing:
+A published `@crystal-ui/core` today would be 2.18 MB unpacked across 1,097
+files, and this is what a consumer would be installing:
 
 | | size | is it the library? |
 |---|---|---|
-| `docs/` — 22 generated specification pages | **994 KB** | no, it is the website |
-| `tokens/` — DTCG source, flat, catalogue, motion recipes | 549 KB | yes |
+| `docs/`: 22 generated specification pages | 994 KB | no, it is the website |
+| `tokens/`: DTCG source, flat, catalogue, motion recipes | 549 KB | yes |
 | `assets/site.css`, `site.js` | 49 KB | no |
 | `assets/motion-suite.*`, `motion-preview.js`, `motion-catalog.js`, `motion-interactions.js`, `motion-shaders.js` | 87 KB | no, the preview's motion demos |
-| `assets/controls.css`, `controls.js` | 32 KB | **no, and this one has already caused a defect** |
+| `assets/controls.css`, `controls.js` | 32 KB | no, and this one has already caused a defect |
 | `assets/crystal.{css,js,d.ts}`, `crystal-theme.css`, `motion.{css,js}`, `icons.*`, `tokens.js` | 122 KB | yes |
 | `assets/core/`, `shaders/`, `fonts/`, `vendor/` | 261 KB | yes |
-| `exports/` — the TypeScript, Swift and Kotlin token exports | 21 KB | yes |
+| `exports/`: the TypeScript, Swift and Kotlin token exports | 21 KB | yes |
 
-**Forty-six per cent of the package is the documentation website.** A product
-that wants the token resolver downloads the specification pages.
+Forty-six per cent of the package is the documentation website. A product that
+wants the token resolver downloads the specification pages.
 
 ### The three defects this shape produced
 
-**D-9.** `controls.css` is website-only and unexported, and because the preview
-loads it, it shaped the appearance that was *blessed* — while
-`--cr-shadow-float`, which is what every platform library actually receives, said
-something different. A library following Crystal's tokens could not reproduce
-Crystal's own appearance. Eight hard-coded shadow literals remain in that file.
+**D-9.** `controls.css` is website-only and unexported. Because the preview
+loads it, it shaped the appearance that was blessed, while `--cr-shadow-float`,
+which is what every platform library receives, said something different. A
+library following Crystal's tokens could not reproduce Crystal's own appearance.
+Eight hard-coded shadow literals remain in that file.
 
 **R-13.** Crystal React's materials had drifted and nothing compared them.
-Closing it needed a gate that runs *two servers* and diffs computed styles,
+Closing it needed a gate that runs two servers and diffs computed styles,
 because there is no artefact to compare against. A library cannot ask "what is
 Crystal's Resin recipe?"; it can only ask a browser what Crystal's website
 painted.
 
 **R-14.** A `file:` dependency, pre-bundled once by Vite and then served stale.
-Three investigations in one day; one started a wrong diagnosis of the theme
-provider, and one is what Meridian saw when they reported that Crystal's
+There were three investigations in one day. One started a wrong diagnosis of the
+theme provider, and one is what Meridian saw when they reported that Crystal's
 specifications were missing from every component.
 
 R-15, closed today, is the fourth and the clearest. The Haze content fill's
-*ingredients* were exported tokens and its *recipe* — "held back 8px from the
-rim, on an isolated layer" — existed only as a literal in `controls.css`. Crystal
+ingredients were exported tokens, and its recipe, "held back 8px from the
+rim, on an isolated layer", existed only as a literal in `controls.css`. Crystal
 React could carry every Haze token, pass every token gate, and paint nothing on
-sixteen surfaces. A specification only one renderer can read is not a
-specification.
-
----
+sixteen surfaces.
 
 ## 2. The boundary
 
-**The test:** *a library that consumes this can render Crystal correctly with no
-browser and no website.*
+**The test:** a library that consumes this can render Crystal correctly with no
+browser and no website.
 
 **Stays in the package.** `tokens/` in every generated form; the resolver
-(`assets/crystal.js` + `.d.ts`); the headless core (`assets/core/`);
+(`assets/crystal.js` and `.d.ts`); the headless core (`assets/core/`);
 `crystal.css`, `crystal-theme.css`, `motion.css`, `motion.js`; the icon set and
 its manifest; `assets/shaders/`, `assets/fonts/`; `exports/` for TypeScript,
 Swift and Kotlin; `reference/licenses/`; `src/engines.js`.
@@ -78,32 +76,33 @@ Swift and Kotlin; `reference/licenses/`; `src/engines.js`.
 `motion-interactions.js`, `motion-shaders.js`, `motion-catalog.js`,
 `assets/vendor/`, `tools/`, `tests/`, `validation/`.
 
-### `controls.css` — the boundary case, and a recommendation
+### `controls.css`: the boundary case, and a recommendation
 
-D-10 left this open. The recommendation, and the reasoning, since this is a
-material-spec question and those are Meridian's:
+D-10 left this open. It is a material-spec question, and those are Meridian's,
+so the recommendation is given here with its reasoning.
 
-`controls.css` is not one thing. It holds **genuine Crystal specification** — the
-Resin control recipe, the Haze protective fill, the optical sheen, the strip
-where the pills are bare, the forced-colours fallbacks — bound to **bare element
-selectors**, `:is(button, a.cr-button, input[type=checkbox], …)`. The
-specification is why the file matters. The bare selectors are why it cannot be
-exported: it would give every button in a consumer's application a Resin
-background and a 48px minimum height, which is exactly what happened the one time
-it *was* exported, when a 32px chip rendered 50px tall in Crystal React.
+`controls.css` holds two things. The first is Crystal specification: the Resin
+control recipe, the Haze protective fill, the optical sheen, the strip where the
+pills are bare, and the forced-colours fallbacks. The second is the bare element
+selectors that the specification is bound to,
+`:is(button, a.cr-button, input[type=checkbox], …)`. The specification is why
+the file matters. The bare selectors are why it cannot be exported: it would
+give every button in a consumer's application a Resin background and a 48px
+minimum height. That happened the one time it was exported, when a 32px chip
+rendered 50px tall in Crystal React.
 
-Three options, and only one of them is a real fix:
+There are three options, and only the third is a fix:
 
-1. **Leave it preview-only.** What we have. The hazard stays: the site can keep
-   shaping a blessed appearance out of rules no consumer can reach.
-2. **Export it as-is.** Re-creates the 2024 defect. Not viable.
+1. **Leave it preview-only.** This is the current state. The hazard stays: the
+   site can keep shaping a blessed appearance out of rules no consumer can reach.
+2. **Export it as-is.** This re-creates the 2024 defect, so it is not viable.
 3. **Promote the recipes, not the file.** Every composition in it that is
-   genuine specification becomes either a token (as `component.haze.inset` did
-   today) or a class-scoped rule in exported CSS; `controls.css` keeps only the
-   bare-element *adapter* that lets the preview's own markup wear them.
+   specification becomes either a token (as `component.haze.inset` did today) or
+   a class-scoped rule in exported CSS. `controls.css` keeps only the
+   bare-element adapter that lets the preview's own markup wear them.
 
-**Recommended: (3), done incrementally and driven by the gates, not in one
-sweep.** R-15 is the worked example and it took one token: the number moved into
+Recommended: (3), done incrementally and driven by the gates. R-15 is the worked
+example and it took one token: the number moved into
 `tokens/crystal.tokens.json`, `controls.css` now reads `var(--cr-haze-inset)`,
 the Swift and Kotlin exports picked it up for free, and the parity gate grew a
 `::before` comparison that fails if a consumer stops painting it. Eight shadow
@@ -111,9 +110,7 @@ literals remain (D-9's remainder) and each can take the same route.
 
 Doing it in one sweep would mean re-blessing every approved frame at once, which
 the change discipline exists to prevent. Doing it incrementally means each
-promotion is one token, one gate, one reviewable diff.
-
----
+promotion is one token, one gate and one reviewable diff.
 
 ## 3. What a non-JavaScript library consumes
 
@@ -123,7 +120,7 @@ Crystal's component libraries"*.
 
 A SwiftUI or Compose library cannot install an npm package. The Swift and Kotlin
 exports are already generated and then stranded inside one. So every release also
-publishes a **specification bundle as a GitHub release asset** on the `crystal`
+publishes a **specification bundle** as a GitHub release asset on the `crystal`
 repository, at a tagged version:
 
 ```
@@ -139,18 +136,17 @@ crystal-spec-2.0.0.zip
   CONTRACT.md
 ```
 
-A release asset rather than a second registry: it is versioned, immutable, fetchable
-by any toolchain with `curl`, needs no new account or credential, and is produced by
-the same workflow that publishes to npm, so the two cannot drift. `libraries/CONTRACT.md`
-then cites the artefact instead of describing it.
-
----
+The bundle is a release asset and not a second registry, because a release asset
+is versioned, immutable, fetchable by any toolchain with `curl`, needs no new
+account or credential, and is produced by the same workflow that publishes to
+npm, so the two cannot drift. `libraries/CONTRACT.md` then cites the artefact
+instead of describing it.
 
 ## 4. Publishing
 
 **npm Trusted Publishing (OIDC) from GitHub Actions.** No npm credential exists
 in the repository at all, so there is nothing to leak, rotate or scope. A
-granular automation token is the fallback *only* if trusted publishing cannot be
+granular automation token is the fallback only if trusted publishing cannot be
 enabled on the account, and would then be scoped to the single package with a
 short expiry.
 
@@ -158,11 +154,11 @@ short expiry.
 from `boomerbowser/crystal` at a known commit rather than from someone who
 guessed a version number.
 
-**Owning `@crystal-ui` publicly is itself the mitigation** for dependency confusion.
-An unclaimed scope that private libraries already import from is the textbook
-setup for that attack.
+Owning `@crystal-ui` publicly is the mitigation for dependency confusion. An
+unclaimed scope that private libraries already import from is the textbook setup
+for that attack.
 
-**Two release gates, because both failure modes are silent:**
+There are two release gates, because both failure modes are silent:
 
 - **No `file:` or `link:` dependency in the published manifest.** A package
   published while carrying one ships a dependency resolving to a directory on
@@ -171,107 +167,99 @@ setup for that attack.
   preview-only motion scripts. This is D-9's structural fix: a preview-only
   stylesheet cannot shape a blessed appearance if it cannot leave the repository.
 
-Both are written and both were proven to fail before being trusted — see
+Both are written, and both were proven to fail before being trusted. See
 `tools/verify-package.cjs`.
-
----
 
 ## 5. Order
 
 1. **Package boundary and the two release gates.** Local, reversible, no
    consumer affected. *Done.*
-1b. **The folders themselves.** *Done — Meridian asked for this explicitly:
+1b. **The folders themselves.** *Done.* Meridian asked for this explicitly:
    "separate the files that make up @crystal-ui/core from the preview website into
    different folders. That's part of what we meant originally." The `files` array
-   said what shipped; it did not stop anyone reaching across. Now
-   `design-system/core/` holds the library and nothing else, with its own
-   `package.json`, and the preview reaches it the way a consumer will — by a path
-   into the package, not by sitting in the same directory.*
+   said what shipped, and it did not stop anyone reaching across. Now
+   `design-system/core/` holds only the library, with its own `package.json`,
+   and the preview reaches it the way a consumer will, by a path into the
+   package.
 
-   **Superseded on 20 September**, and the reasoning above is worth keeping for
-   the shape of its error. It said `core/` had to be *inside* the deploy root
-   rather than beside it, and called that "a constraint rather than a
+   **Superseded on 20 September.** The reasoning above is kept because it
+   records an error. It said `core/` had to be inside the deploy root and not
+   beside it, and called that "a constraint rather than a
    preference": Vercel served the site as a static upload with no build step, so
    a sibling folder would be unreachable. The premise was true and the
-   conclusion did not follow. The absence of a build step was itself a setting,
-   not a law, and Meridian then asked for the two to be entirely separate
-   folders — which is what they now are, `core/` and `website/` at the
-   repository root, with `tools/assemble-site.mjs` copying the library into
+   conclusion did not follow, because the absence of a build step was a setting
+   that could be changed. Meridian then asked for the two to be entirely
+   separate folders, and they now are: `core/` and `website/` at the repository
+   root, with `tools/assemble-site.mjs` copying the library into
    `website/vendor/@crystal-ui/core/` as the whole of a twenty-line build
-   command. When a constraint blocks what is being asked for, check whether it
-   is a fact about the world or a line in a config file. See D-12.
+   command. See D-12.
 2. **The publish workflow**, OIDC and provenance, plus the spec bundle. *Written;
    it cannot run until Meridian enables trusted publishing.*
 3. **Specifications updated** to describe the core library and how a platform
    library consumes it.
 4. **The website becomes a consumer**: it installs `@crystal-ui/core` and its
    previews read the published resolver.
-5. **The repository split**, which is the step with Meridian's hand in it.
+5. **The repository split**, which is the step that needs Meridian.
 6. **Crystal React moves to `"@crystal-ui/core": "^2.0.0"`**, `pnpm link` for local
-   work, and `optimizeDeps.force` retires — it is R-14's workaround, and a real
-   dependency is its cure.
+   work, and `optimizeDeps.force` retires. It is R-14's workaround, and a real
+   dependency removes the need for it.
 
-Steps 4 and 6 are gated on step 2 actually having published something. Until
-then the `file:` dependency stays, because a committed range pointing at a
-version that does not exist is worse than an honest path.
-
----
+Steps 4 and 6 wait until step 2 has published something. Until then the `file:`
+dependency stays, because a committed range pointing at a version that does not
+exist is worse than a local path.
 
 ## 6. What only Meridian can do
 
 | | |
 |---|---|
-| **Create the `@crystal-ui` scope on npm** | First, and under whichever account or organisation should own it. `@crystal` itself is taken — Meridian verified that directly on 20 September, after an earlier check here asked the wrong question (a package 404 says nothing about a scope; see D-10 in `closed-issues.md`). `@crystal-ui` is the scope Meridian holds. |
-| **Publish 2.0.0 once, by hand** | npm cannot attach a trusted publisher to a package that does not exist yet, so the order matters and an earlier draft of this table had it backwards. From `core/`: `npm publish --access public`. This one version carries no provenance attestation, unavoidably — provenance needs a CI provider npm recognises, and this publish cannot come from CI because the trusted publisher does not exist until after it. Every version from the first tag onward is attested. |
-| **Then enable Trusted Publishing** | npm → the `@crystal-ui/core` package → *Settings* → *Publishing access* → add a trusted publisher: repository `boomerbowser/crystal`, workflow `.github/workflows/publish.yml`. Every version after the first comes from a tag and needs no credential. |
-| **Re-base the Vercel project onto `crystal-preview`** | Already planned. The build settings change with it — see §7. |
-| **Push the website to `crystal-preview`** | Prepared here, not pushed: this session has never written to that repository, and a first push to a new remote is not something to do unasked. The command is in §7. |
+| **Create the `@crystal-ui` scope on npm** | First, and under whichever account or organisation should own it. `@crystal` itself is taken. Meridian verified that directly on 20 September, after an earlier check here asked the wrong question (a package 404 says nothing about a scope; see D-10 in `closed-issues.md`). `@crystal-ui` is the scope Meridian holds. |
+| **Publish 2.0.0 once, by hand** | npm cannot attach a trusted publisher to a package that does not exist yet, so the order matters and an earlier draft of this table had it backwards. From `core/`: `npm publish --access public`. This one version carries no provenance attestation, and that cannot be avoided: provenance needs a CI provider npm recognises, and this publish cannot come from CI because the trusted publisher does not exist until after it. Every version from the first tag onward is attested. |
+| **Then enable Trusted Publishing** | On npm, open the `@crystal-ui/core` package, then *Settings*, then *Publishing access*, and add a trusted publisher: repository `boomerbowser/crystal`, workflow `.github/workflows/publish.yml`. Every version after the first comes from a tag and needs no credential. |
+| **Re-base the Vercel project onto `crystal-preview`** | Already planned. The build settings change with it. See §7. |
+| **Push the website to `crystal-preview`** | Prepared here and not pushed. This session has never written to that repository, and a first push to a new remote is not made without being asked. The command is in §7. |
 | **Decide whether `crystal-preview` publishes anything** | Recommendation: no. It is a site, it consumes `@crystal-ui/core`, and it needs no package identity. |
 
 `CRYSTAL_HEAD_TOKEN` is already set on `crystal-preview`, and the `crystal`
 repository is already public. Neither needs anything further.
 
----
-
 ## 7. The split, concretely
 
-**Mostly done as of 20 September**, and by a different route than described
-below. The two are already separate folders in one repository — `core/` and
-`website/` — and `crystal-preview` has been populated from `website/` and
-committed locally, consuming the library as a dependency. What has not happened
-is the push and the Vercel cutover, and the order matters: removing `website/`
+**Mostly done as of 20 September**, by a different route from the one described
+below. The two are already separate folders in one repository, `core/` and
+`website/`, and `crystal-preview` has been populated from `website/` and
+committed locally, consuming the library as a dependency. The push and the
+Vercel cutover have not happened, and the order matters: removing `website/`
 from `crystal` before Vercel is re-based takes the live site down, and
 `crystal-preview` cannot take over until `@crystal-ui/core` is installable. See
-D-12 for the sequence. The description below is what was planned; the
-paragraphs that follow it are still accurate about *what* goes where.
+D-12 for the sequence. The description below is what was planned. The
+paragraphs that follow it are still accurate about what goes where.
 
 **`crystal-preview`** holds `index.html`, `playground.html`, `motion.html`,
-`docs/`, and the preview's own assets — `site.css`, `site.js`, `menu.js`,
+`docs/`, and the preview's own assets: `site.css`, `site.js`, `menu.js`,
 `docs.js`, `controls.css`, `controls.js`, the motion suite, `assets/vendor/`.
 It declares `"@crystal-ui/core": "^2.0.0"` and its pages load the resolver, the
 theme and the icons from `node_modules/@crystal-ui/core/…` rather than from a
 sibling path.
 
-**`crystal`** keeps the library, `tokens/`, `tools/`, `tests/` and `validation/`
-— every gate stays with the thing it gates.
+**`crystal`** keeps the library, `tokens/`, `tools/`, `tests/` and `validation/`,
+so every gate stays with the thing it gates.
 
-The generated pages were named here as the wrinkle, with two options and a
-recommendation. **Neither was taken, and the third answer is better than both.**
+The generated pages were named here as the difficulty, with two options and a
+recommendation. Neither option was taken. A third answer was taken, and it is
+better than both.
 
 The concern was that moving `tools/build.py` and the Markdown to
 `crystal-preview` would separate the specification text from the tokens it is
-checked against, which is what the D-7 drift gate exists to prevent. That is
-true — but only because the Markdown was being treated as the website's. It is
-not. The specification is the design system's.
+checked against, which is what the D-7 drift gate exists to prevent. That holds
+only while the Markdown is treated as the website's. The specification belongs
+to the design system.
 
 So `core/docs/` holds the eleven specification pages, they ship in the package,
 and `@crystal-ui/core/docs/*` exports them. The generator and the drift gate
-stay beside the tokens in `crystal`, exactly as the recommendation wanted, and
-`crystal-preview` renders the specification it installed — no release asset, no
-fetch step, and nothing to keep in sync, because there is only one copy and it
-arrives the same way every other part of the library does.
-
----
+stay beside the tokens in `crystal`, as the recommendation wanted, and
+`crystal-preview` renders the specification it installed. That needs no release
+asset and no fetch step, and there is nothing to keep in sync, because there is
+only one copy and it arrives the same way as every other part of the library.
 
 ## 8. What this proposal does not claim
 

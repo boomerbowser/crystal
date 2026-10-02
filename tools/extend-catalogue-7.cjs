@@ -5,21 +5,21 @@
  * Meridian's answer. Three of them change the catalogue:
  *
  *   - D-26 (b): a button group and a split button are not docks. Their segments
- *     touch — square inside, pill outside, a hairline between — which `.cr-dock`
+ *     touch (square inside, pill outside, a hairline between), which `.cr-dock`
  *     (4px gaps inside 9px of padding, a pill per control) does not draw. They
  *     are the new `group` surface, `.cr-group`.
  *   - D-28: five motion assignments no component can play as written come off.
  *     `page-in`/`page-out` mark a new view after routing, which the navigation
- *     does not render — it keeps `selection`, the motion it plays. `busy` is a
+ *     does not render; it keeps `selection`, the motion it plays. `busy` is a
  *     one-shot cycle beside D-19's continuous indicators, two answers to one
- *     question; linear progress plays `activity-travel`, not the ring's
- *     `activity-turn`. `resin-confluence` describes itself as "a visual study,
+ *     question; linear progress plays `activity-travel`, and `activity-turn`
+ *     is the ring's. `resin-confluence` describes itself as "a visual study,
  *     not an application action". The authored bubble has no reactions to
  *     toggle. The colour controls have no readout for `slider-step` to move.
- *   - D-29 (a): the virtualizer was listed twice. `virtual-scroller` goes;
- *     `virtualizer` stays, because its semantics are the complete ones — set
- *     counts across recycling *and* a focused row never dropped — and its
- *     parity already names both references. The catalogue is 284 components.
+ *   - D-29 (a): the virtualizer was listed twice. `virtual-scroller` goes and
+ *     `virtualizer` stays, because its semantics are the complete ones (set
+ *     counts across recycling and a focused row never dropped) and its parity
+ *     already names both references. The catalogue is 284 components.
  *
  * Old values are quoted below. Idempotent; refuses to write on an unknown id,
  * an unknown surface or recipe, or a value that is neither the old one nor the

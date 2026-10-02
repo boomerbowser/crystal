@@ -18,10 +18,8 @@ const ROOT = path.resolve(__dirname, '..');
 const FLAT = path.join(ROOT, 'core/tokens/crystal.json');
 const DTCG = path.join(ROOT, 'core/tokens/crystal.tokens.json');
 /* Inside `core/`, because these files are the package's `.` export and ship
-   with it. Written to a bare `exports/` beside the tools, they landed outside
-   the library: the package went on shipping an older copy under `core/` while
-   every build refreshed one nobody installed, and the two stayed close enough
-   for long enough that nothing noticed. */
+   with it. A bare `exports/` beside the tools is outside the library, and a
+   build that writes there refreshes a copy nobody installs. */
 const EXPORTS = path.join(ROOT, 'core/exports');
 
 const MODE_ROLES = {
@@ -63,29 +61,27 @@ const MATERIAL_ROLES = {
 /* ------------------------------------------------- the chart series scale
 
    Six categorical colours per palette per mode, derived rather than picked.
-   They are derived because picking them would be seventy-two hexes nobody
-   could check, and because the thing that has to be true of them is a
-   measurement — every one clears 3:1 against both grounds of its mode, and no
-   two are closer than a visible step apart — which an algorithm can be held to
-   and a swatch cannot.
+   Picking them would mean seventy-two hexes nobody could check, and what has
+   to be true of them is a measurement: every one clears 3:1 against both
+   grounds of its mode, and no two are closer than a visible step apart. An
+   algorithm can be held to that and a swatch cannot.
 
-   This is the one place the pipeline computes a colour rather than copying one,
-   and it earns that the way the header says derived values earn it: the inputs
-   are tokens (`component.chart.series*`), the output is asserted in
+   This is the one place the pipeline computes a colour rather than copying one.
+   The inputs are tokens (`component.chart.series*`), the output is asserted in
    `tests/core-contracts.cjs`, and the round-trip guard reports every value it
    adds.
 
    The construction: take the palette's own seed hue, turn half a step off it,
    step six times around the hue circle, and draw all six at one OKLab lightness
-   and one chroma.
-   One lightness for all six is deliberate — a categorical scale must not imply
-   an order, and a ramp does. Where sRGB cannot hold the chroma at that hue the
-   chroma is reduced for that hue alone; where the hue cannot clear the contrast
-   floor at that lightness the lightness moves for that hue alone, because the
-   floor is a promise to a reader and the family resemblance is a preference.
+   and one chroma. All six share one lightness because a categorical scale must
+   not imply an order, and a ramp does. Where sRGB cannot hold the chroma at a
+   hue, the chroma is reduced for that hue alone; where a hue cannot clear the
+   contrast floor at that lightness, the lightness moves for that hue alone,
+   because the floor is a promise to a reader and the family resemblance is a
+   preference.
 
    A series colour is for data marks and nothing else. It is never ink, never an
-   action fill, and it is not a secondary colour — Crystal has none, and
+   action fill, and never a secondary colour; Crystal has none, and
    `docs/colors.md` says why. */
 
 const OKLAB_M1 = [
@@ -119,8 +115,8 @@ const toOklab = (hex) => {
   return OKLAB_M2.map((row) => row[0] * cone[0] + row[1] * cone[1] + row[2] * cone[2]);
 };
 /* The inverse, returning the linear channels too so the caller can ask whether
-   the colour it wanted exists in sRGB at all rather than silently taking the
-   clipped one. */
+   the colour it wanted exists in sRGB at all, instead of taking the clipped
+   one. */
 const fromOklab = ([L, a, b]) => {
   const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3;
   const m = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3;
@@ -140,8 +136,8 @@ const seriesHue = (hex) => {
   return Math.atan2(b, a);
 };
 /* The most chroma sRGB will hold at this lightness and hue, never more than
-   asked for. Bisection rather than a formula because the sRGB solid's cross
-   section is not a shape with one. */
+   asked for. Bisection, because the sRGB solid's cross section has no closed
+   formula. */
 const fitChroma = (L, hue, want) => {
   const at = (C) => fromOklab([L, C * Math.cos(hue), C * Math.sin(hue)]);
   if (at(want).inGamut) return want;
@@ -163,9 +159,9 @@ function chartSeries(seed, roles, mode, policy) {
   const chroma = policy.chroma;
   const floor = policy.contrast;
   /* Toward the ground, until it clears it. In light mode a mark gets darker; in
-     dark mode it gets lighter. The margin is a rounding guard, not a second
-     floor: these values are compared at two decimal places by the contract
-     test, and landing exactly on 3.00 makes that comparison a coin toss. */
+     dark mode it gets lighter. The 0.05 margin is a rounding guard: the
+     contract test compares these values at two decimal places, and a value
+     that lands exactly on 3.00 makes that comparison a coin toss. */
   const step = mode === 'light' ? -0.01 : 0.01;
   const grounds = [roles.surface, roles.canvas];
   const clears = (hex) => Math.min(...grounds.map((g) => contrastRatio(hex, g)));
@@ -190,20 +186,19 @@ function chartSeries(seed, roles, mode, policy) {
 
    A heatmap cell and a calendar day carry a value by how strongly they are
    painted. The catalogue puts "scale construction, contrast floor at every step"
-   on Crystal's side of the line for both, and the floor it means is not the one
-   the series colours clear: a cell is a *ground*, the value is written on it,
-   and what has to clear 4.5:1 is the ink on each step.
+   on Crystal's side of the line for both. A cell is a ground with the value
+   written on it, so the floor that applies is the text one: the ink on each
+   step has to clear 4.5:1.
 
    So each step ships with its ink. Five steps from a near-ground tint to a strong
    one along the palette's own seed hue, and for each the better of the mode's two
-   available inks — its body text, or the ink it puts on the action colour.
+   available inks: its body text, or the ink it puts on the action colour.
 
-   The ink is chosen per step and changes partway along in some palettes, which
-   is not a defect: a ramp that spans light to dark has to change ink somewhere,
-   and pretending otherwise would mean a ramp too short to read as intensity. The
-   constraint that actually binds is the *gap* — a mid-lightness where neither of
-   a mode's inks reaches 4.5:1 — and the far end is pulled back until no step
-   falls in it. */
+   The ink is chosen per step and changes partway along in some palettes. A ramp
+   that spans light to dark has to change ink somewhere; one that did not would
+   be too short to read as intensity. The constraint that binds is the gap, a
+   mid-lightness where neither of a mode's inks reaches 4.5:1, and the far end
+   is pulled back until no step falls in it. */
 
 function intensityRamp(seed, roles, mode, steps) {
   const hue = seriesHue(seed);
@@ -224,12 +219,10 @@ function intensityRamp(seed, roles, mode, steps) {
     return ramp;
   };
 
-  /* The far end is pulled back until every step has *an* ink that clears 4.5:1,
-     rather than being a constant that happens to work for five palettes out of
-     six. Harbor is the one a constant does not work for: its body ink is a soft
-     grey rather than a near-black, which is a decision that palette makes
-     everywhere else too, and a ramp that ignored it would be unreadable in
-     exactly the palette that chose to be quiet. */
+  /* The far end is pulled back until every step has an ink that clears 4.5:1.
+     A constant far end works for five palettes out of six: Harbor's body ink
+     is a soft grey rather than a near-black, and a ramp that ignored that
+     would be unreadable in that palette. */
   let far = mode === 'light' ? 0.66 : 0.45;
   const step = mode === 'light' ? -0.01 : 0.01;
   let ramp = build(far);
@@ -251,11 +244,11 @@ function intensityRamp(seed, roles, mode, steps) {
 }
 
 /* Gridlines and the axis rule. The axis is a boundary and takes the palette's
-   boundary colour; a gridline is a reading aid behind the data and must not
+   boundary colour. A gridline is a reading aid behind the data and must not
    compete with it, so it is the body ink at the opacity a hairline needs to be
-   followed and not read. Both are written as colours rather than as opacity for
-   a consumer to apply, because a chart draws them on whatever material it was
-   put on and an alpha is the only form that survives that. */
+   followed and not read. Both are written as rgba colours rather than as an
+   opacity for a consumer to apply, because a chart draws them on whatever
+   material it was put on and an alpha is the only form that survives that. */
 const gridInk = (hex, alpha) => `rgba(${channels(hex).join(', ')}, ${alpha})`;
 
 const leaf = ($type, $value, $description) =>
@@ -376,20 +369,19 @@ function migrate() {
   set(out.semantic, 'typography.readingLeading', leaf('dimension', dim(flat.typography.readingLeading)));
 
   /* semantic: the type scale.
-     Crystal specified a reading rhythm — Manrope at 16/24 — and no scale, so the
-     React library derived six steps of its own. Six ratios living in one platform
-     library is a type scale the other platforms cannot see, which is CONTRACT §1
-     again: the derivation belongs here, where every platform reads it.
+     Crystal specifies a reading rhythm (Manrope at 16/24) and derives six steps
+     from it here, so every platform reads the same scale. A scale derived
+     inside one platform library is invisible to the others (CONTRACT §1).
 
      Ratios rather than sizes, because the derivation is the design decision. Each
      step is a multiple of the reading size, so moving `typography.readingSize`
      moves the whole scale instead of leaving six literals behind. The scale is
-     deliberately modest: Crystal's hierarchy is carried by weight and material as
-     much as by size, and a dramatic scale fights that.
+     modest: Crystal's hierarchy is carried by weight and material as much as by
+     size, and a dramatic scale fights that.
 
-     Leading tightens as size grows — large text needs proportionally less to read
-     as a block rather than a list of lines — and tracking tightens with it,
-     because default tracking reads loose at display sizes. */
+     Leading tightens as size grows, because large text needs proportionally
+     less to read as a block rather than a list of lines. Tracking tightens with
+     it, because default tracking reads loose at display sizes. */
   const TYPE_SCALE = {
     display: { ratio: 2, leading: 1.1, tracking: '-0.055em' },
     title: { ratio: 1.5, leading: 1.2, tracking: '-0.04em' },
@@ -408,19 +400,17 @@ function migrate() {
   }
 
   /* semantic: spacing and breakpoints.
-     Neither existed as a token, and the layout tier cannot be built without
-     both — the catalogue makes "the spacing scale" and "breakpoint behaviour"
-     Crystal's obligation for every layout component, and a library with no
-     token to read has to write the numbers itself, which is CONTRACT §1's
-     definition of drift.
+     The catalogue makes "the spacing scale" and "breakpoint behaviour"
+     Crystal's obligation for every layout component, so both are tokens. A
+     library with no token to read has to write the numbers itself, which is
+     CONTRACT §1's definition of drift.
 
-     These are not new design decisions. They are the values the preview's own
-     shell already uses, named so something other than the preview can reach
-     them: the spacing scale is the 4px rhythm the catalogue names, tied at two
-     points to the reading rhythm so it is not an arbitrary ladder — `md` is the
+     The values are the ones the preview's own shell uses, named so something
+     other than the preview can reach them. The spacing scale is the 4px rhythm
+     the catalogue names, tied at two points to the reading rhythm: `md` is the
      16px reading size and `lg` is the 24px leading, which makes a `lg` gap
      exactly one blank line between blocks. The breakpoints are where the shell
-     already changes: 600, 850, 1150 and 1500. */
+     changes: 600, 850, 1150 and 1500. */
   for (const [step, value] of [['2xs', 4], ['xs', 8], ['sm', 12], ['md', 16], ['lg', 24], ['xl', 32], ['2xl', 48]]) {
     set(out.semantic, `spacing.${step}`, leaf('dimension', dim(value), `Spacing step ${step}`));
   }
@@ -429,8 +419,8 @@ function migrate() {
       `Viewport width at which the ${name} layout begins`));
   }
 
-  /* The material vocabulary was renamed Mica -> Plastic, Acrylic -> Frost and
-     Glass -> Resin. Both names still ship so existing adopters keep working;
+  /* The material vocabulary was renamed Mica to Plastic, Acrylic to Frost and
+     Glass to Resin. Both names still ship so existing adopters keep working;
      the removal version is named here, at the moment of deprecation. */
   out.$deprecated = {
     removedIn: '3.0.0',
@@ -454,18 +444,18 @@ function migrate() {
   set(out.component, 'action.radius', leaf('dimension', '999px',
     'Action controls are pill-shaped, independent of the content radius'));
   set(out.component, 'action.minTarget', leaf('dimension', '44px', 'Minimum interactive target'));
-  /* The geometry of an action control, stated once. These were literals inside
-     controls.css and inside every library that reimplemented a button; a value
-     used by every action in the system is a token by definition. */
+  /* The geometry of an action control, stated once. A value used by every
+     action in the system is a token by definition, not a literal in each
+     library that implements a button. */
   set(out.component, 'action.paddingBlock', leaf('dimension', '15px', 'Action control block padding'));
   set(out.component, 'action.paddingInline', leaf('dimension', '24px', 'Action control inline padding'));
   set(out.component, 'action.gap', leaf('dimension', '9px', 'Gap between an action\'s icon and its label'));
   set(out.component, 'action.disabledOpacity', leaf('number', 0.55, 'Opacity of a disabled control'));
 
-  /* Scrollbars are a Crystal surface, not browser furniture. Two of them: a Frost
-     scrollbar for panels and long reading surfaces, and a Resin one for floating
-     control planes and compact scrollers, so a scrollbar belongs to the material
-     it scrolls rather than to the operating system. */
+  /* Scrollbars are a Crystal surface. There are two: a Frost scrollbar for
+     panels and long reading surfaces, and a Resin one for floating control
+     planes and compact scrollers, so a scrollbar belongs to the material it
+     scrolls rather than to the operating system. */
   const sb = (flat.component && flat.component.scrollbar) || { width: 10, thumbMinLength: 32, inset: 2 };
   set(out.component, 'scrollbar.width', leaf('dimension', dim(sb.width), 'Scrollbar track width'));
   set(out.component, 'scrollbar.thumbMinLength', leaf('dimension', dim(sb.thumbMinLength),
@@ -495,19 +485,16 @@ function migrate() {
     'Narrowest an auto-flowing grid cell becomes before the grid drops a column'));
   set(out.component, 'layout.sidebarWidth', leaf('dimension', '280px',
     'Default width of a shell\'s supporting panel: a two-word label plus an icon at comfortable density'));
-  /* Icon sizes. `size` is what Crystal's own stylesheet has always drawn an icon
-     at; `action` is the larger one the catalogue specifies inside an icon button,
-     where the icon is the only content and carries the whole meaning. Both were
-     literals — one in the reset, one in prose — which is a size no platform
-     library could read. */
+  /* Icon sizes. `size` is what Crystal's own stylesheet draws an icon at;
+     `action` is the larger one the catalogue specifies inside an icon button,
+     where the icon is the only content and carries the whole meaning. Both are
+     tokens so that every platform library can read them. */
   set(out.component, 'icon.size', leaf('dimension', '20px', 'An icon in running content or beside a label'));
   set(out.component, 'icon.action', leaf('dimension', '24px', 'The single icon inside an icon button'));
-  /* The choice and range controls. Every one of these figures was already in the
-     catalogue as prose — "26px box, 9px radius", "44x28px track", "8px track,
-     26px thumb" — which is a specification no platform library can read. A value
-     stated in a sentence and implemented from memory is the drift CONTRACT §1
-     describes, and it is worse than an untokenised value because it looks
-     specified. */
+  /* The choice and range controls. The catalogue states these figures in prose
+     ("26px box, 9px radius", "44x28px track", "8px track, 26px thumb"), which
+     no platform library can read. A value stated in a sentence and implemented
+     from memory is the drift CONTRACT §1 describes. */
   set(out.component, 'choice.boxSize', leaf('dimension', '26px', 'A checkbox box or a radio circle'));
   set(out.component, 'choice.boxRadius', leaf('dimension', '9px', 'The checkbox box corner; a radio is a circle'));
   set(out.component, 'switch.trackWidth', leaf('dimension', '44px', 'Switch track width'));
@@ -518,9 +505,9 @@ function migrate() {
   /* The pointer that ties an overlay to its trigger. It is a rotated square
      carrying the overlay's own material rather than a filled triangle: a
      diffusing surface and a flat shape of the same nominal colour do not match,
-     and the mismatch lands exactly where the eye is looking. Named here because
-     the size and the corner are what make the join invisible, and a platform
-     library guessing at them would guess differently. */
+     and the mismatch lands where the eye is looking. The size and the corner
+     are what make the join invisible, so they are tokens rather than a guess
+     each platform library makes. */
   set(out.component, 'overlayArrow.size', leaf('dimension', '14px',
     'The side of the rotated square that points at an overlay\'s trigger'));
   set(out.component, 'overlayArrow.radius', leaf('dimension', '3px',
@@ -549,8 +536,8 @@ function migrate() {
   set(out.component, 'indicator.lineWidth', leaf('dimension', '3px',
     "A line that marks: a drop target's rule, a selected swatch's ring, a quotation's leading rule"));
   /* A link's underline is the non-colour signal that it is a link, so it is
-     present at rest and it has to clear the descenders it runs under — an
-     underline through the tail of a "g" is a strikethrough. */
+     present at rest and it has to clear the descenders it runs under. An
+     underline through the tail of a "g" reads as a strikethrough. */
   set(out.component, 'anchor.underlineOffset', leaf('dimension', '4px',
     'How far a link\'s underline sits below the baseline, so a descender is not struck through'));
   /* Depth, as a length. One step per level, wide enough that the guide line for
@@ -626,9 +613,9 @@ function buildFlat(tokens) {
       for (const [role, node] of Object.entries(palette[mode] ?? {})) {
         if (!(role in entry.modes[mode])) entry.modes[mode][role] = node.$value;
       }
-      /* Derived, and last, so a hand-authored role of the same name would win.
-         Nothing authors these today; the ordering is there so that the day one
-         is overridden for a palette that needs it, the override is what ships. */
+      /* Derived, and last, so a hand-authored role of the same name wins.
+         Nothing authors these today; the ordering means that if one is ever
+         overridden for a palette that needs it, the override is what ships. */
       const chart = tokens.component.chart;
       Object.assign(entry.modes[mode], chartSeries(palette.seed.$value, entry.modes[mode], mode, {
         count: chart.seriesCount.$value,
@@ -689,18 +676,17 @@ function buildFlat(tokens) {
     family: tokens.semantic.typography.family.$value,
   };
   /* Every component token, projected whole.
-     
-     This used to be a hand-written list of the families the resolver happened to
-     read, and that list was the gate's blind spot: the round-trip guard compares
-     the rebuilt flat file against the committed one, so a token the projection
-     skipped could change or vanish with the build still reporting "no token value
-     changed". `component.selection` was deleted that way — correctly, that time.
-     
-     Projecting the tier entire means the guard covers the tier entire. Aliases are
-     dereferenced, because a flat file holding `{semantic.shape.contentRadius}` asks
-     every consumer to implement alias resolution a second time, which is the
-     divergence CONTRACT §1 exists to prevent. Dimensions become numbers, matching
-     how the resolver has always read the families it did know about. */
+
+     The round-trip guard compares the rebuilt flat file against the committed
+     one, so a token the projection skipped could change or vanish with the
+     build still reporting "no token value changed". The whole tier is
+     projected so that the guard covers all of it.
+
+     Aliases are dereferenced, because a flat file holding
+     `{semantic.shape.contentRadius}` asks every consumer to implement alias
+     resolution a second time, which is the divergence CONTRACT §1 exists to
+     prevent. Dimensions become numbers, matching how the resolver reads the
+     other families. */
   const projectComponent = (node) => Object.fromEntries(
     Object.entries(node)
       .filter(([key]) => !key.startsWith('$'))
@@ -711,7 +697,7 @@ function buildFlat(tokens) {
   flat.component = projectComponent(tokens.component);
   /* Spacing reaches CSS as custom properties because a product writing plain CSS
      against Crystal needs the same scale the libraries compile against. It does
-     not vary with palette, mode or density — `--cr-space` is the density-aware
+     not vary with palette, mode or density; `--cr-space` is the density-aware
      padding step and is a different thing. */
   flat.spacing = Object.fromEntries(Object.entries(tokens.semantic.spacing)
     .map(([key, leafValue]) => [key, unpx(leafValue.$value)]));
@@ -797,26 +783,24 @@ if (process.argv.includes('--migrate')) {
     }
     return v;
   };
-  /* Metadata, not material. The guard exists to prove that no token *value*
-     changed while the file was restructured; a version string is supposed to
-     change and would otherwise make every release look like a regression. The
-     exemption is deliberately narrow — two named metadata keys, nothing that
-     participates in a colour, size or duration. */
+  /* Metadata. The guard exists to prove that no token value changed while the
+     file was restructured; a version string is supposed to change and would
+     otherwise make every release look like a regression. The exemption is
+     narrow: two named metadata keys, nothing that participates in a colour,
+     size or duration. */
   const strip = (o) => {
     const c = structuredClone(o);
     delete c.schemaNote;
     delete c.version;
     return canonical(c);
   };
-  /* An addition is not a regression, and the guard used to treat them alike.
-     A token that is new — absent from the committed flat file, present in the
-     rebuilt one — is somebody deciding to name a value; a token whose value
-     *moved* is a material specification changing under everybody, which is the
-     thing this gate exists to catch. A token that disappeared is the same kind of
-     harm from the other direction, so it is fatal too.
-
-     Conflating them meant every genuine addition had to get past the gate rather
-     than through it, which is how a gate stops being believed. */
+  /* An addition is not a regression. A token that is new (absent from the
+     committed flat file, present in the rebuilt one) is somebody deciding to
+     name a value. A token whose value moved is a material specification
+     changing under everybody, which is what this gate exists to catch. A token
+     that disappeared is the same harm from the other direction, so it is fatal
+     too. Treating additions as regressions would make every genuine addition
+     fail the gate. */
   const changes = [];
   const additions = [];
   (function compare(a, b, trail) {
@@ -839,9 +823,9 @@ if (process.argv.includes('--migrate')) {
     process.exit(1);
   }
 
-  /* Announced rather than silent. Naming a value is a design decision even when
-     the number is not new, and it should be visible in the build log of the
-     commit that does it. */
+  /* Announced. Naming a value is a design decision even when the number is not
+     new, and it should be visible in the build log of the commit that does
+     it. */
   if (additions.length) {
     console.log(`${additions.length} new token(s):`);
     for (const a of additions) console.log('  + ' + a);

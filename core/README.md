@@ -1,37 +1,96 @@
-# Crystal design system
+# @crystal-ui/core
 
-Open [the interactive playground](index.html). This package is Meridian Digital's Crystal design system: a product-neutral visual language with five bolder palettes, the original Harbor mapping, light/dark modes, real local adjustments and CSS/JSON exports.
+Crystal is Meridian's design system. This package is the library: design tokens,
+the material stylesheets, a token resolver, a headless state core, motion recipes,
+icons, shaders and the specification.
 
-## Visual acceptance baseline
+It is framework independent. It is the base that platform component libraries are
+built on, and it is not a component framework or a native renderer itself.
 
-The [approved Crystal material studies](reference/approved-crystal/README.md) are the visual standard for all future work. Unexplained divergence is a defect, not an acceptable style variation. Capture the affected UI before and after any visual change, in both light and dark and at narrow widths, and compare it against those studies; passing token and contrast checks alone do not establish visual correctness.
+```sh
+npm install @crystal-ui/core
+```
 
-## Defining hierarchy
+## Using the stylesheets
 
-**Plastic → Frost → Resin**, from back to front. Product palettes vary; this material order is Crystal’s shared identity. Haze reading wells sit within that hierarchy.
+Load the theme first, then the primitives.
 
-## Recommended defaults
+```js
+import '@crystal-ui/core/theme';
+import '@crystal-ui/core/css';
+```
 
-Color atmosphere **90%**, Frost base tint **35%**, elevation **125%**, and corner radius **28px**. Resin stays at **20%** fill opacity. Haze uses **80%** fill with a **1.95px** feathered perimeter and crisp text. See the [material specification](docs/materials.html#recommended-defaults) for recipes and fallback behavior.
+```html
+<section class="cr-plastic">
+  <section class="cr-frost">
+    <article class="cr-haze">Readable product content</article>
+  </section>
+  <nav class="cr-resin" aria-label="Product navigation">
+    <!-- The product's navigation controls -->
+  </nav>
+</section>
+```
 
-Stone retains 55% light / 60% dark opacity and shares Haze’s 1.95px feather. Mirage is the modal scrim. All six are explicit materials in the canonical catalog.
+Set `data-crystal-mode="dark"` or `"light"` on the root element to choose a mode.
+The generated theme is the Prism palette in both modes. The resolver produces a
+theme for any of the six palettes and any settings within the documented ranges.
 
-## Included
+## Materials
 
-- Preserved original specification and token files with a SHA-256 provenance manifest.
-- Eight editable specification chapters covering identity, typography/layout, color, materials/elevation, components/patterns, accessibility, adoption, material motion and component motion.
-- Six full light/dark palettes, independent functional statuses, configurable atmosphere/tint/elevation/radius/density/font and reduced transparency.
-- Three local product scenes; working dialog, token inspection, local name editing, preference persistence and downloads.
-- Framework-independent CSS primitives and a dependency-free JavaScript token resolver/exporter. This is not a complete production component framework or native renderer.
-- A dedicated [motion playground](motion.html) with six replayable material motions with 5–30px ordinary travel, up to 50px ordinary expressive depth, with documented exceptions for larger compositions, in-place Haze/Stone ripples, liquid light, moving feathered edges and directional Mirage entrances/exits, working scene/dialog transitions, saved animation speed across the preview (0.25–2×, five-second cap) and independent reduced-motion preferences.
-- Motion 13.4.0 and GSAP 3.15.0 installed and bundled locally, with 54 component recipes, live component studies and real-engine browser contract checks. See [component motion](docs/motion-components.html).
-- Resin/Haze interaction surfaces and compact information shells, including tooltips, toasts, labels, tags and temporary menus.
-- Rebuild/validation tooling and actual verification results, separately labeled from product adoption requirements.
+The material order is **Plastic → Frost → Resin**, from back to front. Products
+change the palette. They do not change this order.
 
-The original source proposal and application remain unchanged. Company branding is intentionally not invented; Crystal is the shared design-system name, and products supply their own names and marks.
+| Material | What it is |
+|---|---|
+| Plastic | The opaque foundation, tinted by the palette. |
+| Frost | The intermediate panel: 40px blur, tint and fine grain. |
+| Resin | The floating control plane: 20px blur, a fixed 20% fill and a defined rim. |
+| Haze | The reading surface: an 80% fill with a 1.95px feathered edge and crisp text. |
+| Stone | Label backing: 55% in light mode, 60% in dark, feathered like Haze. |
+| Mirage | The scrim behind a modal. |
 
-## Open locally
+Recommended defaults: colour atmosphere 90%, Frost base tint 35%, elevation 125%,
+corner radius 28px. Feathering applies to an isolated paint layer only. Text,
+icons, hit areas and focus rings are never blurred.
 
-Run `python3 tools/serve.py` from this folder and visit `http://127.0.0.1:4321/`. Direct file opening is not browser-verified. The preview has no backend and makes no required external asset requests. External reference links open their named documentation sites.
+## What the package exports
 
-See [adoption](docs/adoption.html), [verification](validation/report.html), and [asset notices](reference/ASSET-NOTICES.md). The packaged ZIP is published as a release asset rather than kept in the repository; it contains the complete usable directory without local dependency environments. Rebuild it locally with `python3 tools/package.py`. No framework installation is needed to view it.
+| Import | Contents |
+|---|---|
+| `@crystal-ui/core` | The generated token export for TypeScript. Swift and Kotlin exports are in `exports/`. |
+| `@crystal-ui/core/tokens` | The token source, in W3C DTCG format. |
+| `@crystal-ui/core/flat` | The flat token file, with the runtime defaults and the palette list. |
+| `@crystal-ui/core/css` | `crystal.css`: the materials, the control surface and the component recipes. |
+| `@crystal-ui/core/theme` | The generated default theme. |
+| `@crystal-ui/core/resolver` | The token resolver, contrast calculation, and CSS and JSON export. |
+| `@crystal-ui/core/core/state` | State derivation for indicators, fields and ranges. |
+| `@crystal-ui/core/core/preferences` | Preference clamping and duration resolution. |
+| `@crystal-ui/core/core/spring` | Spring physics: sampling, settling time and overshoot. |
+| `@crystal-ui/core/core/presets` | Keyframes for the material motion presets, computed from tokens. |
+| `@crystal-ui/core/motion-recipes` | The 59 motion recipes, each with its spring and per-platform values. |
+| `@crystal-ui/core/engines` | The Motion and GSAP engine entry. |
+| `@crystal-ui/core/icons` | The icon manifest. There are 1011 icons on a 24px grid. |
+| `@crystal-ui/core/shaders/*` | The optical layer's shader sources and their manifest. |
+| `@crystal-ui/core/catalogue` | The component catalogue: 284 components in 14 categories. |
+| `@crystal-ui/core/surfaces` | The 23 surfaces a component can be made of, each with its recipe. |
+| `@crystal-ui/core/docs/*` | The eleven specification chapters, as Markdown. |
+
+`motion` and `gsap` are dependencies of this package. A consumer bundles them as
+it prefers.
+
+## Specification
+
+The chapters in `docs/` are the specification. Start with `principles.md`,
+`materials.md` and `components.md`. `adoption.md` covers how a product or a
+library takes Crystal on, and `catalogue.md` lists every component with its
+surface, states, semantics and motion.
+
+The rendered site, the interactive playground and the verification evidence are
+in [crystal-preview](https://github.com/boomerbowser/crystal-preview). The
+approved material studies there are the visual standard. A rendering that departs
+from them without an approved reason is a defect, and passing token and contrast
+checks does not establish that a rendering is correct.
+
+## Licences
+
+Third-party licences are in `licenses/`.

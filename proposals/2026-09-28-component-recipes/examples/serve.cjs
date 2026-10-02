@@ -2,7 +2,7 @@
 /* Serve the repository over loopback so the specimen sheet can load the library
  * by relative path. `file://` is not browser-verified for Crystal (adoption.md),
  * and the desktop app's preview renders a file outside the project as a static
- * snapshot with no stylesheet at all — which is how this file came to exist.
+ * snapshot with no stylesheet at all.
  *
  *   node proposals/2026-09-28-component-recipes/examples/serve.cjs [port]
  *   → http://localhost:4321/proposals/2026-09-28-component-recipes/examples/

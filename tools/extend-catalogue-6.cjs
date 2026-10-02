@@ -2,25 +2,23 @@
 /* Sixth catalogue extension: the surfaces that disagreed with their own entries.
  *
  * D-23, ruled by Meridian on 28 September 2026: "fix the catalogue surfaces".
- * Crystal React measured every component against the class its catalogue surface
- * names, planted beside it in a browser, and found the surface field saying one
- * thing while the entry's own prose, its geometry, or the rendered component said
- * another. The rendering is the evidence — the documentation site's, and the
- * library's where the library had been measured against the site — so the surface
- * moves to what renders, and prose that contradicts it is corrected.
+ * Where the surface field said one thing and the entry's own prose, its
+ * geometry or the rendered component said another, the rendering is the
+ * evidence: the documentation site's, and the library's where the library had
+ * been measured against the site. The surface moves to what renders, and prose
+ * that contradicts it is corrected.
  *
- *   - Seven strips are docks, not Resin planes. Tabs, the segmented control, the
- *     toolbar, the command bar, the action bar, the button group and the split
- *     button render as Resin holding one Haze fill under their controls — measured
- *     identical to `.cr-dock` in every material property, and the strip mixin was
- *     measured from Crystal's own site. `.cr-resin` is a different composition: a
- *     plane with an optical sheen and no reading fill.
+ *   - Seven strips are docks. Tabs, the segmented control, the toolbar, the
+ *     command bar, the action bar, the button group and the split button render
+ *     as Resin holding one Haze fill under their controls, identical to
+ *     `.cr-dock` in every material property. `.cr-resin` is a different
+ *     composition: a plane with an optical sheen and no reading fill.
  *   - The resizable handle and the image comparison's thumb are Resin handles, as
  *     their own prose says. `drag-handle` is a grab-to-move grip, which on a 4px
  *     splitter adds padding and a dot grid and over photographs is a muted grip on
  *     no material.
  *   - The media controls are the Resin plane at its pill, as their geometry says,
- *     not the Resin panel.
+ *     and were listed as the Resin panel.
  *   - The rich text surface is a field: a Resin shell around a Haze well, which is
  *     what `resin` + `haze` described, and it is edited like one.
  *   - The rail's prose said "Resin active destination" while its surface said

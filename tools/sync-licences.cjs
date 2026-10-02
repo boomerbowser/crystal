@@ -3,14 +3,13 @@
  * `@crystal-ui/core` declares gsap and motion as runtime dependencies and
  * `core/licenses/` carries their notices, because a consumer who installs the
  * library is redistributing them. The licence in the package must therefore be
- * the licence of the version the manifest declares — which is what
- * `validate-motion.cjs` checks, by requiring this workspace's devDependency,
- * the library's dependency and the lockfile to agree.
+ * the licence of the version the manifest declares. `validate-motion.cjs`
+ * checks this by requiring this workspace's devDependency, the library's
+ * dependency and the lockfile to agree.
  *
- * This was the tail of `build-motion.cjs`, whose other half bundled the engines
- * into a script for the browser. That is a website asset and it is built in
- * crystal-preview now. Copying the notices is the library's own business and
- * stayed.
+ * This was the tail of `build-motion.cjs`. The browser engine bundle is a
+ * website asset, built in crystal-preview. Copying the notices belongs to the
+ * library.
  *
  *   node tools/sync-licences.cjs
  */

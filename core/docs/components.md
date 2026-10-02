@@ -13,8 +13,8 @@ The package contains working CSS primitives and a bounded interactive reference.
 | Stone label backing | 55% light / 60% dark, 1.95px feather, crisp text | `.cr-stone`; `.cr-dock-inner` shares the recipe |
 | Mirage modal scrim | Dark tint with chromatic diffusion of the scene behind the active modal | `.cr-mirage` and dialog `::backdrop`; standalone paint requires real application modal behavior |
 | Action | Resin shell with the neutral Haze reading fill, optical pressure and light; hover/pressed/focus/disabled | `.cr-button`. Real action and progress/error handling are app-owned |
-| Primary action | The same control with its Haze reading fill **in the primary colour** and the tested ink on it | `.cr-button.primary`; `--cr-primary` on the fill, `--cr-on-primary` as the ink. Opt-in, so a button is emphatic only where somebody said so |
-| Quiet action | The same shell with **no** reading fill, so the label sits directly on the material | `.cr-button.quiet`; same semantics as any action |
+| Primary action | The same control with its Haze reading fill in the primary colour and the tested ink on it | `.cr-button.primary`; `--cr-primary` on the fill, `--cr-on-primary` as the ink. Opt-in, so a button is emphatic only where an author chose it |
+| Quiet action | The same shell with no reading fill, so the label sits directly on the material | `.cr-button.quiet`; same semantics as any action |
 | Destructive action | Resin/Haze with independent danger boundary and explicit label | `.danger`; app supplies consequence-specific confirmation and recovery |
 | Text field | Visible label, state badge, glowing focus ring, validation, helper/error association | `.cr-input`; working native form example; app supplies validation rules |
 | Selection control | Explicit selected state plus text/mark | Native checkbox, radio and select, styled by `assets/crystal.css` as of 2.1.0, and the native switch (`input[type=checkbox][role=switch]`) as of 2.2.0; keyboard semantics must match the component |
@@ -25,7 +25,7 @@ The package contains working CSS primitives and a bounded interactive reference.
 | Range control | Visible label/value, keyboard adjustable range | Native `input[type=range]`, styled by `assets/crystal.css` as of 2.1.0, including its RTL track direction; product limits require domain validation |
 | Authored bubble | Haze, directional tight corner, optional author metadata | `.cr-bubble`, `.own`; app supplies content/Markdown semantics |
 | Composer surround | Frost frame and softened content well around protected input controls | CSS composition; no rich-text editor or delivery service is implemented |
-| Status badge | Independent ink/surface pair, symbol and visible label | `.cr-status` with `data-status`; 18px radius, 12px/18px padding, 36px floor, as the preview has always rendered it; dynamic announcements are app-owned |
+| Status badge | Independent ink/surface pair, symbol and visible label | `.cr-status` with `data-status`; 18px radius, 12px/18px padding, 36px floor, as the preview renders it; dynamic announcements are app-owned |
 | Avatar | Circular image/initials, accessible identity when needed | Reference styling; app handles real identity, image failure and privacy |
 | Dialog | 80% feathered surface over Mirage; title, body and named actions | Working native HTML dialog example; Escape/focus return; app owns transactions |
 | Tooltip | Short supplemental text; never sole label | Frost (`.cr-frost`, R15e); working tooltip in the motion suite with focus, hover and Escape |
@@ -42,9 +42,9 @@ The package contains working CSS primitives and a bounded interactive reference.
 
 Every production control needs default, hover where meaningful, pressed, focus-visible, disabled, loading and error states as applicable. Disabled elements must not be the only explanation of unavailable functionality. Do not simulate success for an unimplemented action.
 
-Primary application buttons are at least 44px high. Compact documentation controls may be smaller but must meet applicable target-size/spacing criteria; do not infer that every clickable element is 44px from the button class. Validate touch use, not only a desktop screenshot.
+Primary application buttons are at least 44px high. Compact documentation controls may be smaller but must meet applicable target-size/spacing criteria; do not infer that every clickable element is 44px from the button class. Validate touch use as well as a desktop screenshot.
 
-The selected destination carries its state by `aria-pressed` and by label weight; palette swatches, which cannot carry a weight change, use an inset ring gap. Functional statuses have words and distinct symbols. These cues survive color changes, and none of them is a check mark — a check means validated, never selected.
+The selected destination carries its state by `aria-pressed` and by label weight; palette swatches, which cannot carry a weight change, use an inset ring gap. Functional statuses have words and distinct symbols. These cues survive color changes, and none of them is a check mark. A check means validated, never selected.
 
 The preview product-name form performs a real local update with native validation; it does not save a brand to a remote service. Dialogs inspect actual specifications or exported tokens. The export buttons produce files from the current configuration. Fictional messages, avatars and library cards remain clearly labeled design content.
 
@@ -52,7 +52,7 @@ The preview product-name form performs a real local update with native validatio
 
 **Navigation:** Use a floating toolbar when it improves the task. Keep the active destination labeled and avoid nested floating material planes. Side navigation may be more appropriate for dense tools. Do not require one product's destination set in unrelated products.
 
-**Editing:** Give content a stable 80% reading fill with feathered edges and crisp text, then surround it with tools at an appropriate elevation. Native input controls retain protected backgrounds and explicit boundaries. Separate draft state from publication and communicate unsaved/error states honestly.
+**Editing:** Give content a stable 80% reading fill with feathered edges and crisp text, then surround it with tools at an appropriate elevation. Native input controls retain protected backgrounds and explicit boundaries. Separate draft state from publication and communicate unsaved/error states accurately.
 
 **Consequential actions:** Use a Haze dialog with explicit action names, clear consequences, safe dismissal where appropriate, and actual pending/failure handling. Decorative Resin must not obscure the decision.
 
@@ -68,24 +68,24 @@ Maintain a production Storybook or equivalent gallery for actual components with
 
 ## Resin interaction and information surfaces
 
-Buttons, action links, tabs, selectable controls and field shells use Resin as their interaction surface, with Haze reading protection inside a visible Resin perimeter. **On the primary action that reading fill is the primary colour, and the perimeter is the ordinary glass rim** — `--cr-primary` on the fill, `--cr-on-primary` as the ink, which is the palette's own tested pair and measures 4.74 to 10.31 against the rendered composite across all six palettes and both modes. The fill is opaque there where the neutral one is 80%, and that is the single deliberate deviation in this recipe. An 80% fill transmits a fifth of what is behind it: white over a light page is still white, so the neutral pad loses nothing, but a mid-tone primary at 80% over the Resin shell composites to a washed-out lilac sitting at the luminance where neither a white nor a near-black label clears 4.5 — 3.37 to 4.55 with `onPrimary`, 2.95 to 5.06 with `text`, failing in every light palette. A reading ground whose job is to make the label independent of the backdrop cannot be the one thing that depends on it.
+Buttons, action links, tabs, selectable controls and field shells use Resin as their interaction surface, with Haze reading protection inside a visible Resin perimeter. On the primary action that reading fill is the primary colour, and the perimeter is the ordinary glass rim: `--cr-primary` on the fill and `--cr-on-primary` as the ink. That is the palette's own tested pair, and it measures 4.74 to 10.31 against the rendered composite across all six palettes and both modes. The fill is opaque there where the neutral one is 80%, and that is the only deviation in this recipe. An 80% fill transmits a fifth of what is behind it. White over a light page is still white, so the neutral pad loses nothing. A mid-tone primary at 80% over the Resin shell composites to a washed-out lilac, at the luminance where neither a white nor a near-black label clears 4.5: 3.37 to 4.55 with `onPrimary` and 2.95 to 5.06 with `text`, failing in every light palette. The reading fill exists to make the label independent of the backdrop, so the primary fill is opaque.
 
-**A quiet button has no reading fill.** It keeps the whole Resin shell — rim, float shadow, sheen — and drops the pad, which makes it the only variant that is glass all the way through. The cost is the pad's whole purpose: a quiet label reads against the Resin fill and therefore against whatever is behind the control. On Crystal's own foundation that is a wide margin — `--cr-text` over the Resin fill over canvas, surface, surface-alt and foundation measures 10.88 to 18.28 across all six palettes and both modes — but a quiet button placed over artwork has no protected ground, and that composition is the one to avoid. The recipe is in `assets/crystal.css`, in `@layer crystal.component`: a Resin fill with a rim and a float shadow, a `::before` carrying the inset Haze fill at the material's feather, and a `::after` carrying the optical sheen from `--cr-control-color` and `--cr-control-light`. Both pseudo-elements are dropped under reduced transparency and under forced colours.
+**A quiet button has no reading fill.** It keeps the whole Resin shell (rim, float shadow and sheen) and drops the pad, so it is the only variant that is glass all the way through. Without the pad, a quiet label reads against the Resin fill and therefore against whatever is behind the control. On Crystal's own foundation the margin is wide: `--cr-text` over the Resin fill over canvas, surface, surface-alt and foundation measures 10.88 to 18.28 across all six palettes and both modes. A quiet button placed over artwork has no protected ground, so avoid that composition. The recipe is in `assets/crystal.css`, in `@layer crystal.component`: a Resin fill with a rim and a float shadow, a `::before` carrying the inset Haze fill at the material's feather, and a `::after` carrying the optical sheen from `--cr-control-color` and `--cr-control-light`. Both pseudo-elements are dropped under reduced transparency and under forced colours.
 
-Until 2.1.0 this paragraph told you to load `assets/controls.css`, which is the documentation site's stylesheet and has never been in the package — so the surface this specification describes was one no consumer could obtain. The field shell is markup a product wraps around a native field — `<span class="cr-field-shell">` around the `<input>` — and adds no semantics of its own; labels, input values, validation and form submission remain native.
+The recipe is not in `assets/controls.css`, which is the documentation site's stylesheet and is not in the package. The field shell is markup a product wraps around a native field, `<span class="cr-field-shell">` around the `<input>`, and it adds no semantics of its own. Labels, input values, validation and form submission remain native.
 
-Small display elements that sit *on* content — labels, tags, badges and keyboard caps — use `.cr-resin-haze`. This is a reusable composition of existing materials, not a seventh material. Transient overlays — tooltips, toasts, menus, dropdowns, flyouts and popovers — are **Frost** (`.cr-frost`), at Meridian's direction (R15e): a surface that opens over content is an intermediate panel, not a compact control, and its reading content sits on Haze inside it. Larger persistent components retain their structural material. Native OS popup internals are platform-owned; use an actual accessible custom component when full Crystal popup rendering is required.
+Small display elements that sit on content (labels, tags, badges and keyboard caps) use `.cr-resin-haze`. This is a reusable composition of existing materials, not a seventh material. Transient overlays (tooltips, toasts, menus, dropdowns, flyouts and popovers) are **Frost** (`.cr-frost`), at Meridian's direction (R15e). A surface that opens over content is an intermediate panel rather than a compact control, and its reading content sits on Haze inside it. Larger persistent components retain their structural material. Native OS popup internals are platform-owned; use an actual accessible custom component when full Crystal popup rendering is required.
 
 Selected controls carry correct ARIA state and label weight; a circular badge marks activity or information, never selection. Disabled controls retain legible content but cannot activate. Opaque and forced-color modes replace decorative optics while preserving control boundaries. Motion uses material deformation and changing light, with crisp foreground text.
 
 ### Every component names its surface
 
-The catalogue gives every one of its components a **surface** — the material composition it is made of — from the closed vocabulary in `tokens/surfaces.json`, and each surface is one recipe in `assets/crystal.css`. The build refuses a component naming a surface with no recipe, so the catalogue cannot specify a material Crystal has not published. The vocabulary is listed, with counts, at the top of the [catalogue](catalogue.html#surfaces). Four of its entries arrived in 2.2.0 because a consumer had reached them and found nothing:
+The catalogue gives every one of its components a **surface**, which is the material composition it is made of, from the closed vocabulary in `tokens/surfaces.json`. Each surface is one recipe in `assets/crystal.css`. The build refuses a component naming a surface with no recipe, so the catalogue cannot specify a material Crystal has not published. The vocabulary is listed, with counts, at the top of the [catalogue](catalogue.html#surfaces). Four of its entries arrived in 2.2.0, because a consumer had reached for them and not found them:
 
 | Surface | Recipe | What it is |
 |---|---|---|
-| Navigation entry | `.cr-nav-item`, `.stacked` for a rail | Furniture on the panel beneath it: no material of its own, pill hit area, 44px target, selection by label weight (650 → 800), and current location by a 6px primary dot on `aria-current` only — never on `aria-selected` or `aria-pressed`, which are selection. The dot is flat (no material, no elevation) and sits in the entry's inline-start padding, so the label does not move. Lifted from this site's own side menu, which this page has always named as the reference implementation of selection; the dot is what the catalogue added (D-22). |
-| Bare control | `.cr-bare` | A control inside a surface that already has a coat — a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows, a dismiss button. Crystal paints every `<button>` by element in five layers; this removes all five and keeps the target and the focus ring. |
+| Navigation entry | `.cr-nav-item`, `.stacked` for a rail | Furniture on the panel beneath it: no material of its own, pill hit area, 44px target, selection by label weight (650 to 800), and current location by a 6px primary dot on `aria-current` only. The dot never appears on `aria-selected` or `aria-pressed`, which are selection. The dot is flat (no material, no elevation) and sits in the entry's inline-start padding, so the label does not move. The recipe is lifted from this site's own side menu, which this page names as the reference implementation of selection. The catalogue added the dot (D-22). |
+| Bare control | `.cr-bare` | A control inside a surface that already has a coat: a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows or a dismiss button. Crystal paints every `<button>` by element in five layers; this removes all five and keeps the target and the focus ring. |
 | Drag handle | `.cr-drag-handle` | A bare control with a grip and a lift while `aria-grabbed` or `data-dragging` is set. Pointer capture, the keyboard alternative and drop validation are the product's. |
 | Resin panel | `.cr-resin.panel` | The Resin plane with the content radius instead of the pill, for a floating window or a wide control bar. |
 
@@ -94,12 +94,12 @@ Five more arrived in 2.3.0, each from a ruling of 29 September 2026 on something
 | Surface | Recipe | What it is |
 |---|---|---|
 | Group | `.cr-group`, `.vertical` to stack | A new surface in the vocabulary. A button group and a split button are one Resin plane whose controls touch: one pill outside, the interior corners square against their neighbours, a hairline in `--cr-edge` between. The children keep their fill and give up their own elevation and diffusion, because the plane is the group's. A dock spaces its controls apart; a group does not. |
-| Dock controls that are not buttons | `.cr-dock` | The dock now reaches `[role=tab]` (selected by `aria-selected`), a `label` holding a radio (selected by `:checked`, its focus ring drawn on the label) and a link (current by `aria-current`), with the dock button's values. Every selector is inside `:where()`, so nothing a consumer already sits against changes specificity. |
-| Dialog body | `.cr-dialog-body`, with `.cr-scroll-frost` | The dialog's surface does not scroll; its body does, so a tall dialog keeps its title in view and takes the edge fade without dissolving its own fill. Give the body `tabindex="0"` and a name when it scrolls, so a keyboard can reach and scroll it. A dialog written without a body scrolls its surface as before. `position: fixed` now applies to a native `dialog.cr-dialog` only, which the browser centres; on any other element the host positions the surface. |
+| Dock controls that are not buttons | `.cr-dock` | The dock reaches `[role=tab]` (selected by `aria-selected`), a `label` holding a radio (selected by `:checked`, its focus ring drawn on the label) and a link (current by `aria-current`), with the dock button's values. Every selector is inside `:where()`, so nothing a consumer already sits against changes specificity. |
+| Dialog body | `.cr-dialog-body`, with `.cr-scroll-frost` | The dialog's surface does not scroll; its body does, so a tall dialog keeps its title in view and takes the edge fade without dissolving its own fill. Give the body `tabindex="0"` and a name when it scrolls, so a keyboard can reach and scroll it. A dialog written without a body still scrolls its surface. `position: fixed` applies to a native `dialog.cr-dialog` only, which the browser centres; on any other element the host positions the surface. |
 | Recessed overlay | `.cr-haze.overlay` | A menu, popover or listbox opened inside a pane that is already lifted. On the page a transient overlay is Frost; inside a Haze dialog or a Frost panel it recesses into Haze, and plain Haze has no edge. This is a flat Haze fill with the `--cr-edge` rim and the content shadow, and no feather. |
-| Count | `.cr-resin-haze.count` | The compact display sized for a count: a 20px circle that grows to a pill with its digits, filled to its own edge, with no block padding. The tag's 8px Haze inset and 17px block padding made a count badge 55px tall. |
+| Count | `.cr-resin-haze.count` | The compact display sized for a count: a 20px circle that grows to a pill with its digits, filled to its own edge, with no block padding. With the tag's 8px Haze inset and 17px block padding a count badge is 55px tall. |
 
-A native switch is a checkbox with a track — `<input type="checkbox" role="switch">` — styled by element like the checkbox and radio: the track reads `--cr-switch-track-width` and `-height`, the thumb is the opaque surface, and the on state is the primary-soft pair.
+A native switch is a checkbox with a track, `<input type="checkbox" role="switch">`, styled by element like the checkbox and radio. The track reads `--cr-switch-track-width` and `-height`, the thumb is the opaque surface, and the on state is the primary-soft pair.
 
 ### Interaction surface geometry
 
@@ -110,11 +110,11 @@ Toolbars, segmented controls and tab groups share one Resin/Haze surface. Their 
 
 ## Material definition on small and nested surfaces
 
-A small Resin control over a Haze reading well can lose the color and depth visible in the larger material studies. Keep the 20% Resin body and 80% inset Haze fill. Supply restrained contextual light **under** the Haze rather than increasing body opacity or painting the label. The control optical layer mixes glow at 12.6% and decorative color at 8.4% in light mode; dark mode uses 9.8% and 7% (a 30% reduction from the previous rim color opacity). On buttons and action links, inset the chromatic paint by 2px and feather that paint by 2px beneath Haze, so the color blends inward into the content fill. Keep the outer optical contour and all text crisp. Palette specimen colors and selection marks are not blurred. These are local gradient maxima, not changes to the global atmosphere or material opacity. Do not increase saturation to compensate for every additional nested surface. The approved material studies remain the visual authority.
+A small Resin control over a Haze reading well can lose the color and depth visible in the larger material studies. Keep the 20% Resin body and 80% inset Haze fill. Supply restrained contextual light under the Haze rather than increasing body opacity or painting the label. The control optical layer mixes glow at 12.6% and decorative color at 8.4% in light mode; dark mode uses 9.8% and 7% (a 30% reduction from the previous rim color opacity). On buttons and action links, inset the chromatic paint by 2px and feather that paint by 2px beneath Haze, so the color blends inward into the content fill. Keep the outer optical contour and all text crisp. Palette specimen colors and selection marks are not blurred. These values are local gradient maxima and leave the global atmosphere and material opacity unchanged. Do not increase saturation to compensate for every additional nested surface. The approved material studies remain the visual authority.
 
 Use a luminous outer contour and soft paired shadows instead of a dark hairline around every control. Text fields have a circular Resin/Haze field-state badge within the Resin surround; keyboard focus still adds a full, clearly visible ring. Checkboxes and radios use contained selection marks, switches retain a contrast-bearing thumb, and sliders use a value-driven track and marked glass thumb. Keep labels and native semantics. Status badges use their semantic symbol and words, with the tested semantic ink/surface pair behind the symbol, rather than a colored perimeter stroke. Selection, errors and focus must remain distinguishable without color.
 
-When adapting controls to different sizes, preserve enough exposed Resin to show the rim and enough protected Haze to keep text crisp. Do not blur the element or its foreground. Opaque, reduced-transparency and forced-color modes remain functional alternatives. Validate actual composed controls in both modes and at narrow widths; a beautiful isolated material swatch does not establish component fidelity.
+When adapting controls to different sizes, preserve enough exposed Resin to show the rim and enough protected Haze to keep text crisp. Do not blur the element or its foreground. Opaque, reduced-transparency and forced-color modes remain functional alternatives. Validate actual composed controls in both modes and at narrow widths. An isolated material swatch does not establish component fidelity.
 
 
 ## Rounded icon set
@@ -132,89 +132,88 @@ Icons next to text are decorative and hidden from assistive technology. Icon-onl
 
 ## Focus light and circular state badges
 
-Focus uses an immediate 2px primary-color core at a 3px offset, surrounded by a broadly feathered halo. The halo is four graded layers of the primary color — 46% at 6px / 1px, 30% at 16px / 3px, 17% at 30px / 6px and 8% at 54px / 11px (blur / spread) — so the light falls off smoothly instead of ending on a hard edge. The spreads were halved from 2/6/12/22 at Meridian's request; the blur radii were deliberately left alone, so the ring thins without the falloff flattening.
+Focus uses an immediate 2px primary-color core at a 3px offset, surrounded by a broadly feathered halo. The halo is four graded layers of the primary color: 46% at 6px / 1px, 30% at 16px / 3px, 17% at 30px / 6px and 8% at 54px / 11px (blur / spread). The light falls off smoothly instead of ending on a hard edge. The spreads were halved from 2/6/12/22 at Meridian's request and the blur radii were left unchanged, so the ring thins without the falloff flattening.
 
 **A focused control also lifts.** Beneath the halo sit two elevation layers: a directional 8px / 18px (offset / blur) at 30% of the primary color, and a broad 22px / 40px at 27% of the *decorative* color. The directional layer reuses the halo's second feather so the lift reads as the same light source; the broad one is decorative rather than primary so the shadow under a focused control carries the palette's own shadow hue instead of tinting the page purple. Focus changes the elevation shadow's hue without blurring any foreground.
 
-**In dark mode the feather alphas lift**, to 56 / 38 / 22 / 11 against light's 46 / 30 / 17 / 8. A deep canvas swallows the falloff at the lighter values, so the ring reads as a hard edge with nothing around it. Blur, spread and the elevation layers are identical in both modes.
+In dark mode the feather alphas lift, to 56 / 38 / 22 / 11 against light's 46 / 30 / 17 / 8. A deep canvas swallows the falloff at the lighter values, so the ring reads as a hard edge with nothing around it. Blur, spread and the elevation layers are identical in both modes.
 
 The four feather colors are published as `--cr-focus-feather-1` through `-4` and the broad shadow as `--cr-focus-shadow`, so a product can retint the falloff without restating the recipe. The single token `--cr-focus-ring` composes all six layers so every focusable surface shares one recipe. The core remains defined for visibility; text and icons are never blurred. Keyboard focus applies to all interactive elements. Text entry lights its Resin shell through `:focus-within`. Motion must neither delay nor remove the focus cue. Forced colors substitute a system Highlight outline and remove decorative shadows.
 
-A `.cr-indicator` is a 20px circle painting an 80% Haze fill on an isolated layer with a 1px feather — Haze rather than Resin, for the reason given under [Indicators](#indicators). Field badges are 24px. Their foreground remains crisp and uses the tested body ink. They sit beside the content, never over text or a native select arrow. These are informational, non-interactive marks, not small click targets.
+A `.cr-indicator` is a 20px circle painting an 80% Haze fill on an isolated layer with a 1px feather. It is Haze rather than Resin, for the reason given under [Indicators](#indicators). Field badges are 24px. Their foreground remains crisp and uses the tested body ink. They sit beside the content, never over text or a native select arrow. These are informational, non-interactive marks and are not click targets.
 
 <!-- generated:focus-recipe -->
 
 | Layer | Blur | Spread | Role |
 |---|---|---|---|
-| `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | — | — | The crisp core. Never feathered, and the only part that survives forced colours. |
+| `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | None | None | The crisp core. Never feathered, and the only part that survives forced colours. |
 | Halo 1 | 6px | 1px | 46% of the primary colour |
 | Halo 2 | 16px | 3px | 30% of the primary colour |
 | Halo 3 | 30px | 6px | 17% of the primary colour |
 | Halo 4 | 54px | 11px | 8% of the primary colour |
-| Elevation 1 | 18px | — | 30% of the primary colour, offset 8px — the directional lift |
-| Elevation 2 | 40px | — | 27% of the decorative colour, offset 22px — the broad lift |
+| Elevation 1 | 18px | None | 30% of the primary colour, offset 8px: the directional lift |
+| Elevation 2 | 40px | None | 27% of the decorative colour, offset 22px: the broad lift |
 <!-- /generated:focus-recipe -->
 
 Every layer is read from `--cr-focus-ring` in the library's own exported theme, so this
-table cannot disagree with what ships. It used to be read from the preview site's
-`assets/controls.css` — a stylesheet the package does not contain — which is how Crystal
-came to document a halo it did not export and a lift no consumer received. The core is
-never feathered and the offset is never zero: a ring drawn *on* the border is hard to
+table cannot disagree with what ships. The preview site's `assets/controls.css` is a
+stylesheet the package does not contain, and the table must not be read from it. The core
+is never feathered and the offset is never zero: a ring drawn *on* the border is hard to
 tell from a hover state, and on a pill it reads as a thicker stroke rather than as focus.
 
-A check mark is reserved for validation and information display — the status badges in `.cr-status` and a checkbox's own `:checked` indicator. It never marks a selected, pressed or focused control. Selection instead uses a heavier label weight, which changes no metric that would reflow the group. Round specimen swatches, which cannot carry a weight change, use an inset ring gap.  Ordinary prose links retain their link styling. Badges are `aria-hidden`: the real control supplies its accessible name, required/invalid/selected/busy state and error association. The visual symbol never gets appended to the control's text content. Native checkbox/radio indicators and functional labels remain intact. Small controls retain full-sized hit targets. Badges have solid, unblurred alternatives under reduced transparency and forced colors.
+A check mark is reserved for validation and information display: the status badges in `.cr-status` and a checkbox's own `:checked` indicator. It never marks a selected, pressed or focused control. Selection instead uses a heavier label weight, which changes no metric that would reflow the group. Round specimen swatches, which cannot carry a weight change, use an inset ring gap.  Ordinary prose links retain their link styling. Badges are `aria-hidden`: the real control supplies its accessible name, required/invalid/selected/busy state and error association. The visual symbol never gets appended to the control's text content. Native checkbox/radio indicators and functional labels remain intact. Small controls retain full-sized hit targets. Badges have solid, unblurred alternatives under reduced transparency and forced colors.
 
 ## Geometry
 
-Crystal has exactly two control shapes, and which one applies is determined by what the
-control *is*, not by how it looks best in a particular layout.
+Crystal has exactly two control shapes, and what the control is decides which one applies.
+How the control looks in a particular layout does not.
 
 **Action controls are pill-shaped.** Buttons, icon buttons, segmented controls, chips,
-menu entries, tabs — anything whose job is "do this" or "go here" — use a fully rounded
-radius. A pill is unambiguous at any size: it never reads as a card, a field or a
-container.
+menu entries and tabs use a fully rounded radius, as does anything else whose job is
+"do this" or "go here". A pill is unambiguous at any size: it never reads as a card, a
+field or a container.
 
-**Card-shaped buttons keep the content radius.** A control that is really a tappable
-*object* — a project tile, a palette swatch card, a library item — keeps `--cr-radius`
-(28px by default). These are the exception and they are recognisable: the user is choosing
-a thing, not triggering an action.
+**Card-shaped buttons keep the content radius.** A control that is a tappable object (a
+project tile, a palette swatch card or a library item) keeps `--cr-radius` (28px by
+default). These are the exception and they are recognisable, because the user is choosing
+a thing and is not triggering an action.
 
-There is no third option. A button with an 8px or 12px radius is neither shape and is a
-defect, not a variant.
+There is no third shape: a button with an 8px or 12px radius is neither shape and is a
+defect.
 
 <div class="sample-row" markdown="1">
 <button class="cr-button" type="button">Pill action</button>
 <button class="cr-control" type="button">Pill control</button>
 </div>
 
-The pill radius is a token, not a literal: `component.action.radius` resolves through
-`semantic.shape.pill`. A component that writes `border-radius:999px` directly works and
-silently opts itself out of every future change to the shape language. See
+The pill radius is a token: `component.action.radius` resolves through
+`semantic.shape.pill`. A component that writes `border-radius:999px` directly renders
+correctly and does not follow any later change to the shape language. See
 [Tokens](tokens.html).
 
 ## Focus
 
-Focus is a **crisp 2px primary core at 3px offset, inside a four-layer feathered halo**.
-Six layers in total, and each one is doing a job:
+Focus is a crisp 2px primary core at 3px offset, inside a four-layer feathered halo.
+There are six layers in total, and each has a role:
 
 | Layer | Role |
 | --- | --- |
-| `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | The crisp core. This is what proves focus at a glance and what survives forced colours. |
+| `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | The crisp core. It shows focus at a glance and it survives forced colours. |
 | `inset 0 2px 1px var(--cr-rim)` | Keeps the control's own top edge readable inside the ring. |
 | 4 × feathered primary glows at 6/1, 16/3, 30/6 and 54/11 | The halo. Increasing blur at decreasing opacity, so the ring dissolves outward rather than ending on a hard edge. |
 
-Each pair is blur radius / spread. The spread values were halved in September 2026; the blur radii were deliberately left alone, because halving both produces a tighter ring with a harder edge, which is a different thing from a thinner one.
+Each pair is blur radius / spread. The spread values were halved in September 2026 and the blur radii were left unchanged. Halving both produces a tighter ring with a harder edge, which is different from a thinner ring.
 
-The core is never feathered. The offset is never zero — a ring drawn *on* the border is
-hard to distinguish from a hover state, and on a pill it reads as a thicker stroke rather
-than as focus.
+The core is never feathered. The offset is never zero, because a ring drawn *on* the
+border is hard to distinguish from a hover state, and on a pill it reads as a thicker
+stroke rather than as focus.
 
 Tab to the entries in the side menu on this page to see the complete recipe on a real
 control.
 
 Focus is applied through `:focus-visible`, never `:focus`, so pointer users do not get a
 ring they did not ask for. Any rule that resets `box-shadow` on a control must exclude the
-focused state, or it silently reduces the recipe to a bare outline:
+focused state, or it reduces the recipe to a bare outline:
 
 ```css
 /* Correct: the resting state only. */
@@ -236,31 +235,30 @@ Selection is expressed with **label weight**:
 The side menu on this page is the reference implementation.
 
 Nothing is drawn beside the label to mark it. A leading mark is drawn inside the
-control, so it offsets the very label it is meant to mark and the selected item stops
-lining up with the others. The obligation such a mark would serve — that selection
-never rests on colour alone — is already met by weight, which is typographic rather
-than chromatic and survives every palette, dark mode and colour vision difference.
+control, so it offsets the label it is meant to mark and the selected item stops lining
+up with the others. Selection must never rest on colour alone, and weight already meets
+that obligation: it is typographic rather than chromatic, so it survives every palette,
+dark mode and colour vision difference.
 
-Why not a check: a check mark is a *statement about a value* — this field validated, this
-item is complete, this option is confirmed. If it also means "this is the current tab",
+A check mark is a statement about a value: this field validated, this item is complete,
+this option is confirmed. If it also means "this is the current tab",
 then a list containing both validated items and a current item becomes unreadable, and a
 screen reader's "checked" state stops corresponding to anything the user can act on.
 
-Selection colour is never the only signal. A weight change is typographic, so it
-survives the palette being changed, the mode being dark, and colour vision differences.
-This is WCAG 1.4.1 applied as a design rule rather than as a post-hoc check.
+Selection colour is never the only signal. This is WCAG 1.4.1 applied as a design rule
+rather than as a post-hoc check.
 
 ### Selection in forced colours
 
-A filled selected row is a defect in forced-colors mode — see
+A filled selected row is a defect in forced-colors mode. See
 [forced colours](accessibility.html#forced-colours) for the reason and the correct
-recipe. In short: selection becomes a `Highlight` ring, never a fill.
+recipe. Selection becomes a `Highlight` ring, never a fill.
 
 ## Indicators
 
-An indicator — the moving pill behind a selected segment, the dock's active marker — is
-**Haze, not Resin**. It sits above a surface that is frequently already translucent, and a
-Resin indicator would be the nested-Resin failure by another name.
+An indicator (the moving pill behind a selected segment, or the dock's active marker) is
+Haze, not Resin. It sits above a surface that is frequently already translucent, and a
+Resin indicator would be the nested-Resin failure.
 
 ```css
 .cr-indicator{

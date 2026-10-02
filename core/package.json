@@ -1,8 +1,15 @@
 {
   "name": "@crystal-ui/core",
   "version": "2.3.1",
-  "description": "Crystal design system: tokens, material primitives, headless core, icons and specifications.",
-  "keywords": [],
+  "description": "Crystal, Meridian's design system: design tokens, material stylesheets, a token resolver, a headless state core, motion recipes, icons and the specification.",
+  "keywords": [
+    "design-system",
+    "design-tokens",
+    "css",
+    "theming",
+    "motion",
+    "icons"
+  ],
   "type": "commonjs",
   "license": "SEE LICENSE IN licenses",
   "repository": {

@@ -1,9 +1,9 @@
 /* The token resolver, as a module.
  *
- * `resolve` is the whole reason this is importable: it turns a palette, a mode
- * and a set of preferences into the custom properties a surface renders from. A
+ * `resolve` is the reason this is importable. It turns a palette, a mode and a
+ * set of preferences into the custom properties a surface renders from. A
  * library that can only load the generated stylesheet gets one palette at
- * `:root`, which is not a design system with six.
+ * `:root`, and the design system has six.
  */
 export interface CrystalConfiguration {
   palette?: string;

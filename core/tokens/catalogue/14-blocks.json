@@ -1,7 +1,7 @@
 {
   "id": "blocks",
   "name": "Blocks",
-  "description": "Composed arrangements that solve a recognisable product problem: a dashboard shell, a checkout, a player, a storefront. Kept as their own tier rather than mixed into the components, because a component is a primitive with one job and a contract, while a block is opinionated by design — and a design system that cannot tell the two apart ships opinions as if they were primitives. Benchmarked against Tailwind UI, Mantine UI, Ant Design Pro, MUI Templates and PrimeBlocks.",
+  "description": "Composed arrangements that solve a recognisable product problem: a dashboard shell, a checkout, a player, a storefront. Kept as their own tier rather than mixed into the components, because a component is a primitive with one job and a contract, while a block is opinionated by design. Mixing the two would ship opinions as if they were primitives. Benchmarked against Tailwind UI, Mantine UI, Ant Design Pro, MUI Templates and PrimeBlocks.",
   "components": [
     {
       "id": "dashboard-shell",

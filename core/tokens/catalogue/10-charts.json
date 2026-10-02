@@ -1,7 +1,7 @@
 {
   "id": "charts",
   "name": "Charts",
-  "description": "Data visualisation on one shared surface. Crystal named no charting component before 2.0 while every React benchmark shipped one; these are specified against MUI X Charts, PrimeReact Chart and Mantine Charts. Every chart owes a text equivalent of its data — a chart is a second representation, never the only one.",
+  "description": "Data visualisation on one shared surface. Crystal named no charting component before 2.0 while every React benchmark shipped one. These are specified against MUI X Charts, PrimeReact Chart and Mantine Charts. Every chart owes a text equivalent of its data, so the chart is never the only representation.",
   "components": [
     {
       "id": "chart-surface",

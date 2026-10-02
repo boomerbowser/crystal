@@ -1,7 +1,8 @@
 /* Contract tests for the Crystal headless core.
  *
- * These encode decisions, not implementation details. If one fails, a rule the
- * design system promises has changed — check the specification before the code.
+ * These encode decisions rather than implementation details. If one fails, a
+ * rule the design system promises has changed: check the specification before
+ * the code.
  */
 const assert = require('node:assert/strict');
 const state = require('../core/assets/core/state.js');
@@ -198,13 +199,13 @@ check('the platform mapping round-trips the damping ratio', () => {
 /* Crystal draws its two scrollbars through two mechanisms, and exactly one of
    them may reach any given browser. Chromium 121 and later ignore every
    `::-webkit-scrollbar` pseudo-element on a container whose `scrollbar-width` or
-   `scrollbar-color` is not `auto` — which is every container Crystal styles. A
-   webkit rule written outside the `@supports not (scrollbar-color:auto)` guard
-   is therefore dead in the browser most people use and live in the one they do
-   not, which is one specification rendering two ways.
+   `scrollbar-color` is not `auto`, and that is every container Crystal styles.
+   A webkit rule written outside the `@supports not (scrollbar-color:auto)`
+   guard is therefore dead in the browser most people use and live in the ones
+   they do not, so one specification renders two ways.
 
-   This is a source check because it cannot be a runtime one: a branch that did
-   not apply leaves nothing in the computed style to look at. */
+   This is a source check because a branch that did not apply leaves nothing in
+   the computed style for a runtime check to look at. */
 check('every webkit scrollbar rule sits behind the legacy guard', () => {
   const source = require('node:fs').readFileSync(require('node:path').join(__dirname, '../core/assets/crystal.css'), 'utf8');
   /* Comments name the pseudo-element in order to explain it. Blanked rather than
@@ -227,11 +228,10 @@ check('every webkit scrollbar rule sits behind the legacy guard', () => {
 });
 
 /* Crystal's focus is a crisp core inside a feathered halo, and it has to reach
-   anything that can take focus — not only the native controls. A scroll area that
-   holds nothing focusable becomes a tab stop so its content is reachable by
-   keyboard, and before this it received the browser's default ring instead of
-   Crystal's, on the one component whose whole reason for being focusable is
-   accessibility. */
+   anything that can take focus, including elements that are not native
+   controls. A scroll area that holds nothing focusable becomes a tab stop so
+   its content is reachable by keyboard, and it must get Crystal's ring rather
+   than the browser's default. */
 check('the focus halo reaches anything focusable, not only native controls', () => {
   const css = require('node:fs').readFileSync(require('node:path').join(__dirname, '../core/assets/crystal.css'), 'utf8');
   for (const rule of css.match(/[^{}]*:focus-visible[^{}]*\{[^}]*\}/g) ?? []) {
@@ -249,17 +249,14 @@ check('the focus halo reaches anything focusable, not only native controls', () 
 
 /* The focus recipe, held to exactly what Meridian approved.
  *
- * D-11 recorded that this file "compares the exported halo against the rendered
- * one, layer by layer, blur and spread". It did not. That check went to
- * `crystal-preview/tests/site-contracts.cjs` with the site it photographs, and
- * the entry was never corrected — so for a day the tracker named a gate in this
- * repository that was not here. This is that gate, and it is written now
- * because the two divergences it would have had to stay silent about are
- * decided: the library carries the elevation layers and the dark-mode lift.
+ * D-11 records that this file "compares the exported halo against the rendered
+ * one, layer by layer, blur and spread". The comparison with the rendered page
+ * is in `crystal-preview/tests/site-contracts.cjs`, with the site it
+ * photographs; this is the library's gate.
  *
- * Geometry *and* alpha, all six layers, both modes. The earlier check compared
- * geometry only and the first four layers only, deliberately, so that running it
- * could not freeze an undecided divergence into a gate. That reason has expired.
+ * It checks geometry and alpha, all six layers, in both modes. That is safe
+ * because both divergences between the library and the preview are decided:
+ * the library carries the elevation layers and the dark-mode lift.
  */
 const FOCUS = {
   halo: [[6, 1], [16, 3], [30, 6], [54, 11]],
@@ -272,24 +269,23 @@ function focusBlocks() {
   const css = require('node:fs').readFileSync(
     require('node:path').join(__dirname, '../core/assets/crystal-theme.css'), 'utf8');
   /* The theme writes a light block and a dark one. Split on the ring so each
-     block's feathers are read beside the ring that references them, rather than
-     both resolving to the first definition in the file — which would have made
-     the dark-mode alphas untestable in exactly the way that let them diverge. */
+     block's feathers are read beside the ring that references them. Otherwise
+     both resolve to the first definition in the file and the dark-mode alphas
+     are never tested. */
   const blocks = [];
   const re = /--cr-focus-ring:\s*([^;]+);/g;
   let m;
   while ((m = re.exec(css))) {
     const before = css.slice(0, m.index);
     const start = before.lastIndexOf('{');
-    /* The selector — and any `@media` wrapping it, which lands in the same
-       slice — so the mode is read from what the block is *for* rather than
-       inferred from the alphas it contains. Inferring from the alphas made a
-       reverted dark value report itself as a wrong *light* block: a correct
-       failure with a misleading name, and a misleading name on a gate is how
-       the next person looks in the wrong file.
+    /* The selector, and any `@media` wrapping it (which lands in the same
+       slice), so the mode is read from what the block is for rather than
+       inferred from the alphas it contains. Inferred from the alphas, a
+       reverted dark value reports itself as a wrong light block, and the
+       failure sends the reader to the wrong file.
 
-       Comments are stripped first. Without that, the file's own header — which
-       says `Set data-crystal-mode="light" or "dark"` — falls inside the first
+       Comments are stripped first. Otherwise the file's own header, which
+       says `Set data-crystal-mode="light" or "dark"`, falls inside the first
        block's slice and classifies `:root` as dark. */
     const head = before
       .slice(before.lastIndexOf('}', start) + 1, start)
@@ -341,10 +337,10 @@ check('the feather alphas lift in dark mode and hold in light', () => {
 });
 
 /* A consumer that loads `crystal.css` and not the generated theme still gets a
-   focus ring, out of the `var(--cr-focus-ring, …)` fallback. It shipped the
-   withdrawn spreads 2/6/12/22 for as long as D-11 was open *and one day after it
-   was closed*, because the fix went into the resolver and nobody looked at the
-   stylesheet. Same geometry or it is a second recipe. */
+   focus ring, out of the `var(--cr-focus-ring, …)` fallback. The fallback must
+   have the same geometry as the exported theme, or it is a second recipe. It
+   kept the withdrawn spreads 2/6/12/22 after D-11 closed, because the fix went
+   into the resolver and not the stylesheet. */
 check('the stylesheet fallback is the same recipe as the exported theme', () => {
   const css = require('node:fs').readFileSync(
     require('node:path').join(__dirname, '../core/assets/crystal.css'), 'utf8');
@@ -363,12 +359,11 @@ check('the stylesheet fallback is the same recipe as the exported theme', () => 
 /* ------------------------------------------------- tokens vs stylesheet */
 
 /* `crystal.css` is hand-authored; `crystal.tokens.json` is the source of truth.
-   Nothing compared them, and for as long as nothing did, the stylesheet said a
-   button is padded `10px 19px` while the tokens, the reference table, the
-   preview site and crystal-react all said `15px 24px`. The binding is not
-   systematic — a hand-authored sheet has no generated link to the token file —
-   so the pairs are listed by hand, and a listed pair that cannot be found in
-   the stylesheet fails rather than passing quietly. */
+   Unchecked, the stylesheet padded a button `10px 19px` while the tokens, the
+   reference table, the preview site and crystal-react all said `15px 24px`. A
+   hand-authored sheet has no generated link to the token file, so the pairs
+   are listed by hand, and a listed pair that cannot be found in the stylesheet
+   fails. */
 const TOKEN_BOUND = [
   { token: 'component.action.paddingBlock', rule: '.cr-button', prop: 'padding', part: 0 },
   { token: 'component.action.paddingInline', rule: '.cr-button', prop: 'padding', part: 1 },
@@ -377,24 +372,24 @@ const TOKEN_BOUND = [
   { token: 'component.action.gap', rule: '.cr-button', prop: 'gap' },
 ];
 
-/* Selectors that may legitimately carry a different value from the plain
-   control: a variant is a different thing, not a contradiction. */
+/* Selectors that may carry a different value from the plain control, because a
+   variant is allowed to differ. */
 const VARIANT_MAY_DIFFER = [
   /\.cr-button\s*\.|\.cr-button\./,   /* .cr-button.danger and friends */
   /\.cr-dock/,                        /* the dock's own compact controls */
   /aria-(pressed|selected|current)/,  /* selection weight, not geometry */
-  /* The 2.2.0 recipes that a <button> may wear instead of the action geometry:
-     a bare control, a navigation entry and a drag handle are decided to differ
-     from the action (44px floor, no pad, their own padding) — see surfaces.json. */
+  /* The 2.2.0 recipes that a <button> may wear instead of the action geometry.
+     A bare control, a navigation entry and a drag handle are decided to differ
+     from the action (44px floor, no pad, their own padding); see surfaces.json. */
   /\.cr-bare\b/, /\.cr-nav-item\b/, /\.cr-drag-handle\b/,
   /* A button inside a group (2.3.0, D-26): its interior corners square off
-     against its neighbours and only the group's ends are round — the `group`
-     surface, decided to differ from a lone action's pill. */
+     against its neighbours and only the group's ends are round. That is the
+     `group` surface, decided to differ from a lone action's pill. */
   /\.cr-group\b/,
 ];
 
 /* Every rule that sets `prop` and could reach a `<button class="cr-button">`.
-   Declaration order and layer are not resolved here — the assertion is the
+   Declaration order and layer are not resolved here. The assertion is the
    stricter "they all agree", which needs neither. */
 function rulesReaching(css, prop) {
   const out = [];
@@ -403,8 +398,8 @@ function rulesReaching(css, prop) {
   while ((match = rule.exec(css)) !== null) {
     const selector = match[1].trim().replace(/\s+/g, ' ');
     /* A pseudo-element is a different box. `::before` on a control is the Haze
-       reading pad, and `border-radius: inherit` there is not a contradiction of
-       the control's radius — it is how the pad follows it. */
+       reading pad, and `border-radius: inherit` there is how the pad follows
+       the control's radius. */
     if (/::(before|after|placeholder|selection|marker|backdrop)/.test(selector)) continue;
     const reaches = /cr-button/.test(selector) || /(?<![\w.#-])button(?![\w-])/.test(selector);
     if (!reaches) continue;
@@ -444,18 +439,17 @@ check('the stylesheet honours the token values it is bound to', () => {
     /* And nothing later takes it back.
      *
      * The check above reads the first `.cr-button` rule, which is in
-     * `crystal.reset` — and for two years it was green while the value it read
-     * never rendered. `:is(button,a.cr-button)` in `crystal.component` set a
-     * different `min-height`, and a later layer wins regardless of specificity,
-     * so the bound declaration was dead and the token disagreed with every
-     * button Crystal drew (D-20).
+     * `crystal.reset`. A later layer wins regardless of specificity, so a rule
+     * in `crystal.component` can leave that declaration dead: when
+     * `:is(button,a.cr-button)` there set a different `min-height`, the token
+     * disagreed with every button Crystal drew (D-20).
      *
-     * So the pair is only honoured if every *other* rule that could apply to
-     * the same element agrees. "Could apply" is approximated by hand, because a
+     * So the pair is only honoured if every other rule that could apply to the
+     * same element agrees. "Could apply" is approximated by hand, because a
      * text scan cannot resolve selectors: a rule naming `cr-button`, or one
      * selecting the bare `button` element, can reach a `<button class="cr-button">`.
-     * A variant that genuinely differs belongs in `VARIANT_MAY_DIFFER` with a
-     * reason, so that it is a decision rather than an omission. */
+     * A variant that really differs belongs in `VARIANT_MAY_DIFFER` with a
+     * reason, so that the difference is recorded as a decision. */
     for (const other of rulesReaching(css, bound.prop)) {
       if (other.selector === bound.rule) continue;
       if (VARIANT_MAY_DIFFER.some((re) => re.test(other.selector))) continue;
@@ -471,22 +465,20 @@ check('the stylesheet honours the token values it is bound to', () => {
 
 /* The button vocabulary: what is tinted, what is not, and what no longer exists.
  *
- * Three separate failures live here, and each has happened.
- *
- * The tint is *opt-in*. It used to be `:not(.secondary):not(.quiet):not(.danger)`
- * — a rule that had to enumerate every variant it was not meant to paint, and was
- * one forgotten modifier away from tinting the whole surface. Seventy-two
- * secondary buttons on the preview alone depended on that list being complete.
+ * The tint is opt-in. A rule of the form `:not(.secondary):not(.quiet):not(.danger)`
+ * has to enumerate every variant it must not paint, and one forgotten modifier
+ * tints the whole surface. Seventy-two secondary buttons on the preview alone
+ * depended on that list being complete.
  *
  * `.secondary` is withdrawn. It named a second action colour and Crystal has no
  * such role: the palettes publish one action pair, and the companion and glow
  * hues are expressive paint that `docs/colors.md` says is never assumed to be
- * text-safe. A class that survives its own deletion in one file and not another
- * is how a withdrawn variant comes back.
+ * text-safe. A withdrawn variant comes back when its class is deleted from one
+ * file and survives in another.
  *
- * And a quiet button has no reading fill at all — a suppressed pseudo-element,
- * invisible in a diff of the rules that create it, because the base control rule
- * paints a `::before` on every button and one line stops it.
+ * A quiet button has no reading fill at all. The base control rule paints a
+ * `::before` on every button and one line suppresses it, which does not show in
+ * a diff of the rules that create the fill.
  */
 check('the button vocabulary is primary, quiet, danger — and not secondary', () => {
   const fs = require('node:fs');
@@ -516,8 +508,8 @@ check('the button vocabulary is primary, quiet, danger — and not secondary', (
   assert.equal(ink.length, 1,
     `expected exactly one rule giving the primary button the tested ink for that fill, found ${ink.length}`);
 
-  /* Opt-in. A tint that applies to anything *other* than `.primary` is the
-     enumerate-the-exceptions shape coming back. */
+  /* Opt-in. A tint that applies to anything other than `.primary` brings back
+     the rule that enumerates its exceptions. */
   for (const { selector, body } of rules) {
     if (!/background\s*:\s*var\(--cr-primary\)/.test(body)) continue;
     assert.ok(/\.cr-button\.primary\b/.test(selector),
@@ -528,9 +520,8 @@ check('the button vocabulary is primary, quiet, danger — and not secondary', (
     && /display\s*:\s*none/.test(body));
   assert.ok(quiet, 'a quiet button still paints the Haze reading fill every control gets');
 
-  /* And the accident all of this replaced: nothing may put the solid primary
-     back on the element, where it shows only as the ring of background left
-     exposed around the inset fill. */
+  /* Nothing may put the solid primary back on the element itself, where it
+     shows only as a ring of background exposed around the inset fill. */
   const ring = rules.find(({ selector, body }) => /^\.cr-button(\.[a-z-]+)?$/.test(selector)
     && /background\s*:\s*var\(--cr-primary\)/.test(body));
   assert.ok(!ring, `${ring?.selector} paints the element in the solid primary again`);
@@ -540,9 +531,9 @@ check('the button vocabulary is primary, quiet, danger — and not secondary', (
 /* --------------------------------------------------- the chart series scale */
 
 /* Six categorical colours per palette per mode, derived in `build-tokens.cjs`.
-   The derivation is a means; these are the ends, and they are what a chart is
-   allowed to rely on. A palette added later, or a lightness moved to make a
-   scale prettier, meets these before it ships. */
+   These checks hold the properties a chart is allowed to rely on, whatever the
+   derivation does. A palette added later, or a lightness moved to make a scale
+   prettier, must pass them before it ships. */
 
 const charts = (() => {
   const tokens = require('../core/tokens/crystal.json');
@@ -556,9 +547,8 @@ const charts = (() => {
     const [lo, hi] = [luminance(a), luminance(b)].sort((x, y) => x - y);
     return (hi + 0.05) / (lo + 0.05);
   };
-  /* OKLab distance, which is the only reason to convert at all: two colours a
-     reader can tell apart are two colours a perceptual space puts a distance
-     between, and sRGB does not. */
+  /* Converted to OKLab for distance. A perceptual space puts a distance between
+     two colours a reader can tell apart, and sRGB does not. */
   const oklab = (hex) => {
     const [r, g, b] = channels(hex).map(linear);
     const m = [
@@ -612,9 +602,9 @@ check('every series colour clears 3:1 against both grounds of its mode', () => {
   }
 });
 
-/* Clearing the ground is not enough: stacked bars, pie segments and adjacent
-   heatmap cells are next to *each other*, and a scale whose members are only
-   distinguishable from the background is a scale with one colour in it. */
+/* Stacked bars, pie segments and adjacent heatmap cells sit next to each other,
+   so the series colours must be distinguishable from one another as well as
+   from the ground. */
 check('no two series colours in a scale are closer than a visible step', () => {
   const least = 0.10;
   for (const { id, mode, series } of charts.every) {
@@ -628,19 +618,18 @@ check('no two series colours in a scale are closer than a visible step', () => {
   }
 });
 
-/* A series colour is for data marks, and it is not the action colour. That is
-   what `component.chart.seriesHueOffset` is for: the ring of hues is centred on
-   the palette rather than started from it, precisely so that no slot lands on
-   the seed hue at the lightness these are drawn at, which is where the primary
-   already is. The closest any of the seventy-two comes to its palette's primary
-   today is 0.050.
+/* A series colour is for data marks, and it is never the action colour.
+   `component.chart.seriesHueOffset` centres the ring of hues on the palette
+   rather than starting it there, so that no slot lands on the seed hue at the
+   lightness these are drawn at, which is where the primary already is. The
+   closest any of the seventy-two comes to its palette's primary today is 0.050.
 
-   The threshold here is deliberately far below that. This check is not policing
-   how near a series may come to the action colour — the offset decides that, and
-   a palette added later may legitimately come nearer. It is here to catch the
-   collapse: somebody "simplifying" the first slot to `var(--cr-primary)`, after
-   which a chart's first series is the colour of every button on the page it sits
-   in and nothing else in this file would notice. */
+   The threshold here is deliberately far below that. The offset decides how
+   near a series may come to the action colour, and a palette added later may
+   come nearer. This check catches the collapse: somebody "simplifying" the
+   first slot to `var(--cr-primary)`, which makes a chart's first series the
+   colour of every button on its page, and which nothing else in this file
+   would notice. */
 check('no series colour is the action colour', () => {
   for (const { id, mode, roles, series } of charts.every) {
     series.forEach((hex, i) => {
@@ -650,13 +639,12 @@ check('no series colour is the action colour', () => {
   }
 });
 
-/* What this proves and what it does not: both sides read the same flat token
-   file, so it cannot tell you the order is right — it tells you the scale is
-   *published*, under the name a stylesheet indexes with
-   `var(--cr-chart-series-#{$i})`, and that it stops where the token says. Drop
-   the digit rule from `camelToKebab` and every one of these becomes
-   `--cr-chart-series1`, which resolves to nothing in every chart in every
-   consumer and throws nothing anywhere. */
+/* Both sides read the same flat token file, so this cannot show that the order
+   is right. It shows that the scale is published, under the name a stylesheet
+   indexes with `var(--cr-chart-series-#{$i})`, and that it stops where the
+   token says. Without the digit rule in `camelToKebab`, every one of these
+   becomes `--cr-chart-series1`, which resolves to nothing in every chart in
+   every consumer and throws no error. */
 check('the series scale is published as --cr-chart-series-N, and ends', () => {
   const crystal = require('../core/assets/crystal.js');
   for (const { id, mode, series } of charts.every) {
@@ -673,10 +661,10 @@ check('the series scale is published as --cr-chart-series-N, and ends', () => {
 
 /* ------------------------------------------------------ the intensity ramp */
 
-/* A heatmap cell and a calendar day are *grounds*, not marks: the value is
-   written on them. So the floor that applies is the text one, and it applies to
-   every step — a ramp whose middle bucket is unreadable is a ramp that hides
-   exactly the values a reader is trying to compare. */
+/* A heatmap cell and a calendar day are grounds rather than marks: the value
+   is written on them. So the text floor applies, and it applies to every step.
+   A ramp with an unreadable middle bucket hides the values a reader is trying
+   to compare. */
 
 check('every intensity step ships an ink that clears 4.5:1 on it', () => {
   const steps = charts.tokens.component.chart.intensitySteps;
@@ -693,9 +681,8 @@ check('every intensity step ships an ink that clears 4.5:1 on it', () => {
   }
 });
 
-/* And the ramp has to read as a ramp. Consecutive steps a reader cannot tell
-   apart make the scale shorter than it claims to be, which is worse than a
-   shorter scale honestly declared. */
+/* Consecutive steps must be distinguishable. Steps a reader cannot tell apart
+   make the scale shorter than it claims to be. */
 check('consecutive intensity steps are distinguishable', () => {
   const steps = charts.tokens.component.chart.intensitySteps;
   for (const { id, mode, roles } of charts.every) {
@@ -724,11 +711,11 @@ check('the intensity ramp moves one way', () => {
 
 /* ----------------------------------------------------- surfaces and recipes */
 
-/* A component is specified in a surface, a surface is implemented by a recipe,
-   and the two are held together here: a surface named in the vocabulary with no
-   rule in the stylesheet is a specification only one renderer can read (D-9,
-   R-15, D-11 — the same defect three times), and a catalogue entry naming a
-   surface outside the vocabulary is a material Crystal never defined. */
+/* A component is specified in a surface, and a surface is implemented by a
+   recipe. These checks hold the two together. A surface named in the vocabulary
+   with no rule in the stylesheet can be read by only one renderer (D-9, R-15
+   and D-11 were each this defect), and a catalogue entry naming a surface
+   outside the vocabulary names a material Crystal never defined. */
 const surfaces = require('../core/tokens/surfaces.json').surfaces;
 const catalogue = require('node:fs').readdirSync(require('node:path').join(__dirname, '../core/tokens/catalogue'))
   .filter((f) => f.endsWith('.json')).sort()
@@ -767,9 +754,9 @@ check('every motion id the catalogue claims is a recipe or a material preset', (
   }
 });
 
-/* A rule authored in `crystal.reset` that the component layer also reaches is a
-   rule that may never render — D-20 and D-21 were both that. The recipes added
-   for the catalogue live in the component layer only. */
+/* A rule authored in `crystal.reset` that the component layer also reaches may
+   never render (D-20 and D-21). The recipes added for the catalogue live in the
+   component layer only. */
 check('the catalogue recipes are authored in the component layer, never the reset layer', () => {
   const reset = stylesheetCode.slice(0, stylesheetCode.indexOf('@layer crystal.component {'));
   for (const selector of ['.cr-bare', '.cr-nav-item', '.cr-drag-handle', '[role=switch]', '.panel']) {
@@ -786,7 +773,8 @@ const block = (selector) => {
 
 /* Crystal paints the Resin coat by element, in five layers. Measured across 488
    Crystal React stories, eighteen controls that had declared themselves
-   transparent were transparent in exactly one of the five. Bare means all five. */
+   transparent were transparent in exactly one of the five. A bare control
+   removes all five. */
 check('a bare control takes off every layer of the coat and keeps the target', () => {
   const bare = block(':is(button, a, [role=button], .cr-bare).cr-bare');
   /* The coat is (0,1,1) and lives in the same layer; a lone class never wins. */
@@ -801,8 +789,8 @@ check('a bare control takes off every layer of the coat and keeps the target', (
   assert.match(pseudo.slice(0, pseudo.indexOf('}')), /content:\s*none/);
 });
 
-/* The reference implementation of selection, now exported. Weight, and nothing
-   drawn beside the label. */
+/* The reference implementation of selection, exported: label weight, with
+   nothing drawn beside the label. */
 check('a navigation entry is selected by label weight and never by a mark', () => {
   const current = block('.cr-nav-item:is([aria-current]:not([aria-current=false]),[aria-selected=true],[aria-pressed=true])');
   assert.match(current, /font-weight:\s*800/);
@@ -813,11 +801,11 @@ check('a navigation entry is selected by label weight and never by a mark', () =
   assert.match(rest, /backdrop-filter:\s*none/);
 });
 
-/* D-22: current location is a dot, selection is weight, and they are two
-   indicators. The dot is keyed on aria-current alone — a selected or pressed
-   entry is selection and must not gain it — it is flat (no shadow, no blur, no
-   material), and it sits inside the entry's own inline-start padding so the
-   label never moves. */
+/* D-22: current location is a dot and selection is weight; they are two
+   indicators. The dot is keyed on aria-current alone, because a selected or
+   pressed entry is selection and must not gain it. It is flat (no shadow, no
+   blur, no material), and it sits inside the entry's own inline-start padding
+   so the label never moves. */
 check('a navigation entry marks its current location with a flat dot inside its padding', () => {
   const selector = '.cr-nav-item:is([aria-current]:not([aria-current=false]))::before';
   const dot = block(selector);
@@ -849,10 +837,10 @@ check('the switch and the choice box read their published tokens', () => {
   assert.match(theme, new RegExp(`--cr-choice-box-size:\\s*${tokens.choice.boxSize.$value}`));
 });
 
-/* The rulings of 29 September 2026 (proposals/2026-09-29-rulings.md), each as
-   the one thing a later edit could quietly undo. What they look like is checked
-   in a browser by proposals/2026-09-29-rulings/examples/verify.mjs; these hold
-   the text of the decision. */
+/* The rulings of 29 September 2026 (proposals/2026-09-29-rulings.md), each
+   checked at the point a later edit could undo it without notice. How they look
+   is checked in a browser by proposals/2026-09-29-rulings/examples/verify.mjs;
+   these hold the text of the decision. */
 check('the rulings of 29 September 2026 hold in the stylesheet', () => {
   const fs = require('node:fs');
   const path = require('node:path');

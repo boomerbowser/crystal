@@ -1,7 +1,7 @@
 {
   "id": "screens",
   "name": "Screens",
-  "description": "Whole views and the chrome around them, for interactive applications rather than documents. A screen owns landmarks, focus movement between views, and the states a view can be in before it has content — loading, empty, error, offline, not found, unauthorised — which products otherwise improvise separately and inconsistently.",
+  "description": "Whole views and the chrome around them, for interactive applications rather than documents. A screen owns landmarks, focus movement between views, and the states a view can be in before it has content (loading, empty, error, offline, not found, unauthorised), which products otherwise improvise separately and inconsistently.",
   "components": [
     {
       "id": "screen",

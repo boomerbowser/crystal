@@ -1,7 +1,7 @@
 {
   "id": "media",
   "name": "Media",
-  "description": "Video, audio and galleries. Crystal named none of these before, and they are the clearest case of the parity requirement being about capability rather than nomenclature: a design system without a transport control leaves every product to invent one, and each invention re-solves captions, scrubbing and keyboard transport differently.",
+  "description": "Video, audio and galleries. Crystal named none of these before. The parity requirement here is about capability: a design system without a transport control leaves every product to invent one, and each invention re-solves captions, scrubbing and keyboard transport differently.",
   "components": [
     {
       "id": "video-player",

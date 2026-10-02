@@ -188,7 +188,7 @@
         "none"
       ],
       "geometry": "Step per level; leading tightens as size grows.",
-      "semantics": "The level is the document structure, never chosen for size — size comes from the step.",
+      "semantics": "The level is the document structure, never chosen for size. Size comes from the step.",
       "crystal": "The scale and its tracking",
       "product": "Level and wording",
       "parity": [

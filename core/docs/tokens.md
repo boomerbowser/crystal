@@ -1,28 +1,28 @@
 # Tokens
 
-Every value Crystal ships, generated from `core/tokens/crystal.tokens.json` — the W3C
+Every value Crystal ships, generated from `core/tokens/crystal.tokens.json`, the W3C
 Design Tokens (DTCG) source of truth. This page is written by
-`tools/build-reference.cjs`; editing it by hand is pointless, because the next build
-overwrites it. Edit the token file and run `npm run build`.
+`tools/build-reference.cjs`, and the next build overwrites any edit made here by hand.
+Edit the token file and run `npm run build`.
 
 ## How the three tiers work
 
-Crystal resolves a value through three tiers, and the direction is strictly one way:
+Crystal resolves a value through three tiers, and the direction is one way only:
 a component reads a semantic token, a semantic token reads a primitive, and nothing
-reads upward. That is what makes a palette swap a change to one tier rather than a
-search across the codebase.
+reads upward. A palette swap is therefore a change to one tier, with no search
+across the codebase.
 
 ```
 component.action.radius  →  semantic.shape.pill  →  primitive.distance.full
 ```
 
-**A component that reads a primitive directly is a bug.** It works, and it silently
-opts that component out of every theme, mode and palette change made at the semantic
-tier. `tools/validate-tokens.cjs` checks the direction of every reference.
+**A component that reads a primitive directly is a bug.** It works, and it opts that
+component out of every theme, mode and palette change made at the semantic tier.
+`tools/validate-tokens.cjs` checks the direction of every reference.
 
 ## Primitive tokens
 
-Raw values. Never referenced by a component directly — a primitive is the thing a semantic token points at, so that the meaning can be re-pointed without editing every use site.
+Raw values. A component never references a primitive directly: a primitive is what a semantic token points at, so the meaning can be re-pointed without editing every use site.
 
 213 tokens.
 
@@ -30,9 +30,9 @@ Raw values. Never referenced by a component directly — a primitive is the thin
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
-| `primitive.palette.prism.seed` | color | `#7338EF` | — |
-| `primitive.palette.prism.companion` | color | `#EF48C6` | — |
-| `primitive.palette.prism.glow` | color | `#52BDF3` | — |
+| `primitive.palette.prism.seed` | color | `#7338EF` | None |
+| `primitive.palette.prism.companion` | color | `#EF48C6` | None |
+| `primitive.palette.prism.glow` | color | `#52BDF3` | None |
 | `primitive.palette.prism.light.canvas` | color | `#f9f6fe` | Foundation behind every surface |
 | `primitive.palette.prism.light.surface` | color | `#ffffff` | Opaque reading surface |
 | `primitive.palette.prism.light.surfaceAlt` | color | `#f2edfe` | Secondary reading surface |
@@ -59,9 +59,9 @@ Raw values. Never referenced by a component directly — a primitive is the thin
 | `primitive.palette.prism.dark.decorative` | color | `#7e48f0` | Atmosphere and decorative light |
 | `primitive.palette.prism.dark.companion` | color | `#EF48C6` | Paired atmosphere colour |
 | `primitive.palette.prism.dark.glow` | color | `#52BDF3` | Highlight light |
-| `primitive.palette.fuchsia.seed` | color | `#C01993` | — |
-| `primitive.palette.fuchsia.companion` | color | `#7C4DFF` | — |
-| `primitive.palette.fuchsia.glow` | color | `#FF96DA` | — |
+| `primitive.palette.fuchsia.seed` | color | `#C01993` | None |
+| `primitive.palette.fuchsia.companion` | color | `#7C4DFF` | None |
+| `primitive.palette.fuchsia.glow` | color | `#FF96DA` | None |
 | `primitive.palette.fuchsia.light.canvas` | color | `#fcf5fa` | Foundation behind every surface |
 | `primitive.palette.fuchsia.light.surface` | color | `#ffffff` | Opaque reading surface |
 | `primitive.palette.fuchsia.light.surfaceAlt` | color | `#f9eaf5` | Secondary reading surface |
@@ -88,9 +88,9 @@ Raw values. Never referenced by a component directly — a primitive is the thin
 | `primitive.palette.fuchsia.dark.decorative` | color | `#c52b9c` | Atmosphere and decorative light |
 | `primitive.palette.fuchsia.dark.companion` | color | `#7C4DFF` | Paired atmosphere colour |
 | `primitive.palette.fuchsia.dark.glow` | color | `#FF96DA` | Highlight light |
-| `primitive.palette.cobalt.seed` | color | `#2758E8` | — |
-| `primitive.palette.cobalt.companion` | color | `#6D47F2` | — |
-| `primitive.palette.cobalt.glow` | color | `#48C6F0` | — |
+| `primitive.palette.cobalt.seed` | color | `#2758E8` | None |
+| `primitive.palette.cobalt.companion` | color | `#6D47F2` | None |
+| `primitive.palette.cobalt.glow` | color | `#48C6F0` | None |
 | `primitive.palette.cobalt.light.canvas` | color | `#f5f7fe` | Foundation behind every surface |
 | `primitive.palette.cobalt.light.surface` | color | `#ffffff` | Opaque reading surface |
 | `primitive.palette.cobalt.light.surfaceAlt` | color | `#ecf0fd` | Secondary reading surface |
@@ -117,9 +117,9 @@ Raw values. Never referenced by a component directly — a primitive is the thin
 | `primitive.palette.cobalt.dark.decorative` | color | `#3865ea` | Atmosphere and decorative light |
 | `primitive.palette.cobalt.dark.companion` | color | `#6D47F2` | Paired atmosphere colour |
 | `primitive.palette.cobalt.dark.glow` | color | `#48C6F0` | Highlight light |
-| `primitive.palette.ion.seed` | color | `#007E97` | — |
-| `primitive.palette.ion.companion` | color | `#3D45E5` | — |
-| `primitive.palette.ion.glow` | color | `#36DCD1` | — |
+| `primitive.palette.ion.seed` | color | `#007E97` | None |
+| `primitive.palette.ion.companion` | color | `#3D45E5` | None |
+| `primitive.palette.ion.glow` | color | `#36DCD1` | None |
 | `primitive.palette.ion.light.canvas` | color | `#f4f9fa` | Foundation behind every surface |
 | `primitive.palette.ion.light.surface` | color | `#ffffff` | Opaque reading surface |
 | `primitive.palette.ion.light.surfaceAlt` | color | `#e8f3f6` | Secondary reading surface |
@@ -146,9 +146,9 @@ Raw values. Never referenced by a component directly — a primitive is the thin
 | `primitive.palette.ion.dark.decorative` | color | `#14889f` | Atmosphere and decorative light |
 | `primitive.palette.ion.dark.companion` | color | `#3D45E5` | Paired atmosphere colour |
 | `primitive.palette.ion.dark.glow` | color | `#36DCD1` | Highlight light |
-| `primitive.palette.amethyst.seed` | color | `#8430C6` | — |
-| `primitive.palette.amethyst.companion` | color | `#CE49B2` | — |
-| `primitive.palette.amethyst.glow` | color | `#9198FF` | — |
+| `primitive.palette.amethyst.seed` | color | `#8430C6` | None |
+| `primitive.palette.amethyst.companion` | color | `#CE49B2` | None |
+| `primitive.palette.amethyst.glow` | color | `#9198FF` | None |
 | `primitive.palette.amethyst.light.canvas` | color | `#f9f6fc` | Foundation behind every surface |
 | `primitive.palette.amethyst.light.surface` | color | `#ffffff` | Opaque reading surface |
 | `primitive.palette.amethyst.light.surfaceAlt` | color | `#f4ecfa` | Secondary reading surface |
@@ -175,9 +175,9 @@ Raw values. Never referenced by a component directly — a primitive is the thin
 | `primitive.palette.amethyst.dark.decorative` | color | `#8e41cb` | Atmosphere and decorative light |
 | `primitive.palette.amethyst.dark.companion` | color | `#CE49B2` | Paired atmosphere colour |
 | `primitive.palette.amethyst.dark.glow` | color | `#9198FF` | Highlight light |
-| `primitive.palette.harbor.seed` | color | `#4669B2` | — |
-| `primitive.palette.harbor.companion` | color | `#8970B5` | — |
-| `primitive.palette.harbor.glow` | color | `#72C4DF` | — |
+| `primitive.palette.harbor.seed` | color | `#4669B2` | None |
+| `primitive.palette.harbor.companion` | color | `#8970B5` | None |
+| `primitive.palette.harbor.glow` | color | `#72C4DF` | None |
 | `primitive.palette.harbor.light.canvas` | color | `#faf8fe` | Foundation behind every surface |
 | `primitive.palette.harbor.light.surface` | color | `#ffffff` | Opaque reading surface |
 | `primitive.palette.harbor.light.surfaceAlt` | color | `#e7e7f1` | Secondary reading surface |
@@ -204,69 +204,69 @@ Raw values. Never referenced by a component directly — a primitive is the thin
 | `primitive.palette.harbor.dark.decorative` | color | `#4669B2` | Atmosphere and decorative light |
 | `primitive.palette.harbor.dark.companion` | color | `#8970B5` | Paired atmosphere colour |
 | `primitive.palette.harbor.dark.glow` | color | `#72C4DF` | Highlight light |
-| `primitive.palette.harbor.dark.contentOwnSurface` | color | `#283c60` | — |
+| `primitive.palette.harbor.dark.contentOwnSurface` | color | `#283c60` | None |
 
 ### Primitive · material
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
-| `primitive.material.acrylicBlur` | dimension | `40px` | — |
-| `primitive.material.acrylicSaturation` | number | `125` | — |
-| `primitive.material.glassBlur` | dimension | `20px` | — |
-| `primitive.material.glassSaturation` | number | `165` | — |
-| `primitive.material.glassOpacity` | number | `0.2` | — |
-| `primitive.material.grainOpacity` | number | `0.045` | — |
-| `primitive.material.labelVeil` | number | `0.55` | — |
-| `primitive.material.labelVeilDark` | number | `0.6` | — |
-| `primitive.material.contentOpacity` | number | `0.8` | — |
-| `primitive.material.contentFeather` | dimension | `1.95px` | — |
-| `primitive.material.stoneFeather` | dimension | `1.95px` | — |
-| `primitive.material.mirageColor` | color | `#111525` | — |
-| `primitive.material.mirageOpacity` | number | `0.38` | — |
-| `primitive.material.mirageBlur` | dimension | `28px` | — |
-| `primitive.material.mirageSaturation` | number | `165` | — |
-| `primitive.material.mirageBrightness` | number | `88` | — |
-| `primitive.material.mirageFallbackOpacity` | number | `0.64` | — |
-| `primitive.material.plasticInactive.light` | color | `#f1f1f3` | — |
-| `primitive.material.plasticInactive.dark` | color | `#202126` | — |
+| `primitive.material.acrylicBlur` | dimension | `40px` | None |
+| `primitive.material.acrylicSaturation` | number | `125` | None |
+| `primitive.material.glassBlur` | dimension | `20px` | None |
+| `primitive.material.glassSaturation` | number | `165` | None |
+| `primitive.material.glassOpacity` | number | `0.2` | None |
+| `primitive.material.grainOpacity` | number | `0.045` | None |
+| `primitive.material.labelVeil` | number | `0.55` | None |
+| `primitive.material.labelVeilDark` | number | `0.6` | None |
+| `primitive.material.contentOpacity` | number | `0.8` | None |
+| `primitive.material.contentFeather` | dimension | `1.95px` | None |
+| `primitive.material.stoneFeather` | dimension | `1.95px` | None |
+| `primitive.material.mirageColor` | color | `#111525` | None |
+| `primitive.material.mirageOpacity` | number | `0.38` | None |
+| `primitive.material.mirageBlur` | dimension | `28px` | None |
+| `primitive.material.mirageSaturation` | number | `165` | None |
+| `primitive.material.mirageBrightness` | number | `88` | None |
+| `primitive.material.mirageFallbackOpacity` | number | `0.64` | None |
+| `primitive.material.plasticInactive.light` | color | `#f1f1f3` | None |
+| `primitive.material.plasticInactive.dark` | color | `#202126` | None |
 
 ### Primitive · duration
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
-| `primitive.duration.press` | duration | `120ms` | — |
-| `primitive.duration.state` | duration | `213.33ms` | — |
-| `primitive.duration.spatial` | duration | `293.33ms` | — |
-| `primitive.duration.exit` | duration | `160ms` | — |
-| `primitive.duration.material` | duration | `1000ms` | — |
-| `primitive.duration.liquid` | duration | `1400ms` | — |
-| `primitive.duration.flow` | duration | `1200ms` | — |
-| `primitive.duration.departure` | duration | `650ms` | — |
-| `primitive.duration.maxDuration` | duration | `5000ms` | — |
+| `primitive.duration.press` | duration | `120ms` | None |
+| `primitive.duration.state` | duration | `213.33ms` | None |
+| `primitive.duration.spatial` | duration | `293.33ms` | None |
+| `primitive.duration.exit` | duration | `160ms` | None |
+| `primitive.duration.material` | duration | `1000ms` | None |
+| `primitive.duration.liquid` | duration | `1400ms` | None |
+| `primitive.duration.flow` | duration | `1200ms` | None |
+| `primitive.duration.departure` | duration | `650ms` | None |
+| `primitive.duration.maxDuration` | duration | `5000ms` | None |
 
 ### Primitive · distance
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
-| `primitive.distance.panel` | dimension | `24px` | — |
-| `primitive.distance.floating` | dimension | `30px` | — |
-| `primitive.distance.content` | dimension | `0px` | — |
-| `primitive.distance.exit` | dimension | `20px` | — |
-| `primitive.distance.depth` | dimension | `50px` | — |
-| `primitive.distance.feather` | dimension | `6px` | — |
-| `primitive.distance.maxTravel` | dimension | `50px` | — |
+| `primitive.distance.panel` | dimension | `24px` | None |
+| `primitive.distance.floating` | dimension | `30px` | None |
+| `primitive.distance.content` | dimension | `0px` | None |
+| `primitive.distance.exit` | dimension | `20px` | None |
+| `primitive.distance.depth` | dimension | `50px` | None |
+| `primitive.distance.feather` | dimension | `6px` | None |
+| `primitive.distance.maxTravel` | dimension | `50px` | None |
 
 ### Primitive · easing
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
-| `primitive.easing.enter` | cubicBezier | `cubic-bezier(0.22, 0.65, 0.22, 1)` | — |
-| `primitive.easing.settle` | cubicBezier | `cubic-bezier(0.2, 0, 0.2, 1)` | — |
-| `primitive.easing.exit` | cubicBezier | `cubic-bezier(0.4, 0, 0.6, 1)` | — |
+| `primitive.easing.enter` | cubicBezier | `cubic-bezier(0.22, 0.65, 0.22, 1)` | None |
+| `primitive.easing.settle` | cubicBezier | `cubic-bezier(0.2, 0, 0.2, 1)` | None |
+| `primitive.easing.exit` | cubicBezier | `cubic-bezier(0.4, 0, 0.6, 1)` | None |
 
 ## Semantic tokens
 
-What a value *means*: the surface a card sits on, the duration a control settles over. Components consume this tier and nothing below it.
+What a value means: the surface a card sits on, the duration a control settles over. Components consume this tier and nothing below it.
 
 114 tokens.
 
@@ -298,70 +298,70 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
-| `semantic.feedback.light.success.ink` | color | `#175D38` | — |
-| `semantic.feedback.light.success.surface` | color | `#E5F4EA` | — |
+| `semantic.feedback.light.success.ink` | color | `#175D38` | None |
+| `semantic.feedback.light.success.surface` | color | `#E5F4EA` | None |
 | `semantic.feedback.light.success.symbol` | string | `✓` | Carries meaning without colour. A check mark means validated or informational, never selected. |
-| `semantic.feedback.light.success.label` | string | `Ready` | — |
-| `semantic.feedback.light.attention.ink` | color | `#714B00` | — |
-| `semantic.feedback.light.attention.surface` | color | `#FFF0CD` | — |
+| `semantic.feedback.light.success.label` | string | `Ready` | None |
+| `semantic.feedback.light.attention.ink` | color | `#714B00` | None |
+| `semantic.feedback.light.attention.surface` | color | `#FFF0CD` | None |
 | `semantic.feedback.light.attention.symbol` | string | `△` | Carries meaning without colour. A check mark means validated or informational, never selected. |
-| `semantic.feedback.light.attention.label` | string | `Review needed` | — |
-| `semantic.feedback.light.danger.ink` | color | `#941D36` | — |
-| `semantic.feedback.light.danger.surface` | color | `#FFE8EC` | — |
+| `semantic.feedback.light.attention.label` | string | `Review needed` | None |
+| `semantic.feedback.light.danger.ink` | color | `#941D36` | None |
+| `semantic.feedback.light.danger.surface` | color | `#FFE8EC` | None |
 | `semantic.feedback.light.danger.symbol` | string | `!` | Carries meaning without colour. A check mark means validated or informational, never selected. |
-| `semantic.feedback.light.danger.label` | string | `Action blocked` | — |
-| `semantic.feedback.light.info.ink` | color | `#334155` | — |
-| `semantic.feedback.light.info.surface` | color | `#E8EDF4` | — |
+| `semantic.feedback.light.danger.label` | string | `Action blocked` | None |
+| `semantic.feedback.light.info.ink` | color | `#334155` | None |
+| `semantic.feedback.light.info.surface` | color | `#E8EDF4` | None |
 | `semantic.feedback.light.info.symbol` | string | `i` | Carries meaning without colour. A check mark means validated or informational, never selected. |
-| `semantic.feedback.light.info.label` | string | `Information` | — |
-| `semantic.feedback.dark.success.ink` | color | `#9BE2B3` | — |
-| `semantic.feedback.dark.success.surface` | color | `#173525` | — |
+| `semantic.feedback.light.info.label` | string | `Information` | None |
+| `semantic.feedback.dark.success.ink` | color | `#9BE2B3` | None |
+| `semantic.feedback.dark.success.surface` | color | `#173525` | None |
 | `semantic.feedback.dark.success.symbol` | string | `✓` | Carries meaning without colour. A check mark means validated or informational, never selected. |
-| `semantic.feedback.dark.success.label` | string | `Ready` | — |
-| `semantic.feedback.dark.attention.ink` | color | `#FFDA8A` | — |
-| `semantic.feedback.dark.attention.surface` | color | `#3D2D0E` | — |
+| `semantic.feedback.dark.success.label` | string | `Ready` | None |
+| `semantic.feedback.dark.attention.ink` | color | `#FFDA8A` | None |
+| `semantic.feedback.dark.attention.surface` | color | `#3D2D0E` | None |
 | `semantic.feedback.dark.attention.symbol` | string | `△` | Carries meaning without colour. A check mark means validated or informational, never selected. |
-| `semantic.feedback.dark.attention.label` | string | `Review needed` | — |
-| `semantic.feedback.dark.danger.ink` | color | `#FFB2C0` | — |
-| `semantic.feedback.dark.danger.surface` | color | `#481C29` | — |
+| `semantic.feedback.dark.attention.label` | string | `Review needed` | None |
+| `semantic.feedback.dark.danger.ink` | color | `#FFB2C0` | None |
+| `semantic.feedback.dark.danger.surface` | color | `#481C29` | None |
 | `semantic.feedback.dark.danger.symbol` | string | `!` | Carries meaning without colour. A check mark means validated or informational, never selected. |
-| `semantic.feedback.dark.danger.label` | string | `Action blocked` | — |
-| `semantic.feedback.dark.info.ink` | color | `#D2DCEC` | — |
-| `semantic.feedback.dark.info.surface` | color | `#263244` | — |
+| `semantic.feedback.dark.danger.label` | string | `Action blocked` | None |
+| `semantic.feedback.dark.info.ink` | color | `#D2DCEC` | None |
+| `semantic.feedback.dark.info.surface` | color | `#263244` | None |
 | `semantic.feedback.dark.info.symbol` | string | `i` | Carries meaning without colour. A check mark means validated or informational, never selected. |
-| `semantic.feedback.dark.info.label` | string | `Information` | — |
+| `semantic.feedback.dark.info.label` | string | `Information` | None |
 
 ### Semantic · motion
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
-| `semantic.motion.duration.press` | duration | `{primitive.duration.press}` | — |
-| `semantic.motion.duration.state` | duration | `{primitive.duration.state}` | — |
-| `semantic.motion.duration.spatial` | duration | `{primitive.duration.spatial}` | — |
-| `semantic.motion.duration.exit` | duration | `{primitive.duration.exit}` | — |
-| `semantic.motion.duration.material` | duration | `{primitive.duration.material}` | — |
-| `semantic.motion.duration.liquid` | duration | `{primitive.duration.liquid}` | — |
-| `semantic.motion.duration.flow` | duration | `{primitive.duration.flow}` | — |
-| `semantic.motion.duration.departure` | duration | `{primitive.duration.departure}` | — |
+| `semantic.motion.duration.press` | duration | `{primitive.duration.press}` | None |
+| `semantic.motion.duration.state` | duration | `{primitive.duration.state}` | None |
+| `semantic.motion.duration.spatial` | duration | `{primitive.duration.spatial}` | None |
+| `semantic.motion.duration.exit` | duration | `{primitive.duration.exit}` | None |
+| `semantic.motion.duration.material` | duration | `{primitive.duration.material}` | None |
+| `semantic.motion.duration.liquid` | duration | `{primitive.duration.liquid}` | None |
+| `semantic.motion.duration.flow` | duration | `{primitive.duration.flow}` | None |
+| `semantic.motion.duration.departure` | duration | `{primitive.duration.departure}` | None |
 | `semantic.motion.duration.ceiling` | duration | `{primitive.duration.maxDuration}` | Hard ceiling for any single animation, including replay-rate adjustment |
-| `semantic.motion.easing.enter` | cubicBezier | `{primitive.easing.enter}` | — |
-| `semantic.motion.easing.settle` | cubicBezier | `{primitive.easing.settle}` | — |
-| `semantic.motion.easing.exit` | cubicBezier | `{primitive.easing.exit}` | — |
-| `semantic.motion.travel.panel` | dimension | `{primitive.distance.panel}` | — |
-| `semantic.motion.travel.floating` | dimension | `{primitive.distance.floating}` | — |
-| `semantic.motion.travel.content` | dimension | `{primitive.distance.content}` | — |
-| `semantic.motion.travel.exit` | dimension | `{primitive.distance.exit}` | — |
-| `semantic.motion.travel.depth` | dimension | `{primitive.distance.depth}` | — |
-| `semantic.motion.travel.feather` | dimension | `{primitive.distance.feather}` | — |
-| `semantic.motion.travel.max` | dimension | `{primitive.distance.maxTravel}` | — |
+| `semantic.motion.easing.enter` | cubicBezier | `{primitive.easing.enter}` | None |
+| `semantic.motion.easing.settle` | cubicBezier | `{primitive.easing.settle}` | None |
+| `semantic.motion.easing.exit` | cubicBezier | `{primitive.easing.exit}` | None |
+| `semantic.motion.travel.panel` | dimension | `{primitive.distance.panel}` | None |
+| `semantic.motion.travel.floating` | dimension | `{primitive.distance.floating}` | None |
+| `semantic.motion.travel.content` | dimension | `{primitive.distance.content}` | None |
+| `semantic.motion.travel.exit` | dimension | `{primitive.distance.exit}` | None |
+| `semantic.motion.travel.depth` | dimension | `{primitive.distance.depth}` | None |
+| `semantic.motion.travel.feather` | dimension | `{primitive.distance.feather}` | None |
+| `semantic.motion.travel.max` | dimension | `{primitive.distance.maxTravel}` | None |
 
 ### Semantic · typography
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
-| `semantic.typography.family` | fontFamily | `Manrope` | — |
-| `semantic.typography.readingSize` | dimension | `16px` | — |
-| `semantic.typography.readingLeading` | dimension | `24px` | — |
+| `semantic.typography.family` | fontFamily | `Manrope` | None |
+| `semantic.typography.readingSize` | dimension | `16px` | None |
+| `semantic.typography.readingLeading` | dimension | `24px` | None |
 | `semantic.typography.scale.display.ratio` | number | `2` | display: multiple of the reading size |
 | `semantic.typography.scale.display.leading` | number | `1.1` | display: line height as a multiple of its own size |
 | `semantic.typography.scale.display.tracking` | dimension | `-0.055em` | display: letter spacing |
@@ -422,12 +422,12 @@ What a value *means*: the surface a card sits on, the duration a control settles
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
-| `semantic.default.palette` | string | `prism` | — |
-| `semantic.default.mode` | string | `light` | — |
-| `semantic.default.density` | string | `comfortable` | — |
-| `semantic.default.font` | string | `manrope` | — |
-| `semantic.default.reduced` | boolean | `false` | — |
-| `semantic.default.reduceMotion` | boolean | `false` | — |
+| `semantic.default.palette` | string | `prism` | None |
+| `semantic.default.mode` | string | `light` | None |
+| `semantic.default.density` | string | `comfortable` | None |
+| `semantic.default.font` | string | `manrope` | None |
+| `semantic.default.reduced` | boolean | `false` | None |
+| `semantic.default.reduceMotion` | boolean | `false` | None |
 
 ## Component tokens
 
@@ -538,14 +538,14 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
 | `component.focus.coreWidth` | dimension | `2px` | Crisp focus core, never blurred |
-| `component.focus.coreOffset` | dimension | `3px` | — |
+| `component.focus.coreOffset` | dimension | `3px` | None |
 
 ### Component · indicator
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
 | `component.indicator.size` | dimension | `20px` | Circular state badge |
-| `component.indicator.fieldSize` | dimension | `24px` | — |
+| `component.indicator.fieldSize` | dimension | `24px` | None |
 | `component.indicator.lineWidth` | dimension | `3px` | A line that marks: a drop target's rule, a selected swatch's ring, a quotation's leading rule |
 
 ### Component · anchor
@@ -570,22 +570,22 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
-| `component.chart.seriesCount` | number | `6` | How many categorical series the palette can tell apart by colour. A seventh series repeats the first colour and must differ by another channel — a dash pattern, a fill pattern or a marker shape — because six hues is where perceptual separation runs out, not where charts do. |
+| `component.chart.seriesCount` | number | `6` | How many categorical series the palette can tell apart by colour. A seventh series repeats the first colour and must differ by another channel, such as a dash pattern, a fill pattern or a marker shape. Six hues is where perceptual separation runs out, and charts often need more. |
 | `component.chart.seriesLightness.light` | number | `0.55` | OKLab lightness every light-mode series colour is drawn at. One lightness for all six is what makes them read as one family rather than a ramp: a categorical scale must not imply an order it does not have. |
-| `component.chart.seriesLightness.dark` | number | `0.72` | The same, for dark mode. Higher than light, because the ground is dark and a mark must be lighter than it — but not as high as the ground allows. At 0.80 sRGB can no longer hold the chroma at the violet and blue hues, the colours there go pale, and the first series of a violet palette lands on the same colour as the palette's own action colour, which is a data mark that reads as a button. |
+| `component.chart.seriesLightness.dark` | number | `0.72` | The same, for dark mode. Higher than light, because the ground is dark and a mark must be lighter than it, but not as high as the ground allows. At 0.80 sRGB can no longer hold the chroma at the violet and blue hues, the colours there go pale, and the first series of a violet palette lands on the same colour as the palette's own action colour, which is a data mark that reads as a button. |
 | `component.chart.seriesChroma` | number | `0.18` | OKLab chroma asked for at each series hue, reduced per hue only where sRGB cannot hold it. Asking for one chroma and clipping is what keeps the six equally saturated to the eye. |
 | `component.chart.seriesHueOffset` | number | `30` | Degrees the ring of series hues is turned from the palette's own seed hue. Half a step, so the palette hue falls exactly between the first and last series rather than on the first. The ring is centred on the palette rather than started from it for one reason: a series colour sitting on the seed hue at the lightness these are drawn at is the palette's action colour, and a data mark that is the colour of every button on the page is a data mark people try to press. |
-| `component.chart.seriesContrast` | number | `3` | The floor every series colour clears against both the surface and the canvas of its mode. A data mark is a graphical object carrying information, so WCAG 1.4.11 applies to it and 3:1 is the bar. Where a hue cannot reach the floor at the stated lightness, its lightness moves until it does — the floor is not negotiable and the family resemblance is. |
+| `component.chart.seriesContrast` | number | `3` | The floor every series colour clears against both the surface and the canvas of its mode. A data mark is a graphical object carrying information, so WCAG 1.4.11 applies to it and 3:1 is the bar. Where a hue cannot reach the floor at the stated lightness, its lightness moves until it does. The floor is fixed, and the family resemblance gives way. |
 | `component.chart.stroke` | dimension | `2px` | Line and edge weight for a data mark: a chart line, a polygon edge, a candle wick. |
-| `component.chart.hairline` | dimension | `1px` | The separation a chart draws in the surface colour rather than in ink — between pie segments, heatmap cells, treemap rectangles and map regions. It is a gap, not a border: it shows the ground through. |
+| `component.chart.hairline` | dimension | `1px` | The separation a chart draws in the surface colour rather than in ink, between pie segments, heatmap cells, treemap rectangles and map regions. It is a gap that shows the ground through. |
 | `component.chart.pointMin` | dimension | `6px` | Smallest drawn point diameter. Points are sized on a scale between this and pointMax; the hit area is the action minimum regardless, so a 6px point is still a 44px target. |
 | `component.chart.pointMax` | dimension | `18px` | Largest drawn point diameter. |
 | `component.chart.barRadius` | dimension | `4px` | Radius on the value end of a bar only. The base end stays square because it sits on the axis, and rounding it would lift the bar off the line it is measured from. |
 | `component.chart.cellGap` | dimension | `2px` | Gap between the square cells of a heatmap or calendar heatmap. |
 | `component.chart.ringThickness` | number | `0.32` | A donut's ring thickness as a proportion of its outer radius. Declared rather than chosen per chart so a donut is recognisably the same object at every size. |
-| `component.chart.fillOpacity` | number | `0.25` | Opacity of a fill whose job is to show extent without hiding what is behind it — the region under a line, the inside of a radar polygon. Low enough that two overlapping series are still two, and that the gridlines a reader measures against are still legible through both. |
+| `component.chart.fillOpacity` | number | `0.25` | Opacity of a fill whose job is to show extent without hiding what is behind it, such as the region under a line or the inside of a radar polygon. Low enough that two overlapping series are still two, and that the gridlines a reader measures against are still legible through both. |
 | `component.chart.linkOpacity` | number | `0.45` | Opacity of a flow between two nodes. Higher than a fill because a link is the mark rather than its backing, and low enough that a crossing reads as two links rather than as a third shape. |
-| `component.chart.intensitySteps` | number | `5` | How many buckets an intensity scale has — a heatmap cell, a calendar day. Five, because a reader comparing cells is matching them to a key rather than reading a gradient, and a key with more entries than a hand has fingers is a key nobody uses. |
+| `component.chart.intensitySteps` | number | `5` | How many buckets an intensity scale has, for a heatmap cell or a calendar day. Five, because a reader comparing cells is matching them to a key rather than reading a gradient, and a key with more entries than a hand has fingers is a key nobody uses. |
 | `component.chart.gaugeSweep` | number | `270` | Degrees an arc gauge sweeps, centred on the bottom. Not a full circle, because a full circle has no ends and a gauge is a value between two of them; not a half, because three quarters gives the same travel half the diameter would and leaves the centre square for the value. |
 
 ### Component · progress
@@ -596,9 +596,8 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 
 ## Deprecations
 
-A deprecated token still resolves. It is listed here so adopters can migrate before
-it is removed, which is the only reason to keep a name that no longer describes its
-value.
+A deprecated token still resolves. Its name is kept, and listed here, only so
+adopters can migrate before it is removed.
 
 | Token | Replacement or reason |
 | --- | --- |

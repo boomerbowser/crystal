@@ -4,9 +4,9 @@ Crystal 2.0 is Meridian Digital's reusable design system, built out from the app
 
 ## Governing hierarchy
 
-**Plastic → Frost → Resin, from back to front, is Crystal’s defining invariant.** The user explicitly reaffirmed this priority on September 17, 2026. Product colors and layouts may vary; the hierarchy must remain recognizable. Plastic grounds the window, Frost forms the intermediate material layer, and Resin floats above it for functional controls. Haze reading wells live within the hierarchy for legibility; they are not a replacement theme or a competing fourth material identity.
+**Plastic → Frost → Resin, from back to front, is Crystal's defining invariant.** The user reaffirmed this priority on September 17, 2026. Product colors and layouts may vary; the hierarchy must remain recognizable. Plastic grounds the window, Frost forms the intermediate material layer, and Resin floats above it for functional controls. Haze reading wells sit inside the hierarchy for legibility. They do not replace the theme and do not form a fourth material identity.
 
-Crystal names six materials: **Plastic, Frost, Resin, Haze, Stone, Mirage**. Haze fills reading surfaces; Stone protects labels within controls; Mirage separates modal decisions. The first three establish the main spatial hierarchy.
+Crystal names six materials: Plastic, Frost, Resin, Haze, Stone, Mirage. Haze fills reading surfaces; Stone protects labels within controls; Mirage separates modal decisions. The first three establish the main spatial hierarchy.
 
 ## Shared identity, product freedom
 
@@ -34,30 +34,30 @@ Manrope is the shared default, bundled locally under its accompanying SIL Open F
 
 | Role | Size / line height | Weight | Use |
 |---|---|---|---|
-| Display | 36–50px / 1.08–1.2 | 750 | Product or section introduction; responsive |
-| Page title | 28–32px / 1.2 | 750 | Primary task context |
-| Section | 20–24px / 1.25 | 700 | Local hierarchy |
-| Reading | 16px / 24px | 400–500 | Messages, documents, sustained reading |
-| Control | 14–16px / 1.3–1.5 | 650–750 | Primary application controls |
-| Supporting | 12–14px / 1.5–1.7 | 500–650 | Metadata and short labels, never a replacement for reading type |
+| Display | 36 to 50px / 1.08 to 1.2 | 750 | Product or section introduction; responsive |
+| Page title | 28 to 32px / 1.2 | 750 | Primary task context |
+| Section | 20 to 24px / 1.25 | 700 | Local hierarchy |
+| Reading | 16px / 24px | 400 to 500 | Messages, documents, sustained reading |
+| Control | 14 to 16px / 1.3 to 1.5 | 650 to 750 | Primary application controls |
+| Supporting | 12 to 14px / 1.5 to 1.7 | 500 to 650 | Metadata and short labels, never a replacement for reading type |
 
-Respect user scaling. Do not cap text zoom or hide overflow to conceal clipped labels. Aim for 45–75 characters per line for sustained prose. Compact density reduces spacing, not reading size.
+Respect user scaling. Do not cap text zoom or hide overflow to conceal clipped labels. Aim for 45 to 75 characters per line for sustained prose. Compact density reduces spacing and leaves reading size unchanged.
 
 ## Geometry, spacing and responsive layout
 
 Use a 4px base rhythm with 8, 12, 16, 20, 24, 32 and 48px spacing. The default content radius is 28px, adjustable between 14 and 28px. Supporting panels use content radius + 6px; input wells use content radius − 7px. Person avatars stay circular.
 
-**Actions are fully rounded.** Every action control — primary, secondary, quiet and compact buttons, segmented options, dock destinations and navigation pills — uses a pill radius (`999px`) independent of the content-radius control, so the radius slider never turns an action into a rectangle. Card-shaped buttons are the deliberate exception: a button whose content is a layout with artwork (specimen cards, palette cards, library items) keeps the content radius so its artwork is not clipped into a lozenge. The distinction is behavioral, not tag-based — it depends on whether the control reads as an action or as a card.
+**Actions are fully rounded.** Every action control (primary, secondary, quiet and compact buttons, segmented options, dock destinations and navigation pills) uses a pill radius (`999px`) independent of the content-radius control, so the radius slider never turns an action into a rectangle. Card-shaped buttons are the exception: a button whose content is a layout with artwork (specimen cards, palette cards, library items) keeps the content radius so its artwork is not clipped into a lozenge. The distinction is behavioral: it depends on whether the control reads as an action or as a card, whatever its tag.
 
 An authored bubble uses 6 / R / R / R corners. A counterpart uses R / 6 / R / R; mirror the direction for RTL. Do not use asymmetric corners indiscriminately on controls.
 
-The playground moves its inspector below the canvas under 850px and stacks components under 600px. These are demonstration breakpoints, not universal product breakpoints. Product layouts should adapt to content and input modality, preserving navigation and avoiding horizontal page scroll at 320 CSS pixels.
+The playground moves its inspector below the canvas under 850px and stacks components under 600px. These breakpoints belong to the demonstration. Product layouts should adapt to content and input modality, preserving navigation and avoiding horizontal page scroll at 320 CSS pixels.
 
 ## Icons and motion
 
 Use a coherent 24px icon grid, approximately 1.8px rounded strokes, visible labels for primary destinations, and accessible names for icon-only actions. The included SVGs are original simple line drawings. Do not rely on emoji as the only status or control vocabulary.
 
-Press feedback is 120ms, state feedback 213.33ms, compact spatial entrances 293.33ms and exits 160ms. Expressive material journeys use 1000–1400ms, 5–30px ordinary travel (50px compact guidance; larger spatial compositions may exceed it), in-place Haze/Stone movement and 650ms departures. A saved user speed factor scales motion, with a five-second ceiling and immediate reduced-motion states. The [motion specification](motion.html) defines all six material signatures, easing, interruption and live examples. Use motion in response to user action; no continuous decorative motion is required. Reduced motion removes spatial effects while retaining immediate state feedback.
+Press feedback is 120ms, state feedback 213.33ms, compact spatial entrances 293.33ms and exits 160ms. Expressive material journeys use 1000 to 1400ms, 5 to 30px ordinary travel (50px compact guidance; larger spatial compositions may exceed it), in-place Haze/Stone movement and 650ms departures. A saved user speed factor scales motion, with a five-second ceiling and immediate reduced-motion states. The [motion specification](motion.html) defines all six material signatures, easing, interruption and live examples. Use motion in response to user action; no continuous decorative motion is required. Reduced motion removes spatial effects while retaining immediate state feedback.
 
 ## System boundaries
 

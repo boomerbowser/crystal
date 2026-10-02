@@ -14,7 +14,7 @@
 | `assets/site.css`, `assets/site.js` | Reference-site layout and local demonstration behavior |
 | `tokens/crystal.json` | Canonical editable palette, material and default configuration |
 | `docs/*.md` | Editable specifications; adjacent HTML is generated |
-| `docs/tokens.md`, `docs/catalogue.md` | **Generated** from the token sources — do not edit |
+| `docs/tokens.md`, `docs/catalogue.md` | Generated from the token sources; do not edit |
 | `src/overview.md` | The site's index page, editable |
 | `src/pages/*.html` | Editable body fragments for the Playground and motion studies |
 | `tools/shell.py` | The only copy of the page header, side menu and footer |
@@ -25,7 +25,7 @@
 **Every HTML file in the site is generated.** `index.html`, `playground.html`,
 `motion.html`, the ten specification pages and the verification report are all written
 by `tools/build.py` and `tools/report.py` through `tools/shell.py`. Edit the markdown,
-the fragments under `src/pages/`, or the shell — never the HTML, which the next build
+the fragments under `src/pages/`, or the shell. Never edit the HTML, which the next build
 overwrites. Sections between `<!-- generated:NAME -->` markers inside a markdown file
 are written by `tools/build-reference.cjs` and are overwritten too; the prose around
 them is not.
@@ -36,9 +36,9 @@ The site uses relative local assets without fetching fonts or services. Review i
 
 Copy `assets/crystal.css`, `assets/fonts/`, `assets/grain.svg`, and the theme CSS into the product. Preserve the primitive stylesheet’s relative asset paths. Load theme CSS before primitive CSS. The reference-site CSS/JS are not needed by a product.
 
-`assets/crystal.css` carries the Resin interaction surface, the components built on it — `.cr-control`, `.cr-field-shell`, `.cr-indicator`, `.cr-resin-haze` and `.cr-tag` — the dock, the table and its scroller, and every native form control: checkbox, radio, switch, range, file button, select option and menu item. As of 2.2.0 it also carries the four recipes the catalogue needed and no consumer could obtain: `.cr-nav-item` (a navigation entry, selected by label weight), `.cr-bare` (a control with no Resin coat, for controls inside a surface that already has one), `.cr-drag-handle`, and `.cr-resin.panel` (the Resin plane with the content radius). Before 2.1.0 it carried none of the control surface, and this page told you to copy a second stylesheet, `assets/controls.css`, that the package has never contained. There is no second stylesheet to copy.
+`assets/crystal.css` carries the Resin interaction surface, the components built on it (`.cr-control`, `.cr-field-shell`, `.cr-indicator`, `.cr-resin-haze` and `.cr-tag`), the dock, the table and its scroller, and every native form control: checkbox, radio, switch, range, file button, select option and menu item. As of 2.2.0 it also carries the four recipes the catalogue needed and consumers could not obtain before: `.cr-nav-item` (a navigation entry, selected by label weight), `.cr-bare` (a control with no Resin coat, for controls inside a surface that already has one), `.cr-drag-handle`, and `.cr-resin.panel` (the Resin plane with the content radius). Before 2.1.0 it carried none of the control surface. There is no second stylesheet to copy: the package has never contained `assets/controls.css`.
 
-Every component in the catalogue names the surface it is made of, from the closed vocabulary in `tokens/surfaces.json` (exported as `@crystal-ui/core/surfaces`). A library implements each surface once — as a class, a mixin or a native view — and every component made of it inherits the implementation. The catalogue chapter lists the vocabulary with the `crystal.css` recipe behind each entry.
+Every component in the catalogue names the surface it is made of, from the closed vocabulary in `tokens/surfaces.json` (exported as `@crystal-ui/core/surfaces`). A library implements each surface once, as a class, a mixin or a native view, and every component made of it inherits the implementation. The catalogue chapter lists the vocabulary with the `crystal.css` recipe behind each entry.
 
 ```html
 <link rel="stylesheet" href="crystal-theme.css">
@@ -55,7 +55,7 @@ Every component in the catalogue names the surface it is made of, from the close
 
 Set `data-crystal-mode="dark"` or `"light"` on the root HTML element to select a mode. An export made with Auto selected also follows the OS preference unless explicitly overridden. Export CSS from the playground to capture the selected palette and material settings in both modes.
 
-The product adapter supplies layout, padding and placement (at least 12px of inset for content on feathered fills): the snippet shows material assignment, not a complete application. Set `data-window-active="false"` on a foundation to select its neutral opaque inactive state; remove the attribute or set it to `"true"` to restore contextual tint. Wire this to supported host activation events where available. The browser study uses a manual switch and does not infer desktop activation or capture wallpaper.
+The product adapter supplies layout, padding and placement (at least 12px of inset for content on feathered fills): the snippet shows material assignment only. Set `data-window-active="false"` on a foundation to select its neutral opaque inactive state; remove the attribute or set it to `"true"` to restore contextual tint. Wire this to supported host activation events where available. The browser study uses a manual switch and does not infer desktop activation or capture wallpaper.
 
 The primitive stylesheet includes element-level typography, focus and box-sizing rules intended for a Crystal product root.
 
@@ -74,7 +74,7 @@ Crystal's stylesheets are organised into cascade layers, declared once at the to
 | `crystal.component` | Crystal's controls and material surfaces | Crystal |
 | `crystal.override` | Deliberate overrides that beat Crystal's components | You |
 
-**An ordinary unlayered rule in your own stylesheet beats every layer.** Overriding Crystal no longer requires out-specifying it: `.cr-button { border-radius: 4px }` is enough. Use `crystal.override` when you want an override that still loses to your own unlayered rules, and `crystal.base` for page styles Crystal's components should win over.
+**An ordinary unlayered rule in your own stylesheet beats every layer.** Overriding Crystal does not require out-specifying it: `.cr-button { border-radius: 4px }` is enough. Use `crystal.override` when you want an override that still loses to your own unlayered rules, and `crystal.base` for page styles Crystal's components should win over.
 
 If your page has inline `<style>` blocks that Crystal's components are expected to win over, declare them into `crystal.base`. Unlayered styles take precedence over all layers, which is usually what you want for product code and occasionally surprising for a page's own scaffolding. Review them when introducing Crystal into an existing application; scope these rules in your adapter if the page contains unrelated embedded products. `--cr-` variables are namespaced, but generic element selectors are not a CSS isolation boundary.
 
@@ -126,19 +126,19 @@ Crystal follows semantic versioning against a stated public contract. These are 
 - Exported file formats for CSS, JSON, TypeScript, Swift and Kotlin
 - Icon identifiers in the manifest
 
-Anything else — internal selectors, generated file ordering, the preview site — may change in a patch release.
+Anything else (internal selectors, generated file ordering, the preview site) may change in a patch release.
 
-**Deprecate before removing.** A deprecated name keeps working for at least one minor version, and the version that will remove it is named at the moment it is deprecated. Removal happens only in a major release. The legacy material vocabulary — `--cr-acrylic-*`, `--cr-glass-*`, `--cr-mica-*` and the `.cr-acrylic` and `.cr-glass` classes — is deprecated in 2.0.0 and will be removed in 3.0.0; they currently ship as aliases of the Frost, Resin and Plastic tokens.
+**Deprecate before removing.** A deprecated name keeps working for at least one minor version, and the version that will remove it is named at the moment it is deprecated. Removal happens only in a major release. The legacy material vocabulary (`--cr-acrylic-*`, `--cr-glass-*`, `--cr-mica-*` and the `.cr-acrylic` and `.cr-glass` classes) is deprecated in 2.0.0 and will be removed in 3.0.0; they currently ship as aliases of the Frost, Resin and Plastic tokens.
 
-Crystal publishes publicly to npm as **`@crystal-ui/core`**:
+Crystal publishes publicly to npm as `@crystal-ui/core`:
 
 ```sh
 npm install @crystal-ui/core
 ```
 
-Products pin a version, which is what makes one-version-per-product and a CI parity check enforceable. Every release after 2.0.0 is published from a tag by GitHub Actions through npm Trusted Publishing and carries a provenance attestation, so a consumer can verify the tarball came from `boomerbowser/crystal` and from the commit the tag names. 2.0.0 itself was published by hand and is the one version without an attestation — npm cannot attach a trusted publisher to a package that does not exist yet.
+Products pin a version, which makes one-version-per-product and a CI parity check enforceable. Every release after 2.0.0 is published from a tag by GitHub Actions through npm Trusted Publishing and carries a provenance attestation, so a consumer can verify the tarball came from `boomerbowser/crystal` and from the commit the tag names. 2.0.0 itself was published by hand and is the one version without an attestation, because npm cannot attach a trusted publisher to a package that does not exist yet.
 
-A specification bundle — the token files, the generated Swift and Kotlin exports and the parity contract — is attached to each GitHub release, for platform libraries that cannot install an npm package.
+A specification bundle (the token files, the generated Swift and Kotlin exports and the parity contract) is attached to each GitHub release, for platform libraries that cannot install an npm package.
 
 ## Rebuild and validate
 
@@ -150,31 +150,31 @@ npm run build
 npm test
 ```
 
-`npm run build` regenerates everything the library generates rather than stores: the flat token file from the DTCG source, `tokens.js`, the exported theme, and the reference sections in `docs/`. `npm test` runs that build and then checks token contracts and contrast, recipe uniqueness, duration and travel bounds, the engine versions against the lockfile, documentation drift, and what the published package may contain. Node and nothing else — the library has no Python tooling.
+`npm run build` regenerates everything the library generates rather than stores: the flat token file from the DTCG source, `tokens.js`, the exported theme, and the reference sections in `docs/`. `npm test` runs that build and then checks token contracts and contrast, recipe uniqueness, duration and travel bounds, the engine versions against the lockfile, documentation drift, and what the published package may contain. The library needs Node and nothing else; it has no Python tooling.
 
-The exported theme is produced by running the resolver, not by writing CSS. Any other method would be a second implementation of alias resolution, which is the divergence the token pipeline exists to prevent.
+The exported theme is produced by running the resolver and never by writing CSS. Any other method would be a second implementation of alias resolution, which is the divergence the token pipeline exists to prevent.
 
-The documentation website is a separate repository, `crystal-preview`. It installs this package, renders the specification it installed, and runs the browser gates — pages, links, scrolling, interactions and the visual baselines — against what was published rather than against a working copy.
+The documentation website is a separate repository, `crystal-preview`. It installs this package, renders the specification it installed, and runs the browser gates (pages, links, scrolling, interactions and the visual baselines) against what was published rather than against a working copy.
 
 ## Deploying the documentation website
 
-The website is `crystal-preview`, a separate repository that installs this package. How it is deployed — the Vercel settings, the caching rules, the relative-path and clean-URL constraints — is documented there, because it is a fact about that site rather than about Crystal. Nothing in this package depends on it.
+The website is `crystal-preview`, a separate repository that installs this package. How it is deployed (the Vercel settings, the caching rules, the relative-path and clean-URL constraints) is documented there, because it concerns that site and not Crystal. Nothing in this package depends on it.
 
 ### User animation speed
 
-`Crystal.normalize({ motionSpeed: 1 })` accepts a factor from 0.25 to 2. Resolved durations divide by that factor and cap each animation at 5000ms; reduced motion produces zero durations. CSS and JSON exports retain this preference. The playground and Motion page share it, including real dialog/backdrop timing. Products should target 0–2 seconds by default and expose reduced motion independently of speed.
+`Crystal.normalize({ motionSpeed: 1 })` accepts a factor from 0.25 to 2. Resolved durations divide by that factor and cap each animation at 5000ms; reduced motion produces zero durations. CSS and JSON exports retain this preference. The playground and Motion page share it, including real dialog/backdrop timing. Products should target 0 to 2 seconds by default and expose reduced motion independently of speed.
 
 
 ### Motion engine dependencies
 
 The motion runtime needs the engines and the recipe catalogue. `@crystal-ui/core` declares Motion 13.4.0 and GSAP 3.15.0 as dependencies and ships `engines.js`, which re-exports both; bundle it however your product bundles anything else. The recipes are `@crystal-ui/core/motion-recipes`. Ship `licenses/` with any bundle that includes the engines.
 
-**The token resolver and the static material CSS do not need either library.** A product that uses Crystal's colour, materials and geometry without its motion installs nothing extra. See [component motion](motion-components.html) for the integration and cancellation contracts.
+The token resolver and the static material CSS do not need either library. A product that uses Crystal's colour, materials and geometry without its motion installs nothing extra. See [component motion](motion-components.html) for the integration and cancellation contracts.
 
 ### Interaction surfaces and revised motion
 
 Render the field shells in your component framework: a bare `<input>` cannot carry Crystal's focus ring, because the ring belongs to the shell around it and the input itself takes `outline: 0`. Compact information surfaces and ephemeral menus use `.cr-resin-haze`. Do not transplant the legacy solid button rules without this material layer. The 54-recipe catalogue declares material signatures and justified extended travel; the old 50px token describes compact motion only.
 
-`controls.css` is **not** part of this package and never will be — but as of 2.1.0 the part of it you needed is. It was the documentation site's own stylesheet, and it carried a great deal that this specification describes and the library did not ship, so a product following this page reached for `.cr-indicator` or `.cr-resin-haze` and got nothing, styled a `.cr-table-scroll` that never scrolled, and got no checkbox, radio, range or select styling at all.
+`controls.css` is not part of this package and never will be, but as of 2.1.0 the part of it you needed is. It is the documentation site's own stylesheet, and it carried a great deal that this specification describes and the library did not ship: in the library `.cr-indicator` and `.cr-resin-haze` had no rules, `.cr-table-scroll` did not scroll, and checkbox, radio, range and select had no styling.
 
-It took two passes to find it. The first lifted five components and the interaction surface and was checked by rendering the site with and without them, which proved the lift faithful and said nothing about what the site still overrode — both sides of that comparison kept the sheet. The second measured the residual directly and moved a further 75 rules. Those now live in `assets/crystal.css`; the site keeps what is genuinely its own — its switches, its segmented controls, its colour swatches. What remains of `controls.css` is still not exportable: it styles bare elements, and exporting it once already caused a 32px chip to render 50px tall in Crystal React — D-9. `tools/verify-package.cjs` fails a tarball that contains it.
+Five components, the interaction surface and a further 75 rules moved from it into `assets/crystal.css`. The site keeps what is its own: its switches, its segmented controls and its colour swatches. What remains of `controls.css` is not exportable. It styles bare elements, and exporting it made a 32px chip render 50px tall in Crystal React (D-9). `tools/verify-package.cjs` fails a tarball that contains it.

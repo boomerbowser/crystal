@@ -21,14 +21,13 @@
 #
 # Everything after that is this workflow, from a tag, with no credential.
 #
-# 2.0.0 will therefore be the one version with no provenance attestation, and
-# that is unavoidable rather than an oversight: npm can only generate
-# provenance inside a CI provider it recognises, and step 2 cannot run in CI
-# because step 3 has not happened yet. Requiring it in the manifest does not
-# solve that — it only makes step 2 fail after building the tarball, with
-# "Automatic provenance generation not supported for provider: null", which is
-# exactly what happened on the first attempt. `--provenance` is passed on the
-# command line below, by the publisher that can honour it.
+# 2.0.0 is therefore the one version with no provenance attestation. npm can
+# only generate provenance inside a CI provider it recognises, and step 2
+# cannot run in CI because step 3 has not happened yet. Requiring provenance in
+# the manifest makes step 2 fail after building the tarball, with
+# "Automatic provenance generation not supported for provider: null". So
+# `--provenance` is passed on the command line below, by the publisher that
+# can honour it.
 name: publish
 
 on:
@@ -53,24 +52,23 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-      # Before anything expensive, because this is the check that decides
-      # whether the run may publish at all.
+      # Runs before anything expensive, because this check decides whether the
+      # run may publish at all.
       #
       # `core/`, because there are two manifests and only one of them is
       # published. The other, at the repository root, is private machinery that
       # builds the library and the website and installs nothing for a consumer.
       #
-      # It used to read `if [ "$GITHUB_REF_TYPE" = tag ] && [ ... ]`, which is a
-      # guard that passes rather than a guard that checks. Dispatched from a
-      # branch the condition short-circuits, nothing is compared, and the job
-      # goes on to publish whatever version `core/package.json` happens to hold
-      # — with no tag for `--provenance` to attest the tarball to, and a
-      # specification bundle named after the branch. It was green on every
-      # dispatch and had never once compared a version.
+      # Any ref that is not a tag fails here. A guard written as
+      # `if [ "$GITHUB_REF_TYPE" = tag ] && [ ... ]` short-circuits when
+      # dispatched from a branch, compares nothing, and lets the job publish
+      # whatever version `core/package.json` holds, with no tag for
+      # `--provenance` to attest the tarball to and a specification bundle
+      # named after the branch.
       #
       # `workflow_dispatch` stays, because a publish that fails after the tag is
-      # pushed needs a way to be re-run without inventing a version. It is
-      # dispatched *against the tag*:
+      # pushed needs a way to be re-run without inventing a version. Dispatch it
+      # against the tag:
       #
       #   gh workflow run publish.yml --ref vX.Y.Z
       - name: The tag and the manifest agree
@@ -94,15 +92,15 @@ jobs:
       # proves the committed generated files match their source.
       - run: npm test
 
-      # Same rule as verify.yml, and the same one exception. `npm test` runs the
+      # Same rule as verify.yml, and the same exceptions. `npm test` runs the
       # build first, so a diff here means a committed generated file does not
-      # match its source — and publishing would ship a package that is not this
+      # match its source, and publishing would ship a package that is not this
       # commit. `validation/token-checks.json` records when the evidence was
-      # produced, so its `date` differs on every run by design; its numbers are
-      # held to the rule like everything else. `core/docs/accessibility.md`
-      # quotes that date in its "Checks run" row, so it is exempted the same way
-      # and for the same reason — verify.yml learned this and this file did not,
-      # which would have failed any publish run on a later day than its commit.
+      # produced, so its `date` differs on every run; its numbers are held to
+      # the rule like everything else. `core/docs/accessibility.md` quotes that
+      # date in its "Checks run" row, so it is exempted the same way and for the
+      # same reason. Without that, any publish run on a later day than its
+      # commit would fail.
       - name: Generated files match their source
         run: |
           git diff --exit-code -- ':(top)' \
@@ -122,28 +120,28 @@ jobs:
           fi
 
       # What the tarball may contain: no `file:` dependency, no website, and
-      # every export entry point actually shipped. Both of the first two are
-      # silent failures — the registry accepts them and the damage appears in
-      # somebody else's repository days later.
+      # every export entry point actually shipped. The registry accepts the
+      # first two without complaint, and the damage appears in somebody else's
+      # repository days later.
       - run: node tools/verify-package.cjs
 
       # --provenance attests the tarball to this commit and this workflow, so a
       # consumer can verify their @crystal-ui/core came from boomerbowser/crystal
       # and not from someone who guessed a version number. `access public`
-      # because a scoped package is private by default, and an unpublished
-      # scope that private libraries already import from is the textbook setup
-      # for dependency confusion — owning it publicly is what closes that.
+      # because a scoped package is private by default. An unpublished scope
+      # that private libraries already import from is open to dependency
+      # confusion, and owning it publicly closes that.
       - run: npm publish --provenance --access public
         working-directory: core
 
-      # The half of this that npm cannot carry.
+      # The part of the release that npm cannot carry.
       #
-      # A SwiftUI or Compose library cannot install an npm package, so the
-      # generated Swift and Kotlin exports would stay stranded inside one and
-      # those libraries would retype Crystal's values — the exact thing
-      # CONTRACT §1 forbids, made unavoidable by the packaging. A release asset
-      # is versioned, immutable, fetchable with curl, needs no new account, and
-      # is built by the same job that published to npm, so the two cannot drift.
+      # A SwiftUI or Compose library cannot install an npm package. Without this
+      # bundle the generated Swift and Kotlin exports would stay inside the npm
+      # package, and those libraries would have to retype Crystal's values, which
+      # CONTRACT §1 forbids. A release asset is versioned, immutable, fetchable
+      # with curl and needs no new account. It is built by the same job that
+      # published to npm, so the two cannot drift.
       - name: Build the specification bundle
         run: |
           set -euo pipefail

@@ -1,5 +1,5 @@
 /* Crystal material choreography. Every effect is cancellable, and every effect is finite
-   except a continuous indicator — activity-turn, activity-travel, skeleton-sweep — which
+   except a continuous indicator (activity-turn, activity-travel, skeleton-sweep), which
    repeats while its work is pending and is stopped by the caller when the work resolves. */
 (function(root){
   'use strict';
@@ -43,11 +43,11 @@
   }
   function runComponent(element,name,frames,base,engine,options={}){
     if(!(element instanceof Element))throw new TypeError('CrystalMotion requires an element');
-    /* `once` coalesces repeats of the SAME recipe on the same element. A continuous
+    /* `once` coalesces repeats of the same recipe on the same element. A continuous
        control fires its event many times a second, and restarting a 400ms animation on
-       every one of them stops it partway and begins again — which is what makes a slider
-       feel choppy. A different recipe still interrupts, because that is a different thing
-       being expressed. Deliberate replays (the catalogue) simply omit the option. */
+       every one of them stops it partway and begins again, which makes a slider feel
+       choppy. A different recipe still interrupts, because it expresses a different
+       thing. A caller that wants a replay, as the catalogue does, omits the option. */
     if(options.once&&element.dataset.crMotionName===name&&element.dataset.crMotionState==='running')
       return Promise.resolve({status:'coalesced'});
     stop(element);element.dataset.crMotionName=name;element.dataset.crMotionEngine=engine;
@@ -55,8 +55,8 @@
     element.dataset.crMotionSignature=recipe.signature||'measured-layout';
     if(reduced()){element.dataset.crMotionState='instant';return Promise.resolve({status:'instant'});}
     const opts={duration:duration(base,options.rate),engine,easing:recipe.signature==='inertia'?'cubic-bezier(0.16, 0.7, 0.2, 1)':recipe.signature==='coalesce'?'cubic-bezier(0.34, 0.08, 0.24, 1)':'cubic-bezier(0.22, 0.65, 0.22, 1)'};
-    /* A continuous recipe travels at constant speed and repeats until stop() — the
-       returned promise settles only when it is cancelled, which is the caller's to do
+    /* A continuous recipe travels at constant speed and repeats until stop(). The
+       returned promise settles only when it is cancelled, which the caller does
        the moment the pending work resolves. */
     if(recipe.loop){opts.easing=recipe.easing||'linear';opts.repeat=Infinity;}
     /* A staggered mark waits its turn: `index` is its position and `count` how many
@@ -68,7 +68,7 @@
     const animations=[CrystalEngines.frames(element,frames,opts)];
     /* The optical layers are finite decoration on a transition. On a loop they would
        repeat with it, and a feathered edge that ripples for as long as something is
-       loading is ambient motion by another route. */
+       loading is ambient motion. */
     if(!recipe.loop)opticalLayers(element,recipe,opts,animations);
     active.set(element,animations);element.dataset.crMotionState='running';
     return Promise.all(animations.map(animation=>animation.finished.then(()=>true,error=>{if(error.name!=='AbortError')throw error;return false;}))).then(results=>{
@@ -140,10 +140,11 @@
   }
   media.addEventListener('change',()=>{if(reduced())stopAll();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAll();});
-  /* Ambient motion — what a surface does at rest — is deferred to a later version
-     of Crystal at Meridian's direction. It was specified, built and measured, and
-     the record of that work is in the request log; what shipped was not good
-     enough to keep. The optical layer remains for motion that a person starts. */
+  /* Ambient motion, which is what a surface does at rest, is deferred to a later
+     version of Crystal at Meridian's direction. It was specified, built and
+     measured, and what shipped was not good enough to keep. The record of that
+     work is in the request log. The optical layer remains for motion that a
+     person starts. */
 
   root.CrystalMotion=Object.freeze({play,layout,duration,recipes:Object.freeze(recipes),stop,stopAll,reduced,direction,presets:Object.freeze([...Object.keys(durationNames),...Object.keys(recipes)])});
 })(window);

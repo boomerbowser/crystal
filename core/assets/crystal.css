@@ -1,8 +1,8 @@
 /* Crystal cascade layers, declared once and in precedence order.
-   reset     — element-level defaults Crystal sets on a product root
-   base      — the consuming page's own layout and typography
-   component — Crystal's controls and material surfaces, which win over base
-   override  — reserved for the consuming product
+   reset:     element-level defaults Crystal sets on a product root
+   base:      the consuming page's own layout and typography
+   component: Crystal's controls and material surfaces, which win over base
+   override:  reserved for the consuming product
    Unlayered CSS beats every layer, so a product needs no specificity contest
    to override Crystal: an ordinary rule in its own stylesheet is enough. */
 @layer crystal.reset, crystal.base, crystal.component, crystal.override;
@@ -13,9 +13,9 @@
    crystal-theme.css or by a configuration exported from the playground. */
 :root{--cr-font:Manrope,system-ui,sans-serif;--cr-radius:28px;--cr-space:20px;--cr-reading:16px;--cr-leading:1.5;color-scheme:light}
 *{box-sizing:border-box}body{margin:0;color:var(--cr-text);background:var(--cr-canvas);font-family:var(--cr-font);font-size:16px;line-height:1.6}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}a{color:var(--cr-primary);text-underline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:var(--cr-focus-core-width,2px) solid var(--cr-focus-core,var(--cr-primary));outline-offset:var(--cr-focus-core-offset,3px);box-shadow:var(--cr-focus-ring,0 0 6px 1px var(--cr-focus-feather-1,color-mix(in srgb,var(--cr-primary) 46%,transparent)),0 0 16px 3px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 0 30px 6px var(--cr-focus-feather-3,color-mix(in srgb,var(--cr-primary) 17%,transparent)),0 0 54px 11px var(--cr-focus-feather-4,color-mix(in srgb,var(--cr-primary) 8%,transparent)),0 8px 18px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 22px 40px var(--cr-focus-shadow,color-mix(in srgb,var(--cr-decorative) 27%,transparent)))}button:disabled{cursor:not-allowed;opacity:.55}button{transition:background var(--cr-state),box-shadow var(--cr-state),transform var(--cr-press)}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{line-height:1.2;letter-spacing:-.04em}button:has(svg){display:inline-flex;align-items:center;justify-content:center;gap:9px}
-/* Plastic carries a glow of its own — the primary lifted by the scheme's tint —
-   which is a material property and stays. What was ambient was the glow drifting
-   across the foundation; that is deferred with the rest of the tier, so the
+/* Plastic has a glow of its own, the primary lifted by the scheme's tint. It is
+   a material property and stays. The drift of that glow across the foundation
+   is ambient motion, which is deferred with the rest of the tier, so the
    gradient holds at its resting position. */
 :is(.cr-plastic,.cr-foundation){background-color:var(--cr-canvas);background-image:radial-gradient(ellipse 58% 44% at 26% 34%,var(--cr-atmosphere-glow),transparent 72%),radial-gradient(ellipse at 5% 12%,var(--cr-atmosphere-one),transparent 64%),radial-gradient(ellipse at 96% 88%,var(--cr-atmosphere-two),transparent 63%);isolation:isolate}
 :is(.cr-haze,.cr-surface){background:var(--cr-surface);border:1px solid var(--cr-edge);border-radius:var(--cr-radius);box-shadow:var(--cr-shadow-content);color:var(--cr-text)}
@@ -24,41 +24,34 @@
 :is(.cr-resin,.cr-glass){background:var(--cr-resin-fill);border-radius:999px;box-shadow:var(--cr-shadow-float);backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));-webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation))}
 .cr-well{background:var(--cr-surface);border-radius:calc(var(--cr-radius) - 7px);color:var(--cr-text);border:1px solid var(--cr-edge)}
 .cr-button{min-height:48px;padding:15px 24px;border-radius:999px;border:1px solid transparent;font-weight:750;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;line-height:1.3}
-/* The button vocabulary is four names and none of them is a colour Crystal
-   does not have.
+/* The button vocabulary is four names, and each names a colour role Crystal
+   defines.
 
    `.cr-button` is the action control: a Resin shell with the neutral Haze
    reading fill. `.primary` is the one tinted in the palette's action colour,
    `.quiet` drops the reading fill, `.danger` adds the independent
-   destructive boundary. Emphasis is opt-in: a rule that had to enumerate
-   every variant it was *not* meant to tint was one forgotten modifier away
-   from painting the whole surface.
+   destructive boundary. Emphasis is opt-in, because a rule that enumerates
+   the variants it must not tint paints every variant it forgets.
 
-   `.secondary` was here and is gone. It named a second action colour, and
-   Crystal has no such role — the palettes publish one action pair, and the
-   companion and glow hues are expressive paint that is never assumed to be
-   text-safe. See `docs/colors.md`. A variant named after a colour the system
-   does not define is a promise it cannot keep.
+   There is no `.secondary`. It named a second action colour, and Crystal has
+   no such role: the palettes publish one action pair, and the companion and
+   glow hues are expressive paint that is never assumed to be text-safe. See
+   `docs/colors.md`.
 
-   The bare `.cr-button` also no longer carries `background:var(--cr-primary)`
-   and `color:var(--cr-on-primary)` here. Those had not rendered since the
-   Resin surface was adopted — the component layer outranks this one — and
-   with the tint moved to `.primary` they would now be wrong as well as
-   dead. */
+   The bare `.cr-button` does not set `background:var(--cr-primary)` or
+   `color:var(--cr-on-primary)` here. The component layer outranks this one,
+   so they would not render, and the tint belongs to `.primary`. */
 .cr-input{min-height:44px;border:1px solid var(--cr-outline);border-radius:12px;background:var(--cr-surface);padding:10px 12px;width:100%;color:var(--cr-text)}.cr-input::placeholder{color:var(--cr-muted)}
 .cr-status{display:inline-flex;align-items:center;gap:7px;border-radius:9px;padding:5px 9px;background:var(--status-surface);color:var(--status-ink);font-size:13px;font-weight:750;line-height:1.4;/* Adopted from the preview 21 September 2026 with D-11's third divergence.
    It scopes --cr-outline to the status ink for the chip's subtree. Nothing
-   in the library reads it there today: --cr-outline is consumed by
-   .cr-input, .cr-dialog, the Frost/Resin border and the two scrollbar
-   rules, none of which can match inside a chip, and the
-   chip's own rim comes from --cr-rim. Kept because the preview carries it
-   and a consumer may nest something that reads it; it is not a claim that
-   anything renders differently. */--cr-outline:var(--status-ink)}.cr-status[data-status=success]{--status-surface:var(--cr-success-surface);--status-ink:var(--cr-success-ink)}.cr-status[data-status=attention]{--status-surface:var(--cr-attention-surface);--status-ink:var(--cr-attention-ink)}.cr-status[data-status=danger]{--status-surface:var(--cr-danger-surface);--status-ink:var(--cr-danger-ink)}.cr-status[data-status=info]{--status-surface:var(--cr-info-surface);--status-ink:var(--cr-info-ink)}
+   in the library reads it there: --cr-outline is consumed by .cr-input,
+   .cr-dialog, the Frost/Resin border and the two scrollbar rules, none of
+   which can match inside a chip, and the chip's own rim comes from
+   --cr-rim. It is kept because the preview carries it and a consumer may
+   nest something that reads it. It changes nothing the library renders. */--cr-outline:var(--status-ink)}.cr-status[data-status=success]{--status-surface:var(--cr-success-surface);--status-ink:var(--cr-success-ink)}.cr-status[data-status=attention]{--status-surface:var(--cr-attention-surface);--status-ink:var(--cr-attention-ink)}.cr-status[data-status=danger]{--status-surface:var(--cr-danger-surface);--status-ink:var(--cr-danger-ink)}.cr-status[data-status=info]{--status-surface:var(--cr-info-surface);--status-ink:var(--cr-info-ink)}
 .cr-bubble{background:var(--cr-surface);color:var(--cr-text);border:1px solid var(--cr-edge);border-radius:6px var(--cr-radius) var(--cr-radius) var(--cr-radius);box-shadow:var(--cr-shadow-content);padding:14px 18px;line-height:1.5;font-size:16px}.cr-bubble.own{border-radius:var(--cr-radius) 6px var(--cr-radius) var(--cr-radius);background:var(--cr-primary-soft);color:var(--cr-on-primary-soft)}[dir=rtl] .cr-bubble{border-radius:var(--cr-radius) 6px var(--cr-radius) var(--cr-radius)}[dir=rtl] .cr-bubble.own{border-radius:6px var(--cr-radius) var(--cr-radius) var(--cr-radius)}
-.cr-dock{display:flex;align-items:center;gap:4px;padding:8px;max-width:100%}.cr-dock-inner{display:flex;gap:3px;align-items:center;border-radius:999px;background:var(--cr-label-fill);padding:3px;width:100%}.cr-dock button{min-height:44px;border:0;background:none;padding:10px 17px;border-radius:999px;font-weight:700;white-space:nowrap;color:var(--cr-text)}/* The underline this rule used to draw under a selected dock label is gone.
-   Selection is carried by label weight alone, the adopted component layer
-   sets text-decoration:none over it, and a declaration that neither renders
-   nor matches the specification is worse than an absent one. */
+.cr-dock{display:flex;align-items:center;gap:4px;padding:8px;max-width:100%}.cr-dock-inner{display:flex;gap:3px;align-items:center;border-radius:999px;background:var(--cr-label-fill);padding:3px;width:100%}.cr-dock button{min-height:44px;border:0;background:none;padding:10px 17px;border-radius:999px;font-weight:700;white-space:nowrap;color:var(--cr-text)}/* A selected dock label has no underline. Selection is carried by label
+   weight alone, and the component layer sets text-decoration:none. */
 .cr-dock button[aria-pressed=true]{background:var(--cr-primary);color:var(--cr-on-primary);box-shadow:0 2px 5px #0002}.cr-dock button:hover:not([aria-pressed=true]){background:var(--cr-surface)}
 .cr-dialog{border:1px solid var(--cr-outline);background:var(--cr-surface);color:var(--cr-text);padding:30px;border-radius:calc(var(--cr-radius) + 6px);width:min(560px,calc(100% - 32px));box-shadow:var(--cr-shadow-float);max-height:85dvh;overflow:auto;overflow-x:hidden}.cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fill);backdrop-filter:blur(var(--cr-mirage-blur)) saturate(var(--cr-mirage-saturation)) brightness(var(--cr-mirage-brightness));-webkit-backdrop-filter:blur(var(--cr-mirage-blur)) saturate(var(--cr-mirage-saturation)) brightness(var(--cr-mirage-brightness))}.cr-dialog header{display:flex;justify-content:space-between;align-items:start;gap:20px}.cr-dialog h2{font-size:26px}.cr-dialog footer{display:flex;gap:10px;justify-content:flex-end;margin-top:24px}.cr-dialog pre{max-height:300px;overflow:auto}
 [data-effects=opaque] :is(.cr-frost,.cr-acrylic),[data-effects=opaque] :is(.cr-resin,.cr-glass){backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--cr-surface);border-color:var(--cr-outline)}[data-effects=opaque] :is(.cr-frost,.cr-acrylic):before{display:none}
@@ -111,9 +104,8 @@ dialog.cr-dialog{position:fixed}
 
 /* Scrolling.
  *
- * A scrollbar in Crystal belongs to the material it scrolls, not to the
- * operating system. There are two, and which one a surface gets follows the
- * hierarchy rather than taste:
+ * A scrollbar in Crystal belongs to the material it scrolls. There are two, and
+ * the material hierarchy decides which one a surface gets:
  *
  *   .cr-scroll-frost   panels and long reading surfaces. Frost is the
  *                      intermediate layer, so a scrollbar on a panel reads as
@@ -122,31 +114,32 @@ dialog.cr-dialog{position:fixed}
  *                      scrollers. Resin is the control plane, and a scrollbar
  *                      there is a control sitting above content.
  *
- * `.cr-scroll` is the shared behaviour both build on, and is worth applying to
- * any scroll container on its own:
+ * `.cr-scroll` is the shared behaviour both build on, and can be applied to any
+ * scroll container on its own:
  *
  *   - `overscroll-behavior: contain` stops scroll chaining. On a phone, swiping
  *     a table that has reached its end otherwise scrolls the page underneath,
  *     which reads as the table refusing to move.
  *   - `scrollbar-gutter: stable` keeps content from shifting in the inline
- *     direction when a vertical scrollbar appears, which is what makes a growing
- *     list jitter. It is not applied to horizontal-only scrollers, where it
- *     reserves space against a scrollbar that never arrives — add `.cr-scroll-x`
- *     to say a scroller is horizontal-only, since CSS cannot work that out.
- *   - `touch-action: pan-x pan-y` keeps a browser's own gesture handling rather
- *     than replacing it, so momentum and rubber-banding still feel native.
+ *     direction when a vertical scrollbar appears, which otherwise makes a
+ *     growing list jitter. It is not applied to horizontal-only scrollers,
+ *     where it reserves space for a scrollbar that never arrives. Add
+ *     `.cr-scroll-x` to say a scroller is horizontal-only, since CSS cannot
+ *     work that out.
+ *   - `touch-action: pan-x pan-y` keeps the browser's own gesture handling, so
+ *     momentum and rubber-banding stay native.
  *
- * What this cannot do is give a scrollbar the actual material. `backdrop-filter`
+ * These classes cannot give a scrollbar the material itself. `backdrop-filter`
  * has no effect on a scrollbar, and the standard properties expose only two
- * colours and a coarse width, so what these deliver is the right Frost or Resin
- * colour rather than real diffusion. CONTRACT §2 already says a CSS
- * approximation is not a native optical specification; a surface that needs the
- * true material uses the scroll-area component, which draws its own thumb as a
- * real element and can carry the material in full. */
+ * colours and a coarse width, so the classes deliver the Frost or Resin colour
+ * without the diffusion. CONTRACT §2 says a CSS approximation is not a native
+ * optical specification. A surface that needs the true material uses the
+ * scroll-area component, which draws its own thumb as a real element and can
+ * carry the material in full. */
 /* A dialog's own code block scrolls too, and a scrollable descendant owes the
-   contract on its own account: `scrollbar-color` and `scrollbar-width` inherit,
-   so it already looks right, but `overscroll-behavior` does not — which is the
-   half that a swipe actually notices. */
+   contract itself. `scrollbar-color` and `scrollbar-width` inherit, so it
+   already looks right. `overscroll-behavior` does not inherit, so it is set
+   here. */
 .cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog,.cr-dialog pre{
   overscroll-behavior:contain;
   touch-action:pan-x pan-y;
@@ -155,23 +148,22 @@ dialog.cr-dialog{position:fixed}
 /* The gutter belongs to vertical scrolling only. `scrollbar-gutter` reserves
    space on the inline edge, where a vertical scrollbar appears; it does nothing
    for a horizontal one. `.cr-table-scroll` scrolls horizontally and is therefore
-   excluded — reserving a gutter there costs every table 12px and prevents no
+   excluded: reserving a gutter there costs every table 12px and prevents no
    shift. A dialog takes `both-edges` because its content is centred, and a
    gutter on one side alone would sit it off-centre. */
 .cr-scroll,.cr-scroll-frost,.cr-scroll-resin{scrollbar-gutter:stable}
 .cr-dialog{scrollbar-gutter:stable both-edges}
-/* A dialog's code block scrolls down past 300px, and it had the contract's other
-   parts and not this one: on a desktop its text moved 10px when the scrollbar
-   arrived. Found by the scroll gate on a Pixel 6 Pro, which opened a dialog with
-   code in it for the first time (D-4); a phone's overlay scrollbar hid it. */
+/* A dialog's code block scrolls down past 300px. Without a stable gutter its
+   text moves 10px on a desktop when the scrollbar arrives (D-4). A phone's
+   overlay scrollbar hides the shift. */
 .cr-dialog pre{scrollbar-gutter:stable}
 /* A horizontal-only scroller says so, because the stylesheet cannot tell. Setting
    `overflow-x: auto` alone makes `overflow-y` compute to `auto` as well, so the
    browser reserves the inline gutter for a vertical scrollbar that can never
-   appear — 12px lost on every such surface, protecting against no shift. This is
+   appear: 12px lost on every such surface, protecting against no shift. This is
    the declaration `.cr-table-scroll` gets by being excluded from the rule above,
-   made available to anything that reaches for one of the three classes directly.
-   It comes after them, so it wins on order alone without raising specificity. */
+   made available to anything that uses one of the three classes directly. It
+   comes after them, so it wins on order alone without raising specificity. */
 .cr-scroll-x{overflow-x:auto;overflow-y:hidden;scrollbar-gutter:auto}
 
 /* A dialog is a reading surface, so it takes the Frost scrollbar; the table
@@ -192,27 +184,27 @@ dialog.cr-dialog{position:fixed}
 
 /* The scroll area's edge fade.
  *
- * A fade says there is more in that direction, which a scrollbar alone does not
- * on a touch device where the scrollbar is an overlay that is not there yet. It
- * is a mask rather than a painted overlay, because what a painted overlay would
- * have to paint is the surrounding material, and a colour approximating a
- * translucent material over an unknown backdrop is wrong at every edge except
- * the one it was sampled at. Masking lets the real material show through.
+ * A fade says there is more in that direction. A scrollbar alone does not say
+ * so on a touch device, where the scrollbar is an overlay that has not appeared
+ * yet. The fade is a mask, because a painted overlay would have to paint the
+ * surrounding material, and a colour approximating a translucent material over
+ * an unknown backdrop is wrong at every edge except the one it was sampled at.
+ * Masking lets the real material show through.
  *
  * `data-cr-scroll` says which edges have content beyond them and is set by
- * whatever runtime owns the container — Crystal React sets it from a scroll
- * listener. Absent the attribute nothing fades, so a container that never gets a
- * runtime is unmasked rather than permanently faded at both ends.
+ * whatever runtime owns the container. Crystal React sets it from a scroll
+ * listener. Without the attribute nothing fades, so a container that never
+ * gets a runtime stays unmasked.
  *
- * `scroll-padding` is the part that keeps this accessible: browsers scroll a
- * newly focused element into view respecting scroll padding, so a focus ring can
- * never come to rest underneath the fade. Crystal does not blur focus, and a
- * fade over one would be the same defect by another route.
+ * `scroll-padding` keeps the fade accessible: browsers scroll a newly focused
+ * element into view respecting scroll padding, so a focus ring can never come
+ * to rest underneath the fade. Crystal does not blur focus, and a fade over a
+ * focus ring would blur it.
  *
- * A mask fades the whole element, its own fill and border included. So the fade
- * belongs on the element that scrolls, and a material surface that also scrolls
- * puts its material on a wrapper — otherwise the panel dissolves along with the
- * content it is holding. */
+ * A mask fades the whole element, its own fill and border included. The fade
+ * therefore belongs on the element that scrolls, and a material surface that
+ * also scrolls puts its material on a wrapper. Otherwise the panel fades along
+ * with the content it holds. */
 :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll]{
   --cr-scroll-fade-start:0px;--cr-scroll-fade-end:0px;
   scroll-padding:var(--cr-scroll-fade);
@@ -238,27 +230,26 @@ dialog.cr-dialog{position:fixed}
     #000 calc(100% - var(--cr-scroll-fade-end)),transparent 100%);
 }
 @media(forced-colors:active){
-  /* Forced colours exist to make everything legible. A fade is the opposite of
-     that, and the scrollbar is already system-coloured, so the edge says enough. */
+  /* Forced colours exist to make everything legible, and a fade reduces
+     legibility. The scrollbar is already system-coloured and marks the edge. */
   :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll]{mask-image:none}
 }
 
-/* The older path, for engines that predate the standard properties — Safari
- * before 18.2, Chromium before 121. It is deliberately exclusive with the block
- * above rather than additional to it.
+/* The older path, for engines that predate the standard properties: Safari
+ * before 18.2, Chromium before 121. It is exclusive with the block above. The
+ * guard makes each engine take exactly one mechanism.
  *
  * Chromium 121 and later ignore every `::-webkit-scrollbar` pseudo-element on a
  * container whose `scrollbar-width` or `scrollbar-color` is anything but `auto`,
  * and they are set above on exactly these selectors. Left unguarded, these rules
- * are dead in the browser most people use and live in the one they don't, which
- * is two renderings of one specification — the drift CONTRACT §1 forbids. The
- * guard makes each engine take exactly one mechanism.
+ * are dead in the browser most people use and live in the older ones, so one
+ * specification renders two ways. That is the drift CONTRACT §1 forbids.
  *
- * What the older path can express and the standard properties cannot is
- * geometry: `--cr-scrollbar-width`, `--cr-scrollbar-inset` and
- * `--cr-scrollbar-thumb-min` reach only this branch, because `scrollbar-width`
- * takes `auto | thin | none` and nothing finer. Those three tokens are the older
- * path's statement of the same intent, not a second specification. */
+ * The older path can express geometry, which the standard properties cannot:
+ * `--cr-scrollbar-width`, `--cr-scrollbar-inset` and `--cr-scrollbar-thumb-min`
+ * reach only this branch, because `scrollbar-width` takes `auto | thin | none`
+ * and nothing finer. Those three tokens state the same intent as the standard
+ * branch for the older path. */
 @supports not (scrollbar-color:auto){
   :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog)::-webkit-scrollbar{
     width:var(--cr-scrollbar-width);height:var(--cr-scrollbar-width);
@@ -320,29 +311,22 @@ dialog.cr-dialog{position:fixed}
    only ever in the preview's stylesheet.
 
    `.cr-control`, `.cr-field-shell`, `.cr-indicator`, `.cr-resin-haze` and
-   `.cr-tag` are named throughout `docs/components.md` — the indicator's 20px
-   circle with its 3px-inset 80% Haze fill, `.cr-resin-haze` as the composition
-   small display elements use — and until 21 September 2026 the library shipped
-   none of them. `components.md` said "use `assets/controls.css` after the base
-   and layout styles", and `assets/controls.css` is not in this package and never
-   was. A consumer following the specification reached for five components that
-   did not exist, which is why Crystal React had to rebuild the control surface
-   in SCSS rather than consume it.
+   `.cr-tag` are named throughout `docs/components.md`: the indicator is a 20px
+   circle with a 3px-inset 80% Haze fill, and `.cr-resin-haze` is the
+   composition small display elements use. The library adopted them on
+   21 September 2026 as D-11's third divergence, on Meridian's decision that the
+   library adopts rather than the preview drops. They are lifted from
+   `crystal-preview/website/assets/controls.css` with the selector lists
+   filtered to the Crystal parts. The preview's own furniture (`.suite-switch`,
+   `.segmented`, the range inputs) shares those rules and stays with the site.
 
-   That is D-11's third divergence, and Meridian decided on 21 September that the
-   library adopts rather than the preview drops. Lifted from
-   `crystal-preview/website/assets/controls.css` with its selector lists filtered
-   to the Crystal parts: the preview's own furniture — `.suite-switch`,
-   `.segmented`, the range inputs — shares those rules and stays with the site.
-
-   In `@layer crystal.component`, which is where the preview had it and where the
-   layer order at the top of this file already reserves a slot. That matters for
-   more than tidiness: the rules above sit in `crystal.reset`, an earlier layer,
-   so these win regardless of specificity — which is what let a reset-layer hover
-   (D-21) and a reset-layer target size (D-20) publish values that never
-   rendered. A component recipe belongs in this layer or nowhere. The cascade is
-   the one the preview has been rendering all along, which is what makes this an
-   adoption rather than a redesign.
+   The block sits in `@layer crystal.component`, where the preview had it and
+   where the layer order at the top of this file reserves a slot. The rules
+   above sit in `crystal.reset`, an earlier layer, so these win regardless of
+   specificity; a reset-layer hover (D-21) and a reset-layer target size (D-20)
+   both published values this layer erased. A component recipe belongs in this
+   layer or nowhere. The cascade is the one the preview renders, so this is an
+   adoption and not a redesign.
    --------------------------------------------------------------------------- */
 @layer crystal.component {
 :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status) {
@@ -481,12 +465,11 @@ span.cr-field-shell :is(input,select,textarea):focus-visible {
 :is(.cr-resin,.cr-glass,.cr-resin-haze) :is(button,a.cr-button,.cr-button,.cr-control) {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    /* backdrop-filter silently creates a stacking context, and these controls
-     paint their fill on a ::before at z-index -1 which was relying on it. Drop
-     the filter alone and that pseudo-element escapes to the nearest ancestor
-     context and paints behind the button's own background instead of above it —
-     which erased the selected dock label completely. Isolation restores the
-     containment without restoring the second blur. */
+    /* backdrop-filter creates a stacking context, and these controls paint
+     their fill on a ::before at z-index -1 that relies on it. Without the
+     filter that pseudo-element escapes to the nearest ancestor context and
+     paints behind the button's own background instead of above it. Isolation
+     restores the containment without restoring the second blur. */
     isolation: isolate;
 }
 .cr-indicator {
@@ -653,30 +636,24 @@ span.cr-field-shell:focus-within {
 
 
 /* ---------------------------------------------------------------------------
-   Second adoption pass — 21 September 2026, D-11's third divergence.
+   Second adoption pass, 21 September 2026, D-11's third divergence.
 
    The first pass lifted the Resin interaction surface and five components the
-   preview defined and the library did not, and was verified by rendering the
-   site both ways and finding the pixels identical. That proved the lift was
-   faithful. It proved nothing about what `controls.css` still overrode once
-   the lift had landed, because both sides of that comparison kept the sheet.
+   preview defined and the library did not. This pass holds what `controls.css`
+   still overrode once that lift had landed, measured against library 2.1.0
+   with the stripped sheet as the only variable. A rule belongs to the preview
+   only if it names a class or id outside Crystal's `cr-` namespace; everything
+   else is the library's. That predicate fails closed.
 
-   Measuring the residual — library 2.1.0, the stripped sheet as the only
-   variable — found a great deal. Three attempts to classify it by selector
-   shape gave three different answers (29, 51, and still leaking), so the
-   question was inverted: a rule belongs to the preview only if it names a
-   class or id outside Crystal's `cr-` namespace, and everything else is the
-   library's. That fails closed, the way discovery-by-list does.
+   The partition is 75 rules and 238 declarations here, 50 rules left with the
+   preview, 2 dropped. This block is generated from `controls.css` by that
+   partition, so the two sides cannot drift.
 
-   The partition is **75 rules and 238 declarations** here, 50 rules left with
-   the preview, 2 dropped. This block is generated from `controls.css` by that
-   partition rather than transcribed, so the two sides cannot drift.
+   Beyond geometry, the library styled no native form control before this
+   pass: checkbox, radio, range, file button, select option and menu item all
+   lived only in the preview.
 
-   What the library turned out to be missing, beyond geometry: it styled no
-   native form control at all — no checkbox, radio, range, file button, select
-   option or menu item lived here, only in the preview.
-
-   Three exceptions, each decided rather than derived:
+   Three exceptions to the predicate, each a decision:
 
    · `:not(.swatch)` is stripped from the sheen selector. `.swatch` is the
      preview's; the sheen is Crystal's. The preview keeps its swatches flush
@@ -684,68 +661,59 @@ span.cr-field-shell:focus-within {
    · `.cr-dock-inner` stays with the preview. `components.md` says it shares
      the Stone recipe; `materials.md` says a label on a Resin dock takes its
      own chip. The preview follows one and the library the other, and the
-     preview's rule is measurably too broad — it also blanks
-     `.cr-dock-inner.cr-stone`, the preview's own "Stone on Resin" specimen.
-     That is Meridian's line to draw, and it is filed rather than guessed.
+     preview's rule is too broad: it also blanks `.cr-dock-inner.cr-stone`,
+     the preview's own "Stone on Resin" specimen. The line is Meridian's to
+     draw, and it is filed rather than guessed.
    · `.cr-button.danger`'s neutralisation is dropped from both. It styles
-     nothing on the preview, and status colours are never redefined. The danger
-     boundary below comes from `components.md`, not from the preview.
+     nothing on the preview, and status colours are never redefined. The
+     danger boundary below comes from `components.md`.
    --------------------------------------------------------------------------- */
 @layer crystal.component {
 
 /* Destructive actions take the Resin/Haze surface every button has, plus the
-   independent danger boundary components.md requires. The reset layer used to
-   ask for a danger *fill*; the component layer has silently outranked it since
-   the surface was adopted, which left a danger button indistinguishable from
-   any other button in the library. The boundary is the documented carrier. */
+   independent danger boundary components.md requires. The boundary is the
+   documented carrier. A danger fill cannot live in the reset layer: this layer
+   outranks it, so a fill declared there does not render. */
 .cr-button.danger {
     border-color: var(--cr-danger-ink)
 }
 
-/* The primary action's *reading fill* is the primary colour.
+/* The primary action's reading fill is the primary colour.
  *
  * Meridian, 22 September 2026, twice. First: "the Haze content fill should adopt
  * the primary color, not the rim. The text color will need to be adjusted
- * depending on the primary color." Then, against the first attempt: "the Primary
- * button now has no Haze content fill … return Primary's Haze content fill, and
- * make the color of that content fill the primary color."
+ * depending on the primary color." Then: "the Primary button now has no Haze
+ * content fill … return Primary's Haze content fill, and make the color of that
+ * content fill the primary color."
  *
- * What was wrong before either of those: the reset layer asked for
- * `background:var(--cr-primary)` on `.cr-button`, and the Resin control rule in
- * this layer has outranked it since the surface was adopted — so the primary
- * colour survived only as the 8px ring of element background left exposed around
- * an inset, white Haze fill, with white `onPrimary` text sitting on that white
- * fill. The colour was in the rim by accident and the label was barely legible.
- *
- * What was wrong with the first attempt: it used `--cr-haze-own-fill`, the
- * palette's content-own surface at Haze's 80%. That is a *soft* tone, and over
- * Crystal's own light atmosphere an 80% soft tone is within a few percent of the
- * Resin shell around it. The fill was there and nobody could see it — which is
- * what Meridian reported, and it is also not "the primary color".
- *
- * So the fill is `--cr-primary` itself, and the ink is `--cr-on-primary`: the
- * palette's own tested pair, which `validate-tokens` already holds across all six
+ * The fill is `--cr-primary` itself and the ink is `--cr-on-primary`: the
+ * palette's own tested pair, which `validate-tokens` holds across all six
  * palettes and both modes. Measured against the rendered composite it is 4.74 to
  * 10.31, tightest on Ion in light mode.
  *
- * The fill is opaque where Haze's neutral fill is 80%, and that is the one
- * deliberate deviation here rather than an oversight. An 80% fill transmits a
- * fifth of whatever is behind it; white over a light page is still white, so the
- * neutral pad loses nothing, but a mid-tone primary at 80% over the Resin shell
- * composites to a washed-out lilac that sits at the exact luminance where neither
- * a white nor a near-black label clears 4.5 — measured, it is 3.37 to 4.55 with
- * `onPrimary` and 2.95 to 5.06 with `text`, failing in every light palette. A
- * reading ground whose whole job is to make the label independent of the backdrop
- * cannot be the one thing that depends on it.
+ * Two other placements do not carry the colour. A `background:var(--cr-primary)`
+ * on `.cr-button` in the reset layer is outranked by the Resin control rule in
+ * this layer, so the primary survives only as the 8px ring of element background
+ * left exposed around the inset, white Haze fill, with white `onPrimary` text on
+ * that white fill. `--cr-haze-own-fill`, the palette's content-own surface at
+ * Haze's 80%, is a soft tone, and over Crystal's own light atmosphere an 80%
+ * soft tone is within a few percent of the Resin shell around it.
  *
- * The rim stays the Resin rim. The colour is in the fill; the perimeter is glass,
+ * The fill is opaque where Haze's neutral fill is 80%, and that was decided. An
+ * 80% fill transmits a fifth of whatever is behind it. White over a light page
+ * is still white, so the neutral pad loses nothing, but a mid-tone primary at
+ * 80% over the Resin shell composites to a washed-out lilac at the luminance
+ * where neither a white nor a near-black label clears 4.5. Measured, it is 3.37
+ * to 4.55 with `onPrimary` and 2.95 to 5.06 with `text`, failing in every light
+ * palette. The reading ground exists to make the label independent of the
+ * backdrop, so it cannot itself depend on the backdrop.
+ *
+ * The rim stays the Resin rim. The colour is in the fill, and the perimeter is
  * the same glass every other control has.
  *
- * The tint is opt-in, on `.primary`, rather than applying to any button that is
- * not something else. It used to read `:not(.secondary):not(.quiet):not(.danger)`,
- * which was one forgotten modifier away from painting the whole surface, and it
- * named `.secondary` — a variant Crystal withdrew when it was established that
- * the palettes define one action pair and no second one.
+ * The tint is opt-in, on `.primary`. A rule that enumerates the variants it must
+ * not tint paints every variant it forgets, and there is no `.secondary`: the
+ * palettes define one action pair and no second one.
  */
 .cr-button.primary {
     color: var(--cr-on-primary)
@@ -758,19 +726,16 @@ span.cr-field-shell:focus-within {
  *
  * Meridian, 22 September 2026: "remove the Haze content fill from the Quiet
  * buttons." With the pad gone, quiet is the only one of the four that is glass
- * all the way through — a Resin shell, its rim, its float shadow and its sheen,
- * and the label directly on the material. That is what makes it quiet, and it is
- * the distinction that was missing when quiet took the base surface an hour
- * earlier: primary is tinted, secondary is the neutral pad, quiet is neither.
+ * all the way through: a Resin shell, its rim, its float shadow and its sheen,
+ * and the label directly on the material.
  *
- * The consequence is worth stating where it lives rather than being discovered.
- * The pad is what makes a label's contrast independent of whatever is behind the
- * control; without it the label reads against the Resin fill and therefore
- * against the backdrop. On Crystal's own foundation that is a wide margin —
+ * The pad is what makes a label's contrast independent of whatever is behind
+ * the control. Without it the label reads against the Resin fill and therefore
+ * against the backdrop. On Crystal's own foundation the margin is wide:
  * measured across all six palettes and both modes, `--cr-text` over the Resin
- * fill over canvas, surface, surface-alt and foundation is 10.88 to 18.28 — but
- * a quiet button placed over artwork has no protected ground, and that is the
- * one composition to avoid.
+ * fill over canvas, surface, surface-alt and foundation is 10.88 to 18.28. A
+ * quiet button placed over artwork has no protected ground, and that is the one
+ * composition to avoid.
  */
 .cr-button.quiet::before {
     display: none
@@ -1180,21 +1145,19 @@ span.cr-status>span {
 
 
 /* ---------------------------------------------------------------------------
-   Component recipes for the catalogue — 28 September 2026.
+   Component recipes for the catalogue, 28 September 2026.
 
    `core/tokens/surfaces.json` names the closed set of material compositions a
-   component may be made of, and every catalogue entry now says which it is.
-   Most of the vocabulary was already here. Four compositions were not, and
-   each was found the same way: Crystal React reached a component the catalogue
-   specified, looked for the recipe, and rebuilt it locally with a comment
-   saying Crystal had none. The R-19 sweep named them — a navigation link, a
-   nav rail item, a drag handle, and the "bare" control that eighteen distinct
-   controls and 127 instances had been approximating with `background:
-   transparent`, which takes off one layer of the Resin coat and leaves four.
+   component may be made of, and every catalogue entry says which it is. Most
+   of the vocabulary was already here. Four compositions were not, and the R-19
+   sweep named them: a navigation link, a nav rail item, a drag handle, and the
+   "bare" control that eighteen distinct controls and 127 instances in Crystal
+   React had been approximating with `background: transparent`, which takes off
+   one layer of the Resin coat and leaves four.
 
    Each recipe is authored here, in `@layer crystal.component`, and nowhere
-   else. Not in `crystal.reset`: D-20 and D-21 were both rules authored there
-   that this layer erased, and a recipe that may not render is worse than none.
+   else. A rule authored in `crystal.reset` is erased by this layer (D-20,
+   D-21), and a recipe that may not render is worse than none.
 
    Everything reads tokens where a token exists and falls back to the literal
    the token publishes, so a stylesheet loaded without the generated theme
@@ -1206,22 +1169,23 @@ span.cr-status>span {
  *
  * Selector note, which applies to the three recipes below: the coat is keyed on
  * `:is(button, a.cr-button, …)`, specificity (0,1,1), in this same layer. A lone
- * class is (0,1,0) and loses to it whatever the source order — measured, a
- * `<button class="cr-bare">` kept the fill, the rim and the blur. Each recipe
- * therefore carries the element compound and reaches (0,2,0). A rule that must
- * beat the coat and does not say so in its selector is D-20 by another route.
+ * class is (0,1,0) and loses to it whatever the source order; measured, a
+ * `<button class="cr-bare">` under a lone-class rule keeps the fill, the rim
+ * and the blur. Each recipe therefore carries the element compound and reaches
+ * (0,2,0). A rule that must beat the coat and does not say so in its selector
+ * fails the way D-20 did.
  *
- * Crystal paints the Resin coat by element — `:is(button, …)` above — so a
+ * Crystal paints the Resin coat by element, `:is(button, …)` above, so a
  * `<button>` wears the fill, the rim, the float shadow, the backdrop blur and
  * both feathered pseudo-layers whether or not anything asked. A control that
  * sits inside a surface which already has a coat must not wear a second one: a
  * disclosure chevron, a chip's remove button, a sort header, a stepper's arrows,
  * the dismiss button on a toast. Declaring `background: transparent` on one of
  * those takes off one layer of five. This takes off all five and keeps what a
- * control still owes — the 44px target, the pill hit area, the focus ring.
+ * control still owes: the 44px target, the pill hit area and the focus ring.
  *
  * It is not `.cr-button.quiet`. Quiet keeps the whole shell and drops only the
- * reading pad, which is what makes a quiet *button* quiet; a chevron is not a
+ * reading pad, which is what makes a quiet button quiet; a chevron is not a
  * Resin control that has been quietened.
  */
 :is(button, a, [role=button], .cr-bare).cr-bare {
@@ -1256,7 +1220,7 @@ span.cr-status>span {
     filter: none;
 }
 /* An on state without a reading pad has nothing to tint, so it takes the
-   weight half of the selection rule and keeps the surface ink — the element
+   weight half of the selection rule and keeps the surface ink. The element
    rule above would otherwise leave on-primary ink on a transparent ground. */
 .cr-bare:is([aria-pressed=true],[aria-selected=true],[aria-checked=true]) {
     color: var(--cr-text);
@@ -1291,22 +1255,22 @@ span.cr-status>span {
 /* A navigation entry.
  *
  * `docs/components.md` names the documentation site's side menu as the
- * reference implementation of selection, and until now that recipe lived only
- * in the site's own stylesheet — the same shape as D-9, a specification only
- * one renderer could read. Lifted from `crystal-preview` `.menu-item` as it
- * renders: an entry is furniture on the panel beneath it, so it has no material
- * of its own and no Resin coat. Thirteen floating capsules in a sidebar would
- * be exactly the legibility noise the hierarchy exists to prevent. The pill
- * geometry stays, because "go here" is an action.
+ * reference implementation of selection. The recipe is lifted from
+ * `crystal-preview` `.menu-item` as it renders, so that it no longer lives only
+ * in the site's own stylesheet (the shape of D-9). An entry is furniture on the
+ * panel beneath it, so it has no material of its own and no Resin coat.
+ * Thirteen floating capsules in a sidebar would be the legibility noise the
+ * hierarchy exists to prevent. The pill geometry stays, because "go here" is
+ * an action.
  *
  * Selection is label weight, 650 at rest and 800 when current. Nothing is drawn
  * beside the label for selection. `.stacked` puts the icon above the label for a
  * rail.
  *
- * Current *location* is a different indicator, and the catalogue says so: "current
+ * Current location is a different indicator, and the catalogue says so: "current
  * location is a dot; selection within a set is label weight" (D-22, ruled on
- * 28 September 2026). The dot is drawn on `aria-current` only — never for
- * `aria-selected` or `aria-pressed`, which are selection — and it sits inside the
+ * 28 September 2026). The dot is drawn on `aria-current` only, never for
+ * `aria-selected` or `aria-pressed`, which are selection. It sits inside the
  * entry's own inline-start padding, absolutely positioned, so the label does not
  * move by a pixel when the page changes. It is a flat mark in the primary colour:
  * no material, no elevation, no blur. An entry is furniture on the panel beneath
@@ -1390,9 +1354,10 @@ span.cr-status>span {
 }
 
 /* A Resin panel: the Resin plane with the content radius instead of the pill,
-   for a floating control plane that is a rectangle — a floating window, a wide
-   media control bar. Fill, rim, blur and shadow are the plane's; only the
-   geometry changes, and it matches the Frost panel's so nested radii line up. */
+   for a floating control plane that is a rectangle, such as a floating window
+   or a wide media control bar. Fill, rim, blur and shadow are the plane's; only
+   the geometry changes, and it matches the Frost panel's so nested radii line
+   up. */
 :is(.cr-resin,.cr-glass).panel {
     border-radius: calc(var(--cr-radius) + 6px);
 }
@@ -1451,10 +1416,10 @@ input[type=radio] {
 }
 
 /* Disabled. The reset layer dims a native `button:disabled` and nothing else,
-   so an action link, a control span and a navigation entry had no disabled
-   state at all. The opacity is the published token; a disabled element must
-   still not be the only explanation of unavailability, and the product still
-   has to refuse the action — this only shows that it will. */
+   so an action link, a control span and a navigation entry take their disabled
+   state here. The opacity is the published token. A disabled element must not
+   be the only explanation of unavailability, and the product still has to
+   refuse the action; this only shows that it will. */
 button:disabled,
 :is(a.cr-button,.cr-control,.cr-nav-item,.cr-bare,.cr-drag-handle)[aria-disabled=true] {
     opacity: var(--cr-action-disabled-opacity, .55);
@@ -1462,7 +1427,7 @@ button:disabled,
     filter: none;
 }
 
-/* Controls inside a Resin plane lose their own backdrop filter — the rule above
+/* Controls inside a Resin plane lose their own backdrop filter. The rule above
    lists the action controls, and these are controls too. */
 :is(.cr-resin,.cr-glass,.cr-resin-haze) :is(.cr-bare,.cr-nav-item,.cr-drag-handle) {
     backdrop-filter: none;
@@ -1510,11 +1475,11 @@ input[type=checkbox][role=switch] {
 
 
 /* ---------------------------------------------------------------------------
-   Rulings of 29 September 2026 — proposals/2026-09-29-rulings.md.
+   Rulings of 29 September 2026, proposals/2026-09-29-rulings.md.
 
-   Each recipe below closes an open issue that a consumer found by reaching for
-   Crystal and finding it did not reach: a dock whose controls were not buttons,
-   a group whose segments touch, a dialog whose body scrolls, an overlay inside a
+   Each recipe below closes an open issue a consumer found by reaching for
+   Crystal where it did not reach: a dock whose controls are not buttons, a
+   group whose segments touch, a dialog whose body scrolls, an overlay inside a
    pane, a count badge. As in the block above, each is authored in
    `@layer crystal.component` and nowhere else, and each carries its own
    reduced-transparency and forced-colours branches.
@@ -1526,8 +1491,8 @@ input[type=checkbox][role=switch] {
  * `.cr-dock button` reaches only a <button>. A tab is often `[role=tab]` on
  * another element, a segmented control is often radio inputs inside labels, and
  * a dock or bottom-bar destination is a link carrying `aria-current`. Each gets
- * the dock button's values here, selected by its own state — `aria-selected`, a
- * checked radio, `aria-current`.
+ * the dock button's values here, selected by its own state: `aria-selected`, a
+ * checked radio or `aria-current`.
  *
  * Every selector is inside `:where()`, so it adds no specificity to `.cr-dock`,
  * and the existing `.cr-dock button` rules (0,1,1) keep winning on a <button>
@@ -1561,8 +1526,8 @@ input[type=checkbox][role=switch] {
 }
 /* The radio is the control and the label is what is seen; the input stays in the
    accessibility tree and takes focus, and its ring is drawn on the label. The
-   label is matched by a radio anywhere inside it — React Aria, for one, wraps
-   its input in a visually hidden span — and only a radio that is the label's own
+   label is matched by a radio anywhere inside it (React Aria, for one, wraps
+   its input in a visually hidden span), and only a radio that is the label's own
    child is hidden here, because a wrapped one is already hidden by its wrapper. */
 .cr-dock :where(label:has(> input[type=radio])) > input[type=radio] {
     position: absolute;
@@ -1599,13 +1564,13 @@ input[type=checkbox][role=switch] {
 }
 }
 
-/* A group — the `group` surface (D-26).
+/* A group: the `group` surface (D-26).
  *
  * A button group and a split button are one Resin plane whose segments touch:
  * the silhouette is a single pill, the interior corners square off against
  * their neighbours, and a hairline in `--cr-edge` separates them. The plane is
- * the group's, so the children give up their own elevation and diffusion — a
- * Resin button on a Resin plane is the composition Crystal forbids — and keep
+ * the group's, so the children give up their own elevation and diffusion (a
+ * Resin button on a Resin plane is the composition Crystal forbids) and keep
  * their fill, so a primary action's ink still has its fill beneath it.
  *
  * The child selector is `:is(button, a.cr-button, .cr-button, .cr-control)`
@@ -1706,13 +1671,13 @@ input[type=checkbox][role=switch] {
  * A surface that scrolls takes its title out of view in a tall dialog, and
  * cannot take the edge fade, because a mask fades an element's own fill and rim
  * along with its content. So the surface is a column that does not scroll, and
- * `.cr-dialog-body` scrolls inside it — with `.cr-scroll-frost` beside it for
+ * `.cr-dialog-body` scrolls inside it, with `.cr-scroll-frost` beside it for
  * the scroll contract, the Frost scrollbar and the edge fade, since a dialog is
  * a reading surface.
  *
  * Keyed on the body's presence, so a 2.2 dialog written without one goes on
- * scrolling as its surface, exactly as before. And only an open native dialog is
- * shown: an author `display` would otherwise beat the browser's
+ * scrolling as its surface. And only an open native dialog is shown: an author
+ * `display` would otherwise beat the browser's
  * `dialog:not([open]) { display: none }`. */
 .cr-dialog:has(> .cr-dialog-body) {
     display: flex;
@@ -1722,8 +1687,8 @@ input[type=checkbox][role=switch] {
 dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     display: none;
 }
-/* The header's gap, which body paragraphs' own margins used to supply. It
-   matches the gap inside the header, as the footer's 24px matches its own. */
+/* The gap below the header. It matches the gap inside the header, as the
+   footer's 24px matches its own. */
 .cr-dialog > header + .cr-dialog-body {
     margin-top: 20px;
 }
@@ -1741,12 +1706,12 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 /* An overlay inside a pane (D-25).
  *
  * On the page a transient overlay is Frost. Inside a pane that is already
- * lifted — a Haze dialog, a Frost panel — it recesses into Haze rather than
- * floating a second pane of glass, and plain Haze has no edge: a menu drawn that
- * way over a Haze dialog cannot be told from the dialog. The recessed overlay is
- * Haze given the one boundary it needs: a flat fill, the `--cr-edge` rim and the
- * content shadow. There is no feather — a bordered box has no perimeter to
- * dissolve into its surroundings. */
+ * lifted (a Haze dialog, a Frost panel) it recesses into Haze rather than
+ * floating a second pane of glass. Plain Haze has no edge, and a menu drawn that
+ * way over a Haze dialog cannot be told from the dialog, so the recessed overlay
+ * is Haze given the one boundary it needs: a flat fill, the `--cr-edge` rim and
+ * the content shadow. There is no feather, because a bordered box has no
+ * perimeter to dissolve into its surroundings. */
 :is(.cr-haze,.cr-surface).overlay {
     border: 1px solid var(--cr-edge);
     border-radius: var(--cr-radius);
@@ -1778,8 +1743,8 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
  * `.cr-resin-haze` is sized for a tag: its Haze pad is inset by
  * `--cr-haze-inset`, 8px, and its block padding is 17px. On a 20px count badge
  * the first leaves a pad a few pixels across with the digit mostly outside it,
- * and the second makes the badge 55px tall. A count fills to its own edge — it
- * is smaller than the perimeter the inset protects — has no block padding, and
+ * and the second makes the badge 55px tall. A count fills to its own edge, since
+ * it is smaller than the perimeter the inset protects, has no block padding, and
  * is a circle that becomes a pill as the digits need it: a square minimum and a
  * pill radius, so the shape follows the content. 20px is
  * `component.indicator.size`; 4px is the smallest spacing step. */
@@ -1804,11 +1769,456 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     inset: 0;
 }
 
-/* The indicator's field glyphs now reach any field shell (D-27); a shell that is
-   a block — a label, a textarea, a row of chips — makes the same room for the
-   glyph that the inline shell always has. `:where()` so this adds nothing to the
-   shell's own specificity; the inline shell's padding rule is unchanged. */
+/* The indicator's field glyphs reach any field shell (D-27). A shell that is a
+   block (a label, a textarea, a row of chips) makes the same room for the glyph
+   that the inline shell has. `:where()` so this adds nothing to the shell's own
+   specificity; the inline shell's padding rule is unchanged. */
 :where(.cr-field-shell:not(span)):has(> .cr-indicator) {
     padding-inline-end: 40px;
+}
+}
+
+/* ---------------------------------------------------------------------------
+   Media and text recipes, proposals/2026-10-02-media-text-and-recipe-parity.md.
+
+   The media players and the text surfaces were the two places where every
+   platform library had to invent its own layout: where the transport sits over
+   the picture and how far from the edge, what a caption cue is painted on, how a
+   heading, a checklist or an underline looks inside an editor, and where the
+   formatting toolbar goes when a touch keyboard covers half the screen. Each
+   recipe below is a composition of surfaces the vocabulary already has (Resin,
+   Stone, Frost, Haze), so no platform gains a new material; it gains the
+   geometry. As in the blocks above, each is authored in `@layer
+   crystal.component` and carries its own fallback branches.
+   --------------------------------------------------------------------------- */
+@layer crystal.component {
+
+/* The media stage.
+ *
+ * The picture's frame: the content radius, the letterbox, and the aspect ratio
+ * the product asked for, so the page does not jump when the first frame
+ * decodes. `--cr-media-aspect` is unset by default, which leaves the media's
+ * own ratio; a product sets `16 / 9`, `4 / 3`, `1` or `9 / 16`. `--cr-media-fit`
+ * is `contain`, so nothing the author filmed is cropped unless they ask for
+ * `cover`. */
+.cr-media {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    container-type: inline-size;
+    aspect-ratio: var(--cr-media-aspect, auto);
+    border-radius: var(--cr-radius);
+    background: var(--cr-surface-alt);
+    line-height: 0;
+}
+.cr-media > :is(video, img, canvas) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: var(--cr-media-fit, contain);
+}
+/* The transport's region. It is inset from the stage by the 12px spacing step on
+   every side it touches, so the Resin pill never meets the content radius
+   (a 999px pill inside a 28px corner touches it at a point), and the inset grows
+   to the safe area in full screen on a device with a notch or a home bar. */
+.cr-media-bar {
+    position: absolute;
+    z-index: 2;
+    inset-inline: var(--cr-spacing-sm);
+    inset-block-end: var(--cr-spacing-sm);
+    line-height: var(--cr-leading, 1.5);
+}
+.cr-media:fullscreen .cr-media-bar {
+    inset-inline: max(var(--cr-spacing-sm), env(safe-area-inset-left), env(safe-area-inset-right));
+    inset-block-end: max(var(--cr-spacing-sm), env(safe-area-inset-bottom));
+}
+.cr-media:fullscreen {
+    border-radius: 0;
+}
+
+/* The transport: a Resin pill holding the controls.
+ *
+ * 4px block padding around the 44px targets makes a 52px pill, the height of a
+ * dock control. 12px inline padding keeps the first and last targets' focus
+ * halos (3px offset plus the feather) inside the pill's curve. The time
+ * readouts are tabular so the bar does not shift as the seconds change. */
+:is(.cr-resin,.cr-glass).transport {
+    display: flex;
+    align-items: center;
+    gap: var(--cr-spacing-2xs);
+    min-height: 52px;
+    box-sizing: border-box;
+    padding: var(--cr-spacing-2xs) var(--cr-spacing-sm);
+    color: var(--cr-text);
+}
+:is(.cr-resin,.cr-glass).transport :where(time, output, .time) {
+    flex: none;
+    padding-inline: var(--cr-spacing-2xs);
+    font-size: var(--cr-text-caption-size);
+    font-variant-numeric: tabular-nums;
+    color: var(--cr-muted);
+}
+/* Narrow players drop the inline padding to the smallest step and let the bar
+   wrap its trailing controls onto a second row, rather than crushing the
+   scrubber to nothing. */
+@container (max-width: 420px) {
+:is(.cr-resin,.cr-glass).transport {
+    flex-wrap: wrap;
+    padding-inline: var(--cr-spacing-xs);
+    border-radius: calc(var(--cr-radius) - 4px);
+}
+}
+
+/* A caption cue is a label over a moving backdrop, which is what Stone is for.
+ *
+ * Two forms. `::cue` reaches the browser's own caption renderer, which accepts
+ * a background and a font but no pseudo-element, so the fill is flat there. A
+ * library that renders cues itself (for the same look in every engine) wears
+ * `.cr-media-caption`, which is `.cr-stone`'s feathered backing on a positioned
+ * box. The cue sits above the transport, never under it. */
+.cr-media :is(video)::cue {
+    background: var(--cr-stone-fill);
+    color: var(--cr-text);
+    font-family: var(--cr-font);
+    font-weight: 650;
+    line-height: 1.35;
+}
+.cr-media-caption {
+    position: absolute;
+    z-index: 1;
+    inset-inline: var(--cr-spacing-lg);
+    inset-block-end: calc(52px + var(--cr-spacing-sm) * 2);
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    line-height: 1.35;
+    text-align: center;
+}
+.cr-media-caption > * {
+    position: relative;
+    isolation: isolate;
+    max-width: 42ch;
+    padding: var(--cr-spacing-2xs) var(--cr-spacing-sm);
+    border-radius: var(--cr-spacing-xs);
+    color: var(--cr-text);
+    font-weight: 650;
+    font-size: clamp(15px, 3.2cqi, 28px);
+}
+.cr-media-caption > *::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--cr-stone-fill);
+    filter: blur(var(--cr-stone-feather));
+}
+
+/* The audio player: no picture, so the stage becomes a Haze reading surface
+   (title, artist, chapter) holding the transport, with the card padding every
+   other Haze card has. Worn as `.cr-haze.cr-media.audio`. */
+.cr-media.audio {
+    display: grid;
+    gap: var(--cr-spacing-sm);
+    aspect-ratio: auto;
+    overflow: visible;
+    padding: var(--cr-space);
+    /* The letterbox above is authored in this layer and would beat the Haze
+       fill, which `.cr-haze` sets in the reset layer. `revert-layer` hands the
+       background back to whichever surface the player wears. */
+    background: revert-layer;
+    line-height: var(--cr-leading, 1.5);
+}
+.cr-media.audio .cr-media-bar {
+    position: static;
+}
+
+/* A Frost overlay shaped as a bar of controls: the selection toolbar over
+   highlighted text, a floating format bar. Transient overlays are Frost
+   (R15e); this is the popover with the pill silhouette and the dock's spacing,
+   because what it holds is a row of 44px targets and not a paragraph. */
+:is(.cr-frost,.cr-acrylic).bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: var(--cr-spacing-2xs);
+    border-radius: 999px;
+}
+
+/* Prose and the editor share one typographic vocabulary.
+ *
+ * `.cr-prose` is the reading rhythm for content the product did not lay out
+ * (rendered Markdown, a CMS body); `.cr-editor` is the same vocabulary inside an
+ * editable surface, plus the caret and the selection. Headings take the type
+ * scale; lists take Crystal's markers; a checklist is native checkboxes, so it
+ * wears the selection control and its checked state is the control's, never a
+ * glyph drawn beside the text. Every decoration differs in shape as well as
+ * colour: an insertion is underlined, a deletion struck through, a highlight
+ * filled, so none of them rests on colour alone. */
+:is(.cr-prose,.cr-editor) {
+    color: var(--cr-text);
+    font-size: var(--cr-text-body-size);
+    line-height: var(--cr-text-body-leading);
+    overflow-wrap: anywhere;
+}
+:is(.cr-prose,.cr-editor) > * + * {
+    margin-top: var(--cr-spacing-sm);
+}
+:is(.cr-prose,.cr-editor) :where(h1, h2, h3, h4, h5, h6) {
+    margin: 0;
+    font-weight: 750;
+    text-wrap: balance;
+}
+:is(.cr-prose,.cr-editor) > :where(h1, h2, h3, h4, h5, h6) {
+    margin-top: var(--cr-spacing-lg);
+}
+:is(.cr-prose,.cr-editor) > :where(h1, h2, h3, h4, h5, h6):first-child {
+    margin-top: 0;
+}
+:is(.cr-prose,.cr-editor) :where(h1) {
+    font-size: var(--cr-text-title-size);
+    line-height: var(--cr-text-title-leading);
+    letter-spacing: var(--cr-text-title-tracking);
+}
+:is(.cr-prose,.cr-editor) :where(h2) {
+    font-size: var(--cr-text-heading-size);
+    line-height: var(--cr-text-heading-leading);
+    letter-spacing: var(--cr-text-heading-tracking);
+}
+:is(.cr-prose,.cr-editor) :where(h3, h4) {
+    font-size: var(--cr-text-subheading-size);
+    line-height: var(--cr-text-subheading-leading);
+}
+:is(.cr-prose,.cr-editor) :where(h5, h6) {
+    font-size: var(--cr-text-body-size);
+    line-height: var(--cr-text-body-leading);
+}
+:is(.cr-prose,.cr-editor) :where(p, ul, ol, blockquote, pre) {
+    margin-bottom: 0;
+}
+:is(.cr-prose,.cr-editor) :where(ul, ol) {
+    padding-inline-start: 1.5em;
+}
+:is(.cr-prose,.cr-editor) :where(ul, ol) :where(ul, ol) {
+    margin-top: var(--cr-spacing-2xs);
+}
+:is(.cr-prose,.cr-editor) :where(li) + :where(li) {
+    margin-top: var(--cr-spacing-2xs);
+}
+:is(.cr-prose,.cr-editor) :where(li)::marker {
+    color: var(--cr-primary);
+    font-weight: 700;
+}
+/* A checklist: `ul.checklist`, or a list whose items begin with a checkbox. The
+   checkbox is the marker, so the list's own marker and indent go; the item is a
+   row of the control and its text, top-aligned so a wrapped line keeps the
+   control on the first. */
+:is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) {
+    padding-inline-start: 0;
+    list-style: none;
+}
+:is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) > li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--cr-spacing-xs);
+}
+:is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) > li > :where(label) {
+    flex: none;
+    display: inline-flex;
+    margin-top: calc((var(--cr-text-body-leading) - var(--cr-choice-box-size, 20px)) / 2);
+}
+:is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) > li > :where(div, p, span) {
+    flex: 1;
+    min-width: 0;
+}
+/* Done is the checkbox's state. The text recedes to the muted ink so a long
+   list can be scanned, and is not struck through, which would make finished
+   work harder to read. */
+:is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) > li:where([data-checked=true], :has(> label input:checked)) > :where(div, p, span) {
+    color: var(--cr-muted);
+}
+:is(.cr-prose,.cr-editor) :where(blockquote) {
+    margin-inline: 0;
+    padding-inline-start: var(--cr-spacing-md);
+    border-inline-start: 3px solid var(--cr-primary);
+    color: var(--cr-text);
+}
+:is(.cr-prose,.cr-editor) :where(pre) {
+    position: relative;
+    isolation: isolate;
+    padding: var(--cr-spacing-md);
+    border-radius: calc(var(--cr-radius) - 12px);
+    background: var(--cr-label-fill);
+    overflow: auto;
+    overscroll-behavior: contain;
+    line-height: 1.55;
+}
+:is(.cr-prose,.cr-editor) :where(code, kbd, samp) {
+    font-family: ui-monospace, 'SF Mono', 'Cascadia Code', 'Roboto Mono', monospace;
+    font-size: 0.9em;
+}
+:is(.cr-prose,.cr-editor) :where(:not(pre) > code) {
+    padding: 0.1em 0.35em;
+    border-radius: 6px;
+    background: var(--cr-label-fill);
+}
+:is(.cr-prose,.cr-editor) :where(kbd) {
+    padding: 0.05em 0.4em;
+    border: 1px solid var(--cr-outline);
+    border-bottom-width: 2px;
+    border-radius: 6px;
+}
+:is(.cr-prose,.cr-editor) :where(a) {
+    color: var(--cr-primary);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1px;
+}
+:is(.cr-prose,.cr-editor) :where(u) {
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.2em;
+}
+:is(.cr-prose,.cr-editor) :where(s, strike) {
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+}
+:is(.cr-prose,.cr-editor) :where(ins) {
+    text-decoration: underline;
+    text-decoration-color: var(--cr-success-ink);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+}
+:is(.cr-prose,.cr-editor) :where(del) {
+    text-decoration: line-through;
+    text-decoration-color: var(--cr-danger-ink);
+    text-decoration-thickness: 2px;
+}
+:is(.cr-prose,.cr-editor) :where(mark) {
+    padding: 0 0.15em;
+    border-radius: 4px;
+    background: var(--cr-attention-surface);
+    color: var(--cr-attention-ink);
+}
+:is(.cr-prose,.cr-editor) :where(sub, sup) {
+    font-size: 0.75em;
+    line-height: 0;
+}
+:is(.cr-prose,.cr-editor) :where(hr) {
+    border: 0;
+    border-top: 1px solid var(--cr-edge);
+    margin-block: var(--cr-spacing-lg);
+}
+
+/* The editable surface: the caret in the primary ink, the selection on the
+   primary-soft pair (which clears 4.5:1 for its own text in every palette),
+   and an outline-free focus, because the field shell around it draws the ring. */
+.cr-editor {
+    caret-color: var(--cr-primary);
+    outline: none;
+    min-height: calc(var(--cr-text-body-leading) * 4);
+    padding: var(--cr-spacing-sm) var(--cr-spacing-md);
+}
+.cr-editor ::selection,
+.cr-editor::selection {
+    background: var(--cr-primary-soft);
+    color: var(--cr-on-primary-soft);
+}
+/* An empty block's prompt, read from `data-placeholder`. Engines mark the empty
+   block with `.is-empty` (ProseMirror, TipTap) or leave it `:empty`; both are
+   reached. */
+.cr-editor :where(.is-empty, :empty)[data-placeholder]::before {
+    content: attr(data-placeholder);
+    float: inline-start;
+    height: 0;
+    pointer-events: none;
+    color: var(--cr-muted);
+}
+
+/* The formatting toolbar.
+ *
+ * On a fine pointer it sits above the text and sticks to the top of the
+ * surface as the document scrolls. On a touch screen it moves below the text
+ * and sticks to the bottom, above the on-screen keyboard where the browser
+ * reports it (`keyboard-inset-height`, from the VirtualKeyboard API), so the
+ * formatting a person is using is never under their keyboard and is in reach of
+ * a thumb. */
+.cr-editor-toolbar {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px;
+    padding: var(--cr-spacing-2xs);
+    border-bottom: 1px solid var(--cr-edge);
+}
+.cr-editor-toolbar > [role=separator] {
+    align-self: stretch;
+    width: 1px;
+    margin: var(--cr-spacing-xs) var(--cr-spacing-2xs);
+    background: var(--cr-edge);
+}
+@media (pointer: coarse) {
+.cr-editor-toolbar {
+    order: 2;
+    inset-block-start: auto;
+    inset-block-end: env(keyboard-inset-height, 0px);
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior: contain;
+    border-bottom: 0;
+    border-top: 1px solid var(--cr-edge);
+    scrollbar-width: none;
+}
+.cr-editor-toolbar > * {
+    flex: none;
+    touch-action: manipulation;
+}
+}
+
+[data-effects=opaque] .cr-media-caption > *::before {
+    background: var(--cr-surface);
+    filter: none;
+}
+@media (prefers-reduced-transparency:reduce) {
+.cr-media-caption > *::before {
+    background: var(--cr-surface);
+    filter: none;
+}
+.cr-media :is(video)::cue {
+    background: var(--cr-surface);
+}
+}
+@media (forced-colors:active) {
+.cr-media {
+    border: 1px solid CanvasText;
+}
+.cr-media-caption > * {
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid CanvasText;
+}
+.cr-media-caption > *::before {
+    display: none;
+}
+:is(.cr-prose,.cr-editor) :where(mark) {
+    background: Mark;
+    color: MarkText;
+}
+:is(.cr-prose,.cr-editor) :where(ins, del) {
+    text-decoration-color: CanvasText;
+}
+.cr-editor ::selection,
+.cr-editor::selection {
+    background: Highlight;
+    color: HighlightText;
+}
+.cr-editor-toolbar,
+.cr-editor-toolbar > [role=separator] {
+    border-color: CanvasText;
+}
 }
 }

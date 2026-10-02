@@ -2,7 +2,7 @@
 
 Crystal's icon set is one grid: a 24px view box, 1.8px strokes, round caps and joins, and `currentColor` so every icon inherits a tested foreground colour.
 
-Icon files carry no stroke width, cap, join or colour of their own. Those come from the stylesheet, so the contract lives in one place and cannot drift across a thousand files. An icon that carries its own stroke is a defect, not a variant.
+Icon files carry no stroke width, cap, join or colour of their own. Those come from the stylesheet, so the contract lives in one place and cannot drift across a thousand files. An icon that carries its own stroke is a defect.
 
 Thirteen symbols are original Crystal work and live in the sprite at `assets/icons.svg`: `crystal`, `layers`, `document`, `directions`, `workspace`, `conversation`, `library`, `check`, `attention`, `alert`, `info`, `sparkle` and `chevron`. They are authoritative and are never replaced by a sourced icon of the same name. The remainder are derived from Lucide under the ISC License and vendored into `assets/icons/`; see [asset notices](../reference/ASSET-NOTICES.md).
 

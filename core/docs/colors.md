@@ -35,32 +35,31 @@ The seed is not automatically a text color. The canonical [token JSON](../tokens
 
 ### There is no secondary colour, and that is a decision
 
-Crystal defines **one action pair per palette** — `primary` with `onPrimary`, and
+Crystal defines one action pair per palette: `primary` with `onPrimary`, and
 `primarySoft` with `onPrimarySoft` for the container form. There is no
 `secondary`, and nothing in the token set, the exported theme or the component
 vocabulary names one.
 
-A palette is not one hue: each carries a seed, a **companion** and a **glow**, and
-all three ship as `--cr-decorative`, `--cr-companion` and `--cr-glow`. What they
-do not carry is an ink. They sit in the Expressive layer above precisely because
-they have never been given a tested foreground, and the resolver consumes them in
-four places, all of them paint rather than ground: the three atmosphere stops and
-the focus shadow.
+A palette has more than one hue: each carries a seed, a companion and a glow, and
+all three ship as `--cr-decorative`, `--cr-companion` and `--cr-glow`. None of
+them carries an ink. They sit in the Expressive layer above because they have
+never been given a tested foreground. The resolver consumes them in four places,
+all of them paint and none of them ground: the three atmosphere stops and the
+focus shadow.
 
-Promoting the companion is not a matter of renaming it. As a solid reading fill it
-fails the 4.5 floor with **both** candidate inks in a third of the matrix — Prism
+The companion cannot be promoted by renaming it. As a solid reading fill it
+fails the 4.5 floor with both candidate inks in a third of the matrix: Prism
 dark 3.27 against white and 3.00 against the text ink, Amethyst dark 4.02 / 3.68,
 Harbor 4.16 / 3.07 in light and 4.16 / 3.32 in dark. The other eight
-palette-and-mode combinations clear it between 4.54 and 6.60, and a role that
-works in eight of twelve is not a role. A secondary action colour would need its
-own tuned tones and its own tested ink authored per palette per mode, which is
-work nobody has done and not an omission anybody can close by promotion.
+palette-and-mode combinations clear it between 4.54 and 6.60, and eight of twelve
+is too few to define a role. A secondary action colour would need its own tuned
+tones and its own tested ink authored per palette per mode. That work has not
+been done, and promotion does not replace it.
 
-The consequence for components is that **no variant may be named after it**. A
-`.secondary` button existed until 22 September 2026 and was withdrawn for exactly
-this reason: a variant named after a colour the system does not define is a
-promise it cannot keep. Emphasis is carried by `.primary` being opt-in, by label
-weight, and by placement.
+For components, the consequence is that **no variant may be named after it**. A
+`.secondary` button existed until 22 September 2026 and was withdrawn for this
+reason: the system does not define the colour the variant was named after.
+Emphasis is carried by `.primary` being opt-in, by label weight, and by placement.
 
 ### The chart series scale, which is not that
 
@@ -69,53 +68,50 @@ therefore publishes a **series scale**: six categorical colours per palette per
 mode, as `--cr-chart-series-1` through `--cr-chart-series-6`, alongside
 `--cr-chart-axis` and `--cr-chart-grid`.
 
-This is not the secondary colour arriving by another door, and the distinction is
-worth being exact about. A series colour is **for data marks only** — a bar, a
-line, a segment, a cell. It is never ink, never an action fill, never a surface
-and never a state. It has no tested foreground, because nothing is ever set on
-top of it; that is precisely the property the companion lacks and cannot be given
-by renaming.
+The series scale is not a secondary colour. A series colour is for data marks
+only: a bar, a line, a segment, a cell. It is never ink, an action fill, a
+surface or a state. It has no tested foreground, because nothing is ever set on
+top of it. The companion lacks that property and cannot be given it by renaming.
 
-They are derived rather than picked, in `tools/build-tokens.cjs`, because the
-thing that has to be true of seventy-two colours is a measurement and not a
-preference. Take the palette's seed hue, turn half a step off it, step six times
-around the hue circle, and draw all six at one OKLab lightness (0.55 light, 0.72
-dark) and one chroma (0.18). Then:
+They are derived in `tools/build-tokens.cjs` and not picked by hand, because
+what has to be true of seventy-two colours is a measurement. Take the palette's
+seed hue, turn half a step off it, step six times around the hue circle, and draw
+all six at one OKLab lightness (0.55 light, 0.72 dark) and one chroma (0.18).
+Then:
 
-- **Every one clears 3:1 against both the surface and the canvas of its mode.** A
+- Every one clears 3:1 against both the surface and the canvas of its mode. A
   data mark is a graphical object carrying information, so WCAG 1.4.11 applies.
-  Where a hue cannot reach the floor at the stated lightness its lightness moves
-  until it does — the floor is a promise, the family resemblance is a preference.
-- **No two in a scale are closer than 0.10 in OKLab.** Segments and stacked bars
-  are adjacent to each other, not only to the ground.
-- **One lightness for all six**, deliberately: a categorical scale must not imply
-  an order, and a ramp does.
-- **The ring is centred on the palette hue rather than started from it.** A slot
-  on the seed hue at these lightnesses is the palette's action colour, and a data
-  mark the colour of every button on the page is one people try to press.
+  Where a hue cannot reach the floor at the stated lightness, its lightness moves
+  until it does: the floor takes priority over the family resemblance.
+- No two in a scale are closer than 0.10 in OKLab. Segments and stacked bars
+  are adjacent to each other as well as to the ground.
+- All six share one lightness: a categorical scale must not imply an order, and
+  a ramp does.
+- The ring is centred on the palette hue and does not start from it. A slot on
+  the seed hue at these lightnesses is the palette's action colour, and people
+  try to press a data mark that has the colour of every button on the page.
 
 All four are asserted in `tests/core-contracts.cjs` for all twelve
 palette-and-mode combinations.
 
-Beside the series scale, and on the same principle from the other direction,
-Crystal 2.1.0 publishes an **intensity ramp**: `--cr-chart-heat-1` through
-`--cr-chart-heat-5`, for a heatmap cell or a calendar day, each with its own ink
-as `--cr-chart-on-heat-N`. A cell is a *ground* rather than a mark — the value is
-written on it — so the floor that applies is the text one, 4.5:1, and it applies
-to every step. The ink changes partway along the ramp in some palettes, which is
-what a ramp spanning light to dark has to do; what the construction guarantees is
-that no step falls in the gap where neither of a mode's inks reaches the floor.
-Harbor is why that is a search and not a constant: its body ink is a soft grey
-rather than a near-black, and a ramp built for the other five would be unreadable
-in exactly the palette that chose to be quiet.
+Beside the series scale, Crystal 2.1.0 publishes an **intensity ramp**:
+`--cr-chart-heat-1` through `--cr-chart-heat-5`, for a heatmap cell or a calendar
+day, each with its own ink as `--cr-chart-on-heat-N`. A cell is a ground and not
+a mark, because the value is written on it, so the floor that applies is the text
+one, 4.5:1, and it applies to every step. The ink changes partway along the ramp
+in some palettes, as a ramp spanning light to dark has to. The construction
+guarantees that no step falls in the gap where neither of a mode's inks reaches
+the floor. It is a search and not a constant because of Harbor: its body ink is a
+soft grey rather than a near-black, and a ramp built for the other five would be
+unreadable in Harbor.
 
-Six is where hue separation runs out, not where charts do. **A seventh series
-repeats the first colour and must differ by another channel** — a dash pattern, a
-fill pattern, a marker shape. That rule is not a fallback for the seventh series
-only: colour is never the sole carrier of a series at any count, because six hues
-at sixty degrees do not survive dichromatic vision, and the scale is not built to
-pretend otherwise. Two of the six also sit near the danger and success hues; they
-carry no such meaning, and a chart that needs to say "bad" says it in words.
+Hue separation runs out at six, and a chart may have more series. **A seventh
+series repeats the first colour and must differ by another channel**: a dash
+pattern, a fill pattern, a marker shape. The rule applies at every count, not
+only from the seventh series: colour is never the sole carrier of a series,
+because six hues at sixty degrees do not survive dichromatic vision. Two of the
+six also sit near the danger and success hues; they carry no such meaning, and a
+chart that needs to say "bad" says it in words.
 
 CSS variables use the `--cr-` namespace and kebab-case names. Source JSON uses camelCase keys and the explicit `Crystal token schema v1`; it is not advertised as a Design Tokens Community Group interchange schema.
 
@@ -132,7 +128,7 @@ Use context-specific phrases rather than “red item” or “green action.” K
 
 ## Atmosphere and contrast
 
-Color atmosphere ranges from 15–90%, with a recommended default of 90%. This value controls a bounded decorative contribution to the opaque foundation; it is not whole-page opacity or text opacity. Frost base tint ranges from 35–85%, with a recommended default of 35%, with Frost receiving ten additional percentage points, capped at 94%. Resin is independent of that control and renders at a fixed 20% fill opacity. Stone, a separate 55% light / 60% dark fill with a 1.95px feather, protects Resin labels without turning the inner plane nearly opaque. Its safety depends on the supporting glass tint and optical sheen; test the full composite, not the veil alone. These are independent design choices, not copied vendor compositor constants.
+Color atmosphere ranges from 15% to 90%, with a recommended default of 90%. This value controls a bounded decorative contribution to the opaque foundation; it is not whole-page opacity or text opacity. Frost base tint ranges from 35% to 85%, with a recommended default of 35%, with Frost receiving ten additional percentage points, capped at 94%. Resin is independent of that control and renders at a fixed 20% fill opacity. Stone, a separate 55% light / 60% dark fill with a 1.95px feather, protects Resin labels without turning the inner plane nearly opaque. Its safety depends on the supporting glass tint and optical sheen; test the full composite, not the veil alone. These are independent design choices, not copied vendor compositor constants.
 
 Contrast calculations use sRGB relative luminance. Normal text pairs target at least 4.5:1; essential non-text identification targets at least 3:1 where applicable. The live table checks defined solid pairs. Transparent composites require additional verification against supported backdrop extremes. A high body-text ratio does not certify all UI states.
 
@@ -153,11 +149,10 @@ Crystal ships six product palettes. Every one of them changes the primary, the c
 the decorative and the glow. None of them changes what success, warning, error or
 information look like.
 
-The reason is that a status colour is a *shared vocabulary*, not a brand expression. If
-error is red in one Meridian product and magenta in another because magenta suited the
-palette, then red stops meaning error and the user has to re-learn a safety signal per
-product. Brand identity is expressed in the primary; safety is not available for
-expression.
+The reason is that a status colour is a shared vocabulary. If error is red in one
+Meridian product and magenta in another because magenta suited the palette, then red
+stops meaning error and the user has to re-learn a safety signal per product. Brand
+identity is expressed in the primary, and status colours are not used to express it.
 
 <div class="feedback-grid">
 <span class="cr-status" data-status="success"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#check"/></svg></span>Ready</span>
@@ -167,11 +162,11 @@ expression.
 </div>
 
 These render identically under all six palettes. Switch palettes in the
-[Playground](../playground.html) and watch them not move.
+[Playground](../playground.html) to see that they do not change.
 
-Status colours still respond to **mode** — a red that is legible on a light canvas is not
-the same red that is legible on a dark one — but the pair is derived from the status
-token, not from the active palette.
+Status colours still respond to mode, because a red that is legible on a light canvas
+is not the same red that is legible on a dark one. The pair is derived from the status
+token and never from the active palette.
 
 Status is never the only signal. Each status carries an icon and a text message; see
 [colour is never the only signal](accessibility.html#colour-is-never-the-only-signal).
@@ -180,11 +175,10 @@ Status is never the only signal. Each status carries an icon and a text message;
 
 | Token | Re-pointable by a product palette? |
 | --- | --- |
-| `semantic.material.primary` and its companions | Yes — this is what a palette is |
+| `semantic.material.primary` and its companions | Yes. This is what a palette is |
 | `primitive.palette.*` seeds | Yes, by adding a palette |
 | `semantic.feedback.*` | **No** |
-| `component.focus.*` | No — focus follows the primary automatically |
+| `component.focus.*` | No. Focus follows the primary automatically |
 
-A product that needs a status colour changed does not have a theming problem; it has a
-semantics problem, and the answer is a new semantic token, not a redefinition of an
-existing one.
+A product that needs a status colour changed has a semantics problem, which theming
+does not solve. The answer is a new semantic token. An existing one is never redefined.

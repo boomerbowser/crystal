@@ -4,9 +4,9 @@ import { gsap } from 'gsap';
 
 const cssName = name => name.replace(/[A-Z]/g, letter => '-' + letter.toLowerCase());
 function easing(value){
-  /* A continuous recipe travels at constant speed. Anything that is not a named
-     curve used to fall through to the default ease, which made a loop surge and
-     slow once per cycle — a spinner that breathes. */
+  /* A continuous recipe travels at constant speed, so `linear` is handled here.
+     Anything that is not a named curve falls through to the default ease, which
+     makes a loop surge and slow once per cycle. */
   if(value==='linear')return t=>t;
   const match=/cubic-bezier\(([^)]+)\)/.exec(value||'');
   return match ? cubicBezier(...match[1].split(',').map(Number)) : cubicBezier(.22,.65,.22,1);

@@ -2,15 +2,13 @@
 /* Add the components the React benchmarks ship that Crystal had not specified.
  *
  * The catalogue in core/tokens/catalogue/ is the source; libraries/parity.json is
- * GENERATED from it by build-catalogue.cjs. An earlier version of this tool
- * edited parity.json directly, and the next `npm test` silently reverted all 55
- * additions — a generated file accepted the edit and then threw it away. This
- * one writes to the source.
+ * generated from it by build-catalogue.cjs, and `npm test` regenerates it, so an
+ * edit made to parity.json directly is thrown away (an earlier version of this
+ * tool lost all 55 additions that way). This one writes to the source.
  *
- * A component is not added by naming it. Each entry carries the same fields every
- * other entry carries — anatomy, states, material, geometry, semantics, the
- * Crystal/product split and the parity claim — because that is what makes it a
- * specification a library can be measured against rather than a wish.
+ * Each entry carries the same fields every other entry carries (anatomy, states,
+ * material, geometry, semantics, the Crystal/product split and the parity
+ * claim), because those fields are what a library can be measured against.
  *
  *   node tools/extend-catalogue.cjs          report
  *   node tools/extend-catalogue.cjs --write  apply
@@ -367,7 +365,7 @@ const ADDITIONS = {
   ],
 };
 
-/* Named so the catalogue records the decision rather than silently omitting them. */
+/* Named so the catalogue records the decision to leave them out. */
 const REFUSED = {
   '09-utility': [
     { ...c('terminal', 'Terminal', 'A shell emulator.', ['at-rest'], 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', ['primereact:terminal']),

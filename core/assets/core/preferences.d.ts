@@ -1,9 +1,9 @@
 /* Types for Crystal's headless preference core.
  *
- * Hand-written because the implementation is hand-written: these are source
- * types, not generated ones. They exist because CONTRACT §1 tells libraries to
- * import this module, and an untyped import makes every consumer re-describe
- * the same shape — which is the divergence the section is about.
+ * These are source types, written by hand like the implementation. Nothing
+ * generates them. They exist because CONTRACT §1 tells libraries to import
+ * this module, and an untyped import makes every consumer describe the same
+ * shape again, which is the divergence that section is about.
  */
 
 export interface CrystalRange { min: number; max: number; }

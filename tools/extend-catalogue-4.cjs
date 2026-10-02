@@ -5,17 +5,17 @@
  * What was measured before this ran (28 September 2026):
  *
  *   - 285 entries; the only machine-readable link from an entry to a Crystal
- *     recipe was `motion`, and 237 entries had none. Whole categories — layout,
- *     charts, media, commerce, blocks — carried no motion at all, and a
+ *     recipe was `motion`, and 237 entries had none. Whole categories (layout,
+ *     charts, media, commerce, blocks) carried no motion at all, and a
  *     consumer that reads "where the catalogue assigns none, the component
  *     plays none" (Crystal React's plan, §4.1) therefore shipped 145
- *     components with no motion whatever.
+ *     components with no motion.
  *   - `material` was prose. 102 entries named no material in it, and nothing
  *     tied the prose to a class in `crystal.css`, so a library could satisfy
  *     the catalogue's material sentence with any recipe it liked. Crystal
  *     React wrote 43 of its own.
  *   - The prose disagreed with the specification in five places, listed under
- *     PROSE below, each with what the specification actually says.
+ *     PROSE below, each with what the specification says.
  *
  * What this does:
  *
@@ -28,10 +28,9 @@
  *      ("Component coverage and composition"). That table has said since 2.0
  *      that a date picker takes `menu-in/out`, `selection` and `page-in`, that
  *      a table row takes `list-in/out` and `highlight`, that a badge takes
- *      `attention`; the catalogue entries simply did not carry it. Every recipe
- *      named here already exists — nothing is invented, and the two motion
- *      gaps that need a decision (D-19 continuous indicators, R-21 chart mark
- *      enter) are deliberately left unassigned.
+ *      `attention`; the catalogue entries did not carry it. Every recipe named
+ *      here already exists. The two motion gaps that need a decision (D-19
+ *      continuous indicators, R-21 chart mark enter) are left unassigned.
  *   3. Corrects the five material sentences that contradicted the specification.
  *
  * Idempotent: an entry that already carries the field is left alone unless the
@@ -146,8 +145,8 @@ const SURFACE = {
 
 /* -------------------------------------------------------------------- motion
    Added to whatever the entry already claims; duplicates are collapsed. Every
-   row is one of the families in docs/motion-components.md — the family is
-   named so the mapping can be checked against the table rather than trusted. */
+   row is one of the families in docs/motion-components.md, and the family is
+   named so the mapping can be checked against the table. */
 const FIELD = ['field-focus', 'field-invalid', 'field-valid'];         // Input, textarea, validation group
 const MENU = ['menu-in', 'menu-out'];                                   // Dropdown / select / command menu
 const POPOVER = ['popover-in', 'popover-out'];                          // Popover / hover card
@@ -191,7 +190,7 @@ const MOTION = {
   highlight: ['highlight'],
   /* utility */
   'drag-handle': DRAG,
-  /* charts — marks are R-21's, deliberately unassigned; the legend and tooltip are ordinary components */
+  /* charts: marks are R-21's and are left unassigned; the legend and tooltip are ordinary components */
   'chart-legend': ['selection'], 'chart-tooltip': ['tooltip-in', 'tooltip-out'],
   /* media */
   'video-player': ['media-in'], 'audio-player': ['media-in'], gallery: ['media-in', 'caption-in', 'selection'],
@@ -216,7 +215,7 @@ const MOTION = {
    kept here so the correction is a diff rather than an overwrite. */
 const PROSE = {
   /* docs/components.md: "the side menu on this page is the reference implementation" of
-     selection — and that menu is Plastic. crystal-preview's own comment: "Menu entries are
+     selection, and that menu is Plastic. crystal-preview's own comment: "Menu entries are
      Plastic, not Resin. Resin is reserved for surfaces that float above everything, and a
      sidebar entry is furniture. Thirteen floating capsules would be exactly the legibility
      noise the hierarchy exists to prevent." Was: "Resin shell with Haze fill". */

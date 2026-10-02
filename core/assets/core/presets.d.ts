@@ -2,7 +2,7 @@
  *
  * A preset is the movement a material makes entering or leaving. Its geometry is
  * computed from travel, depth and feather tokens rather than stored, so a token
- * change moves every preset at once — which is why a library must call this
+ * change moves every preset at once. A library must therefore call this module
  * rather than copy the keyframes it produces.
  */
 
@@ -17,8 +17,9 @@ export interface CrystalPresetMeasurements {
   travel: number;
   /** Resolved depth distance in px, from `travel-depth`. */
   depth: number;
-  /** A dismissal that fades rather than falls: a dialog, a Haze card, a Stone
-   *  backing — anything anchored to the page rather than floating above it. */
+  /** A dismissal that fades rather than falls. It applies to anything anchored
+   *  to the page rather than floating above it: a dialog, a Haze card, a Stone
+   *  backing. */
   anchored?: boolean;
   /** Where a Mirage wash flows from. */
   from?: CrystalFlowDirection;

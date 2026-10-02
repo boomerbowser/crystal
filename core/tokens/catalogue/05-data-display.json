@@ -20,7 +20,7 @@
         "haze"
       ],
       "geometry": "Content radius; at least 12px between content and the feathered edge",
-      "semantics": "An article when it is content, a button when the whole card acts. Never both.",
+      "semantics": "An article when it is content or a button when the whole card acts, never both.",
       "crystal": "Fill, feather, elevation, interactive treatment",
       "product": "Content and what an interactive card does",
       "motion": [
@@ -252,7 +252,7 @@
         "mui:Chip",
         "antd:Tag"
       ],
-      "note": "Success uses a check mark. That is information display — the legitimate use of the glyph."
+      "note": "Success uses a check mark. That is information display, the legitimate use of the glyph."
     },
     {
       "id": "indicator",
@@ -542,7 +542,7 @@
     {
       "id": "authored-bubble",
       "name": "Authored bubble",
-      "anatomy": "A reading surface with one intentionally tightened corner indicating authorship or direction.",
+      "anatomy": "A reading surface with one tightened corner indicating authorship or direction.",
       "states": [
         "incoming",
         "own",

@@ -1,19 +1,18 @@
 #!/usr/bin/env node
-/* Second catalogue extension: the capabilities, not just the names.
+/* Second catalogue extension: the capabilities as well as the names.
  *
- * Meridian's parity requirement was never only "a component with this name
- * exists" — it was the functionality that ships as an extension or add-on
- * elsewhere: click-and-drag, upload zones, media players, galleries, command
- * palettes, resizable tables, virtualisation. The first extension counted
- * components against four benchmark libraries and missed this, because counting
- * names against names cannot see a missing capability.
+ * Meridian's parity requirement covers the functionality that ships as an
+ * extension or add-on elsewhere: click-and-drag, upload zones, media players,
+ * galleries, command palettes, resizable tables, virtualisation. The first
+ * extension counted component names against four benchmark libraries, and a
+ * count of names cannot see a missing capability.
  *
  * Two sources this time:
  *
  *   1. React Aria's own component list, enumerated from the installed package.
  *      CONTRACT §3 says to wrap a maintained primitive rather than rebuild it, so
  *      a primitive React Aria ships that Crystal does not name is a gap by
- *      definition — Crystal would be leaving accessible behaviour on the floor.
+ *      definition: accessible behaviour Crystal would be leaving out.
  *   2. Meridian's named list: click-and-drag, File Input / Upload / UploadZone,
  *      Spotlight, floating action, navbar and submenu types, animated toasts and
  *      banners, alerts, loading and skeletons, pagination, portal, video and

@@ -1958,7 +1958,7 @@
       "seriesCount": {
         "$type": "number",
         "$value": 6,
-        "$description": "How many categorical series the palette can tell apart by colour. A seventh series repeats the first colour and must differ by another channel — a dash pattern, a fill pattern or a marker shape — because six hues is where perceptual separation runs out, not where charts do."
+        "$description": "How many categorical series the palette can tell apart by colour. A seventh series repeats the first colour and must differ by another channel, such as a dash pattern, a fill pattern or a marker shape. Six hues is where perceptual separation runs out, and charts often need more."
       },
       "seriesLightness": {
         "light": {
@@ -1969,7 +1969,7 @@
         "dark": {
           "$type": "number",
           "$value": 0.72,
-          "$description": "The same, for dark mode. Higher than light, because the ground is dark and a mark must be lighter than it — but not as high as the ground allows. At 0.80 sRGB can no longer hold the chroma at the violet and blue hues, the colours there go pale, and the first series of a violet palette lands on the same colour as the palette's own action colour, which is a data mark that reads as a button."
+          "$description": "The same, for dark mode. Higher than light, because the ground is dark and a mark must be lighter than it, but not as high as the ground allows. At 0.80 sRGB can no longer hold the chroma at the violet and blue hues, the colours there go pale, and the first series of a violet palette lands on the same colour as the palette's own action colour, which is a data mark that reads as a button."
         }
       },
       "seriesChroma": {
@@ -1985,7 +1985,7 @@
       "seriesContrast": {
         "$type": "number",
         "$value": 3,
-        "$description": "The floor every series colour clears against both the surface and the canvas of its mode. A data mark is a graphical object carrying information, so WCAG 1.4.11 applies to it and 3:1 is the bar. Where a hue cannot reach the floor at the stated lightness, its lightness moves until it does — the floor is not negotiable and the family resemblance is."
+        "$description": "The floor every series colour clears against both the surface and the canvas of its mode. A data mark is a graphical object carrying information, so WCAG 1.4.11 applies to it and 3:1 is the bar. Where a hue cannot reach the floor at the stated lightness, its lightness moves until it does. The floor is fixed, and the family resemblance gives way."
       },
       "stroke": {
         "$type": "dimension",
@@ -1995,7 +1995,7 @@
       "hairline": {
         "$type": "dimension",
         "$value": "1px",
-        "$description": "The separation a chart draws in the surface colour rather than in ink — between pie segments, heatmap cells, treemap rectangles and map regions. It is a gap, not a border: it shows the ground through."
+        "$description": "The separation a chart draws in the surface colour rather than in ink, between pie segments, heatmap cells, treemap rectangles and map regions. It is a gap that shows the ground through."
       },
       "pointMin": {
         "$type": "dimension",
@@ -2025,7 +2025,7 @@
       "fillOpacity": {
         "$type": "number",
         "$value": 0.25,
-        "$description": "Opacity of a fill whose job is to show extent without hiding what is behind it — the region under a line, the inside of a radar polygon. Low enough that two overlapping series are still two, and that the gridlines a reader measures against are still legible through both."
+        "$description": "Opacity of a fill whose job is to show extent without hiding what is behind it, such as the region under a line or the inside of a radar polygon. Low enough that two overlapping series are still two, and that the gridlines a reader measures against are still legible through both."
       },
       "linkOpacity": {
         "$type": "number",
@@ -2035,7 +2035,7 @@
       "intensitySteps": {
         "$type": "number",
         "$value": 5,
-        "$description": "How many buckets an intensity scale has — a heatmap cell, a calendar day. Five, because a reader comparing cells is matching them to a key rather than reading a gradient, and a key with more entries than a hand has fingers is a key nobody uses."
+        "$description": "How many buckets an intensity scale has, for a heatmap cell or a calendar day. Five, because a reader comparing cells is matching them to a key rather than reading a gradient, and a key with more entries than a hand has fingers is a key nobody uses."
       },
       "gaugeSweep": {
         "$type": "number",

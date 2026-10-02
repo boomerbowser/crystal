@@ -1,22 +1,22 @@
 /* Crystal headless core: the motion presets.
  *
- * A preset is the movement a *material* makes when it enters or leaves — Plastic
+ * A preset is the movement a material makes when it enters or leaves: Plastic
  * rising, Frost coming toward the viewer, Resin flowing in, Mirage washing across
- * the scene, and the shared dismissal. Unlike a recipe, a preset is not a stored
- * keyframe list: its geometry is computed from the travel, depth and feather
- * tokens, so changing a travel token changes every preset at once.
+ * the scene, and the shared dismissal. A recipe is a stored keyframe list. A
+ * preset's geometry is computed from the travel, depth and feather tokens, so
+ * changing a travel token changes every preset at once.
  *
  * Pure functions. No DOM access, no globals, no side effects: the caller measures
- * its own environment and passes the numbers in. That is what lets the web
- * runtime, a React library, a SwiftUI view and a Compose composable all produce
- * the same movement instead of four implementations that drift — which CONTRACT
- * §1 names as the reason to reuse the resolver's arithmetic rather than
- * reimplement it.
+ * its own environment and passes the numbers in. The web runtime, a React
+ * library, a SwiftUI view and a Compose composable therefore all produce the
+ * same movement, where four separate implementations drift. CONTRACT §1 names
+ * that as the reason to reuse the resolver's arithmetic rather than reimplement
+ * it.
  *
- * What is deliberately NOT here: the decorative paint layers the web runtime adds
- * on top — animated box-shadow, border-radius and background-position. Those
- * cannot be composited, so each of them repaints every frame, and they are also
- * unportable. A platform that wants them adds them itself; the movement below is
+ * The decorative paint layers the web runtime adds on top (animated box-shadow,
+ * border-radius and background-position) are left out of this module. They
+ * cannot be composited, so each of them repaints every frame, and they are not
+ * portable. A platform that wants them adds them itself. The movement below is
  * the contract.
  */
 (function (root, factory) {
@@ -66,7 +66,7 @@
    * @param {number} measured.travel   resolved travel distance in px
    * @param {number} measured.depth    resolved depth distance in px
    * @param {boolean} [measured.anchored]  a dismissal that fades rather than falls,
-   *        which is what a surface anchored to the page does — a dialog, a Haze
+   *        which is what a surface anchored to the page does: a dialog, a Haze
    *        card, a Stone backing. An unanchored dismissal drops away.
    * @param {string} [measured.from]   flow direction for Mirage: left, right, top, bottom
    * @param {boolean} [measured.softFlow]  true when the host can register a custom
@@ -128,10 +128,10 @@
           { transform: `translateY(${travel}px)`, opacity: 0 },
         ];
     }
-    /* `haze` and `stone` have no component movement of their own: their material
+    /* `haze` and `stone` have no component movement of their own. Their material
        signature is the feathered paint shifting while the text stays fixed, which
-       is a paint-layer effect the caller adds. Returning no keyframes is the
-       correct answer, not a gap. */
+       is a paint-layer effect the caller adds, so returning no keyframes is
+       correct. */
 
     return result;
   }

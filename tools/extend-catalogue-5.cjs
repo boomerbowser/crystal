@@ -1,26 +1,25 @@
 #!/usr/bin/env node
 /* Fifth catalogue extension: three rulings Meridian made on 28 September 2026.
  *
- *   D-19 — continuous activity indicators. The catalogue asked `loader`,
- *          `skeleton` and `progress` to spin, sweep and travel, and the motion
- *          chapter said nothing loops and published nothing that did. Meridian
- *          adopted three continuous recipes — `activity-turn`,
- *          `activity-travel`, `skeleton-sweep` — which report work that is
- *          genuinely pending and stop when it resolves. The three entries now
- *          claim them.
- *   R-21 — a data mark arriving. `bar-chart`, `line-chart` and `pie-chart`
- *          asked for an enter or draw-on motion and no recipe existed. Meridian
- *          adopted `mark-in`: critically damped, because a mark that overshoots
- *          its value has shown a number that is not true, and staggered by
- *          index up to a ceiling. All three charts claim it, and `line-chart`'s
- *          "draw-on" becomes the enter motion it now has — a stroke drawn along
- *          its length is a different recipe that nobody has asked for.
- *   R-22 — the quantity stepper is not a spin button. The entry asked for the
- *          role; React Aria removes it on purpose, because a spinbutton cannot
- *          be focused with VoiceOver, and trading reachability for a role name
- *          is a regression of the accessible surface. Meridian ruled for the
- *          reachable control. `number-input` said the same thing about the same
- *          primitive and changes with it.
+ *   D-19: continuous activity indicators. The catalogue asked `loader`,
+ *         `skeleton` and `progress` to spin, sweep and travel, and the motion
+ *         chapter published no recipe that loops. Meridian adopted three
+ *         continuous recipes, `activity-turn`, `activity-travel` and
+ *         `skeleton-sweep`, which report work that is genuinely pending and
+ *         stop when it resolves. The three entries now claim them.
+ *   R-21: a data mark arriving. `bar-chart`, `line-chart` and `pie-chart`
+ *         asked for an enter or draw-on motion and no recipe existed. Meridian
+ *         adopted `mark-in`: critically damped, because a mark that overshoots
+ *         its value has shown a number that is not true, and staggered by
+ *         index up to a ceiling. All three charts claim it, and `line-chart`'s
+ *         "draw-on" becomes the enter motion. A stroke drawn along its length
+ *         is a different recipe that nobody has asked for.
+ *   R-22: the quantity stepper is not a spin button. The entry asked for the
+ *         role. React Aria removes it, because a spinbutton cannot be focused
+ *         with VoiceOver, and trading reachability for a role name is a
+ *         regression of the accessible surface. Meridian ruled for the
+ *         reachable control. `number-input` said the same thing about the same
+ *         primitive and changes with it.
  *
  * The old sentences are quoted below, so the record says what each one was.
  * Idempotent, and refuses to write if an id or a recipe does not exist.

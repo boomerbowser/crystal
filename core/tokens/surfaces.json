@@ -1,6 +1,6 @@
 {
-  "$description": "Crystal's surface vocabulary: the closed set of material compositions a component may be made of, and the crystal.css recipe that implements each. Every catalogue entry names one or more of these in its `surface` field. tools/build-catalogue.cjs refuses an entry naming a surface not listed here, and refuses a surface whose `class` does not exist in core/assets/crystal.css — so a component cannot be specified in a material Crystal has not published a recipe for.",
-  "$rule": "The vocabulary is small on purpose. A component that seems to need a new surface almost always needs one of these on a different element; a new entry here is a new material composition for every platform library, and is added with a recipe, a fallback for reduced transparency and forced colours, a contract row in docs/components.md and a changelog entry — never alone.",
+  "$description": "Crystal's surface vocabulary: the closed set of material compositions a component may be made of, and the crystal.css recipe that implements each. Every catalogue entry names one or more of these in its `surface` field. tools/build-catalogue.cjs refuses an entry naming a surface not listed here, and refuses a surface whose `class` does not exist in core/assets/crystal.css, so a component cannot be specified in a material Crystal has not published a recipe for.",
+  "$rule": "The vocabulary is kept small. A component that seems to need a new surface almost always needs one of these on a different element. A new entry here is a new material composition for every platform library, so it is added together with a recipe, a fallback for reduced transparency and forced colours, a contract row in docs/components.md and a changelog entry.",
   "surfaces": [
     {
       "id": "plastic",
@@ -14,7 +14,8 @@
       "name": "Frost panel",
       "materials": ["Frost"],
       "class": ".cr-frost",
-      "use": "Intermediate task frames and every transient surface that opens over content: side panels, drawers, sheets, app bars, and — at Meridian's direction (R15e) — menus, popovers, tooltips and toasts. Reading content inside it sits on Haze."
+      "use": "Intermediate task frames and every transient surface that opens over content: side panels, drawers, sheets and app bars, and menus, popovers, tooltips and toasts (R15e). Reading content inside it sits on Haze. `.cr-frost.bar` is a transient overlay shaped as a row of controls, a pill with 4px padding: the selection toolbar over highlighted text.",
+      "also": [".cr-frost.bar"]
     },
     {
       "id": "haze",
@@ -29,7 +30,8 @@
       "name": "Resin plane",
       "materials": ["Resin"],
       "class": ".cr-resin",
-      "use": "One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter — Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock."
+      "use": "One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter, because Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock. `.cr-resin.transport` is the media transport: the pill with 4px block and 12px inline padding around 44px targets, 52px tall, with tabular time readouts, wrapping to a second row in a player narrower than 420px. `.cr-media` is the stage it sits on (the content radius, the letterbox, `--cr-media-aspect` and `--cr-media-fit`), and `.cr-media-bar` is the region inset 12px, or the safe area in full screen, that holds the transport.",
+      "also": [".cr-resin.transport"]
     },
     {
       "id": "resin-panel",
@@ -51,7 +53,8 @@
       "name": "Field shell",
       "materials": ["Resin", "Haze"],
       "class": ".cr-field-shell",
-      "use": "The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics."
+      "use": "The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics. `.cr-editor` is the editable surface inside a rich text field: the shared prose vocabulary (headings, lists, checklists, marks, insertions and deletions) with the primary caret and the primary-soft selection. `.cr-editor-toolbar` is its toolbar, above the text on a fine pointer and below it, clear of the touch keyboard, on a coarse one.",
+      "also": [".cr-editor"]
     },
     {
       "id": "compact",
@@ -59,14 +62,15 @@
       "materials": ["Resin", "Haze"],
       "class": ".cr-resin-haze",
       "also": [".cr-tag", ".cr-resin-haze.count"],
-      "use": "Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens — transient overlays are Frost. `.count` is the size for a count: a 20px circle that grows to a pill, filled to its own edge, with no block padding."
+      "use": "Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens. Transient overlays are Frost. `.count` is the size for a count: a 20px circle that grows to a pill, filled to its own edge, with no block padding."
     },
     {
       "id": "stone",
       "name": "Stone label backing",
       "materials": ["Stone"],
       "class": ".cr-stone",
-      "use": "A label over an unknown or moving backdrop — a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text."
+      "use": "A label over an unknown or moving backdrop: a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text. `.cr-media-caption` is a caption cue rendered by the library: the Stone backing on a box above the transport, never under it. `::cue` on a `.cr-media` video is the flat fill for the browser's own renderer.",
+      "also": [".cr-media-caption"]
     },
     {
       "id": "mirage",
@@ -119,7 +123,7 @@
       "materials": ["Resin", "Haze"],
       "class": ".cr-dock",
       "also": [".cr-dock-inner"],
-      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars. The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment. The controls may be buttons, tabs (`[role=tab]`, selected by `aria-selected`), radio labels (selected by `:checked`) or links (current by `aria-current`); only buttons were reached before 2.3.0."
+      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way (tab strips, segmented controls, toolbars, command and action bars). The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment. The controls may be buttons, tabs (`[role=tab]`, selected by `aria-selected`), radio labels (selected by `:checked`) or links (current by `aria-current`); only buttons were reached before 2.3.0."
     },
     {
       "id": "group",
@@ -134,14 +138,14 @@
       "name": "Navigation entry",
       "materials": ["Plastic"],
       "class": ".cr-nav-item",
-      "use": "An entry in side navigation, a rail or a tree of destinations. It has no material of its own — it is furniture on the panel beneath it — and carries selection by label weight alone. Pill hit area, 44px target. `.stacked` puts the icon above the label for a rail. Adopted from the documentation site's side menu, which docs/components.md names as the reference implementation of selection."
+      "use": "An entry in side navigation, a rail or a tree of destinations. It has no material of its own, sits on the panel beneath it, and carries selection by label weight alone. Pill hit area, 44px target. `.stacked` puts the icon above the label for a rail. Adopted from the documentation site's side menu, which docs/components.md names as the reference implementation of selection."
     },
     {
       "id": "bare",
       "name": "Bare control",
       "materials": [],
       "class": ".cr-bare",
-      "use": "A control that must not wear the Resin coat because it sits inside a surface that already has one: a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows, a dismiss button on a toast. Crystal paints every button by element, so bare means subtracting the fill, the shadow, the backdrop filter and both pseudo-layers — this class does all four. The focus ring and the target floor stay."
+      "use": "A control that must not wear the Resin coat because it sits inside a surface that already has one: a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows, a dismiss button on a toast. Crystal paints every button by element, so this class subtracts the fill, the shadow, the backdrop filter and both pseudo-layers. The focus ring and the target floor stay."
     },
     {
       "id": "drag-handle",
@@ -171,7 +175,7 @@
       "name": "No surface of its own",
       "materials": [],
       "class": null,
-      "use": "Layout, typography, behaviour and drawing components that inherit whatever they sit on. A chart's marks, a divider, a provider. Nothing to paint and nothing to wear."
+      "use": "Layout, typography, behaviour and drawing components that inherit whatever they sit on. A chart's marks, a divider, a provider."
     }
   ]
 }

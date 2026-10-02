@@ -1,7 +1,7 @@
 {
   "name": "crystal-workspace",
   "private": true,
-  "description": "Build and verification machinery for Crystal. Not published: the package is core/, which is published as @crystal-ui/core. The documentation website is its own repository, crystal-preview, and consumes that package.",
+  "description": "Build and verification tooling for Crystal. The published package is core/, which is @crystal-ui/core on npm. The documentation website is a separate repository, crystal-preview.",
   "type": "commonjs",
   "scripts": {
     "build": "node tools/build-library.mjs",

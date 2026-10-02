@@ -3,26 +3,23 @@
  * The catalogue is authored as data so every contract has the same shape and
  * none can be half-written. These assertions run on every build:
  *
- *   1. Every motion recipe family maps to a catalogue component. Crystal shipped
- *      animations for eleven components that had no contract; that must not recur.
- *   2. Every motion id a component claims exists — as a recipe in
+ *   1. Every motion recipe family maps to a catalogue component, so Crystal
+ *      cannot ship an animation for a component that has no contract.
+ *   2. Every motion id a component claims exists, as a recipe in
  *      `motion-recipes.json` or as a material preset in `core/assets/core/presets.js`.
- *      Until 28 September 2026 this ran one way only, and `dialog` and `scrim`
- *      named three ids that were in neither file for a release.
+ *      The check runs in both directions (since 28 September 2026).
  *   3. Every component names its surface, from the closed vocabulary in
  *      `core/tokens/surfaces.json`, and every surface in that vocabulary has a
  *      recipe in `core/assets/crystal.css`. A component cannot be specified in a
  *      material Crystal has not published a recipe for.
  *   4. Every component states what Crystal supplies and what the product owns.
- *      A contract missing either is a placeholder, and placeholders are how a
- *      catalogue comes to claim more than it specifies.
+ *      A contract missing either is a placeholder, and a placeholder lets the
+ *      catalogue claim more than it specifies.
  *
  * Status is merged, never generated. `libraries/status/<platform>.json` is the
  * record a platform library keeps of what it has implemented; this file reads
- * it and writes the merge into `parity.json`. It used to regenerate every
- * status as `not-started`, which is why the manifest the README called "the
- * single source of truth for what exists" said 283 of 285 components did not
- * exist while a library had shipped 265 of them.
+ * it and writes the merge into `parity.json`. Regenerating a status here would
+ * overwrite that record with `not-started`.
  */
 const fs = require('node:fs');
 const path = require('node:path');
@@ -30,17 +27,16 @@ const path = require('node:path');
 const ROOT = path.resolve(__dirname, '..');
 const DIR = path.join(ROOT, 'core/tokens/catalogue');
 const CHAPTER = path.join(ROOT, 'core/docs/catalogue.md');
-/* Inside the repository. This used to resolve to `../libraries/parity.json`
-   relative to the repository — a path left from the monorepo layout — so every
-   build wrote the manifest to a directory beside the checkout and the committed
-   file was never regenerated. AGENTS.md: a generator here may not write
-   anything outside this repository. */
+/* Inside the repository. AGENTS.md: a generator here may not write anything
+   outside this repository. A path relative to the repository root, such as
+   `../libraries/parity.json`, writes beside the checkout and leaves the
+   committed file stale. */
 const MANIFEST = path.join(ROOT, 'libraries/parity.json');
 const STATUS_DIR = path.join(ROOT, 'libraries/status');
 const STYLESHEET = path.join(ROOT, 'core/assets/crystal.css');
 
 /* Libraries Crystal's parity is measured against. Named explicitly so the claim
-   is checkable rather than asserted. */
+   is checkable. */
 const BENCHMARKS = ['mantine', 'mui', 'antd'];
 
 /* Platforms Crystal intends to ship libraries for. */
@@ -124,11 +120,10 @@ function validate(categories, surfaces, presets) {
   }
 
   /* Every motion recipe family must belong to a documented component. Material
-     choreography animates a material, not a component; those recipes are
-     specified in the materials chapter and are exempt by category. (An
-     `Ambient` exemption used to sit beside this one. R22 withdrew the category
-     and the exemption stayed, which would have let a recipe in a category that
-     no longer exists pass unclaimed. It is gone.) */
+     choreography animates a material rather than a component; those recipes
+     are specified in the materials chapter and are exempt by category. There
+     is no `Ambient` exemption: R22 withdrew that category, and an exemption for
+     it would let a recipe in a category that no longer exists pass unclaimed. */
   const MATERIAL_CATEGORIES = new Set(['Material compositions']);
   const claimed = new Set();
   for (const category of categories) {
@@ -168,9 +163,9 @@ function chapter(categories, stats, surfaces) {
   const lines = [];
   lines.push('# Component catalogue');
   lines.push('');
-  lines.push(`Crystal specifies **${total} components** across ${categories.length} categories. Parity is measured against the most fully-featured libraries in use — Mantine, Ant Design and MUI — rather than a shorter list Crystal finds convenient.`);
+  lines.push(`Crystal specifies ${total} components across ${categories.length} categories. Parity is measured against Mantine, Ant Design and MUI, and each entry names the components it corresponds to in them.`);
   lines.push('');
-  lines.push('Crystal specifies appearance: anatomy, states, material, geometry and the semantics a correct implementation must expose. It does not ship focus management, menu keyboard behaviour, date arithmetic or a rich-text engine. Products bring their own accessible primitives and dress them in Crystal. Every entry states this split explicitly, so what the system owes you and what you owe the system are never in doubt.');
+  lines.push('Crystal specifies appearance: anatomy, states, material, geometry and the semantics a correct implementation must expose. It does not ship focus management, menu keyboard behaviour, date arithmetic or a rich-text engine. Products bring their own accessible primitives and style them with Crystal. Every entry says which parts Crystal supplies and which parts the product owns.');
   lines.push('');
   lines.push('This chapter is generated from `core/tokens/catalogue/`. The same source generates the parity manifest in `libraries/parity.json`, so a component cannot appear in one and not the other.');
   lines.push('');
@@ -185,13 +180,13 @@ function chapter(categories, stats, surfaces) {
   lines.push('');
   lines.push('## Surfaces');
   lines.push('');
-  lines.push('Every component is made of one or more of these, named in its **Surface** row, outer to inner. The vocabulary is `core/tokens/surfaces.json`; each surface is implemented by the `crystal.css` recipe shown, and the build refuses a component naming a surface that has no recipe. A library implements the surface once and every component made of it inherits the implementation — which is what keeps two hundred components from becoming two hundred recipes.');
+  lines.push('Every component is made of one or more of these surfaces. Its Surface row names them, outer to inner. The vocabulary is `core/tokens/surfaces.json`. Each surface is implemented by the `crystal.css` recipe shown, and the build refuses a component that names a surface with no recipe. A library implements each surface once, and every component made of that surface uses the implementation.');
   lines.push('');
   lines.push('| Surface | Materials | Recipe | Components | Use |');
   lines.push('| --- | --- | --- | --- | --- |');
   for (const s of surfaces.surfaces) {
-    const recipe = s.class ? `<code>${esc(s.class)}</code>` : '—';
-    lines.push(`| <a id="surface-${s.id}"></a>**${esc(s.name)}** \`${s.id}\` | ${s.materials.length ? s.materials.join(' + ') : '—'} | ${recipe} | ${cov.perSurface.get(s.id)} | ${esc(s.use)} |`);
+    const recipe = s.class ? `<code>${esc(s.class)}</code>` : 'None';
+    lines.push(`| <a id="surface-${s.id}"></a>**${esc(s.name)}** \`${s.id}\` | ${s.materials.length ? s.materials.join(' + ') : 'None'} | ${recipe} | ${cov.perSurface.get(s.id)} | ${esc(s.use)} |`);
   }
   lines.push('');
 
@@ -257,7 +252,7 @@ function manifest(categories, stats, status) {
         ...(c.motion?.length ? { motion: c.motion } : {}),
         /* A component the catalogue has refused carries that refusal through to
            the manifest on every platform. Otherwise the platform's own record
-           decides, and a platform with no record is honestly not-started. */
+           decides, and a platform with no record is not-started. */
         status: Object.fromEntries(PLATFORMS.map((p) => [p,
           c.status === 'not-applicable' ? 'not-applicable' : (status[p]?.[c.id] || 'not-started')])),
         ...(c.why ? { why: c.why } : {}),
@@ -288,21 +283,18 @@ fs.writeFileSync(CHAPTER, chapter(categories, stats, surfaces));
 fs.mkdirSync(path.dirname(MANIFEST), { recursive: true });
 fs.writeFileSync(MANIFEST, JSON.stringify(manifest(categories, stats, status.merged), null, 2) + '\n');
 /* The full specification in one file. parity.json carries per-platform status;
-   this carries what each component actually IS — anatomy, states, material,
-   surface, geometry, semantics, the Crystal/product split and the parity claim.
-   A library needs the second to build a component and to document it, and
-   reading fourteen files across a package boundary is not something a consumer
-   should have to do. */
+   this carries what each component is: anatomy, states, material, surface,
+   geometry, semantics, the Crystal/product split and the parity claim. A
+   library needs the second to build a component and to document it, and
+   should not have to read fourteen files across a package boundary. */
 fs.writeFileSync(
   path.join(ROOT, 'core/tokens/catalogue.json'),
   JSON.stringify({
     $description: 'Crystal component catalogue, combined. Generated from core/tokens/catalogue/.',
-    /* The version this catalogue ships in, not the day it was built. It was the
-       build date, which made a committed generated file depend on the calendar:
-       rebuilt on a later UTC day it differed, and both workflows refuse a build
-       that changes a committed file. A commit made at 21:18 in New York on
-       24 September failed CI because the runner's clock already said the 25th.
-       A version changes when the source does, and only then. */
+    /* The version this catalogue ships in, never the build date. Both workflows
+       refuse a build that changes a committed file, and a build date makes a
+       committed generated file differ on every later UTC day. A version changes
+       only when the source does. */
     version: require('../core/package.json').version,
     surfaces: surfaces.surfaces,
     categories: categories.map((category) => ({

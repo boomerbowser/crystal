@@ -1,14 +1,13 @@
 /* Build everything @crystal-ui/core ships that is generated rather than written.
  *
- * This was the first half of `tools/build.py`, which built the library and then
- * rendered a website from it. The website is `crystal-preview` now and renders
- * the library it installs, so what is left here is only the library — and it no
- * longer needs Python, which means this repository does not either.
+ * This builds the library only. The website is `crystal-preview` and renders
+ * the library it installs. Nothing here needs Python, so this repository does
+ * not either.
  *
- * Order is dependency order and is not arbitrary. The DTCG source produces the
- * flat token file; the flat file produces `tokens.js`; `tokens.js` and
- * `crystal.js` together produce the exported theme; and the reference sections
- * in `core/docs/` quote values from all of them, so they are generated last.
+ * The order is dependency order. The DTCG source produces the flat token file;
+ * the flat file produces `tokens.js`; `tokens.js` and `crystal.js` together
+ * produce the exported theme; and the reference sections in `core/docs/` quote
+ * values from all of them, so they are generated last.
  *
  *   node tools/build-library.mjs
  */
@@ -25,9 +24,9 @@ const run = (script) =>
 run('build-tokens.cjs');
 run('build-catalogue.cjs');
 
-/* The browser reads the tokens as a script, not as JSON, so the flat file is
-   wrapped rather than fetched. Generated here rather than committed by hand
-   because it is the flat file with eleven characters in front of it. */
+/* The browser reads the tokens as a script rather than fetching JSON, so the
+   flat file is wrapped. It is generated rather than committed by hand because
+   it is the flat file with eleven characters in front of it. */
 const flat = readFileSync(resolve(ROOT, 'core/tokens/crystal.json'), 'utf8');
 writeFileSync(
   resolve(ROOT, 'core/assets/tokens.js'),

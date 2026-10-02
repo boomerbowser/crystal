@@ -1,7 +1,7 @@
 {
   "id": "commerce",
   "name": "Commerce",
-  "description": "Functional e-commerce components. Crystal named none before, which left every store to reinvent a quantity stepper, a variant selector and a cart summary — and to re-solve availability, currency formatting and checkout validation each time. Payment is deliberately bounded: these components never handle raw card data, and defer to the host provider's own element.",
+  "description": "Functional e-commerce components. Crystal named none before, which left every store to reinvent a quantity stepper, a variant selector and a cart summary, and to re-solve availability, currency formatting and checkout validation each time. Payment is deliberately bounded: these components never handle raw card data, and defer to the host provider's own element.",
   "components": [
     {
       "id": "price",
@@ -79,7 +79,7 @@
         "field"
       ],
       "geometry": "Pill; both controls reach 44px.",
-      "semantics": "A typable numeric field: the value is read as its text, and the bounds are announced when reached. Not role=spinbutton — a spin button cannot be focused with VoiceOver, so the role would put the control out of some readers' reach.",
+      "semantics": "A typable numeric field: the value is read as its text, and the bounds are announced when reached. Not role=spinbutton, because a spin button cannot be focused with VoiceOver, so the role would put the control out of some readers' reach.",
       "crystal": "Materials, press recipe on each control",
       "product": "Bounds, step, stock rules",
       "motion": [
@@ -307,9 +307,9 @@
         "haze"
       ],
       "geometry": "Options keep the content radius; the selected one carries label weight.",
-      "semantics": "A radio group. Card fields are never reimplemented — the host supplies its provider element.",
+      "semantics": "A radio group. Card fields are never reimplemented: the host supplies its provider element.",
       "crystal": "Option material, selection, focus ring",
-      "product": "The provider, tokenisation, and PCI scope — this component never handles raw card data",
+      "product": "The provider, tokenisation, and PCI scope; this component never handles raw card data",
       "motion": [
         "selection"
       ],

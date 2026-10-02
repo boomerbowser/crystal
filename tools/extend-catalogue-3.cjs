@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 /* Third catalogue extension: the suites, and the block tier.
  *
- * Meridian asked for comprehensive typography, e-commerce, visualisation, and
- * portal/screen suites, plus a tier of larger composed blocks — kept in a section
+ * Meridian asked for full typography, e-commerce, visualisation, and
+ * portal/screen suites, plus a tier of larger composed blocks, kept in a section
  * of its own rather than mixed into the component catalogue.
  *
- * The distinction matters and is the reason `blocks` is a separate category
- * rather than more components. A component is a primitive with one job and a
- * contract a library can hold. A block is an arrangement of components that
- * solves a recognisable product problem — a dashboard header, a checkout summary,
- * a player shell. Blocks are opinionated by design, and a design system that
- * cannot tell the two apart ends up shipping opinions as if they were primitives.
+ * `blocks` is a separate category because a block is a different kind of thing.
+ * A component is a primitive with one job and a contract a library can hold. A
+ * block is an arrangement of components that solves a recognisable product
+ * problem: a dashboard header, a checkout summary, a player shell. Blocks carry
+ * opinions, and a design system that cannot tell the two apart ships opinions
+ * as if they were primitives.
  *
  * Benchmarked against Tailwind UI, Mantine UI, Ant Design Pro, MUI Templates and
  * PrimeBlocks, which are where this tier exists in the ecosystems Crystal is
@@ -29,7 +29,7 @@ const c = (id, name, anatomy, states, material, geometry, semantics, crystal, pr
   ({ id, name, anatomy, states, material, geometry, semantics, crystal, product, parity });
 
 /* Shared shorthands: most entries in a suite share their material and geometry
-   answers, and repeating them verbatim would invite them to drift apart. */
+   answers, and repeating them verbatim would let them drift apart. */
 const readable = `${H} content fill on the surrounding material`;
 const contentRadius = 'Content radius; spacing from the scale.';
 const crisp = 'Text stays crisp: feathering is paint-only and never touches a glyph.';

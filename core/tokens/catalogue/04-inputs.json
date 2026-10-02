@@ -291,7 +291,7 @@
         "mui:Checkbox",
         "antd:Checkbox"
       ],
-      "note": "The checked mark is a check glyph. That is the control's own semantics — a validated, entered value — not a selection badge placed over a focused item."
+      "note": "The checked mark is a check glyph. That is the control's own semantics (a validated, entered value), not a selection badge placed over a focused item."
     },
     {
       "id": "checkbox-group",
@@ -412,7 +412,7 @@
       "surface": [
         "choice"
       ],
-      "geometry": "8px track, 26px thumb; the thumb is the target and meets 44px in practice through padding",
+      "geometry": "8px track, 26px thumb; the thumb is the target and meets 44px through padding",
       "semantics": "Native range or role=slider with aria-valuenow, valuemin, valuemax and valuetext",
       "crystal": "Track fill, thumb material, tick treatment, RTL mirroring",
       "product": "Step, bounds and what the value drives",
@@ -799,7 +799,7 @@
         "mui:—",
         "antd:Upload"
       ],
-      "note": "Crystal supplies appearance only. A file input that does not actually upload must not be presented as working."
+      "note": "Crystal supplies appearance only. A file input that does not upload must not be presented as working."
     },
     {
       "id": "dropzone",

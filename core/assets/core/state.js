@@ -2,9 +2,9 @@
  *
  * Pure functions. No DOM access, no globals, no side effects. A web page, a
  * React component, a SwiftUI view and a Compose composable all need the same
- * answers to "which mark does this control show" and "how full is this range";
- * deriving that here is what lets libraries share behaviour instead of
- * reimplementing it and drifting.
+ * answers to "which mark does this control show" and "how full is this range".
+ * Deriving them here lets libraries share behaviour instead of reimplementing
+ * it and drifting.
  *
  * Usable as a plain <script> (attaches to CrystalCore) or via require().
  */
@@ -18,8 +18,8 @@
   /* Indicator precedence. Activity outranks location, which outranks selection:
      a control that is busy should say so before it says where you are, and a
      control that is the current page should say that before it says it is
-     selected. A check mark is deliberately absent — it means validated or
-     informational, never "this one is selected". */
+     selected. The order has no check mark, because a check mark means validated
+     or informational, never "this one is selected". */
   const INDICATOR_ORDER = ['busy', 'current', 'selection'];
 
   function resolveIndicator(flags) {
@@ -40,8 +40,8 @@
     return 'idle';
   }
 
-  /* Range fill, clamped to 0-100. A zero-width range is a legitimate state
-     (a single-value slider), not an error, and must not divide by zero. */
+  /* Range fill, clamped between 0 and 100. A zero-width range is a legitimate
+     state (a single-value slider) and must not divide by zero. */
   function rangeProgress(range) {
     const r = range || {};
     const min = Number(r.min);

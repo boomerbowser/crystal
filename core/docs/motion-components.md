@@ -2,22 +2,22 @@
 
 [Open the live component studies](../motion.html#component-motion) · [Search all recipes](../motion.html#recipe-library) · [Run browser contracts](../motion-contracts.html)
 
-Crystal ships 59 executable component recipes in nine families — three of them continuous indicators of pending work — the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
+Crystal ships 59 executable component recipes in nine families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. Three of the recipes are continuous indicators of pending work. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
 
 ## Engine responsibilities
 
-**Motion 13.4.0** runs component and material element keyframes: translation, opacity, scale and state feedback. **GSAP 3.15.0** timelines coordinate the paint-layer clocks for feathered edges, optical highlights and rims, plus selected component sequences. Recipes declare a material and a motion signature: pressure, coalescence, meniscus movement, caustic light, surface tension, feathering, refraction or inertia. Optical layers share the component’s cancellation group and never animate text blur. GSAP drives paused native effects when targeting actual pseudo-elements. It does not clone private page content or replace the material with a screenshot.
+**Motion 13.4.0** runs component and material element keyframes: translation, opacity, scale and state feedback. **GSAP 3.15.0** timelines coordinate the paint-layer clocks for feathered edges, optical highlights and rims, plus selected component sequences. Recipes declare a material and a motion signature: pressure, coalescence, meniscus movement, caustic light, surface tension, feathering, refraction or inertia. Optical layers share the component's cancellation group and never animate text blur. GSAP drives paused native effects when targeting actual pseudo-elements. It does not clone private page content or replace the material with a screenshot.
 
-Both packages are installed with exact versions in `package.json`, resolved transitively in `package-lock.json`, and bundled locally as `assets/vendor/crystal-engines.js`. No runtime CDN is required. The pure token resolver remains independent of the engines. The preview’s native dialog backdrop keeps a CSS fallback with the same timing tokens. Frost unfolds in depth; Plastic settles with weight; Resin compresses and redistributes its light; Haze and Stone move through their perimeter. Five larger material studies have generously sized replay stages.
+Both packages are installed with exact versions in `package.json`, resolved transitively in `package-lock.json`, and bundled locally as `assets/vendor/crystal-engines.js`. No runtime CDN is required. The pure token resolver remains independent of the engines. The preview's native dialog backdrop keeps a CSS fallback with the same timing tokens. Frost unfolds in depth; Plastic settles with weight; Resin compresses and redistributes its light; Haze and Stone move through their perimeter. Five larger material studies have generously sized replay stages.
 
 The engine bridge gives both libraries one cancellation contract: `finished` settles on completion or cancellation, and only properties owned by the effect are restored. Cancellation never leaves a promise waiting for a killed GSAP timeline. Material replay, component recipes, and layout changes all participate in `CrystalMotion.stop()` and `stopAll()`.
 
 ## Motion rules shared by every component
 
 - Semantic state, selected values, routing decisions, modality and focus take effect immediately. A visual transition cannot authorize an action or fabricate success.
-- Ordinary translation is 5–30px. 50px guides compact motion; documented larger compositions may exceed it. Haze and Stone content stays in place; only their feathered paint moves locally.
+- Ordinary translation is 5px to 30px. 50px guides compact motion; documented larger compositions may exceed it. Haze and Stone content stays in place; only their feathered paint moves locally.
 - Typical sequences stay under two seconds at 1×. Each animation is capped at five seconds after speed adjustment. Defaults for controls are substantially shorter than material studies.
-- The saved 0.25–2× speed factor applies throughout the preview and both engines. OS or explicit reduced motion overrides it and presents the final semantic state immediately.
+- The saved speed factor, 0.25× to 2×, applies throughout the preview and both engines. OS or explicit reduced motion overrides it and presents the final semantic state immediately.
 - No automatic carousel, endless shimmer, flashing error, or infinite decorative loop is included. A finite busy cue can end while an operation remains busy; its static status remains.
 - Exits keep focus safe. Move focus out before hiding nonmodal content; keep native modality during a modal exit, then restore the trigger.
 - Never animate a visible keyboard focus ring away. Hover is supplementary, and disabled controls do not animate.
@@ -25,9 +25,9 @@ The engine bridge gives both libraries one cancellation contract: `finished` set
 
 ## Interaction and compact-surface materials
 
-All interaction surfaces use a 20% Resin body, visible illuminated rim and an inset 80% Haze reading fill where contrast needs protection. The preview uses the protected form consistently because its surroundings are adjustable. The reading fill is physically inset, so the Resin perimeter stays visible. Standalone actions keep a neutral Haze reading fill inside a broad Resin rim. Grouped actions share one Resin/Haze container: inactive items are transparent, and the selected item uses the tested primary/on-primary color pair as a raised indicator, with its label at weight 800. Nothing is drawn beside the label — a check mark means validated, never selected. The group retains the surrounding material shell.
+All interaction surfaces use a 20% Resin body, visible illuminated rim and an inset 80% Haze reading fill where contrast needs protection. The preview uses the protected form consistently because its surroundings are adjustable. The reading fill is physically inset, so the Resin perimeter stays visible. Standalone actions keep a neutral Haze reading fill inside a broad Resin rim. Grouped actions share one Resin/Haze container: inactive items are transparent, and the selected item uses the tested primary/on-primary color pair as a raised indicator, with its label at weight 800. Nothing is drawn beside the label. A check mark means validated, never selected. The group retains the surrounding material shell.
 
-The same formula applies to **display labels, tags, badges and keyboard caps**. Use `.cr-resin-haze` for these shells; `.cr-tag` adds compact label geometry. **Tooltips, toasts, menus, dropdowns, flyouts and popovers are Frost** (`.cr-frost`), at Meridian's direction (R15e): they open over content, so they are intermediate panels, and their reading content sits on Haze inside them. This does not change large persistent Frost panels, Plastic foundations, Haze reading areas, or the standalone Stone material. Plain prose and ordinary form-label text do not need their own material container. Native OS option popups and file choosers retain platform drawing; the in-app menu and select trigger use Crystal.
+The same formula applies to display labels, tags, badges and keyboard caps. Use `.cr-resin-haze` for these shells; `.cr-tag` adds compact label geometry. **Tooltips, toasts, menus, dropdowns, flyouts and popovers are Frost** (`.cr-frost`), at Meridian's direction (R15e): they open over content, so they are intermediate panels, and their reading content sits on Haze inside them. This does not change large persistent Frost panels, Plastic foundations, Haze reading areas, or the standalone Stone material. Plain prose and ordinary form-label text do not need their own material container. Native OS option popups and file choosers retain platform drawing; the in-app menu and select trigger use Crystal.
 
 ## Component coverage and composition
 
@@ -53,14 +53,14 @@ The same formula applies to **display labels, tags, badges and keyboard caps**. 
 | Toast / snackbar / banner | `toast-in/out`, `attention` | Persistent readable status; manual dismissal in this preview |
 | Progress bar / transfer indicator | `progress-change`, `success`; indeterminate: `activity-travel` (bar) or `activity-turn` (ring) | Actual measured progress; never animate a fabricated success. Indeterminate only while the work cannot be measured, and determinate the moment it can |
 | Busy indicator / skeleton | `busy`, `skeleton-resolve`; while pending: `activity-turn` (loader), `skeleton-sweep` (skeleton) | Real pending/ready state, no inference from animation completion. The continuous recipe runs only while the work is pending and stops when it resolves |
-| Chart mark — bar, series, segment | `mark-in`, staggered by index | Plays when the chart first appears, never when its data changes; critically damped, so no mark ever shows a value it does not have |
+| Chart mark (bar, series, segment) | `mark-in`, staggered by index | Plays when the chart first appears, never when its data changes; critically damped, so no mark ever shows a value it does not have |
 | Empty state / no-results panel | `empty-in` | Actual empty collection or search result |
 | Image / video surface / lightbox | `media-in`, `caption-in`, Haze/Mirage if modal | Decode/readiness event, reserved layout space, media controls owned by host |
 | Carousel / gallery / thumbnail strip | `carousel-next/previous`, `selection` | Explicit navigation, item count, descriptive text; no autoplay |
 | Avatar / presence / badge / unread counter | `selection`, `highlight`, `attention` | Status text or accessible label; no color-only meaning |
 | Calendar / date picker / combobox | `menu-in/out`, `selection`, `page-in` | Full keyboard/locale/date semantics supplied by the component library |
 
-Mappings intentionally share recipes. Each new product component should select a behavior contract rather than invent another animation for a synonymous state. The suite does not implement a router, a production combobox, pointer dragging, a video player, or network services; it provides their usable motion primitives and exact integration responsibilities.
+Mappings share recipes, because each new product component should select a behaviour contract rather than invent another animation for a synonymous state. The suite does not implement a router, a production combobox, pointer dragging, a video player, or network services; it provides their usable motion primitives and exact integration responsibilities.
 
 ## Executable recipe catalog
 
@@ -125,15 +125,15 @@ Base times below are at 1×; the preview resolves the saved speed at playback. E
 | `haze-tide` | haze / feather | GSAP | 1800ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. |
 | `stone-contour` | stone / feather | GSAP | 1300ms | Explicit material choreography for a large specimen; replay is a visual study, not an application action. |
 | `check-off` | plastic / iris | Motion | 300ms | Checkbox and radio indicators returning to unchecked. Paired with `check`; the iris closes toward the same point it opened from. |
-| `activity-turn` | stone / feather | Motion | 1200ms per cycle, while pending | A loader, or an indeterminate progress ring, while an operation is genuinely pending — and only then. Starts when the work starts and stops when it resolves. One period for every continuous indicator, so two in one view never tick against each other. |
+| `activity-turn` | stone / feather | Motion | 1200ms per cycle, while pending | A loader, or an indeterminate progress ring, only while an operation is genuinely pending. Starts when the work starts and stops when it resolves. One period for every continuous indicator, so two in one view never tick against each other. |
 | `activity-travel` | stone / feather | Motion | 1200ms per cycle, while pending | Indeterminate linear progress while an operation is genuinely pending, stopping when it resolves or becomes measurable. |
 | `skeleton-sweep` | haze / feather | Motion | 1200ms per cycle, while pending | A skeleton while its content is genuinely loading, on the Haze fill and never on the text that replaces it. Ends with skeleton-resolve. |
-| `mark-in` | haze / feather | Motion | 500ms | A data mark — a bar, a series, a segment — growing from its baseline when a chart first appears, and not when its data later changes. transform-origin is the baseline. Staggered by index up to 24 marks; past that every mark arrives together, because a sequence nobody can count is decoration. |
+| `mark-in` | haze / feather | Motion | 500ms | A data mark (a bar, a series, a segment) growing from its baseline when a chart first appears, and not when its data later changes. transform-origin is the baseline. Staggered by index up to 24 marks; past that every mark arrives together, because a sequence nobody can count is decoration. |
 <!-- /generated:component-recipes -->
 
 ## Runtime API
 
-The field shell's appearance is in `crystal.css` as of 2.1.0; the documentation site wraps its native fields with a script of its own, and a product wraps them in its own markup or component. Load the theme CSS, then `crystal.css`, then `motion.css`. The engines are the consumer's to bundle — `@crystal-ui/core` ships `engines.js` and declares gsap and motion as dependencies — and `assets/motion.js` is the adapter over them, reading the recipe catalogue from `window.CRYSTAL_MOTION_RECIPES` (the contents of `motion-recipes.json`). Load `tokens.js` and `crystal.js` first if resolving user preferences dynamically. The material presets a recipe id can also name — `plastic`, `frost`, `resin`, `haze`, `stone`, `mirage`, `mirage-out`, `dismiss` — are computed from tokens by `core/presets`, which a platform library imports directly. Delegated button feedback is the documentation site's; a component library binds motion to state in its own lifecycle.
+The field shell's appearance is in `crystal.css` as of 2.1.0; the documentation site wraps its native fields with a script of its own, and a product wraps them in its own markup or component. Load the theme CSS, then `crystal.css`, then `motion.css`. The engines are the consumer's to bundle: `@crystal-ui/core` ships `engines.js` and declares gsap and motion as dependencies. `assets/motion.js` is the adapter over them, and reads the recipe catalogue from `window.CRYSTAL_MOTION_RECIPES` (the contents of `motion-recipes.json`). Load `tokens.js` and `crystal.js` first if resolving user preferences dynamically. A recipe id can also name a material preset: `plastic`, `frost`, `resin`, `haze`, `stone`, `mirage`, `mirage-out` or `dismiss`. `core/presets` computes the presets from tokens, and a platform library imports it directly. Delegated button feedback is the documentation site's; a component library binds motion to state in its own lifecycle.
 
 ```js
 // Apply real UI state before giving it visual feedback.
@@ -151,7 +151,7 @@ CrystalMotion.stop(row);
 CrystalMotion.stopAll();
 ```
 
-`play(element, recipeId, {rate})` accepts all material and component recipe IDs. An additional replay rate is optional; the default uses the user's factor once, not twice. `duration(baseMilliseconds, rate)` resolves the same factor and cap. `recipes` exposes the catalog metadata. Unknown presets and invalid targets throw rather than reporting a fake completion.
+`play(element, recipeId, {rate})` accepts all material and component recipe IDs. An additional replay rate is optional; the default uses the user's factor once, not twice. `duration(baseMilliseconds, rate)` resolves the same factor and cap. `recipes` exposes the catalog metadata. Unknown presets and invalid targets throw. They do not report a fake completion.
 
 `layout(element, previousRect)` compares the previous and current DOM position. Displacements up to the viewport diagonal use a GSAP-controlled inverse transform, with duration adapting to distance. Pass `{extended:false}` to retain the compact 50px/crossfade behavior. Offscreen-scale moves beyond the viewport diagonal crossfade. The final order is always the real DOM order. Layout animation is cosmetic and does not supply drag-and-drop behavior.
 
@@ -173,9 +173,9 @@ npm run build
 npm test
 ```
 
-`npm run build` regenerates the token data, the exported theme and the reference sections in `docs/`. `npm test` runs that build and then checks token contracts and contrast, recipe uniqueness, duration and travel bounds, engine declarations against the lockfile, documentation drift, and what the published package may contain. It needs Node and nothing else — the library has no Python tooling.
+`npm run build` regenerates the token data, the exported theme and the reference sections in `docs/`. `npm test` runs that build and then checks token contracts and contrast, recipe uniqueness, duration and travel bounds, engine declarations against the lockfile, documentation drift, and what the published package may contain. It needs only Node. The library has no Python tooling.
 
-The motion engines are bundled for a browser by the documentation website, not here: `@crystal-ui/core` ships `engines.js` and declares gsap and motion as dependencies, and a consumer bundles them as it prefers. The browser contract page that exercises the real engines — recipe completion, cancellation, supersession, property restoration, reduced motion, duration limits, stationary foregrounds and every material signature — lives in `crystal-preview` and runs against the published package. Its results are evidence for the exercised browser, not a full WCAG, native-renderer or cross-browser certification.
+The documentation website bundles the motion engines for a browser. This package does not: `@crystal-ui/core` ships `engines.js` and declares gsap and motion as dependencies, and a consumer bundles them as it prefers. The browser contract page that exercises the real engines lives in `crystal-preview` and runs against the published package. It covers recipe completion, cancellation, supersession, property restoration, reduced motion, duration limits, stationary foregrounds and every material signature. Its results are evidence for the exercised browser only. They are not a full WCAG, native-renderer or cross-browser certification.
 
 ### Storybook and future component packages
 

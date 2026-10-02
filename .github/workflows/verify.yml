@@ -1,22 +1,20 @@
 # The library's gates, run on every push and pull request.
 #
-# Nothing here is a new check. Each step is a script that already exists and that
-# the project already runs by hand; the point of this file is that "already runs
-# by hand" stops being the only guarantee. The order is the order of dependency:
+# Each step is an existing script that the project also runs by hand; this file
+# makes sure they run on every change. The order is the order of dependency:
 # the token build writes the files the validators read.
 #
-# The browser half of this file is gone, along with the website it tested. The
-# pages, the link check, scrolling, interactions and the visual baselines are
-# crystal-preview's, and are run there against the published package.
+# There are no browser checks here. The pages, the link check, scrolling,
+# interactions and the visual baselines belong to crystal-preview, and run there
+# against the published package.
 name: Verify
 
 on:
   push:
     branches: [main, 'crystal-*']
   pull_request:
-  # Re-runnable without an empty commit. A workflow that can only be triggered by
-  # a push cannot be used to check whether a secret was set correctly, which is
-  # the first thing anybody wants to check.
+  # Re-runnable without an empty commit. A workflow that only a push can trigger
+  # cannot be used to check whether a secret was set correctly.
   workflow_dispatch:
 
 # A superseded run has nothing to tell anyone.
@@ -35,40 +33,36 @@ jobs:
           node-version: 22
       - run: npm ci --no-audit --no-fund
 
-      # Builds everything the library generates — tokens, catalogue, the
-      # exported theme and the reference sections in core/docs/ — then runs the
+      # Builds everything the library generates (tokens, catalogue, the
+      # exported theme and the reference sections in core/docs/), then runs the
       # core contracts, the token validator (contrast included), the motion
       # validator, the documentation drift gate and the package boundary.
       #
       # These are the gates `publish.yml` runs before publishing, which is why
-      # they stayed in this repository when the website left it. The website's
-      # own gates — the pages, the links, scrolling, interactions and the visual
-      # baselines — moved to crystal-preview with the pages they are about.
+      # they stay in this repository. The website's own gates (the pages, the
+      # links, scrolling, interactions and the visual baselines) live in
+      # crystal-preview with the pages they are about.
       - run: npm test
 
-      # Generated output is generated, not authored. If a build produces
-      # something different from what is committed, the committed copy is stale
-      # and every downstream gate is reading a file nobody has looked at.
+      # If a build produces something different from what is committed, the
+      # committed copy is stale and every downstream gate is reading a file
+      # nobody has looked at.
       #
-      # The pathspec stays repository-wide and stays anchored with `:(top)`.
-      # These steps no longer run in a subdirectory — the library and the website
-      # are folders at the repository root — so a bare pathspec would resolve the
-      # same way today. It is written anchored anyway, because the last time the
-      # anchoring was left implicit the exclude resolved to
-      # `design-system/design-system/…` and excluded nothing, and passed locally
-      # because there happened to be no diff for it to exclude.
+      # The pathspec stays repository-wide and anchored with `:(top)`. The
+      # library and the website are folders at the repository root, so a bare
+      # pathspec would resolve the same way today. It is anchored anyway: with
+      # the anchoring left implicit, an exclude once resolved to
+      # `design-system/design-system/…`, excluded nothing, and still passed
+      # locally because there was no diff for it to exclude.
       #
-      # `validation/token-checks.json` is the exception, and only for its
-      # `date`: it records when the evidence was produced, so it differs on
-      # every run by design. Its numbers are held to the same rule as everything else — the
-      # second command fails if anything but the timestamp moved.
-      # Two files carry the date their evidence was produced, and a date that
-      # changes with the calendar rather than with the source is not drift. This
-      # job failed at midnight on 23 September 2026 on a commit that touched
-      # neither — `core/docs/accessibility.md`'s "Checks run" row had rolled over
-      # — which is a gate crying wolf once a day and training everybody to
-      # re-run it. Both are excluded from the exact comparison and then checked
-      # for changes *beyond* their timestamp, which is the thing worth catching.
+      # Two files are the exception, and only for their dates.
+      # `validation/token-checks.json` records in its `date` when the evidence
+      # was produced, and `core/docs/accessibility.md`'s "Checks run" row quotes
+      # that date, so both change with the calendar rather than with the source.
+      # Compared exactly, they failed this job at midnight on 23 September 2026
+      # on a commit that touched neither. Both are excluded from the exact
+      # comparison, and the second command fails if anything in them but the
+      # timestamp moved.
       - name: Generated files match their source
         run: |
           git diff --exit-code -- ':(top)' \

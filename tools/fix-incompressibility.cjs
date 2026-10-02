@@ -2,16 +2,14 @@
  *
  * A fluid is incompressible: squeezed on one axis it expands on the other by
  * exactly the reciprocal. Seventeen keyframes across seven recipes broke that,
- * by as much as 13.75%, which is why the 1.x deformations read as rubber being
- * crushed rather than liquid moving. The geometry was wrong; no easing work
- * could have fixed it.
+ * by as much as 13.75%, and made the 1.x deformations read as rubber being
+ * crushed. The error is in the geometry, so easing cannot correct it.
  *
  * The correction divides both axes by the square root of the area. That
- * conserves volume while preserving the deformation's aspect ratio exactly, so
- * the designed character of each movement is untouched and only the physical
- * error is removed. Keeping one axis and deriving the other would also conserve
- * volume, but it would change how the deformation looks, which the standing
- * constraint does not permit.
+ * conserves volume and keeps the deformation's aspect ratio exactly, so only
+ * the physical error is removed. Keeping one axis and deriving the other would
+ * also conserve volume, but it would change how the deformation looks, which
+ * the standing constraint does not permit.
  *
  *   node tools/fix-incompressibility.cjs          report
  *   node tools/fix-incompressibility.cjs --write  correct the recipes

@@ -1,14 +1,13 @@
 /* Derive a spring for every motion recipe from its authored duration.
  *
- * The recipes already encode intent: how long a movement takes, and what it is
- * made of. This turns that intent into physics without changing it. Duration
- * stays the authority — the spring is fitted so its settling time reproduces
- * the duration that was already reviewed and approved — and the keyframes are
- * untouched. Nothing here may alter how a recipe looks with springs disabled.
+ * Each recipe states how long a movement takes and what it is made of. This
+ * fits a spring to that without changing it. Duration stays the authority: the
+ * spring is fitted so its settling time reproduces the approved duration, and
+ * the keyframes are untouched. Nothing here may alter how a recipe looks with
+ * springs disabled.
  *
  * Damping is chosen by signature rather than per recipe, because the signature
- * is the material claim. "Inertia" that does not overshoot is not inertia, and
- * a "feather" that bounces is not a feather.
+ * is the material claim: inertia must overshoot and a feather must not bounce.
  *
  *   node tools/fit-springs.cjs          report the fit
  *   node tools/fit-springs.cjs --write  write springs into the recipes
@@ -21,10 +20,9 @@ const FILE = path.resolve(__dirname, '../core/tokens/motion-recipes.json');
 const WRITE = process.argv.includes('--write');
 
 /* Damping ratio per signature. Below 1 the movement overshoots and reads as
-   momentum; nearer 1 it arrives without bounce and reads as controlled. These
-   are the material's character expressed as a number. */
+   momentum; nearer 1 it arrives without bounce and reads as controlled. */
 const DAMPING = {
-  inertia: 0.55,    // carries momentum; the overshoot IS the signature
+  inertia: 0.55,    // carries momentum; the overshoot is the signature
   coalesce: 0.62,   // two bodies merging, with a rebound as they join
   pressure: 0.66,   // a control pushed and released
   torsion: 0.66,    // twisting release
@@ -77,9 +75,9 @@ for (const recipe of data.recipes) {
      invent physics it does not have. */
   if (recipe.loop && recipe.direction === 'normal') { delete recipe.spring; continue; }
   /* A recipe that shows data overrides its signature. A mark that overshoots its
-     value has, for part of a second, shown a number that is not true — so a
-     recipe declaring `overshoot: "never"` is fitted critically damped whatever
-     material it is made of. */
+     value shows a wrong number for part of a second, so a recipe declaring
+     `overshoot: "never"` is fitted critically damped whatever material it is
+     made of. */
   const zeta = recipe.overshoot === 'never' ? 1 : (DAMPING[recipe.signature] ?? DEFAULT_DAMPING);
   const fitted = fit(recipe.duration, zeta);
   const settle = spring.settleTime(fitted);

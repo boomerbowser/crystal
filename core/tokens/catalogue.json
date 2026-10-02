@@ -18,7 +18,7 @@
         "Frost"
       ],
       "class": ".cr-frost",
-      "use": "Intermediate task frames and every transient surface that opens over content: side panels, drawers, sheets, app bars, and — at Meridian's direction (R15e) — menus, popovers, tooltips and toasts. Reading content inside it sits on Haze."
+      "use": "Intermediate task frames and every transient surface that opens over content: side panels, drawers, sheets and app bars, and menus, popovers, tooltips and toasts (R15e). Reading content inside it sits on Haze."
     },
     {
       "id": "haze",
@@ -39,7 +39,7 @@
         "Resin"
       ],
       "class": ".cr-resin",
-      "use": "One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter — Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock."
+      "use": "One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter, because Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock."
     },
     {
       "id": "resin-panel",
@@ -87,7 +87,7 @@
         ".cr-tag",
         ".cr-resin-haze.count"
       ],
-      "use": "Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens — transient overlays are Frost. `.count` is the size for a count: a 20px circle that grows to a pill, filled to its own edge, with no block padding."
+      "use": "Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens. Transient overlays are Frost. `.count` is the size for a count: a 20px circle that grows to a pill, filled to its own edge, with no block padding."
     },
     {
       "id": "stone",
@@ -96,7 +96,7 @@
         "Stone"
       ],
       "class": ".cr-stone",
-      "use": "A label over an unknown or moving backdrop — a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text."
+      "use": "A label over an unknown or moving backdrop: a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text."
     },
     {
       "id": "mirage",
@@ -175,7 +175,7 @@
       "also": [
         ".cr-dock-inner"
       ],
-      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way — tab strips, segmented controls, toolbars, command and action bars. The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment. The controls may be buttons, tabs (`[role=tab]`, selected by `aria-selected`), radio labels (selected by `:checked`) or links (current by `aria-current`); only buttons were reached before 2.3.0."
+      "use": "A Resin plane holding labelled controls on one Haze fill, so every label reads on the same protected ground: a dock of destinations, and the strips that group controls the same way (tab strips, segmented controls, toolbars, command and action bars). The controls inside are transparent; the current or selected one takes weight 800 and the primary fill, whether it is a dock's destination, a tab or a segment. The controls may be buttons, tabs (`[role=tab]`, selected by `aria-selected`), radio labels (selected by `:checked`) or links (current by `aria-current`); only buttons were reached before 2.3.0."
     },
     {
       "id": "group",
@@ -197,14 +197,14 @@
         "Plastic"
       ],
       "class": ".cr-nav-item",
-      "use": "An entry in side navigation, a rail or a tree of destinations. It has no material of its own — it is furniture on the panel beneath it — and carries selection by label weight alone. Pill hit area, 44px target. `.stacked` puts the icon above the label for a rail. Adopted from the documentation site's side menu, which docs/components.md names as the reference implementation of selection."
+      "use": "An entry in side navigation, a rail or a tree of destinations. It has no material of its own, sits on the panel beneath it, and carries selection by label weight alone. Pill hit area, 44px target. `.stacked` puts the icon above the label for a rail. Adopted from the documentation site's side menu, which docs/components.md names as the reference implementation of selection."
     },
     {
       "id": "bare",
       "name": "Bare control",
       "materials": [],
       "class": ".cr-bare",
-      "use": "A control that must not wear the Resin coat because it sits inside a surface that already has one: a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows, a dismiss button on a toast. Crystal paints every button by element, so bare means subtracting the fill, the shadow, the backdrop filter and both pseudo-layers — this class does all four. The focus ring and the target floor stay."
+      "use": "A control that must not wear the Resin coat because it sits inside a surface that already has one: a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows, a dismiss button on a toast. Crystal paints every button by element, so this class subtracts the fill, the shadow, the backdrop filter and both pseudo-layers. The focus ring and the target floor stay."
     },
     {
       "id": "drag-handle",
@@ -241,7 +241,7 @@
       "name": "No surface of its own",
       "materials": [],
       "class": null,
-      "use": "Layout, typography, behaviour and drawing components that inherit whatever they sit on. A chart's marks, a divider, a provider. Nothing to paint and nothing to wear."
+      "use": "Layout, typography, behaviour and drawing components that inherit whatever they sit on. A chart's marks, a divider, a provider."
     }
   ],
   "categories": [
@@ -857,7 +857,7 @@
             "haze"
           ],
           "geometry": "Indent step 20px; guides use the edge token",
-          "semantics": "role=treegrid/row/gridcell with aria-expanded, aria-level, aria-posinset, aria-setsize and full arrow-key navigation. Not role=tree: a treeitem is a single navigable unit, so it cannot contain the expand control this anatomy requires — treegrid is the pattern ARIA provides for a row that holds its own control. See M-3.",
+          "semantics": "role=treegrid/row/gridcell with aria-expanded, aria-level, aria-posinset, aria-setsize and full arrow-key navigation. Not role=tree: a treeitem is a single navigable unit, so it cannot contain the expand control this anatomy requires, and treegrid is the pattern ARIA provides for a row that holds its own control. See M-3.",
           "crystal": "Row treatment, indentation guides, label weight for the selected row",
           "product": "The keyboard navigation implementation, data and lazy loading",
           "motion": [
@@ -1577,7 +1577,7 @@
             "mui:Checkbox",
             "antd:Checkbox"
           ],
-          "note": "The checked mark is a check glyph. That is the control's own semantics — a validated, entered value — not a selection badge placed over a focused item."
+          "note": "The checked mark is a check glyph. That is the control's own semantics (a validated, entered value), not a selection badge placed over a focused item."
         },
         {
           "id": "checkbox-group",
@@ -1698,7 +1698,7 @@
           "surface": [
             "choice"
           ],
-          "geometry": "8px track, 26px thumb; the thumb is the target and meets 44px in practice through padding",
+          "geometry": "8px track, 26px thumb; the thumb is the target and meets 44px through padding",
           "semantics": "Native range or role=slider with aria-valuenow, valuemin, valuemax and valuetext",
           "crystal": "Track fill, thumb material, tick treatment, RTL mirroring",
           "product": "Step, bounds and what the value drives",
@@ -2085,7 +2085,7 @@
             "mui:—",
             "antd:Upload"
           ],
-          "note": "Crystal supplies appearance only. A file input that does not actually upload must not be presented as working."
+          "note": "Crystal supplies appearance only. A file input that does not upload must not be presented as working."
         },
         {
           "id": "dropzone",
@@ -2826,7 +2826,7 @@
             "haze"
           ],
           "geometry": "Content radius; at least 12px between content and the feathered edge",
-          "semantics": "An article when it is content, a button when the whole card acts. Never both.",
+          "semantics": "An article when it is content or a button when the whole card acts, never both.",
           "crystal": "Fill, feather, elevation, interactive treatment",
           "product": "Content and what an interactive card does",
           "motion": [
@@ -3058,7 +3058,7 @@
             "mui:Chip",
             "antd:Tag"
           ],
-          "note": "Success uses a check mark. That is information display — the legitimate use of the glyph."
+          "note": "Success uses a check mark. That is information display, the legitimate use of the glyph."
         },
         {
           "id": "indicator",
@@ -3348,7 +3348,7 @@
         {
           "id": "authored-bubble",
           "name": "Authored bubble",
-          "anatomy": "A reading surface with one intentionally tightened corner indicating authorship or direction.",
+          "anatomy": "A reading surface with one tightened corner indicating authorship or direction.",
           "states": [
             "incoming",
             "own",
@@ -3944,7 +3944,7 @@
             "mui:Skeleton",
             "antd:Skeleton"
           ],
-          "note": "A skeleton must match the real layout. A skeleton that does not resolve into the shape it promised is a worse experience than a spinner."
+          "note": "A skeleton must match the real layout. One that resolves into a different shape is a worse experience than a spinner."
         },
         {
           "id": "loading-overlay",
@@ -4639,7 +4639,7 @@
             "none"
           ],
           "geometry": "Step per level; leading tightens as size grows.",
-          "semantics": "The level is the document structure, never chosen for size — size comes from the step.",
+          "semantics": "The level is the document structure, never chosen for size. Size comes from the step.",
           "crystal": "The scale and its tracking",
           "product": "Level and wording",
           "parity": [
@@ -5357,7 +5357,7 @@
     {
       "id": "charts",
       "name": "Charts",
-      "description": "Data visualisation on one shared surface. Crystal named no charting component before 2.0 while every React benchmark shipped one; these are specified against MUI X Charts, PrimeReact Chart and Mantine Charts. Every chart owes a text equivalent of its data — a chart is a second representation, never the only one.",
+      "description": "Data visualisation on one shared surface. Crystal named no charting component before 2.0 while every React benchmark shipped one. These are specified against MUI X Charts, PrimeReact Chart and Mantine Charts. Every chart owes a text equivalent of its data, so the chart is never the only representation.",
       "components": [
         {
           "id": "chart-surface",
@@ -5903,7 +5903,7 @@
     {
       "id": "media",
       "name": "Media",
-      "description": "Video, audio and galleries. Crystal named none of these before, and they are the clearest case of the parity requirement being about capability rather than nomenclature: a design system without a transport control leaves every product to invent one, and each invention re-solves captions, scrubbing and keyboard transport differently.",
+      "description": "Video, audio and galleries. Crystal named none of these before. The parity requirement here is about capability: a design system without a transport control leaves every product to invent one, and each invention re-solves captions, scrubbing and keyboard transport differently.",
       "components": [
         {
           "id": "video-player",
@@ -6043,7 +6043,7 @@
     {
       "id": "commerce",
       "name": "Commerce",
-      "description": "Functional e-commerce components. Crystal named none before, which left every store to reinvent a quantity stepper, a variant selector and a cart summary — and to re-solve availability, currency formatting and checkout validation each time. Payment is deliberately bounded: these components never handle raw card data, and defer to the host provider's own element.",
+      "description": "Functional e-commerce components. Crystal named none before, which left every store to reinvent a quantity stepper, a variant selector and a cart summary, and to re-solve availability, currency formatting and checkout validation each time. Payment is deliberately bounded: these components never handle raw card data, and defer to the host provider's own element.",
       "components": [
         {
           "id": "price",
@@ -6121,7 +6121,7 @@
             "field"
           ],
           "geometry": "Pill; both controls reach 44px.",
-          "semantics": "A typable numeric field: the value is read as its text, and the bounds are announced when reached. Not role=spinbutton — a spin button cannot be focused with VoiceOver, so the role would put the control out of some readers' reach.",
+          "semantics": "A typable numeric field: the value is read as its text, and the bounds are announced when reached. Not role=spinbutton, because a spin button cannot be focused with VoiceOver, so the role would put the control out of some readers' reach.",
           "crystal": "Materials, press recipe on each control",
           "product": "Bounds, step, stock rules",
           "motion": [
@@ -6349,9 +6349,9 @@
             "haze"
           ],
           "geometry": "Options keep the content radius; the selected one carries label weight.",
-          "semantics": "A radio group. Card fields are never reimplemented — the host supplies its provider element.",
+          "semantics": "A radio group. Card fields are never reimplemented: the host supplies its provider element.",
           "crystal": "Option material, selection, focus ring",
-          "product": "The provider, tokenisation, and PCI scope — this component never handles raw card data",
+          "product": "The provider, tokenisation, and PCI scope; this component never handles raw card data",
           "motion": [
             "selection"
           ],
@@ -6625,7 +6625,7 @@
     {
       "id": "screens",
       "name": "Screens",
-      "description": "Whole views and the chrome around them, for interactive applications rather than documents. A screen owns landmarks, focus movement between views, and the states a view can be in before it has content — loading, empty, error, offline, not found, unauthorised — which products otherwise improvise separately and inconsistently.",
+      "description": "Whole views and the chrome around them, for interactive applications rather than documents. A screen owns landmarks, focus movement between views, and the states a view can be in before it has content (loading, empty, error, offline, not found, unauthorised), which products otherwise improvise separately and inconsistently.",
       "components": [
         {
           "id": "screen",
@@ -6977,7 +6977,7 @@
     {
       "id": "blocks",
       "name": "Blocks",
-      "description": "Composed arrangements that solve a recognisable product problem: a dashboard shell, a checkout, a player, a storefront. Kept as their own tier rather than mixed into the components, because a component is a primitive with one job and a contract, while a block is opinionated by design — and a design system that cannot tell the two apart ships opinions as if they were primitives. Benchmarked against Tailwind UI, Mantine UI, Ant Design Pro, MUI Templates and PrimeBlocks.",
+      "description": "Composed arrangements that solve a recognisable product problem: a dashboard shell, a checkout, a player, a storefront. Kept as their own tier rather than mixed into the components, because a component is a primitive with one job and a contract, while a block is opinionated by design. Mixing the two would ship opinions as if they were primitives. Benchmarked against Tailwind UI, Mantine UI, Ant Design Pro, MUI Templates and PrimeBlocks.",
       "components": [
         {
           "id": "dashboard-shell",

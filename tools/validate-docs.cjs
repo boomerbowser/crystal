@@ -1,14 +1,14 @@
 /* Catch documentation that has drifted from the sources it describes.
  *
- * Generated regions cannot drift — `tools/build-reference.cjs` rewrites them. But a
- * specification is mostly prose, and prose quotes values: "an 80% content fill with a
- * 1.95px feather", "Motion 13.4.0". Generating those inline would wreck the writing, so
- * instead this asserts that every value the prose quotes is still the value that ships.
+ * Generated regions cannot drift, because `tools/build-reference.cjs` rewrites them.
+ * Prose quotes values too: "an 80% content fill with a 1.95px feather", "Motion
+ * 13.4.0". Generating those inline would damage the writing, so this asserts that
+ * every value the prose quotes is still the value that ships.
  *
- * The check is one-directional and deliberately so: if a token says 40px, the chapter
- * that documents that material must contain "40px" somewhere. Change the token without
- * touching the prose and this fails. It cannot catch a value quoted in a sentence that
- * has become wrong for some other reason, and does not pretend to.
+ * The check is one-directional: if a token says 40px, the chapter that documents that
+ * material must contain "40px" somewhere. Change the token without touching the prose
+ * and this fails. It cannot catch a quoted value in a sentence that has become wrong
+ * for some other reason.
  */
 const fs = require('node:fs');
 const path = require('node:path');
@@ -17,10 +17,8 @@ const read = p => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 const doc = name => fs.readFileSync(path.join(ROOT, 'core/docs', name), 'utf8');
 
 const failures = [];
-/* Counted rather than declared. The total used to be a literal at the bottom of
-   this file, so adding a check and forgetting to bump it reported fewer checks
-   than ran — and the number is evidence, published in
-   `validation/doc-drift-checks.json`. */
+/* Counted rather than declared, so the total always matches the checks that
+   ran. The number is published in `validation/doc-drift-checks.json`. */
 let checked = 0;
 const expect = (where, needle, why) => {
   checked += 1;
@@ -44,8 +42,8 @@ for (const [needle, why] of [
 ]) expect('materials.md', needle, why);
 
 /* Engine versions, stated in two chapters. */
-/* The published manifest, because the versions the documentation quotes are the
-   ones a consumer installs — not the ones the workspace happens to build with. */
+/* Read from the published manifest, because the documentation quotes the
+   versions a consumer installs, which can differ from the workspace's. */
 const pkg = read('core/package.json');
 for (const where of ['adoption.md', 'motion-components.md']) {
   expect(where, `Motion ${pkg.dependencies.motion}`, 'the pinned Motion version');
@@ -68,10 +66,8 @@ expect('accessibility.md', checks.checks.toLocaleString(), 'the number of contra
 
 /* The focus halo, quoted in prose. The generated table beneath it is built from
    the exported theme and cannot drift; the sentence above it is hand-written and
-   did. It described 2/6/12/22 for as long as the library shipped those spreads
-   and for a while after Meridian halved them, so the specification, the library
-   and the site disagreed three ways at once — D-11. Every blur/spread pair the
-   theme actually exports must appear in the sentence. */
+   once still described the withdrawn 2/6/12/22 spreads (D-11). Every
+   blur/spread pair the theme exports must appear in the sentence. */
 {
   const theme = fs.readFileSync(path.join(ROOT, 'core/assets/crystal-theme.css'), 'utf8');
   const ring = /--cr-focus-ring:\s*([^;]+);/.exec(theme);
@@ -86,10 +82,8 @@ expect('accessibility.md', checks.checks.toLocaleString(), 'the number of contra
         `a focus halo layer the theme exports (blur ${halo[1]}px, spread ${halo[2]}px)`);
       continue;
     }
-    /* The two elevation layers, which this check used to skip with a bare
-       `continue` — so the lift could have changed in the theme and the prose
-       said whatever it liked. They have a y-offset and no spread, so they are
-       quoted as offset/blur. */
+    /* The two elevation layers are checked as well. They have a y-offset and
+       no spread, so they are quoted as offset/blur. */
     const lift = /^\s*0\s+(\d+)px\s+(\d+)px/.exec(layer);
     if (lift) {
       expect('components.md', `${lift[1]}px / ${lift[2]}px`,

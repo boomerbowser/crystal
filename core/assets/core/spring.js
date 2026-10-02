@@ -6,11 +6,10 @@
  * duration and a bézier, for two reasons. The first is behavioural: a timed
  * curve cannot be interrupted meaningfully, because it has no notion of where
  * the thing currently is or how fast it is going. Press a control while it is
- * still settling and a curve restarts from a new zero, which is why timed
- * motion feels brittle under real use. A spring resumes from its current state
- * because its current state is all it needs.
+ * still settling and a curve restarts from a new zero, which makes timed
+ * motion feel brittle in use. A spring resumes from its current state.
  *
- * The second is portability, which is the reason it lives in the core. A
+ * The second is portability, which is why it lives in the core. A
  * cubic-bézier is a web primitive. Stiffness, damping and mass map directly
  * onto SwiftUI's spring(response:dampingFraction:), Compose's
  * spring(dampingRatio:stiffness:) and every serious animation runtime, so a
@@ -57,9 +56,9 @@
      displacement 1 with zero initial velocity. Returns 0 at t=0 and approaches
      1 as the spring settles, so it can be read directly as animation progress.
 
-     The three damping regimes are genuinely different closed-form solutions,
-     not one formula with a parameter; conflating them produces NaN at exactly
-     critical damping, which is the case a designer is most likely to pick. */
+     The three damping regimes have different closed-form solutions. Applying
+     one formula to all three produces NaN at exactly critical damping, which
+     is the case a designer is most likely to pick. */
   function sampleSpring(spec, tSeconds) {
     const { stiffness, damping, mass } = normaliseSpring(spec);
     const t = Math.max(0, Number(tSeconds) || 0);
@@ -98,9 +97,9 @@
     return MAX_SETTLE_MS;
   }
 
-  /* Does this spring pass its target before settling? Underdamped springs do;
-     it is the overshoot that reads as momentum, and its absence that makes
-     critically damped motion feel mechanical. */
+  /* True when the spring passes its target before settling, which underdamped
+     springs do. The overshoot reads as momentum, and without it critically
+     damped motion feels mechanical. */
   function overshoots(spec) {
     return dampingRatio(spec) < 1;
   }
