@@ -2049,6 +2049,13 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     display: inline-flex;
     margin-top: calc((var(--cr-text-body-leading) - var(--cr-choice-box-size, 26px)) / 2);
 }
+/* A checklist's checkbox is a choice, not the field's text entry. Inside an
+   editor's field shell, `.cr-field-shell :is(input, select, textarea)` would
+   give it the text entry's 44px floor, stretching the 26px box into a pill and
+   dropping it below its line. */
+.cr-field-shell :is(.cr-prose,.cr-editor) input:is([type=checkbox],[type=radio]) {
+    min-height: 0;
+}
 :is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) > li > :where(div, p, span) {
     flex: 1;
     min-width: 0;

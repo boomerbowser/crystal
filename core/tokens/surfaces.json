@@ -53,7 +53,7 @@
       "name": "Field shell",
       "materials": ["Resin", "Haze"],
       "class": ".cr-field-shell",
-      "use": "The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics. `.cr-editor` is the editable surface inside a rich text field: the shared prose vocabulary (headings, lists, checklists, marks, insertions and deletions) with the primary caret and the primary-soft selection. `.cr-editor-toolbar` is its toolbar, above the text on a fine pointer and below it, clear of the touch keyboard, on a coarse one.",
+      "use": "The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics. `.cr-editor` is the editable surface inside a rich text field: the shared prose vocabulary (headings, lists, checklists, marks, insertions and deletions) with the primary caret and a 28% primary selection, distinct from the primary-soft highlight (D-34). `.cr-editor-toolbar` is its toolbar, above the text on a fine pointer and below it, clear of the touch keyboard, on a coarse one.",
       "also": [".cr-editor"]
     },
     {

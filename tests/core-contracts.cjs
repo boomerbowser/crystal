@@ -1003,6 +1003,10 @@ check('the media and text recipes hold their geometry and their rules', () => {
   assert.ok(!/content:\s*['"]\\?2713|content:\s*['"]✓/.test(media), 'a check glyph is drawn in the media and text recipes');
   const done = media.slice(media.indexOf('[data-checked=true]'), media.indexOf('[data-checked=true]') + 300);
   assert.ok(!/line-through/.test(done), 'a finished checklist item is struck through');
+  /* A checklist's checkbox keeps its 26px box inside an editor's field shell,
+     whose text-entry rule would otherwise give it a 44px floor. */
+  const choice = rule('.cr-field-shell :is(.cr-prose,.cr-editor) input:is([type=checkbox],[type=radio])');
+  assert.ok(/min-height:\s*0/.test(choice), 'a checklist checkbox inside an editor takes the field shell\'s 44px text-entry floor');
   /* The touch toolbar clears the keyboard. */
   assert.ok(/inset-block-end:\s*env\(keyboard-inset-height/.test(media), 'the touch toolbar no longer clears the on-screen keyboard');
   /* The editor's frame outranks the shell's inline layout: a zero-specificity
