@@ -399,6 +399,19 @@ Haze's 1.95px feather applies to an isolated paint layer only. Text, icons, hit 
 focus rings stay crisp, because a feathered glyph is blurred and is not legible. The
 feather softens the edge of the fill against the frame behind it and does nothing else.
 
+## Media and text compositions
+
+The media and text recipes of 2.4.0 compose the materials above and add none. The [components chapter](components.html#media-and-text) has each recipe's values and a specimen.
+
+- **The media stage is a frame, not a material.** It clips the picture to the content radius and letterboxes it in `--cr-surface-alt`, so it follows the palette and mode.
+- **The transport is a Resin plane over the picture.** Its controls give up their own diffusion, because Resin never contains Resin. Its time readouts are labels read through a 20% fill over moving pictures, so each sits on its own Haze pill.
+- **A caption cue is Stone,** which exists for a label over an unknown or moving backdrop. The cue keeps its crisp text over a feathered backing and sits above the transport, never under it.
+- **The audio card is Haze.** With no picture, the player is a reading surface holding a title and the transport.
+- **The selection toolbar is Frost,** because every transient overlay is (R15e). It takes a pill silhouette because it holds a row of controls, not a paragraph.
+- **The editor is the field shell:** a Resin surround with the Haze well the document is written on. Prose has no material of its own and reads on whatever surface holds it.
+
+Under reduced transparency and in opaque mode the caption's backing becomes the opaque surface; under forced colours the cue, the readouts and the stage take system colours with a CanvasText border.
+
 ## See it working
 
 The [Playground](../playground.html#foundations) renders the full hierarchy live, with

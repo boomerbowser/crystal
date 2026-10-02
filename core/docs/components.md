@@ -99,6 +99,17 @@ Five more arrived in 2.3.0, each from a ruling of 29 September 2026 on something
 | Recessed overlay | `.cr-haze.overlay` | A menu, popover or listbox opened inside a pane that is already lifted. On the page a transient overlay is Frost; inside a Haze dialog or a Frost panel it recesses into Haze, and plain Haze has no edge. This is a flat Haze fill with the `--cr-edge` rim and the content shadow, and no feather. |
 | Count | `.cr-resin-haze.count` | The compact display sized for a count: a 20px circle that grows to a pill with its digits, filled to its own edge, with no block padding. With the tag's 8px Haze inset and 17px block padding a count badge is 55px tall. |
 
+The media and text recipes of 2.4.0 add no surface. Each is a selector on a surface the vocabulary already has, so no platform gains a material; it gains the geometry. Each links to its specimen [below](#media-and-text).
+
+| Recipe | Surface | What it is |
+|---|---|---|
+| [Media stage](#specimen-media-stage) `.cr-media` | none of its own | The picture's frame: the content radius, a `--cr-surface-alt` letterbox, and the aspect ratio the product sets in `--cr-media-aspect` (unset keeps the media's own; `16 / 9`, `4 / 3`, `1`, `9 / 16`), so the page does not jump when the first frame decodes. `--cr-media-fit` is `contain`, so nothing is cropped unless the product asks for `cover`. In full screen the radius goes to 0. |
+| [Transport](#specimen-media-stage) `.cr-resin.transport` in `.cr-media-bar` | Resin plane | A Resin pill with 4px block and 12px inline padding around the 48px action targets, 58px tall with its rim. The bar is inset 12px from the stage, or the safe area in full screen, so the pill never meets the content radius. The time readouts are tabular, on their own Haze pills, in body ink. Below 420px of player width the bar wraps its trailing controls onto a second row. |
+| [Caption cue](#specimen-media-stage) `.cr-media-caption`, `::cue` | Stone label backing | A cue is a label over a moving picture, so it sits on Stone, above the transport and never under it: 12px above the bar whether or not the bar is shown, so it does not jump when a pointer arrives. `.cr-media-caption` is the feathered backing for a library that renders cues itself; `::cue` gives the browser's own renderer the flat Stone fill, because it accepts no pseudo-element. |
+| [Audio card](#specimen-media-audio) `.cr-haze.cr-media.audio` | Haze reading surface | The audio player has no picture, so the stage becomes a Haze card with the 20px card padding, holding the title, a secondary line and the transport. |
+| [Selection toolbar](#specimen-text-marks) `.cr-frost.bar` | Frost panel | A transient overlay shaped as a row of controls: a pill with 4px padding, for the commonest marks over highlighted text. It is Frost because every transient overlay is (R15e). |
+| [Prose and the editor](#specimen-text-editor) `.cr-prose`, `.cr-editor`, `.cr-editor-toolbar` | Field shell, when editing | One reading vocabulary for a document while it is written and after it is published: 24px between blocks, headings stepping down the type scale, muted list markers, a primary-soft rule on a quotation, checklists of native checkboxes, and marks that each differ in shape as well as colour. A field shell holding an editor becomes a column at the content radius. Its toolbar sits above the text on a fine pointer, and below it on a coarse one, clear of the on-screen keyboard; `.below` asks for that placement on any pointer. |
+
 A native switch is a checkbox with a track, `<input type="checkbox" role="switch">`, styled by element like the checkbox and radio. The track reads `--cr-switch-track-width` and `-height`, the thumb is the opaque surface, and the on state is the primary-soft pair.
 
 ### Interaction surface geometry
@@ -273,6 +284,73 @@ Resin indicator would be the nested-Resin failure.
 ```
 
 The feather is on the `::before` layer alone, so the label above it stays crisp.
+
+## Media and text
+
+These specimens are static: they show each recipe, and the behaviour (playback, captions, editing commands) is the engine's and the platform library's.
+
+<div id="specimen-media-stage" class="cr-media" style="--cr-media-aspect: 16 / 9; max-width: 560px; margin-block: 16px">
+  <div class="cr-media-caption"><span>The harbour at dusk.</span></div>
+  <div class="cr-media-bar">
+    <div class="cr-resin transport" role="group" aria-label="Transport specimen">
+      <button type="button" class="cr-bare" aria-pressed="false">Play</button>
+      <time>0:00</time>
+      <input type="range" min="0" max="8" value="3" aria-label="Seek" style="flex: 1; min-width: 0">
+      <time>0:08</time>
+      <button type="button" class="cr-bare">Settings</button>
+    </div>
+  </div>
+</div>
+
+The stage at 16:9 with no picture loaded, which is its letterbox, the caption cue on Stone above the transport, and the transport inset 12px from the stage.
+
+<div id="specimen-media-audio" class="cr-haze cr-media audio" style="max-width: 560px; margin-block: 16px">
+  <div><p style="margin: 0; font-weight: 700">Episode 4: The long way round</p><p style="margin: 0; color: var(--cr-muted)">Harbour stories</p></div>
+  <div class="cr-media-bar">
+    <div class="cr-resin transport" role="group" aria-label="Audio transport specimen">
+      <button type="button" class="cr-bare" aria-pressed="false">Play</button>
+      <time>0:00</time>
+      <input type="range" min="0" max="8" value="0" aria-label="Seek Episode 4" style="flex: 1; min-width: 0">
+      <time>0:08</time>
+    </div>
+  </div>
+</div>
+
+The audio card: Haze, with the card padding, holding the title and the transport.
+
+<div id="specimen-text-editor" class="cr-field-shell" style="max-width: 560px; margin-block: 16px">
+  <div class="cr-editor-toolbar" role="toolbar" aria-label="Formatting specimen">
+    <button type="button" class="cr-bare">Heading</button>
+    <span role="separator" aria-orientation="vertical"></span>
+    <button type="button" class="cr-bare" aria-label="Bold" aria-pressed="true"><b>B</b></button>
+    <button type="button" class="cr-bare" aria-label="Italic" aria-pressed="false"><i>I</i></button>
+    <button type="button" class="cr-bare" aria-label="Underline" aria-pressed="false"><u>U</u></button>
+  </div>
+  <div class="cr-editor" role="textbox" aria-multiline="true" aria-readonly="true" aria-label="Editor specimen">
+    <h3>Before the meeting</h3>
+    <ul class="checklist">
+      <li><label><input type="checkbox" checked aria-label="Send the minutes"></label><p>Send the minutes</p></li>
+      <li><label><input type="checkbox" aria-label="Confirm the venue"></label><p>Confirm the venue</p></li>
+    </ul>
+    <p>The <strong>pilot boat</strong> budget is <u>under review</u>, the fee is <s>£40</s> £45, and the depth at low tide is <del>3.9 m</del> <ins>4.2 m</ins>. Press <kbd>Alt</kbd> + <kbd>F10</kbd> for the toolbar.</p>
+    <blockquote><p>A harbour is only as good as the water in it.</p></blockquote>
+  </div>
+</div>
+
+The editor: a field shell holding the toolbar and the document. The checklist's mark is the native checkbox's own state, the one place a check means checked. A finished item recedes to the muted ink and is not struck through. An insertion is underlined and a deletion struck through, so neither rests on colour alone.
+
+<div id="specimen-text-marks" style="display: grid; gap: 12px; justify-items: start; max-width: 560px; margin-block: 16px">
+  <div class="cr-frost bar" role="toolbar" aria-label="Selection toolbar specimen">
+    <button type="button" class="cr-bare" aria-label="Bold" aria-pressed="true"><b>B</b></button>
+    <button type="button" class="cr-bare" aria-label="Italic" aria-pressed="false"><i>I</i></button>
+    <button type="button" class="cr-bare">Link</button>
+  </div>
+  <div class="cr-haze cr-editor" style="padding: 16px" role="textbox" aria-multiline="true" aria-readonly="true" aria-label="Highlight specimen">
+    <p>A <mark>highlighted phrase</mark> beside plain text. Select across both to see the selection.</p>
+  </div>
+</div>
+
+**A highlight and a selection differ (D-34).** A highlight is `mark`, the primary-soft pair, as prose renders it. The editor's selection is a 28% primary tint under unchanged ink, so a highlighted word that is then selected still looks selected. The highlight measures 6.06:1 or better and the selection 7.63:1 or better in every palette and mode. Where they overlap, Harbor falls under 4.5:1, which is open as D-39.
 
 ## See it working
 
