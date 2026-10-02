@@ -1023,6 +1023,23 @@ check('the media and text recipes hold their geometry and their rules', () => {
   }
 });
 
+/* A material's diffusion survives a consumer's minifier. lightningcss, which
+   Vite 8 minifies CSS with, reads `backdrop-filter` and
+   `-webkit-backdrop-filter` as one property and keeps the last declaration.
+   Written standard first, only the prefixed one survives, and Chromium ignores
+   it: Resin rendered flat in Crystal React's built stories while the dev server
+   showed it diffused. Prefixed first, the minifier keeps the standard property
+   and adds the prefix back only for targets that need it. */
+check('every backdrop-filter is written after its -webkit- form', () => {
+  const late = [];
+  for (const [, selector, body] of stylesheetCode.matchAll(/([^{};]*)\{([^{}]*)\}/g)) {
+    const standard = body.search(/(?<![-\w])backdrop-filter\s*:/);
+    const prefixed = body.search(/-webkit-backdrop-filter\s*:/);
+    if (standard >= 0 && prefixed >= 0 && standard < prefixed) late.push(selector.trim().slice(0, 60));
+  }
+  assert.deepEqual(late, [], `${late.length} rule(s) write -webkit-backdrop-filter last, which a minifier keeps alone`);
+});
+
 /* -------------------------------------------------------------- report */
 
 const failures = results.filter((r) => r.status === 'fail');

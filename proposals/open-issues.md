@@ -200,6 +200,7 @@ Task C-M3, and R-A8 under options (a) and (b).
 
 | Closed | Entries | How |
 |---|---|---|
+| 2 October 2026 | D-38 | Opened and closed the same day: `crystal.css` writes the WebKit alias first, so a consumer's minifier keeps the unprefixed property. |
 | 29 September 2026 | D-4 | On a Pixel 6 Pro. |
 | 29 September 2026 | D-17 | On the evidence of its hunt. |
 | 29 September 2026 | D-25 | With the preview on 2.3.0. |

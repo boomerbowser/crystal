@@ -160,10 +160,17 @@ This output was reproduced through the real pipeline:
 Autoprefixer alone does not do this: running it over the same declaration keeps
 both. The unprefixed declaration is lost when a minifier runs after autoprefixer.
 
-Crystal's own `assets/crystal.css` writes the pair, and that is correct there:
-the preview ships hand-written CSS that nothing minifies, and dropping the alias
-there would lose Safari. Do not read it as an example for a stylesheet that goes
-through a build.
+Crystal's own `assets/crystal.css` writes the pair, because it ships as written
+and dropping the alias would lose Safari. It writes the alias **first**, and a
+contract check holds it to that. A consumer imports `@crystal-ui/core/css`
+through its own bundler, so the file is minified after all. lightningcss, which
+Vite 8 minifies CSS with, reads the two as one property and keeps the last
+declaration: written unprefixed first, only the alias survived, and Resin
+rendered flat in Crystal React's built stories while its dev server, which does
+not minify, showed it diffused (D-38). Alias first, lightningcss keeps the
+unprefixed property and adds the alias back for targets that need it, and
+esbuild keeps both. Order is the fix for a stylesheet that must ship the pair;
+a stylesheet that goes through a build should still write the property once.
 
 ### What not to load
 

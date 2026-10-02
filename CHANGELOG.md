@@ -47,6 +47,16 @@ Proposed for 2.4.0; not yet released. `crystal-theme.css` is byte-identical.
   rich text surface the format vocabulary, the selection toolbar and touch
   placement; prose, the prose list and text the read-only vocabulary.
 
+### Fixed
+
+- **Materials keep their diffusion through a consumer's minifier (D-38).**
+  `crystal.css` wrote `backdrop-filter` before `-webkit-backdrop-filter` in 23
+  rules. lightningcss, which Vite 8 minifies CSS with, keeps only the last of
+  the two, so a minified build kept the WebKit alias alone, which Chromium
+  ignores, and Frost, Resin and Mirage rendered flat. The alias now comes
+  first in every rule. No declaration changed, and `crystal-theme.css` is
+  byte-identical.
+
 ## [2.3.1] - 2026-09-29
 
 A patch release for one scroll container that broke Crystal's own contract.

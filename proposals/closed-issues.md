@@ -2268,3 +2268,31 @@ its `main` passes CI on them. Crystal React's material gate compares against it.
 The re-capture had been refused for a while that day: the repository was then
 private, its jobs drew on the account's included Actions minutes, and GitHub
 declines jobs with a payments-or-spending-limit message once those are used up.
+
+## D-38 · Resin renders flat once a consumer minifies `crystal.css`
+
+**What.** Crystal React's CI, the first run in three days that GitHub started,
+failed `verify:theme` on the built stories: the command palette's field, a
+`.cr-field-shell`, computed `backdrop-filter: none`. The dev server, which does
+not minify, showed `blur(20px) saturate(1.65)`. Vite 8 minifies CSS with
+lightningcss, and lightningcss reads `backdrop-filter` and
+`-webkit-backdrop-filter` as one property and keeps the last declaration.
+`crystal.css` wrote the unprefixed form first in 23 rules, so only the alias
+survived, and Chromium does not implement the alias. Frost, Resin, Mirage, the
+dock, the table scroller, the group and the bare and navigation controls all
+lost their diffusion in any build that minifies with lightningcss. esbuild,
+Vite 7's minifier, keeps both forms in either order, which is why nothing
+reported it earlier.
+
+**Why it matters.** D-4b predicted this and was closed on the premise that
+nothing minifies `crystal.css`. That stopped being true when the library was
+published: a consumer imports `@crystal-ui/core/css` into its own bundle.
+
+**Closed** by order, built into the next release. Each of the 23 rules now writes
+`-webkit-backdrop-filter` first and `backdrop-filter` last; every rule keeps
+the same declarations, and `crystal-theme.css` is byte-identical. Minified by
+lightningcss with Vite's default targets, the old stylesheet leaves 23 rules
+with only the alias and the new one leaves none; esbuild keeps both forms. A
+contract check, `every backdrop-filter is written after its -webkit- form`,
+failed on all 23 rules before the change and passes after it.
+`libraries/CONTRACT.md` says why the order matters.

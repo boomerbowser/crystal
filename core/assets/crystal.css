@@ -19,9 +19,9 @@
    gradient holds at its resting position. */
 :is(.cr-plastic,.cr-foundation){background-color:var(--cr-canvas);background-image:radial-gradient(ellipse 58% 44% at 26% 34%,var(--cr-atmosphere-glow),transparent 72%),radial-gradient(ellipse at 5% 12%,var(--cr-atmosphere-one),transparent 64%),radial-gradient(ellipse at 96% 88%,var(--cr-atmosphere-two),transparent 63%);isolation:isolate}
 :is(.cr-haze,.cr-surface){background:var(--cr-surface);border:1px solid var(--cr-edge);border-radius:var(--cr-radius);box-shadow:var(--cr-shadow-content);color:var(--cr-text)}
-:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass){position:relative;isolation:isolate;border:1px solid var(--cr-rim);background:var(--cr-frost-fill);box-shadow:var(--cr-shadow-panel);border-radius:calc(var(--cr-radius) + 6px);backdrop-filter:blur(var(--cr-frost-blur)) saturate(var(--cr-frost-saturation));-webkit-backdrop-filter:blur(var(--cr-frost-blur)) saturate(var(--cr-frost-saturation))}
+:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass){position:relative;isolation:isolate;border:1px solid var(--cr-rim);background:var(--cr-frost-fill);box-shadow:var(--cr-shadow-panel);border-radius:calc(var(--cr-radius) + 6px);-webkit-backdrop-filter:blur(var(--cr-frost-blur)) saturate(var(--cr-frost-saturation));backdrop-filter:blur(var(--cr-frost-blur)) saturate(var(--cr-frost-saturation))}
 :is(.cr-frost,.cr-acrylic):before{content:'';position:absolute;inset:0;pointer-events:none;z-index:-1;border-radius:inherit;opacity:var(--cr-grain-opacity);background-image:url('grain.svg')}
-:is(.cr-resin,.cr-glass){background:var(--cr-resin-fill);border-radius:999px;box-shadow:var(--cr-shadow-float);backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));-webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation))}
+:is(.cr-resin,.cr-glass){background:var(--cr-resin-fill);border-radius:999px;box-shadow:var(--cr-shadow-float);-webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation))}
 .cr-well{background:var(--cr-surface);border-radius:calc(var(--cr-radius) - 7px);color:var(--cr-text);border:1px solid var(--cr-edge)}
 .cr-button{min-height:48px;padding:15px 24px;border-radius:999px;border:1px solid transparent;font-weight:750;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;line-height:1.3}
 /* The button vocabulary is four names, and each names a colour role Crystal
@@ -53,10 +53,10 @@
 .cr-dock{display:flex;align-items:center;gap:4px;padding:8px;max-width:100%}.cr-dock-inner{display:flex;gap:3px;align-items:center;border-radius:999px;background:var(--cr-label-fill);padding:3px;width:100%}.cr-dock button{min-height:44px;border:0;background:none;padding:10px 17px;border-radius:999px;font-weight:700;white-space:nowrap;color:var(--cr-text)}/* A selected dock label has no underline. Selection is carried by label
    weight alone, and the component layer sets text-decoration:none. */
 .cr-dock button[aria-pressed=true]{background:var(--cr-primary);color:var(--cr-on-primary);box-shadow:0 2px 5px #0002}.cr-dock button:hover:not([aria-pressed=true]){background:var(--cr-surface)}
-.cr-dialog{border:1px solid var(--cr-outline);background:var(--cr-surface);color:var(--cr-text);padding:30px;border-radius:calc(var(--cr-radius) + 6px);width:min(560px,calc(100% - 32px));box-shadow:var(--cr-shadow-float);max-height:85dvh;overflow:auto;overflow-x:hidden}.cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fill);backdrop-filter:blur(var(--cr-mirage-blur)) saturate(var(--cr-mirage-saturation)) brightness(var(--cr-mirage-brightness));-webkit-backdrop-filter:blur(var(--cr-mirage-blur)) saturate(var(--cr-mirage-saturation)) brightness(var(--cr-mirage-brightness))}.cr-dialog header{display:flex;justify-content:space-between;align-items:start;gap:20px}.cr-dialog h2{font-size:26px}.cr-dialog footer{display:flex;gap:10px;justify-content:flex-end;margin-top:24px}.cr-dialog pre{max-height:300px;overflow:auto}
-[data-effects=opaque] :is(.cr-frost,.cr-acrylic),[data-effects=opaque] :is(.cr-resin,.cr-glass){backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--cr-surface);border-color:var(--cr-outline)}[data-effects=opaque] :is(.cr-frost,.cr-acrylic):before{display:none}
+.cr-dialog{border:1px solid var(--cr-outline);background:var(--cr-surface);color:var(--cr-text);padding:30px;border-radius:calc(var(--cr-radius) + 6px);width:min(560px,calc(100% - 32px));box-shadow:var(--cr-shadow-float);max-height:85dvh;overflow:auto;overflow-x:hidden}.cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fill);-webkit-backdrop-filter:blur(var(--cr-mirage-blur)) saturate(var(--cr-mirage-saturation)) brightness(var(--cr-mirage-brightness));backdrop-filter:blur(var(--cr-mirage-blur)) saturate(var(--cr-mirage-saturation)) brightness(var(--cr-mirage-brightness))}.cr-dialog header{display:flex;justify-content:space-between;align-items:start;gap:20px}.cr-dialog h2{font-size:26px}.cr-dialog footer{display:flex;gap:10px;justify-content:flex-end;margin-top:24px}.cr-dialog pre{max-height:300px;overflow:auto}
+[data-effects=opaque] :is(.cr-frost,.cr-acrylic),[data-effects=opaque] :is(.cr-resin,.cr-glass){-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--cr-surface);border-color:var(--cr-outline)}[data-effects=opaque] :is(.cr-frost,.cr-acrylic):before{display:none}
 @supports not (backdrop-filter:blur(1px)){:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass){background:var(--cr-surface);border-color:var(--cr-outline)}}
-@media(prefers-reduced-transparency:reduce){:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass){background:var(--cr-surface);backdrop-filter:none;-webkit-backdrop-filter:none}:is(.cr-frost,.cr-acrylic):before{display:none}}
+@media(prefers-reduced-transparency:reduce){:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass){background:var(--cr-surface);-webkit-backdrop-filter:none;backdrop-filter:none}:is(.cr-frost,.cr-acrylic):before{display:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}button:active:not(:disabled){transform:none}}
 @media(forced-colors:active){:is(.cr-plastic,.cr-foundation),:is(.cr-haze,.cr-surface),.cr-bubble,:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass),.cr-well,.cr-dock-inner{background:Canvas!important;color:CanvasText!important;box-shadow:none!important;backdrop-filter:none!important;border:1px solid CanvasText}:is(.cr-frost,.cr-acrylic):before{display:none}.cr-button,.cr-status{forced-color-adjust:auto;border:1px solid ButtonText}.cr-dock button[aria-pressed=true]{outline:2px solid Highlight}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline-color:Highlight}}
 
@@ -292,12 +292,12 @@ dialog.cr-dialog{position:fixed}
 [data-effects=opaque] :is(.cr-stone,.cr-dock-inner)::before{background:var(--cr-surface);filter:none}
 @media(prefers-reduced-transparency:reduce){
   :is(.cr-stone,.cr-dock-inner)::before{background:var(--cr-surface);filter:none}
-  .cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fallback-fill);backdrop-filter:none;-webkit-backdrop-filter:none}
+  .cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fallback-fill);-webkit-backdrop-filter:none;backdrop-filter:none}
 }
 @media(forced-colors:active){
   .cr-stone{background:Canvas!important;color:CanvasText!important;border:1px solid CanvasText}
   :is(.cr-stone,.cr-dock-inner)::before{display:none}
-  .cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fallback-fill);backdrop-filter:none;-webkit-backdrop-filter:none}
+  .cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fallback-fill);-webkit-backdrop-filter:none;backdrop-filter:none}
 }
 
 /* Mirage draws its chroma from the actual backdrop, never an invented overlay gradient. */
@@ -336,8 +336,8 @@ dialog.cr-dialog{position:fixed}
     color: var(--cr-text);
     border: 1px solid var(--cr-rim);
     box-shadow: var(--cr-shadow-float);
-    backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
     -webkit-backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
+    backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
     filter: none;
 }
 :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::before {
@@ -394,8 +394,8 @@ dialog.cr-dialog{position:fixed}
 }
 [data-effects=opaque] :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status) {
     background: var(--cr-surface);
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
 }
 [data-effects=opaque] :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after {
     display: none;
@@ -463,8 +463,8 @@ span.cr-field-shell :is(input,select,textarea):focus-visible {
     box-shadow: inset 0 1px 2px var(--cr-shadow-contact),inset 0 -1px 0 var(--cr-rim);
 }
 :is(.cr-resin,.cr-glass,.cr-resin-haze) :is(button,a.cr-button,.cr-button,.cr-control) {
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     /* backdrop-filter creates a stacking context, and these controls paint
      their fill on a ::before at z-index -1 that relies on it. Without the
      filter that pseudo-element escapes to the nearest ancestor context and
@@ -485,8 +485,8 @@ span.cr-field-shell :is(input,select,textarea):focus-visible {
     border-radius: 50%;
     border: 1px solid var(--cr-rim);
     background: transparent;
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     box-shadow: 0 2px 4px var(--cr-control-edge),0 4px 8px var(--cr-shadow-contact);
     color: var(--cr-text);
     font: 800 12px/1 var(--cr-font);
@@ -570,8 +570,8 @@ span.cr-field-shell {
 @media (prefers-reduced-transparency:reduce) {
 :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status) {
     background: var(--cr-surface);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none
 }
 :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after {
     display: none
@@ -901,8 +901,8 @@ input[type=file]::file-selector-button {
     border:0;
     background:transparent;
     box-shadow:none;
-    backdrop-filter:none;
     -webkit-backdrop-filter:none;
+    backdrop-filter:none;
     border-radius:999px;
     color:var(--cr-text)
 }
@@ -962,8 +962,8 @@ span.cr-status>span {
     border-radius:var(--cr-radius);
     background:var(--cr-resin-fill);
     box-shadow:var(--cr-shadow-content);
-    backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
-    -webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation))
+    -webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
+    backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation))
 }
 .cr-table-scroll::before {
     content:'';
@@ -1032,8 +1032,8 @@ span.cr-status>span {
 }
 [data-effects=opaque] .cr-table-scroll {
     background:var(--cr-surface);
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none
 }
 [data-effects=opaque] .cr-table-scroll::before {
     display:none
@@ -1134,8 +1134,8 @@ span.cr-status>span {
 }
 .cr-table-scroll {
     background:var(--cr-surface);
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none
 }
 .cr-table-scroll::before {
     display:none
@@ -1200,8 +1200,8 @@ span.cr-status>span {
     border-radius: 999px;
     background: transparent;
     color: inherit;
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     filter: none;
     font-weight: inherit;
 }
@@ -1294,8 +1294,8 @@ span.cr-status>span {
     line-height: 1.35;
     text-align: start;
     text-decoration: none;
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     filter: none;
 }
 .cr-nav-item::before,
@@ -1430,8 +1430,8 @@ button:disabled,
 /* Controls inside a Resin plane lose their own backdrop filter. The rule above
    lists the action controls, and these are controls too. */
 :is(.cr-resin,.cr-glass,.cr-resin-haze) :is(.cr-bare,.cr-nav-item,.cr-drag-handle) {
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     isolation: isolate;
 }
 
@@ -1585,8 +1585,8 @@ input[type=checkbox][role=switch] {
     border-radius: 999px;
     background: var(--cr-resin-fill);
     box-shadow: var(--cr-shadow-float);
-    backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
     -webkit-backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
+    backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
 }
 .cr-group::before {
     content: '';
@@ -1601,8 +1601,8 @@ input[type=checkbox][role=switch] {
 .cr-group > :is(button, a.cr-button, .cr-button, .cr-control) {
     border-radius: 0;
     box-shadow: none;
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     isolation: isolate;
 }
 .cr-group > :is(button, a.cr-button, .cr-button, .cr-control):first-child {
@@ -1637,14 +1637,14 @@ input[type=checkbox][role=switch] {
 }
 [data-effects=opaque] .cr-group {
     background: var(--cr-surface);
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
 }
 @media (prefers-reduced-transparency:reduce) {
 .cr-group {
     background: var(--cr-surface);
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
 }
 .cr-group::before {
     filter: none;
