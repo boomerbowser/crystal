@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-44 tasks: 22 done, 17 ready, 4 blocked, 1 needs a ruling, 0 dropped.
+46 tasks: 24 done, 17 ready, 4 blocked, 1 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -44,8 +44,8 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-R1](#c-r1) | P0 | Ready | Publish @crystal-ui/core 2.4.0 | – |
 | [C-R2](#c-r2) | P2 | Done | Remove the backdrop blur that survives forced colours (D-36) | – |
 | [C-S1](#c-s1) | P2 | Done | Resolve the partial surface recipes (F-2 items 3 to 9) | – |
-| [C-S2](#c-s2) | P1 | Ready | Platform guide for surface-recipes.json in CONTRACT.md | – |
-| [C-S3](#c-s3) | P2 | Ready | Measure before assigning, as a contract rule (re-evaluation rec. 1) | – |
+| [C-S2](#c-s2) | P1 | Done | Platform guide for surface-recipes.json in CONTRACT.md | – |
+| [C-S3](#c-s3) | P2 | Done | Measure before assigning, as a contract rule (re-evaluation rec. 1) | – |
 | [C-S4](#c-s4) | P2 | Done | Check prose against surface in the build (re-evaluation rec. 3) | – |
 | [C-M1](#c-m1) | P2 | Done | Material presets as entrances (D-31) | – |
 | [C-M2](#c-m2) | P2 | Done | Rule on the 20 unplayed assignments (D-32) | – |
@@ -101,27 +101,27 @@ Where: `core/assets/crystal.css, core/tokens/surfaces.json`.
 
 ### C-S2
 
-**Platform guide for surface-recipes.json in CONTRACT.md.** Recipes, P1, ready.
+**Platform guide for surface-recipes.json in CONTRACT.md.** Recipes, P1, done.
 
 Target: A SwiftUI or Compose library can implement every surface from the JSON and its token export alone.
 
 Done when:
 
-- [ ] libraries/CONTRACT.md names the file, the fields and the fallbacks a platform must honour
-- [ ] One worked example per material
+- [x] libraries/CONTRACT.md names the file, the fields and the fallbacks a platform must honour
+- [x] One worked example per material
 
 Where: `libraries/CONTRACT.md, core/docs/adoption.md`.
 
 ### C-S3
 
-**Measure before assigning, as a contract rule (re-evaluation rec. 1).** Recipes, P2, ready.
+**Measure before assigning, as a contract rule (re-evaluation rec. 1).** Recipes, P2, done.
 
 Target: A surface or motion enters the catalogue only after a component wearing it has been compared with the recipe in a browser.
 
 Done when:
 
-- [ ] The rule is in libraries/CONTRACT.md
-- [ ] extend-catalogue tools cite the measurement for each assignment
+- [x] The rule is in libraries/CONTRACT.md
+- [x] extend-catalogue tools cite the measurement for each assignment
 
 Where: `libraries/CONTRACT.md`.
 
@@ -292,6 +292,8 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-A3](#r-a3) | P2 | Ready | Cascader plays the field recipes | – |
 | [R-A4](#r-a4) | P2 | Ready | Product gallery and playlist block play their assigned motion | – |
 | [R-A5](#r-a5) | P3 | Ready | Credit view-push-out to the view stack | – |
+| [R-A9](#r-a9) | P2 | Ready | The Haze reading fill in the popover, the pop-confirm and the menu | – |
+| [R-A10](#r-a10) | P2 | Ready | The Resin thumb on the colour area, slider and wheel | – |
 | [R-Q1](#r-q1) | P2 | Ready | Documentation site from the surfaces (re-evaluation rec. 7, Slice Q) | C-R1 |
 | [R-A8](#r-a8) | P2 | Blocked | The travelling selection pill on strips (D-37) | C-M3, C-R1 |
 
@@ -634,6 +636,32 @@ Done when:
 - [ ] recipesPlayedByNoComponent no longer lists it
 
 Where: `src/components/ViewStack/`.
+
+### R-A9
+
+**The Haze reading fill in the popover, the pop-confirm and the menu.** Audit, P2, ready.
+
+Target: Popover and Popconfirm content, and Menu rows, sit on the Haze reading fill their catalogue entries specify inside the Frost panel, measured against the .cr-haze recipe; core then assigns the haze surface and removes the three from UNMEASURED in build-catalogue.cjs.
+
+Done when:
+
+- [ ] Measured in the Storybook (computed ::before fill and feather) for each of the three
+- [ ] A verify:materials row for each
+
+Where: `src/components/Popover/, Popconfirm/, Menu/`.
+
+### R-A10
+
+**The Resin thumb on the colour area, slider and wheel.** Audit, P2, ready.
+
+Target: The colour controls draw the Resin thumb their catalogue entries specify (today the thumb is the picked colour), measured against the .cr-resin recipe; core then assigns the resin surface and removes the three from UNMEASURED.
+
+Done when:
+
+- [ ] Measured in the Storybook for each of the three
+- [ ] The picked colour stays visible inside the thumb
+
+Where: `src/components/ColorPicker/`.
 
 ### R-Q1
 

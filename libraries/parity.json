@@ -1514,7 +1514,7 @@
       "name": "Colour area",
       "category": "inputs",
       "surface": [
-        "resin"
+        "none"
       ],
       "status": {
         "web": "implemented",
@@ -1528,7 +1528,7 @@
       "name": "Colour slider",
       "category": "inputs",
       "surface": [
-        "resin"
+        "none"
       ],
       "status": {
         "web": "implemented",
@@ -1542,7 +1542,7 @@
       "name": "Colour wheel",
       "category": "inputs",
       "surface": [
-        "resin"
+        "none"
       ],
       "status": {
         "web": "implemented",
@@ -2428,8 +2428,7 @@
       "name": "Inline confirm",
       "category": "feedback",
       "surface": [
-        "frost",
-        "haze"
+        "frost"
       ],
       "motion": [
         "popover-in",
@@ -2558,8 +2557,7 @@
       "name": "Menu",
       "category": "overlays",
       "surface": [
-        "frost",
-        "haze"
+        "frost"
       ],
       "motion": [
         "menu-in",
@@ -2595,8 +2593,7 @@
       "name": "Popover",
       "category": "overlays",
       "surface": [
-        "frost",
-        "haze"
+        "frost"
       ],
       "motion": [
         "popover-in",

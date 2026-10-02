@@ -86,7 +86,7 @@
       "repo": "core",
       "area": "Recipes",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "title": "Platform guide for surface-recipes.json in CONTRACT.md",
       "depends": [],
       "target": "A SwiftUI or Compose library can implement every surface from the JSON and its token export alone.",
@@ -101,7 +101,7 @@
       "repo": "core",
       "area": "Recipes",
       "priority": "P2",
-      "status": "ready",
+      "status": "done",
       "title": "Measure before assigning, as a contract rule (re-evaluation rec. 1)",
       "depends": [],
       "target": "A surface or motion enters the catalogue only after a component wearing it has been compared with the recipe in a browser.",
@@ -645,6 +645,36 @@
         "recipesPlayedByNoComponent no longer lists it"
       ],
       "where": "src/components/ViewStack/"
+    },
+    {
+      "id": "R-A9",
+      "repo": "react",
+      "area": "Audit",
+      "priority": "P2",
+      "status": "ready",
+      "title": "The Haze reading fill in the popover, the pop-confirm and the menu",
+      "depends": [],
+      "target": "Popover and Popconfirm content, and Menu rows, sit on the Haze reading fill their catalogue entries specify inside the Frost panel, measured against the .cr-haze recipe; core then assigns the haze surface and removes the three from UNMEASURED in build-catalogue.cjs.",
+      "acceptance": [
+        "Measured in the Storybook (computed ::before fill and feather) for each of the three",
+        "A verify:materials row for each"
+      ],
+      "where": "src/components/Popover/, Popconfirm/, Menu/"
+    },
+    {
+      "id": "R-A10",
+      "repo": "react",
+      "area": "Audit",
+      "priority": "P2",
+      "status": "ready",
+      "title": "The Resin thumb on the colour area, slider and wheel",
+      "depends": [],
+      "target": "The colour controls draw the Resin thumb their catalogue entries specify (today the thumb is the picked colour), measured against the .cr-resin recipe; core then assigns the resin surface and removes the three from UNMEASURED.",
+      "acceptance": [
+        "Measured in the Storybook for each of the three",
+        "The picked colour stays visible inside the thumb"
+      ],
+      "where": "src/components/ColorPicker/"
     },
     {
       "id": "R-Q1",

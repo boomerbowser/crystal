@@ -93,6 +93,21 @@ function loadStatus(known) {
   return { merged, problems };
 }
 
+/* Entries whose prose specifies a material that no component has yet been
+   measured wearing, so the surface is not assigned (C-S3: a surface enters the
+   catalogue only after a component wearing it has been compared with the
+   recipe in a browser). Each names the task that closes it. An entry listed
+   here that no longer needs it fails the build, so the list cannot outlive
+   its reason. */
+const UNMEASURED = {
+  popover: { material: 'Haze', task: 'R-A9', why: 'the Haze reading fill; Crystal React draws Haze only on the buttons\' pads' },
+  popconfirm: { material: 'Haze', task: 'R-A9', why: 'the Haze reading fill; Crystal React draws Haze only on the buttons\' pads' },
+  menu: { material: 'Haze', task: 'R-A9', why: 'Haze rows; not yet measured on a menu' },
+  'color-area': { material: 'Resin', task: 'R-A10', why: 'the Resin thumb; Crystal React\'s thumb is the picked colour' },
+  'color-slider': { material: 'Resin', task: 'R-A10', why: 'the Resin thumb; Crystal React\'s thumb is the picked colour' },
+  'color-wheel': { material: 'Resin', task: 'R-A10', why: 'the Resin thumb; Crystal React\'s thumb is the picked colour' },
+};
+
 function validate(categories, surfaces, presets) {
   const problems = [...surfaces.problems];
   const seen = new Set();
@@ -117,12 +132,17 @@ function validate(categories, surfaces, presets) {
          the material or the anatomy is one an entry's surface is made of. A
          token in a code span is a colour, not a material claim. */
       const made = new Set((c.surface || []).flatMap((s) => surfaces.byId.get(s)?.materials ?? []));
+      const awaiting = UNMEASURED[c.id];
+      let used = false;
       for (const field of ['material', 'anatomy']) {
         const prose = String(c[field] || '').replace(/`[^`]*`/g, '');
         for (const m of prose.match(/\b(Plastic|Frost|Resin|Haze|Stone|Mirage)\b/g) || []) {
-          if (!made.has(m)) problems.push(`${where}: ${field} names ${m}, and none of its surfaces (${(c.surface || []).join(', ')}) is made of it`);
+          if (made.has(m)) continue;
+          if (awaiting?.material === m) { used = true; continue; }
+          problems.push(`${where}: ${field} names ${m}, and none of its surfaces (${(c.surface || []).join(', ')}) is made of it`);
         }
       }
+      if (awaiting && !used) problems.push(`${where}: listed as awaiting a measured ${awaiting.material}, which its prose and surfaces now agree on; remove it from UNMEASURED`);
       for (const id of c.motion || []) {
         if (!recipeIds.has(id) && !presets.has(id)) problems.push(`${where}: motion "${id}" is neither a recipe nor a material preset`);
       }

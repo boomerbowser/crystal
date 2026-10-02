@@ -2653,7 +2653,7 @@
           ],
           "material": "Resin thumb over the gradient field",
           "surface": [
-            "resin"
+            "none"
           ],
           "geometry": "Thumb reaches 44px including its hit area.",
           "semantics": "Two linked sliders; each axis announces its own value and responds to arrow keys.",
@@ -2676,7 +2676,7 @@
           ],
           "material": "Resin thumb on a gradient track",
           "surface": [
-            "resin"
+            "none"
           ],
           "geometry": "Matches the slider contract.",
           "semantics": "role=\"slider\" with the channel named and the value in that channel's units.",
@@ -2699,7 +2699,7 @@
           ],
           "material": "Resin thumb on the hue ring",
           "surface": [
-            "resin"
+            "none"
           ],
           "geometry": "Ring thickness is a declared proportion of the radius.",
           "semantics": "role=\"slider\" in degrees, wrapping at 360.",
@@ -4079,8 +4079,7 @@
           ],
           "material": "Frost panel with Haze reading fill (R15e)",
           "surface": [
-            "frost",
-            "haze"
+            "frost"
           ],
           "geometry": "Content radius; anchored to the trigger",
           "semantics": "Focus moves into the popover, returns to the trigger on dismiss, and Escape cancels",
@@ -4276,8 +4275,7 @@
           ],
           "material": "Frost panel with Haze rows (R15e)",
           "surface": [
-            "frost",
-            "haze"
+            "frost"
           ],
           "geometry": "Content radius; every row reserves leading room for a check mark, so ticking one does not shift its label",
           "semantics": "role=menu with full keyboard navigation, type-ahead and Escape; checkable items use aria-checked",
@@ -4330,8 +4328,7 @@
           ],
           "material": "Frost panel with Haze reading fill (R15e)",
           "surface": [
-            "frost",
-            "haze"
+            "frost"
           ],
           "geometry": "Content radius; flips and shifts to stay in view",
           "semantics": "The trigger carries aria-expanded and aria-controls; focus moves in for interactive content",

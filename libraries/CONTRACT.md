@@ -16,11 +16,41 @@ The six materials are Plastic → Frost → Resin, plus Haze, Stone and Mirage. 
 
 What must survive on every platform: the material order, visibly distinct material behaviour, contextual colour, optical rims, elevation, feathered Haze and Stone paint, and crisp foregrounds. Text, icons, hit areas and focus rings are never blurred.
 
+### The materials as data: `surface-recipes.json`
+
+A library that cannot wear a CSS selector reads each surface's recipe from `core/tokens/surface-recipes.json`, exported as `@crystal-ui/core/surface-recipes`. It is generated from `crystal.css` and `surfaces.json` on every build, so it cannot drift from what the web renders. There is one record per surface in `surfaces.json`, in the same order. Every value is written as the stylesheet writes it: a token reference (`var(--cr-resin-fill)`), a literal (`999px`) or an expression (`calc(var(--cr-radius) + 6px)`). Resolve the tokens from your platform's export (`exports/crystal-tokens.swift`, `.kt` or `.ts`), never from the values quoted below, which are the Prism light defaults for illustration.
+
+**The fields a platform draws.** `fill` is the element's own background. `blur` and `saturation` are the arguments of its backdrop filter; when the filter has more functions than those two, the whole of it is in `extras` under `backdrop-filter` (Mirage's brightness is there). `rim` is the border, `shadow` the elevation, `radius` the corner and `padding` the inset. `haze` is a feathered paint layer behind the content: draw `haze.fill` on its own layer, inset by `haze.inset` and blurred by `haze.feather`, and keep text, icons and focus crisp above it. `layers` lists every other painted layer (the Resin sheen, for example). A record with `alternatives` has one recipe per element, for a selector the stylesheet paints differently by element (the checkbox and the radio).
+
+**The four fallbacks a platform must honour.** Each lists only what changes:
+
+| Branch | When | What a platform does |
+|---|---|---|
+| `opaque` | The product turned diffusion off (`effects: opaque`) | Apply it whenever the product's own setting says so |
+| `reducedTransparency` | The person asked the operating system for less transparency | Apply it whenever the platform reports that preference |
+| `forcedColors` | A high-contrast or forced-colour mode is on | Draw system colours, drop shadows and blur; never keep a backdrop blur |
+| `noBackdropFilter` | The renderer cannot blur what is behind it | Use the opaque fill the branch names rather than an unblurred translucent one |
+
+**What not to copy.** `shadowed` lists a fallback declaration the cascade overrides, so it never renders; do not reproduce it. `missing` names a material the surface claims that this selector does not paint, and `why` says where it comes from instead: a part of a larger surface, or a value taken from what it is worn on. Draw what `why` says, not a guess. Every gap has a reason, or the contract tests fail.
+
+**One worked example per material.**
+
+- **Plastic** (`plastic`). `fill: var(--cr-canvas)` and nothing else: no blur, rim, shadow or radius. It is the opaque foundation of a view, `#f9f6fe` in Prism light. Under `forcedColors` it becomes `Canvas` with `CanvasText`.
+- **Frost** (`frost`). `fill: var(--cr-frost-fill)`, `blur: var(--cr-frost-blur)`, `saturation: var(--cr-frost-saturation)`, `rim: 1px solid var(--cr-rim)`, `shadow: var(--cr-shadow-panel)`, `radius: calc(var(--cr-radius) + 6px)`. A panel that blurs what is behind it: 45% white at 40px and 125% in Prism light, at 34px radius. `opaque`, `reducedTransparency` and `noBackdropFilter` all replace the fill with `var(--cr-surface)` and drop the blur.
+- **Resin** (`resin`). The same fields as Frost with the Resin tokens: a 20% fill, 20px blur and 165% saturation, the float shadow, and `radius: 999px`, the pill. Its controls lose their own backdrop filter, because Resin never contains Resin.
+- **Haze** (`haze`). `fill: transparent`, `radius: var(--cr-radius)`, and a `haze` layer: `fill: var(--cr-haze-fill)` (80% white), `feather: var(--cr-haze-feather)` (1.95px), inset `0`, radius inherited. Draw the fill on its own feathered layer behind the content. `opaque` and `reducedTransparency` make that layer `var(--cr-surface)` with no feather.
+- **Stone** (`stone`). As Haze, with `var(--cr-stone-fill)` (55% light, 60% dark) on the feathered layer. It sets no radius, and `why` says so: Stone backs a label and takes the radius of what it backs.
+- **Mirage** (`mirage`). `fill: var(--cr-mirage-fill)`, and the full filter in `extras`: `blur(var(--cr-mirage-blur)) saturate(var(--cr-mirage-saturation)) brightness(var(--cr-mirage-brightness))`, 28px, 165% and 88%. It is the scrim behind a modal. `reducedTransparency`, `forcedColors` and `noBackdropFilter` replace it with `var(--cr-mirage-fallback-fill)` and no filter.
+
+The compositions (`control`, `field`, `dock`, `table` and the rest) are these materials combined, and their records read the same way: the Resin shell's fields on the element, the Haze pad on its `haze` layer.
+
 ## 3. Implement the full catalogue.
 
 `parity.json` lists every component Crystal specifies, with per-platform status. A component present in one library is expected in the others, with the same states, semantics and token bindings. Parity is measured against Mantine, Ant Design and MUI, named per component in the catalogue so the claim is checkable.
 
 Crystal specifies appearance. Products bring their own accessible primitives: focus management, menu keyboard behaviour, date arithmetic, rich-text engines. Do not rebuild complex behaviour to obtain a surface style. Wrap a maintained primitive and style it.
+
+**Measure before assigning.** A surface or a motion enters a catalogue entry only after a component wearing it has been compared with the recipe in a browser: the computed values, not the class names or the prose. The `tools/extend-catalogue-*.cjs` script that makes the assignment cites the measurement beside it: which component, where it was rendered, and what was read. An entry's prose may specify a material before any component wears it. Until one has been measured, the entry keeps the surface it has, and `tools/build-catalogue.cjs` lists it as awaiting a measurement, with the task that closes it. That list fails the build once an entry no longer needs it.
 
 ## 4. Preserve the behavioural contracts.
 

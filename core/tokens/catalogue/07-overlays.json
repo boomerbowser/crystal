@@ -74,8 +74,7 @@
       ],
       "material": "Frost panel with Haze rows (R15e)",
       "surface": [
-        "frost",
-        "haze"
+        "frost"
       ],
       "geometry": "Content radius; every row reserves leading room for a check mark, so ticking one does not shift its label",
       "semantics": "role=menu with full keyboard navigation, type-ahead and Escape; checkable items use aria-checked",
@@ -128,8 +127,7 @@
       ],
       "material": "Frost panel with Haze reading fill (R15e)",
       "surface": [
-        "frost",
-        "haze"
+        "frost"
       ],
       "geometry": "Content radius; flips and shifts to stay in view",
       "semantics": "The trigger carries aria-expanded and aria-controls; focus moves in for interactive content",

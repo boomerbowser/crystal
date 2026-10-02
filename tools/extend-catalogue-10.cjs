@@ -7,20 +7,26 @@
  * surfaces is made of it. A token in a code span is a colour, not a material
  * claim, and is not read. Twenty-six entries failed; each is corrected here
  * against Crystal's own vocabulary and tokens, never against what a library
- * happens to draw:
+ * happens to draw, and a surface is assigned only where a component wearing it
+ * was measured (C-S3):
  *
  *   - The four overlay anatomies, and the mentions list, still said Resin.
  *     Transient overlays are Frost (R15e), as their material fields already said.
  *   - A Frost overlay with a Haze reading fill is made of both surfaces, as the
  *     Frost surface's own description says ("reading content inside it sits on
- *     Haze"): the toast, the notification, the pop-confirm, the menu and the
- *     popover add `haze`.
+ *     Haze"). The toast and the notification add `haze`, measured on a component
+ *     that wears it. The pop-confirm, the menu and the popover say the same in
+ *     their material, but no component has been measured wearing a Haze reading
+ *     fill there (Crystal React's draws Haze only on the buttons' pads), so they
+ *     keep `frost` until one has (C-S3); build-catalogue.cjs lists them.
  *   - The indicator has been Haze since 2.3.0 (D-27); its anatomy still said
  *     Resin, and its material said so in the negative.
- *   - The angle slider, the knob and the three colour controls were `none` but
- *     draw a Resin thumb or body, which is the Resin plane's "Resin handle over
- *     imagery or between regions": they take `resin`. The knob's value arc is
- *     primary, as every other arc in the catalogue is.
+ *   - The angle slider and the knob were `none` but draw a Resin dial, which is
+ *     the Resin plane's "Resin handle over imagery or between regions", measured:
+ *     they take `resin`. The knob's value arc is primary, as every other arc in
+ *     the catalogue is. The three colour controls specify a Resin thumb that no
+ *     component has been measured drawing (Crystal React's thumb is the picked
+ *     colour), so they keep `none` until one has; build-catalogue.cjs lists them.
  *   - Charts named Haze for a colour. A series fill is the series colour at
  *     `--cr-chart-fill-opacity`, which core defines for it; a track, a band,
  *     a centre or a node fill is `--cr-haze-fill`, the Haze colour without the
@@ -64,12 +70,13 @@ const FIELDS = [
     'Resin popover with Haze rows over the field',
     'Frost popover with Haze rows over the field (R15e)'],
 
-  /* ------------------------------------- a Frost overlay with a Haze reading fill */
+  /* ------------------------------------- a Frost overlay with a Haze reading fill
+     Measured on 2 October 2026 in Crystal React's Storybook (dev server, so no
+     minifier): Feedback/Toast and Feedback/Notification compute Frost's
+     blur(40px) saturate(1.25) and paint a feathered 80% Haze layer on their
+     own ::before. */
   ['toast', 'surface', ['frost'], ['frost', 'haze']],
   ['notification', 'surface', ['frost'], ['frost', 'haze']],
-  ['popconfirm', 'surface', ['frost'], ['frost', 'haze']],
-  ['menu', 'surface', ['frost'], ['frost', 'haze']],
-  ['popover', 'surface', ['frost'], ['frost', 'haze']],
 
   /* ------------------------------------------------- the indicator is Haze (D-27) */
   ['indicator', 'anatomy',
@@ -79,15 +86,15 @@ const FIELDS = [
     'Haze: a 20px circle painting the Haze fill on an isolated layer with a 1px feather; no Resin, because it sits on surfaces that are often already translucent',
     'Haze: a 20px circle painting the Haze fill on an isolated layer with a 1px feather, and no coat of its own, because it sits on surfaces that are often already translucent'],
 
-  /* --------------------------------------------- controls with a Resin handle */
+  /* --------------------------------------------- controls with a Resin handle
+     Measured the same way: Inputs/Choice and range draws the angle slider's and
+     the knob's dial at blur(20px) saturate(1.65) on the 20% Resin fill, the
+     .cr-resin recipe. */
   ['angle-slider', 'surface', ['none'], ['resin']],
   ['knob', 'surface', ['none'], ['resin']],
   ['knob', 'material',
     'Resin body with a Haze value arc',
     'Resin body with a primary value arc'],
-  ['color-area', 'surface', ['none'], ['resin']],
-  ['color-slider', 'surface', ['none'], ['resin']],
-  ['color-wheel', 'surface', ['none'], ['resin']],
   ['color-swatch', 'material',
     'Haze chequerboard beneath a transparent colour',
     'A chequerboard beneath a transparent colour, so its alpha shows'],
