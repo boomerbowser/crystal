@@ -2,11 +2,13 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
-## [Unreleased]
+## [2.4.0] - 2026-10-02
 
 Media and text recipes, and every surface's recipe as values, from the
-proposal of 2 October 2026 (`proposals/2026-10-02-media-text-and-recipe-parity.md`).
-Proposed for 2.4.0; not yet released. `crystal-theme.css` is byte-identical.
+proposal of 2 October 2026 (`proposals/2026-10-02-media-text-and-recipe-parity.md`),
+and the rulings of the same day (`proposals/2026-10-02-rulings.md`).
+`crystal-theme.css` is byte-identical. The travelling selection pill (D-37) is
+ruled and follows in a later minor version.
 
 ### Added
 
@@ -36,6 +38,25 @@ Proposed for 2.4.0; not yet released. `crystal-theme.css` is byte-identical.
 - Four `also` registrations in `surfaces.json`: `.cr-resin.transport`,
   `.cr-media-caption`, `.cr-frost.bar`, `.cr-editor`. The vocabulary stays at
   23 surfaces.
+- **Eleven icons the format vocabulary requires** (D-35): `heading-2`,
+  `heading-3`, `heading-4`, `link`, `unlink`, `list`, `list-ordered`, `quote`,
+  `subscript`, `undo` and `redo`, kept by a named list whatever the slice of
+  Lucide picks. The manifest lists them under `required`; the set is 1022
+  icons. The build reports every icon that arrives or leaves against the
+  committed manifest and refuses a removal outside a major release, because
+  icon identifiers are public contract.
+- **A reason for every partial recipe.** `surfaces.json` gains a `partial` map,
+  copied into each `surface-recipes.json` record as `why`, for a selector that
+  cannot resolve every material it names (a part of a larger surface, or a
+  value taken from what it is worn on). A contract check fails on a gap
+  without one.
+- **36 contrast checks** for text marks (D-34): the highlight's ink on its
+  fill, and body ink under the editor's selection on the surface and on Haze,
+  at 4.5:1 in every palette and mode. 1,824 cases.
+- **The media and text recipes in the specification.** `docs/components.md`
+  describes each recipe with a live specimen and says how a highlight and a
+  selection differ; `docs/materials.md` says which material each composition
+  uses.
 
 ### Changed
 
@@ -46,6 +67,33 @@ Proposed for 2.4.0; not yet released. `crystal-theme.css` is byte-identical.
   player its Haze card and speed menu; the media controls their geometry; the
   rich text surface the format vocabulary, the selection toolbar and touch
   placement; prose, the prose list and text the read-only vocabulary.
+- **Catalogue, from the rulings of 2 October** (`tools/extend-catalogue-9.cjs`).
+  The rich text surface's note allows an optional engine binding from a
+  library's own entry point, with the format vocabulary as the contract
+  (D-30). Nine motion assignments no component can play come off: `list-out`
+  on the transfer list, the data table and the resizable table;
+  `accordion-out` on the tree view, the navigation tree, the organisation
+  chart and the spoiler; `page-out` on master-detail; `list-in` on the
+  combobox. The menubar and the split button say their menus are the
+  product's children (D-32).
+- **Catalogue prose agrees with its surfaces** (`tools/extend-catalogue-10.cjs`).
+  `tools/build-catalogue.cjs` refuses an entry whose material or anatomy names
+  a material none of its surfaces is made of. 26 entries are corrected: the
+  overlay anatomies say Frost (R15e), the toast and the notification add
+  `haze`, the indicator's anatomy says Haze, the angle slider and the knob
+  take `resin`, and charts name the token they colour with. A surface is
+  assigned only where a component wearing it was measured; six entries whose
+  prose specifies a material no component draws yet are listed as awaiting a
+  measurement.
+- **The vocabulary.** The navigation entry has no material of its own, and the
+  dock is Resin, Haze and Stone, which is what `.cr-dock-inner` paints.
+  `.cr-button` is element-keyed (it coats a `button` or an `a`; `.cr-control`
+  coats any element). The editor's selection is described as the 28% primary
+  tint it is, not primary-soft.
+- **The material presets are studies in 2.x** (D-31). `presets.js` and the
+  motion chapter both say that `plastic`, `frost`, `resin`, `haze`, `stone`
+  and the five compositions are assigned to no entry; `mirage`, `mirage-out`
+  and `dismiss` are the entrances and exits, on the dialog and its scrim.
 
 ### Fixed
 
@@ -56,6 +104,17 @@ Proposed for 2.4.0; not yet released. `crystal-theme.css` is byte-identical.
   ignores, and Frost, Resin and Mirage rendered flat. The alias now comes
   first in every rule. No declaration changed, and `crystal-theme.css` is
   byte-identical.
+- **Forced colours remove every control surface's backdrop blur** (D-36). The
+  status badge, the tag, the count, the checkbox, the radio and the switch
+  kept `blur(20px)` under forced colours, measured in Chromium; the reset now
+  names them and is important, as the reset layer's material resets are.
+- **Safari before 18 diffuses the dock and the choices, and honours every
+  reset.** Twelve rules wrote `backdrop-filter` without its `-webkit-` form; each
+  now writes the alias first. The choices read `--cr-resin-blur`, which
+  resolves to the 20px they wrote. Computed values in Chromium are unchanged.
+- **A checklist's checkbox stays 26px inside an editor's field shell.** The
+  shell's 44px text-entry floor reached it, stretching the box into a pill
+  11px below its line.
 
 ## [2.3.1] - 2026-09-29
 

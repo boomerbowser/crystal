@@ -1,6 +1,6 @@
 {
   "name": "@crystal-ui/core",
-  "version": "2.3.1",
+  "version": "2.4.0",
   "description": "Crystal, Meridian's design system: design tokens, material stylesheets, a token resolver, a headless state core, motion recipes, icons and the specification.",
   "keywords": [
     "design-system",
