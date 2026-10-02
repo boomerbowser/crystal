@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" data-crystal-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Media, text and recipe parity</title>
+<link rel="stylesheet" href="../../../core/assets/crystal-theme.css">
+<link rel="stylesheet" href="../../../core/assets/crystal.css">
+<link rel="stylesheet" href="examples.css">
+</head>
+<body class="cr-plastic">
+<main class="sheet">
+  <header class="sheet-head">
+    <div>
+      <p class="eyebrow">Proposal · 2 October 2026</p>
+      <h1>Media, text and recipe parity</h1>
+      <p>Findings and proposals for <code>@crystal-ui/core</code> and Crystal React, answering Meridian's brief of 2 October: too few recipes to keep platforms consistent, hidden animations, inconsistent material composition, players without their padding and features, and a text element without a vocabulary. Every page here loads the library from <code>core/assets</code> by relative path and adds layout only. Serve the repository with <code>node proposals/2026-10-02-media-text-and-recipe-parity/examples/serve.cjs</code>.</p>
+    </div>
+    <div class="controls"><button type="button" class="cr-button" id="mode" aria-pressed="false">Dark mode</button></div>
+  </header>
+
+  <section class="summary" aria-label="At a glance">
+    <div class="total cr-haze"><span class="cr-status" data-status="success">Recipes added</span><strong>10</strong><span class="muted">compositions of existing surfaces; vocabulary still 23</span></div>
+    <div class="total cr-haze"><span class="cr-status" data-status="success">Surfaces as values</span><strong>23</strong><span class="muted">surface-recipes.json, for every platform</span></div>
+    <div class="total cr-haze"><span class="cr-status" data-status="info">Catalogue fields</span><strong>38</strong><span class="muted">across 10 entries; still 284 components</span></div>
+    <div class="total cr-haze"><span class="cr-status" data-status="attention">Hidden motion</span><strong>6 + 4</strong><span class="muted">recipes and presets no component plays</span></div>
+    <div class="total cr-haze"><span class="cr-status" data-status="attention">Decisions</span><strong>8</strong><span class="muted">for Meridian, D-30 to D-37</span></div>
+  </section>
+
+  <h2>The pages</h2>
+  <div class="cards">
+    <a class="card cr-haze" href="media.html"><h3>Media recipes</h3><p>The stage at four aspect ratios, the transport with its insets and readouts, captions on Stone above the bar, the settings menu, the audio card, and before and after.</p></a>
+    <a class="card cr-haze" href="text.html"><h3>Text recipes</h3><p>The shared reading vocabulary, the editor's frame and toolbar, the selection toolbar, highlight against selection, and the touch layout above the keyboard.</p></a>
+    <a class="card cr-haze" href="motion.html"><h3>Hidden motion</h3><p>Every recipe and preset, playable, with the ten no component plays marked. The presets are computed by Crystal's own headless module.</p></a>
+    <a class="card cr-haze" href="findings.html"><h3>The audit</h3><p>All 284 entries measured: motion played, played by a child, or by nothing; surfaces worn; material painted by hand.</p></a>
+    <a class="card cr-haze" href="tasks.html"><h3>Tasks, targets and rulings</h3><p>Every task with its target, the checks that say it is done and what it waits on, and the decisions for Meridian, which are ruled here and recorded in the rulings record and the tracker.</p></a>
+  </div>
+
+  <h2>The documents</h2>
+  <table class="data cr-haze" style="border-radius:var(--cr-radius);overflow:hidden">
+    <tbody>
+      <tr><th scope="row">The proposal</th><td><code>proposals/2026-10-02-media-text-and-recipe-parity.md</code></td></tr>
+      <tr><th scope="row">Decisions</th><td><code>proposals/open-issues.md</code>, D-30 to D-37; rulings in <code>proposals/2026-10-02-rulings.md</code>, recorded from the tasks page</td></tr>
+      <tr><th scope="row">Tasks</th><td><code>…/tasks.md</code>, rendered from <code>tasks.json</code></td></tr>
+      <tr><th scope="row">Captures</th><td><code>…/captures/README.md</code></td></tr>
+      <tr><th scope="row">Crystal React's half</th><td><code>crystal-react/docs/proposals/2026-10-02-media-text-and-recipe-parity.md</code>, with the implementation and migration guide; Slice R in <code>docs/implementation-plan.md</code></td></tr>
+    </tbody>
+  </table>
+</main>
+<script>
+  const root = document.documentElement;
+  const mode = document.getElementById('mode');
+  mode.addEventListener('click', () => {
+    const dark = root.dataset.crystalMode !== 'dark';
+    root.dataset.crystalMode = dark ? 'dark' : 'light';
+    mode.setAttribute('aria-pressed', String(dark));
+    mode.textContent = dark ? 'Light mode' : 'Dark mode';
+  });
+</script>
+</body>
+</html>

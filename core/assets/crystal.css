@@ -1810,6 +1810,9 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     border-radius: var(--cr-radius);
     background: var(--cr-surface-alt);
     line-height: 0;
+    /* The transport's height, which the caption cue clears: the 48px action
+       target (D-20), 4px above and below, and the 1px rim. */
+    --cr-media-transport: 58px;
 }
 .cr-media > :is(video, img, canvas) {
     display: block;
@@ -1838,25 +1841,33 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 
 /* The transport: a Resin pill holding the controls.
  *
- * 4px block padding around the 44px targets makes a 52px pill, the height of a
- * dock control. 12px inline padding keeps the first and last targets' focus
+ * 4px block padding around the 48px action targets (D-20) makes a 56px pill
+ * inside its rim. 12px inline padding keeps the first and last targets' focus
  * halos (3px offset plus the feather) inside the pill's curve. The time
  * readouts are tabular so the bar does not shift as the seconds change. */
 :is(.cr-resin,.cr-glass).transport {
     display: flex;
     align-items: center;
     gap: var(--cr-spacing-2xs);
-    min-height: 52px;
+    min-height: 58px;
     box-sizing: border-box;
     padding: var(--cr-spacing-2xs) var(--cr-spacing-sm);
     color: var(--cr-text);
 }
+/* The readouts are labels read over moving pictures through a 20% fill, so
+   each sits on its own Haze pill: the "Haze fills behind readable labels" the
+   catalogue names. A control is not given one, because its own coat already
+   carries a Haze pad. */
 :is(.cr-resin,.cr-glass).transport :where(time, output, .time) {
     flex: none;
-    padding-inline: var(--cr-spacing-2xs);
+    padding: 2px var(--cr-spacing-xs);
+    border-radius: 999px;
+    background: var(--cr-haze-fill);
     font-size: var(--cr-text-caption-size);
+    font-weight: 650;
     font-variant-numeric: tabular-nums;
-    color: var(--cr-muted);
+    line-height: var(--cr-text-caption-leading, 1.4);
+    color: var(--cr-text);
 }
 /* Narrow players drop the inline padding to the smallest step and let the bar
    wrap its trailing controls onto a second row, rather than crushing the
@@ -1887,7 +1898,7 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     position: absolute;
     z-index: 1;
     inset-inline: var(--cr-spacing-lg);
-    inset-block-end: calc(52px + var(--cr-spacing-sm) * 2);
+    inset-block-end: calc(var(--cr-media-transport, 58px) + var(--cr-spacing-sm) * 2);
     display: flex;
     justify-content: center;
     pointer-events: none;
@@ -1936,7 +1947,7 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 /* A Frost overlay shaped as a bar of controls: the selection toolbar over
    highlighted text, a floating format bar. Transient overlays are Frost
    (R15e); this is the popover with the pill silhouette and the dock's spacing,
-   because what it holds is a row of 44px targets and not a paragraph. */
+   because what it holds is a row of 48px targets and not a paragraph. */
 :is(.cr-frost,.cr-acrylic).bar {
     display: inline-flex;
     align-items: center;
@@ -1949,70 +1960,81 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
  *
  * `.cr-prose` is the reading rhythm for content the product did not lay out
  * (rendered Markdown, a CMS body); `.cr-editor` is the same vocabulary inside an
- * editable surface, plus the caret and the selection. Headings take the type
- * scale; lists take Crystal's markers; a checklist is native checkboxes, so it
- * wears the selection control and its checked state is the control's, never a
- * glyph drawn beside the text. Every decoration differs in shape as well as
- * colour: an insertion is underlined, a deletion struck through, a highlight
- * filled, so none of them rests on colour alone. */
+ * editable surface, plus the caret and the selection. The values are the ones
+ * Crystal React's `Prose` renders and was reviewed at: block gaps of 24px,
+ * headings stepping through the scale from display, muted list markers, a
+ * primary-soft rule on a quotation. What is new is the part no platform had:
+ * checklists, and the marks a document needs past bold and italic.
+ *
+ * A checklist is native checkboxes, so it wears the selection control and its
+ * checked state is the control's, never a glyph drawn beside the text. Every
+ * mark differs in shape as well as colour: an insertion is underlined, a
+ * deletion struck through, a highlight filled, so none rests on colour alone. */
 :is(.cr-prose,.cr-editor) {
     color: var(--cr-text);
     font-size: var(--cr-text-body-size);
     line-height: var(--cr-text-body-leading);
     overflow-wrap: anywhere;
 }
+.cr-prose {
+    max-width: 68ch;
+}
 :is(.cr-prose,.cr-editor) > * + * {
-    margin-top: var(--cr-spacing-sm);
+    margin-top: var(--cr-spacing-lg);
+}
+:is(.cr-prose,.cr-editor) > :first-child {
+    margin-top: 0;
 }
 :is(.cr-prose,.cr-editor) :where(h1, h2, h3, h4, h5, h6) {
-    margin: 0;
+    margin-bottom: 0;
     font-weight: 750;
     text-wrap: balance;
 }
-:is(.cr-prose,.cr-editor) > :where(h1, h2, h3, h4, h5, h6) {
-    margin-top: var(--cr-spacing-lg);
-}
-:is(.cr-prose,.cr-editor) > :where(h1, h2, h3, h4, h5, h6):first-child {
-    margin-top: 0;
+:is(.cr-prose,.cr-editor) > :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
+    margin-top: var(--cr-spacing-xl);
 }
 :is(.cr-prose,.cr-editor) :where(h1) {
+    font-size: var(--cr-text-display-size);
+    line-height: var(--cr-text-display-leading);
+    letter-spacing: var(--cr-text-display-tracking);
+}
+:is(.cr-prose,.cr-editor) :where(h2) {
     font-size: var(--cr-text-title-size);
     line-height: var(--cr-text-title-leading);
     letter-spacing: var(--cr-text-title-tracking);
 }
-:is(.cr-prose,.cr-editor) :where(h2) {
+:is(.cr-prose,.cr-editor) :where(h3) {
     font-size: var(--cr-text-heading-size);
     line-height: var(--cr-text-heading-leading);
     letter-spacing: var(--cr-text-heading-tracking);
 }
-:is(.cr-prose,.cr-editor) :where(h3, h4) {
+:is(.cr-prose,.cr-editor) :where(h4, h5, h6) {
     font-size: var(--cr-text-subheading-size);
     line-height: var(--cr-text-subheading-leading);
-}
-:is(.cr-prose,.cr-editor) :where(h5, h6) {
-    font-size: var(--cr-text-body-size);
-    line-height: var(--cr-text-body-leading);
+    letter-spacing: var(--cr-text-subheading-tracking);
 }
 :is(.cr-prose,.cr-editor) :where(p, ul, ol, blockquote, pre) {
     margin-bottom: 0;
 }
 :is(.cr-prose,.cr-editor) :where(ul, ol) {
-    padding-inline-start: 1.5em;
+    padding-inline-start: var(--cr-spacing-lg);
 }
 :is(.cr-prose,.cr-editor) :where(ul, ol) :where(ul, ol) {
-    margin-top: var(--cr-spacing-2xs);
+    margin-top: var(--cr-spacing-xs);
 }
 :is(.cr-prose,.cr-editor) :where(li) + :where(li) {
-    margin-top: var(--cr-spacing-2xs);
+    margin-top: var(--cr-spacing-xs);
 }
 :is(.cr-prose,.cr-editor) :where(li)::marker {
-    color: var(--cr-primary);
-    font-weight: 700;
+    color: var(--cr-muted);
 }
-/* A checklist: `ul.checklist`, or a list whose items begin with a checkbox. The
-   checkbox is the marker, so the list's own marker and indent go; the item is a
-   row of the control and its text, top-aligned so a wrapped line keeps the
-   control on the first. */
+:is(.cr-prose,.cr-editor) :where(li) > :where(p) {
+    margin: 0;
+}
+/* A checklist: `ul.checklist`, or `ul[data-type=taskList]` as ProseMirror and
+   TipTap write it. The checkbox is the marker, so the list's own marker and
+   indent go; the item is a row of the control and its text, top-aligned so a
+   wrapped line keeps the control on the first. */
 :is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) {
     padding-inline-start: 0;
     list-style: none;
@@ -2025,7 +2047,7 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 :is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) > li > :where(label) {
     flex: none;
     display: inline-flex;
-    margin-top: calc((var(--cr-text-body-leading) - var(--cr-choice-box-size, 20px)) / 2);
+    margin-top: calc((var(--cr-text-body-leading) - var(--cr-choice-box-size, 26px)) / 2);
 }
 :is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) > li > :where(div, p, span) {
     flex: 1;
@@ -2040,40 +2062,37 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 :is(.cr-prose,.cr-editor) :where(blockquote) {
     margin-inline: 0;
     padding-inline-start: var(--cr-spacing-md);
-    border-inline-start: 3px solid var(--cr-primary);
-    color: var(--cr-text);
+    border-inline-start: 3px solid var(--cr-primary-soft);
+    color: var(--cr-muted);
 }
 :is(.cr-prose,.cr-editor) :where(pre) {
-    position: relative;
-    isolation: isolate;
-    padding: var(--cr-spacing-md);
-    border-radius: calc(var(--cr-radius) - 12px);
-    background: var(--cr-label-fill);
-    overflow: auto;
+    padding: var(--cr-space);
+    border-radius: var(--cr-radius);
+    background: var(--cr-surface-alt);
+    overflow-x: auto;
     overscroll-behavior: contain;
-    line-height: 1.55;
 }
 :is(.cr-prose,.cr-editor) :where(code, kbd, samp) {
-    font-family: ui-monospace, 'SF Mono', 'Cascadia Code', 'Roboto Mono', monospace;
+    padding-inline: 0.2em;
+    border-radius: 4px;
+    background: var(--cr-surface-alt);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.9em;
 }
-:is(.cr-prose,.cr-editor) :where(:not(pre) > code) {
-    padding: 0.1em 0.35em;
-    border-radius: 6px;
-    background: var(--cr-label-fill);
+:is(.cr-prose,.cr-editor) :where(pre code) {
+    padding: 0;
+    background: none;
+    font-size: inherit;
 }
+/* A key is a key cap, so it has the edge and the deeper bottom a cap has, which
+   tells it from inline code by shape. */
 :is(.cr-prose,.cr-editor) :where(kbd) {
-    padding: 0.05em 0.4em;
     border: 1px solid var(--cr-outline);
     border-bottom-width: 2px;
-    border-radius: 6px;
 }
 :is(.cr-prose,.cr-editor) :where(a) {
     color: var(--cr-primary);
-    font-weight: 650;
-    text-decoration: underline;
-    text-underline-offset: 0.18em;
-    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
 }
 :is(.cr-prose,.cr-editor) :where(u) {
     text-decoration: underline;
@@ -2096,34 +2115,33 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     text-decoration-thickness: 2px;
 }
 :is(.cr-prose,.cr-editor) :where(mark) {
-    padding: 0 0.15em;
-    border-radius: 4px;
-    background: var(--cr-attention-surface);
-    color: var(--cr-attention-ink);
+    background: var(--cr-primary-soft);
+    color: var(--cr-on-primary-soft);
 }
 :is(.cr-prose,.cr-editor) :where(sub, sup) {
     font-size: 0.75em;
     line-height: 0;
 }
 :is(.cr-prose,.cr-editor) :where(hr) {
+    height: 1px;
     border: 0;
-    border-top: 1px solid var(--cr-edge);
-    margin-block: var(--cr-spacing-lg);
+    background: var(--cr-edge);
 }
 
-/* The editable surface: the caret in the primary ink, the selection on the
-   primary-soft pair (which clears 4.5:1 for its own text in every palette),
-   and an outline-free focus, because the field shell around it draws the ring. */
+/* The editable surface: the caret in the primary ink, and an outline-free
+   focus, because the field shell around it draws the ring. The selection is a
+   28% primary tint under unchanged text. It is not the primary-soft pair,
+   which a highlight (`mark`) already wears: a highlighted word that is then
+   selected must still look selected. */
 .cr-editor {
     caret-color: var(--cr-primary);
     outline: none;
     min-height: calc(var(--cr-text-body-leading) * 4);
-    padding: var(--cr-spacing-sm) var(--cr-spacing-md);
+    padding: var(--cr-space);
 }
 .cr-editor ::selection,
 .cr-editor::selection {
-    background: var(--cr-primary-soft);
-    color: var(--cr-on-primary-soft);
+    background: color-mix(in srgb, var(--cr-primary) 28%, transparent);
 }
 /* An empty block's prompt, read from `data-placeholder`. Engines mark the empty
    block with `.is-empty` (ProseMirror, TipTap) or leave it `:empty`; both are
@@ -2134,6 +2152,23 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     height: 0;
     pointer-events: none;
     color: var(--cr-muted);
+}
+
+/* The editor's frame: a field shell holding a toolbar and an editable surface.
+ * The shell is an inline control by default; holding an editor it becomes a
+ * column at the content radius, padded by its own Haze inset so the toolbar
+ * and the text sit on the well. The selector is (0,2,0), so it outranks the
+ * shell's own (0,1,0) inline layout and 20px radius in this layer; written in
+ * `:where()`, as first drafted, it lost to both and centred the toolbar. */
+.cr-field-shell:has(> .cr-editor) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: var(--cr-haze-inset);
+    border-radius: var(--cr-radius);
 }
 
 /* The formatting toolbar.
@@ -2160,6 +2195,15 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     width: 1px;
     margin: var(--cr-spacing-xs) var(--cr-spacing-2xs);
     background: var(--cr-edge);
+}
+/* `.below` asks for the touch placement on any pointer, for a product that
+   knows its layout better than the media query does. */
+.cr-editor-toolbar.below {
+    order: 2;
+    inset-block-start: auto;
+    inset-block-end: env(keyboard-inset-height, 0px);
+    border-bottom: 0;
+    border-top: 1px solid var(--cr-edge);
 }
 @media (pointer: coarse) {
 .cr-editor-toolbar {
@@ -2195,6 +2239,10 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 @media (forced-colors:active) {
 .cr-media {
     border: 1px solid CanvasText;
+}
+:is(.cr-resin,.cr-glass).transport :where(time, output, .time) {
+    background: Canvas;
+    color: CanvasText;
 }
 .cr-media-caption > * {
     background: Canvas;

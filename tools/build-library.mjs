@@ -23,6 +23,10 @@ const run = (script) =>
 
 run('build-tokens.cjs');
 run('build-catalogue.cjs');
+/* The surface recipes read the vocabulary the catalogue build has just
+   validated and the stylesheet, and write them as token references for the
+   platform libraries. */
+run('build-surface-recipes.cjs');
 
 /* The browser reads the tokens as a script rather than fetching JSON, so the
    flat file is wrapped. It is generated rather than committed by hand because

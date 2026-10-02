@@ -1282,7 +1282,15 @@
       "name": "Rich text surface",
       "category": "inputs",
       "surface": [
-        "field"
+        "field",
+        "frost"
+      ],
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "menu-in",
+        "menu-out"
       ],
       "status": {
         "web": "implemented",
@@ -3665,10 +3673,14 @@
       "category": "media",
       "surface": [
         "resin",
-        "haze"
+        "haze",
+        "stone",
+        "frost"
       ],
       "motion": [
-        "media-in"
+        "media-in",
+        "menu-in",
+        "menu-out"
       ],
       "status": {
         "web": "implemented",
@@ -3682,11 +3694,14 @@
       "name": "Audio player",
       "category": "media",
       "surface": [
+        "haze",
         "resin",
-        "haze"
+        "frost"
       ],
       "motion": [
-        "media-in"
+        "media-in",
+        "menu-in",
+        "menu-out"
       ],
       "status": {
         "web": "implemented",
@@ -3700,7 +3715,8 @@
       "name": "Media controls",
       "category": "media",
       "surface": [
-        "resin"
+        "resin",
+        "haze"
       ],
       "status": {
         "web": "implemented",

@@ -6,26 +6,34 @@
     {
       "id": "video-player",
       "name": "Video player",
-      "anatomy": "A video surface with Crystal transport controls.",
+      "anatomy": "A media stage at a set aspect ratio holding the video, a caption cue above the transport, and the transport inset from the stage: play, skip, the scrubber with its two time readouts, mute and volume, then a settings menu (playback speed, subtitles and captions, audio track, quality), picture in picture and full screen.",
       "states": [
         "idle",
         "playing",
         "paused",
         "buffering",
         "ended",
-        "focus-visible"
+        "focus-visible",
+        "captions-on",
+        "settings-open",
+        "picture-in-picture",
+        "full-screen"
       ],
-      "material": "Resin control bar over the video; Haze fills behind readable labels",
+      "material": "Resin transport over the video with Haze fills behind its time readouts; Stone behind caption cues; Frost settings menu",
       "surface": [
         "resin",
-        "haze"
+        "haze",
+        "stone",
+        "frost"
       ],
-      "geometry": "Control bar is a pill; every control reaches 44px.",
-      "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus.",
-      "crystal": "Control-bar material, transport geometry, the motion of showing and hiding controls",
-      "product": "Sources, captions, DRM, analytics",
+      "geometry": "The stage keeps the content radius and the aspect ratio the product sets (16:9, 4:3, 1:1, 9:16 or the media's own). The transport is a pill inset 12px from the stage, or the safe area in full screen, with 4px block padding around its controls (58px with its rim); every control reaches the 48px action target. Caption cues sit above the transport, never under it. Below 420px the transport wraps its trailing controls onto a second row.",
+      "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus. Speed, subtitle, audio-track and quality choices are menus of radio items (menuitemradio with aria-checked); the selected item is shown by label weight, never a check mark, and each change is announced in words. A choice the engine cannot make (an audio track list where the browser exposes none, picture in picture where it is unsupported) is not offered.",
+      "crystal": "Stage, transport and caption materials, transport geometry and insets, the settings menu, the motion of showing and hiding controls",
+      "product": "Sources, caption and audio tracks, quality renditions and their switching (adaptive streaming), DRM, analytics",
       "motion": [
-        "media-in"
+        "media-in",
+        "menu-in",
+        "menu-out"
       ],
       "parity": [
         "primereact:galleria",
@@ -35,26 +43,30 @@
     {
       "id": "audio-player",
       "name": "Audio player",
-      "anatomy": "An audio transport with scrubbing and volume.",
+      "anatomy": "A Haze card holding the title and any secondary line (artist, episode, chapter), with the transport inset from its edge: play, skip, the scrubber with its two time readouts, mute and volume, and a settings menu for playback speed.",
       "states": [
         "idle",
         "playing",
         "paused",
         "buffering",
         "ended",
-        "focus-visible"
+        "focus-visible",
+        "settings-open"
       ],
-      "material": "Resin plane with Haze readable regions",
+      "material": "Haze card holding a Resin transport; Frost settings menu",
       "surface": [
+        "haze",
         "resin",
-        "haze"
+        "frost"
       ],
-      "geometry": "Pill; the scrubber is a slider with a 44px thumb.",
+      "geometry": "The card keeps the content radius and the card padding (20px); the transport is a pill with 4px block padding around its controls; the scrubber is a slider with a 44px thumb.",
       "semantics": "A real audio element. The scrubber is a slider announcing time, not a progress bar.",
       "crystal": "Material, scrubber geometry, time formatting",
       "product": "Sources, playlists, streaming",
       "motion": [
-        "media-in"
+        "media-in",
+        "menu-in",
+        "menu-out"
       ],
       "parity": [
         "mantine:Audio"
@@ -63,7 +75,7 @@
     {
       "id": "media-controls",
       "name": "Media controls",
-      "anatomy": "The shared transport used by both players.",
+      "anatomy": "The shared transport used by both players: play, skip, the scrubber between two time readouts, mute and volume, then the controls a player adds (settings, picture in picture, full screen).",
       "states": [
         "idle",
         "playing",
@@ -71,11 +83,12 @@
         "buffering",
         "focus-visible"
       ],
-      "material": "Resin plane",
+      "material": "Resin plane; Haze behind the time readouts",
       "surface": [
-        "resin"
+        "resin",
+        "haze"
       ],
-      "geometry": "Pill; 44px targets throughout.",
+      "geometry": "Pill with 4px block and 12px inline padding around its 48px controls (58px tall with its rim), 4px between them. Time readouts are tabular and sit on Haze pills.",
       "semantics": "Each control is a button with a name; play and pause are one toggle with a pressed state.",
       "crystal": "Materials, the press recipe on every control",
       "product": "Which controls appear",

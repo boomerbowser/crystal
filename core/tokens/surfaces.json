@@ -30,7 +30,7 @@
       "name": "Resin plane",
       "materials": ["Resin"],
       "class": ".cr-resin",
-      "use": "One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter, because Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock. `.cr-resin.transport` is the media transport: the pill with 4px block and 12px inline padding around 44px targets, 52px tall, with tabular time readouts, wrapping to a second row in a player narrower than 420px. `.cr-media` is the stage it sits on (the content radius, the letterbox, `--cr-media-aspect` and `--cr-media-fit`), and `.cr-media-bar` is the region inset 12px, or the safe area in full screen, that holds the transport.",
+      "use": "One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter, because Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock. `.cr-resin.transport` is the media transport: the pill with 4px block and 12px inline padding around its 48px controls (58px tall with its rim), with tabular time readouts, wrapping to a second row in a player narrower than 420px. `.cr-media` is the stage it sits on (the content radius, the letterbox, `--cr-media-aspect` and `--cr-media-fit`), and `.cr-media-bar` is the region inset 12px, or the safe area in full screen, that holds the transport.",
       "also": [".cr-resin.transport"]
     },
     {

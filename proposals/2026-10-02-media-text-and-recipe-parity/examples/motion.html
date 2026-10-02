@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" data-crystal-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crystal hidden motion</title>
+<!-- The real library, by relative path. The recipes are read from
+     core/tokens/motion-recipes.json and the presets computed by
+     core/assets/core/presets.js, Crystal's own headless module. -->
+<link rel="stylesheet" href="../../../core/assets/crystal-theme.css">
+<link rel="stylesheet" href="../../../core/assets/crystal.css">
+<link rel="stylesheet" href="examples.css">
+<script src="../../../core/assets/core/presets.js"></script>
+<style>
+  /* Layout only. */
+  .motion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+  .motion-card { display: grid; gap: 8px; align-content: start; padding: 16px; }
+  .motion-card h3 { margin: 0; font-size: 14px; }
+  .motion-card p { margin: 0; font-size: 12.5px; line-height: 1.5; }
+  .stage { display: grid; place-items: center; height: 120px; border-radius: 20px; overflow: hidden; background: var(--cr-surface-alt); }
+  .specimen-box { display: grid; place-items: center; width: 150px; height: 64px; border-radius: 22px; font-weight: 750; font-size: 13px; text-align: center; padding: 6px; box-sizing: border-box; }
+  .filters { margin-bottom: 18px; }
+  .hidden-flag { font-size: 12px; font-weight: 800; }
+</style>
+</head>
+<body class="cr-plastic">
+<main class="sheet">
+  <header class="sheet-head">
+    <div>
+      <p class="eyebrow"><a href="index.html">Media, text and recipe parity</a></p>
+      <h1>Every motion Crystal ships</h1>
+      <p>All 59 recipes and all 8 material presets, each on the material it belongs to, each started by a press. The ones marked <b>hidden</b> are played by no component in Crystal React: six recipes and four presets that, until this page and Crystal React's motion catalogue story, nobody could see. Nothing here moves at rest, and the three continuous recipes run only while their toggle stands for pending work.</p>
+    </div>
+    <div class="controls"><button type="button" class="cr-button" id="mode" aria-pressed="false">Dark mode</button></div>
+  </header>
+
+  <form class="filters cr-haze" aria-label="Show">
+    <fieldset><legend>Show</legend><div class="cr-dock"><div class="cr-dock-inner" id="show">
+      <label><input type="radio" name="show" value="hidden" checked>Hidden only</label>
+      <label><input type="radio" name="show" value="all">Everything</label>
+    </div></div></fieldset>
+    <p class="muted" id="count" role="status" style="margin:0"></p>
+  </form>
+
+  <h2>Recipes <small>core/tokens/motion-recipes.json</small></h2>
+  <div class="motion-grid" id="recipes"></div>
+  <h2>Material presets <small>core/assets/core/presets.js</small></h2>
+  <div class="motion-grid" id="presets"></div>
+  <p class="note">The page plays each recipe's keyframes over its authored duration with Crystal's easing tokens, through the Web Animations API. Crystal React plays the same keyframes on the recipe's fitted spring, shown under each card, which settles in the same time. Reduced motion, which this page honours, removes the movement and keeps the state.</p>
+</main>
+<script>
+  const root = document.documentElement;
+  const mode = document.getElementById('mode');
+  mode.addEventListener('click', () => {
+    const dark = root.dataset.crystalMode !== 'dark';
+    root.dataset.crystalMode = dark ? 'dark' : 'light';
+    mode.setAttribute('aria-pressed', String(dark));
+    mode.textContent = dark ? 'Light mode' : 'Dark mode';
+  });
+
+  /* What Crystal React's audit (scripts/audit-recipes.mjs, 2 October 2026)
+     found no component plays. */
+  const HIDDEN_RECIPES = new Set(['view-push-out', 'resin-confluence', 'frost-unfold', 'plastic-settle', 'haze-tide', 'stone-contour']);
+  const HIDDEN_PRESETS = new Set(['plastic', 'resin', 'haze', 'stone']);
+  const MATERIAL = { resin: 'cr-resin', frost: 'cr-frost', plastic: 'cr-plastic', haze: 'cr-haze', stone: 'cr-stone', mirage: 'cr-mirage' };
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const css = getComputedStyle(root);
+  const token = (name, fallback) => css.getPropertyValue(name).trim() || fallback;
+  const ms = (value) => (value.endsWith('ms') ? parseFloat(value) : parseFloat(value) * 1000);
+  const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  function card(id, title, meta, use, spring, material, hidden, play, loop) {
+    const article = document.createElement('article');
+    article.className = 'cr-haze motion-card';
+    article.dataset.hidden = String(hidden);
+    article.innerHTML = '<div class="stage"><div class="specimen-box ' + material + '">' + esc(title) + '</div></div>'
+      + '<h3><code>' + esc(id) + '</code> ' + (hidden ? '<span class="cr-status hidden-flag" data-status="attention">Hidden</span>' : '') + '</h3>'
+      + '<p class="muted">' + esc(meta) + '</p>' + (use ? '<p>' + esc(use) + '</p>' : '')
+      + (spring ? '<p class="muted">Spring: stiffness ' + spring.stiffness + ', damping ' + spring.damping + ', ratio ' + spring.dampingRatio + '</p>' : '')
+      + '<button type="button" class="cr-button quiet"' + (loop ? ' aria-pressed="false"' : '') + '>' + (loop ? 'Start (work pending)' : 'Play') + '</button>';
+    const box = article.querySelector('.specimen-box');
+    const button = article.querySelector('button');
+    let running = null;
+    button.addEventListener('click', () => {
+      if (loop) {
+        if (running) { running.cancel(); running = null; button.setAttribute('aria-pressed', 'false'); button.textContent = 'Start (work pending)'; return; }
+        running = reduced ? null : play(box, true);
+        button.setAttribute('aria-pressed', 'true'); button.textContent = 'Stop (work resolved)';
+        return;
+      }
+      if (!reduced) play(box, false);
+    });
+    return article;
+  }
+
+  fetch('../../../core/tokens/motion-recipes.json').then((r) => r.json()).then(({ recipes }) => {
+    const host = document.getElementById('recipes');
+    for (const recipe of recipes) {
+      const material = MATERIAL[recipe.material] || (recipe.category === 'Controls' ? 'cr-button' : 'cr-haze');
+      const play = (box, loop) => box.animate(recipe.keyframes.map(({ offset, ...frame }) => (offset === undefined ? frame : { ...frame, offset })), {
+        duration: recipe.duration,
+        easing: recipe.easing === 'linear' ? 'linear' : token('--cr-ease-settle', 'ease'),
+        iterations: loop ? Infinity : 1,
+      });
+      host.append(card(recipe.id, recipe.label, recipe.category + ' · ' + recipe.duration + 'ms' + (recipe.loop ? ' · continuous' : ''),
+        recipe.use, recipe.spring, material, HIDDEN_RECIPES.has(recipe.id), play, recipe.loop === true));
+    }
+    filter();
+  });
+
+  const presets = window.CrystalCore.presets;
+  const presetHost = document.getElementById('presets');
+  for (const name of presets.PRESETS) {
+    const built = presets.presetKeyframes(name, {
+      travel: parseFloat(token('--cr-travel-' + presets.travelRole(name), '24')) || 24,
+      depth: parseFloat(token('--cr-travel-depth', '50')) || 50,
+      anchored: false,
+    });
+    const duration = ms(token('--cr-' + built.duration, '1000ms'));
+    const easing = token('--cr-ease-' + built.easing, 'ease');
+    const material = name.startsWith('mirage') ? 'cr-mirage' : (MATERIAL[name] || 'cr-haze');
+    const play = (box) => box.animate(built.keyframes, { duration, easing });
+    presetHost.append(card(name, name[0].toUpperCase() + name.slice(1), 'Preset · ' + built.duration + ' · ' + Math.round(duration) + 'ms', '', null, material, HIDDEN_PRESETS.has(name), play, false));
+  }
+
+  function filter() {
+    const all = document.querySelector('input[name="show"]:checked').value === 'all';
+    let shown = 0;
+    for (const article of document.querySelectorAll('.motion-card')) {
+      const visible = all || article.dataset.hidden === 'true';
+      article.hidden = !visible;
+      if (visible) shown += 1;
+    }
+    document.getElementById('count').textContent = shown + ' shown';
+  }
+  document.getElementById('show').addEventListener('change', filter);
+  filter();
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "$description": "Rulings on the decisions in tasks.json, append-only. The newest ruling on a decision is the one in force; earlier ones stay as the record. Written by the tasks page through examples/serve.cjs, or by `node apply-rulings.mjs ruling.json`. Every ruling is Meridian's: `ruledBy` names who made it.",
+  "rulings": [
+    {
+      "decision": "D-30",
+      "option": "a",
+      "ruledBy": "Meridian Digital",
+      "date": "2026-10-02"
+    },
+    {
+      "decision": "D-31",
+      "option": "a",
+      "ruledBy": "Meridian Digital",
+      "date": "2026-10-02"
+    },
+    {
+      "decision": "D-32",
+      "option": "a",
+      "ruledBy": "Meridian Digital",
+      "date": "2026-10-02"
+    },
+    {
+      "decision": "D-33",
+      "option": "a",
+      "ruledBy": "Meridian Digital",
+      "date": "2026-10-02"
+    },
+    {
+      "decision": "D-34",
+      "option": "a",
+      "ruledBy": "Meridian Digital",
+      "date": "2026-10-02"
+    },
+    {
+      "decision": "D-35",
+      "option": "a",
+      "ruledBy": "Meridian Digital",
+      "date": "2026-10-02"
+    },
+    {
+      "decision": "D-37",
+      "option": "a",
+      "ruledBy": "Meridian Digital",
+      "date": "2026-10-02"
+    }
+  ]
+}

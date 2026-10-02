@@ -1,0 +1,7995 @@
+{
+  "generated": "2026-10-02",
+  "summary": {
+    "core": "local checkout (crystal-design-system/core)",
+    "components": 284,
+    "implemented": 282,
+    "motion": {
+      "assigned": 338,
+      "played": 278,
+      "playedByChild": 40,
+      "unplayed": 20,
+      "entriesWithUnplayed": 15,
+      "recipesPlayedByNoComponent": [
+        "view-push-out",
+        "resin-confluence",
+        "frost-unfold",
+        "plastic-settle",
+        "haze-tide",
+        "stone-contour"
+      ],
+      "presetsPlayedByNoComponent": [
+        "plastic",
+        "resin",
+        "haze",
+        "stone"
+      ]
+    },
+    "materials": {
+      "directories": 237,
+      "directoriesWithHandWrittenBackdropFilter": 29,
+      "backdropFilterLines": 79,
+      "directoriesUsingMaterialMixins": 49,
+      "mixinUses": {
+        "field.shell": 15,
+        "frost": 8,
+        "haze-fill": 25,
+        "resin": 3
+      },
+      "entriesWithASurfaceNotWornInMarkup": 105
+    }
+  },
+  "recipeUse": {
+    "press": 52,
+    "hover": 36,
+    "selection": 54,
+    "switch-on": 1,
+    "switch-off": 1,
+    "check": 7,
+    "slider-step": 7,
+    "icon-turn": 14,
+    "copy-confirm": 3,
+    "field-focus": 48,
+    "field-invalid": 48,
+    "field-valid": 48,
+    "hint-in": 4,
+    "hint-out": 4,
+    "tab-in": 1,
+    "page-in": 17,
+    "page-out": 6,
+    "view-push-in": 1,
+    "view-push-out": 0,
+    "breadcrumb": 1,
+    "drawer-in": 3,
+    "drawer-out": 3,
+    "menu-in": 32,
+    "menu-out": 32,
+    "tooltip-in": 8,
+    "tooltip-out": 8,
+    "popover-in": 22,
+    "popover-out": 22,
+    "accordion-in": 8,
+    "accordion-out": 2,
+    "list-in": 31,
+    "list-out": 26,
+    "reorder": 3,
+    "highlight": 13,
+    "message-in": 2,
+    "toast-in": 4,
+    "toast-out": 4,
+    "success": 22,
+    "attention": 24,
+    "progress-change": 10,
+    "skeleton-resolve": 2,
+    "empty-in": 8,
+    "media-in": 8,
+    "caption-in": 3,
+    "carousel-next": 1,
+    "carousel-previous": 1,
+    "drag-pickup": 8,
+    "drag-settle": 8,
+    "resize-settle": 5,
+    "resin-confluence": 0,
+    "frost-unfold": 0,
+    "plastic-settle": 0,
+    "haze-tide": 0,
+    "stone-contour": 0,
+    "check-off": 7,
+    "activity-turn": 8,
+    "activity-travel": 2,
+    "skeleton-sweep": 2,
+    "mark-in": 6
+  },
+  "presetUse": {
+    "plastic": 0,
+    "frost": 1,
+    "resin": 0,
+    "haze": 0,
+    "stone": 0,
+    "mirage": 4,
+    "mirage-out": 4,
+    "dismiss": 1
+  },
+  "components": [
+    {
+      "id": "app-shell",
+      "name": "App shell",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "plastic",
+        "frost",
+        "dock"
+      ],
+      "directory": "src/components/AppShell",
+      "classesWorn": [
+        "cr-dock",
+        "cr-plastic",
+        "cr-scroll-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "container",
+      "name": "Container",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Container",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "grid",
+      "name": "Grid",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Grid",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "simple-grid",
+      "name": "Simple grid",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/SimpleGrid",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "stack",
+      "name": "Stack",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Stack",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "group",
+      "name": "Group",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Stack",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "divider",
+      "name": "Divider",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Divider",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "aspect-ratio",
+      "name": "Aspect ratio",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/AspectRatio",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "scroll-area",
+      "name": "Scroll area",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ScrollArea",
+      "classesWorn": [
+        "cr-scroll-frost",
+        "cr-scroll-resin"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "center",
+      "name": "Center",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Center",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "space",
+      "name": "Space",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Space",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "app-bar",
+      "name": "App bar",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost"
+      ],
+      "directory": "src/components/AppBar",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "masonry",
+      "name": "Masonry",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Masonry",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "overflow-list",
+      "name": "Overflow list",
+      "category": "layout",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none",
+        "frost"
+      ],
+      "directory": "src/components/OverflowList",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "anchor",
+      "name": "Anchor",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Anchor",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "nav-link",
+      "name": "Nav link",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "nav-item"
+      ],
+      "directory": "src/components/NavLink",
+      "classesWorn": [
+        "cr-nav-item"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "nav-rail",
+      "name": "Navigation rail",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "nav-item"
+      ],
+      "directory": "src/components/NavRail",
+      "classesWorn": [
+        "cr-nav-item"
+      ],
+      "handWritten": {
+        "backdropFilter": 1,
+        "mixins": [
+          "frost"
+        ]
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "dock",
+      "name": "Destination dock",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "dock"
+      ],
+      "directory": "src/components/Dock",
+      "classesWorn": [
+        "cr-dock",
+        "cr-dock-inner"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "breadcrumb"
+        ],
+        "played": [
+          "breadcrumb"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Breadcrumbs",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "tabs",
+      "name": "Tabs",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "tab-in"
+        ],
+        "played": [
+          "tab-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "dock"
+      ],
+      "directory": "src/components/Tabs",
+      "classesWorn": [
+        "cr-dock"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "pagination",
+      "name": "Pagination",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control"
+      ],
+      "directory": "src/components/Pagination",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 1,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "stepper",
+      "name": "Stepper",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control",
+        "haze"
+      ],
+      "directory": "src/components/Stepper",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 2,
+        "mixins": [
+          "resin",
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "burger",
+      "name": "Burger",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "icon-turn"
+        ],
+        "played": [
+          "icon-turn"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control"
+      ],
+      "directory": "src/components/Burger",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 1,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "command-palette",
+      "name": "Command palette",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "menu-in",
+          "menu-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "mirage",
+        "dialog",
+        "field"
+      ],
+      "directory": "src/components/CommandPalette",
+      "classesWorn": [
+        "cr-field-shell",
+        "cr-scroll-resin"
+      ],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": [
+        "mirage",
+        "dialog"
+      ]
+    },
+    {
+      "id": "tree-view",
+      "name": "Tree view",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "accordion-in",
+          "accordion-out"
+        ],
+        "played": [
+          "accordion-in"
+        ],
+        "playedByChild": [],
+        "unplayed": [
+          "accordion-out"
+        ]
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/TreeView",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "affix",
+      "name": "Affix",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "resin"
+      ],
+      "directory": "src/components/Affix",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 1,
+        "mixins": [
+          "resin"
+        ]
+      },
+      "surfaceNotWorn": [
+        "resin"
+      ]
+    },
+    {
+      "id": "bottom-navigation",
+      "name": "Bottom navigation",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "dock"
+      ],
+      "directory": "src/components/BottomNavigation",
+      "classesWorn": [
+        "cr-dock"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "navigation-menu",
+      "name": "Navigation menu",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "menu-in",
+          "menu-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none",
+        "frost"
+      ],
+      "directory": "src/components/NavigationMenu",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 1,
+        "mixins": [
+          "frost"
+        ]
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "table-of-contents",
+      "name": "Table of contents",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/TableOfContents",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "menubar",
+      "name": "Menubar",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": [
+          "menu-in",
+          "menu-out"
+        ]
+      },
+      "surfaces": [
+        "none",
+        "frost"
+      ],
+      "directory": "src/components/Menubar",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "submenu",
+      "name": "Submenu",
+      "category": "navigation",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "menu-in",
+          "menu-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost"
+      ],
+      "directory": "src/components/Menu",
+      "classesWorn": [
+        "cr-scroll-resin"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "button",
+      "name": "Button",
+      "category": "actions",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "press",
+          "hover"
+        ],
+        "played": [
+          "press",
+          "hover"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control"
+      ],
+      "directory": "src/components/Button",
+      "classesWorn": [
+        "cr-button"
+      ],
+      "handWritten": {
+        "backdropFilter": 2,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "icon-button",
+      "name": "Icon button",
+      "category": "actions",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "press",
+          "icon-turn"
+        ],
+        "played": [
+          "press",
+          "icon-turn"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control"
+      ],
+      "directory": "src/components/IconButton",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 2,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "button-group",
+      "name": "Button group",
+      "category": "actions",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "press"
+        ],
+        "played": [],
+        "playedByChild": [
+          "press"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "group"
+      ],
+      "directory": "src/components/ButtonGroup",
+      "classesWorn": [
+        "cr-group"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "split-button",
+      "name": "Split button",
+      "category": "actions",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": [
+          "menu-in",
+          "menu-out"
+        ]
+      },
+      "surfaces": [
+        "group"
+      ],
+      "directory": "src/components/ButtonGroup",
+      "classesWorn": [
+        "cr-group"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "floating-action",
+      "name": "Floating action",
+      "category": "actions",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "press"
+        ],
+        "played": [
+          "press"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control"
+      ],
+      "directory": "src/components/FloatingAction",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "copy-button",
+      "name": "Copy button",
+      "category": "actions",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "copy-confirm"
+        ],
+        "played": [
+          "copy-confirm"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control"
+      ],
+      "directory": "src/components/CopyButton",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "close-button",
+      "name": "Close button",
+      "category": "actions",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "press"
+        ],
+        "played": [
+          "press"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control"
+      ],
+      "directory": "src/components/IconButton",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 2,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "action-bar",
+      "name": "Action bar",
+      "category": "actions",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "press"
+        ],
+        "played": [
+          "press"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "dock"
+      ],
+      "directory": "src/components/FloatingAction",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "dock"
+      ]
+    },
+    {
+      "id": "speed-dial",
+      "name": "Speed dial",
+      "category": "actions",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "press",
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "press",
+          "menu-in",
+          "menu-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control"
+      ],
+      "directory": "src/components/FloatingAction",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "text-input",
+      "name": "Text input",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/TextInput",
+      "classesWorn": [
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "textarea",
+      "name": "Textarea",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus"
+        ],
+        "played": [
+          "field-focus"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": null
+    },
+    {
+      "id": "number-input",
+      "name": "Number input",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/NumberInput",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "password-input",
+      "name": "Password input",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/PasswordInput",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "search-input",
+      "name": "Search input",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/SearchInput",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "select",
+      "name": "Select",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field",
+        "frost"
+      ],
+      "directory": "src/components/Select",
+      "classesWorn": [
+        "cr-field-shell",
+        "cr-frost",
+        "cr-scroll-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "combobox",
+      "name": "Combobox",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "popover-in",
+          "popover-out",
+          "list-in"
+        ],
+        "played": [
+          "popover-in",
+          "popover-out"
+        ],
+        "playedByChild": [],
+        "unplayed": [
+          "list-in"
+        ]
+      },
+      "surfaces": [
+        "field",
+        "frost"
+      ],
+      "directory": null
+    },
+    {
+      "id": "multi-select",
+      "name": "Multi select",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out",
+          "list-in",
+          "list-out"
+        ],
+        "played": [
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out",
+          "list-in",
+          "list-out"
+        ],
+        "playedByChild": [
+          "field-focus"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field",
+        "compact",
+        "frost"
+      ],
+      "directory": "src/components/MultiSelect",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell",
+        "cr-frost",
+        "cr-scroll-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": [
+        "compact"
+      ]
+    },
+    {
+      "id": "checkbox",
+      "name": "Checkbox",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "check",
+          "check-off"
+        ],
+        "played": [
+          "check",
+          "check-off"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "choice"
+      ],
+      "directory": "src/components/Checkbox",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "checkbox-group",
+      "name": "Checkbox group",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Checkbox",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "radio",
+      "name": "Radio",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "check",
+          "check-off"
+        ],
+        "played": [
+          "check",
+          "check-off"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "choice"
+      ],
+      "directory": "src/components/Checkbox",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "radio-group",
+      "name": "Radio group",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Checkbox",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "switch",
+      "name": "Switch",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "switch-on",
+          "switch-off"
+        ],
+        "played": [
+          "switch-on",
+          "switch-off"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "choice"
+      ],
+      "directory": "src/components/Switch",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "slider",
+      "name": "Slider",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "slider-step"
+        ],
+        "played": [
+          "slider-step"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "choice"
+      ],
+      "directory": "src/components/Slider",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "range-slider",
+      "name": "Range slider",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "slider-step"
+        ],
+        "played": [
+          "slider-step"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "choice"
+      ],
+      "directory": "src/components/Slider",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "segmented-control",
+      "name": "Segmented control",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "dock"
+      ],
+      "directory": "src/components/SegmentedControl",
+      "classesWorn": [
+        "cr-dock"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "rating",
+      "name": "Rating",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Rating",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "pin-input",
+      "name": "PIN input",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/PinInput",
+      "classesWorn": [
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "tags-input",
+      "name": "Tags input",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "list-in",
+          "list-out"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "list-in",
+          "list-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field",
+        "compact"
+      ],
+      "directory": "src/components/TagsInput",
+      "classesWorn": [
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": [
+        "compact"
+      ]
+    },
+    {
+      "id": "chip",
+      "name": "Chip",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection",
+          "press"
+        ],
+        "played": [
+          "selection",
+          "press"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control"
+      ],
+      "directory": "src/components/Chip",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "color-input",
+      "name": "Colour input",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/ColorPicker",
+      "classesWorn": [
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "date-input",
+      "name": "Date input",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/DatePicker",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell",
+        "cr-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "date-picker",
+      "name": "Date picker",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out",
+          "selection",
+          "page-in"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out",
+          "selection",
+          "page-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field",
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/DatePicker",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell",
+        "cr-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "date-range-picker",
+      "name": "Date range picker",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out",
+          "selection",
+          "page-in"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out",
+          "selection",
+          "page-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field",
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/DatePicker",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell",
+        "cr-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "time-input",
+      "name": "Time input",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/DatePicker",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell",
+        "cr-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "file-input",
+      "name": "File input",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out",
+          "progress-change"
+        ],
+        "played": [
+          "list-in",
+          "list-out",
+          "progress-change"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control",
+        "haze"
+      ],
+      "directory": "src/components/FileInput",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "dropzone",
+      "name": "Dropzone",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "drag-pickup",
+          "drag-settle"
+        ],
+        "played": [
+          "drag-pickup",
+          "drag-settle"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": null
+    },
+    {
+      "id": "form-field",
+      "name": "Form field",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/FormField",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "fieldset",
+      "name": "Fieldset",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/FormField",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "transfer",
+      "name": "Transfer",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out"
+        ],
+        "played": [
+          "list-in"
+        ],
+        "playedByChild": [],
+        "unplayed": [
+          "list-out"
+        ]
+      },
+      "surfaces": [
+        "haze",
+        "control"
+      ],
+      "directory": "src/components/Transfer",
+      "classesWorn": [
+        "cr-scroll-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "cascader",
+      "name": "Cascader",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "menu-in",
+          "menu-out"
+        ],
+        "playedByChild": [],
+        "unplayed": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ]
+      },
+      "surfaces": [
+        "field",
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/Cascader",
+      "classesWorn": [
+        "cr-field-shell",
+        "cr-frost",
+        "cr-scroll-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "mentions",
+      "name": "Mentions",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "menu-in",
+          "menu-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/RichTextSurface",
+      "classesWorn": [
+        "cr-field-shell",
+        "cr-scroll-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost",
+        "haze"
+      ]
+    },
+    {
+      "id": "rich-text-surface",
+      "name": "Rich text surface",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field",
+        "frost"
+      ],
+      "directory": "src/components/RichTextSurface",
+      "classesWorn": [
+        "cr-field-shell",
+        "cr-scroll-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "helper-text",
+      "name": "Helper text",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "hint-in",
+          "hint-out"
+        ],
+        "played": [
+          "hint-in",
+          "hint-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/FormField",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "autocomplete",
+      "name": "Autocomplete",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field",
+        "frost"
+      ],
+      "directory": "src/components/ComboBox",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell",
+        "cr-frost",
+        "cr-scroll-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "native-select",
+      "name": "Native select",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/Select",
+      "classesWorn": [
+        "cr-field-shell",
+        "cr-frost",
+        "cr-scroll-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "date-time-picker",
+      "name": "Date and time picker",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out",
+          "selection",
+          "page-in"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out",
+          "selection",
+          "page-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field",
+        "frost"
+      ],
+      "directory": "src/components/DatePicker",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell",
+        "cr-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "month-picker",
+      "name": "Month picker",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection",
+          "page-in"
+        ],
+        "played": [
+          "selection",
+          "page-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/DatePicker",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell",
+        "cr-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "year-picker",
+      "name": "Year picker",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection",
+          "page-in"
+        ],
+        "played": [
+          "selection",
+          "page-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/DatePicker",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell",
+        "cr-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "digital-clock",
+      "name": "Digital clock",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/DatePicker",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell",
+        "cr-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "angle-slider",
+      "name": "Angle slider",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "slider-step"
+        ],
+        "played": [
+          "slider-step"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/AngleSlider",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 3,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "knob",
+      "name": "Knob",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "slider-step"
+        ],
+        "played": [
+          "slider-step"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/AngleSlider",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 3,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "mask-input",
+      "name": "Mask input",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/MaskInput",
+      "classesWorn": [
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "json-input",
+      "name": "JSON input",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "played": [],
+        "playedByChild": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/JsonInput",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "field"
+      ]
+    },
+    {
+      "id": "color-area",
+      "name": "Colour area",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ColorPicker",
+      "classesWorn": [
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "color-slider",
+      "name": "Colour slider",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ColorPicker",
+      "classesWorn": [
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "color-wheel",
+      "name": "Colour wheel",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ColorPicker",
+      "classesWorn": [
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "color-swatch",
+      "name": "Colour swatch",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ColorPicker",
+      "classesWorn": [
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "color-swatch-picker",
+      "name": "Colour swatch picker",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ColorPicker",
+      "classesWorn": [
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "token-field",
+      "name": "Token field",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "list-in",
+          "list-out"
+        ],
+        "played": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "list-in",
+          "list-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field",
+        "compact"
+      ],
+      "directory": "src/components/TagsInput",
+      "classesWorn": [
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": [
+        "compact"
+      ]
+    },
+    {
+      "id": "upload",
+      "name": "Upload",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out",
+          "progress-change"
+        ],
+        "played": [
+          "list-in",
+          "list-out",
+          "progress-change"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control",
+        "haze"
+      ],
+      "directory": "src/components/FileInput",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "upload-zone",
+      "name": "Upload zone",
+      "category": "inputs",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "drag-pickup",
+          "drag-settle"
+        ],
+        "played": [
+          "drag-pickup",
+          "drag-settle"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/FileInput",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "card",
+      "name": "Card",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out"
+        ],
+        "played": [
+          "list-in",
+          "list-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/Card",
+      "classesWorn": [
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "table",
+      "name": "Table",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out",
+          "highlight"
+        ],
+        "played": [
+          "list-in",
+          "list-out",
+          "highlight"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "table"
+      ],
+      "directory": "src/components/Table",
+      "classesWorn": [
+        "cr-bare",
+        "cr-table-scroll"
+      ],
+      "handWritten": {
+        "backdropFilter": 1,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "data-table",
+      "name": "Data table",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out",
+          "highlight"
+        ],
+        "played": [
+          "list-in",
+          "highlight"
+        ],
+        "playedByChild": [],
+        "unplayed": [
+          "list-out"
+        ]
+      },
+      "surfaces": [
+        "table"
+      ],
+      "directory": "src/components/DataTable",
+      "classesWorn": [
+        "cr-table-scroll"
+      ],
+      "handWritten": {
+        "backdropFilter": 1,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "list",
+      "name": "List",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out",
+          "reorder"
+        ],
+        "played": [
+          "list-in",
+          "list-out",
+          "reorder"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/List",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "description-list",
+      "name": "Description list",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/DescriptionList",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "avatar",
+      "name": "Avatar",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Avatar",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "avatar-group",
+      "name": "Avatar group",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/AvatarGroup",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "badge",
+      "name": "Badge",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "highlight",
+          "attention"
+        ],
+        "played": [
+          "highlight",
+          "attention"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "compact"
+      ],
+      "directory": "src/components/Badge",
+      "classesWorn": [
+        "cr-resin-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "status-badge",
+      "name": "Status badge",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "success",
+          "attention"
+        ],
+        "played": [
+          "success",
+          "attention"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "status"
+      ],
+      "directory": "src/components/StatusBadge",
+      "classesWorn": [
+        "cr-status"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "indicator",
+      "name": "Indicator",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "indicator"
+      ],
+      "directory": "src/components/Indicator",
+      "classesWorn": [
+        "cr-indicator"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "image",
+      "name": "Image",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "media-in"
+        ],
+        "played": [
+          "media-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/Image",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "timeline",
+      "name": "Timeline",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in"
+        ],
+        "played": [
+          "list-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "indicator",
+        "haze"
+      ],
+      "directory": "src/components/Timeline",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "resin"
+        ]
+      },
+      "surfaceNotWorn": [
+        "indicator",
+        "haze"
+      ]
+    },
+    {
+      "id": "accordion",
+      "name": "Accordion",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "accordion-in",
+          "accordion-out"
+        ],
+        "played": [
+          "accordion-in",
+          "accordion-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/Accordion",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "collapse",
+      "name": "Collapse",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "accordion-in",
+          "accordion-out"
+        ],
+        "played": [
+          "accordion-in",
+          "accordion-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Collapse",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "spoiler",
+      "name": "Spoiler",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "accordion-in",
+          "accordion-out"
+        ],
+        "played": [
+          "accordion-in"
+        ],
+        "playedByChild": [],
+        "unplayed": [
+          "accordion-out"
+        ]
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Spoiler",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "carousel",
+      "name": "Carousel",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "carousel-next",
+          "carousel-previous"
+        ],
+        "played": [
+          "carousel-next",
+          "carousel-previous"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control",
+        "haze"
+      ],
+      "directory": "src/components/Carousel",
+      "classesWorn": [
+        "cr-bare",
+        "cr-button",
+        "cr-scroll-resin"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "statistic",
+      "name": "Statistic",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "highlight"
+        ],
+        "played": [
+          "highlight"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/Statistic",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "code",
+      "name": "Code",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Code",
+      "classesWorn": [
+        "cr-scroll-resin"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "kbd",
+      "name": "Keyboard key",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "compact"
+      ],
+      "directory": "src/components/Kbd",
+      "classesWorn": [
+        "cr-resin-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "theme-icon",
+      "name": "Theme icon",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ThemeIcon",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "authored-bubble",
+      "name": "Authored bubble",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "message-in"
+        ],
+        "played": [
+          "message-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "bubble"
+      ],
+      "directory": "src/components/AuthoredBubble",
+      "classesWorn": [
+        "cr-bubble"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "caption",
+      "name": "Caption",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "caption-in"
+        ],
+        "played": [
+          "caption-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "stone"
+      ],
+      "directory": "src/components/Caption",
+      "classesWorn": [
+        "cr-stone"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "calendar",
+      "name": "Calendar",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection",
+          "page-in"
+        ],
+        "played": [
+          "selection",
+          "page-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/Calendar",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 1,
+        "mixins": [
+          "frost"
+        ]
+      },
+      "surfaceNotWorn": [
+        "frost",
+        "haze"
+      ]
+    },
+    {
+      "id": "data-view",
+      "name": "Data view",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out"
+        ],
+        "played": [
+          "list-in",
+          "list-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/DataView",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "image-list",
+      "name": "Image list",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "media-in"
+        ],
+        "played": [],
+        "playedByChild": [
+          "media-in"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/ImageList",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "organization-chart",
+      "name": "Organization chart",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "accordion-in",
+          "accordion-out"
+        ],
+        "played": [
+          "accordion-in"
+        ],
+        "playedByChild": [],
+        "unplayed": [
+          "accordion-out"
+        ]
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/OrganizationChart",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "rolling-number",
+      "name": "Rolling number",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/RollingNumber",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "image-compare",
+      "name": "Image compare",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "drag-pickup",
+          "drag-settle"
+        ],
+        "played": [
+          "drag-pickup",
+          "drag-settle"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "resin"
+      ],
+      "directory": "src/components/ImageCompare",
+      "classesWorn": [
+        "cr-resin"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "marquee",
+      "name": "Marquee",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Marquee",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "overlay-badge",
+      "name": "Overlay badge",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "attention"
+        ],
+        "played": [
+          "attention"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/OverlayBadge",
+      "classesWorn": [
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "navigation-tree",
+      "name": "Navigation tree",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "accordion-in",
+          "accordion-out"
+        ],
+        "played": [
+          "accordion-in"
+        ],
+        "playedByChild": [],
+        "unplayed": [
+          "accordion-out"
+        ]
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/NavigationTree",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "resizable-table",
+      "name": "Resizable table",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out",
+          "highlight",
+          "resize-settle"
+        ],
+        "played": [],
+        "playedByChild": [
+          "list-in",
+          "highlight",
+          "resize-settle"
+        ],
+        "unplayed": [
+          "list-out"
+        ]
+      },
+      "surfaces": [
+        "table"
+      ],
+      "directory": "src/components/ResizableTable",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "table"
+      ]
+    },
+    {
+      "id": "stat-card",
+      "name": "Stat card",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "highlight"
+        ],
+        "played": [],
+        "playedByChild": [
+          "highlight"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/StatCard",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "kpi-tile",
+      "name": "KPI tile",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "highlight"
+        ],
+        "played": [],
+        "playedByChild": [
+          "highlight"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/KpiTile",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "trend-indicator",
+      "name": "Trend indicator",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "highlight"
+        ],
+        "played": [
+          "highlight"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/TrendIndicator",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "delta-badge",
+      "name": "Delta badge",
+      "category": "data-display",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "highlight"
+        ],
+        "played": [
+          "highlight"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/DeltaBadge",
+      "classesWorn": [
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "alert",
+      "name": "Alert",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "attention"
+        ],
+        "played": [
+          "attention"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/Alert",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "toast",
+      "name": "Toast",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "toast-in",
+          "toast-out"
+        ],
+        "played": [
+          "toast-in",
+          "toast-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost"
+      ],
+      "directory": "src/components/Toast",
+      "classesWorn": [
+        "cr-bare",
+        "cr-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "notification",
+      "name": "Notification",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "toast-in",
+          "toast-out"
+        ],
+        "played": [
+          "toast-in",
+          "toast-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost"
+      ],
+      "directory": "src/components/Notification",
+      "classesWorn": [
+        "cr-bare",
+        "cr-frost",
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "progress",
+      "name": "Progress",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "progress-change",
+          "activity-travel"
+        ],
+        "played": [
+          "progress-change",
+          "activity-travel"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Progress",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "ring-progress",
+      "name": "Ring progress",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "progress-change",
+          "success"
+        ],
+        "played": [
+          "progress-change",
+          "success"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/RingProgress",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "loader",
+      "name": "Loader",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "activity-turn"
+        ],
+        "played": [
+          "activity-turn"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Loader",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "skeleton",
+      "name": "Skeleton",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "skeleton-resolve",
+          "skeleton-sweep"
+        ],
+        "played": [
+          "skeleton-resolve",
+          "skeleton-sweep"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/Skeleton",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "loading-overlay",
+      "name": "Loading overlay",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "mirage"
+      ],
+      "directory": "src/components/LoadingOverlay",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "mirage"
+      ]
+    },
+    {
+      "id": "empty-state",
+      "name": "Empty state",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "empty-in"
+        ],
+        "played": [
+          "empty-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/EmptyState",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "result",
+      "name": "Result",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "success"
+        ],
+        "played": [
+          "success"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/Result",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "popconfirm",
+      "name": "Inline confirm",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "popover-in",
+          "popover-out"
+        ],
+        "played": [],
+        "playedByChild": [
+          "popover-in",
+          "popover-out"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost"
+      ],
+      "directory": "src/components/Popconfirm",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "tour",
+      "name": "Tour",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "popover-in",
+          "popover-out"
+        ],
+        "played": [
+          "popover-in",
+          "popover-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "mirage"
+      ],
+      "directory": "src/components/Tour",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 2,
+        "mixins": [
+          "frost"
+        ]
+      },
+      "surfaceNotWorn": [
+        "frost",
+        "mirage"
+      ]
+    },
+    {
+      "id": "semi-circle-progress",
+      "name": "Semi-circle progress",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "progress-change"
+        ],
+        "played": [
+          "progress-change"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/SemiCircleProgress",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "meter-group",
+      "name": "Meter group",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "progress-change"
+        ],
+        "played": [
+          "progress-change"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/MeterGroup",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "banner",
+      "name": "Banner",
+      "category": "feedback",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "toast-in",
+          "toast-out",
+          "attention"
+        ],
+        "played": [
+          "toast-in",
+          "toast-out",
+          "attention"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/Banner",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "dialog",
+      "name": "Dialog",
+      "category": "overlays",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "mirage",
+          "mirage-out",
+          "dismiss"
+        ],
+        "played": [
+          "mirage",
+          "mirage-out",
+          "dismiss"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "dialog",
+        "mirage"
+      ],
+      "directory": "src/components/Dialog",
+      "classesWorn": [
+        "cr-dialog",
+        "cr-dialog-body",
+        "cr-mirage"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "drawer",
+      "name": "Drawer",
+      "category": "overlays",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "drawer-in",
+          "drawer-out"
+        ],
+        "played": [
+          "drawer-in",
+          "drawer-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "mirage"
+      ],
+      "directory": "src/components/Drawer",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 8,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost",
+        "mirage"
+      ]
+    },
+    {
+      "id": "menu",
+      "name": "Menu",
+      "category": "overlays",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "menu-in",
+          "menu-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost"
+      ],
+      "directory": "src/components/Menu",
+      "classesWorn": [
+        "cr-scroll-resin"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "context-menu",
+      "name": "Context menu",
+      "category": "overlays",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "menu-in",
+          "menu-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost"
+      ],
+      "directory": "src/components/Menu",
+      "classesWorn": [
+        "cr-scroll-resin"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "popover",
+      "name": "Popover",
+      "category": "overlays",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "popover-in",
+          "popover-out"
+        ],
+        "played": [
+          "popover-in",
+          "popover-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost"
+      ],
+      "directory": "src/components/Popover",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "hover-card",
+      "name": "Hover card",
+      "category": "overlays",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "popover-in",
+          "popover-out"
+        ],
+        "played": [
+          "popover-in",
+          "popover-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost"
+      ],
+      "directory": "src/components/HoverCard",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "tooltip",
+      "name": "Tooltip",
+      "category": "overlays",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "tooltip-in",
+          "tooltip-out"
+        ],
+        "played": [
+          "tooltip-in",
+          "tooltip-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost"
+      ],
+      "directory": "src/components/Tooltip",
+      "classesWorn": [
+        "cr-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "scrim",
+      "name": "Scrim",
+      "category": "overlays",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "mirage",
+          "mirage-out"
+        ],
+        "played": [
+          "mirage",
+          "mirage-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "mirage"
+      ],
+      "directory": "src/components/Scrim",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "mirage"
+      ]
+    },
+    {
+      "id": "portal",
+      "name": "Portal",
+      "category": "overlays",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Portal",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "floating-window",
+      "name": "Floating window",
+      "category": "overlays",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "drawer-in",
+          "drawer-out"
+        ],
+        "played": [
+          "drawer-in",
+          "drawer-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "resin-panel"
+      ],
+      "directory": "src/components/FloatingWindow",
+      "classesWorn": [
+        "cr-bare",
+        "cr-resin"
+      ],
+      "handWritten": {
+        "backdropFilter": 1,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "overlay-arrow",
+      "name": "Overlay arrow",
+      "category": "overlays",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/OverlayArrow",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 3,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "title",
+      "name": "Title",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Title",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "text",
+      "name": "Text",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Text",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "blockquote",
+      "name": "Blockquote",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/Prose",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "mark",
+      "name": "Mark",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "highlight"
+        ],
+        "played": [
+          "highlight"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Highlight",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "prose",
+      "name": "Prose",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Prose",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "highlight",
+      "name": "Highlight",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "highlight"
+        ],
+        "played": [
+          "highlight"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/Highlight",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "number-formatter",
+      "name": "Number formatter",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/NumberFormatter",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "display",
+      "name": "Display",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Title",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "heading",
+      "name": "Heading",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": null
+    },
+    {
+      "id": "lead",
+      "name": "Lead",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Title",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "prose-list",
+      "name": "Prose list",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ProseList",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "code-block",
+      "name": "Code block",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/CodeBlock",
+      "classesWorn": [
+        "cr-scroll-resin"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "truncate",
+      "name": "Truncate",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Truncate",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "cite",
+      "name": "Cite",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ProseList",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "abbreviation",
+      "name": "Abbreviation",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": null
+    },
+    {
+      "id": "text-balance",
+      "name": "Balanced text",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/TextBalance",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "gradient-text",
+      "name": "Gradient text",
+      "category": "typography",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/GradientText",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "visually-hidden",
+      "name": "Visually hidden",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/VisuallyHidden",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "skip-link",
+      "name": "Skip link",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/SkipLink",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "focus-trap",
+      "name": "Focus trap",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/FocusTrap",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "transition",
+      "name": "Transition",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Transition",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "direction-provider",
+      "name": "Direction provider",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/DirectionProvider",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "theme-provider",
+      "name": "Theme provider",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": null
+    },
+    {
+      "id": "reduced-effects",
+      "name": "Reduced effects",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ReducedEffects",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "resizable",
+      "name": "Resizable region",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "resize-settle"
+        ],
+        "played": [
+          "resize-settle"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "resin"
+      ],
+      "directory": "src/components/Resizable",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 3,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "resin"
+      ]
+    },
+    {
+      "id": "watermark",
+      "name": "Watermark",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Watermark",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "qr-code",
+      "name": "QR code",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": null
+    },
+    {
+      "id": "click-away",
+      "name": "Click away",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ClickAway",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "animate-on-scroll",
+      "name": "Animate on scroll",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/AnimateOnScroll",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "no-ssr",
+      "name": "No SSR",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/NoSsr",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "global-styles",
+      "name": "Global styles",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "plastic"
+      ],
+      "directory": "src/components/GlobalStyles",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "terminal",
+      "name": "Terminal",
+      "category": "utility",
+      "status": "not-applicable",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": null
+    },
+    {
+      "id": "border-beam",
+      "name": "Border beam",
+      "category": "utility",
+      "status": "not-applicable",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": null
+    },
+    {
+      "id": "pressable",
+      "name": "Pressable",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Pressable",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "focusable",
+      "name": "Focusable",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Focusable",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "drag-handle",
+      "name": "Drag handle",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "drag-pickup",
+          "drag-settle"
+        ],
+        "played": [
+          "drag-pickup",
+          "drag-settle"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "drag-handle"
+      ],
+      "directory": "src/components/DragHandle",
+      "classesWorn": [
+        "cr-bare",
+        "cr-drag-handle"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "drop-indicator",
+      "name": "Drop indicator",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/DropIndicator",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "virtualizer",
+      "name": "Virtualizer",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Virtualizer",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "shared-element-transition",
+      "name": "Shared element transition",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": null
+    },
+    {
+      "id": "toolbar",
+      "name": "Toolbar",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "dock"
+      ],
+      "directory": "src/components/Toolbar",
+      "classesWorn": [
+        "cr-dock"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "router-provider",
+      "name": "Router provider",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/RouterProvider",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "ssr-provider",
+      "name": "SSR provider",
+      "category": "utility",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": null
+    },
+    {
+      "id": "chart-surface",
+      "name": "Chart surface",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/ChartSurface",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "bar-chart",
+      "name": "Bar chart",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "mark-in"
+        ],
+        "played": [
+          "mark-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/BarChart",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "line-chart",
+      "name": "Line chart",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "mark-in"
+        ],
+        "played": [
+          "mark-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/LineChart",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "area-chart",
+      "name": "Area chart",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/AreaChart",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "pie-chart",
+      "name": "Pie chart",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "mark-in"
+        ],
+        "played": [
+          "mark-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/PieChart",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "donut-chart",
+      "name": "Donut chart",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/DonutChart",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "scatter-chart",
+      "name": "Scatter chart",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ScatterChart",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "radar-chart",
+      "name": "Radar chart",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/RadarChart",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "spark-line",
+      "name": "Spark line",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/SparkLine",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "gauge",
+      "name": "Gauge",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Gauge",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "heatmap",
+      "name": "Heatmap",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Heatmap",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "funnel-chart",
+      "name": "Funnel chart",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/FunnelChart",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "chart-legend",
+      "name": "Chart legend",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/ChartLegend",
+      "classesWorn": [
+        "cr-bare"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "chart-tooltip",
+      "name": "Chart tooltip",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "tooltip-in",
+          "tooltip-out"
+        ],
+        "played": [
+          "tooltip-in",
+          "tooltip-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost"
+      ],
+      "directory": "src/components/ChartTooltip",
+      "classesWorn": [
+        "cr-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 1,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "calendar-heatmap",
+      "name": "Calendar heatmap",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/CalendarHeatmap",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "treemap",
+      "name": "Treemap",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Treemap",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "sankey",
+      "name": "Sankey",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Sankey",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "candlestick-chart",
+      "name": "Candlestick chart",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/CandlestickChart",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "waterfall-chart",
+      "name": "Waterfall chart",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/WaterfallChart",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "bullet-chart",
+      "name": "Bullet chart",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/BulletChart",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "box-plot",
+      "name": "Box plot",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/BoxPlot",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "histogram",
+      "name": "Histogram",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Histogram",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "geo-map",
+      "name": "Geographic map",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/GeoMap",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "network-graph",
+      "name": "Network graph",
+      "category": "charts",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/NetworkGraph",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "video-player",
+      "name": "Video player",
+      "category": "media",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "media-in",
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "media-in"
+        ],
+        "playedByChild": [
+          "menu-in",
+          "menu-out"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "resin",
+        "haze",
+        "stone",
+        "frost"
+      ],
+      "directory": "src/components/VideoPlayer",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "resin",
+        "haze",
+        "stone",
+        "frost"
+      ]
+    },
+    {
+      "id": "audio-player",
+      "name": "Audio player",
+      "category": "media",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "media-in",
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [
+          "media-in"
+        ],
+        "playedByChild": [
+          "menu-in",
+          "menu-out"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze",
+        "resin",
+        "frost"
+      ],
+      "directory": "src/components/AudioPlayer",
+      "classesWorn": [
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "resin",
+        "frost"
+      ]
+    },
+    {
+      "id": "media-controls",
+      "name": "Media controls",
+      "category": "media",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "resin",
+        "haze"
+      ],
+      "directory": "src/components/MediaControls",
+      "classesWorn": [
+        "cr-resin"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "gallery",
+      "name": "Gallery",
+      "category": "media",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "media-in",
+          "caption-in",
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [
+          "media-in",
+          "caption-in"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze",
+        "mirage"
+      ],
+      "directory": "src/components/Gallery",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze",
+        "mirage"
+      ]
+    },
+    {
+      "id": "lightbox",
+      "name": "Lightbox",
+      "category": "media",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "media-in",
+          "caption-in"
+        ],
+        "played": [
+          "media-in",
+          "caption-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "mirage"
+      ],
+      "directory": "src/components/Lightbox",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 4,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "mirage"
+      ]
+    },
+    {
+      "id": "price",
+      "name": "Price",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/Price",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "price-range",
+      "name": "Price range",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/PriceRange",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "discount-badge",
+      "name": "Discount badge",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "attention"
+        ],
+        "played": [
+          "attention"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/DiscountBadge",
+      "classesWorn": [
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "quantity-stepper",
+      "name": "Quantity stepper",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "slider-step"
+        ],
+        "played": [
+          "slider-step"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/QuantityStepper",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "variant-selector",
+      "name": "Variant selector",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/VariantSelector",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "stock-indicator",
+      "name": "Stock indicator",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/StockIndicator",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "product-card",
+      "name": "Product card",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out"
+        ],
+        "played": [
+          "list-in",
+          "list-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/ProductCard",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "product-gallery",
+      "name": "Product gallery",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "media-in",
+          "selection"
+        ],
+        "played": [],
+        "playedByChild": [
+          "selection"
+        ],
+        "unplayed": [
+          "media-in"
+        ]
+      },
+      "surfaces": [
+        "haze",
+        "mirage"
+      ],
+      "directory": "src/components/ProductGallery",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze",
+        "mirage"
+      ]
+    },
+    {
+      "id": "cart-item",
+      "name": "Cart item",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out"
+        ],
+        "played": [
+          "list-in",
+          "list-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/CartItem",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "cart-summary",
+      "name": "Cart summary",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/CartSummary",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "coupon-input",
+      "name": "Coupon input",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "played": [],
+        "playedByChild": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/CouponInput",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "field"
+      ]
+    },
+    {
+      "id": "checkout-steps",
+      "name": "Checkout steps",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [],
+        "playedByChild": [
+          "selection"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/CheckoutSteps",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "payment-method",
+      "name": "Payment method",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/PaymentMethod",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "address-form",
+      "name": "Address form",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "played": [],
+        "playedByChild": [
+          "field-focus",
+          "field-invalid",
+          "field-valid"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/AddressForm",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "field"
+      ]
+    },
+    {
+      "id": "order-summary",
+      "name": "Order summary",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/OrderSummary",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "shipping-selector",
+      "name": "Shipping selector",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/ShippingSelector",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "delivery-estimate",
+      "name": "Delivery estimate",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/DeliveryEstimate",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "wishlist-button",
+      "name": "Wishlist button",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "press",
+          "selection"
+        ],
+        "played": [
+          "selection"
+        ],
+        "playedByChild": [
+          "press"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "control"
+      ],
+      "directory": "src/components/WishlistButton",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "review",
+      "name": "Review",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out"
+        ],
+        "played": [
+          "list-in",
+          "list-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/Review",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "rating-summary",
+      "name": "Rating summary",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/RatingSummary",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "filter-panel",
+      "name": "Filter panel",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/FilterPanel",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "frost"
+        ]
+      },
+      "surfaceNotWorn": [
+        "frost",
+        "haze"
+      ]
+    },
+    {
+      "id": "sort-select",
+      "name": "Sort select",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out"
+        ],
+        "played": [],
+        "playedByChild": [
+          "field-focus",
+          "field-invalid",
+          "field-valid",
+          "menu-in",
+          "menu-out"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "field"
+      ],
+      "directory": "src/components/SortSelect",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "field"
+      ]
+    },
+    {
+      "id": "compare-table",
+      "name": "Compare table",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "table"
+      ],
+      "directory": "src/components/CompareTable",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "table"
+      ]
+    },
+    {
+      "id": "recently-viewed",
+      "name": "Recently viewed",
+      "category": "commerce",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in"
+        ],
+        "played": [
+          "list-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/RecentlyViewed",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "screen",
+      "name": "Screen",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "plastic",
+        "frost"
+      ],
+      "directory": "src/components/Screen",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "page-header",
+      "name": "Page header",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost"
+      ],
+      "directory": "src/components/PageHeader",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "frost"
+        ]
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "view-stack",
+      "name": "View stack",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "view-push-in",
+          "view-push-out"
+        ],
+        "played": [
+          "view-push-in"
+        ],
+        "playedByChild": [],
+        "unplayed": [
+          "view-push-out"
+        ]
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ViewStack",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "master-detail",
+      "name": "Master detail",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "page-in",
+          "page-out"
+        ],
+        "played": [
+          "page-in"
+        ],
+        "playedByChild": [],
+        "unplayed": [
+          "page-out"
+        ]
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/MasterDetail",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "frost",
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "frost",
+        "haze"
+      ]
+    },
+    {
+      "id": "split-view",
+      "name": "Split view",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "resize-settle"
+        ],
+        "played": [],
+        "playedByChild": [
+          "resize-settle"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/SplitView",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "command-bar",
+      "name": "Command bar",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "dock"
+      ],
+      "directory": "src/components/CommandBar",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "dock"
+      ]
+    },
+    {
+      "id": "status-bar",
+      "name": "Status bar",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "stone"
+      ],
+      "directory": "src/components/StatusBar",
+      "classesWorn": [
+        "cr-stone"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "workspace",
+      "name": "Workspace",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "plastic",
+        "frost"
+      ],
+      "directory": "src/components/Workspace",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "frost"
+        ]
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "focus-mode",
+      "name": "Focus mode",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "page-in",
+          "page-out"
+        ],
+        "played": [
+          "page-in",
+          "page-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/FocusMode",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "empty-screen",
+      "name": "Empty screen",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "empty-in"
+        ],
+        "played": [],
+        "playedByChild": [
+          "empty-in"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/EmptyScreen",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "error-screen",
+      "name": "Error screen",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "page-in"
+        ],
+        "played": [
+          "page-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/ErrorScreen",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "loading-screen",
+      "name": "Loading screen",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "skeleton-resolve"
+        ],
+        "played": [],
+        "playedByChild": [
+          "skeleton-resolve"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/LoadingScreen",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "offline-screen",
+      "name": "Offline screen",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "page-in"
+        ],
+        "played": [
+          "page-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/OfflineScreen",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "not-found-screen",
+      "name": "Not found screen",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "page-in"
+        ],
+        "played": [
+          "page-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/NotFoundScreen",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "permission-screen",
+      "name": "Permission screen",
+      "category": "screens",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "page-in"
+        ],
+        "played": [
+          "page-in"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/PermissionScreen",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "dashboard-shell",
+      "name": "Dashboard shell",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "plastic",
+        "frost",
+        "control"
+      ],
+      "directory": "src/components/DashboardShell",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost"
+      ]
+    },
+    {
+      "id": "metrics-row",
+      "name": "Metrics row",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/MetricsRow",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "analytics-panel",
+      "name": "Analytics panel",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/AnalyticsPanel",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "haze-fill"
+        ]
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    },
+    {
+      "id": "data-table-block",
+      "name": "Data table block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "table",
+        "frost"
+      ],
+      "directory": "src/components/DataTableBlock",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "table",
+        "frost"
+      ]
+    },
+    {
+      "id": "crud-form-block",
+      "name": "CRUD form block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/CrudFormBlock",
+      "classesWorn": [
+        "cr-frost",
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "settings-block",
+      "name": "Settings block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/SettingsBlock",
+      "classesWorn": [
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "auth-block",
+      "name": "Auth block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "plastic",
+        "haze"
+      ],
+      "directory": "src/components/AuthBlock",
+      "classesWorn": [
+        "cr-haze",
+        "cr-plastic"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "profile-block",
+      "name": "Profile block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/ProfileBlock",
+      "classesWorn": [
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "activity-feed",
+      "name": "Activity feed",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out"
+        ],
+        "played": [
+          "list-in",
+          "list-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/ActivityFeed",
+      "classesWorn": [
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "notification-centre",
+      "name": "Notification centre",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "toast-in",
+          "toast-out",
+          "list-in",
+          "list-out"
+        ],
+        "played": [
+          "list-in",
+          "list-out"
+        ],
+        "playedByChild": [
+          "toast-in",
+          "toast-out"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/NotificationCentre",
+      "classesWorn": [
+        "cr-frost",
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "player-shell",
+      "name": "Player shell",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "resin",
+        "haze"
+      ],
+      "directory": "src/components/PlayerShell",
+      "classesWorn": [
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "resin"
+      ]
+    },
+    {
+      "id": "playlist-block",
+      "name": "Playlist block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "list-in",
+          "list-out",
+          "reorder"
+        ],
+        "played": [
+          "reorder"
+        ],
+        "playedByChild": [],
+        "unplayed": [
+          "list-in",
+          "list-out"
+        ]
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/PlaylistBlock",
+      "classesWorn": [
+        "cr-bare",
+        "cr-drag-handle",
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "storefront-block",
+      "name": "Storefront block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/StorefrontBlock",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "product-detail-block",
+      "name": "Product detail block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "none"
+      ],
+      "directory": "src/components/ProductDetailBlock",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "checkout-block",
+      "name": "Checkout block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/CheckoutBlock",
+      "classesWorn": [
+        "cr-frost",
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "cart-drawer",
+      "name": "Cart drawer",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "drawer-in",
+          "drawer-out"
+        ],
+        "played": [],
+        "playedByChild": [
+          "drawer-in",
+          "drawer-out"
+        ],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/CartDrawer",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost",
+        "haze"
+      ]
+    },
+    {
+      "id": "pricing-block",
+      "name": "Pricing block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "haze"
+      ],
+      "directory": "src/components/PricingBlock",
+      "classesWorn": [
+        "cr-haze"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "onboarding-block",
+      "name": "Onboarding block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "page-in",
+          "page-out"
+        ],
+        "played": [
+          "page-in",
+          "page-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "mirage"
+      ],
+      "directory": "src/components/OnboardingBlock",
+      "classesWorn": [],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "frost",
+        "mirage"
+      ]
+    },
+    {
+      "id": "search-block",
+      "name": "Search block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [
+          "menu-in",
+          "menu-out",
+          "list-in",
+          "list-out"
+        ],
+        "played": [
+          "menu-in",
+          "menu-out",
+          "list-in",
+          "list-out"
+        ],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/SearchBlock",
+      "classesWorn": [
+        "cr-bare",
+        "cr-field-shell",
+        "cr-frost",
+        "cr-haze",
+        "cr-scroll-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": [
+          "field.shell"
+        ]
+      },
+      "surfaceNotWorn": []
+    },
+    {
+      "id": "editor-block",
+      "name": "Editor block",
+      "category": "blocks",
+      "status": "implemented",
+      "motion": {
+        "assigned": [],
+        "played": [],
+        "playedByChild": [],
+        "unplayed": []
+      },
+      "surfaces": [
+        "frost",
+        "haze"
+      ],
+      "directory": "src/components/EditorBlock",
+      "classesWorn": [
+        "cr-frost"
+      ],
+      "handWritten": {
+        "backdropFilter": 0,
+        "mixins": []
+      },
+      "surfaceNotWorn": [
+        "haze"
+      ]
+    }
+  ]
+}

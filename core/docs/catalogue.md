@@ -13,7 +13,7 @@ This chapter is generated from `core/tokens/catalogue/`. The same source generat
 | [Layout and structure](#layout-and-structure) | 14 | 0 |
 | [Navigation](#navigation) | 17 | 15 |
 | [Actions](#actions) | 9 | 9 |
-| [Inputs and forms](#inputs-and-forms) | 52 | 44 |
+| [Inputs and forms](#inputs-and-forms) | 52 | 45 |
 | [Data display](#data-display) | 36 | 27 |
 | [Feedback and status](#feedback-and-status) | 15 | 14 |
 | [Overlays](#overlays) | 11 | 9 |
@@ -24,7 +24,7 @@ This chapter is generated from `core/tokens/catalogue/`. The same source generat
 | [Commerce](#commerce) | 24 | 15 |
 | [Screens](#screens) | 15 | 10 |
 | [Blocks](#blocks) | 20 | 6 |
-| **Total** | **284** | **162** |
+| **Total** | **284** | **163** |
 
 ## Surfaces
 
@@ -33,14 +33,14 @@ Every component is made of one or more of these surfaces. Its Surface row names 
 | Surface | Materials | Recipe | Components | Use |
 | --- | --- | --- | --- | --- |
 | <a id="surface-plastic"></a>**Plastic foundation** `plastic` | Plastic | <code>.cr-plastic</code> | 6 | The root scene or window. One contextual, opaque foundation per view; never a component. |
-| <a id="surface-frost"></a>**Frost panel** `frost` | Frost | <code>.cr-frost</code> | 45 | Intermediate task frames and every transient surface that opens over content: side panels, drawers, sheets and app bars, and menus, popovers, tooltips and toasts (R15e). Reading content inside it sits on Haze. |
-| <a id="surface-haze"></a>**Haze reading surface** `haze` | Haze | <code>.cr-haze</code> | 82 | Anything read: cards, rows, panels, wells, forms, messages, decisions. 80% fill, 1.95px feather on an isolated paint layer, crisp foreground. `.cr-well` is the same recipe recessed into a Frost or Resin frame. `.cr-haze.overlay` is the recessed overlay: a transient overlay opened inside a pane that is already lifted, drawn as a flat Haze fill with the `--cr-edge` rim and the content shadow, so it can be told from the pane it sits in. |
-| <a id="surface-resin"></a>**Resin plane** `resin` | Resin | <code>.cr-resin</code> | 7 | One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter, because Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock. |
+| <a id="surface-frost"></a>**Frost panel** `frost` | Frost | <code>.cr-frost</code> | 48 | Intermediate task frames and every transient surface that opens over content: side panels, drawers, sheets and app bars, and menus, popovers, tooltips and toasts (R15e). Reading content inside it sits on Haze. `.cr-frost.bar` is a transient overlay shaped as a row of controls, a pill with 4px padding: the selection toolbar over highlighted text. |
+| <a id="surface-haze"></a>**Haze reading surface** `haze` | Haze | <code>.cr-haze</code> | 83 | Anything read: cards, rows, panels, wells, forms, messages, decisions. 80% fill, 1.95px feather on an isolated paint layer, crisp foreground. `.cr-well` is the same recipe recessed into a Frost or Resin frame. `.cr-haze.overlay` is the recessed overlay: a transient overlay opened inside a pane that is already lifted, drawn as a flat Haze fill with the `--cr-edge` rim and the content shadow, so it can be told from the pane it sits in. |
+| <a id="surface-resin"></a>**Resin plane** `resin` | Resin | <code>.cr-resin</code> | 7 | One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter, because Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock. `.cr-resin.transport` is the media transport: the pill with 4px block and 12px inline padding around its 48px controls (58px tall with its rim), with tabular time readouts, wrapping to a second row in a player narrower than 420px. `.cr-media` is the stage it sits on (the content radius, the letterbox, `--cr-media-aspect` and `--cr-media-fit`), and `.cr-media-bar` is the region inset 12px, or the safe area in full screen, that holds the transport. |
 | <a id="surface-resin-panel"></a>**Resin panel** `resin-panel` | Resin | <code>.cr-resin.panel</code> | 1 | The Resin plane with the content radius instead of the pill, for a floating control plane that is a rectangle: a floating window, a media control bar wider than it is tall. Same fill, rim, blur and float shadow; only the geometry changes. |
 | <a id="surface-control"></a>**Resin control** `control` | Resin + Haze | <code>.cr-button</code> | 16 | An action: a Resin shell with the 8px-inset Haze reading pad and the optical sheen. Pill geometry. `.primary` tints the pad, `.quiet` removes it, `.danger` adds the destructive boundary. Selected state is the primary pad plus label weight 800. |
-| <a id="surface-field"></a>**Field shell** `field` | Resin + Haze | <code>.cr-field-shell</code> | 28 | The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics. |
+| <a id="surface-field"></a>**Field shell** `field` | Resin + Haze | <code>.cr-field-shell</code> | 28 | The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics. `.cr-editor` is the editable surface inside a rich text field: the shared prose vocabulary (headings, lists, checklists, marks, insertions and deletions) with the primary caret and the primary-soft selection. `.cr-editor-toolbar` is its toolbar, above the text on a fine pointer and below it, clear of the touch keyboard, on a coarse one. |
 | <a id="surface-compact"></a>**Compact display** `compact` | Resin + Haze | <code>.cr-resin-haze</code> | 5 | Small information displays that sit on content: tags, badges, labels, keyboard caps. A Resin shell with the inset Haze pad, 18px radius. Not for anything that opens. Transient overlays are Frost. `.count` is the size for a count: a 20px circle that grows to a pill, filled to its own edge, with no block padding. |
-| <a id="surface-stone"></a>**Stone label backing** `stone` | Stone | <code>.cr-stone</code> | 2 | A label over an unknown or moving backdrop: a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text. |
+| <a id="surface-stone"></a>**Stone label backing** `stone` | Stone | <code>.cr-stone</code> | 3 | A label over an unknown or moving backdrop: a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text. `.cr-media-caption` is a caption cue rendered by the library: the Stone backing on a box above the transport, never under it. `::cue` on a `.cr-media` video is the flat fill for the browser's own renderer. |
 | <a id="surface-mirage"></a>**Mirage scrim** `mirage` | Mirage | <code>.cr-mirage</code> | 10 | The chromatic diffusion of the real scene behind a modal. Never a content surface; the decision surface above it is Haze. |
 | <a id="surface-dialog"></a>**Dialog** `dialog` | Haze + Mirage | <code>.cr-dialog</code> | 2 | A Haze decision surface over a Mirage scrim, with the float shadow. Modality, focus and dismissal are the product's. The surface does not scroll: `.cr-dialog-body`, worn with `.cr-scroll-frost`, scrolls inside it, so the title stays in view and the edge fade does not dissolve the surface. `position: fixed` is for a native `&lt;dialog&gt;`; on any other element the host positions it. |
 | <a id="surface-indicator"></a>**Indicator** `indicator` | Haze | <code>.cr-indicator</code> | 2 | A 20px informational circle painting Haze on an isolated layer, or the moving pill behind a selected segment. Haze rather than Resin, because it sits on a surface that is often already translucent. Never a selection mark. |
@@ -1216,20 +1216,21 @@ A text surface that offers a filtered list after a trigger character.
 
 ### Rich text surface
 
-A toolbar of formatting actions above an editable content surface.
+A formatting toolbar and an editable surface. The toolbar holds Crystal's format vocabulary in groups: the block type (paragraph, headings two to four, bulleted list, numbered list, checklist, quotation, code block), the marks (bold, italic, underline, strikethrough, inline code, highlight, link, subscript, superscript) and history (undo, redo). A selection toolbar of the commonest marks floats over highlighted text.
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
-<tr><th scope="row">States</th><td>idle, focus, selection-active, disabled, read-only</td></tr>
-<tr><th scope="row">Material</th><td>Resin toolbar, Haze editing surface</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-field">Field shell</a></td></tr>
-<tr><th scope="row">Geometry</th><td>Toolbar is a pill group; surface at content radius</td></tr>
-<tr><th scope="row">Semantics</th><td>Toolbar actions use aria-pressed for active formatting; the editor exposes its own semantics</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Toolbar and surface appearance, active-format treatment</td></tr>
-<tr><th scope="row">Product owns</th><td>The entire editing engine, serialisation and paste handling</td></tr>
+<tr><th scope="row">States</th><td>idle, focus, selection-active, selection-toolbar-open, touch-keyboard-open, disabled, read-only</td></tr>
+<tr><th scope="row">Material</th><td>Resin toolbar, Haze editing surface; Frost selection toolbar</td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-field">Field shell</a> → <a href="#surface-frost">Frost panel</a></td></tr>
+<tr><th scope="row">Geometry</th><td>Toolbar controls are 48px pills in separated groups on the field shell's Haze well; the surface keeps the content radius and the card padding (20px). On a fine pointer the toolbar sits above the text; on a coarse pointer it sits below the text and sticks above the on-screen keyboard.</td></tr>
+<tr><th scope="row">Semantics</th><td>Toolbar actions use aria-pressed for active formatting, and the block type is a single control naming the current type. A format changed by a keyboard shortcut while focus is in the text is announced politely. The editor exposes its own semantics: real headings, lists and checkboxes in the document, so a screen reader navigates it as it would the published page.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Toolbar and surface appearance, active-format treatment, the format vocabulary and its rendering (shared with prose), the selection toolbar, toolbar placement on touch</td></tr>
+<tr><th scope="row">Product owns</th><td>The editing engine, serialisation and paste handling, and which parts of the format vocabulary a product offers</td></tr>
+<tr><th scope="row">Motion</th><td><code>field-focus</code>, <code>field-invalid</code>, <code>field-valid</code>, <code>menu-in</code>, <code>menu-out</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:RichTextEditor · mui:— · antd:—</td></tr>
 </tbody></table></div>
 
-> Crystal specifies the surface only. Do not rebuild a rich-text engine to obtain this appearance.
+> Crystal specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. Whether a library may ship an optional binding of its own is D-30.
 
 ### Helper text
 
@@ -2559,10 +2560,10 @@ A heading at one of six levels, with tightened tracking at display sizes.
 
 ### Text
 
-Body copy with size, weight, colour role and truncation options.
+Body copy with size, weight, colour role, decoration (underline, strikethrough) and truncation options.
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
-<tr><th scope="row">States</th><td>default, muted, truncated, clamped</td></tr>
+<tr><th scope="row">States</th><td>default, muted, truncated, clamped, underlined, struck-through</td></tr>
 <tr><th scope="row">Material</th><td>None</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-none">No surface of its own</a></td></tr>
 <tr><th scope="row">Geometry</th><td>16px/24px reading rhythm; 78ch maximum measure</td></tr>
@@ -2605,14 +2606,14 @@ Inline highlighted text, typically a search match.
 
 ### Prose
 
-Long-form content with consistent rhythm across headings, lists, tables, code and media.
+Long-form content with consistent rhythm across headings, lists and checklists, quotations, tables, code and media, and the inline marks: links, emphasis, underline, strikethrough, insertions and deletions, highlights, inline code, keys, subscript and superscript.
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>default</td></tr>
 <tr><th scope="row">Material</th><td>Inherits; embedded surfaces follow their own components</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-none">No surface of its own</a></td></tr>
 <tr><th scope="row">Geometry</th><td>78ch measure; 1.8 line height; 4px-rhythm vertical spacing</td></tr>
-<tr><th scope="row">Semantics</th><td>Anchor navigation must preserve focus when sections change</td></tr>
+<tr><th scope="row">Semantics</th><td>Anchor navigation must preserve focus when sections change. Every mark differs in shape as well as colour (an insertion is underlined, a deletion struck through, a highlight filled), and each is its own element (ins, del, mark, u, s), so none rests on colour alone.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>The complete reading rhythm and embedded-element treatment</td></tr>
 <tr><th scope="row">Product owns</th><td>Content, rendering and virtualisation</td></tr>
 <tr><th scope="row">Parity</th><td>mui:— · mantine:TypographyStylesProvider · antd:Typography</td></tr>
@@ -2696,14 +2697,14 @@ The standfirst paragraph beneath a title.
 
 ### Prose list
 
-Ordered and unordered lists inside running text, with Crystal markers.
+Ordered and unordered lists inside running text, with Crystal markers, and checklists whose markers are checkboxes.
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
-<tr><th scope="row">States</th><td>at-rest</td></tr>
+<tr><th scope="row">States</th><td>at-rest, checked, unchecked</td></tr>
 <tr><th scope="row">Material</th><td>Inherits</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-none">No surface of its own</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Marker inset follows the spacing scale; hanging indent preserved.</td></tr>
-<tr><th scope="row">Semantics</th><td>Real ul and ol so the count and nesting are announced.</td></tr>
+<tr><th scope="row">Semantics</th><td>Real ul and ol so the count and nesting are announced. A checklist item's marker is a native checkbox, read-only when the list is, so its state is announced; a finished item recedes to the muted ink and is not struck through.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Marker treatment, spacing, nesting rhythm</td></tr>
 <tr><th scope="row">Product owns</th><td>Content and ordering</td></tr>
 <tr><th scope="row">Parity</th><td>mantine:List · antd:Typography</td></tr>
@@ -3559,45 +3560,45 @@ Video, audio and galleries. Crystal named none of these before. The parity requi
 
 ### Video player
 
-A video surface with Crystal transport controls.
+A media stage at a set aspect ratio holding the video, a caption cue above the transport, and the transport inset from the stage: play, skip, the scrubber with its two time readouts, mute and volume, then a settings menu (playback speed, subtitles and captions, audio track, quality), picture in picture and full screen.
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
-<tr><th scope="row">States</th><td>idle, playing, paused, buffering, ended, focus-visible</td></tr>
-<tr><th scope="row">Material</th><td>Resin control bar over the video; Haze fills behind readable labels</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a> → <a href="#surface-haze">Haze reading surface</a></td></tr>
-<tr><th scope="row">Geometry</th><td>Control bar is a pill; every control reaches 44px.</td></tr>
-<tr><th scope="row">Semantics</th><td>Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus.</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Control-bar material, transport geometry, the motion of showing and hiding controls</td></tr>
-<tr><th scope="row">Product owns</th><td>Sources, captions, DRM, analytics</td></tr>
-<tr><th scope="row">Motion</th><td><code>media-in</code></td></tr>
+<tr><th scope="row">States</th><td>idle, playing, paused, buffering, ended, focus-visible, captions-on, settings-open, picture-in-picture, full-screen</td></tr>
+<tr><th scope="row">Material</th><td>Resin transport over the video with Haze fills behind its time readouts; Stone behind caption cues; Frost settings menu</td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a> → <a href="#surface-haze">Haze reading surface</a> → <a href="#surface-stone">Stone label backing</a> → <a href="#surface-frost">Frost panel</a></td></tr>
+<tr><th scope="row">Geometry</th><td>The stage keeps the content radius and the aspect ratio the product sets (16:9, 4:3, 1:1, 9:16 or the media's own). The transport is a pill inset 12px from the stage, or the safe area in full screen, with 4px block padding around its controls (58px with its rim); every control reaches the 48px action target. Caption cues sit above the transport, never under it. Below 420px the transport wraps its trailing controls onto a second row.</td></tr>
+<tr><th scope="row">Semantics</th><td>Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus. Speed, subtitle, audio-track and quality choices are menus of radio items (menuitemradio with aria-checked); the selected item is shown by label weight, never a check mark, and each change is announced in words. A choice the engine cannot make (an audio track list where the browser exposes none, picture in picture where it is unsupported) is not offered.</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Stage, transport and caption materials, transport geometry and insets, the settings menu, the motion of showing and hiding controls</td></tr>
+<tr><th scope="row">Product owns</th><td>Sources, caption and audio tracks, quality renditions and their switching (adaptive streaming), DRM, analytics</td></tr>
+<tr><th scope="row">Motion</th><td><code>media-in</code>, <code>menu-in</code>, <code>menu-out</code></td></tr>
 <tr><th scope="row">Parity</th><td>primereact:galleria · mui:CardMedia</td></tr>
 </tbody></table></div>
 
 ### Audio player
 
-An audio transport with scrubbing and volume.
+A Haze card holding the title and any secondary line (artist, episode, chapter), with the transport inset from its edge: play, skip, the scrubber with its two time readouts, mute and volume, and a settings menu for playback speed.
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
-<tr><th scope="row">States</th><td>idle, playing, paused, buffering, ended, focus-visible</td></tr>
-<tr><th scope="row">Material</th><td>Resin plane with Haze readable regions</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a> → <a href="#surface-haze">Haze reading surface</a></td></tr>
-<tr><th scope="row">Geometry</th><td>Pill; the scrubber is a slider with a 44px thumb.</td></tr>
+<tr><th scope="row">States</th><td>idle, playing, paused, buffering, ended, focus-visible, settings-open</td></tr>
+<tr><th scope="row">Material</th><td>Haze card holding a Resin transport; Frost settings menu</td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-haze">Haze reading surface</a> → <a href="#surface-resin">Resin plane</a> → <a href="#surface-frost">Frost panel</a></td></tr>
+<tr><th scope="row">Geometry</th><td>The card keeps the content radius and the card padding (20px); the transport is a pill with 4px block padding around its controls; the scrubber is a slider with a 44px thumb.</td></tr>
 <tr><th scope="row">Semantics</th><td>A real audio element. The scrubber is a slider announcing time, not a progress bar.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Material, scrubber geometry, time formatting</td></tr>
 <tr><th scope="row">Product owns</th><td>Sources, playlists, streaming</td></tr>
-<tr><th scope="row">Motion</th><td><code>media-in</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>media-in</code>, <code>menu-in</code>, <code>menu-out</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Audio</td></tr>
 </tbody></table></div>
 
 ### Media controls
 
-The shared transport used by both players.
+The shared transport used by both players: play, skip, the scrubber between two time readouts, mute and volume, then the controls a player adds (settings, picture in picture, full screen).
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>idle, playing, paused, buffering, focus-visible</td></tr>
-<tr><th scope="row">Material</th><td>Resin plane</td></tr>
-<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a></td></tr>
-<tr><th scope="row">Geometry</th><td>Pill; 44px targets throughout.</td></tr>
+<tr><th scope="row">Material</th><td>Resin plane; Haze behind the time readouts</td></tr>
+<tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a> → <a href="#surface-haze">Haze reading surface</a></td></tr>
+<tr><th scope="row">Geometry</th><td>Pill with 4px block and 12px inline padding around its 48px controls (58px tall with its rim), 4px between them. Time readouts are tabular and sit on Haze pills.</td></tr>
 <tr><th scope="row">Semantics</th><td>Each control is a button with a name; play and pause are one toggle with a pressed state.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Materials, the press recipe on every control</td></tr>
 <tr><th scope="row">Product owns</th><td>Which controls appear</td></tr>
@@ -4419,7 +4420,7 @@ A media surface with transport, queue and metadata.
 <tr><th scope="row">Material</th><td>Resin transport over the media; Haze metadata</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-resin">Resin plane</a> → <a href="#surface-haze">Haze reading surface</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Transport is a pill; controls reach 44px.</td></tr>
-<tr><th scope="row">Semantics</th><td>Real media elements; captions and their state announced; transport reachable by keyboard.</td></tr>
+<tr><th scope="row">Semantics</th><td>Real media elements; captions and their state announced; transport reachable by keyboard; speed, track and quality choices announced as they change.</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Transport material, the show and hide motion</td></tr>
 <tr><th scope="row">Product owns</th><td>Sources, queue, DRM</td></tr>
 <tr><th scope="row">Parity</th><td>primereact:galleria</td></tr>
@@ -4551,7 +4552,7 @@ Search with suggestions, recent queries and results.
 
 ### Editor block
 
-A rich text surface with toolbar, and save state.
+A rich text surface with its toolbar and selection toolbar, a save state in words, and the save action.
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>at-rest, focus-visible, dirty, saving, saved</td></tr>

@@ -27,12 +27,14 @@
     {
       "id": "text",
       "name": "Text",
-      "anatomy": "Body copy with size, weight, colour role and truncation options.",
+      "anatomy": "Body copy with size, weight, colour role, decoration (underline, strikethrough) and truncation options.",
       "states": [
         "default",
         "muted",
         "truncated",
-        "clamped"
+        "clamped",
+        "underlined",
+        "struck-through"
       ],
       "material": "None",
       "surface": [
@@ -97,7 +99,7 @@
     {
       "id": "prose",
       "name": "Prose",
-      "anatomy": "Long-form content with consistent rhythm across headings, lists, tables, code and media.",
+      "anatomy": "Long-form content with consistent rhythm across headings, lists and checklists, quotations, tables, code and media, and the inline marks: links, emphasis, underline, strikethrough, insertions and deletions, highlights, inline code, keys, subscript and superscript.",
       "states": [
         "default"
       ],
@@ -106,7 +108,7 @@
         "none"
       ],
       "geometry": "78ch measure; 1.8 line height; 4px-rhythm vertical spacing",
-      "semantics": "Anchor navigation must preserve focus when sections change",
+      "semantics": "Anchor navigation must preserve focus when sections change. Every mark differs in shape as well as colour (an insertion is underlined, a deletion struck through, a highlight filled), and each is its own element (ins, del, mark, u, s), so none rests on colour alone.",
       "crystal": "The complete reading rhythm and embedded-element treatment",
       "product": "Content, rendering and virtualisation",
       "parity": [
@@ -218,16 +220,18 @@
     {
       "id": "prose-list",
       "name": "Prose list",
-      "anatomy": "Ordered and unordered lists inside running text, with Crystal markers.",
+      "anatomy": "Ordered and unordered lists inside running text, with Crystal markers, and checklists whose markers are checkboxes.",
       "states": [
-        "at-rest"
+        "at-rest",
+        "checked",
+        "unchecked"
       ],
       "material": "Inherits",
       "surface": [
         "none"
       ],
       "geometry": "Marker inset follows the spacing scale; hanging indent preserved.",
-      "semantics": "Real ul and ol so the count and nesting are announced.",
+      "semantics": "Real ul and ol so the count and nesting are announced. A checklist item's marker is a native checkbox, read-only when the list is, so its state is announced; a finished item recedes to the muted ink and is not struck through.",
       "crystal": "Marker treatment, spacing, nesting rhythm",
       "product": "Content and ordering",
       "parity": [

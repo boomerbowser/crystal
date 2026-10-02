@@ -744,6 +744,107 @@ check('every catalogue entry names a surface from the vocabulary', () => {
   }
 });
 
+/* The recipes are published as values so a platform with no selectors can
+   reproduce them. The generated file has to be current, cover the whole
+   vocabulary, name only tokens Crystal defines, and agree with the stylesheet
+   when the stylesheet is read by a different method. */
+check('every surface publishes its recipe as token references, and the file is current', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const { buildSurfaceRecipes } = require('../tools/build-surface-recipes.cjs');
+  const file = path.join(__dirname, '../core/tokens/surface-recipes.json');
+  const onDisk = fs.readFileSync(file, 'utf8');
+  assert.equal(onDisk, buildSurfaceRecipes(), 'core/tokens/surface-recipes.json is stale: run node tools/build-surface-recipes.cjs');
+  const recipes = JSON.parse(onDisk).surfaces;
+
+  assert.deepEqual(recipes.map((r) => r.id), surfaces.map((s) => s.id), 'the recipes do not cover the vocabulary in order');
+  for (const s of surfaces) {
+    const r = recipes.find((x) => x.id === s.id);
+    assert.equal(r.selector, s.class, `${s.id}: recipe selector differs from surfaces.json`);
+    if (s.class === null) assert.equal(r.kind, 'none', `${s.id}: a surface with no class is not marked as having none`);
+    for (const sel of s.also || []) assert.ok(r.also && r.also[sel], `${s.id}: no recipe for ${sel}`);
+  }
+
+  const defined = new Set();
+  for (const sheet of ['crystal-theme.css', 'crystal.css']) {
+    const text = fs.readFileSync(path.join(__dirname, '../core/assets', sheet), 'utf8');
+    for (const m of text.matchAll(/(--cr-[-\w]+)\s*:/g)) defined.add(m[1]);
+  }
+  for (const r of recipes) {
+    for (const token of r.tokens) assert.ok(defined.has(token), `${r.id} references ${token}, which no stylesheet defines`);
+    for (const m of JSON.stringify(r).matchAll(/var\(\s*(--cr-[-\w]+)/g)) {
+      assert.ok(r.tokens.includes(m[1]), `${r.id} uses ${m[1]} without listing it in tokens`);
+    }
+  }
+
+  /* An independent reading: find the rule by its literal selector and take the
+     declaration with a regular expression. */
+  const componentLayer = stylesheetCode.indexOf('@layer crystal.component {');
+  const rule = (selector) => {
+    /* Anchored at a rule boundary, so a selector is not found inside a longer
+       list. A selector written `.x {` in the expanded style is looked up in
+       the component layer, where the recipes the cascade keeps are authored. */
+    const code = /^\S+ \{$/.test(selector) ? stylesheetCode.slice(componentLayer) : stylesheetCode;
+    selector = selector.replace(/ \{$/, '');
+    const at = code.search(new RegExp('(?<=^|[}\\s])' + selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\{'));
+    assert.ok(at !== -1, `no rule for ${selector}`);
+    return code.slice(code.indexOf('{', at) + 1, code.indexOf('}', at));
+  };
+  const decl = (selector, property) => {
+    const m = rule(selector).match(new RegExp(`(?:^|[;\\s])${property}\\s*:\\s*([^;]+?)\\s*(?:;|$)`));
+    assert.ok(m, `${selector} declares no ${property}`);
+    return m[1].replace(/\s+/g, ' ');
+  };
+  const blurOf = (value) => value.match(/blur\(((?:[^()]|\([^()]*\))*)\)/)[1];
+  const recipe = (id) => recipes.find((r) => r.id === id);
+  const coat = ':is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)';
+
+  /* The planes paint on the element itself. */
+  const planes = {
+    resin: { fill: ':is(.cr-resin,.cr-glass)', blur: ':is(.cr-resin,.cr-glass)', radius: ':is(.cr-resin,.cr-glass)' },
+    frost: { fill: ':is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass)', blur: ':is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass)', radius: ':is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass)' },
+    dock: { fill: '.cr-dock {', blur: '.cr-dock {', radius: '.cr-dock {' },
+    group: { fill: '.cr-group {', blur: '.cr-group {', radius: '.cr-group {' },
+    field: { fill: coat, blur: coat, radius: '.cr-field-shell {' },
+  };
+  for (const [id, where] of Object.entries(planes)) {
+    const r = recipe(id);
+    for (const field of ['fill', 'blur', 'radius']) assert.ok(r[field] !== null, `${id}: ${field} did not resolve`);
+    assert.equal(r.fill, decl(where.fill, 'background'), `${id}: fill`);
+    assert.equal(r.blur, blurOf(decl(where.blur, 'backdrop-filter')), `${id}: blur`);
+    assert.equal(r.radius, decl(where.radius, 'border-radius'), `${id}: radius`);
+  }
+
+  /* Haze and Stone are feathered paint: the element is transparent and the
+     fill is on an isolated ::before, which is the layer a platform reproduces. */
+  const feathered = {
+    haze: { layer: ':is(.cr-haze,.cr-surface)::before,.cr-well::before,.cr-bubble::before,.cr-content-fill::before,.cr-dialog::before', radius: ':is(.cr-haze,.cr-surface)' },
+    stone: { layer: '.cr-stone::before,.cr-dock-inner::before', radius: null },
+    dock: { layer: '.cr-dock::before {', radius: '.cr-dock {' },
+    group: { layer: '.cr-group::before {', radius: '.cr-group {' },
+    field: { layer: coat + '::before', radius: '.cr-field-shell {' },
+  };
+  for (const [id, where] of Object.entries(feathered)) {
+    const r = recipe(id);
+    assert.ok(r.haze, `${id}: no feathered paint layer`);
+    assert.equal(r.haze.layer, '::before', `${id}: the feathered paint is not on ::before`);
+    assert.equal(r.haze.fill, decl(where.layer, 'background'), `${id}: feathered fill`);
+    assert.equal(r.haze.feather, blurOf(decl(where.layer, 'filter')), `${id}: feather`);
+    assert.equal(r.layers['::before'].background, r.haze.fill, `${id}: layer and haze disagree`);
+    if (where.radius) assert.equal(r.radius, decl(where.radius, 'border-radius'), `${id}: radius`);
+  }
+  assert.equal(recipe('haze').fill, 'transparent', 'haze: the element itself must not paint the reading fill');
+  assert.equal(recipe('stone').fill, 'transparent', 'stone: the element itself must not paint the label backing');
+  /* Stone sets no radius of its own; the record must say so rather than invent one. */
+  assert.ok(!/border-radius/.test(rule('.cr-stone,.cr-dock-inner')), 'stone gained a radius: update this check');
+  assert.equal(recipe('stone').radius, null, 'stone: a radius the stylesheet does not set');
+
+  /* The adaptations come through as overrides. */
+  assert.equal(recipe('resin').fallbacks.opaque.declarations.background, 'var(--cr-surface)', 'resin: opaque fallback');
+  assert.equal(recipe('resin').fallbacks.reducedTransparency.declarations['backdrop-filter'], 'none', 'resin: reduced transparency');
+  assert.equal(recipe('haze').fallbacks.forcedColors.layers['::before'].display, 'none', 'haze: forced colours drop the feathered layer');
+});
+
 check('every motion id the catalogue claims is a recipe or a material preset', () => {
   const recipes = new Set(require('../core/tokens/motion-recipes.json').recipes.map((r) => r.id));
   const presets = new Set(require('../core/assets/core/presets.js').PRESETS);
@@ -867,6 +968,59 @@ check('the rulings of 29 September 2026 hold in the stylesheet', () => {
   /* D-27: the glyphs reach any field shell. */
   assert.ok(!/span\.cr-field-shell(:[\w-]+(\([^)]*\))?)*>\.cr-indicator/.test(stylesheetCode),
     'the field glyphs are keyed on span.cr-field-shell again, which a div shell never matches (D-27)');
+});
+
+/* The media and text recipes of 2 October 2026. Each was a place where every
+   platform invented its own geometry; these hold the numbers the proposal
+   measured, so a later edit that moves one has to say so. */
+check('the media and text recipes hold their geometry and their rules', () => {
+  /* Comments are stripped from stylesheetCode, so the block is found by its first rule. */
+  const start = stylesheetCode.indexOf('.cr-media {');
+  assert.ok(start !== -1, 'the media and text block is missing');
+  const media = stylesheetCode.slice(start);
+  const rule = (selector) => {
+    const at = media.indexOf(selector + ' {');
+    assert.ok(at !== -1, `no rule for ${selector}`);
+    return media.slice(at, media.indexOf('}', at));
+  };
+  /* The transport is inset from the stage, so the pill never meets the
+     content radius; 4px block and 12px inline padding around 48px targets. */
+  const bar = rule('.cr-media-bar');
+  assert.ok(/inset-inline:\s*var\(--cr-spacing-sm\)/.test(bar) && /inset-block-end:\s*var\(--cr-spacing-sm\)/.test(bar), 'the transport is not inset 12px from the stage');
+  const transport = rule(':is(.cr-resin,.cr-glass).transport');
+  assert.ok(/min-height:\s*58px/.test(transport), 'the transport is not the 48px target plus its padding and rim');
+  assert.ok(/padding:\s*var\(--cr-spacing-2xs\) var\(--cr-spacing-sm\)/.test(transport), 'the transport lost its padding');
+  /* The readouts are labels over moving pictures and sit on Haze. */
+  assert.ok(/background:\s*var\(--cr-haze-fill\)/.test(rule(':is(.cr-resin,.cr-glass).transport :where(time, output, .time)')), 'the time readouts lost their Haze fill');
+  /* A caption is Stone and sits above the transport. */
+  const caption = media.slice(media.indexOf('.cr-media-caption > *::before {'));
+  assert.ok(/var\(--cr-stone-fill\)/.test(caption.slice(0, 300)), 'the caption is not on Stone');
+  assert.ok(/inset-block-end:\s*calc\(var\(--cr-media-transport/.test(rule('.cr-media-caption')), 'the caption no longer clears the transport');
+  /* The audio card hands its background back to the surface it wears. */
+  assert.ok(/background:\s*revert-layer/.test(rule('.cr-media.audio')), 'the audio player paints the letterbox over its Haze card');
+  /* Selection is weight, a done item is not struck through, and a checklist's
+     marker is the native control. */
+  assert.ok(!/content:\s*['"]\\?2713|content:\s*['"]✓/.test(media), 'a check glyph is drawn in the media and text recipes');
+  const done = media.slice(media.indexOf('[data-checked=true]'), media.indexOf('[data-checked=true]') + 300);
+  assert.ok(!/line-through/.test(done), 'a finished checklist item is struck through');
+  /* The touch toolbar clears the keyboard. */
+  assert.ok(/inset-block-end:\s*env\(keyboard-inset-height/.test(media), 'the touch toolbar no longer clears the on-screen keyboard');
+  /* The editor's frame outranks the shell's inline layout: a zero-specificity
+     rule lost to it and centred the toolbar at a 20px radius. */
+  const frame = rule('.cr-field-shell:has(> .cr-editor)');
+  assert.ok(/flex-direction:\s*column/.test(frame) && /border-radius:\s*var\(--cr-radius\)/.test(frame) && /align-items:\s*stretch/.test(frame),
+    'the editor frame is not a stretched column at the content radius');
+  assert.ok(!/:where\(\.cr-field-shell:has\(> \.cr-editor\)\)/.test(media), 'the editor frame is back inside :where() and loses to the shell');
+  /* Every new surface selector is registered in the vocabulary. */
+  const also = new Set(surfaces.flatMap((s) => s.also || []));
+  for (const cls of ['.cr-resin.transport', '.cr-media-caption', '.cr-frost.bar', '.cr-editor']) {
+    assert.ok(also.has(cls), `${cls} is not in surfaces.json`);
+  }
+  /* Authored in the component layer only. */
+  const reset = stylesheetCode.slice(0, stylesheetCode.indexOf('@layer crystal.component {'));
+  for (const cls of ['.cr-media', '.cr-editor', '.cr-prose', '.transport']) {
+    assert.ok(!reset.includes(cls), `${cls} has a rule in the reset layer`);
+  }
 });
 
 /* -------------------------------------------------------------- report */

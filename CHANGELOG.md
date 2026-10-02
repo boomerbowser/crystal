@@ -4,6 +4,49 @@ Notable changes to Crystal. The format follows [Keep a Changelog](https://keepac
 
 ## [Unreleased]
 
+Media and text recipes, and every surface's recipe as values, from the
+proposal of 2 October 2026 (`proposals/2026-10-02-media-text-and-recipe-parity.md`).
+Proposed for 2.4.0; not yet released. `crystal-theme.css` is byte-identical.
+
+### Added
+
+- **Each surface's recipe as values.** `core/tokens/surface-recipes.json`,
+  exported as `@crystal-ui/core/surface-recipes`, gives every surface's fill,
+  blur, saturation, rim, shadow, radius, padding, feathered layer,
+  pseudo-element layers and four fallbacks as token references, generated from
+  `crystal.css` by `tools/build-surface-recipes.cjs`, so a SwiftUI or Compose
+  library can implement a surface without reading a stylesheet. A contract
+  check fails when it is stale or names a token that does not exist.
+- **Media recipes.** `.cr-media` (the stage: content radius, letterbox,
+  `--cr-media-aspect`, `--cr-media-fit`), `.cr-media-bar` (the transport
+  inset 12px, or the safe area in full screen), `.cr-resin.transport` (4px and
+  12px padding around the 48px targets, tabular readouts on Haze pills,
+  wrapping below 420px), `.cr-media-caption` and `.cr-media video::cue` (the
+  cue on Stone, above the transport), and `.cr-haze.cr-media.audio` (the
+  audio card).
+- **Text recipes.** `.cr-prose` and `.cr-editor` share one reading vocabulary
+  with the values Crystal React's `Prose` renders, plus checklists, `u`, `s`,
+  `ins`, `del`, `kbd`, `sub` and `sup`; the editor has the primary caret and a
+  28% primary selection that stays distinct from a highlight.
+  `.cr-field-shell:has(> .cr-editor)` is the editor's frame;
+  `.cr-editor-toolbar` sits above the text on a fine pointer and below it,
+  sticky above `keyboard-inset-height`, on a coarse one or with `.below`.
+- **`.cr-frost.bar`**, a transient overlay shaped as a row of controls: the
+  selection toolbar.
+- Four `also` registrations in `surfaces.json`: `.cr-resin.transport`,
+  `.cr-media-caption`, `.cr-frost.bar`, `.cr-editor`. The vocabulary stays at
+  23 surfaces.
+
+### Changed
+
+- **Catalogue.** `tools/extend-catalogue-8.cjs` changes 38 fields across ten
+  entries and adds none (284). The video player gains its stage, settings menu
+  (speed, subtitles, audio track, quality, as radio items with selection by
+  weight), captions on Stone, picture in picture and full screen; the audio
+  player its Haze card and speed menu; the media controls their geometry; the
+  rich text surface the format vocabulary, the selection toolbar and touch
+  placement; prose, the prose list and text the read-only vocabulary.
+
 ## [2.3.1] - 2026-09-29
 
 A patch release for one scroll container that broke Crystal's own contract.

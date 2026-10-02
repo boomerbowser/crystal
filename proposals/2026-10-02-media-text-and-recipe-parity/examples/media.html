@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en" data-crystal-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crystal media recipes</title>
+<!-- The real library, by relative path: what a consumer gets, nothing the page adds. -->
+<link rel="stylesheet" href="../../../core/assets/crystal-theme.css">
+<link rel="stylesheet" href="../../../core/assets/crystal.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  /* Layout only. The players' widths, and the hidden inputs of the speed dock. */
+  .player { width: 100%; max-width: 760px; }
+  .ratios { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: start; width: 100%; }
+  @media (max-width: 760px) { .ratios { grid-template-columns: 1fr 1fr; } }
+  .settings { display: grid; gap: 10px; padding: 14px; min-width: 300px; }
+  .settings .group { display: grid; gap: 6px; }
+  .settings .group > span { font-size: 12px; font-weight: 800; color: var(--cr-muted); padding-inline: 6px; }
+  .audio { width: 100%; max-width: 560px; }
+  .audio .title { margin: 0; font-weight: 750; }
+  .audio .sub { margin: 0; font-size: 13px; font-weight: 650; color: var(--cr-muted); }
+  .grow { flex: 1; min-width: 0; }
+  input[type=range].grow { width: 100%; }
+</style>
+</head>
+<body class="cr-plastic">
+<main class="sheet">
+  <header class="sheet-head">
+    <div>
+      <p class="eyebrow"><a href="index.html">Media, text and recipe parity</a></p>
+      <h1>The media recipes</h1>
+      <p>The stage, the transport, the caption cue and the audio card, as <code>core/assets/crystal.css</code> renders them after 2.3.1. The players below are real <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code> elements playing a generated clip with two audio tracks and captions in two languages; a few lines of script drive them so the recipes can be seen in use. The behaviour a product ships is Crystal React's <code>VideoPlayer</code> and <code>AudioPlayer</code>.</p>
+    </div>
+    <div class="controls"><button type="button" class="cr-button" id="mode" aria-pressed="false">Dark mode</button></div>
+  </header>
+
+  <h2>The video player <small>.cr-media, .cr-media-bar, .cr-resin.transport, .cr-media-caption</small></h2>
+  <div class="grid">
+    <figure class="specimen wide">
+      <div class="scene">
+        <div class="player">
+          <div class="cr-media" id="stage" style="--cr-media-aspect: 16 / 9">
+            <video id="video" preload="metadata" playsinline aria-label="A walk through the harbour">
+              <source src="media/harbour.mp4" type="video/mp4">
+              <track kind="captions" srclang="en" label="English" src="media/harbour.en.vtt">
+              <track kind="subtitles" srclang="fr" label="Français" src="media/harbour.fr.vtt">
+            </video>
+            <div class="cr-media-caption" id="cue" hidden><span></span></div>
+            <div class="cr-media-bar">
+              <div class="cr-resin transport" role="group" aria-label="Transport">
+                <button type="button" class="cr-bare" id="play" aria-pressed="false">Play</button>
+                <time id="now">0:00</time>
+                <input class="grow" type="range" id="seek" min="0" max="8" step="0.1" value="0" aria-label="Seek">
+                <time id="length">0:08</time>
+                <button type="button" class="cr-bare" id="cc" aria-pressed="false">CC</button>
+                <button type="button" class="cr-bare" id="open-settings" aria-expanded="false" aria-controls="settings">Settings</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption><b>Stage</b> at 16:9 before the first frame, so the page does not jump. <b>Transport</b> inset 12px from the stage (it was 8px, and a focused end control drew its ring over the rim), 4px block and 12px inline padding, time readouts on Haze pills in text ink. <b>Cue</b> on feathered Stone, above the transport, never under it. Press CC, then play or drag the scrubber to 3 seconds.</figcaption>
+    </figure>
+
+    <figure class="specimen">
+      <div class="scene">
+        <div class="cr-frost settings" id="settings" role="group" aria-label="Settings">
+          <div class="group"><span id="speed-label">Speed</span>
+            <div class="cr-dock"><div class="cr-dock-inner" role="radiogroup" aria-labelledby="speed-label" id="speeds">
+              <label><input type="radio" name="speed" value="0.75">0.75×</label>
+              <label><input type="radio" name="speed" value="1" checked>Normal</label>
+              <label><input type="radio" name="speed" value="1.5">1.5×</label>
+              <label><input type="radio" name="speed" value="2">2×</label>
+            </div></div>
+          </div>
+          <div class="group"><span id="subs-label">Subtitles</span>
+            <div class="cr-dock"><div class="cr-dock-inner" role="radiogroup" aria-labelledby="subs-label" id="subs">
+              <label><input type="radio" name="subs" value="off" checked>Off</label>
+              <label><input type="radio" name="subs" value="0">English</label>
+              <label><input type="radio" name="subs" value="1">Français</label>
+            </div></div>
+          </div>
+          <div class="group" id="audio-group" hidden><span id="audio-label">Audio</span>
+            <div class="cr-dock"><div class="cr-dock-inner" role="radiogroup" aria-labelledby="audio-label" id="audios"></div></div>
+          </div>
+          <p class="muted" id="audio-note" style="margin:0;padding-inline:6px"></p>
+        </div>
+      </div>
+      <figcaption><b>Settings</b> on Frost, as every transient overlay is (R15e). Each choice is one of a set, and the chosen one is weight and the selected fill, never a check mark. The audio group appears only in an engine with <code>audioTracks</code> (Safari); this page says which yours is. Crystal React nests these as a submenu per choice, so the menu stays short over a short picture.</figcaption>
+    </figure>
+
+    <figure class="specimen">
+      <div class="scene">
+        <div class="cr-media" style="--cr-media-aspect: 16 / 9; width: 100%">
+          <video src="media/harbour.mp4" preload="metadata" muted aria-label="Harbour, captions drawn by the browser"></video>
+          <div class="cr-media-caption"><span>The harbour at dusk.</span></div>
+          <div class="cr-media-bar">
+            <div class="cr-resin transport" role="group" aria-label="Transport, at rest">
+              <button type="button" class="cr-bare" aria-pressed="false">Play</button>
+              <time>0:00</time><input class="grow" type="range" min="0" max="8" value="0" aria-label="Seek"><time>0:08</time>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption><b>Cue clearance.</b> <code>--cr-media-transport</code> (58px: the 48px target, 4px above and below, the rim) plus the 12px inset twice. A cue sits 24px above the bar whether or not the bar is shown, so it never jumps when a pointer arrives.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Aspect ratio and fit <small>--cr-media-aspect, --cr-media-fit</small></h2>
+  <div class="grid">
+    <figure class="specimen wide">
+      <div class="scene">
+        <div class="ratios">
+          <div class="cr-media" style="--cr-media-aspect: 16 / 9"><video src="media/harbour.mp4#t=2" preload="metadata" muted aria-label="16:9"></video></div>
+          <div class="cr-media" style="--cr-media-aspect: 4 / 3"><video src="media/harbour.mp4#t=2" preload="metadata" muted aria-label="4:3"></video></div>
+          <div class="cr-media" style="--cr-media-aspect: 1"><video src="media/harbour.mp4#t=2" preload="metadata" muted aria-label="1:1"></video></div>
+          <div class="cr-media" style="--cr-media-aspect: 9 / 16; --cr-media-fit: cover"><video src="media/harbour.mp4#t=2" preload="metadata" muted aria-label="9:16, cover"></video></div>
+        </div>
+      </div>
+      <figcaption>16:9, 4:3 and 1:1 letterbox (<code>contain</code>, nothing the author filmed is cropped); 9:16 fills with <code>cover</code>, for a portrait clip. The letterbox is <code>--cr-surface-alt</code>, so it follows the palette and mode.</figcaption>
+    </figure>
+  </div>
+
+  <h2>The audio player <small>.cr-haze.cr-media.audio</small></h2>
+  <div class="grid">
+    <figure class="specimen wide">
+      <div class="scene">
+        <div class="cr-haze cr-media audio">
+          <div><p class="title">Episode 4: The long way round</p><p class="sub">Harbour stories · 8 seconds</p></div>
+          <audio id="audio" src="media/episode.m4a" preload="metadata" aria-label="Episode 4"></audio>
+          <div class="cr-media-bar">
+            <div class="cr-resin transport" role="group" aria-label="Episode 4 transport">
+              <button type="button" class="cr-bare" id="aplay" aria-pressed="false">Play</button>
+              <time id="anow">0:00</time>
+              <input class="grow" type="range" id="aseek" min="0" max="8" step="0.1" value="0" aria-label="Seek Episode 4">
+              <time>0:08</time>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption>A Haze card with the 20px card padding, holding the title and the transport. Before, the player drew no surface: the pill floated on the page and the play button sat flush with its edge. <code>background: revert-layer</code> in the recipe hands the background back to Haze, which the stage's letterbox would otherwise paint over.</figcaption>
+    </figure>
+  </div>
+
+  <h2>Before and after <small>Crystal React, captured with Playwright, light and dark</small></h2>
+  <div class="grid two">
+    <div class="compare"><figure><img src="../captures/before/media-audio-player--with-a-title--light.png" alt="Before: the audio player with no card, the play button flush with the pill"><figcaption>Before</figcaption></figure><figure><img src="../captures/after/media-audio-player--with-a-title--light.png" alt="After: the audio player as a Haze card with padding"><figcaption>After</figcaption></figure></div>
+    <div class="compare"><figure><img src="../captures/before/blocks-playershell--video--dark.png" alt="Before: the player shell with a collapsed stage"><figcaption>Before</figcaption></figure><figure><img src="../captures/after/blocks-playershell--video--dark.png" alt="After: the player shell at 16:9 with the inset transport"><figcaption>After</figcaption></figure></div>
+    <div class="compare"><figure><img src="../captures/before/media-video-player--with-captions--light.png" alt="Before: the video player, stage collapsed"><figcaption>Before</figcaption></figure><figure><img src="../captures/after/media-video-player--with-settings--light.png" alt="After: the video player with settings, picture in picture and full screen"><figcaption>After</figcaption></figure></div>
+    <div class="compare"><figure><img src="../captures/before/media-media-controls--with-volume-and-skip--dark.png" alt="Before: readouts in muted ink on bare Resin"><figcaption>Before</figcaption></figure><figure><img src="../captures/after/media-media-controls--with-volume-and-skip--dark.png" alt="After: readouts on Haze pills"><figcaption>After</figcaption></figure></div>
+  </div>
+  <p class="note">The captures are Crystal React's Storybook at the stories named in each file, focused with one Tab so the transport shows. They are in <code>../captures/</code> with a README saying how they were taken.</p>
+</main>
+<script>
+  /* Page furniture: the mode toggle, and enough wiring to see the recipes in
+     use. Nothing moves at rest; every change follows a press. */
+  const root = document.documentElement;
+  const mode = document.getElementById('mode');
+  mode.addEventListener('click', () => {
+    const dark = root.dataset.crystalMode !== 'dark';
+    root.dataset.crystalMode = dark ? 'dark' : 'light';
+    mode.setAttribute('aria-pressed', String(dark));
+    mode.textContent = dark ? 'Light mode' : 'Dark mode';
+  });
+  const time = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+
+  const video = document.getElementById('video');
+  const play = document.getElementById('play');
+  const seek = document.getElementById('seek');
+  const cue = document.getElementById('cue');
+  const tracks = () => [...video.textTracks].filter((t) => t.kind === 'captions' || t.kind === 'subtitles');
+  let chosen = 0;
+  const drawCue = () => {
+    const on = tracks().find((t) => t.mode === 'hidden');
+    const active = on ? [...(on.activeCues || [])] : [];
+    cue.hidden = active.length === 0;
+    cue.firstElementChild.replaceChildren(...active.map((c) => c.getCueAsHTML()));
+  };
+  const setTrack = (index) => {
+    tracks().forEach((t, i) => { t.mode = i === index ? 'hidden' : 'disabled'; t.oncuechange = drawCue; });
+    if (index !== null) chosen = index;
+    document.getElementById('cc').setAttribute('aria-pressed', String(index !== null));
+    const radio = document.querySelector(`#subs input[value="${index === null ? 'off' : index}"]`);
+    if (radio) radio.checked = true;
+    drawCue();
+  };
+  play.addEventListener('click', () => (video.paused ? video.play() : video.pause()));
+  video.addEventListener('play', () => { play.setAttribute('aria-pressed', 'true'); play.textContent = 'Pause'; });
+  video.addEventListener('pause', () => { play.setAttribute('aria-pressed', 'false'); play.textContent = 'Play'; });
+  video.addEventListener('timeupdate', () => { seek.value = video.currentTime; document.getElementById('now').textContent = time(video.currentTime); });
+  seek.addEventListener('input', () => { video.currentTime = Number(seek.value); });
+  document.getElementById('cc').addEventListener('click', (e) => setTrack(e.currentTarget.getAttribute('aria-pressed') === 'true' ? null : chosen));
+  document.getElementById('subs').addEventListener('change', (e) => setTrack(e.target.value === 'off' ? null : Number(e.target.value)));
+  document.getElementById('speeds').addEventListener('change', (e) => { video.playbackRate = Number(e.target.value); });
+  document.getElementById('open-settings').addEventListener('click', (e) => {
+    const open = e.currentTarget.getAttribute('aria-expanded') !== 'true';
+    e.currentTarget.setAttribute('aria-expanded', String(open));
+    document.getElementById('settings').scrollIntoView({ block: 'nearest' });
+  });
+  video.addEventListener('loadedmetadata', () => {
+    setTrack(null);
+    const list = video.audioTracks;
+    const note = document.getElementById('audio-note');
+    if (!list) { note.textContent = 'This engine has no audioTracks, so the player offers no audio choice it could not make.'; return; }
+    note.textContent = '';
+    document.getElementById('audio-group').hidden = false;
+    document.getElementById('audios').innerHTML = '';
+    for (let i = 0; i < list.length; i += 1) {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      Object.assign(input, { type: 'radio', name: 'audio', value: String(i), checked: list[i].enabled });
+      label.append(input, list[i].label || list[i].language || `Track ${i + 1}`);
+      document.getElementById('audios').append(label);
+    }
+    document.getElementById('audios').addEventListener('change', (e) => {
+      for (let i = 0; i < list.length; i += 1) list[i].enabled = String(i) === e.target.value;
+    });
+  });
+
+  const audio = document.getElementById('audio');
+  const aplay = document.getElementById('aplay');
+  aplay.addEventListener('click', () => (audio.paused ? audio.play() : audio.pause()));
+  audio.addEventListener('play', () => { aplay.setAttribute('aria-pressed', 'true'); aplay.textContent = 'Pause'; });
+  audio.addEventListener('pause', () => { aplay.setAttribute('aria-pressed', 'false'); aplay.textContent = 'Play'; });
+  audio.addEventListener('timeupdate', () => { document.getElementById('aseek').value = audio.currentTime; document.getElementById('anow').textContent = time(audio.currentTime); });
+  document.getElementById('aseek').addEventListener('input', (e) => { audio.currentTime = Number(e.target.value); });
+</script>
+</body>
+</html>

@@ -51,6 +51,7 @@
     },
     "./catalogue": "./tokens/catalogue.json",
     "./surfaces": "./tokens/surfaces.json",
+    "./surface-recipes": "./tokens/surface-recipes.json",
     "./resolver": {
       "types": "./assets/crystal.d.ts",
       "default": "./assets/crystal.js"

@@ -18,7 +18,10 @@
         "Frost"
       ],
       "class": ".cr-frost",
-      "use": "Intermediate task frames and every transient surface that opens over content: side panels, drawers, sheets and app bars, and menus, popovers, tooltips and toasts (R15e). Reading content inside it sits on Haze."
+      "use": "Intermediate task frames and every transient surface that opens over content: side panels, drawers, sheets and app bars, and menus, popovers, tooltips and toasts (R15e). Reading content inside it sits on Haze. `.cr-frost.bar` is a transient overlay shaped as a row of controls, a pill with 4px padding: the selection toolbar over highlighted text.",
+      "also": [
+        ".cr-frost.bar"
+      ]
     },
     {
       "id": "haze",
@@ -39,7 +42,10 @@
         "Resin"
       ],
       "class": ".cr-resin",
-      "use": "One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter, because Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock."
+      "use": "One floating Resin plane with no reading fill of its own, pill-shaped unless it is a panel: a player's transport bar, a pinned element, a Resin handle over imagery or between regions. Controls inside it lose their own backdrop filter, because Resin never contains Resin. A plane whose controls are labels to be read holds a Haze fill as well, and is a dock. `.cr-resin.transport` is the media transport: the pill with 4px block and 12px inline padding around its 48px controls (58px tall with its rim), with tabular time readouts, wrapping to a second row in a player narrower than 420px. `.cr-media` is the stage it sits on (the content radius, the letterbox, `--cr-media-aspect` and `--cr-media-fit`), and `.cr-media-bar` is the region inset 12px, or the safe area in full screen, that holds the transport.",
+      "also": [
+        ".cr-resin.transport"
+      ]
     },
     {
       "id": "resin-panel",
@@ -73,7 +79,10 @@
         "Haze"
       ],
       "class": ".cr-field-shell",
-      "use": "The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics."
+      "use": "The Resin surround of a native text entry, with the Haze well the value is read on and the circular field-state badge. The native control keeps its functional boundary and semantics. `.cr-editor` is the editable surface inside a rich text field: the shared prose vocabulary (headings, lists, checklists, marks, insertions and deletions) with the primary caret and the primary-soft selection. `.cr-editor-toolbar` is its toolbar, above the text on a fine pointer and below it, clear of the touch keyboard, on a coarse one.",
+      "also": [
+        ".cr-editor"
+      ]
     },
     {
       "id": "compact",
@@ -96,7 +105,10 @@
         "Stone"
       ],
       "class": ".cr-stone",
-      "use": "A label over an unknown or moving backdrop: a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text."
+      "use": "A label over an unknown or moving backdrop: a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text. `.cr-media-caption` is a caption cue rendered by the library: the Stone backing on a box above the transport, never under it. `::cue` on a `.cr-media` video is the flat fill for the browser's own renderer.",
+      "also": [
+        ".cr-media-caption"
+      ]
     },
     {
       "id": "mirage",
@@ -2261,28 +2273,38 @@
         {
           "id": "rich-text-surface",
           "name": "Rich text surface",
-          "anatomy": "A toolbar of formatting actions above an editable content surface.",
+          "anatomy": "A formatting toolbar and an editable surface. The toolbar holds Crystal's format vocabulary in groups: the block type (paragraph, headings two to four, bulleted list, numbered list, checklist, quotation, code block), the marks (bold, italic, underline, strikethrough, inline code, highlight, link, subscript, superscript) and history (undo, redo). A selection toolbar of the commonest marks floats over highlighted text.",
           "states": [
             "idle",
             "focus",
             "selection-active",
+            "selection-toolbar-open",
+            "touch-keyboard-open",
             "disabled",
             "read-only"
           ],
-          "material": "Resin toolbar, Haze editing surface",
+          "material": "Resin toolbar, Haze editing surface; Frost selection toolbar",
           "surface": [
-            "field"
+            "field",
+            "frost"
           ],
-          "geometry": "Toolbar is a pill group; surface at content radius",
-          "semantics": "Toolbar actions use aria-pressed for active formatting; the editor exposes its own semantics",
-          "crystal": "Toolbar and surface appearance, active-format treatment",
-          "product": "The entire editing engine, serialisation and paste handling",
+          "geometry": "Toolbar controls are 48px pills in separated groups on the field shell's Haze well; the surface keeps the content radius and the card padding (20px). On a fine pointer the toolbar sits above the text; on a coarse pointer it sits below the text and sticks above the on-screen keyboard.",
+          "semantics": "Toolbar actions use aria-pressed for active formatting, and the block type is a single control naming the current type. A format changed by a keyboard shortcut while focus is in the text is announced politely. The editor exposes its own semantics: real headings, lists and checkboxes in the document, so a screen reader navigates it as it would the published page.",
+          "crystal": "Toolbar and surface appearance, active-format treatment, the format vocabulary and its rendering (shared with prose), the selection toolbar, toolbar placement on touch",
+          "product": "The editing engine, serialisation and paste handling, and which parts of the format vocabulary a product offers",
           "parity": [
             "mantine:RichTextEditor",
             "mui:—",
             "antd:—"
           ],
-          "note": "Crystal specifies the surface only. Do not rebuild a rich-text engine to obtain this appearance."
+          "note": "Crystal specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. Whether a library may ship an optional binding of its own is D-30.",
+          "motion": [
+            "field-focus",
+            "field-invalid",
+            "field-valid",
+            "menu-in",
+            "menu-out"
+          ]
         },
         {
           "id": "helper-text",
@@ -4478,12 +4500,14 @@
         {
           "id": "text",
           "name": "Text",
-          "anatomy": "Body copy with size, weight, colour role and truncation options.",
+          "anatomy": "Body copy with size, weight, colour role, decoration (underline, strikethrough) and truncation options.",
           "states": [
             "default",
             "muted",
             "truncated",
-            "clamped"
+            "clamped",
+            "underlined",
+            "struck-through"
           ],
           "material": "None",
           "surface": [
@@ -4548,7 +4572,7 @@
         {
           "id": "prose",
           "name": "Prose",
-          "anatomy": "Long-form content with consistent rhythm across headings, lists, tables, code and media.",
+          "anatomy": "Long-form content with consistent rhythm across headings, lists and checklists, quotations, tables, code and media, and the inline marks: links, emphasis, underline, strikethrough, insertions and deletions, highlights, inline code, keys, subscript and superscript.",
           "states": [
             "default"
           ],
@@ -4557,7 +4581,7 @@
             "none"
           ],
           "geometry": "78ch measure; 1.8 line height; 4px-rhythm vertical spacing",
-          "semantics": "Anchor navigation must preserve focus when sections change",
+          "semantics": "Anchor navigation must preserve focus when sections change. Every mark differs in shape as well as colour (an insertion is underlined, a deletion struck through, a highlight filled), and each is its own element (ins, del, mark, u, s), so none rests on colour alone.",
           "crystal": "The complete reading rhythm and embedded-element treatment",
           "product": "Content, rendering and virtualisation",
           "parity": [
@@ -4669,16 +4693,18 @@
         {
           "id": "prose-list",
           "name": "Prose list",
-          "anatomy": "Ordered and unordered lists inside running text, with Crystal markers.",
+          "anatomy": "Ordered and unordered lists inside running text, with Crystal markers, and checklists whose markers are checkboxes.",
           "states": [
-            "at-rest"
+            "at-rest",
+            "checked",
+            "unchecked"
           ],
           "material": "Inherits",
           "surface": [
             "none"
           ],
           "geometry": "Marker inset follows the spacing scale; hanging indent preserved.",
-          "semantics": "Real ul and ol so the count and nesting are announced.",
+          "semantics": "Real ul and ol so the count and nesting are announced. A checklist item's marker is a native checkbox, read-only when the list is, so its state is announced; a finished item recedes to the muted ink and is not struck through.",
           "crystal": "Marker treatment, spacing, nesting rhythm",
           "product": "Content and ordering",
           "parity": [
@@ -5908,26 +5934,34 @@
         {
           "id": "video-player",
           "name": "Video player",
-          "anatomy": "A video surface with Crystal transport controls.",
+          "anatomy": "A media stage at a set aspect ratio holding the video, a caption cue above the transport, and the transport inset from the stage: play, skip, the scrubber with its two time readouts, mute and volume, then a settings menu (playback speed, subtitles and captions, audio track, quality), picture in picture and full screen.",
           "states": [
             "idle",
             "playing",
             "paused",
             "buffering",
             "ended",
-            "focus-visible"
+            "focus-visible",
+            "captions-on",
+            "settings-open",
+            "picture-in-picture",
+            "full-screen"
           ],
-          "material": "Resin control bar over the video; Haze fills behind readable labels",
+          "material": "Resin transport over the video with Haze fills behind its time readouts; Stone behind caption cues; Frost settings menu",
           "surface": [
             "resin",
-            "haze"
+            "haze",
+            "stone",
+            "frost"
           ],
-          "geometry": "Control bar is a pill; every control reaches 44px.",
-          "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus.",
-          "crystal": "Control-bar material, transport geometry, the motion of showing and hiding controls",
-          "product": "Sources, captions, DRM, analytics",
+          "geometry": "The stage keeps the content radius and the aspect ratio the product sets (16:9, 4:3, 1:1, 9:16 or the media's own). The transport is a pill inset 12px from the stage, or the safe area in full screen, with 4px block padding around its controls (58px with its rim); every control reaches the 48px action target. Caption cues sit above the transport, never under it. Below 420px the transport wraps its trailing controls onto a second row.",
+          "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus. Speed, subtitle, audio-track and quality choices are menus of radio items (menuitemradio with aria-checked); the selected item is shown by label weight, never a check mark, and each change is announced in words. A choice the engine cannot make (an audio track list where the browser exposes none, picture in picture where it is unsupported) is not offered.",
+          "crystal": "Stage, transport and caption materials, transport geometry and insets, the settings menu, the motion of showing and hiding controls",
+          "product": "Sources, caption and audio tracks, quality renditions and their switching (adaptive streaming), DRM, analytics",
           "motion": [
-            "media-in"
+            "media-in",
+            "menu-in",
+            "menu-out"
           ],
           "parity": [
             "primereact:galleria",
@@ -5937,26 +5971,30 @@
         {
           "id": "audio-player",
           "name": "Audio player",
-          "anatomy": "An audio transport with scrubbing and volume.",
+          "anatomy": "A Haze card holding the title and any secondary line (artist, episode, chapter), with the transport inset from its edge: play, skip, the scrubber with its two time readouts, mute and volume, and a settings menu for playback speed.",
           "states": [
             "idle",
             "playing",
             "paused",
             "buffering",
             "ended",
-            "focus-visible"
+            "focus-visible",
+            "settings-open"
           ],
-          "material": "Resin plane with Haze readable regions",
+          "material": "Haze card holding a Resin transport; Frost settings menu",
           "surface": [
+            "haze",
             "resin",
-            "haze"
+            "frost"
           ],
-          "geometry": "Pill; the scrubber is a slider with a 44px thumb.",
+          "geometry": "The card keeps the content radius and the card padding (20px); the transport is a pill with 4px block padding around its controls; the scrubber is a slider with a 44px thumb.",
           "semantics": "A real audio element. The scrubber is a slider announcing time, not a progress bar.",
           "crystal": "Material, scrubber geometry, time formatting",
           "product": "Sources, playlists, streaming",
           "motion": [
-            "media-in"
+            "media-in",
+            "menu-in",
+            "menu-out"
           ],
           "parity": [
             "mantine:Audio"
@@ -5965,7 +6003,7 @@
         {
           "id": "media-controls",
           "name": "Media controls",
-          "anatomy": "The shared transport used by both players.",
+          "anatomy": "The shared transport used by both players: play, skip, the scrubber between two time readouts, mute and volume, then the controls a player adds (settings, picture in picture, full screen).",
           "states": [
             "idle",
             "playing",
@@ -5973,11 +6011,12 @@
             "buffering",
             "focus-visible"
           ],
-          "material": "Resin plane",
+          "material": "Resin plane; Haze behind the time readouts",
           "surface": [
-            "resin"
+            "resin",
+            "haze"
           ],
-          "geometry": "Pill; 44px targets throughout.",
+          "geometry": "Pill with 4px block and 12px inline padding around its 48px controls (58px tall with its rim), 4px between them. Time readouts are tabular and sit on Haze pills.",
           "semantics": "Each control is a button with a name; play and pause are one toggle with a pressed state.",
           "crystal": "Materials, the press recipe on every control",
           "product": "Which controls appear",
@@ -7236,7 +7275,7 @@
             "haze"
           ],
           "geometry": "Transport is a pill; controls reach 44px.",
-          "semantics": "Real media elements; captions and their state announced; transport reachable by keyboard.",
+          "semantics": "Real media elements; captions and their state announced; transport reachable by keyboard; speed, track and quality choices announced as they change.",
           "crystal": "Transport material, the show and hide motion",
           "product": "Sources, queue, DRM",
           "parity": [
@@ -7446,7 +7485,7 @@
         {
           "id": "editor-block",
           "name": "Editor block",
-          "anatomy": "A rich text surface with toolbar, and save state.",
+          "anatomy": "A rich text surface with its toolbar and selection toolbar, a save state in words, and the save action.",
           "states": [
             "at-rest",
             "focus-visible",

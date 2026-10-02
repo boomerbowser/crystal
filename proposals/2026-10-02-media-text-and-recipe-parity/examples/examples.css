@@ -1,0 +1,62 @@
+/* Layout for the example pages, and nothing else. Every specimen is the
+   library's own class on the library's own element, loaded by relative path
+   from core/assets, so these pages show what a consumer of the library gets.
+   Nothing here restyles a Crystal recipe. The page background is the Plastic
+   foundation, which is a specimen too. */
+body { font-family: var(--cr-font); min-height: 100vh; margin: 0; }
+.sheet { max-width: 1180px; margin: 0 auto; padding: 32px 24px 96px; }
+.sheet-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 28px; }
+.sheet-head h1 { font-size: 30px; letter-spacing: -.045em; margin: 0 0 6px; }
+.sheet-head p { margin: 0; color: var(--cr-muted); max-width: 70ch; font-size: 14px; line-height: 1.6; }
+.eyebrow { font-size: 12px !important; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px !important; }
+.eyebrow a { color: var(--cr-primary); }
+.controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+/* The page's own section headings only: an unlayered `h2` rule would beat the
+   reading vocabulary's layered headings inside the specimens. */
+.sheet > h2 { font-size: 22px; letter-spacing: -.03em; margin: 44px 0 14px; }
+.sheet > h2 small { font-weight: 600; color: var(--cr-muted); font-size: 13px; letter-spacing: 0; margin-inline-start: 10px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+.grid.two { grid-template-columns: repeat(auto-fill, minmax(460px, 1fr)); }
+.specimen { display: flex; flex-direction: column; gap: 10px; min-width: 0; margin: 0; }
+.specimen > figcaption { font-size: 12.5px; color: var(--cr-muted); line-height: 1.55; padding: 0 4px; }
+.specimen > figcaption b { color: var(--cr-text); font-weight: 800; }
+.specimen.wide { grid-column: 1 / -1; }
+/* A vivid scene under each specimen so diffusion, tint and rims are visible, as
+   in the approved material studies. Content, not material. */
+.scene { position: relative; isolation: isolate; min-height: 200px; border-radius: calc(var(--cr-radius) + 10px); overflow: hidden; display: grid; place-items: center; padding: 24px; background: var(--cr-canvas); }
+.scene::before { content: ''; position: absolute; z-index: -1; width: 340px; height: 160px; left: -60px; top: 80px; transform: rotate(-32deg); border-radius: 120px; background: linear-gradient(45deg, var(--cr-decorative), var(--cr-companion)); }
+.scene::after { content: ''; position: absolute; z-index: -1; width: 160px; height: 160px; right: -30px; top: -30px; border-radius: 50%; background: var(--cr-glow); }
+.muted { color: var(--cr-muted); font-size: 13px; }
+.note { margin: 14px 0 0; font-size: 13.5px; color: var(--cr-muted); line-height: 1.6; max-width: 80ch; }
+.pad { padding: var(--cr-space); }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.compare figure { margin: 0; display: grid; gap: 6px; }
+.compare img { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--cr-edge); display: block; }
+.compare figcaption { font-size: 12px; font-weight: 750; color: var(--cr-muted); }
+@media (max-width: 760px) { .compare, .grid.two { grid-template-columns: 1fr; } .sheet { padding: 24px 16px 72px; } }
+table.data { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.data th, table.data td { padding: 9px 10px; text-align: start; border-bottom: 1px solid var(--cr-edge); vertical-align: top; }
+table.data th { font-weight: 750; }
+.sheet-head code, figcaption code, .note code, table.data code { font-size: .9em; }
+/* The cards on the hub and the boards. */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.card { display: grid; gap: 8px; padding: var(--cr-space); text-decoration: none; color: var(--cr-text); }
+.card h3 { margin: 0; font-size: 18px; letter-spacing: -.02em; }
+.card p { margin: 0; font-size: 13.5px; color: var(--cr-muted); line-height: 1.55; }
+.summary { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; margin-bottom: 18px; }
+.total { display: grid; gap: 6px; padding: 14px 16px; }
+.total strong { font-size: 28px; letter-spacing: -.04em; }
+.filters { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: end; padding: 16px 18px; margin-bottom: 12px; }
+.filters fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 6px; }
+.filters legend, .filters .search { font-size: 12px; font-weight: 800; color: var(--cr-muted); }
+.filters .search { display: grid; gap: 6px; }
+.board { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+.task { display: grid; gap: 8px; align-content: start; padding: var(--cr-space); }
+.task header { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.task h2 { margin: 2px 0 0; font-size: 17px; letter-spacing: -.02em; }
+.task p, .task li { margin: 0; font-size: 13.5px; line-height: 1.55; }
+.task ul { margin: 0; padding-inline-start: 20px; display: grid; gap: 3px; }
+.task .meta, .task .where { color: var(--cr-muted); font-size: 12.5px; }
+/* Visually hidden, still read: the names of icon-like controls. */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

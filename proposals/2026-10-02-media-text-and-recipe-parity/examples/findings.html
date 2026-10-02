@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" data-crystal-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crystal React audit</title>
+<link rel="stylesheet" href="../../../core/assets/crystal-theme.css">
+<link rel="stylesheet" href="../../../core/assets/crystal.css">
+<link rel="stylesheet" href="examples.css">
+<style>
+  /* Layout only. */
+  .table-wrap { padding: 8px; }
+  .table-wrap table.data td code { font-size: 12px; }
+  .cells { display: flex; flex-wrap: wrap; gap: 4px; }
+  .pill { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--cr-surface-alt); }
+  .pill.miss { background: var(--cr-attention-surface); color: var(--cr-attention-ink); }
+  .pill.child { background: var(--cr-info-surface); color: var(--cr-info-ink); }
+  .bars { display: grid; gap: 10px; }
+  .bar-row { display: grid; grid-template-columns: 160px 1fr 70px; gap: 10px; align-items: center; font-size: 13px; }
+  .bar { height: 12px; border-radius: 999px; background: var(--cr-surface-alt); overflow: hidden; display: flex; }
+  .bar > span { display: block; height: 100%; }
+  .bar .own { background: var(--cr-primary); }
+  .bar .kid { background: var(--cr-info-ink); }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12.5px; color: var(--cr-muted); }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 4px; margin-inline-end: 6px; vertical-align: -2px; }
+</style>
+</head>
+<body class="cr-plastic">
+<main class="sheet">
+  <header class="sheet-head">
+    <div>
+      <p class="eyebrow"><a href="index.html">Media, text and recipe parity</a></p>
+      <h1>Crystal React, measured against the catalogue</h1>
+      <p>Every one of the 284 catalogue entries: which assigned motion it plays itself, which a child plays, which nothing plays; which surfaces it should wear and whether its markup wears them; and how much material it paints by hand. Read from <code>../audit.json</code>, written by Crystal React's <code>scripts/audit-recipes.mjs</code>. It is a static reading of source: a finding is a place to look, and the browser gates decide.</p>
+    </div>
+    <div class="controls"><button type="button" class="cr-button" id="mode" aria-pressed="false">Dark mode</button></div>
+  </header>
+
+  <section class="summary" id="totals" aria-label="Totals"></section>
+
+  <h2>Motion coverage <small id="coverage-note"></small></h2>
+  <div class="cr-haze pad">
+    <div class="legend"><span><i style="background:var(--cr-primary)"></i>Played by the component</span><span><i style="background:var(--cr-info-ink)"></i>Played by a child it renders</span><span><i style="background:var(--cr-surface-alt);border:1px solid var(--cr-edge)"></i>Played by nothing</span></div>
+    <div class="bars" id="bars" style="margin-top:14px"></div>
+  </div>
+
+  <h2>Every entry</h2>
+  <form class="filters cr-haze" aria-label="Filter the entries">
+    <fieldset><legend>Show</legend><div class="cr-dock"><div class="cr-dock-inner" id="show">
+      <label><input type="radio" name="show" value="issues" checked>With a finding</label>
+      <label><input type="radio" name="show" value="motion">Unplayed motion</label>
+      <label><input type="radio" name="show" value="material">Hand-written material</label>
+      <label><input type="radio" name="show" value="all">All</label>
+    </div></div></fieldset>
+    <label class="search">Search <span class="cr-field-shell"><input class="cr-input" type="search" id="q" placeholder="Component or category"></span></label>
+  </form>
+  <p class="muted" role="status" id="shown"></p>
+  <div class="cr-haze table-wrap cr-scroll-frost" style="overflow:auto">
+    <table class="data">
+      <thead><tr><th scope="col">Entry</th><th scope="col">Category</th><th scope="col">Motion</th><th scope="col">Surfaces</th><th scope="col">Hand-written</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+</main>
+<script>
+  const root = document.documentElement;
+  const mode = document.getElementById('mode');
+  mode.addEventListener('click', () => {
+    const dark = root.dataset.crystalMode !== 'dark';
+    root.dataset.crystalMode = dark ? 'dark' : 'light';
+    mode.setAttribute('aria-pressed', String(dark));
+    mode.textContent = dark ? 'Light mode' : 'Dark mode';
+  });
+  const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  fetch('../audit.json').then((r) => r.json()).then((audit) => {
+    const s = audit.summary;
+    const totals = [
+      ['Motion played by the component', s.motion.played + ' of ' + s.motion.assigned, 'success'],
+      ['Played by a child', String(s.motion.playedByChild), 'info'],
+      ['Played by nothing', s.motion.unplayed + ' in ' + s.motion.entriesWithUnplayed + ' entries', 'attention'],
+      ['Recipes no component plays', String(s.motion.recipesPlayedByNoComponent.length), 'attention'],
+      ['Directories painting backdrop-filter by hand', s.materials.directoriesWithHandWrittenBackdropFilter + ' of ' + s.materials.directories, 'attention'],
+      ['Directories using material mixins', String(s.materials.directoriesUsingMaterialMixins), 'info'],
+    ];
+    document.getElementById('totals').innerHTML = totals.map(([label, value, tone]) =>
+      '<div class="total cr-haze"><span class="cr-status" data-status="' + tone + '">' + esc(label) + '</span><strong>' + esc(value) + '</strong></div>').join('');
+
+    /* Counted from the data, so the heading cannot go stale. */
+    document.getElementById('coverage-note').textContent = s.motion.assigned + ' assignments across '
+      + audit.components.filter((c) => c.motion.assigned.length).length + ' entries';
+    const categories = [...new Set(audit.components.map((c) => c.category))];
+    document.getElementById('bars').innerHTML = categories.map((category) => {
+      const list = audit.components.filter((c) => c.category === category);
+      const total = list.reduce((n, c) => n + c.motion.assigned.length, 0);
+      if (!total) return '';
+      const own = list.reduce((n, c) => n + c.motion.played.length, 0);
+      const kid = list.reduce((n, c) => n + c.motion.playedByChild.length, 0);
+      return '<div class="bar-row"><span>' + esc(category) + '</span><div class="bar" role="img" aria-label="' + esc(category) + ': ' + own + ' played, ' + kid + ' by a child, ' + (total - own - kid) + ' by nothing, of ' + total + '">'
+        + '<span class="own" style="width:' + (own / total * 100) + '%"></span><span class="kid" style="width:' + (kid / total * 100) + '%"></span></div>'
+        + '<span class="muted">' + own + (kid ? ' + ' + kid : '') + ' / ' + total + '</span></div>';
+    }).join('');
+
+    const render = () => {
+      const show = document.querySelector('input[name="show"]:checked').value;
+      const q = document.getElementById('q').value.toLowerCase();
+      const rows = audit.components.filter((c) => {
+        const motion = c.motion.unplayed.length > 0;
+        const material = c.handWritten && (c.handWritten.backdropFilter > 0 || c.handWritten.mixins.length > 0);
+        const keep = show === 'all' || (show === 'motion' && motion) || (show === 'material' && material) || (show === 'issues' && (motion || material));
+        return keep && (!q || (c.id + ' ' + c.name + ' ' + c.category).toLowerCase().includes(q));
+      });
+      document.getElementById('shown').textContent = rows.length + ' of ' + audit.components.length + ' entries';
+      document.getElementById('rows').innerHTML = rows.map((c) => {
+        const pills = [
+          ...c.motion.played.map((m) => '<span class="pill">' + esc(m) + '</span>'),
+          ...c.motion.playedByChild.map((m) => '<span class="pill child">' + esc(m) + ' (child)</span>'),
+          ...c.motion.unplayed.map((m) => '<span class="pill miss">' + esc(m) + ' (unplayed)</span>'),
+        ].join('') || '<span class="muted">none assigned</span>';
+        const surfaces = c.surfaces.map((id) => '<span class="pill' + ((c.surfaceNotWorn || []).includes(id) ? ' miss' : '') + '">' + esc(id) + ((c.surfaceNotWorn || []).includes(id) ? ' (not in markup)' : '') + '</span>').join('');
+        const hand = c.handWritten ? [
+          c.handWritten.backdropFilter ? c.handWritten.backdropFilter + ' backdrop-filter' : '',
+          c.handWritten.mixins.length ? c.handWritten.mixins.join(', ') : '',
+        ].filter(Boolean).join('; ') || '<span class="muted">none</span>' : '<span class="muted">' + esc(c.status) + '</span>';
+        return '<tr><th scope="row">' + esc(c.name) + '<br><code>' + esc(c.directory || c.id) + '</code></th><td>' + esc(c.category) + '</td><td><div class="cells">' + pills + '</div></td><td><div class="cells">' + surfaces + '</div></td><td>' + hand + '</td></tr>';
+      }).join('');
+    };
+    document.getElementById('show').addEventListener('change', render);
+    document.getElementById('q').addEventListener('input', render);
+    render();
+  });
+</script>
+</body>
+</html>

@@ -975,28 +975,38 @@
     {
       "id": "rich-text-surface",
       "name": "Rich text surface",
-      "anatomy": "A toolbar of formatting actions above an editable content surface.",
+      "anatomy": "A formatting toolbar and an editable surface. The toolbar holds Crystal's format vocabulary in groups: the block type (paragraph, headings two to four, bulleted list, numbered list, checklist, quotation, code block), the marks (bold, italic, underline, strikethrough, inline code, highlight, link, subscript, superscript) and history (undo, redo). A selection toolbar of the commonest marks floats over highlighted text.",
       "states": [
         "idle",
         "focus",
         "selection-active",
+        "selection-toolbar-open",
+        "touch-keyboard-open",
         "disabled",
         "read-only"
       ],
-      "material": "Resin toolbar, Haze editing surface",
+      "material": "Resin toolbar, Haze editing surface; Frost selection toolbar",
       "surface": [
-        "field"
+        "field",
+        "frost"
       ],
-      "geometry": "Toolbar is a pill group; surface at content radius",
-      "semantics": "Toolbar actions use aria-pressed for active formatting; the editor exposes its own semantics",
-      "crystal": "Toolbar and surface appearance, active-format treatment",
-      "product": "The entire editing engine, serialisation and paste handling",
+      "geometry": "Toolbar controls are 48px pills in separated groups on the field shell's Haze well; the surface keeps the content radius and the card padding (20px). On a fine pointer the toolbar sits above the text; on a coarse pointer it sits below the text and sticks above the on-screen keyboard.",
+      "semantics": "Toolbar actions use aria-pressed for active formatting, and the block type is a single control naming the current type. A format changed by a keyboard shortcut while focus is in the text is announced politely. The editor exposes its own semantics: real headings, lists and checkboxes in the document, so a screen reader navigates it as it would the published page.",
+      "crystal": "Toolbar and surface appearance, active-format treatment, the format vocabulary and its rendering (shared with prose), the selection toolbar, toolbar placement on touch",
+      "product": "The editing engine, serialisation and paste handling, and which parts of the format vocabulary a product offers",
       "parity": [
         "mantine:RichTextEditor",
         "mui:—",
         "antd:—"
       ],
-      "note": "Crystal specifies the surface only. Do not rebuild a rich-text engine to obtain this appearance."
+      "note": "Crystal specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. Whether a library may ship an optional binding of its own is D-30.",
+      "motion": [
+        "field-focus",
+        "field-invalid",
+        "field-valid",
+        "menu-in",
+        "menu-out"
+      ]
     },
     {
       "id": "helper-text",

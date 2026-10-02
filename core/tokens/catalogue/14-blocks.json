@@ -260,7 +260,7 @@
         "haze"
       ],
       "geometry": "Transport is a pill; controls reach 44px.",
-      "semantics": "Real media elements; captions and their state announced; transport reachable by keyboard.",
+      "semantics": "Real media elements; captions and their state announced; transport reachable by keyboard; speed, track and quality choices announced as they change.",
       "crystal": "Transport material, the show and hide motion",
       "product": "Sources, queue, DRM",
       "parity": [
@@ -470,7 +470,7 @@
     {
       "id": "editor-block",
       "name": "Editor block",
-      "anatomy": "A rich text surface with toolbar, and save state.",
+      "anatomy": "A rich text surface with its toolbar and selection toolbar, a save state in words, and the save action.",
       "states": [
         "at-rest",
         "focus-visible",
