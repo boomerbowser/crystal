@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-46 tasks: 24 done, 17 ready, 4 blocked, 1 needs a ruling, 0 dropped.
+46 tasks: 28 done, 13 ready, 4 blocked, 1 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -282,16 +282,16 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-T3](#r-t3) | P1 | Done | RichTextEditor at @crystal-ui/react/editor | – |
 | [R-T4](#r-t4) | P1 | Done | Text decorations and the edit elements | – |
 | [R-T5](#r-t5) | P1 | Ready | Prove the touch toolbar on real devices | – |
-| [R-T6](#r-t6) | P2 | Ready | Mentions popover wears .cr-frost | – |
+| [R-T6](#r-t6) | P2 | Done | Mentions popover wears .cr-frost | – |
 | [R-T7](#r-t7) | P2 | Ready | EditorBlock offers the bound editor in a story | D-30 |
 | [R-T8](#r-t8) | P3 | Ready | Screen-reader pass on the editor | – |
 | [R-T9](#r-t9) | P1 | Blocked | Wear the published prose and editor recipes and delete the copies | C-R1 |
 | [R-A0](#r-a0) | P1 | Done | Motion catalogue story | – |
 | [R-A1](#r-a1) | P1 | Ready | Sort the hand-written material (re-evaluation rec. 6) | – |
 | [R-A2](#r-a2) | P2 | Ready | Confirm the 105 entries whose surface is not worn in their own markup | – |
-| [R-A3](#r-a3) | P2 | Ready | Cascader plays the field recipes | – |
-| [R-A4](#r-a4) | P2 | Ready | Product gallery and playlist block play their assigned motion | – |
-| [R-A5](#r-a5) | P3 | Ready | Credit view-push-out to the view stack | – |
+| [R-A3](#r-a3) | P2 | Done | Cascader plays the field recipes | – |
+| [R-A4](#r-a4) | P2 | Done | Product gallery and playlist block play their assigned motion | – |
+| [R-A5](#r-a5) | P3 | Done | The view stack plays view-push-out | – |
 | [R-A9](#r-a9) | P2 | Ready | The Haze reading fill in the popover, the pop-confirm and the menu | – |
 | [R-A10](#r-a10) | P2 | Ready | The Resin thumb on the colour area, slider and wheel | – |
 | [R-Q1](#r-q1) | P2 | Ready | Documentation site from the surfaces (re-evaluation rec. 7, Slice Q) | C-R1 |
@@ -518,13 +518,13 @@ Where: `src/components/RichTextSurface/useKeyboardInset.ts`.
 
 ### R-T6
 
-**Mentions popover wears .cr-frost.** Text, P2, ready.
+**Mentions popover wears .cr-frost.** Text, P2, done.
 
 Target: The suggestion popover's hand-written Frost goes.
 
 Done when:
 
-- [ ] verify:materials compares it with .cr-frost
+- [x] verify:materials compares it with .cr-frost
 
 Where: `src/components/RichTextSurface/RichTextSurface.module.scss`.
 
@@ -603,37 +603,37 @@ Where: `scripts/audit-recipes.mjs`.
 
 ### R-A3
 
-**Cascader plays the field recipes.** Motion, P2, ready.
+**Cascader plays the field recipes.** Motion, P2, done.
 
 Target: field-focus, field-invalid and field-valid on the cascader's shell.
 
 Done when:
 
-- [ ] Manifest credits all three
+- [x] Manifest credits all three
 
 Where: `src/components/Cascader/`.
 
 ### R-A4
 
-**Product gallery and playlist block play their assigned motion.** Motion, P2, ready.
+**Product gallery and playlist block play their assigned motion.** Motion, P2, done.
 
 Target: media-in on the product gallery; list-in and list-out on the playlist block.
 
 Done when:
 
-- [ ] Manifest credits them; verify:behaviour checks one each
+- [x] Manifest credits them; verify:behaviour checks one each
 
 Where: `src/components/ProductGallery/, PlaylistBlock/`.
 
 ### R-A5
 
-**Credit view-push-out to the view stack.** Motion, P3, ready.
+**The view stack plays view-push-out.** Motion, P3, done.
 
-Target: The view stack names the recipe whose movement it makes.
+Target: The view a push covers stays beneath the arrival and plays view-push-out before it unmounts; the stack had never made that movement, so crediting the recipe would have been false.
 
 Done when:
 
-- [ ] recipesPlayedByNoComponent no longer lists it
+- [x] recipesPlayedByNoComponent no longer lists it
 
 Where: `src/components/ViewStack/`.
 
