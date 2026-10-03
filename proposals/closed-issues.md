@@ -729,7 +729,7 @@ never been exercised has now run.
 
 Meridian fixed the account-level git configuration and asked for a commit to be
 pushed to `crystal-preview`. Deployment `dpl_49kwxpdt4qqmWCwgqv9y3gbw8YMt`, from
-`crystal-preview@9fc6bf9`, is **`READY`**. It is the first production deployment
+`crystal-preview@a424919`, is **`READY`**. It is the first production deployment
 ever built from that repository, and the first built from the published package
 and not from a copy of the website on disk.
 
@@ -2167,7 +2167,7 @@ layout from before the page settled.
 Round three's one failure was different: a button's rim photographed a sub-pixel
 into a transition in `focus-ring-light`. Round four waits for every finite
 animation, bounded at three seconds, before the picture is taken. Both fixes are
-in crystal-preview's `tools/capture-frames.mjs` (commit `a65821c`). That gives
+in crystal-preview's `tools/capture-frames.mjs` (commit `689cd7b`). That gives
 102 runs without the select failure and 42 without the transition failure. Round
 four's other eighteen jobs were not started: GitHub reported that the account's
 recent payments had failed or its spending limit needed raising.
