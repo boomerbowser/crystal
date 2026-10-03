@@ -252,7 +252,7 @@
       "repo": "core",
       "area": "Text",
       "priority": "P0",
-      "status": "ruling",
+      "status": "done",
       "title": "Selected highlight contrast (D-39)",
       "depends": [],
       "target": "A highlighted word that is selected keeps 4.5:1 in every palette and mode.",

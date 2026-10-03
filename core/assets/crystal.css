@@ -2171,6 +2171,15 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 .cr-editor::selection {
     background: color-mix(in srgb, var(--cr-primary) 28%, transparent);
 }
+/* A highlighted word that is then selected takes the action pair, primary
+   with on-primary ink, which the resolver holds at 4.5:1 in every palette.
+   The 28% tint over the primary-soft highlight fell to 3.74:1 in Harbor
+   (D-39). Forced colours below still draws every selection in Highlight. */
+.cr-editor :where(mark)::selection,
+.cr-editor :where(mark) ::selection {
+    background: var(--cr-primary);
+    color: var(--cr-on-primary);
+}
 /* An empty block's prompt, read from `data-placeholder`. Engines mark the empty
    block with `.is-empty` (ProseMirror, TipTap) or leave it `:empty`; both are
    reached. */

@@ -27,6 +27,9 @@ for(const palette of Object.keys(D.palettes))for(const mode of ['light','dark'])
  check('Highlight (mark) text',p.onPrimarySoft,p.primarySoft,4.5,{palette,mode,kind:'text-mark'});
  for(const [label,base] of [['Editor selection on the surface',p.surface],['Editor selection on Haze',flatten(C.resolve(config,mode)['--cr-haze-fill'],p.surface)]])
   check(label,p.text,over(p.primary,base,.28),4.5,{palette,mode,kind:'text-mark'});
+ /* A highlighted word that is then selected takes the action pair (D-39). The
+    selection tint over the highlight measured 3.74:1 in Harbor. */
+ check('Selected highlight',p.onPrimary,p.primary,4.5,{palette,mode,kind:'text-mark'});
  /* A scrollbar thumb is a control, and it has to be seen against the surface it
     scrolls. It must never take the material's own surface colour, which matches
     the panel behind it (white on white on a light Frost panel). 3:1 is the

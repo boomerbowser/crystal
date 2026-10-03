@@ -5,9 +5,9 @@ not fixed. Each entry says what is wrong, why it matters, where it is, and what
 closing it would take.
 
 <!-- rulings-summary -->
-**Two entries are open**, D-37 and D-39, all from the media, text and recipe work of 2 October
+**One entry is open**, D-37, all from the media, text and recipe work of 2 October
 2026 ([`2026-10-02-media-text-and-recipe-parity.md`](2026-10-02-media-text-and-recipe-parity.md)).
-One waits on a ruling by Meridian; one is ruled ([`2026-10-02-rulings.md`](2026-10-02-rulings.md)) and open until built. Every
+No wait on a ruling by Meridian; one is ruled ([`2026-10-02-rulings.md`](2026-10-02-rulings.md)) and open until built. Every
 decision left on 29 September 2026 was ruled on
 ([`2026-09-29-rulings.md`](2026-09-29-rulings.md)) and is built.
 <!-- /rulings-summary -->
@@ -48,44 +48,11 @@ Task C-M3, and R-A8 under options (a) and (b).
 **Ruled on 2026-10-02 by Meridian Digital: (a) Specify a travelling pill for every strip: one .cr-indicator.pill behind the selected segment, moved by a new critically damped recipe between measured positions, on tabs, the segmented control, the dock, bottom navigation and toggle button groups; selection stays label weight.** C-M3 becomes ready; adds R-A8, The travelling selection pill on strips. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-M3).
 <!-- /ruling:D-37 -->
 
-## D-39 · A selected highlight falls below 4.5:1 in Harbor
-
-**What.** D-34 kept the highlight (`mark`, on-primary-soft ink on the
-primary-soft fill) and the editor's selection (a 28% primary tint under
-unchanged ink) as built, and both pass on their own: the highlight measures
-6.06:1 or better and the selection 7.63:1 or better in every palette and mode
-(C-T1 checks them). Where they meet, a highlighted word that is then selected,
-the ink stays on-primary-soft and the tint composites over the primary-soft
-fill. In five palettes that is 5.7:1 or better. In Harbor it is **4.34:1 in
-light and 3.74:1 in dark**, under the 4.5:1 text minimum.
-
-**Why it matters.** It lasts only while the text is selected, but a person
-selects text to read it, copy it or format it, and Crystal holds all text to
-4.5:1. A palette added later can fail the same way, because the composite
-depends on how close a palette's primary is to its primary-soft.
-
-**Options.** Each changes how a selected highlight looks; nothing else moves.
-
-- (a) A selected highlight takes primary with on-primary ink, the action
-  pair, which the resolver's audit already holds at 4.5:1 for every palette,
-  including any added later. Lowest today 4.74:1. The selection inside a
-  highlight is then stronger than elsewhere **(rec.)**.
-- (b) The tint over a highlight drops to 16%. Lowest today 4.53:1. The
-  smallest visible change, but the margin is thin and a new palette is not
-  guaranteed to pass.
-- (c) Keep as built and record Harbor as an exception.
-
-**Where.** `core/assets/crystal.css` (`.cr-editor ::selection`), and a check in
-`tools/validate-tokens.cjs` for whichever pair is chosen. Measured with the
-same arithmetic as the token checks; the values above are for 28% and 16%
-tints of each palette's primary over its primary-soft.
-
-<!-- ruling:D-39 --><!-- /ruling:D-39 -->
-
 ## Closed most recently
 
 | Closed | Entries | How |
 |---|---|---|
+| 3 October 2026 | D-39 | By Meridian's ruling (a): a selected highlight takes the action pair. |
 | 2 October 2026 | D-36 | Measured, fixed, and found two more surfaces than the static report. |
 | 2 October 2026 | D-30, D-31, D-32, D-33, D-34, D-35 | Built from Meridian's rulings of the same day. D-39 opened from D-34's measurements. |
 | 2 October 2026 | D-38 | Opened and closed the same day: `crystal.css` writes the WebKit alias first, so a consumer's minifier keeps the unprefixed property. |

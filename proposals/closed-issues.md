@@ -2418,6 +2418,42 @@ intact. Several are cited by name from the code they produced.
 
 **Closed** on 2 October 2026 by C-R2. Measured on a page loading only Crystal's two stylesheets, six elements kept a backdrop blur under forced colours: the three D-36 named and also the tag and the count (`.cr-resin-haze`), which the static report had not reached. The choices' base rule has the reset's specificity and comes later; the badge and the tag were not in the reset's list. The reset now names them and is important. After the change no element on that page keeps a backdrop-filter under forced colours, in either mode, and nothing changes without forced colours. The measured check, a browser gate with forced colours emulated, belongs to crystal-preview, which runs a browser in CI; it is part of C-R3 and will be seen failing on 2.3.1 before the preview adopts the release.
 
+## D-39 · A selected highlight falls below 4.5:1 in Harbor
+
+**What.** D-34 kept the highlight (`mark`, on-primary-soft ink on the
+primary-soft fill) and the editor's selection (a 28% primary tint under
+unchanged ink) as built, and both pass on their own: the highlight measures
+6.06:1 or better and the selection 7.63:1 or better in every palette and mode
+(C-T1 checks them). Where they meet, a highlighted word that is then selected,
+the ink stays on-primary-soft and the tint composites over the primary-soft
+fill. In five palettes that is 5.7:1 or better. In Harbor it is **4.34:1 in
+light and 3.74:1 in dark**, under the 4.5:1 text minimum.
+
+**Why it matters.** It lasts only while the text is selected, but a person
+selects text to read it, copy it or format it, and Crystal holds all text to
+4.5:1. A palette added later can fail the same way, because the composite
+depends on how close a palette's primary is to its primary-soft.
+
+**Options.** Each changes how a selected highlight looks; nothing else moves.
+
+- (a) A selected highlight takes primary with on-primary ink, the action
+  pair, which the resolver's audit already holds at 4.5:1 for every palette,
+  including any added later. Lowest today 4.74:1. The selection inside a
+  highlight is then stronger than elsewhere **(rec.)**.
+- (b) The tint over a highlight drops to 16%. Lowest today 4.53:1. The
+  smallest visible change, but the margin is thin and a new palette is not
+  guaranteed to pass.
+- (c) Keep as built and record Harbor as an exception.
+
+**Where.** `core/assets/crystal.css` (`.cr-editor ::selection`), and a check in
+`tools/validate-tokens.cjs` for whichever pair is chosen. Measured with the
+same arithmetic as the token checks; the values above are for 28% and 16%
+tints of each palette's primary over its primary-soft.
+
+**Ruled on 2026-10-03 by Meridian Digital: (a) A selected highlight takes primary with on-primary ink, the action pair the resolver already holds at 4.5:1 in every palette.** C-T3 becomes ready. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-T3).
+
+**Closed** on 3 October 2026 by C-T3, on Meridian's ruling (a). `.cr-editor :where(mark)::selection` takes `--cr-primary` with `--cr-on-primary`; forced colours still draws every selection in `Highlight`. `tools/validate-tokens.cjs` checks the pair in every palette and mode, 4.74:1 at worst, and failed on the previous composite (4.34:1 and 3.74:1 in Harbor) before the change. Measured in Chromium: a selection inside `mark` computes the primary fill and the on-primary ink, and a plain selection keeps the 28% tint.
+
 ## D-38 · Resin renders flat once a consumer minifies `crystal.css`
 
 **What.** Crystal React's CI, the first run in three days that GitHub started,

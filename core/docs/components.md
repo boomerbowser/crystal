@@ -350,7 +350,7 @@ The editor: a field shell holding the toolbar and the document. The checklist's 
   </div>
 </div>
 
-**A highlight and a selection differ (D-34).** A highlight is `mark`, the primary-soft pair, as prose renders it. The editor's selection is a 28% primary tint under unchanged ink, so a highlighted word that is then selected still looks selected. The highlight measures 6.06:1 or better and the selection 7.63:1 or better in every palette and mode. Where they overlap, Harbor falls under 4.5:1, which is open as D-39.
+**A highlight and a selection differ (D-34).** A highlight is `mark`, the primary-soft pair, as prose renders it. The editor's selection is a 28% primary tint under unchanged ink, so a highlighted word that is then selected still looks selected. The highlight measures 6.06:1 or better and the selection 7.63:1 or better in every palette and mode. A highlighted word that is then selected takes the action pair, primary with on-primary ink, 4.74:1 or better: the 28% tint over the highlight fell to 3.74:1 in Harbor (D-39).
 
 ## See it working
 

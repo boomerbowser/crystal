@@ -154,18 +154,18 @@ meaning when a product re-themes. See [Color](colors.html#status).
 
 <!-- generated:contrast -->
 
-1,824 contrast cases are computed across all six palettes in both
+1,836 contrast cases are computed across all six palettes in both
 modes, including bounded composites: Resin and Haze control labels are checked with the
 optical sheen beneath the protective fill, against content composites and RGB-corner
 backdrops with the fixed Resin fill.
 
 | Measure | Result |
 |---|---|
-| Cases computed | 1,824 |
+| Cases computed | 1,836 |
 | Failures | 0 |
 | Lowest result of any kind | 3.07:1 |
 | Lowest normal-text result | 4.67:1 |
-| Checks run | 2026-10-02 |
+| Checks run | 2026-10-03 |
 
 Normal text is held to 4.5:1. Essential non-text (focus rings, control boundaries,
 indicator lines) is held to the separate 3:1 threshold that applies to those elements.
@@ -176,7 +176,7 @@ white rim, which measures 1.06:1 against the page in light mode and 1.63:1 in da
 under the 3:1 above. Meridian ruled on 28 September 2026 (D-24) that the field is drawn as
 written: the rim does not identify a field. A field is identified by the Resin shell's
 fill and float shadow, the Haze well the value is read on, and the visible label every
-Crystal field carries. The 1,824 checks above do not cover those. A product that needs a
+Crystal field carries. The 1,836 checks above do not cover those. A product that needs a
 field boundary it can defend against WCAG 1.4.11 on its own terms should measure its own
 backdrops and not rely on this table.
 

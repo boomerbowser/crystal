@@ -114,6 +114,10 @@ ruled and follows in a later minor version.
   reset.** Twelve rules wrote `backdrop-filter` without its `-webkit-` form; each
   now writes the alias first. The choices read `--cr-resin-blur`, which
   resolves to the 20px they wrote. Computed values in Chromium are unchanged.
+- **A selected highlight keeps 4.5:1 in every palette** (D-39). A highlighted
+  word that is then selected kept the highlight's ink under the 28% selection
+  tint, 3.74:1 in Harbor dark. It now takes the action pair, primary with
+  on-primary ink, 4.74:1 or better, which the resolver holds for any palette.
 - **A checklist's checkbox stays 26px inside an editor's field shell.** The
   shell's 44px text-entry floor reached it, stretching the box into a pill
   11px below its line.
