@@ -20,7 +20,7 @@
       "repo": "core",
       "area": "Release",
       "priority": "P0",
-      "status": "ready",
+      "status": "done",
       "title": "Publish @crystal-ui/core 2.4.0",
       "depends": [],
       "target": "2.4.0 on the registry with the media and text recipes, surface-recipes.json and the catalogue changes.",
@@ -52,7 +52,7 @@
       "repo": "preview",
       "area": "Release",
       "priority": "P1",
-      "status": "blocked",
+      "status": "ready",
       "title": "Show the media and text recipes in the preview and re-baseline",
       "depends": [
         "C-R1"
@@ -141,6 +141,21 @@
         "The video player entry names the choice in its anatomy and semantics"
       ],
       "where": "core/assets/crystal.css, core/tokens/catalogue/11-media.json"
+    },
+    {
+      "id": "C-S6",
+      "repo": "core",
+      "area": "Catalogue",
+      "priority": "P2",
+      "status": "ready",
+      "title": "Assign haze to the popover, the pop-confirm and the menu",
+      "depends": [],
+      "target": "Crystal React measured the Haze reading fill inside their Frost panels on 3 October (R-A9): an 80% fill at 1.95px and opacity 1 on ::after, grain intact. A twelfth extend-catalogue script adds haze to the three entries' surfaces, citing that measurement, and removes them from UNMEASURED in build-catalogue.cjs.",
+      "acceptance": [
+        "extend-catalogue-12.cjs cites the measurement",
+        "UNMEASURED lists only the three colour controls (R-A10)"
+      ],
+      "where": "tools/, core/tokens/catalogue/07-overlays.json, 06-feedback.json"
     },
     {
       "id": "C-M1",
@@ -386,7 +401,7 @@
       "repo": "react",
       "area": "Media",
       "priority": "P1",
-      "status": "blocked",
+      "status": "ready",
       "title": "Wear the published media recipes and delete the copies",
       "depends": [
         "C-R1"
@@ -566,7 +581,7 @@
       "repo": "react",
       "area": "Text",
       "priority": "P1",
-      "status": "blocked",
+      "status": "ready",
       "title": "Wear the published prose and editor recipes and delete the copies",
       "depends": [
         "C-R1"
@@ -667,7 +682,7 @@
       "repo": "react",
       "area": "Audit",
       "priority": "P2",
-      "status": "ready",
+      "status": "done",
       "title": "The Haze reading fill in the popover, the pop-confirm and the menu",
       "depends": [],
       "target": "Popover and Popconfirm content, and Menu rows, sit on the Haze reading fill their catalogue entries specify inside the Frost panel, measured against the .cr-haze recipe; core then assigns the haze surface and removes the three from UNMEASURED in build-catalogue.cjs.",

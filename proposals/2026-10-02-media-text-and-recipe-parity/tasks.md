@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-47 tasks: 32 done, 11 ready, 4 blocked, 0 needs a ruling, 0 dropped.
+48 tasks: 34 done, 13 ready, 1 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -41,13 +41,14 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 
 | ID | Priority | Status | Task | Depends on |
 |---|---|---|---|---|
-| [C-R1](#c-r1) | P0 | Ready | Publish @crystal-ui/core 2.4.0 | – |
+| [C-R1](#c-r1) | P0 | Done | Publish @crystal-ui/core 2.4.0 | – |
 | [C-R2](#c-r2) | P2 | Done | Remove the backdrop blur that survives forced colours (D-36) | – |
 | [C-S1](#c-s1) | P2 | Done | Resolve the partial surface recipes (F-2 items 3 to 9) | – |
 | [C-S2](#c-s2) | P1 | Done | Platform guide for surface-recipes.json in CONTRACT.md | – |
 | [C-S3](#c-s3) | P2 | Done | Measure before assigning, as a contract rule (re-evaluation rec. 1) | – |
 | [C-S4](#c-s4) | P2 | Done | Check prose against surface in the build (re-evaluation rec. 3) | – |
 | [C-S5](#c-s5) | P2 | Ready | Caption style in the media recipe | – |
+| [C-S6](#c-s6) | P2 | Ready | Assign haze to the popover, the pop-confirm and the menu | – |
 | [C-M1](#c-m1) | P2 | Done | Material presets as entrances (D-31) | – |
 | [C-M2](#c-m2) | P2 | Done | Rule on the 20 unplayed assignments (D-32) | – |
 | [C-M3](#c-m3) | P2 | Ready | Selection motion for strips and groups (D-37) | – |
@@ -59,16 +60,16 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 
 ### C-R1
 
-**Publish @crystal-ui/core 2.4.0.** Release, P0, ready.
+**Publish @crystal-ui/core 2.4.0.** Release, P0, done.
 
 Target: 2.4.0 on the registry with the media and text recipes, surface-recipes.json and the catalogue changes.
 
 Done when:
 
-- [ ] CHANGELOG entry under 2.4.0 lists every recipe, the catalogue changes and the new export
-- [ ] npm test passes; crystal-theme.css byte-identical or the change explained
-- [ ] verify-package: 19 exports, ./surface-recipes resolves
-- [ ] The distributable ZIP regenerated
+- [x] CHANGELOG entry under 2.4.0 lists every recipe, the catalogue changes and the new export
+- [x] npm test passes; crystal-theme.css byte-identical or the change explained
+- [x] verify-package: 19 exports, ./surface-recipes resolves
+- [x] The distributable ZIP regenerated
 
 Where: `CHANGELOG.md, core/package.json`.
 
@@ -152,6 +153,19 @@ Done when:
 - [ ] The video player entry names the choice in its anatomy and semantics
 
 Where: `core/assets/crystal.css, core/tokens/catalogue/11-media.json`.
+
+### C-S6
+
+**Assign haze to the popover, the pop-confirm and the menu.** Catalogue, P2, ready.
+
+Target: Crystal React measured the Haze reading fill inside their Frost panels on 3 October (R-A9): an 80% fill at 1.95px and opacity 1 on ::after, grain intact. A twelfth extend-catalogue script adds haze to the three entries' surfaces, citing that measurement, and removes them from UNMEASURED in build-catalogue.cjs.
+
+Done when:
+
+- [ ] extend-catalogue-12.cjs cites the measurement
+- [ ] UNMEASURED lists only the three colour controls (R-A10)
+
+Where: `tools/, core/tokens/catalogue/07-overlays.json, 06-feedback.json`.
 
 ### C-M1
 
@@ -261,11 +275,11 @@ Where: `core/assets/crystal.css, tools/validate-tokens.cjs`.
 
 | ID | Priority | Status | Task | Depends on |
 |---|---|---|---|---|
-| [C-R3](#c-r3) | P1 | Blocked | Show the media and text recipes in the preview and re-baseline | C-R1 |
+| [C-R3](#c-r3) | P1 | Ready | Show the media and text recipes in the preview and re-baseline | C-R1 |
 
 ### C-R3
 
-**Show the media and text recipes in the preview and re-baseline.** Release, P1, blocked.
+**Show the media and text recipes in the preview and re-baseline.** Release, P1, ready.
 
 Target: crystal-preview on 2.4.0, with specimens of the stage, transport, caption, audio card, editor and selection bar in the playground.
 
@@ -288,7 +302,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-M6](#r-m6) | P1 | Done | MediaControls: transport padding, readouts on Haze, sliders inset by half a thumb | – |
 | [R-M7](#r-m7) | P2 | Done | PlayerShell uses the player's own full screen | – |
 | [R-M8](#r-m8) | P2 | Done | Real media fixtures for stories and gates | – |
-| [R-M9](#r-m9) | P1 | Blocked | Wear the published media recipes and delete the copies | C-R1 |
+| [R-M9](#r-m9) | P1 | Ready | Wear the published media recipes and delete the copies | C-R1 |
 | [R-M10](#r-m10) | P1 | Ready | Prove audio-track switching in Safari | – |
 | [R-M11](#r-m11) | P3 | Done | Draw the first cue before playback starts | – |
 | [R-M12](#r-m12) | P2 | Done | Caption appearance settings (size and backing) | – |
@@ -300,14 +314,14 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-T6](#r-t6) | P2 | Done | Mentions popover wears .cr-frost | – |
 | [R-T7](#r-t7) | P2 | Done | EditorBlock offers the bound editor in a story | D-30 |
 | [R-T8](#r-t8) | P3 | Ready | Screen-reader pass on the editor | – |
-| [R-T9](#r-t9) | P1 | Blocked | Wear the published prose and editor recipes and delete the copies | C-R1 |
+| [R-T9](#r-t9) | P1 | Ready | Wear the published prose and editor recipes and delete the copies | C-R1 |
 | [R-A0](#r-a0) | P1 | Done | Motion catalogue story | – |
 | [R-A1](#r-a1) | P1 | Ready | Sort the hand-written material (re-evaluation rec. 6) | – |
 | [R-A2](#r-a2) | P2 | Ready | Confirm the 105 entries whose surface is not worn in their own markup | – |
 | [R-A3](#r-a3) | P2 | Done | Cascader plays the field recipes | – |
 | [R-A4](#r-a4) | P2 | Done | Product gallery and playlist block play their assigned motion | – |
 | [R-A5](#r-a5) | P3 | Done | The view stack plays view-push-out | – |
-| [R-A9](#r-a9) | P2 | Ready | The Haze reading fill in the popover, the pop-confirm and the menu | – |
+| [R-A9](#r-a9) | P2 | Done | The Haze reading fill in the popover, the pop-confirm and the menu | – |
 | [R-A10](#r-a10) | P2 | Ready | The Resin thumb on the colour area, slider and wheel | – |
 | [R-Q1](#r-q1) | P2 | Ready | Documentation site from the surfaces (re-evaluation rec. 7, Slice Q) | C-R1 |
 | [R-A8](#r-a8) | P2 | Blocked | The travelling selection pill on strips (D-37) | C-M3, C-R1 |
@@ -417,7 +431,7 @@ Where: `.storybook/fixtures/`.
 
 ### R-M9
 
-**Wear the published media recipes and delete the copies.** Media, P1, blocked.
+**Wear the published media recipes and delete the copies.** Media, P1, ready.
 
 Target: VideoPlayer, AudioPlayer and MediaControls wear .cr-media, .cr-media-bar, .cr-resin.transport and .cr-media-caption.
 
@@ -569,7 +583,7 @@ Where: `src/editor/`.
 
 ### R-T9
 
-**Wear the published prose and editor recipes and delete the copies.** Text, P1, blocked.
+**Wear the published prose and editor recipes and delete the copies.** Text, P1, ready.
 
 Target: Prose and RichTextSurface wear .cr-prose, .cr-editor and .cr-editor-toolbar; the selection toolbar wears .cr-frost.bar.
 
@@ -654,14 +668,14 @@ Where: `src/components/ViewStack/`.
 
 ### R-A9
 
-**The Haze reading fill in the popover, the pop-confirm and the menu.** Audit, P2, ready.
+**The Haze reading fill in the popover, the pop-confirm and the menu.** Audit, P2, done.
 
 Target: Popover and Popconfirm content, and Menu rows, sit on the Haze reading fill their catalogue entries specify inside the Frost panel, measured against the .cr-haze recipe; core then assigns the haze surface and removes the three from UNMEASURED in build-catalogue.cjs.
 
 Done when:
 
-- [ ] Measured in the Storybook (computed ::before fill and feather) for each of the three
-- [ ] A verify:materials row for each
+- [x] Measured in the Storybook (computed ::before fill and feather) for each of the three
+- [x] A verify:materials row for each
 
 Where: `src/components/Popover/, Popconfirm/, Menu/`.
 

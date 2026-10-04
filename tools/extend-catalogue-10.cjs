@@ -76,7 +76,10 @@ const FIELDS = [
      Measured on 2 October 2026 in Crystal React's Storybook (dev server, so no
      minifier): Feedback/Toast and Feedback/Notification compute Frost's
      blur(40px) saturate(1.25) and paint a feathered 80% Haze layer on their
-     own ::before. */
+     own ::before. That reading missed the layer's opacity: on ::before it
+     replaced .cr-frost's grain and was drawn at the grain's 4.5%. Measured
+     again on 3 October, after Crystal React moved it to ::after: an 80% fill
+     at 1.95px and opacity 1, with the grain intact. */
   ['toast', 'surface', ['frost'], ['frost', 'haze']],
   ['notification', 'surface', ['frost'], ['frost', 'haze']],
 
