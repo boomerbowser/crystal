@@ -10,6 +10,14 @@ and the rulings of the same day (`proposals/2026-10-02-rulings.md`).
 `crystal-theme.css` is byte-identical. The travelling selection pill (D-37) is
 ruled and follows in a later minor version.
 
+**Published as it stands.** A few changes below alter Crystal's contract in ways
+a strict reading of semantic versioning would call breaking: the catalogue's
+removed motion assignments and moved surfaces, the important forced-colours
+reset, the selected highlight's colours, and the choices reading
+`--cr-resin-blur`. They ship in 2.4.0, and any breaking change in Crystal 2.x
+will be fixed in Crystal 3.0 rather than in a 2.x release (added to the
+repository's changelog and the release notes on 3 October 2026).
+
 ### Added
 
 - **Each surface's recipe as values.** `core/tokens/surface-recipes.json`,
