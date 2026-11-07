@@ -287,7 +287,8 @@
       ],
       "material": "Frost panel with Haze reading fill (R15e)",
       "surface": [
-        "frost"
+        "frost",
+        "haze"
       ],
       "geometry": "Content radius; anchored to the trigger",
       "semantics": "Focus moves into the popover, returns to the trigger on dismiss, and Escape cancels",

@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-49 tasks: 36 done, 12 ready, 1 blocked, 0 needs a ruling, 0 dropped.
+49 tasks: 37 done, 11 ready, 1 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -49,7 +49,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-S3](#c-s3) | P2 | Done | Measure before assigning, as a contract rule (re-evaluation rec. 1) | – |
 | [C-S4](#c-s4) | P2 | Done | Check prose against surface in the build (re-evaluation rec. 3) | – |
 | [C-S5](#c-s5) | P2 | Ready | Caption style in the media recipe | – |
-| [C-S6](#c-s6) | P2 | Ready | Assign haze to the popover, the pop-confirm and the menu | – |
+| [C-S6](#c-s6) | P2 | Done | Assign haze to the popover, the pop-confirm and the menu | – |
 | [C-S7](#c-s7) | P2 | Ready | Correct the editor recipe's floor, toolbar backing and placements (D-40) | – |
 | [C-M1](#c-m1) | P2 | Done | Material presets as entrances (D-31) | – |
 | [C-M2](#c-m2) | P2 | Done | Rule on the 20 unplayed assignments (D-32) | – |
@@ -158,14 +158,14 @@ Where: `core/assets/crystal.css, core/tokens/catalogue/11-media.json`.
 
 ### C-S6
 
-**Assign haze to the popover, the pop-confirm and the menu.** Catalogue, P2, ready.
+**Assign haze to the popover, the pop-confirm and the menu.** Catalogue, P2, done.
 
 Target: Crystal React measured the Haze reading fill inside their Frost panels on 3 October (R-A9): an 80% fill at 1.95px and opacity 1 on ::after, grain intact. A twelfth extend-catalogue script adds haze to the three entries' surfaces, citing that measurement, and removes them from UNMEASURED in build-catalogue.cjs.
 
 Done when:
 
-- [ ] extend-catalogue-12.cjs cites the measurement
-- [ ] UNMEASURED lists only the three colour controls (R-A10)
+- [x] extend-catalogue-12.cjs cites the measurement
+- [x] UNMEASURED lists only the three colour controls (R-A10)
 
 Where: `tools/, core/tokens/catalogue/07-overlays.json, 06-feedback.json`.
 

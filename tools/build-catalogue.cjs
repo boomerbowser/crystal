@@ -100,9 +100,6 @@ function loadStatus(known) {
    here that no longer needs it fails the build, so the list cannot outlive
    its reason. */
 const UNMEASURED = {
-  popover: { material: 'Haze', task: 'R-A9', why: 'the Haze reading fill; Crystal React draws Haze only on the buttons\' pads' },
-  popconfirm: { material: 'Haze', task: 'R-A9', why: 'the Haze reading fill; Crystal React draws Haze only on the buttons\' pads' },
-  menu: { material: 'Haze', task: 'R-A9', why: 'Haze rows; not yet measured on a menu' },
   'color-area': { material: 'Resin', task: 'R-A10', why: 'the Resin thumb; Crystal React\'s thumb is the picked colour' },
   'color-slider': { material: 'Resin', task: 'R-A10', why: 'the Resin thumb; Crystal React\'s thumb is the picked colour' },
   'color-wheel': { material: 'Resin', task: 'R-A10', why: 'the Resin thumb; Crystal React\'s thumb is the picked colour' },

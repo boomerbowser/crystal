@@ -147,7 +147,7 @@
       "repo": "core",
       "area": "Catalogue",
       "priority": "P2",
-      "status": "ready",
+      "status": "done",
       "title": "Assign haze to the popover, the pop-confirm and the menu",
       "depends": [],
       "target": "Crystal React measured the Haze reading fill inside their Frost panels on 3 October (R-A9): an 80% fill at 1.95px and opacity 1 on ::after, grain intact. A twelfth extend-catalogue script adds haze to the three entries' surfaces, citing that measurement, and removes them from UNMEASURED in build-catalogue.cjs.",

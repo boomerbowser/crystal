@@ -2428,7 +2428,8 @@
       "name": "Inline confirm",
       "category": "feedback",
       "surface": [
-        "frost"
+        "frost",
+        "haze"
       ],
       "motion": [
         "popover-in",
@@ -2557,7 +2558,8 @@
       "name": "Menu",
       "category": "overlays",
       "surface": [
-        "frost"
+        "frost",
+        "haze"
       ],
       "motion": [
         "menu-in",
@@ -2593,7 +2595,8 @@
       "name": "Popover",
       "category": "overlays",
       "surface": [
-        "frost"
+        "frost",
+        "haze"
       ],
       "motion": [
         "popover-in",
