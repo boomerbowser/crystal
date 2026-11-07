@@ -5,9 +5,9 @@ not fixed. Each entry says what is wrong, why it matters, where it is, and what
 closing it would take.
 
 <!-- rulings-summary -->
-**One entry is open**, D-37, all from the media, text and recipe work of 2 October
+**Three entries are open**, D-37, D-40 and D-41, all from the media, text and recipe work of 2 October
 2026 ([`2026-10-02-media-text-and-recipe-parity.md`](2026-10-02-media-text-and-recipe-parity.md)).
-No wait on a ruling by Meridian; one is ruled ([`2026-10-02-rulings.md`](2026-10-02-rulings.md)) and open until built. Every
+One waits on a ruling by Meridian; one is ruled ([`2026-10-02-rulings.md`](2026-10-02-rulings.md)) and open until built; D-40 is a defect with a fix specified. Every
 decision left on 29 September 2026 was ruled on
 ([`2026-09-29-rulings.md`](2026-09-29-rulings.md)) and is built.
 <!-- /rulings-summary -->
@@ -47,6 +47,65 @@ Task C-M3, and R-A8 under options (a) and (b).
 <!-- ruling:D-37 -->
 **Ruled on 2026-10-02 by Meridian Digital: (a) Specify a travelling pill for every strip: one .cr-indicator.pill behind the selected segment, moved by a new critically damped recipe between measured positions, on tabs, the segmented control, the dock, bottom navigation and toggle button groups; selection stays label weight.** C-M3 becomes ready; adds R-A8, The travelling selection pill on strips. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-M3).
 <!-- /ruling:D-37 -->
+
+## D-40 · Three faults in the editor recipe
+
+**What.** Found by Crystal React wearing `.cr-editor` and `.cr-editor-toolbar`
+from 2.4.0 (R-T9), measured in Chromium on 7 November 2026, computed values:
+
+1. `.cr-editor { min-height: calc(var(--cr-text-body-leading) * 4) }` multiplies
+   a unitless leading (`1.5`), so the result is the number `6`, invalid for a
+   length at computed-value time. A bare `.cr-editor` computes `min-height: 0px`:
+   an empty editor collapses to its padding. The checklist's control offset,
+   `calc((var(--cr-text-body-leading) - var(--cr-choice-box-size, 26px)) / 2)`,
+   subtracts a length from a number and computes `margin-top: 0px` the same way.
+2. On a fine pointer `.cr-editor-toolbar` is `position: sticky; inset-block-start: 0`
+   with no background (`rgba(0, 0, 0, 0)`), so a document scrolled under it
+   shows through the controls.
+3. `.below` asks for "the touch placement on any pointer" but sets only the
+   order, the inset and the rule; the touch placement's single scrolling row is
+   in the `pointer: coarse` block alone. And there is no counterpart: a product
+   that wants the toolbar above the text on a touch screen has to undo the
+   coarse rule property by property.
+
+**Why it matters.** The first is a value the recipe states and no renderer
+draws. The second makes the toolbar unreadable over text on every desktop
+editor that scrolls with the page. The third leaves two platforms to guess what
+a placement means.
+
+**Closing it.** Multiply by `1em` (`calc(var(--cr-text-body-leading) * 1em * 4)`,
+and the same in the checklist offset), or publish the leading as a length. Give
+the sticky toolbar the Haze fill Crystal React already paints under the bottom
+toolbar, rounded to the well. Add `.above`, and either give `.below` the
+touch row or say it is placement only. Crystal React keeps three local rules
+for these meanwhile (`RichTextSurface.module.scss`: the 144px floor, the
+toolbar kept in the flow, and the `top` placement undoing the coarse rule) and
+drops them with this fix.
+
+**Where.** `core/assets/crystal.css`. Task C-S7.
+
+## D-41 · The body's leading is not `--cr-leading`
+
+**What.** `crystal.css` sets `body { line-height: 1.6 }`; the theme publishes
+`--cr-leading: 1.5` and `--cr-text-body-leading: 1.5`. Recipes that read the
+token (`.cr-media-bar`, `.cr-media.audio`) set 24px lines on 16px text inside a
+page whose inherited lines are 25.6px. Crystal React's audio card moved from
+the inherited 1.6 to the token's 1.5 when it began wearing the recipe
+(7 November 2026).
+
+**Why it matters.** Two leadings for body text, one written and one published,
+and which one a component gets depends on whether its recipe names the token.
+
+**Options.** (a) The body takes the published 1.5 (`var(--cr-leading)`), which
+the Swift and Kotlin exports already carry as a 24px reading leading
+**(rec.)**. (b) The tokens move to 1.6, and the reading leading to 25.6px on
+every platform. Changing the body moves every page's text; changing the token
+moves every recipe that reads it. It is a visible change either way, so it is
+Meridian's to choose.
+
+**Where.** `core/assets/crystal.css`, `core/tokens/`. Task C-S8 once ruled.
+
+<!-- ruling:D-41 --><!-- /ruling:D-41 -->
 
 ## Closed most recently
 

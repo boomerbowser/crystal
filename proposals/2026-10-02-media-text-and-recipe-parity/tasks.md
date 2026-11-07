@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-48 tasks: 34 done, 13 ready, 1 blocked, 0 needs a ruling, 0 dropped.
+49 tasks: 36 done, 12 ready, 1 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -36,6 +36,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | D-35 · The icon set drops the editor's glyphs | C-I1 | Ruled | (a) A named list of icons the vocabulary requires, kept whatever the cap, with every icon that leaves disclosed, by Meridian Digital on 2026-10-02 |
 | D-37 · Selection that travels between segments | C-M3 | Ruled | (a) Specify a travelling pill for every strip: one .cr-indicator.pill behind the selected segment, moved by a new critically damped recipe between measured positions, on tabs, the segmented control, the dock, bottom navigation and toggle button groups; selection stays label weight, by Meridian Digital on 2026-10-02 |
 | D-39 · A selected highlight falls below 4.5:1 in Harbor | C-T3 | Ruled | (a) A selected highlight takes primary with on-primary ink, the action pair the resolver already holds at 4.5:1 in every palette, by Meridian Digital on 2026-10-03 |
+| D-41 · The body's leading is not --cr-leading | – | Needs a ruling | – |
 
 ## Crystal (`@crystal-ui/core`)
 
@@ -49,6 +50,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-S4](#c-s4) | P2 | Done | Check prose against surface in the build (re-evaluation rec. 3) | – |
 | [C-S5](#c-s5) | P2 | Ready | Caption style in the media recipe | – |
 | [C-S6](#c-s6) | P2 | Ready | Assign haze to the popover, the pop-confirm and the menu | – |
+| [C-S7](#c-s7) | P2 | Ready | Correct the editor recipe's floor, toolbar backing and placements (D-40) | – |
 | [C-M1](#c-m1) | P2 | Done | Material presets as entrances (D-31) | – |
 | [C-M2](#c-m2) | P2 | Done | Rule on the 20 unplayed assignments (D-32) | – |
 | [C-M3](#c-m3) | P2 | Ready | Selection motion for strips and groups (D-37) | – |
@@ -166,6 +168,19 @@ Done when:
 - [ ] UNMEASURED lists only the three colour controls (R-A10)
 
 Where: `tools/, core/tokens/catalogue/07-overlays.json, 06-feedback.json`.
+
+### C-S7
+
+**Correct the editor recipe's floor, toolbar backing and placements (D-40).** Recipes, P2, ready.
+
+Target: .cr-editor's min-height and the checklist's control offset compute to valid lengths; the sticky .cr-editor-toolbar has a backing so a document scrolled under it does not show through; .above mirrors .below, and .below says the touch placement it promises.
+
+Done when:
+
+- [ ] The three faults measured in a browser before and after (computed values)
+- [ ] Crystal React drops its three local workarounds in RichTextSurface.module.scss
+
+Where: `core/assets/crystal.css`.
 
 ### C-M1
 
@@ -302,7 +317,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-M6](#r-m6) | P1 | Done | MediaControls: transport padding, readouts on Haze, sliders inset by half a thumb | – |
 | [R-M7](#r-m7) | P2 | Done | PlayerShell uses the player's own full screen | – |
 | [R-M8](#r-m8) | P2 | Done | Real media fixtures for stories and gates | – |
-| [R-M9](#r-m9) | P1 | Ready | Wear the published media recipes and delete the copies | C-R1 |
+| [R-M9](#r-m9) | P1 | Done | Wear the published media recipes and delete the copies | C-R1 |
 | [R-M10](#r-m10) | P1 | Ready | Prove audio-track switching in Safari | – |
 | [R-M11](#r-m11) | P3 | Done | Draw the first cue before playback starts | – |
 | [R-M12](#r-m12) | P2 | Done | Caption appearance settings (size and backing) | – |
@@ -314,7 +329,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-T6](#r-t6) | P2 | Done | Mentions popover wears .cr-frost | – |
 | [R-T7](#r-t7) | P2 | Done | EditorBlock offers the bound editor in a story | D-30 |
 | [R-T8](#r-t8) | P3 | Ready | Screen-reader pass on the editor | – |
-| [R-T9](#r-t9) | P1 | Ready | Wear the published prose and editor recipes and delete the copies | C-R1 |
+| [R-T9](#r-t9) | P1 | Done | Wear the published prose and editor recipes and delete the copies | C-R1 |
 | [R-A0](#r-a0) | P1 | Done | Motion catalogue story | – |
 | [R-A1](#r-a1) | P1 | Ready | Sort the hand-written material (re-evaluation rec. 6) | – |
 | [R-A2](#r-a2) | P2 | Ready | Confirm the 105 entries whose surface is not worn in their own markup | – |
@@ -431,14 +446,14 @@ Where: `.storybook/fixtures/`.
 
 ### R-M9
 
-**Wear the published media recipes and delete the copies.** Media, P1, ready.
+**Wear the published media recipes and delete the copies.** Media, P1, done.
 
 Target: VideoPlayer, AudioPlayer and MediaControls wear .cr-media, .cr-media-bar, .cr-resin.transport and .cr-media-caption.
 
 Done when:
 
-- [ ] src/media/coreRecipes.test.ts removed with the copies
-- [ ] verify:appearance and verify:behaviour unchanged
+- [x] src/media/coreRecipes.test.ts removed with the copies
+- [x] verify:appearance and verify:behaviour unchanged
 
 Where: `src/components/VideoPlayer/, AudioPlayer/, MediaControls/`. Depends on C-R1.
 
@@ -583,13 +598,13 @@ Where: `src/editor/`.
 
 ### R-T9
 
-**Wear the published prose and editor recipes and delete the copies.** Text, P1, ready.
+**Wear the published prose and editor recipes and delete the copies.** Text, P1, done.
 
 Target: Prose and RichTextSurface wear .cr-prose, .cr-editor and .cr-editor-toolbar; the selection toolbar wears .cr-frost.bar.
 
 Done when:
 
-- [ ] styles/_prose.scss retired or reduced to what core does not publish
+- [x] styles/_prose.scss retired or reduced to what core does not publish
 
 Where: `src/styles/_prose.scss`. Depends on C-R1.
 

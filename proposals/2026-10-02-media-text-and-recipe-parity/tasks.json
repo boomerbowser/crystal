@@ -158,6 +158,21 @@
       "where": "tools/, core/tokens/catalogue/07-overlays.json, 06-feedback.json"
     },
     {
+      "id": "C-S7",
+      "repo": "core",
+      "area": "Recipes",
+      "priority": "P2",
+      "status": "ready",
+      "title": "Correct the editor recipe's floor, toolbar backing and placements (D-40)",
+      "depends": [],
+      "target": ".cr-editor's min-height and the checklist's control offset compute to valid lengths; the sticky .cr-editor-toolbar has a backing so a document scrolled under it does not show through; .above mirrors .below, and .below says the touch placement it promises.",
+      "acceptance": [
+        "The three faults measured in a browser before and after (computed values)",
+        "Crystal React drops its three local workarounds in RichTextSurface.module.scss"
+      ],
+      "where": "core/assets/crystal.css"
+    },
+    {
       "id": "C-M1",
       "repo": "core",
       "area": "Motion",
@@ -401,7 +416,7 @@
       "repo": "react",
       "area": "Media",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "title": "Wear the published media recipes and delete the copies",
       "depends": [
         "C-R1"
@@ -581,7 +596,7 @@
       "repo": "react",
       "area": "Text",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "title": "Wear the published prose and editor recipes and delete the copies",
       "depends": [
         "C-R1"
@@ -1141,6 +1156,62 @@
               "status": "dropped",
               "target": "The selected highlight stays as built; the accessibility chapter records the Harbor exception."
             }
+          }
+        }
+      ]
+    },
+    {
+      "id": "D-41",
+      "title": "The body's leading is not --cr-leading",
+      "task": null,
+      "after": [],
+      "summary": "crystal.css sets body { line-height: 1.6 }, while the theme publishes --cr-leading and --cr-text-body-leading as 1.5 and the Swift and Kotlin exports publish the reading leading as 24px (1.5 at 16px). Recipes that read the token set 24px lines inside pages whose inherited lines are 25.6px. Either change is visible on every page, so it is Meridian's to choose.",
+      "options": [
+        {
+          "id": "a",
+          "label": "The body takes the published 1.5, which the native exports already carry",
+          "recommended": true,
+          "effects": {
+            "add": [
+              {
+                "id": "C-S8",
+                "repo": "core",
+                "area": "Tokens",
+                "priority": "P2",
+                "status": "ready",
+                "title": "One body leading (D-41)",
+                "depends": [],
+                "target": "crystal.css's body line-height reads var(--cr-leading); nothing else changes.",
+                "acceptance": [
+                  "crystal.css, the theme and the platform exports agree on the body leading",
+                  "The preview re-baselined, every changed frame disclosed"
+                ],
+                "where": "core/assets/crystal.css, core/tokens/"
+              }
+            ]
+          }
+        },
+        {
+          "id": "b",
+          "label": "The tokens move to 1.6, and the reading leading to 25.6px on every platform",
+          "effects": {
+            "add": [
+              {
+                "id": "C-S8",
+                "repo": "core",
+                "area": "Tokens",
+                "priority": "P2",
+                "status": "ready",
+                "title": "One body leading (D-41)",
+                "depends": [],
+                "target": "--cr-leading, --cr-text-body-leading and typography.reading.leading move to 1.6 / 25.6px, regenerated into every export; every recipe that reads them is re-measured.",
+                "acceptance": [
+                  "crystal.css, the theme and the platform exports agree on the body leading",
+                  "The preview re-baselined, every changed frame disclosed"
+                ],
+                "where": "core/assets/crystal.css, core/tokens/"
+              }
+            ]
           }
         }
       ]
