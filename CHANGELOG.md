@@ -2,7 +2,7 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
-## [Unreleased]
+## [2.6.0] - 2026-11-08
 
 The travelling selection pill, by Meridian's ruling (a) on D-37. Nothing
 changes on a page that does not place a pill: `crystal-theme.css` is

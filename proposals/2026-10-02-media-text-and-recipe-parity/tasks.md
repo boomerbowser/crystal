@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-52 tasks: 45 done, 6 ready, 1 blocked, 0 needs a ruling, 0 dropped.
+53 tasks: 45 done, 7 ready, 1 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -53,6 +53,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-S7](#c-s7) | P2 | Done | Correct the editor recipe's floor, toolbar backing and placements (D-40) | – |
 | [C-S8](#c-s8) | P2 | Done | One body leading (D-41) | – |
 | [C-R4](#c-r4) | P1 | Done | Publish @crystal-ui/core 2.5.0 | C-S5, C-S7, C-S8 |
+| [C-R5](#c-r5) | P1 | Ready | Publish @crystal-ui/core 2.6.0 | C-M3 |
 | [C-M1](#c-m1) | P2 | Done | Material presets as entrances (D-31) | – |
 | [C-M2](#c-m2) | P2 | Done | Rule on the 20 unplayed assignments (D-32) | – |
 | [C-M3](#c-m3) | P2 | Done | Selection motion for strips and groups (D-37) | – |
@@ -211,6 +212,20 @@ Done when:
 
 Where: `CHANGELOG.md, core/package.json`. Depends on C-S5, C-S7, C-S8.
 
+### C-R5
+
+**Publish @crystal-ui/core 2.6.0.** Release, P1, ready.
+
+Target: 2.6.0 on the registry with the travelling selection pill: .cr-indicator.pill, the selection-travel recipe and CrystalMotion.travel().
+
+Done when:
+
+- [ ] CHANGELOG entry under 2.6.0; crystal-theme.css byte-identical to 2.5.0
+- [ ] npm test passes
+- [ ] The distributable ZIP regenerated
+
+Where: `CHANGELOG.md, core/package.json`. Depends on C-M3.
+
 ### C-M1
 
 **Material presets as entrances (D-31).** Motion, P2, done, by the ruling on D-31.
@@ -338,6 +353,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 
 | ID | Priority | Status | Task | Depends on |
 |---|---|---|---|---|
+| [R-A8](#r-a8) | P2 | Blocked | The travelling selection pill on strips (D-37) | C-M3, C-R5 |
 | [R-T10](#r-t10) | P1 | Done | Wear the 2.5.0 editor and caption recipes and drop the workarounds | C-R4 |
 | [R-M1](#r-m1) | P1 | Done | Playback rate and picture in picture on useMediaElement | – |
 | [R-M2](#r-m2) | P1 | Done | useMediaTracks: caption, audio and video tracks | – |
@@ -369,7 +385,20 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-A9](#r-a9) | P2 | Done | The Haze reading fill in the popover, the pop-confirm and the menu | – |
 | [R-A10](#r-a10) | P2 | Done | The Resin thumb on the colour area, slider and wheel | – |
 | [R-Q1](#r-q1) | P2 | Ready | Documentation site from the surfaces (re-evaluation rec. 7, Slice Q) | C-R1 |
-| [R-A8](#r-a8) | P2 | Blocked | The travelling selection pill on strips (D-37) | C-M3, C-R1 |
+
+### R-A8
+
+**The travelling selection pill on strips (D-37).** Motion, P2, blocked.
+
+Target: Tabs, the segmented control, the dock, bottom navigation and toggle button groups render one selection pill through useTravelMotion, measured against the selected segment and moved by the new recipe when a person changes the selection; instant under reduced motion; label weight unchanged.
+
+Done when:
+
+- [ ] verify:behaviour checks the pill ends under the selected segment after a click and after the arrow keys, in both text directions
+- [ ] verify:appearance unchanged at rest
+- [ ] No movement on first render or when the selection changes programmatically without a person
+
+Where: `src/motion/useTravelMotion.ts, src/components/Tabs/, SegmentedControl/, Dock/, BottomNavigation/`. Depends on C-M3, C-R5.
 
 ### R-T10
 
@@ -761,17 +790,3 @@ Done when:
 - [ ] 23 pages generated from surface-recipes.json and the manifest
 
 Where: `docs site (Slice Q)`. Depends on C-R1.
-
-### R-A8
-
-**The travelling selection pill on strips (D-37).** Motion, P2, blocked, by the ruling on D-37.
-
-Target: Tabs, the segmented control, the dock, bottom navigation and toggle button groups render one selection pill from styles/_strip.scss, measured against the selected segment and moved by the new recipe when a person changes the selection; instant under reduced motion; label weight unchanged.
-
-Done when:
-
-- [ ] verify:behaviour checks the pill ends under the selected segment after a click and after the arrow keys, in both text directions
-- [ ] verify:appearance unchanged at rest
-- [ ] No movement on first render or when the selection changes programmatically without a person
-
-Where: `src/styles/_strip.scss, src/components/Tabs/, SegmentedControl/, Dock/, BottomNavigation/, ButtonGroup/`. Depends on C-M3, C-R1.
