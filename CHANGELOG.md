@@ -2,11 +2,11 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
-## [Unreleased]
+## [2.5.0] - 2026-11-08
 
-The editor recipe's faults (D-40), the reader's caption style (C-S5) and one
-body leading by Meridian's ruling on D-41. `crystal-theme.css` changes only in
-the leading.
+The editor recipe's faults (D-40), the reader's caption style (C-S5), one
+body leading by Meridian's ruling on D-41, and the last surfaces awaiting a
+measurement. `crystal-theme.css` changes only in the leading.
 
 ### Changed
 
@@ -20,6 +20,14 @@ the leading.
   16px text, as the page around it does. The resolver derives `--cr-leading`
   from the body step, and `crystal.css`'s body reads `var(--cr-leading)`.
   Native apps reading `typography.readingLeading` move from 24 to 25.6 points.
+
+- **The last surfaces awaiting a measurement (C-S6, R-A10).** The popover,
+  the pop-confirm and the menu add `haze`: each Frost panel's recessed overlay,
+  measured on Crystal React's built stories in light and dark. The colour area,
+  the colour slider and the colour wheel move from `none` to `resin`, now that
+  Crystal React draws their Resin thumb. No catalogue entry awaits a
+  measurement; the material prose was already right, and only the surfaces
+  change.
 
 ### Fixed
 
