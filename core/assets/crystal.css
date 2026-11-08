@@ -1899,12 +1899,6 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     padding-inline: var(--cr-spacing-xs);
     border-radius: calc(var(--cr-radius) - 4px);
 }
-/* Two rows of 48px targets, the 4px gap between them, 4px above and below and
-   the 1px rim: the cue clears the wrapped transport as it clears one row
-   (D-42). */
-.cr-media-caption {
-    --cr-media-transport: 110px;
-}
 }
 
 /* A caption cue is a label over a moving backdrop, which is what Stone is for.
@@ -1950,6 +1944,15 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     border-radius: inherit;
     background: var(--cr-caption-backing, var(--cr-stone-fill));
     filter: blur(var(--cr-caption-feather, var(--cr-stone-feather)));
+}
+
+/* Below 420px the transport wraps to two rows: two 48px targets, the 4px gap
+   between them, 4px above and below and the 1px rim. The cue clears the
+   wrapped transport as it clears one row (D-42). */
+@container (max-width: 420px) {
+.cr-media-caption {
+    --cr-media-transport: 110px;
+}
 }
 
 /* The reader's caption style. Captions are the reader's, so a player offers a
