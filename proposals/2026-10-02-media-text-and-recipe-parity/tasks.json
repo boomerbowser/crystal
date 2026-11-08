@@ -208,6 +208,43 @@
       "where": "CHANGELOG.md, core/package.json"
     },
     {
+      "id": "C-R5",
+      "repo": "core",
+      "area": "Release",
+      "priority": "P1",
+      "status": "ready",
+      "title": "Publish @crystal-ui/core 2.6.0",
+      "depends": [
+        "C-M3"
+      ],
+      "target": "2.6.0 on the registry with the travelling selection pill: .cr-indicator.pill, the selection-travel recipe and CrystalMotion.travel().",
+      "acceptance": [
+        "CHANGELOG entry under 2.6.0; crystal-theme.css byte-identical to 2.5.0",
+        "npm test passes",
+        "The distributable ZIP regenerated"
+      ],
+      "where": "CHANGELOG.md, core/package.json"
+    },
+    {
+      "id": "R-A8",
+      "repo": "react",
+      "area": "Motion",
+      "priority": "P2",
+      "status": "blocked",
+      "title": "The travelling selection pill on strips (D-37)",
+      "depends": [
+        "C-M3",
+        "C-R5"
+      ],
+      "target": "Tabs, the segmented control, the dock, bottom navigation and toggle button groups render one selection pill through useTravelMotion, measured against the selected segment and moved by the new recipe when a person changes the selection; instant under reduced motion; label weight unchanged.",
+      "acceptance": [
+        "verify:behaviour checks the pill ends under the selected segment after a click and after the arrow keys, in both text directions",
+        "verify:appearance unchanged at rest",
+        "No movement on first render or when the selection changes programmatically without a person"
+      ],
+      "where": "src/motion/useTravelMotion.ts, src/components/Tabs/, SegmentedControl/, Dock/, BottomNavigation/"
+    },
+    {
       "id": "R-T10",
       "repo": "react",
       "area": "Text",
@@ -485,7 +522,7 @@
       "repo": "react",
       "area": "Media",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "title": "Prove audio-track switching in Safari",
       "depends": [],
       "target": "The audio group appears and switches the track in an engine with audioTracks.",
