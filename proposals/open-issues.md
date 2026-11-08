@@ -52,7 +52,7 @@ Task C-M3, and R-A8 under options (a) and (b).
 
 | Closed | Entries | How |
 |---|---|---|
-| 7 November 2026 | D-40, D-41 | D-40 fixed in the editor recipe (C-S7); D-41 built from Meridian's ruling (b), one body leading of 1.6 (C-S8). |
+| 7 November 2026 | D-40, D-41, D-42 | D-40 fixed in the editor recipe (C-S7); D-41 built from Meridian's ruling (b), one body leading of 1.6 (C-S8); D-42, a caption under a wrapped transport, opened and fixed the same day. |
 | 3 October 2026 | D-39 | By Meridian's ruling (a): a selected highlight takes the action pair. |
 | 2 October 2026 | D-36 | Measured, fixed, and found two more surfaces than the static report. |
 | 2 October 2026 | D-30, D-31, D-32, D-33, D-34, D-35 | Built from Meridian's rulings of the same day. D-39 opened from D-34's measurements. |

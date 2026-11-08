@@ -2569,3 +2569,23 @@ unchanged at 25.6px, and every recipe that reads the token moves from 24px to
 25.6px lines (`.cr-prose`, `.cr-editor`, `.cr-media-bar`, `.cr-media.audio`).
 The `lg` spacing step stays 24px; the materials chapter now calls it the step
 nearest the leading. The preview's re-baseline is with C-R3.
+
+## D-42 · A caption cue under a wrapped transport
+
+**What.** Found adding the media specimens to the preview's playground
+(C-R3), measured in Chromium on 7 November 2026. Below 420px the transport
+wraps its trailing controls onto a second row and grows from 58px to 110px,
+but `.cr-media-caption` clears `--cr-media-transport`, which stays 58px. On a
+390px viewport the playground's cue sat 40px under the transport (32px on a
+bare page with only Crystal's stylesheets).
+
+**Why it matters.** "The cue sits above the transport, never under it." A
+phone is where a player is narrow, and the caption is what a person who cannot
+hear the sound reads.
+
+**Closed** on 7 November 2026, the day it was opened. Inside the 420px
+container query, `.cr-media-caption` sets `--cr-media-transport: 110px`: two
+rows of 48px targets, the 4px gap, 4px above and below and the 1px rim.
+Measured on the bare page at 390px: the overlap from 32px to 0, and at 1280px
+nothing changes. The preview carries the same value locally until it adopts
+the release with this fix.

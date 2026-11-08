@@ -32,6 +32,11 @@ the leading.
   shows through its controls; the opaque surface with transparency reduced,
   `Canvas` under forced colours.
 
+- **A caption under a wrapped transport (D-42).** Below 420px the transport
+  wraps to two rows (110px), and `.cr-media-caption` now clears that height
+  instead of one row's 58px, so the cue is never under the controls on a
+  phone.
+
 ### Added
 
 - **`.cr-editor-toolbar.above` (D-40)**, the counterpart of `.below`: the
