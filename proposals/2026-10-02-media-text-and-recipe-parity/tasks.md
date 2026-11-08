@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-52 tasks: 41 done, 9 ready, 2 blocked, 0 needs a ruling, 0 dropped.
+52 tasks: 42 done, 8 ready, 2 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -367,7 +367,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-A4](#r-a4) | P2 | Done | Product gallery and playlist block play their assigned motion | – |
 | [R-A5](#r-a5) | P3 | Done | The view stack plays view-push-out | – |
 | [R-A9](#r-a9) | P2 | Done | The Haze reading fill in the popover, the pop-confirm and the menu | – |
-| [R-A10](#r-a10) | P2 | Ready | The Resin thumb on the colour area, slider and wheel | – |
+| [R-A10](#r-a10) | P2 | Done | The Resin thumb on the colour area, slider and wheel | – |
 | [R-Q1](#r-q1) | P2 | Ready | Documentation site from the surfaces (re-evaluation rec. 7, Slice Q) | C-R1 |
 | [R-A8](#r-a8) | P2 | Blocked | The travelling selection pill on strips (D-37) | C-M3, C-R1 |
 
@@ -739,14 +739,14 @@ Where: `src/components/Popover/, Popconfirm/, Menu/`.
 
 ### R-A10
 
-**The Resin thumb on the colour area, slider and wheel.** Audit, P2, ready.
+**The Resin thumb on the colour area, slider and wheel.** Audit, P2, done.
 
 Target: The colour controls draw the Resin thumb their catalogue entries specify (today the thumb is the picked colour), measured against the .cr-resin recipe; core then assigns the resin surface and removes the three from UNMEASURED.
 
 Done when:
 
-- [ ] Measured in the Storybook for each of the three
-- [ ] The picked colour stays visible inside the thumb
+- [x] Measured in the Storybook for each of the three
+- [x] The picked colour stays visible inside the thumb
 
 Where: `src/components/ColorPicker/`.
 

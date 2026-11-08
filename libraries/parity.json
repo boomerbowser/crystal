@@ -1514,7 +1514,7 @@
       "name": "Colour area",
       "category": "inputs",
       "surface": [
-        "none"
+        "resin"
       ],
       "status": {
         "web": "implemented",
@@ -1528,7 +1528,7 @@
       "name": "Colour slider",
       "category": "inputs",
       "surface": [
-        "none"
+        "resin"
       ],
       "status": {
         "web": "implemented",
@@ -1542,7 +1542,7 @@
       "name": "Colour wheel",
       "category": "inputs",
       "surface": [
-        "none"
+        "resin"
       ],
       "status": {
         "web": "implemented",

@@ -764,7 +764,7 @@
       "repo": "react",
       "area": "Audit",
       "priority": "P2",
-      "status": "ready",
+      "status": "done",
       "title": "The Resin thumb on the colour area, slider and wheel",
       "depends": [],
       "target": "The colour controls draw the Resin thumb their catalogue entries specify (today the thumb is the picked colour), measured against the .cr-resin recipe; core then assigns the resin surface and removes the three from UNMEASURED.",

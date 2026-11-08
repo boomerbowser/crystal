@@ -2659,7 +2659,7 @@
           ],
           "material": "Resin thumb over the gradient field",
           "surface": [
-            "none"
+            "resin"
           ],
           "geometry": "Thumb reaches 44px including its hit area.",
           "semantics": "Two linked sliders; each axis announces its own value and responds to arrow keys.",
@@ -2682,7 +2682,7 @@
           ],
           "material": "Resin thumb on a gradient track",
           "surface": [
-            "none"
+            "resin"
           ],
           "geometry": "Matches the slider contract.",
           "semantics": "role=\"slider\" with the channel named and the value in that channel's units.",
@@ -2705,7 +2705,7 @@
           ],
           "material": "Resin thumb on the hue ring",
           "surface": [
-            "none"
+            "resin"
           ],
           "geometry": "Ring thickness is a declared proportion of the radius.",
           "semantics": "role=\"slider\" in degrees, wrapping at 360.",

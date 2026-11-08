@@ -99,11 +99,7 @@ function loadStatus(known) {
    recipe in a browser). Each names the task that closes it. An entry listed
    here that no longer needs it fails the build, so the list cannot outlive
    its reason. */
-const UNMEASURED = {
-  'color-area': { material: 'Resin', task: 'R-A10', why: 'the Resin thumb; Crystal React\'s thumb is the picked colour' },
-  'color-slider': { material: 'Resin', task: 'R-A10', why: 'the Resin thumb; Crystal React\'s thumb is the picked colour' },
-  'color-wheel': { material: 'Resin', task: 'R-A10', why: 'the Resin thumb; Crystal React\'s thumb is the picked colour' },
-};
+const UNMEASURED = {};
 
 function validate(categories, surfaces, presets) {
   const problems = [...surfaces.problems];
