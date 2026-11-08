@@ -93,7 +93,7 @@
         "hover",
         "focus"
       ],
-      "material": "Resin plane, Stone label backing, primary fill on the selected destination",
+      "material": "Resin plane, Stone label backing, the primary pill behind the selected destination",
       "surface": [
         "dock"
       ],
@@ -102,7 +102,7 @@
       "crystal": "The single shared plane, label weight for the current entry, elevation",
       "product": "Destinations and routing",
       "motion": [
-        "selection"
+        "selection-travel"
       ],
       "parity": [
         "mui:BottomNavigation",
@@ -148,7 +148,7 @@
         "selected",
         "disabled"
       ],
-      "material": "Resin strip, primary fill on the selected tab",
+      "material": "Resin strip, the primary pill behind the selected tab",
       "surface": [
         "dock"
       ],
@@ -157,7 +157,8 @@
       "crystal": "Strip material, label weight for the selected tab, focus ring",
       "product": "The roving tabindex implementation and panel content",
       "motion": [
-        "tab-in"
+        "tab-in",
+        "selection-travel"
       ],
       "parity": [
         "mantine:Tabs",
@@ -348,10 +349,10 @@
       ],
       "geometry": "Pill; targets at least 44px; respects the safe area.",
       "semantics": "role=\"navigation\"; the current destination carries aria-current=\"page\".",
-      "crystal": "Material, geometry, selection by label weight, safe-area inset",
+      "crystal": "Material, geometry, selection by label weight with the pill behind it, safe-area inset",
       "product": "Destinations and routing",
       "motion": [
-        "selection"
+        "selection-travel"
       ],
       "parity": [
         "mui:BottomNavigation"

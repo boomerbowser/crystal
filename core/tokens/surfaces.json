@@ -114,7 +114,7 @@
       "name": "Indicator",
       "materials": ["Haze"],
       "class": ".cr-indicator",
-      "use": "A 20px informational circle painting Haze on an isolated layer, or the moving pill behind a selected segment. Haze rather than Resin, because it sits on a surface that is often already translucent. Never a selection mark."
+      "use": "A 20px informational circle painting Haze on an isolated layer, or, as `.cr-indicator.pill`, the primary fill that travels behind the selected segment of a strip (D-37): tabs, a segmented control, the dock, bottom navigation or a toggle button group. The circle is Haze rather than Resin, because it sits on a surface that is often already translucent. Neither is ever the only mark of a selection: the selected segment keeps its label weight, and the circle never marks one at all."
     },
     {
       "id": "status",

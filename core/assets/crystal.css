@@ -1584,6 +1584,77 @@ input[type=checkbox][role=switch] {
 }
 }
 
+/* The travelling selection pill (D-37).
+ *
+ * One `.cr-indicator.pill` behind the selected segment of a strip: tabs, a
+ * segmented control, the dock, bottom navigation or a toggle button group. It
+ * is a child of the plane that holds the segments (`.cr-dock`, `.cr-dock-inner`
+ * or `.cr-group`), hidden from assistive technology, and placed by five
+ * measured properties: `--cr-pill-x`, `--cr-pill-y`, `--cr-pill-width` and
+ * `--cr-pill-height`, the selected segment's box inside the plane's padding
+ * edge, and `--cr-pill-radius`, its corners. `CrystalMotion.travel()`
+ * writes them and moves the pill with the `selection-travel` recipe.
+ *
+ * Until the pill is placed (`data-placed`) it is not drawn and each segment
+ * paints its own selection, so a strip with no script, or before its first
+ * measurement, looks as it always has. Once placed, the selected segment gives
+ * its fill and its contact shadow to the pill and keeps its ink and its weight:
+ * selection is still label weight, so the pill is never the only sign of it.
+ *
+ * z-index -1 inside the plane's stacking context puts the pill above the
+ * plane's Haze backing, which is earlier in the tree at the same level, and
+ * under every segment's label without asking the segments to be positioned. */
+.cr-indicator.pill {
+    display: none;
+    position: absolute;
+    inset: auto;
+    left: var(--cr-pill-x, 0px);
+    top: var(--cr-pill-y, 0px);
+    width: var(--cr-pill-width, 0px);
+    height: var(--cr-pill-height, 0px);
+    min-width: 0;
+    z-index: -1;
+    border: 0;
+    /* The segment's own corners, so the pill is a pill in the dock and keeps
+       a group's square interior corners. */
+    border-radius: var(--cr-pill-radius, 999px);
+    background: var(--cr-primary);
+    box-shadow: 0 3px 7px var(--cr-shadow-contact);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.cr-indicator.pill[data-placed] {
+    display: block;
+}
+.cr-indicator.pill::before,
+.cr-indicator.pill::after {
+    content: none;
+    display: none;
+}
+:is(.cr-dock, .cr-dock-inner, .cr-group):has(> .cr-indicator.pill[data-placed]) :is([aria-pressed=true], [aria-selected=true], [aria-checked=true], [aria-current]:not([aria-current=false]), label:has(input[type=radio]:checked)) {
+    background: transparent;
+    box-shadow: none;
+}
+:is(.cr-dock, .cr-dock-inner, .cr-group):has(> .cr-indicator.pill[data-placed]) :is([aria-pressed=true], [aria-selected=true], [aria-checked=true])::before {
+    background: transparent;
+}
+/* A group's segments paint their own fill, which a dock's do not. In a toggle
+   set with a pill that fill would hide the pill as it passes behind, so every
+   segment gives its fill to the group's plane and the pill is the one fill
+   drawn. A hover keeps its own, on the element rather than this layer. */
+.cr-group:has(> .cr-indicator.pill[data-placed]) > :is(button, a.cr-button, .cr-button, .cr-control)::before {
+    background: transparent;
+    filter: none;
+}
+/* Forced colours draw selection as the segment's own Highlight outline, which
+   stays; a fill the system would flatten to Canvas is not drawn. */
+@media (forced-colors:active) {
+.cr-indicator.pill[data-placed] {
+    display: none;
+}
+}
+
 /* A group: the `group` surface (D-26).
  *
  * A button group and a split button are one Resin plane whose segments touch:
@@ -1625,7 +1696,10 @@ input[type=checkbox][role=switch] {
     backdrop-filter: none;
     isolation: isolate;
 }
-.cr-group > :is(button, a.cr-button, .cr-button, .cr-control):first-child {
+/* A toggle set's pill comes first in the group (D-37), so the first segment is
+   the first child or the one straight after the pill. The pill's case is in
+   :where(), so the rule keeps the specificity it had. */
+.cr-group > :is(button, a.cr-button, .cr-button, .cr-control):is(:first-child, :where(.cr-indicator.pill:first-child) + *) {
     border-start-start-radius: 999px;
     border-end-start-radius: 999px;
 }
@@ -1645,7 +1719,7 @@ input[type=checkbox][role=switch] {
     border-inline-start: 0;
     border-block-start: 1px solid var(--cr-edge);
 }
-.cr-group.vertical > :is(button, a.cr-button, .cr-button, .cr-control):first-child {
+.cr-group.vertical > :is(button, a.cr-button, .cr-button, .cr-control):is(:first-child, :where(.cr-indicator.pill:first-child) + *) {
     border-radius: 0;
     border-start-start-radius: 999px;
     border-start-end-radius: 999px;

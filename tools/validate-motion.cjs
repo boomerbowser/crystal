@@ -44,7 +44,7 @@ for(const recipe of data.recipes){
   if (recipe.overshoot!==undefined) {
     assert.equal(recipe.overshoot,'never',recipe.id+' declares overshoot "'+recipe.overshoot+'"; the only declaration is "never"');
     assert(recipe.spring&&spring.peakOvershoot(recipe.spring)===0&&spring.dampingRatio(recipe.spring)>=1-1e-9,
-      recipe.id+' shows data and must be critically damped; its spring overshoots. Run tools/fit-springs.cjs --write');
+      recipe.id+' declares overshoot "never" (it shows data, or a position that must not be passed) and must be critically damped; its spring overshoots. Run tools/fit-springs.cjs --write');
   }
   if (recipe.stagger!==undefined) {
     const {step,maxMarks}=recipe.stagger;

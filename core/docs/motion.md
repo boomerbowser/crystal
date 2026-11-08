@@ -85,7 +85,7 @@ The canonical motion definitions live in `tokens/crystal.json`; CSS and JSON exp
 
 Both engines are installed, bundled locally and used by the runtime. [Motion's animate API](https://motion.dev/docs/animate) drives element keyframes. [GSAP timelines](https://gsap.com/docs/v3/GSAP/Timeline/) control material paint-layer clocks and selected component sequences. Native Web Animations effects paint actual pseudo-elements under those GSAP clocks; CSS supplies the native dialog backdrop fallback.
 
-See the [component motion suite](motion-components.html) for all 59 recipes, engine assignments, API contracts, live component behavior, test instructions and future component-library/Storybook coverage. [License notices](../reference/ASSET-NOTICES.md) accompany the local bundle.
+See the [component motion suite](motion-components.html) for all 60 recipes, engine assignments, API contracts, live component behavior, test instructions and future component-library/Storybook coverage. [License notices](../reference/ASSET-NOTICES.md) accompany the local bundle.
 
 The compact CSS timing tokens remain available for small state changes. The material-driven Resin press recipe uses 320ms for a complete compression/recovery sequence; hover light uses 700ms. These visual clocks never delay the actual action. The executable catalog lists the current duration of every recipe.
 
@@ -228,7 +228,7 @@ including that reduced motion still applies the state instantly.
 
 <!-- generated:recipes -->
 
-All 59 recipes in 9 categories, generated from `core/tokens/motion-recipes.json`. Damping ratio and
+All 60 recipes in 9 categories, generated from `core/tokens/motion-recipes.json`. Damping ratio and
 overshoot are derived from each recipe's spring by `core/assets/core/spring.js`, so a
 retuned spring cannot leave a stale number in this table.
 
@@ -243,6 +243,7 @@ correct is a material question; see the signature policy below.
 | `press`: Press and release | 320ms | pressure | resin | 0.660 | 6.3% | Buttons, icon buttons and segmented controls. Disabled controls never animate. | Apply the semantic state immediately; omit decorative movement. |
 | `hover`: Light follows the surface | 700ms | caustic | resin | 0.900 | 0.2% | Fine-pointer affordance only; keyboard focus is immediate. | Apply the semantic state immediately; omit decorative movement. |
 | `selection`: Selection settle | 420ms | meniscus | resin | 0.700 | 4.6% | Selected chips, radios, toggles and navigation; set selected semantics first. | Apply the semantic state immediately; omit decorative movement. |
+| `selection-travel`: Selection travel | 460ms | meniscus | resin | 1.000 | none | The one .cr-indicator.pill behind the selected segment of tabs, a segmented control, the dock, bottom navigation or a toggle button group, moving to the new segment when the choice changes. Set the selected semantics first; selection stays label weight, so the pill is never the only sign of it. Critically damped: a pill that overshoots stands for a moment on a segment nobody chose. | The pill is placed behind the new segment at once; nothing travels. |
 | `switch-on`: Switch on | 460ms | coalesce | resin | 0.620 | 8.4% | Animate the thumb after its checked state is applied. | Apply the semantic state immediately; omit decorative movement. |
 | `switch-off`: Switch off | 460ms | coalesce | resin | 0.620 | 8.4% | Animate the thumb after its unchecked state is applied. | Apply the semantic state immediately; omit decorative movement. |
 | `check`: Checkmark confirmation | 340ms | iris | resin | 0.800 | 1.5% | Checkbox and radio indicators; retain a visible non-color state. | Apply the semantic state immediately; omit decorative movement. |

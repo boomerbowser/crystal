@@ -166,7 +166,7 @@
         "Haze"
       ],
       "class": ".cr-indicator",
-      "use": "A 20px informational circle painting Haze on an isolated layer, or the moving pill behind a selected segment. Haze rather than Resin, because it sits on a surface that is often already translucent. Never a selection mark."
+      "use": "A 20px informational circle painting Haze on an isolated layer, or, as `.cr-indicator.pill`, the primary fill that travels behind the selected segment of a strip (D-37): tabs, a segmented control, the dock, bottom navigation or a toggle button group. The circle is Haze rather than Resin, because it sits on a surface that is often already translucent. Neither is ever the only mark of a selection: the selected segment keeps its label weight, and the circle never marks one at all."
     },
     {
       "id": "status",
@@ -696,7 +696,7 @@
             "hover",
             "focus"
           ],
-          "material": "Resin plane, Stone label backing, primary fill on the selected destination",
+          "material": "Resin plane, Stone label backing, the primary pill behind the selected destination",
           "surface": [
             "dock"
           ],
@@ -705,7 +705,7 @@
           "crystal": "The single shared plane, label weight for the current entry, elevation",
           "product": "Destinations and routing",
           "motion": [
-            "selection"
+            "selection-travel"
           ],
           "parity": [
             "mui:BottomNavigation",
@@ -751,7 +751,7 @@
             "selected",
             "disabled"
           ],
-          "material": "Resin strip, primary fill on the selected tab",
+          "material": "Resin strip, the primary pill behind the selected tab",
           "surface": [
             "dock"
           ],
@@ -760,7 +760,8 @@
           "crystal": "Strip material, label weight for the selected tab, focus ring",
           "product": "The roving tabindex implementation and panel content",
           "motion": [
-            "tab-in"
+            "tab-in",
+            "selection-travel"
           ],
           "parity": [
             "mantine:Tabs",
@@ -951,10 +952,10 @@
           ],
           "geometry": "Pill; targets at least 44px; respects the safe area.",
           "semantics": "role=\"navigation\"; the current destination carries aria-current=\"page\".",
-          "crystal": "Material, geometry, selection by label weight, safe-area inset",
+          "crystal": "Material, geometry, selection by label weight with the pill behind it, safe-area inset",
           "product": "Destinations and routing",
           "motion": [
-            "selection"
+            "selection-travel"
           ],
           "parity": [
             "mui:BottomNavigation"
@@ -1149,10 +1150,11 @@
           ],
           "geometry": "Pill outer geometry; interior corners square against neighbours",
           "semantics": "group role with an accessible name when the buttons are related",
-          "crystal": "The shared plane and interior separation",
+          "crystal": "The shared plane and interior separation; as a toggle set, the pill behind the pressed button",
           "product": "Which actions are grouped",
           "motion": [
-            "press"
+            "press",
+            "selection-travel"
           ],
           "parity": [
             "mantine:Button.Group",
@@ -1794,7 +1796,7 @@
             "selected",
             "disabled"
           ],
-          "material": "One Resin plane; primary fill on the selected segment",
+          "material": "One Resin plane; the primary pill behind the selected segment",
           "surface": [
             "dock"
           ],
@@ -1803,7 +1805,7 @@
           "crystal": "Shared plane, label weight for the selected segment, focus ring",
           "product": "Options and change handling",
           "motion": [
-            "selection"
+            "selection-travel"
           ],
           "parity": [
             "mantine:SegmentedControl",

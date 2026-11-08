@@ -145,6 +145,53 @@
       }
     },
     {
+      "id": "selection-travel",
+      "category": "Controls",
+      "label": "Selection travel",
+      "duration": 460,
+      "engine": "Motion",
+      "keyframes": [
+        {
+          "transform": "translateX(-96px)",
+          "width": "88px",
+          "offset": 0
+        },
+        {
+          "transform": "translateX(0px)",
+          "width": "112px",
+          "offset": 1
+        }
+      ],
+      "measured": "The keyframes are a sample: the pill leaving an 88px segment for the 112px segment beside it. A player measures both segments when the choice changes and substitutes the departing segment’s offset from the arriving one, and its size, for the first keyframe; the last keyframe is always the arriving segment where it stands. CrystalMotion.travel() does this on the web.",
+      "overshoot": "never",
+      "travelException": "The pill crosses its own strip from the segment that was chosen to the one that is; the strip is its bound, and the distance is wherever the two segments stand.",
+      "use": "The one .cr-indicator.pill behind the selected segment of tabs, a segmented control, the dock, bottom navigation or a toggle button group, moving to the new segment when the choice changes. Set the selected semantics first; selection stays label weight, so the pill is never the only sign of it. Critically damped: a pill that overshoots stands for a moment on a segment nobody chose.",
+      "reduced": "The pill is placed behind the new segment at once; nothing travels.",
+      "material": "resin",
+      "signature": "meniscus",
+      "spring": {
+        "stiffness": 773.7214,
+        "damping": 55.6317,
+        "mass": 1,
+        "dampingRatio": 1,
+        "platform": {
+          "swiftUI": {
+            "response": 0.2259,
+            "dampingFraction": 1
+          },
+          "compose": {
+            "dampingRatio": 1,
+            "stiffness": 773.7214
+          },
+          "web": {
+            "stiffness": 773.7214,
+            "damping": 55.6317,
+            "mass": 1
+          }
+        }
+      }
+    },
+    {
       "id": "switch-on",
       "category": "Controls",
       "label": "Switch on",

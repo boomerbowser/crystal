@@ -2,7 +2,7 @@
 
 [Open the live component studies](../motion.html#component-motion) · [Search all recipes](../motion.html#recipe-library) · [Run browser contracts](../motion-contracts.html)
 
-Crystal ships 59 executable component recipes in nine families, the six material signatures, Mirage withdrawal, a modal dismissal, and a measured-layout helper. Three of the recipes are continuous indicators of pending work. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
+Crystal ships 60 executable component recipes in nine families, the six material signatures, Mirage withdrawal, a modal dismissal, a measured-layout helper, and the travelling selection pill, which plays `selection-travel` between measured segments. Three of the recipes are continuous indicators of pending work. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
 
 ## Engine responsibilities
 
@@ -38,7 +38,8 @@ The same formula applies to display labels, tags, badges and keyboard caps. Use 
 | Slider, stepper, numeric output | `slider-step` | Native keyboard range interaction and current value |
 | Input, textarea, validation group | `field-focus`, `field-invalid`, `field-valid`, `hint-in/out` | Real validation, associated error text, `aria-invalid` |
 | Copy action, confirmation mark | `copy-confirm`, `success` | Play only after the actual action succeeds |
-| Tab, navigation rail, bottom navigation | `selection`, `tab-in` | Selected semantics, roving tab stop, panel visibility |
+| Tab, navigation rail, bottom navigation | `selection`, `tab-in`; on a strip, `selection-travel` through `travel()` | Selected semantics, roving tab stop, panel visibility |
+| Segmented control, dock, toggle button group | `selection-travel` through `travel()` | Selected semantics first; selection stays label weight, so the pill is never the only sign of it |
 | Page/view, wizard step, breadcrumb, pagination | `page-in/out`, `breadcrumb` | Router/history and focus managed by the host |
 | Dialog / alert dialog | Haze + Mirage + `dismiss` | Native modality, initial focus, Escape, focus return |
 | Drawer / inspector / sheet | `drawer-in/out` + Mirage | Native modality or an explicitly nonmodal panel contract |
@@ -73,6 +74,7 @@ Base times below are at 1×; the preview resolves the saved speed at playback. E
 | `press` | resin / pressure | Motion | 320ms | Buttons, icon buttons and segmented controls. Disabled controls never animate. |
 | `hover` | resin / caustic | Motion | 700ms | Fine-pointer affordance only; keyboard focus is immediate. |
 | `selection` | resin / meniscus | Motion | 420ms | Selected chips, radios, toggles and navigation; set selected semantics first. |
+| `selection-travel` | resin / meniscus | Motion | 460ms | The one .cr-indicator.pill behind the selected segment of tabs, a segmented control, the dock, bottom navigation or a toggle button group, moving to the new segment when the choice changes. Set the selected semantics first; selection stays label weight, so the pill is never the only sign of it. Critically damped: a pill that overshoots stands for a moment on a segment nobody chose. |
 | `switch-on` | resin / coalesce | Motion | 460ms | Animate the thumb after its checked state is applied. |
 | `switch-off` | resin / coalesce | Motion | 460ms | Animate the thumb after its unchecked state is applied. |
 | `check` | resin / iris | Motion | 340ms | Checkbox and radio indicators; retain a visible non-color state. |
@@ -154,6 +156,18 @@ CrystalMotion.stopAll();
 `play(element, recipeId, {rate})` accepts all material and component recipe IDs. An additional replay rate is optional; the default uses the user's factor once, not twice. `duration(baseMilliseconds, rate)` resolves the same factor and cap. `recipes` exposes the catalog metadata. Unknown presets and invalid targets throw. They do not report a fake completion.
 
 `layout(element, previousRect)` compares the previous and current DOM position. Displacements up to the viewport diagonal use a GSAP-controlled inverse transform, with duration adapting to distance. Pass `{extended:false}` to retain the compact 50px/crossfade behavior. Offscreen-scale moves beyond the viewport diagonal crossfade. The final order is always the real DOM order. Layout animation is cosmetic and does not supply drag-and-drop behavior.
+
+`travel(pill, segment, {instant})` moves a strip's selection pill (D-37). The pill is one `.cr-indicator.pill`, `aria-hidden`, a child of the plane that holds the segments: `.cr-dock`, `.cr-dock-inner` or `.cr-group`. Set the segment's selected semantics first, then call `travel` with the segment that carries them. It measures the segment inside the plane, writes `--cr-pill-x`, `--cr-pill-y`, `--cr-pill-width`, `--cr-pill-height` and `--cr-pill-radius` on the pill, marks it `data-placed`, and plays `selection-travel` from where the pill is seen to where the segment stands. Placing the pill is what hands the fill to it: until then each segment paints its own, so a strip with no script looks as it always has. The first call, `{instant:true}` (call it from a resize observer, or when fonts load) and reduced motion place the pill without travelling. A travel that starts while another is under way starts from where the pill is seen, so a quick second choice turns the pill rather than snapping it. While it travels the pill carries `data-travelling`, and the arriving label keeps the strip's ink until the pill is under it; its weight changes at once, with the semantics. Forced colours draw no pill and keep the segment's own outline.
+
+```js
+const pill = strip.querySelector(':scope > .cr-indicator.pill');
+await CrystalMotion.travel(pill, strip.querySelector('[aria-selected=true]'), { instant: true });
+
+// When the choice changes:
+previous.setAttribute('aria-selected', 'false');
+next.setAttribute('aria-selected', 'true');
+await CrystalMotion.travel(pill, next);
+```
 
 The engine bridge restores prior inline values and priorities for its owned properties. Consumers should avoid modifying the same animated property during an effect; stop it before changing that property. Component implementations should use a dedicated animated wrapper when they already own a nontrivial transform. Libraries must not let two engines compete for the same property.
 

@@ -81,6 +81,60 @@
     element.dataset.crMotionTravel=within?String(Math.round(distance)):'0';
     return runComponent(element,'layout',within?[{transform:`translate(${dx}px,${dy}px) scale(.98)`},{transform:'translate(0,0) scale(1)'}]:[{opacity:.65},{opacity:1}],Math.min(1200,380+distance*.65),'GSAP',options);
   }
+  /* The travelling selection pill (D-37). `pill` is the strip's one
+     `.cr-indicator.pill`, a child of the plane (`.cr-dock`, `.cr-dock-inner` or
+     `.cr-group`); `target` is the segment now selected, whose semantics the
+     caller has already set. The pill is placed behind the target through five
+     properties the stylesheet reads, the target's box and its corners, and
+     `data-placed` hands the selection fill from the segments to the pill. The
+     first placement, `{ instant: true }` (for a resize or a font load) and
+     reduced motion place without travelling. Otherwise the pill travels from
+     where it is seen, which mid-flight is not where it was placed, so an
+     interrupted travel turns rather than jumps.
+
+     The two labels' ink crosses on the pill's clock: the arriving label goes
+     from the strip's ink to the selected ink as the pill comes under it, and
+     the departing label the other way. Holding either ink until the pill lands
+     leaves one label in the colour of whatever is about to be behind it: in a
+     dark palette the primary is light, and the strip's light ink on it all but
+     disappears. Weight is not animated; it changes with the semantics. */
+  const chosen=new WeakMap(),inks=new WeakMap();
+  function travel(pill,target,options={}){
+    if(!(pill instanceof Element)||!(target instanceof Element))throw new TypeError('CrystalMotion.travel requires the pill and the selected segment');
+    const strip=pill.parentElement;if(!strip)throw new TypeError('CrystalMotion.travel requires a pill inside its strip');
+    for(const animation of inks.get(pill)||[])animation.cancel();inks.delete(pill);
+    const box=strip.getBoundingClientRect(),at=rect=>({x:rect.left-box.left-strip.clientLeft,y:rect.top-box.top-strip.clientTop,width:rect.width,height:rect.height});
+    const next=at(target.getBoundingClientRect()),placed=pill.hasAttribute('data-placed'),seen=placed?at(pill.getBoundingClientRect()):null;
+    const departing=chosen.get(pill);chosen.set(pill,target);
+    stop(pill);
+    const corners=getComputedStyle(target).borderRadius,before=seen?getComputedStyle(pill).borderRadius:corners;
+    for(const [key,value] of Object.entries(next))pill.style.setProperty('--cr-pill-'+key,value+'px');
+    pill.style.setProperty('--cr-pill-radius',corners);
+    pill.setAttribute('data-placed','');
+    const dx=seen?seen.x-next.x:0,dy=seen?seen.y-next.y:0;
+    if(!seen||options.instant||!next.width||(Math.abs(dx)<.5&&Math.abs(dy)<.5&&Math.abs(seen.width-next.width)<.5&&Math.abs(seen.height-next.height)<.5)){
+      pill.dataset.crMotionName='selection-travel';pill.dataset.crMotionState='instant';return Promise.resolve({status:'instant'});
+    }
+    const recipe=recipes['selection-travel'];if(!recipe)throw new RangeError('Unknown Crystal motion: selection-travel');
+    pill.dataset.crMotionTravel=String(Math.round(Math.hypot(dx,dy)));
+    const run=runComponent(pill,'selection-travel',[
+      {transform:`translate(${dx}px,${dy}px)`,width:seen.width+'px',height:seen.height+'px',borderRadius:before},
+      {transform:'translate(0px,0px)',width:next.width+'px',height:next.height+'px',borderRadius:corners},
+    ],recipe.duration,recipe.engine,options);
+    if(pill.dataset.crMotionState==='running'){
+      pill.setAttribute('data-travelling','');
+      if(departing&&departing!==target&&departing.isConnected&&typeof target.animate==='function'){
+        const selectedInk=getComputedStyle(target).color,stripInk=getComputedStyle(departing).color;
+        const timing={duration:duration(recipe.duration,options.rate),easing:'cubic-bezier(0.22, 0.65, 0.22, 1)'};
+        if(selectedInk!==stripInk)inks.set(pill,[
+          target.animate([{color:stripInk},{color:selectedInk}],timing),
+          departing.animate([{color:selectedInk},{color:stripInk}],timing),
+        ]);
+      }
+    }
+    const land=()=>{if(pill.dataset.crMotionState!=='running')pill.removeAttribute('data-travelling');};
+    return run.then(result=>{land();return result;},error=>{land();throw error;});
+  }
   function play(element,name,options={}){
     if(recipes[name]){const recipe=recipes[name];return runComponent(element,name,recipe.keyframes,recipe.duration,recipe.engine,options);}
 
@@ -146,5 +200,5 @@
      work is in the request log. The optical layer remains for motion that a
      person starts. */
 
-  root.CrystalMotion=Object.freeze({play,layout,duration,recipes:Object.freeze(recipes),stop,stopAll,reduced,direction,presets:Object.freeze([...Object.keys(durationNames),...Object.keys(recipes)])});
+  root.CrystalMotion=Object.freeze({play,layout,travel,duration,recipes:Object.freeze(recipes),stop,stopAll,reduced,direction,presets:Object.freeze([...Object.keys(durationNames),...Object.keys(recipes)])});
 })(window);

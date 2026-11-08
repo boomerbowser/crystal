@@ -79,10 +79,11 @@
       ],
       "geometry": "Pill outer geometry; interior corners square against neighbours",
       "semantics": "group role with an accessible name when the buttons are related",
-      "crystal": "The shared plane and interior separation",
+      "crystal": "The shared plane and interior separation; as a toggle set, the pill behind the pressed button",
       "product": "Which actions are grouped",
       "motion": [
-        "press"
+        "press",
+        "selection-travel"
       ],
       "parity": [
         "mantine:Button.Group",

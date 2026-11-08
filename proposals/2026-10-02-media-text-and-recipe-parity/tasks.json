@@ -259,7 +259,7 @@
       "repo": "core",
       "area": "Motion",
       "priority": "P2",
-      "status": "ruling",
+      "status": "done",
       "title": "Selection motion for strips and groups (D-37)",
       "depends": [],
       "target": "Either Crystal specifies how a selection moves between the segments of a strip, or the vocabulary stops describing a moving pill it never drew.",
@@ -1104,7 +1104,7 @@
           "effects": {
             "task": {
               "status": "ready",
-              "target": "crystal.css has .cr-indicator.pill, the strips draw selection on it rather than per item, motion-recipes.json has a critically damped selection-travel recipe driven by measured layout (instant under reduced motion), and extend-catalogue-9.cjs assigns it to tabs, segmented-control, dock, bottom-navigation and button-group, each measured on a component first. The preview is re-baselined with every changed frame disclosed."
+              "target": "crystal.css has .cr-indicator.pill, the strips draw selection on it rather than per item, motion-recipes.json has a critically damped selection-travel recipe driven by measured layout (instant under reduced motion), and extend-catalogue-15.cjs assigns it to tabs, segmented-control, dock, bottom-navigation and button-group, each measured on a component first. The preview is re-baselined with every changed frame disclosed."
             },
             "add": [
               {

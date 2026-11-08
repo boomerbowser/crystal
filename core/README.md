@@ -67,7 +67,7 @@ icons, hit areas and focus rings are never blurred.
 | `@crystal-ui/core/core/preferences` | Preference clamping and duration resolution. |
 | `@crystal-ui/core/core/spring` | Spring physics: sampling, settling time and overshoot. |
 | `@crystal-ui/core/core/presets` | Keyframes for the material motion presets, computed from tokens. |
-| `@crystal-ui/core/motion-recipes` | The 59 motion recipes, each with its spring and per-platform values. |
+| `@crystal-ui/core/motion-recipes` | The 60 motion recipes, each with its spring and per-platform values. |
 | `@crystal-ui/core/engines` | The Motion and GSAP engine entry. |
 | `@crystal-ui/core/icons` | The icon manifest. There are 1022 icons on a 24px grid. |
 | `@crystal-ui/core/shaders/*` | The optical layer's shader sources and their manifest. |

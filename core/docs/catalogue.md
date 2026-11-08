@@ -43,7 +43,7 @@ Every component is made of one or more of these surfaces. Its Surface row names 
 | <a id="surface-stone"></a>**Stone label backing** `stone` | Stone | <code>.cr-stone</code> | 3 | A label over an unknown or moving backdrop: a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text. `.cr-media-caption` is a caption cue rendered by the library: the Stone backing on a box above the transport, never under it. `.large`, `.larger` and `.solid` are the reader's caption style: a cue 1.25 or 1.5 times the size, and a cue on the opaque surface. `::cue` on a `.cr-media` video is the flat fill for the browser's own renderer, which follows the reader's system caption settings. |
 | <a id="surface-mirage"></a>**Mirage scrim** `mirage` | Mirage | <code>.cr-mirage</code> | 10 | The chromatic diffusion of the real scene behind a modal. Never a content surface; the decision surface above it is Haze. |
 | <a id="surface-dialog"></a>**Dialog** `dialog` | Haze + Mirage | <code>.cr-dialog</code> | 2 | A Haze decision surface over a Mirage scrim, with the float shadow. Modality, focus and dismissal are the product's. The surface does not scroll: `.cr-dialog-body`, worn with `.cr-scroll-frost`, scrolls inside it, so the title stays in view and the edge fade does not dissolve the surface. `position: fixed` is for a native `&lt;dialog&gt;`; on any other element the host positions it. |
-| <a id="surface-indicator"></a>**Indicator** `indicator` | Haze | <code>.cr-indicator</code> | 2 | A 20px informational circle painting Haze on an isolated layer, or the moving pill behind a selected segment. Haze rather than Resin, because it sits on a surface that is often already translucent. Never a selection mark. |
+| <a id="surface-indicator"></a>**Indicator** `indicator` | Haze | <code>.cr-indicator</code> | 2 | A 20px informational circle painting Haze on an isolated layer, or, as `.cr-indicator.pill`, the primary fill that travels behind the selected segment of a strip (D-37): tabs, a segmented control, the dock, bottom navigation or a toggle button group. The circle is Haze rather than Resin, because it sits on a surface that is often already translucent. Neither is ever the only mark of a selection: the selected segment keeps its label weight, and the circle never marks one at all. |
 | <a id="surface-status"></a>**Status badge** `status` | Resin + Haze | <code>.cr-status</code> | 1 | The semantic ink and surface pair behind a symbol, with words beside it. Status colours are independent of the palette and are never redefined by it. |
 | <a id="surface-bubble"></a>**Authored bubble** `bubble` | Haze | <code>.cr-bubble</code> | 1 | A Haze message surface with a directional tight corner. `.own` uses the palette's own-content pair. |
 | <a id="surface-table"></a>**Table** `table` | Resin + Haze | <code>.cr-table-scroll</code> | 5 | A Resin shell with an inset Haze fill holding the table, with the primary-soft header and the Resin scrollbar. Rows are read on the Haze; sort and selection are announced, and selection is label weight. |
@@ -327,13 +327,13 @@ One floating Resin plane holding labelled destinations on a shared Stone label g
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>default, selected, hover, focus</td></tr>
-<tr><th scope="row">Material</th><td>Resin plane, Stone label backing, primary fill on the selected destination</td></tr>
+<tr><th scope="row">Material</th><td>Resin plane, Stone label backing, the primary pill behind the selected destination</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill; 52px minimum destination height</td></tr>
 <tr><th scope="row">Semantics</th><td>nav landmark; aria-pressed or aria-current on the destination</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>The single shared plane, label weight for the current entry, elevation</td></tr>
 <tr><th scope="row">Product owns</th><td>Destinations and routing</td></tr>
-<tr><th scope="row">Motion</th><td><code>selection</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>selection-travel</code></td></tr>
 <tr><th scope="row">Parity</th><td>mui:BottomNavigation · antd:Menu · mantine:SegmentedControl</td></tr>
 </tbody></table></div>
 
@@ -361,13 +361,13 @@ A Resin tab strip with a selected tab and an associated panel.
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>default, hover, focus, selected, disabled</td></tr>
-<tr><th scope="row">Material</th><td>Resin strip, primary fill on the selected tab</td></tr>
+<tr><th scope="row">Material</th><td>Resin strip, the primary pill behind the selected tab</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill tabs inside a pill strip; 44px minimum</td></tr>
 <tr><th scope="row">Semantics</th><td>role=tablist/tab/tabpanel with arrow-key, Home and End navigation and aria-selected</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Strip material, label weight for the selected tab, focus ring</td></tr>
 <tr><th scope="row">Product owns</th><td>The roving tabindex implementation and panel content</td></tr>
-<tr><th scope="row">Motion</th><td><code>tab-in</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>tab-in</code>, <code>selection-travel</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Tabs · mui:Tabs · antd:Tabs</td></tr>
 </tbody></table></div>
 
@@ -478,9 +478,9 @@ A Resin destination group pinned to the bottom of a narrow view.
 <tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill; targets at least 44px; respects the safe area.</td></tr>
 <tr><th scope="row">Semantics</th><td>role="navigation"; the current destination carries aria-current="page".</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>Material, geometry, selection by label weight, safe-area inset</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>Material, geometry, selection by label weight with the pill behind it, safe-area inset</td></tr>
 <tr><th scope="row">Product owns</th><td>Destinations and routing</td></tr>
-<tr><th scope="row">Motion</th><td><code>selection</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>selection-travel</code></td></tr>
 <tr><th scope="row">Parity</th><td>mui:BottomNavigation</td></tr>
 </tbody></table></div>
 
@@ -596,9 +596,9 @@ Adjacent actions sharing one Resin plane with internal hairlines.
 <tr><th scope="row">Surface</th><td><a href="#surface-group">Group</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill outer geometry; interior corners square against neighbours</td></tr>
 <tr><th scope="row">Semantics</th><td>group role with an accessible name when the buttons are related</td></tr>
-<tr><th scope="row">Crystal supplies</th><td>The shared plane and interior separation</td></tr>
+<tr><th scope="row">Crystal supplies</th><td>The shared plane and interior separation; as a toggle set, the pill behind the pressed button</td></tr>
 <tr><th scope="row">Product owns</th><td>Which actions are grouped</td></tr>
-<tr><th scope="row">Motion</th><td><code>press</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>press</code>, <code>selection-travel</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:Button.Group · mui:ButtonGroup · antd:Space.Compact</td></tr>
 </tbody></table></div>
 
@@ -952,13 +952,13 @@ A pill strip of mutually exclusive options sharing one Resin plane.
 
 <div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>
 <tr><th scope="row">States</th><td>default, hover, focus, selected, disabled</td></tr>
-<tr><th scope="row">Material</th><td>One Resin plane; primary fill on the selected segment</td></tr>
+<tr><th scope="row">Material</th><td>One Resin plane; the primary pill behind the selected segment</td></tr>
 <tr><th scope="row">Surface</th><td><a href="#surface-dock">Dock</a></td></tr>
 <tr><th scope="row">Geometry</th><td>Pill strip and pill segments; 44px minimum</td></tr>
 <tr><th scope="row">Semantics</th><td>Radio group semantics, or aria-pressed on buttons; never aria-selected outside a tablist</td></tr>
 <tr><th scope="row">Crystal supplies</th><td>Shared plane, label weight for the selected segment, focus ring</td></tr>
 <tr><th scope="row">Product owns</th><td>Options and change handling</td></tr>
-<tr><th scope="row">Motion</th><td><code>selection</code></td></tr>
+<tr><th scope="row">Motion</th><td><code>selection-travel</code></td></tr>
 <tr><th scope="row">Parity</th><td>mantine:SegmentedControl · mui:ToggleButtonGroup · antd:Segmented</td></tr>
 </tbody></table></div>
 

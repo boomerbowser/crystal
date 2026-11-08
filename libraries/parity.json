@@ -279,7 +279,7 @@
         "dock"
       ],
       "motion": [
-        "selection"
+        "selection-travel"
       ],
       "status": {
         "web": "implemented",
@@ -313,7 +313,8 @@
         "dock"
       ],
       "motion": [
-        "tab-in"
+        "tab-in",
+        "selection-travel"
       ],
       "status": {
         "web": "implemented",
@@ -433,7 +434,7 @@
         "dock"
       ],
       "motion": [
-        "selection"
+        "selection-travel"
       ],
       "status": {
         "web": "implemented",
@@ -559,7 +560,8 @@
         "group"
       ],
       "motion": [
-        "press"
+        "press",
+        "selection-travel"
       ],
       "status": {
         "web": "implemented",
@@ -956,7 +958,7 @@
         "dock"
       ],
       "motion": [
-        "selection"
+        "selection-travel"
       ],
       "status": {
         "web": "implemented",

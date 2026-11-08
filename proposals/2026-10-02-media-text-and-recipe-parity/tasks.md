@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-52 tasks: 44 done, 7 ready, 1 blocked, 0 needs a ruling, 0 dropped.
+52 tasks: 45 done, 6 ready, 1 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -55,7 +55,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-R4](#c-r4) | P1 | Done | Publish @crystal-ui/core 2.5.0 | C-S5, C-S7, C-S8 |
 | [C-M1](#c-m1) | P2 | Done | Material presets as entrances (D-31) | – |
 | [C-M2](#c-m2) | P2 | Done | Rule on the 20 unplayed assignments (D-32) | – |
-| [C-M3](#c-m3) | P2 | Ready | Selection motion for strips and groups (D-37) | – |
+| [C-M3](#c-m3) | P2 | Done | Selection motion for strips and groups (D-37) | – |
 | [C-I1](#c-i1) | P1 | Done | Keep the icons the vocabulary needs (D-35) | – |
 | [C-D1](#c-d1) | P1 | Done | Describe the media and text recipes in the specification chapters | – |
 | [C-T1](#c-t1) | P2 | Done | Highlight and selection colours (D-34) | – |
@@ -239,14 +239,14 @@ Where: `core/tokens/catalogue/`.
 
 ### C-M3
 
-**Selection motion for strips and groups (D-37).** Motion, P2, ready, by the ruling on D-37.
+**Selection motion for strips and groups (D-37).** Motion, P2, done, by the ruling on D-37.
 
-Target: crystal.css has .cr-indicator.pill, the strips draw selection on it rather than per item, motion-recipes.json has a critically damped selection-travel recipe driven by measured layout (instant under reduced motion), and extend-catalogue-9.cjs assigns it to tabs, segmented-control, dock, bottom-navigation and button-group, each measured on a component first. The preview is re-baselined with every changed frame disclosed.
+Target: crystal.css has .cr-indicator.pill, the strips draw selection on it rather than per item, motion-recipes.json has a critically damped selection-travel recipe driven by measured layout (instant under reduced motion), and extend-catalogue-15.cjs assigns it to tabs, segmented-control, dock, bottom-navigation and button-group, each measured on a component first. The preview is re-baselined with every changed frame disclosed.
 
 Done when:
 
-- [ ] Meridian's ruling recorded
-- [ ] surfaces.json, crystal.css and motion-recipes.json say the same thing about the selected segment
+- [x] Meridian's ruling recorded
+- [x] surfaces.json, crystal.css and motion-recipes.json say the same thing about the selected segment
 
 Where: `core/assets/crystal.css, core/tokens/surfaces.json, core/tokens/motion-recipes.json`.
 

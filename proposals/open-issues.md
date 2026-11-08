@@ -48,6 +48,11 @@ Task C-M3, and R-A8 under options (a) and (b).
 **Ruled on 2026-10-02 by Meridian Digital: (a) Specify a travelling pill for every strip: one .cr-indicator.pill behind the selected segment, moved by a new critically damped recipe between measured positions, on tabs, the segmented control, the dock, bottom navigation and toggle button groups; selection stays label weight.** C-M3 becomes ready; adds R-A8, The travelling selection pill on strips. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-M3, R-A8).
 <!-- /ruling:D-37 -->
 
+**Built in core** on 8 November 2026 (C-M3): `.cr-indicator.pill`, the
+`selection-travel` recipe and `CrystalMotion.travel()`, assigned to the five
+strips by `tools/extend-catalogue-15.cjs`. Open until Crystal React draws the
+pill (R-A8).
+
 ## Closed most recently
 
 | Closed | Entries | How |

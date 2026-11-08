@@ -463,7 +463,7 @@
         "selected",
         "disabled"
       ],
-      "material": "One Resin plane; primary fill on the selected segment",
+      "material": "One Resin plane; the primary pill behind the selected segment",
       "surface": [
         "dock"
       ],
@@ -472,7 +472,7 @@
       "crystal": "Shared plane, label weight for the selected segment, focus ring",
       "product": "Options and change handling",
       "motion": [
-        "selection"
+        "selection-travel"
       ],
       "parity": [
         "mantine:SegmentedControl",

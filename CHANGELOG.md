@@ -2,6 +2,53 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
+## [Unreleased]
+
+The travelling selection pill, by Meridian's ruling (a) on D-37. Nothing
+changes on a page that does not place a pill: `crystal-theme.css` is
+byte-identical, and every strip without one paints its selection as before.
+
+### Added
+
+- **The selection pill (C-M3, D-37 ruled (a)).** One `.cr-indicator.pill`,
+  `aria-hidden`, inside the plane of tabs, a segmented control, the dock,
+  bottom navigation or a toggle button group (`.cr-dock`, `.cr-dock-inner` or
+  `.cr-group`). It is placed from five measured properties,
+  `--cr-pill-x`, `--cr-pill-y`, `--cr-pill-width`, `--cr-pill-height` and
+  `--cr-pill-radius`, and drawn only once placed (`data-placed`). From then on
+  the selected segment gives its primary fill and its contact shadow to the
+  pill and keeps its ink and its weight, so selection is still label weight.
+  The pill sits at `z-index: -1` in the plane's stacking context, above its
+  Haze backing and under every label. Forced colours draw no pill, and the
+  segment keeps its Highlight outline.
+- **`selection-travel`**, the sixtieth recipe: Controls, Resin, 460ms, and
+  critically damped (`overshoot: "never"`), because a pill that overshoots
+  stands for a moment on a segment nobody chose. Its keyframes are a sample
+  travel between an 88px and a 112px segment; `measured` says what a player
+  substitutes. `travelException` records that the pill's bound is its strip.
+- **`CrystalMotion.travel(pill, segment, { instant })`** in `motion.js`. It
+  measures the selected segment inside the plane, writes the five properties,
+  and plays `selection-travel` from where the pill is seen, so a second choice
+  made mid-flight turns the pill rather than snapping it. The first call,
+  `{ instant: true }` and reduced motion place it without travelling. The two
+  labels' ink crosses on the pill's clock. Measured in Chromium: the pill ends
+  within 0px of the selected segment on tabs, radio labels, links and a
+  button group, light and dark, at 800px and 375px, and its position never
+  passes the target.
+
+### Changed
+
+- **Catalogue (extend-catalogue-15.cjs).** The dock, bottom navigation and the
+  segmented control play `selection-travel` in place of `selection`; tabs add
+  it beside `tab-in`; the button group adds it beside `press` for a toggle set.
+  Materials and Crystal fields name the pill rather than a fill on the segment.
+- **`.cr-indicator` in `surfaces.json`** describes the pill as built.
+- **A toggle group with a pill** draws no fill on its segments, so the pill is
+  never hidden as it passes behind one. A group's first segment is the first
+  child or the one straight after the pill, at the same specificity as before.
+- `overshoot: "never"` now covers a position that must not be passed as well
+  as a value; `fit-springs.cjs` and `validate-motion.cjs` say so.
+
 ## [2.5.0] - 2026-11-08
 
 The editor recipe's faults (D-40), the reader's caption style (C-S5), one

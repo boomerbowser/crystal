@@ -1066,6 +1066,26 @@ check('forced colours reset every control surface\'s backdrop-filter, importantl
   }
 });
 
+/* The travelling selection pill (D-37) is three pieces that have to agree:
+   the stylesheet reads the five properties, the runtime writes the same five,
+   and the recipe it plays is critically damped. A browser measures the travel
+   itself; this keeps the names from drifting apart. */
+check('the selection pill: stylesheet, runtime and recipe agree', () => {
+  const fs = require('node:fs'), path = require('node:path');
+  const motion = fs.readFileSync(path.join(__dirname, '../core/assets/motion.js'), 'utf8');
+  const recipes = JSON.parse(fs.readFileSync(path.join(__dirname, '../core/tokens/motion-recipes.json'), 'utf8')).recipes;
+  for (const name of ['x', 'y', 'width', 'height', 'radius']) {
+    assert.ok(stylesheetCode.includes(`var(--cr-pill-${name}`), `crystal.css does not read --cr-pill-${name}`);
+  }
+  assert.ok(/'--cr-pill-'\+key/.test(motion) && motion.includes("'--cr-pill-radius'"), 'motion.js does not write the pill properties');
+  assert.ok(/CrystalMotion=Object\.freeze\(\{[^}]*\btravel\b/.test(motion), 'CrystalMotion does not export travel');
+  assert.ok(stylesheetCode.includes('.cr-indicator.pill[data-placed]'), 'crystal.css does not draw a placed pill');
+  const recipe = recipes.find((r) => r.id === 'selection-travel');
+  assert.ok(recipe, 'motion-recipes.json has no selection-travel');
+  assert.equal(recipe.overshoot, 'never');
+  assert.equal(recipe.spring.dampingRatio, 1);
+});
+
 /* -------------------------------------------------------------- report */
 
 const failures = results.filter((r) => r.status === 'fail');
