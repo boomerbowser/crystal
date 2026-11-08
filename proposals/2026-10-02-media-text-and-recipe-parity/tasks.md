@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-52 tasks: 42 done, 8 ready, 2 blocked, 0 needs a ruling, 0 dropped.
+52 tasks: 43 done, 8 ready, 1 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -52,7 +52,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-S6](#c-s6) | P2 | Done | Assign haze to the popover, the pop-confirm and the menu | – |
 | [C-S7](#c-s7) | P2 | Done | Correct the editor recipe's floor, toolbar backing and placements (D-40) | – |
 | [C-S8](#c-s8) | P2 | Done | One body leading (D-41) | – |
-| [C-R4](#c-r4) | P1 | Ready | Publish @crystal-ui/core 2.5.0 | C-S5, C-S7, C-S8 |
+| [C-R4](#c-r4) | P1 | Done | Publish @crystal-ui/core 2.5.0 | C-S5, C-S7, C-S8 |
 | [C-M1](#c-m1) | P2 | Done | Material presets as entrances (D-31) | – |
 | [C-M2](#c-m2) | P2 | Done | Rule on the 20 unplayed assignments (D-32) | – |
 | [C-M3](#c-m3) | P2 | Ready | Selection motion for strips and groups (D-37) | – |
@@ -199,15 +199,15 @@ Where: `core/assets/crystal.css, core/tokens/`.
 
 ### C-R4
 
-**Publish @crystal-ui/core 2.5.0.** Release, P1, ready.
+**Publish @crystal-ui/core 2.5.0.** Release, P1, done.
 
 Target: 2.5.0 on the registry with the caption style, the corrected editor recipe and the one body leading.
 
 Done when:
 
-- [ ] CHANGELOG entry under 2.5.0 lists the three and the theme change (--cr-leading, --cr-text-body-leading)
-- [ ] npm test passes; crystal-theme.css changes only in the leading
-- [ ] The distributable ZIP regenerated
+- [x] CHANGELOG entry under 2.5.0 lists the three and the theme change (--cr-leading, --cr-text-body-leading)
+- [x] npm test passes; crystal-theme.css changes only in the leading
+- [x] The distributable ZIP regenerated
 
 Where: `CHANGELOG.md, core/package.json`. Depends on C-S5, C-S7, C-S8.
 
@@ -338,7 +338,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 
 | ID | Priority | Status | Task | Depends on |
 |---|---|---|---|---|
-| [R-T10](#r-t10) | P1 | Blocked | Wear the 2.5.0 editor and caption recipes and drop the workarounds | C-R4 |
+| [R-T10](#r-t10) | P1 | Ready | Wear the 2.5.0 editor and caption recipes and drop the workarounds | C-R4 |
 | [R-M1](#r-m1) | P1 | Done | Playback rate and picture in picture on useMediaElement | – |
 | [R-M2](#r-m2) | P1 | Done | useMediaTracks: caption, audio and video tracks | – |
 | [R-M3](#r-m3) | P1 | Done | MediaSettings: speed, subtitles, audio, quality | – |
@@ -373,7 +373,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 
 ### R-T10
 
-**Wear the 2.5.0 editor and caption recipes and drop the workarounds.** Text, P1, blocked.
+**Wear the 2.5.0 editor and caption recipes and drop the workarounds.** Text, P1, ready.
 
 Target: RichTextSurface drops its D-40 workarounds (the 144px floor, the in-flow top toolbar and the coarse-pointer undo) and wears .above for toolbarPlacement="top"; VideoPlayer's captions wear .large, .larger and .solid in place of its local caption-style rules.
 

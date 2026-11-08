@@ -192,7 +192,7 @@
       "repo": "core",
       "area": "Release",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "title": "Publish @crystal-ui/core 2.5.0",
       "depends": [
         "C-S5",
@@ -212,7 +212,7 @@
       "repo": "react",
       "area": "Text",
       "priority": "P1",
-      "status": "blocked",
+      "status": "ready",
       "title": "Wear the 2.5.0 editor and caption recipes and drop the workarounds",
       "depends": [
         "C-R4"
