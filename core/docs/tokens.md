@@ -361,7 +361,7 @@ What a value means: the surface a card sits on, the duration a control settles o
 | --- | --- | --- | --- |
 | `semantic.typography.family` | fontFamily | `Manrope` | None |
 | `semantic.typography.readingSize` | dimension | `16px` | None |
-| `semantic.typography.readingLeading` | dimension | `24px` | None |
+| `semantic.typography.readingLeading` | dimension | `25.6px` | None |
 | `semantic.typography.scale.display.ratio` | number | `2` | display: multiple of the reading size |
 | `semantic.typography.scale.display.leading` | number | `1.1` | display: line height as a multiple of its own size |
 | `semantic.typography.scale.display.tracking` | dimension | `-0.055em` | display: letter spacing |
@@ -375,7 +375,7 @@ What a value means: the surface a card sits on, the duration a control settles o
 | `semantic.typography.scale.subheading.leading` | number | `1.45` | subheading: line height as a multiple of its own size |
 | `semantic.typography.scale.subheading.tracking` | dimension | `-0.01em` | subheading: letter spacing |
 | `semantic.typography.scale.body.ratio` | number | `1` | body: multiple of the reading size |
-| `semantic.typography.scale.body.leading` | number | `1.5` | body: line height as a multiple of its own size |
+| `semantic.typography.scale.body.leading` | number | `1.6` | body: line height as a multiple of its own size |
 | `semantic.typography.scale.body.tracking` | dimension | `0` | body: letter spacing |
 | `semantic.typography.scale.caption.ratio` | number | `0.8125` | caption: multiple of the reading size |
 | `semantic.typography.scale.caption.leading` | number | `1.45` | caption: line height as a multiple of its own size |

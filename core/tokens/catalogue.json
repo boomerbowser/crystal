@@ -116,13 +116,19 @@
         "Stone"
       ],
       "class": ".cr-stone",
-      "use": "A label over an unknown or moving backdrop: a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text. `.cr-media-caption` is a caption cue rendered by the library: the Stone backing on a box above the transport, never under it. `::cue` on a `.cr-media` video is the flat fill for the browser's own renderer.",
+      "use": "A label over an unknown or moving backdrop: a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text. `.cr-media-caption` is a caption cue rendered by the library: the Stone backing on a box above the transport, never under it. `.large`, `.larger` and `.solid` are the reader's caption style: a cue 1.25 or 1.5 times the size, and a cue on the opaque surface. `::cue` on a `.cr-media` video is the flat fill for the browser's own renderer, which follows the reader's system caption settings.",
       "also": [
-        ".cr-media-caption"
+        ".cr-media-caption",
+        ".cr-media-caption.large",
+        ".cr-media-caption.larger",
+        ".cr-media-caption.solid"
       ],
       "partial": {
         ".cr-stone": "Stone backs a label and takes the radius of the element it backs.",
-        ".cr-media-caption": "A part: the outer element positions the cue, and its inner box (`.cr-media-caption > *`) carries the Stone backing and the radius."
+        ".cr-media-caption": "A part: the outer element positions the cue, and its inner box (`.cr-media-caption > *`) carries the Stone backing and the radius.",
+        ".cr-media-caption.large": "The reader's caption style, larger: `--cr-caption-scale` multiplies the cue's 15px to 28px range on its inner box. Worn with the cue's own recipe.",
+        ".cr-media-caption.larger": "The reader's caption style, largest: `--cr-caption-scale` multiplies the cue's 15px to 28px range on its inner box. Worn with the cue's own recipe.",
+        ".cr-media-caption.solid": "The reader's caption style, solid: the inner box's backing is the opaque surface with no feather, the backing the cue's fallbacks draw. Worn with the cue's own recipe."
       }
     },
     {
@@ -5959,7 +5965,7 @@
         {
           "id": "video-player",
           "name": "Video player",
-          "anatomy": "A media stage at a set aspect ratio holding the video, a caption cue above the transport, and the transport inset from the stage: play, skip, the scrubber with its two time readouts, mute and volume, then a settings menu (playback speed, subtitles and captions, audio track, quality), picture in picture and full screen.",
+          "anatomy": "A media stage at a set aspect ratio holding the video, a caption cue above the transport, and the transport inset from the stage: play, skip, the scrubber with its two time readouts, mute and volume, then a settings menu (playback speed, subtitles and captions, caption style, audio track, quality), picture in picture and full screen.",
           "states": [
             "idle",
             "playing",
@@ -5980,7 +5986,7 @@
             "frost"
           ],
           "geometry": "The stage keeps the content radius and the aspect ratio the product sets (16:9, 4:3, 1:1, 9:16 or the media's own). The transport is a pill inset 12px from the stage, or the safe area in full screen, with 4px block padding around its controls (58px with its rim); every control reaches the 48px action target. Caption cues sit above the transport, never under it. Below 420px the transport wraps its trailing controls onto a second row.",
-          "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus. Speed, subtitle, audio-track and quality choices are menus of radio items (menuitemradio with aria-checked); the selected item is shown by label weight, never a check mark, and each change is announced in words. A choice the engine cannot make (an audio track list where the browser exposes none, picture in picture where it is unsupported) is not offered.",
+          "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus. The caption style (a larger size, 1.25 or 1.5 times, and a solid backing on the opaque surface) is the reader's: it is kept for every player the reader opens and drawn with `.cr-media-caption`'s `.large`, `.larger` and `.solid`. Speed, subtitle, caption-style, audio-track and quality choices are menus of radio items (menuitemradio with aria-checked); the selected item is shown by label weight, never a check mark, and each change is announced in words. A choice the engine cannot make (an audio track list where the browser exposes none, picture in picture where it is unsupported) is not offered.",
           "crystal": "Stage, transport and caption materials, transport geometry and insets, the settings menu, the motion of showing and hiding controls",
           "product": "Sources, caption and audio tracks, quality renditions and their switching (adaptive streaming), DRM, analytics",
           "motion": [

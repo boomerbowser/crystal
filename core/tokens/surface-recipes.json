@@ -1254,7 +1254,7 @@
             "color": "var(--cr-text)",
             "font-size": "var(--cr-text-body-size)",
             "line-height": "var(--cr-text-body-leading)",
-            "min-height": "calc(var(--cr-text-body-leading) * 4)",
+            "min-height": "calc(var(--cr-text-body-leading) * 1em * 4 + var(--cr-space) * 2)",
             "outline": "none",
             "overflow-wrap": "anywhere"
           },
@@ -1689,6 +1689,124 @@
             "radius"
           ],
           "why": "A part: the outer element positions the cue, and its inner box (`.cr-media-caption > *`) carries the Stone backing and the radius."
+        },
+        ".cr-media-caption.large": {
+          "selector": ".cr-media-caption.large",
+          "fill": null,
+          "blur": null,
+          "saturation": null,
+          "rim": null,
+          "shadow": null,
+          "radius": null,
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "--cr-caption-scale": "1.25",
+            "display": "flex",
+            "inset-block-end": "calc(var(--cr-media-transport, 58px) + var(--cr-spacing-sm) * 2)",
+            "inset-inline": "var(--cr-spacing-lg)",
+            "justify-content": "center",
+            "line-height": "1.35",
+            "pointer-events": "none",
+            "position": "absolute",
+            "text-align": "center",
+            "z-index": "1"
+          },
+          "layers": {},
+          "fallbacks": {
+            "opaque": null,
+            "reducedTransparency": null,
+            "forcedColors": null,
+            "noBackdropFilter": null
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": [
+            "haze",
+            "radius"
+          ],
+          "why": "The reader's caption style, larger: `--cr-caption-scale` multiplies the cue's 15px to 28px range on its inner box. Worn with the cue's own recipe."
+        },
+        ".cr-media-caption.larger": {
+          "selector": ".cr-media-caption.larger",
+          "fill": null,
+          "blur": null,
+          "saturation": null,
+          "rim": null,
+          "shadow": null,
+          "radius": null,
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "--cr-caption-scale": "1.5",
+            "display": "flex",
+            "inset-block-end": "calc(var(--cr-media-transport, 58px) + var(--cr-spacing-sm) * 2)",
+            "inset-inline": "var(--cr-spacing-lg)",
+            "justify-content": "center",
+            "line-height": "1.35",
+            "pointer-events": "none",
+            "position": "absolute",
+            "text-align": "center",
+            "z-index": "1"
+          },
+          "layers": {},
+          "fallbacks": {
+            "opaque": null,
+            "reducedTransparency": null,
+            "forcedColors": null,
+            "noBackdropFilter": null
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": [
+            "haze",
+            "radius"
+          ],
+          "why": "The reader's caption style, largest: `--cr-caption-scale` multiplies the cue's 15px to 28px range on its inner box. Worn with the cue's own recipe."
+        },
+        ".cr-media-caption.solid": {
+          "selector": ".cr-media-caption.solid",
+          "fill": null,
+          "blur": null,
+          "saturation": null,
+          "rim": null,
+          "shadow": null,
+          "radius": null,
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "--cr-caption-backing": "var(--cr-surface)",
+            "--cr-caption-feather": "0px",
+            "display": "flex",
+            "inset-block-end": "calc(var(--cr-media-transport, 58px) + var(--cr-spacing-sm) * 2)",
+            "inset-inline": "var(--cr-spacing-lg)",
+            "justify-content": "center",
+            "line-height": "1.35",
+            "pointer-events": "none",
+            "position": "absolute",
+            "text-align": "center",
+            "z-index": "1"
+          },
+          "layers": {},
+          "fallbacks": {
+            "opaque": null,
+            "reducedTransparency": null,
+            "forcedColors": null,
+            "noBackdropFilter": null
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": [
+            "haze",
+            "radius"
+          ],
+          "why": "The reader's caption style, solid: the inner box's backing is the opaque surface with no feather, the backing the cue's fallbacks draw. Worn with the cue's own recipe."
         }
       },
       "why": "Stone backs a label and takes the radius of the element it backs.",

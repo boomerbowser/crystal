@@ -584,7 +584,7 @@
   },
   "typography": {
     "readingSize": 16,
-    "readingLeading": 24,
+    "readingLeading": 25.6,
     "family": "Manrope",
     "scale": {
       "display": {
@@ -609,7 +609,7 @@
       },
       "body": {
         "ratio": 1,
-        "leading": 1.5,
+        "leading": 1.6,
         "tracking": "0"
       },
       "caption": {

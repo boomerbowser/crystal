@@ -2,6 +2,47 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
+## [Unreleased]
+
+The editor recipe's faults (D-40), the reader's caption style (C-S5) and one
+body leading by Meridian's ruling on D-41. `crystal-theme.css` changes only in
+the leading.
+
+### Changed
+
+- **One body leading, 1.6 (D-41, ruled (b)).** `typography.scale.body.leading`
+  moves from 1.5 to 1.6 and `typography.readingLeading` from 24px to 25.6px, in
+  the DTCG source, the runtime tokens and the TypeScript, Swift and Kotlin
+  exports. The theme publishes `--cr-leading: 1.6` and
+  `--cr-text-body-leading: 1.6` (compact density 1.472, was 1.38). The page's
+  text is unchanged; every recipe that reads the token (`.cr-prose`,
+  `.cr-editor`, `.cr-media-bar`, `.cr-media.audio`) now sets 25.6px lines on
+  16px text, as the page around it does. The resolver derives `--cr-leading`
+  from the body step, and `crystal.css`'s body reads `var(--cr-leading)`.
+  Native apps reading `typography.readingLeading` move from 24 to 25.6 points.
+
+### Fixed
+
+- **The editor's floor (D-40).** `.cr-editor`'s `min-height` multiplied a
+  unitless leading and computed to nothing, so an empty editor collapsed to
+  its padding. It is now four lines inside the padding (142.4px at 16px). The
+  checklist control's offset is corrected the same way.
+- **The sticky toolbar's backing (D-40).** `.cr-editor-toolbar` sits on the
+  Haze fill, rounded to the well, so a document scrolled under it no longer
+  shows through its controls; the opaque surface with transparency reduced,
+  `Canvas` under forced colours.
+
+### Added
+
+- **`.cr-editor-toolbar.above` (D-40)**, the counterpart of `.below`: the
+  toolbar over the text on any pointer. Both are placement only; the pointer
+  still decides whether the controls wrap or scroll in one row.
+- **The reader's caption style (C-S5).** `.cr-media-caption.large` and
+  `.larger` scale the cue's range by 1.25 and 1.5, and `.solid` puts the cue on
+  the opaque surface, through `--cr-caption-scale`, `--cr-caption-backing` and
+  `--cr-caption-feather`; recorded in `surface-recipes.json`. The video
+  player's catalogue entry names the choice in its anatomy and semantics.
+
 ## [2.4.0] - 2026-10-02
 
 Media and text recipes, and every surface's recipe as values, from the

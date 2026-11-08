@@ -11,8 +11,8 @@
 @font-face{font-family:Manrope;src:url('fonts/manrope.woff2') format('woff2');font-weight:200 800;font-display:swap}
 /* Crystal 1.0: framework-independent primitives. Theme variables are supplied by
    crystal-theme.css or by a configuration exported from the playground. */
-:root{--cr-font:Manrope,system-ui,sans-serif;--cr-radius:28px;--cr-space:20px;--cr-reading:16px;--cr-leading:1.5;color-scheme:light}
-*{box-sizing:border-box}body{margin:0;color:var(--cr-text);background:var(--cr-canvas);font-family:var(--cr-font);font-size:16px;line-height:1.6}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}a{color:var(--cr-primary);text-underline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:var(--cr-focus-core-width,2px) solid var(--cr-focus-core,var(--cr-primary));outline-offset:var(--cr-focus-core-offset,3px);box-shadow:var(--cr-focus-ring,0 0 6px 1px var(--cr-focus-feather-1,color-mix(in srgb,var(--cr-primary) 46%,transparent)),0 0 16px 3px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 0 30px 6px var(--cr-focus-feather-3,color-mix(in srgb,var(--cr-primary) 17%,transparent)),0 0 54px 11px var(--cr-focus-feather-4,color-mix(in srgb,var(--cr-primary) 8%,transparent)),0 8px 18px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 22px 40px var(--cr-focus-shadow,color-mix(in srgb,var(--cr-decorative) 27%,transparent)))}button:disabled{cursor:not-allowed;opacity:.55}button{transition:background var(--cr-state),box-shadow var(--cr-state),transform var(--cr-press)}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{line-height:1.2;letter-spacing:-.04em}button:has(svg){display:inline-flex;align-items:center;justify-content:center;gap:9px}
+:root{--cr-font:Manrope,system-ui,sans-serif;--cr-radius:28px;--cr-space:20px;--cr-reading:16px;--cr-leading:1.6;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;color:var(--cr-text);background:var(--cr-canvas);font-family:var(--cr-font);font-size:16px;line-height:var(--cr-leading)}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}a{color:var(--cr-primary);text-underline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:var(--cr-focus-core-width,2px) solid var(--cr-focus-core,var(--cr-primary));outline-offset:var(--cr-focus-core-offset,3px);box-shadow:var(--cr-focus-ring,0 0 6px 1px var(--cr-focus-feather-1,color-mix(in srgb,var(--cr-primary) 46%,transparent)),0 0 16px 3px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 0 30px 6px var(--cr-focus-feather-3,color-mix(in srgb,var(--cr-primary) 17%,transparent)),0 0 54px 11px var(--cr-focus-feather-4,color-mix(in srgb,var(--cr-primary) 8%,transparent)),0 8px 18px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 22px 40px var(--cr-focus-shadow,color-mix(in srgb,var(--cr-decorative) 27%,transparent)))}button:disabled{cursor:not-allowed;opacity:.55}button{transition:background var(--cr-state),box-shadow var(--cr-state),transform var(--cr-press)}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{line-height:1.2;letter-spacing:-.04em}button:has(svg){display:inline-flex;align-items:center;justify-content:center;gap:9px}
 /* Plastic has a glow of its own, the primary lifted by the scheme's tint. It is
    a material property and stays. The drift of that glow across the foundation
    is ambient motion, which is deferred with the rest of the tier, so the
@@ -1850,7 +1850,7 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     z-index: 2;
     inset-inline: var(--cr-spacing-sm);
     inset-block-end: var(--cr-spacing-sm);
-    line-height: var(--cr-leading, 1.5);
+    line-height: var(--cr-leading, 1.6);
 }
 .cr-media:fullscreen .cr-media-bar {
     inset-inline: max(var(--cr-spacing-sm), env(safe-area-inset-left), env(safe-area-inset-right));
@@ -1934,7 +1934,7 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     border-radius: var(--cr-spacing-xs);
     color: var(--cr-text);
     font-weight: 650;
-    font-size: clamp(15px, 3.2cqi, 28px);
+    font-size: calc(clamp(15px, 3.2cqi, 28px) * var(--cr-caption-scale, 1));
 }
 .cr-media-caption > *::before {
     content: '';
@@ -1942,8 +1942,29 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     inset: 0;
     z-index: -1;
     border-radius: inherit;
-    background: var(--cr-stone-fill);
-    filter: blur(var(--cr-stone-feather));
+    background: var(--cr-caption-backing, var(--cr-stone-fill));
+    filter: blur(var(--cr-caption-feather, var(--cr-stone-feather)));
+}
+
+/* The reader's caption style. Captions are the reader's, so a player offers a
+ * larger size and a solid backing and keeps the choice for every player on
+ * the page. The choice is worn on `.cr-media-caption` and reaches the cue's
+ * box through two properties: `--cr-caption-scale` scales the whole range, so
+ * a larger cue still grows with the stage (`.large` 1.25, `.larger` 1.5), and
+ * `.solid` puts the cue on the opaque surface in place of the feathered Stone,
+ * the backing every fallback below already draws. Under forced colours the
+ * cue is drawn in system colours whatever the choice. The browser's own
+ * renderer (`::cue`) is left to the reader's system caption settings, which
+ * every engine applies to it. */
+.cr-media-caption.large {
+    --cr-caption-scale: 1.25;
+}
+.cr-media-caption.larger {
+    --cr-caption-scale: 1.5;
+}
+.cr-media-caption.solid {
+    --cr-caption-backing: var(--cr-surface);
+    --cr-caption-feather: 0px;
 }
 
 /* The audio player: no picture, so the stage becomes a Haze reading surface
@@ -1959,7 +1980,7 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
        fill, which `.cr-haze` sets in the reset layer. `revert-layer` hands the
        background back to whichever surface the player wears. */
     background: revert-layer;
-    line-height: var(--cr-leading, 1.5);
+    line-height: var(--cr-leading, 1.6);
 }
 .cr-media.audio .cr-media-bar {
     position: static;
@@ -2068,7 +2089,10 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 :is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) > li > :where(label) {
     flex: none;
     display: inline-flex;
-    margin-top: calc((var(--cr-text-body-leading) - var(--cr-choice-box-size, 26px)) / 2);
+    /* The leading is unitless, so it is made a length with `1em` before the
+       box is taken from it; without it the calc is invalid and computes 0
+       (D-40). */
+    margin-top: calc((var(--cr-text-body-leading) * 1em - var(--cr-choice-box-size, 26px)) / 2);
 }
 /* A checklist's checkbox is a choice, not the field's text entry. Inside an
    editor's field shell, `.cr-field-shell :is(input, select, textarea)` would
@@ -2157,14 +2181,17 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 }
 
 /* The editable surface: the caret in the primary ink, and an outline-free
-   focus, because the field shell around it draws the ring. The selection is a
+   focus, because the field shell around it draws the ring. Its floor is four
+   lines of body text inside its padding: the leading is unitless, so it is
+   made a length with `1em` (written without it, the calc was invalid and an
+   empty editor collapsed to its padding, D-40). The selection is a
    28% primary tint under unchanged text. It is not the primary-soft pair,
    which a highlight (`mark`) already wears: a highlighted word that is then
    selected must still look selected. */
 .cr-editor {
     caret-color: var(--cr-primary);
     outline: none;
-    min-height: calc(var(--cr-text-body-leading) * 4);
+    min-height: calc(var(--cr-text-body-leading) * 1em * 4 + var(--cr-space) * 2);
     padding: var(--cr-space);
 }
 .cr-editor ::selection,
@@ -2215,7 +2242,15 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
  * and sticks to the bottom, above the on-screen keyboard where the browser
  * reports it (`keyboard-inset-height`, from the VirtualKeyboard API), so the
  * formatting a person is using is never under their keyboard and is in reach of
- * a thumb. */
+ * a thumb. Either way it sits on the Haze fill, rounded to the well it sits in,
+ * so a document scrolled under it does not show through its controls (D-40).
+ *
+ * The placement and the row are separate. The pointer decides the row: on a
+ * fine pointer the controls wrap, on a touch screen they are one row that
+ * scrolls sideways. `.below` and `.above` decide only the placement, for a
+ * product that knows its layout better than the media query does: `.below`
+ * puts the toolbar under the text on any pointer, `.above` keeps it over the
+ * text on any pointer. */
 .cr-editor-toolbar {
     position: sticky;
     inset-block-start: 0;
@@ -2226,6 +2261,8 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     gap: 2px;
     padding: var(--cr-spacing-2xs);
     border-bottom: 1px solid var(--cr-edge);
+    border-radius: calc(var(--cr-radius) - var(--cr-haze-inset)) calc(var(--cr-radius) - var(--cr-haze-inset)) 0 0;
+    background: var(--cr-haze-fill);
 }
 .cr-editor-toolbar > [role=separator] {
     align-self: stretch;
@@ -2233,26 +2270,28 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     margin: var(--cr-spacing-xs) var(--cr-spacing-2xs);
     background: var(--cr-edge);
 }
-/* `.below` asks for the touch placement on any pointer, for a product that
-   knows its layout better than the media query does. */
 .cr-editor-toolbar.below {
     order: 2;
     inset-block-start: auto;
     inset-block-end: env(keyboard-inset-height, 0px);
     border-bottom: 0;
     border-top: 1px solid var(--cr-edge);
+    border-radius: 0 0 calc(var(--cr-radius) - var(--cr-haze-inset)) calc(var(--cr-radius) - var(--cr-haze-inset));
 }
 @media (pointer: coarse) {
 .cr-editor-toolbar {
-    order: 2;
-    inset-block-start: auto;
-    inset-block-end: env(keyboard-inset-height, 0px);
     flex-wrap: nowrap;
     overflow-x: auto;
     overscroll-behavior: contain;
+    scrollbar-width: none;
+}
+.cr-editor-toolbar:not(.above) {
+    order: 2;
+    inset-block-start: auto;
+    inset-block-end: env(keyboard-inset-height, 0px);
     border-bottom: 0;
     border-top: 1px solid var(--cr-edge);
-    scrollbar-width: none;
+    border-radius: 0 0 calc(var(--cr-radius) - var(--cr-haze-inset)) calc(var(--cr-radius) - var(--cr-haze-inset));
 }
 .cr-editor-toolbar > * {
     flex: none;
@@ -2260,6 +2299,16 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 }
 }
 
+/* With transparency reduced the well is the opaque surface, and so is the
+   toolbar's backing. */
+[data-effects=opaque] .cr-editor-toolbar {
+    background: var(--cr-surface);
+}
+@media (prefers-reduced-transparency:reduce) {
+.cr-editor-toolbar {
+    background: var(--cr-surface);
+}
+}
 [data-effects=opaque] .cr-media-caption > *::before {
     background: var(--cr-surface);
     filter: none;
@@ -2300,6 +2349,9 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 .cr-editor::selection {
     background: Highlight;
     color: HighlightText;
+}
+.cr-editor-toolbar {
+    background: Canvas;
 }
 .cr-editor-toolbar,
 .cr-editor-toolbar > [role=separator] {

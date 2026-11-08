@@ -114,7 +114,7 @@ function writeIssues(data, decisions) {
   if (moot) parts.push(`${NUMBER[moot].toLowerCase()} ${moot === 1 ? 'is' : 'are'} no longer needed`);
   if (defects.length) parts.push(`${defects.join(', ')} ${defects.length === 1 ? 'is a defect' : 'are defects'} with a fix specified`);
   const list = filed.length > 1 ? `${filed.slice(0, -1).join(', ')} and ${filed.at(-1)}` : filed[0];
-  const summary = `**${NUMBER[filed.length]} ${filed.length === 1 ? 'entry is' : 'entries are'} open**, ${list}, all from the media, text and recipe work of 2 October
+  const summary = `**${NUMBER[filed.length]} ${filed.length === 1 ? 'entry is' : 'entries are'} open**, ${list}, ${filed.length === 1 ? 'from' : 'all from'} the media, text and recipe work of 2 October
 2026 ([\`2026-10-02-media-text-and-recipe-parity.md\`](2026-10-02-media-text-and-recipe-parity.md)).
 ${parts.join('; ')}. Every
 decision left on 29 September 2026 was ruled on

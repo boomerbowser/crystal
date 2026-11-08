@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-50 tasks: 37 done, 12 ready, 1 blocked, 0 needs a ruling, 0 dropped.
+52 tasks: 40 done, 10 ready, 2 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -48,9 +48,11 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-S2](#c-s2) | P1 | Done | Platform guide for surface-recipes.json in CONTRACT.md | – |
 | [C-S3](#c-s3) | P2 | Done | Measure before assigning, as a contract rule (re-evaluation rec. 1) | – |
 | [C-S4](#c-s4) | P2 | Done | Check prose against surface in the build (re-evaluation rec. 3) | – |
-| [C-S5](#c-s5) | P2 | Ready | Caption style in the media recipe | – |
+| [C-S5](#c-s5) | P2 | Done | Caption style in the media recipe | – |
 | [C-S6](#c-s6) | P2 | Done | Assign haze to the popover, the pop-confirm and the menu | – |
-| [C-S7](#c-s7) | P2 | Ready | Correct the editor recipe's floor, toolbar backing and placements (D-40) | – |
+| [C-S7](#c-s7) | P2 | Done | Correct the editor recipe's floor, toolbar backing and placements (D-40) | – |
+| [C-S8](#c-s8) | P2 | Done | One body leading (D-41) | – |
+| [C-R4](#c-r4) | P1 | Ready | Publish @crystal-ui/core 2.5.0 | C-S5, C-S7, C-S8 |
 | [C-M1](#c-m1) | P2 | Done | Material presets as entrances (D-31) | – |
 | [C-M2](#c-m2) | P2 | Done | Rule on the 20 unplayed assignments (D-32) | – |
 | [C-M3](#c-m3) | P2 | Ready | Selection motion for strips and groups (D-37) | – |
@@ -59,7 +61,6 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-T1](#c-t1) | P2 | Done | Highlight and selection colours (D-34) | – |
 | [C-T2](#c-t2) | P1 | Done | Engine binding policy for platform libraries (D-30) | – |
 | [C-T3](#c-t3) | P0 | Done | Selected highlight contrast (D-39) | – |
-| [C-S8](#c-s8) | P2 | Ready | One body leading (D-41) | – |
 
 ### C-R1
 
@@ -145,15 +146,15 @@ Where: `tools/build-catalogue.cjs, core/tokens/catalogue/`.
 
 ### C-S5
 
-**Caption style in the media recipe.** Recipes, P2, ready.
+**Caption style in the media recipe.** Recipes, P2, done.
 
 Target: .cr-media-caption publishes the reader's caption style (a larger size and a solid backing on --cr-surface), and the video player's entry names the caption-style choice, so every platform offers what Crystal React does since R-M12.
 
 Done when:
 
-- [ ] crystal.css carries the size and backing variants, with their forced-colours and reduced-transparency branches
-- [ ] surface-recipes.json records them
-- [ ] The video player entry names the choice in its anatomy and semantics
+- [x] crystal.css carries the size and backing variants, with their forced-colours and reduced-transparency branches
+- [x] surface-recipes.json records them
+- [x] The video player entry names the choice in its anatomy and semantics
 
 Where: `core/assets/crystal.css, core/tokens/catalogue/11-media.json`.
 
@@ -172,16 +173,43 @@ Where: `tools/, core/tokens/catalogue/07-overlays.json, 06-feedback.json`.
 
 ### C-S7
 
-**Correct the editor recipe's floor, toolbar backing and placements (D-40).** Recipes, P2, ready.
+**Correct the editor recipe's floor, toolbar backing and placements (D-40).** Recipes, P2, done.
 
 Target: .cr-editor's min-height and the checklist's control offset compute to valid lengths; the sticky .cr-editor-toolbar has a backing so a document scrolled under it does not show through; .above mirrors .below, and .below says the touch placement it promises.
 
 Done when:
 
-- [ ] The three faults measured in a browser before and after (computed values)
-- [ ] Crystal React drops its three local workarounds in RichTextSurface.module.scss
+- [x] The three faults measured in a browser before and after (computed values)
+- [x] Crystal React drops its three local workarounds once the fix is released (R-T10)
 
 Where: `core/assets/crystal.css`.
+
+### C-S8
+
+**One body leading (D-41).** Tokens, P2, done.
+
+Target: --cr-leading, --cr-text-body-leading and typography.reading.leading move to 1.6 / 25.6px, regenerated into every export; crystal.css's body reads var(--cr-leading), and the resolver derives --cr-leading from the body step; every recipe that reads them is re-measured.
+
+Done when:
+
+- [x] crystal.css, the theme and the platform exports agree on the body leading
+- [x] The preview re-baselined, every changed frame disclosed (with C-R3)
+
+Where: `core/assets/crystal.css, core/tokens/`.
+
+### C-R4
+
+**Publish @crystal-ui/core 2.5.0.** Release, P1, ready.
+
+Target: 2.5.0 on the registry with the caption style, the corrected editor recipe and the one body leading.
+
+Done when:
+
+- [ ] CHANGELOG entry under 2.5.0 lists the three and the theme change (--cr-leading, --cr-text-body-leading)
+- [ ] npm test passes; crystal-theme.css changes only in the leading
+- [ ] The distributable ZIP regenerated
+
+Where: `CHANGELOG.md, core/package.json`. Depends on C-S5, C-S7, C-S8.
 
 ### C-M1
 
@@ -287,19 +315,6 @@ Done when:
 
 Where: `core/assets/crystal.css, tools/validate-tokens.cjs`.
 
-### C-S8
-
-**One body leading (D-41).** Tokens, P2, ready, by the ruling on D-41.
-
-Target: --cr-leading, --cr-text-body-leading and typography.reading.leading move to 1.6 / 25.6px, regenerated into every export; every recipe that reads them is re-measured.
-
-Done when:
-
-- [ ] crystal.css, the theme and the platform exports agree on the body leading
-- [ ] The preview re-baselined, every changed frame disclosed
-
-Where: `core/assets/crystal.css, core/tokens/`.
-
 ## crystal-preview
 
 | ID | Priority | Status | Task | Depends on |
@@ -323,6 +338,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 
 | ID | Priority | Status | Task | Depends on |
 |---|---|---|---|---|
+| [R-T10](#r-t10) | P1 | Blocked | Wear the 2.5.0 editor and caption recipes and drop the workarounds | C-R4 |
 | [R-M1](#r-m1) | P1 | Done | Playback rate and picture in picture on useMediaElement | – |
 | [R-M2](#r-m2) | P1 | Done | useMediaTracks: caption, audio and video tracks | – |
 | [R-M3](#r-m3) | P1 | Done | MediaSettings: speed, subtitles, audio, quality | – |
@@ -354,6 +370,19 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-A10](#r-a10) | P2 | Ready | The Resin thumb on the colour area, slider and wheel | – |
 | [R-Q1](#r-q1) | P2 | Ready | Documentation site from the surfaces (re-evaluation rec. 7, Slice Q) | C-R1 |
 | [R-A8](#r-a8) | P2 | Blocked | The travelling selection pill on strips (D-37) | C-M3, C-R1 |
+
+### R-T10
+
+**Wear the 2.5.0 editor and caption recipes and drop the workarounds.** Text, P1, blocked.
+
+Target: RichTextSurface drops its D-40 workarounds (the 144px floor, the in-flow top toolbar and the coarse-pointer undo) and wears .above for toolbarPlacement="top"; VideoPlayer's captions wear .large, .larger and .solid in place of its local caption-style rules.
+
+Done when:
+
+- [ ] RichTextSurface.module.scss and VideoPlayer.module.scss lose the rules core now publishes
+- [ ] verify:appearance, verify:behaviour and verify:materials pass; every changed value disclosed
+
+Where: `src/components/RichTextSurface/, src/components/VideoPlayer/`. Depends on C-R4.
 
 ### R-M1
 

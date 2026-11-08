@@ -6,7 +6,7 @@
     {
       "id": "video-player",
       "name": "Video player",
-      "anatomy": "A media stage at a set aspect ratio holding the video, a caption cue above the transport, and the transport inset from the stage: play, skip, the scrubber with its two time readouts, mute and volume, then a settings menu (playback speed, subtitles and captions, audio track, quality), picture in picture and full screen.",
+      "anatomy": "A media stage at a set aspect ratio holding the video, a caption cue above the transport, and the transport inset from the stage: play, skip, the scrubber with its two time readouts, mute and volume, then a settings menu (playback speed, subtitles and captions, caption style, audio track, quality), picture in picture and full screen.",
       "states": [
         "idle",
         "playing",
@@ -27,7 +27,7 @@
         "frost"
       ],
       "geometry": "The stage keeps the content radius and the aspect ratio the product sets (16:9, 4:3, 1:1, 9:16 or the media's own). The transport is a pill inset 12px from the stage, or the safe area in full screen, with 4px block padding around its controls (58px with its rim); every control reaches the 48px action target. Caption cues sit above the transport, never under it. Below 420px the transport wraps its trailing controls onto a second row.",
-      "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus. Speed, subtitle, audio-track and quality choices are menus of radio items (menuitemradio with aria-checked); the selected item is shown by label weight, never a check mark, and each change is announced in words. A choice the engine cannot make (an audio track list where the browser exposes none, picture in picture where it is unsupported) is not offered.",
+      "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus. The caption style (a larger size, 1.25 or 1.5 times, and a solid backing on the opaque surface) is the reader's: it is kept for every player the reader opens and drawn with `.cr-media-caption`'s `.large`, `.larger` and `.solid`. Speed, subtitle, caption-style, audio-track and quality choices are menus of radio items (menuitemradio with aria-checked); the selected item is shown by label weight, never a check mark, and each change is announced in words. A choice the engine cannot make (an audio track list where the browser exposes none, picture in picture where it is unsupported) is not offered.",
       "crystal": "Stage, transport and caption materials, transport geometry and insets, the settings menu, the motion of showing and hiding controls",
       "product": "Sources, caption and audio tracks, quality renditions and their switching (adaptive streaming), DRM, analytics",
       "motion": [

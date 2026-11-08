@@ -59,7 +59,11 @@
     Object.assign(tokens,{
       '--cr-font':s.font==='manrope'?'Manrope, system-ui, sans-serif':'system-ui, sans-serif',
       '--cr-radius':s.radius+'px','--cr-space':s.density==='compact'?'14px':'20px',
-      '--cr-reading':'16px','--cr-leading':'1.5',
+      '--cr-reading':data.typography.readingSize+'px',
+      /* The body's leading, the type scale's `body` step before density: the
+         value `crystal.css` gives the page, so a recipe that reads the token
+         sets the lines the page around it sets (D-41). */
+      '--cr-leading':String(data.typography.scale.body.leading),
       '--cr-foundation-muted':p.text,
       '--cr-mica-inactive':data.material.micaInactive[mode],
       '--cr-atmosphere-one':rgba(p.decorative,s.atmosphere/100*(dark?.29:.24)),

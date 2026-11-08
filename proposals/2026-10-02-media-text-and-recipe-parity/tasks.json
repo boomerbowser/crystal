@@ -1,6 +1,6 @@
 {
   "$description": "The development tasks and targets from proposals/2026-10-02-media-text-and-recipe-parity.md. This file is the source; tasks.md and examples/tasks.html are rendered from it by render-tasks.mjs. Edit here, then run `node proposals/2026-10-02-media-text-and-recipe-parity/render-tasks.mjs`. Decisions and their options are in `decisions`; rulings are recorded append-only in rulings.json and applied by apply-rulings.mjs, never by editing task statuses here.",
-  "updated": "2026-10-02",
+  "updated": "2026-11-07",
   "statuses": {
     "done": "Built and verified in this change; reviewable now.",
     "ready": "Specified and unblocked; can start.",
@@ -131,7 +131,7 @@
       "repo": "core",
       "area": "Recipes",
       "priority": "P2",
-      "status": "ready",
+      "status": "done",
       "title": "Caption style in the media recipe",
       "depends": [],
       "target": ".cr-media-caption publishes the reader's caption style (a larger size and a solid backing on --cr-surface), and the video player's entry names the caption-style choice, so every platform offers what Crystal React does since R-M12.",
@@ -162,15 +162,67 @@
       "repo": "core",
       "area": "Recipes",
       "priority": "P2",
-      "status": "ready",
+      "status": "done",
       "title": "Correct the editor recipe's floor, toolbar backing and placements (D-40)",
       "depends": [],
       "target": ".cr-editor's min-height and the checklist's control offset compute to valid lengths; the sticky .cr-editor-toolbar has a backing so a document scrolled under it does not show through; .above mirrors .below, and .below says the touch placement it promises.",
       "acceptance": [
         "The three faults measured in a browser before and after (computed values)",
-        "Crystal React drops its three local workarounds in RichTextSurface.module.scss"
+        "Crystal React drops its three local workarounds once the fix is released (R-T10)"
       ],
       "where": "core/assets/crystal.css"
+    },
+    {
+      "id": "C-S8",
+      "repo": "core",
+      "area": "Tokens",
+      "priority": "P2",
+      "status": "done",
+      "title": "One body leading (D-41)",
+      "depends": [],
+      "target": "--cr-leading, --cr-text-body-leading and typography.reading.leading move to 1.6 / 25.6px, regenerated into every export; crystal.css's body reads var(--cr-leading), and the resolver derives --cr-leading from the body step; every recipe that reads them is re-measured.",
+      "acceptance": [
+        "crystal.css, the theme and the platform exports agree on the body leading",
+        "The preview re-baselined, every changed frame disclosed (with C-R3)"
+      ],
+      "where": "core/assets/crystal.css, core/tokens/"
+    },
+    {
+      "id": "C-R4",
+      "repo": "core",
+      "area": "Release",
+      "priority": "P1",
+      "status": "ready",
+      "title": "Publish @crystal-ui/core 2.5.0",
+      "depends": [
+        "C-S5",
+        "C-S7",
+        "C-S8"
+      ],
+      "target": "2.5.0 on the registry with the caption style, the corrected editor recipe and the one body leading.",
+      "acceptance": [
+        "CHANGELOG entry under 2.5.0 lists the three and the theme change (--cr-leading, --cr-text-body-leading)",
+        "npm test passes; crystal-theme.css changes only in the leading",
+        "The distributable ZIP regenerated"
+      ],
+      "where": "CHANGELOG.md, core/package.json"
+    },
+    {
+      "id": "R-T10",
+      "repo": "react",
+      "area": "Text",
+      "priority": "P1",
+      "status": "blocked",
+      "title": "Wear the 2.5.0 editor and caption recipes and drop the workarounds",
+      "depends": [
+        "C-R4"
+      ],
+      "target": "RichTextSurface drops its D-40 workarounds (the 144px floor, the in-flow top toolbar and the coarse-pointer undo) and wears .above for toolbarPlacement=\"top\"; VideoPlayer's captions wear .large, .larger and .solid in place of its local caption-style rules.",
+      "acceptance": [
+        "RichTextSurface.module.scss and VideoPlayer.module.scss lose the rules core now publishes",
+        "verify:appearance, verify:behaviour and verify:materials pass; every changed value disclosed"
+      ],
+      "where": "src/components/RichTextSurface/, src/components/VideoPlayer/"
     },
     {
       "id": "C-M1",

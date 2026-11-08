@@ -369,7 +369,7 @@ function migrate() {
   set(out.semantic, 'typography.readingLeading', leaf('dimension', dim(flat.typography.readingLeading)));
 
   /* semantic: the type scale.
-     Crystal specifies a reading rhythm (Manrope at 16/24) and derives six steps
+     Crystal specifies a reading rhythm (Manrope at 16/25.6) and derives six steps
      from it here, so every platform reads the same scale. A scale derived
      inside one platform library is invisible to the others (CONTRACT §1).
 
@@ -387,7 +387,7 @@ function migrate() {
     title: { ratio: 1.5, leading: 1.2, tracking: '-0.04em' },
     heading: { ratio: 1.25, leading: 1.3, tracking: '-0.03em' },
     subheading: { ratio: 1.0625, leading: 1.45, tracking: '-0.01em' },
-    body: { ratio: 1, leading: 1.5, tracking: '0' },
+    body: { ratio: 1, leading: 1.6, tracking: '0' },
     caption: { ratio: 0.8125, leading: 1.45, tracking: '0' },
   };
   for (const [step, values] of Object.entries(TYPE_SCALE)) {
@@ -408,8 +408,8 @@ function migrate() {
      The values are the ones the preview's own shell uses, named so something
      other than the preview can reach them. The spacing scale is the 4px rhythm
      the catalogue names, tied at two points to the reading rhythm: `md` is the
-     16px reading size and `lg` is the 24px leading, which makes a `lg` gap
-     exactly one blank line between blocks. The breakpoints are where the shell
+     16px reading size and `lg` is the step nearest the 25.6px leading (D-41),
+     which makes a `lg` gap read as one blank line between blocks. The breakpoints are where the shell
      changes: 600, 850, 1150 and 1500. */
   for (const [step, value] of [['2xs', 4], ['xs', 8], ['sm', 12], ['md', 16], ['lg', 24], ['xl', 32], ['2xl', 48]]) {
     set(out.semantic, `spacing.${step}`, leaf('dimension', dim(value), `Spacing step ${step}`));

@@ -151,7 +151,7 @@ Keep backdrop filters confined to a few bounded surfaces, avoid continuous blur 
 
 This section defines two scales as tokens. They name what Crystal's own shell already does, so something other than the preview can reach the values. Neither is a new design decision.
 
-**The spacing scale** is the 4px rhythm, tied at two points to the reading rhythm: `md` is the 16px reading size and `lg` is the 24px leading, so a `lg` gap is exactly one blank line between blocks.
+**The spacing scale** is the 4px rhythm, tied at two points to the reading rhythm: `md` is the 16px reading size and `lg`, 24px, is the step nearest the 25.6px leading, so a `lg` gap reads as one blank line between blocks.
 
 | Step | `2xs` | `xs` | `sm` | `md` | `lg` | `xl` | `2xl` |
 |---|---|---|---|---|---|---|---|
@@ -165,7 +165,7 @@ This section defines two scales as tokens. They name what Crystal's own shell al
 
 ## The type scale
 
-Crystal specifies a reading rhythm, Manrope at 16/24, and the scale is derived from it. Each step is a ratio of the reading size, so changing `typography.readingSize` changes all six steps and no step is a literal.
+Crystal specifies a reading rhythm, Manrope at 16/25.6 (a leading of 1.6, D-41), and the scale is derived from it. Each step is a ratio of the reading size, so changing `typography.readingSize` changes all six steps and no step is a literal.
 
 | Step | Ratio | Size | Leading | Tracking |
 |---|---|---|---|---|
@@ -173,7 +173,7 @@ Crystal specifies a reading rhythm, Manrope at 16/24, and the scale is derived f
 | `title` | 1.5 | 24px | 1.2 | −0.04em |
 | `heading` | 1.25 | 20px | 1.3 | −0.03em |
 | `subheading` | 1.0625 | 17px | 1.45 | −0.01em |
-| `body` | 1 | 16px | 1.5 | 0 |
+| `body` | 1 | 16px | 1.6 | 0 |
 | `caption` | 0.8125 | 13px | 1.45 | 0 |
 
 The scale is modest, because Crystal's hierarchy is carried by weight and material as much as by size, and a dramatic scale competes with both.

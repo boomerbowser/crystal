@@ -80,11 +80,14 @@
       "name": "Stone label backing",
       "materials": ["Stone"],
       "class": ".cr-stone",
-      "use": "A label over an unknown or moving backdrop: a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text. `.cr-media-caption` is a caption cue rendered by the library: the Stone backing on a box above the transport, never under it. `::cue` on a `.cr-media` video is the flat fill for the browser's own renderer.",
-      "also": [".cr-media-caption"],
+      "use": "A label over an unknown or moving backdrop: a caption on media, a status bar over a scene. 55% light / 60% dark fill, feathered like Haze, crisp text. `.cr-media-caption` is a caption cue rendered by the library: the Stone backing on a box above the transport, never under it. `.large`, `.larger` and `.solid` are the reader's caption style: a cue 1.25 or 1.5 times the size, and a cue on the opaque surface. `::cue` on a `.cr-media` video is the flat fill for the browser's own renderer, which follows the reader's system caption settings.",
+      "also": [".cr-media-caption", ".cr-media-caption.large", ".cr-media-caption.larger", ".cr-media-caption.solid"],
       "partial": {
         ".cr-stone": "Stone backs a label and takes the radius of the element it backs.",
-        ".cr-media-caption": "A part: the outer element positions the cue, and its inner box (`.cr-media-caption > *`) carries the Stone backing and the radius."
+        ".cr-media-caption": "A part: the outer element positions the cue, and its inner box (`.cr-media-caption > *`) carries the Stone backing and the radius.",
+        ".cr-media-caption.large": "The reader's caption style, larger: `--cr-caption-scale` multiplies the cue's 15px to 28px range on its inner box. Worn with the cue's own recipe.",
+        ".cr-media-caption.larger": "The reader's caption style, largest: `--cr-caption-scale` multiplies the cue's 15px to 28px range on its inner box. Worn with the cue's own recipe.",
+        ".cr-media-caption.solid": "The reader's caption style, solid: the inner box's backing is the opaque surface with no feather, the backing the cue's fallbacks draw. Worn with the cue's own recipe."
       }
     },
     {

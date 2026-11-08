@@ -2481,3 +2481,91 @@ with only the alias and the new one leaves none; esbuild keeps both forms. A
 contract check, `every backdrop-filter is written after its -webkit- form`,
 failed on all 23 rules before the change and passes after it.
 `libraries/CONTRACT.md` says why the order matters.
+
+## D-40 · Three faults in the editor recipe
+
+**What.** Found by Crystal React wearing `.cr-editor` and `.cr-editor-toolbar`
+from 2.4.0 (R-T9), measured in Chromium on 7 November 2026, computed values:
+
+1. `.cr-editor { min-height: calc(var(--cr-text-body-leading) * 4) }` multiplies
+   a unitless leading (`1.5`), so the result is the number `6`, invalid for a
+   length at computed-value time. A bare `.cr-editor` computes `min-height: 0px`:
+   an empty editor collapses to its padding. The checklist's control offset,
+   `calc((var(--cr-text-body-leading) - var(--cr-choice-box-size, 26px)) / 2)`,
+   subtracts a length from a number and computes `margin-top: 0px` the same way.
+2. On a fine pointer `.cr-editor-toolbar` is `position: sticky; inset-block-start: 0`
+   with no background (`rgba(0, 0, 0, 0)`), so a document scrolled under it
+   shows through the controls.
+3. `.below` asks for "the touch placement on any pointer" but sets only the
+   order, the inset and the rule; the touch placement's single scrolling row is
+   in the `pointer: coarse` block alone. And there is no counterpart: a product
+   that wants the toolbar above the text on a touch screen has to undo the
+   coarse rule property by property.
+
+**Why it matters.** The first is a value the recipe states and no renderer
+draws. The second makes the toolbar unreadable over text on every desktop
+editor that scrolls with the page. The third leaves two platforms to guess what
+a placement means.
+
+**Closing it.** Multiply by `1em` (`calc(var(--cr-text-body-leading) * 1em * 4)`,
+and the same in the checklist offset), or publish the leading as a length. Give
+the sticky toolbar the Haze fill Crystal React already paints under the bottom
+toolbar, rounded to the well. Add `.above`, and either give `.below` the
+touch row or say it is placement only. Crystal React keeps three local rules
+for these meanwhile (`RichTextSurface.module.scss`: the 144px floor, the
+toolbar kept in the flow, and the `top` placement undoing the coarse rule) and
+drops them with this fix.
+
+**Where.** `core/assets/crystal.css`. Task C-S7.
+
+**Closed** on 7 November 2026 by C-S7. `.cr-editor`'s floor is
+`calc(var(--cr-text-body-leading) * 1em * 4 + var(--cr-space) * 2)`, four lines
+inside its padding, and the checklist offset multiplies by `1em` the same way.
+The toolbar sits on `--cr-haze-fill`, rounded to the well (the opaque surface
+with transparency reduced, `Canvas` under forced colours). `.above` mirrors
+`.below`, and both are placement only: the pointer decides whether the
+controls wrap or scroll in one row. Measured in Chromium on a page wearing the
+recipe, computed values, light and dark, fine and coarse pointers: an empty
+editor from 64px to 142.4px (`min-height` from `auto` to 142.4px), the
+checklist offset from 0px to -0.2px, the sticky toolbar's background from
+`rgba(0, 0, 0, 0)` to `rgba(255, 255, 255, 0.8)` light and
+`rgba(29, 23, 48, 0.8)` dark, and `.above` on a coarse pointer from order 2 to
+order 0 with its rule beneath it. Crystal React drops its three workarounds
+when 2.5.0 is published (R-T10).
+
+## D-41 · The body's leading is not `--cr-leading`
+
+**What.** `crystal.css` sets `body { line-height: 1.6 }`; the theme publishes
+`--cr-leading: 1.5` and `--cr-text-body-leading: 1.5`. Recipes that read the
+token (`.cr-media-bar`, `.cr-media.audio`) set 24px lines on 16px text inside a
+page whose inherited lines are 25.6px. Crystal React's audio card moved from
+the inherited 1.6 to the token's 1.5 when it began wearing the recipe
+(7 November 2026).
+
+**Why it matters.** Two leadings for body text, one written and one published,
+and which one a component gets depends on whether its recipe names the token.
+
+**Options.** (a) The body takes the published 1.5 (`var(--cr-leading)`), which
+the Swift and Kotlin exports already carry as a 24px reading leading
+**(rec.)**. (b) The tokens move to 1.6, and the reading leading to 25.6px on
+every platform. Changing the body moves every page's text; changing the token
+moves every recipe that reads it. It is a visible change either way, so it is
+Meridian's to choose.
+
+**Where.** `core/assets/crystal.css`, `core/tokens/`. Task C-S8 once ruled.
+
+<!-- ruling:D-41 -->
+**Ruled on 2026-11-07 by Meridian Digital: (b) The tokens move to 1.6, and the reading leading to 25.6px on every platform.** Adds C-S8, One body leading. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-S8).
+<!-- /ruling:D-41 -->
+
+**Closed** on 7 November 2026 by C-S8, on Meridian's ruling (b).
+`typography.scale.body.leading` is 1.6 and `typography.readingLeading` 25.6px
+in the DTCG source, the runtime tokens and the TypeScript, Swift and Kotlin
+exports; the theme publishes `--cr-leading: 1.6` and
+`--cr-text-body-leading: 1.6` (compact density 1.472). The resolver derives
+`--cr-leading` from the body step instead of writing it, and `crystal.css`'s
+body reads `var(--cr-leading)`. Measured in Chromium: the page's text is
+unchanged at 25.6px, and every recipe that reads the token moves from 24px to
+25.6px lines (`.cr-prose`, `.cr-editor`, `.cr-media-bar`, `.cr-media.audio`).
+The `lg` spacing step stays 24px; the materials chapter now calls it the step
+nearest the leading. The preview's re-baseline is with C-R3.

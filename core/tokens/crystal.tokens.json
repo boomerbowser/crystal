@@ -1457,7 +1457,7 @@
       },
       "readingLeading": {
         "$type": "dimension",
-        "$value": "24px"
+        "$value": "25.6px"
       },
       "scale": {
         "display": {
@@ -1536,7 +1536,7 @@
           },
           "leading": {
             "$type": "number",
-            "$value": 1.5,
+            "$value": 1.6,
             "$description": "body: line height as a multiple of its own size"
           },
           "tracking": {

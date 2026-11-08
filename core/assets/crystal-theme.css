@@ -39,7 +39,7 @@
   --cr-radius: 28px;
   --cr-space: 20px;
   --cr-reading: 16px;
-  --cr-leading: 1.5;
+  --cr-leading: 1.6;
   --cr-foundation-muted: #171130;
   --cr-mica-inactive: #f1f1f3;
   --cr-atmosphere-one: rgba(115, 56, 239, 0.216);
@@ -111,7 +111,7 @@
   --cr-text-subheading-leading: 1.45;
   --cr-text-subheading-tracking: -0.01em;
   --cr-text-body-size: 16px;
-  --cr-text-body-leading: 1.5;
+  --cr-text-body-leading: 1.6;
   --cr-text-body-tracking: 0;
   --cr-text-caption-size: 13px;
   --cr-text-caption-leading: 1.45;
@@ -223,7 +223,7 @@
   --cr-radius: 28px;
   --cr-space: 20px;
   --cr-reading: 16px;
-  --cr-leading: 1.5;
+  --cr-leading: 1.6;
   --cr-foundation-muted: #171130;
   --cr-mica-inactive: #f1f1f3;
   --cr-atmosphere-one: rgba(115, 56, 239, 0.216);
@@ -295,7 +295,7 @@
   --cr-text-subheading-leading: 1.45;
   --cr-text-subheading-tracking: -0.01em;
   --cr-text-body-size: 16px;
-  --cr-text-body-leading: 1.5;
+  --cr-text-body-leading: 1.6;
   --cr-text-body-tracking: 0;
   --cr-text-caption-size: 13px;
   --cr-text-caption-leading: 1.45;
@@ -407,7 +407,7 @@
   --cr-radius: 28px;
   --cr-space: 20px;
   --cr-reading: 16px;
-  --cr-leading: 1.5;
+  --cr-leading: 1.6;
   --cr-foundation-muted: #f7f3fe;
   --cr-mica-inactive: #202126;
   --cr-atmosphere-one: rgba(126, 72, 240, 0.261);
@@ -479,7 +479,7 @@
   --cr-text-subheading-leading: 1.45;
   --cr-text-subheading-tracking: -0.01em;
   --cr-text-body-size: 16px;
-  --cr-text-body-leading: 1.5;
+  --cr-text-body-leading: 1.6;
   --cr-text-body-tracking: 0;
   --cr-text-caption-size: 13px;
   --cr-text-caption-leading: 1.45;
