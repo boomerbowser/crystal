@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-53 tasks: 45 done, 7 ready, 1 blocked, 0 needs a ruling, 0 dropped.
+53 tasks: 46 done, 6 ready, 1 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -364,7 +364,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-M7](#r-m7) | P2 | Done | PlayerShell uses the player's own full screen | – |
 | [R-M8](#r-m8) | P2 | Done | Real media fixtures for stories and gates | – |
 | [R-M9](#r-m9) | P1 | Done | Wear the published media recipes and delete the copies | C-R1 |
-| [R-M10](#r-m10) | P1 | Ready | Prove audio-track switching in Safari | – |
+| [R-M10](#r-m10) | P1 | Done | Prove audio-track switching in Safari | – |
 | [R-M11](#r-m11) | P3 | Done | Draw the first cue before playback starts | – |
 | [R-M12](#r-m12) | P2 | Done | Caption appearance settings (size and backing) | – |
 | [R-T1](#r-t1) | P1 | Done | RichTextSurface wears .cr-field-shell, carries the vocabulary, places the toolbar by pointer | – |
@@ -531,13 +531,13 @@ Where: `src/components/VideoPlayer/, AudioPlayer/, MediaControls/`. Depends on C
 
 ### R-M10
 
-**Prove audio-track switching in Safari.** Media, P1, ready.
+**Prove audio-track switching in Safari.** Media, P1, done.
 
 Target: The audio group appears and switches the track in an engine with audioTracks.
 
 Done when:
 
-- [ ] A WebKit leg in verify:behaviour, or a recorded manual check with the harbour clip
+- [x] A WebKit leg in verify:behaviour, or a recorded manual check with the harbour clip
 
 Where: `scripts/verify-behaviour.mjs`.
 

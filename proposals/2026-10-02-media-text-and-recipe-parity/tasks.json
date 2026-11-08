@@ -522,7 +522,7 @@
       "repo": "react",
       "area": "Media",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "title": "Prove audio-track switching in Safari",
       "depends": [],
       "target": "The audio group appears and switches the track in an engine with audioTracks.",
