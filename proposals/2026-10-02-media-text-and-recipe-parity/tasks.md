@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-52 tasks: 43 done, 8 ready, 1 blocked, 0 needs a ruling, 0 dropped.
+52 tasks: 44 done, 7 ready, 1 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -338,7 +338,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 
 | ID | Priority | Status | Task | Depends on |
 |---|---|---|---|---|
-| [R-T10](#r-t10) | P1 | Ready | Wear the 2.5.0 editor and caption recipes and drop the workarounds | C-R4 |
+| [R-T10](#r-t10) | P1 | Done | Wear the 2.5.0 editor and caption recipes and drop the workarounds | C-R4 |
 | [R-M1](#r-m1) | P1 | Done | Playback rate and picture in picture on useMediaElement | – |
 | [R-M2](#r-m2) | P1 | Done | useMediaTracks: caption, audio and video tracks | – |
 | [R-M3](#r-m3) | P1 | Done | MediaSettings: speed, subtitles, audio, quality | – |
@@ -373,14 +373,14 @@ Where: `crystal-preview/website`. Depends on C-R1.
 
 ### R-T10
 
-**Wear the 2.5.0 editor and caption recipes and drop the workarounds.** Text, P1, ready.
+**Wear the 2.5.0 editor and caption recipes and drop the workarounds.** Text, P1, done.
 
 Target: RichTextSurface drops its D-40 workarounds (the 144px floor, the in-flow top toolbar and the coarse-pointer undo) and wears .above for toolbarPlacement="top"; VideoPlayer's captions wear .large, .larger and .solid in place of its local caption-style rules.
 
 Done when:
 
-- [ ] RichTextSurface.module.scss and VideoPlayer.module.scss lose the rules core now publishes
-- [ ] verify:appearance, verify:behaviour and verify:materials pass; every changed value disclosed
+- [x] RichTextSurface.module.scss and VideoPlayer.module.scss lose the rules core now publishes
+- [x] verify:appearance, verify:behaviour and verify:materials pass; every changed value disclosed
 
 Where: `src/components/RichTextSurface/, src/components/VideoPlayer/`. Depends on C-R4.
 
