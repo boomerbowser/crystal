@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-49 tasks: 37 done, 11 ready, 1 blocked, 0 needs a ruling, 0 dropped.
+50 tasks: 37 done, 12 ready, 1 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -36,7 +36,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | D-35 · The icon set drops the editor's glyphs | C-I1 | Ruled | (a) A named list of icons the vocabulary requires, kept whatever the cap, with every icon that leaves disclosed, by Meridian Digital on 2026-10-02 |
 | D-37 · Selection that travels between segments | C-M3 | Ruled | (a) Specify a travelling pill for every strip: one .cr-indicator.pill behind the selected segment, moved by a new critically damped recipe between measured positions, on tabs, the segmented control, the dock, bottom navigation and toggle button groups; selection stays label weight, by Meridian Digital on 2026-10-02 |
 | D-39 · A selected highlight falls below 4.5:1 in Harbor | C-T3 | Ruled | (a) A selected highlight takes primary with on-primary ink, the action pair the resolver already holds at 4.5:1 in every palette, by Meridian Digital on 2026-10-03 |
-| D-41 · The body's leading is not --cr-leading | – | Needs a ruling | – |
+| D-41 · The body's leading is not --cr-leading | – | Ruled | (b) The tokens move to 1.6, and the reading leading to 25.6px on every platform, by Meridian Digital on 2026-11-07 |
 
 ## Crystal (`@crystal-ui/core`)
 
@@ -59,6 +59,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-T1](#c-t1) | P2 | Done | Highlight and selection colours (D-34) | – |
 | [C-T2](#c-t2) | P1 | Done | Engine binding policy for platform libraries (D-30) | – |
 | [C-T3](#c-t3) | P0 | Done | Selected highlight contrast (D-39) | – |
+| [C-S8](#c-s8) | P2 | Ready | One body leading (D-41) | – |
 
 ### C-R1
 
@@ -285,6 +286,19 @@ Done when:
 - [x] A check in validate-tokens.cjs for the selected-highlight pair, seen failing on the current values first
 
 Where: `core/assets/crystal.css, tools/validate-tokens.cjs`.
+
+### C-S8
+
+**One body leading (D-41).** Tokens, P2, ready, by the ruling on D-41.
+
+Target: --cr-leading, --cr-text-body-leading and typography.reading.leading move to 1.6 / 25.6px, regenerated into every export; every recipe that reads them is re-measured.
+
+Done when:
+
+- [ ] crystal.css, the theme and the platform exports agree on the body leading
+- [ ] The preview re-baselined, every changed frame disclosed
+
+Where: `core/assets/crystal.css, core/tokens/`.
 
 ## crystal-preview
 

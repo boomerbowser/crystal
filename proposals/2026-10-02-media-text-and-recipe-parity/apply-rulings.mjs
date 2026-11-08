@@ -109,7 +109,7 @@ function writeIssues(data, decisions) {
   const ruled = stillOpen.filter((d) => d.state === 'ruled').length;
   const moot = stillOpen.filter((d) => d.state === 'moot').length;
   const defects = filed.filter((id) => !decisions.some((d) => d.id === id));
-  const parts = [`${NUMBER[waiting]} wait${waiting === 1 ? 's' : ''} on a ruling by Meridian`];
+  const parts = [waiting ? `${NUMBER[waiting]} wait${waiting === 1 ? 's' : ''} on a ruling by Meridian` : 'None waits on a ruling by Meridian'];
   if (ruled) parts.push(`${NUMBER[ruled].toLowerCase()} ${ruled === 1 ? 'is' : 'are'} ruled ([\`2026-10-02-rulings.md\`](2026-10-02-rulings.md)) and open until built`);
   if (moot) parts.push(`${NUMBER[moot].toLowerCase()} ${moot === 1 ? 'is' : 'are'} no longer needed`);
   if (defects.length) parts.push(`${defects.join(', ')} ${defects.length === 1 ? 'is a defect' : 'are defects'} with a fix specified`);
@@ -136,9 +136,12 @@ decision left on 29 September 2026 was ruled on
     let body = '';
     if (decision.state === 'ruled') {
       const option = decision.options.find((o) => o.id === decision.ruling.option);
+      /* The work a ruling leaves: the decision's own task, or the tasks its
+         option adds (D-41's C-S8), which have no task of their own until ruled. */
+      const building = [decision.task, ...(option.effects?.add ?? []).map((t) => t.id)].filter(Boolean);
       body = `**Ruled on ${decision.ruling.date} by ${decision.ruling.ruledBy}: (${option.id}) ${option.label}.** `
         + `${capital(describeEffects(decision, option, data))}. Recorded in [\`2026-10-02-rulings.md\`](2026-10-02-rulings.md). `
-        + (decision.task ? `The entry stays open until the work is built (task ${decision.task}).` : 'Nothing is left to build; the entry closes with the next tracker review.');
+        + (building.length ? `The entry stays open until the work is built (task ${building.join(', ')}).` : 'Nothing is left to build; the entry closes with the next tracker review.');
       if (decision.history.length > 1) body += ` It supersedes ${decision.history.length - 1} earlier ruling${decision.history.length > 2 ? 's' : ''}.`;
     } else if (decision.state === 'moot') {
       body = `**Not needed.** The ruling on ${decision.by} made this question unnecessary; it closes with ${decision.by}'s work.`;

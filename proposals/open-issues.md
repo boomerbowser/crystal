@@ -7,7 +7,7 @@ closing it would take.
 <!-- rulings-summary -->
 **Three entries are open**, D-37, D-40 and D-41, all from the media, text and recipe work of 2 October
 2026 ([`2026-10-02-media-text-and-recipe-parity.md`](2026-10-02-media-text-and-recipe-parity.md)).
-One waits on a ruling by Meridian; one is ruled ([`2026-10-02-rulings.md`](2026-10-02-rulings.md)) and open until built; D-40 is a defect with a fix specified. Every
+None waits on a ruling by Meridian; two are ruled ([`2026-10-02-rulings.md`](2026-10-02-rulings.md)) and open until built; D-40 is a defect with a fix specified. Every
 decision left on 29 September 2026 was ruled on
 ([`2026-09-29-rulings.md`](2026-09-29-rulings.md)) and is built.
 <!-- /rulings-summary -->
@@ -45,7 +45,7 @@ label weight **(rec.)**. (b) The same, on tabs and the segmented control only.
 Task C-M3, and R-A8 under options (a) and (b).
 
 <!-- ruling:D-37 -->
-**Ruled on 2026-10-02 by Meridian Digital: (a) Specify a travelling pill for every strip: one .cr-indicator.pill behind the selected segment, moved by a new critically damped recipe between measured positions, on tabs, the segmented control, the dock, bottom navigation and toggle button groups; selection stays label weight.** C-M3 becomes ready; adds R-A8, The travelling selection pill on strips. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-M3).
+**Ruled on 2026-10-02 by Meridian Digital: (a) Specify a travelling pill for every strip: one .cr-indicator.pill behind the selected segment, moved by a new critically damped recipe between measured positions, on tabs, the segmented control, the dock, bottom navigation and toggle button groups; selection stays label weight.** C-M3 becomes ready; adds R-A8, The travelling selection pill on strips. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-M3, R-A8).
 <!-- /ruling:D-37 -->
 
 ## D-40 · Three faults in the editor recipe
@@ -105,7 +105,9 @@ Meridian's to choose.
 
 **Where.** `core/assets/crystal.css`, `core/tokens/`. Task C-S8 once ruled.
 
-<!-- ruling:D-41 --><!-- /ruling:D-41 -->
+<!-- ruling:D-41 -->
+**Ruled on 2026-11-07 by Meridian Digital: (b) The tokens move to 1.6, and the reading leading to 25.6px on every platform.** Adds C-S8, One body leading. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-S8).
+<!-- /ruling:D-41 -->
 
 ## Closed most recently
 
