@@ -52,15 +52,15 @@
       "repo": "preview",
       "area": "Release",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "title": "Show the media and text recipes in the preview and re-baseline",
       "depends": [
         "C-R1"
       ],
       "target": "crystal-preview on 2.4.0, with specimens of the stage, transport, caption, audio card, editor and selection bar in the playground.",
       "acceptance": [
-        "Baselines re-captured on the runner, every changed frame disclosed",
-        "A browser gate measures backdrop-filter with forced colours emulated on every Crystal surface (D-36), seen failing on 2.3.1 and passing on 2.4.0"
+        "Baselines re-captured on the runner, every changed frame disclosed (crystal-preview#1; the desk set waits on the machine that captured it)",
+        "A browser gate measures backdrop-filter with forced colours emulated on every Crystal surface (D-36), seen failing on 2.3.1 and passing on 2.4.0 (verify:forced-colours)"
       ],
       "where": "crystal-preview/website"
     },

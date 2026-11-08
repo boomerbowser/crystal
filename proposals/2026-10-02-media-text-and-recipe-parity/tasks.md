@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-52 tasks: 40 done, 10 ready, 2 blocked, 0 needs a ruling, 0 dropped.
+52 tasks: 41 done, 9 ready, 2 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -319,18 +319,18 @@ Where: `core/assets/crystal.css, tools/validate-tokens.cjs`.
 
 | ID | Priority | Status | Task | Depends on |
 |---|---|---|---|---|
-| [C-R3](#c-r3) | P1 | Ready | Show the media and text recipes in the preview and re-baseline | C-R1 |
+| [C-R3](#c-r3) | P1 | Done | Show the media and text recipes in the preview and re-baseline | C-R1 |
 
 ### C-R3
 
-**Show the media and text recipes in the preview and re-baseline.** Release, P1, ready.
+**Show the media and text recipes in the preview and re-baseline.** Release, P1, done.
 
 Target: crystal-preview on 2.4.0, with specimens of the stage, transport, caption, audio card, editor and selection bar in the playground.
 
 Done when:
 
-- [ ] Baselines re-captured on the runner, every changed frame disclosed
-- [ ] A browser gate measures backdrop-filter with forced colours emulated on every Crystal surface (D-36), seen failing on 2.3.1 and passing on 2.4.0
+- [x] Baselines re-captured on the runner, every changed frame disclosed (crystal-preview#1; the desk set waits on the machine that captured it)
+- [x] A browser gate measures backdrop-filter with forced colours emulated on every Crystal surface (D-36), seen failing on 2.3.1 and passing on 2.4.0 (verify:forced-colours)
 
 Where: `crystal-preview/website`. Depends on C-R1.
 
