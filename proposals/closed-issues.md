@@ -2589,3 +2589,56 @@ rows of 48px targets, the 4px gap, 4px above and below and the 1px rim.
 Measured on the bare page at 390px: the overlap from 32px to 0, and at 1280px
 nothing changes. The preview carries the same value locally until it adopts
 the release with this fix.
+
+## D-37 · Selection that travels between segments
+
+**What.** When the choice changes in tabs, a segmented control, the dock,
+bottom navigation or a button group used as a toggle set, the old segment's
+fill switches off and the new one's switches on. Crystal paints selection on
+each item (`.cr-dock button[aria-pressed=true]` and the D-26 rules for tabs,
+links and radio labels), so there is no one element that could travel. The only
+motion is `selection`'s squash where the new item stands; tabs play `tab-in` on
+the panel and nothing on the tab. `surfaces.json` describes `.cr-indicator` as
+"the moving pill behind a selected segment", but `crystal.css` draws only the
+20px circle and hides `data-kind=selection`, and none of the 59 recipes moves a
+selection from one place to another. Crystal React plays everything the
+catalogue assigns these components.
+
+**Why it matters.** A selection that jumps gives no sense of where it went, on
+the strips people use most. And the vocabulary promises a pill no renderer can
+draw, the drift the re-evaluation of 29 September warns about. The rule that
+nothing moves at rest allows a travelling pill, because a person starts it; it
+is a visible change to every strip, so it needs Meridian's approval.
+
+**Options.** (a) A travelling pill for every strip: one `.cr-indicator.pill`
+behind the selected segment, moved by a new critically damped recipe between
+measured positions (core's `layout()` measures them for the reorder recipe
+today), instant under reduced motion, on tabs, the segmented control, the dock,
+bottom navigation and toggle button groups, with selection still carried by
+label weight **(rec.)**. (b) The same, on tabs and the segmented control only.
+(c) Keep selection in place and take the moving pill out of `surfaces.json`.
+
+**Where.** `core/assets/crystal.css`, `core/tokens/surfaces.json`,
+`core/tokens/motion-recipes.json`; Crystal React `src/styles/_strip.scss`.
+Task C-M3, and R-A8 under options (a) and (b).
+
+<!-- ruling:D-37 -->
+**Ruled on 2026-10-02 by Meridian Digital: (a) Specify a travelling pill for every strip: one .cr-indicator.pill behind the selected segment, moved by a new critically damped recipe between measured positions, on tabs, the segmented control, the dock, bottom navigation and toggle button groups; selection stays label weight.** C-M3 becomes ready; adds R-A8, The travelling selection pill on strips. Recorded in [`2026-10-02-rulings.md`](2026-10-02-rulings.md). The entry stays open until the work is built (task C-M3, R-A8).
+<!-- /ruling:D-37 -->
+
+**Closed** on 16 November 2026, built from Meridian's ruling (a). Core 2.6.0
+(C-M3, published that day) draws one `.cr-indicator.pill` behind the selected
+segment, moves it with `selection-travel`, critically damped, through
+`CrystalMotion.travel()`, and assigns it to the five strips
+(`tools/extend-catalogue-15.cjs`). Crystal React's tabs, segmented control,
+dock and bottom navigation draw it through `useTravelMotion` (R-A8), gated
+by `verify:behaviour` in both text directions and by `verify:appearance` at
+rest; the preview's scene dock draws it too. Measured in Chromium: the pill
+lands within 0.5px of the selected segment and never passes it, and at rest
+the strips are pixel-identical to the per-segment fill they replace. Building
+it found three faults, each fixed: the arriving label's ink held until landing
+vanished on dark palettes' light primary, so the ink crosses on the pill's
+clock; a group's first segment lost its rounded corner to the pill; and the
+preview's own `controls.css` painted the pill with the surface when effects
+were opaque. Crystal React has no toggle button group, so the button group's
+assignment has nothing to draw there.

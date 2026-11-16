@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-53 tasks: 46 done, 6 ready, 1 blocked, 0 needs a ruling, 0 dropped.
+53 tasks: 49 done, 4 ready, 0 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -53,7 +53,7 @@ Each is Meridian's to make. Record a ruling on the board, served by `examples/se
 | [C-S7](#c-s7) | P2 | Done | Correct the editor recipe's floor, toolbar backing and placements (D-40) | – |
 | [C-S8](#c-s8) | P2 | Done | One body leading (D-41) | – |
 | [C-R4](#c-r4) | P1 | Done | Publish @crystal-ui/core 2.5.0 | C-S5, C-S7, C-S8 |
-| [C-R5](#c-r5) | P1 | Ready | Publish @crystal-ui/core 2.6.0 | C-M3 |
+| [C-R5](#c-r5) | P1 | Done | Publish @crystal-ui/core 2.6.0 | C-M3 |
 | [C-M1](#c-m1) | P2 | Done | Material presets as entrances (D-31) | – |
 | [C-M2](#c-m2) | P2 | Done | Rule on the 20 unplayed assignments (D-32) | – |
 | [C-M3](#c-m3) | P2 | Done | Selection motion for strips and groups (D-37) | – |
@@ -214,15 +214,15 @@ Where: `CHANGELOG.md, core/package.json`. Depends on C-S5, C-S7, C-S8.
 
 ### C-R5
 
-**Publish @crystal-ui/core 2.6.0.** Release, P1, ready.
+**Publish @crystal-ui/core 2.6.0.** Release, P1, done.
 
 Target: 2.6.0 on the registry with the travelling selection pill: .cr-indicator.pill, the selection-travel recipe and CrystalMotion.travel().
 
 Done when:
 
-- [ ] CHANGELOG entry under 2.6.0; crystal-theme.css byte-identical to 2.5.0
-- [ ] npm test passes
-- [ ] The distributable ZIP regenerated
+- [x] CHANGELOG entry under 2.6.0; crystal-theme.css byte-identical to 2.5.0
+- [x] npm test passes
+- [x] The distributable ZIP regenerated
 
 Where: `CHANGELOG.md, core/package.json`. Depends on C-M3.
 
@@ -353,7 +353,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 
 | ID | Priority | Status | Task | Depends on |
 |---|---|---|---|---|
-| [R-A8](#r-a8) | P2 | Blocked | The travelling selection pill on strips (D-37) | C-M3, C-R5 |
+| [R-A8](#r-a8) | P2 | Done | The travelling selection pill on strips (D-37) | C-M3, C-R5 |
 | [R-T10](#r-t10) | P1 | Done | Wear the 2.5.0 editor and caption recipes and drop the workarounds | C-R4 |
 | [R-M1](#r-m1) | P1 | Done | Playback rate and picture in picture on useMediaElement | – |
 | [R-M2](#r-m2) | P1 | Done | useMediaTracks: caption, audio and video tracks | – |
@@ -371,7 +371,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-T2](#r-t2) | P1 | Done | The format vocabulary, exported from the main entry | – |
 | [R-T3](#r-t3) | P1 | Done | RichTextEditor at @crystal-ui/react/editor | – |
 | [R-T4](#r-t4) | P1 | Done | Text decorations and the edit elements | – |
-| [R-T5](#r-t5) | P1 | Ready | Prove the touch toolbar on real devices | – |
+| [R-T5](#r-t5) | P1 | Done | Prove the touch toolbar on real devices | – |
 | [R-T6](#r-t6) | P2 | Done | Mentions popover wears .cr-frost | – |
 | [R-T7](#r-t7) | P2 | Done | EditorBlock offers the bound editor in a story | D-30 |
 | [R-T8](#r-t8) | P3 | Ready | Screen-reader pass on the editor | – |
@@ -388,15 +388,15 @@ Where: `crystal-preview/website`. Depends on C-R1.
 
 ### R-A8
 
-**The travelling selection pill on strips (D-37).** Motion, P2, blocked.
+**The travelling selection pill on strips (D-37).** Motion, P2, done.
 
 Target: Tabs, the segmented control, the dock, bottom navigation and toggle button groups render one selection pill through useTravelMotion, measured against the selected segment and moved by the new recipe when a person changes the selection; instant under reduced motion; label weight unchanged.
 
 Done when:
 
-- [ ] verify:behaviour checks the pill ends under the selected segment after a click and after the arrow keys, in both text directions
-- [ ] verify:appearance unchanged at rest
-- [ ] No movement on first render or when the selection changes programmatically without a person
+- [x] verify:behaviour checks the pill ends under the selected segment after a click and after the arrow keys, in both text directions
+- [x] verify:appearance unchanged at rest
+- [x] No movement on first render or when the selection changes programmatically without a person
 
 Where: `src/motion/useTravelMotion.ts, src/components/Tabs/, SegmentedControl/, Dock/, BottomNavigation/`. Depends on C-M3, C-R5.
 
@@ -621,14 +621,14 @@ Where: `src/components/Text/`.
 
 ### R-T5
 
-**Prove the touch toolbar on real devices.** Text, P1, ready.
+**Prove the touch toolbar on real devices.** Text, P1, done.
 
 Target: The toolbar stays above the keyboard on iOS Safari and Android Chrome.
 
 Done when:
 
-- [ ] Recorded on a phone of each kind, as D-4 was
-- [ ] The visualViewport inset measured, not assumed
+- [x] Recorded on a phone of each kind, as D-4 was
+- [x] The visualViewport inset measured, not assumed
 
 Where: `src/components/RichTextSurface/useKeyboardInset.ts`.
 

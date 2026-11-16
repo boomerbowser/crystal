@@ -212,7 +212,7 @@
       "repo": "core",
       "area": "Release",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "title": "Publish @crystal-ui/core 2.6.0",
       "depends": [
         "C-M3"
@@ -230,7 +230,7 @@
       "repo": "react",
       "area": "Motion",
       "priority": "P2",
-      "status": "blocked",
+      "status": "done",
       "title": "The travelling selection pill on strips (D-37)",
       "depends": [
         "C-M3",
@@ -626,7 +626,7 @@
       "repo": "react",
       "area": "Text",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "title": "Prove the touch toolbar on real devices",
       "depends": [],
       "target": "The toolbar stays above the keyboard on iOS Safari and Android Chrome.",
