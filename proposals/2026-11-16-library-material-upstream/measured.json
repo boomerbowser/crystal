@@ -1,0 +1,1396 @@
+[
+ {
+  "dir": "AppShell",
+  "selector": ".sidebar",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-frost",
+  "story": "application-shell--shell",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(255, 255, 255, 0.85)",
+   "borderTopLeftRadius: 0px | core 34px",
+   "boxShadow: none | core rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(107, 40, 112, 0.",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before opacity: 1 | core 0.045"
+  ]
+ },
+ {
+  "dir": "AppBar",
+  "selector": ".appBar",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-frost",
+  "story": "application-shell--shell",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(255, 255, 255, 0.85)",
+   "borderTopLeftRadius: 0px | core 34px",
+   "boxShadow: none | core rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(107, 40, 112, 0.",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before opacity: 1 | core 0.045"
+  ]
+ },
+ {
+  "dir": "NavRail",
+  "selector": ".rail",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-frost",
+  "story": "navigation-rails-and-bars--rail",
+  "diff": [
+   "borderTopLeftRadius: 28px | core 34px",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before opacity: 1 | core 0.045"
+  ]
+ },
+ {
+  "dir": "Pagination",
+  "selector": ".page, .arrow",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-button",
+  "story": "navigation-pagination-and-steps--pages",
+  "diff": []
+ },
+ {
+  "dir": "Stepper",
+  "selector": ".step:not(:last-child)::after",
+  "hits": [
+   "fill:haze"
+  ],
+  "core": "cr-haze",
+  "story": "navigation-pagination-and-steps--steps",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "borderTopLeftRadius: 0px | core 28px",
+   "::before content: none | core \"\"",
+   "::before backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.8)",
+   "::before filter: none | core blur(1.95px)",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,",
+   "::after content: \"\" | core none",
+   "::after backgroundColor: rgba(255, 255, 255, 0.8) | core rgba(0, 0, 0, 0)",
+   "::after top: 24px | core auto",
+   "::after left: 56px | core auto"
+  ]
+ },
+ {
+  "dir": "Stepper",
+  "selector": ".marker",
+  "hits": [
+   "material.resin"
+  ],
+  "core": "cr-resin",
+  "story": "navigation-pagination-and-steps--steps",
+  "diff": [
+   "borderTopLeftRadius: 50% | core 999px",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core linear-gradient(145deg, rgba(255, 255, 255, 0.23), rgba(0, 0",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::after content: none | core \"\"",
+   "::after top: auto | core 0px",
+   "::after left: auto | core 0px",
+   "::after boxShadow: none | core rgba(255, 255, 255, 0.72) 1px 1px 1px 0px inset, rgba(255, 2"
+  ]
+ },
+ {
+  "dir": "Stepper",
+  "selector": ".marker",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-button",
+  "story": "navigation-pagination-and-steps--steps",
+  "diff": [
+   "backgroundColor: rgba(255, 255, 255, 0.2) | core rgba(0, 0, 0, 0)",
+   "backdropFilter: blur(20px) saturate(1.65) | core none",
+   "borderTopColor: rgba(255, 255, 255, 0.85) | core rgba(0, 0, 0, 0)",
+   "borderTopLeftRadius: 50% | core 999px",
+   "boxShadow: rgba(255, 255, 255, 0.85) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0 | core none"
+  ]
+ },
+ {
+  "dir": "Stepper",
+  "selector": ".stepper[data-shape='pill'] .control",
+  "hits": [
+   "material.haze-fill(0)"
+  ],
+  "core": "cr-haze",
+  "story": "navigation-pagination-and-steps--steps",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "borderTopLeftRadius: 0px | core 28px",
+   "::before content: none | core \"\"",
+   "::before backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.8)",
+   "::before filter: none | core blur(1.95px)",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Stepper",
+  "selector": ".stepper[data-shape='pill'] .marker",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-button",
+  "story": "navigation-pagination-and-steps--steps",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "borderTopLeftRadius: 0px | core 999px"
+  ]
+ },
+ {
+  "dir": "Burger",
+  "selector": ".burger",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-button",
+  "story": "navigation-menu-bars--disclosure",
+  "diff": []
+ },
+ {
+  "dir": "CommandPalette",
+  "selector": ".scrim",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-mirage",
+  "story": "overlays-command-palette--palette",
+  "diff": []
+ },
+ {
+  "dir": "CommandPalette",
+  "selector": ".palette::before",
+  "hits": [
+   "fill:haze"
+  ],
+  "core": "cr-haze",
+  "story": "overlays-command-palette--palette",
+  "diff": [
+   "borderTopColor: rgba(98, 74, 159, 0.25) | core rgba(0, 0, 0, 0)",
+   "::before boxShadow: rgba(255, 255, 255, 0.85) 0px 2px 1px 0px inset, rgba(255, 2 | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "CommandPalette",
+  "selector": ".field",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "overlays-command-palette--palette",
+  "diff": [
+   "boxShadow: rgba(115, 56, 239, 0.46) 0px 0px 6px 1px, rgba(115, 56, 239, 0.3) 0px  | core rgba(255, 255, 255, 0.85) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0"
+  ]
+ },
+ {
+  "dir": "Affix",
+  "selector": ".content[data-pinned]",
+  "hits": [
+   "material.resin"
+  ],
+  "core": "cr-resin",
+  "story": "utilities-positioning--pinned",
+  "diff": [
+   "backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.2)",
+   "backdropFilter: none | core blur(20px) saturate(1.65)",
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(255, 255, 255, 0.85)",
+   "borderTopLeftRadius: 0px | core 999px",
+   "boxShadow: none | core rgba(255, 255, 255, 0.85) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core linear-gradient(145deg, rgba(255, 255, 255, 0.23), rgba(0, 0",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::after content: none | core \"\"",
+   "::after top: auto | core 0px",
+   "::after left: auto | core 0px",
+   "::after boxShadow: none | core rgba(255, 255, 255, 0.72) 1px 1px 1px 0px inset, rgba(255, 2"
+  ]
+ },
+ {
+  "dir": "Affix",
+  "selector": ".content[data-pinned]",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-resin",
+  "story": "utilities-positioning--pinned",
+  "diff": [
+   "backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.2)",
+   "backdropFilter: none | core blur(20px) saturate(1.65)",
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(255, 255, 255, 0.85)",
+   "borderTopLeftRadius: 0px | core 999px",
+   "boxShadow: none | core rgba(255, 255, 255, 0.85) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core linear-gradient(145deg, rgba(255, 255, 255, 0.23), rgba(0, 0",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::after content: none | core \"\"",
+   "::after top: auto | core 0px",
+   "::after left: auto | core 0px",
+   "::after boxShadow: none | core rgba(255, 255, 255, 0.72) 1px 1px 1px 0px inset, rgba(255, 2"
+  ]
+ },
+ {
+  "dir": "NavigationMenu",
+  "selector": ".panel",
+  "hits": [
+   "material.frost"
+  ],
+  "core": "cr-frost",
+  "story": "navigation-menu-bars--sections",
+  "diff": [
+   "borderTopLeftRadius: 28px | core 34px",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before opacity: 1 | core 0.045"
+  ]
+ },
+ {
+  "dir": "NavigationMenu",
+  "selector": ".panel",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-frost",
+  "story": "navigation-menu-bars--sections",
+  "diff": [
+   "borderTopLeftRadius: 28px | core 34px",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before opacity: 1 | core 0.045"
+  ]
+ },
+ {
+  "dir": "TableOfContents",
+  "selector": ".toc::before",
+  "hits": [
+   "fill:haze"
+  ],
+  "core": "cr-haze",
+  "story": "navigation-hierarchies--scroll-spy",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)"
+  ]
+ },
+ {
+  "dir": "Menu",
+  "selector": ".popover[data-cr-overlay='frost']",
+  "hits": [
+   "material.haze-fill($inset: $cr-spacing-2xs, $layer: '::after')"
+  ],
+  "core": "cr-haze",
+  "story": "overlays-anchored-surfaces--on-the-page",
+  "diff": [
+   "backgroundColor: rgba(255, 255, 255, 0.45) | core rgba(0, 0, 0, 0)",
+   "backdropFilter: blur(40px) saturate(1.25) | core none",
+   "borderTopColor: rgba(255, 255, 255, 0.85) | core rgba(0, 0, 0, 0)",
+   "boxShadow: rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(107, 40, 112, 0. | core none",
+   "::before backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.8)",
+   "::before backgroundImage: url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20 | core none",
+   "::before filter: none | core blur(1.95px)",
+   "::before opacity: 0.045 | core 1",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,",
+   "::after content: \"\" | core none",
+   "::after backgroundColor: rgba(255, 255, 255, 0.8) | core rgba(0, 0, 0, 0)",
+   "::after filter: blur(1.95px) | core none",
+   "::after top: 4px | core auto",
+   "::after left: 4px | core auto"
+  ]
+ },
+ {
+  "dir": "Button",
+  "selector": ".button",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-button",
+  "story": "actions-button--resin",
+  "diff": []
+ },
+ {
+  "dir": "IconButton",
+  "selector": ".quiet",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-button",
+  "story": "actions-icon-group-and-floating--icons",
+  "diff": [
+   "backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.2)",
+   "backdropFilter: none | core blur(20px) saturate(1.65)",
+   "borderTopColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.85)",
+   "boxShadow: none | core rgba(255, 255, 255, 0.85) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0"
+  ]
+ },
+ {
+  "dir": "IconButton",
+  "selector": ".iconButton:not(.quiet)",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-button",
+  "story": "actions-icon-group-and-floating--icons",
+  "diff": [
+   "backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.2)",
+   "backdropFilter: none | core blur(20px) saturate(1.65)",
+   "borderTopColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.85)",
+   "boxShadow: none | core rgba(255, 255, 255, 0.85) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0"
+  ]
+ },
+ {
+  "dir": "FloatingAction",
+  "selector": ".floating",
+  "hits": [
+   "backdrop-filter",
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "actions-icon-group-and-floating--floating",
+  "diff": [
+   "borderTopLeftRadius: 999px | core 28px"
+  ]
+ },
+ {
+  "dir": "FloatingAction",
+  "selector": ":global([data-effects='opaque']) .floating",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-button",
+  "story": "actions-icon-group-and-floating--floating",
+  "diff": []
+ },
+ {
+  "dir": "TextInput",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "inputs-textinput--default",
+  "diff": []
+ },
+ {
+  "dir": "Textarea",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "result": "no stories"
+ },
+ {
+  "dir": "NumberInput",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "inputs-text-and-choice--text-family",
+  "diff": []
+ },
+ {
+  "dir": "PasswordInput",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "inputs-text-and-choice--text-family",
+  "diff": []
+ },
+ {
+  "dir": "SearchInput",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "blocks-datatableblock--default",
+  "diff": []
+ },
+ {
+  "dir": "Select",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "inputs-text-and-choice--text-family",
+  "diff": []
+ },
+ {
+  "dir": "Combobox",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "result": "no stories"
+ },
+ {
+  "dir": "MultiSelect",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "inputs-text-and-choice--text-family",
+  "diff": []
+ },
+ {
+  "dir": "Checkbox",
+  "selector": ".box",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": null,
+  "result": "element-painted (choice): compared separately"
+ },
+ {
+  "dir": "Switch",
+  "selector": ".track",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": null,
+  "result": "element-painted (choice): compared separately"
+ },
+ {
+  "dir": "Slider",
+  "selector": ".thumb",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": null,
+  "result": "element-painted (choice): compared separately"
+ },
+ {
+  "dir": "PinInput",
+  "selector": ".well",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "inputs-text-and-choice--text-family",
+  "diff": []
+ },
+ {
+  "dir": "TagsInput",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "inputs-composite--filtering",
+  "diff": []
+ },
+ {
+  "dir": "ColorPicker",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "inputs-temporal-colour-and-files--temporal",
+  "diff": []
+ },
+ {
+  "dir": "DatePicker",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "inputs-temporal-colour-and-files--temporal",
+  "diff": []
+ },
+ {
+  "dir": "Cascader",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "inputs-composite--filtering",
+  "diff": []
+ },
+ {
+  "dir": "RichTextSurface",
+  "selector": ":global([data-effects='opaque']) .popover",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-frost",
+  "story": "inputs-richtextsurface--with-mentions",
+  "diff": [
+   "borderTopLeftRadius: 28px | core 34px"
+  ]
+ },
+ {
+  "dir": "ComboBox",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "inputs-composite--filtering",
+  "diff": []
+ },
+ {
+  "dir": "AngleSlider",
+  "selector": ":global([data-effects='opaque']) .dial",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-resin",
+  "story": "inputs-choice-and-range--ranges",
+  "diff": [
+   "borderTopLeftRadius: 50% | core 999px",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core linear-gradient(145deg, rgba(255, 255, 255, 0.23), rgba(0, 0",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::after content: none | core \"\"",
+   "::after top: auto | core 0px",
+   "::after left: auto | core 0px",
+   "::after boxShadow: none | core rgba(255, 255, 255, 0.72) 1px 1px 1px 0px inset, rgba(255, 2"
+  ]
+ },
+ {
+  "dir": "Table",
+  "selector": ".placeholder",
+  "hits": [
+   "fill:haze"
+  ],
+  "core": "cr-haze",
+  "story": "data-display-table--loading",
+  "diff": [
+   "backgroundColor: rgba(255, 255, 255, 0.8) | core rgba(0, 0, 0, 0)",
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(64, 46, 118) | core rgba(0, 0, 0, 0)",
+   "::before content: none | core \"\"",
+   "::before backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.8)",
+   "::before filter: none | core blur(1.95px)",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Table",
+  "selector": ".shell",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-table-scroll",
+  "story": "data-display-table--default",
+  "diff": []
+ },
+ {
+  "dir": "DataTable",
+  "selector": ".scroller",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-table-scroll",
+  "story": "data-display-data-table--default",
+  "diff": []
+ },
+ {
+  "dir": "List",
+  "selector": ".row",
+  "hits": [
+   "fill:haze"
+  ],
+  "core": "cr-haze",
+  "story": "data-display-list--default",
+  "diff": [
+   "backgroundColor: rgba(255, 255, 255, 0.8) | core rgba(0, 0, 0, 0)",
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before content: none | core \"\"",
+   "::before backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.8)",
+   "::before filter: none | core blur(1.95px)",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Image",
+  "selector": ".image",
+  "hits": [
+   "fill:haze"
+  ],
+  "core": "cr-haze",
+  "story": "data-display-image--default",
+  "diff": [
+   "backgroundColor: rgba(255, 255, 255, 0.8) | core rgba(0, 0, 0, 0)",
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before content: none | core \"\"",
+   "::before backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.8)",
+   "::before filter: none | core blur(1.95px)",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Timeline",
+  "selector": ".marker",
+  "hits": [
+   "material.resin"
+  ],
+  "core": "cr-resin",
+  "story": "data-display-timeline--default",
+  "diff": [
+   "backgroundColor: rgb(229, 244, 234) | core rgba(255, 255, 255, 0.2)",
+   "borderTopLeftRadius: 50% | core 999px",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core linear-gradient(145deg, rgba(255, 255, 255, 0.23), rgba(0, 0",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::after content: none | core \"\"",
+   "::after top: auto | core 0px",
+   "::after left: auto | core 0px",
+   "::after boxShadow: none | core rgba(255, 255, 255, 0.72) 1px 1px 1px 0px inset, rgba(255, 2"
+  ]
+ },
+ {
+  "dir": "Accordion",
+  "selector": ".row",
+  "hits": [
+   "fill:haze"
+  ],
+  "core": "cr-haze",
+  "story": "data-display-accordion--default",
+  "diff": [
+   "backgroundColor: rgba(255, 255, 255, 0.8) | core rgba(0, 0, 0, 0)",
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before content: none | core \"\"",
+   "::before backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.8)",
+   "::before filter: none | core blur(1.95px)",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Carousel",
+  "selector": ".slide",
+  "hits": [
+   "material.haze-fill(0)"
+  ],
+  "core": "cr-haze",
+  "story": "data-display-carousel--default",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Statistic",
+  "selector": ".placeholder",
+  "hits": [
+   "fill:haze"
+  ],
+  "core": "cr-haze",
+  "story": "data-display-statistic--loading",
+  "diff": [
+   "backgroundColor: rgba(255, 255, 255, 0.8) | core rgba(0, 0, 0, 0)",
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before content: none | core \"\"",
+   "::before backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.8)",
+   "::before filter: none | core blur(1.95px)",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Calendar",
+  "selector": ".panel",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-frost",
+  "story": "data-display-calendar--default",
+  "diff": [
+   "borderTopLeftRadius: 32px | core 34px",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before opacity: 1 | core 0.045"
+  ]
+ },
+ {
+  "dir": "DataView",
+  "selector": ".item",
+  "hits": [
+   "material.haze-fill(0)"
+  ],
+  "core": "cr-haze",
+  "story": "data-display-data-view--a-grid",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "ImageList",
+  "selector": ".caption",
+  "hits": [
+   "material.haze-fill(0)"
+  ],
+  "core": "cr-haze",
+  "story": "data-display-image-list--default",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "borderTopLeftRadius: 0px | core 28px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "OrganizationChart",
+  "selector": ".node",
+  "hits": [
+   "material.haze-fill(0)"
+  ],
+  "core": "cr-haze",
+  "story": "data-display-organization-chart--default",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Alert",
+  "selector": ".alert",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "feedback-alert--danger",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Toast",
+  "selector": ".toast",
+  "hits": [
+   "material.haze-fill($layer: '::after')"
+  ],
+  "core": "cr-haze",
+  "story": "feedback-toast--success",
+  "diff": [
+   "backgroundColor: rgba(255, 255, 255, 0.45) | core rgba(0, 0, 0, 0)",
+   "backdropFilter: blur(40px) saturate(1.25) | core none",
+   "borderTopColor: rgba(255, 255, 255, 0.85) | core rgba(0, 0, 0, 0)",
+   "boxShadow: rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(107, 40, 112, 0. | core none",
+   "::before backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.8)",
+   "::before backgroundImage: url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20 | core none",
+   "::before filter: none | core blur(1.95px)",
+   "::before opacity: 0.045 | core 1",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,",
+   "::after content: \"\" | core none",
+   "::after backgroundColor: rgba(255, 255, 255, 0.8) | core rgba(0, 0, 0, 0)",
+   "::after filter: blur(1.95px) | core none",
+   "::after top: 8px | core auto",
+   "::after left: 8px | core auto"
+  ]
+ },
+ {
+  "dir": "LoadingOverlay",
+  "selector": ".scrim",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-mirage",
+  "story": "feedback-loading-overlay--blocked",
+  "diff": []
+ },
+ {
+  "dir": "EmptyState",
+  "selector": ".empty",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "feedback-empty-state--truly-empty",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Result",
+  "selector": ".result",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "feedback-result--success",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Tour",
+  "selector": ".scrim",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-mirage",
+  "result": "element not found in its stories"
+ },
+ {
+  "dir": "Tour",
+  "selector": ".panel",
+  "hits": [
+   "material.frost"
+  ],
+  "core": "cr-frost",
+  "result": "element not found in its stories"
+ },
+ {
+  "dir": "Banner",
+  "selector": ".banner",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "feedback-banner--info",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "borderTopLeftRadius: 0px | core 28px",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,",
+   "::after content: \"\" | core none",
+   "::after backgroundColor: rgb(51, 65, 85) | core rgba(0, 0, 0, 0)",
+   "::after top: 0px | core auto",
+   "::after left: 0px | core auto"
+  ]
+ },
+ {
+  "dir": "Drawer",
+  "selector": ".scrim",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-mirage",
+  "story": "overlays-drawer--modal-focus",
+  "diff": []
+ },
+ {
+  "dir": "Drawer",
+  "selector": ".panel",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-frost",
+  "story": "overlays-drawer--modal-focus",
+  "diff": [
+   "borderTopColor: rgba(98, 74, 159, 0.25) | core rgba(255, 255, 255, 0.85)",
+   "borderTopLeftRadius: 28px | core 34px",
+   "boxShadow: rgba(255, 255, 255, 0.85) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0 | core rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(107, 40, 112, 0.",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before opacity: 1 | core 0.045"
+  ]
+ },
+ {
+  "dir": "Popover",
+  "selector": ".popover[data-cr-overlay='frost']",
+  "hits": [
+   "material.haze-fill($layer: '::after')"
+  ],
+  "core": "cr-haze",
+  "story": "overlays-anchored-surfaces--on-the-page",
+  "diff": [
+   "backgroundColor: rgba(255, 255, 255, 0.45) | core rgba(0, 0, 0, 0)",
+   "backdropFilter: blur(40px) saturate(1.25) | core none",
+   "borderTopColor: rgba(255, 255, 255, 0.85) | core rgba(0, 0, 0, 0)",
+   "boxShadow: rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(107, 40, 112, 0. | core none",
+   "::before backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.8)",
+   "::before backgroundImage: url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20 | core none",
+   "::before filter: none | core blur(1.95px)",
+   "::before opacity: 0.045 | core 1",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,",
+   "::after content: \"\" | core none",
+   "::after backgroundColor: rgba(255, 255, 255, 0.8) | core rgba(0, 0, 0, 0)",
+   "::after filter: blur(1.95px) | core none",
+   "::after top: 4px | core auto",
+   "::after left: 4px | core auto"
+  ]
+ },
+ {
+  "dir": "Scrim",
+  "selector": ".scrim",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-mirage",
+  "story": "overlays-scrim--centred",
+  "diff": []
+ },
+ {
+  "dir": "FloatingWindow",
+  "selector": ".window",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-resin panel",
+  "story": "overlays-floating-surfaces--window",
+  "diff": []
+ },
+ {
+  "dir": "OverlayArrow",
+  "selector": ".arrow[data-cr-overlay='frost']",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-button",
+  "story": "overlays-overlayarrow--on-a-popover",
+  "diff": [
+   "backgroundColor: rgba(255, 255, 255, 0.45) | core rgba(0, 0, 0, 0)",
+   "backdropFilter: blur(40px) saturate(1.25) | core none",
+   "borderTopColor: rgba(255, 255, 255, 0.85) | core rgba(0, 0, 0, 0)",
+   "borderTopLeftRadius: 3px | core 999px",
+   "boxShadow: rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(107, 40, 112, 0. | core none"
+  ]
+ },
+ {
+  "dir": "OverlayArrow",
+  "selector": ".arrow[data-cr-overlay='haze']",
+  "hits": [
+   "fill:haze"
+  ],
+  "core": "cr-haze",
+  "story": "overlays-overlayarrow--on-a-popover",
+  "diff": [
+   "backgroundColor: rgba(255, 255, 255, 0.45) | core rgba(0, 0, 0, 0)",
+   "backdropFilter: blur(40px) saturate(1.25) | core none",
+   "borderTopColor: rgba(255, 255, 255, 0.85) | core rgba(0, 0, 0, 0)",
+   "borderTopLeftRadius: 3px | core 28px",
+   "boxShadow: rgba(255, 255, 255, 0.85) 0px 1px 0px 0px inset, rgba(107, 40, 112, 0. | core none",
+   "::before content: none | core \"\"",
+   "::before backgroundColor: rgba(0, 0, 0, 0) | core rgba(255, 255, 255, 0.8)",
+   "::before filter: none | core blur(1.95px)",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Highlight",
+  "selector": ".cue",
+  "hits": [
+   "fill:haze"
+  ],
+  "core": "cr-haze",
+  "result": "element not found in its stories"
+ },
+ {
+  "dir": "CodeBlock",
+  "selector": ".codeBlock::before",
+  "hits": [
+   "fill:haze"
+  ],
+  "core": "cr-haze",
+  "story": "typography-scale-and-prose--composed",
+  "diff": [
+   "borderTopColor: rgba(98, 74, 159, 0.25) | core rgba(0, 0, 0, 0)",
+   "::before filter: none | core blur(1.95px)",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Resizable",
+  "selector": ".handle",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-resin",
+  "story": "application-shell--resizing",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(255, 255, 255, 0.85)",
+   "borderTopLeftRadius: 0px | core 999px",
+   "boxShadow: none | core rgba(255, 255, 255, 0.85) 0px 2px 1px 0px inset, rgba(255, 255, 255, 0",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core linear-gradient(145deg, rgba(255, 255, 255, 0.23), rgba(0, 0",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::after top: 46.5938px | core 0px",
+   "::after left: 2px | core 0px",
+   "::after boxShadow: none | core rgba(255, 255, 255, 0.72) 1px 1px 1px 0px inset, rgba(255, 2"
+  ]
+ },
+ {
+  "dir": "QrCode",
+  "selector": ".qrCode::before",
+  "hits": [
+   "fill:haze"
+  ],
+  "core": "cr-haze",
+  "result": "no stories"
+ },
+ {
+  "dir": "ChartSurface",
+  "selector": ".plot",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "charts-chart-surface--default",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "ChartLegend",
+  "selector": ".entry",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "charts-chart-legend--a-key",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "borderTopLeftRadius: 999px | core 28px",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "ChartTooltip",
+  "selector": ".tooltip",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-frost",
+  "story": "charts-chart-tooltip--default",
+  "diff": [
+   "borderTopLeftRadius: 28px | core 34px"
+  ]
+ },
+ {
+  "dir": "Gallery",
+  "selector": ".thumb",
+  "hits": [
+   "material.haze-fill($inset: 0)"
+  ],
+  "core": "cr-haze",
+  "story": "media-gallery--a-set",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before backgroundColor: rgb(115, 56, 239) | core rgba(255, 255, 255, 0.8)",
+   "::before filter: none | core blur(1.95px)",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Lightbox",
+  "selector": ".scrim",
+  "hits": [
+   "backdrop-filter"
+  ],
+  "core": "cr-mirage",
+  "story": "media-lightbox--from-a-thumbnail",
+  "diff": []
+ },
+ {
+  "dir": "QuantityStepper",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "commerce-quantity-stepper--default",
+  "diff": [
+   "borderTopLeftRadius: 999px | core 20px"
+  ]
+ },
+ {
+  "dir": "VariantSelector",
+  "selector": ".swatch",
+  "hits": [
+   "material.haze-fill(0)"
+  ],
+  "core": "cr-haze",
+  "story": "commerce-variant-selector--swatches",
+  "diff": [
+   "borderTopColor: rgb(98, 74, 159) | core rgba(0, 0, 0, 0)",
+   "borderTopLeftRadius: 50% | core 28px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "ProductCard",
+  "selector": ".card",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "commerce-product-card--default",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "CartItem",
+  "selector": ".item",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "commerce-cart-item--default",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "CartSummary",
+  "selector": ".summary",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "commerce-cart-summary--default",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "OrderSummary",
+  "selector": ".order",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "commerce-order-summary--default",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Review",
+  "selector": ".review",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "commerce-review--default",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "RatingSummary",
+  "selector": ".summary",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "commerce-rating-summary--default",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "FilterPanel",
+  "selector": ".panel",
+  "hits": [
+   "material.frost"
+  ],
+  "core": "cr-frost",
+  "story": "commerce-filter-panel--default",
+  "diff": [
+   "borderTopLeftRadius: 28px | core 34px",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before opacity: 1 | core 0.045"
+  ]
+ },
+ {
+  "dir": "PageHeader",
+  "selector": ".banded",
+  "hits": [
+   "material.frost"
+  ],
+  "core": "cr-frost",
+  "story": "screens-pageheader--default",
+  "diff": [
+   "borderTopLeftRadius: 0px | core 34px",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before opacity: 1 | core 0.045"
+  ]
+ },
+ {
+  "dir": "MasterDetail",
+  "selector": ".list",
+  "hits": [
+   "material.frost"
+  ],
+  "core": "cr-frost",
+  "story": "screens-masterdetail--default",
+  "diff": [
+   "borderTopLeftRadius: 28px | core 34px",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before opacity: 1 | core 0.045"
+  ]
+ },
+ {
+  "dir": "MasterDetail",
+  "selector": ".detail",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "screens-masterdetail--default",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "Workspace",
+  "selector": ".pane",
+  "hits": [
+   "material.frost"
+  ],
+  "core": "cr-frost",
+  "story": "screens-workspace--default",
+  "diff": [
+   "borderTopLeftRadius: 28px | core 34px",
+   "::before content: none | core \"\"",
+   "::before backgroundImage: none | core url(\"data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/20",
+   "::before top: auto | core 0px",
+   "::before left: auto | core 0px",
+   "::before opacity: 1 | core 0.045"
+  ]
+ },
+ {
+  "dir": "AnalyticsPanel",
+  "selector": ".panel",
+  "hits": [
+   "material.haze-fill"
+  ],
+  "core": "cr-haze",
+  "story": "blocks-analyticspanel--default",
+  "diff": [
+   "borderTopWidth: 0px | core 1px",
+   "borderTopColor: rgb(23, 17, 48) | core rgba(0, 0, 0, 0)",
+   "::before top: 8px | core 0px",
+   "::before left: 8px | core 0px",
+   "::before boxShadow: none | core rgba(107, 40, 112, 0.15) 0px 2.5px 3.75px 0px, rgba(107, 40,"
+  ]
+ },
+ {
+  "dir": "SearchBlock",
+  "selector": ".shell",
+  "hits": [
+   "field.shell"
+  ],
+  "core": "cr-field-shell",
+  "story": "blocks-searchblock--at-rest",
+  "diff": []
+ }
+]

@@ -1,0 +1,1650 @@
+[
+ {
+  "dir": "AppShell",
+  "entries": [
+   "app-shell[plastic,frost,dock]"
+  ],
+  "rules": [
+   {
+    "file": "AppShell.module.scss",
+    "selector": ".sidebar",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "AppShell.module.scss",
+    "selector": ":global([data-effects='opaque']) .sidebar",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "AppShell.module.scss",
+    "selector": ".sidebar",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "AppShell.module.scss",
+    "selector": ".sidebar",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "AppBar",
+  "entries": [
+   "app-bar[frost]"
+  ],
+  "rules": [
+   {
+    "file": "AppBar.module.scss",
+    "selector": ".appBar",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "AppBar.module.scss",
+    "selector": ":global([data-effects='opaque']) .appBar",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "AppBar.module.scss",
+    "selector": ".appBar",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "AppBar.module.scss",
+    "selector": ".appBar",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "NavRail",
+  "entries": [
+   "nav-rail[frost,nav-item]"
+  ],
+  "rules": [
+   {
+    "file": "NavRail.module.scss",
+    "selector": ".rail",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Pagination",
+  "entries": [
+   "pagination[control]"
+  ],
+  "rules": [
+   {
+    "file": "Pagination.module.scss",
+    "selector": ".page, .arrow",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Stepper",
+  "entries": [
+   "stepper[control,haze]"
+  ],
+  "rules": [
+   {
+    "file": "Stepper.module.scss",
+    "selector": ".step:not(:last-child)::after",
+    "hits": [
+     "fill:haze"
+    ]
+   },
+   {
+    "file": "Stepper.module.scss",
+    "selector": ".marker",
+    "hits": [
+     "material.resin"
+    ]
+   },
+   {
+    "file": "Stepper.module.scss",
+    "selector": ".marker",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Stepper.module.scss",
+    "selector": ".stepper[data-shape='pill'] .control",
+    "hits": [
+     "material.haze-fill(0)"
+    ]
+   },
+   {
+    "file": "Stepper.module.scss",
+    "selector": ".stepper[data-shape='pill'] .marker",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Burger",
+  "entries": [
+   "burger[control]"
+  ],
+  "rules": [
+   {
+    "file": "Burger.module.scss",
+    "selector": ".burger",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "CommandPalette",
+  "entries": [
+   "command-palette[mirage,dialog,field]"
+  ],
+  "rules": [
+   {
+    "file": "CommandPalette.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "CommandPalette.module.scss",
+    "selector": ".palette::before",
+    "hits": [
+     "fill:haze"
+    ]
+   },
+   {
+    "file": "CommandPalette.module.scss",
+    "selector": ".field",
+    "hits": [
+     "field.shell"
+    ]
+   },
+   {
+    "file": "CommandPalette.module.scss",
+    "selector": ":global([data-effects='opaque']) .scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "CommandPalette.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "CommandPalette.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Affix",
+  "entries": [
+   "affix[resin]"
+  ],
+  "rules": [
+   {
+    "file": "Affix.module.scss",
+    "selector": ".content[data-pinned]",
+    "hits": [
+     "material.resin"
+    ]
+   },
+   {
+    "file": "Affix.module.scss",
+    "selector": ".content[data-pinned]",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "NavigationMenu",
+  "entries": [
+   "navigation-menu[none,frost]"
+  ],
+  "rules": [
+   {
+    "file": "NavigationMenu.module.scss",
+    "selector": ".panel",
+    "hits": [
+     "material.frost"
+    ]
+   },
+   {
+    "file": "NavigationMenu.module.scss",
+    "selector": ".panel",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "TableOfContents",
+  "entries": [
+   "table-of-contents[haze]"
+  ],
+  "rules": [
+   {
+    "file": "TableOfContents.module.scss",
+    "selector": ".toc::before",
+    "hits": [
+     "fill:haze"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Menu",
+  "entries": [
+   "submenu[frost]",
+   "menu[frost,haze]",
+   "context-menu[frost]"
+  ],
+  "rules": [
+   {
+    "file": "Menu.module.scss",
+    "selector": ".popover[data-cr-overlay='frost']",
+    "hits": [
+     "material.haze-fill($inset: $cr-spacing-2xs, $layer: '::after')"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Button",
+  "entries": [
+   "button[control]"
+  ],
+  "rules": [
+   {
+    "file": "Button.module.scss",
+    "selector": ".button",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Button.module.scss",
+    "selector": ".button",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "IconButton",
+  "entries": [
+   "icon-button[control]",
+   "close-button[control]"
+  ],
+  "rules": [
+   {
+    "file": "IconButton.module.scss",
+    "selector": ".quiet",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "IconButton.module.scss",
+    "selector": ".iconButton:not(.quiet)",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "FloatingAction",
+  "entries": [
+   "floating-action[control]",
+   "action-bar[dock]",
+   "speed-dial[control]"
+  ],
+  "rules": [
+   {
+    "file": "FloatingAction.module.scss",
+    "selector": ".floating",
+    "hits": [
+     "backdrop-filter",
+     "material.haze-fill"
+    ]
+   },
+   {
+    "file": "FloatingAction.module.scss",
+    "selector": ":global([data-effects='opaque']) .floating",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "FloatingAction.module.scss",
+    "selector": ".floating",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "FloatingAction.module.scss",
+    "selector": ".floating",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "TextInput",
+  "entries": [
+   "text-input[field]"
+  ],
+  "rules": [
+   {
+    "file": "TextInput.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Textarea",
+  "entries": [
+   "textarea[field]"
+  ],
+  "rules": [
+   {
+    "file": "TextArea.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "NumberInput",
+  "entries": [
+   "number-input[field]"
+  ],
+  "rules": [
+   {
+    "file": "NumberInput.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "PasswordInput",
+  "entries": [
+   "password-input[field]"
+  ],
+  "rules": [
+   {
+    "file": "PasswordInput.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "SearchInput",
+  "entries": [
+   "search-input[field]"
+  ],
+  "rules": [
+   {
+    "file": "SearchInput.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Select",
+  "entries": [
+   "select[field,frost]",
+   "native-select[field]"
+  ],
+  "rules": [
+   {
+    "file": "Select.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Combobox",
+  "entries": [
+   "combobox[field,frost]"
+  ],
+  "rules": [
+   {
+    "file": "ComboBox.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "MultiSelect",
+  "entries": [
+   "multi-select[field,compact,frost]"
+  ],
+  "rules": [
+   {
+    "file": "MultiSelect.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Checkbox",
+  "entries": [
+   "checkbox[choice]",
+   "checkbox-group[none]",
+   "radio[choice]",
+   "radio-group[none]"
+  ],
+  "rules": [
+   {
+    "file": "Checkbox.module.scss",
+    "selector": ".box",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Checkbox.module.scss",
+    "selector": ":global([data-effects='opaque']) .box",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Checkbox.module.scss",
+    "selector": ".box",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Checkbox.module.scss",
+    "selector": ".box",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Switch",
+  "entries": [
+   "switch[choice]"
+  ],
+  "rules": [
+   {
+    "file": "Switch.module.scss",
+    "selector": ".track",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Switch.module.scss",
+    "selector": ":global([data-effects='opaque']) .track",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Switch.module.scss",
+    "selector": ".track",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Switch.module.scss",
+    "selector": ".track",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Slider",
+  "entries": [
+   "slider[choice]",
+   "range-slider[choice]"
+  ],
+  "rules": [
+   {
+    "file": "Slider.module.scss",
+    "selector": ".thumb",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Slider.module.scss",
+    "selector": ":global([data-effects='opaque']) .thumb",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Slider.module.scss",
+    "selector": ".thumb",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Slider.module.scss",
+    "selector": ".thumb",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "PinInput",
+  "entries": [
+   "pin-input[field]"
+  ],
+  "rules": [
+   {
+    "file": "PinInput.module.scss",
+    "selector": ".well",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "TagsInput",
+  "entries": [
+   "tags-input[field,compact]",
+   "token-field[field,compact]"
+  ],
+  "rules": [
+   {
+    "file": "TagsInput.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "ColorPicker",
+  "entries": [
+   "color-input[field]",
+   "color-area[resin]",
+   "color-slider[resin]",
+   "color-wheel[resin]",
+   "color-swatch[none]",
+   "color-swatch-picker[none]"
+  ],
+  "rules": [
+   {
+    "file": "ColorPicker.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "DatePicker",
+  "entries": [
+   "date-input[field]",
+   "date-picker[field,frost,haze]",
+   "date-range-picker[field,frost,haze]",
+   "time-input[field]",
+   "date-time-picker[field,frost]",
+   "month-picker[frost,haze]",
+   "year-picker[frost,haze]",
+   "digital-clock[frost,haze]"
+  ],
+  "rules": [
+   {
+    "file": "DatePicker.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Cascader",
+  "entries": [
+   "cascader[field,frost,haze]"
+  ],
+  "rules": [
+   {
+    "file": "Cascader.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "RichTextSurface",
+  "entries": [
+   "mentions[frost,haze]",
+   "rich-text-surface[field,frost]"
+  ],
+  "rules": [
+   {
+    "file": "RichTextSurface.module.scss",
+    "selector": ":global([data-effects='opaque']) .popover",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "RichTextSurface.module.scss",
+    "selector": ".popover",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "ComboBox",
+  "entries": [
+   "autocomplete[field,frost]"
+  ],
+  "rules": [
+   {
+    "file": "ComboBox.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "AngleSlider",
+  "entries": [
+   "angle-slider[resin]",
+   "knob[resin]"
+  ],
+  "rules": [
+   {
+    "file": "AngleSlider.module.scss",
+    "selector": ":global([data-effects='opaque']) .dial",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "AngleSlider.module.scss",
+    "selector": ".dial",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Table",
+  "entries": [
+   "table[table]"
+  ],
+  "rules": [
+   {
+    "file": "Table.module.scss",
+    "selector": ".placeholder",
+    "hits": [
+     "fill:haze"
+    ]
+   },
+   {
+    "file": "Table.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "DataTable",
+  "entries": [
+   "data-table[table]"
+  ],
+  "rules": [
+   {
+    "file": "DataTable.module.scss",
+    "selector": ".scroller",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "List",
+  "entries": [
+   "list[haze]"
+  ],
+  "rules": [
+   {
+    "file": "List.module.scss",
+    "selector": ".row",
+    "hits": [
+     "fill:haze"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Image",
+  "entries": [
+   "image[haze]"
+  ],
+  "rules": [
+   {
+    "file": "Image.module.scss",
+    "selector": ".image",
+    "hits": [
+     "fill:haze"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Timeline",
+  "entries": [
+   "timeline[indicator,haze]"
+  ],
+  "rules": [
+   {
+    "file": "Timeline.module.scss",
+    "selector": ".marker",
+    "hits": [
+     "material.resin"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Accordion",
+  "entries": [
+   "accordion[haze]"
+  ],
+  "rules": [
+   {
+    "file": "Accordion.module.scss",
+    "selector": ".row",
+    "hits": [
+     "fill:haze"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Carousel",
+  "entries": [
+   "carousel[control,haze]"
+  ],
+  "rules": [
+   {
+    "file": "Carousel.module.scss",
+    "selector": ".slide",
+    "hits": [
+     "material.haze-fill(0)"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Statistic",
+  "entries": [
+   "statistic[haze]"
+  ],
+  "rules": [
+   {
+    "file": "Statistic.module.scss",
+    "selector": ".placeholder",
+    "hits": [
+     "fill:haze"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Calendar",
+  "entries": [
+   "calendar[frost,haze]"
+  ],
+  "rules": [
+   {
+    "file": "Calendar.module.scss",
+    "selector": ".panel",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "DataView",
+  "entries": [
+   "data-view[haze]"
+  ],
+  "rules": [
+   {
+    "file": "DataView.module.scss",
+    "selector": ".item",
+    "hits": [
+     "material.haze-fill(0)"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "ImageList",
+  "entries": [
+   "image-list[haze]"
+  ],
+  "rules": [
+   {
+    "file": "ImageList.module.scss",
+    "selector": ".caption",
+    "hits": [
+     "material.haze-fill(0)"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "OrganizationChart",
+  "entries": [
+   "organization-chart[haze]"
+  ],
+  "rules": [
+   {
+    "file": "OrganizationChart.module.scss",
+    "selector": ".node",
+    "hits": [
+     "material.haze-fill(0)"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Alert",
+  "entries": [
+   "alert[haze]"
+  ],
+  "rules": [
+   {
+    "file": "Alert.module.scss",
+    "selector": ".alert",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Toast",
+  "entries": [
+   "toast[frost,haze]"
+  ],
+  "rules": [
+   {
+    "file": "Toast.module.scss",
+    "selector": ".toast",
+    "hits": [
+     "material.haze-fill($layer: '::after')"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Notification",
+  "entries": [
+   "notification[frost,haze]"
+  ],
+  "rules": [
+   {
+    "file": "Notification.module.scss",
+    "selector": "&:global(.cr-frost)",
+    "hits": [
+     "material.haze-fill($layer: '::after')"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "LoadingOverlay",
+  "entries": [
+   "loading-overlay[mirage]"
+  ],
+  "rules": [
+   {
+    "file": "LoadingOverlay.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "LoadingOverlay.module.scss",
+    "selector": ":global([data-effects='opaque']) .scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "LoadingOverlay.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "LoadingOverlay.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "EmptyState",
+  "entries": [
+   "empty-state[haze]"
+  ],
+  "rules": [
+   {
+    "file": "EmptyState.module.scss",
+    "selector": ".empty",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Result",
+  "entries": [
+   "result[haze]"
+  ],
+  "rules": [
+   {
+    "file": "Result.module.scss",
+    "selector": ".result",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Tour",
+  "entries": [
+   "tour[frost,mirage]"
+  ],
+  "rules": [
+   {
+    "file": "Tour.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Tour.module.scss",
+    "selector": ".panel",
+    "hits": [
+     "material.frost"
+    ]
+   },
+   {
+    "file": "Tour.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Banner",
+  "entries": [
+   "banner[haze]"
+  ],
+  "rules": [
+   {
+    "file": "Banner.module.scss",
+    "selector": ".banner",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Drawer",
+  "entries": [
+   "drawer[frost,mirage]"
+  ],
+  "rules": [
+   {
+    "file": "Drawer.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Drawer.module.scss",
+    "selector": ".panel",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Drawer.module.scss",
+    "selector": ":global([data-effects='opaque']) .panel",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Drawer.module.scss",
+    "selector": ":global([data-effects='opaque']) .scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Drawer.module.scss",
+    "selector": ".panel",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Drawer.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Drawer.module.scss",
+    "selector": ".panel",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Drawer.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Popover",
+  "entries": [
+   "popover[frost,haze]"
+  ],
+  "rules": [
+   {
+    "file": "Popover.module.scss",
+    "selector": ".popover[data-cr-overlay='frost']",
+    "hits": [
+     "material.haze-fill($layer: '::after')"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Scrim",
+  "entries": [
+   "scrim[mirage]"
+  ],
+  "rules": [
+   {
+    "file": "Scrim.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Scrim.module.scss",
+    "selector": ":global([data-effects='opaque']) .scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Scrim.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Scrim.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "FloatingWindow",
+  "entries": [
+   "floating-window[resin-panel]"
+  ],
+  "rules": [
+   {
+    "file": "FloatingWindow.module.scss",
+    "selector": ".window",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "OverlayArrow",
+  "entries": [
+   "overlay-arrow[none]"
+  ],
+  "rules": [
+   {
+    "file": "OverlayArrow.module.scss",
+    "selector": ".arrow[data-cr-overlay='frost']",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "OverlayArrow.module.scss",
+    "selector": ".arrow[data-cr-overlay='haze']",
+    "hits": [
+     "fill:haze"
+    ]
+   },
+   {
+    "file": "OverlayArrow.module.scss",
+    "selector": ":global([data-crystal-overlays][data-effects='opaque']) .arrow",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "OverlayArrow.module.scss",
+    "selector": ".arrow",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Highlight",
+  "entries": [
+   "mark[none]",
+   "highlight[haze]"
+  ],
+  "rules": [
+   {
+    "file": "Highlight.module.scss",
+    "selector": ".cue",
+    "hits": [
+     "fill:haze"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "CodeBlock",
+  "entries": [
+   "code-block[haze]"
+  ],
+  "rules": [
+   {
+    "file": "CodeBlock.module.scss",
+    "selector": ".codeBlock::before",
+    "hits": [
+     "fill:haze"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Resizable",
+  "entries": [
+   "resizable[resin]"
+  ],
+  "rules": [
+   {
+    "file": "Resizable.module.scss",
+    "selector": ".handle",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Resizable.module.scss",
+    "selector": ":global([data-effects='opaque']) .handle",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Resizable.module.scss",
+    "selector": ".handle",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "QrCode",
+  "entries": [
+   "qr-code[haze]"
+  ],
+  "rules": [
+   {
+    "file": "QRCode.module.scss",
+    "selector": ".qrCode::before",
+    "hits": [
+     "fill:haze"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "ChartSurface",
+  "entries": [
+   "chart-surface[haze]"
+  ],
+  "rules": [
+   {
+    "file": "ChartSurface.module.scss",
+    "selector": ".plot",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "ChartLegend",
+  "entries": [
+   "chart-legend[haze]"
+  ],
+  "rules": [
+   {
+    "file": "ChartLegend.module.scss",
+    "selector": ".entry",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "ChartTooltip",
+  "entries": [
+   "chart-tooltip[frost]"
+  ],
+  "rules": [
+   {
+    "file": "ChartTooltip.module.scss",
+    "selector": ".tooltip",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Gallery",
+  "entries": [
+   "gallery[haze,mirage]"
+  ],
+  "rules": [
+   {
+    "file": "Gallery.module.scss",
+    "selector": ".thumb",
+    "hits": [
+     "material.haze-fill($inset: 0)"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Lightbox",
+  "entries": [
+   "lightbox[mirage]"
+  ],
+  "rules": [
+   {
+    "file": "Lightbox.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Lightbox.module.scss",
+    "selector": ":global([data-effects='opaque']) .scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Lightbox.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   },
+   {
+    "file": "Lightbox.module.scss",
+    "selector": ".scrim",
+    "hits": [
+     "backdrop-filter"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "QuantityStepper",
+  "entries": [
+   "quantity-stepper[field]"
+  ],
+  "rules": [
+   {
+    "file": "QuantityStepper.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "VariantSelector",
+  "entries": [
+   "variant-selector[haze]"
+  ],
+  "rules": [
+   {
+    "file": "VariantSelector.module.scss",
+    "selector": ".swatch",
+    "hits": [
+     "material.haze-fill(0)"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "ProductCard",
+  "entries": [
+   "product-card[haze]"
+  ],
+  "rules": [
+   {
+    "file": "ProductCard.module.scss",
+    "selector": ".card",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "CartItem",
+  "entries": [
+   "cart-item[haze]"
+  ],
+  "rules": [
+   {
+    "file": "CartItem.module.scss",
+    "selector": ".item",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "CartSummary",
+  "entries": [
+   "cart-summary[haze]"
+  ],
+  "rules": [
+   {
+    "file": "CartSummary.module.scss",
+    "selector": ".summary",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "OrderSummary",
+  "entries": [
+   "order-summary[haze]"
+  ],
+  "rules": [
+   {
+    "file": "OrderSummary.module.scss",
+    "selector": ".order",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Review",
+  "entries": [
+   "review[haze]"
+  ],
+  "rules": [
+   {
+    "file": "Review.module.scss",
+    "selector": ".review",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "RatingSummary",
+  "entries": [
+   "rating-summary[haze]"
+  ],
+  "rules": [
+   {
+    "file": "RatingSummary.module.scss",
+    "selector": ".summary",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "FilterPanel",
+  "entries": [
+   "filter-panel[frost,haze]"
+  ],
+  "rules": [
+   {
+    "file": "FilterPanel.module.scss",
+    "selector": ".panel",
+    "hits": [
+     "material.frost"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "PageHeader",
+  "entries": [
+   "page-header[frost]"
+  ],
+  "rules": [
+   {
+    "file": "PageHeader.module.scss",
+    "selector": ".banded",
+    "hits": [
+     "material.frost"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "MasterDetail",
+  "entries": [
+   "master-detail[frost,haze]"
+  ],
+  "rules": [
+   {
+    "file": "MasterDetail.module.scss",
+    "selector": ".list",
+    "hits": [
+     "material.frost"
+    ]
+   },
+   {
+    "file": "MasterDetail.module.scss",
+    "selector": ".detail",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "Workspace",
+  "entries": [
+   "workspace[plastic,frost]"
+  ],
+  "rules": [
+   {
+    "file": "Workspace.module.scss",
+    "selector": ".pane",
+    "hits": [
+     "material.frost"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "AnalyticsPanel",
+  "entries": [
+   "analytics-panel[haze]"
+  ],
+  "rules": [
+   {
+    "file": "AnalyticsPanel.module.scss",
+    "selector": ".panel",
+    "hits": [
+     "material.haze-fill"
+    ]
+   }
+  ]
+ },
+ {
+  "dir": "SearchBlock",
+  "entries": [
+   "search-block[frost,haze]"
+  ],
+  "rules": [
+   {
+    "file": "SearchBlock.module.scss",
+    "selector": ".shell",
+    "hits": [
+     "field.shell"
+    ]
+   }
+  ]
+ }
+]
