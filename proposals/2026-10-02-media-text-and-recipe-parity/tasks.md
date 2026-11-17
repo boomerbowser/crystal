@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-53 tasks: 49 done, 4 ready, 0 blocked, 0 needs a ruling, 0 dropped.
+53 tasks: 50 done, 3 ready, 0 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -377,7 +377,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-T8](#r-t8) | P3 | Ready | Screen-reader pass on the editor | – |
 | [R-T9](#r-t9) | P1 | Done | Wear the published prose and editor recipes and delete the copies | C-R1 |
 | [R-A0](#r-a0) | P1 | Done | Motion catalogue story | – |
-| [R-A1](#r-a1) | P1 | Ready | Sort the hand-written material (re-evaluation rec. 6) | – |
+| [R-A1](#r-a1) | P1 | Done | Sort the hand-written material (re-evaluation rec. 6) | – |
 | [R-A2](#r-a2) | P2 | Ready | Confirm the 105 entries whose surface is not worn in their own markup | – |
 | [R-A3](#r-a3) | P2 | Done | Cascader plays the field recipes | – |
 | [R-A4](#r-a4) | P2 | Done | Product gallery and playlist block play their assigned motion | – |
@@ -694,14 +694,14 @@ Where: `src/motion/MotionCatalogue.stories.tsx`.
 
 ### R-A1
 
-**Sort the hand-written material (re-evaluation rec. 6).** Materials, P1, ready.
+**Sort the hand-written material (re-evaluation rec. 6).** Materials, P1, done.
 
 Target: Each of the 29 directories with hand-written backdrop-filter and the 49 using material mixins either wears a surface or is filed upstream as a composition the vocabulary lacks.
 
 Done when:
 
-- [ ] audit-recipes.mjs reports the count falling
-- [ ] verify:materials covers each surface worn
+- [x] audit-recipes.mjs reports the count falling
+- [x] verify:materials covers each surface worn
 
 Where: `scripts/audit-recipes.mjs, src/components/`.
 

@@ -715,7 +715,7 @@
       "repo": "react",
       "area": "Materials",
       "priority": "P1",
-      "status": "ready",
+      "status": "done",
       "title": "Sort the hand-written material (re-evaluation rec. 6)",
       "depends": [],
       "target": "Each of the 29 directories with hand-written backdrop-filter and the 49 using material mixins either wears a surface or is filed upstream as a composition the vocabulary lacks.",

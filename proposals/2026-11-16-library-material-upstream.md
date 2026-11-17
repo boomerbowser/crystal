@@ -187,6 +187,20 @@ boundary as Statistic's. Measured by reading rather than in a story: the
 Highlight cue (invisible at rest), QrCode (no story) and the native-shaped
 Combobox shell (the same conversion as its siblings).
 
+## Phase 3, as done (17 November 2026)
+
+crystal-preview adopts 2.8.0, and its playground shows one specimen of every
+variant in a section after the supporting materials, each on a coloured scene
+and marked `data-variant`. Crystal React's `verify:materials` compares a
+specimen of each variant in its parity story against these (130 comparisons,
+from 22), so a library stylesheet that overrode a variant would fail there.
+The preview's 23 frames match a capture of 2.6.0 taken in the same
+environment; on the CI runner one frame, the opaque playground, re-renders the
+anti-aliasing of text on the page ground, because the Mirage study lost its
+backdrop filter in opaque mode, and its runner baseline was re-captured.
+
+R-28 is closed in Crystal React. Its record is there, in `closed-issues.md`.
+
 ## Every element
 
 | Directory | Selector | Crystal surface | Outcome | Differs in |
