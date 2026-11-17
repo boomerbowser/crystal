@@ -380,10 +380,23 @@ const OPAQUE = '[data-effects=opaque]';
    pseudo-element it paints (or '' for the element) and whether it sits behind
    the opaque switch. */
 function reach(rule, target) {
-  if (!rule.simples.length) return null;
-  if (rule.simples.every((s) => s.kind === 'universal')) return null;
+  const isNot = (s) => s.kind === 'pseudo-class' && s.name === 'not';
+  const positive = rule.simples.filter((s) => !isNot(s));
+  if (!positive.length) return null;
+  if (positive.every((s) => s.kind === 'universal')) return null;
   const targetSet = new Set(target.simples.map((s) => s.text));
-  if (!rule.simples.every((s) => targetSet.has(s.text))) return null;
+  if (!positive.every((s) => targetSet.has(s.text))) return null;
+  /* `:not(a, b)` reaches an element at rest unless the element wears one of
+     its arguments in full: `:not(:focus-visible)` is the resting state, and
+     `:not(.cr-bare)` excludes the bare control. An argument with a combinator
+     of its own is not modelled, and such a rule is treated as not reaching. */
+  for (const s of rule.simples.filter(isNot)) {
+    for (const arg of splitTop(s.args, ',')) {
+      const complex = parseComplex(arg);
+      if (complex.length !== 1) return null;
+      if (complex[0].simples.every((x) => targetSet.has(x.text))) return null;
+    }
+  }
 
   let opaque = false;
   let prefix = rule.prefix;

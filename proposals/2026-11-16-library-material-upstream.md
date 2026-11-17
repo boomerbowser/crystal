@@ -27,9 +27,11 @@ vocabulary is missing. So the migration runs upstream first:
    counts none, and a check keeps it there.
 
 The appearance the libraries ship is kept, which is what makes this a migration
-rather than a redesign. Where a difference turns out to be a defect against the
-approved baseline (a Frost panel without Frost's grain, say), that is recorded
-beside it and put to Meridian rather than silently published as a variant.
+rather than a redesign. Where a library's surface has drifted from the base
+recipe (a Frost panel without Frost's grain, say), the drift is published as a
+named variant, not put to Meridian case by case: ruled with the approval of
+phase 1, "publish the drifting differences as variants". Each such variant says in its
+comment what it drops from the base, so the drift is visible in the standard.
 
 ## The measurement
 
@@ -84,14 +86,66 @@ variant, not 59.
 
 ## Phases
 
-1. **Core 2.7.0** publishes the variants above and the two field-shell traits,
-   each with its fallback routes and a contract check, and records which
-   differences were put to Meridian as defects.
+1. **Core 2.7.0** publishes the variants above, each with its fallback routes
+   and a contract check. Drift is published as variants by the ruling above.
+   Done: see "Phase 1, as published" below.
 2. **Crystal React** wears them directory by directory, deleting each rule as
    its element measures identical; `verify:materials` and
    `verify:appearance` gain a row per variant, and the audit's hand-written
    counts reach zero and are held there.
 3. **crystal-preview** shows each variant on the materials page.
+
+## Phase 1, as published (core 2.7.0, 17 November 2026)
+
+The variants, named for what they are rather than for the component that first
+needed them, because a product's own `card` or `content` class on a
+`.cr-haze` element must not change meaning:
+
+| Kind (above) | Variant | Notes |
+|---|---|---|
+| Haze cards with an inset fill | `.cr-haze.inset` | no border box, no shadow under the fill |
+| The same, filled to the edge | `.cr-haze.flush` | |
+| Flat Haze rows | `.cr-haze.flat` | fill on the element; `.flat.sunken` falls back to `--cr-surface-alt` |
+| Raised Haze | `.cr-haze.raised` | the float shadow on the fill, as the dialog |
+| Frost at the content radius | `.cr-frost.pane` | |
+| Frost without grain (drift) | `.cr-frost.flat` | composes with `.pane`, `.docked`, `.sheet` |
+| Docked Frost | `.cr-frost.docked` | no rim, radius or shadow |
+| Frost sheet | `.cr-frost.sheet` | `--cr-edge` rim, content radius, float shadow |
+| Frost with a reading fill | `.cr-frost.reading` | Haze on `::after`, inset `--cr-frost-reading-inset` |
+| Resin without sheen (drift) | `.cr-resin.flat` | Affix's pinned plane (28px, not the panel's 34px) is not yet measured: its story does not pin |
+| Resin handle | `.cr-resin.divider` | outline colour where translucency gives way, CanvasText in forced colours |
+| Field shell filling its row | `.cr-field-shell.block` | |
+| Bare controls (IconButton quiet, stepper marker) | `.cr-bare`, already published | no new variant |
+
+Corrections rather than variants: the Mirage scrim and the dialog backdrop take
+the fallback fill in opaque mode, and `.cr-bare`, `.cr-nav-item` and
+`.cr-drag-handle` on a `<button>` stay transparent in opaque mode (the coat's
+opaque route had outranked them, and erased the drag handle's grip).
+
+A finding for phase 2, not a core change: Crystal React's List draws a link row
+and a button row differently. A `<button>` row keeps the coat's reading pad,
+sheen and float shadow under its Haze fill; an `<a>` row has none of them.
+`.cr-haze.flat` hides the pad (a flat row has no layer), so the button rows keep
+it in the library until the difference is settled, and the measurement shows
+no change.
+
+Not published: the field shell's `transform-origin: center`, which is already
+the initial value, so it is not a trait.
+
+**The gate before the tag.** Fifteen React components (one or more per variant,
+including `<button>` wearers) were converted against a local 2.7.0 tarball and
+snapshotted before and after, element by element, in light, dark, opaque,
+reduced transparency and forced colours (`scripts/snapshot-material.mjs` in
+crystal-react). Light and dark: no difference apart from `position: relative`
+and `isolation: isolate` with no offsets, which move nothing. The fallback
+modes changed only where the React rule had lacked a route the base surface has
+(the outline rim in opaque mode, a feather of `none` where it was `blur(0)`).
+The gate found these defects, all fixed before the tag: the opaque route
+above, and Resin's optical rims appearing on the resize handle's transparent
+hit target. A second pass converted TextInput to `.cr-field-shell.block` (no
+difference in any mode) and measured List's `<button>` rows (the finding
+below). crystal-preview's 23 frames, captured on 2.6.0 and on
+the tarball, are identical.
 
 ## Every element
 

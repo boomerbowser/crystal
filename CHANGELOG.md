@@ -2,6 +2,67 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
+## [2.7.0] - 2026-11-17
+
+The material variants (R-28, ruled 16 November 2026). Every surface the React
+library had written by hand, because Crystal had not published it, is now a
+named variant of the surface it modifies, so a platform library wears it
+instead of redrawing it. Where the library's surface had drifted from the base
+recipe, the drift is published as the variant, by the same ruling. Nothing
+changes on a page that wears none of the new classes, except the Mirage
+correction below. The plan is
+`proposals/2026-11-16-library-material-upstream.md`.
+
+### Added
+
+- **Haze variants.** `.cr-haze.inset`, a reading card with no border box and
+  its fill inset by `--cr-haze-inset`, with no shadow under the fill;
+  `.cr-haze.flush`, the same filled to its own edge; `.cr-haze.flat`, the fill
+  on the element with no feather or layer, for rows, and `.flat.sunken`, which
+  falls back to `--cr-surface-alt` instead of `--cr-surface`, for
+  placeholders; `.cr-haze.raised`, the fill with the float shadow.
+- **Frost variants.** `.cr-frost.pane`, the content radius; `.cr-frost.flat`,
+  no grain; `.cr-frost.docked`, no rim, radius or shadow, for an app bar or a
+  sidebar; `.cr-frost.sheet`, the `--cr-edge` rim, the content radius and the
+  float shadow, for a drawer; `.cr-frost.reading`, a Haze reading fill on
+  `::after` inset by the new `--cr-frost-reading-inset` (default
+  `--cr-haze-inset`), for a toast or a popover. `.flat` composes with `.pane`,
+  `.docked` and `.sheet`.
+- **Resin variants.** `.cr-resin.flat`, no sheen, for a step or timeline
+  marker; `.cr-resin.divider`, the fill
+  and blur only, for the handle between resizable regions, falling back to
+  `--cr-outline` with no backdrop and to CanvasText in forced colours.
+- **`.cr-field-shell.block`**, the field shell as a block that fills its row.
+- Each variant that restates a fill or a border carries its own opaque,
+  reduced-transparency, no-backdrop and forced-colours routes, and is listed in
+  `tokens/surfaces.json` under its surface's `also`, so
+  `tokens/surface-recipes.json` publishes its recipe as values for every
+  platform. A contract check holds each variant's recipe in every mode.
+
+### Fixed
+
+- **The bare control, the navigation entry and the drag handle in opaque
+  mode.** The coat's opaque route, `[data-effects=opaque] :is(button, …)`,
+  (0,2,1), outranked the (0,2,0) recipes that take the coat off a `<button>`
+  and gave them the opaque surface: a white pill where a chevron or a quiet
+  icon button should have drawn nothing, and, because the route sets the
+  `background` shorthand, a drag handle with no grip. The route now excludes
+  `.cr-bare`, `.cr-nav-item` and `.cr-drag-handle` inside `:where()`, so its
+  specificity is unchanged. Found by the React library's before-and-after
+  measurement for R-28.
+- **`tools/build-surface-recipes.cjs` reads `:not()`.** A rule with `:not(x)`
+  now reaches an element that does not wear `x`, as the browser applies it;
+  before, any such rule was left out. The only recipe that changes is the bare
+  control's: its resting shadow is `none`, from `.cr-bare:not(:focus-visible)`.
+
+### Changed
+
+- **Mirage in opaque mode.** `.cr-mirage` and a dialog's `::backdrop` take
+  `--cr-mirage-fallback-fill` with no backdrop filter under
+  `[data-effects=opaque]`, as they already did under reduced transparency. The
+  opaque setting asks for no translucency, and the scrim was the largest
+  translucent area left on screen. Pages not in opaque mode are unchanged.
+
 ## [2.6.0] - 2026-11-16
 
 The travelling selection pill, by Meridian's ruling (a) on D-37. Nothing

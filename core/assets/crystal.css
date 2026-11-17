@@ -66,6 +66,8 @@
 [data-effects=opaque] :is(.cr-resin,.cr-glass)::before,[data-effects=opaque] :is(.cr-resin,.cr-glass)::after{display:none}
 @media(prefers-reduced-transparency:reduce){:is(.cr-resin,.cr-glass)::before,:is(.cr-resin,.cr-glass)::after{display:none}}
 @media(forced-colors:active){:is(.cr-resin,.cr-glass)::before,:is(.cr-resin,.cr-glass)::after{display:none}}
+/* The Resin divider (2.7.0) is a line the pointer holds; in forced colours it is drawn in CanvasText, not erased to Canvas. */
+@media(forced-colors:active){:is(.cr-resin,.cr-glass).divider{background:CanvasText!important}}
 
 /* The host supplies activation state; this primitive never samples the desktop. */
 :is(.cr-plastic,.cr-foundation)[data-window-active="false"]{background-color:var(--cr-plastic-inactive);background-image:none}
@@ -300,6 +302,9 @@ dialog.cr-dialog{position:fixed}
   .cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fallback-fill);-webkit-backdrop-filter:none;backdrop-filter:none}
 }
 
+/* The opaque setting is a request for no translucency, and a scrim is the largest translucent area on screen:
+   it takes the same flat fill as reduced transparency (2.7.0). */
+[data-effects=opaque] .cr-mirage,[data-effects=opaque] .cr-dialog::backdrop{background:var(--cr-mirage-fallback-fill);-webkit-backdrop-filter:none;backdrop-filter:none}
 /* Mirage draws its chroma from the actual backdrop, never an invented overlay gradient. */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fallback-fill)}
@@ -392,7 +397,12 @@ dialog.cr-dialog{position:fixed}
 .cr-field-shell :focus-visible {
     outline: 0;
 }
-[data-effects=opaque] :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status) {
+/* The three recipes that take the coat off a control (a bare control, a
+   navigation entry and a drag handle) have no coat to make opaque. `:where()`
+   keeps this rule's specificity at (0,2,1); without the exclusion it outranked
+   their (0,2,0) recipes and drew the surface behind them, and the shorthand
+   erased the drag handle's grip (fixed in 2.7.0). */
+[data-effects=opaque] :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status):where(:not(.cr-bare,.cr-nav-item,.cr-drag-handle)) {
     background: var(--cr-surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
@@ -1230,6 +1240,7 @@ span.cr-status>span {
     content: none;
     display: none;
 }
+
 /* Resting state only: focus is a box-shadow recipe, and a blanket `none`
    would silently reduce it to a bare outline. */
 .cr-bare:not(:focus-visible) {
@@ -1831,6 +1842,219 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     border: 1px solid CanvasText;
     box-shadow: none;
 }
+}
+/* ---------------------------------------------------------------------------
+   Material variants, 2.7.0 (R-28, proposals/2026-11-16-library-material-
+   upstream.md).
+
+   A platform library that needed a surface Crystal had not published wrote it
+   by hand: a Haze fill inset inside a card, a Frost pane without its grain, a
+   Resin handle with no rim. Ruled 16 November 2026, those are corrections the
+   standard takes in, not add-ons, and where a library's surface had drifted
+   from the base recipe the drift is published here as a named variant rather
+   than left in the library. Each variant states only what differs from the
+   surface it modifies, so the base recipe's fallbacks still apply to
+   everything it does not restate, and each variant that restates a fill or a
+   border restates its own reduced-transparency, opaque, no-backdrop and
+   forced-colours routes.
+
+   Selector note: every variant is the surface compound plus one class,
+   `:is(.cr-haze,.cr-surface).flat`, specificity (0,2,0), authored in this
+   layer. That beats the Resin coat `:is(button, …)` (0,1,1) on the
+   properties a variant states, so a `<button>` that wears a variant gets the
+   variant's fill and border, and keeps the coat's pseudo-layers unless the
+   variant says otherwise. A control that must lose the whole coat wears
+   `.cr-bare` as well.
+
+   Supported compositions: `.cr-haze.flat.sunken`, `.cr-frost.pane.flat`,
+   `.cr-frost.docked.flat`, `.cr-frost.sheet.flat`.
+   Other pairs compose by property but are not part of the contract.
+   --------------------------------------------------------------------------- */
+
+/* Haze, inset. A reading card: the feathered fill stops `--cr-haze-inset` (8px)
+   short of the box, so content padding is measured from the fill and the card
+   has no border box of its own. No shadow under the fill: an inset card sits
+   in a page, it does not float over it. Alerts, empty states, results,
+   product and cart cards, reviews, summaries, a chart's plot. */
+:is(.cr-haze,.cr-surface).inset {
+    border: 0;
+}
+:is(.cr-haze,.cr-surface).inset::before {
+    inset: var(--cr-haze-inset);
+    box-shadow: none;
+}
+
+/* Haze, flush. The same card filled to its own edge, for a tile whose content
+   is the card: a gallery thumbnail, a carousel slide, an organisation chart's
+   node, a swatch. */
+:is(.cr-haze,.cr-surface).flush {
+    border: 0;
+}
+:is(.cr-haze,.cr-surface).flush::before {
+    inset: 0;
+    box-shadow: none;
+}
+@media (forced-colors:active) {
+:is(.cr-haze,.cr-surface):is(.inset,.flush) {
+    border: 1px solid CanvasText;
+}
+}
+
+/* Haze, flat. The fill on the element itself, with no feather and no layer:
+   a row in a list or an accordion, a placeholder. A row is one of many and is
+   drawn edge to edge against its neighbours, so a feathered perimeter would
+   blur the seams. `.sunken` is the flat fill recessed: where the fill gives way
+   to the opaque surface, it gives way to the alternate surface instead, so an
+   image placeholder still reads as a well. */
+:is(.cr-haze,.cr-surface).flat {
+    border: 0;
+    background: var(--cr-haze-fill);
+}
+:is(.cr-haze,.cr-surface).flat::before {
+    display: none;
+}
+[data-effects=opaque] :is(.cr-haze,.cr-surface).flat {
+    background: var(--cr-surface);
+}
+[data-effects=opaque] :is(.cr-haze,.cr-surface).flat.sunken {
+    background: var(--cr-surface-alt);
+}
+@media (prefers-reduced-transparency:reduce) {
+:is(.cr-haze,.cr-surface).flat {
+    background: var(--cr-surface);
+}
+:is(.cr-haze,.cr-surface).flat.sunken {
+    background: var(--cr-surface-alt);
+}
+}
+@media (forced-colors:active) {
+:is(.cr-haze,.cr-surface).flat {
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid CanvasText;
+}
+}
+
+/* Haze, raised. The fill takes the float shadow, as the dialog's does: a
+   reading surface that opens over everything, such as a command palette. */
+:is(.cr-haze,.cr-surface).raised::before {
+    box-shadow: var(--cr-shadow-float);
+}
+
+/* Frost, pane. The content radius, 28px, instead of the panel's 34px: a pane
+   that sits beside content rather than over it, such as a navigation rail, a
+   filter panel, a tour step or a workspace pane. */
+:is(.cr-frost,.cr-acrylic).pane {
+    border-radius: var(--cr-radius);
+}
+
+/* Frost, flat. No grain. A pane that holds a long column of controls or rows
+   shows the grain as noise behind them; the fill, rim, blur and shadow are
+   unchanged. */
+:is(.cr-frost,.cr-acrylic).flat::before {
+    display: none;
+}
+
+/* Frost, docked. A pane docked to the edges of the window, such as an app bar
+   or a sidebar: no rim, no radius and no shadow, because it does not float.
+   The side it shares with content is the component's to draw. */
+:is(.cr-frost,.cr-acrylic).docked {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Frost, sheet. A pane that slides over content from an edge, such as a
+   drawer: the `--cr-edge` rim, the content radius and the float shadow. Which
+   corners square off against the edge is the component's geometry. */
+:is(.cr-frost,.cr-acrylic).sheet {
+    border: 1px solid var(--cr-edge);
+    border-radius: var(--cr-radius);
+    box-shadow: var(--cr-shadow-float);
+}
+
+/* Frost, reading. A transient Frost surface whose content is read, such as a
+   toast or a popover, holds a Haze reading fill. It is painted on `::after`,
+   because `::before` is the grain, and a fill written there is drawn at the
+   grain's opacity. The inset is `--cr-frost-reading-inset`, defaulting to
+   `--cr-haze-inset`; a component sets the former, never the latter, because
+   controls nested inside read `--cr-haze-inset` for their own pads. */
+:is(.cr-frost,.cr-acrylic).reading {
+    --cr-frost-reading-inset: var(--cr-haze-inset);
+}
+:is(.cr-frost,.cr-acrylic).reading::after {
+    content: '';
+    position: absolute;
+    inset: var(--cr-frost-reading-inset);
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+    background: var(--cr-haze-fill);
+    filter: blur(var(--cr-haze-feather));
+}
+[data-effects=opaque] :is(.cr-frost,.cr-acrylic).reading::after {
+    background: var(--cr-surface);
+    filter: none;
+}
+@media (prefers-reduced-transparency:reduce) {
+:is(.cr-frost,.cr-acrylic).reading::after {
+    background: var(--cr-surface);
+    filter: none;
+}
+}
+@media (forced-colors:active) {
+:is(.cr-frost,.cr-acrylic).reading::after {
+    display: none;
+}
+}
+
+/* Resin, flat. No sheen. A Resin plane that is a mark rather than a control,
+   such as a stepper's or a timeline's marker: the fill,
+   rim, blur and float shadow, without the optical highlight layers. */
+:is(.cr-resin,.cr-glass).flat::before,
+:is(.cr-resin,.cr-glass).flat::after {
+    display: none;
+}
+
+/* Resin, divider. The handle between two resizable regions: the Resin fill
+   and blur only, with no rim, shadow or sheen, because it is a line the
+   pointer can hold rather than a plane. Where the fill gives way, it becomes
+   the outline colour, not the surface, so the line stays visible on the
+   surface it divides. */
+:is(.cr-resin,.cr-glass).divider {
+    border: 0;
+    box-shadow: none;
+}
+:is(.cr-resin,.cr-glass).divider::before,
+:is(.cr-resin,.cr-glass).divider::after {
+    display: none;
+}
+[data-effects=opaque] :is(.cr-resin,.cr-glass).divider {
+    background: var(--cr-outline);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+@media (prefers-reduced-transparency:reduce) {
+:is(.cr-resin,.cr-glass).divider {
+    background: var(--cr-outline);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+:is(.cr-resin,.cr-glass).divider {
+    background: var(--cr-outline);
+}
+}
+/* Forced colours: the divider is drawn in CanvasText. That rule sits in the
+   reset layer beside the base forced-colours rule, because the base rule's
+   `background: Canvas !important` is there, and an important declaration in an
+   earlier layer beats one in this layer whatever its specificity. */
+
+/* Field shell, block. The shell as a block that fills its row, for a field
+   laid out in a form rather than set in a line of text. */
+.cr-field-shell.block {
+    display: flex;
 }
 
 /* A count (D-27).

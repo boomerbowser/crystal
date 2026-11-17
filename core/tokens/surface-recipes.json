@@ -223,16 +223,450 @@
           "shadowed": [],
           "diagnostics": [],
           "missing": []
+        },
+        ".cr-frost.pane": {
+          "selector": ".cr-frost.pane",
+          "fill": "var(--cr-frost-fill)",
+          "blur": "var(--cr-frost-blur)",
+          "saturation": "var(--cr-frost-saturation)",
+          "rim": "1px solid var(--cr-rim)",
+          "shadow": "var(--cr-shadow-panel)",
+          "radius": "var(--cr-radius)",
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "isolation": "isolate",
+            "position": "relative"
+          },
+          "layers": {
+            "::before": {
+              "background-image": "url('grain.svg')",
+              "border-radius": "inherit",
+              "content": "''",
+              "inset": "0",
+              "opacity": "var(--cr-grain-opacity)",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)",
+                "border-color": "var(--cr-outline)"
+              },
+              "layers": {
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              },
+              "layers": {
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Canvas",
+                "border": "1px solid CanvasText",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              },
+              "layers": {
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "noBackdropFilter": {
+              "declarations": {
+                "background": "var(--cr-surface)",
+                "border-color": "var(--cr-outline)"
+              }
+            }
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": []
+        },
+        ".cr-frost.flat": {
+          "selector": ".cr-frost.flat",
+          "fill": "var(--cr-frost-fill)",
+          "blur": "var(--cr-frost-blur)",
+          "saturation": "var(--cr-frost-saturation)",
+          "rim": "1px solid var(--cr-rim)",
+          "shadow": "var(--cr-shadow-panel)",
+          "radius": "calc(var(--cr-radius) + 6px)",
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "isolation": "isolate",
+            "position": "relative"
+          },
+          "layers": {
+            "::before": {
+              "background-image": "url('grain.svg')",
+              "border-radius": "inherit",
+              "content": "''",
+              "display": "none",
+              "inset": "0",
+              "opacity": "var(--cr-grain-opacity)",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)",
+                "border-color": "var(--cr-outline)"
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Canvas",
+                "border": "1px solid CanvasText",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              }
+            },
+            "noBackdropFilter": {
+              "declarations": {
+                "background": "var(--cr-surface)",
+                "border-color": "var(--cr-outline)"
+              }
+            }
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": []
+        },
+        ".cr-frost.docked": {
+          "selector": ".cr-frost.docked",
+          "fill": "var(--cr-frost-fill)",
+          "blur": "var(--cr-frost-blur)",
+          "saturation": "var(--cr-frost-saturation)",
+          "rim": "0",
+          "shadow": "none",
+          "radius": "0",
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "isolation": "isolate",
+            "position": "relative"
+          },
+          "layers": {
+            "::before": {
+              "background-image": "url('grain.svg')",
+              "border-radius": "inherit",
+              "content": "''",
+              "inset": "0",
+              "opacity": "var(--cr-grain-opacity)",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)",
+                "border-color": "var(--cr-outline)"
+              },
+              "layers": {
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              },
+              "layers": {
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Canvas",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              },
+              "layers": {
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "noBackdropFilter": {
+              "declarations": {
+                "background": "var(--cr-surface)",
+                "border-color": "var(--cr-outline)"
+              }
+            }
+          },
+          "conditions": {},
+          "shadowed": [
+            {
+              "branch": "forcedColors",
+              "layer": null,
+              "property": "border",
+              "value": "1px solid CanvasText",
+              "by": "0"
+            }
+          ],
+          "diagnostics": [],
+          "missing": []
+        },
+        ".cr-frost.sheet": {
+          "selector": ".cr-frost.sheet",
+          "fill": "var(--cr-frost-fill)",
+          "blur": "var(--cr-frost-blur)",
+          "saturation": "var(--cr-frost-saturation)",
+          "rim": "1px solid var(--cr-edge)",
+          "shadow": "var(--cr-shadow-float)",
+          "radius": "var(--cr-radius)",
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "isolation": "isolate",
+            "position": "relative"
+          },
+          "layers": {
+            "::before": {
+              "background-image": "url('grain.svg')",
+              "border-radius": "inherit",
+              "content": "''",
+              "inset": "0",
+              "opacity": "var(--cr-grain-opacity)",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)",
+                "border-color": "var(--cr-outline)"
+              },
+              "layers": {
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              },
+              "layers": {
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Canvas",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              },
+              "layers": {
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "noBackdropFilter": {
+              "declarations": {
+                "background": "var(--cr-surface)",
+                "border-color": "var(--cr-outline)"
+              }
+            }
+          },
+          "conditions": {},
+          "shadowed": [
+            {
+              "branch": "forcedColors",
+              "layer": null,
+              "property": "border",
+              "value": "1px solid CanvasText",
+              "by": "1px solid var(--cr-edge)"
+            }
+          ],
+          "diagnostics": [],
+          "missing": []
+        },
+        ".cr-frost.reading": {
+          "selector": ".cr-frost.reading",
+          "fill": "var(--cr-frost-fill)",
+          "blur": "var(--cr-frost-blur)",
+          "saturation": "var(--cr-frost-saturation)",
+          "rim": "1px solid var(--cr-rim)",
+          "shadow": "var(--cr-shadow-panel)",
+          "radius": "calc(var(--cr-radius) + 6px)",
+          "padding": null,
+          "haze": {
+            "layer": "::after",
+            "inset": "var(--cr-frost-reading-inset)",
+            "fill": "var(--cr-haze-fill)",
+            "feather": "var(--cr-haze-feather)",
+            "radius": "inherit"
+          },
+          "feather": "var(--cr-haze-feather)",
+          "extras": {
+            "--cr-frost-reading-inset": "var(--cr-haze-inset)",
+            "isolation": "isolate",
+            "position": "relative"
+          },
+          "layers": {
+            "::after": {
+              "background": "var(--cr-haze-fill)",
+              "border-radius": "inherit",
+              "content": "''",
+              "filter": "blur(var(--cr-haze-feather))",
+              "inset": "var(--cr-frost-reading-inset)",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            },
+            "::before": {
+              "background-image": "url('grain.svg')",
+              "border-radius": "inherit",
+              "content": "''",
+              "inset": "0",
+              "opacity": "var(--cr-grain-opacity)",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)",
+                "border-color": "var(--cr-outline)"
+              },
+              "layers": {
+                "::after": {
+                  "background": "var(--cr-surface)",
+                  "filter": "none"
+                },
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              },
+              "layers": {
+                "::after": {
+                  "background": "var(--cr-surface)",
+                  "filter": "none"
+                },
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Canvas",
+                "border": "1px solid CanvasText",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              },
+              "layers": {
+                "::after": {
+                  "display": "none"
+                },
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "noBackdropFilter": {
+              "declarations": {
+                "background": "var(--cr-surface)",
+                "border-color": "var(--cr-outline)"
+              }
+            }
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": []
         }
       },
       "tokens": [
+        "--cr-edge",
         "--cr-frost-blur",
         "--cr-frost-fill",
+        "--cr-frost-reading-inset",
         "--cr-frost-saturation",
         "--cr-grain-opacity",
+        "--cr-haze-feather",
+        "--cr-haze-fill",
+        "--cr-haze-inset",
         "--cr-outline",
         "--cr-radius",
         "--cr-rim",
+        "--cr-shadow-float",
         "--cr-shadow-panel",
         "--cr-spacing-2xs",
         "--cr-surface"
@@ -390,15 +824,386 @@
           "shadowed": [],
           "diagnostics": [],
           "missing": []
+        },
+        ".cr-haze.inset": {
+          "selector": ".cr-haze.inset",
+          "fill": "transparent",
+          "blur": null,
+          "saturation": null,
+          "rim": "0",
+          "shadow": "none",
+          "radius": "var(--cr-radius)",
+          "padding": null,
+          "haze": {
+            "layer": "::before",
+            "inset": "var(--cr-haze-inset)",
+            "fill": "var(--cr-haze-fill)",
+            "feather": "var(--cr-haze-feather)",
+            "radius": "inherit"
+          },
+          "feather": "var(--cr-haze-feather)",
+          "extras": {
+            "border-color": "transparent",
+            "color": "var(--cr-text)",
+            "isolation": "isolate",
+            "position": "relative"
+          },
+          "layers": {
+            "::before": {
+              "background": "var(--cr-haze-fill)",
+              "border-radius": "inherit",
+              "box-shadow": "none",
+              "content": "''",
+              "filter": "blur(var(--cr-haze-feather))",
+              "inset": "var(--cr-haze-inset)",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "layers": {
+                "::before": {
+                  "background": "var(--cr-surface)",
+                  "filter": "none"
+                }
+              }
+            },
+            "reducedTransparency": {
+              "layers": {
+                "::before": {
+                  "background": "var(--cr-surface)",
+                  "filter": "none"
+                }
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Canvas",
+                "border": "1px solid CanvasText",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              },
+              "layers": {
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "noBackdropFilter": null
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": []
+        },
+        ".cr-haze.flush": {
+          "selector": ".cr-haze.flush",
+          "fill": "transparent",
+          "blur": null,
+          "saturation": null,
+          "rim": "0",
+          "shadow": "none",
+          "radius": "var(--cr-radius)",
+          "padding": null,
+          "haze": {
+            "layer": "::before",
+            "inset": "0",
+            "fill": "var(--cr-haze-fill)",
+            "feather": "var(--cr-haze-feather)",
+            "radius": "inherit"
+          },
+          "feather": "var(--cr-haze-feather)",
+          "extras": {
+            "border-color": "transparent",
+            "color": "var(--cr-text)",
+            "isolation": "isolate",
+            "position": "relative"
+          },
+          "layers": {
+            "::before": {
+              "background": "var(--cr-haze-fill)",
+              "border-radius": "inherit",
+              "box-shadow": "none",
+              "content": "''",
+              "filter": "blur(var(--cr-haze-feather))",
+              "inset": "0",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "layers": {
+                "::before": {
+                  "background": "var(--cr-surface)",
+                  "filter": "none"
+                }
+              }
+            },
+            "reducedTransparency": {
+              "layers": {
+                "::before": {
+                  "background": "var(--cr-surface)",
+                  "filter": "none"
+                }
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Canvas",
+                "border": "1px solid CanvasText",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              },
+              "layers": {
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "noBackdropFilter": null
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": []
+        },
+        ".cr-haze.flat": {
+          "selector": ".cr-haze.flat",
+          "fill": "var(--cr-haze-fill)",
+          "blur": null,
+          "saturation": null,
+          "rim": "0",
+          "shadow": "none",
+          "radius": "var(--cr-radius)",
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "border-color": "transparent",
+            "color": "var(--cr-text)",
+            "isolation": "isolate",
+            "position": "relative"
+          },
+          "layers": {
+            "::before": {
+              "background": "var(--cr-haze-fill)",
+              "border-radius": "inherit",
+              "box-shadow": "var(--cr-shadow-content)",
+              "content": "''",
+              "display": "none",
+              "filter": "blur(var(--cr-haze-feather))",
+              "inset": "0",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "background": "var(--cr-surface)"
+              },
+              "layers": {
+                "::before": {
+                  "background": "var(--cr-surface)",
+                  "filter": "none"
+                }
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "background": "var(--cr-surface)"
+              },
+              "layers": {
+                "::before": {
+                  "background": "var(--cr-surface)",
+                  "filter": "none"
+                }
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Canvas",
+                "border": "1px solid CanvasText",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              }
+            },
+            "noBackdropFilter": null
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": []
+        },
+        ".cr-haze.flat.sunken": {
+          "selector": ".cr-haze.flat.sunken",
+          "fill": "var(--cr-haze-fill)",
+          "blur": null,
+          "saturation": null,
+          "rim": "0",
+          "shadow": "none",
+          "radius": "var(--cr-radius)",
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "border-color": "transparent",
+            "color": "var(--cr-text)",
+            "isolation": "isolate",
+            "position": "relative"
+          },
+          "layers": {
+            "::before": {
+              "background": "var(--cr-haze-fill)",
+              "border-radius": "inherit",
+              "box-shadow": "var(--cr-shadow-content)",
+              "content": "''",
+              "display": "none",
+              "filter": "blur(var(--cr-haze-feather))",
+              "inset": "0",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "background": "var(--cr-surface-alt)"
+              },
+              "layers": {
+                "::before": {
+                  "background": "var(--cr-surface)",
+                  "filter": "none"
+                }
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "background": "var(--cr-surface-alt)"
+              },
+              "layers": {
+                "::before": {
+                  "background": "var(--cr-surface)",
+                  "filter": "none"
+                }
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Canvas",
+                "border": "1px solid CanvasText",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              }
+            },
+            "noBackdropFilter": null
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": []
+        },
+        ".cr-haze.raised": {
+          "selector": ".cr-haze.raised",
+          "fill": "transparent",
+          "blur": null,
+          "saturation": null,
+          "rim": "1px solid transparent",
+          "shadow": "none",
+          "radius": "var(--cr-radius)",
+          "padding": null,
+          "haze": {
+            "layer": "::before",
+            "inset": "0",
+            "fill": "var(--cr-haze-fill)",
+            "feather": "var(--cr-haze-feather)",
+            "radius": "inherit"
+          },
+          "feather": "var(--cr-haze-feather)",
+          "extras": {
+            "color": "var(--cr-text)",
+            "isolation": "isolate",
+            "position": "relative"
+          },
+          "layers": {
+            "::before": {
+              "background": "var(--cr-haze-fill)",
+              "border-radius": "inherit",
+              "box-shadow": "var(--cr-shadow-float)",
+              "content": "''",
+              "filter": "blur(var(--cr-haze-feather))",
+              "inset": "0",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "layers": {
+                "::before": {
+                  "background": "var(--cr-surface)",
+                  "filter": "none"
+                }
+              }
+            },
+            "reducedTransparency": {
+              "layers": {
+                "::before": {
+                  "background": "var(--cr-surface)",
+                  "filter": "none"
+                }
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Canvas",
+                "border": "1px solid CanvasText",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              },
+              "layers": {
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "noBackdropFilter": null
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [
+            "rim composed from the border shorthand (1px solid var(--cr-edge)) and border-color (transparent), which cascades after it"
+          ],
+          "missing": []
         }
       },
       "tokens": [
         "--cr-edge",
         "--cr-haze-feather",
         "--cr-haze-fill",
+        "--cr-haze-inset",
         "--cr-radius",
         "--cr-shadow-content",
+        "--cr-shadow-float",
         "--cr-surface",
+        "--cr-surface-alt",
         "--cr-text"
       ]
     },
@@ -611,6 +1416,161 @@
             }
           },
           "shadowed": [],
+          "diagnostics": [],
+          "missing": []
+        },
+        ".cr-resin.flat": {
+          "selector": ".cr-resin.flat",
+          "fill": "var(--cr-resin-fill)",
+          "blur": "var(--cr-resin-blur)",
+          "saturation": "var(--cr-resin-saturation)",
+          "rim": "1px solid var(--cr-rim)",
+          "shadow": "var(--cr-shadow-float)",
+          "radius": "999px",
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "isolation": "isolate",
+            "position": "relative"
+          },
+          "layers": {
+            "::after": {
+              "border-radius": "inherit",
+              "box-shadow": "inset 1px 1px 1px rgba(255,255,255,.72),inset -1px -1px 1px rgba(255,255,255,.28)",
+              "content": "''",
+              "display": "none",
+              "inset": "0",
+              "pointer-events": "none",
+              "position": "absolute"
+            },
+            "::before": {
+              "background": "linear-gradient(145deg,rgba(255,255,255,.23),transparent 32%,transparent 69%,rgba(255,255,255,.10))",
+              "border-radius": "inherit",
+              "content": "''",
+              "display": "none",
+              "inset": "0",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)",
+                "border-color": "var(--cr-outline)"
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Canvas",
+                "border": "1px solid CanvasText",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              }
+            },
+            "noBackdropFilter": {
+              "declarations": {
+                "background": "var(--cr-surface)",
+                "border-color": "var(--cr-outline)"
+              }
+            }
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": []
+        },
+        ".cr-resin.divider": {
+          "selector": ".cr-resin.divider",
+          "fill": "var(--cr-resin-fill)",
+          "blur": "var(--cr-resin-blur)",
+          "saturation": "var(--cr-resin-saturation)",
+          "rim": "0",
+          "shadow": "none",
+          "radius": "999px",
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "isolation": "isolate",
+            "position": "relative"
+          },
+          "layers": {
+            "::after": {
+              "border-radius": "inherit",
+              "box-shadow": "inset 1px 1px 1px rgba(255,255,255,.72),inset -1px -1px 1px rgba(255,255,255,.28)",
+              "content": "''",
+              "display": "none",
+              "inset": "0",
+              "pointer-events": "none",
+              "position": "absolute"
+            },
+            "::before": {
+              "background": "linear-gradient(145deg,rgba(255,255,255,.23),transparent 32%,transparent 69%,rgba(255,255,255,.10))",
+              "border-radius": "inherit",
+              "content": "''",
+              "display": "none",
+              "inset": "0",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-outline)",
+                "border-color": "var(--cr-outline)"
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-outline)"
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "CanvasText",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              }
+            },
+            "noBackdropFilter": {
+              "declarations": {
+                "background": "var(--cr-outline)",
+                "border-color": "var(--cr-outline)"
+              }
+            }
+          },
+          "conditions": {},
+          "shadowed": [
+            {
+              "branch": "forcedColors",
+              "layer": null,
+              "property": "border",
+              "value": "1px solid CanvasText",
+              "by": "0"
+            }
+          ],
           "diagnostics": [],
           "missing": []
         }
@@ -1285,6 +2245,109 @@
             "radius"
           ],
           "why": "A part: the document inside the field shell, which carries the Resin surround and the Haze well."
+        },
+        ".cr-field-shell.block": {
+          "selector": ".cr-field-shell.block",
+          "fill": "var(--cr-resin-fill)",
+          "blur": "var(--cr-resin-blur)",
+          "saturation": "var(--cr-resin-saturation)",
+          "rim": "1px solid var(--cr-rim)",
+          "shadow": "var(--cr-shadow-float)",
+          "radius": "20px",
+          "padding": "8px",
+          "haze": {
+            "layer": "::before",
+            "inset": "var(--cr-haze-inset)",
+            "fill": "var(--cr-haze-fill)",
+            "feather": "var(--cr-haze-feather)",
+            "radius": "inherit"
+          },
+          "feather": "var(--cr-haze-feather)",
+          "extras": {
+            "align-items": "center",
+            "color": "var(--cr-text)",
+            "display": "flex",
+            "filter": "none",
+            "isolation": "isolate",
+            "min-width": "0",
+            "position": "relative",
+            "vertical-align": "middle"
+          },
+          "layers": {
+            "::after": {
+              "background": "linear-gradient(115deg,transparent 20%,#ffffff30 43%,#ffffff0a 55%,transparent 72%),radial-gradient(ellipse at 12% 0%,var(--cr-control-light),transparent 75%),linear-gradient(135deg,var(--cr-control-color),transparent 60%,var(--cr-control-light))",
+              "background-position": "100% 0",
+              "background-size": "220% 100%,100% 100%,100% 100%",
+              "border-radius": "inherit",
+              "box-shadow": "inset 0 2px 1px var(--cr-rim),inset 0 -1px 1px var(--cr-rim)",
+              "content": "''",
+              "inset": "0",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-2"
+            },
+            "::before": {
+              "background": "var(--cr-haze-fill)",
+              "border-radius": "inherit",
+              "box-shadow": "none",
+              "content": "''",
+              "filter": "blur(var(--cr-haze-feather))",
+              "inset": "var(--cr-haze-inset)",
+              "pointer-events": "none",
+              "position": "absolute",
+              "z-index": "-1"
+            }
+          },
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              },
+              "layers": {
+                "::after": {
+                  "display": "none"
+                }
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              },
+              "layers": {
+                "::after": {
+                  "display": "none"
+                }
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Canvas",
+                "border": "1px solid ButtonText",
+                "box-shadow": "none",
+                "color": "CanvasText"
+              },
+              "layers": {
+                "::after": {
+                  "display": "none"
+                },
+                "::before": {
+                  "display": "none"
+                }
+              }
+            },
+            "noBackdropFilter": null
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": [],
+          "why": "The shell's display only: worn with `.cr-field-shell`, which carries the coat."
         }
       },
       "tokens": [
@@ -1866,7 +2929,13 @@
       },
       "layers": {},
       "fallbacks": {
-        "opaque": null,
+        "opaque": {
+          "declarations": {
+            "-webkit-backdrop-filter": "none",
+            "backdrop-filter": "none",
+            "background": "var(--cr-mirage-fallback-fill)"
+          }
+        },
         "reducedTransparency": {
           "declarations": {
             "-webkit-backdrop-filter": "none",
@@ -1908,7 +2977,13 @@
           },
           "layers": {},
           "fallbacks": {
-            "opaque": null,
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-mirage-fallback-fill)"
+              }
+            },
             "reducedTransparency": {
               "declarations": {
                 "-webkit-backdrop-filter": "none",
@@ -2002,6 +3077,11 @@
       "fallbacks": {
         "opaque": {
           "layers": {
+            "::backdrop": {
+              "-webkit-backdrop-filter": "none",
+              "backdrop-filter": "none",
+              "background": "var(--cr-mirage-fallback-fill)"
+            },
             "::before": {
               "background": "var(--cr-surface)",
               "filter": "none"
@@ -3016,7 +4096,7 @@
       "blur": null,
       "saturation": null,
       "rim": "1px solid transparent",
-      "shadow": null,
+      "shadow": "none",
       "radius": "999px",
       "padding": "10px 14px",
       "haze": null,
@@ -3052,8 +4132,7 @@
         "reducedTransparency": null,
         "forcedColors": {
           "declarations": {
-            "border-color": "transparent",
-            "box-shadow": "none"
+            "border-color": "transparent"
           }
         },
         "noBackdropFilter": null
@@ -3076,7 +4155,7 @@
       "blur": null,
       "saturation": null,
       "rim": "1px solid transparent",
-      "shadow": null,
+      "shadow": "none",
       "radius": "999px",
       "padding": "0 10px",
       "haze": null,
@@ -3108,8 +4187,7 @@
         "reducedTransparency": null,
         "forcedColors": {
           "declarations": {
-            "border-color": "transparent",
-            "box-shadow": "none"
+            "border-color": "transparent"
           }
         },
         "noBackdropFilter": null

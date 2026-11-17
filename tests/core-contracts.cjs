@@ -858,6 +858,92 @@ check('every motion id the catalogue claims is a recipe or a material preset', (
   }
 });
 
+/* The material variants (2.7.0, R-28). Each was a surface a platform library
+   wrote by hand; published here, each must resolve to the recipe the library
+   drew, and keep a route in every mode the base surface has one for. */
+check('the material variants resolve to their recipes in every mode', () => {
+  const recipes = JSON.parse(require('node:fs').readFileSync(require('node:path').join(__dirname, '../core/tokens/surface-recipes.json'), 'utf8')).surfaces;
+  const of = (id, sel) => {
+    const r = recipes.find((x) => x.id === id);
+    assert.ok(r.also && r.also[sel], `${id}: no recipe for ${sel}`);
+    return r.also[sel];
+  };
+  const base = (id) => recipes.find((x) => x.id === id);
+  const fb = (r, mode) => r.fallbacks[mode] || {};
+
+  /* Haze. */
+  for (const sel of ['.cr-haze.inset', '.cr-haze.flush']) {
+    const r = of('haze', sel);
+    assert.equal(r.rim, '0', `${sel}: the card has no border box`);
+    assert.equal(r.layers['::before']['box-shadow'], 'none', `${sel}: no shadow under the fill`);
+    assert.equal(fb(r, 'opaque').layers['::before'].background, 'var(--cr-surface)', `${sel}: opaque`);
+    assert.equal(fb(r, 'reducedTransparency').layers['::before'].background, 'var(--cr-surface)', `${sel}: reduced transparency`);
+    assert.equal(fb(r, 'forcedColors').declarations.border, '1px solid CanvasText', `${sel}: forced colours keep a boundary`);
+    assert.equal(fb(r, 'forcedColors').layers['::before'].display, 'none', `${sel}: forced colours drop the fill`);
+  }
+  assert.equal(of('haze', '.cr-haze.inset').haze.inset, 'var(--cr-haze-inset)', '.cr-haze.inset: inset');
+  assert.equal(of('haze', '.cr-haze.flush').haze.inset, '0', '.cr-haze.flush: inset');
+  for (const [sel, ground] of [['.cr-haze.flat', 'var(--cr-surface)'], ['.cr-haze.flat.sunken', 'var(--cr-surface-alt)']]) {
+    const r = of('haze', sel);
+    assert.equal(r.fill, 'var(--cr-haze-fill)', `${sel}: the fill is on the element`);
+    assert.equal(r.layers['::before'].display, 'none', `${sel}: no feathered layer`);
+    assert.equal(fb(r, 'opaque').declarations.background, ground, `${sel}: opaque`);
+    assert.equal(fb(r, 'reducedTransparency').declarations.background, ground, `${sel}: reduced transparency`);
+    assert.equal(fb(r, 'forcedColors').declarations.background, 'Canvas', `${sel}: forced colours`);
+  }
+  assert.equal(of('haze', '.cr-haze.raised').layers['::before']['box-shadow'], 'var(--cr-shadow-float)', '.cr-haze.raised: float shadow');
+
+  /* Frost. */
+  assert.equal(of('frost', '.cr-frost.pane').radius, 'var(--cr-radius)', '.cr-frost.pane: content radius');
+  assert.equal(of('frost', '.cr-frost.flat').layers['::before'].display, 'none', '.cr-frost.flat: no grain');
+  assert.notEqual(base('frost').layers['::before'].display, 'none', 'frost: the base panel lost its grain');
+  const docked = of('frost', '.cr-frost.docked');
+  assert.deepEqual([docked.rim, docked.radius, docked.shadow], ['0', '0', 'none'], '.cr-frost.docked: no rim, radius or shadow');
+  const sheet = of('frost', '.cr-frost.sheet');
+  assert.deepEqual([sheet.rim, sheet.radius, sheet.shadow], ['1px solid var(--cr-edge)', 'var(--cr-radius)', 'var(--cr-shadow-float)'], '.cr-frost.sheet');
+  const reading = of('frost', '.cr-frost.reading');
+  assert.equal(reading.layers['::after'].background, 'var(--cr-haze-fill)', '.cr-frost.reading: the reading fill is on ::after');
+  assert.equal(reading.layers['::after'].inset, 'var(--cr-frost-reading-inset)', '.cr-frost.reading: inset');
+  assert.match(stylesheetCode, /\.reading \{\s*--cr-frost-reading-inset: var\(--cr-haze-inset\);/, '.cr-frost.reading: the inset defaults to --cr-haze-inset');
+  assert.notEqual(reading.layers['::before'].display, 'none', '.cr-frost.reading: the grain stays on ::before');
+  assert.equal(fb(reading, 'opaque').layers['::after'].background, 'var(--cr-surface)', '.cr-frost.reading: opaque');
+  assert.equal(fb(reading, 'reducedTransparency').layers['::after'].background, 'var(--cr-surface)', '.cr-frost.reading: reduced transparency');
+  assert.equal(fb(reading, 'forcedColors').layers['::after'].display, 'none', '.cr-frost.reading: forced colours');
+
+  /* Resin. */
+  const flat = of('resin', '.cr-resin.flat');
+  for (const layer of ['::before', '::after']) {
+    assert.equal(flat.layers[layer].display, 'none', `.cr-resin.flat: no sheen on ${layer}`);
+    assert.notEqual(base('resin').layers[layer].display, 'none', `resin: the base plane lost its sheen on ${layer}`);
+  }
+  const divider = of('resin', '.cr-resin.divider');
+  assert.deepEqual([divider.rim, divider.shadow], ['0', 'none'], '.cr-resin.divider: no rim or shadow');
+  assert.equal(divider.fill, 'var(--cr-resin-fill)', '.cr-resin.divider: fill');
+  for (const mode of ['opaque', 'reducedTransparency', 'noBackdropFilter']) {
+    assert.equal(fb(divider, mode).declarations.background, 'var(--cr-outline)', `.cr-resin.divider: ${mode} keeps the line visible`);
+  }
+  assert.equal(fb(divider, 'forcedColors').declarations.background, 'CanvasText', '.cr-resin.divider: forced colours');
+  assert.equal(fb(base('resin'), 'forcedColors').declarations.background, 'Canvas', 'resin: the base forced-colours route moved');
+
+  /* Mirage and the dialog backdrop give way in opaque mode as in reduced transparency. */
+  assert.equal(fb(base('mirage'), 'opaque').declarations.background, 'var(--cr-mirage-fallback-fill)', 'mirage: opaque');
+  assert.equal(fb(base('mirage'), 'opaque').declarations['backdrop-filter'], 'none', 'mirage: opaque drops the backdrop');
+  assert.equal(fb(base('dialog'), 'opaque').layers['::backdrop'].background, 'var(--cr-mirage-fallback-fill)', 'dialog: opaque backdrop');
+
+  /* The field shell as a block. */
+  assert.equal(of('field', '.cr-field-shell.block').extras.display, 'flex', '.cr-field-shell.block: display');
+
+  /* Authored in the component layer. The divider's forced-colours rule is the
+     one exception, and must be: the base rule it overrides is important and
+     sits in the reset layer. */
+  const reset = stylesheetCode.slice(0, stylesheetCode.indexOf('@layer crystal.component {'));
+  for (const v of ['.inset', '.flush', '.flat', '.sunken', '.raised', '.pane', '.docked', '.sheet', '.reading', '.block']) {
+    assert.ok(!reset.includes(v), `${v} has a rule in the reset layer`);
+  }
+  assert.match(reset, /@media\(forced-colors:active\)\{:is\(\.cr-resin,\.cr-glass\)\.divider\{background:CanvasText!important\}\}/, 'the divider has no forced-colours rule beside the base one');
+});
+
+
 /* A rule authored in `crystal.reset` that the component layer also reaches may
    never render (D-20 and D-21). The recipes added for the catalogue live in the
    component layer only. */
@@ -889,6 +975,9 @@ check('a bare control takes off every layer of the coat and keeps the target', (
   assert.match(bare, /backdrop-filter:\s*none/);
   assert.match(bare, /min-inline-size:\s*44px/);
   assert.match(block('.cr-bare:not(:focus-visible)'), /box-shadow:\s*none/);
+  /* The coat's opaque route is (0,2,1) and outranks the (0,2,0) recipes that
+     take the coat off, so it must exclude them, at no cost in specificity. */
+  assert.match(stylesheetCode, /\[data-effects=opaque\] :is\(button,a\.cr-button,\.cr-control,\.cr-field-shell,\.cr-resin-haze,\.cr-status\):where\(:not\(\.cr-bare,\.cr-nav-item,\.cr-drag-handle\)\) \{\s*background: var\(--cr-surface\)/, 'the coat\'s opaque route reaches the bare control, the navigation entry or the drag handle');
   const pseudo = stylesheetCode.slice(stylesheetCode.indexOf('.cr-bare::before'));
   assert.match(pseudo.slice(0, pseudo.indexOf('}')), /content:\s*none/);
 });
