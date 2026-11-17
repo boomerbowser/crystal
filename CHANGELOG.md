@@ -2,6 +2,31 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
+## [2.10.0] - 2026-11-17
+
+Focus rings only when they are needed (ruled 17 November 2026). Accessibility
+is balanced against the people who do not need a given signal: a ring is for
+someone moving with the keyboard, and after a click it was noise, around every
+field clicked into and every list a click opened.
+
+### Added
+
+- **`core/modality.js`** (`@crystal-ui/core/core/modality`, with types): records
+  the input modality on the document element as `data-crystal-modality`,
+  `pointer` after a pointer is pressed and `keyboard` after Tab, F6, F10 or a
+  navigation key outside a text field. Typing, a caret moved with an arrow and
+  a modified shortcut change nothing. A classic script starts it by itself; a
+  module calls `watch(document)`.
+
+### Changed
+
+- **Every focus ring waits for keyboard modality.** The ten rules that draw one
+  (the reset ring, the component-layer ring, the field shell's `:focus-within`
+  ring, the dock's radio label) stand behind
+  `:root:not([data-crystal-modality=pointer])`, inside `:where()`, so no
+  specificity changes. A page that does not load the script draws every ring
+  as before. A contract check fails on a ring rule written without the gate.
+
 ## [2.9.0] - 2026-11-17
 
 ### Added

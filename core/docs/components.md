@@ -252,6 +252,14 @@ focused state, or it reduces the recipe to a bare outline:
 .menu-item:not(:focus-visible){ box-shadow:none }
 ```
 
+### When the ring is drawn
+
+A focus ring is for someone moving through the interface with the keyboard. Drawn after a click it is noise around the thing the person is already looking at, and on a field or a palette it stays for as long as they type. Browsers decide `:focus-visible` element by element and count a text field, and anything focused by script after a click (the list a select opens, a palette's field), as focus-visible whatever put focus there. So Crystal decides for itself, as of 2.10.0.
+
+`core/modality.js` records how the person is interacting, on the document element, as `data-crystal-modality`: `pointer` after a pointer is pressed, `keyboard` after Tab, F6, F10, or a navigation key (an arrow, Home, End, Page Up or Down, Enter, Space, Escape) outside a text field. Typing, an arrow that moves a caret, and a shortcut held with a modifier change nothing, so a field clicked into does not grow a ring at the first letter. Every rule that draws a ring stands behind `:root:not([data-crystal-modality=pointer])`. Load the script as a classic `<script>` and it starts by itself; as a module, call `watch(document)` once. A page without it draws every ring, which is the accessible default; a page with it meets the same requirement, because the ring is always drawn for keyboard focus.
+
+Platform libraries follow the same rule: Crystal React's `CrystalProvider` watches the document, and its own fields' rings stand behind the same attribute.
+
 ## Selection
 
 **A check mark means validated or informational. It never means "selected".** This is

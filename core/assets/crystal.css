@@ -12,7 +12,7 @@
 /* Crystal 1.0: framework-independent primitives. Theme variables are supplied by
    crystal-theme.css or by a configuration exported from the playground. */
 :root{--cr-font:Manrope,system-ui,sans-serif;--cr-radius:28px;--cr-space:20px;--cr-reading:16px;--cr-leading:1.6;color-scheme:light}
-*{box-sizing:border-box}body{margin:0;color:var(--cr-text);background:var(--cr-canvas);font-family:var(--cr-font);font-size:16px;line-height:var(--cr-leading)}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}a{color:var(--cr-primary);text-underline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:var(--cr-focus-core-width,2px) solid var(--cr-focus-core,var(--cr-primary));outline-offset:var(--cr-focus-core-offset,3px);box-shadow:var(--cr-focus-ring,0 0 6px 1px var(--cr-focus-feather-1,color-mix(in srgb,var(--cr-primary) 46%,transparent)),0 0 16px 3px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 0 30px 6px var(--cr-focus-feather-3,color-mix(in srgb,var(--cr-primary) 17%,transparent)),0 0 54px 11px var(--cr-focus-feather-4,color-mix(in srgb,var(--cr-primary) 8%,transparent)),0 8px 18px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 22px 40px var(--cr-focus-shadow,color-mix(in srgb,var(--cr-decorative) 27%,transparent)))}button:disabled{cursor:not-allowed;opacity:.55}button{transition:background var(--cr-state),box-shadow var(--cr-state),transform var(--cr-press)}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{line-height:1.2;letter-spacing:-.04em}button:has(svg){display:inline-flex;align-items:center;justify-content:center;gap:9px}
+*{box-sizing:border-box}body{margin:0;color:var(--cr-text);background:var(--cr-canvas);font-family:var(--cr-font);font-size:16px;line-height:var(--cr-leading)}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}a{color:var(--cr-primary);text-underline-offset:4px}:where(:root:not([data-crystal-modality=pointer])) button:focus-visible,:where(:root:not([data-crystal-modality=pointer])) a:focus-visible,:where(:root:not([data-crystal-modality=pointer])) input:focus-visible,:where(:root:not([data-crystal-modality=pointer])) select:focus-visible,:where(:root:not([data-crystal-modality=pointer])) textarea:focus-visible,:where(:root:not([data-crystal-modality=pointer])) summary:focus-visible,:where(:root:not([data-crystal-modality=pointer])) [tabindex]:focus-visible{outline:var(--cr-focus-core-width,2px) solid var(--cr-focus-core,var(--cr-primary));outline-offset:var(--cr-focus-core-offset,3px);box-shadow:var(--cr-focus-ring,0 0 6px 1px var(--cr-focus-feather-1,color-mix(in srgb,var(--cr-primary) 46%,transparent)),0 0 16px 3px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 0 30px 6px var(--cr-focus-feather-3,color-mix(in srgb,var(--cr-primary) 17%,transparent)),0 0 54px 11px var(--cr-focus-feather-4,color-mix(in srgb,var(--cr-primary) 8%,transparent)),0 8px 18px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 22px 40px var(--cr-focus-shadow,color-mix(in srgb,var(--cr-decorative) 27%,transparent)))}button:disabled{cursor:not-allowed;opacity:.55}button{transition:background var(--cr-state),box-shadow var(--cr-state),transform var(--cr-press)}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{line-height:1.2;letter-spacing:-.04em}button:has(svg){display:inline-flex;align-items:center;justify-content:center;gap:9px}
 /* Plastic has a glow of its own, the primary lifted by the scheme's tint. It is
    a material property and stays. The drift of that glow across the foundation
    is ambient motion, which is deferred with the rest of the tier, so the
@@ -390,7 +390,7 @@ dialog.cr-dialog{position:fixed}
     min-height: 44px;
     max-width: 100%;
 }
-.cr-field-shell:focus-within {
+:where(:root:not([data-crystal-modality=pointer])) .cr-field-shell:focus-within {
     outline: 2px solid var(--cr-focus-core);
     outline-offset: 3px;
 }
@@ -460,7 +460,7 @@ span.cr-field-shell:has([aria-invalid=true])::after {
 [data-effects=opaque] span.cr-field-shell::after {
     display: none;
 }
-span.cr-field-shell:focus-within {
+:where(:root:not([data-crystal-modality=pointer])) span.cr-field-shell:focus-within {
     outline: 2px solid var(--cr-focus-core);
     outline-offset: 3px;
     box-shadow: inset 0 2px 1px var(--cr-rim),var(--cr-focus-ring);
@@ -641,7 +641,7 @@ span.cr-field-shell::after {
 .cr-indicator::before {
     display: none
 }
-span.cr-field-shell:focus-within {
+:where(:root:not([data-crystal-modality=pointer])) span.cr-field-shell:focus-within {
     outline: 2px solid Highlight;
     box-shadow: none
 }
@@ -971,8 +971,8 @@ span.cr-status>span {
 .cr-dialog {
     border-color:var(--cr-rim)
 }
-:is(button,a,input,select,textarea,summary,[tabindex]):focus-visible,
-.cr-dock button:focus-visible {
+:where(:root:not([data-crystal-modality=pointer])) :is(button,a,input,select,textarea,summary,[tabindex]):focus-visible,
+:where(:root:not([data-crystal-modality=pointer])) .cr-dock button:focus-visible {
     outline:2px solid var(--cr-focus-core);
     outline-offset:3px;
     box-shadow:inset 0 2px 1px var(--cr-rim),var(--cr-focus-ring)
@@ -1131,8 +1131,8 @@ span.cr-status>span {
     background:Canvas;
     color:CanvasText
 }
-:is(button,a,input,select,textarea,summary,[tabindex]):focus-visible,
-.cr-dock button:focus-visible {
+:where(:root:not([data-crystal-modality=pointer])) :is(button,a,input,select,textarea,summary,[tabindex]):focus-visible,
+:where(:root:not([data-crystal-modality=pointer])) .cr-dock button:focus-visible {
     outline:2px solid Highlight;
     box-shadow:none
 }
@@ -1569,7 +1569,7 @@ input[type=checkbox][role=switch] {
     opacity: 0;
     cursor: pointer;
 }
-.cr-dock :where(label:has(input[type=radio]:focus-visible)) {
+:where(:root:not([data-crystal-modality=pointer])) .cr-dock :where(label:has(input[type=radio]:focus-visible)) {
     outline: 2px solid var(--cr-focus-core);
     outline-offset: 3px;
     box-shadow: inset 0 2px 1px var(--cr-rim), var(--cr-focus-ring);
@@ -1589,7 +1589,7 @@ input[type=checkbox][role=switch] {
     outline-offset: -3px;
     box-shadow: none;
 }
-.cr-dock :where(label:has(input[type=radio]:focus-visible)) {
+:where(:root:not([data-crystal-modality=pointer])) .cr-dock :where(label:has(input[type=radio]:focus-visible)) {
     outline-color: Highlight;
     box-shadow: none;
 }

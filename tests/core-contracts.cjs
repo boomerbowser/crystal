@@ -975,6 +975,48 @@ check('the library registry covers the parity platforms', () => {
 });
 
 
+function splitSelectors(text) {
+  const out = []; let depth = 0, start = 0;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === '(') depth++; else if (ch === ')') depth--;
+    else if (ch === ',' && depth === 0) { out.push(text.slice(start, i)); start = i + 1; }
+  }
+  out.push(text.slice(start));
+  return out;
+}
+
+/* Focus rings only when they are needed (ruled 17 November 2026). A ring is for
+   someone moving through the page with the keyboard; drawn after a click, on a
+   field or on a list a click opened, it is noise. `core/modality.js` records
+   the modality on the document element, and every rule that draws a ring
+   stands behind `:root:not([data-crystal-modality=pointer])`, so with no script
+   every ring is still drawn. */
+check('every focus ring waits for keyboard modality, and the modality is read from the right keys', () => {
+  const GATE = ':where(:root:not([data-crystal-modality=pointer]))';
+  const rules = [...stylesheetCode.matchAll(/([^{}]+)\{([^{}]*)\}/g)];
+  const drawing = rules.filter(([, selector, body]) => /:focus-(visible|within)/.test(selector)
+    && /(outline:[^;]*(var\(--cr-focus-core|Highlight)|var\(--cr-focus-ring)/.test(body)
+    && !/:not\(:focus-visible\)/.test(selector));
+  assert.ok(drawing.length >= 6, `found only ${drawing.length} focus-ring rules; the check is not reading the stylesheet`);
+  for (const [, selector] of drawing) {
+    for (const part of splitSelectors(selector)) {
+      if (!/:focus-(visible|within)/.test(part)) continue;
+      assert.ok(part.trim().startsWith(GATE), `a focus ring drawn whatever the modality: ${part.trim().slice(0, 120)}`);
+    }
+  }
+  const modality = require('../core/assets/core/modality.js');
+  const key = (k, extra = {}) => modality.modalityForKey({ key: k, metaKey: false, ctrlKey: false, altKey: false, target: null, ...extra });
+  const field = { nodeType: 1, tagName: 'INPUT', isContentEditable: false, getAttribute: () => 'text' };
+  assert.equal(key('Tab'), 'keyboard', 'Tab moves focus');
+  assert.equal(key('Tab', { target: field }), 'keyboard', 'Tab moves focus out of a field too');
+  assert.equal(key('ArrowDown'), 'keyboard', 'an arrow navigates a list');
+  assert.equal(key('ArrowDown', { target: field }), null, 'an arrow in a field moves the caret');
+  assert.equal(key('a', { target: field }), null, 'typing is not navigating');
+  assert.equal(key('k', { metaKey: true }), null, 'a shortcut is not navigating');
+  assert.equal(key('F10', { altKey: true }), 'keyboard', 'Alt+F10 moves to a toolbar');
+});
+
 /* A rule authored in `crystal.reset` that the component layer also reaches may
    never render (D-20 and D-21). The recipes added for the catalogue live in the
    component layer only. */

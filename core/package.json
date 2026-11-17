@@ -1,6 +1,6 @@
 {
   "name": "@crystal-ui/core",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "description": "Crystal, Meridian's design system: design tokens, material stylesheets, a token resolver, a headless state core, motion recipes, icons and the specification.",
   "keywords": [
     "design-system",
@@ -40,6 +40,10 @@
       "default": "./assets/core/preferences.js"
     },
     "./core/spring": "./assets/core/spring.js",
+    "./core/modality": {
+      "types": "./assets/core/modality.d.ts",
+      "default": "./assets/core/modality.js"
+    },
     "./motion-recipes": "./tokens/motion-recipes.json",
     "./engines": "./engines.js",
     "./shaders/*": "./assets/shaders/*",
