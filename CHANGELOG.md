@@ -2,6 +2,24 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
+## [2.9.0] - 2026-11-17
+
+### Added
+
+- **The library registry**, `tokens/libraries.json`, exported as
+  `@crystal-ui/core/libraries`: one entry per platform in
+  `libraries/parity.json`, planned or built, with its package, registry,
+  repository and documentation. Crystal React (`@crystal-ui/react`, alpha) is
+  built; React Native, SwiftUI and Jetpack Compose are planned. A contract
+  check holds the registry to the parity platforms. The adoption chapter
+  renders it as "Component libraries", and the specification bundle carries
+  it. A library's version is not recorded, because it is the package's own:
+  the sites that show it resolve it when they build.
+- **Release notification.** The publish workflow tells crystal-preview and
+  Crystal React that a version is on the registry, when a
+  `CRYSTAL_FOLLOWERS_TOKEN` secret is set; each follows Crystal on its own
+  hourly check either way.
+
 ## [2.8.1] - 2026-11-17
 
 Catalogue corrections from Crystal React's surface measurement (R-A2). Under

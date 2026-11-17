@@ -151,7 +151,7 @@ jobs:
              core/tokens/catalogue.json core/tokens/motion-recipes.json "$out/tokens/"
           cp core/exports/crystal-tokens.swift core/exports/crystal-tokens.kt \
              core/exports/crystal-tokens.ts "$out/exports/"
-          cp libraries/parity.json "$out/libraries/"
+          cp libraries/parity.json core/tokens/libraries.json "$out/libraries/"
           cp libraries/CONTRACT.md "$out/"
           zip -rq "$out.zip" "$out"
           echo "BUNDLE=$out.zip" >> "$GITHUB_ENV"
@@ -160,3 +160,22 @@ jobs:
         with:
           files: ${{ env.BUNDLE }}
           generate_release_notes: true
+
+      # Tell the sites that follow Crystal (crystal-preview and Crystal React's
+      # documentation) that a version is on the registry, so each adopts it in
+      # minutes rather than at its next hourly check. GITHUB_TOKEN cannot start a
+      # workflow in another repository, so this needs a token with Actions write
+      # on both, stored as CRYSTAL_FOLLOWERS_TOKEN. Without it the step is
+      # skipped and the hourly check still adopts the release.
+      - name: Notify the sites that follow Crystal
+        env:
+          GH_TOKEN: ${{ secrets.CRYSTAL_FOLLOWERS_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "CRYSTAL_FOLLOWERS_TOKEN is not set; the followers will adopt ${GITHUB_REF_NAME} on their hourly check."
+            exit 0
+          fi
+          for repo in boomerbowser/crystal-preview boomerbowser/crystal-react; do
+            gh api "repos/$repo/dispatches" -f event_type=crystal-published -f "client_payload[version]=${GITHUB_REF_NAME#v}" \
+              || echo "::warning::Could not notify $repo; its hourly check will adopt the release."
+          done

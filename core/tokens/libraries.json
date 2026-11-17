@@ -1,0 +1,49 @@
+{
+  "$description": "Crystal's component libraries: one per platform in libraries/parity.json, planned or built. The canonical record of which exist, their package and where their documentation is. A library's version is not recorded here, because it is the package's own on its registry: a site that shows it resolves it from the registry when it builds. tests/core-contracts.cjs holds the platforms to parity.json's.",
+  "libraries": [
+    {
+      "platform": "web",
+      "name": "Crystal React",
+      "framework": "React",
+      "status": "built",
+      "stage": "alpha",
+      "package": "@crystal-ui/react",
+      "registry": "https://www.npmjs.com/package/@crystal-ui/react",
+      "repository": "https://github.com/boomerbowser/crystal-react",
+      "documentation": null
+    },
+    {
+      "platform": "react-native",
+      "name": null,
+      "framework": "React Native",
+      "status": "planned",
+      "stage": null,
+      "package": null,
+      "registry": null,
+      "repository": null,
+      "documentation": null
+    },
+    {
+      "platform": "swiftui",
+      "name": null,
+      "framework": "SwiftUI",
+      "status": "planned",
+      "stage": null,
+      "package": null,
+      "registry": null,
+      "repository": null,
+      "documentation": null
+    },
+    {
+      "platform": "compose",
+      "name": null,
+      "framework": "Jetpack Compose",
+      "status": "planned",
+      "stage": null,
+      "package": null,
+      "registry": null,
+      "repository": null,
+      "documentation": null
+    }
+  ]
+}

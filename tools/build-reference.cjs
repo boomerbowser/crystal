@@ -374,6 +374,19 @@ function iconFigures() {
   return lines.join('\n');
 }
 
+function librariesTable() {
+  const { libraries } = JSON.parse(fs.readFileSync(path.join(ROOT, 'core/tokens/libraries.json'), 'utf8'));
+  const link = (label, href) => (href ? `[${label}](${href})` : '');
+  const lines = ['| Platform | Library | Status | Package | Documentation |', '|---|---|---|---|---|'];
+  for (const l of libraries) {
+    const status = l.status === 'built' ? `Built${l.stage ? ` (${l.stage})` : ''}` : 'Planned';
+    const pkg = l.package ? link(`\`${l.package}\``, l.registry) : 'Not yet published';
+    const docs = l.documentation ? link('Documentation', l.documentation) : (l.repository ? `${link('Repository', l.repository)}; no website yet` : 'Not yet');
+    lines.push(`| ${l.framework} | ${l.name ?? 'Not yet named'} | ${status} | ${pkg} | ${docs} |`);
+  }
+  return lines.join('\n');
+}
+
 /* ---------- writing ---------- */
 
 function replaceSection(file, name, body) {
@@ -405,5 +418,6 @@ const changed = [
   replaceSection('core/docs/components.md', 'focus-recipe', focusRecipeTable()),
   replaceSection('core/docs/accessibility.md', 'contrast', contrastFigures()),
   replaceSection('core/docs/icons.md', 'icon-counts', iconFigures()),
+  replaceSection('core/docs/adoption.md', 'libraries', librariesTable()),
 ];
 console.log(`Generated core/docs/tokens.md and ${changed.length} reference sections.`);

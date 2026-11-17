@@ -962,6 +962,19 @@ check('the material variants resolve to their recipes in every mode', () => {
 });
 
 
+/* The library registry names every platform the parity record does, once, and
+   a built library names its package. */
+check('the library registry covers the parity platforms', () => {
+  const { libraries } = require('../core/tokens/libraries.json');
+  const { platforms } = require('../libraries/parity.json');
+  assert.deepEqual(libraries.map((l) => l.platform), platforms, 'libraries.json platforms differ from parity.json');
+  for (const l of libraries) {
+    assert.ok(['built', 'planned'].includes(l.status), `${l.platform}: status "${l.status}"`);
+    if (l.status === 'built') assert.ok(l.package && l.registry && l.repository, `${l.platform}: a built library names its package, registry and repository`);
+  }
+});
+
+
 /* A rule authored in `crystal.reset` that the component layer also reaches may
    never render (D-20 and D-21). The recipes added for the catalogue live in the
    component layer only. */
