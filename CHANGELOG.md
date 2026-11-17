@@ -2,6 +2,35 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
+## [2.8.0] - 2026-11-17
+
+The choice box as a class (R-28, phase 2). Crystal React now wears Crystal's
+material everywhere: its audit counts no hand-written backdrop filter and no
+material mixin, and a test holds both at zero. The one surface it could not wear
+was the checkbox, the radio and the switch, which Crystal paints only on the
+native input, while React Aria keeps that input hidden and draws the box on its
+own element.
+
+### Added
+
+- **`.cr-choice`**: the native checkbox's box on any element, with the control
+  light, the rim, the Resin blur and the three-part shadow at the published
+  size and radius. `.radio` makes it a circle, and a switch's track is the
+  same box at the track's size with the pill radius. The mark inside it, and
+  the colour a selected box takes, are the component's.
+- **`.cr-choice.outline`**, published as drift by the R-28 ruling: the
+  `--cr-outline` boundary in place of the rim, the plain Resin fill with its
+  saturation, and a single inset rim, which Crystal React's checkbox and radio
+  have drawn since 2.1.
+
+### Fixed
+
+- **The native checkbox, radio and switch in opaque mode and under reduced
+  transparency.** They had no route for either, and kept their Resin blur where
+  every other Resin surface became the surface. They now take
+  `--cr-surface` with no backdrop filter, as `.cr-choice` does. A switch that
+  is on keeps its primary-soft track.
+
 ## [2.7.0] - 2026-11-17
 
 The material variants (R-28, ruled 16 November 2026). Every surface the React

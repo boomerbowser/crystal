@@ -2057,6 +2057,86 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     display: flex;
 }
 
+/* ---------------------------------------------------------------------------
+   The choice box as a class, 2.8.0 (R-28, phase 2).
+
+   Crystal paints the checkbox, the radio and the switch on the native input
+   (`input:is([type=checkbox],[type=radio])` above). A library that keeps the
+   input visually hidden and draws the box on its own element, as React Aria
+   does, could not wear that recipe and restated it by hand. `.cr-choice` is
+   the same box on any element: the Resin box with the control light, the rim,
+   the blur and the three-part shadow, at the published size and radius. The
+   mark inside it, and the colour a selected box takes, stay the component's,
+   because a native input draws its mark on `::after` and a component draws its
+   own. `.radio` makes it a circle. A switch's track is the same box at the
+   track's size and the pill radius.
+
+   `.outline` is the box a platform library drew instead (published as drift,
+   by the ruling given with phase 1): the `--cr-outline` boundary in place of
+   the rim, the plain Resin fill and blur, and a single inset rim, so that a
+   selected box, which the component fills with the primary, reads as a solid
+   mark against an outlined one.
+
+   Neither the native box nor the class had an opaque or reduced-transparency
+   route before 2.8.0, so a Resin box kept its blur where every other Resin
+   surface gave way. Both now become the surface with no backdrop. The routes
+   name `.cr-choice.outline` inside `:is()` so they outrank the variant. A
+   native switch that is on keeps its primary-soft track, because
+   `:checked` outranks them; a selected state a component draws keeps its
+   colour, because a component's own rule is unlayered.
+   --------------------------------------------------------------------------- */
+.cr-choice {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    box-sizing: border-box;
+    width: var(--cr-choice-box-size, 26px);
+    height: var(--cr-choice-box-size, 26px);
+    border: 1px solid var(--cr-rim);
+    border-radius: var(--cr-choice-box-radius, 9px);
+    background: linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);
+    -webkit-backdrop-filter: blur(var(--cr-resin-blur));
+    backdrop-filter: blur(var(--cr-resin-blur));
+    box-shadow: inset 0 2px 2px var(--cr-rim),0 2px 3px var(--cr-control-edge),0 5px 10px var(--cr-shadow-contact);
+}
+.cr-choice.radio {
+    border-radius: 50%;
+}
+.cr-choice.outline {
+    border-color: var(--cr-outline);
+    background: var(--cr-resin-fill);
+    -webkit-backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
+    backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
+    box-shadow: inset 0 2px 1px var(--cr-rim);
+}
+[data-effects=opaque] :is(.cr-choice.outline, .cr-choice, input:is([type=checkbox],[type=radio])) {
+    background: var(--cr-surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+@media (prefers-reduced-transparency:reduce) {
+:is(.cr-choice.outline, .cr-choice, input:is([type=checkbox],[type=radio])) {
+    background: var(--cr-surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+:is(.cr-choice.outline, .cr-choice) {
+    background: var(--cr-surface);
+}
+}
+@media (forced-colors:active) {
+:is(.cr-choice.outline, .cr-choice) {
+    background: Field;
+    border-color: FieldText;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+}
+
 /* A count (D-27).
  *
  * `.cr-resin-haze` is sized for a tag: its Haze pad is inset by

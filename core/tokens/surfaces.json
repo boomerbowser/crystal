@@ -187,9 +187,12 @@
       "name": "Selection control",
       "materials": ["Resin"],
       "class": "input:is([type=checkbox],[type=radio])",
-      "also": ["input[type=checkbox][role=switch]", "input[type=range]"],
-      "use": "Native checkbox, radio, switch and range, styled by element: a Resin box, circle or track with a contained mark, and the marked glass thumb. Semantics stay native.",
+      "also": ["input[type=checkbox][role=switch]", "input[type=range]", ".cr-choice", ".cr-choice.radio", ".cr-choice.outline"],
+      "use": "Native checkbox, radio, switch and range, styled by element: a Resin box, circle or track with a contained mark, and the marked glass thumb. Semantics stay native. `.cr-choice` is the same box on any element, for a library that keeps the input visually hidden and draws the box itself (2.8.0); `.radio` is the circle, and a switch's track is the box at the track's size with the pill radius. The mark and the selected colour are the component's. `.cr-choice.outline` is the outlined box: the `--cr-outline` boundary, the plain Resin fill and a single inset rim (2.8.0). In opaque mode and under reduced transparency the box, native or not, becomes the surface with no backdrop (2.8.0).",
       "partial": {
+        ".cr-choice": "The box alone: the mark inside it and the colour of a selected box are drawn by the component that wears it.",
+        ".cr-choice.radio": "The box alone, round: the dot inside it is the component's.",
+        ".cr-choice.outline": "The box alone: the mark inside it and the colour of a selected box are drawn by the component that wears it.",
         "input[type=range]": "A track and a thumb, painted on the slider's pseudo-elements (`::-webkit-slider-runnable-track`, `::-webkit-slider-thumb` and their `::-moz-range-` forms), which this record does not read."
       }
     },

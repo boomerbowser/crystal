@@ -4282,8 +4282,20 @@
             }
           },
           "fallbacks": {
-            "opaque": null,
-            "reducedTransparency": null,
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
             "forcedColors": {
               "declarations": {
                 "-webkit-backdrop-filter": "none",
@@ -4354,8 +4366,20 @@
             }
           },
           "fallbacks": {
-            "opaque": null,
-            "reducedTransparency": null,
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
             "forcedColors": {
               "declarations": {
                 "-webkit-backdrop-filter": "none",
@@ -4435,8 +4459,20 @@
             }
           },
           "fallbacks": {
-            "opaque": null,
-            "reducedTransparency": null,
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
             "forcedColors": {
               "declarations": {
                 "-webkit-backdrop-filter": "none",
@@ -4566,6 +4602,179 @@
             "radius"
           ],
           "why": "A track and a thumb, painted on the slider's pseudo-elements (`::-webkit-slider-runnable-track`, `::-webkit-slider-thumb` and their `::-moz-range-` forms), which this record does not read."
+        },
+        ".cr-choice": {
+          "selector": ".cr-choice",
+          "fill": "linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill)",
+          "blur": "var(--cr-resin-blur)",
+          "saturation": null,
+          "rim": "1px solid var(--cr-rim)",
+          "shadow": "inset 0 2px 2px var(--cr-rim),0 2px 3px var(--cr-control-edge),0 5px 10px var(--cr-shadow-contact)",
+          "radius": "var(--cr-choice-box-radius, 9px)",
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "box-sizing": "border-box",
+            "display": "inline-grid",
+            "flex": "none",
+            "height": "var(--cr-choice-box-size, 26px)",
+            "place-items": "center",
+            "position": "relative",
+            "width": "var(--cr-choice-box-size, 26px)"
+          },
+          "layers": {},
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Field",
+                "border-color": "FieldText",
+                "box-shadow": "none"
+              }
+            },
+            "noBackdropFilter": {
+              "declarations": {
+                "background": "var(--cr-surface)"
+              }
+            }
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": [],
+          "why": "The box alone: the mark inside it and the colour of a selected box are drawn by the component that wears it."
+        },
+        ".cr-choice.radio": {
+          "selector": ".cr-choice.radio",
+          "fill": "linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill)",
+          "blur": "var(--cr-resin-blur)",
+          "saturation": null,
+          "rim": "1px solid var(--cr-rim)",
+          "shadow": "inset 0 2px 2px var(--cr-rim),0 2px 3px var(--cr-control-edge),0 5px 10px var(--cr-shadow-contact)",
+          "radius": "50%",
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "box-sizing": "border-box",
+            "display": "inline-grid",
+            "flex": "none",
+            "height": "var(--cr-choice-box-size, 26px)",
+            "place-items": "center",
+            "position": "relative",
+            "width": "var(--cr-choice-box-size, 26px)"
+          },
+          "layers": {},
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Field",
+                "border-color": "FieldText",
+                "box-shadow": "none"
+              }
+            },
+            "noBackdropFilter": {
+              "declarations": {
+                "background": "var(--cr-surface)"
+              }
+            }
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [],
+          "missing": [],
+          "why": "The box alone, round: the dot inside it is the component's."
+        },
+        ".cr-choice.outline": {
+          "selector": ".cr-choice.outline",
+          "fill": "var(--cr-resin-fill)",
+          "blur": "var(--cr-resin-blur)",
+          "saturation": "var(--cr-resin-saturation)",
+          "rim": "1px solid var(--cr-outline)",
+          "shadow": "inset 0 2px 1px var(--cr-rim)",
+          "radius": "var(--cr-choice-box-radius, 9px)",
+          "padding": null,
+          "haze": null,
+          "feather": null,
+          "extras": {
+            "box-sizing": "border-box",
+            "display": "inline-grid",
+            "flex": "none",
+            "height": "var(--cr-choice-box-size, 26px)",
+            "place-items": "center",
+            "position": "relative",
+            "width": "var(--cr-choice-box-size, 26px)"
+          },
+          "layers": {},
+          "fallbacks": {
+            "opaque": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
+            "reducedTransparency": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "var(--cr-surface)"
+              }
+            },
+            "forcedColors": {
+              "declarations": {
+                "-webkit-backdrop-filter": "none",
+                "backdrop-filter": "none",
+                "background": "Field",
+                "border-color": "FieldText",
+                "box-shadow": "none"
+              }
+            },
+            "noBackdropFilter": {
+              "declarations": {
+                "background": "var(--cr-surface)"
+              }
+            }
+          },
+          "conditions": {},
+          "shadowed": [],
+          "diagnostics": [
+            "rim composed from the border shorthand (1px solid var(--cr-rim)) and border-color (var(--cr-outline)), which cascades after it"
+          ],
+          "missing": [],
+          "why": "The box alone: the mark inside it and the colour of a selected box are drawn by the component that wears it."
         }
       },
       "tokens": [
@@ -4575,11 +4784,13 @@
         "--cr-control-edge",
         "--cr-control-light",
         "--cr-ease-settle",
+        "--cr-outline",
         "--cr-primary",
         "--cr-primary-soft",
         "--cr-range-progress",
         "--cr-resin-blur",
         "--cr-resin-fill",
+        "--cr-resin-saturation",
         "--cr-rim",
         "--cr-shadow-cast",
         "--cr-shadow-contact",

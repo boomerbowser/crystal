@@ -930,6 +930,24 @@ check('the material variants resolve to their recipes in every mode', () => {
   assert.equal(fb(base('mirage'), 'opaque').declarations['backdrop-filter'], 'none', 'mirage: opaque drops the backdrop');
   assert.equal(fb(base('dialog'), 'opaque').layers['::backdrop'].background, 'var(--cr-mirage-fallback-fill)', 'dialog: opaque backdrop');
 
+  /* The choice box as a class (2.8.0): the native box's recipe on any element,
+     its outlined variant, and an opaque and reduced-transparency route for both
+     the class and the native input, which had none. */
+  const choice = base('choice');
+  const nativeBox = choice.alternatives ? choice.alternatives['input[type=checkbox]'] : choice;
+  const box = of('choice', '.cr-choice');
+  for (const k of ['fill', 'blur', 'rim', 'shadow', 'radius']) assert.equal(box[k], nativeBox[k], `.cr-choice: ${k} is not the native box's`);
+  assert.equal(of('choice', '.cr-choice.radio').radius, '50%', '.cr-choice.radio: round');
+  const outline = of('choice', '.cr-choice.outline');
+  assert.deepEqual([outline.fill, outline.rim, outline.shadow], ['var(--cr-resin-fill)', '1px solid var(--cr-outline)', 'inset 0 2px 1px var(--cr-rim)'], '.cr-choice.outline');
+  for (const r of [nativeBox, box, outline]) {
+    for (const mode of ['opaque', 'reducedTransparency']) {
+      assert.equal(fb(r, mode).declarations.background, 'var(--cr-surface)', `${r.selector}: ${mode} gives the surface`);
+      assert.equal(fb(r, mode).declarations['backdrop-filter'], 'none', `${r.selector}: ${mode} drops the blur`);
+    }
+  }
+  assert.equal(fb(outline, 'forcedColors').declarations.background, 'Field', '.cr-choice.outline: forced colours');
+
   /* The field shell as a block. */
   assert.equal(of('field', '.cr-field-shell.block').extras.display, 'flex', '.cr-field-shell.block: display');
 
@@ -937,7 +955,7 @@ check('the material variants resolve to their recipes in every mode', () => {
      one exception, and must be: the base rule it overrides is important and
      sits in the reset layer. */
   const reset = stylesheetCode.slice(0, stylesheetCode.indexOf('@layer crystal.component {'));
-  for (const v of ['.inset', '.flush', '.flat', '.sunken', '.raised', '.pane', '.docked', '.sheet', '.reading', '.block']) {
+  for (const v of ['.inset', '.flush', '.flat', '.sunken', '.raised', '.pane', '.docked', '.sheet', '.reading', '.block', '.cr-choice']) {
     assert.ok(!reset.includes(v), `${v} has a rule in the reset layer`);
   }
   assert.match(reset, /@media\(forced-colors:active\)\{:is\(\.cr-resin,\.cr-glass\)\.divider\{background:CanvasText!important\}\}/, 'the divider has no forced-colours rule beside the base one');

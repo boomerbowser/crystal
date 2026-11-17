@@ -147,6 +147,46 @@ difference in any mode) and measured List's `<button>` rows (the finding
 below). crystal-preview's 23 frames, captured on 2.6.0 and on
 the tarball, are identical.
 
+## Phase 2, as done (core 2.8.0, 17 November 2026)
+
+Crystal React wears the variants in every directory. Its audit
+(`scripts/audit-recipes.mjs`, with the `backdrop-filter: none` miscount fixed,
+which had counted fallbacks that turn diffusion off) reports no hand-written
+backdrop filter and no material mixin, and `styles/_material.scss` is deleted.
+`src/styles/handWrittenMaterial.test.ts` holds both counts at zero, and
+`verify:appearance` gained a row per variant, planting a twin that wears the
+variant beside the component.
+
+What the conversion needed from Crystal, published as 2.8.0:
+
+- **`.cr-choice`**, the native choice box as a class. React Aria keeps the input
+  hidden and draws the box on a span, which could not wear an element recipe.
+  The switch's track is exactly the native box and wears it as is.
+- **`.cr-choice.outline`**, the library's checkbox and radio box, published as
+  drift: the outline boundary, the plain Resin fill, one inset rim.
+- **A correction:** the native choice had no opaque or reduced-transparency
+  route; it now gives way as every Resin surface does.
+
+The slider thumb and the angle slider's dial wear `.cr-resin.flat`; the
+floating action and the pagination and burger buttons wear only the Resin coat
+Crystal already gives a `<button>`, so their copies of it were deleted.
+
+One use of a fill token stays, and the test documents why: the stepper's 2px
+connector is a line on a pseudo-element, which cannot wear a class and has no
+fill to feather.
+
+Measured before and after in light, dark, opaque, reduced transparency and
+forced colours (`scripts/snapshot-material.mjs`, 71 elements): light and dark
+are unchanged apart from layout-neutral `position` and `isolation`, and the
+code block's flat fill moving from its `::before` to the element (clipped to
+the padding box, so it still stops inside the rim). The fallback modes change
+only where a component had no route Crystal has: the outline rim in opaque
+mode, the feather off where the fill becomes the surface, the Tour's scrim and
+the placeholders giving way, and Table's placeholder taking the same forced
+boundary as Statistic's. Measured by reading rather than in a story: the
+Highlight cue (invisible at rest), QrCode (no story) and the native-shaped
+Combobox shell (the same conversion as its siblings).
+
 ## Every element
 
 | Directory | Selector | Crystal surface | Outcome | Differs in |
