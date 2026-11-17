@@ -1835,8 +1835,7 @@
       "name": "Timeline",
       "category": "data-display",
       "surface": [
-        "indicator",
-        "haze"
+        "resin"
       ],
       "motion": [
         "list-in"
@@ -2364,7 +2363,7 @@
       "name": "Skeleton",
       "category": "feedback",
       "surface": [
-        "haze"
+        "none"
       ],
       "motion": [
         "skeleton-resolve",
@@ -3235,7 +3234,7 @@
       "name": "Drop indicator",
       "category": "utility",
       "surface": [
-        "haze"
+        "none"
       ],
       "status": {
         "web": "implemented",
@@ -4452,8 +4451,7 @@
       "name": "Data table block",
       "category": "blocks",
       "surface": [
-        "table",
-        "frost"
+        "table"
       ],
       "status": {
         "web": "implemented",

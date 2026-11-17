@@ -317,10 +317,9 @@
         "upcoming",
         "error"
       ],
-      "material": "Indicator markers on a Haze connector",
+      "material": "Resin markers (`.cr-resin.flat`) on a 2px connector in `--cr-haze-fill`",
       "surface": [
-        "indicator",
-        "haze"
+        "resin"
       ],
       "geometry": "Circular markers; 2px connector",
       "semantics": "Ordered list; the current item carries aria-current",

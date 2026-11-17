@@ -2,6 +2,27 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
+## [2.8.1] - 2026-11-17
+
+Catalogue corrections from Crystal React's surface measurement (R-A2). Under
+the R-28 ruling a library's deliberate drawing is a correction the standard
+takes in; these four entries named a surface the component deliberately does
+not wear. No stylesheet or token changes.
+
+### Changed
+
+- **Timeline**: Resin markers (`.cr-resin.flat`) on a 2px connector drawn in
+  `--cr-haze-fill`; surface `resin`, was `indicator` and `haze`. The markers
+  carry a number or a glyph and a status colour, which the 20px indicator does
+  not, and the connector is a line, not a surface.
+- **Skeleton**: the alternate surface with the luminance sweep; surface
+  `none`, was `haze`. A placeholder is not a reading surface.
+- **Drop indicator**: a 2px line in the primary, or the danger ink where the
+  drop is refused; surface `none`, was `haze`. It is a control affordance.
+- **Data table block**: the table surface; surface `table`, was `table` and
+  `frost`. The block opens no overlay of its own; one the product opens from
+  its toolbar brings its own surface.
+
 ## [2.8.0] - 2026-11-17
 
 The choice box as a class (R-28, phase 2). Crystal React now wears Crystal's

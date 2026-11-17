@@ -429,9 +429,9 @@
         "shown",
         "invalid-target"
       ],
-      "material": "Haze line or fill",
+      "material": "A 2px line in `--cr-primary`, or `--cr-danger-ink` where the drop is refused: a control affordance, not a material",
       "surface": [
-        "haze"
+        "none"
       ],
       "geometry": "Follows the gap between items rather than covering one.",
       "semantics": "Announced as the drag moves, so a keyboard drag is followable without sight.",

@@ -82,10 +82,9 @@
         "selecting",
         "error"
       ],
-      "material": "Table surface with Frost overlays",
+      "material": "The table surface; an overlay the product opens from the toolbar brings its own surface",
       "surface": [
-        "table",
-        "frost"
+        "table"
       ],
       "geometry": "Toolbar controls are pills; the table keeps its own surface.",
       "semantics": "Selection count is announced; bulk actions describe what they will affect.",

@@ -179,9 +179,9 @@
         "loading",
         "resolving"
       ],
-      "material": "Haze fill with a slow luminance sweep",
+      "material": "The alternate surface (`--cr-surface-alt`) with a slow luminance sweep: a placeholder, not a reading surface",
       "surface": [
-        "haze"
+        "none"
       ],
       "geometry": "Matches the real content's radius and rhythm exactly",
       "semantics": "aria-hidden with a live region announcing loading; must not be read as content",

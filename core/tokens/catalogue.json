@@ -1,6 +1,6 @@
 {
   "$description": "Crystal component catalogue, combined. Generated from core/tokens/catalogue/.",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "surfaces": [
     {
       "id": "plastic",
@@ -3198,10 +3198,9 @@
             "upcoming",
             "error"
           ],
-          "material": "Indicator markers on a Haze connector",
+          "material": "Resin markers (`.cr-resin.flat`) on a 2px connector in `--cr-haze-fill`",
           "surface": [
-            "indicator",
-            "haze"
+            "resin"
           ],
           "geometry": "Circular markers; 2px connector",
           "semantics": "Ordered list; the current item carries aria-current",
@@ -3999,9 +3998,9 @@
             "loading",
             "resolving"
           ],
-          "material": "Haze fill with a slow luminance sweep",
+          "material": "The alternate surface (`--cr-surface-alt`) with a slow luminance sweep: a placeholder, not a reading surface",
           "surface": [
-            "haze"
+            "none"
           ],
           "geometry": "Matches the real content's radius and rhythm exactly",
           "semantics": "aria-hidden with a live region announcing loading; must not be read as content",
@@ -5318,9 +5317,9 @@
             "shown",
             "invalid-target"
           ],
-          "material": "Haze line or fill",
+          "material": "A 2px line in `--cr-primary`, or `--cr-danger-ink` where the drop is refused: a control affordance, not a material",
           "surface": [
-            "haze"
+            "none"
           ],
           "geometry": "Follows the gap between items rather than covering one.",
           "semantics": "Announced as the drag moves, so a keyboard drag is followable without sight.",
@@ -7149,10 +7148,9 @@
             "selecting",
             "error"
           ],
-          "material": "Table surface with Frost overlays",
+          "material": "The table surface; an overlay the product opens from the toolbar brings its own surface",
           "surface": [
-            "table",
-            "frost"
+            "table"
           ],
           "geometry": "Toolbar controls are pills; the table keeps its own surface.",
           "semantics": "Selection count is announced; bulk actions describe what they will affect.",
