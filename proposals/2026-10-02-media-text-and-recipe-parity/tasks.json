@@ -816,7 +816,7 @@
       "repo": "react",
       "area": "Docs",
       "priority": "P2",
-      "status": "ready",
+      "status": "done",
       "title": "Documentation site from the surfaces (re-evaluation rec. 7, Slice Q)",
       "depends": [
         "C-R1"

@@ -3,7 +3,7 @@
 Rendered from `tasks.json` and `rulings.json` by `render-tasks.mjs`. Edit the JSON, or record a ruling on the board, not this file.
 The proposal is [`../2026-10-02-media-text-and-recipe-parity.md`](../2026-10-02-media-text-and-recipe-parity.md); the board is [`examples/tasks.html`](examples/tasks.html); the rulings are recorded in [`../2026-10-02-rulings.md`](../2026-10-02-rulings.md).
 
-53 tasks: 51 done, 2 ready, 0 blocked, 0 needs a ruling, 0 dropped.
+53 tasks: 52 done, 1 ready, 0 blocked, 0 needs a ruling, 0 dropped.
 
 IDs: `C-` is Crystal core (R release, S surfaces and recipes, M motion, I icons, D docs, T text), `R-` is Crystal React (M media, T text, A audit, motion and materials, Q documentation). Crystal React's implementation plan carries the `R-` tasks as Slice R.
 
@@ -384,7 +384,7 @@ Where: `crystal-preview/website`. Depends on C-R1.
 | [R-A5](#r-a5) | P3 | Done | The view stack plays view-push-out | – |
 | [R-A9](#r-a9) | P2 | Done | The Haze reading fill in the popover, the pop-confirm and the menu | – |
 | [R-A10](#r-a10) | P2 | Done | The Resin thumb on the colour area, slider and wheel | – |
-| [R-Q1](#r-q1) | P2 | Ready | Documentation site from the surfaces (re-evaluation rec. 7, Slice Q) | C-R1 |
+| [R-Q1](#r-q1) | P2 | Done | Documentation site from the surfaces (re-evaluation rec. 7, Slice Q) | C-R1 |
 
 ### R-A8
 
@@ -781,12 +781,12 @@ Where: `src/components/ColorPicker/`.
 
 ### R-Q1
 
-**Documentation site from the surfaces (re-evaluation rec. 7, Slice Q).** Docs, P2, ready.
+**Documentation site from the surfaces (re-evaluation rec. 7, Slice Q).** Docs, P2, done.
 
 Target: One page per surface with its recipe values and every component made of it.
 
 Done when:
 
-- [ ] 23 pages generated from surface-recipes.json and the manifest
+- [x] 23 pages generated from surface-recipes.json and the manifest
 
 Where: `docs site (Slice Q)`. Depends on C-R1.
