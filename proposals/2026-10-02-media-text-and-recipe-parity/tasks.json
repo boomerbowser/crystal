@@ -730,7 +730,7 @@
       "repo": "react",
       "area": "Materials",
       "priority": "P2",
-      "status": "ready",
+      "status": "done",
       "title": "Confirm the 105 entries whose surface is not worn in their own markup",
       "depends": [],
       "target": "Each is either worn through a child (recorded) or fixed.",
