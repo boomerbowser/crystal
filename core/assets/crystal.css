@@ -906,7 +906,12 @@ input[type=file]::file-selector-button {
     isolation:isolate;
     background:var(--cr-resin-fill);
     border:1px solid var(--cr-rim);
-    border-radius:999px;
+    /* Concentric with the pills inside it: half a 52px button, plus the 9px
+       padding and the 1px border. A one-row dock is 72px tall, so this is
+       still a full pill; a vertical dock (a column of tabs) keeps corners
+       that follow its first and last pill instead of turning into a capsule
+       whose ends the selected pill pokes out of (2.10.1). */
+    border-radius:calc(26px + 9px + 1px);
     padding:9px;
     gap:4px;
     box-shadow:var(--cr-shadow-float);
@@ -1068,7 +1073,8 @@ span.cr-status>span {
 
 @media (max-width:600px) {
 .cr-dock {
-    padding:7px
+    padding:7px;
+    border-radius:calc(26px + 7px + 1px)
 }
 .cr-dock button {
     padding:10px 9px;

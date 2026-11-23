@@ -3745,7 +3745,7 @@
       "saturation": "var(--cr-resin-saturation)",
       "rim": "1px solid var(--cr-rim)",
       "shadow": "var(--cr-shadow-float)",
-      "radius": "999px",
+      "radius": "calc(26px + 9px + 1px)",
       "padding": "9px",
       "haze": {
         "layer": "::before",
@@ -3809,6 +3809,7 @@
       "conditions": {
         "@media (max-width:600px)": {
           "declarations": {
+            "border-radius": "calc(26px + 7px + 1px)",
             "padding": "7px"
           }
         }

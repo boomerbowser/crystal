@@ -2,6 +2,19 @@
 
 Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
 
+## [2.10.1] - 2026-11-22
+
+### Fixed
+
+- **A vertical dock is no longer a capsule.** `.cr-dock` drew a 999px radius,
+  which is a pill for one row of buttons and a capsule for a column of them:
+  the strip's ends curved in faster than the first and last pill, and the
+  selected pill poked out through the strip (Crystal React's vertical tabs).
+  The radius is now concentric with the pills inside: half a 52px button plus
+  the 9px padding and the 1px border (`calc(26px + 9px + 1px)`), and 7px of
+  padding under 600px. One row looks exactly as before. A contract check
+  fails on a capsule radius.
+
 ## [2.10.0] - 2026-11-17
 
 Focus rings only when they are needed (ruled 17 November 2026). Accessibility

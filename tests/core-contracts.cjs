@@ -992,6 +992,16 @@ function splitSelectors(text) {
    the modality on the document element, and every rule that draws a ring
    stands behind `:root:not([data-crystal-modality=pointer])`, so with no script
    every ring is still drawn. */
+check('a dock is concentric with its pills, so a vertical one is not a capsule', () => {
+  /* 999px made a column of tabs a capsule whose ends the first and last pill
+     poke out of. The radius is half a pill plus the padding and the border. */
+  const blocks = [...stylesheetCode.matchAll(/\.cr-dock\s*\{([^}]*)\}/g)].map((match) => match[1]);
+  const radii = blocks.map((body) => /border-radius\s*:\s*([^;]+)/.exec(body)?.[1]?.trim()).filter(Boolean);
+  assert.ok(radii.length > 0, 'the dock declares a radius');
+  for (const radius of radii) assert.doesNotMatch(radius, /999px/, `dock radius ${radius} is a capsule`);
+  assert.ok(radii.includes('calc(26px + 9px + 1px)'), 'the dock radius follows its pills, padding and border');
+});
+
 check('every focus ring waits for keyboard modality, and the modality is read from the right keys', () => {
   const GATE = ':where(:root:not([data-crystal-modality=pointer]))';
   const rules = [...stylesheetCode.matchAll(/([^{}]+)\{([^{}]*)\}/g)];
