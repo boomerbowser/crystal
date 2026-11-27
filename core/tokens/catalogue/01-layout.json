@@ -1,7 +1,7 @@
 {
   "id": "layout",
   "name": "Layout and structure",
-  "description": "Surfaces and arrangement. These carry Crystal's material hierarchy; everything else sits inside them.",
+  "description": "Surfaces and arrangement. These carry Prismata's material hierarchy; everything else sits inside them.",
   "components": [
     {
       "id": "app-shell",
@@ -20,7 +20,7 @@
       ],
       "geometry": "Panel radius = content radius + 6px",
       "semantics": "Landmark roles: banner, navigation, main, contentinfo. One main per view.",
-      "crystal": "Material assignment per region, elevation ordering, safe-area handling",
+      "prismata": "Material assignment per region, elevation ordering, safe-area handling",
       "product": "Routing, which regions exist, persistence of the collapsed state",
       "parity": [
         "mantine:AppShell",
@@ -41,7 +41,7 @@
       ],
       "geometry": "Gutters follow the 4px rhythm: 18/26/44px by viewport",
       "semantics": "Presentational only; must not introduce a landmark",
-      "crystal": "Width ceiling and gutter scale",
+      "prismata": "Width ceiling and gutter scale",
       "product": "Which content is constrained",
       "parity": [
         "mantine:Container",
@@ -62,7 +62,7 @@
       ],
       "geometry": "Gutters from the 4px rhythm; 12-column reference",
       "semantics": "Presentational; reading order must match visual order",
-      "crystal": "Gutter scale and breakpoint behaviour",
+      "prismata": "Gutter scale and breakpoint behaviour",
       "product": "Column spans per breakpoint",
       "parity": [
         "mantine:Grid",
@@ -83,7 +83,7 @@
       ],
       "geometry": "Shared gutter with Grid",
       "semantics": "Presentational",
-      "crystal": "Minimum cell width and gutter",
+      "prismata": "Minimum cell width and gutter",
       "product": "Cell count and content",
       "parity": [
         "mantine:SimpleGrid",
@@ -104,7 +104,7 @@
       ],
       "geometry": "Spacing from the 4px rhythm",
       "semantics": "Presentational",
-      "crystal": "Spacing scale",
+      "prismata": "Spacing scale",
       "product": "Which spacing step",
       "parity": [
         "mantine:Stack",
@@ -126,7 +126,7 @@
       ],
       "geometry": "Spacing from the 4px rhythm",
       "semantics": "Presentational",
-      "crystal": "Spacing scale and wrap behaviour",
+      "prismata": "Spacing scale and wrap behaviour",
       "product": "Alignment and content",
       "parity": [
         "mantine:Group",
@@ -149,7 +149,7 @@
       ],
       "geometry": "1px, full-bleed within its container",
       "semantics": "role=separator with an accessible name when labelled; decorative dividers are aria-hidden",
-      "crystal": "Rule colour and label treatment",
+      "prismata": "Rule colour and label treatment",
       "product": "Placement and label text",
       "parity": [
         "mantine:Divider",
@@ -170,7 +170,7 @@
       ],
       "geometry": "Content radius when clipping media",
       "semantics": "Presentational",
-      "crystal": "Reserving space so loading media does not shift layout",
+      "prismata": "Reserving space so loading media does not shift layout",
       "product": "The ratio and the media",
       "parity": [
         "mantine:AspectRatio",
@@ -181,7 +181,7 @@
     {
       "id": "scroll-area",
       "name": "Scroll area",
-      "anatomy": "A bounded scrolling region with a Crystal scrollbar and edge fades.",
+      "anatomy": "A bounded scrolling region with a Prismata scrollbar and edge fades.",
       "states": [
         "at-start",
         "scrolling",
@@ -193,7 +193,7 @@
       ],
       "geometry": "Inherits container radius; fade depth 24px",
       "semantics": "Keyboard scrollable; must be focusable when it is the only way to reach content",
-      "crystal": "Scrollbar appearance, edge fade, reduced-motion behaviour",
+      "prismata": "Scrollbar appearance, edge fade, reduced-motion behaviour",
       "product": "What scrolls and how far",
       "parity": [
         "mantine:ScrollArea",
@@ -214,7 +214,7 @@
       ],
       "geometry": "None",
       "semantics": "Presentational",
-      "crystal": "Nothing beyond layout",
+      "prismata": "Nothing beyond layout",
       "product": "Content",
       "parity": [
         "mantine:Center",
@@ -235,7 +235,7 @@
       ],
       "geometry": "4px rhythm",
       "semantics": "Presentational; never used to convey grouping to assistive technology",
-      "crystal": "Spacing scale",
+      "prismata": "Spacing scale",
       "product": "Which step",
       "parity": [
         "mantine:Space",
@@ -258,7 +258,7 @@
       ],
       "geometry": "Full-bleed; no radius on the outer edges; actions are pills.",
       "semantics": "role=\"banner\" unless nested; the title is the page heading or labels one.",
-      "crystal": "Material, elevation on scroll, action geometry",
+      "prismata": "Material, elevation on scroll, action geometry",
       "product": "Which actions appear, scroll behaviour, routing",
       "parity": [
         "mui:AppBar",
@@ -279,7 +279,7 @@
       ],
       "geometry": "Gap follows the spacing scale; columns respond to container width.",
       "semantics": "A list when the items are a set; otherwise presentational.",
-      "crystal": "Spacing, breakpoint behaviour, reduced-motion reflow",
+      "prismata": "Spacing, breakpoint behaviour, reduced-motion reflow",
       "product": "Item content and ordering",
       "parity": [
         "antd:Masonry",
@@ -302,7 +302,7 @@
       ],
       "geometry": "Overflow trigger is a pill and reaches 44px.",
       "semantics": "The overflow trigger names how many items it holds; hidden items stay reachable.",
-      "crystal": "Measurement, the trigger, the menu material",
+      "prismata": "Measurement, the trigger, the menu material",
       "product": "Item content, priority order",
       "parity": [
         "mantine:OverflowList"

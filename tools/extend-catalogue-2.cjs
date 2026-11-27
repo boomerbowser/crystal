@@ -11,8 +11,8 @@
  *
  *   1. React Aria's own component list, enumerated from the installed package.
  *      CONTRACT §3 says to wrap a maintained primitive rather than rebuild it, so
- *      a primitive React Aria ships that Crystal does not name is a gap by
- *      definition: accessible behaviour Crystal would be leaving out.
+ *      a primitive React Aria ships that Prismata does not name is a gap by
+ *      definition: accessible behaviour Prismata would be leaving out.
  *   2. Meridian's named list: click-and-drag, File Input / Upload / UploadZone,
  *      Spotlight, floating action, navbar and submenu types, animated toasts and
  *      banners, alerts, loading and skeletons, pagination, portal, video and
@@ -28,8 +28,8 @@ const DIR = path.resolve(__dirname, '../core/tokens/catalogue');
 const WRITE = process.argv.includes('--write');
 
 const R = 'Resin', H = 'Haze', F = 'Frost', S = 'Stone';
-const c = (id, name, anatomy, states, material, geometry, semantics, crystal, product, parity) =>
-  ({ id, name, anatomy, states, material, geometry, semantics, crystal, product, parity });
+const c = (id, name, anatomy, states, material, geometry, semantics, prismata, product, parity) =>
+  ({ id, name, anatomy, states, material, geometry, semantics, prismata, product, parity });
 
 const ADDITIONS = {
   '02-navigation': [
@@ -137,7 +137,7 @@ const ADDITIONS = {
       'Gives its child button semantics unless told otherwise; never swallows keyboard activation.',
       'That the press recipe plays and the focus ring appears', 'What the press does',
       ['react-aria:Pressable']),
-    c('focusable', 'Focusable', 'Makes any element focusable with Crystal\'s focus ring.',
+    c('focusable', 'Focusable', 'Makes any element focusable with Prismata\'s focus ring.',
       ['at-rest', 'focus-visible', 'disabled'], 'None of its own',
       'Focus ring at the documented offset.',
       'Adds a tab stop without inventing a role.',
@@ -184,7 +184,7 @@ const ADDITIONS = {
       ['react-aria:SSRProvider']),
   ],
   '11-media': [
-    c('video-player', 'Video player', 'A video surface with Crystal transport controls.',
+    c('video-player', 'Video player', 'A video surface with Prismata transport controls.',
       ['idle', 'playing', 'paused', 'buffering', 'ended', 'focus-visible'],
       `${R} control bar over the video; ${H} fills behind readable labels`,
       'Control bar is a pill; every control reaches 44px.',
@@ -222,7 +222,7 @@ const ADDITIONS = {
 const MEDIA_META = {
   id: 'media',
   name: 'Media',
-  description: 'Video, audio and galleries. Crystal named none of these before, and they are the clearest case of the parity requirement being about capability rather than nomenclature: a design system without a transport control leaves every product to invent one, and each invention re-solves captions, scrubbing and keyboard transport differently.',
+  description: 'Video, audio and galleries. Prismata named none of these before, and they are the clearest case of the parity requirement being about capability rather than nomenclature: a design system without a transport control leaves every product to invent one, and each invention re-solves captions, scrubbing and keyboard transport differently.',
   components: [],
 };
 

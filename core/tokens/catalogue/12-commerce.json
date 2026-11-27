@@ -1,7 +1,7 @@
 {
   "id": "commerce",
   "name": "Commerce",
-  "description": "Functional e-commerce components. Crystal named none before, which left every store to reinvent a quantity stepper, a variant selector and a cart summary, and to re-solve availability, currency formatting and checkout validation each time. Payment is deliberately bounded: these components never handle raw card data, and defer to the host provider's own element.",
+  "description": "Functional e-commerce components. Prismata named none before, which left every store to reinvent a quantity stepper, a variant selector and a cart summary, and to re-solve availability, currency formatting and checkout validation each time. Payment is deliberately bounded: these components never handle raw card data, and defer to the host provider's own element.",
   "components": [
     {
       "id": "price",
@@ -16,7 +16,7 @@
       ],
       "geometry": "Tabular figures so a column of prices aligns.",
       "semantics": "The formatted value is the text content; currency is stated, not implied by a symbol alone.",
-      "crystal": "Figure style and step",
+      "prismata": "Figure style and step",
       "product": "Currency, locale, precision, tax display",
       "parity": [
         "antd:Statistic"
@@ -35,7 +35,7 @@
       ],
       "geometry": "Matches price.",
       "semantics": "Reads as a sentence rather than two numbers with a dash.",
-      "crystal": "Typography",
+      "prismata": "Typography",
       "product": "Range rules",
       "parity": [
         "antd:Statistic"
@@ -54,7 +54,7 @@
       ],
       "geometry": "Pill.",
       "semantics": "States what is reduced from what; a percentage alone is not a claim.",
-      "crystal": "Status tokens, pill geometry",
+      "prismata": "Status tokens, pill geometry",
       "product": "Discount rules and rounding",
       "motion": [
         "attention"
@@ -80,7 +80,7 @@
       ],
       "geometry": "Pill; both controls reach 44px.",
       "semantics": "A typable numeric field: the value is read as its text, and the bounds are announced when reached. Not role=spinbutton, because a spin button cannot be focused with VoiceOver, so the role would put the control out of some readers' reach.",
-      "crystal": "Materials, press recipe on each control",
+      "prismata": "Materials, press recipe on each control",
       "product": "Bounds, step, stock rules",
       "motion": [
         "slider-step"
@@ -106,7 +106,7 @@
       ],
       "geometry": "Options are pills; swatch variants are circles.",
       "semantics": "Unavailable options stay perceivable and say why; selection is label weight, never a check mark.",
-      "crystal": "Option material, selection weight, unavailable treatment",
+      "prismata": "Option material, selection weight, unavailable treatment",
       "product": "Variant axes and stock",
       "motion": [
         "selection"
@@ -131,7 +131,7 @@
       ],
       "geometry": "Inline with the price or the action.",
       "semantics": "Words carry the state; status colour reinforces it.",
-      "crystal": "Status tokens",
+      "prismata": "Status tokens",
       "product": "Thresholds and wording",
       "parity": [
         "antd:Tag"
@@ -153,7 +153,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "The whole card is not a link; the name is, and the action is a button. One tab stop each.",
-      "crystal": "Material, media aspect, action geometry, hover recipe",
+      "prismata": "Material, media aspect, action geometry, hover recipe",
       "product": "Which attributes appear",
       "motion": [
         "list-in",
@@ -180,7 +180,7 @@
       ],
       "geometry": "Thumbnails keep the content radius; the viewer is full-bleed within the scrim.",
       "semantics": "Arrow keys move between items with position announced; zoom is keyboard reachable.",
-      "crystal": "Scrim and thumbnail materials, the transition into the viewer",
+      "prismata": "Scrim and thumbnail materials, the transition into the viewer",
       "product": "The media set",
       "motion": [
         "media-in",
@@ -206,7 +206,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Removal is announced and undoable; quantity changes announce the new subtotal.",
-      "crystal": "Material, the update and remove motion",
+      "prismata": "Material, the update and remove motion",
       "product": "Pricing and stock rules",
       "motion": [
         "list-in",
@@ -231,7 +231,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "A description list, so each line is a labelled pair; the total is marked as such.",
-      "crystal": "Material, figure alignment, the motion of a changing total",
+      "prismata": "Material, figure alignment, the motion of a changing total",
       "product": "What the lines are and how they are computed",
       "parity": [
         "antd:Descriptions"
@@ -254,7 +254,7 @@
       ],
       "geometry": "Field and action share one pill row.",
       "semantics": "Success and failure are announced; an applied code is removable.",
-      "crystal": "Materials, field-valid and field-invalid recipes",
+      "prismata": "Materials, field-valid and field-invalid recipes",
       "product": "Validation and stacking rules",
       "motion": [
         "field-focus",
@@ -282,7 +282,7 @@
       ],
       "geometry": "Steps are pills; connectors are hairlines.",
       "semantics": "The current step is aria-current; completion is stated in words, and a check mark here means validated rather than selected.",
-      "crystal": "Step materials, connector treatment, the advance motion",
+      "prismata": "Step materials, connector treatment, the advance motion",
       "product": "The steps and their validation",
       "motion": [
         "selection"
@@ -308,7 +308,7 @@
       ],
       "geometry": "Options keep the content radius; the selected one carries label weight.",
       "semantics": "A radio group. Card fields are never reimplemented: the host supplies its provider element.",
-      "crystal": "Option material, selection, focus ring",
+      "prismata": "Option material, selection, focus ring",
       "product": "The provider, tokenisation, and PCI scope; this component never handles raw card data",
       "motion": [
         "selection"
@@ -333,7 +333,7 @@
       ],
       "geometry": "Fields follow the input geometry.",
       "semantics": "Field order, labels and required-ness change by country; postcode validation is per-locale, not one regular expression.",
-      "crystal": "Materials, validation recipes",
+      "prismata": "Materials, validation recipes",
       "product": "Countries supported and their field rules",
       "motion": [
         "field-focus",
@@ -360,7 +360,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Status is a word; the status colour reinforces it.",
-      "crystal": "Material, status tokens",
+      "prismata": "Material, status tokens",
       "product": "Order model and statuses",
       "parity": [
         "antd:Descriptions"
@@ -382,7 +382,7 @@
       ],
       "geometry": "Options keep the content radius.",
       "semantics": "A radio group; each option states price and estimate together.",
-      "crystal": "Option material, selection weight",
+      "prismata": "Option material, selection weight",
       "product": "Rates and estimates",
       "motion": [
         "selection"
@@ -406,7 +406,7 @@
       ],
       "geometry": "Inline.",
       "semantics": "An absolute date, not only a relative phrase.",
-      "crystal": "Typography and colour",
+      "prismata": "Typography and colour",
       "product": "Estimation and locale",
       "parity": [
         "antd:Typography"
@@ -428,7 +428,7 @@
       ],
       "geometry": "Pill; 44px target.",
       "semantics": "A toggle with a pressed state and a name that says what it will do.",
-      "crystal": "Press recipe, the state-change recipe",
+      "prismata": "Press recipe, the state-change recipe",
       "product": "Persistence",
       "motion": [
         "press",
@@ -452,7 +452,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "The rating is text as well as stars.",
-      "crystal": "Material, rating rendering, expansion motion",
+      "prismata": "Material, rating rendering, expansion motion",
       "product": "Moderation and sorting",
       "motion": [
         "list-in",
@@ -476,7 +476,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "The average and the count are both stated; bars are labelled.",
-      "crystal": "Bar material, figure typography",
+      "prismata": "Bar material, figure typography",
       "product": "How the average is computed",
       "parity": [
         "primereact:rating"
@@ -499,7 +499,7 @@
       ],
       "geometry": "Panel radius; controls are pills.",
       "semantics": "Applied filters are announced and individually removable; counts update politely.",
-      "crystal": "Panel and group materials, the apply and clear motion",
+      "prismata": "Panel and group materials, the apply and clear motion",
       "product": "The facets and their counts",
       "parity": [
         "antd:Collapse",
@@ -521,7 +521,7 @@
       ],
       "geometry": "Pill.",
       "semantics": "A select whose current ordering is announced on change.",
-      "crystal": "Materials, open motion",
+      "prismata": "Materials, open motion",
       "product": "The orderings offered",
       "motion": [
         "field-focus",
@@ -548,7 +548,7 @@
       ],
       "geometry": "Sticky first column and header; differences are marked, not only coloured.",
       "semantics": "A real table with row and column headers; differences are stated in text.",
-      "crystal": "Table surface, sticky treatment, difference marking",
+      "prismata": "Table surface, sticky treatment, difference marking",
       "product": "Which attributes compare",
       "parity": [
         "antd:Table"
@@ -569,7 +569,7 @@
       ],
       "geometry": "Scrolls within its own container; never the page.",
       "semantics": "A labelled list; the strip is keyboard scrollable.",
-      "crystal": "Scroll surface, edge fade from the surrounding material",
+      "prismata": "Scroll surface, edge fade from the surrounding material",
       "product": "Retention and privacy policy",
       "motion": [
         "list-in"

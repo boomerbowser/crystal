@@ -1,11 +1,11 @@
-/* Build everything @crystal-ui/core ships that is generated rather than written.
+/* Build everything @prismata/core ships that is generated rather than written.
  *
- * This builds the library only. The website is `crystal-preview` and renders
+ * This builds the library only. The website is `prismata-preview` and renders
  * the library it installs. Nothing here needs Python, so this repository does
  * not either.
  *
  * The order is dependency order. The DTCG source produces the flat token file;
- * the flat file produces `tokens.js`; `tokens.js` and `crystal.js` together
+ * the flat file produces `tokens.js`; `tokens.js` and `prismata.js` together
  * produce the exported theme; and the reference sections in `core/docs/` quote
  * values from all of them, so they are generated last.
  *
@@ -31,10 +31,10 @@ run('build-surface-recipes.cjs');
 /* The browser reads the tokens as a script rather than fetching JSON, so the
    flat file is wrapped. It is generated rather than committed by hand because
    it is the flat file with eleven characters in front of it. */
-const flat = readFileSync(resolve(ROOT, 'core/tokens/crystal.json'), 'utf8');
+const flat = readFileSync(resolve(ROOT, 'core/tokens/prismata.json'), 'utf8');
 writeFileSync(
   resolve(ROOT, 'core/assets/tokens.js'),
-  `window.CRYSTAL_TOKENS = ${JSON.stringify(JSON.parse(flat))};\n`,
+  `window.PRISMATA_TOKENS = ${JSON.stringify(JSON.parse(flat))};\n`,
 );
 
 /* The exported theme is the resolver's own output, produced by running the
@@ -42,10 +42,10 @@ writeFileSync(
    alias resolution, which is the divergence the token pipeline exists to
    prevent. */
 const context = createContext({ window: {} });
-for (const asset of ['core/assets/tokens.js', 'core/assets/crystal.js']) {
+for (const asset of ['core/assets/tokens.js', 'core/assets/prismata.js']) {
   runInContext(readFileSync(resolve(ROOT, asset), 'utf8'), context);
 }
-writeFileSync(resolve(ROOT, 'core/assets/crystal-theme.css'), context.window.Crystal.exportCSS());
+writeFileSync(resolve(ROOT, 'core/assets/prismata-theme.css'), context.window.Prismata.exportCSS());
 
 run('build-reference.cjs');
 

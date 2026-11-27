@@ -1,5 +1,5 @@
 {
-  "$description": "Per-platform implementation status for every component Crystal specifies. Generated from core/tokens/catalogue/ with status merged from libraries/status/<platform>.json. A component present in one library is expected in the others, with the same states, semantics, surfaces and token bindings.",
+  "$description": "Per-platform implementation status for every component Prismata specifies. Generated from core/tokens/catalogue/ with status merged from libraries/status/<platform>.json. A component present in one library is expected in the others, with the same states, semantics, surfaces and token bindings.",
   "generated": "tools/build-catalogue.cjs",
   "benchmarks": [
     "mantine",
@@ -3181,7 +3181,7 @@
         "swiftui": "not-applicable",
         "compose": "not-applicable"
       },
-      "why": "Crystal specifies edge treatment as the Resin optical rim. A second, unrelated mechanism for a moving border would contradict the material spec, and the ambient tier that would have owned it is deferred."
+      "why": "Prismata specifies edge treatment as the Resin optical rim. A second, unrelated mechanism for a moving border would contradict the material spec, and the ambient tier that would have owned it is deferred."
     },
     {
       "id": "pressable",

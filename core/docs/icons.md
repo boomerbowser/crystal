@@ -1,10 +1,10 @@
 # Icons
 
-Crystal's icon set is one grid: a 24px view box, 1.8px strokes, round caps and joins, and `currentColor` so every icon inherits a tested foreground colour.
+Prismata's icon set is one grid: a 24px view box, 1.8px strokes, round caps and joins, and `currentColor` so every icon inherits a tested foreground colour.
 
 Icon files carry no stroke width, cap, join or colour of their own. Those come from the stylesheet, so the contract lives in one place and cannot drift across a thousand files. An icon that carries its own stroke is a defect.
 
-Thirteen symbols are original Crystal work and live in the sprite at `assets/icons.svg`: `crystal`, `layers`, `document`, `directions`, `workspace`, `conversation`, `library`, `check`, `attention`, `alert`, `info`, `sparkle` and `chevron`. They are authoritative and are never replaced by a sourced icon of the same name. The remainder are derived from Lucide under the ISC License and vendored into `assets/icons/`; see [asset notices](../reference/ASSET-NOTICES.md).
+Thirteen symbols are original Prismata work and live in the sprite at `assets/icons.svg`: `prismata`, `layers`, `document`, `directions`, `workspace`, `conversation`, `library`, `check`, `attention`, `alert`, `info`, `sparkle` and `chevron`. They are authoritative and are never replaced by a sourced icon of the same name. The remainder are derived from Lucide under the ISC License and vendored into `assets/icons/`; see [asset notices](../reference/ASSET-NOTICES.md).
 
 ## Using an icon
 
@@ -28,7 +28,7 @@ Icons beside text are decorative and hidden from assistive technology. An icon-o
 
 ## Icons the vocabularies require
 
-The set is an evenly spaced slice of Lucide's, so an icon a Crystal vocabulary needs can fall outside it. `tools/build-icons.cjs` keeps a named list of required icons whatever the slice picks: today the rich text format vocabulary's `heading-2`, `heading-3`, `heading-4`, `link`, `unlink`, `list`, `list-ordered`, `quote`, `subscript`, `undo` and `redo` (D-35). The manifest lists them under `required`. A library draws these glyphs from the set rather than by hand.
+The set is an evenly spaced slice of Lucide's, so an icon a Prismata vocabulary needs can fall outside it. `tools/build-icons.cjs` keeps a named list of required icons whatever the slice picks: today the rich text format vocabulary's `heading-2`, `heading-3`, `heading-4`, `link`, `unlink`, `list`, `list-ordered`, `quote`, `subscript`, `undo` and `redo` (D-35). The manifest lists them under `required`. A library draws these glyphs from the set rather than by hand.
 
 Icon identifiers are public contract, so an icon leaves the set only in a major version. The build reports every icon that arrives or leaves against the committed manifest and refuses a removal outside a major release.
 
@@ -38,7 +38,7 @@ Icon identifiers are public contract, so an icon leaves the set only in a major 
 
 | Source | Count | Licence |
 |---|---|---|
-| crystal | 13 | Original work |
+| prismata | 13 | Original work |
 | lucide | 1009 | ISC ([notice](../licenses/lucide-LICENSE.txt)) |
 | **Total** | **1022** | |
 

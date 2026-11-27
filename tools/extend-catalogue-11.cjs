@@ -3,10 +3,10 @@
  *
  * The combobox's and the cascader's material fields call their popover Resin.
  * Transient overlays are Frost (R15e), both entries already list the `frost`
- * surface, and Crystal React's ComboBox and Cascader wear `.cr-frost` on the
+ * surface, and Prismata React's ComboBox and Cascader wear `.pr-frost` on the
  * popover. The check build-catalogue.cjs gained for C-S4 cannot see these,
  * because both entries are also made of the field shell, which is Resin; they
- * were found reading Crystal React's manifest. No surface changes.
+ * were found reading Prismata React's manifest. No surface changes.
  *
  * Old values are quoted below. Idempotent; refuses to write on an unknown id,
  * an unknown surface or recipe, or a value that is neither the old one nor the

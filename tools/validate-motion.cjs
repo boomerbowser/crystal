@@ -20,8 +20,8 @@ const withoutOffset=frame=>{const{offset,...rest}=frame;return JSON.stringify(re
 /* The one period every continuous indicator shares. It is a published token, so
    "two indicators never tick against each other" is checked against the value
    a platform library reads rather than against a number written here. */
-const FLOW=JSON.parse(fs.readFileSync('core/tokens/crystal.json','utf8')).motion.flow;
-assert(Number.isFinite(FLOW)&&FLOW>0,'motion.flow is missing from core/tokens/crystal.json');
+const FLOW=JSON.parse(fs.readFileSync('core/tokens/prismata.json','utf8')).motion.flow;
+assert(Number.isFinite(FLOW)&&FLOW>0,'motion.flow is missing from core/tokens/prismata.json');
 /* Only these may repeat. A loop anywhere else is ambient motion (what a surface
    does at rest), which Meridian withdrew from 2.0. This check keeps it out. */
 const CONTINUOUS=new Set(['activity-turn','activity-travel','skeleton-sweep']);
@@ -73,7 +73,7 @@ for(const recipe of data.recipes){
         recipe.id+' deformation "'+match[0]+'" has area '+area.toFixed(4)+'; a fluid conserves volume');
     }
   }
-assert(!ids.has(recipe.id),'Duplicate recipe '+recipe.id);ids.add(recipe.id);/* Crystal's 5000ms ceiling protects responsiveness: nobody may be stranded
+assert(!ids.has(recipe.id),'Duplicate recipe '+recipe.id);ids.add(recipe.id);/* Prismata's 5000ms ceiling protects responsiveness: nobody may be stranded
    inside a transition. A loop never blocks an interaction or gates a state
    change, so nobody waits through it, and its limit is set by how it reads.
    Two seconds suits a gesture that repeats in place, like a breath. A gesture
@@ -85,7 +85,7 @@ assert(recipe.duration>0&&recipe.duration<=ceiling,
   recipe.id+' duration '+recipe.duration+'ms exceeds the '+ceiling+'ms limit for its kind');assert(['Motion','GSAP'].includes(recipe.engine));assert(recipe.use&&recipe.reduced&&recipe.material&&recipe.signature);assert(recipe.keyframes.length>=2);for(const frame of recipe.keyframes){for(const match of (frame.transform||'').matchAll(/translate[XYZ]?\((-?[\d.]+)px/g))assert(Math.abs(Number(match[1]))<=50||recipe.travelException,recipe.id+' requires a documented large-travel exception');}}
 /* The engine versions exist in three places and all three have to agree.
  *
- * `core/package.json` is the authority: gsap and motion are @crystal-ui/core's
+ * `core/package.json` is the authority: gsap and motion are @prismata/core's
  * runtime contract, and a consumer installs whatever it declares. The workspace
  * manifest needs them too, because `tools/sync-licences.cjs` copies their
  * licence notices out of `node_modules/` and into `core/licenses/`, which the
@@ -102,12 +102,12 @@ for(const name of ['motion','gsap']){
   const declared=core.dependencies[name];
   assert(declared,`core/package.json does not declare ${name}`);
   assert.equal(pkg.devDependencies[name],declared,
-    `the workspace builds the engine bundle from ${name} ${pkg.devDependencies[name]} while @crystal-ui/core ships ${declared}`);
+    `the workspace builds the engine bundle from ${name} ${pkg.devDependencies[name]} while @prismata/core ships ${declared}`);
   assert.equal(lock.packages['node_modules/'+name].version,declared,
-    `the lockfile installs ${name} ${lock.packages['node_modules/'+name].version}, not the ${declared} @crystal-ui/core declares`);
+    `the lockfile installs ${name} ${lock.packages['node_modules/'+name].version}, not the ${declared} @prismata/core declares`);
 }
 /* The engine bundle and the browser's motion catalogue are built by the
-   website, from this library's recipes, and are checked in crystal-preview
+   website, from this library's recipes, and are checked in prismata-preview
    where they are produced. This library guarantees the recipe data and the
    versions it declares, which is everything above. */
 const result={recipes:ids.size,categories:new Set(data.recipes.map(r=>r.category)).size,engines:pkg.dependencies,staticContracts:'passed'};

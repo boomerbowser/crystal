@@ -13,7 +13,7 @@
  * as if they were primitives.
  *
  * Benchmarked against Tailwind UI, Mantine UI, Ant Design Pro, MUI Templates and
- * PrimeBlocks, which are where this tier exists in the ecosystems Crystal is
+ * PrimeBlocks, which are where this tier exists in the ecosystems Prismata is
  * measured against.
  *
  *   node tools/extend-catalogue-3.cjs --write
@@ -25,8 +25,8 @@ const DIR = path.resolve(__dirname, '../core/tokens/catalogue');
 const WRITE = process.argv.includes('--write');
 
 const R = 'Resin', H = 'Haze', F = 'Frost', S = 'Stone';
-const c = (id, name, anatomy, states, material, geometry, semantics, crystal, product, parity) =>
-  ({ id, name, anatomy, states, material, geometry, semantics, crystal, product, parity });
+const c = (id, name, anatomy, states, material, geometry, semantics, prismata, product, parity) =>
+  ({ id, name, anatomy, states, material, geometry, semantics, prismata, product, parity });
 
 /* Shared shorthands: most entries in a suite share their material and geometry
    answers, and repeating them verbatim would let them drift apart. */
@@ -47,7 +47,7 @@ const ADDITIONS = {
     c('lead', 'Lead', 'The standfirst paragraph beneath a title.',
       ['at-rest'], 'Inherits', 'One step above body; measure capped for reading.',
       'A paragraph, not a heading.', 'Step and measure', 'The words', ['mantine:Text']),
-    c('prose-list', 'Prose list', 'Ordered and unordered lists inside running text, with Crystal markers.',
+    c('prose-list', 'Prose list', 'Ordered and unordered lists inside running text, with Prismata markers.',
       ['at-rest'], 'Inherits', 'Marker inset follows the spacing scale; hanging indent preserved.',
       'Real ul and ol so the count and nesting are announced.',
       'Marker treatment, spacing, nesting rhythm', 'Content and ordering',
@@ -492,7 +492,7 @@ const META = {
   '12-commerce': {
     id: 'commerce',
     name: 'Commerce',
-    description: 'Functional e-commerce components. Crystal named none before, which left every store to reinvent a quantity stepper, a variant selector and a cart summary — and to re-solve availability, currency formatting and checkout validation each time. Payment is deliberately bounded: these components never handle raw card data, and defer to the host provider\'s own element.',
+    description: 'Functional e-commerce components. Prismata named none before, which left every store to reinvent a quantity stepper, a variant selector and a cart summary — and to re-solve availability, currency formatting and checkout validation each time. Payment is deliberately bounded: these components never handle raw card data, and defer to the host provider\'s own element.',
     components: [],
   },
   '13-screens': {

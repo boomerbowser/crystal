@@ -5,12 +5,12 @@
  * The colour area, the colour slider and the colour wheel name "Resin thumb"
  * in their material, and until now their surface was `none`, held in
  * build-catalogue.cjs's UNMEASURED because no renderer drew the Resin thumb:
- * Crystal React's thumb was the picked colour (CONTRACT §3, measure before
- * assigning). Crystal React now draws it (crystal-react, branch
+ * Prismata React's thumb was the picked colour (CONTRACT §3, measure before
+ * assigning). Prismata React now draws it (prismata-react, branch
  * r-a10-resin-thumb). Measured on 7 November 2026 in Chromium against the built
- * stories on @crystal-ui/core 2.4.0, computed values, light and dark, on the
+ * stories on @prismata/core 2.4.0, computed values, light and dark, on the
  * area, the hue slider and the wheel of "Inputs/Temporal, colour and files":
- * each thumb is `.cr-resin`, `rgba(255, 255, 255, 0.2)` light and
+ * each thumb is `.pr-resin`, `rgba(255, 255, 255, 0.2)` light and
  * `rgba(29, 23, 48, 0.2)` dark, the rim at 0.85 and 0.17, the float shadow,
  * `blur(20px) saturate(1.65)`, with the picked colour as a disc inside it and
  * a dark hairline outside it so the thumb keeps an edge on any colour.

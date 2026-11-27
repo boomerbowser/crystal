@@ -1,122 +1,122 @@
-/* Crystal cascade layers, declared once and in precedence order.
-   reset:     element-level defaults Crystal sets on a product root
+/* Prismata cascade layers, declared once and in precedence order.
+   reset:     element-level defaults Prismata sets on a product root
    base:      the consuming page's own layout and typography
-   component: Crystal's controls and material surfaces, which win over base
+   component: Prismata's controls and material surfaces, which win over base
    override:  reserved for the consuming product
    Unlayered CSS beats every layer, so a product needs no specificity contest
-   to override Crystal: an ordinary rule in its own stylesheet is enough. */
-@layer crystal.reset, crystal.base, crystal.component, crystal.override;
+   to override Prismata: an ordinary rule in its own stylesheet is enough. */
+@layer prismata.reset, prismata.base, prismata.component, prismata.override;
 
-@layer crystal.reset {
+@layer prismata.reset {
 @font-face{font-family:Manrope;src:url('fonts/manrope.woff2') format('woff2');font-weight:200 800;font-display:swap}
-/* Crystal 1.0: framework-independent primitives. Theme variables are supplied by
-   crystal-theme.css or by a configuration exported from the playground. */
-:root{--cr-font:Manrope,system-ui,sans-serif;--cr-radius:28px;--cr-space:20px;--cr-reading:16px;--cr-leading:1.6;color-scheme:light}
-*{box-sizing:border-box}body{margin:0;color:var(--cr-text);background:var(--cr-canvas);font-family:var(--cr-font);font-size:16px;line-height:var(--cr-leading)}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}a{color:var(--cr-primary);text-underline-offset:4px}:where(:root:not([data-crystal-modality=pointer])) button:focus-visible,:where(:root:not([data-crystal-modality=pointer])) a:focus-visible,:where(:root:not([data-crystal-modality=pointer])) input:focus-visible,:where(:root:not([data-crystal-modality=pointer])) select:focus-visible,:where(:root:not([data-crystal-modality=pointer])) textarea:focus-visible,:where(:root:not([data-crystal-modality=pointer])) summary:focus-visible,:where(:root:not([data-crystal-modality=pointer])) [tabindex]:focus-visible{outline:var(--cr-focus-core-width,2px) solid var(--cr-focus-core,var(--cr-primary));outline-offset:var(--cr-focus-core-offset,3px);box-shadow:var(--cr-focus-ring,0 0 6px 1px var(--cr-focus-feather-1,color-mix(in srgb,var(--cr-primary) 46%,transparent)),0 0 16px 3px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 0 30px 6px var(--cr-focus-feather-3,color-mix(in srgb,var(--cr-primary) 17%,transparent)),0 0 54px 11px var(--cr-focus-feather-4,color-mix(in srgb,var(--cr-primary) 8%,transparent)),0 8px 18px var(--cr-focus-feather-2,color-mix(in srgb,var(--cr-primary) 30%,transparent)),0 22px 40px var(--cr-focus-shadow,color-mix(in srgb,var(--cr-decorative) 27%,transparent)))}button:disabled{cursor:not-allowed;opacity:.55}button{transition:background var(--cr-state),box-shadow var(--cr-state),transform var(--cr-press)}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{line-height:1.2;letter-spacing:-.04em}button:has(svg){display:inline-flex;align-items:center;justify-content:center;gap:9px}
+/* Prismata 1.0: framework-independent primitives. Theme variables are supplied by
+   prismata-theme.css or by a configuration exported from the playground. */
+:root{--pr-font:Manrope,system-ui,sans-serif;--pr-radius:28px;--pr-space:20px;--pr-reading:16px;--pr-leading:1.6;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;color:var(--pr-text);background:var(--pr-canvas);font-family:var(--pr-font);font-size:16px;line-height:var(--pr-leading)}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,textarea{touch-action:manipulation}button{cursor:pointer}a{color:var(--pr-primary);text-underline-offset:4px}:where(:root:not([data-prismata-modality=pointer])) button:focus-visible,:where(:root:not([data-prismata-modality=pointer])) a:focus-visible,:where(:root:not([data-prismata-modality=pointer])) input:focus-visible,:where(:root:not([data-prismata-modality=pointer])) select:focus-visible,:where(:root:not([data-prismata-modality=pointer])) textarea:focus-visible,:where(:root:not([data-prismata-modality=pointer])) summary:focus-visible,:where(:root:not([data-prismata-modality=pointer])) [tabindex]:focus-visible{outline:var(--pr-focus-core-width,2px) solid var(--pr-focus-core,var(--pr-primary));outline-offset:var(--pr-focus-core-offset,3px);box-shadow:var(--pr-focus-ring,0 0 6px 1px var(--pr-focus-feather-1,color-mix(in srgb,var(--pr-primary) 46%,transparent)),0 0 16px 3px var(--pr-focus-feather-2,color-mix(in srgb,var(--pr-primary) 30%,transparent)),0 0 30px 6px var(--pr-focus-feather-3,color-mix(in srgb,var(--pr-primary) 17%,transparent)),0 0 54px 11px var(--pr-focus-feather-4,color-mix(in srgb,var(--pr-primary) 8%,transparent)),0 8px 18px var(--pr-focus-feather-2,color-mix(in srgb,var(--pr-primary) 30%,transparent)),0 22px 40px var(--pr-focus-shadow,color-mix(in srgb,var(--pr-decorative) 27%,transparent)))}button:disabled{cursor:not-allowed;opacity:.55}button{transition:background var(--pr-state),box-shadow var(--pr-state),transform var(--pr-press)}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4{line-height:1.2;letter-spacing:-.04em}button:has(svg){display:inline-flex;align-items:center;justify-content:center;gap:9px}
 /* Plastic has a glow of its own, the primary lifted by the scheme's tint. It is
    a material property and stays. The drift of that glow across the foundation
    is ambient motion, which is deferred with the rest of the tier, so the
    gradient holds at its resting position. */
-:is(.cr-plastic,.cr-foundation){background-color:var(--cr-canvas);background-image:radial-gradient(ellipse 58% 44% at 26% 34%,var(--cr-atmosphere-glow),transparent 72%),radial-gradient(ellipse at 5% 12%,var(--cr-atmosphere-one),transparent 64%),radial-gradient(ellipse at 96% 88%,var(--cr-atmosphere-two),transparent 63%);isolation:isolate}
-:is(.cr-haze,.cr-surface){background:var(--cr-surface);border:1px solid var(--cr-edge);border-radius:var(--cr-radius);box-shadow:var(--cr-shadow-content);color:var(--cr-text)}
-:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass){position:relative;isolation:isolate;border:1px solid var(--cr-rim);background:var(--cr-frost-fill);box-shadow:var(--cr-shadow-panel);border-radius:calc(var(--cr-radius) + 6px);-webkit-backdrop-filter:blur(var(--cr-frost-blur)) saturate(var(--cr-frost-saturation));backdrop-filter:blur(var(--cr-frost-blur)) saturate(var(--cr-frost-saturation))}
-:is(.cr-frost,.cr-acrylic):before{content:'';position:absolute;inset:0;pointer-events:none;z-index:-1;border-radius:inherit;opacity:var(--cr-grain-opacity);background-image:url('grain.svg')}
-:is(.cr-resin,.cr-glass){background:var(--cr-resin-fill);border-radius:999px;box-shadow:var(--cr-shadow-float);-webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation))}
-.cr-well{background:var(--cr-surface);border-radius:calc(var(--cr-radius) - 7px);color:var(--cr-text);border:1px solid var(--cr-edge)}
-.cr-button{min-height:48px;padding:15px 24px;border-radius:999px;border:1px solid transparent;font-weight:750;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;line-height:1.3}
-/* The button vocabulary is four names, and each names a colour role Crystal
+:is(.pr-plastic,.pr-foundation){background-color:var(--pr-canvas);background-image:radial-gradient(ellipse 58% 44% at 26% 34%,var(--pr-atmosphere-glow),transparent 72%),radial-gradient(ellipse at 5% 12%,var(--pr-atmosphere-one),transparent 64%),radial-gradient(ellipse at 96% 88%,var(--pr-atmosphere-two),transparent 63%);isolation:isolate}
+:is(.pr-haze,.pr-surface){background:var(--pr-surface);border:1px solid var(--pr-edge);border-radius:var(--pr-radius);box-shadow:var(--pr-shadow-content);color:var(--pr-text)}
+:is(.pr-frost,.pr-acrylic),:is(.pr-resin,.pr-glass){position:relative;isolation:isolate;border:1px solid var(--pr-rim);background:var(--pr-frost-fill);box-shadow:var(--pr-shadow-panel);border-radius:calc(var(--pr-radius) + 6px);-webkit-backdrop-filter:blur(var(--pr-frost-blur)) saturate(var(--pr-frost-saturation));backdrop-filter:blur(var(--pr-frost-blur)) saturate(var(--pr-frost-saturation))}
+:is(.pr-frost,.pr-acrylic):before{content:'';position:absolute;inset:0;pointer-events:none;z-index:-1;border-radius:inherit;opacity:var(--pr-grain-opacity);background-image:url('grain.svg')}
+:is(.pr-resin,.pr-glass){background:var(--pr-resin-fill);border-radius:999px;box-shadow:var(--pr-shadow-float);-webkit-backdrop-filter:blur(var(--pr-resin-blur)) saturate(var(--pr-resin-saturation));backdrop-filter:blur(var(--pr-resin-blur)) saturate(var(--pr-resin-saturation))}
+.pr-well{background:var(--pr-surface);border-radius:calc(var(--pr-radius) - 7px);color:var(--pr-text);border:1px solid var(--pr-edge)}
+.pr-button{min-height:48px;padding:15px 24px;border-radius:999px;border:1px solid transparent;font-weight:750;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;line-height:1.3}
+/* The button vocabulary is four names, and each names a colour role Prismata
    defines.
 
-   `.cr-button` is the action control: a Resin shell with the neutral Haze
+   `.pr-button` is the action control: a Resin shell with the neutral Haze
    reading fill. `.primary` is the one tinted in the palette's action colour,
    `.quiet` drops the reading fill, `.danger` adds the independent
    destructive boundary. Emphasis is opt-in, because a rule that enumerates
    the variants it must not tint paints every variant it forgets.
 
-   There is no `.secondary`. It named a second action colour, and Crystal has
+   There is no `.secondary`. It named a second action colour, and Prismata has
    no such role: the palettes publish one action pair, and the companion and
    glow hues are expressive paint that is never assumed to be text-safe. See
    `docs/colors.md`.
 
-   The bare `.cr-button` does not set `background:var(--cr-primary)` or
-   `color:var(--cr-on-primary)` here. The component layer outranks this one,
+   The bare `.pr-button` does not set `background:var(--pr-primary)` or
+   `color:var(--pr-on-primary)` here. The component layer outranks this one,
    so they would not render, and the tint belongs to `.primary`. */
-.cr-input{min-height:44px;border:1px solid var(--cr-outline);border-radius:12px;background:var(--cr-surface);padding:10px 12px;width:100%;color:var(--cr-text)}.cr-input::placeholder{color:var(--cr-muted)}
-.cr-status{display:inline-flex;align-items:center;gap:7px;border-radius:9px;padding:5px 9px;background:var(--status-surface);color:var(--status-ink);font-size:13px;font-weight:750;line-height:1.4;/* Adopted from the preview 21 September 2026 with D-11's third divergence.
-   It scopes --cr-outline to the status ink for the chip's subtree. Nothing
-   in the library reads it there: --cr-outline is consumed by .cr-input,
-   .cr-dialog, the Frost/Resin border and the two scrollbar rules, none of
+.pr-input{min-height:44px;border:1px solid var(--pr-outline);border-radius:12px;background:var(--pr-surface);padding:10px 12px;width:100%;color:var(--pr-text)}.pr-input::placeholder{color:var(--pr-muted)}
+.pr-status{display:inline-flex;align-items:center;gap:7px;border-radius:9px;padding:5px 9px;background:var(--status-surface);color:var(--status-ink);font-size:13px;font-weight:750;line-height:1.4;/* Adopted from the preview 21 September 2026 with D-11's third divergence.
+   It scopes --pr-outline to the status ink for the chip's subtree. Nothing
+   in the library reads it there: --pr-outline is consumed by .pr-input,
+   .pr-dialog, the Frost/Resin border and the two scrollbar rules, none of
    which can match inside a chip, and the chip's own rim comes from
-   --cr-rim. It is kept because the preview carries it and a consumer may
-   nest something that reads it. It changes nothing the library renders. */--cr-outline:var(--status-ink)}.cr-status[data-status=success]{--status-surface:var(--cr-success-surface);--status-ink:var(--cr-success-ink)}.cr-status[data-status=attention]{--status-surface:var(--cr-attention-surface);--status-ink:var(--cr-attention-ink)}.cr-status[data-status=danger]{--status-surface:var(--cr-danger-surface);--status-ink:var(--cr-danger-ink)}.cr-status[data-status=info]{--status-surface:var(--cr-info-surface);--status-ink:var(--cr-info-ink)}
-.cr-bubble{background:var(--cr-surface);color:var(--cr-text);border:1px solid var(--cr-edge);border-radius:6px var(--cr-radius) var(--cr-radius) var(--cr-radius);box-shadow:var(--cr-shadow-content);padding:14px 18px;line-height:1.5;font-size:16px}.cr-bubble.own{border-radius:var(--cr-radius) 6px var(--cr-radius) var(--cr-radius);background:var(--cr-primary-soft);color:var(--cr-on-primary-soft)}[dir=rtl] .cr-bubble{border-radius:var(--cr-radius) 6px var(--cr-radius) var(--cr-radius)}[dir=rtl] .cr-bubble.own{border-radius:6px var(--cr-radius) var(--cr-radius) var(--cr-radius)}
-.cr-dock{display:flex;align-items:center;gap:4px;padding:8px;max-width:100%}.cr-dock-inner{display:flex;gap:3px;align-items:center;border-radius:999px;background:var(--cr-label-fill);padding:3px;width:100%}.cr-dock button{min-height:44px;border:0;background:none;padding:10px 17px;border-radius:999px;font-weight:700;white-space:nowrap;color:var(--cr-text)}/* A selected dock label has no underline. Selection is carried by label
+   --pr-rim. It is kept because the preview carries it and a consumer may
+   nest something that reads it. It changes nothing the library renders. */--pr-outline:var(--status-ink)}.pr-status[data-status=success]{--status-surface:var(--pr-success-surface);--status-ink:var(--pr-success-ink)}.pr-status[data-status=attention]{--status-surface:var(--pr-attention-surface);--status-ink:var(--pr-attention-ink)}.pr-status[data-status=danger]{--status-surface:var(--pr-danger-surface);--status-ink:var(--pr-danger-ink)}.pr-status[data-status=info]{--status-surface:var(--pr-info-surface);--status-ink:var(--pr-info-ink)}
+.pr-bubble{background:var(--pr-surface);color:var(--pr-text);border:1px solid var(--pr-edge);border-radius:6px var(--pr-radius) var(--pr-radius) var(--pr-radius);box-shadow:var(--pr-shadow-content);padding:14px 18px;line-height:1.5;font-size:16px}.pr-bubble.own{border-radius:var(--pr-radius) 6px var(--pr-radius) var(--pr-radius);background:var(--pr-primary-soft);color:var(--pr-on-primary-soft)}[dir=rtl] .pr-bubble{border-radius:var(--pr-radius) 6px var(--pr-radius) var(--pr-radius)}[dir=rtl] .pr-bubble.own{border-radius:6px var(--pr-radius) var(--pr-radius) var(--pr-radius)}
+.pr-dock{display:flex;align-items:center;gap:4px;padding:8px;max-width:100%}.pr-dock-inner{display:flex;gap:3px;align-items:center;border-radius:999px;background:var(--pr-label-fill);padding:3px;width:100%}.pr-dock button{min-height:44px;border:0;background:none;padding:10px 17px;border-radius:999px;font-weight:700;white-space:nowrap;color:var(--pr-text)}/* A selected dock label has no underline. Selection is carried by label
    weight alone, and the component layer sets text-decoration:none. */
-.cr-dock button[aria-pressed=true]{background:var(--cr-primary);color:var(--cr-on-primary);box-shadow:0 2px 5px #0002}.cr-dock button:hover:not([aria-pressed=true]){background:var(--cr-surface)}
-.cr-dialog{border:1px solid var(--cr-outline);background:var(--cr-surface);color:var(--cr-text);padding:30px;border-radius:calc(var(--cr-radius) + 6px);width:min(560px,calc(100% - 32px));box-shadow:var(--cr-shadow-float);max-height:85dvh;overflow:auto;overflow-x:hidden}.cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fill);-webkit-backdrop-filter:blur(var(--cr-mirage-blur)) saturate(var(--cr-mirage-saturation)) brightness(var(--cr-mirage-brightness));backdrop-filter:blur(var(--cr-mirage-blur)) saturate(var(--cr-mirage-saturation)) brightness(var(--cr-mirage-brightness))}.cr-dialog header{display:flex;justify-content:space-between;align-items:start;gap:20px}.cr-dialog h2{font-size:26px}.cr-dialog footer{display:flex;gap:10px;justify-content:flex-end;margin-top:24px}.cr-dialog pre{max-height:300px;overflow:auto}
-[data-effects=opaque] :is(.cr-frost,.cr-acrylic),[data-effects=opaque] :is(.cr-resin,.cr-glass){-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--cr-surface);border-color:var(--cr-outline)}[data-effects=opaque] :is(.cr-frost,.cr-acrylic):before{display:none}
-@supports not (backdrop-filter:blur(1px)){:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass){background:var(--cr-surface);border-color:var(--cr-outline)}}
-@media(prefers-reduced-transparency:reduce){:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass){background:var(--cr-surface);-webkit-backdrop-filter:none;backdrop-filter:none}:is(.cr-frost,.cr-acrylic):before{display:none}}
+.pr-dock button[aria-pressed=true]{background:var(--pr-primary);color:var(--pr-on-primary);box-shadow:0 2px 5px #0002}.pr-dock button:hover:not([aria-pressed=true]){background:var(--pr-surface)}
+.pr-dialog{border:1px solid var(--pr-outline);background:var(--pr-surface);color:var(--pr-text);padding:30px;border-radius:calc(var(--pr-radius) + 6px);width:min(560px,calc(100% - 32px));box-shadow:var(--pr-shadow-float);max-height:85dvh;overflow:auto;overflow-x:hidden}.pr-dialog::backdrop,.pr-mirage{background:var(--pr-mirage-fill);-webkit-backdrop-filter:blur(var(--pr-mirage-blur)) saturate(var(--pr-mirage-saturation)) brightness(var(--pr-mirage-brightness));backdrop-filter:blur(var(--pr-mirage-blur)) saturate(var(--pr-mirage-saturation)) brightness(var(--pr-mirage-brightness))}.pr-dialog header{display:flex;justify-content:space-between;align-items:start;gap:20px}.pr-dialog h2{font-size:26px}.pr-dialog footer{display:flex;gap:10px;justify-content:flex-end;margin-top:24px}.pr-dialog pre{max-height:300px;overflow:auto}
+[data-effects=opaque] :is(.pr-frost,.pr-acrylic),[data-effects=opaque] :is(.pr-resin,.pr-glass){-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--pr-surface);border-color:var(--pr-outline)}[data-effects=opaque] :is(.pr-frost,.pr-acrylic):before{display:none}
+@supports not (backdrop-filter:blur(1px)){:is(.pr-frost,.pr-acrylic),:is(.pr-resin,.pr-glass){background:var(--pr-surface);border-color:var(--pr-outline)}}
+@media(prefers-reduced-transparency:reduce){:is(.pr-frost,.pr-acrylic),:is(.pr-resin,.pr-glass){background:var(--pr-surface);-webkit-backdrop-filter:none;backdrop-filter:none}:is(.pr-frost,.pr-acrylic):before{display:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}button:active:not(:disabled){transform:none}}
-@media(forced-colors:active){:is(.cr-plastic,.cr-foundation),:is(.cr-haze,.cr-surface),.cr-bubble,:is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass),.cr-well,.cr-dock-inner{background:Canvas!important;color:CanvasText!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border:1px solid CanvasText}:is(.cr-frost,.cr-acrylic):before{display:none}.cr-button,.cr-status{forced-color-adjust:auto;border:1px solid ButtonText}.cr-dock button[aria-pressed=true]{outline:2px solid Highlight}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline-color:Highlight}}
+@media(forced-colors:active){:is(.pr-plastic,.pr-foundation),:is(.pr-haze,.pr-surface),.pr-bubble,:is(.pr-frost,.pr-acrylic),:is(.pr-resin,.pr-glass),.pr-well,.pr-dock-inner{background:Canvas!important;color:CanvasText!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border:1px solid CanvasText}:is(.pr-frost,.pr-acrylic):before{display:none}.pr-button,.pr-status{forced-color-adjust:auto;border:1px solid ButtonText}.pr-dock button[aria-pressed=true]{outline:2px solid Highlight}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline-color:Highlight}}
 
 /* Smooth optical body and illuminated rim distinguish Glass from grainy Acrylic. */
-:is(.cr-resin,.cr-glass)::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;background:linear-gradient(145deg,rgba(255,255,255,.23),transparent 32%,transparent 69%,rgba(255,255,255,.10))}
-:is(.cr-resin,.cr-glass)::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 1px 1px 1px rgba(255,255,255,.72),inset -1px -1px 1px rgba(255,255,255,.28)}
-[data-effects=opaque] :is(.cr-resin,.cr-glass)::before,[data-effects=opaque] :is(.cr-resin,.cr-glass)::after{display:none}
-@media(prefers-reduced-transparency:reduce){:is(.cr-resin,.cr-glass)::before,:is(.cr-resin,.cr-glass)::after{display:none}}
-@media(forced-colors:active){:is(.cr-resin,.cr-glass)::before,:is(.cr-resin,.cr-glass)::after{display:none}}
+:is(.pr-resin,.pr-glass)::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;background:linear-gradient(145deg,rgba(255,255,255,.23),transparent 32%,transparent 69%,rgba(255,255,255,.10))}
+:is(.pr-resin,.pr-glass)::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 1px 1px 1px rgba(255,255,255,.72),inset -1px -1px 1px rgba(255,255,255,.28)}
+[data-effects=opaque] :is(.pr-resin,.pr-glass)::before,[data-effects=opaque] :is(.pr-resin,.pr-glass)::after{display:none}
+@media(prefers-reduced-transparency:reduce){:is(.pr-resin,.pr-glass)::before,:is(.pr-resin,.pr-glass)::after{display:none}}
+@media(forced-colors:active){:is(.pr-resin,.pr-glass)::before,:is(.pr-resin,.pr-glass)::after{display:none}}
 /* The Resin divider (2.7.0) is a line the pointer holds; in forced colours it is drawn in CanvasText, not erased to Canvas. */
-@media(forced-colors:active){:is(.cr-resin,.cr-glass).divider{background:CanvasText!important}}
+@media(forced-colors:active){:is(.pr-resin,.pr-glass).divider{background:CanvasText!important}}
 
 /* The host supplies activation state; this primitive never samples the desktop. */
-:is(.cr-plastic,.cr-foundation)[data-window-active="false"]{background-color:var(--cr-plastic-inactive);background-image:none}
+:is(.pr-plastic,.pr-foundation)[data-window-active="false"]{background-color:var(--pr-plastic-inactive);background-image:none}
 
 /* Content paint is feathered separately: text, controls and focus remain crisp. */
-:is(.cr-haze,.cr-surface),.cr-well,.cr-bubble,.cr-content-fill,.cr-dialog{
+:is(.pr-haze,.pr-surface),.pr-well,.pr-bubble,.pr-content-fill,.pr-dialog{
   position:relative;isolation:isolate;background:transparent;border-color:transparent;
-  box-shadow:none;color:var(--cr-text);
+  box-shadow:none;color:var(--pr-text);
 }
-:is(.cr-haze,.cr-surface)::before,.cr-well::before,.cr-bubble::before,.cr-content-fill::before,.cr-dialog::before{
+:is(.pr-haze,.pr-surface)::before,.pr-well::before,.pr-bubble::before,.pr-content-fill::before,.pr-dialog::before{
   content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
-  border-radius:inherit;background:var(--cr-haze-fill);
-  filter:blur(var(--cr-haze-feather));box-shadow:var(--cr-shadow-content);
+  border-radius:inherit;background:var(--pr-haze-fill);
+  filter:blur(var(--pr-haze-feather));box-shadow:var(--pr-shadow-content);
 }
-.cr-bubble.own{background:transparent;color:var(--cr-content-own-text)}
-.cr-bubble.own::before{background:var(--cr-haze-own-fill)}
-.cr-well::before,.cr-content-fill::before{box-shadow:none}
+.pr-bubble.own{background:transparent;color:var(--pr-content-own-text)}
+.pr-bubble.own::before{background:var(--pr-haze-own-fill)}
+.pr-well::before,.pr-content-fill::before{box-shadow:none}
 /* Fixed centres a native <dialog>, which the browser gives inset:0 and auto
    margins when it is modal. On any other element the class is the material and
    the host positions it (D-29). */
-dialog.cr-dialog{position:fixed}
-.cr-dialog::before{box-shadow:var(--cr-shadow-float)}
-:is(:is(.cr-haze,.cr-surface),.cr-well,.cr-bubble,.cr-content-fill,.cr-dialog) a:not(.cr-button){color:inherit;text-decoration:underline}
+dialog.pr-dialog{position:fixed}
+.pr-dialog::before{box-shadow:var(--pr-shadow-float)}
+:is(:is(.pr-haze,.pr-surface),.pr-well,.pr-bubble,.pr-content-fill,.pr-dialog) a:not(.pr-button){color:inherit;text-decoration:underline}
 /* Place content >=12px from the feathered edge; functional boundaries remain explicit. */
-[data-effects=opaque] :is(:is(.cr-haze,.cr-surface),.cr-well,.cr-bubble,.cr-content-fill,.cr-dialog)::before{background:var(--cr-surface);filter:none}
-[data-effects=opaque] .cr-bubble.own::before{background:var(--cr-content-own-base)}
+[data-effects=opaque] :is(:is(.pr-haze,.pr-surface),.pr-well,.pr-bubble,.pr-content-fill,.pr-dialog)::before{background:var(--pr-surface);filter:none}
+[data-effects=opaque] .pr-bubble.own::before{background:var(--pr-content-own-base)}
 @media(prefers-reduced-transparency:reduce){
-  :is(:is(.cr-haze,.cr-surface),.cr-well,.cr-bubble,.cr-content-fill,.cr-dialog)::before{background:var(--cr-surface);filter:none}
-  .cr-bubble.own::before{background:var(--cr-content-own-base)}
+  :is(:is(.pr-haze,.pr-surface),.pr-well,.pr-bubble,.pr-content-fill,.pr-dialog)::before{background:var(--pr-surface);filter:none}
+  .pr-bubble.own::before{background:var(--pr-content-own-base)}
 }
 @media(forced-colors:active){
-  :is(:is(.cr-haze,.cr-surface),.cr-well,.cr-bubble,.cr-content-fill,.cr-dialog,.cr-dock-inner){background:Canvas!important;color:CanvasText!important;border:1px solid CanvasText}
-  :is(:is(.cr-haze,.cr-surface),.cr-well,.cr-bubble,.cr-content-fill,.cr-dialog,.cr-dock-inner)::before{display:none}
+  :is(:is(.pr-haze,.pr-surface),.pr-well,.pr-bubble,.pr-content-fill,.pr-dialog,.pr-dock-inner){background:Canvas!important;color:CanvasText!important;border:1px solid CanvasText}
+  :is(:is(.pr-haze,.pr-surface),.pr-well,.pr-bubble,.pr-content-fill,.pr-dialog,.pr-dock-inner)::before{display:none}
 }
 
 
 /* Scrolling.
  *
- * A scrollbar in Crystal belongs to the material it scrolls. There are two, and
+ * A scrollbar in Prismata belongs to the material it scrolls. There are two, and
  * the material hierarchy decides which one a surface gets:
  *
- *   .cr-scroll-frost   panels and long reading surfaces. Frost is the
+ *   .pr-scroll-frost   panels and long reading surfaces. Frost is the
  *                      intermediate layer, so a scrollbar on a panel reads as
  *                      part of the panel.
- *   .cr-scroll-resin   floating control planes, menus, popovers and compact
+ *   .pr-scroll-resin   floating control planes, menus, popovers and compact
  *                      scrollers. Resin is the control plane, and a scrollbar
  *                      there is a control sitting above content.
  *
- * `.cr-scroll` is the shared behaviour both build on, and can be applied to any
+ * `.pr-scroll` is the shared behaviour both build on, and can be applied to any
  * scroll container on its own:
  *
  *   - `overscroll-behavior: contain` stops scroll chaining. On a phone, swiping
@@ -126,7 +126,7 @@ dialog.cr-dialog{position:fixed}
  *     direction when a vertical scrollbar appears, which otherwise makes a
  *     growing list jitter. It is not applied to horizontal-only scrollers,
  *     where it reserves space for a scrollbar that never arrives. Add
- *     `.cr-scroll-x` to say a scroller is horizontal-only, since CSS cannot
+ *     `.pr-scroll-x` to say a scroller is horizontal-only, since CSS cannot
  *     work that out.
  *   - `touch-action: pan-x pan-y` keeps the browser's own gesture handling, so
  *     momentum and rubber-banding stay native.
@@ -142,46 +142,46 @@ dialog.cr-dialog{position:fixed}
    contract itself. `scrollbar-color` and `scrollbar-width` inherit, so it
    already looks right. `overscroll-behavior` does not inherit, so it is set
    here. */
-.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog,.cr-dialog pre{
+.pr-scroll,.pr-scroll-frost,.pr-scroll-resin,.pr-table-scroll,.pr-dialog,.pr-dialog pre{
   overscroll-behavior:contain;
   touch-action:pan-x pan-y;
   scrollbar-width:thin;
 }
 /* The gutter belongs to vertical scrolling only. `scrollbar-gutter` reserves
    space on the inline edge, where a vertical scrollbar appears; it does nothing
-   for a horizontal one. `.cr-table-scroll` scrolls horizontally and is therefore
+   for a horizontal one. `.pr-table-scroll` scrolls horizontally and is therefore
    excluded: reserving a gutter there costs every table 12px and prevents no
    shift. A dialog takes `both-edges` because its content is centred, and a
    gutter on one side alone would sit it off-centre. */
-.cr-scroll,.cr-scroll-frost,.cr-scroll-resin{scrollbar-gutter:stable}
-.cr-dialog{scrollbar-gutter:stable both-edges}
+.pr-scroll,.pr-scroll-frost,.pr-scroll-resin{scrollbar-gutter:stable}
+.pr-dialog{scrollbar-gutter:stable both-edges}
 /* A dialog's code block scrolls down past 300px. Without a stable gutter its
    text moves 10px on a desktop when the scrollbar arrives (D-4). A phone's
    overlay scrollbar hides the shift. */
-.cr-dialog pre{scrollbar-gutter:stable}
+.pr-dialog pre{scrollbar-gutter:stable}
 /* A horizontal-only scroller says so, because the stylesheet cannot tell. Setting
    `overflow-x: auto` alone makes `overflow-y` compute to `auto` as well, so the
    browser reserves the inline gutter for a vertical scrollbar that can never
    appear: 12px lost on every such surface, protecting against no shift. This is
-   the declaration `.cr-table-scroll` gets by being excluded from the rule above,
+   the declaration `.pr-table-scroll` gets by being excluded from the rule above,
    made available to anything that uses one of the three classes directly. It
    comes after them, so it wins on order alone without raising specificity. */
-.cr-scroll-x{overflow-x:auto;overflow-y:hidden;scrollbar-gutter:auto}
+.pr-scroll-x{overflow-x:auto;overflow-y:hidden;scrollbar-gutter:auto}
 
 /* A dialog is a reading surface, so it takes the Frost scrollbar; the table
    scroller is a Resin plane and takes the Resin one. */
-.cr-scroll-frost,.cr-dialog{scrollbar-color:var(--cr-scrollbar-frost-thumb) var(--cr-scrollbar-track)}
-.cr-scroll-resin,.cr-table-scroll{scrollbar-color:var(--cr-scrollbar-resin-thumb) var(--cr-scrollbar-track)}
+.pr-scroll-frost,.pr-dialog{scrollbar-color:var(--pr-scrollbar-frost-thumb) var(--pr-scrollbar-track)}
+.pr-scroll-resin,.pr-table-scroll{scrollbar-color:var(--pr-scrollbar-resin-thumb) var(--pr-scrollbar-track)}
 
 /* Reduced transparency and forced colours: keep the shape, drop the translucency. */
-[data-effects=opaque] :is(.cr-scroll-frost,.cr-scroll-resin){
-  scrollbar-color:var(--cr-outline) var(--cr-surface-alt);
+[data-effects=opaque] :is(.pr-scroll-frost,.pr-scroll-resin){
+  scrollbar-color:var(--pr-outline) var(--pr-surface-alt);
 }
 @media(prefers-reduced-transparency:reduce){
-  :is(.cr-scroll-frost,.cr-scroll-resin){scrollbar-color:var(--cr-outline) var(--cr-surface-alt)}
+  :is(.pr-scroll-frost,.pr-scroll-resin){scrollbar-color:var(--pr-outline) var(--pr-surface-alt)}
 }
 @media(forced-colors:active){
-  :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog){scrollbar-color:CanvasText Canvas}
+  :is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin,.pr-table-scroll,.pr-dialog){scrollbar-color:CanvasText Canvas}
 }
 
 /* The scroll area's edge fade.
@@ -193,48 +193,48 @@ dialog.cr-dialog{position:fixed}
  * an unknown backdrop is wrong at every edge except the one it was sampled at.
  * Masking lets the real material show through.
  *
- * `data-cr-scroll` says which edges have content beyond them and is set by
- * whatever runtime owns the container. Crystal React sets it from a scroll
+ * `data-pr-scroll` says which edges have content beyond them and is set by
+ * whatever runtime owns the container. Prismata React sets it from a scroll
  * listener. Without the attribute nothing fades, so a container that never
  * gets a runtime stays unmasked.
  *
  * `scroll-padding` keeps the fade accessible: browsers scroll a newly focused
  * element into view respecting scroll padding, so a focus ring can never come
- * to rest underneath the fade. Crystal does not blur focus, and a fade over a
+ * to rest underneath the fade. Prismata does not blur focus, and a fade over a
  * focus ring would blur it.
  *
  * A mask fades the whole element, its own fill and border included. The fade
  * therefore belongs on the element that scrolls, and a material surface that
  * also scrolls puts its material on a wrapper. Otherwise the panel fades along
  * with the content it holds. */
-:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll]{
-  --cr-scroll-fade-start:0px;--cr-scroll-fade-end:0px;
-  scroll-padding:var(--cr-scroll-fade);
+:is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin)[data-pr-scroll]{
+  --pr-scroll-fade-start:0px;--pr-scroll-fade-end:0px;
+  scroll-padding:var(--pr-scroll-fade);
 }
-:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll=both]{
-  --cr-scroll-fade-start:var(--cr-scroll-fade);--cr-scroll-fade-end:var(--cr-scroll-fade);
+:is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin)[data-pr-scroll=both]{
+  --pr-scroll-fade-start:var(--pr-scroll-fade);--pr-scroll-fade-end:var(--pr-scroll-fade);
 }
 /* `start` means the container is AT its start, so only the far edge fades. */
-:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll=start]{--cr-scroll-fade-end:var(--cr-scroll-fade)}
-:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll=end]{--cr-scroll-fade-start:var(--cr-scroll-fade)}
-:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll][data-cr-scroll-axis=y]{
-  mask-image:linear-gradient(to bottom,transparent 0,#000 var(--cr-scroll-fade-start),
-    #000 calc(100% - var(--cr-scroll-fade-end)),transparent 100%);
+:is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin)[data-pr-scroll=start]{--pr-scroll-fade-end:var(--pr-scroll-fade)}
+:is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin)[data-pr-scroll=end]{--pr-scroll-fade-start:var(--pr-scroll-fade)}
+:is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin)[data-pr-scroll][data-pr-scroll-axis=y]{
+  mask-image:linear-gradient(to bottom,transparent 0,#000 var(--pr-scroll-fade-start),
+    #000 calc(100% - var(--pr-scroll-fade-end)),transparent 100%);
 }
-:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll][data-cr-scroll-axis=x]{
-  mask-image:linear-gradient(to right,transparent 0,#000 var(--cr-scroll-fade-start),
-    #000 calc(100% - var(--cr-scroll-fade-end)),transparent 100%);
+:is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin)[data-pr-scroll][data-pr-scroll-axis=x]{
+  mask-image:linear-gradient(to right,transparent 0,#000 var(--pr-scroll-fade-start),
+    #000 calc(100% - var(--pr-scroll-fade-end)),transparent 100%);
 }
 /* Start and end are logical, so the horizontal gradient turns around in RTL. */
-[dir=rtl] :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll][data-cr-scroll-axis=x],
-:is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[dir=rtl][data-cr-scroll][data-cr-scroll-axis=x]{
-  mask-image:linear-gradient(to left,transparent 0,#000 var(--cr-scroll-fade-start),
-    #000 calc(100% - var(--cr-scroll-fade-end)),transparent 100%);
+[dir=rtl] :is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin)[data-pr-scroll][data-pr-scroll-axis=x],
+:is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin)[dir=rtl][data-pr-scroll][data-pr-scroll-axis=x]{
+  mask-image:linear-gradient(to left,transparent 0,#000 var(--pr-scroll-fade-start),
+    #000 calc(100% - var(--pr-scroll-fade-end)),transparent 100%);
 }
 @media(forced-colors:active){
   /* Forced colours exist to make everything legible, and a fade reduces
      legibility. The scrollbar is already system-coloured and marks the edge. */
-  :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)[data-cr-scroll]{mask-image:none}
+  :is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin)[data-pr-scroll]{mask-image:none}
 }
 
 /* The older path, for engines that predate the standard properties: Safari
@@ -248,127 +248,127 @@ dialog.cr-dialog{position:fixed}
  * specification renders two ways. That is the drift CONTRACT §1 forbids.
  *
  * The older path can express geometry, which the standard properties cannot:
- * `--cr-scrollbar-width`, `--cr-scrollbar-inset` and `--cr-scrollbar-thumb-min`
+ * `--pr-scrollbar-width`, `--pr-scrollbar-inset` and `--pr-scrollbar-thumb-min`
  * reach only this branch, because `scrollbar-width` takes `auto | thin | none`
  * and nothing finer. Those three tokens state the same intent as the standard
  * branch for the older path. */
 @supports not (scrollbar-color:auto){
-  :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog)::-webkit-scrollbar{
-    width:var(--cr-scrollbar-width);height:var(--cr-scrollbar-width);
+  :is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin,.pr-table-scroll,.pr-dialog)::-webkit-scrollbar{
+    width:var(--pr-scrollbar-width);height:var(--pr-scrollbar-width);
   }
-  :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog)::-webkit-scrollbar-track{
-    background:var(--cr-scrollbar-track);border-radius:var(--cr-scrollbar-width);
+  :is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin,.pr-table-scroll,.pr-dialog)::-webkit-scrollbar-track{
+    background:var(--pr-scrollbar-track);border-radius:var(--pr-scrollbar-width);
   }
-  :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog)::-webkit-scrollbar-thumb{
-    border-radius:var(--cr-scrollbar-width);
+  :is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin,.pr-table-scroll,.pr-dialog)::-webkit-scrollbar-thumb{
+    border-radius:var(--pr-scrollbar-width);
     /* The inset is a transparent border with a clipped background, which is the
        only way to inset a scrollbar thumb: padding does not apply to it. */
-    border:var(--cr-scrollbar-inset) solid transparent;
+    border:var(--pr-scrollbar-inset) solid transparent;
     background-clip:padding-box;
-    min-height:var(--cr-scrollbar-thumb-min);min-width:var(--cr-scrollbar-thumb-min);
+    min-height:var(--pr-scrollbar-thumb-min);min-width:var(--pr-scrollbar-thumb-min);
   }
-  :is(.cr-scroll-frost,.cr-dialog)::-webkit-scrollbar-thumb{background-color:var(--cr-scrollbar-frost-thumb)}
-  :is(.cr-scroll-resin,.cr-table-scroll)::-webkit-scrollbar-thumb{background-color:var(--cr-scrollbar-resin-thumb)}
-  :is(.cr-scroll-frost,.cr-scroll-resin)::-webkit-scrollbar-thumb:hover{
+  :is(.pr-scroll-frost,.pr-dialog)::-webkit-scrollbar-thumb{background-color:var(--pr-scrollbar-frost-thumb)}
+  :is(.pr-scroll-resin,.pr-table-scroll)::-webkit-scrollbar-thumb{background-color:var(--pr-scrollbar-resin-thumb)}
+  :is(.pr-scroll-frost,.pr-scroll-resin)::-webkit-scrollbar-thumb:hover{
     /* The rim is the same contour the materials use, so a hovered thumb gains
-       definition the way every other Crystal surface does. */
-    box-shadow:inset 0 0 0 1px var(--cr-rim);
+       definition the way every other Prismata surface does. */
+    box-shadow:inset 0 0 0 1px var(--pr-rim);
   }
-  :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin)::-webkit-scrollbar-corner{background:transparent}
-  [data-effects=opaque] :is(.cr-scroll-frost,.cr-scroll-resin)::-webkit-scrollbar-thumb{
-    background-color:var(--cr-outline);
+  :is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin)::-webkit-scrollbar-corner{background:transparent}
+  [data-effects=opaque] :is(.pr-scroll-frost,.pr-scroll-resin)::-webkit-scrollbar-thumb{
+    background-color:var(--pr-outline);
   }
   @media(prefers-reduced-transparency:reduce){
-    :is(.cr-scroll-frost,.cr-scroll-resin)::-webkit-scrollbar-thumb{background-color:var(--cr-outline)}
+    :is(.pr-scroll-frost,.pr-scroll-resin)::-webkit-scrollbar-thumb{background-color:var(--pr-outline)}
   }
   @media(forced-colors:active){
-    :is(.cr-scroll,.cr-scroll-frost,.cr-scroll-resin,.cr-table-scroll,.cr-dialog)::-webkit-scrollbar-thumb{
+    :is(.pr-scroll,.pr-scroll-frost,.pr-scroll-resin,.pr-table-scroll,.pr-dialog)::-webkit-scrollbar-thumb{
       background-color:CanvasText;border-color:Canvas;
     }
   }
 }
 
 /* Stone shares Haze's feather, with its own unchanged label opacity. */
-.cr-stone,.cr-dock-inner{position:relative;isolation:isolate;background:transparent;color:var(--cr-text)}
-.cr-stone::before,.cr-dock-inner::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:var(--cr-stone-fill);filter:blur(var(--cr-stone-feather))}
-[data-effects=opaque] :is(.cr-stone,.cr-dock-inner)::before{background:var(--cr-surface);filter:none}
+.pr-stone,.pr-dock-inner{position:relative;isolation:isolate;background:transparent;color:var(--pr-text)}
+.pr-stone::before,.pr-dock-inner::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:var(--pr-stone-fill);filter:blur(var(--pr-stone-feather))}
+[data-effects=opaque] :is(.pr-stone,.pr-dock-inner)::before{background:var(--pr-surface);filter:none}
 @media(prefers-reduced-transparency:reduce){
-  :is(.cr-stone,.cr-dock-inner)::before{background:var(--cr-surface);filter:none}
-  .cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fallback-fill);-webkit-backdrop-filter:none;backdrop-filter:none}
+  :is(.pr-stone,.pr-dock-inner)::before{background:var(--pr-surface);filter:none}
+  .pr-dialog::backdrop,.pr-mirage{background:var(--pr-mirage-fallback-fill);-webkit-backdrop-filter:none;backdrop-filter:none}
 }
 @media(forced-colors:active){
-  .cr-stone{background:Canvas!important;color:CanvasText!important;border:1px solid CanvasText}
-  :is(.cr-stone,.cr-dock-inner)::before{display:none}
-  .cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fallback-fill);-webkit-backdrop-filter:none;backdrop-filter:none}
+  .pr-stone{background:Canvas!important;color:CanvasText!important;border:1px solid CanvasText}
+  :is(.pr-stone,.pr-dock-inner)::before{display:none}
+  .pr-dialog::backdrop,.pr-mirage{background:var(--pr-mirage-fallback-fill);-webkit-backdrop-filter:none;backdrop-filter:none}
 }
 
 /* The opaque setting is a request for no translucency, and a scrim is the largest translucent area on screen:
    it takes the same flat fill as reduced transparency (2.7.0). */
-[data-effects=opaque] .cr-mirage,[data-effects=opaque] .cr-dialog::backdrop{background:var(--cr-mirage-fallback-fill);-webkit-backdrop-filter:none;backdrop-filter:none}
+[data-effects=opaque] .pr-mirage,[data-effects=opaque] .pr-dialog::backdrop{background:var(--pr-mirage-fallback-fill);-webkit-backdrop-filter:none;backdrop-filter:none}
 /* Mirage draws its chroma from the actual backdrop, never an invented overlay gradient. */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-  .cr-dialog::backdrop,.cr-mirage{background:var(--cr-mirage-fallback-fill)}
+  .pr-dialog::backdrop,.pr-mirage{background:var(--pr-mirage-fallback-fill)}
 }
 }
 
 /* ---------------------------------------------------------------------------
-   The Resin interaction surface, and the four Crystal components that were
+   The Resin interaction surface, and the four Prismata components that were
    only ever in the preview's stylesheet.
 
-   `.cr-control`, `.cr-field-shell`, `.cr-indicator`, `.cr-resin-haze` and
-   `.cr-tag` are named throughout `docs/components.md`: the indicator is a 20px
-   circle with a 3px-inset 80% Haze fill, and `.cr-resin-haze` is the
+   `.pr-control`, `.pr-field-shell`, `.pr-indicator`, `.pr-resin-haze` and
+   `.pr-tag` are named throughout `docs/components.md`: the indicator is a 20px
+   circle with a 3px-inset 80% Haze fill, and `.pr-resin-haze` is the
    composition small display elements use. The library adopted them on
    21 September 2026 as D-11's third divergence, on Meridian's decision that the
    library adopts rather than the preview drops. They are lifted from
-   `crystal-preview/website/assets/controls.css` with the selector lists
-   filtered to the Crystal parts. The preview's own furniture (`.suite-switch`,
+   `prismata-preview/website/assets/controls.css` with the selector lists
+   filtered to the Prismata parts. The preview's own furniture (`.suite-switch`,
    `.segmented`, the range inputs) shares those rules and stays with the site.
 
-   The block sits in `@layer crystal.component`, where the preview had it and
+   The block sits in `@layer prismata.component`, where the preview had it and
    where the layer order at the top of this file reserves a slot. The rules
-   above sit in `crystal.reset`, an earlier layer, so these win regardless of
+   above sit in `prismata.reset`, an earlier layer, so these win regardless of
    specificity; a reset-layer hover (D-21) and a reset-layer target size (D-20)
    both published values this layer erased. A component recipe belongs in this
    layer or nowhere. The cascade is the one the preview renders, so this is an
    adoption and not a redesign.
    --------------------------------------------------------------------------- */
-@layer crystal.component {
-:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status) {
+@layer prismata.component {
+:is(button,a.pr-button,.pr-control,.pr-field-shell,.pr-resin-haze,.pr-status) {
     position: relative;
     isolation: isolate;
-    background: var(--cr-resin-fill);
-    color: var(--cr-text);
-    border: 1px solid var(--cr-rim);
-    box-shadow: var(--cr-shadow-float);
-    -webkit-backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
-    backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
+    background: var(--pr-resin-fill);
+    color: var(--pr-text);
+    border: 1px solid var(--pr-rim);
+    box-shadow: var(--pr-shadow-float);
+    -webkit-backdrop-filter: blur(var(--pr-resin-blur)) saturate(var(--pr-resin-saturation));
+    backdrop-filter: blur(var(--pr-resin-blur)) saturate(var(--pr-resin-saturation));
     filter: none;
 }
-:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::before {
+:is(button,a.pr-button,.pr-control,.pr-field-shell,.pr-resin-haze,.pr-status)::before {
     content: '';
     position: absolute;
-    inset: var(--cr-haze-inset);
+    inset: var(--pr-haze-inset);
     z-index: -1;
     pointer-events: none;
     border-radius: inherit;
-    background: var(--cr-haze-fill);
-    filter: blur(var(--cr-haze-feather));
+    background: var(--pr-haze-fill);
+    filter: blur(var(--pr-haze-feather));
     box-shadow: none;
 }
-:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after {
+:is(button,a.pr-button,.pr-control,.pr-field-shell,.pr-resin-haze,.pr-status)::after {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -2;
     pointer-events: none;
     border-radius: inherit;
-    background: linear-gradient(115deg,transparent 20%,#ffffff30 43%,#ffffff0a 55%,transparent 72%),radial-gradient(ellipse at 12% 0%,var(--cr-control-light),transparent 75%),linear-gradient(135deg,var(--cr-control-color),transparent 60%,var(--cr-control-light));
+    background: linear-gradient(115deg,transparent 20%,#ffffff30 43%,#ffffff0a 55%,transparent 72%),radial-gradient(ellipse at 12% 0%,var(--pr-control-light),transparent 75%),linear-gradient(135deg,var(--pr-control-color),transparent 60%,var(--pr-control-light));
     background-size: 220% 100%,100% 100%,100% 100%;
     background-position: 100% 0;
-    box-shadow: inset 0 2px 1px var(--cr-rim),inset 0 -1px 1px var(--cr-rim);
+    box-shadow: inset 0 2px 1px var(--pr-rim),inset 0 -1px 1px var(--pr-rim);
 }
-.cr-field-shell {
+.pr-field-shell {
     display: inline-flex;
     align-items: center;
     min-width: 0;
@@ -376,25 +376,25 @@ dialog.cr-dialog{position:fixed}
     padding: 8px;
     vertical-align: middle;
 }
-.cr-field-shell:has(.cr-input) {
+.pr-field-shell:has(.pr-input) {
     width: 100%;
 }
-.cr-field-shell :is(input,select,textarea) {
+.pr-field-shell :is(input,select,textarea) {
     position: relative;
     background: transparent;
     border: 0;
     box-shadow: none;
     border-radius: 12px;
     min-width: 0;
-    color: var(--cr-text);
+    color: var(--pr-text);
     min-height: 44px;
     max-width: 100%;
 }
-:where(:root:not([data-crystal-modality=pointer])) .cr-field-shell:focus-within {
-    outline: 2px solid var(--cr-focus-core);
+:where(:root:not([data-prismata-modality=pointer])) .pr-field-shell:focus-within {
+    outline: 2px solid var(--pr-focus-core);
     outline-offset: 3px;
 }
-.cr-field-shell :focus-visible {
+.pr-field-shell :focus-visible {
     outline: 0;
 }
 /* The three recipes that take the coat off a control (a bare control, a
@@ -402,20 +402,20 @@ dialog.cr-dialog{position:fixed}
    keeps this rule's specificity at (0,2,1); without the exclusion it outranked
    their (0,2,0) recipes and drew the surface behind them, and the shorthand
    erased the drag handle's grip (fixed in 2.7.0). */
-[data-effects=opaque] :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status):where(:not(.cr-bare,.cr-nav-item,.cr-drag-handle)) {
-    background: var(--cr-surface);
+[data-effects=opaque] :is(button,a.pr-button,.pr-control,.pr-field-shell,.pr-resin-haze,.pr-status):where(:not(.pr-bare,.pr-nav-item,.pr-drag-handle)) {
+    background: var(--pr-surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
-[data-effects=opaque] :is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after {
+[data-effects=opaque] :is(button,a.pr-button,.pr-control,.pr-field-shell,.pr-resin-haze,.pr-status)::after {
     display: none;
 }
-.cr-resin-haze {
+.pr-resin-haze {
     border-radius: 18px;
     padding: 16px;
     line-height: 1.5;
 }
-.cr-tag {
+.pr-tag {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -424,7 +424,7 @@ dialog.cr-dialog{position:fixed}
     font-size: 13px;
     font-weight: 700;
 }
-nav a.cr-control {
+nav a.pr-control {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -433,46 +433,46 @@ nav a.cr-control {
     min-height: 44px;
     text-decoration: none;
 }
-nav a.cr-control[aria-current] {
+nav a.pr-control[aria-current] {
     text-decoration: none;
 }
-.cr-field-shell {
-    box-shadow: inset 0 2px 1px var(--cr-rim),0 3px 5px var(--cr-control-edge),0 12px 24px var(--cr-shadow-contact);
+.pr-field-shell {
+    box-shadow: inset 0 2px 1px var(--pr-rim),0 3px 5px var(--pr-control-edge),0 12px 24px var(--pr-shadow-contact);
 }
-:is(.cr-tag,.cr-resin-haze) {
+:is(.pr-tag,.pr-resin-haze) {
     padding: 17px 24px;
 }
-.cr-tag {
+.pr-tag {
     min-height: 48px;
 }
-span.cr-field-shell {
-    border-color: var(--cr-rim);
+span.pr-field-shell {
+    border-color: var(--pr-rim);
 }
-span.cr-field-shell::after {
-    background-image: radial-gradient(ellipse at 12% 0%,var(--cr-control-light),transparent 75%),linear-gradient(135deg,var(--cr-control-color),transparent 60%,var(--cr-control-light));
+span.pr-field-shell::after {
+    background-image: radial-gradient(ellipse at 12% 0%,var(--pr-control-light),transparent 75%),linear-gradient(135deg,var(--pr-control-color),transparent 60%,var(--pr-control-light));
     background-size: 100% 100%,100% 100%;
     background-position: 0 0,0 0;
     background-repeat: no-repeat;
 }
-span.cr-field-shell:has([aria-invalid=true])::after {
-    background-image: radial-gradient(ellipse at 12% 0%,var(--cr-control-light),transparent 75%),linear-gradient(135deg,var(--cr-control-color),transparent 60%,var(--cr-control-light));
+span.pr-field-shell:has([aria-invalid=true])::after {
+    background-image: radial-gradient(ellipse at 12% 0%,var(--pr-control-light),transparent 75%),linear-gradient(135deg,var(--pr-control-color),transparent 60%,var(--pr-control-light));
 }
-[data-effects=opaque] span.cr-field-shell::after {
+[data-effects=opaque] span.pr-field-shell::after {
     display: none;
 }
-:where(:root:not([data-crystal-modality=pointer])) span.cr-field-shell:focus-within {
-    outline: 2px solid var(--cr-focus-core);
+:where(:root:not([data-prismata-modality=pointer])) span.pr-field-shell:focus-within {
+    outline: 2px solid var(--pr-focus-core);
     outline-offset: 3px;
-    box-shadow: inset 0 2px 1px var(--cr-rim),var(--cr-focus-ring);
+    box-shadow: inset 0 2px 1px var(--pr-rim),var(--pr-focus-ring);
 }
-span.cr-field-shell :is(input,select,textarea):focus-visible {
+span.pr-field-shell :is(input,select,textarea):focus-visible {
     outline: 0;
     box-shadow: none;
 }
-:is(.cr-resin,.cr-glass,.cr-resin-haze) :is(.cr-haze,.cr-surface,.cr-well,.cr-content-fill) {
-    box-shadow: inset 0 1px 2px var(--cr-shadow-contact),inset 0 -1px 0 var(--cr-rim);
+:is(.pr-resin,.pr-glass,.pr-resin-haze) :is(.pr-haze,.pr-surface,.pr-well,.pr-content-fill) {
+    box-shadow: inset 0 1px 2px var(--pr-shadow-contact),inset 0 -1px 0 var(--pr-rim);
 }
-:is(.cr-resin,.cr-glass,.cr-resin-haze) :is(button,a.cr-button,.cr-button,.cr-control) {
+:is(.pr-resin,.pr-glass,.pr-resin-haze) :is(button,a.pr-button,.pr-button,.pr-control) {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     /* backdrop-filter creates a stacking context, and these controls paint
@@ -482,7 +482,7 @@ span.cr-field-shell :is(input,select,textarea):focus-visible {
      restores the containment without restoring the second blur. */
     isolation: isolate;
 }
-.cr-indicator {
+.pr-indicator {
     position: absolute;
     isolation: isolate;
     display: grid;
@@ -493,117 +493,117 @@ span.cr-field-shell :is(input,select,textarea):focus-visible {
     height: 20px;
     min-width: 20px;
     border-radius: 50%;
-    border: 1px solid var(--cr-rim);
+    border: 1px solid var(--pr-rim);
     background: transparent;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-    box-shadow: 0 2px 4px var(--cr-control-edge),0 4px 8px var(--cr-shadow-contact);
-    color: var(--cr-text);
-    font: 800 12px/1 var(--cr-font);
+    box-shadow: 0 2px 4px var(--pr-control-edge),0 4px 8px var(--pr-shadow-contact);
+    color: var(--pr-text);
+    font: 800 12px/1 var(--pr-font);
     z-index: 2;
     pointer-events: none;
     text-decoration: none;
     text-shadow: none;
 }
-.cr-indicator::before {
+.pr-indicator::before {
     content: '';
     position: absolute;
     inset: 1px;
     z-index: -1;
     border-radius: 50%;
-    background: var(--cr-haze-fill);
-    filter: blur(var(--cr-haze-feather));
+    background: var(--pr-haze-fill);
+    filter: blur(var(--pr-haze-feather));
 }
-.cr-indicator:is([data-kind=selection],[data-kind=current],[data-kind=busy]) {
+.pr-indicator:is([data-kind=selection],[data-kind=current],[data-kind=busy]) {
     display: none;
 }
-[aria-current]:not([aria-current=false])>.cr-indicator[data-kind=current] {
+[aria-current]:not([aria-current=false])>.pr-indicator[data-kind=current] {
     display: grid;
 }
-[aria-busy=true]>.cr-indicator[data-kind=busy] {
+[aria-busy=true]>.pr-indicator[data-kind=busy] {
     display: grid;
 }
-.cr-indicator[data-kind=current]::after {
+.pr-indicator[data-kind=current]::after {
     content: '●';
     font-size: 9px;
 }
-.cr-indicator[data-kind=busy]::after {
+.pr-indicator[data-kind=busy]::after {
     content: '…';
     font-size: 14px;
 }
-:is([aria-pressed=true],[aria-selected=true],[aria-checked=true])>.cr-indicator[data-kind=selection] {
+:is([aria-pressed=true],[aria-selected=true],[aria-checked=true])>.pr-indicator[data-kind=selection] {
     display: none
 }
-.cr-indicator[data-kind=selection]::before,.cr-indicator[data-kind=selection]::after {
+.pr-indicator[data-kind=selection]::before,.pr-indicator[data-kind=selection]::after {
     content: none;
     display: none;
 }
-span.cr-field-shell {
+span.pr-field-shell {
     padding-inline-end: 40px;
 }
-.cr-field-shell>.cr-indicator {
+.pr-field-shell>.pr-indicator {
     inset-block-start: 50%;
     inset-inline-end: 10px;
     transform: translateY(-50%);
     width: 24px;
     height: 24px;
 }
-.cr-field-shell>.cr-indicator::after {
+.pr-field-shell>.pr-indicator::after {
     content: '○';
     font-size: 15px;
 }
-.cr-field-shell:focus-within>.cr-indicator::after {
+.pr-field-shell:focus-within>.pr-indicator::after {
     content: '●';
     font-size: 9px;
 }
-.cr-field-shell:has(:is([required],[aria-required=true]))>.cr-indicator::after {
+.pr-field-shell:has(:is([required],[aria-required=true]))>.pr-indicator::after {
     content: '*';
     font-size: 19px;
 }
-.cr-field-shell:has([aria-invalid=true])>.cr-indicator::after {
+.pr-field-shell:has([aria-invalid=true])>.pr-indicator::after {
     content: '!';
     font-size: 15px;
 }
-:is(button[aria-pressed],button[aria-selected],button[aria-checked],a.cr-control[aria-current]) {
+:is(button[aria-pressed],button[aria-selected],button[aria-checked],a.pr-control[aria-current]) {
     text-decoration: none;
 }
-[data-effects=opaque] .cr-indicator {
-    background: var(--cr-surface);
+[data-effects=opaque] .pr-indicator {
+    background: var(--pr-surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
-[data-effects=opaque] .cr-indicator::before {
+[data-effects=opaque] .pr-indicator::before {
     filter: none;
 }
 }
 
-@layer crystal.component {
+@layer prismata.component {
 @media (prefers-reduced-transparency:reduce) {
-:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status) {
-    background: var(--cr-surface);
+:is(button,a.pr-button,.pr-control,.pr-field-shell,.pr-resin-haze,.pr-status) {
+    background: var(--pr-surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none
 }
-:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after {
+:is(button,a.pr-button,.pr-control,.pr-field-shell,.pr-resin-haze,.pr-status)::after {
     display: none
 }
-span.cr-field-shell::after {
+span.pr-field-shell::after {
     display: none;
 }
-.cr-indicator {
-    background: var(--cr-surface);
+.pr-indicator {
+    background: var(--pr-surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none
 }
-.cr-indicator::before {
+.pr-indicator::before {
     filter: none
 }
 }
 }
 
-@layer crystal.component {
+@layer prismata.component {
 @media (forced-colors:active) {
-:is(button,a.cr-button,.cr-control,.cr-field-shell,input) {
+:is(button,a.pr-button,.pr-control,.pr-field-shell,input) {
     background: Canvas!important;
     color: CanvasText!important;
     border: 1px solid ButtonText;
@@ -611,7 +611,7 @@ span.cr-field-shell::after {
     -webkit-backdrop-filter: none;
     backdrop-filter: none
 }
-:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::before,:is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)::after {
+:is(button,a.pr-button,.pr-control,.pr-field-shell,.pr-resin-haze,.pr-status)::before,:is(button,a.pr-button,.pr-control,.pr-field-shell,.pr-resin-haze,.pr-status)::after {
     display: none
 }
 /* The browser's forced-colours adjustment replaces colours and drops shadows,
@@ -620,17 +620,17 @@ span.cr-field-shell::after {
    their blur: the choices' own rule has this rule's specificity and comes
    later, and the badge and the tag were not listed (D-36). Important, as the
    material resets in the reset layer are, so no later rule can restore it. */
-:is(button,a.cr-button,.cr-control,.cr-field-shell,input,.cr-resin-haze,.cr-status) {
+:is(button,a.pr-button,.pr-control,.pr-field-shell,input,.pr-resin-haze,.pr-status) {
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important
 }
-span.cr-field-shell {
+span.pr-field-shell {
     border: 1px solid ButtonText
 }
-span.cr-field-shell::after {
+span.pr-field-shell::after {
     display: none
 }
-.cr-indicator {
+.pr-indicator {
     background: Canvas;
     color: CanvasText;
     border: 1px solid ButtonText;
@@ -638,19 +638,19 @@ span.cr-field-shell::after {
     -webkit-backdrop-filter: none;
     backdrop-filter: none
 }
-.cr-indicator::before {
+.pr-indicator::before {
     display: none
 }
-:where(:root:not([data-crystal-modality=pointer])) span.cr-field-shell:focus-within {
+:where(:root:not([data-prismata-modality=pointer])) span.pr-field-shell:focus-within {
     outline: 2px solid Highlight;
     box-shadow: none
 }
 }
 }
 
-@layer crystal.component {
+@layer prismata.component {
 @media (max-width:600px) {
-.cr-tag {
+.pr-tag {
     padding: 10px 15px;
     min-height: 40px;
     white-space: nowrap
@@ -666,7 +666,7 @@ span.cr-field-shell::after {
    preview defined and the library did not. This pass holds what `controls.css`
    still overrode once that lift had landed, measured against library 2.1.0
    with the stripped sheet as the only variable. A rule belongs to the preview
-   only if it names a class or id outside Crystal's `cr-` namespace; everything
+   only if it names a class or id outside Prismata's `pr-` namespace; everything
    else is the library's. That predicate fails closed.
 
    The partition is 75 rules and 238 declarations here, 50 rules left with the
@@ -680,26 +680,26 @@ span.cr-field-shell::after {
    Three exceptions to the predicate, each a decision:
 
    · `:not(.swatch)` is stripped from the sheen selector. `.swatch` is the
-     preview's; the sheen is Crystal's. The preview keeps its swatches flush
+     preview's; the sheen is Prismata's. The preview keeps its swatches flush
      with a rule of its own.
-   · `.cr-dock-inner` stays with the preview. `components.md` says it shares
+   · `.pr-dock-inner` stays with the preview. `components.md` says it shares
      the Stone recipe; `materials.md` says a label on a Resin dock takes its
      own chip. The preview follows one and the library the other, and the
-     preview's rule is too broad: it also blanks `.cr-dock-inner.cr-stone`,
+     preview's rule is too broad: it also blanks `.pr-dock-inner.pr-stone`,
      the preview's own "Stone on Resin" specimen. The line is Meridian's to
      draw, and it is filed rather than guessed.
-   · `.cr-button.danger`'s neutralisation is dropped from both. It styles
+   · `.pr-button.danger`'s neutralisation is dropped from both. It styles
      nothing on the preview, and status colours are never redefined. The
      danger boundary below comes from `components.md`.
    --------------------------------------------------------------------------- */
-@layer crystal.component {
+@layer prismata.component {
 
 /* Destructive actions take the Resin/Haze surface every button has, plus the
    independent danger boundary components.md requires. The boundary is the
    documented carrier. A danger fill cannot live in the reset layer: this layer
    outranks it, so a fill declared there does not render. */
-.cr-button.danger {
-    border-color: var(--cr-danger-ink)
+.pr-button.danger {
+    border-color: var(--pr-danger-ink)
 }
 
 /* The primary action's reading fill is the primary colour.
@@ -710,17 +710,17 @@ span.cr-field-shell::after {
  * content fill … return Primary's Haze content fill, and make the color of that
  * content fill the primary color."
  *
- * The fill is `--cr-primary` itself and the ink is `--cr-on-primary`: the
+ * The fill is `--pr-primary` itself and the ink is `--pr-on-primary`: the
  * palette's own tested pair, which `validate-tokens` holds across all six
  * palettes and both modes. Measured against the rendered composite it is 4.74 to
  * 10.31, tightest on Ion in light mode.
  *
- * Two other placements do not carry the colour. A `background:var(--cr-primary)`
- * on `.cr-button` in the reset layer is outranked by the Resin control rule in
+ * Two other placements do not carry the colour. A `background:var(--pr-primary)`
+ * on `.pr-button` in the reset layer is outranked by the Resin control rule in
  * this layer, so the primary survives only as the 8px ring of element background
  * left exposed around the inset, white Haze fill, with white `onPrimary` text on
- * that white fill. `--cr-haze-own-fill`, the palette's content-own surface at
- * Haze's 80%, is a soft tone, and over Crystal's own light atmosphere an 80%
+ * that white fill. `--pr-haze-own-fill`, the palette's content-own surface at
+ * Haze's 80%, is a soft tone, and over Prismata's own light atmosphere an 80%
  * soft tone is within a few percent of the Resin shell around it.
  *
  * The fill is opaque where Haze's neutral fill is 80%, and that was decided. An
@@ -739,11 +739,11 @@ span.cr-field-shell::after {
  * not tint paints every variant it forgets, and there is no `.secondary`: the
  * palettes define one action pair and no second one.
  */
-.cr-button.primary {
-    color: var(--cr-on-primary)
+.pr-button.primary {
+    color: var(--pr-on-primary)
 }
-.cr-button.primary::before {
-    background: var(--cr-primary)
+.pr-button.primary::before {
+    background: var(--pr-primary)
 }
 
 /* A quiet button has no Haze reading fill.
@@ -755,41 +755,41 @@ span.cr-field-shell::after {
  *
  * The pad is what makes a label's contrast independent of whatever is behind
  * the control. Without it the label reads against the Resin fill and therefore
- * against the backdrop. On Crystal's own foundation the margin is wide:
- * measured across all six palettes and both modes, `--cr-text` over the Resin
+ * against the backdrop. On Prismata's own foundation the margin is wide:
+ * measured across all six palettes and both modes, `--pr-text` over the Resin
  * fill over canvas, surface, surface-alt and foundation is 10.88 to 18.28. A
  * quiet button placed over artwork has no protected ground, and that is the one
  * composition to avoid.
  */
-.cr-button.quiet::before {
+.pr-button.quiet::before {
     display: none
 }
 
-:is(button,a.cr-button,.cr-control)::after {
+:is(button,a.pr-button,.pr-control)::after {
     inset:2px;
     filter:blur(2px);
     box-shadow:none
 }
-:is(button,a.cr-button) {
+:is(button,a.pr-button) {
     min-height:48px
 }
-:is(button,a.cr-button):hover {
-    background:var(--cr-resin-fill);
+:is(button,a.pr-button):hover {
+    background:var(--pr-resin-fill);
     filter:none
 }
 :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true]) {
-    color:var(--cr-on-primary)
+    color:var(--pr-on-primary)
 }
 :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true])::before {
-    background:var(--cr-primary);
+    background:var(--pr-primary);
     filter:none
 }
 :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true]) {
     text-decoration:none
 }
 select option {
-    background:var(--cr-surface);
-    color:var(--cr-text)
+    background:var(--pr-surface);
+    color:var(--pr-text)
 }
 input:is([type=checkbox],[type=radio]) {
     appearance:none;
@@ -797,12 +797,12 @@ input:is([type=checkbox],[type=radio]) {
     height:26px;
     flex:none;
     vertical-align:middle;
-    border:1px solid var(--cr-rim);
+    border:1px solid var(--pr-rim);
     border-radius:9px;
-    background:linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);
-    -webkit-backdrop-filter:blur(var(--cr-resin-blur));
-    backdrop-filter:blur(var(--cr-resin-blur));
-    box-shadow:inset 0 2px 2px var(--cr-rim),0 2px 3px var(--cr-control-edge),0 5px 10px var(--cr-shadow-contact);
+    background:linear-gradient(135deg,var(--pr-control-light),var(--pr-control-color)),var(--pr-resin-fill);
+    -webkit-backdrop-filter:blur(var(--pr-resin-blur));
+    backdrop-filter:blur(var(--pr-resin-blur));
+    box-shadow:inset 0 2px 2px var(--pr-rim),0 2px 3px var(--pr-control-edge),0 5px 10px var(--pr-shadow-contact);
     display:inline-grid;
     place-items:center
 }
@@ -814,9 +814,9 @@ input:is([type=checkbox],[type=radio])::after {
     box-sizing:border-box;
     width:14px;
     height:14px;
-    border:2px solid var(--cr-primary);
+    border:2px solid var(--pr-primary);
     border-radius:4px;
-    background:var(--cr-surface)
+    background:var(--pr-surface)
 }
 input[type=radio]::after {
     border-radius:50%
@@ -825,8 +825,8 @@ input[type=checkbox]:checked::after {
     content:'✓';
     font-size:14px;
     font-weight:800;
-    background:var(--cr-primary);
-    color:var(--cr-on-primary);
+    background:var(--pr-primary);
+    color:var(--pr-on-primary);
     border:0;
     line-height:18px;
     width:18px;
@@ -834,21 +834,21 @@ input[type=checkbox]:checked::after {
     text-align:center
 }
 input[type=radio]:checked::after {
-    background:var(--cr-primary);
-    box-shadow:inset 0 0 0 3px var(--cr-surface)
+    background:var(--pr-primary);
+    box-shadow:inset 0 0 0 3px var(--pr-surface)
 }
 input[type=range] {
     appearance:none;
     background:transparent;
     min-height:32px;
-    --cr-range-progress:50%
+    --pr-range-progress:50%
 }
 input[type=range]::-webkit-slider-runnable-track {
     height:8px;
     border:0;
     border-radius:99px;
-    background:linear-gradient(to right,var(--cr-primary) 0 var(--cr-range-progress),var(--cr-primary-soft) var(--cr-range-progress) 100%);
-    box-shadow:0 -1px 0 var(--cr-rim),0 2px 4px var(--cr-control-edge)
+    background:linear-gradient(to right,var(--pr-primary) 0 var(--pr-range-progress),var(--pr-primary-soft) var(--pr-range-progress) 100%);
+    box-shadow:0 -1px 0 var(--pr-rim),0 2px 4px var(--pr-control-edge)
 }
 input[type=range]::-webkit-slider-thumb {
     appearance:none;
@@ -856,56 +856,56 @@ input[type=range]::-webkit-slider-thumb {
     height:26px;
     margin-top:-9px;
     border-radius:50%;
-    border:2px solid var(--cr-rim);
-    background:radial-gradient(circle,var(--cr-primary) 0 3px,var(--cr-surface) 3.5px 7px,transparent 8px),linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);
-    box-shadow:inset 0 2px 1px var(--cr-rim),0 2px 4px var(--cr-control-edge),0 5px 10px var(--cr-shadow-cast)
+    border:2px solid var(--pr-rim);
+    background:radial-gradient(circle,var(--pr-primary) 0 3px,var(--pr-surface) 3.5px 7px,transparent 8px),linear-gradient(135deg,var(--pr-control-light),var(--pr-control-color)),var(--pr-resin-fill);
+    box-shadow:inset 0 2px 1px var(--pr-rim),0 2px 4px var(--pr-control-edge),0 5px 10px var(--pr-shadow-cast)
 }
 input[type=range]::-moz-range-track {
     height:8px;
     border:0;
     border-radius:99px;
-    background:var(--cr-primary-soft);
-    box-shadow:0 -1px 0 var(--cr-rim),0 2px 4px var(--cr-control-edge)
+    background:var(--pr-primary-soft);
+    box-shadow:0 -1px 0 var(--pr-rim),0 2px 4px var(--pr-control-edge)
 }
 input[type=range]::-moz-range-progress {
     height:8px;
     border-radius:99px;
-    background:var(--cr-primary)
+    background:var(--pr-primary)
 }
 input[type=range]::-moz-range-thumb {
     width:26px;
     height:26px;
     border-radius:50%;
-    border:2px solid var(--cr-rim);
-    background:radial-gradient(circle,var(--cr-primary) 0 3px,var(--cr-surface) 3.5px 7px,transparent 8px),linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);
-    box-shadow:inset 0 2px 1px var(--cr-rim),0 2px 4px var(--cr-control-edge),0 5px 10px var(--cr-shadow-cast)
+    border:2px solid var(--pr-rim);
+    background:radial-gradient(circle,var(--pr-primary) 0 3px,var(--pr-surface) 3.5px 7px,transparent 8px),linear-gradient(135deg,var(--pr-control-light),var(--pr-control-color)),var(--pr-resin-fill);
+    box-shadow:inset 0 2px 1px var(--pr-rim),0 2px 4px var(--pr-control-edge),0 5px 10px var(--pr-shadow-cast)
 }
 :root[dir=rtl] body input[type=range]::-webkit-slider-runnable-track {
-    background:linear-gradient(to left,var(--cr-primary) 0 var(--cr-range-progress),var(--cr-primary-soft) var(--cr-range-progress) 100%)
+    background:linear-gradient(to left,var(--pr-primary) 0 var(--pr-range-progress),var(--pr-primary-soft) var(--pr-range-progress) 100%)
 }
-.cr-status {
+.pr-status {
     padding:10px 14px;
     min-height:36px
 }
 input[type=file]::file-selector-button {
     min-height:44px;
     padding:10px 16px;
-    border:1px solid var(--cr-rim);
+    border:1px solid var(--pr-rim);
     border-radius:99px;
-    color:var(--cr-text);
-    background:linear-gradient(var(--cr-haze-fill),var(--cr-haze-fill)) padding-box,var(--cr-resin-fill);
-    box-shadow:inset 1px 1px 2px var(--cr-rim),0 4px 8px var(--cr-shadow-contact);
+    color:var(--pr-text);
+    background:linear-gradient(var(--pr-haze-fill),var(--pr-haze-fill)) padding-box,var(--pr-resin-fill);
+    box-shadow:inset 1px 1px 2px var(--pr-rim),0 4px 8px var(--pr-shadow-contact);
     margin-inline-end:8px;
     cursor:pointer
 }
-.cr-button {
+.pr-button {
     padding:15px 24px
 }
-.cr-dock {
+.pr-dock {
     position:relative;
     isolation:isolate;
-    background:var(--cr-resin-fill);
-    border:1px solid var(--cr-rim);
+    background:var(--pr-resin-fill);
+    border:1px solid var(--pr-rim);
     /* Concentric with the pills inside it: half a 52px button, plus the 9px
        padding and the 1px border. A one-row dock is 72px tall, so this is
        still a full pill; a vertical dock (a column of tabs) keeps corners
@@ -914,56 +914,56 @@ input[type=file]::file-selector-button {
     border-radius:calc(26px + 9px + 1px);
     padding:9px;
     gap:4px;
-    box-shadow:var(--cr-shadow-float);
-    -webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
-    backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation))
+    box-shadow:var(--pr-shadow-float);
+    -webkit-backdrop-filter:blur(var(--pr-resin-blur)) saturate(var(--pr-resin-saturation));
+    backdrop-filter:blur(var(--pr-resin-blur)) saturate(var(--pr-resin-saturation))
 }
-.cr-dock::before {
+.pr-dock::before {
     content:'';
     position:absolute;
-    inset:var(--cr-haze-inset);
+    inset:var(--pr-haze-inset);
     border-radius:inherit;
     z-index:-1;
-    background:var(--cr-haze-fill);
-    filter:blur(var(--cr-haze-feather));
+    background:var(--pr-haze-fill);
+    filter:blur(var(--pr-haze-feather));
     pointer-events:none
 }
-.cr-dock button {
+.pr-dock button {
     border:0;
     background:transparent;
     box-shadow:none;
     -webkit-backdrop-filter:none;
     backdrop-filter:none;
     border-radius:999px;
-    color:var(--cr-text)
+    color:var(--pr-text)
 }
-.cr-dock button::before,
-.cr-dock button::after {
+.pr-dock button::before,
+.pr-dock button::after {
     display:none
 }
-.cr-dock button:is([aria-pressed=true],[aria-selected=true]) {
-    background:var(--cr-primary);
-    color:var(--cr-on-primary);
-    box-shadow:0 3px 7px var(--cr-shadow-contact)
+.pr-dock button:is([aria-pressed=true],[aria-selected=true]) {
+    background:var(--pr-primary);
+    color:var(--pr-on-primary);
+    box-shadow:0 3px 7px var(--pr-shadow-contact)
 }
-.cr-dock button {
+.pr-dock button {
     min-height:52px;
     padding:13px 18px
 }
 [role=menu] button {
     padding-inline-start:24px
 }
-[data-effects=opaque] .cr-dock {
-    background:var(--cr-surface);
+[data-effects=opaque] .pr-dock {
+    background:var(--pr-surface);
     -webkit-backdrop-filter:none;
     backdrop-filter:none
 }
-span.cr-status {
-    border-color:var(--cr-rim);
+span.pr-status {
+    border-color:var(--pr-rim);
     border-radius:18px;
     padding:12px 18px
 }
-span.cr-status>span {
+span.pr-status>span {
     display:inline-grid;
     place-items:center;
     min-width:24px;
@@ -973,41 +973,41 @@ span.cr-status>span {
     color:var(--status-ink);
     font-weight:800
 }
-.cr-dialog {
-    border-color:var(--cr-rim)
+.pr-dialog {
+    border-color:var(--pr-rim)
 }
-:where(:root:not([data-crystal-modality=pointer])) :is(button,a,input,select,textarea,summary,[tabindex]):focus-visible,
-:where(:root:not([data-crystal-modality=pointer])) .cr-dock button:focus-visible {
-    outline:2px solid var(--cr-focus-core);
+:where(:root:not([data-prismata-modality=pointer])) :is(button,a,input,select,textarea,summary,[tabindex]):focus-visible,
+:where(:root:not([data-prismata-modality=pointer])) .pr-dock button:focus-visible {
+    outline:2px solid var(--pr-focus-core);
     outline-offset:3px;
-    box-shadow:inset 0 2px 1px var(--cr-rim),var(--cr-focus-ring)
+    box-shadow:inset 0 2px 1px var(--pr-rim),var(--pr-focus-ring)
 }
 :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true],[role=tab][aria-selected=true]) {
     font-weight:800
 }
-.cr-table-scroll {
+.pr-table-scroll {
     position:relative;
     isolation:isolate;
     overflow:auto;
     max-width:100%;
-    border:1px solid var(--cr-rim);
-    border-radius:var(--cr-radius);
-    background:var(--cr-resin-fill);
-    box-shadow:var(--cr-shadow-content);
-    -webkit-backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
-    backdrop-filter:blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation))
+    border:1px solid var(--pr-rim);
+    border-radius:var(--pr-radius);
+    background:var(--pr-resin-fill);
+    box-shadow:var(--pr-shadow-content);
+    -webkit-backdrop-filter:blur(var(--pr-resin-blur)) saturate(var(--pr-resin-saturation));
+    backdrop-filter:blur(var(--pr-resin-blur)) saturate(var(--pr-resin-saturation))
 }
-.cr-table-scroll::before {
+.pr-table-scroll::before {
     content:'';
     position:absolute;
     inset:6px;
     z-index:-1;
     pointer-events:none;
     border-radius:inherit;
-    background:var(--cr-haze-fill);
-    filter:blur(var(--cr-haze-feather))
+    background:var(--pr-haze-fill);
+    filter:blur(var(--pr-haze-feather))
 }
-.cr-table {
+.pr-table {
     width:100%;
     border-collapse:separate;
     border-spacing:0;
@@ -1015,87 +1015,87 @@ span.cr-status>span {
     box-shadow:none;
     border:0
 }
-.cr-table :is(th,td) {
+.pr-table :is(th,td) {
     border:0;
-    border-bottom:1px solid var(--cr-edge);
+    border-bottom:1px solid var(--pr-edge);
     padding:14px 18px;
     text-align:start;
     vertical-align:top;
     background:transparent
 }
-.cr-table thead th {
+.pr-table thead th {
     position:sticky;
     top:0;
     z-index:1;
-    background:var(--cr-primary-soft);
-    color:var(--cr-on-primary-soft);
+    background:var(--pr-primary-soft);
+    color:var(--pr-on-primary-soft);
     font-weight:800;
     border-bottom:0
 }
-.cr-table thead th:first-child {
-    border-start-start-radius:calc(var(--cr-radius) - 8px)
+.pr-table thead th:first-child {
+    border-start-start-radius:calc(var(--pr-radius) - 8px)
 }
-.cr-table thead th:last-child {
-    border-start-end-radius:calc(var(--cr-radius) - 8px)
+.pr-table thead th:last-child {
+    border-start-end-radius:calc(var(--pr-radius) - 8px)
 }
-.cr-table tbody tr:last-child :is(th,td) {
+.pr-table tbody tr:last-child :is(th,td) {
     border-bottom:0
 }
-.cr-table-properties tbody tr:first-child :is(th,td) {
+.pr-table-properties tbody tr:first-child :is(th,td) {
     padding-top:18px
 }
-.cr-table-properties th[scope=row] {
+.pr-table-properties th[scope=row] {
     width:11.5rem;
     font-weight:800;
-    color:var(--cr-text)
+    color:var(--pr-text)
 }
-.cr-table-properties td {
-    color:var(--cr-muted)
+.pr-table-properties td {
+    color:var(--pr-muted)
 }
-.cr-table tbody tr:hover :is(th,td) {
-    background:var(--cr-label-fill)
+.pr-table tbody tr:hover :is(th,td) {
+    background:var(--pr-label-fill)
 }
-.cr-table caption {
+.pr-table caption {
     caption-side:top;
     text-align:start;
     padding:14px 18px 6px;
     font-size:13px;
-    color:var(--cr-muted)
+    color:var(--pr-muted)
 }
-[data-effects=opaque] .cr-table-scroll {
-    background:var(--cr-surface);
+[data-effects=opaque] .pr-table-scroll {
+    background:var(--pr-surface);
     -webkit-backdrop-filter:none;
     backdrop-filter:none
 }
-[data-effects=opaque] .cr-table-scroll::before {
+[data-effects=opaque] .pr-table-scroll::before {
     display:none
 }
 
 @media (max-width:600px) {
-.cr-dock {
+.pr-dock {
     padding:7px;
     border-radius:calc(26px + 7px + 1px)
 }
-.cr-dock button {
+.pr-dock button {
     padding:10px 9px;
     font-size:11px;
     min-height:44px
 }
-.cr-table-properties th[scope=row] {
+.pr-table-properties th[scope=row] {
     width:auto
 }
-.cr-table-properties tr {
+.pr-table-properties tr {
     display:grid
 }
-.cr-table-properties :is(th,td) {
+.pr-table-properties :is(th,td) {
     border-bottom:0
 }
-.cr-table-properties td {
+.pr-table-properties td {
     padding-top:0;
     padding-bottom:14px;
-    border-bottom:1px solid var(--cr-edge)
+    border-bottom:1px solid var(--pr-edge)
 }
-.cr-table :is(th,td) {
+.pr-table :is(th,td) {
     padding:11px 13px
 }
 }
@@ -1107,17 +1107,17 @@ input:is([type=checkbox],[type=radio]) {
 input:is([type=checkbox],[type=radio])::after {
     display:none
 }
-.cr-dock {
+.pr-dock {
     background:Canvas;
     border:1px solid ButtonText;
     box-shadow:none;
     -webkit-backdrop-filter:none;
     backdrop-filter:none
 }
-.cr-dock::before {
+.pr-dock::before {
     display:none
 }
-.cr-dock button:is([aria-pressed=true],[aria-selected=true]) {
+.pr-dock button:is([aria-pressed=true],[aria-selected=true]) {
     background:Canvas;
     color:CanvasText;
     outline:2px solid Highlight;
@@ -1133,29 +1133,29 @@ input[type=range]::-webkit-slider-thumb {
     background:ButtonText;
     border-color:Canvas
 }
-span.cr-status>span {
+span.pr-status>span {
     background:Canvas;
     color:CanvasText
 }
-:where(:root:not([data-crystal-modality=pointer])) :is(button,a,input,select,textarea,summary,[tabindex]):focus-visible,
-:where(:root:not([data-crystal-modality=pointer])) .cr-dock button:focus-visible {
+:where(:root:not([data-prismata-modality=pointer])) :is(button,a,input,select,textarea,summary,[tabindex]):focus-visible,
+:where(:root:not([data-prismata-modality=pointer])) .pr-dock button:focus-visible {
     outline:2px solid Highlight;
     box-shadow:none
 }
-.cr-table-scroll {
+.pr-table-scroll {
     background:Canvas;
     border:1px solid CanvasText;
     box-shadow:none;
     -webkit-backdrop-filter:none;
     backdrop-filter:none
 }
-.cr-table-scroll::before {
+.pr-table-scroll::before {
     display:none
 }
-.cr-table :is(th,td) {
+.pr-table :is(th,td) {
     border-bottom:1px solid CanvasText
 }
-.cr-table thead th {
+.pr-table thead th {
     background:Canvas;
     color:CanvasText;
     border-bottom:1px solid CanvasText
@@ -1163,17 +1163,17 @@ span.cr-status>span {
 }
 
 @media (prefers-reduced-transparency:reduce) {
-.cr-dock {
-    background:var(--cr-surface);
+.pr-dock {
+    background:var(--pr-surface);
     -webkit-backdrop-filter:none;
     backdrop-filter:none
 }
-.cr-table-scroll {
-    background:var(--cr-surface);
+.pr-table-scroll {
+    background:var(--pr-surface);
     -webkit-backdrop-filter:none;
     backdrop-filter:none
 }
-.cr-table-scroll::before {
+.pr-table-scroll::before {
     display:none
 }
 }
@@ -1187,31 +1187,31 @@ span.cr-status>span {
    component may be made of, and every catalogue entry says which it is. Most
    of the vocabulary was already here. Four compositions were not, and the R-19
    sweep named them: a navigation link, a nav rail item, a drag handle, and the
-   "bare" control that eighteen distinct controls and 127 instances in Crystal
+   "bare" control that eighteen distinct controls and 127 instances in Prismata
    React had been approximating with `background: transparent`, which takes off
    one layer of the Resin coat and leaves four.
 
-   Each recipe is authored here, in `@layer crystal.component`, and nowhere
-   else. A rule authored in `crystal.reset` is erased by this layer (D-20,
+   Each recipe is authored here, in `@layer prismata.component`, and nowhere
+   else. A rule authored in `prismata.reset` is erased by this layer (D-20,
    D-21), and a recipe that may not render is worse than none.
 
    Everything reads tokens where a token exists and falls back to the literal
    the token publishes, so a stylesheet loaded without the generated theme
    still renders the same recipe.
    --------------------------------------------------------------------------- */
-@layer crystal.component {
+@layer prismata.component {
 
 /* A bare control.
  *
  * Selector note, which applies to the three recipes below: the coat is keyed on
- * `:is(button, a.cr-button, …)`, specificity (0,1,1), in this same layer. A lone
+ * `:is(button, a.pr-button, …)`, specificity (0,1,1), in this same layer. A lone
  * class is (0,1,0) and loses to it whatever the source order; measured, a
- * `<button class="cr-bare">` under a lone-class rule keeps the fill, the rim
+ * `<button class="pr-bare">` under a lone-class rule keeps the fill, the rim
  * and the blur. Each recipe therefore carries the element compound and reaches
  * (0,2,0). A rule that must beat the coat and does not say so in its selector
  * fails the way D-20 did.
  *
- * Crystal paints the Resin coat by element, `:is(button, …)` above, so a
+ * Prismata paints the Resin coat by element, `:is(button, …)` above, so a
  * `<button>` wears the fill, the rim, the float shadow, the backdrop blur and
  * both feathered pseudo-layers whether or not anything asked. A control that
  * sits inside a surface which already has a coat must not wear a second one: a
@@ -1220,11 +1220,11 @@ span.cr-status>span {
  * those takes off one layer of five. This takes off all five and keeps what a
  * control still owes: the 44px target, the pill hit area and the focus ring.
  *
- * It is not `.cr-button.quiet`. Quiet keeps the whole shell and drops only the
+ * It is not `.pr-button.quiet`. Quiet keeps the whole shell and drops only the
  * reading pad, which is what makes a quiet button quiet; a chevron is not a
  * Resin control that has been quietened.
  */
-:is(button, a, [role=button], .cr-bare).cr-bare {
+:is(button, a, [role=button], .pr-bare).pr-bare {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1241,36 +1241,36 @@ span.cr-status>span {
     filter: none;
     font-weight: inherit;
 }
-.cr-bare::before,
-.cr-bare::after {
+.pr-bare::before,
+.pr-bare::after {
     content: none;
     display: none;
 }
 
 /* Resting state only: focus is a box-shadow recipe, and a blanket `none`
    would silently reduce it to a bare outline. */
-.cr-bare:not(:focus-visible) {
+.pr-bare:not(:focus-visible) {
     box-shadow: none;
 }
-.cr-bare:hover:not(:disabled):not([aria-disabled=true]) {
-    background: var(--cr-surface-alt);
+.pr-bare:hover:not(:disabled):not([aria-disabled=true]) {
+    background: var(--pr-surface-alt);
     filter: none;
 }
 /* An on state without a reading pad has nothing to tint, so it takes the
    weight half of the selection rule and keeps the surface ink. The element
    rule above would otherwise leave on-primary ink on a transparent ground. */
-.cr-bare:is([aria-pressed=true],[aria-selected=true],[aria-checked=true]) {
-    color: var(--cr-text);
+.pr-bare:is([aria-pressed=true],[aria-selected=true],[aria-checked=true]) {
+    color: var(--pr-text);
     font-weight: 800;
 }
 
 /* A drag handle: a bare control with a grip and a lift while it is held.
  * Pointer capture, the keyboard alternative and drop validation are the
  * product's; the handle says only that it can be grabbed and when it has been. */
-:is(button, [role=button], .cr-drag-handle).cr-drag-handle {
+:is(button, [role=button], .pr-drag-handle).pr-drag-handle {
     cursor: grab;
     touch-action: none;
-    color: var(--cr-muted);
+    color: var(--pr-muted);
     padding: 12px 16px;
     background-image: radial-gradient(circle at center, currentColor 1.25px, transparent 1.75px);
     background-size: 6px 6px;
@@ -1279,21 +1279,21 @@ span.cr-status>span {
     background-clip: content-box;
     background-color: transparent;
 }
-.cr-drag-handle:hover:not([aria-disabled=true]) {
-    color: var(--cr-text);
+.pr-drag-handle:hover:not([aria-disabled=true]) {
+    color: var(--pr-text);
 }
-.cr-drag-handle:is([aria-grabbed=true],[data-dragging],[data-dragging=true]) {
+.pr-drag-handle:is([aria-grabbed=true],[data-dragging],[data-dragging=true]) {
     cursor: grabbing;
-    color: var(--cr-text);
-    background-color: var(--cr-surface);
-    box-shadow: var(--cr-shadow-float);
+    color: var(--pr-text);
+    background-color: var(--pr-surface);
+    box-shadow: var(--pr-shadow-float);
 }
 
 /* A navigation entry.
  *
  * `docs/components.md` names the documentation site's side menu as the
  * reference implementation of selection. The recipe is lifted from
- * `crystal-preview` `.menu-item` as it renders, so that it no longer lives only
+ * `prismata-preview` `.menu-item` as it renders, so that it no longer lives only
  * in the site's own stylesheet (the shape of D-9). An entry is furniture on the
  * panel beneath it, so it has no material of its own and no Resin coat.
  * Thirteen floating capsules in a sidebar would be the legibility noise the
@@ -1314,7 +1314,7 @@ span.cr-status>span {
  * it, and a dot that floated or diffused would be one more plane in a column the
  * hierarchy keeps quiet.
  */
-:is(button, a, [role=link], .cr-nav-item).cr-nav-item {
+:is(button, a, [role=link], .pr-nav-item).pr-nav-item {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -1325,7 +1325,7 @@ span.cr-status>span {
     border: 1px solid transparent;
     border-radius: 999px;
     background: transparent;
-    color: var(--cr-muted);
+    color: var(--pr-muted);
     font-size: 14px;
     font-weight: 650;
     line-height: 1.35;
@@ -1335,27 +1335,27 @@ span.cr-status>span {
     backdrop-filter: none;
     filter: none;
 }
-.cr-nav-item::before,
-.cr-nav-item::after {
+.pr-nav-item::before,
+.pr-nav-item::after {
     content: none;
     display: none;
 }
-.cr-nav-item:not(:focus-visible) {
+.pr-nav-item:not(:focus-visible) {
     box-shadow: none;
 }
-.cr-nav-item:hover:not([aria-disabled=true]) {
-    background: var(--cr-surface-alt);
-    color: var(--cr-text);
+.pr-nav-item:hover:not([aria-disabled=true]) {
+    background: var(--pr-surface-alt);
+    color: var(--pr-text);
     filter: none;
 }
-.cr-nav-item:is([aria-current]:not([aria-current=false]),[aria-selected=true],[aria-pressed=true]) {
-    background: var(--cr-surface-alt);
-    color: var(--cr-text);
+.pr-nav-item:is([aria-current]:not([aria-current=false]),[aria-selected=true],[aria-pressed=true]) {
+    background: var(--pr-surface-alt);
+    color: var(--pr-text);
     font-weight: 800;
 }
 /* The location dot. 6px is twice `component.indicator.lineWidth`, so a dot and a
    marking line read as one weight of mark. */
-.cr-nav-item:is([aria-current]:not([aria-current=false]))::before {
+.pr-nav-item:is([aria-current]:not([aria-current=false]))::before {
     content: '';
     display: block;
     position: absolute;
@@ -1364,11 +1364,11 @@ span.cr-status>span {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--cr-primary);
+    background: var(--pr-primary);
     translate: 0 -50%;
     pointer-events: none;
 }
-.cr-nav-item.stacked {
+.pr-nav-item.stacked {
     flex-direction: column;
     justify-content: center;
     gap: 4px;
@@ -1377,13 +1377,13 @@ span.cr-status>span {
     font-size: 12px;
     line-height: 1.25;
 }
-.cr-nav-item svg {
+.pr-nav-item svg {
     width: 24px;
     height: 24px;
 }
 /* Stacked, the inline start is beside the icon, so the dot sits above it instead,
    centred in the entry's own block-start padding. */
-.cr-nav-item.stacked:is([aria-current]:not([aria-current=false]))::before {
+.pr-nav-item.stacked:is([aria-current]:not([aria-current=false]))::before {
     inset-block-start: 2px;
     inset-inline: 0;
     margin-inline: auto;
@@ -1395,8 +1395,8 @@ span.cr-status>span {
    or a wide media control bar. Fill, rim, blur and shadow are the plane's; only
    the geometry changes, and it matches the Frost panel's so nested radii line
    up. */
-:is(.cr-resin,.cr-glass).panel {
-    border-radius: calc(var(--cr-radius) + 6px);
+:is(.pr-resin,.pr-glass).panel {
+    border-radius: calc(var(--pr-radius) + 6px);
 }
 
 /* A switch is a checkbox with a track. Native `<input type=checkbox
@@ -1406,8 +1406,8 @@ span.cr-status>span {
    primary-soft pair. The thumb travels the difference between the two
    dimensions, so changing either token moves it correctly. */
 input[type=checkbox][role=switch] {
-    width: var(--cr-switch-track-width, 44px);
-    height: var(--cr-switch-track-height, 28px);
+    width: var(--pr-switch-track-width, 44px);
+    height: var(--pr-switch-track-height, 28px);
     border-radius: 999px;
     display: inline-block;
     position: relative;
@@ -1417,36 +1417,36 @@ input[type=checkbox][role=switch]::after {
     position: absolute;
     inset-block-start: 2px;
     inset-inline-start: 2px;
-    width: calc(var(--cr-switch-track-height, 28px) - 6px);
-    height: calc(var(--cr-switch-track-height, 28px) - 6px);
+    width: calc(var(--pr-switch-track-height, 28px) - 6px);
+    height: calc(var(--pr-switch-track-height, 28px) - 6px);
     border: 0;
     border-radius: 50%;
-    background: var(--cr-surface);
-    box-shadow: 0 2px 4px var(--cr-control-edge), 0 4px 8px var(--cr-shadow-contact);
-    transition: translate var(--cr-state) var(--cr-ease-settle);
+    background: var(--pr-surface);
+    box-shadow: 0 2px 4px var(--pr-control-edge), 0 4px 8px var(--pr-shadow-contact);
+    transition: translate var(--pr-state) var(--pr-ease-settle);
 }
 input[type=checkbox][role=switch]:checked {
-    background: var(--cr-primary-soft);
+    background: var(--pr-primary-soft);
 }
 input[type=checkbox][role=switch]:checked::after {
     content: '';
-    width: calc(var(--cr-switch-track-height, 28px) - 6px);
-    height: calc(var(--cr-switch-track-height, 28px) - 6px);
-    background: var(--cr-primary);
-    box-shadow: 0 2px 4px var(--cr-control-edge), 0 4px 8px var(--cr-shadow-contact);
-    translate: calc(var(--cr-switch-track-width, 44px) - var(--cr-switch-track-height, 28px)) 0;
+    width: calc(var(--pr-switch-track-height, 28px) - 6px);
+    height: calc(var(--pr-switch-track-height, 28px) - 6px);
+    background: var(--pr-primary);
+    box-shadow: 0 2px 4px var(--pr-control-edge), 0 4px 8px var(--pr-shadow-contact);
+    translate: calc(var(--pr-switch-track-width, 44px) - var(--pr-switch-track-height, 28px)) 0;
 }
 :root[dir=rtl] input[type=checkbox][role=switch]:checked::after {
-    translate: calc(var(--cr-switch-track-height, 28px) - var(--cr-switch-track-width, 44px)) 0;
+    translate: calc(var(--pr-switch-track-height, 28px) - var(--pr-switch-track-width, 44px)) 0;
 }
 
 /* The checkbox and radio read their geometry from the tokens that publish it,
    with the literal the token publishes as the fallback. Same rendering; one
    source. */
 input:is([type=checkbox],[type=radio]) {
-    width: var(--cr-choice-box-size, 26px);
-    height: var(--cr-choice-box-size, 26px);
-    border-radius: var(--cr-choice-box-radius, 9px);
+    width: var(--pr-choice-box-size, 26px);
+    height: var(--pr-choice-box-size, 26px);
+    border-radius: var(--pr-choice-box-radius, 9px);
 }
 input[type=radio] {
     border-radius: 50%;
@@ -1458,23 +1458,23 @@ input[type=radio] {
    be the only explanation of unavailability, and the product still has to
    refuse the action; this only shows that it will. */
 button:disabled,
-:is(a.cr-button,.cr-control,.cr-nav-item,.cr-bare,.cr-drag-handle)[aria-disabled=true] {
-    opacity: var(--cr-action-disabled-opacity, .55);
+:is(a.pr-button,.pr-control,.pr-nav-item,.pr-bare,.pr-drag-handle)[aria-disabled=true] {
+    opacity: var(--pr-action-disabled-opacity, .55);
     cursor: not-allowed;
     filter: none;
 }
 
 /* Controls inside a Resin plane lose their own backdrop filter. The rule above
    lists the action controls, and these are controls too. */
-:is(.cr-resin,.cr-glass,.cr-resin-haze) :is(.cr-bare,.cr-nav-item,.cr-drag-handle) {
+:is(.pr-resin,.pr-glass,.pr-resin-haze) :is(.pr-bare,.pr-nav-item,.pr-drag-handle) {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     isolation: isolate;
 }
 
 @media (prefers-reduced-transparency:reduce) {
-.cr-drag-handle:is([aria-grabbed=true],[data-dragging],[data-dragging=true]) {
-    background-color: var(--cr-surface);
+.pr-drag-handle:is([aria-grabbed=true],[data-dragging],[data-dragging=true]) {
+    background-color: var(--pr-surface);
 }
 }
 
@@ -1482,21 +1482,21 @@ button:disabled,
 /* The current entry is a ring, never a fill: Chromium paints an opaque Canvas
    backplate behind text runs, above the element's own background, so a filled
    row loses its label entirely. */
-.cr-nav-item:is([aria-current]:not([aria-current=false]),[aria-selected=true],[aria-pressed=true]) {
+.pr-nav-item:is([aria-current]:not([aria-current=false]),[aria-selected=true],[aria-pressed=true]) {
     background: Canvas;
     color: CanvasText;
     outline: 2px solid Highlight;
     outline-offset: -3px;
 }
-.cr-nav-item:is([aria-current]:not([aria-current=false]))::before {
+.pr-nav-item:is([aria-current]:not([aria-current=false]))::before {
     background: Highlight;
 }
-.cr-nav-item,
-.cr-bare {
+.pr-nav-item,
+.pr-bare {
     border-color: transparent;
     box-shadow: none;
 }
-.cr-drag-handle:is([aria-grabbed=true],[data-dragging],[data-dragging=true]) {
+.pr-drag-handle:is([aria-grabbed=true],[data-dragging],[data-dragging=true]) {
     background-color: Canvas;
     outline: 2px solid Highlight;
     outline-offset: -3px;
@@ -1515,26 +1515,26 @@ input[type=checkbox][role=switch] {
    Rulings of 29 September 2026, proposals/2026-09-29-rulings.md.
 
    Each recipe below closes an open issue a consumer found by reaching for
-   Crystal where it did not reach: a dock whose controls are not buttons, a
+   Prismata where it did not reach: a dock whose controls are not buttons, a
    group whose segments touch, a dialog whose body scrolls, an overlay inside a
    pane, a count badge. As in the block above, each is authored in
-   `@layer crystal.component` and nowhere else, and each carries its own
+   `@layer prismata.component` and nowhere else, and each carries its own
    reduced-transparency and forced-colours branches.
    --------------------------------------------------------------------------- */
-@layer crystal.component {
+@layer prismata.component {
 
 /* The dock's controls, whatever the element (D-26).
  *
- * `.cr-dock button` reaches only a <button>. A tab is often `[role=tab]` on
+ * `.pr-dock button` reaches only a <button>. A tab is often `[role=tab]` on
  * another element, a segmented control is often radio inputs inside labels, and
  * a dock or bottom-bar destination is a link carrying `aria-current`. Each gets
  * the dock button's values here, selected by its own state: `aria-selected`, a
  * checked radio or `aria-current`.
  *
- * Every selector is inside `:where()`, so it adds no specificity to `.cr-dock`,
- * and the existing `.cr-dock button` rules (0,1,1) keep winning on a <button>
+ * Every selector is inside `:where()`, so it adds no specificity to `.pr-dock`,
+ * and the existing `.pr-dock button` rules (0,1,1) keep winning on a <button>
  * that is also `[role=tab]`. Nothing a consumer already sits against moves. */
-.cr-dock :where([role=tab], a, label:has(input[type=radio])) {
+.pr-dock :where([role=tab], a, label:has(input[type=radio])) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1544,29 +1544,29 @@ input[type=checkbox][role=switch] {
     border: 0;
     border-radius: 999px;
     background: transparent;
-    color: var(--cr-text);
+    color: var(--pr-text);
     font-weight: 700;
     white-space: nowrap;
     text-decoration: none;
     cursor: pointer;
 }
-.cr-dock :where([role=tab][aria-selected=true], a[aria-current]:not([aria-current=false]), label:has(input[type=radio]:checked)) {
-    background: var(--cr-primary);
-    color: var(--cr-on-primary);
-    box-shadow: 0 3px 7px var(--cr-shadow-contact);
+.pr-dock :where([role=tab][aria-selected=true], a[aria-current]:not([aria-current=false]), label:has(input[type=radio]:checked)) {
+    background: var(--pr-primary);
+    color: var(--pr-on-primary);
+    box-shadow: 0 3px 7px var(--pr-shadow-contact);
     /* Selection is weight first, as a selected dock button's is: typographic, so
        it never rests on the fill's colour alone. */
     font-weight: 800;
 }
-.cr-dock :where([role=tab]:not([aria-selected=true]), a:not([aria-current]:not([aria-current=false])), label:has(input[type=radio]:not(:checked))):hover {
-    background: var(--cr-surface);
+.pr-dock :where([role=tab]:not([aria-selected=true]), a:not([aria-current]:not([aria-current=false])), label:has(input[type=radio]:not(:checked))):hover {
+    background: var(--pr-surface);
 }
 /* The radio is the control and the label is what is seen; the input stays in the
    accessibility tree and takes focus, and its ring is drawn on the label. The
    label is matched by a radio anywhere inside it (React Aria, for one, wraps
    its input in a visually hidden span), and only a radio that is the label's own
    child is hidden here, because a wrapped one is already hidden by its wrapper. */
-.cr-dock :where(label:has(> input[type=radio])) > input[type=radio] {
+.pr-dock :where(label:has(> input[type=radio])) > input[type=radio] {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -1575,27 +1575,27 @@ input[type=checkbox][role=switch] {
     opacity: 0;
     cursor: pointer;
 }
-:where(:root:not([data-crystal-modality=pointer])) .cr-dock :where(label:has(input[type=radio]:focus-visible)) {
-    outline: 2px solid var(--cr-focus-core);
+:where(:root:not([data-prismata-modality=pointer])) .pr-dock :where(label:has(input[type=radio]:focus-visible)) {
+    outline: 2px solid var(--pr-focus-core);
     outline-offset: 3px;
-    box-shadow: inset 0 2px 1px var(--cr-rim), var(--cr-focus-ring);
+    box-shadow: inset 0 2px 1px var(--pr-rim), var(--pr-focus-ring);
 }
 @media (max-width:600px) {
-.cr-dock :where([role=tab], a, label:has(input[type=radio])) {
+.pr-dock :where([role=tab], a, label:has(input[type=radio])) {
     padding: 10px 9px;
     font-size: 11px;
     min-height: 44px;
 }
 }
 @media (forced-colors:active) {
-.cr-dock :where([role=tab][aria-selected=true], a[aria-current]:not([aria-current=false]), label:has(input[type=radio]:checked)) {
+.pr-dock :where([role=tab][aria-selected=true], a[aria-current]:not([aria-current=false]), label:has(input[type=radio]:checked)) {
     background: Canvas;
     color: CanvasText;
     outline: 2px solid Highlight;
     outline-offset: -3px;
     box-shadow: none;
 }
-:where(:root:not([data-crystal-modality=pointer])) .cr-dock :where(label:has(input[type=radio]:focus-visible)) {
+:where(:root:not([data-prismata-modality=pointer])) .pr-dock :where(label:has(input[type=radio]:focus-visible)) {
     outline-color: Highlight;
     box-shadow: none;
 }
@@ -1603,13 +1603,13 @@ input[type=checkbox][role=switch] {
 
 /* The travelling selection pill (D-37).
  *
- * One `.cr-indicator.pill` behind the selected segment of a strip: tabs, a
+ * One `.pr-indicator.pill` behind the selected segment of a strip: tabs, a
  * segmented control, the dock, bottom navigation or a toggle button group. It
- * is a child of the plane that holds the segments (`.cr-dock`, `.cr-dock-inner`
- * or `.cr-group`), hidden from assistive technology, and placed by five
- * measured properties: `--cr-pill-x`, `--cr-pill-y`, `--cr-pill-width` and
- * `--cr-pill-height`, the selected segment's box inside the plane's padding
- * edge, and `--cr-pill-radius`, its corners. `CrystalMotion.travel()`
+ * is a child of the plane that holds the segments (`.pr-dock`, `.pr-dock-inner`
+ * or `.pr-group`), hidden from assistive technology, and placed by five
+ * measured properties: `--pr-pill-x`, `--pr-pill-y`, `--pr-pill-width` and
+ * `--pr-pill-height`, the selected segment's box inside the plane's padding
+ * edge, and `--pr-pill-radius`, its corners. `PrismataMotion.travel()`
  * writes them and moves the pill with the `selection-travel` recipe.
  *
  * Until the pill is placed (`data-placed`) it is not drawn and each segment
@@ -1621,53 +1621,53 @@ input[type=checkbox][role=switch] {
  * z-index -1 inside the plane's stacking context puts the pill above the
  * plane's Haze backing, which is earlier in the tree at the same level, and
  * under every segment's label without asking the segments to be positioned. */
-.cr-indicator.pill {
+.pr-indicator.pill {
     display: none;
     position: absolute;
     inset: auto;
-    left: var(--cr-pill-x, 0px);
-    top: var(--cr-pill-y, 0px);
-    width: var(--cr-pill-width, 0px);
-    height: var(--cr-pill-height, 0px);
+    left: var(--pr-pill-x, 0px);
+    top: var(--pr-pill-y, 0px);
+    width: var(--pr-pill-width, 0px);
+    height: var(--pr-pill-height, 0px);
     min-width: 0;
     z-index: -1;
     border: 0;
     /* The segment's own corners, so the pill is a pill in the dock and keeps
        a group's square interior corners. */
-    border-radius: var(--cr-pill-radius, 999px);
-    background: var(--cr-primary);
-    box-shadow: 0 3px 7px var(--cr-shadow-contact);
+    border-radius: var(--pr-pill-radius, 999px);
+    background: var(--pr-primary);
+    box-shadow: 0 3px 7px var(--pr-shadow-contact);
     list-style: none;
     margin: 0;
     padding: 0;
 }
-.cr-indicator.pill[data-placed] {
+.pr-indicator.pill[data-placed] {
     display: block;
 }
-.cr-indicator.pill::before,
-.cr-indicator.pill::after {
+.pr-indicator.pill::before,
+.pr-indicator.pill::after {
     content: none;
     display: none;
 }
-:is(.cr-dock, .cr-dock-inner, .cr-group):has(> .cr-indicator.pill[data-placed]) :is([aria-pressed=true], [aria-selected=true], [aria-checked=true], [aria-current]:not([aria-current=false]), label:has(input[type=radio]:checked)) {
+:is(.pr-dock, .pr-dock-inner, .pr-group):has(> .pr-indicator.pill[data-placed]) :is([aria-pressed=true], [aria-selected=true], [aria-checked=true], [aria-current]:not([aria-current=false]), label:has(input[type=radio]:checked)) {
     background: transparent;
     box-shadow: none;
 }
-:is(.cr-dock, .cr-dock-inner, .cr-group):has(> .cr-indicator.pill[data-placed]) :is([aria-pressed=true], [aria-selected=true], [aria-checked=true])::before {
+:is(.pr-dock, .pr-dock-inner, .pr-group):has(> .pr-indicator.pill[data-placed]) :is([aria-pressed=true], [aria-selected=true], [aria-checked=true])::before {
     background: transparent;
 }
 /* A group's segments paint their own fill, which a dock's do not. In a toggle
    set with a pill that fill would hide the pill as it passes behind, so every
    segment gives its fill to the group's plane and the pill is the one fill
    drawn. A hover keeps its own, on the element rather than this layer. */
-.cr-group:has(> .cr-indicator.pill[data-placed]) > :is(button, a.cr-button, .cr-button, .cr-control)::before {
+.pr-group:has(> .pr-indicator.pill[data-placed]) > :is(button, a.pr-button, .pr-button, .pr-control)::before {
     background: transparent;
     filter: none;
 }
 /* Forced colours draw selection as the segment's own Highlight outline, which
    stays; a fill the system would flatten to Canvas is not drawn. */
 @media (forced-colors:active) {
-.cr-indicator.pill[data-placed] {
+.pr-indicator.pill[data-placed] {
     display: none;
 }
 }
@@ -1676,37 +1676,37 @@ input[type=checkbox][role=switch] {
  *
  * A button group and a split button are one Resin plane whose segments touch:
  * the silhouette is a single pill, the interior corners square off against
- * their neighbours, and a hairline in `--cr-edge` separates them. The plane is
+ * their neighbours, and a hairline in `--pr-edge` separates them. The plane is
  * the group's, so the children give up their own elevation and diffusion (a
- * Resin button on a Resin plane is the composition Crystal forbids) and keep
+ * Resin button on a Resin plane is the composition Prismata forbids) and keep
  * their fill, so a primary action's ink still has its fill beneath it.
  *
- * The child selector is `:is(button, a.cr-button, .cr-button, .cr-control)`
+ * The child selector is `:is(button, a.pr-button, .pr-button, .pr-control)`
  * under the group, (0,2,1), because the Resin coat it subtracts from is keyed on
  * the element at (0,1,1) in this same layer. */
-.cr-group {
+.pr-group {
     display: inline-flex;
     align-items: stretch;
     position: relative;
     isolation: isolate;
-    border: 1px solid var(--cr-rim);
+    border: 1px solid var(--pr-rim);
     border-radius: 999px;
-    background: var(--cr-resin-fill);
-    box-shadow: var(--cr-shadow-float);
-    -webkit-backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
-    backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
+    background: var(--pr-resin-fill);
+    box-shadow: var(--pr-shadow-float);
+    -webkit-backdrop-filter: blur(var(--pr-resin-blur)) saturate(var(--pr-resin-saturation));
+    backdrop-filter: blur(var(--pr-resin-blur)) saturate(var(--pr-resin-saturation));
 }
-.cr-group::before {
+.pr-group::before {
     content: '';
     position: absolute;
-    inset: var(--cr-haze-inset);
+    inset: var(--pr-haze-inset);
     z-index: -1;
     pointer-events: none;
     border-radius: inherit;
-    background: var(--cr-haze-fill);
-    filter: blur(var(--cr-haze-feather));
+    background: var(--pr-haze-fill);
+    filter: blur(var(--pr-haze-feather));
 }
-.cr-group > :is(button, a.cr-button, .cr-button, .cr-control) {
+.pr-group > :is(button, a.pr-button, .pr-button, .pr-control) {
     border-radius: 0;
     box-shadow: none;
     -webkit-backdrop-filter: none;
@@ -1716,63 +1716,63 @@ input[type=checkbox][role=switch] {
 /* A toggle set's pill comes first in the group (D-37), so the first segment is
    the first child or the one straight after the pill. The pill's case is in
    :where(), so the rule keeps the specificity it had. */
-.cr-group > :is(button, a.cr-button, .cr-button, .cr-control):is(:first-child, :where(.cr-indicator.pill:first-child) + *) {
+.pr-group > :is(button, a.pr-button, .pr-button, .pr-control):is(:first-child, :where(.pr-indicator.pill:first-child) + *) {
     border-start-start-radius: 999px;
     border-end-start-radius: 999px;
 }
-.cr-group > :is(button, a.cr-button, .cr-button, .cr-control):last-child {
+.pr-group > :is(button, a.pr-button, .pr-button, .pr-control):last-child {
     border-start-end-radius: 999px;
     border-end-end-radius: 999px;
 }
-.cr-group > :is(button, a.cr-button, .cr-button, .cr-control) + :is(button, a.cr-button, .cr-button, .cr-control) {
-    border-inline-start: 1px solid var(--cr-edge);
+.pr-group > :is(button, a.pr-button, .pr-button, .pr-control) + :is(button, a.pr-button, .pr-button, .pr-control) {
+    border-inline-start: 1px solid var(--pr-edge);
 }
 /* Stacked, the pill radius clamps to a stadium whose ends meet the first and
    last children's own. */
-.cr-group.vertical {
+.pr-group.vertical {
     flex-direction: column;
 }
-.cr-group.vertical > :is(button, a.cr-button, .cr-button, .cr-control) + :is(button, a.cr-button, .cr-button, .cr-control) {
+.pr-group.vertical > :is(button, a.pr-button, .pr-button, .pr-control) + :is(button, a.pr-button, .pr-button, .pr-control) {
     border-inline-start: 0;
-    border-block-start: 1px solid var(--cr-edge);
+    border-block-start: 1px solid var(--pr-edge);
 }
-.cr-group.vertical > :is(button, a.cr-button, .cr-button, .cr-control):is(:first-child, :where(.cr-indicator.pill:first-child) + *) {
+.pr-group.vertical > :is(button, a.pr-button, .pr-button, .pr-control):is(:first-child, :where(.pr-indicator.pill:first-child) + *) {
     border-radius: 0;
     border-start-start-radius: 999px;
     border-start-end-radius: 999px;
 }
-.cr-group.vertical > :is(button, a.cr-button, .cr-button, .cr-control):last-child {
+.pr-group.vertical > :is(button, a.pr-button, .pr-button, .pr-control):last-child {
     border-radius: 0;
     border-end-start-radius: 999px;
     border-end-end-radius: 999px;
 }
-[data-effects=opaque] .cr-group {
-    background: var(--cr-surface);
+[data-effects=opaque] .pr-group {
+    background: var(--pr-surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
 @media (prefers-reduced-transparency:reduce) {
-.cr-group {
-    background: var(--cr-surface);
+.pr-group {
+    background: var(--pr-surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
-.cr-group::before {
+.pr-group::before {
     filter: none;
 }
 }
 @media (forced-colors:active) {
-.cr-group {
+.pr-group {
     background: ButtonFace;
     border: 1px solid ButtonText;
     box-shadow: none;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
-.cr-group::before {
+.pr-group::before {
     display: none;
 }
-.cr-group > :is(button, a.cr-button, .cr-button, .cr-control) + :is(button, a.cr-button, .cr-button, .cr-control) {
+.pr-group > :is(button, a.pr-button, .pr-button, .pr-control) + :is(button, a.pr-button, .pr-button, .pr-control) {
     border-inline-start-color: ButtonText;
     border-block-start-color: ButtonText;
 }
@@ -1783,7 +1783,7 @@ input[type=checkbox][role=switch] {
  * A surface that scrolls takes its title out of view in a tall dialog, and
  * cannot take the edge fade, because a mask fades an element's own fill and rim
  * along with its content. So the surface is a column that does not scroll, and
- * `.cr-dialog-body` scrolls inside it, with `.cr-scroll-frost` beside it for
+ * `.pr-dialog-body` scrolls inside it, with `.pr-scroll-frost` beside it for
  * the scroll contract, the Frost scrollbar and the edge fade, since a dialog is
  * a reading surface.
  *
@@ -1791,20 +1791,20 @@ input[type=checkbox][role=switch] {
  * scrolling as its surface. And only an open native dialog is shown: an author
  * `display` would otherwise beat the browser's
  * `dialog:not([open]) { display: none }`. */
-.cr-dialog:has(> .cr-dialog-body) {
+.pr-dialog:has(> .pr-dialog-body) {
     display: flex;
     flex-direction: column;
     overflow: visible;
 }
-dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
+dialog.pr-dialog:has(> .pr-dialog-body):not([open]) {
     display: none;
 }
 /* The gap below the header. It matches the gap inside the header, as the
    footer's 24px matches its own. */
-.cr-dialog > header + .cr-dialog-body {
+.pr-dialog > header + .pr-dialog-body {
     margin-top: 20px;
 }
-.cr-dialog-body {
+.pr-dialog-body {
     flex: 1 1 auto;
     min-height: 0;
     overflow: auto;
@@ -1821,28 +1821,28 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
  * lifted (a Haze dialog, a Frost panel) it recesses into Haze rather than
  * floating a second pane of glass. Plain Haze has no edge, and a menu drawn that
  * way over a Haze dialog cannot be told from the dialog, so the recessed overlay
- * is Haze given the one boundary it needs: a flat fill, the `--cr-edge` rim and
+ * is Haze given the one boundary it needs: a flat fill, the `--pr-edge` rim and
  * the content shadow. There is no feather, because a bordered box has no
  * perimeter to dissolve into its surroundings. */
-:is(.cr-haze,.cr-surface).overlay {
-    border: 1px solid var(--cr-edge);
-    border-radius: var(--cr-radius);
-    background: var(--cr-haze-fill);
-    box-shadow: var(--cr-shadow-content);
+:is(.pr-haze,.pr-surface).overlay {
+    border: 1px solid var(--pr-edge);
+    border-radius: var(--pr-radius);
+    background: var(--pr-haze-fill);
+    box-shadow: var(--pr-shadow-content);
 }
-:is(.cr-haze,.cr-surface).overlay::before {
+:is(.pr-haze,.pr-surface).overlay::before {
     display: none;
 }
-[data-effects=opaque] :is(.cr-haze,.cr-surface).overlay {
-    background: var(--cr-surface);
+[data-effects=opaque] :is(.pr-haze,.pr-surface).overlay {
+    background: var(--pr-surface);
 }
 @media (prefers-reduced-transparency:reduce) {
-:is(.cr-haze,.cr-surface).overlay {
-    background: var(--cr-surface);
+:is(.pr-haze,.pr-surface).overlay {
+    background: var(--pr-surface);
 }
 }
 @media (forced-colors:active) {
-:is(.cr-haze,.cr-surface).overlay {
+:is(.pr-haze,.pr-surface).overlay {
     background: Canvas;
     color: CanvasText;
     border: 1px solid CanvasText;
@@ -1853,7 +1853,7 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
    Material variants, 2.7.0 (R-28, proposals/2026-11-16-library-material-
    upstream.md).
 
-   A platform library that needed a surface Crystal had not published wrote it
+   A platform library that needed a surface Prismata had not published wrote it
    by hand: a Haze fill inset inside a card, a Frost pane without its grain, a
    Resin handle with no rim. Ruled 16 November 2026, those are corrections the
    standard takes in, not add-ons, and where a library's surface had drifted
@@ -1865,43 +1865,43 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
    forced-colours routes.
 
    Selector note: every variant is the surface compound plus one class,
-   `:is(.cr-haze,.cr-surface).flat`, specificity (0,2,0), authored in this
+   `:is(.pr-haze,.pr-surface).flat`, specificity (0,2,0), authored in this
    layer. That beats the Resin coat `:is(button, …)` (0,1,1) on the
    properties a variant states, so a `<button>` that wears a variant gets the
    variant's fill and border, and keeps the coat's pseudo-layers unless the
    variant says otherwise. A control that must lose the whole coat wears
-   `.cr-bare` as well.
+   `.pr-bare` as well.
 
-   Supported compositions: `.cr-haze.flat.sunken`, `.cr-frost.pane.flat`,
-   `.cr-frost.docked.flat`, `.cr-frost.sheet.flat`.
+   Supported compositions: `.pr-haze.flat.sunken`, `.pr-frost.pane.flat`,
+   `.pr-frost.docked.flat`, `.pr-frost.sheet.flat`.
    Other pairs compose by property but are not part of the contract.
    --------------------------------------------------------------------------- */
 
-/* Haze, inset. A reading card: the feathered fill stops `--cr-haze-inset` (8px)
+/* Haze, inset. A reading card: the feathered fill stops `--pr-haze-inset` (8px)
    short of the box, so content padding is measured from the fill and the card
    has no border box of its own. No shadow under the fill: an inset card sits
    in a page, it does not float over it. Alerts, empty states, results,
    product and cart cards, reviews, summaries, a chart's plot. */
-:is(.cr-haze,.cr-surface).inset {
+:is(.pr-haze,.pr-surface).inset {
     border: 0;
 }
-:is(.cr-haze,.cr-surface).inset::before {
-    inset: var(--cr-haze-inset);
+:is(.pr-haze,.pr-surface).inset::before {
+    inset: var(--pr-haze-inset);
     box-shadow: none;
 }
 
 /* Haze, flush. The same card filled to its own edge, for a tile whose content
    is the card: a gallery thumbnail, a carousel slide, an organisation chart's
    node, a swatch. */
-:is(.cr-haze,.cr-surface).flush {
+:is(.pr-haze,.pr-surface).flush {
     border: 0;
 }
-:is(.cr-haze,.cr-surface).flush::before {
+:is(.pr-haze,.pr-surface).flush::before {
     inset: 0;
     box-shadow: none;
 }
 @media (forced-colors:active) {
-:is(.cr-haze,.cr-surface):is(.inset,.flush) {
+:is(.pr-haze,.pr-surface):is(.inset,.flush) {
     border: 1px solid CanvasText;
 }
 }
@@ -1912,29 +1912,29 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
    blur the seams. `.sunken` is the flat fill recessed: where the fill gives way
    to the opaque surface, it gives way to the alternate surface instead, so an
    image placeholder still reads as a well. */
-:is(.cr-haze,.cr-surface).flat {
+:is(.pr-haze,.pr-surface).flat {
     border: 0;
-    background: var(--cr-haze-fill);
+    background: var(--pr-haze-fill);
 }
-:is(.cr-haze,.cr-surface).flat::before {
+:is(.pr-haze,.pr-surface).flat::before {
     display: none;
 }
-[data-effects=opaque] :is(.cr-haze,.cr-surface).flat {
-    background: var(--cr-surface);
+[data-effects=opaque] :is(.pr-haze,.pr-surface).flat {
+    background: var(--pr-surface);
 }
-[data-effects=opaque] :is(.cr-haze,.cr-surface).flat.sunken {
-    background: var(--cr-surface-alt);
+[data-effects=opaque] :is(.pr-haze,.pr-surface).flat.sunken {
+    background: var(--pr-surface-alt);
 }
 @media (prefers-reduced-transparency:reduce) {
-:is(.cr-haze,.cr-surface).flat {
-    background: var(--cr-surface);
+:is(.pr-haze,.pr-surface).flat {
+    background: var(--pr-surface);
 }
-:is(.cr-haze,.cr-surface).flat.sunken {
-    background: var(--cr-surface-alt);
+:is(.pr-haze,.pr-surface).flat.sunken {
+    background: var(--pr-surface-alt);
 }
 }
 @media (forced-colors:active) {
-:is(.cr-haze,.cr-surface).flat {
+:is(.pr-haze,.pr-surface).flat {
     background: Canvas;
     color: CanvasText;
     border: 1px solid CanvasText;
@@ -1943,73 +1943,73 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 
 /* Haze, raised. The fill takes the float shadow, as the dialog's does: a
    reading surface that opens over everything, such as a command palette. */
-:is(.cr-haze,.cr-surface).raised::before {
-    box-shadow: var(--cr-shadow-float);
+:is(.pr-haze,.pr-surface).raised::before {
+    box-shadow: var(--pr-shadow-float);
 }
 
 /* Frost, pane. The content radius, 28px, instead of the panel's 34px: a pane
    that sits beside content rather than over it, such as a navigation rail, a
    filter panel, a tour step or a workspace pane. */
-:is(.cr-frost,.cr-acrylic).pane {
-    border-radius: var(--cr-radius);
+:is(.pr-frost,.pr-acrylic).pane {
+    border-radius: var(--pr-radius);
 }
 
 /* Frost, flat. No grain. A pane that holds a long column of controls or rows
    shows the grain as noise behind them; the fill, rim, blur and shadow are
    unchanged. */
-:is(.cr-frost,.cr-acrylic).flat::before {
+:is(.pr-frost,.pr-acrylic).flat::before {
     display: none;
 }
 
 /* Frost, docked. A pane docked to the edges of the window, such as an app bar
    or a sidebar: no rim, no radius and no shadow, because it does not float.
    The side it shares with content is the component's to draw. */
-:is(.cr-frost,.cr-acrylic).docked {
+:is(.pr-frost,.pr-acrylic).docked {
     border: 0;
     border-radius: 0;
     box-shadow: none;
 }
 
 /* Frost, sheet. A pane that slides over content from an edge, such as a
-   drawer: the `--cr-edge` rim, the content radius and the float shadow. Which
+   drawer: the `--pr-edge` rim, the content radius and the float shadow. Which
    corners square off against the edge is the component's geometry. */
-:is(.cr-frost,.cr-acrylic).sheet {
-    border: 1px solid var(--cr-edge);
-    border-radius: var(--cr-radius);
-    box-shadow: var(--cr-shadow-float);
+:is(.pr-frost,.pr-acrylic).sheet {
+    border: 1px solid var(--pr-edge);
+    border-radius: var(--pr-radius);
+    box-shadow: var(--pr-shadow-float);
 }
 
 /* Frost, reading. A transient Frost surface whose content is read, such as a
    toast or a popover, holds a Haze reading fill. It is painted on `::after`,
    because `::before` is the grain, and a fill written there is drawn at the
-   grain's opacity. The inset is `--cr-frost-reading-inset`, defaulting to
-   `--cr-haze-inset`; a component sets the former, never the latter, because
-   controls nested inside read `--cr-haze-inset` for their own pads. */
-:is(.cr-frost,.cr-acrylic).reading {
-    --cr-frost-reading-inset: var(--cr-haze-inset);
+   grain's opacity. The inset is `--pr-frost-reading-inset`, defaulting to
+   `--pr-haze-inset`; a component sets the former, never the latter, because
+   controls nested inside read `--pr-haze-inset` for their own pads. */
+:is(.pr-frost,.pr-acrylic).reading {
+    --pr-frost-reading-inset: var(--pr-haze-inset);
 }
-:is(.cr-frost,.cr-acrylic).reading::after {
+:is(.pr-frost,.pr-acrylic).reading::after {
     content: '';
     position: absolute;
-    inset: var(--cr-frost-reading-inset);
+    inset: var(--pr-frost-reading-inset);
     z-index: -1;
     pointer-events: none;
     border-radius: inherit;
-    background: var(--cr-haze-fill);
-    filter: blur(var(--cr-haze-feather));
+    background: var(--pr-haze-fill);
+    filter: blur(var(--pr-haze-feather));
 }
-[data-effects=opaque] :is(.cr-frost,.cr-acrylic).reading::after {
-    background: var(--cr-surface);
+[data-effects=opaque] :is(.pr-frost,.pr-acrylic).reading::after {
+    background: var(--pr-surface);
     filter: none;
 }
 @media (prefers-reduced-transparency:reduce) {
-:is(.cr-frost,.cr-acrylic).reading::after {
-    background: var(--cr-surface);
+:is(.pr-frost,.pr-acrylic).reading::after {
+    background: var(--pr-surface);
     filter: none;
 }
 }
 @media (forced-colors:active) {
-:is(.cr-frost,.cr-acrylic).reading::after {
+:is(.pr-frost,.pr-acrylic).reading::after {
     display: none;
 }
 }
@@ -2017,8 +2017,8 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 /* Resin, flat. No sheen. A Resin plane that is a mark rather than a control,
    such as a stepper's or a timeline's marker: the fill,
    rim, blur and float shadow, without the optical highlight layers. */
-:is(.cr-resin,.cr-glass).flat::before,
-:is(.cr-resin,.cr-glass).flat::after {
+:is(.pr-resin,.pr-glass).flat::before,
+:is(.pr-resin,.pr-glass).flat::after {
     display: none;
 }
 
@@ -2027,29 +2027,29 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
    pointer can hold rather than a plane. Where the fill gives way, it becomes
    the outline colour, not the surface, so the line stays visible on the
    surface it divides. */
-:is(.cr-resin,.cr-glass).divider {
+:is(.pr-resin,.pr-glass).divider {
     border: 0;
     box-shadow: none;
 }
-:is(.cr-resin,.cr-glass).divider::before,
-:is(.cr-resin,.cr-glass).divider::after {
+:is(.pr-resin,.pr-glass).divider::before,
+:is(.pr-resin,.pr-glass).divider::after {
     display: none;
 }
-[data-effects=opaque] :is(.cr-resin,.cr-glass).divider {
-    background: var(--cr-outline);
+[data-effects=opaque] :is(.pr-resin,.pr-glass).divider {
+    background: var(--pr-outline);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
 @media (prefers-reduced-transparency:reduce) {
-:is(.cr-resin,.cr-glass).divider {
-    background: var(--cr-outline);
+:is(.pr-resin,.pr-glass).divider {
+    background: var(--pr-outline);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
 }
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
-:is(.cr-resin,.cr-glass).divider {
-    background: var(--cr-outline);
+:is(.pr-resin,.pr-glass).divider {
+    background: var(--pr-outline);
 }
 }
 /* Forced colours: the divider is drawn in CanvasText. That rule sits in the
@@ -2059,17 +2059,17 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 
 /* Field shell, block. The shell as a block that fills its row, for a field
    laid out in a form rather than set in a line of text. */
-.cr-field-shell.block {
+.pr-field-shell.block {
     display: flex;
 }
 
 /* ---------------------------------------------------------------------------
    The choice box as a class, 2.8.0 (R-28, phase 2).
 
-   Crystal paints the checkbox, the radio and the switch on the native input
+   Prismata paints the checkbox, the radio and the switch on the native input
    (`input:is([type=checkbox],[type=radio])` above). A library that keeps the
    input visually hidden and draws the box on its own element, as React Aria
-   does, could not wear that recipe and restated it by hand. `.cr-choice` is
+   does, could not wear that recipe and restated it by hand. `.pr-choice` is
    the same box on any element: the Resin box with the control light, the rim,
    the blur and the three-part shadow, at the published size and radius. The
    mark inside it, and the colour a selected box takes, stay the component's,
@@ -2078,7 +2078,7 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
    track's size and the pill radius.
 
    `.outline` is the box a platform library drew instead (published as drift,
-   by the ruling given with phase 1): the `--cr-outline` boundary in place of
+   by the ruling given with phase 1): the `--pr-outline` boundary in place of
    the rim, the plain Resin fill and blur, and a single inset rim, so that a
    selected box, which the component fills with the primary, reads as a solid
    mark against an outlined one.
@@ -2086,55 +2086,55 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
    Neither the native box nor the class had an opaque or reduced-transparency
    route before 2.8.0, so a Resin box kept its blur where every other Resin
    surface gave way. Both now become the surface with no backdrop. The routes
-   name `.cr-choice.outline` inside `:is()` so they outrank the variant. A
+   name `.pr-choice.outline` inside `:is()` so they outrank the variant. A
    native switch that is on keeps its primary-soft track, because
    `:checked` outranks them; a selected state a component draws keeps its
    colour, because a component's own rule is unlayered.
    --------------------------------------------------------------------------- */
-.cr-choice {
+.pr-choice {
     position: relative;
     display: inline-grid;
     place-items: center;
     flex: none;
     box-sizing: border-box;
-    width: var(--cr-choice-box-size, 26px);
-    height: var(--cr-choice-box-size, 26px);
-    border: 1px solid var(--cr-rim);
-    border-radius: var(--cr-choice-box-radius, 9px);
-    background: linear-gradient(135deg,var(--cr-control-light),var(--cr-control-color)),var(--cr-resin-fill);
-    -webkit-backdrop-filter: blur(var(--cr-resin-blur));
-    backdrop-filter: blur(var(--cr-resin-blur));
-    box-shadow: inset 0 2px 2px var(--cr-rim),0 2px 3px var(--cr-control-edge),0 5px 10px var(--cr-shadow-contact);
+    width: var(--pr-choice-box-size, 26px);
+    height: var(--pr-choice-box-size, 26px);
+    border: 1px solid var(--pr-rim);
+    border-radius: var(--pr-choice-box-radius, 9px);
+    background: linear-gradient(135deg,var(--pr-control-light),var(--pr-control-color)),var(--pr-resin-fill);
+    -webkit-backdrop-filter: blur(var(--pr-resin-blur));
+    backdrop-filter: blur(var(--pr-resin-blur));
+    box-shadow: inset 0 2px 2px var(--pr-rim),0 2px 3px var(--pr-control-edge),0 5px 10px var(--pr-shadow-contact);
 }
-.cr-choice.radio {
+.pr-choice.radio {
     border-radius: 50%;
 }
-.cr-choice.outline {
-    border-color: var(--cr-outline);
-    background: var(--cr-resin-fill);
-    -webkit-backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
-    backdrop-filter: blur(var(--cr-resin-blur)) saturate(var(--cr-resin-saturation));
-    box-shadow: inset 0 2px 1px var(--cr-rim);
+.pr-choice.outline {
+    border-color: var(--pr-outline);
+    background: var(--pr-resin-fill);
+    -webkit-backdrop-filter: blur(var(--pr-resin-blur)) saturate(var(--pr-resin-saturation));
+    backdrop-filter: blur(var(--pr-resin-blur)) saturate(var(--pr-resin-saturation));
+    box-shadow: inset 0 2px 1px var(--pr-rim);
 }
-[data-effects=opaque] :is(.cr-choice.outline, .cr-choice, input:is([type=checkbox],[type=radio])) {
-    background: var(--cr-surface);
+[data-effects=opaque] :is(.pr-choice.outline, .pr-choice, input:is([type=checkbox],[type=radio])) {
+    background: var(--pr-surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
 @media (prefers-reduced-transparency:reduce) {
-:is(.cr-choice.outline, .cr-choice, input:is([type=checkbox],[type=radio])) {
-    background: var(--cr-surface);
+:is(.pr-choice.outline, .pr-choice, input:is([type=checkbox],[type=radio])) {
+    background: var(--pr-surface);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
 }
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
-:is(.cr-choice.outline, .cr-choice) {
-    background: var(--cr-surface);
+:is(.pr-choice.outline, .pr-choice) {
+    background: var(--pr-surface);
 }
 }
 @media (forced-colors:active) {
-:is(.cr-choice.outline, .cr-choice) {
+:is(.pr-choice.outline, .pr-choice) {
     background: Field;
     border-color: FieldText;
     box-shadow: none;
@@ -2145,15 +2145,15 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 
 /* A count (D-27).
  *
- * `.cr-resin-haze` is sized for a tag: its Haze pad is inset by
- * `--cr-haze-inset`, 8px, and its block padding is 17px. On a 20px count badge
+ * `.pr-resin-haze` is sized for a tag: its Haze pad is inset by
+ * `--pr-haze-inset`, 8px, and its block padding is 17px. On a 20px count badge
  * the first leaves a pad a few pixels across with the digit mostly outside it,
  * and the second makes the badge 55px tall. A count fills to its own edge, since
  * it is smaller than the perimeter the inset protects, has no block padding, and
  * is a circle that becomes a pill as the digits need it: a square minimum and a
  * pill radius, so the shape follows the content. 20px is
  * `component.indicator.size`; 4px is the smallest spacing step. */
-.cr-resin-haze.count {
+.pr-resin-haze.count {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -2162,7 +2162,7 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     min-height: 20px;
     padding: 0 4px;
     border-radius: 999px;
-    font-size: var(--cr-text-caption-size, 13px);
+    font-size: var(--pr-text-caption-size, 13px);
     /* One line in a circle: the caption's reading leading plus the rim would
        make the circle 21px and no longer round. */
     line-height: 1;
@@ -2170,7 +2170,7 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
-.cr-resin-haze.count::before {
+.pr-resin-haze.count::before {
     inset: 0;
 }
 
@@ -2178,7 +2178,7 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
    block (a label, a textarea, a row of chips) makes the same room for the glyph
    that the inline shell has. `:where()` so this adds nothing to the shell's own
    specificity; the inline shell's padding rule is unchanged. */
-:where(.cr-field-shell:not(span)):has(> .cr-indicator) {
+:where(.pr-field-shell:not(span)):has(> .pr-indicator) {
     padding-inline-end: 40px;
 }
 }
@@ -2194,53 +2194,53 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
    recipe below is a composition of surfaces the vocabulary already has (Resin,
    Stone, Frost, Haze), so no platform gains a new material; it gains the
    geometry. As in the blocks above, each is authored in `@layer
-   crystal.component` and carries its own fallback branches.
+   prismata.component` and carries its own fallback branches.
    --------------------------------------------------------------------------- */
-@layer crystal.component {
+@layer prismata.component {
 
 /* The media stage.
  *
  * The picture's frame: the content radius, the letterbox, and the aspect ratio
  * the product asked for, so the page does not jump when the first frame
- * decodes. `--cr-media-aspect` is unset by default, which leaves the media's
- * own ratio; a product sets `16 / 9`, `4 / 3`, `1` or `9 / 16`. `--cr-media-fit`
+ * decodes. `--pr-media-aspect` is unset by default, which leaves the media's
+ * own ratio; a product sets `16 / 9`, `4 / 3`, `1` or `9 / 16`. `--pr-media-fit`
  * is `contain`, so nothing the author filmed is cropped unless they ask for
  * `cover`. */
-.cr-media {
+.pr-media {
     position: relative;
     isolation: isolate;
     overflow: hidden;
     container-type: inline-size;
-    aspect-ratio: var(--cr-media-aspect, auto);
-    border-radius: var(--cr-radius);
-    background: var(--cr-surface-alt);
+    aspect-ratio: var(--pr-media-aspect, auto);
+    border-radius: var(--pr-radius);
+    background: var(--pr-surface-alt);
     line-height: 0;
     /* The transport's height, which the caption cue clears: the 48px action
        target (D-20), 4px above and below, and the 1px rim. */
-    --cr-media-transport: 58px;
+    --pr-media-transport: 58px;
 }
-.cr-media > :is(video, img, canvas) {
+.pr-media > :is(video, img, canvas) {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: var(--cr-media-fit, contain);
+    object-fit: var(--pr-media-fit, contain);
 }
 /* The transport's region. It is inset from the stage by the 12px spacing step on
    every side it touches, so the Resin pill never meets the content radius
    (a 999px pill inside a 28px corner touches it at a point), and the inset grows
    to the safe area in full screen on a device with a notch or a home bar. */
-.cr-media-bar {
+.pr-media-bar {
     position: absolute;
     z-index: 2;
-    inset-inline: var(--cr-spacing-sm);
-    inset-block-end: var(--cr-spacing-sm);
-    line-height: var(--cr-leading, 1.6);
+    inset-inline: var(--pr-spacing-sm);
+    inset-block-end: var(--pr-spacing-sm);
+    line-height: var(--pr-leading, 1.6);
 }
-.cr-media:fullscreen .cr-media-bar {
-    inset-inline: max(var(--cr-spacing-sm), env(safe-area-inset-left), env(safe-area-inset-right));
-    inset-block-end: max(var(--cr-spacing-sm), env(safe-area-inset-bottom));
+.pr-media:fullscreen .pr-media-bar {
+    inset-inline: max(var(--pr-spacing-sm), env(safe-area-inset-left), env(safe-area-inset-right));
+    inset-block-end: max(var(--pr-spacing-sm), env(safe-area-inset-bottom));
 }
-.cr-media:fullscreen {
+.pr-media:fullscreen {
     border-radius: 0;
 }
 
@@ -2250,38 +2250,38 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
  * inside its rim. 12px inline padding keeps the first and last targets' focus
  * halos (3px offset plus the feather) inside the pill's curve. The time
  * readouts are tabular so the bar does not shift as the seconds change. */
-:is(.cr-resin,.cr-glass).transport {
+:is(.pr-resin,.pr-glass).transport {
     display: flex;
     align-items: center;
-    gap: var(--cr-spacing-2xs);
+    gap: var(--pr-spacing-2xs);
     min-height: 58px;
     box-sizing: border-box;
-    padding: var(--cr-spacing-2xs) var(--cr-spacing-sm);
-    color: var(--cr-text);
+    padding: var(--pr-spacing-2xs) var(--pr-spacing-sm);
+    color: var(--pr-text);
 }
 /* The readouts are labels read over moving pictures through a 20% fill, so
    each sits on its own Haze pill: the "Haze fills behind readable labels" the
    catalogue names. A control is not given one, because its own coat already
    carries a Haze pad. */
-:is(.cr-resin,.cr-glass).transport :where(time, output, .time) {
+:is(.pr-resin,.pr-glass).transport :where(time, output, .time) {
     flex: none;
-    padding: 2px var(--cr-spacing-xs);
+    padding: 2px var(--pr-spacing-xs);
     border-radius: 999px;
-    background: var(--cr-haze-fill);
-    font-size: var(--cr-text-caption-size);
+    background: var(--pr-haze-fill);
+    font-size: var(--pr-text-caption-size);
     font-weight: 650;
     font-variant-numeric: tabular-nums;
-    line-height: var(--cr-text-caption-leading, 1.4);
-    color: var(--cr-text);
+    line-height: var(--pr-text-caption-leading, 1.4);
+    color: var(--pr-text);
 }
 /* Narrow players drop the inline padding to the smallest step and let the bar
    wrap its trailing controls onto a second row, rather than crushing the
    scrubber to nothing. */
 @container (max-width: 420px) {
-:is(.cr-resin,.cr-glass).transport {
+:is(.pr-resin,.pr-glass).transport {
     flex-wrap: wrap;
-    padding-inline: var(--cr-spacing-xs);
-    border-radius: calc(var(--cr-radius) - 4px);
+    padding-inline: var(--pr-spacing-xs);
+    border-radius: calc(var(--pr-radius) - 4px);
 }
 }
 
@@ -2290,92 +2290,92 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
  * Two forms. `::cue` reaches the browser's own caption renderer, which accepts
  * a background and a font but no pseudo-element, so the fill is flat there. A
  * library that renders cues itself (for the same look in every engine) wears
- * `.cr-media-caption`, which is `.cr-stone`'s feathered backing on a positioned
+ * `.pr-media-caption`, which is `.pr-stone`'s feathered backing on a positioned
  * box. The cue sits above the transport, never under it. */
-.cr-media :is(video)::cue {
-    background: var(--cr-stone-fill);
-    color: var(--cr-text);
-    font-family: var(--cr-font);
+.pr-media :is(video)::cue {
+    background: var(--pr-stone-fill);
+    color: var(--pr-text);
+    font-family: var(--pr-font);
     font-weight: 650;
     line-height: 1.35;
 }
-.cr-media-caption {
+.pr-media-caption {
     position: absolute;
     z-index: 1;
-    inset-inline: var(--cr-spacing-lg);
-    inset-block-end: calc(var(--cr-media-transport, 58px) + var(--cr-spacing-sm) * 2);
+    inset-inline: var(--pr-spacing-lg);
+    inset-block-end: calc(var(--pr-media-transport, 58px) + var(--pr-spacing-sm) * 2);
     display: flex;
     justify-content: center;
     pointer-events: none;
     line-height: 1.35;
     text-align: center;
 }
-.cr-media-caption > * {
+.pr-media-caption > * {
     position: relative;
     isolation: isolate;
     max-width: 42ch;
-    padding: var(--cr-spacing-2xs) var(--cr-spacing-sm);
-    border-radius: var(--cr-spacing-xs);
-    color: var(--cr-text);
+    padding: var(--pr-spacing-2xs) var(--pr-spacing-sm);
+    border-radius: var(--pr-spacing-xs);
+    color: var(--pr-text);
     font-weight: 650;
-    font-size: calc(clamp(15px, 3.2cqi, 28px) * var(--cr-caption-scale, 1));
+    font-size: calc(clamp(15px, 3.2cqi, 28px) * var(--pr-caption-scale, 1));
 }
-.cr-media-caption > *::before {
+.pr-media-caption > *::before {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
     border-radius: inherit;
-    background: var(--cr-caption-backing, var(--cr-stone-fill));
-    filter: blur(var(--cr-caption-feather, var(--cr-stone-feather)));
+    background: var(--pr-caption-backing, var(--pr-stone-fill));
+    filter: blur(var(--pr-caption-feather, var(--pr-stone-feather)));
 }
 
 /* Below 420px the transport wraps to two rows: two 48px targets, the 4px gap
    between them, 4px above and below and the 1px rim. The cue clears the
    wrapped transport as it clears one row (D-42). */
 @container (max-width: 420px) {
-.cr-media-caption {
-    --cr-media-transport: 110px;
+.pr-media-caption {
+    --pr-media-transport: 110px;
 }
 }
 
 /* The reader's caption style. Captions are the reader's, so a player offers a
  * larger size and a solid backing and keeps the choice for every player on
- * the page. The choice is worn on `.cr-media-caption` and reaches the cue's
- * box through two properties: `--cr-caption-scale` scales the whole range, so
+ * the page. The choice is worn on `.pr-media-caption` and reaches the cue's
+ * box through two properties: `--pr-caption-scale` scales the whole range, so
  * a larger cue still grows with the stage (`.large` 1.25, `.larger` 1.5), and
  * `.solid` puts the cue on the opaque surface in place of the feathered Stone,
  * the backing every fallback below already draws. Under forced colours the
  * cue is drawn in system colours whatever the choice. The browser's own
  * renderer (`::cue`) is left to the reader's system caption settings, which
  * every engine applies to it. */
-.cr-media-caption.large {
-    --cr-caption-scale: 1.25;
+.pr-media-caption.large {
+    --pr-caption-scale: 1.25;
 }
-.cr-media-caption.larger {
-    --cr-caption-scale: 1.5;
+.pr-media-caption.larger {
+    --pr-caption-scale: 1.5;
 }
-.cr-media-caption.solid {
-    --cr-caption-backing: var(--cr-surface);
-    --cr-caption-feather: 0px;
+.pr-media-caption.solid {
+    --pr-caption-backing: var(--pr-surface);
+    --pr-caption-feather: 0px;
 }
 
 /* The audio player: no picture, so the stage becomes a Haze reading surface
    (title, artist, chapter) holding the transport, with the card padding every
-   other Haze card has. Worn as `.cr-haze.cr-media.audio`. */
-.cr-media.audio {
+   other Haze card has. Worn as `.pr-haze.pr-media.audio`. */
+.pr-media.audio {
     display: grid;
-    gap: var(--cr-spacing-sm);
+    gap: var(--pr-spacing-sm);
     aspect-ratio: auto;
     overflow: visible;
-    padding: var(--cr-space);
+    padding: var(--pr-space);
     /* The letterbox above is authored in this layer and would beat the Haze
-       fill, which `.cr-haze` sets in the reset layer. `revert-layer` hands the
+       fill, which `.pr-haze` sets in the reset layer. `revert-layer` hands the
        background back to whichever surface the player wears. */
     background: revert-layer;
-    line-height: var(--cr-leading, 1.6);
+    line-height: var(--pr-leading, 1.6);
 }
-.cr-media.audio .cr-media-bar {
+.pr-media.audio .pr-media-bar {
     position: static;
 }
 
@@ -2383,20 +2383,20 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
    highlighted text, a floating format bar. Transient overlays are Frost
    (R15e); this is the popover with the pill silhouette and the dock's spacing,
    because what it holds is a row of 48px targets and not a paragraph. */
-:is(.cr-frost,.cr-acrylic).bar {
+:is(.pr-frost,.pr-acrylic).bar {
     display: inline-flex;
     align-items: center;
     gap: 2px;
-    padding: var(--cr-spacing-2xs);
+    padding: var(--pr-spacing-2xs);
     border-radius: 999px;
 }
 
 /* Prose and the editor share one typographic vocabulary.
  *
- * `.cr-prose` is the reading rhythm for content the product did not lay out
- * (rendered Markdown, a CMS body); `.cr-editor` is the same vocabulary inside an
+ * `.pr-prose` is the reading rhythm for content the product did not lay out
+ * (rendered Markdown, a CMS body); `.pr-editor` is the same vocabulary inside an
  * editable surface, plus the caret and the selection. The values are the ones
- * Crystal React's `Prose` renders and was reviewed at: block gaps of 24px,
+ * Prismata React's `Prose` renders and was reviewed at: block gaps of 24px,
  * headings stepping through the scale from display, muted list markers, a
  * primary-soft rule on a quotation. What is new is the part no platform had:
  * checklists, and the marks a document needs past bold and italic.
@@ -2405,172 +2405,172 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
  * checked state is the control's, never a glyph drawn beside the text. Every
  * mark differs in shape as well as colour: an insertion is underlined, a
  * deletion struck through, a highlight filled, so none rests on colour alone. */
-:is(.cr-prose,.cr-editor) {
-    color: var(--cr-text);
-    font-size: var(--cr-text-body-size);
-    line-height: var(--cr-text-body-leading);
+:is(.pr-prose,.pr-editor) {
+    color: var(--pr-text);
+    font-size: var(--pr-text-body-size);
+    line-height: var(--pr-text-body-leading);
     overflow-wrap: anywhere;
 }
-.cr-prose {
+.pr-prose {
     max-width: 68ch;
 }
-:is(.cr-prose,.cr-editor) > * + * {
-    margin-top: var(--cr-spacing-lg);
+:is(.pr-prose,.pr-editor) > * + * {
+    margin-top: var(--pr-spacing-lg);
 }
-:is(.cr-prose,.cr-editor) > :first-child {
+:is(.pr-prose,.pr-editor) > :first-child {
     margin-top: 0;
 }
-:is(.cr-prose,.cr-editor) :where(h1, h2, h3, h4, h5, h6) {
+:is(.pr-prose,.pr-editor) :where(h1, h2, h3, h4, h5, h6) {
     margin-bottom: 0;
     font-weight: 750;
     text-wrap: balance;
 }
-:is(.cr-prose,.cr-editor) > :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
-    margin-top: var(--cr-spacing-xl);
+:is(.pr-prose,.pr-editor) > :where(h1, h2, h3, h4, h5, h6):not(:first-child) {
+    margin-top: var(--pr-spacing-xl);
 }
-:is(.cr-prose,.cr-editor) :where(h1) {
-    font-size: var(--cr-text-display-size);
-    line-height: var(--cr-text-display-leading);
-    letter-spacing: var(--cr-text-display-tracking);
+:is(.pr-prose,.pr-editor) :where(h1) {
+    font-size: var(--pr-text-display-size);
+    line-height: var(--pr-text-display-leading);
+    letter-spacing: var(--pr-text-display-tracking);
 }
-:is(.cr-prose,.cr-editor) :where(h2) {
-    font-size: var(--cr-text-title-size);
-    line-height: var(--cr-text-title-leading);
-    letter-spacing: var(--cr-text-title-tracking);
+:is(.pr-prose,.pr-editor) :where(h2) {
+    font-size: var(--pr-text-title-size);
+    line-height: var(--pr-text-title-leading);
+    letter-spacing: var(--pr-text-title-tracking);
 }
-:is(.cr-prose,.cr-editor) :where(h3) {
-    font-size: var(--cr-text-heading-size);
-    line-height: var(--cr-text-heading-leading);
-    letter-spacing: var(--cr-text-heading-tracking);
+:is(.pr-prose,.pr-editor) :where(h3) {
+    font-size: var(--pr-text-heading-size);
+    line-height: var(--pr-text-heading-leading);
+    letter-spacing: var(--pr-text-heading-tracking);
 }
-:is(.cr-prose,.cr-editor) :where(h4, h5, h6) {
-    font-size: var(--cr-text-subheading-size);
-    line-height: var(--cr-text-subheading-leading);
-    letter-spacing: var(--cr-text-subheading-tracking);
+:is(.pr-prose,.pr-editor) :where(h4, h5, h6) {
+    font-size: var(--pr-text-subheading-size);
+    line-height: var(--pr-text-subheading-leading);
+    letter-spacing: var(--pr-text-subheading-tracking);
 }
-:is(.cr-prose,.cr-editor) :where(p, ul, ol, blockquote, pre) {
+:is(.pr-prose,.pr-editor) :where(p, ul, ol, blockquote, pre) {
     margin-bottom: 0;
 }
-:is(.cr-prose,.cr-editor) :where(ul, ol) {
-    padding-inline-start: var(--cr-spacing-lg);
+:is(.pr-prose,.pr-editor) :where(ul, ol) {
+    padding-inline-start: var(--pr-spacing-lg);
 }
-:is(.cr-prose,.cr-editor) :where(ul, ol) :where(ul, ol) {
-    margin-top: var(--cr-spacing-xs);
+:is(.pr-prose,.pr-editor) :where(ul, ol) :where(ul, ol) {
+    margin-top: var(--pr-spacing-xs);
 }
-:is(.cr-prose,.cr-editor) :where(li) + :where(li) {
-    margin-top: var(--cr-spacing-xs);
+:is(.pr-prose,.pr-editor) :where(li) + :where(li) {
+    margin-top: var(--pr-spacing-xs);
 }
-:is(.cr-prose,.cr-editor) :where(li)::marker {
-    color: var(--cr-muted);
+:is(.pr-prose,.pr-editor) :where(li)::marker {
+    color: var(--pr-muted);
 }
-:is(.cr-prose,.cr-editor) :where(li) > :where(p) {
+:is(.pr-prose,.pr-editor) :where(li) > :where(p) {
     margin: 0;
 }
 /* A checklist: `ul.checklist`, or `ul[data-type=taskList]` as ProseMirror and
    TipTap write it. The checkbox is the marker, so the list's own marker and
    indent go; the item is a row of the control and its text, top-aligned so a
    wrapped line keeps the control on the first. */
-:is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) {
+:is(.pr-prose,.pr-editor) :where(ul.checklist, ul[data-type=taskList]) {
     padding-inline-start: 0;
     list-style: none;
 }
-:is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) > li {
+:is(.pr-prose,.pr-editor) :where(ul.checklist, ul[data-type=taskList]) > li {
     display: flex;
     align-items: flex-start;
-    gap: var(--cr-spacing-xs);
+    gap: var(--pr-spacing-xs);
 }
-:is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) > li > :where(label) {
+:is(.pr-prose,.pr-editor) :where(ul.checklist, ul[data-type=taskList]) > li > :where(label) {
     flex: none;
     display: inline-flex;
     /* The leading is unitless, so it is made a length with `1em` before the
        box is taken from it; without it the calc is invalid and computes 0
        (D-40). */
-    margin-top: calc((var(--cr-text-body-leading) * 1em - var(--cr-choice-box-size, 26px)) / 2);
+    margin-top: calc((var(--pr-text-body-leading) * 1em - var(--pr-choice-box-size, 26px)) / 2);
 }
 /* A checklist's checkbox is a choice, not the field's text entry. Inside an
-   editor's field shell, `.cr-field-shell :is(input, select, textarea)` would
+   editor's field shell, `.pr-field-shell :is(input, select, textarea)` would
    give it the text entry's 44px floor, stretching the 26px box into a pill and
    dropping it below its line. */
-.cr-field-shell :is(.cr-prose,.cr-editor) input:is([type=checkbox],[type=radio]) {
+.pr-field-shell :is(.pr-prose,.pr-editor) input:is([type=checkbox],[type=radio]) {
     min-height: 0;
 }
-:is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) > li > :where(div, p, span) {
+:is(.pr-prose,.pr-editor) :where(ul.checklist, ul[data-type=taskList]) > li > :where(div, p, span) {
     flex: 1;
     min-width: 0;
 }
 /* Done is the checkbox's state. The text recedes to the muted ink so a long
    list can be scanned, and is not struck through, which would make finished
    work harder to read. */
-:is(.cr-prose,.cr-editor) :where(ul.checklist, ul[data-type=taskList]) > li:where([data-checked=true], :has(> label input:checked)) > :where(div, p, span) {
-    color: var(--cr-muted);
+:is(.pr-prose,.pr-editor) :where(ul.checklist, ul[data-type=taskList]) > li:where([data-checked=true], :has(> label input:checked)) > :where(div, p, span) {
+    color: var(--pr-muted);
 }
-:is(.cr-prose,.cr-editor) :where(blockquote) {
+:is(.pr-prose,.pr-editor) :where(blockquote) {
     margin-inline: 0;
-    padding-inline-start: var(--cr-spacing-md);
-    border-inline-start: 3px solid var(--cr-primary-soft);
-    color: var(--cr-muted);
+    padding-inline-start: var(--pr-spacing-md);
+    border-inline-start: 3px solid var(--pr-primary-soft);
+    color: var(--pr-muted);
 }
-:is(.cr-prose,.cr-editor) :where(pre) {
-    padding: var(--cr-space);
-    border-radius: var(--cr-radius);
-    background: var(--cr-surface-alt);
+:is(.pr-prose,.pr-editor) :where(pre) {
+    padding: var(--pr-space);
+    border-radius: var(--pr-radius);
+    background: var(--pr-surface-alt);
     overflow-x: auto;
     overscroll-behavior: contain;
 }
-:is(.cr-prose,.cr-editor) :where(code, kbd, samp) {
+:is(.pr-prose,.pr-editor) :where(code, kbd, samp) {
     padding-inline: 0.2em;
     border-radius: 4px;
-    background: var(--cr-surface-alt);
+    background: var(--pr-surface-alt);
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     font-size: 0.9em;
 }
-:is(.cr-prose,.cr-editor) :where(pre code) {
+:is(.pr-prose,.pr-editor) :where(pre code) {
     padding: 0;
     background: none;
     font-size: inherit;
 }
 /* A key is a key cap, so it has the edge and the deeper bottom a cap has, which
    tells it from inline code by shape. */
-:is(.cr-prose,.cr-editor) :where(kbd) {
-    border: 1px solid var(--cr-outline);
+:is(.pr-prose,.pr-editor) :where(kbd) {
+    border: 1px solid var(--pr-outline);
     border-bottom-width: 2px;
 }
-:is(.cr-prose,.cr-editor) :where(a) {
-    color: var(--cr-primary);
+:is(.pr-prose,.pr-editor) :where(a) {
+    color: var(--pr-primary);
     text-underline-offset: 0.2em;
 }
-:is(.cr-prose,.cr-editor) :where(u) {
+:is(.pr-prose,.pr-editor) :where(u) {
     text-decoration: underline;
     text-decoration-thickness: 1.5px;
     text-underline-offset: 0.2em;
 }
-:is(.cr-prose,.cr-editor) :where(s, strike) {
+:is(.pr-prose,.pr-editor) :where(s, strike) {
     text-decoration: line-through;
     text-decoration-thickness: 1.5px;
 }
-:is(.cr-prose,.cr-editor) :where(ins) {
+:is(.pr-prose,.pr-editor) :where(ins) {
     text-decoration: underline;
-    text-decoration-color: var(--cr-success-ink);
+    text-decoration-color: var(--pr-success-ink);
     text-decoration-thickness: 2px;
     text-underline-offset: 0.2em;
 }
-:is(.cr-prose,.cr-editor) :where(del) {
+:is(.pr-prose,.pr-editor) :where(del) {
     text-decoration: line-through;
-    text-decoration-color: var(--cr-danger-ink);
+    text-decoration-color: var(--pr-danger-ink);
     text-decoration-thickness: 2px;
 }
-:is(.cr-prose,.cr-editor) :where(mark) {
-    background: var(--cr-primary-soft);
-    color: var(--cr-on-primary-soft);
+:is(.pr-prose,.pr-editor) :where(mark) {
+    background: var(--pr-primary-soft);
+    color: var(--pr-on-primary-soft);
 }
-:is(.cr-prose,.cr-editor) :where(sub, sup) {
+:is(.pr-prose,.pr-editor) :where(sub, sup) {
     font-size: 0.75em;
     line-height: 0;
 }
-:is(.cr-prose,.cr-editor) :where(hr) {
+:is(.pr-prose,.pr-editor) :where(hr) {
     height: 1px;
     border: 0;
-    background: var(--cr-edge);
+    background: var(--pr-edge);
 }
 
 /* The editable surface: the caret in the primary ink, and an outline-free
@@ -2581,34 +2581,34 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
    28% primary tint under unchanged text. It is not the primary-soft pair,
    which a highlight (`mark`) already wears: a highlighted word that is then
    selected must still look selected. */
-.cr-editor {
-    caret-color: var(--cr-primary);
+.pr-editor {
+    caret-color: var(--pr-primary);
     outline: none;
-    min-height: calc(var(--cr-text-body-leading) * 1em * 4 + var(--cr-space) * 2);
-    padding: var(--cr-space);
+    min-height: calc(var(--pr-text-body-leading) * 1em * 4 + var(--pr-space) * 2);
+    padding: var(--pr-space);
 }
-.cr-editor ::selection,
-.cr-editor::selection {
-    background: color-mix(in srgb, var(--cr-primary) 28%, transparent);
+.pr-editor ::selection,
+.pr-editor::selection {
+    background: color-mix(in srgb, var(--pr-primary) 28%, transparent);
 }
 /* A highlighted word that is then selected takes the action pair, primary
    with on-primary ink, which the resolver holds at 4.5:1 in every palette.
    The 28% tint over the primary-soft highlight fell to 3.74:1 in Harbor
    (D-39). Forced colours below still draws every selection in Highlight. */
-.cr-editor :where(mark)::selection,
-.cr-editor :where(mark) ::selection {
-    background: var(--cr-primary);
-    color: var(--cr-on-primary);
+.pr-editor :where(mark)::selection,
+.pr-editor :where(mark) ::selection {
+    background: var(--pr-primary);
+    color: var(--pr-on-primary);
 }
 /* An empty block's prompt, read from `data-placeholder`. Engines mark the empty
    block with `.is-empty` (ProseMirror, TipTap) or leave it `:empty`; both are
    reached. */
-.cr-editor :where(.is-empty, :empty)[data-placeholder]::before {
+.pr-editor :where(.is-empty, :empty)[data-placeholder]::before {
     content: attr(data-placeholder);
     float: inline-start;
     height: 0;
     pointer-events: none;
-    color: var(--cr-muted);
+    color: var(--pr-muted);
 }
 
 /* The editor's frame: a field shell holding a toolbar and an editable surface.
@@ -2617,15 +2617,15 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
  * and the text sit on the well. The selector is (0,2,0), so it outranks the
  * shell's own (0,1,0) inline layout and 20px radius in this layer; written in
  * `:where()`, as first drafted, it lost to both and centred the toolbar. */
-.cr-field-shell:has(> .cr-editor) {
+.pr-field-shell:has(> .pr-editor) {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
-    padding: var(--cr-haze-inset);
-    border-radius: var(--cr-radius);
+    padding: var(--pr-haze-inset);
+    border-radius: var(--pr-radius);
 }
 
 /* The formatting toolbar.
@@ -2644,7 +2644,7 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
  * product that knows its layout better than the media query does: `.below`
  * puts the toolbar under the text on any pointer, `.above` keeps it over the
  * text on any pointer. */
-.cr-editor-toolbar {
+.pr-editor-toolbar {
     position: sticky;
     inset-block-start: 0;
     z-index: 1;
@@ -2652,41 +2652,41 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
     flex-wrap: wrap;
     align-items: center;
     gap: 2px;
-    padding: var(--cr-spacing-2xs);
-    border-bottom: 1px solid var(--cr-edge);
-    border-radius: calc(var(--cr-radius) - var(--cr-haze-inset)) calc(var(--cr-radius) - var(--cr-haze-inset)) 0 0;
-    background: var(--cr-haze-fill);
+    padding: var(--pr-spacing-2xs);
+    border-bottom: 1px solid var(--pr-edge);
+    border-radius: calc(var(--pr-radius) - var(--pr-haze-inset)) calc(var(--pr-radius) - var(--pr-haze-inset)) 0 0;
+    background: var(--pr-haze-fill);
 }
-.cr-editor-toolbar > [role=separator] {
+.pr-editor-toolbar > [role=separator] {
     align-self: stretch;
     width: 1px;
-    margin: var(--cr-spacing-xs) var(--cr-spacing-2xs);
-    background: var(--cr-edge);
+    margin: var(--pr-spacing-xs) var(--pr-spacing-2xs);
+    background: var(--pr-edge);
 }
-.cr-editor-toolbar.below {
+.pr-editor-toolbar.below {
     order: 2;
     inset-block-start: auto;
     inset-block-end: env(keyboard-inset-height, 0px);
     border-bottom: 0;
-    border-top: 1px solid var(--cr-edge);
-    border-radius: 0 0 calc(var(--cr-radius) - var(--cr-haze-inset)) calc(var(--cr-radius) - var(--cr-haze-inset));
+    border-top: 1px solid var(--pr-edge);
+    border-radius: 0 0 calc(var(--pr-radius) - var(--pr-haze-inset)) calc(var(--pr-radius) - var(--pr-haze-inset));
 }
 @media (pointer: coarse) {
-.cr-editor-toolbar {
+.pr-editor-toolbar {
     flex-wrap: nowrap;
     overflow-x: auto;
     overscroll-behavior: contain;
     scrollbar-width: none;
 }
-.cr-editor-toolbar:not(.above) {
+.pr-editor-toolbar:not(.above) {
     order: 2;
     inset-block-start: auto;
     inset-block-end: env(keyboard-inset-height, 0px);
     border-bottom: 0;
-    border-top: 1px solid var(--cr-edge);
-    border-radius: 0 0 calc(var(--cr-radius) - var(--cr-haze-inset)) calc(var(--cr-radius) - var(--cr-haze-inset));
+    border-top: 1px solid var(--pr-edge);
+    border-radius: 0 0 calc(var(--pr-radius) - var(--pr-haze-inset)) calc(var(--pr-radius) - var(--pr-haze-inset));
 }
-.cr-editor-toolbar > * {
+.pr-editor-toolbar > * {
     flex: none;
     touch-action: manipulation;
 }
@@ -2694,60 +2694,60 @@ dialog.cr-dialog:has(> .cr-dialog-body):not([open]) {
 
 /* With transparency reduced the well is the opaque surface, and so is the
    toolbar's backing. */
-[data-effects=opaque] .cr-editor-toolbar {
-    background: var(--cr-surface);
+[data-effects=opaque] .pr-editor-toolbar {
+    background: var(--pr-surface);
 }
 @media (prefers-reduced-transparency:reduce) {
-.cr-editor-toolbar {
-    background: var(--cr-surface);
+.pr-editor-toolbar {
+    background: var(--pr-surface);
 }
 }
-[data-effects=opaque] .cr-media-caption > *::before {
-    background: var(--cr-surface);
+[data-effects=opaque] .pr-media-caption > *::before {
+    background: var(--pr-surface);
     filter: none;
 }
 @media (prefers-reduced-transparency:reduce) {
-.cr-media-caption > *::before {
-    background: var(--cr-surface);
+.pr-media-caption > *::before {
+    background: var(--pr-surface);
     filter: none;
 }
-.cr-media :is(video)::cue {
-    background: var(--cr-surface);
+.pr-media :is(video)::cue {
+    background: var(--pr-surface);
 }
 }
 @media (forced-colors:active) {
-.cr-media {
+.pr-media {
     border: 1px solid CanvasText;
 }
-:is(.cr-resin,.cr-glass).transport :where(time, output, .time) {
+:is(.pr-resin,.pr-glass).transport :where(time, output, .time) {
     background: Canvas;
     color: CanvasText;
 }
-.cr-media-caption > * {
+.pr-media-caption > * {
     background: Canvas;
     color: CanvasText;
     border: 1px solid CanvasText;
 }
-.cr-media-caption > *::before {
+.pr-media-caption > *::before {
     display: none;
 }
-:is(.cr-prose,.cr-editor) :where(mark) {
+:is(.pr-prose,.pr-editor) :where(mark) {
     background: Mark;
     color: MarkText;
 }
-:is(.cr-prose,.cr-editor) :where(ins, del) {
+:is(.pr-prose,.pr-editor) :where(ins, del) {
     text-decoration-color: CanvasText;
 }
-.cr-editor ::selection,
-.cr-editor::selection {
+.pr-editor ::selection,
+.pr-editor::selection {
     background: Highlight;
     color: HighlightText;
 }
-.cr-editor-toolbar {
+.pr-editor-toolbar {
     background: Canvas;
 }
-.cr-editor-toolbar,
-.cr-editor-toolbar > [role=separator] {
+.pr-editor-toolbar,
+.pr-editor-toolbar > [role=separator] {
     border-color: CanvasText;
 }
 }

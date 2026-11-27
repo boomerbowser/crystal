@@ -1,7 +1,7 @@
 {
   "id": "charts",
   "name": "Charts",
-  "description": "Data visualisation on one shared surface. Crystal named no charting component before 2.0 while every React benchmark shipped one. These are specified against MUI X Charts, PrimeReact Chart and Mantine Charts. Every chart owes a text equivalent of its data, so the chart is never the only representation.",
+  "description": "Data visualisation on one shared surface. Prismata named no charting component before 2.0 while every React benchmark shipped one. These are specified against MUI X Charts, PrimeReact Chart and Mantine Charts. Every chart owes a text equivalent of its data, so the chart is never the only representation.",
   "components": [
     {
       "id": "chart-surface",
@@ -19,7 +19,7 @@
       ],
       "geometry": "Plot area keeps the content radius; the legend is a list of pills.",
       "semantics": "Each chart has an accessible name and a table equivalent of its data.",
-      "crystal": "Materials, grid and axis colour, focus order, empty and loading surfaces",
+      "prismata": "Materials, grid and axis colour, focus order, empty and loading surfaces",
       "product": "Data, scales, formatting",
       "parity": [
         "mui-x-charts:ChartContainer"
@@ -41,7 +41,7 @@
       ],
       "geometry": "Bars keep a small radius on the value end only.",
       "semantics": "Every series is named; values are reachable as text.",
-      "crystal": "Bar geometry, series colour from the palette, enter motion",
+      "prismata": "Bar geometry, series colour from the palette, enter motion",
       "product": "Data, stacking, axes",
       "motion": [
         "mark-in"
@@ -67,7 +67,7 @@
       ],
       "geometry": "Line weight follows the stroke scale; points reach 44px of hit area.",
       "semantics": "Series are distinguishable without colour alone.",
-      "crystal": "Stroke scale, point geometry, enter motion (mark-in)",
+      "prismata": "Stroke scale, point geometry, enter motion (mark-in)",
       "product": "Data, curve type, axes",
       "motion": [
         "mark-in"
@@ -86,13 +86,13 @@
         "focus-visible",
         "empty"
       ],
-      "material": "The series colour at `--cr-chart-fill-opacity` beneath the line",
+      "material": "The series colour at `--pr-chart-fill-opacity` beneath the line",
       "surface": [
         "none"
       ],
       "geometry": "Fill never obscures gridlines beneath it.",
       "semantics": "As the line chart.",
-      "crystal": "Fill material and opacity so overlaps stay readable",
+      "prismata": "Fill material and opacity so overlaps stay readable",
       "product": "Data and stacking",
       "parity": [
         "mantine:AreaChart"
@@ -114,7 +114,7 @@
       ],
       "geometry": "Segments separated by a hairline in the surface colour.",
       "semantics": "Each segment is labelled with its value; the total is stated.",
-      "crystal": "Segment colour ordering, separation, enter motion",
+      "prismata": "Segment colour ordering, separation, enter motion",
       "product": "Data and labels",
       "motion": [
         "mark-in"
@@ -133,13 +133,13 @@
         "focus-visible",
         "empty"
       ],
-      "material": "A centre fill in `--cr-haze-fill`",
+      "material": "A centre fill in `--pr-haze-fill`",
       "surface": [
         "none"
       ],
       "geometry": "Ring thickness is a declared proportion of the radius.",
       "semantics": "The centre value is text, not an image.",
-      "crystal": "Ring geometry, centre material",
+      "prismata": "Ring geometry, centre material",
       "product": "Data and the centre summary",
       "parity": [
         "mantine:DonutChart"
@@ -161,7 +161,7 @@
       ],
       "geometry": "Point size is a scale, not an arbitrary radius.",
       "semantics": "Dense regions remain describable; a table equivalent is required.",
-      "crystal": "Point geometry, overlap treatment",
+      "prismata": "Point geometry, overlap treatment",
       "product": "Data and scales",
       "parity": [
         "mui-x-charts:ScatterChart"
@@ -177,13 +177,13 @@
         "focus-visible",
         "empty"
       ],
-      "material": "The series colour at `--cr-chart-fill-opacity` inside each series polygon",
+      "material": "The series colour at `--pr-chart-fill-opacity` inside each series polygon",
       "surface": [
         "none"
       ],
       "geometry": "Axis labels sit outside the outer ring.",
       "semantics": "Axes are labelled; series are named.",
-      "crystal": "Fill opacity so overlapping series stay readable",
+      "prismata": "Fill opacity so overlapping series stay readable",
       "product": "Data and axis set",
       "parity": [
         "mui-x-charts:RadarChart",
@@ -204,7 +204,7 @@
       ],
       "geometry": "Fixed aspect; no padding of its own.",
       "semantics": "Needs a text summary beside it; it is never the only carrier of the value.",
-      "crystal": "Stroke weight at small size",
+      "prismata": "Stroke weight at small size",
       "product": "Data and range",
       "parity": [
         "mui-x-charts:SparkLineChart",
@@ -219,13 +219,13 @@
         "determinate",
         "empty"
       ],
-      "material": "A track in `--cr-haze-fill` with a primary arc",
+      "material": "A track in `--pr-haze-fill` with a primary arc",
       "surface": [
         "none"
       ],
       "geometry": "Matches the ring progress stroke.",
       "semantics": "role=\"meter\" with a text value.",
-      "crystal": "Arc geometry, threshold colour from status tokens",
+      "prismata": "Arc geometry, threshold colour from status tokens",
       "product": "Value, range, thresholds",
       "parity": [
         "mui-x-charts:Gauge"
@@ -247,7 +247,7 @@
       ],
       "geometry": "Cells are square with a hairline gap.",
       "semantics": "Intensity is paired with a value; colour alone never carries meaning.",
-      "crystal": "Scale construction, contrast floor at every step",
+      "prismata": "Scale construction, contrast floor at every step",
       "product": "Data and bucketing",
       "parity": [
         "mui-x-charts:Heatmap"
@@ -269,7 +269,7 @@
       ],
       "geometry": "Stages meet without gaps; labels sit outside when they do not fit.",
       "semantics": "Each stage states its absolute and relative value.",
-      "crystal": "Stage geometry, label placement",
+      "prismata": "Stage geometry, label placement",
       "product": "Stages and values",
       "parity": [
         "mui-x-charts:FunnelChart"
@@ -290,7 +290,7 @@
       ],
       "geometry": "Entries are pills and reach 44px.",
       "semantics": "Toggles are buttons with a pressed state; hidden series are announced.",
-      "crystal": "Entry material, pressed state, selection by weight",
+      "prismata": "Entry material, pressed state, selection by weight",
       "product": "Which series are toggleable",
       "motion": [
         "selection"
@@ -313,7 +313,7 @@
       ],
       "geometry": "Panel radius; never covers the point it describes.",
       "semantics": "Mirrors the tooltip contract: reachable by keyboard, dismissible with Escape.",
-      "crystal": "Material, follow motion, placement",
+      "prismata": "Material, follow motion, placement",
       "product": "Which values appear and their format",
       "motion": [
         "tooltip-in",
@@ -339,7 +339,7 @@
       ],
       "geometry": "Square cells with a hairline gap; week and month labels outside.",
       "semantics": "Every cell states its date and value; intensity is paired with a number.",
-      "crystal": "Scale construction and the contrast floor at every step",
+      "prismata": "Scale construction and the contrast floor at every step",
       "product": "Data and bucketing",
       "parity": [
         "mui-x-charts:Heatmap"
@@ -361,7 +361,7 @@
       ],
       "geometry": "Hairline separation; labels drop out rather than overflow.",
       "semantics": "Navigable as a tree, with each node stating its share.",
-      "crystal": "Nesting depth rendering, label policy",
+      "prismata": "Nesting depth rendering, label policy",
       "product": "Hierarchy and values",
       "parity": [
         "recharts:Treemap"
@@ -383,7 +383,7 @@
       ],
       "geometry": "Link opacity keeps crossings readable.",
       "semantics": "Each link states its endpoints and volume as text.",
-      "crystal": "Link material and opacity so overlaps stay legible",
+      "prismata": "Link material and opacity so overlaps stay legible",
       "product": "Nodes and flows",
       "parity": [
         "recharts:Sankey"
@@ -405,7 +405,7 @@
       ],
       "geometry": "Wick and body share one x centre; body has no radius.",
       "semantics": "Each period is reachable and states all four values.",
-      "crystal": "Rise and fall colour from the status tokens, never red and green alone",
+      "prismata": "Rise and fall colour from the status tokens, never red and green alone",
       "product": "Data and period",
       "parity": [
         "mui-x-charts:BarChart"
@@ -427,7 +427,7 @@
       ],
       "geometry": "Connectors align with bar edges.",
       "semantics": "Each step states its delta and the running total.",
-      "crystal": "Increase, decrease and total colour from the status tokens",
+      "prismata": "Increase, decrease and total colour from the status tokens",
       "product": "Steps and values",
       "parity": [
         "mui-x-charts:BarChart"
@@ -442,13 +442,13 @@
         "focus-visible",
         "empty"
       ],
-      "material": "Range bands in `--cr-haze-fill`",
+      "material": "Range bands in `--pr-haze-fill`",
       "surface": [
         "none"
       ],
       "geometry": "Single row; the target is a crisp marker, not a bar.",
       "semantics": "role=\"meter\" with the target stated in text.",
-      "crystal": "Band materials, marker crispness",
+      "prismata": "Band materials, marker crispness",
       "product": "Ranges and targets",
       "parity": [
         "mui-x-charts:Gauge"
@@ -470,7 +470,7 @@
       ],
       "geometry": "Whisker caps align with the box width.",
       "semantics": "Each summary statistic is reachable as text; outliers are counted, not only drawn.",
-      "crystal": "Box and whisker geometry",
+      "prismata": "Box and whisker geometry",
       "product": "Data and outlier rule",
       "parity": [
         "recharts:Scatter"
@@ -492,7 +492,7 @@
       ],
       "geometry": "Bins meet without gaps; the value end keeps a small radius.",
       "semantics": "Bin bounds and counts are text.",
-      "crystal": "Bin geometry, series colour",
+      "prismata": "Bin geometry, series colour",
       "product": "Bin width and range",
       "parity": [
         "mui-x-charts:BarChart"
@@ -514,7 +514,7 @@
       ],
       "geometry": "Region borders are hairlines in the rim colour.",
       "semantics": "Regions are reachable by keyboard and state their name and value; a table equivalent is required.",
-      "crystal": "Scale construction, border treatment, contrast floor",
+      "prismata": "Scale construction, border treatment, contrast floor",
       "product": "Projection, topology, and the data join",
       "parity": [
         "recharts:Customized"
@@ -530,13 +530,13 @@
         "focus-visible",
         "empty"
       ],
-      "material": "Node fills in `--cr-haze-fill`",
+      "material": "Node fills in `--pr-haze-fill`",
       "surface": [
         "none"
       ],
       "geometry": "Node size is a scale; edges are hairlines.",
       "semantics": "Nodes are reachable by keyboard; each states its degree and neighbours.",
-      "crystal": "Node material, edge treatment, focus ring on a node",
+      "prismata": "Node material, edge treatment, focus ring on a node",
       "product": "Layout algorithm and data",
       "parity": [
         "primereact:organizationchart"

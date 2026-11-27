@@ -1,4 +1,4 @@
-/* Types for Crystal's headless preference core.
+/* Types for Prismata's headless preference core.
  *
  * These are source types, written by hand like the implementation. Nothing
  * generates them. They exist because CONTRACT §1 tells libraries to import
@@ -6,9 +6,9 @@
  * shape again, which is the divergence that section is about.
  */
 
-export interface CrystalRange { min: number; max: number; }
+export interface PrismataRange { min: number; max: number; }
 
-export interface CrystalPreferences {
+export interface PrismataPreferences {
   palette: string;
   mode: 'light' | 'dark';
   density: 'comfortable' | 'compact';
@@ -24,23 +24,23 @@ export interface CrystalPreferences {
 
 /**
  * Clamp and default an arbitrary object into a valid preference set. Values
- * outside Crystal's ranges are replaced, never passed through.
+ * outside Prismata's ranges are replaced, never passed through.
  *
- * `defaults` is Crystal's own `default` block from `@crystal-ui/core/flat`,
+ * `defaults` is Prismata's own `default` block from `@prismata/core/flat`,
  * and is required: the function fills from it rather than carrying a second
  * copy of the defaults. Pass `palettes` alongside to have an unknown palette
  * name rejected instead of accepted.
  */
 export function normalisePreferences(
   input: Record<string, unknown>,
-  defaults: Partial<CrystalPreferences> & { palettes?: Record<string, unknown> },
-): CrystalPreferences;
+  defaults: Partial<PrismataPreferences> & { palettes?: Record<string, unknown> },
+): PrismataPreferences;
 
 /** Resolved duration in ms. Reduced motion resolves to 0; the result is capped
  *  at DURATION_CEILING so slowing playback cannot strand a long transition. */
 export function resolveDuration(base: number, motionSpeed: number, reduceMotion: boolean): number;
 
-export const RANGES: Record<'atmosphere' | 'translucency' | 'elevation' | 'radius' | 'motionSpeed', CrystalRange>;
+export const RANGES: Record<'atmosphere' | 'translucency' | 'elevation' | 'radius' | 'motionSpeed', PrismataRange>;
 export const CHOICES: Record<'palette' | 'mode' | 'density' | 'font', readonly string[]>;
 export const DURATION_CEILING: number;
 

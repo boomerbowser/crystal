@@ -1,10 +1,10 @@
-/* Vendor and normalise Crystal's icon set.
+/* Vendor and normalise Prismata's icon set.
  *
  * Icons are content, not a build dependency: they are normalised once and
  * committed, so the package and every library get them without a package
  * manager. The source is a devDependency used only to produce them.
  *
- * Crystal's own thirteen symbols are original work and are authoritative. A
+ * Prismata's own thirteen symbols are original work and are authoritative. A
  * sourced icon never replaces one of them, even where the names collide.
  */
 const fs = require('node:fs');
@@ -19,9 +19,9 @@ const LICENSE_OUT = path.join(ROOT, 'core/licenses/lucide-LICENSE.txt');
 
 const TARGET = 1000;
 
-/* Crystal's original symbols. These are drawn for Crystal and stay in the
+/* Prismata's original symbols. These are drawn for Prismata and stay in the
    sprite unchanged; the vendored set must never overwrite them. */
-const ORIGINAL = ['crystal', 'layers', 'document', 'directions', 'workspace',
+const ORIGINAL = ['prismata', 'layers', 'document', 'directions', 'workspace',
   'conversation', 'library', 'check', 'attention', 'alert', 'info', 'sparkle', 'chevron'];
 
 /* Excluded wholesale: third-party marks carry their own trademark terms that a
@@ -41,7 +41,7 @@ const BRANDS = new Set(['github', 'gitlab', 'chrome', 'codepen', 'codesandbox', 
   'framer', 'slack', 'trello', 'twitch', 'twitter', 'youtube', 'linkedin', 'facebook',
   'instagram', 'dribbble', 'bitcoin', 'apple', 'nfc', 'webhook', 'php', 'rss']);
 
-/* Icons a Crystal vocabulary needs, kept whatever the slice below picks and
+/* Icons a Prismata vocabulary needs, kept whatever the slice below picks and
    whatever the exclusions say (D-35). These are the rich text surface's format
    vocabulary (the catalogue's `rich-text-surface` and `prose`) that the slice
    missed: the link, both lists, the quotation, subscript, history, and the
@@ -55,7 +55,7 @@ function isWanted(name) {
   return !EXCLUDE_PATTERNS.some((p) => p.test(name));
 }
 
-/* Reduce a sourced SVG to the path geometry only. Crystal's stylesheet supplies
+/* Reduce a sourced SVG to the path geometry only. Prismata's stylesheet supplies
    stroke width, caps, joins and currentColor, so carrying them per file would
    duplicate the contract in 1000 places and let them drift. */
 function normalise(svg) {
@@ -68,7 +68,7 @@ function normalise(svg) {
     .trim();
   if (!inner) return null;
   if (/stroke-width|stroke=|fill="(?!none)/.test(inner)) {
-    /* A shape carrying its own stroke or fill would ignore Crystal's contract. */
+    /* A shape carrying its own stroke or fill would ignore Prismata's contract. */
     return inner.replace(/\s(stroke-width|stroke|fill)="[^"]*"/g, '');
   }
   return inner;
@@ -131,27 +131,27 @@ for (const name of selected) {
   entries.push({ id: name, name: titleCase(name), source: 'lucide', license: 'ISC' });
 }
 
-/* Crystal's originals are recorded in the manifest and read from the sprite. */
+/* Prismata's originals are recorded in the manifest and read from the sprite. */
 const spriteText = fs.readFileSync(SPRITE, 'utf8');
 for (const name of ORIGINAL) {
   if (!spriteText.includes(`id="${name}"`)) {
     console.error(`Original symbol missing from the sprite: ${name}`);
     process.exit(1);
   }
-  entries.push({ id: name, name: titleCase(name), source: 'crystal', license: 'original' });
+  entries.push({ id: name, name: titleCase(name), source: 'prismata', license: 'original' });
 }
 entries.sort((a, b) => a.id.localeCompare(b.id));
 
 fs.writeFileSync(MANIFEST, JSON.stringify({
   $description:
-    'Crystal icon set. Every icon is a 24px view box with 1.8px strokes, round caps and ' +
+    'Prismata icon set. Every icon is a 24px view box with 1.8px strokes, round caps and ' +
     'joins, and currentColor, so it inherits tested foreground colours. Stroke width, caps ' +
     'and joins are supplied by the stylesheet and are deliberately absent from the files.',
   grid: { viewBox: '0 0 24 24', strokeWidth: 1.8, linecap: 'round', linejoin: 'round' },
   total: entries.length,
   required: REQUIRED,
   sources: {
-    crystal: { count: entries.filter((e) => e.source === 'crystal').length, license: 'Original work' },
+    prismata: { count: entries.filter((e) => e.source === 'prismata').length, license: 'Original work' },
     lucide: { count: entries.filter((e) => e.source === 'lucide').length, license: 'ISC', notice: 'core/licenses/lucide-LICENSE.txt' },
   },
   icons: entries,
@@ -165,7 +165,7 @@ fs.copyFileSync(licenseSource, LICENSE_OUT);
 console.log(JSON.stringify({
   available: available.length,
   vendored: entries.filter((e) => e.source === 'lucide').length,
-  original: entries.filter((e) => e.source === 'crystal').length,
+  original: entries.filter((e) => e.source === 'prismata').length,
   total: entries.length,
   skipped,
   arriving,

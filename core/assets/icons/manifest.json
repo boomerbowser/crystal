@@ -1,5 +1,5 @@
 {
-  "$description": "Crystal icon set. Every icon is a 24px view box with 1.8px strokes, round caps and joins, and currentColor, so it inherits tested foreground colours. Stroke width, caps and joins are supplied by the stylesheet and are deliberately absent from the files.",
+  "$description": "Prismata icon set. Every icon is a 24px view box with 1.8px strokes, round caps and joins, and currentColor, so it inherits tested foreground colours. Stroke width, caps and joins are supplied by the stylesheet and are deliberately absent from the files.",
   "grid": {
     "viewBox": "0 0 24 24",
     "strokeWidth": 1.8,
@@ -21,7 +21,7 @@
     "unlink"
   ],
   "sources": {
-    "crystal": {
+    "prismata": {
       "count": 13,
       "license": "Original work"
     },
@@ -95,7 +95,7 @@
     {
       "id": "alert",
       "name": "Alert",
-      "source": "crystal",
+      "source": "prismata",
       "license": "original"
     },
     {
@@ -473,7 +473,7 @@
     {
       "id": "attention",
       "name": "Attention",
-      "source": "crystal",
+      "source": "prismata",
       "license": "original"
     },
     {
@@ -1235,7 +1235,7 @@
     {
       "id": "check",
       "name": "Check",
-      "source": "crystal",
+      "source": "prismata",
       "license": "original"
     },
     {
@@ -1283,7 +1283,7 @@
     {
       "id": "chevron",
       "name": "Chevron",
-      "source": "crystal",
+      "source": "prismata",
       "license": "original"
     },
     {
@@ -1715,7 +1715,7 @@
     {
       "id": "conversation",
       "name": "Conversation",
-      "source": "crystal",
+      "source": "prismata",
       "license": "original"
     },
     {
@@ -1815,9 +1815,9 @@
       "license": "ISC"
     },
     {
-      "id": "crystal",
-      "name": "Crystal",
-      "source": "crystal",
+      "id": "prismata",
+      "name": "Prismata",
+      "source": "prismata",
       "license": "original"
     },
     {
@@ -1913,7 +1913,7 @@
     {
       "id": "directions",
       "name": "Directions",
-      "source": "crystal",
+      "source": "prismata",
       "license": "original"
     },
     {
@@ -1943,7 +1943,7 @@
     {
       "id": "document",
       "name": "Document",
-      "source": "crystal",
+      "source": "prismata",
       "license": "original"
     },
     {
@@ -3047,7 +3047,7 @@
     {
       "id": "info",
       "name": "Info",
-      "source": "crystal",
+      "source": "prismata",
       "license": "original"
     },
     {
@@ -3167,7 +3167,7 @@
     {
       "id": "layers",
       "name": "Layers",
-      "source": "crystal",
+      "source": "prismata",
       "license": "original"
     },
     {
@@ -3233,7 +3233,7 @@
     {
       "id": "library",
       "name": "Library",
-      "source": "crystal",
+      "source": "prismata",
       "license": "original"
     },
     {
@@ -5003,7 +5003,7 @@
     {
       "id": "sparkle",
       "name": "Sparkle",
-      "source": "crystal",
+      "source": "prismata",
       "license": "original"
     },
     {
@@ -6083,7 +6083,7 @@
     {
       "id": "workspace",
       "name": "Workspace",
-      "source": "crystal",
+      "source": "prismata",
       "license": "original"
     },
     {

@@ -1,7 +1,7 @@
 {
   "version": "2.0.0",
-  "name": "Crystal",
-  "basis": "crystal-03-balanced; Meridian Digital design system",
+  "name": "Prismata",
+  "basis": "prismata-03-balanced; Meridian Digital design system",
   "default": {
     "palette": "prism",
     "mode": "light",
@@ -731,43 +731,43 @@
     "xl": 32,
     "2xl": 48
   },
-  "schemaNote": "Generated from core/tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.",
+  "schemaNote": "Generated from core/tokens/prismata.tokens.json (W3C DTCG). Edit the DTCG source, not this file.",
   "materials": {
     "plastic": {
       "name": "Plastic",
       "role": "Opaque contextual foundation",
       "inspiration": "Microsoft Mica",
-      "primitive": ".cr-plastic"
+      "primitive": ".pr-plastic"
     },
     "frost": {
       "name": "Frost",
       "role": "Diffused intermediate surface",
       "inspiration": "Microsoft Acrylic",
-      "primitive": ".cr-frost"
+      "primitive": ".pr-frost"
     },
     "resin": {
       "name": "Resin",
       "role": "Floating optical control surface",
       "inspiration": "Apple Liquid Glass",
-      "primitive": ".cr-resin"
+      "primitive": ".pr-resin"
     },
     "haze": {
       "name": "Haze",
       "role": "Soft content fill",
-      "inspiration": "Crystal solid content recipe",
-      "primitive": ".cr-haze"
+      "inspiration": "Prismata solid content recipe",
+      "primitive": ".pr-haze"
     },
     "stone": {
       "name": "Stone",
       "role": "Protected label backing",
-      "inspiration": "Crystal protected-label veil",
-      "primitive": ".cr-stone"
+      "inspiration": "Prismata protected-label veil",
+      "primitive": ".pr-stone"
     },
     "mirage": {
       "name": "Mirage",
       "role": "Chromatic diffusion and dark modal separation",
       "inspiration": "Modal smoke/scrim pattern",
-      "primitive": ".cr-mirage and dialog::backdrop"
+      "primitive": ".pr-mirage and dialog::backdrop"
     }
   }
 }

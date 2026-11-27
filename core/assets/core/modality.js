@@ -1,4 +1,4 @@
-/* Crystal headless core: input modality, for focus rings that appear only when
+/* Prismata headless core: input modality, for focus rings that appear only when
  * they are needed.
  *
  * A focus ring is for a person who cannot see where a click landed: someone
@@ -10,8 +10,8 @@
  * whatever put focus there.
  *
  * This records how the person is interacting, on the document element, as
- * `data-crystal-modality`: `pointer` after a pointer is pressed, `keyboard`
- * after a key that moves focus or navigates. Crystal's stylesheet draws no
+ * `data-prismata-modality`: `pointer` after a pointer is pressed, `keyboard`
+ * after a key that moves focus or navigates. Prismata's stylesheet draws no
  * focus ring while it is `pointer`. Typing in a text field, and a shortcut held
  * with a modifier, do not change it, so a field clicked into does not grow a
  * ring at the first letter. With no script the attribute is absent and every
@@ -24,13 +24,13 @@
   const api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
   else {
-    (root.CrystalCore = root.CrystalCore || {}).modality = api;
+    (root.PrismataCore = root.PrismataCore || {}).modality = api;
     if (typeof document !== 'undefined') api.watch(document);
   }
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
-  const ATTRIBUTE = 'data-crystal-modality';
+  const ATTRIBUTE = 'data-prismata-modality';
   const NAVIGATION = new Set(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown', 'Enter', ' ', 'Escape']);
   /* Keys that move focus wherever focus is, including out of a text field. */
   const ALWAYS = new Set(['Tab', 'F6', 'F10']);

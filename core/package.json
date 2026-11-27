@@ -1,7 +1,7 @@
 {
-  "name": "@crystal-ui/core",
-  "version": "2.10.1",
-  "description": "Crystal, Meridian's design system: design tokens, material stylesheets, a token resolver, a headless state core, motion recipes, icons and the specification.",
+  "name": "@prismata/core",
+  "version": "3.0.0",
+  "description": "Prismata, Meridian's design system: design tokens, material stylesheets, a token resolver, a headless state core, motion recipes, icons and the specification.",
   "keywords": [
     "design-system",
     "design-tokens",
@@ -14,7 +14,7 @@
   "license": "SEE LICENSE IN licenses",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/boomerbowser/crystal.git",
+    "url": "git+https://github.com/boomerbowser/prismata.git",
     "directory": "core"
   },
   "publishConfig": {
@@ -22,10 +22,10 @@
     "access": "public"
   },
   "exports": {
-    ".": "./exports/crystal-tokens.ts",
-    "./tokens": "./tokens/crystal.tokens.json",
-    "./css": "./assets/crystal.css",
-    "./theme": "./assets/crystal-theme.css",
+    ".": "./exports/prismata-tokens.ts",
+    "./tokens": "./tokens/prismata.tokens.json",
+    "./css": "./assets/prismata.css",
+    "./theme": "./assets/prismata-theme.css",
     "./core": {
       "types": "./assets/core/state.d.ts",
       "default": "./assets/core/state.js"
@@ -48,7 +48,7 @@
     "./engines": "./engines.js",
     "./shaders/*": "./assets/shaders/*",
     "./docs/*": "./docs/*",
-    "./flat": "./tokens/crystal.json",
+    "./flat": "./tokens/prismata.json",
     "./core/presets": {
       "types": "./assets/core/presets.d.ts",
       "default": "./assets/core/presets.js"
@@ -58,15 +58,15 @@
     "./libraries": "./tokens/libraries.json",
     "./surface-recipes": "./tokens/surface-recipes.json",
     "./resolver": {
-      "types": "./assets/crystal.d.ts",
-      "default": "./assets/crystal.js"
+      "types": "./assets/prismata.d.ts",
+      "default": "./assets/prismata.js"
     }
   },
   "files": [
-    "assets/crystal.js",
-    "assets/crystal.d.ts",
-    "assets/crystal.css",
-    "assets/crystal-theme.css",
+    "assets/prismata.js",
+    "assets/prismata.d.ts",
+    "assets/prismata.css",
+    "assets/prismata-theme.css",
     "assets/motion.js",
     "assets/motion.css",
     "assets/tokens.js",

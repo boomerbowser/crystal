@@ -1,14 +1,14 @@
-/* Crystal headless core: preferences and motion resolution.
+/* Prismata headless core: preferences and motion resolution.
  *
  * Pure functions. The clamps and the duration ceiling are part of the contract.
  * A product that lets a preference drift outside these ranges is no longer
- * rendering Crystal, and an animation that runs past the ceiling breaks the
+ * rendering Prismata, and an animation that runs past the ceiling breaks the
  * responsiveness the motion specification promises.
  */
 (function (root, factory) {
   const api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
-  else (root.CrystalCore = root.CrystalCore || {}).preferences = api;
+  else (root.PrismataCore = root.PrismataCore || {}).preferences = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 

@@ -1,21 +1,21 @@
-@layer crystal.base {
-@property --cr-flow-reach{syntax:'<percentage>';inherits:false;initial-value:100%}
-@keyframes cr-soft-flow-in{from{opacity:0;--cr-flow-reach:0%}to{opacity:1;--cr-flow-reach:100%}}
-@keyframes cr-soft-flow-out{from{opacity:1;--cr-flow-reach:100%}to{opacity:0;--cr-flow-reach:0%}}
+@layer prismata.base {
+@property --pr-flow-reach{syntax:'<percentage>';inherits:false;initial-value:100%}
+@keyframes pr-soft-flow-in{from{opacity:0;--pr-flow-reach:0%}to{opacity:1;--pr-flow-reach:100%}}
+@keyframes pr-soft-flow-out{from{opacity:1;--pr-flow-reach:100%}to{opacity:0;--pr-flow-reach:0%}}
 /* Directional Mirage reveals the actual blurred scene; its filter stays constant. */
-@keyframes cr-flow-in{from{opacity:0;clip-path:ellipse(0% 35% at var(--flow-x) var(--flow-y))}58%{opacity:.8}to{opacity:1;clip-path:ellipse(150% 150% at var(--flow-x) var(--flow-y))}}
-@keyframes cr-flow-out{from{opacity:1;clip-path:ellipse(150% 150% at var(--flow-exit-x) var(--flow-exit-y))}to{opacity:0;clip-path:ellipse(0% 35% at var(--flow-exit-x) var(--flow-exit-y))}}
-.cr-dialog::backdrop{--flow-x:0%;--flow-y:65%;--flow-exit-x:100%;--flow-exit-y:35%}
-.cr-dialog[data-flow-direction=right]::backdrop{--flow-x:100%;--flow-y:35%;--flow-exit-x:0%;--flow-exit-y:65%}
-.cr-dialog[data-flow-direction=top]::backdrop{--flow-x:65%;--flow-y:0%;--flow-exit-x:35%;--flow-exit-y:100%}
-.cr-dialog[data-flow-direction=bottom]::backdrop{--flow-x:35%;--flow-y:100%;--flow-exit-x:65%;--flow-exit-y:0%}
-.cr-dialog[open]::backdrop{animation:cr-flow-in var(--cr-flow) var(--cr-ease-enter)}
-.cr-dialog[data-closing]::backdrop{animation:cr-flow-out var(--cr-departure) var(--cr-ease-exit) forwards}
-.cr-button,.cr-dock button{transition:transform var(--cr-press) var(--cr-ease-settle),background-color var(--cr-state) var(--cr-ease-settle)}
+@keyframes pr-flow-in{from{opacity:0;clip-path:ellipse(0% 35% at var(--flow-x) var(--flow-y))}58%{opacity:.8}to{opacity:1;clip-path:ellipse(150% 150% at var(--flow-x) var(--flow-y))}}
+@keyframes pr-flow-out{from{opacity:1;clip-path:ellipse(150% 150% at var(--flow-exit-x) var(--flow-exit-y))}to{opacity:0;clip-path:ellipse(0% 35% at var(--flow-exit-x) var(--flow-exit-y))}}
+.pr-dialog::backdrop{--flow-x:0%;--flow-y:65%;--flow-exit-x:100%;--flow-exit-y:35%}
+.pr-dialog[data-flow-direction=right]::backdrop{--flow-x:100%;--flow-y:35%;--flow-exit-x:0%;--flow-exit-y:65%}
+.pr-dialog[data-flow-direction=top]::backdrop{--flow-x:65%;--flow-y:0%;--flow-exit-x:35%;--flow-exit-y:100%}
+.pr-dialog[data-flow-direction=bottom]::backdrop{--flow-x:35%;--flow-y:100%;--flow-exit-x:65%;--flow-exit-y:0%}
+.pr-dialog[open]::backdrop{animation:pr-flow-in var(--pr-flow) var(--pr-ease-enter)}
+.pr-dialog[data-closing]::backdrop{animation:pr-flow-out var(--pr-departure) var(--pr-ease-exit) forwards}
+.pr-button,.pr-dock button{transition:transform var(--pr-press) var(--pr-ease-settle),background-color var(--pr-state) var(--pr-ease-settle)}
 @media(hover:hover) and (pointer:fine){
-  .cr-button:hover:not(:disabled){transform:none}
+  .pr-button:hover:not(:disabled){transform:none}
 }
-.cr-button:active:not(:disabled),.cr-dock button:active:not(:disabled){transform:none}
+.pr-button:active:not(:disabled),.pr-dock button:active:not(:disabled){transform:none}
 /* Immediate semantic state and focus; motion is supplemental. */
 html[data-motion=reduce] *,html[data-motion=reduce] *::before,html[data-motion=reduce] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 html[data-motion=reduce] button:hover,html[data-motion=reduce] button:active{transform:none!important}
@@ -23,17 +23,17 @@ html[data-motion=reduce] button:hover,html[data-motion=reduce] button:active{tra
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   button:hover,button:active{transform:none!important}
 }
-html[data-motion=reduce] .cr-dialog::backdrop{animation:none!important}
-@media(prefers-reduced-motion:reduce){.cr-dialog::backdrop{animation:none!important}}
+html[data-motion=reduce] .pr-dialog::backdrop{animation:none!important}
+@media(prefers-reduced-motion:reduce){.pr-dialog::backdrop{animation:none!important}}
 
 /* Wide feather on the reveal front; filter parameters remain constant. */
-.cr-mirage{--flow-x:0%;--flow-y:65%}
-.cr-mirage[data-flow-direction=right]{--flow-x:100%;--flow-y:35%}
-.cr-mirage[data-flow-direction=top]{--flow-x:65%;--flow-y:0%}
-.cr-mirage[data-flow-direction=bottom]{--flow-x:35%;--flow-y:100%}
-.cr-mirage[data-flow-soft=true][data-cr-motion-state=running],.cr-dialog[data-flow-soft=true]::backdrop{mask-image:radial-gradient(ellipse 150% 150% at var(--flow-x) var(--flow-y),#000 calc(var(--cr-flow-reach) - 14%),transparent var(--cr-flow-reach))}
-.cr-dialog[data-flow-soft=true][open]::backdrop{animation-name:cr-soft-flow-in}
-.cr-dialog[data-flow-soft=true][data-closing]::backdrop{mask-image:radial-gradient(ellipse 150% 150% at var(--flow-exit-x) var(--flow-exit-y),#000 calc(var(--cr-flow-reach) - 14%),transparent var(--cr-flow-reach));animation-name:cr-soft-flow-out}
-html[data-motion=reduce] .cr-dialog::backdrop{mask-image:none;animation:none!important}
-@media(prefers-reduced-motion:reduce){.cr-dialog::backdrop{mask-image:none;animation:none!important}}
+.pr-mirage{--flow-x:0%;--flow-y:65%}
+.pr-mirage[data-flow-direction=right]{--flow-x:100%;--flow-y:35%}
+.pr-mirage[data-flow-direction=top]{--flow-x:65%;--flow-y:0%}
+.pr-mirage[data-flow-direction=bottom]{--flow-x:35%;--flow-y:100%}
+.pr-mirage[data-flow-soft=true][data-pr-motion-state=running],.pr-dialog[data-flow-soft=true]::backdrop{mask-image:radial-gradient(ellipse 150% 150% at var(--flow-x) var(--flow-y),#000 calc(var(--pr-flow-reach) - 14%),transparent var(--pr-flow-reach))}
+.pr-dialog[data-flow-soft=true][open]::backdrop{animation-name:pr-soft-flow-in}
+.pr-dialog[data-flow-soft=true][data-closing]::backdrop{mask-image:radial-gradient(ellipse 150% 150% at var(--flow-exit-x) var(--flow-exit-y),#000 calc(var(--pr-flow-reach) - 14%),transparent var(--pr-flow-reach));animation-name:pr-soft-flow-out}
+html[data-motion=reduce] .pr-dialog::backdrop{mask-image:none;animation:none!important}
+@media(prefers-reduced-motion:reduce){.pr-dialog::backdrop{mask-image:none;animation:none!important}}
 }

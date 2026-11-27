@@ -1,11 +1,11 @@
-# Crystal
+# Prismata
 
-Crystal is the design system for Meridian products. This repository holds the
-library, published to npm as `@crystal-ui/core`, and the contract that platform
+Prismata is the design system for Meridian products. This repository holds the
+library, published to npm as `@prismata/core`, and the contract that platform
 component libraries are built against.
 
 ```sh
-npm install @crystal-ui/core
+npm install @prismata/core
 ```
 
 ## Layout
@@ -17,16 +17,16 @@ npm install @crystal-ui/core
 | [`tools/`](tools/), [`tests/`](tests/), [`validation/`](validation/) | The build, the checks, and the records the checks write. Node only. |
 | [`proposals/`](proposals/) | Design proposals and the issue trackers. |
 
-A component library implements Crystal for one platform and takes its tokens and
+A component library implements Prismata for one platform and takes its tokens and
 material definitions from this package. The requirements are in
 [`libraries/CONTRACT.md`](libraries/CONTRACT.md). The first library is
-[Crystal React](https://github.com/boomerbowser/crystal-react).
+[Prismata React](https://github.com/boomerbowser/prismata-react).
 
 ## The documentation website
 
 The interactive preview, the rendered specification pages and the verification
 evidence are in a separate repository,
-[`crystal-preview`](https://github.com/boomerbowser/crystal-preview). The site
+[`prismata-preview`](https://github.com/boomerbowser/prismata-preview). The site
 installs this package from npm and renders the specification that ships inside
 it, so everything the site shows is something a consumer of the package also
 receives.

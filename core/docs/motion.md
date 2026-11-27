@@ -1,6 +1,6 @@
 # Motion: material in movement
 
-Crystal's motion makes its materials recognisable: Plastic levitates, Frost emerges toward the viewer, Resin flows and catches light, Haze and Stone carry moving feathered edges, and Mirage washes across the scene. [Open the interactive motion studies](../motion.html).
+Prismata's motion makes its materials recognisable: Plastic levitates, Frost emerges toward the viewer, Resin flows and catches light, Haze and Stone carry moving feathered edges, and Mirage washes across the scene. [Open the interactive motion studies](../motion.html).
 
 ## Timing and easing
 
@@ -8,17 +8,17 @@ Small interaction tokens keep the earlier 25% speed reduction. The larger materi
 
 | Token | Default | Use |
 |---|---|---|
-| `--cr-press` | 120ms | Small button press feedback |
-| `--cr-state` | 213.33ms | Simple state transitions |
-| `--cr-spatial` | 293.33ms | Compact product transitions |
-| `--cr-exit` | 160ms | Compact departures |
-| `--cr-material` | 1000ms | Plastic, Frost, Haze and Stone choreography |
-| `--cr-liquid` | 1400ms | Resin deformation and traveling light |
-| `--cr-flow` | 1200ms | Mirage arrival, including dialog backdrop |
-| `--cr-departure` | 650ms | Modal dismissal and Mirage withdrawal |
-| `--cr-ease-enter` | `cubic-bezier(0.22, 0.65, 0.22, 1)` | Progressive arrival, soft settling |
-| `--cr-ease-settle` | `cubic-bezier(0.2, 0, 0.2, 1)` | Small control response |
-| `--cr-ease-exit` | `cubic-bezier(0.4, 0, 0.6, 1)` | Smooth acceleration and departure |
+| `--pr-press` | 120ms | Small button press feedback |
+| `--pr-state` | 213.33ms | Simple state transitions |
+| `--pr-spatial` | 293.33ms | Compact product transitions |
+| `--pr-exit` | 160ms | Compact departures |
+| `--pr-material` | 1000ms | Plastic, Frost, Haze and Stone choreography |
+| `--pr-liquid` | 1400ms | Resin deformation and traveling light |
+| `--pr-flow` | 1200ms | Mirage arrival, including dialog backdrop |
+| `--pr-departure` | 650ms | Modal dismissal and Mirage withdrawal |
+| `--pr-ease-enter` | `cubic-bezier(0.22, 0.65, 0.22, 1)` | Progressive arrival, soft settling |
+| `--pr-ease-settle` | `cubic-bezier(0.2, 0, 0.2, 1)` | Small control response |
+| `--pr-ease-exit` | `cubic-bezier(0.4, 0, 0.6, 1)` | Smooth acceleration and departure |
 
 Ordinary travel stays within 5px to 30px. 50px is the guideline for compact motion. Larger or longer spatial transitions may exceed it when the movement requires it: full-width sheets, view changes, measured reordering, gallery turns and large material compositions. Each authored exception records its purpose in `travelException`. Do not apply large composition motion to a small button.
 
@@ -61,24 +61,24 @@ Transforms and opacity are the primary motion channels. Small specimen rim/shado
 
 ## Adoption
 
-Load the generated theme, `assets/crystal.css`, then `assets/motion.css`. Load `assets/vendor/crystal-engines.js`, `assets/motion-catalog.js`, then `assets/motion.js` before application code for the framework-independent browser adapter.
+Load the generated theme, `assets/prismata.css`, then `assets/motion.css`. Load `assets/vendor/prismata-engines.js`, `assets/motion-catalog.js`, then `assets/motion.js` before application code for the framework-independent browser adapter.
 
 ```js
 // The application owns visibility, routing and focus.
-const result = await CrystalMotion.play(panel, 'frost');
-await CrystalMotion.play(scrim, 'mirage', { direction: 'left', rate: 1 });
+const result = await PrismataMotion.play(panel, 'frost');
+await PrismataMotion.play(scrim, 'mirage', { direction: 'left', rate: 1 });
 // result.status: finished, cancelled, or instant.
-CrystalMotion.stop(panel);
-CrystalMotion.stopAll();
+PrismataMotion.stop(panel);
+PrismataMotion.stopAll();
 // Before showModal(), choose the CSS backdrop's direction:
-CrystalMotion.direction(dialog, 'bottom');
+PrismataMotion.direction(dialog, 'bottom');
 ```
 
 Presets: `plastic`, `frost`, `resin`, `haze`, `stone`, `mirage`, `mirage-out`, `dismiss`. The optional `direction` accepts `left`, `right`, `top`, `bottom`; omission or `cycle` chooses the next direction. The adapter does not hide or remove targets; callers own exit completion. The playground implements the specimen's hidden state explicitly.
 
 GSAP controls paint-layer motion through Web Animations pseudo-element targeting on `::before` and `::after`. Engines without that support retain supported component movement and may omit the optional optical effects. In that fallback Haze and Stone stay still. No sliding animation is substituted for them. Invalid targets or unknown presets produce errors; unavailable animation APIs return `instant`. Material selectors must supply the actual pseudo-element paints. Use Haze motion for Haze dialogs. Do not reuse Resin's deforming rim on them.
 
-The canonical motion definitions live in `tokens/crystal.json`; CSS and JSON exports include both compact and expressive durations and travel values. Always include `motion.css` for native dialog backdrop choreography and accessibility overrides. The reference provides real visual behaviour. It does not provide a native compositor or a physics simulation.
+The canonical motion definitions live in `tokens/prismata.json`; CSS and JSON exports include both compact and expressive durations and travel values. Always include `motion.css` for native dialog backdrop choreography and accessibility overrides. The reference provides real visual behaviour. It does not provide a native compositor or a physics simulation.
 
 
 ## Installed animation engines
@@ -143,14 +143,14 @@ aspect ratio exactly, so the correction removes only the compressibility error.
 ## Why Resin is not animated with ripples
 
 The model people reach for first animates Resin as a surface wave: a ripple spreading from
-the contact point. Crystal rejects that model.
+the contact point. Prismata rejects that model.
 
 A ripple is a surface phenomenon: it says the material has a skin, that the skin was
 disturbed, and that the disturbance is travelling across it, like water in a dish. Resin
 has no skin: it is a solid, transparent body with optical depth. Its response to contact
 is a change in how it bends light.
 
-Crystal does what contemporary glass interfaces do:
+Prismata does what contemporary glass interfaces do:
 
 - **Edge lensing.** Refraction concentrates in a band just inside the boundary and falls
   off steeply, leaving the centre optically clear. The interior is shrunk and the edges
@@ -185,8 +185,8 @@ pixel-identical with the shader on and off.
 
 ## Ambient motion
 
-**Deferred to a later version of Crystal.** Nothing in 2.0 moves at rest, and a surface
-that animates on its own is not Crystal until a later version specifies how.
+**Deferred to a later version of Prismata.** Nothing in 2.0 moves at rest, and a surface
+that animates on its own is not Prismata until a later version specifies how.
 
 Ambient motion was built and then withdrawn, and the reasoning is in the request log. Two
 findings apply whenever it returns. A rest state can fail by being too strong or too weak,
@@ -198,7 +198,7 @@ Motion a person starts is unaffected, and so is the optical layer that runs duri
 
 ## What triggers a recipe
 
-Crystal binds motion to state, not to clicks:
+Prismata binds motion to state, not to clicks:
 
 | State change | Recipe |
 | --- | --- |
@@ -218,7 +218,7 @@ produces the same motion, and a programmatic change produces it too.
 There are two guards. A recipe never restarts itself while that same recipe is already
 running on that element, because restarting mid-flight makes a continuous control feel
 choppy. A page that drives a component itself marks that subtree
-`data-cr-motion="manual"`, so the delegated wiring does not fire the same recipe twice.
+`data-pr-motion="manual"`, so the delegated wiring does not fire the same recipe twice.
 
 `npm run verify:interactions` asserts all of this in a real browser against plain controls,
 including that reduced motion still applies the state instantly.
@@ -243,7 +243,7 @@ correct is a material question; see the signature policy below.
 | `press`: Press and release | 320ms | pressure | resin | 0.660 | 6.3% | Buttons, icon buttons and segmented controls. Disabled controls never animate. | Apply the semantic state immediately; omit decorative movement. |
 | `hover`: Light follows the surface | 700ms | caustic | resin | 0.900 | 0.2% | Fine-pointer affordance only; keyboard focus is immediate. | Apply the semantic state immediately; omit decorative movement. |
 | `selection`: Selection settle | 420ms | meniscus | resin | 0.700 | 4.6% | Selected chips, radios, toggles and navigation; set selected semantics first. | Apply the semantic state immediately; omit decorative movement. |
-| `selection-travel`: Selection travel | 460ms | meniscus | resin | 1.000 | none | The one .cr-indicator.pill behind the selected segment of tabs, a segmented control, the dock, bottom navigation or a toggle button group, moving to the new segment when the choice changes. Set the selected semantics first; selection stays label weight, so the pill is never the only sign of it. Critically damped: a pill that overshoots stands for a moment on a segment nobody chose. | The pill is placed behind the new segment at once; nothing travels. |
+| `selection-travel`: Selection travel | 460ms | meniscus | resin | 1.000 | none | The one .pr-indicator.pill behind the selected segment of tabs, a segmented control, the dock, bottom navigation or a toggle button group, moving to the new segment when the choice changes. Set the selected semantics first; selection stays label weight, so the pill is never the only sign of it. Critically damped: a pill that overshoots stands for a moment on a segment nobody chose. | The pill is placed behind the new segment at once; nothing travels. |
 | `switch-on`: Switch on | 460ms | coalesce | resin | 0.620 | 8.4% | Animate the thumb after its checked state is applied. | Apply the semantic state immediately; omit decorative movement. |
 | `switch-off`: Switch off | 460ms | coalesce | resin | 0.620 | 8.4% | Animate the thumb after its unchecked state is applied. | Apply the semantic state immediately; omit decorative movement. |
 | `check`: Checkmark confirmation | 340ms | iris | resin | 0.800 | 1.5% | Checkbox and radio indicators; retain a visible non-color state. | Apply the semantic state immediately; omit decorative movement. |
@@ -360,7 +360,7 @@ correct is a material question; see the signature policy below.
 Generated from `core/assets/shaders/manifest.json` (version 2.0.0).
 
 **The contract is the uniform set, not the GLSL.** A platform that honours these
-uniforms has implemented Crystal's shader layer correctly, whether it does so in
+uniforms has implemented Prismata's shader layer correctly, whether it does so in
 GLSL, Metal or AGSL. The `.frag` files in this repository are one implementation.
 
 ### Uniforms

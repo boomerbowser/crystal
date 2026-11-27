@@ -1,7 +1,7 @@
-// Crystal 2.0.0 design tokens.
-// Generated from core/tokens/crystal.tokens.json. Do not edit by hand.
+// Prismata 2.0.0 design tokens.
+// Generated from core/tokens/prismata.tokens.json. Do not edit by hand.
 
-public enum CrystalToken {
+public enum PrismataToken {
     public static let materialFrostDiffusion = "40px"
     public static let materialFrostSaturation = "125"
     public static let materialFrostGrain = "0.045"

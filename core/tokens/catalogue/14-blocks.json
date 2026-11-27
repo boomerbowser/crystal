@@ -20,7 +20,7 @@
       ],
       "geometry": "Panel radius throughout; safe areas respected.",
       "semantics": "Landmarks in place: banner, navigation, main, contentinfo. One main.",
-      "crystal": "Region materials and elevation ordering",
+      "prismata": "Region materials and elevation ordering",
       "product": "Navigation model and routing",
       "parity": [
         "antd-pro:ProLayout",
@@ -42,7 +42,7 @@
       ],
       "geometry": "Gap from the scale.",
       "semantics": "A labelled list of figures.",
-      "crystal": "Reflow behaviour",
+      "prismata": "Reflow behaviour",
       "product": "Which metrics",
       "parity": [
         "antd-pro:StatisticCard"
@@ -64,7 +64,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "The chart carries a table equivalent; controls are real controls.",
-      "crystal": "Panel material, control geometry",
+      "prismata": "Panel material, control geometry",
       "product": "The data and the ranges",
       "parity": [
         "antd-pro:ChartCard",
@@ -88,7 +88,7 @@
       ],
       "geometry": "Toolbar controls are pills; the table keeps its own surface.",
       "semantics": "Selection count is announced; bulk actions describe what they will affect.",
-      "crystal": "Surfaces, selection treatment, the motion of entering bulk mode",
+      "prismata": "Surfaces, selection treatment, the motion of entering bulk mode",
       "product": "Data, filters, and what the actions do",
       "parity": [
         "antd-pro:ProTable",
@@ -113,7 +113,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Errors summarise at the top and link to their fields; submission state is announced.",
-      "crystal": "Section materials, field recipes, the submit transition",
+      "prismata": "Section materials, field recipes, the submit transition",
       "product": "The schema and the mutation",
       "parity": [
         "antd-pro:ProForm"
@@ -135,7 +135,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Each group is a labelled region; unsaved changes are announced before navigation.",
-      "crystal": "Group material, the save transition",
+      "prismata": "Group material, the save transition",
       "product": "Which settings, and when they apply",
       "parity": [
         "antd-pro:ProForm"
@@ -158,7 +158,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Real form semantics with autocomplete tokens; failures never reveal which factor was wrong.",
-      "crystal": "Card material, field recipes",
+      "prismata": "Card material, field recipes",
       "product": "The auth provider and its policy",
       "parity": [
         "mui-templates:SignIn",
@@ -180,7 +180,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Destructive actions confirm and say what they remove.",
-      "crystal": "Material, avatar geometry",
+      "prismata": "Material, avatar geometry",
       "product": "The profile model",
       "parity": [
         "antd-pro:ProDescriptions"
@@ -202,7 +202,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Live updates are announced politely and never steal focus.",
-      "crystal": "Row material, the insert motion",
+      "prismata": "Row material, the insert motion",
       "product": "The event model",
       "motion": [
         "list-in",
@@ -230,7 +230,7 @@
       ],
       "geometry": "Panel radius; rows reach 44px.",
       "semantics": "Unread count is announced; marking read is undoable.",
-      "crystal": "Panel and row materials, the read transition",
+      "prismata": "Panel and row materials, the read transition",
       "product": "The notification model",
       "motion": [
         "toast-in",
@@ -260,7 +260,7 @@
       ],
       "geometry": "Transport is a pill; controls reach 44px.",
       "semantics": "Real media elements; captions and their state announced; transport reachable by keyboard; speed, track and quality choices announced as they change.",
-      "crystal": "Transport material, the show and hide motion",
+      "prismata": "Transport material, the show and hide motion",
       "product": "Sources, queue, DRM",
       "parity": [
         "primereact:galleria"
@@ -282,7 +282,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Reorder works by keyboard; the now-playing row is aria-current.",
-      "crystal": "Row material, the drag lift and settle",
+      "prismata": "Row material, the drag lift and settle",
       "product": "The queue model",
       "motion": [
         "list-in",
@@ -309,7 +309,7 @@
       ],
       "geometry": "Grid gap from the scale; reflows by container width.",
       "semantics": "Result count is announced on filter change; the grid is a labelled list.",
-      "crystal": "Card and panel materials, the filter transition",
+      "prismata": "Card and panel materials, the filter transition",
       "product": "Catalogue and facets",
       "parity": [
         "primeblocks:ecommerce"
@@ -330,7 +330,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Variant changes update price and stock together, and say so.",
-      "crystal": "Composition of materials, the add-to-cart transition",
+      "prismata": "Composition of materials, the add-to-cart transition",
       "product": "The product model",
       "parity": [
         "primeblocks:ecommerce"
@@ -353,7 +353,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Each step is a labelled region; errors summarise and link; raw card data never touches this component.",
-      "crystal": "Section materials, step transitions",
+      "prismata": "Section materials, step transitions",
       "product": "Providers, tax, and the order model",
       "parity": [
         "primeblocks:ecommerce",
@@ -377,7 +377,7 @@
       ],
       "geometry": "Drawer keeps panel radius on its inner edge.",
       "semantics": "Opening moves focus in and returns it on close; total changes are announced.",
-      "crystal": "Drawer material, the enter and exit recipes",
+      "prismata": "Drawer material, the enter and exit recipes",
       "product": "The cart model",
       "motion": [
         "drawer-in",
@@ -402,7 +402,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "The recommended plan is stated in words, not only styled.",
-      "crystal": "Card materials, emphasis treatment",
+      "prismata": "Card materials, emphasis treatment",
       "product": "Plans and their features",
       "parity": [
         "mantine-ui:Pricing"
@@ -425,7 +425,7 @@
       ],
       "geometry": "Panel radius; the highlight follows the target radius.",
       "semantics": "Escapable at every step; progress announced; focus moves with the step.",
-      "crystal": "Panel and scrim materials, step motion, focus management",
+      "prismata": "Panel and scrim materials, step motion, focus management",
       "product": "The steps and their copy",
       "motion": [
         "page-in",
@@ -453,7 +453,7 @@
       ],
       "geometry": "Overlay keeps panel radius; rows reach 44px.",
       "semantics": "A combobox: results are announced by count, and arrow keys move without losing the typed value.",
-      "crystal": "Overlay material, the open motion, row treatment",
+      "prismata": "Overlay material, the open motion, row treatment",
       "product": "The search backend and ranking",
       "motion": [
         "menu-in",
@@ -484,7 +484,7 @@
       ],
       "geometry": "Toolbar controls are pills; the surface keeps the content radius.",
       "semantics": "The toolbar is a real toolbar with one tab stop; formatting state is announced.",
-      "crystal": "Surface and toolbar materials, the save transition",
+      "prismata": "Surface and toolbar materials, the save transition",
       "product": "The editor engine and its schema",
       "parity": [
         "primereact:editor",

@@ -7,13 +7,13 @@
  * `frost`, with the three held in build-catalogue.cjs's UNMEASURED until a
  * component wearing the fill had been measured (CONTRACT §3).
  *
- * Measured. Crystal React drew the fill on 3 October 2026 (R-A9, crystal-react
+ * Measured. Prismata React drew the fill on 3 October 2026 (R-A9, prismata-react
  * 16e8f3f) and measured it on the dev server. Re-measured on 7 November 2026 in
- * Chromium against the built stories on @crystal-ui/core 2.4.0, computed
+ * Chromium against the built stories on @prismata/core 2.4.0, computed
  * values, light and dark, on the menu and the popover of "Overlays/Anchored
  * surfaces" and the panel of "Feedback/Inline confirm": each panel is
- * `.cr-frost` (backdrop `blur(40px) saturate(1.25)`), and its `::after` is
- * `--cr-haze-fill` at 80% (`rgba(255, 255, 255, 0.8)` light,
+ * `.pr-frost` (backdrop `blur(40px) saturate(1.25)`), and its `::after` is
+ * `--pr-haze-fill` at 80% (`rgba(255, 255, 255, 0.8)` light,
  * `rgba(29, 23, 48, 0.8)` dark) under `blur(1.95px)` at opacity 1, inset 8px
  * (the menu 4px, its own padding), with Frost's grain intact on `::before` at
  * 0.045. The material fields already say this; only the surfaces change.

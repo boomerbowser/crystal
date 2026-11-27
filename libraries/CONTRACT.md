@@ -1,12 +1,12 @@
-# Crystal platform library contract
+# Prismata platform library contract
 
-This contract states what it means for a library to be "a Crystal library". It sets five requirements, so that five libraries do not drift into five design systems that share a colour.
+This contract states what it means for a library to be "a Prismata library". It sets five requirements, so that five libraries do not drift into five design systems that share a colour.
 
-Crystal is the base. A library implements Crystal for a platform; it does not fork the token or material definitions.
+Prismata is the base. A library implements Prismata for a platform; it does not fork the token or material definitions.
 
 ## 1. Consume generated tokens. Never redeclare a value.
 
-The canonical source is `design-system/core/tokens/crystal.tokens.json`, a W3C DTCG file. Generated exports for TypeScript, Swift and Kotlin are emitted from it into `design-system/core/exports/`. A library imports those. A hard-coded `#7338EF`, `40px` or `1.95px` anywhere in a library is a defect, because it is a value that can no longer be changed centrally.
+The canonical source is `design-system/core/tokens/prismata.tokens.json`, a W3C DTCG file. Generated exports for TypeScript, Swift and Kotlin are emitted from it into `design-system/core/exports/`. A library imports those. A hard-coded `#7338EF`, `40px` or `1.95px` anywhere in a library is a defect, because it is a value that can no longer be changed centrally.
 
 Derived values (elevation-scaled shadows, rgba composites, scaled motion durations) are computed, not stored. Reuse the resolver's arithmetic rather than reimplementing it, because two implementations of the same formula will diverge.
 
@@ -18,7 +18,7 @@ What must survive on every platform: the material order, visibly distinct materi
 
 ### The materials as data: `surface-recipes.json`
 
-A library that cannot wear a CSS selector reads each surface's recipe from `core/tokens/surface-recipes.json`, exported as `@crystal-ui/core/surface-recipes`. It is generated from `crystal.css` and `surfaces.json` on every build, so it cannot drift from what the web renders. There is one record per surface in `surfaces.json`, in the same order. Every value is written as the stylesheet writes it: a token reference (`var(--cr-resin-fill)`), a literal (`999px`) or an expression (`calc(var(--cr-radius) + 6px)`). Resolve the tokens from your platform's export (`exports/crystal-tokens.swift`, `.kt` or `.ts`), never from the values quoted below, which are the Prism light defaults for illustration.
+A library that cannot wear a CSS selector reads each surface's recipe from `core/tokens/surface-recipes.json`, exported as `@prismata/core/surface-recipes`. It is generated from `prismata.css` and `surfaces.json` on every build, so it cannot drift from what the web renders. There is one record per surface in `surfaces.json`, in the same order. Every value is written as the stylesheet writes it: a token reference (`var(--pr-resin-fill)`), a literal (`999px`) or an expression (`calc(var(--pr-radius) + 6px)`). Resolve the tokens from your platform's export (`exports/prismata-tokens.swift`, `.kt` or `.ts`), never from the values quoted below, which are the Prism light defaults for illustration.
 
 **The fields a platform draws.** `fill` is the element's own background. `blur` and `saturation` are the arguments of its backdrop filter; when the filter has more functions than those two, the whole of it is in `extras` under `backdrop-filter` (Mirage's brightness is there). `rim` is the border, `shadow` the elevation, `radius` the corner and `padding` the inset. `haze` is a feathered paint layer behind the content: draw `haze.fill` on its own layer, inset by `haze.inset` and blurred by `haze.feather`, and keep text, icons and focus crisp above it. `layers` lists every other painted layer (the Resin sheen, for example). A record with `alternatives` has one recipe per element, for a selector the stylesheet paints differently by element (the checkbox and the radio).
 
@@ -35,20 +35,20 @@ A library that cannot wear a CSS selector reads each surface's recipe from `core
 
 **One worked example per material.**
 
-- **Plastic** (`plastic`). `fill: var(--cr-canvas)` and nothing else: no blur, rim, shadow or radius. It is the opaque foundation of a view, `#f9f6fe` in Prism light. Under `forcedColors` it becomes `Canvas` with `CanvasText`.
-- **Frost** (`frost`). `fill: var(--cr-frost-fill)`, `blur: var(--cr-frost-blur)`, `saturation: var(--cr-frost-saturation)`, `rim: 1px solid var(--cr-rim)`, `shadow: var(--cr-shadow-panel)`, `radius: calc(var(--cr-radius) + 6px)`. A panel that blurs what is behind it: 45% white at 40px and 125% in Prism light, at 34px radius. `opaque`, `reducedTransparency` and `noBackdropFilter` all replace the fill with `var(--cr-surface)` and drop the blur.
+- **Plastic** (`plastic`). `fill: var(--pr-canvas)` and nothing else: no blur, rim, shadow or radius. It is the opaque foundation of a view, `#f9f6fe` in Prism light. Under `forcedColors` it becomes `Canvas` with `CanvasText`.
+- **Frost** (`frost`). `fill: var(--pr-frost-fill)`, `blur: var(--pr-frost-blur)`, `saturation: var(--pr-frost-saturation)`, `rim: 1px solid var(--pr-rim)`, `shadow: var(--pr-shadow-panel)`, `radius: calc(var(--pr-radius) + 6px)`. A panel that blurs what is behind it: 45% white at 40px and 125% in Prism light, at 34px radius. `opaque`, `reducedTransparency` and `noBackdropFilter` all replace the fill with `var(--pr-surface)` and drop the blur.
 - **Resin** (`resin`). The same fields as Frost with the Resin tokens: a 20% fill, 20px blur and 165% saturation, the float shadow, and `radius: 999px`, the pill. Its controls lose their own backdrop filter, because Resin never contains Resin.
-- **Haze** (`haze`). `fill: transparent`, `radius: var(--cr-radius)`, and a `haze` layer: `fill: var(--cr-haze-fill)` (80% white), `feather: var(--cr-haze-feather)` (1.95px), inset `0`, radius inherited. Draw the fill on its own feathered layer behind the content. `opaque` and `reducedTransparency` make that layer `var(--cr-surface)` with no feather.
-- **Stone** (`stone`). As Haze, with `var(--cr-stone-fill)` (55% light, 60% dark) on the feathered layer. It sets no radius, and `why` says so: Stone backs a label and takes the radius of what it backs.
-- **Mirage** (`mirage`). `fill: var(--cr-mirage-fill)`, and the full filter in `extras`: `blur(var(--cr-mirage-blur)) saturate(var(--cr-mirage-saturation)) brightness(var(--cr-mirage-brightness))`, 28px, 165% and 88%. It is the scrim behind a modal. `reducedTransparency`, `forcedColors` and `noBackdropFilter` replace it with `var(--cr-mirage-fallback-fill)` and no filter.
+- **Haze** (`haze`). `fill: transparent`, `radius: var(--pr-radius)`, and a `haze` layer: `fill: var(--pr-haze-fill)` (80% white), `feather: var(--pr-haze-feather)` (1.95px), inset `0`, radius inherited. Draw the fill on its own feathered layer behind the content. `opaque` and `reducedTransparency` make that layer `var(--pr-surface)` with no feather.
+- **Stone** (`stone`). As Haze, with `var(--pr-stone-fill)` (55% light, 60% dark) on the feathered layer. It sets no radius, and `why` says so: Stone backs a label and takes the radius of what it backs.
+- **Mirage** (`mirage`). `fill: var(--pr-mirage-fill)`, and the full filter in `extras`: `blur(var(--pr-mirage-blur)) saturate(var(--pr-mirage-saturation)) brightness(var(--pr-mirage-brightness))`, 28px, 165% and 88%. It is the scrim behind a modal. `reducedTransparency`, `forcedColors` and `noBackdropFilter` replace it with `var(--pr-mirage-fallback-fill)` and no filter.
 
 The compositions (`control`, `field`, `dock`, `table` and the rest) are these materials combined, and their records read the same way: the Resin shell's fields on the element, the Haze pad on its `haze` layer.
 
 ## 3. Implement the full catalogue.
 
-`parity.json` lists every component Crystal specifies, with per-platform status. A component present in one library is expected in the others, with the same states, semantics and token bindings. Parity is measured against Mantine, Ant Design and MUI, named per component in the catalogue so the claim is checkable.
+`parity.json` lists every component Prismata specifies, with per-platform status. A component present in one library is expected in the others, with the same states, semantics and token bindings. Parity is measured against Mantine, Ant Design and MUI, named per component in the catalogue so the claim is checkable.
 
-Crystal specifies appearance. Products bring their own accessible primitives: focus management, menu keyboard behaviour, date arithmetic, rich-text engines. Do not rebuild complex behaviour to obtain a surface style. Wrap a maintained primitive and style it.
+Prismata specifies appearance. Products bring their own accessible primitives: focus management, menu keyboard behaviour, date arithmetic, rich-text engines. Do not rebuild complex behaviour to obtain a surface style. Wrap a maintained primitive and style it.
 
 **Measure before assigning.** A surface or a motion enters a catalogue entry only after a component wearing it has been compared with the recipe in a browser: the computed values, not the class names or the prose. The `tools/extend-catalogue-*.cjs` script that makes the assignment cites the measurement beside it: which component, where it was rendered, and what was read. An entry's prose may specify a material before any component wears it. Until one has been measured, the entry keeps the surface it has, and `tools/build-catalogue.cjs` lists it as awaiting a measurement, with the task that closes it. That list fails the build once an entry no longer needs it.
 
@@ -63,7 +63,7 @@ Crystal specifies appearance. Products bring their own accessible primitives: fo
 
 ## 5. Ship your own evidence.
 
-Crystal's verification covers the design-system package: token contrast, static integrity, motion contracts and visual comparison of the reference preview. It says nothing about a library built on it.
+Prismata's verification covers the design-system package: token contrast, static integrity, motion contracts and visual comparison of the reference preview. It says nothing about a library built on it.
 
 Each library ships its own accessibility and visual-regression evidence, covering every component across the six palettes, both modes, both densities, full and reduced effects, and both text directions. Native clients require real device review; an HTML specimen is not evidence about a native renderer.
 
@@ -71,7 +71,7 @@ Record intentional platform compromises with actual device captures and review t
 
 ## 6. Honour the motion physics, not the keyframes.
 
-Crystal's motion is specified as a damped harmonic oscillator. Every recipe in
+Prismata's motion is specified as a damped harmonic oscillator. Every recipe in
 `design-system/core/tokens/motion-recipes.json` carries a `spring` block with
 `stiffness`, `damping` and `mass`, plus a `platform` block that pre-computes the
 parameterisation each platform exposes. Use it and do not re-derive it. Two
@@ -140,14 +140,14 @@ Non-negotiable properties:
 
 ## 8. Ambient motion is deferred.
 
-Crystal 2.0 ships no ambient motion, and a library must not invent any. Materials are
+Prismata 2.0 ships no ambient motion, and a library must not invent any. Materials are
 still at rest when nothing is happening to them. A surface that moves on its own is not
-Crystal until a later version says how.
+Prismata until a later version says how.
 
 Ambient motion was specified, built and measured, and then withdrawn at Meridian's
 direction. `proposals/crystal-2.0-requests.md` R17 through R21 carry the specification,
 the measurements and the reasons. Nothing in this release depends on that work, and a
-platform implementing Crystal 2.0 has nothing to implement here.
+platform implementing Prismata 2.0 has nothing to implement here.
 
 Two findings from that work will apply again:
 
@@ -178,8 +178,8 @@ alias, so the material loses its diffusion. Nothing reports an error: there is
 no warning, no failed build and no missing file. Frost and Resin render as flat
 translucent fills.
 
-Crystal React shipped in that state from its first component until slice G, and
-every screenshot taken in that period shows a Crystal without its materials.
+Prismata React shipped in that state from its first component until slice G, and
+every screenshot taken in that period shows a Prismata without its materials.
 This output was reproduced through the real pipeline:
 
 ```
@@ -190,13 +190,13 @@ This output was reproduced through the real pipeline:
 Autoprefixer alone does not do this: running it over the same declaration keeps
 both. The unprefixed declaration is lost when a minifier runs after autoprefixer.
 
-Crystal's own `assets/crystal.css` writes the pair, because it ships as written
+Prismata's own `assets/prismata.css` writes the pair, because it ships as written
 and dropping the alias would lose Safari. It writes the alias **first**, and a
-contract check holds it to that. A consumer imports `@crystal-ui/core/css`
+contract check holds it to that. A consumer imports `@prismata/core/css`
 through its own bundler, so the file is minified after all. lightningcss, which
 Vite 8 minifies CSS with, reads the two as one property and keeps the last
 declaration: written unprefixed first, only the alias survived, and Resin
-rendered flat in Crystal React's built stories while its dev server, which does
+rendered flat in Prismata React's built stories while its dev server, which does
 not minify, showed it diffused (D-38). Alias first, lightningcss keeps the
 unprefixed property and adds the alias back for targets that need it, and
 esbuild keeps both. Order is the fix for a stylesheet that must ship the pair;
@@ -204,35 +204,35 @@ a stylesheet that goes through a build should still write the property once.
 
 ### What not to load
 
-`@crystal-ui/core/css` and `@crystal-ui/core/theme` are for everyone: the reset, the
+`@prismata/core/css` and `@prismata/core/theme` are for everyone: the reset, the
 materials, the scroll contract, and the resolved token values.
 
 **`assets/controls.css` is the preview site's own control layer, and it is not
-exported.** `@crystal-ui/core/controls` no longer resolves, and the preview loads
+exported.** `@prismata/core/controls` no longer resolves, and the preview loads
 the file by relative path. Removing the export replaces a prohibition on loading
 the file, which was obeyed until it was broken, so a library has no rule to obey
 here.
 
 The file is dangerous to a library because it styles bare elements.
-`:is(button, a.cr-button)` gives every button in the document a Resin
+`:is(button, a.pr-button)` gives every button in the document a Resin
 background, a feathered `::before` and a 48px minimum height, and bare
 `input[type=checkbox]`, `[type=radio]`, `[type=range]` and `[type=file]` are
 styled the same way. That is right for a page that writes
-`<button class="cr-control">` and wrong underneath a library that ships its own
+`<button class="pr-control">` and wrong underneath a library that ships its own
 controls. Loading both puts two implementations of every control in conflict,
 which is the drift §1 describes, with a stylesheet in place of a value.
 
-Crystal React loaded it in its Storybook for one release. A 32px chip rendered
+Prismata React loaded it in its Storybook for one release. A 32px chip rendered
 50px tall, and every story was validated against styles a consumer of that
 package would never have had. The components were correct and the evidence for
 them was not.
 
-The file sits in `@layer crystal.component`, so unlayered CSS outranks it for any
+The file sits in `@layer prismata.component`, so unlayered CSS outranks it for any
 property a consumer declares. That is not sufficient protection, because a
 consumer does not write a `::before` to cancel a `::before` they do not know
 about.
 
-A library that wants the resolved values in CSS takes `@crystal-ui/core/resolver`
+A library that wants the resolved values in CSS takes `@prismata/core/resolver`
 and publishes them onto its own scope, which is what the provider does.
 
 ---
@@ -242,7 +242,7 @@ and publishes them onto its own scope, which is what the provider does.
 On a phone, a swipe inside a scrollable table that does not meet this contract chains
 into the page underneath. Nothing on screen says the table is scrollable, because a
 phone's scrollbar is an overlay that is not there until you are already scrolling.
-Crystal owns both problems.
+Prismata owns both problems.
 
 **Every scroll container owes four things:**
 
@@ -253,7 +253,7 @@ Crystal owns both problems.
   scrollbar appears. `scrollbar-gutter` reserves the inline edge only, so on a
   horizontal-only scroller it reserves space for a scrollbar that never appears.
   A centred surface such as a dialog takes `stable both-edges`.
-- A Crystal scrollbar rather than the operating system's.
+- A Prismata scrollbar rather than the operating system's.
 - Content to scroll. A container styled as scrollable with nothing to scroll has its
   overflow set by mistake.
 
@@ -269,7 +269,7 @@ Resin.
 **The thumb is ink, never the material's own surface colour.** A thumb painted in the
 material's surface, which is the literal reading of "the scrollbar belongs to the
 material", is white at 62% over a white Frost panel, contrast ratio 1.00. Both thumbs
-clear 3:1 against every Crystal surface in all six palettes and both modes.
+clear 3:1 against every Prismata surface in all six palettes and both modes.
 
 **One mechanism per engine.** Where a platform offers both a standard scrollbar API and
 an older vendor one, a library implements exactly one of them per engine. On the web,
@@ -279,11 +279,11 @@ vendor rules dead in the browser most people use and live in the one they do not
 is the drift §1 describes.
 
 **The edge fade says there is more.** A scroll area fades its content where there is
-content beyond the edge, at `--cr-scroll-fade`, on the scrolling axis. It is a mask
+content beyond the edge, at `--pr-scroll-fade`, on the scrolling axis. It is a mask
 rather than a painted overlay. An overlay would have to paint the surrounding material,
 and a colour approximating a translucent material over an unknown backdrop is wrong at
 every edge except the one it was sampled at. The same value is the container's scroll
-padding, so a focus ring can never come to rest underneath the fade. Crystal does not
+padding, so a focus ring can never come to rest underneath the fade. Prismata does not
 blur focus, and fading a focus ring is the same defect. A mask fades the element's own
 fill and border too, so it belongs on the element that scrolls, and a material surface
 that also scrolls puts its material on a wrapper.

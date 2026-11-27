@@ -6,7 +6,7 @@
  * names Plastic, Frost, Resin, Haze, Stone or Mirage when none of the entry's
  * surfaces is made of it. A token in a code span is a colour, not a material
  * claim, and is not read. Twenty-six entries failed. Twenty-two are corrected
- * here, 25 fields, against Crystal's own vocabulary and tokens, never against
+ * here, 25 fields, against Prismata's own vocabulary and tokens, never against
  * what a library happens to draw, and a surface is assigned only where a
  * component wearing it was measured (C-S3). Six are listed in build-catalogue.cjs
  * as awaiting a measurement; the menu and the popover are in both sets, their
@@ -19,7 +19,7 @@
  *     Haze"). The toast and the notification add `haze`, measured on a component
  *     that wears it. The pop-confirm, the menu and the popover say the same in
  *     their material, but no component has been measured wearing a Haze reading
- *     fill there (Crystal React's draws Haze only on the buttons' pads), so they
+ *     fill there (Prismata React's draws Haze only on the buttons' pads), so they
  *     keep `frost` until one has (C-S3); build-catalogue.cjs lists them.
  *   - The indicator has been Haze since 2.3.0 (D-27); its anatomy still said
  *     Resin, and its material said so in the negative.
@@ -27,11 +27,11 @@
  *     the Resin plane's "Resin handle over imagery or between regions", measured:
  *     they take `resin`. The knob's value arc is primary, as every other arc in
  *     the catalogue is. The three colour controls specify a Resin thumb that no
- *     component has been measured drawing (Crystal React's thumb is the picked
+ *     component has been measured drawing (Prismata React's thumb is the picked
  *     colour), so they keep `none` until one has; build-catalogue.cjs lists them.
  *   - Charts named Haze for a colour. A series fill is the series colour at
- *     `--cr-chart-fill-opacity`, which core defines for it; a track, a band,
- *     a centre or a node fill is `--cr-haze-fill`, the Haze colour without the
+ *     `--pr-chart-fill-opacity`, which core defines for it; a track, a band,
+ *     a centre or a node fill is `--pr-haze-fill`, the Haze colour without the
  *     surface (an arc cannot be feathered), written as the token.
  *   - The rest named a material as context or as an option the vocabulary does
  *     not have: the app bar sits over the foundation; the timeline's markers are
@@ -73,12 +73,12 @@ const FIELDS = [
     'Frost popover with Haze rows over the field (R15e)'],
 
   /* ------------------------------------- a Frost overlay with a Haze reading fill
-     Measured on 2 October 2026 in Crystal React's Storybook (dev server, so no
+     Measured on 2 October 2026 in Prismata React's Storybook (dev server, so no
      minifier): Feedback/Toast and Feedback/Notification compute Frost's
      blur(40px) saturate(1.25) and paint a feathered 80% Haze layer on their
      own ::before. That reading missed the layer's opacity: on ::before it
-     replaced .cr-frost's grain and was drawn at the grain's 4.5%. Measured
-     again on 3 October, after Crystal React moved it to ::after: an 80% fill
+     replaced .pr-frost's grain and was drawn at the grain's 4.5%. Measured
+     again on 3 October, after Prismata React moved it to ::after: an 80% fill
      at 1.95px and opacity 1, with the grain intact. */
   ['toast', 'surface', ['frost'], ['frost', 'haze']],
   ['notification', 'surface', ['frost'], ['frost', 'haze']],
@@ -94,7 +94,7 @@ const FIELDS = [
   /* --------------------------------------------- controls with a Resin handle
      Measured the same way: Inputs/Choice and range draws the angle slider's and
      the knob's dial at blur(20px) saturate(1.65) on the 20% Resin fill, the
-     .cr-resin recipe. */
+     .pr-resin recipe. */
   ['angle-slider', 'surface', ['none'], ['resin']],
   ['knob', 'surface', ['none'], ['resin']],
   ['knob', 'material',
@@ -107,28 +107,28 @@ const FIELDS = [
   /* ---------------------------------------------------- charts name a colour */
   ['area-chart', 'material',
     'Haze fill beneath the line',
-    'The series colour at `--cr-chart-fill-opacity` beneath the line'],
+    'The series colour at `--pr-chart-fill-opacity` beneath the line'],
   ['radar-chart', 'material',
     'Haze fill inside each series polygon',
-    'The series colour at `--cr-chart-fill-opacity` inside each series polygon'],
+    'The series colour at `--pr-chart-fill-opacity` inside each series polygon'],
   ['donut-chart', 'material',
     'Haze centre fill',
-    'A centre fill in `--cr-haze-fill`'],
+    'A centre fill in `--pr-haze-fill`'],
   ['gauge', 'material',
     'Haze track with a primary arc',
-    'A track in `--cr-haze-fill` with a primary arc'],
+    'A track in `--pr-haze-fill` with a primary arc'],
   ['semi-circle-progress', 'material',
     'Haze track with a primary arc',
-    'A track in `--cr-haze-fill` with a primary arc'],
+    'A track in `--pr-haze-fill` with a primary arc'],
   ['meter-group', 'material',
     'Haze track with segment fills',
-    'A track in `--cr-haze-fill` with segment fills'],
+    'A track in `--pr-haze-fill` with segment fills'],
   ['bullet-chart', 'material',
     'Haze range bands',
-    'Range bands in `--cr-haze-fill`'],
+    'Range bands in `--pr-haze-fill`'],
   ['network-graph', 'material',
     'Haze node fills',
-    'Node fills in `--cr-haze-fill`'],
+    'Node fills in `--pr-haze-fill`'],
 
   /* ------------------------------------------------ context and stale options */
   ['app-bar', 'material',
@@ -142,7 +142,7 @@ const FIELDS = [
     'Mirage scrim and a Frost panel'],
   ['drag-handle', 'material',
     'Resin while lifted; Haze drop indicator',
-    'No material of its own: the opaque surface with the float shadow while lifted, and a drop indicator in `--cr-haze-fill`'],
+    'No material of its own: the opaque surface with the float shadow while lifted, and a drop indicator in `--pr-haze-fill`'],
 ];
 
 const problems = [];

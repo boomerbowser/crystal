@@ -16,12 +16,12 @@
  *     organisation chart and the spoiler; page-out on master-detail; and
  *     list-in on the combobox. The
  *     proposal and the ruling call these "eleven"; the list they name is nine
- *     assignments, and with the menus' four and Crystal React's seven gaps it
+ *     assignments, and with the menus' four and Prismata React's seven gaps it
  *     accounts for all twenty. The menubar and the split button keep menu-in and
  *     menu-out, and their notes say the menus are the product's children.
- *     Crystal React's seven gaps (the cascader's field states, the product
+ *     Prismata React's seven gaps (the cascader's field states, the product
  *     gallery's media-in, the view stack's view-push-out, the playlist block's
- *     list motion) stay assigned and are Crystal React tasks.
+ *     list motion) stay assigned and are Prismata React tasks.
  *
  * Old values are quoted below. Idempotent; refuses to write on an unknown id,
  * an unknown surface or recipe, or a value that is neither the old one nor the
@@ -42,8 +42,8 @@ const WRITE = process.argv.includes('--write');
 const FIELDS = [
   /* ------------------------------------------------------------ D-30 (a) */
   ['rich-text-surface', 'note',
-    'Crystal specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. Whether a library may ship an optional binding of its own is D-30.',
-    'Crystal specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. A library may ship an optional binding of an engine from its own entry point, with the engine an optional peer dependency, so a product that never imports the binding never installs or bundles the engine. The format vocabulary is the contract a binding implements: every block type and mark it offers renders as the surface and prose render it (D-30).'],
+    'Prismata specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. Whether a library may ship an optional binding of its own is D-30.',
+    'Prismata specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. A library may ship an optional binding of an engine from its own entry point, with the engine an optional peer dependency, so a product that never imports the binding never installs or bundles the engine. The format vocabulary is the contract a binding implements: every block type and mark it offers renders as the surface and prose render it (D-30).'],
 
   /* ------------------------------------------------------------ D-32 (a) */
   ['transfer', 'motion',

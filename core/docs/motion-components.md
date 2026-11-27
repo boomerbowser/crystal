@@ -2,15 +2,15 @@
 
 [Open the live component studies](../motion.html#component-motion) · [Search all recipes](../motion.html#recipe-library) · [Run browser contracts](../motion-contracts.html)
 
-Crystal ships 60 executable component recipes in nine families, the six material signatures, Mirage withdrawal, a modal dismissal, a measured-layout helper, and the travelling selection pill, which plays `selection-travel` between measured segments. Three of the recipes are continuous indicators of pending work. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
+Prismata ships 60 executable component recipes in nine families, the six material signatures, Mirage withdrawal, a modal dismissal, a measured-layout helper, and the travelling selection pill, which plays `selection-travel` between measured segments. Three of the recipes are continuous indicators of pending work. This is the animation foundation for future component libraries. The demonstration includes real local component behavior, but is not an audited production React, Rust or native component library. No remote operation is represented as implemented.
 
 ## Engine responsibilities
 
 **Motion 13.4.0** runs component and material element keyframes: translation, opacity, scale and state feedback. **GSAP 3.15.0** timelines coordinate the paint-layer clocks for feathered edges, optical highlights and rims, plus selected component sequences. Recipes declare a material and a motion signature: pressure, coalescence, meniscus movement, caustic light, surface tension, feathering, refraction or inertia. Optical layers share the component's cancellation group and never animate text blur. GSAP drives paused native effects when targeting actual pseudo-elements. It does not clone private page content or replace the material with a screenshot.
 
-Both packages are installed with exact versions in `package.json`, resolved transitively in `package-lock.json`, and bundled locally as `assets/vendor/crystal-engines.js`. No runtime CDN is required. The pure token resolver remains independent of the engines. The preview's native dialog backdrop keeps a CSS fallback with the same timing tokens. Frost unfolds in depth; Plastic settles with weight; Resin compresses and redistributes its light; Haze and Stone move through their perimeter. Five larger material studies have generously sized replay stages.
+Both packages are installed with exact versions in `package.json`, resolved transitively in `package-lock.json`, and bundled locally as `assets/vendor/prismata-engines.js`. No runtime CDN is required. The pure token resolver remains independent of the engines. The preview's native dialog backdrop keeps a CSS fallback with the same timing tokens. Frost unfolds in depth; Plastic settles with weight; Resin compresses and redistributes its light; Haze and Stone move through their perimeter. Five larger material studies have generously sized replay stages.
 
-The engine bridge gives both libraries one cancellation contract: `finished` settles on completion or cancellation, and only properties owned by the effect are restored. Cancellation never leaves a promise waiting for a killed GSAP timeline. Material replay, component recipes, and layout changes all participate in `CrystalMotion.stop()` and `stopAll()`.
+The engine bridge gives both libraries one cancellation contract: `finished` settles on completion or cancellation, and only properties owned by the effect are restored. Cancellation never leaves a promise waiting for a killed GSAP timeline. Material replay, component recipes, and layout changes all participate in `PrismataMotion.stop()` and `stopAll()`.
 
 ## Motion rules shared by every component
 
@@ -27,7 +27,7 @@ The engine bridge gives both libraries one cancellation contract: `finished` set
 
 All interaction surfaces use a 20% Resin body, visible illuminated rim and an inset 80% Haze reading fill where contrast needs protection. The preview uses the protected form consistently because its surroundings are adjustable. The reading fill is physically inset, so the Resin perimeter stays visible. Standalone actions keep a neutral Haze reading fill inside a broad Resin rim. Grouped actions share one Resin/Haze container: inactive items are transparent, and the selected item uses the tested primary/on-primary color pair as a raised indicator, with its label at weight 800. Nothing is drawn beside the label. A check mark means validated, never selected. The group retains the surrounding material shell.
 
-The same formula applies to display labels, tags, badges and keyboard caps. Use `.cr-resin-haze` for these shells; `.cr-tag` adds compact label geometry. **Tooltips, toasts, menus, dropdowns, flyouts and popovers are Frost** (`.cr-frost`), at Meridian's direction (R15e): they open over content, so they are intermediate panels, and their reading content sits on Haze inside them. This does not change large persistent Frost panels, Plastic foundations, Haze reading areas, or the standalone Stone material. Plain prose and ordinary form-label text do not need their own material container. Native OS option popups and file choosers retain platform drawing; the in-app menu and select trigger use Crystal.
+The same formula applies to display labels, tags, badges and keyboard caps. Use `.pr-resin-haze` for these shells; `.pr-tag` adds compact label geometry. **Tooltips, toasts, menus, dropdowns, flyouts and popovers are Frost** (`.pr-frost`), at Meridian's direction (R15e): they open over content, so they are intermediate panels, and their reading content sits on Haze inside them. This does not change large persistent Frost panels, Plastic foundations, Haze reading areas, or the standalone Stone material. Plain prose and ordinary form-label text do not need their own material container. Native OS option popups and file choosers retain platform drawing; the in-app menu and select trigger use Prismata.
 
 ## Component coverage and composition
 
@@ -74,7 +74,7 @@ Base times below are at 1×; the preview resolves the saved speed at playback. E
 | `press` | resin / pressure | Motion | 320ms | Buttons, icon buttons and segmented controls. Disabled controls never animate. |
 | `hover` | resin / caustic | Motion | 700ms | Fine-pointer affordance only; keyboard focus is immediate. |
 | `selection` | resin / meniscus | Motion | 420ms | Selected chips, radios, toggles and navigation; set selected semantics first. |
-| `selection-travel` | resin / meniscus | Motion | 460ms | The one .cr-indicator.pill behind the selected segment of tabs, a segmented control, the dock, bottom navigation or a toggle button group, moving to the new segment when the choice changes. Set the selected semantics first; selection stays label weight, so the pill is never the only sign of it. Critically damped: a pill that overshoots stands for a moment on a segment nobody chose. |
+| `selection-travel` | resin / meniscus | Motion | 460ms | The one .pr-indicator.pill behind the selected segment of tabs, a segmented control, the dock, bottom navigation or a toggle button group, moving to the new segment when the choice changes. Set the selected semantics first; selection stays label weight, so the pill is never the only sign of it. Critically damped: a pill that overshoots stands for a moment on a segment nobody chose. |
 | `switch-on` | resin / coalesce | Motion | 460ms | Animate the thumb after its checked state is applied. |
 | `switch-off` | resin / coalesce | Motion | 460ms | Animate the thumb after its unchecked state is applied. |
 | `check` | resin / iris | Motion | 340ms | Checkbox and radio indicators; retain a visible non-color state. |
@@ -135,38 +135,38 @@ Base times below are at 1×; the preview resolves the saved speed at playback. E
 
 ## Runtime API
 
-The field shell's appearance is in `crystal.css` as of 2.1.0; the documentation site wraps its native fields with a script of its own, and a product wraps them in its own markup or component. Load the theme CSS, then `crystal.css`, then `motion.css`. The engines are the consumer's to bundle: `@crystal-ui/core` ships `engines.js` and declares gsap and motion as dependencies. `assets/motion.js` is the adapter over them, and reads the recipe catalogue from `window.CRYSTAL_MOTION_RECIPES` (the contents of `motion-recipes.json`). Load `tokens.js` and `crystal.js` first if resolving user preferences dynamically. A recipe id can also name a material preset: `plastic`, `frost`, `resin`, `haze`, `stone`, `mirage`, `mirage-out` or `dismiss`. `core/presets` computes the presets from tokens, and a platform library imports it directly. Delegated button feedback is the documentation site's; a component library binds motion to state in its own lifecycle.
+The field shell's appearance is in `prismata.css` as of 2.1.0; the documentation site wraps its native fields with a script of its own, and a product wraps them in its own markup or component. Load the theme CSS, then `prismata.css`, then `motion.css`. The engines are the consumer's to bundle: `@prismata/core` ships `engines.js` and declares gsap and motion as dependencies. `assets/motion.js` is the adapter over them, and reads the recipe catalogue from `window.PRISMATA_MOTION_RECIPES` (the contents of `motion-recipes.json`). Load `tokens.js` and `prismata.js` first if resolving user preferences dynamically. A recipe id can also name a material preset: `plastic`, `frost`, `resin`, `haze`, `stone`, `mirage`, `mirage-out` or `dismiss`. `core/presets` computes the presets from tokens, and a platform library imports it directly. Delegated button feedback is the documentation site's; a component library binds motion to state in its own lifecycle.
 
 ```js
 // Apply real UI state before giving it visual feedback.
 button.setAttribute('aria-pressed', 'true');
-const result = await CrystalMotion.play(button, 'selection');
+const result = await PrismataMotion.play(button, 'selection');
 // result.status is finished, cancelled or instant.
 
 // A real reorder, with measured motion that may exceed 50px.
 const before = row.getBoundingClientRect();
 list.insertBefore(row, row.previousElementSibling);
-await CrystalMotion.layout(row, before);
+await PrismataMotion.layout(row, before);
 
 // Cleanup on unmount or superseding intent.
-CrystalMotion.stop(row);
-CrystalMotion.stopAll();
+PrismataMotion.stop(row);
+PrismataMotion.stopAll();
 ```
 
 `play(element, recipeId, {rate})` accepts all material and component recipe IDs. An additional replay rate is optional; the default uses the user's factor once, not twice. `duration(baseMilliseconds, rate)` resolves the same factor and cap. `recipes` exposes the catalog metadata. Unknown presets and invalid targets throw. They do not report a fake completion.
 
 `layout(element, previousRect)` compares the previous and current DOM position. Displacements up to the viewport diagonal use a GSAP-controlled inverse transform, with duration adapting to distance. Pass `{extended:false}` to retain the compact 50px/crossfade behavior. Offscreen-scale moves beyond the viewport diagonal crossfade. The final order is always the real DOM order. Layout animation is cosmetic and does not supply drag-and-drop behavior.
 
-`travel(pill, segment, {instant})` moves a strip's selection pill (D-37). The pill is one `.cr-indicator.pill`, `aria-hidden`, a child of the plane that holds the segments: `.cr-dock`, `.cr-dock-inner` or `.cr-group`. Set the segment's selected semantics first, then call `travel` with the segment that carries them. It measures the segment inside the plane, writes `--cr-pill-x`, `--cr-pill-y`, `--cr-pill-width`, `--cr-pill-height` and `--cr-pill-radius` on the pill, marks it `data-placed`, and plays `selection-travel` from where the pill is seen to where the segment stands. Placing the pill is what hands the fill to it: until then each segment paints its own, so a strip with no script looks as it always has. The first call, `{instant:true}` (call it from a resize observer, or when fonts load) and reduced motion place the pill without travelling. A travel that starts while another is under way starts from where the pill is seen, so a quick second choice turns the pill rather than snapping it. While it travels the pill carries `data-travelling`, and the arriving label keeps the strip's ink until the pill is under it; its weight changes at once, with the semantics. Forced colours draw no pill and keep the segment's own outline.
+`travel(pill, segment, {instant})` moves a strip's selection pill (D-37). The pill is one `.pr-indicator.pill`, `aria-hidden`, a child of the plane that holds the segments: `.pr-dock`, `.pr-dock-inner` or `.pr-group`. Set the segment's selected semantics first, then call `travel` with the segment that carries them. It measures the segment inside the plane, writes `--pr-pill-x`, `--pr-pill-y`, `--pr-pill-width`, `--pr-pill-height` and `--pr-pill-radius` on the pill, marks it `data-placed`, and plays `selection-travel` from where the pill is seen to where the segment stands. Placing the pill is what hands the fill to it: until then each segment paints its own, so a strip with no script looks as it always has. The first call, `{instant:true}` (call it from a resize observer, or when fonts load) and reduced motion place the pill without travelling. A travel that starts while another is under way starts from where the pill is seen, so a quick second choice turns the pill rather than snapping it. While it travels the pill carries `data-travelling`, and the arriving label keeps the strip's ink until the pill is under it; its weight changes at once, with the semantics. Forced colours draw no pill and keep the segment's own outline.
 
 ```js
-const pill = strip.querySelector(':scope > .cr-indicator.pill');
-await CrystalMotion.travel(pill, strip.querySelector('[aria-selected=true]'), { instant: true });
+const pill = strip.querySelector(':scope > .pr-indicator.pill');
+await PrismataMotion.travel(pill, strip.querySelector('[aria-selected=true]'), { instant: true });
 
 // When the choice changes:
 previous.setAttribute('aria-selected', 'false');
 next.setAttribute('aria-selected', 'true');
-await CrystalMotion.travel(pill, next);
+await PrismataMotion.travel(pill, next);
 ```
 
 The engine bridge restores prior inline values and priorities for its owned properties. Consumers should avoid modifying the same animated property during an effect; stop it before changing that property. Component implementations should use a dedicated animated wrapper when they already own a nontrivial transform. Libraries must not let two engines compete for the same property.
@@ -189,7 +189,7 @@ npm test
 
 `npm run build` regenerates the token data, the exported theme and the reference sections in `docs/`. `npm test` runs that build and then checks token contracts and contrast, recipe uniqueness, duration and travel bounds, engine declarations against the lockfile, documentation drift, and what the published package may contain. It needs only Node. The library has no Python tooling.
 
-The documentation website bundles the motion engines for a browser. This package does not: `@crystal-ui/core` ships `engines.js` and declares gsap and motion as dependencies, and a consumer bundles them as it prefers. The browser contract page that exercises the real engines lives in `crystal-preview` and runs against the published package. It covers recipe completion, cancellation, supersession, property restoration, reduced motion, duration limits, stationary foregrounds and every material signature. Its results are evidence for the exercised browser only. They are not a full WCAG, native-renderer or cross-browser certification.
+The documentation website bundles the motion engines for a browser. This package does not: `@prismata/core` ships `engines.js` and declares gsap and motion as dependencies, and a consumer bundles them as it prefers. The browser contract page that exercises the real engines lives in `prismata-preview` and runs against the published package. It covers recipe completion, cancellation, supersession, property restoration, reduced motion, duration limits, stationary foregrounds and every material signature. Its results are evidence for the exercised browser only. They are not a full WCAG, native-renderer or cross-browser certification.
 
 ### Storybook and future component packages
 

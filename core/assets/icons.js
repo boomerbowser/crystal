@@ -22,7 +22,7 @@
     const input = document.createElement('input');
     input.type = 'search';
     input.id = 'icon-search';
-    input.className = 'cr-input';
+    input.className = 'pr-input';
     input.placeholder = 'workspace, arrow, calendar…';
     input.setAttribute('aria-describedby', 'icon-count');
 
@@ -48,7 +48,7 @@
       grid.textContent = '';
       count.textContent = needle
         ? `${matches.length} of ${data.total} icons match “${query.trim()}”.`
-        : `${data.total} icons. ${data.sources.crystal.count} original to Crystal, ${data.sources.lucide.count} derived from Lucide under the ISC License.`;
+        : `${data.total} icons. ${data.sources.prismata.count} original to Prismata, ${data.sources.lucide.count} derived from Lucide under the ISC License.`;
 
       const fragment = document.createDocumentFragment();
       for (const icon of matches.slice(0, 400)) {
@@ -61,13 +61,13 @@
         art.setAttribute('focusable', 'false');
         const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
         /* Original symbols live in the sprite; vendored icons are their own files. */
-        use.setAttribute('href', icon.source === 'crystal'
+        use.setAttribute('href', icon.source === 'prismata'
           ? `../assets/icons.svg#${icon.id}`
           : `${base}${icon.id}.svg#icon`);
         art.append(use);
 
         /* A sourced file has no internal id, so inline it instead of referencing one. */
-        if (icon.source !== 'crystal') {
+        if (icon.source !== 'prismata') {
           art.replaceChildren();
           fetch(`${base}${icon.id}.svg`).then((r) => r.text()).then((svg) => {
             const parsed = new DOMParser().parseFromString(svg, 'image/svg+xml').documentElement;

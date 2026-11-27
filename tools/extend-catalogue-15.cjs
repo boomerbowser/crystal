@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* Fifteenth catalogue extension: the travelling selection pill (C-M3, D-37).
  *
- * Meridian ruled D-37 (a) on 2 October 2026: one `.cr-indicator.pill` behind
+ * Meridian ruled D-37 (a) on 2 October 2026: one `.pr-indicator.pill` behind
  * the selected segment of every strip, moved by a new critically damped recipe
  * between measured positions, on tabs, the segmented control, the dock, bottom
  * navigation and toggle button groups, with selection staying label weight.
@@ -37,11 +37,11 @@ const FIELDS = [
   ['tabs', 'motion', ['tab-in'], ['tab-in', 'selection-travel']],
   ['tabs', 'material', 'Resin strip, primary fill on the selected tab', 'Resin strip, the primary pill behind the selected tab'],
   ['bottom-navigation', 'motion', ['selection'], ['selection-travel']],
-  ['bottom-navigation', 'crystal', 'Material, geometry, selection by label weight, safe-area inset', 'Material, geometry, selection by label weight with the pill behind it, safe-area inset'],
+  ['bottom-navigation', 'prismata', 'Material, geometry, selection by label weight, safe-area inset', 'Material, geometry, selection by label weight with the pill behind it, safe-area inset'],
   ['segmented-control', 'motion', ['selection'], ['selection-travel']],
   ['segmented-control', 'material', 'One Resin plane; primary fill on the selected segment', 'One Resin plane; the primary pill behind the selected segment'],
   ['button-group', 'motion', ['press'], ['press', 'selection-travel']],
-  ['button-group', 'crystal', 'The shared plane and interior separation', 'The shared plane and interior separation; as a toggle set, the pill behind the pressed button'],
+  ['button-group', 'prismata', 'The shared plane and interior separation', 'The shared plane and interior separation; as a toggle set, the pill behind the pressed button'],
 ];
 
 const problems = [];

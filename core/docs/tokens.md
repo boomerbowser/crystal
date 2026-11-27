@@ -1,13 +1,13 @@
 # Tokens
 
-Every value Crystal ships, generated from `core/tokens/crystal.tokens.json`, the W3C
+Every value Prismata ships, generated from `core/tokens/prismata.tokens.json`, the W3C
 Design Tokens (DTCG) source of truth. This page is written by
 `tools/build-reference.cjs`, and the next build overwrites any edit made here by hand.
 Edit the token file and run `npm run build`.
 
 ## How the three tiers work
 
-Crystal resolves a value through three tiers, and the direction is one way only:
+Prismata resolves a value through three tiers, and the direction is one way only:
 a component reads a semantic token, a semantic token reads a primitive, and nothing
 reads upward. A palette swap is therefore a change to one tier, with no search
 across the codebase.
@@ -440,7 +440,7 @@ Values that belong to one component family and would be wrong to reuse elsewhere
 | Token | Type | Value | Meaning |
 | --- | --- | --- | --- |
 | `component.action.radius` | dimension | `999px` | Action controls are pill-shaped, independent of the content radius |
-| `component.action.minTarget` | dimension | `48px` | Minimum interactive target. Above the 44px floor Crystal specifies, which this must never fall below. |
+| `component.action.minTarget` | dimension | `48px` | Minimum interactive target. Above the 44px floor Prismata specifies, which this must never fall below. |
 | `component.action.paddingBlock` | dimension | `15px` | Action control block padding |
 | `component.action.paddingInline` | dimension | `24px` | Action control inline padding |
 | `component.action.gap` | dimension | `9px` | Gap between an action's icon and its label |

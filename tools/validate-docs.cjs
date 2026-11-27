@@ -25,8 +25,8 @@ const expect = (where, needle, why) => {
   if (!doc(where).includes(needle)) failures.push(`docs/${where}: no mention of ${needle} — ${why}`);
 };
 
-/* Material recipe values. These are the numbers Crystal may never let drift. */
-const m = read('core/tokens/crystal.json').material;
+/* Material recipe values. These are the numbers Prismata may never let drift. */
+const m = read('core/tokens/prismata.json').material;
 const pct = v => `${Math.round(v * 100)}%`;
 for (const [needle, why] of [
   [`${m.acrylicBlur}px`, 'Frost diffusion (primitive.material.acrylicBlur)'],
@@ -69,11 +69,11 @@ expect('accessibility.md', checks.checks.toLocaleString(), 'the number of contra
    once still described the withdrawn 2/6/12/22 spreads (D-11). Every
    blur/spread pair the theme exports must appear in the sentence. */
 {
-  const theme = fs.readFileSync(path.join(ROOT, 'core/assets/crystal-theme.css'), 'utf8');
-  const ring = /--cr-focus-ring:\s*([^;]+);/.exec(theme);
+  const theme = fs.readFileSync(path.join(ROOT, 'core/assets/prismata-theme.css'), 'utf8');
+  const ring = /--pr-focus-ring:\s*([^;]+);/.exec(theme);
   const layers = ring ? ring[1].split(/,(?![^(]*\))/) : [];
   if (layers.length === 0) {
-    failures.push('core/assets/crystal-theme.css: no --cr-focus-ring to read, so the prose was not checked at all');
+    failures.push('core/assets/prismata-theme.css: no --pr-focus-ring to read, so the prose was not checked at all');
   }
   for (const layer of layers) {
     const halo = /^\s*0\s+0\s+(\d+)px\s+(\d+)px/.exec(layer);
@@ -90,7 +90,7 @@ expect('accessibility.md', checks.checks.toLocaleString(), 'the number of contra
         `a focus elevation layer the theme exports (offset ${lift[1]}px, blur ${lift[2]}px)`);
       continue;
     }
-    failures.push(`core/assets/crystal-theme.css: unreadable --cr-focus-ring layer "${layer.trim()}" — `
+    failures.push(`core/assets/prismata-theme.css: unreadable --pr-focus-ring layer "${layer.trim()}" — `
       + 'it is neither a halo nor an elevation layer, so nothing in the prose was held to it');
   }
 }

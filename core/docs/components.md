@@ -6,34 +6,34 @@ The package contains working CSS primitives and a bounded interactive reference.
 
 | Component | Anatomy and states | Included / application responsibility |
 |---|---|---|
-| Foundation | Opaque canvas and contextual gradients; light/dark | `.cr-plastic`; product chooses composition |
-| Haze content card | 80% fill, 1.95px feathered perimeter, radius, content depth | `.cr-haze`; use semantic article or button according to behavior |
-| Frost panel | Frosted surround, grain, Haze reading wells | `.cr-frost`; app supplies menu/sheet behavior and focus |
-| Resin toolbar | Single floating plane, protected label group, selected destination | `.cr-resin`, `.cr-dock` (a Resin pill, 9px padding, Haze perimeter, 7px when narrow), `.cr-dock-inner`; local preview switches actual scenes; app supplies routing |
-| Stone label backing | 55% light / 60% dark, 1.95px feather, crisp text | `.cr-stone`; `.cr-dock-inner` shares the recipe |
-| Mirage modal scrim | Dark tint with chromatic diffusion of the scene behind the active modal | `.cr-mirage` and dialog `::backdrop`; standalone paint requires real application modal behavior |
-| Action | Resin shell with the neutral Haze reading fill, optical pressure and light; hover/pressed/focus/disabled | `.cr-button`. Real action and progress/error handling are app-owned |
-| Primary action | The same control with its Haze reading fill in the primary colour and the tested ink on it | `.cr-button.primary`; `--cr-primary` on the fill, `--cr-on-primary` as the ink. Opt-in, so a button is emphatic only where an author chose it |
-| Quiet action | The same shell with no reading fill, so the label sits directly on the material | `.cr-button.quiet`; same semantics as any action |
+| Foundation | Opaque canvas and contextual gradients; light/dark | `.pr-plastic`; product chooses composition |
+| Haze content card | 80% fill, 1.95px feathered perimeter, radius, content depth | `.pr-haze`; use semantic article or button according to behavior |
+| Frost panel | Frosted surround, grain, Haze reading wells | `.pr-frost`; app supplies menu/sheet behavior and focus |
+| Resin toolbar | Single floating plane, protected label group, selected destination | `.pr-resin`, `.pr-dock` (a Resin pill, 9px padding, Haze perimeter, 7px when narrow), `.pr-dock-inner`; local preview switches actual scenes; app supplies routing |
+| Stone label backing | 55% light / 60% dark, 1.95px feather, crisp text | `.pr-stone`; `.pr-dock-inner` shares the recipe |
+| Mirage modal scrim | Dark tint with chromatic diffusion of the scene behind the active modal | `.pr-mirage` and dialog `::backdrop`; standalone paint requires real application modal behavior |
+| Action | Resin shell with the neutral Haze reading fill, optical pressure and light; hover/pressed/focus/disabled | `.pr-button`. Real action and progress/error handling are app-owned |
+| Primary action | The same control with its Haze reading fill in the primary colour and the tested ink on it | `.pr-button.primary`; `--pr-primary` on the fill, `--pr-on-primary` as the ink. Opt-in, so a button is emphatic only where an author chose it |
+| Quiet action | The same shell with no reading fill, so the label sits directly on the material | `.pr-button.quiet`; same semantics as any action |
 | Destructive action | Resin/Haze with independent danger boundary and explicit label | `.danger`; app supplies consequence-specific confirmation and recovery |
-| Text field | Visible label, state badge, glowing focus ring, validation, helper/error association | `.cr-input`; working native form example; app supplies validation rules |
-| Selection control | Explicit selected state plus text/mark | Native checkbox, radio and select, styled by `assets/crystal.css` as of 2.1.0, and the native switch (`input[type=checkbox][role=switch]`) as of 2.2.0. Where a library keeps the input hidden and draws the box itself, the box wears `.cr-choice` (`.radio` for a circle, `.outline` for the outlined box) as of 2.8.0; keyboard semantics must match the component |
-| Navigation entry | No material of its own; pill hit area; selection by label weight; current location by a flat primary dot on `aria-current`, inside the entry's own padding so the label never moves | `.cr-nav-item`, `.stacked` for a rail. Routing and the current-page state are app-owned |
-| Bare control | A control inside a coated surface: no fill, shadow, blur or pseudo-layers; target and focus ring kept | `.cr-bare`; the action itself is app-owned |
-| Drag handle | Grip glyph, grab cursor, lift while held | `.cr-drag-handle` with `aria-grabbed` or `data-dragging`; pointer capture, keyboard drag and drop validation are app-owned |
-| Resin panel | The Resin plane at the content radius | `.cr-resin.panel`; a floating window or wide control bar |
-| Range control | Visible label/value, keyboard adjustable range | Native `input[type=range]`, styled by `assets/crystal.css` as of 2.1.0, including its RTL track direction; product limits require domain validation |
-| Authored bubble | Haze, directional tight corner, optional author metadata | `.cr-bubble`, `.own`; app supplies content/Markdown semantics |
+| Text field | Visible label, state badge, glowing focus ring, validation, helper/error association | `.pr-input`; working native form example; app supplies validation rules |
+| Selection control | Explicit selected state plus text/mark | Native checkbox, radio and select, styled by `assets/prismata.css` as of 2.1.0, and the native switch (`input[type=checkbox][role=switch]`) as of 2.2.0. Where a library keeps the input hidden and draws the box itself, the box wears `.pr-choice` (`.radio` for a circle, `.outline` for the outlined box) as of 2.8.0; keyboard semantics must match the component |
+| Navigation entry | No material of its own; pill hit area; selection by label weight; current location by a flat primary dot on `aria-current`, inside the entry's own padding so the label never moves | `.pr-nav-item`, `.stacked` for a rail. Routing and the current-page state are app-owned |
+| Bare control | A control inside a coated surface: no fill, shadow, blur or pseudo-layers; target and focus ring kept | `.pr-bare`; the action itself is app-owned |
+| Drag handle | Grip glyph, grab cursor, lift while held | `.pr-drag-handle` with `aria-grabbed` or `data-dragging`; pointer capture, keyboard drag and drop validation are app-owned |
+| Resin panel | The Resin plane at the content radius | `.pr-resin.panel`; a floating window or wide control bar |
+| Range control | Visible label/value, keyboard adjustable range | Native `input[type=range]`, styled by `assets/prismata.css` as of 2.1.0, including its RTL track direction; product limits require domain validation |
+| Authored bubble | Haze, directional tight corner, optional author metadata | `.pr-bubble`, `.own`; app supplies content/Markdown semantics |
 | Composer surround | Frost frame and softened content well around protected input controls | CSS composition; no rich-text editor or delivery service is implemented |
-| Status badge | Independent ink/surface pair, symbol and visible label | `.cr-status` with `data-status`; 18px radius, 12px/18px padding, 36px floor, as the preview renders it; dynamic announcements are app-owned |
+| Status badge | Independent ink/surface pair, symbol and visible label | `.pr-status` with `data-status`; 18px radius, 12px/18px padding, 36px floor, as the preview renders it; dynamic announcements are app-owned |
 | Avatar | Circular image/initials, accessible identity when needed | Reference styling; app handles real identity, image failure and privacy |
 | Dialog | 80% feathered surface over Mirage; title, body and named actions | Working native HTML dialog example; Escape/focus return; app owns transactions |
-| Tooltip | Short supplemental text; never sole label | Frost (`.cr-frost`, R15e); working tooltip in the motion suite with focus, hover and Escape |
-| Menu/popover | Frost panel with Haze rows; keyboard navigation and dismissal | `.cr-frost` (R15e); working local menu and popover in the motion suite; production adoption still requires testing |
+| Tooltip | Short supplemental text; never sole label | Frost (`.pr-frost`, R15e); working tooltip in the motion suite with focus, hover and Escape |
+| Menu/popover | Frost panel with Haze rows; keyboard navigation and dismissal | `.pr-frost` (R15e); working local menu and popover in the motion suite; production adoption still requires testing |
 | Drawer/sheet | Overlay support with label, close, focus management | Working modal inspector in the motion suite; app decides production modality |
 | Table/list | Soft content panel, clear header relationships, explicit sort/filter states | Native table in contrast report; production data controls not implemented |
 | Tabs | Labeled selected item with keyboard pattern matching actual semantics | Working ARIA tabs in the motion suite; scene navigation separately uses pressed buttons |
-| Notification/toast | Clear result plus useful next action; Frost panel with Haze reading fill | `.cr-frost` (R15e); manually dismissed notification in the motion suite; production queue remains app-owned |
+| Notification/toast | Clear result plus useful next action; Frost panel with Haze reading fill | `.pr-frost` (R15e); manually dismissed notification in the motion suite; production queue remains app-owned |
 | Loading | Preserve layout, communicate pending work, no false success | Specification only; user-triggered work needs real lifecycle state |
 | Empty/error/denied | Explain situation and a valid next step | Specification only; must reflect actual service/permission state |
 | Chart/data visualization | Direct labels, pattern/shape, accessible equivalent | Specification only; brand palettes are not prevalidated chart palettes |
@@ -68,70 +68,70 @@ Maintain a production Storybook or equivalent gallery for actual components with
 
 ## Resin interaction and information surfaces
 
-Buttons, action links, tabs, selectable controls and field shells use Resin as their interaction surface, with Haze reading protection inside a visible Resin perimeter. On the primary action that reading fill is the primary colour, and the perimeter is the ordinary glass rim: `--cr-primary` on the fill and `--cr-on-primary` as the ink. That is the palette's own tested pair, and it measures 4.74 to 10.31 against the rendered composite across all six palettes and both modes. The fill is opaque there where the neutral one is 80%, and that is the only deviation in this recipe. An 80% fill transmits a fifth of what is behind it. White over a light page is still white, so the neutral pad loses nothing. A mid-tone primary at 80% over the Resin shell composites to a washed-out lilac, at the luminance where neither a white nor a near-black label clears 4.5: 3.37 to 4.55 with `onPrimary` and 2.95 to 5.06 with `text`, failing in every light palette. The reading fill exists to make the label independent of the backdrop, so the primary fill is opaque.
+Buttons, action links, tabs, selectable controls and field shells use Resin as their interaction surface, with Haze reading protection inside a visible Resin perimeter. On the primary action that reading fill is the primary colour, and the perimeter is the ordinary glass rim: `--pr-primary` on the fill and `--pr-on-primary` as the ink. That is the palette's own tested pair, and it measures 4.74 to 10.31 against the rendered composite across all six palettes and both modes. The fill is opaque there where the neutral one is 80%, and that is the only deviation in this recipe. An 80% fill transmits a fifth of what is behind it. White over a light page is still white, so the neutral pad loses nothing. A mid-tone primary at 80% over the Resin shell composites to a washed-out lilac, at the luminance where neither a white nor a near-black label clears 4.5: 3.37 to 4.55 with `onPrimary` and 2.95 to 5.06 with `text`, failing in every light palette. The reading fill exists to make the label independent of the backdrop, so the primary fill is opaque.
 
-**A quiet button has no reading fill.** It keeps the whole Resin shell (rim, float shadow and sheen) and drops the pad, so it is the only variant that is glass all the way through. Without the pad, a quiet label reads against the Resin fill and therefore against whatever is behind the control. On Crystal's own foundation the margin is wide: `--cr-text` over the Resin fill over canvas, surface, surface-alt and foundation measures 10.88 to 18.28 across all six palettes and both modes. A quiet button placed over artwork has no protected ground, so avoid that composition. The recipe is in `assets/crystal.css`, in `@layer crystal.component`: a Resin fill with a rim and a float shadow, a `::before` carrying the inset Haze fill at the material's feather, and a `::after` carrying the optical sheen from `--cr-control-color` and `--cr-control-light`. Both pseudo-elements are dropped under reduced transparency and under forced colours.
+**A quiet button has no reading fill.** It keeps the whole Resin shell (rim, float shadow and sheen) and drops the pad, so it is the only variant that is glass all the way through. Without the pad, a quiet label reads against the Resin fill and therefore against whatever is behind the control. On Prismata's own foundation the margin is wide: `--pr-text` over the Resin fill over canvas, surface, surface-alt and foundation measures 10.88 to 18.28 across all six palettes and both modes. A quiet button placed over artwork has no protected ground, so avoid that composition. The recipe is in `assets/prismata.css`, in `@layer prismata.component`: a Resin fill with a rim and a float shadow, a `::before` carrying the inset Haze fill at the material's feather, and a `::after` carrying the optical sheen from `--pr-control-color` and `--pr-control-light`. Both pseudo-elements are dropped under reduced transparency and under forced colours.
 
-The recipe is not in `assets/controls.css`, which is the documentation site's stylesheet and is not in the package. The field shell is markup a product wraps around a native field, `<span class="cr-field-shell">` around the `<input>`, and it adds no semantics of its own. Labels, input values, validation and form submission remain native.
+The recipe is not in `assets/controls.css`, which is the documentation site's stylesheet and is not in the package. The field shell is markup a product wraps around a native field, `<span class="pr-field-shell">` around the `<input>`, and it adds no semantics of its own. Labels, input values, validation and form submission remain native.
 
-Small display elements that sit on content (labels, tags, badges and keyboard caps) use `.cr-resin-haze`. This is a reusable composition of existing materials, not a seventh material. Transient overlays (tooltips, toasts, menus, dropdowns, flyouts and popovers) are **Frost** (`.cr-frost`), at Meridian's direction (R15e). A surface that opens over content is an intermediate panel rather than a compact control, and its reading content sits on Haze inside it. Larger persistent components retain their structural material. Native OS popup internals are platform-owned; use an actual accessible custom component when full Crystal popup rendering is required.
+Small display elements that sit on content (labels, tags, badges and keyboard caps) use `.pr-resin-haze`. This is a reusable composition of existing materials, not a seventh material. Transient overlays (tooltips, toasts, menus, dropdowns, flyouts and popovers) are **Frost** (`.pr-frost`), at Meridian's direction (R15e). A surface that opens over content is an intermediate panel rather than a compact control, and its reading content sits on Haze inside it. Larger persistent components retain their structural material. Native OS popup internals are platform-owned; use an actual accessible custom component when full Prismata popup rendering is required.
 
 Selected controls carry correct ARIA state and label weight; a circular badge marks activity or information, never selection. Disabled controls retain legible content but cannot activate. Opaque and forced-color modes replace decorative optics while preserving control boundaries. Motion uses material deformation and changing light, with crisp foreground text.
 
 ### Every component names its surface
 
-The catalogue gives every one of its components a **surface**, which is the material composition it is made of, from the closed vocabulary in `tokens/surfaces.json`. Each surface is one recipe in `assets/crystal.css`. The build refuses a component naming a surface with no recipe, so the catalogue cannot specify a material Crystal has not published. The vocabulary is listed, with counts, at the top of the [catalogue](catalogue.html#surfaces). Four of its entries arrived in 2.2.0, because a consumer had reached for them and not found them:
+The catalogue gives every one of its components a **surface**, which is the material composition it is made of, from the closed vocabulary in `tokens/surfaces.json`. Each surface is one recipe in `assets/prismata.css`. The build refuses a component naming a surface with no recipe, so the catalogue cannot specify a material Prismata has not published. The vocabulary is listed, with counts, at the top of the [catalogue](catalogue.html#surfaces). Four of its entries arrived in 2.2.0, because a consumer had reached for them and not found them:
 
 | Surface | Recipe | What it is |
 |---|---|---|
-| Navigation entry | `.cr-nav-item`, `.stacked` for a rail | Furniture on the panel beneath it: no material of its own, pill hit area, 44px target, selection by label weight (650 to 800), and current location by a 6px primary dot on `aria-current` only. The dot never appears on `aria-selected` or `aria-pressed`, which are selection. The dot is flat (no material, no elevation) and sits in the entry's inline-start padding, so the label does not move. The recipe is lifted from this site's own side menu, which this page names as the reference implementation of selection. The catalogue added the dot (D-22). |
-| Bare control | `.cr-bare` | A control inside a surface that already has a coat: a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows or a dismiss button. Crystal paints every `<button>` by element in five layers; this removes all five and keeps the target and the focus ring. |
-| Drag handle | `.cr-drag-handle` | A bare control with a grip and a lift while `aria-grabbed` or `data-dragging` is set. Pointer capture, the keyboard alternative and drop validation are the product's. |
-| Resin panel | `.cr-resin.panel` | The Resin plane with the content radius instead of the pill, for a floating window or a wide control bar. |
+| Navigation entry | `.pr-nav-item`, `.stacked` for a rail | Furniture on the panel beneath it: no material of its own, pill hit area, 44px target, selection by label weight (650 to 800), and current location by a 6px primary dot on `aria-current` only. The dot never appears on `aria-selected` or `aria-pressed`, which are selection. The dot is flat (no material, no elevation) and sits in the entry's inline-start padding, so the label does not move. The recipe is lifted from this site's own side menu, which this page names as the reference implementation of selection. The catalogue added the dot (D-22). |
+| Bare control | `.pr-bare` | A control inside a surface that already has a coat: a disclosure chevron, a chip's remove button, a sort header, a stepper's arrows or a dismiss button. Prismata paints every `<button>` by element in five layers; this removes all five and keeps the target and the focus ring. |
+| Drag handle | `.pr-drag-handle` | A bare control with a grip and a lift while `aria-grabbed` or `data-dragging` is set. Pointer capture, the keyboard alternative and drop validation are the product's. |
+| Resin panel | `.pr-resin.panel` | The Resin plane with the content radius instead of the pill, for a floating window or a wide control bar. |
 
 Five more arrived in 2.3.0, each from a ruling of 29 September 2026 on something a consumer had reached for and not found:
 
 | Surface | Recipe | What it is |
 |---|---|---|
-| Group | `.cr-group`, `.vertical` to stack | A new surface in the vocabulary. A button group and a split button are one Resin plane whose controls touch: one pill outside, the interior corners square against their neighbours, a hairline in `--cr-edge` between. The children keep their fill and give up their own elevation and diffusion, because the plane is the group's. A dock spaces its controls apart; a group does not. |
-| Dock controls that are not buttons | `.cr-dock` | The dock reaches `[role=tab]` (selected by `aria-selected`), a `label` holding a radio (selected by `:checked`, its focus ring drawn on the label) and a link (current by `aria-current`), with the dock button's values. Every selector is inside `:where()`, so nothing a consumer already sits against changes specificity. |
-| Dialog body | `.cr-dialog-body`, with `.cr-scroll-frost` | The dialog's surface does not scroll; its body does, so a tall dialog keeps its title in view and takes the edge fade without dissolving its own fill. Give the body `tabindex="0"` and a name when it scrolls, so a keyboard can reach and scroll it. A dialog written without a body still scrolls its surface. `position: fixed` applies to a native `dialog.cr-dialog` only, which the browser centres; on any other element the host positions the surface. |
-| Recessed overlay | `.cr-haze.overlay` | A menu, popover or listbox opened inside a pane that is already lifted. On the page a transient overlay is Frost; inside a Haze dialog or a Frost panel it recesses into Haze, and plain Haze has no edge. This is a flat Haze fill with the `--cr-edge` rim and the content shadow, and no feather. |
-| Count | `.cr-resin-haze.count` | The compact display sized for a count: a 20px circle that grows to a pill with its digits, filled to its own edge, with no block padding. With the tag's 8px Haze inset and 17px block padding a count badge is 55px tall. |
+| Group | `.pr-group`, `.vertical` to stack | A new surface in the vocabulary. A button group and a split button are one Resin plane whose controls touch: one pill outside, the interior corners square against their neighbours, a hairline in `--pr-edge` between. The children keep their fill and give up their own elevation and diffusion, because the plane is the group's. A dock spaces its controls apart; a group does not. |
+| Dock controls that are not buttons | `.pr-dock` | The dock reaches `[role=tab]` (selected by `aria-selected`), a `label` holding a radio (selected by `:checked`, its focus ring drawn on the label) and a link (current by `aria-current`), with the dock button's values. Every selector is inside `:where()`, so nothing a consumer already sits against changes specificity. |
+| Dialog body | `.pr-dialog-body`, with `.pr-scroll-frost` | The dialog's surface does not scroll; its body does, so a tall dialog keeps its title in view and takes the edge fade without dissolving its own fill. Give the body `tabindex="0"` and a name when it scrolls, so a keyboard can reach and scroll it. A dialog written without a body still scrolls its surface. `position: fixed` applies to a native `dialog.pr-dialog` only, which the browser centres; on any other element the host positions the surface. |
+| Recessed overlay | `.pr-haze.overlay` | A menu, popover or listbox opened inside a pane that is already lifted. On the page a transient overlay is Frost; inside a Haze dialog or a Frost panel it recesses into Haze, and plain Haze has no edge. This is a flat Haze fill with the `--pr-edge` rim and the content shadow, and no feather. |
+| Count | `.pr-resin-haze.count` | The compact display sized for a count: a 20px circle that grows to a pill with its digits, filled to its own edge, with no block padding. With the tag's 8px Haze inset and 17px block padding a count badge is 55px tall. |
 
 The media and text recipes of 2.4.0 add no surface. Each is a selector on a surface the vocabulary already has, so no platform gains a material; it gains the geometry. Each links to its specimen [below](#media-and-text).
 
 | Recipe | Surface | What it is |
 |---|---|---|
-| [Media stage](#specimen-media-stage) `.cr-media` | none of its own | The picture's frame: the content radius, a `--cr-surface-alt` letterbox, and the aspect ratio the product sets in `--cr-media-aspect` (unset keeps the media's own; `16 / 9`, `4 / 3`, `1`, `9 / 16`), so the page does not jump when the first frame decodes. `--cr-media-fit` is `contain`, so nothing is cropped unless the product asks for `cover`. In full screen the radius goes to 0. |
-| [Transport](#specimen-media-stage) `.cr-resin.transport` in `.cr-media-bar` | Resin plane | A Resin pill with 4px block and 12px inline padding around the 48px action targets, 58px tall with its rim. The bar is inset 12px from the stage, or the safe area in full screen, so the pill never meets the content radius. The time readouts are tabular, on their own Haze pills, in body ink. Below 420px of player width the bar wraps its trailing controls onto a second row. |
-| [Caption cue](#specimen-media-stage) `.cr-media-caption`, `::cue` | Stone label backing | A cue is a label over a moving picture, so it sits on Stone, above the transport and never under it: 12px above the bar whether or not the bar is shown, so it does not jump when a pointer arrives. `.cr-media-caption` is the feathered backing for a library that renders cues itself; `::cue` gives the browser's own renderer the flat Stone fill, because it accepts no pseudo-element. |
-| [Audio card](#specimen-media-audio) `.cr-haze.cr-media.audio` | Haze reading surface | The audio player has no picture, so the stage becomes a Haze card with the 20px card padding, holding the title, a secondary line and the transport. |
-| [Selection toolbar](#specimen-text-marks) `.cr-frost.bar` | Frost panel | A transient overlay shaped as a row of controls: a pill with 4px padding, for the commonest marks over highlighted text. It is Frost because every transient overlay is (R15e). |
-| [Prose and the editor](#specimen-text-editor) `.cr-prose`, `.cr-editor`, `.cr-editor-toolbar` | Field shell, when editing | One reading vocabulary for a document while it is written and after it is published: 24px between blocks, headings stepping down the type scale, muted list markers, a primary-soft rule on a quotation, checklists of native checkboxes, and marks that each differ in shape as well as colour. A field shell holding an editor becomes a column at the content radius. Its toolbar sits above the text on a fine pointer, and below it on a coarse one, clear of the on-screen keyboard, on the Haze fill so the document scrolling under it does not show through. `.below` and `.above` fix the placement on any pointer; the pointer still decides whether the controls wrap or scroll in one row. An empty editor holds four lines. |
+| [Media stage](#specimen-media-stage) `.pr-media` | none of its own | The picture's frame: the content radius, a `--pr-surface-alt` letterbox, and the aspect ratio the product sets in `--pr-media-aspect` (unset keeps the media's own; `16 / 9`, `4 / 3`, `1`, `9 / 16`), so the page does not jump when the first frame decodes. `--pr-media-fit` is `contain`, so nothing is cropped unless the product asks for `cover`. In full screen the radius goes to 0. |
+| [Transport](#specimen-media-stage) `.pr-resin.transport` in `.pr-media-bar` | Resin plane | A Resin pill with 4px block and 12px inline padding around the 48px action targets, 58px tall with its rim. The bar is inset 12px from the stage, or the safe area in full screen, so the pill never meets the content radius. The time readouts are tabular, on their own Haze pills, in body ink. Below 420px of player width the bar wraps its trailing controls onto a second row. |
+| [Caption cue](#specimen-media-stage) `.pr-media-caption`, `::cue` | Stone label backing | A cue is a label over a moving picture, so it sits on Stone, above the transport and never under it: 12px above the bar whether or not the bar is shown, so it does not jump when a pointer arrives. `.pr-media-caption` is the feathered backing for a library that renders cues itself; `::cue` gives the browser's own renderer the flat Stone fill, because it accepts no pseudo-element. |
+| [Audio card](#specimen-media-audio) `.pr-haze.pr-media.audio` | Haze reading surface | The audio player has no picture, so the stage becomes a Haze card with the 20px card padding, holding the title, a secondary line and the transport. |
+| [Selection toolbar](#specimen-text-marks) `.pr-frost.bar` | Frost panel | A transient overlay shaped as a row of controls: a pill with 4px padding, for the commonest marks over highlighted text. It is Frost because every transient overlay is (R15e). |
+| [Prose and the editor](#specimen-text-editor) `.pr-prose`, `.pr-editor`, `.pr-editor-toolbar` | Field shell, when editing | One reading vocabulary for a document while it is written and after it is published: 24px between blocks, headings stepping down the type scale, muted list markers, a primary-soft rule on a quotation, checklists of native checkboxes, and marks that each differ in shape as well as colour. A field shell holding an editor becomes a column at the content radius. Its toolbar sits above the text on a fine pointer, and below it on a coarse one, clear of the on-screen keyboard, on the Haze fill so the document scrolling under it does not show through. `.below` and `.above` fix the placement on any pointer; the pointer still decides whether the controls wrap or scroll in one row. An empty editor holds four lines. |
 
-A native switch is a checkbox with a track, `<input type="checkbox" role="switch">`, styled by element like the checkbox and radio. The track reads `--cr-switch-track-width` and `-height`, the thumb is the opaque surface, and the on state is the primary-soft pair.
+A native switch is a checkbox with a track, `<input type="checkbox" role="switch">`, styled by element like the checkbox and radio. The track reads `--pr-switch-track-width` and `-height`, the thumb is the opaque surface, and the on state is the primary-soft pair.
 
-The material variants of 2.7.0 add no surface either. Each was a surface a platform library had drawn by hand because Crystal had not published it; ruled on 16 November 2026, those are corrections the standard takes in, and where a library's surface had drifted from the base recipe the drift is published as a named variant. Each variant states only what differs from the surface it modifies, so the base recipe's opaque, reduced-transparency, no-backdrop and forced-colours routes still apply to everything else, and each variant that restates a fill or a border carries its own routes. A variant is the surface compound plus one class, authored in the component layer, so on a `<button>` it beats the Resin coat on what it states; a control that must lose the whole coat wears `.cr-bare` as well.
+The material variants of 2.7.0 add no surface either. Each was a surface a platform library had drawn by hand because Prismata had not published it; ruled on 16 November 2026, those are corrections the standard takes in, and where a library's surface had drifted from the base recipe the drift is published as a named variant. Each variant states only what differs from the surface it modifies, so the base recipe's opaque, reduced-transparency, no-backdrop and forced-colours routes still apply to everything else, and each variant that restates a fill or a border carries its own routes. A variant is the surface compound plus one class, authored in the component layer, so on a `<button>` it beats the Resin coat on what it states; a control that must lose the whole coat wears `.pr-bare` as well.
 
 | Variant | Surface | What it is |
 |---|---|---|
-| `.cr-haze.inset` | Haze reading surface | A reading card with no border box: the feathered fill stops `--cr-haze-inset` (8px) short of the box, with no shadow under it. An alert, an empty state, a result, a product or cart card, a review, a chart's plot. Forced colours draw a CanvasText boundary. |
-| `.cr-haze.flush` | Haze reading surface | The same card filled to its own edge, for a tile whose content is the card: a thumbnail, a slide, an organisation chart's node, a swatch. |
-| `.cr-haze.flat`, `.flat.sunken` | Haze reading surface | The fill on the element itself, with no feather and no layer: a row in a list or an accordion, drawn edge to edge against its neighbours. It becomes the surface where translucency gives way; `.sunken` becomes the alternate surface instead, for a placeholder that should still read as a well. |
-| `.cr-haze.raised` | Haze reading surface | The fill takes the float shadow, as the dialog's does: a reading surface opened over everything, such as a command palette. |
-| `.cr-frost.pane` | Frost panel | The content radius, 28px, instead of the panel's 34px, for a pane beside content: a navigation rail, a filter panel, a tour step, a workspace pane. |
-| `.cr-frost.flat` | Frost panel | No grain, for a pane holding a long column of controls or rows. Composes with `.pane`, `.docked` and `.sheet`. |
-| `.cr-frost.docked` | Frost panel | A pane docked to the window's edges, such as an app bar or a sidebar: no rim, radius or shadow. The side it shares with content is the component's to draw. |
-| `.cr-frost.sheet` | Frost panel | A pane that slides over content from an edge, such as a drawer: the `--cr-edge` rim, the content radius and the float shadow. Which corners square off against the edge is the component's geometry. |
-| `.cr-frost.reading` | Frost panel | A transient Frost surface whose content is read, such as a toast or a popover, holding a Haze reading fill on `::after`, because `::before` is the grain. The inset is `--cr-frost-reading-inset`, which defaults to `--cr-haze-inset`; set the former, never the latter, because controls inside read `--cr-haze-inset` for their own pads. |
-| `.cr-resin.flat` | Resin plane | No sheen: a plane that is a mark rather than a control, such as a step or timeline marker. |
-| `.cr-resin.divider` | Resin plane | The handle between resizable regions: the Resin fill and blur only, with no rim, shadow or sheen. Where the fill gives way it becomes the outline colour, so the line stays visible on the surface it divides, and CanvasText in forced colours. |
-| `.cr-field-shell.block` | Field shell | The shell as a block that fills its row, for a field laid out in a form rather than set in a line of text. |
-| `.cr-choice`, `.radio` | Selection control | The native checkbox's box on any element, for a library that keeps the input hidden and draws the box itself (2.8.0). A switch's track is the same box at the track's size with the pill radius. The mark and the selected colour are the component's. |
-| `.cr-choice.outline` | Selection control | The outlined box: the `--cr-outline` boundary, the plain Resin fill and a single inset rim (2.8.0). In opaque mode and under reduced transparency every choice box, native or not, becomes the surface with no backdrop. |
+| `.pr-haze.inset` | Haze reading surface | A reading card with no border box: the feathered fill stops `--pr-haze-inset` (8px) short of the box, with no shadow under it. An alert, an empty state, a result, a product or cart card, a review, a chart's plot. Forced colours draw a CanvasText boundary. |
+| `.pr-haze.flush` | Haze reading surface | The same card filled to its own edge, for a tile whose content is the card: a thumbnail, a slide, an organisation chart's node, a swatch. |
+| `.pr-haze.flat`, `.flat.sunken` | Haze reading surface | The fill on the element itself, with no feather and no layer: a row in a list or an accordion, drawn edge to edge against its neighbours. It becomes the surface where translucency gives way; `.sunken` becomes the alternate surface instead, for a placeholder that should still read as a well. |
+| `.pr-haze.raised` | Haze reading surface | The fill takes the float shadow, as the dialog's does: a reading surface opened over everything, such as a command palette. |
+| `.pr-frost.pane` | Frost panel | The content radius, 28px, instead of the panel's 34px, for a pane beside content: a navigation rail, a filter panel, a tour step, a workspace pane. |
+| `.pr-frost.flat` | Frost panel | No grain, for a pane holding a long column of controls or rows. Composes with `.pane`, `.docked` and `.sheet`. |
+| `.pr-frost.docked` | Frost panel | A pane docked to the window's edges, such as an app bar or a sidebar: no rim, radius or shadow. The side it shares with content is the component's to draw. |
+| `.pr-frost.sheet` | Frost panel | A pane that slides over content from an edge, such as a drawer: the `--pr-edge` rim, the content radius and the float shadow. Which corners square off against the edge is the component's geometry. |
+| `.pr-frost.reading` | Frost panel | A transient Frost surface whose content is read, such as a toast or a popover, holding a Haze reading fill on `::after`, because `::before` is the grain. The inset is `--pr-frost-reading-inset`, which defaults to `--pr-haze-inset`; set the former, never the latter, because controls inside read `--pr-haze-inset` for their own pads. |
+| `.pr-resin.flat` | Resin plane | No sheen: a plane that is a mark rather than a control, such as a step or timeline marker. |
+| `.pr-resin.divider` | Resin plane | The handle between resizable regions: the Resin fill and blur only, with no rim, shadow or sheen. Where the fill gives way it becomes the outline colour, so the line stays visible on the surface it divides, and CanvasText in forced colours. |
+| `.pr-field-shell.block` | Field shell | The shell as a block that fills its row, for a field laid out in a form rather than set in a line of text. |
+| `.pr-choice`, `.radio` | Selection control | The native checkbox's box on any element, for a library that keeps the input hidden and draws the box itself (2.8.0). A switch's track is the same box at the track's size with the pill radius. The mark and the selected colour are the component's. |
+| `.pr-choice.outline` | Selection control | The outlined box: the `--pr-outline` boundary, the plain Resin fill and a single inset rim (2.8.0). In opaque mode and under reduced transparency every choice box, native or not, becomes the surface with no backdrop. |
 
-Two existing recipes changed in 2.7.0. `.cr-mirage` and a dialog's `::backdrop` now take the flat fallback fill with no backdrop filter under `[data-effects=opaque]`, as they already did under reduced transparency; before, the opaque setting left the largest translucent area on screen translucent. And `.cr-bare`, `.cr-nav-item` and `.cr-drag-handle` on a `<button>` now stay transparent under `[data-effects=opaque]`: the coat's opaque route had outranked them, drawing the surface behind a bare control and erasing the drag handle's grip.
+Two existing recipes changed in 2.7.0. `.pr-mirage` and a dialog's `::backdrop` now take the flat fallback fill with no backdrop filter under `[data-effects=opaque]`, as they already did under reduced transparency; before, the opaque setting left the largest translucent area on screen translucent. And `.pr-bare`, `.pr-nav-item` and `.pr-drag-handle` on a `<button>` now stay transparent under `[data-effects=opaque]`: the coat's opaque route had outranked them, drawing the surface behind a bare control and erasing the drag handle's grip.
 
 ### Interaction surface geometry
 
@@ -151,7 +151,7 @@ When adapting controls to different sizes, preserve enough exposed Resin to show
 
 ## Rounded icon set
 
-Use the local `assets/icons.svg` symbol library: `crystal`, `layers`, `document`, `directions`, `workspace`, `conversation`, `library`, `check`, `attention`, `alert`, `info`, `sparkle` and `chevron`. Icons use a 24px view box, 1.8px strokes, round caps and joins, and curved silhouettes. Documents, speech tails, books and geometric marks have rounded path geometry rather than merely rounded stroke joins. Keep icons sharp; do not apply material feathering to them.
+Use the local `assets/icons.svg` symbol library: `prismata`, `layers`, `document`, `directions`, `workspace`, `conversation`, `library`, `check`, `attention`, `alert`, `info`, `sparkle` and `chevron`. Icons use a 24px view box, 1.8px strokes, round caps and joins, and curved silhouettes. Documents, speech tails, books and geometric marks have rounded path geometry rather than merely rounded stroke joins. Keep icons sharp; do not apply material feathering to them.
 
 ```html
 <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
@@ -170,15 +170,15 @@ Focus uses an immediate 2px primary-color core at a 3px offset, surrounded by a 
 
 In dark mode the feather alphas lift, to 56 / 38 / 22 / 11 against light's 46 / 30 / 17 / 8. A deep canvas swallows the falloff at the lighter values, so the ring reads as a hard edge with nothing around it. Blur, spread and the elevation layers are identical in both modes.
 
-The four feather colors are published as `--cr-focus-feather-1` through `-4` and the broad shadow as `--cr-focus-shadow`, so a product can retint the falloff without restating the recipe. The single token `--cr-focus-ring` composes all six layers so every focusable surface shares one recipe. The core remains defined for visibility; text and icons are never blurred. Keyboard focus applies to all interactive elements. Text entry lights its Resin shell through `:focus-within`. Motion must neither delay nor remove the focus cue. Forced colors substitute a system Highlight outline and remove decorative shadows.
+The four feather colors are published as `--pr-focus-feather-1` through `-4` and the broad shadow as `--pr-focus-shadow`, so a product can retint the falloff without restating the recipe. The single token `--pr-focus-ring` composes all six layers so every focusable surface shares one recipe. The core remains defined for visibility; text and icons are never blurred. Keyboard focus applies to all interactive elements. Text entry lights its Resin shell through `:focus-within`. Motion must neither delay nor remove the focus cue. Forced colors substitute a system Highlight outline and remove decorative shadows.
 
-A `.cr-indicator` is a 20px circle painting an 80% Haze fill on an isolated layer with a 1px feather. It is Haze rather than Resin, for the reason given under [Indicators](#indicators). Field badges are 24px. Their foreground remains crisp and uses the tested body ink. They sit beside the content, never over text or a native select arrow. These are informational, non-interactive marks and are not click targets.
+A `.pr-indicator` is a 20px circle painting an 80% Haze fill on an isolated layer with a 1px feather. It is Haze rather than Resin, for the reason given under [Indicators](#indicators). Field badges are 24px. Their foreground remains crisp and uses the tested body ink. They sit beside the content, never over text or a native select arrow. These are informational, non-interactive marks and are not click targets.
 
 <!-- generated:focus-recipe -->
 
 | Layer | Blur | Spread | Role |
 |---|---|---|---|
-| `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | None | None | The crisp core. Never feathered, and the only part that survives forced colours. |
+| `outline: 2px solid var(--pr-focus-core)` at `outline-offset: 3px` | None | None | The crisp core. Never feathered, and the only part that survives forced colours. |
 | Halo 1 | 6px | 1px | 46% of the primary colour |
 | Halo 2 | 16px | 3px | 30% of the primary colour |
 | Halo 3 | 30px | 6px | 17% of the primary colour |
@@ -187,17 +187,17 @@ A `.cr-indicator` is a 20px circle painting an 80% Haze fill on an isolated laye
 | Elevation 2 | 40px | None | 27% of the decorative colour, offset 22px: the broad lift |
 <!-- /generated:focus-recipe -->
 
-Every layer is read from `--cr-focus-ring` in the library's own exported theme, so this
+Every layer is read from `--pr-focus-ring` in the library's own exported theme, so this
 table cannot disagree with what ships. The preview site's `assets/controls.css` is a
 stylesheet the package does not contain, and the table must not be read from it. The core
 is never feathered and the offset is never zero: a ring drawn *on* the border is hard to
 tell from a hover state, and on a pill it reads as a thicker stroke rather than as focus.
 
-A check mark is reserved for validation and information display: the status badges in `.cr-status` and a checkbox's own `:checked` indicator. It never marks a selected, pressed or focused control. Selection instead uses a heavier label weight, which changes no metric that would reflow the group. Round specimen swatches, which cannot carry a weight change, use an inset ring gap.  Ordinary prose links retain their link styling. Badges are `aria-hidden`: the real control supplies its accessible name, required/invalid/selected/busy state and error association. The visual symbol never gets appended to the control's text content. Native checkbox/radio indicators and functional labels remain intact. Small controls retain full-sized hit targets. Badges have solid, unblurred alternatives under reduced transparency and forced colors.
+A check mark is reserved for validation and information display: the status badges in `.pr-status` and a checkbox's own `:checked` indicator. It never marks a selected, pressed or focused control. Selection instead uses a heavier label weight, which changes no metric that would reflow the group. Round specimen swatches, which cannot carry a weight change, use an inset ring gap.  Ordinary prose links retain their link styling. Badges are `aria-hidden`: the real control supplies its accessible name, required/invalid/selected/busy state and error association. The visual symbol never gets appended to the control's text content. Native checkbox/radio indicators and functional labels remain intact. Small controls retain full-sized hit targets. Badges have solid, unblurred alternatives under reduced transparency and forced colors.
 
 ## Geometry
 
-Crystal has exactly two control shapes, and what the control is decides which one applies.
+Prismata has exactly two control shapes, and what the control is decides which one applies.
 How the control looks in a particular layout does not.
 
 **Action controls are pill-shaped.** Buttons, icon buttons, segmented controls, chips,
@@ -206,7 +206,7 @@ menu entries and tabs use a fully rounded radius, as does anything else whose jo
 field or a container.
 
 **Card-shaped buttons keep the content radius.** A control that is a tappable object (a
-project tile, a palette swatch card or a library item) keeps `--cr-radius` (28px by
+project tile, a palette swatch card or a library item) keeps `--pr-radius` (28px by
 default). These are the exception and they are recognisable, because the user is choosing
 a thing and is not triggering an action.
 
@@ -214,8 +214,8 @@ There is no third shape: a button with an 8px or 12px radius is neither shape an
 defect.
 
 <div class="sample-row" markdown="1">
-<button class="cr-button" type="button">Pill action</button>
-<button class="cr-control" type="button">Pill control</button>
+<button class="pr-button" type="button">Pill action</button>
+<button class="pr-control" type="button">Pill control</button>
 </div>
 
 The pill radius is a token: `component.action.radius` resolves through
@@ -230,8 +230,8 @@ There are six layers in total, and each has a role:
 
 | Layer | Role |
 | --- | --- |
-| `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | The crisp core. It shows focus at a glance and it survives forced colours. |
-| `inset 0 2px 1px var(--cr-rim)` | Keeps the control's own top edge readable inside the ring. |
+| `outline: 2px solid var(--pr-focus-core)` at `outline-offset: 3px` | The crisp core. It shows focus at a glance and it survives forced colours. |
+| `inset 0 2px 1px var(--pr-rim)` | Keeps the control's own top edge readable inside the ring. |
 | 4 × feathered primary glows at 6/1, 16/3, 30/6 and 54/11 | The halo. Increasing blur at decreasing opacity, so the ring dissolves outward rather than ending on a hard edge. |
 
 Each pair is blur radius / spread. The spread values were halved in September 2026 and the blur radii were left unchanged. Halving both produces a tighter ring with a harder edge, which is different from a thinner ring.
@@ -254,16 +254,16 @@ focused state, or it reduces the recipe to a bare outline:
 
 ### When the ring is drawn
 
-A focus ring is for someone moving through the interface with the keyboard. Drawn after a click it is noise around the thing the person is already looking at, and on a field or a palette it stays for as long as they type. Browsers decide `:focus-visible` element by element and count a text field, and anything focused by script after a click (the list a select opens, a palette's field), as focus-visible whatever put focus there. So Crystal decides for itself, as of 2.10.0.
+A focus ring is for someone moving through the interface with the keyboard. Drawn after a click it is noise around the thing the person is already looking at, and on a field or a palette it stays for as long as they type. Browsers decide `:focus-visible` element by element and count a text field, and anything focused by script after a click (the list a select opens, a palette's field), as focus-visible whatever put focus there. So Prismata decides for itself, as of 2.10.0.
 
-`core/modality.js` records how the person is interacting, on the document element, as `data-crystal-modality`: `pointer` after a pointer is pressed, `keyboard` after Tab, F6, F10, or a navigation key (an arrow, Home, End, Page Up or Down, Enter, Space, Escape) outside a text field. Typing, an arrow that moves a caret, and a shortcut held with a modifier change nothing, so a field clicked into does not grow a ring at the first letter. Every rule that draws a ring stands behind `:root:not([data-crystal-modality=pointer])`. Load the script as a classic `<script>` and it starts by itself; as a module, call `watch(document)` once. A page without it draws every ring, which is the accessible default; a page with it meets the same requirement, because the ring is always drawn for keyboard focus.
+`core/modality.js` records how the person is interacting, on the document element, as `data-prismata-modality`: `pointer` after a pointer is pressed, `keyboard` after Tab, F6, F10, or a navigation key (an arrow, Home, End, Page Up or Down, Enter, Space, Escape) outside a text field. Typing, an arrow that moves a caret, and a shortcut held with a modifier change nothing, so a field clicked into does not grow a ring at the first letter. Every rule that draws a ring stands behind `:root:not([data-prismata-modality=pointer])`. Load the script as a classic `<script>` and it starts by itself; as a module, call `watch(document)` once. A page without it draws every ring, which is the accessible default; a page with it meets the same requirement, because the ring is always drawn for keyboard focus.
 
-Platform libraries follow the same rule: Crystal React's `CrystalProvider` watches the document, and its own fields' rings stand behind the same attribute.
+Platform libraries follow the same rule: Prismata React's `PrismataProvider` watches the document, and its own fields' rings stand behind the same attribute.
 
 ## Selection
 
 **A check mark means validated or informational. It never means "selected".** This is
-Crystal's most frequently violated rule, because a check is the reflexive choice for
+Prismata's most frequently violated rule, because a check is the reflexive choice for
 selection in most systems.
 
 Selection is expressed with **label weight**:
@@ -301,14 +301,14 @@ Haze, not Resin. It sits above a surface that is frequently already translucent,
 Resin indicator would be the nested-Resin failure.
 
 ```css
-.cr-indicator{
+.pr-indicator{
   background:transparent;          /* the indicator paints through ::before */
   backdrop-filter:none;
 }
-.cr-indicator::before{
+.pr-indicator::before{
   inset:1px;
-  background:var(--cr-haze-fill);
-  filter:blur(var(--cr-haze-feather));
+  background:var(--pr-haze-fill);
+  filter:blur(var(--pr-haze-feather));
 }
 ```
 
@@ -318,26 +318,26 @@ The feather is on the `::before` layer alone, so the label above it stays crisp.
 
 These specimens are static: they show each recipe, and the behaviour (playback, captions, editing commands) is the engine's and the platform library's.
 
-<div id="specimen-media-stage" class="cr-media" style="--cr-media-aspect: 16 / 9; max-width: 560px; margin-block: 16px">
-  <div class="cr-media-caption"><span>The harbour at dusk.</span></div>
-  <div class="cr-media-bar">
-    <div class="cr-resin transport" role="group" aria-label="Transport specimen">
-      <button type="button" class="cr-bare" aria-pressed="false">Play</button>
+<div id="specimen-media-stage" class="pr-media" style="--pr-media-aspect: 16 / 9; max-width: 560px; margin-block: 16px">
+  <div class="pr-media-caption"><span>The harbour at dusk.</span></div>
+  <div class="pr-media-bar">
+    <div class="pr-resin transport" role="group" aria-label="Transport specimen">
+      <button type="button" class="pr-bare" aria-pressed="false">Play</button>
       <time>0:00</time>
       <input type="range" min="0" max="8" value="3" aria-label="Seek" style="flex: 1; min-width: 0">
       <time>0:08</time>
-      <button type="button" class="cr-bare">Settings</button>
+      <button type="button" class="pr-bare">Settings</button>
     </div>
   </div>
 </div>
 
 The stage at 16:9 with no picture loaded, which is its letterbox, the caption cue on Stone above the transport, and the transport inset 12px from the stage.
 
-<div id="specimen-media-audio" class="cr-haze cr-media audio" style="max-width: 560px; margin-block: 16px">
-  <div><p style="margin: 0; font-weight: 700">Episode 4: The long way round</p><p style="margin: 0; color: var(--cr-muted)">Harbour stories</p></div>
-  <div class="cr-media-bar">
-    <div class="cr-resin transport" role="group" aria-label="Audio transport specimen">
-      <button type="button" class="cr-bare" aria-pressed="false">Play</button>
+<div id="specimen-media-audio" class="pr-haze pr-media audio" style="max-width: 560px; margin-block: 16px">
+  <div><p style="margin: 0; font-weight: 700">Episode 4: The long way round</p><p style="margin: 0; color: var(--pr-muted)">Harbour stories</p></div>
+  <div class="pr-media-bar">
+    <div class="pr-resin transport" role="group" aria-label="Audio transport specimen">
+      <button type="button" class="pr-bare" aria-pressed="false">Play</button>
       <time>0:00</time>
       <input type="range" min="0" max="8" value="0" aria-label="Seek Episode 4" style="flex: 1; min-width: 0">
       <time>0:08</time>
@@ -347,15 +347,15 @@ The stage at 16:9 with no picture loaded, which is its letterbox, the caption cu
 
 The audio card: Haze, with the card padding, holding the title and the transport.
 
-<div id="specimen-text-editor" class="cr-field-shell" style="max-width: 560px; margin-block: 16px">
-  <div class="cr-editor-toolbar" role="toolbar" aria-label="Formatting specimen">
-    <button type="button" class="cr-bare">Heading</button>
+<div id="specimen-text-editor" class="pr-field-shell" style="max-width: 560px; margin-block: 16px">
+  <div class="pr-editor-toolbar" role="toolbar" aria-label="Formatting specimen">
+    <button type="button" class="pr-bare">Heading</button>
     <span role="separator" aria-orientation="vertical"></span>
-    <button type="button" class="cr-bare" aria-label="Bold" aria-pressed="true"><b>B</b></button>
-    <button type="button" class="cr-bare" aria-label="Italic" aria-pressed="false"><i>I</i></button>
-    <button type="button" class="cr-bare" aria-label="Underline" aria-pressed="false"><u>U</u></button>
+    <button type="button" class="pr-bare" aria-label="Bold" aria-pressed="true"><b>B</b></button>
+    <button type="button" class="pr-bare" aria-label="Italic" aria-pressed="false"><i>I</i></button>
+    <button type="button" class="pr-bare" aria-label="Underline" aria-pressed="false"><u>U</u></button>
   </div>
-  <div class="cr-editor" role="textbox" aria-multiline="true" aria-readonly="true" aria-label="Editor specimen">
+  <div class="pr-editor" role="textbox" aria-multiline="true" aria-readonly="true" aria-label="Editor specimen">
     <h3>Before the meeting</h3>
     <ul class="checklist">
       <li><label><input type="checkbox" checked aria-label="Send the minutes"></label><p>Send the minutes</p></li>
@@ -369,12 +369,12 @@ The audio card: Haze, with the card padding, holding the title and the transport
 The editor: a field shell holding the toolbar and the document. The checklist's mark is the native checkbox's own state, the one place a check means checked. A finished item recedes to the muted ink and is not struck through. An insertion is underlined and a deletion struck through, so neither rests on colour alone.
 
 <div id="specimen-text-marks" style="display: grid; gap: 12px; justify-items: start; max-width: 560px; margin-block: 16px">
-  <div class="cr-frost bar" role="toolbar" aria-label="Selection toolbar specimen">
-    <button type="button" class="cr-bare" aria-label="Bold" aria-pressed="true"><b>B</b></button>
-    <button type="button" class="cr-bare" aria-label="Italic" aria-pressed="false"><i>I</i></button>
-    <button type="button" class="cr-bare">Link</button>
+  <div class="pr-frost bar" role="toolbar" aria-label="Selection toolbar specimen">
+    <button type="button" class="pr-bare" aria-label="Bold" aria-pressed="true"><b>B</b></button>
+    <button type="button" class="pr-bare" aria-label="Italic" aria-pressed="false"><i>I</i></button>
+    <button type="button" class="pr-bare">Link</button>
   </div>
-  <div class="cr-haze cr-editor" style="padding: 16px" role="textbox" aria-multiline="true" aria-readonly="true" aria-label="Highlight specimen">
+  <div class="pr-haze pr-editor" style="padding: 16px" role="textbox" aria-multiline="true" aria-readonly="true" aria-label="Highlight specimen">
     <p>A <mark>highlighted phrase</mark> beside plain text. Select across both to see the selection.</p>
   </div>
 </div>

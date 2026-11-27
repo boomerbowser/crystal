@@ -1,6 +1,6 @@
 /* Copy the motion engines' licence files into the library, so it ships them.
  *
- * `@crystal-ui/core` declares gsap and motion as runtime dependencies and
+ * `@prismata/core` declares gsap and motion as runtime dependencies and
  * `core/licenses/` carries their notices, because a consumer who installs the
  * library is redistributing them. The licence in the package must therefore be
  * the licence of the version the manifest declares. `validate-motion.cjs`
@@ -8,7 +8,7 @@
  * dependency and the lockfile to agree.
  *
  * This was the tail of `build-motion.cjs`. The browser engine bundle is a
- * website asset, built in crystal-preview. Copying the notices belongs to the
+ * website asset, built in prismata-preview. Copying the notices belongs to the
  * library.
  *
  *   node tools/sync-licences.cjs

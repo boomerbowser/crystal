@@ -11,7 +11,7 @@
  *   - Seven strips are docks. Tabs, the segmented control, the toolbar, the
  *     command bar, the action bar, the button group and the split button render
  *     as Resin holding one Haze fill under their controls, identical to
- *     `.cr-dock` in every material property. `.cr-resin` is a different
+ *     `.pr-dock` in every material property. `.pr-resin` is a different
  *     composition: a plane with an optical sheen and no reading fill.
  *   - The resizable handle and the image comparison's thumb are Resin handles, as
  *     their own prose says. `drag-handle` is a grab-to-move grip, which on a 4px
@@ -23,7 +23,7 @@
  *     what `resin` + `haze` described, and it is edited like one.
  *   - The rail's prose said "Resin active destination" while its surface said
  *     `nav-item`; the entry is the navigation entry, with the location dot.
- *   - The dialog's geometry said the content radius and `.cr-dialog` draws the
+ *   - The dialog's geometry said the content radius and `.pr-dialog` draws the
  *     panel radius, which is what the documentation site renders.
  *   - The tooltip's 18px radius was prose only; it is a token now.
  *
@@ -61,7 +61,7 @@ const PROSE = [
     'Frost panel; its destinations are navigation entries, the current one at weight 800 on the surface-alt fill with the location dot'],
   ['dialog', 'geometry',
     'Content radius; 12px minimum from content to the feathered edge',
-    'Panel radius (the content radius plus 6px), as .cr-dialog draws it; 12px minimum from content to the feathered edge'],
+    'Panel radius (the content radius plus 6px), as .pr-dialog draws it; 12px minimum from content to the feathered edge'],
   ['tooltip', 'geometry',
     '18px radius; compact padding',
     '18px radius (component.overlay.tooltipRadius); compact padding'],

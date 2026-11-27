@@ -1,7 +1,7 @@
 {
   "id": "media",
   "name": "Media",
-  "description": "Video, audio and galleries. Crystal named none of these before. The parity requirement here is about capability: a design system without a transport control leaves every product to invent one, and each invention re-solves captions, scrubbing and keyboard transport differently.",
+  "description": "Video, audio and galleries. Prismata named none of these before. The parity requirement here is about capability: a design system without a transport control leaves every product to invent one, and each invention re-solves captions, scrubbing and keyboard transport differently.",
   "components": [
     {
       "id": "video-player",
@@ -27,8 +27,8 @@
         "frost"
       ],
       "geometry": "The stage keeps the content radius and the aspect ratio the product sets (16:9, 4:3, 1:1, 9:16 or the media's own). The transport is a pill inset 12px from the stage, or the safe area in full screen, with 4px block padding around its controls (58px with its rim); every control reaches the 48px action target. Caption cues sit above the transport, never under it. Below 420px the transport wraps its trailing controls onto a second row.",
-      "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus. The caption style (a larger size, 1.25 or 1.5 times, and a solid backing on the opaque surface) is the reader's: it is kept for every player the reader opens and drawn with `.cr-media-caption`'s `.large`, `.larger` and `.solid`. Speed, subtitle, caption-style, audio-track and quality choices are menus of radio items (menuitemradio with aria-checked); the selected item is shown by label weight, never a check mark, and each change is announced in words. A choice the engine cannot make (an audio track list where the browser exposes none, picture in picture where it is unsupported) is not offered.",
-      "crystal": "Stage, transport and caption materials, transport geometry and insets, the settings menu, the motion of showing and hiding controls",
+      "semantics": "Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus. The caption style (a larger size, 1.25 or 1.5 times, and a solid backing on the opaque surface) is the reader's: it is kept for every player the reader opens and drawn with `.pr-media-caption`'s `.large`, `.larger` and `.solid`. Speed, subtitle, caption-style, audio-track and quality choices are menus of radio items (menuitemradio with aria-checked); the selected item is shown by label weight, never a check mark, and each change is announced in words. A choice the engine cannot make (an audio track list where the browser exposes none, picture in picture where it is unsupported) is not offered.",
+      "prismata": "Stage, transport and caption materials, transport geometry and insets, the settings menu, the motion of showing and hiding controls",
       "product": "Sources, caption and audio tracks, quality renditions and their switching (adaptive streaming), DRM, analytics",
       "motion": [
         "media-in",
@@ -61,7 +61,7 @@
       ],
       "geometry": "The card keeps the content radius and the card padding (20px); the transport is a pill with 4px block padding around its controls; the scrubber is a slider with a 44px thumb.",
       "semantics": "A real audio element. The scrubber is a slider announcing time, not a progress bar.",
-      "crystal": "Material, scrubber geometry, time formatting",
+      "prismata": "Material, scrubber geometry, time formatting",
       "product": "Sources, playlists, streaming",
       "motion": [
         "media-in",
@@ -90,7 +90,7 @@
       ],
       "geometry": "Pill with 4px block and 12px inline padding around its 48px controls (58px tall with its rim), 4px between them. Time readouts are tabular and sit on Haze pills.",
       "semantics": "Each control is a button with a name; play and pause are one toggle with a pressed state.",
-      "crystal": "Materials, the press recipe on every control",
+      "prismata": "Materials, the press recipe on every control",
       "product": "Which controls appear",
       "parity": [
         "mui:CardActions"
@@ -112,7 +112,7 @@
       ],
       "geometry": "Thumbnails keep the content radius; the viewer is full-bleed within the scrim.",
       "semantics": "The viewer is a dialog: focus is contained, Escape closes, and arrows move between items with position announced.",
-      "crystal": "Scrim material, thumbnail material, the transition between thumbnail and viewer",
+      "prismata": "Scrim material, thumbnail material, the transition between thumbnail and viewer",
       "product": "The media set and its captions",
       "motion": [
         "media-in",
@@ -139,7 +139,7 @@
       ],
       "geometry": "The item keeps its own aspect; the scrim is full-bleed.",
       "semantics": "A dialog. Zoom and pan are keyboard reachable, and closing returns focus to the thumbnail.",
-      "crystal": "Scrim material, the open and close motion",
+      "prismata": "Scrim material, the open and close motion",
       "product": "The item and its caption",
       "motion": [
         "media-in",

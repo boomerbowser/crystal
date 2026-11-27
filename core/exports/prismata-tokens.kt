@@ -1,7 +1,7 @@
-// Crystal 2.0.0 design tokens.
-// Generated from core/tokens/crystal.tokens.json. Do not edit by hand.
+// Prismata 2.0.0 design tokens.
+// Generated from core/tokens/prismata.tokens.json. Do not edit by hand.
 
-object CrystalToken {
+object PrismataToken {
     const val materialFrostDiffusion = "40px"
     const val materialFrostSaturation = "125"
     const val materialFrostGrain = "0.045"

@@ -19,7 +19,7 @@
       ],
       "geometry": "Full-bleed; safe areas respected.",
       "semantics": "One main per view; the heading is the view name.",
-      "crystal": "Region materials, elevation ordering, safe-area handling",
+      "prismata": "Region materials, elevation ordering, safe-area handling",
       "product": "Routing and what the regions hold",
       "parity": [
         "antd:Layout",
@@ -40,7 +40,7 @@
       ],
       "geometry": "Actions are pills.",
       "semantics": "Contains the h1; breadcrumbs are a navigation landmark.",
-      "crystal": "Material, condense behaviour on scroll",
+      "prismata": "Material, condense behaviour on scroll",
       "product": "Actions and copy",
       "parity": [
         "antd:PageHeader",
@@ -62,7 +62,7 @@
       ],
       "geometry": "Views enter and leave along the reading direction.",
       "semantics": "Focus moves to the new view and returns on pop; the back control is a real button.",
-      "crystal": "Enter and exit recipes, focus management",
+      "prismata": "Enter and exit recipes, focus management",
       "product": "The stack and routing",
       "motion": [
         "view-push-in",
@@ -88,7 +88,7 @@
       ],
       "geometry": "Collapses to a stack below the layout breakpoint.",
       "semantics": "Selection moves focus to the detail only when the layout has collapsed.",
-      "crystal": "Pane materials, the collapse transition",
+      "prismata": "Pane materials, the collapse transition",
       "product": "The data and routing",
       "motion": [
         "page-in"
@@ -113,7 +113,7 @@
       ],
       "geometry": "The divider is a 44px target.",
       "semantics": "The divider is a separator with a value, resizable by keyboard.",
-      "crystal": "Divider material, focus ring",
+      "prismata": "Divider material, focus ring",
       "product": "Panes and persistence",
       "motion": [
         "resize-settle"
@@ -138,7 +138,7 @@
       ],
       "geometry": "Pill; overflow to a menu.",
       "semantics": "role=\"toolbar\" with one tab stop.",
-      "crystal": "Material, overflow behaviour, press recipes",
+      "prismata": "Material, overflow behaviour, press recipes",
       "product": "Which commands apply",
       "parity": [
         "mui:Toolbar"
@@ -159,7 +159,7 @@
       ],
       "geometry": "Full-bleed; text stays crisp.",
       "semantics": "role=\"status\"; errors escalate to assertive.",
-      "crystal": "Material, status tokens",
+      "prismata": "Material, status tokens",
       "product": "What is reported",
       "parity": [
         "antd:Layout.Footer"
@@ -180,7 +180,7 @@
       ],
       "geometry": "Panels keep panel radius.",
       "semantics": "Each pane is a labelled region; focus order follows the visual order.",
-      "crystal": "Panel materials, pane transitions",
+      "prismata": "Panel materials, pane transitions",
       "product": "The panes and their layout",
       "parity": [
         "antd:Layout"
@@ -201,7 +201,7 @@
       ],
       "geometry": "Chrome leaves along its own edge.",
       "semantics": "Entering and leaving are announced; nothing becomes unreachable, only hidden.",
-      "crystal": "The enter and exit recipes",
+      "prismata": "The enter and exit recipes",
       "product": "What counts as chrome",
       "motion": [
         "page-in",
@@ -224,7 +224,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Says what would be here and offers the action that creates it.",
-      "crystal": "Material, illustration treatment",
+      "prismata": "Material, illustration treatment",
       "product": "The copy and the action",
       "motion": [
         "empty-in"
@@ -247,7 +247,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "role=\"alert\"; states what failed and what to try, never only a code.",
-      "crystal": "Material, status tokens",
+      "prismata": "Material, status tokens",
       "product": "The error taxonomy",
       "motion": [
         "page-in"
@@ -269,7 +269,7 @@
       ],
       "geometry": "Skeletons match the shape of what is coming.",
       "semantics": "aria-busy on the region; the wait is announced once, not repeatedly.",
-      "crystal": "Skeleton material and the reduced-motion contract",
+      "prismata": "Skeleton material and the reduced-motion contract",
       "product": "What is loading",
       "motion": [
         "skeleton-resolve"
@@ -293,7 +293,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Announced politely; retry is a real button.",
-      "crystal": "Material, status tokens",
+      "prismata": "Material, status tokens",
       "product": "What is available offline",
       "motion": [
         "page-in"
@@ -315,7 +315,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "States what was not found and offers a route onward.",
-      "crystal": "Material",
+      "prismata": "Material",
       "product": "The copy and the routes",
       "motion": [
         "page-in"
@@ -338,7 +338,7 @@
       ],
       "geometry": "Content radius; spacing from the scale.",
       "semantics": "Says which permission and why; the request is a real button.",
-      "crystal": "Material, status tokens",
+      "prismata": "Material, status tokens",
       "product": "The permission model",
       "motion": [
         "page-in"

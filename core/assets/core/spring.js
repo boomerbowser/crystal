@@ -1,8 +1,8 @@
-/* Crystal headless core: spring derivation.
+/* Prismata headless core: spring derivation.
  *
  * Pure functions. No DOM access, no globals, no side effects.
  *
- * Crystal describes motion as a damped harmonic oscillator rather than a fixed
+ * Prismata describes motion as a damped harmonic oscillator rather than a fixed
  * duration and a bézier, for two reasons. The first is behavioural: a timed
  * curve cannot be interrupted meaningfully, because it has no notion of where
  * the thing currently is or how fast it is going. Press a control while it is
@@ -16,12 +16,12 @@
  * recipe expressed this way can be honoured identically by each platform
  * library instead of approximated by each one differently.
  *
- * Usable as a plain <script> (attaches to CrystalCore) or via require().
+ * Usable as a plain <script> (attaches to PrismataCore) or via require().
  */
 (function (root, factory) {
   const api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
-  else (root.CrystalCore = root.CrystalCore || {}).spring = api;
+  else (root.PrismataCore = root.PrismataCore || {}).spring = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
@@ -105,7 +105,7 @@
   }
 
   /* Peak overshoot as a fraction beyond the target, 0 when critically damped
-     or stiffer. Crystal bounds this: a control that overshoots more than a
+     or stiffer. Prismata bounds this: a control that overshoots more than a
      tenth of its travel reads as loose rather than responsive. */
   function peakOvershoot(spec) {
     const zeta = dampingRatio(spec);

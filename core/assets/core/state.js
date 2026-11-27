@@ -1,4 +1,4 @@
-/* Crystal headless core: state derivation.
+/* Prismata headless core: state derivation.
  *
  * Pure functions. No DOM access, no globals, no side effects. A web page, a
  * React component, a SwiftUI view and a Compose composable all need the same
@@ -6,12 +6,12 @@
  * Deriving them here lets libraries share behaviour instead of reimplementing
  * it and drifting.
  *
- * Usable as a plain <script> (attaches to CrystalCore) or via require().
+ * Usable as a plain <script> (attaches to PrismataCore) or via require().
  */
 (function (root, factory) {
   const api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
-  else (root.CrystalCore = root.CrystalCore || {}).state = api;
+  else (root.PrismataCore = root.PrismataCore || {}).state = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 

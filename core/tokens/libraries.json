@@ -1,15 +1,15 @@
 {
-  "$description": "Crystal's component libraries: one per platform in libraries/parity.json, planned or built. The canonical record of which exist, their package and where their documentation is. A library's version is not recorded here, because it is the package's own on its registry: a site that shows it resolves it from the registry when it builds. tests/core-contracts.cjs holds the platforms to parity.json's.",
+  "$description": "Prismata's component libraries: one per platform in libraries/parity.json, planned or built. The canonical record of which exist, their package and where their documentation is. A library's version is not recorded here, because it is the package's own on its registry: a site that shows it resolves it from the registry when it builds. tests/core-contracts.cjs holds the platforms to parity.json's.",
   "libraries": [
     {
       "platform": "web",
-      "name": "Crystal React",
+      "name": "Prismata React",
       "framework": "React",
       "status": "built",
       "stage": "alpha",
-      "package": "@crystal-ui/react",
-      "registry": "https://www.npmjs.com/package/@crystal-ui/react",
-      "repository": "https://github.com/boomerbowser/crystal-react",
+      "package": "@prismata/react",
+      "registry": "https://www.npmjs.com/package/@prismata/react",
+      "repository": "https://github.com/boomerbowser/prismata-react",
       "documentation": null
     },
     {

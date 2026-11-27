@@ -1,4 +1,4 @@
-/* What a published @crystal-ui/core may and may not contain.
+/* What a published @prismata/core may and may not contain.
  *
  * Each failure checked here is silent: the package publishes, the registry
  * accepts it, every test stays green, and the damage shows up in somebody
@@ -13,7 +13,7 @@
  * `assets/controls.css` is the preview's own stylesheet; it styles bare
  * elements, and it shaped the approved appearance while the exported token said
  * something else (D-9). When it was exported, a 32px chip rendered 50px tall in
- * Crystal React. Keeping preview-only stylesheets out of the package stops them
+ * Prismata React. Keeping preview-only stylesheets out of the package stops them
  * shaping what consumers see.
  *
  * Every export entry point resolves and is in the tarball. `exports` can name a
@@ -35,7 +35,7 @@ const { createRequire } = require('node:module');
 const { tmpdir } = require('node:os');
 
 /* The package is `core/`. There are two manifests: `core/package.json` is
-   @crystal-ui/core and is published, and the one beside `tools/` is private
+   @prismata/core and is published, and the one beside `tools/` is private
    machinery that runs the build and is never installed. */
 const root = resolve(__dirname, '..', 'core');
 const manifest = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
@@ -138,7 +138,7 @@ for (const [name, target] of Object.entries(manifest.exports ?? {})) {
    then removed trailing-slash export targets in favour of the `*` pattern. So
    this asks Node to resolve each subpath, as a consumer would, from a sandbox
    where the package sits at its published name. */
-const sandbox = mkdtempSync(join(tmpdir(), 'crystal-exports-'));
+const sandbox = mkdtempSync(join(tmpdir(), 'prismata-exports-'));
 try {
   const [scope, bare] = manifest.name.split('/');
   mkdirSync(join(sandbox, 'node_modules', scope), { recursive: true });

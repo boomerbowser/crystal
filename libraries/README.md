@@ -1,10 +1,10 @@
-# Crystal component libraries
+# Prismata component libraries
 
-A component library implements Crystal for one platform. Each library has its own
+A component library implements Prismata for one platform. Each library has its own
 repository, package manifest, tests and release process.
 
-The first library is Crystal React (`@crystal-ui/react`, repository
-`boomerbowser/crystal-react`). Its status is recorded in `status/web.json`, which
+The first library is Prismata React (`@prismata/react`, repository
+`boomerbowser/prismata-react`). Its status is recorded in `status/web.json`, which
 `tools/build-catalogue.cjs` merges into `parity.json`. A component is available on
 a platform when that platform's record says `implemented`. A platform with no
 record is `not-started` for every component.
@@ -13,8 +13,8 @@ record is `not-started` for every component.
 
 The full contract is [`CONTRACT.md`](CONTRACT.md). In outline, a library must:
 
-- Consume Crystal's published tokens and redeclare no value. The canonical source
-  is `core/tokens/crystal.tokens.json`. The catalogue names every component's
+- Consume Prismata's published tokens and redeclare no value. The canonical source
+  is `core/tokens/prismata.tokens.json`. The catalogue names every component's
   surface from `core/tokens/surfaces.json`, and a library implements each surface
   once.
 - Implement the material hierarchy Plastic → Frost → Resin, plus Haze, Stone and
@@ -22,7 +22,7 @@ The full contract is [`CONTRACT.md`](CONTRACT.md). In outline, a library must:
   native optical specification.
 - Preserve the documented focus, selection, geometry, motion and reduced-effects
   contracts. They are in the specification chapters in `core/docs/`.
-- Ship its own accessibility and visual-regression evidence. Crystal's
+- Ship its own accessibility and visual-regression evidence. Prismata's
   verification covers the design system package and says nothing about a library
   built on it.
 

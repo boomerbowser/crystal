@@ -17,7 +17,7 @@
       ],
       "geometry": "None",
       "semantics": "Must not use display:none. Focusable variants become visible when focused, as the skip link does.",
-      "crystal": "The clipping recipe and the focusable variant",
+      "prismata": "The clipping recipe and the focusable variant",
       "product": "What needs a text alternative",
       "parity": [
         "mantine:VisuallyHidden",
@@ -39,7 +39,7 @@
       ],
       "geometry": "Pill; appears at the top-left inset",
       "semantics": "First focusable element in the document; its target must be focusable",
-      "crystal": "Appearance on focus and placement",
+      "prismata": "Appearance on focus and placement",
       "product": "The target region",
       "parity": [
         "—"
@@ -59,7 +59,7 @@
       ],
       "geometry": "None",
       "semantics": "Restores focus to the trigger on release; never traps without a visible, keyboard-reachable exit",
-      "crystal": "The contract only",
+      "prismata": "The contract only",
       "product": "The implementation. Use a maintained primitive rather than rebuilding it.",
       "parity": [
         "mantine:FocusTrap",
@@ -70,7 +70,7 @@
     {
       "id": "transition",
       "name": "Transition",
-      "anatomy": "Entry and exit choreography bound to Crystal's timings and easings.",
+      "anatomy": "Entry and exit choreography bound to Prismata's timings and easings.",
       "states": [
         "entering",
         "entered",
@@ -83,7 +83,7 @@
       ],
       "geometry": "Travel from the motion scale: 5-30px ordinary, up to 50px expressive",
       "semantics": "Reduced motion removes spatial change and keeps state feedback; transitions are interruptible and never delay a semantic change",
-      "crystal": "Timings, easings, travel limits, the 5s ceiling, reduced-motion behaviour",
+      "prismata": "Timings, easings, travel limits, the 5s ceiling, reduced-motion behaviour",
       "product": "Which elements transition and when",
       "parity": [
         "mantine:Transition",
@@ -105,7 +105,7 @@
       ],
       "geometry": "Mirrors directional geometry: bubble corners, range tracks, drawer edges, drop indicators",
       "semantics": "Sets a real dir attribute; logical properties do the rest",
-      "crystal": "Which properties are directional and must mirror",
+      "prismata": "Which properties are directional and must mirror",
       "product": "Locale detection and content direction",
       "parity": [
         "mantine:DirectionProvider",
@@ -116,7 +116,7 @@
     {
       "id": "theme-provider",
       "name": "Theme provider",
-      "anatomy": "The scope supplying resolved Crystal tokens to its subtree.",
+      "anatomy": "The scope supplying resolved Prismata tokens to its subtree.",
       "states": [
         "light",
         "dark",
@@ -128,7 +128,7 @@
       ],
       "geometry": "Supplies the content radius and spacing scale",
       "semantics": "Sets color-scheme so native controls and scrollbars match; respects the system preference when set to system",
-      "crystal": "Token resolution, mode switching, preference persistence, reduced-effect handling",
+      "prismata": "Token resolution, mode switching, preference persistence, reduced-effect handling",
       "product": "Which palette, and where preferences are stored",
       "parity": [
         "mantine:MantineProvider",
@@ -151,7 +151,7 @@
       ],
       "geometry": "Unchanged. Shapes, silhouettes and spacing never change with effects.",
       "semantics": "Honours prefers-reduced-transparency and forced-colors, and an explicit product preference",
-      "crystal": "Every material's fallback and the guarantee that hierarchy survives",
+      "prismata": "Every material's fallback and the guarantee that hierarchy survives",
       "product": "Exposing the preference and respecting the system setting",
       "parity": [
         "—"
@@ -176,7 +176,7 @@
       ],
       "geometry": "Handle meets 44px even when the visible grip is narrower",
       "semantics": "role=separator with aria-valuenow and arrow-key resizing. Pointer dragging is never the only route.",
-      "crystal": "Handle treatment, bound states and the settle after a size change",
+      "prismata": "Handle treatment, bound states and the settle after a size change",
       "product": "Bounds, persistence and what resizes",
       "motion": [
         "resize-settle"
@@ -201,7 +201,7 @@
       ],
       "geometry": "Never intercepts pointer events.",
       "semantics": "aria-hidden; it is decoration and must not be read.",
-      "crystal": "Opacity and contrast so it never obscures text",
+      "prismata": "Opacity and contrast so it never obscures text",
       "product": "The mark and its density",
       "parity": [
         "antd:Watermark"
@@ -222,7 +222,7 @@
       ],
       "geometry": "Quiet zone preserved; contrast fixed regardless of palette.",
       "semantics": "Carries a text alternative with the encoded value.",
-      "crystal": "Quiet-zone material, contrast floor, status surfaces",
+      "prismata": "Quiet-zone material, contrast floor, status surfaces",
       "product": "The value and error correction level",
       "parity": [
         "antd:QRCode"
@@ -242,7 +242,7 @@
       ],
       "geometry": "None.",
       "semantics": "Never the only way to dismiss something; Escape always works too.",
-      "crystal": "That dismissal is also keyboard reachable",
+      "prismata": "That dismissal is also keyboard reachable",
       "product": "What dismissal does",
       "parity": [
         "mui:ClickAwayListener"
@@ -262,7 +262,7 @@
       ],
       "geometry": "None.",
       "semantics": "Content is present and readable before the animation runs, never revealed by it.",
-      "crystal": "Which recipes are allowed, the reduced-motion contract",
+      "prismata": "Which recipes are allowed, the reduced-motion contract",
       "product": "Thresholds and which elements opt in",
       "parity": [
         "primereact:animateonscroll"
@@ -282,7 +282,7 @@
       ],
       "geometry": "Reserves the final size so nothing shifts on hydration.",
       "semantics": "Falls back to content, not to emptiness, wherever it can.",
-      "crystal": "That layout does not shift when it resolves",
+      "prismata": "That layout does not shift when it resolves",
       "product": "What is deferred and why",
       "parity": [
         "mui:NoSsr"
@@ -291,7 +291,7 @@
     {
       "id": "global-styles",
       "name": "Global styles",
-      "anatomy": "Applies Crystal's reset and base typography to a document.",
+      "anatomy": "Applies Prismata's reset and base typography to a document.",
       "states": [
         "at-rest"
       ],
@@ -301,7 +301,7 @@
       ],
       "geometry": "Sets the content radius, spacing and reading rhythm as custom properties.",
       "semantics": "Does not change focus visibility or motion preferences on its own.",
-      "crystal": "The reset, the foundation, the token surface",
+      "prismata": "The reset, the foundation, the token surface",
       "product": "Where it is mounted",
       "parity": [
         "mui:CssBaseline",
@@ -321,7 +321,7 @@
       ],
       "geometry": "n/a",
       "semantics": "n/a",
-      "crystal": "n/a",
+      "prismata": "n/a",
       "product": "n/a",
       "parity": [
         "primereact:terminal"
@@ -342,13 +342,13 @@
       ],
       "geometry": "n/a",
       "semantics": "n/a",
-      "crystal": "n/a",
+      "prismata": "n/a",
       "product": "n/a",
       "parity": [
         "antd:border-beam"
       ],
       "status": "not-applicable",
-      "why": "Crystal specifies edge treatment as the Resin optical rim. A second, unrelated mechanism for a moving border would contradict the material spec, and the ambient tier that would have owned it is deferred."
+      "why": "Prismata specifies edge treatment as the Resin optical rim. A second, unrelated mechanism for a moving border would contradict the material spec, and the ambient tier that would have owned it is deferred."
     },
     {
       "id": "pressable",
@@ -366,7 +366,7 @@
       ],
       "geometry": "Enforces the 44px minimum target on whatever it wraps.",
       "semantics": "Gives its child button semantics unless told otherwise; never swallows keyboard activation.",
-      "crystal": "That the press recipe plays and the focus ring appears",
+      "prismata": "That the press recipe plays and the focus ring appears",
       "product": "What the press does",
       "parity": [
         "react-aria:Pressable"
@@ -375,7 +375,7 @@
     {
       "id": "focusable",
       "name": "Focusable",
-      "anatomy": "Makes any element focusable with Crystal's focus ring.",
+      "anatomy": "Makes any element focusable with Prismata's focus ring.",
       "states": [
         "at-rest",
         "focus-visible",
@@ -387,7 +387,7 @@
       ],
       "geometry": "Focus ring at the documented offset.",
       "semantics": "Adds a tab stop without inventing a role.",
-      "crystal": "The focus recipe",
+      "prismata": "The focus recipe",
       "product": "Why the element is focusable",
       "parity": [
         "react-aria:Focusable"
@@ -403,13 +403,13 @@
         "drop-target",
         "focus-visible"
       ],
-      "material": "No material of its own: the opaque surface with the float shadow while lifted, and a drop indicator in `--cr-haze-fill`",
+      "material": "No material of its own: the opaque surface with the float shadow while lifted, and a drop indicator in `--pr-haze-fill`",
       "surface": [
         "drag-handle"
       ],
       "geometry": "Handle is a 44px target; the lifted item keeps its own radius.",
       "semantics": "Keyboard drag is required, not optional: Enter lifts, arrows move, Enter drops, Escape cancels. Every state is announced.",
-      "crystal": "Lift elevation, drop-indicator material, the motion of the lift and the settle",
+      "prismata": "Lift elevation, drop-indicator material, the motion of the lift and the settle",
       "product": "What may be dragged where, and what a drop means",
       "motion": [
         "drag-pickup",
@@ -429,13 +429,13 @@
         "shown",
         "invalid-target"
       ],
-      "material": "A 2px line in `--cr-primary`, or `--cr-danger-ink` where the drop is refused: a control affordance, not a material",
+      "material": "A 2px line in `--pr-primary`, or `--pr-danger-ink` where the drop is refused: a control affordance, not a material",
       "surface": [
         "none"
       ],
       "geometry": "Follows the gap between items rather than covering one.",
       "semantics": "Announced as the drag moves, so a keyboard drag is followable without sight.",
-      "crystal": "Indicator material and motion",
+      "prismata": "Indicator material and motion",
       "product": "Valid targets",
       "parity": [
         "react-aria:DropIndicator"
@@ -456,7 +456,7 @@
       ],
       "geometry": "Preserves scroll position and item size across recycling.",
       "semantics": "Keeps aria-setsize and aria-posinset correct, and never drops focus when a focused row recycles.",
-      "crystal": "Scroll surface, focus retention",
+      "prismata": "Scroll surface, focus retention",
       "product": "Row sizing strategy and data",
       "parity": [
         "react-aria:Virtualizer",
@@ -477,7 +477,7 @@
       ],
       "geometry": "The element keeps its own geometry through the transition.",
       "semantics": "Removed entirely under reduced motion; never the only way a view change is signalled.",
-      "crystal": "Which recipes apply, and the reduced-motion contract",
+      "prismata": "Which recipes apply, and the reduced-motion contract",
       "product": "Which elements are shared",
       "parity": [
         "react-aria:SharedElementTransition"
@@ -497,7 +497,7 @@
       ],
       "geometry": "Controls are pills; the group reaches 44px.",
       "semantics": "role=\"toolbar\": one tab stop, arrows move within, orientation declared.",
-      "crystal": "Material, grouping geometry, focus ring",
+      "prismata": "Material, grouping geometry, focus ring",
       "product": "Which controls, and their order",
       "parity": [
         "react-aria:Toolbar",
@@ -517,7 +517,7 @@
       ],
       "geometry": "None.",
       "semantics": "Every link and navigable item routes through the host router rather than reloading the page.",
-      "crystal": "That navigation is consistent across every component that links",
+      "prismata": "That navigation is consistent across every component that links",
       "product": "Which router, and how it navigates",
       "parity": [
         "react-aria:RouterProvider"
@@ -536,7 +536,7 @@
       ],
       "geometry": "None.",
       "semantics": "Prevents hydration mismatches in ids that label and describe controls.",
-      "crystal": "That labelling survives hydration",
+      "prismata": "That labelling survives hydration",
       "product": "Where it is mounted",
       "parity": [
         "react-aria:SSRProvider"

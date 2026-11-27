@@ -39,19 +39,19 @@ const TIERS = {
 };
 
 function tokensPage() {
-  const tokens = read('core/tokens/crystal.tokens.json');
+  const tokens = read('core/tokens/prismata.tokens.json');
   const deprecated = tokens.$deprecated || {};
   const lines = [
     '# Tokens',
     '',
-    'Every value Crystal ships, generated from `core/tokens/crystal.tokens.json`, the W3C',
+    'Every value Prismata ships, generated from `core/tokens/prismata.tokens.json`, the W3C',
     'Design Tokens (DTCG) source of truth. This page is written by',
     '`tools/build-reference.cjs`, and the next build overwrites any edit made here by hand.',
     'Edit the token file and run `npm run build`.',
     '',
     '## How the three tiers work',
     '',
-    'Crystal resolves a value through three tiers, and the direction is one way only:',
+    'Prismata resolves a value through three tiers, and the direction is one way only:',
     'a component reads a semantic token, a semantic token reads a primitive, and nothing',
     'reads upward. A palette swap is therefore a change to one tier, with no search',
     'across the codebase.',
@@ -154,7 +154,7 @@ function shaderSection() {
     `Generated from \`core/assets/shaders/manifest.json\` (version ${m.version}).`,
     '',
     '**The contract is the uniform set, not the GLSL.** A platform that honours these',
-    'uniforms has implemented Crystal\'s shader layer correctly, whether it does so in',
+    'uniforms has implemented Prismata\'s shader layer correctly, whether it does so in',
     'GLSL, Metal or AGSL. The `.frag` files in this repository are one implementation.',
     '',
     '### Uniforms', '',
@@ -209,12 +209,12 @@ function componentRecipeTable() {
 
 /* ---------- values that live in the token file ---------- */
 
-/* These tables are written from the numbers in `core/tokens/crystal.json`
+/* These tables are written from the numbers in `core/tokens/prismata.json`
    rather than transcribed, because a transcribed material recipe disagrees with
    the build sooner or later, and the material specification may never drift. */
 
 function defaultsTable() {
-  const tokens = read('core/tokens/crystal.tokens.json');
+  const tokens = read('core/tokens/prismata.tokens.json');
   const ranges = tokens.semantic.range;
   const label = {
     atmosphere: 'Color atmosphere', translucency: 'Frost base tint', elevation: 'Elevation',
@@ -238,7 +238,7 @@ function defaultsTable() {
 }
 
 function materialRecipeTable() {
-  const r = read('core/tokens/crystal.json').material;
+  const r = read('core/tokens/prismata.json').material;
   const pct = v => `${Math.round(v * 100)}%`;
   const rows = [
     ['Plastic', 'Opaque. No backdrop filter at all.', 'None'],
@@ -254,7 +254,7 @@ function materialRecipeTable() {
 }
 
 function paletteTable() {
-  const tokens = read('core/tokens/crystal.tokens.json');
+  const tokens = read('core/tokens/prismata.tokens.json');
   const lines = ['| Identity | Seed | Companion | Glow |', '|---|---|---|---|'];
   for (const [name, p] of Object.entries(tokens.primitive.palette)) {
     if (name.startsWith('$')) continue;
@@ -266,7 +266,7 @@ function paletteTable() {
 
 /* Read from the library's own exported theme, because this is the library's
    specification and it may only describe what the library ships. The preview
-   site's `controls.css` overrides `--cr-focus-ring` and must not be the source
+   site's `controls.css` overrides `--pr-focus-ring` and must not be the source
    (D-11), and it is not in this repository.
 
    Six layers since 21 September 2026. Meridian decided the library carries the
@@ -276,9 +276,9 @@ function paletteTable() {
    reading the second and third numbers as blur and spread would report the
    lift as "blur 8, spread 18". */
 function focusRecipeTable() {
-  const css = fs.readFileSync(path.join(ROOT, 'core/assets/crystal-theme.css'), 'utf8');
-  const ring = /--cr-focus-ring:\s*([^;]+);/.exec(css);
-  if (!ring) throw new Error('core/assets/crystal-theme.css: no --cr-focus-ring to read');
+  const css = fs.readFileSync(path.join(ROOT, 'core/assets/prismata-theme.css'), 'utf8');
+  const ring = /--pr-focus-ring:\s*([^;]+);/.exec(css);
+  if (!ring) throw new Error('core/assets/prismata-theme.css: no --pr-focus-ring to read');
 
   /* The ring names its colours rather than inlining them, so the alpha, which
      is what makes the falloff, has to be looked up. First occurrence of each:
@@ -286,7 +286,7 @@ function focusRecipeTable() {
      the light. */
   const colour = (name) => {
     const m = new RegExp(`--${name}:\\s*([^;]+);`).exec(css);
-    if (!m) throw new Error(`core/assets/crystal-theme.css: no --${name} to resolve`);
+    if (!m) throw new Error(`core/assets/prismata-theme.css: no --${name} to resolve`);
     return m[1].trim();
   };
   const alphaOf = (value) => {
@@ -301,7 +301,7 @@ function focusRecipeTable() {
   if (layers.length !== 6) throw new Error(`expected six focus layers, read ${layers.length}`);
 
   const lines = ['| Layer | Blur | Spread | Role |', '|---|---|---|---|',
-    '| `outline: 2px solid var(--cr-focus-core)` at `outline-offset: 3px` | None | None | The crisp core. Never feathered, and the only part that survives forced colours. |'];
+    '| `outline: 2px solid var(--pr-focus-core)` at `outline-offset: 3px` | None | None | The crisp core. Never feathered, and the only part that survives forced colours. |'];
   let halo = 0;
   let lift = 0;
   for (const layer of layers) {
@@ -358,7 +358,7 @@ function iconFigures() {
   for (const [name, s] of Object.entries(manifest.sources || {})) {
     /* The manifest records a path from the library root; this table lives in
        the library's own docs/, one level down. Package-relative, so the link
-       resolves inside @crystal-ui/core wherever it is installed. The website's
+       resolves inside @prismata/core wherever it is installed. The website's
        renderer maps it onto the site. */
     const notice = s.notice ? ` ([notice](../${s.notice.replace(/^core\//, '')}))` : '';
     lines.push(`| ${name} | ${s.count} | ${esc(s.license || 'None')}${notice} |`);

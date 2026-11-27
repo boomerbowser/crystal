@@ -1,7 +1,7 @@
 {
   "id": "overlays",
   "name": "Overlays",
-  "description": "Surfaces that sit above the scene. Crystal supplies the material and the separation; the product supplies real modality, focus containment and focus return.",
+  "description": "Surfaces that sit above the scene. Prismata supplies the material and the separation; the product supplies real modality, focus containment and focus return.",
   "components": [
     {
       "id": "dialog",
@@ -18,9 +18,9 @@
         "dialog",
         "mirage"
       ],
-      "geometry": "Panel radius (the content radius plus 6px), as .cr-dialog draws it; 12px minimum from content to the feathered edge",
+      "geometry": "Panel radius (the content radius plus 6px), as .pr-dialog draws it; 12px minimum from content to the feathered edge",
       "semantics": "Real modal semantics with a named dialog, focus containment, Escape, and focus return to the trigger",
-      "crystal": "Scrim, surface, entrance and exit motion, elevation",
+      "prismata": "Scrim, surface, entrance and exit motion, elevation",
       "product": "Modality, focus management, the decision itself and its consequences",
       "motion": [
         "mirage",
@@ -49,7 +49,7 @@
       ],
       "geometry": "Panel radius on the inner edges only",
       "semantics": "Dialog semantics when modal; a complementary region when not. Modality must be real, not implied.",
-      "crystal": "Panel material, edge geometry, entrance direction",
+      "prismata": "Panel material, edge geometry, entrance direction",
       "product": "Modality, focus management and content",
       "motion": [
         "drawer-in",
@@ -79,7 +79,7 @@
       ],
       "geometry": "Content radius; every row reserves leading room for a check mark, so ticking one does not shift its label",
       "semantics": "role=menu with full keyboard navigation, type-ahead and Escape; checkable items use aria-checked",
-      "crystal": "Surface, row treatment, row geometry, separators",
+      "prismata": "Surface, row treatment, row geometry, separators",
       "product": "The menu implementation, actions and dismissal",
       "motion": [
         "menu-in",
@@ -105,7 +105,7 @@
       ],
       "geometry": "Repositions to stay within the viewport",
       "semantics": "Must be reachable by keyboard, not pointer-only; never the sole route to an action",
-      "crystal": "Surface and positioning behaviour",
+      "prismata": "Surface and positioning behaviour",
       "product": "The actions and the keyboard route",
       "motion": [
         "menu-in",
@@ -133,7 +133,7 @@
       ],
       "geometry": "Content radius; flips and shifts to stay in view",
       "semantics": "The trigger carries aria-expanded and aria-controls; focus moves in for interactive content",
-      "crystal": "Surface, arrow, positioning behaviour",
+      "prismata": "Surface, arrow, positioning behaviour",
       "product": "Content, dismissal and focus policy",
       "motion": [
         "popover-in",
@@ -161,7 +161,7 @@
       ],
       "geometry": "Shared with Popover",
       "semantics": "Must also open on keyboard focus; never contains the only route to an action",
-      "crystal": "Surface, open and close delays",
+      "prismata": "Surface, open and close delays",
       "product": "Preview content and delay tuning",
       "motion": [
         "popover-in",
@@ -187,7 +187,7 @@
       ],
       "geometry": "18px radius (component.overlay.tooltipRadius); compact padding",
       "semantics": "Never the sole accessible name. Opens on focus as well as hover, dismisses on Escape, and stays while hovered.",
-      "crystal": "Surface, delay, placement",
+      "prismata": "Surface, delay, placement",
       "product": "Content and whether a tooltip is the right disclosure at all",
       "motion": [
         "tooltip-in",
@@ -213,7 +213,7 @@
       ],
       "geometry": "Full viewport, or region-scoped for a local overlay",
       "semantics": "Content beneath is inert; the scrim is not a focus target; clicking it dismisses only when dismissal is safe",
-      "crystal": "The complete Mirage recipe and its reduced-transparency fallback",
+      "prismata": "The complete Mirage recipe and its reduced-transparency fallback",
       "product": "Inertness, dismissal policy and stack order",
       "motion": [
         "mirage",
@@ -239,7 +239,7 @@
       ],
       "geometry": "None",
       "semantics": "Portalled content must preserve the logical focus and reading order of its trigger",
-      "crystal": "Stacking contract and layer placement",
+      "prismata": "Stacking contract and layer placement",
       "product": "The portal implementation",
       "parity": [
         "mantine:Portal",
@@ -263,7 +263,7 @@
       ],
       "geometry": "Panel radius; the resize handle reaches 44px.",
       "semantics": "role=\"dialog\" when modal-like; focus is trapped only when it is modal.",
-      "crystal": "Material, elevation, drag and resize motion",
+      "prismata": "Material, elevation, drag and resize motion",
       "product": "Content, bounds and persistence",
       "motion": [
         "drawer-in",
@@ -286,7 +286,7 @@
       ],
       "geometry": "Follows the overlay radius; flips with placement.",
       "semantics": "Decorative: hidden from assistive technology.",
-      "crystal": "That it matches the overlay material exactly, including under reduced effects",
+      "prismata": "That it matches the overlay material exactly, including under reduced effects",
       "product": "Placement",
       "parity": [
         "react-aria:OverlayArrow"

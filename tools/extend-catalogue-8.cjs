@@ -14,7 +14,7 @@
  *     vocabulary already says is "a caption on media", and the settings menu is
  *     Frost, as every transient overlay is (R15e). The audio player gains the
  *     Haze card it was specified with and never drew.
- *   - The text. The rich text surface gains Crystal's format vocabulary: the
+ *   - The text. The rich text surface gains Prismata's format vocabulary: the
  *     block types, the marks, the checklist, the selection toolbar and the touch
  *     placement of the toolbar. The engine stays the product's (D-30 asks
  *     whether that should change). Prose, the prose list and text gain the same
@@ -41,7 +41,7 @@ const WRITE = process.argv.includes('--write');
 const FIELDS = [
   /* ------------------------------------------------------------ video player */
   ['video-player', 'anatomy',
-    'A video surface with Crystal transport controls.',
+    'A video surface with Prismata transport controls.',
     'A media stage at a set aspect ratio holding the video, a caption cue above the transport, and the transport inset from the stage: play, skip, the scrubber with its two time readouts, mute and volume, then a settings menu (playback speed, subtitles and captions, audio track, quality), picture in picture and full screen.'],
   ['video-player', 'states',
     ['idle', 'playing', 'paused', 'buffering', 'ended', 'focus-visible'],
@@ -58,7 +58,7 @@ const FIELDS = [
   ['video-player', 'semantics',
     'Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus.',
     'Native video element underneath. Controls are real buttons, captions are supported and their state is announced, and keyboard shortcuts do not trap focus. Speed, subtitle, audio-track and quality choices are menus of radio items (menuitemradio with aria-checked); the selected item is shown by label weight, never a check mark, and each change is announced in words. A choice the engine cannot make (an audio track list where the browser exposes none, picture in picture where it is unsupported) is not offered.'],
-  ['video-player', 'crystal',
+  ['video-player', 'prismata',
     'Control-bar material, transport geometry, the motion of showing and hiding controls',
     'Stage, transport and caption materials, transport geometry and insets, the settings menu, the motion of showing and hiding controls'],
   ['video-player', 'product',
@@ -110,7 +110,7 @@ const FIELDS = [
   /* ------------------------------------------------------- rich text surface */
   ['rich-text-surface', 'anatomy',
     'A toolbar of formatting actions above an editable content surface.',
-    'A formatting toolbar and an editable surface. The toolbar holds Crystal\'s format vocabulary in groups: the block type (paragraph, headings two to four, bulleted list, numbered list, checklist, quotation, code block), the marks (bold, italic, underline, strikethrough, inline code, highlight, link, subscript, superscript) and history (undo, redo). A selection toolbar of the commonest marks floats over highlighted text.'],
+    'A formatting toolbar and an editable surface. The toolbar holds Prismata\'s format vocabulary in groups: the block type (paragraph, headings two to four, bulleted list, numbered list, checklist, quotation, code block), the marks (bold, italic, underline, strikethrough, inline code, highlight, link, subscript, superscript) and history (undo, redo). A selection toolbar of the commonest marks floats over highlighted text.'],
   ['rich-text-surface', 'states',
     ['idle', 'focus', 'selection-active', 'disabled', 'read-only'],
     ['idle', 'focus', 'selection-active', 'selection-toolbar-open', 'touch-keyboard-open', 'disabled', 'read-only']],
@@ -126,15 +126,15 @@ const FIELDS = [
   ['rich-text-surface', 'semantics',
     'Toolbar actions use aria-pressed for active formatting; the editor exposes its own semantics',
     'Toolbar actions use aria-pressed for active formatting, and the block type is a single control naming the current type. A format changed by a keyboard shortcut while focus is in the text is announced politely. The editor exposes its own semantics: real headings, lists and checkboxes in the document, so a screen reader navigates it as it would the published page.'],
-  ['rich-text-surface', 'crystal',
+  ['rich-text-surface', 'prismata',
     'Toolbar and surface appearance, active-format treatment',
     'Toolbar and surface appearance, active-format treatment, the format vocabulary and its rendering (shared with prose), the selection toolbar, toolbar placement on touch'],
   ['rich-text-surface', 'product',
     'The entire editing engine, serialisation and paste handling',
     'The editing engine, serialisation and paste handling, and which parts of the format vocabulary a product offers'],
   ['rich-text-surface', 'note',
-    'Crystal specifies the surface only. Do not rebuild a rich-text engine to obtain this appearance.',
-    'Crystal specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. Whether a library may ship an optional binding of its own is D-30.'],
+    'Prismata specifies the surface only. Do not rebuild a rich-text engine to obtain this appearance.',
+    'Prismata specifies the surface and the format vocabulary. Do not rebuild a rich-text engine to obtain this appearance; bind an existing one. Whether a library may ship an optional binding of its own is D-30.'],
   ['rich-text-surface', 'motion',
     [],
     ['field-focus', 'field-invalid', 'field-valid', 'menu-in', 'menu-out']],
@@ -152,8 +152,8 @@ const FIELDS = [
     'Anchor navigation must preserve focus when sections change',
     'Anchor navigation must preserve focus when sections change. Every mark differs in shape as well as colour (an insertion is underlined, a deletion struck through, a highlight filled), and each is its own element (ins, del, mark, u, s), so none rests on colour alone.'],
   ['prose-list', 'anatomy',
-    'Ordered and unordered lists inside running text, with Crystal markers.',
-    'Ordered and unordered lists inside running text, with Crystal markers, and checklists whose markers are checkboxes.'],
+    'Ordered and unordered lists inside running text, with Prismata markers.',
+    'Ordered and unordered lists inside running text, with Prismata markers, and checklists whose markers are checkboxes.'],
   ['prose-list', 'states',
     ['at-rest'],
     ['at-rest', 'checked', 'unchecked']],

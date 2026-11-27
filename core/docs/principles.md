@@ -1,12 +1,12 @@
-# Crystal: a shared visual language
+# Prismata: a shared visual language
 
-Crystal 2.0 is Meridian Digital's reusable design system, built out from the approved `crystal-03-balanced` design. It retains the material hierarchy and recognizable silhouettes while allowing stronger product color identities. The original proposal and application that design came from are not modified by this system.
+Prismata 2.0 is Meridian Digital's reusable design system, built out from the approved `prismata-03-balanced` design. It retains the material hierarchy and recognizable silhouettes while allowing stronger product color identities. The original proposal and application that design came from are not modified by this system.
 
 ## Governing hierarchy
 
-**Plastic → Frost → Resin, from back to front, is Crystal's defining invariant.** The user reaffirmed this priority on September 17, 2026. Product colors and layouts may vary; the hierarchy must remain recognizable. Plastic grounds the window, Frost forms the intermediate material layer, and Resin floats above it for functional controls. Haze reading wells sit inside the hierarchy for legibility. They do not replace the theme and do not form a fourth material identity.
+**Plastic → Frost → Resin, from back to front, is Prismata's defining invariant.** The user reaffirmed this priority on September 17, 2026. Product colors and layouts may vary; the hierarchy must remain recognizable. Plastic grounds the window, Frost forms the intermediate material layer, and Resin floats above it for functional controls. Haze reading wells sit inside the hierarchy for legibility. They do not replace the theme and do not form a fourth material identity.
 
-Crystal names six materials: Plastic, Frost, Resin, Haze, Stone, Mirage. Haze fills reading surfaces; Stone protects labels within controls; Mirage separates modal decisions. The first three establish the main spatial hierarchy.
+Prismata names six materials: Plastic, Frost, Resin, Haze, Stone, Mirage. Haze fills reading surfaces; Stone protects labels within controls; Mirage separates modal decisions. The first three establish the main spatial hierarchy.
 
 ## Shared identity, product freedom
 

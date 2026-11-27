@@ -1,5 +1,5 @@
 {
-  "$description": "Crystal's optical shader layer. The uniform contract below is the portable artefact; the GLSL files are one implementation of it. A platform library honours the contract, not the source: GLSL, Metal Shading Language and AGSL are close enough that the port is mechanical, but a platform is free to reach the specified appearance its own way.",
+  "$description": "Prismata's optical shader layer. The uniform contract below is the portable artefact; the GLSL files are one implementation of it. A platform library honours the contract, not the source: GLSL, Metal Shading Language and AGSL are close enough that the port is mechanical, but a platform is free to reach the specified appearance its own way.",
   "version": "2.0.0",
   "principle": "A shader is an enhancement of an already-correct surface, never a requirement for it. Every material renders completely without one. Nothing here may alter a resting appearance: the shaders paint only while motion is in flight, and gate G6 proves the preview is pixel-identical when WebGL2 is unavailable.",
   "compositing": {

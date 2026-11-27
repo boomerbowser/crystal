@@ -1,6 +1,6 @@
 # Accessibility contract and validation
 
-Crystal preserves the original project's strict accessibility intent. WCAG 2.2 is the current Recommendation verified from the W3C source on September 17, 2026; recheck the latest finalized standard at adoption and release. AA is this reusable system's engineering baseline. It does not certify the package or a consuming application. [WCAG 2.2](https://www.w3.org/TR/WCAG22/).
+Prismata preserves the original project's strict accessibility intent. WCAG 2.2 is the current Recommendation verified from the W3C source on September 17, 2026; recheck the latest finalized standard at adoption and release. AA is this reusable system's engineering baseline. It does not certify the package or a consuming application. [WCAG 2.2](https://www.w3.org/TR/WCAG22/).
 
 ## Color and material requirements
 
@@ -42,7 +42,7 @@ See the [verification report](../verification/report.html) for checks actually r
 
 Windows High Contrast (`forced-colors: active` in CSS) replaces the page's palette with
 a small set of system colours the user has chosen: `Canvas`, `CanvasText`, `Highlight`,
-`HighlightText`, `ButtonFace`, `ButtonText`, `LinkText`. Crystal honours that choice.
+`HighlightText`, `ButtonFace`, `ButtonText`, `LinkText`. Prismata honours that choice.
 
 ### Selection is a ring, never a fill
 
@@ -103,11 +103,11 @@ continuous indicator stops when the work resolves; none of them repeats at rest.
 backdrop filter with a solid surface and a stronger border:
 
 ```css
-[data-effects=opaque] :is(.cr-frost,.cr-acrylic),
-[data-effects=opaque] :is(.cr-resin,.cr-glass){
+[data-effects=opaque] :is(.pr-frost,.pr-acrylic),
+[data-effects=opaque] :is(.pr-resin,.pr-glass){
   backdrop-filter:none;
-  background:var(--cr-surface);
-  border-color:var(--cr-outline);
+  background:var(--pr-surface);
+  border-color:var(--pr-outline);
 }
 ```
 
@@ -165,18 +165,18 @@ backdrops with the fixed Resin fill.
 | Failures | 0 |
 | Lowest result of any kind | 3.07:1 |
 | Lowest normal-text result | 4.67:1 |
-| Checks run | 2026-11-08 |
+| Checks run | 2026-10-03 |
 
 Normal text is held to 4.5:1. Essential non-text (focus rings, control boundaries,
 indicator lines) is held to the separate 3:1 threshold that applies to those elements.
 <!-- /generated:contrast -->
 
-**The field shell's rim is decorative, by ruling.** `.cr-field-shell` draws its edge in the
+**The field shell's rim is decorative, by ruling.** `.pr-field-shell` draws its edge in the
 white rim, which measures 1.06:1 against the page in light mode and 1.63:1 in dark, well
 under the 3:1 above. Meridian ruled on 28 September 2026 (D-24) that the field is drawn as
 written: the rim does not identify a field. A field is identified by the Resin shell's
 fill and float shadow, the Haze well the value is read on, and the visible label every
-Crystal field carries. The 1,836 checks above do not cover those. A product that needs a
+Prismata field carries. The 1,836 checks above do not cover those. A product that needs a
 field boundary it can defend against WCAG 1.4.11 on its own terms should measure its own
 backdrops and not rely on this table.
 

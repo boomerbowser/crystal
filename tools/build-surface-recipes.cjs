@@ -1,13 +1,13 @@
 /* Publish each surface's recipe as values.
  *
  * `core/tokens/surfaces.json` ties every surface to a selector in
- * `core/assets/crystal.css`. A browser can wear a selector; SwiftUI and Compose
+ * `core/assets/prismata.css`. A browser can wear a selector; SwiftUI and Compose
  * cannot, and a platform library that has to read the stylesheet to learn which
  * tokens a recipe uses will eventually read it wrong. This tool reads the
  * stylesheet the way a browser resolves it for an element that wears only the
  * surface's selector, and writes the result as token references:
  * `core/tokens/surface-recipes.json`. Every platform then resolves the same
- * recipe from its own exported tokens (`core/exports/crystal-tokens.*`).
+ * recipe from its own exported tokens (`core/exports/prismata-tokens.*`).
  *
  * What the resolution does:
  *
@@ -41,7 +41,7 @@ const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
 const SURFACES = path.join(ROOT, 'core/tokens/surfaces.json');
-const STYLESHEET = path.join(ROOT, 'core/assets/crystal.css');
+const STYLESHEET = path.join(ROOT, 'core/assets/prismata.css');
 const OUTPUT = path.join(ROOT, 'core/tokens/surface-recipes.json');
 
 /* ------------------------------------------------------------- tokenising */
@@ -56,7 +56,7 @@ function stripComments(css) {
       i = end - 1;
     } else if (ch === '/' && css[i + 1] === '*') {
       const end = css.indexOf('*/', i + 2);
-      if (end === -1) throw new Error('unterminated comment in crystal.css');
+      if (end === -1) throw new Error('unterminated comment in prismata.css');
       i = end + 1;
       out += ' ';
     } else {
@@ -72,7 +72,7 @@ function skipString(text, i) {
     if (text[j] === '\\') j++;
     else if (text[j] === quote) return j + 1;
   }
-  throw new Error('unterminated string in crystal.css');
+  throw new Error('unterminated string in prismata.css');
 }
 
 /* Index just past the `}` that closes the block opened at `open`. */
@@ -84,7 +84,7 @@ function matchBrace(text, open) {
     else if (ch === '{') depth++;
     else if (ch === '}' && --depth === 0) return i + 1;
   }
-  throw new Error('unbalanced braces in crystal.css');
+  throw new Error('unbalanced braces in prismata.css');
 }
 
 /* Split on a separator that is not inside parentheses, brackets or strings. */
@@ -139,7 +139,7 @@ function parseStylesheet(css) {
       }
       const prelude = text.slice(i, j).trim();
       if (j >= text.length || text[j] === '}') {
-        if (prelude) throw new Error(`stray text in crystal.css: ${prelude.slice(0, 60)}`);
+        if (prelude) throw new Error(`stray text in prismata.css: ${prelude.slice(0, 60)}`);
         i = j + 1;
         continue;
       }
@@ -178,7 +178,7 @@ function parseStylesheet(css) {
   }
 
   walk(code, null, []);
-  if (!layerOrder) throw new Error('crystal.css declares no @layer order');
+  if (!layerOrder) throw new Error('prismata.css declares no @layer order');
   return { rules, layerOrder };
 }
 
@@ -331,7 +331,7 @@ function expandCompound(simples) {
         for (const option of options) {
           const last = option[option.length - 1];
           const prefix = option.slice(0, -1);
-          if (prefix.length && alt.prefix.length) continue; /* two ancestor chains in one compound: not used by Crystal */
+          if (prefix.length && alt.prefix.length) continue; /* two ancestor chains in one compound: not used by Prismata */
           next.push({
             prefix: prefix.length ? prefix : alt.prefix,
             joiner: prefix.length ? last.combinator : alt.joiner,
@@ -388,7 +388,7 @@ function reach(rule, target) {
   if (!positive.every((s) => targetSet.has(s.text))) return null;
   /* `:not(a, b)` reaches an element at rest unless the element wears one of
      its arguments in full: `:not(:focus-visible)` is the resting state, and
-     `:not(.cr-bare)` excludes the bare control. An argument with a combinator
+     `:not(.pr-bare)` excludes the bare control. An argument with a combinator
      of its own is not modelled, and such a rule is treated as not reaching. */
   for (const s of rule.simples.filter(isNot)) {
     for (const arg of splitTop(s.args, ',')) {
@@ -629,7 +629,7 @@ function normalise(resolved) {
   }
 
   /* The feathered paint layer: a pseudo-element that draws a fill through a
-     blur filter. Crystal paints Haze and Stone this way so the foreground stays
+     blur filter. Prismata paints Haze and Stone this way so the foreground stays
      crisp, and it is the layer a platform must reproduce. */
   let haze = null;
   for (const layer of Object.keys(layers).sort((a, b) => (a === '::before' ? -1 : b === '::before' ? 1 : a < b ? -1 : 1))) {
@@ -673,7 +673,7 @@ function normalise(resolved) {
 
 function tokensIn(value, into = new Set()) {
   if (typeof value === 'string') {
-    for (const m of value.matchAll(/var\(\s*(--cr-[-\w]+)/g)) into.add(m[1]);
+    for (const m of value.matchAll(/var\(\s*(--pr-[-\w]+)/g)) into.add(m[1]);
   } else if (value && typeof value === 'object') {
     for (const v of Object.values(value)) tokensIn(v, into);
   }
@@ -692,7 +692,7 @@ function missingFor(materials, recipe) {
   const needs = new Set(materials);
   if (['Frost', 'Resin', 'Mirage', 'Plastic'].some((m) => needs.has(m)) && !anyFill) missing.push('fill');
   if (['Frost', 'Resin', 'Mirage'].some((m) => needs.has(m)) && !anyBlur) missing.push('blur');
-  if ((needs.has('Haze') || needs.has('Stone')) && !recipe.haze && !/--cr-(haze|stone|label)-/.test(recipe.fill || '')) missing.push('haze');
+  if ((needs.has('Haze') || needs.has('Stone')) && !recipe.haze && !/--pr-(haze|stone|label)-/.test(recipe.fill || '')) missing.push('haze');
   if (['Frost', 'Resin', 'Haze', 'Stone'].some((m) => needs.has(m)) && recipe.radius === null) missing.push('radius');
   return missing;
 }
@@ -728,7 +728,7 @@ function buildSurfaceRecipes() {
     const also = Object.fromEntries((s.also || []).map((sel) => [sel, recipeFor(sel, s.materials, parsed)]));
     const record = { ...head, kind };
     if (kind === 'element') {
-      record.note = 'Crystal paints this surface on native elements by element selector rather than a class. The recipe is what the stylesheet gives that element.';
+      record.note = 'Prismata paints this surface on native elements by element selector rather than a class. The recipe is what the stylesheet gives that element.';
     }
     Object.assign(record, primary);
     if (Object.keys(also).length) record.also = also;
@@ -745,11 +745,11 @@ function buildSurfaceRecipes() {
 
   const document = {
     $description: [
-      'GENERATED by tools/build-surface-recipes.cjs from core/tokens/surfaces.json and core/assets/crystal.css. Never edit it by hand: change the stylesheet or the vocabulary and rebuild. tests/core-contracts.cjs fails when this file is out of date.',
-      'Each surface in surfaces.json has one record. Its recipe is what the stylesheet resolves for an element wearing only the surface selector, written as the stylesheet writes it: token references such as `var(--cr-resin-fill)`, literals such as `999px`, and expressions such as `calc(var(--cr-radius) + 6px)`. A platform resolves the tokens from its own export (core/exports/crystal-tokens.ts, .swift, .kt), so every platform reaches the same values.',
-      'Fields: `fill` is the element\'s own background (the winner of `background` and `background-color`). `blur` and `saturation` are the arguments of `blur()` and `saturate()` in its `backdrop-filter`. `rim` is the border the browser draws: the `border` shorthand, with its colour replaced by a `border-color` that cascades after it (noted under `diagnostics`), or `border-color` alone when there is no shorthand. `shadow` is `box-shadow`, `radius` is `border-radius`, `padding` is the `padding` shorthand. `haze` is the feathered paint layer: a pseudo-element that draws a fill through a blur filter, which is how Crystal paints Haze and Stone so the foreground stays crisp. When `haze` is present the element\'s own `fill` is usually `transparent`, and the visible reading fill is `haze.fill`. `feather` is the blur of the feathered paint, on the element or on that layer. `extras` holds every other declaration on the element. `layers` holds every pseudo-element the recipe paints, keyed by its name.',
+      'GENERATED by tools/build-surface-recipes.cjs from core/tokens/surfaces.json and core/assets/prismata.css. Never edit it by hand: change the stylesheet or the vocabulary and rebuild. tests/core-contracts.cjs fails when this file is out of date.',
+      'Each surface in surfaces.json has one record. Its recipe is what the stylesheet resolves for an element wearing only the surface selector, written as the stylesheet writes it: token references such as `var(--pr-resin-fill)`, literals such as `999px`, and expressions such as `calc(var(--pr-radius) + 6px)`. A platform resolves the tokens from its own export (core/exports/prismata-tokens.ts, .swift, .kt), so every platform reaches the same values.',
+      'Fields: `fill` is the element\'s own background (the winner of `background` and `background-color`). `blur` and `saturation` are the arguments of `blur()` and `saturate()` in its `backdrop-filter`. `rim` is the border the browser draws: the `border` shorthand, with its colour replaced by a `border-color` that cascades after it (noted under `diagnostics`), or `border-color` alone when there is no shorthand. `shadow` is `box-shadow`, `radius` is `border-radius`, `padding` is the `padding` shorthand. `haze` is the feathered paint layer: a pseudo-element that draws a fill through a blur filter, which is how Prismata paints Haze and Stone so the foreground stays crisp. When `haze` is present the element\'s own `fill` is usually `transparent`, and the visible reading fill is `haze.fill`. `feather` is the blur of the feathered paint, on the element or on that layer. `extras` holds every other declaration on the element. `layers` holds every pseudo-element the recipe paints, keyed by its name.',
       '`fallbacks` holds the four adaptations: `opaque` under `[data-effects=opaque]`, `reducedTransparency` under `@media (prefers-reduced-transparency:reduce)`, `forcedColors` under `@media (forced-colors:active)`, and `noBackdropFilter` under `@supports not (backdrop-filter...)`. Each lists only the declarations that change and win, as `declarations` for the element and `layers` for pseudo-elements. A null branch changes nothing. `conditions` holds other conditional branches the same way, keyed by the condition. `shadowed` lists declarations a branch makes that lose to the base recipe in the cascade and therefore never render. `missing` names what the surface\'s materials oblige the recipe to carry and the stylesheet does not supply for this selector, and `why` says why it cannot (the selector is a part of the surface, or takes the value from what it is worn on).',
-      'Rules that add a state or a variant the surface selector does not name (`:hover`, `.primary`, `span.cr-field-shell`, descendants such as `.cr-dock button`) are not part of a recipe, because the element described does not wear them. `tokens` lists every `--cr-*` custom property the record references. A selector that expands to elements the stylesheet paints differently, such as the checkbox and the radio, carries `alternatives`: one recipe per element, keyed by the element selector, in place of the top-level fields.',
+      'Rules that add a state or a variant the surface selector does not name (`:hover`, `.primary`, `span.pr-field-shell`, descendants such as `.pr-dock button`) are not part of a recipe, because the element described does not wear them. `tokens` lists every `--pr-*` custom property the record references. A selector that expands to elements the stylesheet paints differently, such as the checkbox and the radio, carries `alternatives`: one recipe per element, keyed by the element selector, in place of the top-level fields.',
     ].join(' '),
     layerOrder: parsed.layerOrder,
     surfaces: records,

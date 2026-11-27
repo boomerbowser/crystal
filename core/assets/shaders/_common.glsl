@@ -1,6 +1,6 @@
 precision highp float;
 
-/* Shared by Crystal's fragment shaders. Prepended at compile time; not a
+/* Shared by Prismata's fragment shaders. Prepended at compile time; not a
    standalone file. Everything here is procedural, so no shader needs a texture
    upload and the whole layer stays a few kilobytes. */
 
@@ -16,7 +16,7 @@ float noise(vec2 p){
 }
 
 /* Fractal sum. Four octaves is where added detail stops being visible at the
-   sizes Crystal's surfaces actually occupy. */
+   sizes Prismata's surfaces actually occupy. */
 float fbm(vec2 p){
   float total = 0.0, amplitude = 0.5;
   for (int i = 0; i < 4; i++){

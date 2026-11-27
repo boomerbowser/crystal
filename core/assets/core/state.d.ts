@@ -1,4 +1,4 @@
-/* Types for Crystal's headless state derivation. Pure functions: a web page, a
+/* Types for Prismata's headless state derivation. Pure functions: a web page, a
    React component, a SwiftUI view and a Compose composable must all get the same
    answer to "which mark does this control show". */
 

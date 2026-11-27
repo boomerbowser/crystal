@@ -4,15 +4,15 @@
  *
  * What was measured before this ran (28 September 2026):
  *
- *   - 285 entries; the only machine-readable link from an entry to a Crystal
+ *   - 285 entries; the only machine-readable link from an entry to a Prismata
  *     recipe was `motion`, and 237 entries had none. Whole categories (layout,
  *     charts, media, commerce, blocks) carried no motion at all, and a
  *     consumer that reads "where the catalogue assigns none, the component
- *     plays none" (Crystal React's plan, §4.1) therefore shipped 145
+ *     plays none" (Prismata React's plan, §4.1) therefore shipped 145
  *     components with no motion.
  *   - `material` was prose. 102 entries named no material in it, and nothing
- *     tied the prose to a class in `crystal.css`, so a library could satisfy
- *     the catalogue's material sentence with any recipe it liked. Crystal
+ *     tied the prose to a class in `prismata.css`, so a library could satisfy
+ *     the catalogue's material sentence with any recipe it liked. Prismata
  *     React wrote 43 of its own.
  *   - The prose disagreed with the specification in five places, listed under
  *     PROSE below, each with what the specification says.
@@ -23,7 +23,7 @@
  *      The first surface is the entry's own outermost material; further ones
  *      are the compositions inside it, outer to inner. `build-catalogue.cjs`
  *      validates every one against the vocabulary and refuses a vocabulary
- *      entry whose recipe does not exist in `crystal.css`.
+ *      entry whose recipe does not exist in `prismata.css`.
  *   2. Completes `motion` from the family table in `docs/motion-components.md`
  *      ("Component coverage and composition"). That table has said since 2.0
  *      that a date picker takes `menu-in/out`, `selection` and `page-in`, that
@@ -215,7 +215,7 @@ const MOTION = {
    kept here so the correction is a diff rather than an overwrite. */
 const PROSE = {
   /* docs/components.md: "the side menu on this page is the reference implementation" of
-     selection, and that menu is Plastic. crystal-preview's own comment: "Menu entries are
+     selection, and that menu is Plastic. prismata-preview's own comment: "Menu entries are
      Plastic, not Resin. Resin is reserved for surfaces that float above everything, and a
      sidebar entry is furniture. Thirteen floating capsules would be exactly the legibility
      noise the hierarchy exists to prevent." Was: "Resin shell with Haze fill". */
@@ -273,8 +273,8 @@ for (const file of files) {
   }
   /* Field order is part of the entry's readability: surface sits beside material. */
   category.components = category.components.map((c) => {
-    const { id, name, anatomy, states, material, surface, geometry, semantics, crystal, product, motion, parity, ...rest } = c;
-    return Object.fromEntries(Object.entries({ id, name, anatomy, states, material, surface, geometry, semantics, crystal, product, motion, parity, ...rest })
+    const { id, name, anatomy, states, material, surface, geometry, semantics, prismata, product, motion, parity, ...rest } = c;
+    return Object.fromEntries(Object.entries({ id, name, anatomy, states, material, surface, geometry, semantics, prismata, product, motion, parity, ...rest })
       .filter(([, v]) => v !== undefined));
   });
   if (changed && WRITE) fs.writeFileSync(full, JSON.stringify(category, null, 2) + '\n');

@@ -3,16 +3,16 @@
  * The catalogue is authored as data so every contract has the same shape and
  * none can be half-written. These assertions run on every build:
  *
- *   1. Every motion recipe family maps to a catalogue component, so Crystal
+ *   1. Every motion recipe family maps to a catalogue component, so Prismata
  *      cannot ship an animation for a component that has no contract.
  *   2. Every motion id a component claims exists, as a recipe in
  *      `motion-recipes.json` or as a material preset in `core/assets/core/presets.js`.
  *      The check runs in both directions (since 28 September 2026).
  *   3. Every component names its surface, from the closed vocabulary in
  *      `core/tokens/surfaces.json`, and every surface in that vocabulary has a
- *      recipe in `core/assets/crystal.css`. A component cannot be specified in a
- *      material Crystal has not published a recipe for.
- *   4. Every component states what Crystal supplies and what the product owns.
+ *      recipe in `core/assets/prismata.css`. A component cannot be specified in a
+ *      material Prismata has not published a recipe for.
+ *   4. Every component states what Prismata supplies and what the product owns.
  *      A contract missing either is a placeholder, and a placeholder lets the
  *      catalogue claim more than it specifies.
  *
@@ -33,13 +33,13 @@ const CHAPTER = path.join(ROOT, 'core/docs/catalogue.md');
    committed file stale. */
 const MANIFEST = path.join(ROOT, 'libraries/parity.json');
 const STATUS_DIR = path.join(ROOT, 'libraries/status');
-const STYLESHEET = path.join(ROOT, 'core/assets/crystal.css');
+const STYLESHEET = path.join(ROOT, 'core/assets/prismata.css');
 
-/* Libraries Crystal's parity is measured against. Named explicitly so the claim
+/* Libraries Prismata's parity is measured against. Named explicitly so the claim
    is checkable. */
 const BENCHMARKS = ['mantine', 'mui', 'antd'];
 
-/* Platforms Crystal intends to ship libraries for. */
+/* Platforms Prismata intends to ship libraries for. */
 const PLATFORMS = ['web', 'react-native', 'swiftui', 'compose'];
 const STATUS_VALUES = ['not-started', 'in-progress', 'implemented', 'not-applicable'];
 
@@ -58,10 +58,10 @@ function loadSurfaces() {
       if (!selector) continue;
       /* A class selector must appear in the stylesheet as a selector, not as a
          word in a comment (comments are stripped above). An element selector is
-         checked as written. `.cr-resin.panel` checks both tokens. */
+         checked as written. `.pr-resin.panel` checks both tokens. */
       const tokens = selector.startsWith('.') ? selector.split('.').filter(Boolean).map((t) => '.' + t) : [selector];
       for (const token of tokens) {
-        if (!css.includes(token)) problems.push(`surface "${s.id}" names ${selector}, and ${token} has no rule in crystal.css`);
+        if (!css.includes(token)) problems.push(`surface "${s.id}" names ${selector}, and ${token} has no rule in prismata.css`);
       }
     }
   }
@@ -112,7 +112,7 @@ function validate(categories, surfaces, presets) {
       const where = `${category.id}/${c.id}`;
       if (seen.has(c.id)) problems.push(`duplicate component id: ${c.id}`);
       seen.add(c.id);
-      for (const field of ['name', 'anatomy', 'material', 'geometry', 'semantics', 'crystal', 'product']) {
+      for (const field of ['name', 'anatomy', 'material', 'geometry', 'semantics', 'prismata', 'product']) {
         if (!c[field] || !String(c[field]).trim()) problems.push(`${where}: missing ${field}`);
       }
       if (!Array.isArray(c.states) || !c.states.length) problems.push(`${where}: no states listed`);
@@ -186,9 +186,9 @@ function chapter(categories, stats, surfaces) {
   const lines = [];
   lines.push('# Component catalogue');
   lines.push('');
-  lines.push(`Crystal specifies ${total} components across ${categories.length} categories. Parity is measured against Mantine, Ant Design and MUI, and each entry names the components it corresponds to in them.`);
+  lines.push(`Prismata specifies ${total} components across ${categories.length} categories. Parity is measured against Mantine, Ant Design and MUI, and each entry names the components it corresponds to in them.`);
   lines.push('');
-  lines.push('Crystal specifies appearance: anatomy, states, material, geometry and the semantics a correct implementation must expose. It does not ship focus management, menu keyboard behaviour, date arithmetic or a rich-text engine. Products bring their own accessible primitives and style them with Crystal. Every entry says which parts Crystal supplies and which parts the product owns.');
+  lines.push('Prismata specifies appearance: anatomy, states, material, geometry and the semantics a correct implementation must expose. It does not ship focus management, menu keyboard behaviour, date arithmetic or a rich-text engine. Products bring their own accessible primitives and style them with Prismata. Every entry says which parts Prismata supplies and which parts the product owns.');
   lines.push('');
   lines.push('This chapter is generated from `core/tokens/catalogue/`. The same source generates the parity manifest in `libraries/parity.json`, so a component cannot appear in one and not the other.');
   lines.push('');
@@ -203,7 +203,7 @@ function chapter(categories, stats, surfaces) {
   lines.push('');
   lines.push('## Surfaces');
   lines.push('');
-  lines.push('Every component is made of one or more of these surfaces. Its Surface row names them, outer to inner. The vocabulary is `core/tokens/surfaces.json`. Each surface is implemented by the `crystal.css` recipe shown, and the build refuses a component that names a surface with no recipe. A library implements each surface once, and every component made of that surface uses the implementation.');
+  lines.push('Every component is made of one or more of these surfaces. Its Surface row names them, outer to inner. The vocabulary is `core/tokens/surfaces.json`. Each surface is implemented by the `prismata.css` recipe shown, and the build refuses a component that names a surface with no recipe. A library implements each surface once, and every component made of that surface uses the implementation.');
   lines.push('');
   lines.push('| Surface | Materials | Recipe | Components | Use |');
   lines.push('| --- | --- | --- | --- | --- |');
@@ -235,12 +235,12 @@ function chapter(categories, stats, surfaces) {
         ['Surface', surface],
         ['Geometry', esc(c.geometry)],
         ['Semantics', esc(c.semantics)],
-        ['Crystal supplies', esc(c.crystal)],
+        ['Prismata supplies', esc(c.prismata)],
         ['Product owns', esc(c.product)],
       ];
       if (c.motion?.length) rows.push(['Motion', c.motion.map((m) => `<code>${esc(m)}</code>`).join(', ')]);
       rows.push(['Parity', esc(c.parity.join(' · '))]);
-      lines.push('<div class="cr-table-scroll"><table class="cr-table cr-table-properties"><tbody>');
+      lines.push('<div class="pr-table-scroll"><table class="pr-table pr-table-properties"><tbody>');
       for (const [label, value] of rows) {
         lines.push(`<tr><th scope="row">${label}</th><td>${value}</td></tr>`);
       }
@@ -258,7 +258,7 @@ function chapter(categories, stats, surfaces) {
 function manifest(categories, stats, status) {
   return {
     $description:
-      'Per-platform implementation status for every component Crystal specifies. Generated from ' +
+      'Per-platform implementation status for every component Prismata specifies. Generated from ' +
       'core/tokens/catalogue/ with status merged from libraries/status/<platform>.json. A component present ' +
       'in one library is expected in the others, with the same states, semantics, surfaces and token bindings.',
     generated: 'tools/build-catalogue.cjs',
@@ -307,13 +307,13 @@ fs.mkdirSync(path.dirname(MANIFEST), { recursive: true });
 fs.writeFileSync(MANIFEST, JSON.stringify(manifest(categories, stats, status.merged), null, 2) + '\n');
 /* The full specification in one file. parity.json carries per-platform status;
    this carries what each component is: anatomy, states, material, surface,
-   geometry, semantics, the Crystal/product split and the parity claim. A
+   geometry, semantics, the Prismata/product split and the parity claim. A
    library needs the second to build a component and to document it, and
    should not have to read fourteen files across a package boundary. */
 fs.writeFileSync(
   path.join(ROOT, 'core/tokens/catalogue.json'),
   JSON.stringify({
-    $description: 'Crystal component catalogue, combined. Generated from core/tokens/catalogue/.',
+    $description: 'Prismata component catalogue, combined. Generated from core/tokens/catalogue/.',
     /* The version this catalogue ships in, never the build date. Both workflows
        refuse a build that changes a committed file, and a build date makes a
        committed generated file differ on every later UTC day. A version changes

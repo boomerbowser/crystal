@@ -1,4 +1,4 @@
-/* Crystal token pipeline.
+/* Prismata token pipeline.
  *
  * The DTCG file is the authoring format; the flat runtime file is generated from
  * it. Derived values (elevation-scaled shadows, rgba composites, scaled motion)
@@ -15,8 +15,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
-const FLAT = path.join(ROOT, 'core/tokens/crystal.json');
-const DTCG = path.join(ROOT, 'core/tokens/crystal.tokens.json');
+const FLAT = path.join(ROOT, 'core/tokens/prismata.json');
+const DTCG = path.join(ROOT, 'core/tokens/prismata.tokens.json');
 /* Inside `core/`, because these files are the package's `.` export and ship
    with it. A bare `exports/` beside the tools is outside the library, and a
    build that writes there refreshes a copy nobody installs. */
@@ -81,7 +81,7 @@ const MATERIAL_ROLES = {
    preference.
 
    A series colour is for data marks and nothing else. It is never ink, never an
-   action fill, and never a secondary colour; Crystal has none, and
+   action fill, and never a secondary colour; Prismata has none, and
    `docs/colors.md` says why. */
 
 const OKLAB_M1 = [
@@ -186,7 +186,7 @@ function chartSeries(seed, roles, mode, policy) {
 
    A heatmap cell and a calendar day carry a value by how strongly they are
    painted. The catalogue puts "scale construction, contrast floor at every step"
-   on Crystal's side of the line for both. A cell is a ground with the value
+   on Prismata's side of the line for both. A cell is a ground with the value
    written on it, so the floor that applies is the text one: the ink on each
    step has to clear 4.5:1.
 
@@ -275,7 +275,7 @@ function migrate() {
   const out = {
     $schema: 'https://tr.designtokens.org/format/',
     $description:
-      `Crystal design tokens, W3C DTCG format. Three tiers: primitive holds raw values, ` +
+      `Prismata design tokens, W3C DTCG format. Three tiers: primitive holds raw values, ` +
       `semantic names roles and aliases primitives, component binds semantics to control ` +
       `surfaces. Derived values (elevation-scaled shadows, rgba composites, scaled motion) ` +
       `are computed by the resolver, not stored here.`,
@@ -283,7 +283,7 @@ function migrate() {
       system: flat.name,
       version: flat.version,
       basis: flat.basis,
-      generatedFrom: 'core/tokens/crystal.json',
+      generatedFrom: 'core/tokens/prismata.json',
     },
     primitive: {},
     semantic: {},
@@ -369,14 +369,14 @@ function migrate() {
   set(out.semantic, 'typography.readingLeading', leaf('dimension', dim(flat.typography.readingLeading)));
 
   /* semantic: the type scale.
-     Crystal specifies a reading rhythm (Manrope at 16/25.6) and derives six steps
+     Prismata specifies a reading rhythm (Manrope at 16/25.6) and derives six steps
      from it here, so every platform reads the same scale. A scale derived
      inside one platform library is invisible to the others (CONTRACT §1).
 
      Ratios rather than sizes, because the derivation is the design decision. Each
      step is a multiple of the reading size, so moving `typography.readingSize`
      moves the whole scale instead of leaving six literals behind. The scale is
-     modest: Crystal's hierarchy is carried by weight and material as much as by
+     modest: Prismata's hierarchy is carried by weight and material as much as by
      size, and a dramatic scale fights that.
 
      Leading tightens as size grows, because large text needs proportionally
@@ -401,7 +401,7 @@ function migrate() {
 
   /* semantic: spacing and breakpoints.
      The catalogue makes "the spacing scale" and "breakpoint behaviour"
-     Crystal's obligation for every layout component, so both are tokens. A
+     Prismata's obligation for every layout component, so both are tokens. A
      library with no token to read has to write the numbers itself, which is
      CONTRACT §1's definition of drift.
 
@@ -426,18 +426,18 @@ function migrate() {
     removedIn: '3.0.0',
     reason: 'Superseded by the named material vocabulary. Two names for one concept is a documentation and tooling problem that multiplies across platform libraries.',
     tokens: {
-      '--cr-acrylic-fill': '--cr-frost-fill',
-      '--cr-acrylic-blur': '--cr-frost-blur',
-      '--cr-acrylic-saturation': '--cr-frost-saturation',
-      '--cr-glass-fill': '--cr-resin-fill',
-      '--cr-glass-blur': '--cr-resin-blur',
-      '--cr-glass-saturation': '--cr-resin-saturation',
-      '--cr-mica-inactive': '--cr-plastic-inactive',
-      '--cr-content-fill': '--cr-haze-fill',
-      '--cr-content-feather': '--cr-haze-feather',
-      '--cr-label-fill': '--cr-stone-fill',
+      '--pr-acrylic-fill': '--pr-frost-fill',
+      '--pr-acrylic-blur': '--pr-frost-blur',
+      '--pr-acrylic-saturation': '--pr-frost-saturation',
+      '--pr-glass-fill': '--pr-resin-fill',
+      '--pr-glass-blur': '--pr-resin-blur',
+      '--pr-glass-saturation': '--pr-resin-saturation',
+      '--pr-mica-inactive': '--pr-plastic-inactive',
+      '--pr-content-fill': '--pr-haze-fill',
+      '--pr-content-feather': '--pr-haze-feather',
+      '--pr-label-fill': '--pr-stone-fill',
     },
-    classes: { '.cr-acrylic': '.cr-frost', '.cr-glass': '.cr-resin' },
+    classes: { '.pr-acrylic': '.pr-frost', '.pr-glass': '.pr-resin' },
   };
 
   /* component: bindings that libraries implement against */
@@ -452,7 +452,7 @@ function migrate() {
   set(out.component, 'action.gap', leaf('dimension', '9px', 'Gap between an action\'s icon and its label'));
   set(out.component, 'action.disabledOpacity', leaf('number', 0.55, 'Opacity of a disabled control'));
 
-  /* Scrollbars are a Crystal surface. There are two: a Frost scrollbar for
+  /* Scrollbars are a Prismata surface. There are two: a Frost scrollbar for
      panels and long reading surfaces, and a Resin one for floating control
      planes and compact scrollers, so a scrollbar belongs to the material it
      scrolls rather than to the operating system. */
@@ -477,7 +477,7 @@ function migrate() {
   set(out.component, 'layout.gutterCompact', leaf('dimension', '18px', 'Shell gutter below the sm breakpoint'));
   set(out.component, 'layout.gutterBase', leaf('dimension', '26px', 'Shell gutter between the sm and lg breakpoints'));
   set(out.component, 'layout.gutterWide', leaf('dimension', '44px', 'Shell gutter at the lg breakpoint and above'));
-  /* The catalogue makes "minimum cell width" Crystal's obligation for the
+  /* The catalogue makes "minimum cell width" Prismata's obligation for the
      auto-flowing grid, so it is a token rather than a number each library picks.
      240px is a card that still holds a short heading and a line of supporting
      text; below it the two collide. */
@@ -485,7 +485,7 @@ function migrate() {
     'Narrowest an auto-flowing grid cell becomes before the grid drops a column'));
   set(out.component, 'layout.sidebarWidth', leaf('dimension', '280px',
     'Default width of a shell\'s supporting panel: a two-word label plus an icon at comfortable density'));
-  /* Icon sizes. `size` is what Crystal's own stylesheet draws an icon at;
+  /* Icon sizes. `size` is what Prismata's own stylesheet draws an icon at;
      `action` is the larger one the catalogue specifies inside an icon button,
      where the icon is the only content and carries the whole meaning. Both are
      tokens so that every platform library can read them. */
@@ -556,7 +556,7 @@ function migrate() {
       $type: 'number',
       $value: flat.default[key],
       $description: `Default ${flat.default[key]}; valid range ${min}-${max}`,
-      $extensions: { 'digital.meridian.crystal': { minimum: min, maximum: max } },
+      $extensions: { 'digital.meridian.prismata': { minimum: min, maximum: max } },
     });
   }
 
@@ -696,8 +696,8 @@ function buildFlat(tokens) {
       ]));
   flat.component = projectComponent(tokens.component);
   /* Spacing reaches CSS as custom properties because a product writing plain CSS
-     against Crystal needs the same scale the libraries compile against. It does
-     not vary with palette, mode or density; `--cr-space` is the density-aware
+     against Prismata needs the same scale the libraries compile against. It does
+     not vary with palette, mode or density; `--pr-space` is the density-aware
      padding step and is a different thing. */
   flat.spacing = Object.fromEntries(Object.entries(tokens.semantic.spacing)
     .map(([key, leafValue]) => [key, unpx(leafValue.$value)]));
@@ -707,7 +707,7 @@ function buildFlat(tokens) {
       leading: values.leading.$value,
       tracking: values.tracking.$value,
     }]));
-  flat.schemaNote = 'Generated from core/tokens/crystal.tokens.json (W3C DTCG). Edit the DTCG source, not this file.';
+  flat.schemaNote = 'Generated from core/tokens/prismata.tokens.json (W3C DTCG). Edit the DTCG source, not this file.';
   flat.materials = MATERIALS;
   return flat;
 }
@@ -743,21 +743,21 @@ function platformExports(tokens) {
   if (rows.length === semanticCount) throw new Error('Component tier produced no tokens');
 
   const camel = (s) => s.replace(/[.-](\w)/g, (_, c) => c.toUpperCase());
-  const banner = (c) => `${c} Crystal ${tokens.$meta.version} design tokens.\n${c} Generated from core/tokens/crystal.tokens.json. Do not edit by hand.\n`;
+  const banner = (c) => `${c} Prismata ${tokens.$meta.version} design tokens.\n${c} Generated from core/tokens/prismata.tokens.json. Do not edit by hand.\n`;
   const lit = (v) => JSON.stringify(String(v));
 
-  fs.writeFileSync(path.join(EXPORTS, 'crystal-tokens.ts'),
-    banner('//') + '\nexport const crystalTokens = {\n' +
+  fs.writeFileSync(path.join(EXPORTS, 'prismata-tokens.ts'),
+    banner('//') + '\nexport const prismataTokens = {\n' +
     rows.map(([k, v]) => `  ${lit(k)}: ${lit(v)},`).join('\n') +
-    '\n} as const;\n\nexport type CrystalToken = keyof typeof crystalTokens;\n');
+    '\n} as const;\n\nexport type PrismataToken = keyof typeof prismataTokens;\n');
 
-  fs.writeFileSync(path.join(EXPORTS, 'crystal-tokens.swift'),
-    banner('//') + '\npublic enum CrystalToken {\n' +
+  fs.writeFileSync(path.join(EXPORTS, 'prismata-tokens.swift'),
+    banner('//') + '\npublic enum PrismataToken {\n' +
     rows.map(([k, v]) => `    public static let ${camel(k.replace(/\./g, '-'))} = ${lit(v)}`).join('\n') +
     '\n}\n');
 
-  fs.writeFileSync(path.join(EXPORTS, 'crystal-tokens.kt'),
-    banner('//') + '\nobject CrystalToken {\n' +
+  fs.writeFileSync(path.join(EXPORTS, 'prismata-tokens.kt'),
+    banner('//') + '\nobject PrismataToken {\n' +
     rows.map(([k, v]) => `    const val ${camel(k.replace(/\./g, '-'))} = ${lit(v)}`).join('\n') +
     '\n}\n');
 

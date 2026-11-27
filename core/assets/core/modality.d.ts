@@ -1,5 +1,5 @@
-/** The attribute Crystal sets on the document element: `pointer` or `keyboard`. */
-export declare const ATTRIBUTE: 'data-crystal-modality';
+/** The attribute Prismata sets on the document element: `pointer` or `keyboard`. */
+export declare const ATTRIBUTE: 'data-prismata-modality';
 /** Record the input modality on `doc`'s document element. Returns a function that stops. */
 export declare function watch(doc?: Document): () => void;
 /** What a key press says about the modality, or null if it says nothing. */

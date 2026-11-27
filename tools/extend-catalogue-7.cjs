@@ -5,9 +5,9 @@
  * Meridian's answer. Three of them change the catalogue:
  *
  *   - D-26 (b): a button group and a split button are not docks. Their segments
- *     touch (square inside, pill outside, a hairline between), which `.cr-dock`
+ *     touch (square inside, pill outside, a hairline between), which `.pr-dock`
  *     (4px gaps inside 9px of padding, a pill per control) does not draw. They
- *     are the new `group` surface, `.cr-group`.
+ *     are the new `group` surface, `.pr-group`.
  *   - D-28: five motion assignments no component can play as written come off.
  *     `page-in`/`page-out` mark a new view after routing, which the navigation
  *     does not render; it keeps `selection`, the motion it plays. `busy` is a

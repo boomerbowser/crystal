@@ -47,7 +47,7 @@ const MOTION = {
 
 /* [entry, field, the sentence it had, the sentence it has now] */
 const PROSE = [
-  ['line-chart', 'crystal',
+  ['line-chart', 'prismata',
     'Stroke scale, point geometry, draw-on motion',
     'Stroke scale, point geometry, enter motion (mark-in)'],
   ['quantity-stepper', 'semantics',
@@ -93,8 +93,8 @@ for (const file of fs.readdirSync(DIR).filter((f) => f.endsWith('.json')).sort()
   /* The field order extend-catalogue-4 established: motion sits before parity.
      An entry that had no motion would otherwise gain it at the end. */
   category.components = category.components.map((c) => {
-    const { id, name, anatomy, states, material, surface, geometry, semantics, crystal, product, motion, parity, ...rest } = c;
-    return Object.fromEntries(Object.entries({ id, name, anatomy, states, material, surface, geometry, semantics, crystal, product, motion, parity, ...rest })
+    const { id, name, anatomy, states, material, surface, geometry, semantics, prismata, product, motion, parity, ...rest } = c;
+    return Object.fromEntries(Object.entries({ id, name, anatomy, states, material, surface, geometry, semantics, prismata, product, motion, parity, ...rest })
       .filter(([, v]) => v !== undefined));
   });
   if (changed) writes.push([full, category]);

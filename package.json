@@ -1,7 +1,7 @@
 {
-  "name": "crystal-workspace",
+  "name": "prismata-workspace",
   "private": true,
-  "description": "Build and verification tooling for Crystal. The published package is core/, which is @crystal-ui/core on npm. The documentation website is a separate repository, crystal-preview.",
+  "description": "Build and verification tooling for Prismata. The published package is core/, which is @prismata/core on npm. The documentation website is a separate repository, prismata-preview.",
   "type": "commonjs",
   "scripts": {
     "build": "node tools/build-library.mjs",

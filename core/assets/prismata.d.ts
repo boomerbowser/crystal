@@ -5,7 +5,7 @@
  * library that can only load the generated stylesheet gets one palette at
  * `:root`, and the design system has six.
  */
-export interface CrystalConfiguration {
+export interface PrismataConfiguration {
   palette?: string;
   mode?: 'light' | 'dark' | 'system';
   atmosphere?: number;
@@ -19,24 +19,24 @@ export interface CrystalConfiguration {
   motionSpeed?: number;
 }
 
-/** Clamp and normalise a configuration against Crystal's own ranges and choices. */
-export function normalize(value?: CrystalConfiguration): Required<CrystalConfiguration>;
+/** Clamp and normalise a configuration against Prismata's own ranges and choices. */
+export function normalize(value?: PrismataConfiguration): Required<PrismataConfiguration>;
 
-/** Every `--cr-*` custom property for a configuration in a mode. */
+/** Every `--pr-*` custom property for a configuration in a mode. */
 export function resolve(
-  value?: CrystalConfiguration,
+  value?: PrismataConfiguration,
   mode?: 'light' | 'dark',
 ): Record<string, string>;
 
 export function contrast(a: string, b: string): number;
-export function exportCSS(value?: CrystalConfiguration): string;
-export function exportJSON(value?: CrystalConfiguration): unknown;
-export function audit(value?: CrystalConfiguration, mode?: 'light' | 'dark'): readonly {
+export function exportCSS(value?: PrismataConfiguration): string;
+export function exportJSON(value?: PrismataConfiguration): unknown;
+export function audit(value?: PrismataConfiguration, mode?: 'light' | 'dark'): readonly {
   label: string; foreground: string; background: string; ratio: number; minimum: number;
 }[];
 export const version: string;
 
-declare const Crystal: {
+declare const Prismata: {
   normalize: typeof normalize;
   resolve: typeof resolve;
   contrast: typeof contrast;
@@ -45,4 +45,4 @@ declare const Crystal: {
   audit: typeof audit;
   version: string;
 };
-export default Crystal;
+export default Prismata;

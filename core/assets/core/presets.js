@@ -1,4 +1,4 @@
-/* Crystal headless core: the motion presets.
+/* Prismata headless core: the motion presets.
  *
  * A preset is a material's signature movement: Plastic rising, Frost coming
  * toward the viewer, Resin flowing in, Haze and Stone moving their feathered
@@ -28,7 +28,7 @@
 (function (root, factory) {
   const api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
-  else (root.CrystalCore = root.CrystalCore || {}).presets = api;
+  else (root.PrismataCore = root.PrismataCore || {}).presets = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
@@ -80,7 +80,7 @@
    * @returns {{keyframes: object[], easing: 'enter'|'exit', duration: string}}
    */
   function presetKeyframes(name, measured) {
-    if (!DURATION_ROLE[name]) throw new RangeError('Unknown Crystal preset: ' + name);
+    if (!DURATION_ROLE[name]) throw new RangeError('Unknown Prismata preset: ' + name);
     const travel = Math.max(0, Number(measured && measured.travel) || 0);
     const depth = Math.max(0, Number(measured && measured.depth) || 0);
     const anchored = Boolean(measured && measured.anchored);
@@ -96,8 +96,8 @@
     if (name === 'mirage' || name === 'mirage-out') {
       const origin = ORIGINS[from] || ORIGINS.left;
       if (softFlow) {
-        const start = { opacity: 0, '--cr-flow-reach': '0%' };
-        const end = { opacity: 1, '--cr-flow-reach': '100%' };
+        const start = { opacity: 0, '--pr-flow-reach': '0%' };
+        const end = { opacity: 1, '--pr-flow-reach': '100%' };
         result.keyframes = name === 'mirage' ? [start, end] : [end, start];
         return result;
       }

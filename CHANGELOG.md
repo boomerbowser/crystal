@@ -1,6 +1,42 @@
 # Changelog
 
-Notable changes to Crystal. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Crystal follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
+Notable changes to Prismata. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and Prismata follows [semantic versioning](https://semver.org/) against the public contract defined in the adoption chapter.
+
+Prismata was called Crystal, and published as `@crystal-ui/core`, until 3.0.0. The entries below 3.0.0 are kept as they were written, under the old names.
+
+## [3.0.0] - 2026-11-26
+
+Crystal is now Prismata, published under its own npm scope. Nothing about how
+it looks or moves has changed: every value, material and recipe is the same as
+2.10.1. Only the names have.
+
+### Changed
+
+- **The package is `@prismata/core`.** `@crystal-ui/core` is deprecated and
+  stays installable at 2.10.1. Every subpath export keeps its path.
+- **The prefix is `pr-`.** Every class, custom property and attribute that
+  began `cr-` now begins `pr-`: `.cr-haze` is `.pr-haze`, `--cr-primary` is
+  `--pr-primary`, `data-cr-scroll` is `data-pr-scroll`.
+- **The `data-crystal-*` attributes are `data-prismata-*`:** `data-prismata-mode`,
+  `data-prismata-modality` and the rest. The cascade layers are
+  `prismata.reset`, `prismata.base`, `prismata.component` and
+  `prismata.override`.
+- **The files are named for Prismata:** `assets/prismata.css`,
+  `assets/prismata-theme.css`, `assets/prismata.js`, `tokens/prismata.json`,
+  `tokens/prismata.tokens.json` and `exports/prismata-tokens.{ts,swift,kt}`.
+  The subpath exports (`/css`, `/theme`, `/flat`, `/tokens`, `/resolver`)
+  point at them, so imports through an export need only the new scope.
+- **The globals are `window.Prismata`, `window.PRISMATA_TOKENS`,
+  `window.PrismataMotion`, `window.PrismataEngines` and
+  `window.PRISMATA_MOTION_RECIPES`,** and the TypeScript types are
+  `PrismataToken`, `PrismataPresetName` and so on.
+- **The specification bundle on each GitHub release is `prismata-spec-<version>.zip`.**
+
+### Migrating from 2.10.1
+
+Replace `@crystal-ui/core` with `@prismata/core`, then `cr-` with `pr-` and
+`crystal` with `prismata` (in each capitalisation) in class names, custom
+properties, attributes, layer names and globals.
 
 ## [2.10.1] - 2026-11-22
 

@@ -1,11 +1,11 @@
 {
   "$schema": "https://tr.designtokens.org/format/",
-  "$description": "Crystal design tokens, W3C DTCG format. Three tiers: primitive holds raw values, semantic names roles and aliases primitives, component binds semantics to control surfaces. Derived values (elevation-scaled shadows, rgba composites, scaled motion) are computed by the resolver, not stored here.",
+  "$description": "Prismata design tokens, W3C DTCG format. Three tiers: primitive holds raw values, semantic names roles and aliases primitives, component binds semantics to control surfaces. Derived values (elevation-scaled shadows, rgba composites, scaled motion) are computed by the resolver, not stored here.",
   "$meta": {
-    "system": "Crystal",
+    "system": "Prismata",
     "version": "2.0.0",
-    "basis": "crystal-03-balanced; Meridian Digital design system",
-    "generatedFrom": "tokens/crystal.json"
+    "basis": "prismata-03-balanced; Meridian Digital design system",
+    "generatedFrom": "tokens/prismata.json"
   },
   "primitive": {
     "palette": {
@@ -1636,7 +1636,7 @@
         "$value": 90,
         "$description": "Default 90; valid range 15-90",
         "$extensions": {
-          "digital.meridian.crystal": {
+          "digital.meridian.prismata": {
             "minimum": 15,
             "maximum": 90
           }
@@ -1647,7 +1647,7 @@
         "$value": 35,
         "$description": "Default 35; valid range 35-85",
         "$extensions": {
-          "digital.meridian.crystal": {
+          "digital.meridian.prismata": {
             "minimum": 35,
             "maximum": 85
           }
@@ -1658,7 +1658,7 @@
         "$value": 125,
         "$description": "Default 125; valid range 60-150",
         "$extensions": {
-          "digital.meridian.crystal": {
+          "digital.meridian.prismata": {
             "minimum": 60,
             "maximum": 150
           }
@@ -1669,7 +1669,7 @@
         "$value": 28,
         "$description": "Default 28; valid range 14-28",
         "$extensions": {
-          "digital.meridian.crystal": {
+          "digital.meridian.prismata": {
             "minimum": 14,
             "maximum": 28
           }
@@ -1680,7 +1680,7 @@
         "$value": 1,
         "$description": "Default 1; valid range 0.25-2",
         "$extensions": {
-          "digital.meridian.crystal": {
+          "digital.meridian.prismata": {
             "minimum": 0.25,
             "maximum": 2
           }
@@ -1724,7 +1724,7 @@
       "minTarget": {
         "$type": "dimension",
         "$value": "48px",
-        "$description": "Minimum interactive target. Above the 44px floor Crystal specifies, which this must never fall below."
+        "$description": "Minimum interactive target. Above the 44px floor Prismata specifies, which this must never fall below."
       },
       "paddingBlock": {
         "$type": "dimension",
@@ -2055,20 +2055,20 @@
     "removedIn": "3.0.0",
     "reason": "Superseded by the named material vocabulary. Two names for one concept is a documentation and tooling problem that multiplies across platform libraries.",
     "tokens": {
-      "--cr-acrylic-fill": "--cr-frost-fill",
-      "--cr-acrylic-blur": "--cr-frost-blur",
-      "--cr-acrylic-saturation": "--cr-frost-saturation",
-      "--cr-glass-fill": "--cr-resin-fill",
-      "--cr-glass-blur": "--cr-resin-blur",
-      "--cr-glass-saturation": "--cr-resin-saturation",
-      "--cr-mica-inactive": "--cr-plastic-inactive",
-      "--cr-content-fill": "--cr-haze-fill",
-      "--cr-content-feather": "--cr-haze-feather",
-      "--cr-label-fill": "--cr-stone-fill"
+      "--pr-acrylic-fill": "--pr-frost-fill",
+      "--pr-acrylic-blur": "--pr-frost-blur",
+      "--pr-acrylic-saturation": "--pr-frost-saturation",
+      "--pr-glass-fill": "--pr-resin-fill",
+      "--pr-glass-blur": "--pr-resin-blur",
+      "--pr-glass-saturation": "--pr-resin-saturation",
+      "--pr-mica-inactive": "--pr-plastic-inactive",
+      "--pr-content-fill": "--pr-haze-fill",
+      "--pr-content-feather": "--pr-haze-feather",
+      "--pr-label-fill": "--pr-stone-fill"
     },
     "classes": {
-      ".cr-acrylic": ".cr-frost",
-      ".cr-glass": ".cr-resin"
+      ".pr-acrylic": ".pr-frost",
+      ".pr-glass": ".pr-resin"
     }
   }
 }

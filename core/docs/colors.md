@@ -1,10 +1,10 @@
 # Color architecture
 
-Crystal separates expressive identity from functional meaning. The bolder palettes expand beyond the original muted range; they do not create an exemption from accessibility.
+Prismata separates expressive identity from functional meaning. The bolder palettes expand beyond the original muted range; they do not create an exemption from accessibility.
 
 ## What “outside status colors” means
 
-WCAG does not reserve particular hues for errors, success, warnings, or information. Its use-of-color requirement addresses conveying meaning through color alone. Crystal instead treats separation as a system architecture choice: brand tokens may vary by product, while functional status tokens remain stable and have visible text and symbols. [W3C: Use of Color](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html).
+WCAG does not reserve particular hues for errors, success, warnings, or information. Its use-of-color requirement addresses conveying meaning through color alone. Prismata instead treats separation as a system architecture choice: brand tokens may vary by product, while functional status tokens remain stable and have visible text and symbols. [W3C: Use of Color](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html).
 
 Prism, Fuchsia and Amethyst emphasize violet/magenta away from conventional traffic-light statuses. Cobalt and Ion provide blue/cyan alternatives. They are brand identities, not success or information indicators. The information status uses an independent neutral slate pair to avoid inheriting a product’s primary brand color.
 
@@ -22,7 +22,7 @@ Prism, Fuchsia and Amethyst emphasize violet/magenta away from conventional traf
 | Harbor | `#4669B2` | `#8970B5` | `#72C4DF` |
 <!-- /generated:palettes -->
 
-The seed is not automatically a text color. The canonical [token JSON](../tokens/crystal.json) defines paired light/dark values. The bold palette entries are authored sRGB mixtures; they do not use or claim conformity to Material’s tonal generator. Harbor retains mapped values from the original generated palette.
+The seed is not automatically a text color. The canonical [token JSON](../tokens/prismata.json) defines paired light/dark values. The bold palette entries are authored sRGB mixtures; they do not use or claim conformity to Material’s tonal generator. Harbor retains mapped values from the original generated palette.
 
 ## Token layers
 
@@ -35,13 +35,13 @@ The seed is not automatically a text color. The canonical [token JSON](../tokens
 
 ### There is no secondary colour, and that is a decision
 
-Crystal defines one action pair per palette: `primary` with `onPrimary`, and
+Prismata defines one action pair per palette: `primary` with `onPrimary`, and
 `primarySoft` with `onPrimarySoft` for the container form. There is no
 `secondary`, and nothing in the token set, the exported theme or the component
 vocabulary names one.
 
 A palette has more than one hue: each carries a seed, a companion and a glow, and
-all three ship as `--cr-decorative`, `--cr-companion` and `--cr-glow`. None of
+all three ship as `--pr-decorative`, `--pr-companion` and `--pr-glow`. None of
 them carries an ink. They sit in the Expressive layer above because they have
 never been given a tested foreground. The resolver consumes them in four places,
 all of them paint and none of them ground: the three atmosphere stops and the
@@ -63,10 +63,10 @@ Emphasis is carried by `.primary` being opt-in, by label weight, and by placemen
 
 ### The chart series scale, which is not that
 
-Charts need several colours at once and a palette gives one. Crystal 2.1.0
+Charts need several colours at once and a palette gives one. Prismata 2.1.0
 therefore publishes a **series scale**: six categorical colours per palette per
-mode, as `--cr-chart-series-1` through `--cr-chart-series-6`, alongside
-`--cr-chart-axis` and `--cr-chart-grid`.
+mode, as `--pr-chart-series-1` through `--pr-chart-series-6`, alongside
+`--pr-chart-axis` and `--pr-chart-grid`.
 
 The series scale is not a secondary colour. A series colour is for data marks
 only: a bar, a line, a segment, a cell. It is never ink, an action fill, a
@@ -94,9 +94,9 @@ Then:
 All four are asserted in `tests/core-contracts.cjs` for all twelve
 palette-and-mode combinations.
 
-Beside the series scale, Crystal 2.1.0 publishes an **intensity ramp**:
-`--cr-chart-heat-1` through `--cr-chart-heat-5`, for a heatmap cell or a calendar
-day, each with its own ink as `--cr-chart-on-heat-N`. A cell is a ground and not
+Beside the series scale, Prismata 2.1.0 publishes an **intensity ramp**:
+`--pr-chart-heat-1` through `--pr-chart-heat-5`, for a heatmap cell or a calendar
+day, each with its own ink as `--pr-chart-on-heat-N`. A cell is a ground and not
 a mark, because the value is written on it, so the floor that applies is the text
 one, 4.5:1, and it applies to every step. The ink changes partway along the ramp
 in some palettes, as a ramp spanning light to dark has to. The construction
@@ -113,7 +113,7 @@ because six hues at sixty degrees do not survive dichromatic vision. Two of the
 six also sit near the danger and success hues; they carry no such meaning, and a
 chart that needs to say "bad" says it in words.
 
-CSS variables use the `--cr-` namespace and kebab-case names. Source JSON uses camelCase keys and the explicit `Crystal token schema v1`; it is not advertised as a Design Tokens Community Group interchange schema.
+CSS variables use the `--pr-` namespace and kebab-case names. Source JSON uses camelCase keys and the explicit `Prismata token schema v1`; it is not advertised as a Design Tokens Community Group interchange schema.
 
 ## Functional meanings
 
@@ -145,7 +145,7 @@ The controls deliberately offer curated presets rather than an unrestricted colo
 The four statuses are `success`, `attention`, `danger` and `info`, set with a
 `data-status` attribute. Each carries an icon as well as a colour.
 
-Crystal ships six product palettes. Every one of them changes the primary, the companion,
+Prismata ships six product palettes. Every one of them changes the primary, the companion,
 the decorative and the glow. None of them changes what success, warning, error or
 information look like.
 
@@ -155,10 +155,10 @@ stops meaning error and the user has to re-learn a safety signal per product. Br
 identity is expressed in the primary, and status colours are not used to express it.
 
 <div class="feedback-grid">
-<span class="cr-status" data-status="success"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#check"/></svg></span>Ready</span>
-<span class="cr-status" data-status="attention"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#attention"/></svg></span>Needs review</span>
-<span class="cr-status" data-status="danger"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#alert"/></svg></span>Failed</span>
-<span class="cr-status" data-status="info"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#info"/></svg></span>Scheduled</span>
+<span class="pr-status" data-status="success"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#check"/></svg></span>Ready</span>
+<span class="pr-status" data-status="attention"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#attention"/></svg></span>Needs review</span>
+<span class="pr-status" data-status="danger"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#alert"/></svg></span>Failed</span>
+<span class="pr-status" data-status="info"><span aria-hidden="true"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><use href="../assets/icons.svg#info"/></svg></span>Scheduled</span>
 </div>
 
 These render identically under all six palettes. Switch palettes in the

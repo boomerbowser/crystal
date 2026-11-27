@@ -1,4 +1,4 @@
-/* Types for Crystal's shared motion presets.
+/* Types for Prismata's shared motion presets.
  *
  * A preset is the movement a material makes entering or leaving. Its geometry is
  * computed from travel, depth and feather tokens rather than stored, so a token
@@ -6,13 +6,13 @@
  * rather than copy the keyframes it produces.
  */
 
-export type CrystalPresetName =
+export type PrismataPresetName =
   | 'plastic' | 'frost' | 'resin' | 'haze' | 'stone'
   | 'mirage' | 'mirage-out' | 'dismiss';
 
-export type CrystalFlowDirection = 'left' | 'right' | 'top' | 'bottom';
+export type PrismataFlowDirection = 'left' | 'right' | 'top' | 'bottom';
 
-export interface CrystalPresetMeasurements {
+export interface PrismataPresetMeasurements {
   /** Resolved travel distance in px, from the `travel-<role>` token. */
   travel: number;
   /** Resolved depth distance in px, from `travel-depth`. */
@@ -22,36 +22,36 @@ export interface CrystalPresetMeasurements {
    *  backing. */
   anchored?: boolean;
   /** Where a Mirage wash flows from. */
-  from?: CrystalFlowDirection;
+  from?: PrismataFlowDirection;
   /** True when the host can register a custom property for the wash, which gives
    *  a softer edge than a clip path. */
   softFlow?: boolean;
 }
 
-export interface CrystalPresetResult {
+export interface PrismataPresetResult {
   /** Empty for `haze` and `stone`, whose signature is paint rather than movement. */
   keyframes: Record<string, unknown>[];
-  /** Which easing token to resolve: `--cr-ease-enter` or `--cr-ease-exit`. */
+  /** Which easing token to resolve: `--pr-ease-enter` or `--pr-ease-exit`. */
   easing: 'enter' | 'exit';
   /** Which duration token to resolve. */
   duration: string;
 }
 
 export function presetKeyframes(
-  name: CrystalPresetName,
-  measured: CrystalPresetMeasurements,
-): CrystalPresetResult;
+  name: PrismataPresetName,
+  measured: PrismataPresetMeasurements,
+): PrismataPresetResult;
 
 /** The travel token a preset moves by: `travel-<role>`. */
-export function travelRole(name: CrystalPresetName): string;
+export function travelRole(name: PrismataPresetName): string;
 
 /** Area-conserving scale. A deformation that loses area reads as rubber, not fluid. */
 export function squash(sx: number, sy: number): string;
 
-export const PRESETS: readonly CrystalPresetName[];
-export const DURATION_ROLE: Readonly<Record<CrystalPresetName, string>>;
+export const PRESETS: readonly PrismataPresetName[];
+export const DURATION_ROLE: Readonly<Record<PrismataPresetName, string>>;
 export const EXITING: ReadonlySet<string>;
-export const ORIGINS: Readonly<Record<CrystalFlowDirection, string>>;
+export const ORIGINS: Readonly<Record<PrismataFlowDirection, string>>;
 
 declare const presets: {
   presetKeyframes: typeof presetKeyframes;

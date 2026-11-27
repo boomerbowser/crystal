@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* Add the components the React benchmarks ship that Crystal had not specified.
+/* Add the components the React benchmarks ship that Prismata had not specified.
  *
  * The catalogue in core/tokens/catalogue/ is the source; libraries/parity.json is
  * generated from it by build-catalogue.cjs, and `npm test` regenerates it, so an
@@ -7,7 +7,7 @@
  * tool lost all 55 additions that way). This one writes to the source.
  *
  * Each entry carries the same fields every other entry carries (anatomy, states,
- * material, geometry, semantics, the Crystal/product split and the parity
+ * material, geometry, semantics, the Prismata/product split and the parity
  * claim), because those fields are what a library can be measured against.
  *
  *   node tools/extend-catalogue.cjs          report
@@ -20,8 +20,8 @@ const DIR = path.resolve(__dirname, '../core/tokens/catalogue');
 const WRITE = process.argv.includes('--write');
 
 const R = 'Resin', H = 'Haze', F = 'Frost', S = 'Stone';
-const c = (id, name, anatomy, states, material, geometry, semantics, crystal, product, parity) =>
-  ({ id, name, anatomy, states, material, geometry, semantics, crystal, product, parity });
+const c = (id, name, anatomy, states, material, geometry, semantics, prismata, product, parity) =>
+  ({ id, name, anatomy, states, material, geometry, semantics, prismata, product, parity });
 
 /* Where each addition belongs. `charts` is new. */
 const ADDITIONS = {
@@ -270,7 +270,7 @@ const ADDITIONS = {
       'Falls back to content, not to emptiness, wherever it can.',
       'That layout does not shift when it resolves', 'What is deferred and why',
       ['mui:NoSsr']),
-    c('global-styles', 'Global styles', 'Applies Crystal\'s reset and base typography to a document.',
+    c('global-styles', 'Global styles', 'Applies Prismata\'s reset and base typography to a document.',
       ['at-rest'], 'Plastic foundation on the document',
       'Sets the content radius, spacing and reading rhythm as custom properties.',
       'Does not change focus visibility or motion preferences on its own.',
@@ -373,14 +373,14 @@ const REFUSED = {
       why: 'A shell emulator is an application, not a design-system component.' },
     { ...c('border-beam', 'Border beam', 'A travelling highlight around a border.', ['at-rest'], 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', ['antd:border-beam']),
       status: 'not-applicable',
-      why: 'Crystal specifies edge treatment as the Resin optical rim. A second, unrelated mechanism for a moving border would contradict the material spec, and the ambient tier that would have owned it is deferred.' },
+      why: 'Prismata specifies edge treatment as the Resin optical rim. A second, unrelated mechanism for a moving border would contradict the material spec, and the ambient tier that would have owned it is deferred.' },
   ],
 };
 
 const CHARTS_META = {
   id: 'charts',
   name: 'Charts',
-  description: 'Data visualisation on one shared surface. Crystal named no charting component before 2.0 while every React benchmark shipped one; these are specified against MUI X Charts, PrimeReact Chart and Mantine Charts. Every chart owes a text equivalent of its data — a chart is a second representation, never the only one.',
+  description: 'Data visualisation on one shared surface. Prismata named no charting component before 2.0 while every React benchmark shipped one; these are specified against MUI X Charts, PrimeReact Chart and Mantine Charts. Every chart owes a text equivalent of its data — a chart is a second representation, never the only one.',
   components: [],
 };
 

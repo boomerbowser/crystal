@@ -1,4 +1,4 @@
-/* Crystal material choreography. Every effect is cancellable, and every effect is finite
+/* Prismata material choreography. Every effect is cancellable, and every effect is finite
    except a continuous indicator (activity-turn, activity-travel, skeleton-sweep), which
    repeats while its work is pending and is stopped by the caller when the work resolves. */
 (function(root){
@@ -6,11 +6,11 @@
   const media=matchMedia('(prefers-reduced-motion: reduce)'),active=new Map();
   const directions=['left','bottom','right','top'];let flowIndex=0;
   const durationNames={plastic:'material',frost:'material',resin:'liquid',haze:'material',stone:'material',mirage:'flow','mirage-out':'departure',dismiss:'departure'};
-  function reduced(){return media.matches||getComputedStyle(document.documentElement).getPropertyValue('--cr-motion-enabled').trim()==='0';}
-  function stop(element){const current=active.get(element);if(current){active.delete(element);element.dataset.crMotionState='cancelled';for(const animation of current)animation.cancel();}}
+  function reduced(){return media.matches||getComputedStyle(document.documentElement).getPropertyValue('--pr-motion-enabled').trim()==='0';}
+  function stop(element){const current=active.get(element);if(current){active.delete(element);element.dataset.prMotionState='cancelled';for(const animation of current)animation.cancel();}}
   function stopAll(){for(const element of active.keys())stop(element);}
   function direction(element,requested){const value=directions.includes(requested)?requested:directions[flowIndex++%4];element.dataset.flowDirection=value;element.dataset.flowSoft=String(typeof CSS!=='undefined'&&typeof CSS.registerProperty==='function');return value;}
-  const recipes=Object.fromEntries((root.CRYSTAL_MOTION_RECIPES||[]).map(recipe=>[recipe.id,recipe]));
+  const recipes=Object.fromEntries((root.PRISMATA_MOTION_RECIPES||[]).map(recipe=>[recipe.id,recipe]));
   /* A fluid is incompressible: a deformation that loses area reads as rubber
      being crushed, not liquid moving. Both axes are divided by the square root
      of the area, which conserves volume while preserving the deformation's
@@ -19,14 +19,14 @@
      by tools/validate-motion.cjs. */
   function squash(sx,sy){const k=Math.sqrt(sx*sy);return `scale(${(sx/k).toFixed(4)},${(sy/k).toFixed(4)})`;}
 
-  function duration(base,rate=1){const css=getComputedStyle(document.documentElement);const speed=Number(css.getPropertyValue('--cr-motion-speed'))||1;return Math.min(5000,Math.max(0,base)/(Math.max(.25,Math.min(2,speed))*Math.max(.25,Math.min(2,rate))));}
+  function duration(base,rate=1){const css=getComputedStyle(document.documentElement);const speed=Number(css.getPropertyValue('--pr-motion-speed'))||1;return Math.min(5000,Math.max(0,base)/(Math.max(.25,Math.min(2,speed))*Math.max(.25,Math.min(2,rate))));}
   function opticalLayers(element,recipe,options,animations){
     if(document.documentElement.dataset.effects==='opaque'||matchMedia('(prefers-reduced-transparency: reduce)').matches||matchMedia('(forced-colors: active)').matches)return;
-    const surface=element.closest('.cr-field-shell')||element;
-    const add=(frames,pseudo)=>{if(getComputedStyle(surface,pseudo).content==='none')return;animations.push(CrystalEngines.frames(surface,frames,{...options,pseudoElement:pseudo,engine:'GSAP'}));};
+    const surface=element.closest('.pr-field-shell')||element;
+    const add=(frames,pseudo)=>{if(getComputedStyle(surface,pseudo).content==='none')return;animations.push(PrismataEngines.frames(surface,frames,{...options,pseudoElement:pseudo,engine:'GSAP'}));};
     const signature=recipe.signature,corner=getComputedStyle(surface).borderRadius;
     if(signature==='feather'){
-      if(getComputedStyle(surface,'::before').content==='none')animations.push(CrystalEngines.frames(surface,[{boxShadow:getComputedStyle(surface).boxShadow},{boxShadow:'0 0 14px 2px rgba(125,145,185,.32)',offset:.5},{boxShadow:getComputedStyle(surface).boxShadow}],{...options,engine:'GSAP'}));
+      if(getComputedStyle(surface,'::before').content==='none')animations.push(PrismataEngines.frames(surface,[{boxShadow:getComputedStyle(surface).boxShadow},{boxShadow:'0 0 14px 2px rgba(125,145,185,.32)',offset:.5},{boxShadow:getComputedStyle(surface).boxShadow}],{...options,engine:'GSAP'}));
       add([{transform:'translate(0,0)',borderRadius:corner},{transform:'translate(-4px,2px)',borderRadius:'35% 65% 42% 58% / 52% 42% 58% 48%',offset:.3},{transform:'translate(3px,-1px)',borderRadius:'58% 42% 62% 38% / 44% 58% 42% 56%',offset:.68},{transform:'translate(0,0)',borderRadius:corner}],'::before');
     }else if(['pressure','tension','coalesce','meniscus'].includes(signature)){
       const amplitude=signature==='coalesce'?1.045:1.02;
@@ -39,21 +39,21 @@
       const light='linear-gradient(110deg, transparent 10%, rgba(255,255,255,.27) 45%, transparent 75%)';
       add([{backgroundImage:light,backgroundSize:'240% 100%',backgroundPosition:'120% 0',opacity:.12},{backgroundImage:light,backgroundSize:'240% 100%',backgroundPosition:'45% 0',opacity:.7,offset:.55},{backgroundImage:light,backgroundSize:'240% 100%',backgroundPosition:'-35% 0',opacity:0}],'::after');
     }
-    if(signature==='inertia'||signature==='refraction')animations.push(CrystalEngines.frames(element,[{boxShadow:getComputedStyle(element).boxShadow},{boxShadow:'0 25px 42px rgba(8,12,30,.3)',offset:.55},{boxShadow:getComputedStyle(element).boxShadow}],{...options,engine:'GSAP'}));
+    if(signature==='inertia'||signature==='refraction')animations.push(PrismataEngines.frames(element,[{boxShadow:getComputedStyle(element).boxShadow},{boxShadow:'0 25px 42px rgba(8,12,30,.3)',offset:.55},{boxShadow:getComputedStyle(element).boxShadow}],{...options,engine:'GSAP'}));
   }
   function runComponent(element,name,frames,base,engine,options={}){
-    if(!(element instanceof Element))throw new TypeError('CrystalMotion requires an element');
+    if(!(element instanceof Element))throw new TypeError('PrismataMotion requires an element');
     /* `once` coalesces repeats of the same recipe on the same element. A continuous
        control fires its event many times a second, and restarting a 400ms animation on
        every one of them stops it partway and begins again, which makes a slider feel
        choppy. A different recipe still interrupts, because it expresses a different
        thing. A caller that wants a replay, as the catalogue does, omits the option. */
-    if(options.once&&element.dataset.crMotionName===name&&element.dataset.crMotionState==='running')
+    if(options.once&&element.dataset.prMotionName===name&&element.dataset.prMotionState==='running')
       return Promise.resolve({status:'coalesced'});
-    stop(element);element.dataset.crMotionName=name;element.dataset.crMotionEngine=engine;
+    stop(element);element.dataset.prMotionName=name;element.dataset.prMotionEngine=engine;
     const recipe=recipes[name]||{};
-    element.dataset.crMotionSignature=recipe.signature||'measured-layout';
-    if(reduced()){element.dataset.crMotionState='instant';return Promise.resolve({status:'instant'});}
+    element.dataset.prMotionSignature=recipe.signature||'measured-layout';
+    if(reduced()){element.dataset.prMotionState='instant';return Promise.resolve({status:'instant'});}
     const opts={duration:duration(base,options.rate),engine,easing:recipe.signature==='inertia'?'cubic-bezier(0.16, 0.7, 0.2, 1)':recipe.signature==='coalesce'?'cubic-bezier(0.34, 0.08, 0.24, 1)':'cubic-bezier(0.22, 0.65, 0.22, 1)'};
     /* A continuous recipe travels at constant speed and repeats until stop(). The
        returned promise settles only when it is cancelled, which the caller does
@@ -65,25 +65,25 @@
        stagger, because a mark cannot know it is the last. */
     if(recipe.stagger&&Number.isInteger(options.index)&&Number.isInteger(options.count)&&options.count<=recipe.stagger.maxMarks)
       opts.delay=duration(options.index*recipe.stagger.step,options.rate);
-    const animations=[CrystalEngines.frames(element,frames,opts)];
+    const animations=[PrismataEngines.frames(element,frames,opts)];
     /* The optical layers are finite decoration on a transition. On a loop they would
        repeat with it, and a feathered edge that ripples for as long as something is
        loading is ambient motion. */
     if(!recipe.loop)opticalLayers(element,recipe,opts,animations);
-    active.set(element,animations);element.dataset.crMotionState='running';
+    active.set(element,animations);element.dataset.prMotionState='running';
     return Promise.all(animations.map(animation=>animation.finished.then(()=>true,error=>{if(error.name!=='AbortError')throw error;return false;}))).then(results=>{
       const status=results.every(Boolean)?'finished':'cancelled';
-      if(active.get(element)===animations){active.delete(element);element.dataset.crMotionState=status;}return {status};
+      if(active.get(element)===animations){active.delete(element);element.dataset.prMotionState=status;}return {status};
     },error=>{if(active.get(element)===animations)stop(element);throw error;});
   }
   function layout(element,previous,options={}){const next=element.getBoundingClientRect(),dx=previous.left-next.left,dy=previous.top-next.top;
     const distance=Math.hypot(dx,dy),within=distance<=(options.extended===false?50:Math.hypot(innerWidth,innerHeight));
-    element.dataset.crMotionTravel=within?String(Math.round(distance)):'0';
+    element.dataset.prMotionTravel=within?String(Math.round(distance)):'0';
     return runComponent(element,'layout',within?[{transform:`translate(${dx}px,${dy}px) scale(.98)`},{transform:'translate(0,0) scale(1)'}]:[{opacity:.65},{opacity:1}],Math.min(1200,380+distance*.65),'GSAP',options);
   }
   /* The travelling selection pill (D-37). `pill` is the strip's one
-     `.cr-indicator.pill`, a child of the plane (`.cr-dock`, `.cr-dock-inner` or
-     `.cr-group`); `target` is the segment now selected, whose semantics the
+     `.pr-indicator.pill`, a child of the plane (`.pr-dock`, `.pr-dock-inner` or
+     `.pr-group`); `target` is the segment now selected, whose semantics the
      caller has already set. The pill is placed behind the target through five
      properties the stylesheet reads, the target's box and its corners, and
      `data-placed` hands the selection fill from the segments to the pill. The
@@ -100,28 +100,28 @@
      disappears. Weight is not animated; it changes with the semantics. */
   const chosen=new WeakMap(),inks=new WeakMap();
   function travel(pill,target,options={}){
-    if(!(pill instanceof Element)||!(target instanceof Element))throw new TypeError('CrystalMotion.travel requires the pill and the selected segment');
-    const strip=pill.parentElement;if(!strip)throw new TypeError('CrystalMotion.travel requires a pill inside its strip');
+    if(!(pill instanceof Element)||!(target instanceof Element))throw new TypeError('PrismataMotion.travel requires the pill and the selected segment');
+    const strip=pill.parentElement;if(!strip)throw new TypeError('PrismataMotion.travel requires a pill inside its strip');
     for(const animation of inks.get(pill)||[])animation.cancel();inks.delete(pill);
     const box=strip.getBoundingClientRect(),at=rect=>({x:rect.left-box.left-strip.clientLeft,y:rect.top-box.top-strip.clientTop,width:rect.width,height:rect.height});
     const next=at(target.getBoundingClientRect()),placed=pill.hasAttribute('data-placed'),seen=placed?at(pill.getBoundingClientRect()):null;
     const departing=chosen.get(pill);chosen.set(pill,target);
     stop(pill);
     const corners=getComputedStyle(target).borderRadius,before=seen?getComputedStyle(pill).borderRadius:corners;
-    for(const [key,value] of Object.entries(next))pill.style.setProperty('--cr-pill-'+key,value+'px');
-    pill.style.setProperty('--cr-pill-radius',corners);
+    for(const [key,value] of Object.entries(next))pill.style.setProperty('--pr-pill-'+key,value+'px');
+    pill.style.setProperty('--pr-pill-radius',corners);
     pill.setAttribute('data-placed','');
     const dx=seen?seen.x-next.x:0,dy=seen?seen.y-next.y:0;
     if(!seen||options.instant||!next.width||(Math.abs(dx)<.5&&Math.abs(dy)<.5&&Math.abs(seen.width-next.width)<.5&&Math.abs(seen.height-next.height)<.5)){
-      pill.dataset.crMotionName='selection-travel';pill.dataset.crMotionState='instant';return Promise.resolve({status:'instant'});
+      pill.dataset.prMotionName='selection-travel';pill.dataset.prMotionState='instant';return Promise.resolve({status:'instant'});
     }
-    const recipe=recipes['selection-travel'];if(!recipe)throw new RangeError('Unknown Crystal motion: selection-travel');
-    pill.dataset.crMotionTravel=String(Math.round(Math.hypot(dx,dy)));
+    const recipe=recipes['selection-travel'];if(!recipe)throw new RangeError('Unknown Prismata motion: selection-travel');
+    pill.dataset.prMotionTravel=String(Math.round(Math.hypot(dx,dy)));
     const run=runComponent(pill,'selection-travel',[
       {transform:`translate(${dx}px,${dy}px)`,width:seen.width+'px',height:seen.height+'px',borderRadius:before},
       {transform:'translate(0px,0px)',width:next.width+'px',height:next.height+'px',borderRadius:corners},
     ],recipe.duration,recipe.engine,options);
-    if(pill.dataset.crMotionState==='running'){
+    if(pill.dataset.prMotionState==='running'){
       pill.setAttribute('data-travelling','');
       if(departing&&departing!==target&&departing.isConnected&&typeof target.animate==='function'){
         const selectedInk=getComputedStyle(target).color,stripInk=getComputedStyle(departing).color;
@@ -132,31 +132,31 @@
         ]);
       }
     }
-    const land=()=>{if(pill.dataset.crMotionState!=='running')pill.removeAttribute('data-travelling');};
+    const land=()=>{if(pill.dataset.prMotionState!=='running')pill.removeAttribute('data-travelling');};
     return run.then(result=>{land();return result;},error=>{land();throw error;});
   }
   function play(element,name,options={}){
     if(recipes[name]){const recipe=recipes[name];return runComponent(element,name,recipe.keyframes,recipe.duration,recipe.engine,options);}
 
-    if(!(element instanceof Element))throw new TypeError('CrystalMotion.play requires an element');
-    if(!durationNames[name])throw new RangeError('Unknown Crystal motion: '+name);
-    stop(element);element.dataset.crMotionName=name;
-    if(reduced()||typeof element.animate!=='function'){element.dataset.crMotionState='instant';return Promise.resolve({status:'instant'});}
-    const tokens=getComputedStyle(document.documentElement),read=(key,fallback)=>{const value=parseFloat(tokens.getPropertyValue('--cr-'+key));return Number.isFinite(value)?value:fallback;};
+    if(!(element instanceof Element))throw new TypeError('PrismataMotion.play requires an element');
+    if(!durationNames[name])throw new RangeError('Unknown Prismata motion: '+name);
+    stop(element);element.dataset.prMotionName=name;
+    if(reduced()||typeof element.animate!=='function'){element.dataset.prMotionState='instant';return Promise.resolve({status:'instant'});}
+    const tokens=getComputedStyle(document.documentElement),read=(key,fallback)=>{const value=parseFloat(tokens.getPropertyValue('--pr-'+key));return Number.isFinite(value)?value:fallback;};
     const limit=Math.min(50,Math.max(0,read('motion-max-travel',50)));
     /* The travel role, the keyframes and the easing role all come from the shared
        preset module, so the web runtime and every platform library compute the
        same movement from the same tokens instead of each carrying a copy. */
-    const presets=(root.CrystalCore&&root.CrystalCore.presets)||null;
+    const presets=(root.PrismataCore&&root.PrismataCore.presets)||null;
     const travel=Math.min(limit,Math.max(0,read('travel-'+(presets?presets.travelRole(name):'panel'),24)));
     const depth=Math.min(limit,Math.max(0,read('travel-depth',50))),feather=Math.min(6,Math.max(0,read('travel-feather',6)));
-    const anchored=name==='haze'||name==='stone'||(name==='dismiss'&&element.matches('.cr-dialog,.cr-haze,.cr-surface,.cr-stone'));
+    const anchored=name==='haze'||name==='stone'||(name==='dismiss'&&element.matches('.pr-dialog,.pr-haze,.pr-surface,.pr-stone'));
     const rate=Number.isFinite(options.rate)?Math.max(.25,Math.min(2,options.rate)):1;
     const duration=Math.min(read('motion-max-duration',5000),read(durationNames[name],1000)/rate);
     const easingRole=presets&&presets.EXITING.has(name)?'exit':(name==='dismiss'||name==='mirage-out'?'exit':'enter');
-    const easing=tokens.getPropertyValue('--cr-ease-'+easingRole).trim()||'ease-in-out';
+    const easing=tokens.getPropertyValue('--pr-ease-'+easingRole).trim()||'ease-in-out';
     const opts={duration,easing,fill:'none'},animations=[];
-    const add=(frames,pseudoElement)=>{element.dataset.crMotionEngine=pseudoElement?'Motion + GSAP':'Motion';animations.push(CrystalEngines.frames(element,frames,{...opts,...(pseudoElement?{pseudoElement}:{} )}));};
+    const add=(frames,pseudoElement)=>{element.dataset.prMotionEngine=pseudoElement?'Motion + GSAP':'Motion';animations.push(PrismataEngines.frames(element,frames,{...opts,...(pseudoElement?{pseudoElement}:{} )}));};
     const built=presets?presets.presetKeyframes(name,{
       travel,depth,anchored,
       from:(name==='mirage'||name==='mirage-out')?direction(element,options.direction):undefined,
@@ -184,21 +184,21 @@
         if(name==='frost'||name==='plastic')add([{boxShadow:'0 2px 4px rgba(10,15,32,.12)'},{boxShadow:'0 32px 52px rgba(10,15,32,.28)',offset:.66},{boxShadow:getComputedStyle(element).boxShadow}]);
       }catch{/* Optional pseudo-element effects fall back to the real component movement. */}
     }
-    if(!animations.length){element.dataset.crMotionState='instant';return Promise.resolve({status:'instant'});}
-    active.set(element,animations);element.dataset.crMotionState='running';
+    if(!animations.length){element.dataset.prMotionState='instant';return Promise.resolve({status:'instant'});}
+    active.set(element,animations);element.dataset.prMotionState='running';
     return Promise.all(animations.map(animation=>animation.finished.then(()=>true,()=>false))).then(results=>{
       const status=results.every(Boolean)?'finished':'cancelled';
-      if(active.get(element)===animations){active.delete(element);element.dataset.crMotionState=status;}
+      if(active.get(element)===animations){active.delete(element);element.dataset.prMotionState=status;}
       return {status};
     });
   }
   media.addEventListener('change',()=>{if(reduced())stopAll();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAll();});
   /* Ambient motion, which is what a surface does at rest, is deferred to a later
-     version of Crystal at Meridian's direction. It was specified, built and
+     version of Prismata at Meridian's direction. It was specified, built and
      measured, and what shipped was not good enough to keep. The record of that
      work is in the request log. The optical layer remains for motion that a
      person starts. */
 
-  root.CrystalMotion=Object.freeze({play,layout,travel,duration,recipes:Object.freeze(recipes),stop,stopAll,reduced,direction,presets:Object.freeze([...Object.keys(durationNames),...Object.keys(recipes)])});
+  root.PrismataMotion=Object.freeze({play,layout,travel,duration,recipes:Object.freeze(recipes),stop,stopAll,reduced,direction,presets:Object.freeze([...Object.keys(durationNames),...Object.keys(recipes)])});
 })(window);

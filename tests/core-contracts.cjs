@@ -1,4 +1,4 @@
-/* Contract tests for the Crystal headless core.
+/* Contract tests for the Prismata headless core.
  *
  * These encode decisions rather than implementation details. If one fails, a
  * rule the design system promises has changed: check the specification before
@@ -196,10 +196,10 @@ check('the platform mapping round-trips the damping ratio', () => {
 
 /* ------------------------------------------------- scrollbar mechanisms */
 
-/* Crystal draws its two scrollbars through two mechanisms, and exactly one of
+/* Prismata draws its two scrollbars through two mechanisms, and exactly one of
    them may reach any given browser. Chromium 121 and later ignore every
    `::-webkit-scrollbar` pseudo-element on a container whose `scrollbar-width` or
-   `scrollbar-color` is not `auto`, and that is every container Crystal styles.
+   `scrollbar-color` is not `auto`, and that is every container Prismata styles.
    A webkit rule written outside the `@supports not (scrollbar-color:auto)`
    guard is therefore dead in the browser most people use and live in the ones
    they do not, so one specification renders two ways.
@@ -207,7 +207,7 @@ check('the platform mapping round-trips the damping ratio', () => {
    This is a source check because a branch that did not apply leaves nothing in
    the computed style for a runtime check to look at. */
 check('every webkit scrollbar rule sits behind the legacy guard', () => {
-  const source = require('node:fs').readFileSync(require('node:path').join(__dirname, '../core/assets/crystal.css'), 'utf8');
+  const source = require('node:fs').readFileSync(require('node:path').join(__dirname, '../core/assets/prismata.css'), 'utf8');
   /* Comments name the pseudo-element in order to explain it. Blanked rather than
      deleted so the offsets below still point at the real line. */
   const css = source.replace(/\/\*[\s\S]*?\*\//g, (comment) => comment.replace(/[^\n]/g, ' '));
@@ -227,15 +227,15 @@ check('every webkit scrollbar rule sits behind the legacy guard', () => {
   assert.deepEqual(stray, [], 'webkit scrollbar rules outside the guard');
 });
 
-/* Crystal's focus is a crisp core inside a feathered halo, and it has to reach
+/* Prismata's focus is a crisp core inside a feathered halo, and it has to reach
    anything that can take focus, including elements that are not native
    controls. A scroll area that holds nothing focusable becomes a tab stop so
-   its content is reachable by keyboard, and it must get Crystal's ring rather
+   its content is reachable by keyboard, and it must get Prismata's ring rather
    than the browser's default. */
 check('the focus halo reaches anything focusable, not only native controls', () => {
-  const css = require('node:fs').readFileSync(require('node:path').join(__dirname, '../core/assets/crystal.css'), 'utf8');
+  const css = require('node:fs').readFileSync(require('node:path').join(__dirname, '../core/assets/prismata.css'), 'utf8');
   for (const rule of css.match(/[^{}]*:focus-visible[^{}]*\{[^}]*\}/g) ?? []) {
-    if (!/outline:[^;]*var\(--cr-focus-core/.test(rule)) continue;
+    if (!/outline:[^;]*var\(--pr-focus-core/.test(rule)) continue;
     assert.match(rule, /\[tabindex\]:focus-visible/,
       'the focus rule does not reach [tabindex]');
     return;
@@ -251,7 +251,7 @@ check('the focus halo reaches anything focusable, not only native controls', () 
  *
  * D-11 records that this file "compares the exported halo against the rendered
  * one, layer by layer, blur and spread". The comparison with the rendered page
- * is in `crystal-preview/tests/site-contracts.cjs`, with the site it
+ * is in `prismata-preview/tests/site-contracts.cjs`, with the site it
  * photographs; this is the library's gate.
  *
  * It checks geometry and alpha, all six layers, in both modes. That is safe
@@ -267,13 +267,13 @@ const FOCUS = {
 
 function focusBlocks() {
   const css = require('node:fs').readFileSync(
-    require('node:path').join(__dirname, '../core/assets/crystal-theme.css'), 'utf8');
+    require('node:path').join(__dirname, '../core/assets/prismata-theme.css'), 'utf8');
   /* The theme writes a light block and a dark one. Split on the ring so each
      block's feathers are read beside the ring that references them. Otherwise
      both resolve to the first definition in the file and the dark-mode alphas
      are never tested. */
   const blocks = [];
-  const re = /--cr-focus-ring:\s*([^;]+);/g;
+  const re = /--pr-focus-ring:\s*([^;]+);/g;
   let m;
   while ((m = re.exec(css))) {
     const before = css.slice(0, m.index);
@@ -285,7 +285,7 @@ function focusBlocks() {
        failure sends the reader to the wrong file.
 
        Comments are stripped first. Otherwise the file's own header, which
-       says `Set data-crystal-mode="light" or "dark"`, falls inside the first
+       says `Set data-prismata-mode="light" or "dark"`, falls inside the first
        block's slice and classifies `:root` as dark. */
     const head = before
       .slice(before.lastIndexOf('}', start) + 1, start)
@@ -320,32 +320,32 @@ check('the feather alphas lift in dark mode and hold in light', () => {
   const seen = new Set();
   for (const { scope, mode } of focusBlocks()) {
     const alphas = [1, 2, 3, 4].map((n) => {
-      const m = new RegExp(`--cr-focus-feather-${n}:\\s*rgba?\\([^)]*?([\\d.]+)\\s*\\)`).exec(scope);
-      assert.ok(m, `no --cr-focus-feather-${n} beside this ring`);
+      const m = new RegExp(`--pr-focus-feather-${n}:\\s*rgba?\\([^)]*?([\\d.]+)\\s*\\)`).exec(scope);
+      assert.ok(m, `no --pr-focus-feather-${n} beside this ring`);
       return Math.round(Number(m[1]) * 100);
     });
     assert.deepEqual(alphas, FOCUS.alpha[mode],
       `${mode} feather alphas should be ${FOCUS.alpha[mode].join('/')}, read ${alphas.join('/')}`);
-    const shadow = /--cr-focus-shadow:\s*rgba?\([^)]*?([\d.]+)\s*\)/.exec(scope);
-    assert.ok(shadow, 'no --cr-focus-shadow beside this ring');
+    const shadow = /--pr-focus-shadow:\s*rgba?\([^)]*?([\d.]+)\s*\)/.exec(scope);
+    assert.ok(shadow, 'no --pr-focus-shadow beside this ring');
     assert.equal(Math.round(Number(shadow[1]) * 100), FOCUS.shadow,
-      `--cr-focus-shadow should be ${FOCUS.shadow}% of the decorative colour`);
+      `--pr-focus-shadow should be ${FOCUS.shadow}% of the decorative colour`);
     seen.add(mode);
   }
   assert.deepEqual([...seen].sort(), ['dark', 'light'],
     `expected both modes to be checked, saw ${[...seen].join(', ') || 'none'}`);
 });
 
-/* A consumer that loads `crystal.css` and not the generated theme still gets a
-   focus ring, out of the `var(--cr-focus-ring, …)` fallback. The fallback must
+/* A consumer that loads `prismata.css` and not the generated theme still gets a
+   focus ring, out of the `var(--pr-focus-ring, …)` fallback. The fallback must
    have the same geometry as the exported theme, or it is a second recipe. It
    kept the withdrawn spreads 2/6/12/22 after D-11 closed, because the fix went
    into the resolver and not the stylesheet. */
 check('the stylesheet fallback is the same recipe as the exported theme', () => {
   const css = require('node:fs').readFileSync(
-    require('node:path').join(__dirname, '../core/assets/crystal.css'), 'utf8');
-  const m = /box-shadow:\s*var\(--cr-focus-ring,([\s\S]*?)\)\}/.exec(css);
-  assert.ok(m, 'no --cr-focus-ring fallback in crystal.css');
+    require('node:path').join(__dirname, '../core/assets/prismata.css'), 'utf8');
+  const m = /box-shadow:\s*var\(--pr-focus-ring,([\s\S]*?)\)\}/.exec(css);
+  assert.ok(m, 'no --pr-focus-ring fallback in prismata.css');
   const geometry = [...m[1].matchAll(/0\s+(\d+px|0)\s+(\d+px)(?:\s+(\d+px))?/g)]
     .map((g) => [g[1], g[2], g[3]].filter(Boolean).join(' '));
   const want = [
@@ -353,42 +353,42 @@ check('the stylesheet fallback is the same recipe as the exported theme', () => 
     ...FOCUS.lift.map(([offset, blur]) => `${offset}px ${blur}px`),
   ];
   assert.deepEqual(geometry, want,
-    'the fallback in crystal.css is not the recipe the theme exports');
+    'the fallback in prismata.css is not the recipe the theme exports');
 });
 
 /* ------------------------------------------------- tokens vs stylesheet */
 
-/* `crystal.css` is hand-authored; `crystal.tokens.json` is the source of truth.
+/* `prismata.css` is hand-authored; `prismata.tokens.json` is the source of truth.
    Unchecked, the stylesheet padded a button `10px 19px` while the tokens, the
-   reference table, the preview site and crystal-react all said `15px 24px`. A
+   reference table, the preview site and prismata-react all said `15px 24px`. A
    hand-authored sheet has no generated link to the token file, so the pairs
    are listed by hand, and a listed pair that cannot be found in the stylesheet
    fails. */
 const TOKEN_BOUND = [
-  { token: 'component.action.paddingBlock', rule: '.cr-button', prop: 'padding', part: 0 },
-  { token: 'component.action.paddingInline', rule: '.cr-button', prop: 'padding', part: 1 },
-  { token: 'component.action.radius', rule: '.cr-button', prop: 'border-radius' },
-  { token: 'component.action.minTarget', rule: '.cr-button', prop: 'min-height' },
-  { token: 'component.action.gap', rule: '.cr-button', prop: 'gap' },
+  { token: 'component.action.paddingBlock', rule: '.pr-button', prop: 'padding', part: 0 },
+  { token: 'component.action.paddingInline', rule: '.pr-button', prop: 'padding', part: 1 },
+  { token: 'component.action.radius', rule: '.pr-button', prop: 'border-radius' },
+  { token: 'component.action.minTarget', rule: '.pr-button', prop: 'min-height' },
+  { token: 'component.action.gap', rule: '.pr-button', prop: 'gap' },
 ];
 
 /* Selectors that may carry a different value from the plain control, because a
    variant is allowed to differ. */
 const VARIANT_MAY_DIFFER = [
-  /\.cr-button\s*\.|\.cr-button\./,   /* .cr-button.danger and friends */
-  /\.cr-dock/,                        /* the dock's own compact controls */
+  /\.pr-button\s*\.|\.pr-button\./,   /* .pr-button.danger and friends */
+  /\.pr-dock/,                        /* the dock's own compact controls */
   /aria-(pressed|selected|current)/,  /* selection weight, not geometry */
   /* The 2.2.0 recipes that a <button> may wear instead of the action geometry.
      A bare control, a navigation entry and a drag handle are decided to differ
      from the action (44px floor, no pad, their own padding); see surfaces.json. */
-  /\.cr-bare\b/, /\.cr-nav-item\b/, /\.cr-drag-handle\b/,
+  /\.pr-bare\b/, /\.pr-nav-item\b/, /\.pr-drag-handle\b/,
   /* A button inside a group (2.3.0, D-26): its interior corners square off
      against its neighbours and only the group's ends are round. That is the
      `group` surface, decided to differ from a lone action's pill. */
-  /\.cr-group\b/,
+  /\.pr-group\b/,
 ];
 
-/* Every rule that sets `prop` and could reach a `<button class="cr-button">`.
+/* Every rule that sets `prop` and could reach a `<button class="pr-button">`.
    Declaration order and layer are not resolved here. The assertion is the
    stricter "they all agree", which needs neither. */
 function rulesReaching(css, prop) {
@@ -401,7 +401,7 @@ function rulesReaching(css, prop) {
        reading pad, and `border-radius: inherit` there is how the pad follows
        the control's radius. */
     if (/::(before|after|placeholder|selection|marker|backdrop)/.test(selector)) continue;
-    const reaches = /cr-button/.test(selector) || /(?<![\w.#-])button(?![\w-])/.test(selector);
+    const reaches = /pr-button/.test(selector) || /(?<![\w.#-])button(?![\w-])/.test(selector);
     if (!reaches) continue;
     const decl = new RegExp(`(?:^|;)\\s*${prop}\\s*:([^;]*)`).exec(match[2]);
     if (decl) out.push({ selector, value: decl[1].trim().split(/\s+/)[0] });
@@ -413,9 +413,9 @@ check('the stylesheet honours the token values it is bound to', () => {
   const fs = require('node:fs');
   const path = require('node:path');
   const tokens = JSON.parse(fs.readFileSync(
-    path.join(__dirname, '../core/tokens/crystal.tokens.json'), 'utf8'));
+    path.join(__dirname, '../core/tokens/prismata.tokens.json'), 'utf8'));
   const css = fs.readFileSync(
-    path.join(__dirname, '../core/assets/crystal.css'), 'utf8')
+    path.join(__dirname, '../core/assets/prismata.css'), 'utf8')
     .replace(/\/\*[\s\S]*?\*\//g, '');
 
   const value = (dotted) => dotted.split('.').reduce((node, key) => {
@@ -424,11 +424,11 @@ check('the stylesheet honours the token values it is bound to', () => {
   }, tokens).$value;
 
   for (const bound of TOKEN_BOUND) {
-    /* The declaration as the reset layer writes it: `.cr-button{…}` exactly,
-       not `.cr-button.danger` and not `.cr-dock .cr-button`. */
+    /* The declaration as the reset layer writes it: `.pr-button{…}` exactly,
+       not `.pr-button.danger` and not `.pr-dock .pr-button`. */
     const rule = new RegExp(`(?:^|[},])\\s*${bound.rule.replace('.', '\\.')}\\s*\\{([^{}]*)\\}`)
       .exec(css);
-    assert.ok(rule, `${bound.rule} has no rule of its own in crystal.css`);
+    assert.ok(rule, `${bound.rule} has no rule of its own in prismata.css`);
     const decl = new RegExp(`(?:^|;)\\s*${bound.prop}\\s*:([^;]*)`).exec(rule[1]);
     assert.ok(decl, `${bound.rule} does not set ${bound.prop}`);
     const parts = decl[1].trim().split(/\s+/);
@@ -438,16 +438,16 @@ check('the stylesheet honours the token values it is bound to', () => {
 
     /* And nothing later takes it back.
      *
-     * The check above reads the first `.cr-button` rule, which is in
-     * `crystal.reset`. A later layer wins regardless of specificity, so a rule
-     * in `crystal.component` can leave that declaration dead: when
-     * `:is(button,a.cr-button)` there set a different `min-height`, the token
-     * disagreed with every button Crystal drew (D-20).
+     * The check above reads the first `.pr-button` rule, which is in
+     * `prismata.reset`. A later layer wins regardless of specificity, so a rule
+     * in `prismata.component` can leave that declaration dead: when
+     * `:is(button,a.pr-button)` there set a different `min-height`, the token
+     * disagreed with every button Prismata drew (D-20).
      *
      * So the pair is only honoured if every other rule that could apply to the
      * same element agrees. "Could apply" is approximated by hand, because a
-     * text scan cannot resolve selectors: a rule naming `cr-button`, or one
-     * selecting the bare `button` element, can reach a `<button class="cr-button">`.
+     * text scan cannot resolve selectors: a rule naming `pr-button`, or one
+     * selecting the bare `button` element, can reach a `<button class="pr-button">`.
      * A variant that really differs belongs in `VARIANT_MAY_DIFFER` with a
      * reason, so that the difference is recorded as a decision. */
     for (const other of rulesReaching(css, bound.prop)) {
@@ -470,7 +470,7 @@ check('the stylesheet honours the token values it is bound to', () => {
  * tints the whole surface. Seventy-two secondary buttons on the preview alone
  * depended on that list being complete.
  *
- * `.secondary` is withdrawn. It named a second action colour and Crystal has no
+ * `.secondary` is withdrawn. It named a second action colour and Prismata has no
  * such role: the palettes publish one action pair, and the companion and glow
  * hues are expressive paint that `docs/colors.md` says is never assumed to be
  * text-safe. A withdrawn variant comes back when its class is deleted from one
@@ -484,46 +484,46 @@ check('the button vocabulary is primary, quiet, danger — and not secondary', (
   const fs = require('node:fs');
   const path = require('node:path');
   const css = fs.readFileSync(
-    path.join(__dirname, '../core/assets/crystal.css'), 'utf8')
+    path.join(__dirname, '../core/assets/prismata.css'), 'utf8')
     .replace(/\/\*[\s\S]*?\*\//g, '');
 
-  /* Every rule whose selector names `.cr-button`, in document order. */
+  /* Every rule whose selector names `.pr-button`, in document order. */
   const rules = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
     .map(([, selector, body]) => ({ selector: selector.trim(), body }))
-    .filter(({ selector }) => /\.cr-button\b/.test(selector) && !selector.startsWith('@'));
+    .filter(({ selector }) => /\.pr-button\b/.test(selector) && !selector.startsWith('@'));
 
   /* Withdrawn, and the comments that explain the withdrawal were stripped above,
      so a match here is a live rule rather than a mention of one. */
   const secondary = rules.find(({ selector }) => /\.secondary\b/.test(selector));
   assert.ok(!secondary,
-    `${secondary?.selector} still exists; .secondary names an action colour Crystal does not define`);
+    `${secondary?.selector} still exists; .secondary names an action colour Prismata does not define`);
 
-  const fill = rules.filter(({ selector, body }) => /\.cr-button\.primary::before/.test(selector)
-    && /background\s*:\s*var\(--cr-primary\)/.test(body));
+  const fill = rules.filter(({ selector, body }) => /\.pr-button\.primary::before/.test(selector)
+    && /background\s*:\s*var\(--pr-primary\)/.test(body));
   assert.equal(fill.length, 1,
     `expected exactly one rule painting the primary button's Haze fill in the primary colour, found ${fill.length}`);
 
-  const ink = rules.filter(({ selector, body }) => /\.cr-button\.primary$/.test(selector)
-    && /color\s*:\s*var\(--cr-on-primary\)/.test(body));
+  const ink = rules.filter(({ selector, body }) => /\.pr-button\.primary$/.test(selector)
+    && /color\s*:\s*var\(--pr-on-primary\)/.test(body));
   assert.equal(ink.length, 1,
     `expected exactly one rule giving the primary button the tested ink for that fill, found ${ink.length}`);
 
   /* Opt-in. A tint that applies to anything other than `.primary` brings back
      the rule that enumerates its exceptions. */
   for (const { selector, body } of rules) {
-    if (!/background\s*:\s*var\(--cr-primary\)/.test(body)) continue;
-    assert.ok(/\.cr-button\.primary\b/.test(selector),
+    if (!/background\s*:\s*var\(--pr-primary\)/.test(body)) continue;
+    assert.ok(/\.pr-button\.primary\b/.test(selector),
       `${selector} paints a button in the primary colour without asking for .primary`);
   }
 
-  const quiet = rules.find(({ selector, body }) => /\.cr-button\.quiet::before/.test(selector)
+  const quiet = rules.find(({ selector, body }) => /\.pr-button\.quiet::before/.test(selector)
     && /display\s*:\s*none/.test(body));
   assert.ok(quiet, 'a quiet button still paints the Haze reading fill every control gets');
 
   /* Nothing may put the solid primary back on the element itself, where it
      shows only as a ring of background exposed around the inset fill. */
-  const ring = rules.find(({ selector, body }) => /^\.cr-button(\.[a-z-]+)?$/.test(selector)
-    && /background\s*:\s*var\(--cr-primary\)/.test(body));
+  const ring = rules.find(({ selector, body }) => /^\.pr-button(\.[a-z-]+)?$/.test(selector)
+    && /background\s*:\s*var\(--pr-primary\)/.test(body));
   assert.ok(!ring, `${ring?.selector} paints the element in the solid primary again`);
 });
 
@@ -536,7 +536,7 @@ check('the button vocabulary is primary, quiet, danger — and not secondary', (
    prettier, must pass them before it ships. */
 
 const charts = (() => {
-  const tokens = require('../core/tokens/crystal.json');
+  const tokens = require('../core/tokens/prismata.json');
   const channels = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
   const linear = (v) => (v / 255 <= 0.04045 ? v / 255 / 12.92 : (((v / 255) + 0.055) / 1.055) ** 2.4);
   const luminance = (hex) => {
@@ -627,7 +627,7 @@ check('no two series colours in a scale are closer than a visible step', () => {
    The threshold here is deliberately far below that. The offset decides how
    near a series may come to the action colour, and a palette added later may
    come nearer. This check catches the collapse: somebody "simplifying" the
-   first slot to `var(--cr-primary)`, which makes a chart's first series the
+   first slot to `var(--pr-primary)`, which makes a chart's first series the
    colour of every button on its page, and which nothing else in this file
    would notice. */
 check('no series colour is the action colour', () => {
@@ -641,20 +641,20 @@ check('no series colour is the action colour', () => {
 
 /* Both sides read the same flat token file, so this cannot show that the order
    is right. It shows that the scale is published, under the name a stylesheet
-   indexes with `var(--cr-chart-series-#{$i})`, and that it stops where the
+   indexes with `var(--pr-chart-series-#{$i})`, and that it stops where the
    token says. Without the digit rule in `camelToKebab`, every one of these
-   becomes `--cr-chart-series1`, which resolves to nothing in every chart in
+   becomes `--pr-chart-series1`, which resolves to nothing in every chart in
    every consumer and throws no error. */
-check('the series scale is published as --cr-chart-series-N, and ends', () => {
-  const crystal = require('../core/assets/crystal.js');
+check('the series scale is published as --pr-chart-series-N, and ends', () => {
+  const prismata = require('../core/assets/prismata.js');
   for (const { id, mode, series } of charts.every) {
-    const resolved = crystal.resolve({ palette: id }, mode);
+    const resolved = prismata.resolve({ palette: id }, mode);
     series.forEach((hex, i) => {
-      assert.equal(resolved[`--cr-chart-series-${i + 1}`], hex,
-        `${id} ${mode} publishes --cr-chart-series-${i + 1} as `
-        + `${resolved[`--cr-chart-series-${i + 1}`]}, not ${hex}`);
+      assert.equal(resolved[`--pr-chart-series-${i + 1}`], hex,
+        `${id} ${mode} publishes --pr-chart-series-${i + 1} as `
+        + `${resolved[`--pr-chart-series-${i + 1}`]}, not ${hex}`);
     });
-    assert.equal(resolved[`--cr-chart-series-${series.length + 1}`], undefined,
+    assert.equal(resolved[`--pr-chart-series-${series.length + 1}`], undefined,
       'the scale ends where the token says it ends');
   }
 });
@@ -715,16 +715,16 @@ check('the intensity ramp moves one way', () => {
    recipe. These checks hold the two together. A surface named in the vocabulary
    with no rule in the stylesheet can be read by only one renderer (D-9, R-15
    and D-11 were each this defect), and a catalogue entry naming a surface
-   outside the vocabulary names a material Crystal never defined. */
+   outside the vocabulary names a material Prismata never defined. */
 const surfaces = require('../core/tokens/surfaces.json').surfaces;
 const catalogue = require('node:fs').readdirSync(require('node:path').join(__dirname, '../core/tokens/catalogue'))
   .filter((f) => f.endsWith('.json')).sort()
   .flatMap((f) => require(require('node:path').join(__dirname, '../core/tokens/catalogue', f)).components);
 const stylesheet = require('node:fs').readFileSync(
-  require('node:path').join(__dirname, '../core/assets/crystal.css'), 'utf8');
+  require('node:path').join(__dirname, '../core/assets/prismata.css'), 'utf8');
 const stylesheetCode = stylesheet.replace(/\/\*[\s\S]*?\*\//g, '');
 
-check('every surface in the vocabulary has a recipe in crystal.css', () => {
+check('every surface in the vocabulary has a recipe in prismata.css', () => {
   for (const s of surfaces) {
     for (const selector of [s.class, ...(s.also || [])]) {
       if (!selector) continue;
@@ -746,7 +746,7 @@ check('every catalogue entry names a surface from the vocabulary', () => {
 
 /* The recipes are published as values so a platform with no selectors can
    reproduce them. The generated file has to be current, cover the whole
-   vocabulary, name only tokens Crystal defines, and agree with the stylesheet
+   vocabulary, name only tokens Prismata defines, and agree with the stylesheet
    when the stylesheet is read by a different method. */
 check('every surface publishes its recipe as token references, and the file is current', () => {
   const fs = require('node:fs');
@@ -769,20 +769,20 @@ check('every surface publishes its recipe as token references, and the file is c
   }
 
   const defined = new Set();
-  for (const sheet of ['crystal-theme.css', 'crystal.css']) {
+  for (const sheet of ['prismata-theme.css', 'prismata.css']) {
     const text = fs.readFileSync(path.join(__dirname, '../core/assets', sheet), 'utf8');
-    for (const m of text.matchAll(/(--cr-[-\w]+)\s*:/g)) defined.add(m[1]);
+    for (const m of text.matchAll(/(--pr-[-\w]+)\s*:/g)) defined.add(m[1]);
   }
   for (const r of recipes) {
     for (const token of r.tokens) assert.ok(defined.has(token), `${r.id} references ${token}, which no stylesheet defines`);
-    for (const m of JSON.stringify(r).matchAll(/var\(\s*(--cr-[-\w]+)/g)) {
+    for (const m of JSON.stringify(r).matchAll(/var\(\s*(--pr-[-\w]+)/g)) {
       assert.ok(r.tokens.includes(m[1]), `${r.id} uses ${m[1]} without listing it in tokens`);
     }
   }
 
   /* An independent reading: find the rule by its literal selector and take the
      declaration with a regular expression. */
-  const componentLayer = stylesheetCode.indexOf('@layer crystal.component {');
+  const componentLayer = stylesheetCode.indexOf('@layer prismata.component {');
   const rule = (selector) => {
     /* Anchored at a rule boundary, so a selector is not found inside a longer
        list. A selector written `.x {` in the expanded style is looked up in
@@ -800,15 +800,15 @@ check('every surface publishes its recipe as token references, and the file is c
   };
   const blurOf = (value) => value.match(/blur\(((?:[^()]|\([^()]*\))*)\)/)[1];
   const recipe = (id) => recipes.find((r) => r.id === id);
-  const coat = ':is(button,a.cr-button,.cr-control,.cr-field-shell,.cr-resin-haze,.cr-status)';
+  const coat = ':is(button,a.pr-button,.pr-control,.pr-field-shell,.pr-resin-haze,.pr-status)';
 
   /* The planes paint on the element itself. */
   const planes = {
-    resin: { fill: ':is(.cr-resin,.cr-glass)', blur: ':is(.cr-resin,.cr-glass)', radius: ':is(.cr-resin,.cr-glass)' },
-    frost: { fill: ':is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass)', blur: ':is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass)', radius: ':is(.cr-frost,.cr-acrylic),:is(.cr-resin,.cr-glass)' },
-    dock: { fill: '.cr-dock {', blur: '.cr-dock {', radius: '.cr-dock {' },
-    group: { fill: '.cr-group {', blur: '.cr-group {', radius: '.cr-group {' },
-    field: { fill: coat, blur: coat, radius: '.cr-field-shell {' },
+    resin: { fill: ':is(.pr-resin,.pr-glass)', blur: ':is(.pr-resin,.pr-glass)', radius: ':is(.pr-resin,.pr-glass)' },
+    frost: { fill: ':is(.pr-frost,.pr-acrylic),:is(.pr-resin,.pr-glass)', blur: ':is(.pr-frost,.pr-acrylic),:is(.pr-resin,.pr-glass)', radius: ':is(.pr-frost,.pr-acrylic),:is(.pr-resin,.pr-glass)' },
+    dock: { fill: '.pr-dock {', blur: '.pr-dock {', radius: '.pr-dock {' },
+    group: { fill: '.pr-group {', blur: '.pr-group {', radius: '.pr-group {' },
+    field: { fill: coat, blur: coat, radius: '.pr-field-shell {' },
   };
   for (const [id, where] of Object.entries(planes)) {
     const r = recipe(id);
@@ -821,11 +821,11 @@ check('every surface publishes its recipe as token references, and the file is c
   /* Haze and Stone are feathered paint: the element is transparent and the
      fill is on an isolated ::before, which is the layer a platform reproduces. */
   const feathered = {
-    haze: { layer: ':is(.cr-haze,.cr-surface)::before,.cr-well::before,.cr-bubble::before,.cr-content-fill::before,.cr-dialog::before', radius: ':is(.cr-haze,.cr-surface)' },
-    stone: { layer: '.cr-stone::before,.cr-dock-inner::before', radius: null },
-    dock: { layer: '.cr-dock::before {', radius: '.cr-dock {' },
-    group: { layer: '.cr-group::before {', radius: '.cr-group {' },
-    field: { layer: coat + '::before', radius: '.cr-field-shell {' },
+    haze: { layer: ':is(.pr-haze,.pr-surface)::before,.pr-well::before,.pr-bubble::before,.pr-content-fill::before,.pr-dialog::before', radius: ':is(.pr-haze,.pr-surface)' },
+    stone: { layer: '.pr-stone::before,.pr-dock-inner::before', radius: null },
+    dock: { layer: '.pr-dock::before {', radius: '.pr-dock {' },
+    group: { layer: '.pr-group::before {', radius: '.pr-group {' },
+    field: { layer: coat + '::before', radius: '.pr-field-shell {' },
   };
   for (const [id, where] of Object.entries(feathered)) {
     const r = recipe(id);
@@ -839,11 +839,11 @@ check('every surface publishes its recipe as token references, and the file is c
   assert.equal(recipe('haze').fill, 'transparent', 'haze: the element itself must not paint the reading fill');
   assert.equal(recipe('stone').fill, 'transparent', 'stone: the element itself must not paint the label backing');
   /* Stone sets no radius of its own; the record must say so rather than invent one. */
-  assert.ok(!/border-radius/.test(rule('.cr-stone,.cr-dock-inner')), 'stone gained a radius: update this check');
+  assert.ok(!/border-radius/.test(rule('.pr-stone,.pr-dock-inner')), 'stone gained a radius: update this check');
   assert.equal(recipe('stone').radius, null, 'stone: a radius the stylesheet does not set');
 
   /* The adaptations come through as overrides. */
-  assert.equal(recipe('resin').fallbacks.opaque.declarations.background, 'var(--cr-surface)', 'resin: opaque fallback');
+  assert.equal(recipe('resin').fallbacks.opaque.declarations.background, 'var(--pr-surface)', 'resin: opaque fallback');
   assert.equal(recipe('resin').fallbacks.reducedTransparency.declarations['backdrop-filter'], 'none', 'resin: reduced transparency');
   assert.equal(recipe('haze').fallbacks.forcedColors.layers['::before'].display, 'none', 'haze: forced colours drop the feathered layer');
 });
@@ -872,93 +872,93 @@ check('the material variants resolve to their recipes in every mode', () => {
   const fb = (r, mode) => r.fallbacks[mode] || {};
 
   /* Haze. */
-  for (const sel of ['.cr-haze.inset', '.cr-haze.flush']) {
+  for (const sel of ['.pr-haze.inset', '.pr-haze.flush']) {
     const r = of('haze', sel);
     assert.equal(r.rim, '0', `${sel}: the card has no border box`);
     assert.equal(r.layers['::before']['box-shadow'], 'none', `${sel}: no shadow under the fill`);
-    assert.equal(fb(r, 'opaque').layers['::before'].background, 'var(--cr-surface)', `${sel}: opaque`);
-    assert.equal(fb(r, 'reducedTransparency').layers['::before'].background, 'var(--cr-surface)', `${sel}: reduced transparency`);
+    assert.equal(fb(r, 'opaque').layers['::before'].background, 'var(--pr-surface)', `${sel}: opaque`);
+    assert.equal(fb(r, 'reducedTransparency').layers['::before'].background, 'var(--pr-surface)', `${sel}: reduced transparency`);
     assert.equal(fb(r, 'forcedColors').declarations.border, '1px solid CanvasText', `${sel}: forced colours keep a boundary`);
     assert.equal(fb(r, 'forcedColors').layers['::before'].display, 'none', `${sel}: forced colours drop the fill`);
   }
-  assert.equal(of('haze', '.cr-haze.inset').haze.inset, 'var(--cr-haze-inset)', '.cr-haze.inset: inset');
-  assert.equal(of('haze', '.cr-haze.flush').haze.inset, '0', '.cr-haze.flush: inset');
-  for (const [sel, ground] of [['.cr-haze.flat', 'var(--cr-surface)'], ['.cr-haze.flat.sunken', 'var(--cr-surface-alt)']]) {
+  assert.equal(of('haze', '.pr-haze.inset').haze.inset, 'var(--pr-haze-inset)', '.pr-haze.inset: inset');
+  assert.equal(of('haze', '.pr-haze.flush').haze.inset, '0', '.pr-haze.flush: inset');
+  for (const [sel, ground] of [['.pr-haze.flat', 'var(--pr-surface)'], ['.pr-haze.flat.sunken', 'var(--pr-surface-alt)']]) {
     const r = of('haze', sel);
-    assert.equal(r.fill, 'var(--cr-haze-fill)', `${sel}: the fill is on the element`);
+    assert.equal(r.fill, 'var(--pr-haze-fill)', `${sel}: the fill is on the element`);
     assert.equal(r.layers['::before'].display, 'none', `${sel}: no feathered layer`);
     assert.equal(fb(r, 'opaque').declarations.background, ground, `${sel}: opaque`);
     assert.equal(fb(r, 'reducedTransparency').declarations.background, ground, `${sel}: reduced transparency`);
     assert.equal(fb(r, 'forcedColors').declarations.background, 'Canvas', `${sel}: forced colours`);
   }
-  assert.equal(of('haze', '.cr-haze.raised').layers['::before']['box-shadow'], 'var(--cr-shadow-float)', '.cr-haze.raised: float shadow');
+  assert.equal(of('haze', '.pr-haze.raised').layers['::before']['box-shadow'], 'var(--pr-shadow-float)', '.pr-haze.raised: float shadow');
 
   /* Frost. */
-  assert.equal(of('frost', '.cr-frost.pane').radius, 'var(--cr-radius)', '.cr-frost.pane: content radius');
-  assert.equal(of('frost', '.cr-frost.flat').layers['::before'].display, 'none', '.cr-frost.flat: no grain');
+  assert.equal(of('frost', '.pr-frost.pane').radius, 'var(--pr-radius)', '.pr-frost.pane: content radius');
+  assert.equal(of('frost', '.pr-frost.flat').layers['::before'].display, 'none', '.pr-frost.flat: no grain');
   assert.notEqual(base('frost').layers['::before'].display, 'none', 'frost: the base panel lost its grain');
-  const docked = of('frost', '.cr-frost.docked');
-  assert.deepEqual([docked.rim, docked.radius, docked.shadow], ['0', '0', 'none'], '.cr-frost.docked: no rim, radius or shadow');
-  const sheet = of('frost', '.cr-frost.sheet');
-  assert.deepEqual([sheet.rim, sheet.radius, sheet.shadow], ['1px solid var(--cr-edge)', 'var(--cr-radius)', 'var(--cr-shadow-float)'], '.cr-frost.sheet');
-  const reading = of('frost', '.cr-frost.reading');
-  assert.equal(reading.layers['::after'].background, 'var(--cr-haze-fill)', '.cr-frost.reading: the reading fill is on ::after');
-  assert.equal(reading.layers['::after'].inset, 'var(--cr-frost-reading-inset)', '.cr-frost.reading: inset');
-  assert.match(stylesheetCode, /\.reading \{\s*--cr-frost-reading-inset: var\(--cr-haze-inset\);/, '.cr-frost.reading: the inset defaults to --cr-haze-inset');
-  assert.notEqual(reading.layers['::before'].display, 'none', '.cr-frost.reading: the grain stays on ::before');
-  assert.equal(fb(reading, 'opaque').layers['::after'].background, 'var(--cr-surface)', '.cr-frost.reading: opaque');
-  assert.equal(fb(reading, 'reducedTransparency').layers['::after'].background, 'var(--cr-surface)', '.cr-frost.reading: reduced transparency');
-  assert.equal(fb(reading, 'forcedColors').layers['::after'].display, 'none', '.cr-frost.reading: forced colours');
+  const docked = of('frost', '.pr-frost.docked');
+  assert.deepEqual([docked.rim, docked.radius, docked.shadow], ['0', '0', 'none'], '.pr-frost.docked: no rim, radius or shadow');
+  const sheet = of('frost', '.pr-frost.sheet');
+  assert.deepEqual([sheet.rim, sheet.radius, sheet.shadow], ['1px solid var(--pr-edge)', 'var(--pr-radius)', 'var(--pr-shadow-float)'], '.pr-frost.sheet');
+  const reading = of('frost', '.pr-frost.reading');
+  assert.equal(reading.layers['::after'].background, 'var(--pr-haze-fill)', '.pr-frost.reading: the reading fill is on ::after');
+  assert.equal(reading.layers['::after'].inset, 'var(--pr-frost-reading-inset)', '.pr-frost.reading: inset');
+  assert.match(stylesheetCode, /\.reading \{\s*--pr-frost-reading-inset: var\(--pr-haze-inset\);/, '.pr-frost.reading: the inset defaults to --pr-haze-inset');
+  assert.notEqual(reading.layers['::before'].display, 'none', '.pr-frost.reading: the grain stays on ::before');
+  assert.equal(fb(reading, 'opaque').layers['::after'].background, 'var(--pr-surface)', '.pr-frost.reading: opaque');
+  assert.equal(fb(reading, 'reducedTransparency').layers['::after'].background, 'var(--pr-surface)', '.pr-frost.reading: reduced transparency');
+  assert.equal(fb(reading, 'forcedColors').layers['::after'].display, 'none', '.pr-frost.reading: forced colours');
 
   /* Resin. */
-  const flat = of('resin', '.cr-resin.flat');
+  const flat = of('resin', '.pr-resin.flat');
   for (const layer of ['::before', '::after']) {
-    assert.equal(flat.layers[layer].display, 'none', `.cr-resin.flat: no sheen on ${layer}`);
+    assert.equal(flat.layers[layer].display, 'none', `.pr-resin.flat: no sheen on ${layer}`);
     assert.notEqual(base('resin').layers[layer].display, 'none', `resin: the base plane lost its sheen on ${layer}`);
   }
-  const divider = of('resin', '.cr-resin.divider');
-  assert.deepEqual([divider.rim, divider.shadow], ['0', 'none'], '.cr-resin.divider: no rim or shadow');
-  assert.equal(divider.fill, 'var(--cr-resin-fill)', '.cr-resin.divider: fill');
+  const divider = of('resin', '.pr-resin.divider');
+  assert.deepEqual([divider.rim, divider.shadow], ['0', 'none'], '.pr-resin.divider: no rim or shadow');
+  assert.equal(divider.fill, 'var(--pr-resin-fill)', '.pr-resin.divider: fill');
   for (const mode of ['opaque', 'reducedTransparency', 'noBackdropFilter']) {
-    assert.equal(fb(divider, mode).declarations.background, 'var(--cr-outline)', `.cr-resin.divider: ${mode} keeps the line visible`);
+    assert.equal(fb(divider, mode).declarations.background, 'var(--pr-outline)', `.pr-resin.divider: ${mode} keeps the line visible`);
   }
-  assert.equal(fb(divider, 'forcedColors').declarations.background, 'CanvasText', '.cr-resin.divider: forced colours');
+  assert.equal(fb(divider, 'forcedColors').declarations.background, 'CanvasText', '.pr-resin.divider: forced colours');
   assert.equal(fb(base('resin'), 'forcedColors').declarations.background, 'Canvas', 'resin: the base forced-colours route moved');
 
   /* Mirage and the dialog backdrop give way in opaque mode as in reduced transparency. */
-  assert.equal(fb(base('mirage'), 'opaque').declarations.background, 'var(--cr-mirage-fallback-fill)', 'mirage: opaque');
+  assert.equal(fb(base('mirage'), 'opaque').declarations.background, 'var(--pr-mirage-fallback-fill)', 'mirage: opaque');
   assert.equal(fb(base('mirage'), 'opaque').declarations['backdrop-filter'], 'none', 'mirage: opaque drops the backdrop');
-  assert.equal(fb(base('dialog'), 'opaque').layers['::backdrop'].background, 'var(--cr-mirage-fallback-fill)', 'dialog: opaque backdrop');
+  assert.equal(fb(base('dialog'), 'opaque').layers['::backdrop'].background, 'var(--pr-mirage-fallback-fill)', 'dialog: opaque backdrop');
 
   /* The choice box as a class (2.8.0): the native box's recipe on any element,
      its outlined variant, and an opaque and reduced-transparency route for both
      the class and the native input, which had none. */
   const choice = base('choice');
   const nativeBox = choice.alternatives ? choice.alternatives['input[type=checkbox]'] : choice;
-  const box = of('choice', '.cr-choice');
-  for (const k of ['fill', 'blur', 'rim', 'shadow', 'radius']) assert.equal(box[k], nativeBox[k], `.cr-choice: ${k} is not the native box's`);
-  assert.equal(of('choice', '.cr-choice.radio').radius, '50%', '.cr-choice.radio: round');
-  const outline = of('choice', '.cr-choice.outline');
-  assert.deepEqual([outline.fill, outline.rim, outline.shadow], ['var(--cr-resin-fill)', '1px solid var(--cr-outline)', 'inset 0 2px 1px var(--cr-rim)'], '.cr-choice.outline');
+  const box = of('choice', '.pr-choice');
+  for (const k of ['fill', 'blur', 'rim', 'shadow', 'radius']) assert.equal(box[k], nativeBox[k], `.pr-choice: ${k} is not the native box's`);
+  assert.equal(of('choice', '.pr-choice.radio').radius, '50%', '.pr-choice.radio: round');
+  const outline = of('choice', '.pr-choice.outline');
+  assert.deepEqual([outline.fill, outline.rim, outline.shadow], ['var(--pr-resin-fill)', '1px solid var(--pr-outline)', 'inset 0 2px 1px var(--pr-rim)'], '.pr-choice.outline');
   for (const r of [nativeBox, box, outline]) {
     for (const mode of ['opaque', 'reducedTransparency']) {
-      assert.equal(fb(r, mode).declarations.background, 'var(--cr-surface)', `${r.selector}: ${mode} gives the surface`);
+      assert.equal(fb(r, mode).declarations.background, 'var(--pr-surface)', `${r.selector}: ${mode} gives the surface`);
       assert.equal(fb(r, mode).declarations['backdrop-filter'], 'none', `${r.selector}: ${mode} drops the blur`);
     }
   }
-  assert.equal(fb(outline, 'forcedColors').declarations.background, 'Field', '.cr-choice.outline: forced colours');
+  assert.equal(fb(outline, 'forcedColors').declarations.background, 'Field', '.pr-choice.outline: forced colours');
 
   /* The field shell as a block. */
-  assert.equal(of('field', '.cr-field-shell.block').extras.display, 'flex', '.cr-field-shell.block: display');
+  assert.equal(of('field', '.pr-field-shell.block').extras.display, 'flex', '.pr-field-shell.block: display');
 
   /* Authored in the component layer. The divider's forced-colours rule is the
      one exception, and must be: the base rule it overrides is important and
      sits in the reset layer. */
-  const reset = stylesheetCode.slice(0, stylesheetCode.indexOf('@layer crystal.component {'));
-  for (const v of ['.inset', '.flush', '.flat', '.sunken', '.raised', '.pane', '.docked', '.sheet', '.reading', '.block', '.cr-choice']) {
+  const reset = stylesheetCode.slice(0, stylesheetCode.indexOf('@layer prismata.component {'));
+  for (const v of ['.inset', '.flush', '.flat', '.sunken', '.raised', '.pane', '.docked', '.sheet', '.reading', '.block', '.pr-choice']) {
     assert.ok(!reset.includes(v), `${v} has a rule in the reset layer`);
   }
-  assert.match(reset, /@media\(forced-colors:active\)\{:is\(\.cr-resin,\.cr-glass\)\.divider\{background:CanvasText!important\}\}/, 'the divider has no forced-colours rule beside the base one');
+  assert.match(reset, /@media\(forced-colors:active\)\{:is\(\.pr-resin,\.pr-glass\)\.divider\{background:CanvasText!important\}\}/, 'the divider has no forced-colours rule beside the base one');
 });
 
 
@@ -990,12 +990,12 @@ function splitSelectors(text) {
    someone moving through the page with the keyboard; drawn after a click, on a
    field or on a list a click opened, it is noise. `core/modality.js` records
    the modality on the document element, and every rule that draws a ring
-   stands behind `:root:not([data-crystal-modality=pointer])`, so with no script
+   stands behind `:root:not([data-prismata-modality=pointer])`, so with no script
    every ring is still drawn. */
 check('a dock is concentric with its pills, so a vertical one is not a capsule', () => {
   /* 999px made a column of tabs a capsule whose ends the first and last pill
      poke out of. The radius is half a pill plus the padding and the border. */
-  const blocks = [...stylesheetCode.matchAll(/\.cr-dock\s*\{([^}]*)\}/g)].map((match) => match[1]);
+  const blocks = [...stylesheetCode.matchAll(/\.pr-dock\s*\{([^}]*)\}/g)].map((match) => match[1]);
   const radii = blocks.map((body) => /border-radius\s*:\s*([^;]+)/.exec(body)?.[1]?.trim()).filter(Boolean);
   assert.ok(radii.length > 0, 'the dock declares a radius');
   for (const radius of radii) assert.doesNotMatch(radius, /999px/, `dock radius ${radius} is a capsule`);
@@ -1003,10 +1003,10 @@ check('a dock is concentric with its pills, so a vertical one is not a capsule',
 });
 
 check('every focus ring waits for keyboard modality, and the modality is read from the right keys', () => {
-  const GATE = ':where(:root:not([data-crystal-modality=pointer]))';
+  const GATE = ':where(:root:not([data-prismata-modality=pointer]))';
   const rules = [...stylesheetCode.matchAll(/([^{}]+)\{([^{}]*)\}/g)];
   const drawing = rules.filter(([, selector, body]) => /:focus-(visible|within)/.test(selector)
-    && /(outline:[^;]*(var\(--cr-focus-core|Highlight)|var\(--cr-focus-ring)/.test(body)
+    && /(outline:[^;]*(var\(--pr-focus-core|Highlight)|var\(--pr-focus-ring)/.test(body)
     && !/:not\(:focus-visible\)/.test(selector));
   assert.ok(drawing.length >= 6, `found only ${drawing.length} focus-ring rules; the check is not reading the stylesheet`);
   for (const [, selector] of drawing) {
@@ -1027,12 +1027,12 @@ check('every focus ring waits for keyboard modality, and the modality is read fr
   assert.equal(key('F10', { altKey: true }), 'keyboard', 'Alt+F10 moves to a toolbar');
 });
 
-/* A rule authored in `crystal.reset` that the component layer also reaches may
+/* A rule authored in `prismata.reset` that the component layer also reaches may
    never render (D-20 and D-21). The recipes added for the catalogue live in the
    component layer only. */
 check('the catalogue recipes are authored in the component layer, never the reset layer', () => {
-  const reset = stylesheetCode.slice(0, stylesheetCode.indexOf('@layer crystal.component {'));
-  for (const selector of ['.cr-bare', '.cr-nav-item', '.cr-drag-handle', '[role=switch]', '.panel']) {
+  const reset = stylesheetCode.slice(0, stylesheetCode.indexOf('@layer prismata.component {'));
+  for (const selector of ['.pr-bare', '.pr-nav-item', '.pr-drag-handle', '[role=switch]', '.panel']) {
     assert.ok(!reset.includes(selector), `${selector} has a rule in the reset layer`);
     assert.ok(stylesheetCode.includes(selector), `${selector} has no rule at all`);
   }
@@ -1044,34 +1044,34 @@ const block = (selector) => {
   return stylesheetCode.slice(at, stylesheetCode.indexOf('}', at));
 };
 
-/* Crystal paints the Resin coat by element, in five layers. Measured across 488
-   Crystal React stories, eighteen controls that had declared themselves
+/* Prismata paints the Resin coat by element, in five layers. Measured across 488
+   Prismata React stories, eighteen controls that had declared themselves
    transparent were transparent in exactly one of the five. A bare control
    removes all five. */
 check('a bare control takes off every layer of the coat and keeps the target', () => {
-  const bare = block(':is(button, a, [role=button], .cr-bare).cr-bare');
+  const bare = block(':is(button, a, [role=button], .pr-bare).pr-bare');
   /* The coat is (0,1,1) and lives in the same layer; a lone class never wins. */
-  for (const selector of [':is(button, a, [role=button], .cr-bare).cr-bare', ':is(button, a, [role=link], .cr-nav-item).cr-nav-item', ':is(button, [role=button], .cr-drag-handle).cr-drag-handle']) {
+  for (const selector of [':is(button, a, [role=button], .pr-bare).pr-bare', ':is(button, a, [role=link], .pr-nav-item).pr-nav-item', ':is(button, [role=button], .pr-drag-handle).pr-drag-handle']) {
     assert.ok(stylesheetCode.includes(selector + ' {'), `${selector} does not carry the element compound that outranks the coat`);
   }
   assert.match(bare, /background:\s*transparent/);
   assert.match(bare, /backdrop-filter:\s*none/);
   assert.match(bare, /min-inline-size:\s*44px/);
-  assert.match(block('.cr-bare:not(:focus-visible)'), /box-shadow:\s*none/);
+  assert.match(block('.pr-bare:not(:focus-visible)'), /box-shadow:\s*none/);
   /* The coat's opaque route is (0,2,1) and outranks the (0,2,0) recipes that
      take the coat off, so it must exclude them, at no cost in specificity. */
-  assert.match(stylesheetCode, /\[data-effects=opaque\] :is\(button,a\.cr-button,\.cr-control,\.cr-field-shell,\.cr-resin-haze,\.cr-status\):where\(:not\(\.cr-bare,\.cr-nav-item,\.cr-drag-handle\)\) \{\s*background: var\(--cr-surface\)/, 'the coat\'s opaque route reaches the bare control, the navigation entry or the drag handle');
-  const pseudo = stylesheetCode.slice(stylesheetCode.indexOf('.cr-bare::before'));
+  assert.match(stylesheetCode, /\[data-effects=opaque\] :is\(button,a\.pr-button,\.pr-control,\.pr-field-shell,\.pr-resin-haze,\.pr-status\):where\(:not\(\.pr-bare,\.pr-nav-item,\.pr-drag-handle\)\) \{\s*background: var\(--pr-surface\)/, 'the coat\'s opaque route reaches the bare control, the navigation entry or the drag handle');
+  const pseudo = stylesheetCode.slice(stylesheetCode.indexOf('.pr-bare::before'));
   assert.match(pseudo.slice(0, pseudo.indexOf('}')), /content:\s*none/);
 });
 
 /* The reference implementation of selection, exported: label weight, with
    nothing drawn beside the label. */
 check('a navigation entry is selected by label weight and never by a mark', () => {
-  const current = block('.cr-nav-item:is([aria-current]:not([aria-current=false]),[aria-selected=true],[aria-pressed=true])');
+  const current = block('.pr-nav-item:is([aria-current]:not([aria-current=false]),[aria-selected=true],[aria-pressed=true])');
   assert.match(current, /font-weight:\s*800/);
   assert.ok(!/content:/.test(current), 'the current entry draws something');
-  const rest = block(':is(button, a, [role=link], .cr-nav-item).cr-nav-item');
+  const rest = block(':is(button, a, [role=link], .pr-nav-item).pr-nav-item');
   assert.match(rest, /font-weight:\s*650/);
   assert.match(rest, /background:\s*transparent/, 'an entry is furniture, not a Resin capsule');
   assert.match(rest, /backdrop-filter:\s*none/);
@@ -1083,15 +1083,15 @@ check('a navigation entry is selected by label weight and never by a mark', () =
    blur, no material), and it sits inside the entry's own inline-start padding
    so the label never moves. */
 check('a navigation entry marks its current location with a flat dot inside its padding', () => {
-  const selector = '.cr-nav-item:is([aria-current]:not([aria-current=false]))::before';
+  const selector = '.pr-nav-item:is([aria-current]:not([aria-current=false]))::before';
   const dot = block(selector);
   assert.match(dot, /content:\s*''/, 'the current entry draws no dot');
   assert.match(dot, /position:\s*absolute/, 'a dot in the flow would move the label');
-  assert.match(dot, /background:\s*var\(--cr-primary\)/);
+  assert.match(dot, /background:\s*var\(--pr-primary\)/);
   assert.ok(!/box-shadow|backdrop-filter|filter:/.test(dot), 'the dot carries material or elevation');
   const start = Number(/inset-inline-start:\s*(\d+)px/.exec(dot)?.[1]);
   const size = Number(/width:\s*(\d+)px/.exec(dot)?.[1]);
-  const rest = block(':is(button, a, [role=link], .cr-nav-item).cr-nav-item');
+  const rest = block(':is(button, a, [role=link], .pr-nav-item).pr-nav-item');
   const padding = Number(/padding:\s*\d+px\s+(\d+)px/.exec(rest)?.[1]);
   assert.ok(start + size < padding, `the dot ends at ${start + size}px and the label starts at ${padding}px`);
   for (const selection of ['[aria-selected', '[aria-pressed']) {
@@ -1103,14 +1103,14 @@ check('a navigation entry marks its current location with a flat dot inside its 
    part: the token in the theme, the literal only as the fallback. */
 check('the switch and the choice box read their published tokens', () => {
   const theme = require('node:fs').readFileSync(
-    require('node:path').join(__dirname, '../core/assets/crystal-theme.css'), 'utf8');
-  for (const name of ['--cr-switch-track-width', '--cr-switch-track-height', '--cr-choice-box-size', '--cr-choice-box-radius', '--cr-action-disabled-opacity']) {
+    require('node:path').join(__dirname, '../core/assets/prismata-theme.css'), 'utf8');
+  for (const name of ['--pr-switch-track-width', '--pr-switch-track-height', '--pr-choice-box-size', '--pr-choice-box-radius', '--pr-action-disabled-opacity']) {
     assert.ok(theme.includes(name + ':'), `${name} is not exported by the theme`);
     assert.ok(stylesheetCode.includes(`var(${name}`), `${name} is exported and nothing reads it`);
   }
-  const tokens = require('../core/tokens/crystal.tokens.json').component;
-  assert.match(theme, new RegExp(`--cr-switch-track-width:\\s*${tokens.switch.trackWidth.$value}`));
-  assert.match(theme, new RegExp(`--cr-choice-box-size:\\s*${tokens.choice.boxSize.$value}`));
+  const tokens = require('../core/tokens/prismata.tokens.json').component;
+  assert.match(theme, new RegExp(`--pr-switch-track-width:\\s*${tokens.switch.trackWidth.$value}`));
+  assert.match(theme, new RegExp(`--pr-choice-box-size:\\s*${tokens.choice.boxSize.$value}`));
 });
 
 /* The rulings of 29 September 2026 (proposals/2026-09-29-rulings.md), each
@@ -1122,27 +1122,27 @@ check('the rulings of 29 September 2026 hold in the stylesheet', () => {
   const path = require('node:path');
   const motionCss = fs.readFileSync(path.join(__dirname, '../core/assets/motion.css'), 'utf8');
   /* D-21: the reset hover that never rendered stays deleted. */
-  assert.ok(!/\.cr-button:hover\s*\{[^}]*brightness/.test(stylesheetCode),
-    'the reset layer brightens a hovered .cr-button again, which crystal.component erases (D-21)');
+  assert.ok(!/\.pr-button:hover\s*\{[^}]*brightness/.test(stylesheetCode),
+    'the reset layer brightens a hovered .pr-button again, which prismata.component erases (D-21)');
   /* 4.4: the preview's class is the preview's. */
   assert.ok(!/tiny-button/.test(stylesheetCode + motionCss), '.tiny-button is back in the library');
   /* D-29: fixed only centres a native dialog. */
-  assert.ok(/dialog\.cr-dialog\s*\{\s*position:\s*fixed/.test(stylesheetCode), 'dialog.cr-dialog is not fixed');
-  assert.ok(!/(^|[},\s])\.cr-dialog\s*\{\s*position:\s*fixed/.test(stylesheetCode),
-    '.cr-dialog is fixed on every element again, which leaves a non-dialog host off-centre (D-29)');
+  assert.ok(/dialog\.pr-dialog\s*\{\s*position:\s*fixed/.test(stylesheetCode), 'dialog.pr-dialog is not fixed');
+  assert.ok(!/(^|[},\s])\.pr-dialog\s*\{\s*position:\s*fixed/.test(stylesheetCode),
+    '.pr-dialog is fixed on every element again, which leaves a non-dialog host off-centre (D-29)');
   /* D-25: the body scrolls, a body-less dialog still does. */
-  assert.ok(/\.cr-dialog:has\(> \.cr-dialog-body\)\s*\{[^}]*overflow:\s*visible/.test(stylesheetCode), 'a dialog with a body scrolls its surface');
-  assert.ok(/\.cr-dialog-body\s*\{[^}]*overflow:\s*auto/.test(stylesheetCode), '.cr-dialog-body does not scroll');
+  assert.ok(/\.pr-dialog:has\(> \.pr-dialog-body\)\s*\{[^}]*overflow:\s*visible/.test(stylesheetCode), 'a dialog with a body scrolls its surface');
+  assert.ok(/\.pr-dialog-body\s*\{[^}]*overflow:\s*auto/.test(stylesheetCode), '.pr-dialog-body does not scroll');
   /* D-26: the dock reaches its other controls without raising specificity. */
-  assert.ok(/\.cr-dock :where\(\[role=tab\], a, label:has\(input\[type=radio\]\)\)/.test(stylesheetCode),
+  assert.ok(/\.pr-dock :where\(\[role=tab\], a, label:has\(input\[type=radio\]\)\)/.test(stylesheetCode),
     'the dock no longer reaches tabs, links and radio labels, or does so outside :where()');
   /* The new recipes exist. */
-  for (const recipe of ['.cr-group', '.cr-group.vertical', ':is(.cr-haze,.cr-surface).overlay', '.cr-resin-haze.count']) {
+  for (const recipe of ['.pr-group', '.pr-group.vertical', ':is(.pr-haze,.pr-surface).overlay', '.pr-resin-haze.count']) {
     assert.ok(stylesheetCode.includes(recipe + ' {') || stylesheetCode.includes(recipe + '{'), `${recipe} has no rule`);
   }
   /* D-27: the glyphs reach any field shell. */
-  assert.ok(!/span\.cr-field-shell(:[\w-]+(\([^)]*\))?)*>\.cr-indicator/.test(stylesheetCode),
-    'the field glyphs are keyed on span.cr-field-shell again, which a div shell never matches (D-27)');
+  assert.ok(!/span\.pr-field-shell(:[\w-]+(\([^)]*\))?)*>\.pr-indicator/.test(stylesheetCode),
+    'the field glyphs are keyed on span.pr-field-shell again, which a div shell never matches (D-27)');
 });
 
 /* The media and text recipes of 2 October 2026. Each was a place where every
@@ -1150,7 +1150,7 @@ check('the rulings of 29 September 2026 hold in the stylesheet', () => {
    measured, so a later edit that moves one has to say so. */
 check('the media and text recipes hold their geometry and their rules', () => {
   /* Comments are stripped from stylesheetCode, so the block is found by its first rule. */
-  const start = stylesheetCode.indexOf('.cr-media {');
+  const start = stylesheetCode.indexOf('.pr-media {');
   assert.ok(start !== -1, 'the media and text block is missing');
   const media = stylesheetCode.slice(start);
   const rule = (selector) => {
@@ -1160,19 +1160,19 @@ check('the media and text recipes hold their geometry and their rules', () => {
   };
   /* The transport is inset from the stage, so the pill never meets the
      content radius; 4px block and 12px inline padding around 48px targets. */
-  const bar = rule('.cr-media-bar');
-  assert.ok(/inset-inline:\s*var\(--cr-spacing-sm\)/.test(bar) && /inset-block-end:\s*var\(--cr-spacing-sm\)/.test(bar), 'the transport is not inset 12px from the stage');
-  const transport = rule(':is(.cr-resin,.cr-glass).transport');
+  const bar = rule('.pr-media-bar');
+  assert.ok(/inset-inline:\s*var\(--pr-spacing-sm\)/.test(bar) && /inset-block-end:\s*var\(--pr-spacing-sm\)/.test(bar), 'the transport is not inset 12px from the stage');
+  const transport = rule(':is(.pr-resin,.pr-glass).transport');
   assert.ok(/min-height:\s*58px/.test(transport), 'the transport is not the 48px target plus its padding and rim');
-  assert.ok(/padding:\s*var\(--cr-spacing-2xs\) var\(--cr-spacing-sm\)/.test(transport), 'the transport lost its padding');
+  assert.ok(/padding:\s*var\(--pr-spacing-2xs\) var\(--pr-spacing-sm\)/.test(transport), 'the transport lost its padding');
   /* The readouts are labels over moving pictures and sit on Haze. */
-  assert.ok(/background:\s*var\(--cr-haze-fill\)/.test(rule(':is(.cr-resin,.cr-glass).transport :where(time, output, .time)')), 'the time readouts lost their Haze fill');
+  assert.ok(/background:\s*var\(--pr-haze-fill\)/.test(rule(':is(.pr-resin,.pr-glass).transport :where(time, output, .time)')), 'the time readouts lost their Haze fill');
   /* A caption is Stone and sits above the transport. */
-  const caption = media.slice(media.indexOf('.cr-media-caption > *::before {'));
-  assert.ok(/var\(--cr-stone-fill\)/.test(caption.slice(0, 300)), 'the caption is not on Stone');
-  assert.ok(/inset-block-end:\s*calc\(var\(--cr-media-transport/.test(rule('.cr-media-caption')), 'the caption no longer clears the transport');
+  const caption = media.slice(media.indexOf('.pr-media-caption > *::before {'));
+  assert.ok(/var\(--pr-stone-fill\)/.test(caption.slice(0, 300)), 'the caption is not on Stone');
+  assert.ok(/inset-block-end:\s*calc\(var\(--pr-media-transport/.test(rule('.pr-media-caption')), 'the caption no longer clears the transport');
   /* The audio card hands its background back to the surface it wears. */
-  assert.ok(/background:\s*revert-layer/.test(rule('.cr-media.audio')), 'the audio player paints the letterbox over its Haze card');
+  assert.ok(/background:\s*revert-layer/.test(rule('.pr-media.audio')), 'the audio player paints the letterbox over its Haze card');
   /* Selection is weight, a done item is not struck through, and a checklist's
      marker is the native control. */
   assert.ok(!/content:\s*['"]\\?2713|content:\s*['"]✓/.test(media), 'a check glyph is drawn in the media and text recipes');
@@ -1180,24 +1180,24 @@ check('the media and text recipes hold their geometry and their rules', () => {
   assert.ok(!/line-through/.test(done), 'a finished checklist item is struck through');
   /* A checklist's checkbox keeps its 26px box inside an editor's field shell,
      whose text-entry rule would otherwise give it a 44px floor. */
-  const choice = rule('.cr-field-shell :is(.cr-prose,.cr-editor) input:is([type=checkbox],[type=radio])');
+  const choice = rule('.pr-field-shell :is(.pr-prose,.pr-editor) input:is([type=checkbox],[type=radio])');
   assert.ok(/min-height:\s*0/.test(choice), 'a checklist checkbox inside an editor takes the field shell\'s 44px text-entry floor');
   /* The touch toolbar clears the keyboard. */
   assert.ok(/inset-block-end:\s*env\(keyboard-inset-height/.test(media), 'the touch toolbar no longer clears the on-screen keyboard');
   /* The editor's frame outranks the shell's inline layout: a zero-specificity
      rule lost to it and centred the toolbar at a 20px radius. */
-  const frame = rule('.cr-field-shell:has(> .cr-editor)');
-  assert.ok(/flex-direction:\s*column/.test(frame) && /border-radius:\s*var\(--cr-radius\)/.test(frame) && /align-items:\s*stretch/.test(frame),
+  const frame = rule('.pr-field-shell:has(> .pr-editor)');
+  assert.ok(/flex-direction:\s*column/.test(frame) && /border-radius:\s*var\(--pr-radius\)/.test(frame) && /align-items:\s*stretch/.test(frame),
     'the editor frame is not a stretched column at the content radius');
-  assert.ok(!/:where\(\.cr-field-shell:has\(> \.cr-editor\)\)/.test(media), 'the editor frame is back inside :where() and loses to the shell');
+  assert.ok(!/:where\(\.pr-field-shell:has\(> \.pr-editor\)\)/.test(media), 'the editor frame is back inside :where() and loses to the shell');
   /* Every new surface selector is registered in the vocabulary. */
   const also = new Set(surfaces.flatMap((s) => s.also || []));
-  for (const cls of ['.cr-resin.transport', '.cr-media-caption', '.cr-frost.bar', '.cr-editor']) {
+  for (const cls of ['.pr-resin.transport', '.pr-media-caption', '.pr-frost.bar', '.pr-editor']) {
     assert.ok(also.has(cls), `${cls} is not in surfaces.json`);
   }
   /* Authored in the component layer only. */
-  const reset = stylesheetCode.slice(0, stylesheetCode.indexOf('@layer crystal.component {'));
-  for (const cls of ['.cr-media', '.cr-editor', '.cr-prose', '.transport']) {
+  const reset = stylesheetCode.slice(0, stylesheetCode.indexOf('@layer prismata.component {'));
+  for (const cls of ['.pr-media', '.pr-editor', '.pr-prose', '.transport']) {
     assert.ok(!reset.includes(cls), `${cls} has a rule in the reset layer`);
   }
 });
@@ -1206,7 +1206,7 @@ check('the media and text recipes hold their geometry and their rules', () => {
    Vite 8 minifies CSS with, reads `backdrop-filter` and
    `-webkit-backdrop-filter` as one property and keeps the last declaration.
    Written standard first, only the prefixed one survives, and Chromium ignores
-   it: Resin rendered flat in Crystal React's built stories while the dev server
+   it: Resin rendered flat in Prismata React's built stories while the dev server
    showed it diffused. Prefixed first, the minifier keeps the standard property
    and adds the prefix back only for targets that need it. */
 check('every backdrop-filter is written after its -webkit- form', () => {
@@ -1228,12 +1228,12 @@ check('every backdrop-filter is written after its -webkit- form', () => {
 /* Under forced colours no surface keeps a backdrop blur (D-36). The browser
    leaves backdrop-filter alone, and a normal declaration here lost to the
    choices' later rule of equal specificity, so the reset is important. This
-   reads the stylesheet; crystal-preview's browser gate measures the computed
+   reads the stylesheet; prismata-preview's browser gate measures the computed
    style with forced colours emulated. */
 check('forced colours reset every control surface\'s backdrop-filter, importantly', () => {
   const reset = [...stylesheetCode.matchAll(/([^{};]*)\{([^{}]*backdrop-filter:\s*none\s*!important[^{}]*)\}/g)]
     .map(([, selector]) => selector);
-  for (const surface of ['input', '.cr-status', '.cr-resin-haze', 'button', '.cr-field-shell']) {
+  for (const surface of ['input', '.pr-status', '.pr-resin-haze', 'button', '.pr-field-shell']) {
     assert.ok(reset.some((selector) => selector.includes(surface)), `${surface} has no important backdrop-filter reset`);
   }
 });
@@ -1247,11 +1247,11 @@ check('the selection pill: stylesheet, runtime and recipe agree', () => {
   const motion = fs.readFileSync(path.join(__dirname, '../core/assets/motion.js'), 'utf8');
   const recipes = JSON.parse(fs.readFileSync(path.join(__dirname, '../core/tokens/motion-recipes.json'), 'utf8')).recipes;
   for (const name of ['x', 'y', 'width', 'height', 'radius']) {
-    assert.ok(stylesheetCode.includes(`var(--cr-pill-${name}`), `crystal.css does not read --cr-pill-${name}`);
+    assert.ok(stylesheetCode.includes(`var(--pr-pill-${name}`), `prismata.css does not read --pr-pill-${name}`);
   }
-  assert.ok(/'--cr-pill-'\+key/.test(motion) && motion.includes("'--cr-pill-radius'"), 'motion.js does not write the pill properties');
-  assert.ok(/CrystalMotion=Object\.freeze\(\{[^}]*\btravel\b/.test(motion), 'CrystalMotion does not export travel');
-  assert.ok(stylesheetCode.includes('.cr-indicator.pill[data-placed]'), 'crystal.css does not draw a placed pill');
+  assert.ok(/'--pr-pill-'\+key/.test(motion) && motion.includes("'--pr-pill-radius'"), 'motion.js does not write the pill properties');
+  assert.ok(/PrismataMotion=Object\.freeze\(\{[^}]*\btravel\b/.test(motion), 'PrismataMotion does not export travel');
+  assert.ok(stylesheetCode.includes('.pr-indicator.pill[data-placed]'), 'prismata.css does not draw a placed pill');
   const recipe = recipes.find((r) => r.id === 'selection-travel');
   assert.ok(recipe, 'motion-recipes.json has no selection-travel');
   assert.equal(recipe.overshoot, 'never');

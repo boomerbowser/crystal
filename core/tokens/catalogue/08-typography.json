@@ -16,7 +16,7 @@
       ],
       "geometry": "1.2 line height; -0.04em tracking; sizes on a modular scale",
       "semantics": "The visual level must not be chosen independently of the document outline; use a level, style separately",
-      "crystal": "Scale, tracking and leading",
+      "prismata": "Scale, tracking and leading",
       "product": "The outline and the content",
       "parity": [
         "mantine:Title",
@@ -42,7 +42,7 @@
       ],
       "geometry": "16px/24px reading rhythm; 78ch maximum measure",
       "semantics": "Truncated text keeps its full value in the accessibility tree and in a title where useful",
-      "crystal": "Rhythm, measure, colour roles",
+      "prismata": "Rhythm, measure, colour roles",
       "product": "The content and truncation policy",
       "parity": [
         "mantine:Text",
@@ -64,7 +64,7 @@
       ],
       "geometry": "Content radius; 3px leading rule",
       "semantics": "Real blockquote with cite where the source is known",
-      "crystal": "Rule, panel and attribution treatment",
+      "prismata": "Rule, panel and attribution treatment",
       "product": "The quote and its source",
       "parity": [
         "mantine:Blockquote",
@@ -85,7 +85,7 @@
       ],
       "geometry": "4px radius; does not disturb the line box",
       "semantics": "Real mark element; highlighting is never the only indication of a match",
-      "crystal": "Fill pair and geometry",
+      "prismata": "Fill pair and geometry",
       "product": "What is highlighted",
       "motion": [
         "highlight"
@@ -109,7 +109,7 @@
       ],
       "geometry": "78ch measure; 1.8 line height; 4px-rhythm vertical spacing",
       "semantics": "Anchor navigation must preserve focus when sections change. Every mark differs in shape as well as colour (an insertion is underlined, a deletion struck through, a highlight filled), and each is its own element (ins, del, mark, u, s), so none rests on colour alone.",
-      "crystal": "The complete reading rhythm and embedded-element treatment",
+      "prismata": "The complete reading rhythm and embedded-element treatment",
       "product": "Content, rendering and virtualisation",
       "parity": [
         "mui:—",
@@ -130,7 +130,7 @@
       ],
       "geometry": "Fill hugs the text; no radius change at line breaks.",
       "semantics": "Uses <mark>; the surrounding sentence remains readable as one string.",
-      "crystal": "Fill material, contrast against the surface",
+      "prismata": "Fill material, contrast against the surface",
       "product": "What is matched and how",
       "motion": [
         "highlight"
@@ -152,7 +152,7 @@
       ],
       "geometry": "Tabular figures.",
       "semantics": "The formatted value is the text content; no separate visual and spoken form.",
-      "crystal": "Typography, figure style",
+      "prismata": "Typography, figure style",
       "product": "Locale, unit, precision",
       "parity": [
         "mantine:NumberFormatter"
@@ -171,7 +171,7 @@
       ],
       "geometry": "Tightest tracking of the scale; one line where possible.",
       "semantics": "Exactly one per view, and it is the h1 unless the page says otherwise.",
-      "crystal": "The step, tracking and leading",
+      "prismata": "The step, tracking and leading",
       "product": "The words",
       "parity": [
         "mantine:Title",
@@ -191,7 +191,7 @@
       ],
       "geometry": "Step per level; leading tightens as size grows.",
       "semantics": "The level is the document structure, never chosen for size. Size comes from the step.",
-      "crystal": "The scale and its tracking",
+      "prismata": "The scale and its tracking",
       "product": "Level and wording",
       "parity": [
         "mantine:Title",
@@ -211,7 +211,7 @@
       ],
       "geometry": "One step above body; measure capped for reading.",
       "semantics": "A paragraph, not a heading.",
-      "crystal": "Step and measure",
+      "prismata": "Step and measure",
       "product": "The words",
       "parity": [
         "mantine:Text"
@@ -220,7 +220,7 @@
     {
       "id": "prose-list",
       "name": "Prose list",
-      "anatomy": "Ordered and unordered lists inside running text, with Crystal markers, and checklists whose markers are checkboxes.",
+      "anatomy": "Ordered and unordered lists inside running text, with Prismata markers, and checklists whose markers are checkboxes.",
       "states": [
         "at-rest",
         "checked",
@@ -232,7 +232,7 @@
       ],
       "geometry": "Marker inset follows the spacing scale; hanging indent preserved.",
       "semantics": "Real ul and ol so the count and nesting are announced. A checklist item's marker is a native checkbox, read-only when the list is, so its state is announced; a finished item recedes to the muted ink and is not struck through.",
-      "crystal": "Marker treatment, spacing, nesting rhythm",
+      "prismata": "Marker treatment, spacing, nesting rhythm",
       "product": "Content and ordering",
       "parity": [
         "mantine:List",
@@ -254,7 +254,7 @@
       ],
       "geometry": "Content radius; the copy control is a pill.",
       "semantics": "Focusable and scrollable by keyboard; the language is announced; the copy button says what it copied.",
-      "crystal": "Fill material, the monospace pairing, copy feedback motion",
+      "prismata": "Fill material, the monospace pairing, copy feedback motion",
       "product": "Which highlighter, and the languages",
       "parity": [
         "mantine:CodeHighlight",
@@ -275,7 +275,7 @@
       ],
       "geometry": "Clamp by line count, never by pixel height.",
       "semantics": "The full text remains available to assistive technology; expansion is a real control.",
-      "crystal": "The fade, if any, and the expand motion",
+      "prismata": "The fade, if any, and the expand motion",
       "product": "Line count and expansion policy",
       "parity": [
         "mantine:Spoiler",
@@ -295,7 +295,7 @@
       ],
       "geometry": "Sits beneath the quote at one step down.",
       "semantics": "Uses cite, and is associated with its blockquote.",
-      "crystal": "Step and colour",
+      "prismata": "Step and colour",
       "product": "The attribution",
       "parity": [
         "mantine:Blockquote"
@@ -315,7 +315,7 @@
       ],
       "geometry": "No visual weight change; underline on hover only.",
       "semantics": "Uses abbr with a title, and is focusable so the expansion is reachable without a pointer.",
-      "crystal": "The underline treatment",
+      "prismata": "The underline treatment",
       "product": "The expansion text",
       "parity": [
         "antd:Typography.Text"
@@ -334,7 +334,7 @@
       ],
       "geometry": "Balances wrapping without changing the step.",
       "semantics": "Purely visual: the text content is unchanged.",
-      "crystal": "Where balancing applies, and its fallback",
+      "prismata": "Where balancing applies, and its fallback",
       "product": "The words",
       "parity": [
         "mantine:Title"
@@ -353,7 +353,7 @@
       ],
       "geometry": "No change to step or tracking.",
       "semantics": "Contrast is checked against the surface at both gradient ends, and a solid fallback applies where the clip is unsupported.",
-      "crystal": "The gradient, and the contrast floor at every point",
+      "prismata": "The gradient, and the contrast floor at every point",
       "product": "Which text warrants it",
       "parity": [
         "mantine:Text"

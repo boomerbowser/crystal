@@ -1,7 +1,7 @@
-// Crystal 2.0.0 design tokens.
-// Generated from core/tokens/crystal.tokens.json. Do not edit by hand.
+// Prismata 2.0.0 design tokens.
+// Generated from core/tokens/prismata.tokens.json. Do not edit by hand.
 
-export const crystalTokens = {
+export const prismataTokens = {
   "material.frost.diffusion": "40px",
   "material.frost.saturation": "125",
   "material.frost.grain": "0.045",
@@ -177,4 +177,4 @@ export const crystalTokens = {
   "progress.ringStroke": "8px",
 } as const;
 
-export type CrystalToken = keyof typeof crystalTokens;
+export type PrismataToken = keyof typeof prismataTokens;

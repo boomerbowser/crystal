@@ -5,13 +5,13 @@
 # the token build writes the files the validators read.
 #
 # There are no browser checks here. The pages, the link check, scrolling,
-# interactions and the visual baselines belong to crystal-preview, and run there
+# interactions and the visual baselines belong to prismata-preview, and run there
 # against the published package.
 name: Verify
 
 on:
   push:
-    branches: [main, 'crystal-*']
+    branches: [main, 'prismata-*']
   pull_request:
   # Re-runnable without an empty commit. A workflow that only a push can trigger
   # cannot be used to check whether a secret was set correctly.
@@ -41,7 +41,7 @@ jobs:
       # These are the gates `publish.yml` runs before publishing, which is why
       # they stay in this repository. The website's own gates (the pages, the
       # links, scrolling, interactions and the visual baselines) live in
-      # crystal-preview with the pages they are about.
+      # prismata-preview with the pages they are about.
       - run: npm test
 
       # If a build produces something different from what is committed, the

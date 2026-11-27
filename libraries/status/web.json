@@ -1,8 +1,8 @@
 {
-  "$description": "What the web platform library, @crystal-ui/react, has implemented. Merged into libraries/parity.json by tools/build-catalogue.cjs; a component absent here is not-started on this platform. This is the record a library keeps, not a generated file: update it from the library's own component manifest when a slice ships, and say which build it came from.",
+  "$description": "What the web platform library, @prismata/react, has implemented. Merged into libraries/parity.json by tools/build-catalogue.cjs; a component absent here is not-started on this platform. This is the record a library keeps, not a generated file: update it from the library's own component manifest when a slice ships, and say which build it came from.",
   "platform": "web",
-  "library": "@crystal-ui/react",
-  "source": "dist/component-manifest.json in crystal-react at d49e75a (29 September 2026)",
+  "library": "@prismata/react",
+  "source": "dist/component-manifest.json in prismata-react at d49e75a (29 September 2026)",
   "updated": "2026-09-29",
   "components": {
     "app-shell": "implemented",
